@@ -1,0 +1,26 @@
+{
+  "is-main": true,
+  "import": [
+    {
+      "path": "Yoorkin/rabbit-tea",
+      "alias": "tea"
+    },
+    "Yoorkin/rabbit-tea/adapter",
+    {
+      "path": "Yoorkin/rabbit-tea/html",
+      "alias": "html",
+      "value": [
+        "div",
+        "text",
+        "h1",
+        "p",
+        "hr",
+        "ul",
+        "li"
+      ]
+    },
+    "rami3l/cmark/cmark",
+    "rami3l/cmark/cmark_base",
+    "username/rabbit-tea-tailwind/main/highlight"
+  ]
+}

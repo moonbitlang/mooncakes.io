@@ -1,3 +1,4 @@
+///|
 let package_info : Json = {
   "name": "wasm4",
   "traits": [],

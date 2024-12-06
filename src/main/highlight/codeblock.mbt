@@ -1,3 +1,4 @@
+///|
 pub(all) enum CodeSpan {
   Code(String)
   Keyword(String)
@@ -11,8 +12,10 @@ pub(all) enum CodeSpan {
   Space(Int)
 } derive(Show)
 
+///|
 typealias List[A] = @immut/list.T[A]
 
+///|
 enum ParseState {
   ParsingStart(List[Char])
   ParsingLIdent(acc~ : List[Char], List[Char])
@@ -26,14 +29,14 @@ enum ParseState {
   ParsingNumber(acc~ : List[Char], List[Char])
 }
 
-let keywords : Set[String] = Set::of(
-  [
-    "fn", "let", "type", "struct", "enum", "impl", "trait", "derive", "match", "if",
-    "else", "typealias", "guard", "for", "in", "while", "loop", "break", "continue",
-    "return", "pub", "priv", "mut",
-  ],
-)
+///|
+let keywords : Set[String] = Set::of([
+  "fn", "let", "type", "struct", "enum", "impl", "trait", "derive", "match", "if",
+  "else", "typealias", "guard", "for", "in", "while", "loop", "break", "continue",
+  "return", "pub", "priv", "mut",
+])
 
+///|
 pub fn parse(signature : String) -> Array[CodeSpan] {
   let signature = signature.to_array() |> @immut/list.from_array()
   fn parse(state, spans : List[CodeSpan]) {
@@ -70,9 +73,17 @@ pub fn parse(signature : String) -> Array[CodeSpan] {
           | '{'
           | '}'
           | ':'
-          | ',' | '?' | '!' | '=' | '~' | '@' | '.' | '|' | '>' | '<' | '='
-          as
-          x,
+          | ','
+          | '?'
+          | '!'
+          | '='
+          | '~'
+          | '@'
+          | '.'
+          | '|'
+          | '>'
+          | '<'
+          | '=' as x,
           xs
         )
       ) => parse(ParsingStart(xs), Cons(Symbol(String::from_array([x])), spans))
@@ -123,17 +134,17 @@ pub fn parse(signature : String) -> Array[CodeSpan] {
         }
         parse(ParsingStart(xs), Cons(span, spans))
       }
-      ParsingLinkL(Cons('"', Cons('>', xs)), acc~) => {
+      ParsingLinkL(Cons('"', Cons('>', xs)), acc~) =>
         parse(
           ParsingLinkM(
             href=String::from_array(acc.rev().to_array()),
             acc=Nil,
-            a = 5, b =6,
+            a=5,
+            b=6,
             xs,
           ),
           spans,
         )
-      }
       ParsingLinkL(Cons(x, xs), acc~) =>
         parse(ParsingLinkL(acc=Cons(x, acc), xs), spans)
       ParsingLinkM(Cons('<', Cons('/', Cons('a', Cons('>', xs)))), href~, acc~) =>

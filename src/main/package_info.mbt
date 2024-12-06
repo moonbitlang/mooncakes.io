@@ -1,3 +1,4 @@
+///|
 fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
   fn process_value {
     ({ "docstring": String(description), "signature": String(signature) } : Json) =>
@@ -31,10 +32,10 @@ fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
       "values": Array(values),
     } => {
       let cards = [
-        ..types.map(process_type),
-        ..alias.map(process_type),
-        ..values.map(process_value),
-      ]
+          ..types.map(process_type),
+          ..alias.map(process_type),
+          ..values.map(process_value),
+        ]
       (name, cards)
     }
   }

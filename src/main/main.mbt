@@ -1,3 +1,4 @@
+///|
 enum Message {
   ToggleSidebar
   ToggleCardDetail(DetailCardModel)
@@ -7,6 +8,7 @@ enum Message {
   FilterChange(String)
 } derive(Show)
 
+///|
 struct Model {
   count : Int
   sidebar : SidebarModel
@@ -15,6 +17,7 @@ struct Model {
   meta_info : MetaInfoModel
 }
 
+///|
 fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
   match msg {
     ToggleSidebar =>
@@ -59,6 +62,7 @@ fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
   }
 }
 
+///|
 fn floating_view(cards_expanded : Bool) -> @html.Html[Message] {
   let button = if cards_expanded {
     icon_button_view("expansion.svg", text="Fold cards", click=FoldAllCards)
@@ -68,36 +72,24 @@ fn floating_view(cards_expanded : Bool) -> @html.Html[Message] {
   div(class="absolute bottom-4 left-4", [button])
 }
 
+///|
 fn view(model : Model) -> @html.Html[Message] {
-  div(
-    class="flex flex-col",
-    [
-      div([navbar_view(model.navbar)]),
-      div(
-        class="flex w-screen",
-        [
-          div(
-            class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r",
-            [
-              meta_info_view(model.meta_info),
-              div(
-                class="sticky top-[-1px] h-screen",
-                [sidebar_view(model.sidebar)],
-              ),
-            ],
-          ),
-          div(
-            class="flex-grow overflow-hidden bg-[#fcfcfd]",
-            [detail_cards_view(model.detail_cards)],
-          ),
-        ],
-      ),
-      div(class=" ", [footer_view()]),
-    ],
-  )
+  div(class="flex flex-col", [
+    div([navbar_view(model.navbar)]),
+    div(class="flex w-screen", [
+      div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
+        meta_info_view(model.meta_info),
+        div(class="sticky top-[-1px] h-screen", [sidebar_view(model.sidebar)]),
+      ]),
+      div(class="flex-grow overflow-hidden bg-[#fcfcfd]", [
+        detail_cards_view(model.detail_cards),
+      ]),
+    ]),
+    div(class=" ", [footer_view()]),
+  ])
 }
 
-/// NOTE: This program is only available in the js backend, 
+///| NOTE: This program is only available in the js backend, 
 /// see README.md to getting started.
 fn main {
   let (_, detail_cards) = process_pacakge_info(package_info)
@@ -252,81 +244,71 @@ fn main {
         {
           name: "lib",
           target: "lib",
-          kind: Package(
-            {
-              fullpath: "user/lib",
-              folded: false,
-              childrens: [
-                {
-                  name: "main",
-                  target: "lib/hello",
-                  kind: Package(
+          kind: Package({
+            fullpath: "user/lib",
+            folded: false,
+            childrens: [
+              {
+                name: "main",
+                target: "lib/hello",
+                kind: Package({
+                  fullpath: "user/lib/hello",
+                  childrens: [
                     {
-                      fullpath: "user/lib/hello",
-                      childrens: [
-                        {
-                          name: "function1",
-                          target: "lib/main/function1",
-                          kind: Function,
-                        },
-                        {
-                          name: "trait1",
-                          target: "lib/main/function1",
-                          kind: Trait,
-                        },
-                        {
-                          name: "type1",
-                          target: "lib/main/function1",
-                          kind: Type,
-                        },
-                        {
-                          name: "function2",
-                          target: "lib/main/function2",
-                          kind: Function,
-                        },
-                        { name: "type1", target: "lib/main/type1", kind: Type },
-                      ],
-                      folded: true,
+                      name: "function1",
+                      target: "lib/main/function1",
+                      kind: Function,
                     },
-                  ),
-                },
-                {
-                  name: "function1",
-                  target: "lib/main/function1",
-                  kind: Function,
-                },
-                {
-                  name: "function2",
-                  target: "lib/main/function2",
-                  kind: Function,
-                },
-                { name: "type1", target: "lib/main/type1", kind: Type },
-              ],
-            },
-          ),
+                    {
+                      name: "trait1",
+                      target: "lib/main/function1",
+                      kind: Trait,
+                    },
+                    { name: "type1", target: "lib/main/function1", kind: Type },
+                    {
+                      name: "function2",
+                      target: "lib/main/function2",
+                      kind: Function,
+                    },
+                    { name: "type1", target: "lib/main/type1", kind: Type },
+                  ],
+                  folded: true,
+                }),
+              },
+              {
+                name: "function1",
+                target: "lib/main/function1",
+                kind: Function,
+              },
+              {
+                name: "function2",
+                target: "lib/main/function2",
+                kind: Function,
+              },
+              { name: "type1", target: "lib/main/type1", kind: Type },
+            ],
+          }),
         },
         {
           name: "hello",
           target: "lib/hello",
-          kind: Package(
-            {
-              fullpath: "user/lib/hello",
-              childrens: [
-                {
-                  name: "function1",
-                  target: "lib/main/function1",
-                  kind: Function,
-                },
-                {
-                  name: "function2",
-                  target: "lib/main/function2",
-                  kind: Function,
-                },
-                { name: "type1", target: "lib/main/type1", kind: Type },
-              ],
-              folded: true,
-            },
-          ),
+          kind: Package({
+            fullpath: "user/lib/hello",
+            childrens: [
+              {
+                name: "function1",
+                target: "lib/main/function1",
+                kind: Function,
+              },
+              {
+                name: "function2",
+                target: "lib/main/function2",
+                kind: Function,
+              },
+              { name: "type1", target: "lib/main/type1", kind: Type },
+            ],
+            folded: true,
+          }),
         },
       ],
       dependencies: [],

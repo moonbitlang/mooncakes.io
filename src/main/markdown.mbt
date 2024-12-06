@@ -1,3 +1,4 @@
+///|
 fn markdown_view[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
@@ -53,10 +54,9 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
           separator="\n",
         )
         |> hightlight()
-      @html.pre(
-        class="bg-gray-100 p-4 my-4 font-mono text-sm rounded",
-        [@html.code([code])],
-      )
+      @html.pre(class="bg-gray-100 p-4 my-4 font-mono text-sm rounded", [
+        @html.code([code]),
+      ])
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)

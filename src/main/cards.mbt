@@ -1,3 +1,4 @@
+///|
 enum DetailCardModel {
   ValueCard(mut folded~ : Bool, signature~ : String, description~ : String)
   ImplCard(mut folded~ : Bool, signature~ : String, description~ : String)
@@ -18,6 +19,7 @@ enum DetailCardModel {
   ReadmeCard(mut folded~ : Bool, String)
 } derive(Show)
 
+///|
 fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   let fold_button = div(
     click=ToggleCardDetail(card),
@@ -50,27 +52,23 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
 
   // signature 
   fn signature_view(code) {
-    let code_view = @html.pre(
-      [
-        @html.code(
-          class="font-mono text-[0.9em] text-blue-800",
-          [hightlight(code)],
-        ),
-      ],
-    )
+    let code_view = @html.pre([
+      @html.code(class="font-mono text-[0.9em] text-blue-800", [
+        hightlight(code),
+      ]),
+    ])
     div([div(class="my-2 flex-grow overflow-y-scroll", [code_view])])
   }
 
   let header = match card {
     ReadmeCard(_, ..) =>
-      p(
-        class="text-sm font-bold py-2 text-gray-600 self-center",
-        [text("Readme")],
-      )
+      p(class="text-sm font-bold py-2 text-gray-600 self-center", [
+        text("Readme"),
+      ])
     ValueCard(signature~, ..)
     | ImplCard(signature~, ..)
-    | TypeCard(signature~, ..) | TraitCard(signature~, ..) =>
-      signature_view(signature)
+    | TypeCard(signature~, ..)
+    | TraitCard(signature~, ..) => signature_view(signature)
   }
 
   // tool buttons
@@ -83,28 +81,23 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   let description = match card {
     TypeCard(description~, ..)
     | ValueCard(description~, ..)
-    | ImplCard(description~, ..) | TraitCard(description~, ..) =>
+    | ImplCard(description~, ..)
+    | TraitCard(description~, ..) =>
       if description == "" {
         @html.nothing()
       } else {
-        @html.fragment(
-          [
-            div(
-              class="col-start-2 col-span-2 row-start-3 \{detail_visibility}",
-              [div(class="mr-4 mb-6 pt-1", [markdown_view(description)])],
-            ),
-          ],
-        )
+        @html.fragment([
+          div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+            div(class="mr-4 mb-6 pt-1", [markdown_view(description)]),
+          ]),
+        ])
       }
     ReadmeCard(description, ..) =>
-      @html.fragment(
-        [
-          div(
-            class="col-start-2 col-span-2 row-start-3 \{detail_visibility}",
-            [div(class="mr-4 mb-6", [markdown_view(description)])],
-          ),
-        ],
-      )
+      @html.fragment([
+        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+          div(class="mr-4 mb-6", [markdown_view(description)]),
+        ]),
+      ])
   }
 
   // methods or impls
@@ -132,34 +125,37 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
           description,
         ],
       ),
-      ..subsections.map(
-        fn(x) { div(class="col-start-1 col-span-3 border-t", [x]) },
-      ),
+      ..subsections.map(config~, fn(x) {
+        div(class="col-start-1 col-span-3 border-t", [x])
+      }),
     ],
   )
 }
 
+///|
 fn card_view(card : DetailCardModel) -> @html.Html[Message] {
   match card {
     ReadmeCard(_, ..) => div([card_section_view(card)])
     _ =>
-      div(
-        class="border rounded overflow-clip bg-white",
-        [card_section_view(card)],
-      )
+      div(class="border rounded overflow-clip bg-white", [
+        card_section_view(card),
+      ])
     _ => div(class="border-t", [card_section_view(card)])
   }
 }
 
+///|
 fn is_folded(self : DetailCardModel) -> Bool {
   match self {
     ValueCard(folded~, ..)
     | ImplCard(folded~, ..)
-    | TypeCard(folded~, ..) | TraitCard(folded~, ..) | ReadmeCard(folded~, _) =>
-      folded
+    | TypeCard(folded~, ..)
+    | TraitCard(folded~, ..)
+    | ReadmeCard(folded~, _) => folded
   }
 }
 
+///|
 fn toggle_folded(self : DetailCardModel) -> Unit {
   match self {
     ValueCard(..) as card => card.folded = not(card.folded)
@@ -186,15 +182,13 @@ fn toggle_folded(self : DetailCardModel) -> Unit {
   }
 }
 
+///|
 fn detail_cards_view(cards : Array[DetailCardModel]) -> @html.Html[Message] {
-  div(
-    class="",
-    [
-      div(
-        class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2",
-        cards.map(card_view),
-      ),
-      div(class="h-60", []),
-    ],
-  )
+  div(class="", [
+    div(
+      class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2",
+      cards.map(card_view),
+    ),
+    div(class="h-60", []),
+  ])
 }

@@ -125,7 +125,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
           description,
         ],
       ),
-      ..subsections.map(config~, fn(x) {
+      ..subsections.map(fn(x) {
         div(class="col-start-1 col-span-3 border-t", [x])
       }),
     ],

@@ -2,10 +2,8 @@
   "name": "username/rabbit-tea-tailwind",
   "version": "0.1.1",
   "deps": {
-    "Yoorkin/rabbit-tea": {
-      "path": "../moonbit-tea-main"
-    },
-    "rami3l/cmark": "0.1.3"
+    "Yoorkin/rabbit-tea": "0.2.8",
+    "rami3l/cmark": "0.1.5"
   },
   "readme": "README.md",
   "repository": "",

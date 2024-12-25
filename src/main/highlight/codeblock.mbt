@@ -139,8 +139,6 @@ pub fn parse(signature : String) -> Array[CodeSpan] {
           ParsingLinkM(
             href=String::from_array(acc.rev().to_array()),
             acc=Nil,
-            a=5,
-            b=6,
             xs,
           ),
           spans,

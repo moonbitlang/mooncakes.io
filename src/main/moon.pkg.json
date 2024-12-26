@@ -6,6 +6,7 @@
       "alias": "tea"
     },
     "Yoorkin/rabbit-tea/adapter",
+    "Yoorkin/rabbit-tea/http",
     {
       "path": "Yoorkin/rabbit-tea/html",
       "alias": "html",
@@ -21,6 +22,6 @@
     },
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",
-    "username/rabbit-tea-tailwind/main/highlight"
+    "username/rabbit-tea-tailwind/main/highlight",
   ]
 }

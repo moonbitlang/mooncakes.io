@@ -1,0 +1,26 @@
+package username/rabbit-tea-tailwind/main/highlight
+
+// Values
+fn parse(String) -> Array[CodeSpan]
+
+// Types and methods
+pub(all) enum CodeSpan {
+  Code(String)
+  Keyword(String)
+  Symbol(String)
+  Link(String, String)
+  UIdent(String)
+  LIdent(String)
+  StringLiteral(String)
+  NumberLiteral(String)
+  Newline
+  Space(Int)
+}
+impl Show for CodeSpan
+
+type ParseState
+
+// Type aliases
+
+// Traits
+

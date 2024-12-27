@@ -1,0 +1,66 @@
+package username/rabbit-tea-tailwind/main
+
+alias @Yoorkin/rabbit-tea/html as @html
+
+// Values
+fn div[M](style~ : Array[String] = .., id? : String, class? : String, click? : M, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn h1[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn hr[M](style~ : Array[String] = .., id? : String, class? : String, childrens~ : Array[@html.Html[M]] = ..) -> @html.Html[M]
+
+fn li[M](style~ : Array[String] = .., id? : String, class? : String, click? : M, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn p[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn text[M](String) -> @html.Html[M]
+
+fn ul[M](style~ : Array[String] = .., id? : String, class? : String, click? : M, Array[@html.Html[M]]) -> @html.Html[M]
+
+// Types and methods
+type DetailCardModel
+impl Show for DetailCardModel
+
+type Impl
+
+type ItemKind
+impl Show for ItemKind
+
+type ItemModel
+impl Show for ItemModel
+
+type Message
+impl Show for Message
+
+type MetaInfoModel
+
+type Model
+
+type ModelBody
+
+type ModuleIndex
+
+type ModuleModel
+
+type NavbarModel
+
+type Package
+
+type PackageBody
+
+type PackageModel
+impl Show for PackageModel
+
+type SidebarModel
+
+type Trait
+
+type Traits
+
+type Type
+
+// Type aliases
+
+// Traits
+trait ToItemModel
+

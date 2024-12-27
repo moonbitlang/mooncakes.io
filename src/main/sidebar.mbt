@@ -69,7 +69,7 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
   match kind {
     Type => item_button(text(name), icon="type.svg")
     TypeAlias => item_button(text(name), icon="code-brackets.svg")
-    Value=>item_button(text(name), icon="code-brackets.svg")
+    Value => item_button(text(name), icon="code-brackets.svg")
     Trait => item_button(text(name), icon="components.svg")
     Package({ childrens, folded, .. } as pkg) => {
       let childrens = if filter == "" {

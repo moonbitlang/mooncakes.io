@@ -2,6 +2,7 @@
 struct MetaInfoModel {
   author : String
   name : String
+  readme : String
   version : String
   license : String
   keywords : Array[String]

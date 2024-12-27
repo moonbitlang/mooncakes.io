@@ -9,9 +9,10 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
     "license"? : license,
     "description"? : description,
     "keywords"? : keywords,
+    "readme"? : readme,
   } = json
-  let [name, repository, version, license, description] = [
-    name, repository, version, license, description,
+  let [name, repository, version, license, description, readme] = [
+    name, repository, version, license, description, readme,
   ].map(fn(x) {
     match x {
       Some(String(str)) => str
@@ -29,6 +30,7 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
   )
   {
     author,
+    readme,
     name: package_name,
     module_path: name,
     description,
@@ -186,7 +188,7 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
 fn generate_package_model_from_package(package : Package) -> PackageModel {
   let childs = package.childs
   let package = package.body.unwrap()
-  let mut p : PackageModel = {
+  let p : PackageModel = {
     fullpath: package.path,
     folded: false,
     childrens: [],
@@ -204,6 +206,13 @@ fn generate_package_model_from_package(package : Package) -> PackageModel {
       kind: Value,
     })
   }
+  for alias_ in package.typealias_ {
+    p.childrens.push({
+      name: alias_,
+      target: package.path + "/" + alias_,
+      kind: TypeAlias,
+    })
+  }
   for child in childs {
     let p_ = generate_package_model_from_package(child.package)
     p.childrens.push({
@@ -217,12 +226,12 @@ fn generate_package_model_from_package(package : Package) -> PackageModel {
 
 ///|
 fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
-  let mut sidebar : SidebarModel = {
+  let sidebar : SidebarModel = {
     hide: false,
     filter: "",
     cards_expanded: true,
     module_path: index.name,
-    items: [],
+    items: generate_package_model_from_package(index.package).childrens,
     dependencies: [],
   }
   sidebar

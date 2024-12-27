@@ -28,15 +28,16 @@ fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
     {
       "name": String(name),
       "types": Array(types),
-      "typealias": Array(alias),
+      "typealias": Array(alias_),
       "values": Array(values),
+      "readme": String(readme),
     } => {
       let cards = [
           ..types.map(process_type),
-          ..alias.map(process_type),
+          ..alias_.map(process_type),
           ..values.map(process_value),
         ]
-      (name, cards)
+      (readme, cards)
     }
   }
 }

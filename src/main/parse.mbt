@@ -40,6 +40,11 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
 }
 
 ///|
+trait ToItemModel {
+  to_item_model(Self, String) -> ItemModel
+}
+
+///|
 struct Trait {
   name : String
   path : String
@@ -66,9 +71,9 @@ struct Type {
 }
 
 ///|
-struct Package {
+struct PackageBody {
   path : String
-  traits : Traits
+  traits : Array[Traits]
   types : Array[Type]
   typealias_ : Array[String]
   values : Array[String]
@@ -76,21 +81,40 @@ struct Package {
 }
 
 ///|
+struct Package {
+  body : PackageBody?
+  childs : Array[ModuleIndex]
+}
+
+///|
+impl ToItemModel for Traits with to_item_model(self, base) {
+  { name: self.name, target: base + "/" + self.name, kind: Trait }
+}
+
+///|
+impl ToItemModel for Type with to_item_model(self, base) {
+  { name: self.name, target: base + "/" + self.name, kind: Type }
+}
+
+///|
 struct ModuleIndex {
   name : String
   package : Package
-  childs : Array[ModuleIndex]
 }
 
 ///|
 fn parse_module_index(json : Json) -> ModuleIndex {
   match json {
-    { "name": String(name), "package": package, "childs": Array(childs) } =>
+    { "name": String(name), "package": package, "childs": Array(childs) } => {
+      let childs = childs.map(parse_module_index)
       {
         name,
-        package: parse_package(package),
-        childs: childs.map(parse_module_index),
+        package: match package {
+          Null => { body: None, childs }
+          p => parse_package(p, childs)
+        },
       }
+    }
   }
 }
 
@@ -119,9 +143,14 @@ fn parse_impl(json : Json) -> Impl {
 }
 
 ///|
-fn parse_traits(json : Json) -> Traits {
-  let { "name": String(name), "impls": Array(impls) } = json
-  { name, impls: impls.map(parse_impl) }
+fn parse_traits(json : Json) -> Array[Traits] {
+  let result : Array[Traits] = []
+  let Array(traits_list) = json
+  for trait_ in traits_list {
+    let { "name": String(name), "impls": Array(impls) } = trait_
+    result.push({ name, impls: impls.map(parse_impl) })
+  }
+  result
 }
 
 ///|
@@ -131,7 +160,7 @@ fn parse_type(json : Json) -> Type {
 }
 
 ///|
-fn parse_package(json : Json) -> Package {
+fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
   let {
     "path": String(path),
     "traits": traits,
@@ -141,16 +170,60 @@ fn parse_package(json : Json) -> Package {
     "misc": Array(miscs),
   } = json
   {
-    path,
-    traits: parse_traits(traits),
-    types: types.map(parse_type),
-    typealias_: typealais_.map(as_string),
-    values: values.map(as_string),
-    misc: miscs.map(parse_type),
+    body: Some({
+      path,
+      traits: parse_traits(traits),
+      types: types.map(parse_type),
+      typealias_: typealais_.map(as_string),
+      values: values.map(as_string),
+      misc: miscs.map(parse_type),
+    }),
+    childs,
   }
 }
 
 ///|
-fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
+fn generate_package_model_from_package(package : Package) -> PackageModel {
+  let childs = package.childs
+  let package = package.body.unwrap()
+  let mut p : PackageModel = {
+    fullpath: package.path,
+    folded: false,
+    childrens: [],
+  }
+  for trait_ in package.traits {
+    p.childrens.push(trait_.to_item_model(package.path))
+  }
+  for type_ in package.types {
+    p.childrens.push(type_.to_item_model(package.path))
+  }
+  for value in package.values {
+    p.childrens.push({
+      name: value,
+      target: package.path + "/" + value,
+      kind: Value,
+    })
+  }
+  for child in childs {
+    let p_ = generate_package_model_from_package(child.package)
+    p.childrens.push({
+      name: child.name,
+      target: p_.fullpath,
+      kind: Package(p_),
+    })
+  }
+  p
+}
 
+///|
+fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
+  let mut sidebar : SidebarModel = {
+    hide: false,
+    filter: "",
+    cards_expanded: true,
+    module_path: index.name,
+    items: [],
+    dependencies: [],
+  }
+  sidebar
 }

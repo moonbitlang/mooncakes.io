@@ -25,6 +25,7 @@ struct ModelBody {
   navbar : NavbarModel
   detail_cards : Array[DetailCardModel]
   meta_info : MetaInfoModel
+  module_index:ModuleIndex
 }
 
 ///|
@@ -68,7 +69,14 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotModuleIndex(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
-            Ok(index) => (@tea.task(LoadReadme(url)),LoadingReadme())
+            Ok(index) =>
+              (
+                @tea.task(LoadReadme(url)),
+                LoadingReadme(
+                  generate_sidebar_from_module_index(parse_module_index(index)),
+                  meta,
+                ),
+              )
           }
         LoadModuleIndex(url) =>
           (
@@ -81,7 +89,11 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
       }
     LoadingReadme(sidebar, meta) =>
       match msg {
-        GotReadme(result) => {}
+        GotReadme(result) => {
+          match result{
+            Err(_)=>(@tea)
+          }
+        }
         LoadReadme(url) =>
           (
             @http.get(url + "/README.md", expect=Text(Message::GotReadme)),

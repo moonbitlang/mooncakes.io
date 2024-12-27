@@ -20,12 +20,11 @@ enum Message {
 
 ///|
 struct ModelBody {
-  count : Int
   sidebar : SidebarModel
   navbar : NavbarModel
   detail_cards : Array[DetailCardModel]
   meta_info : MetaInfoModel
-  module_index:ModuleIndex
+  module_index : ModuleIndex
 }
 
 ///|
@@ -33,7 +32,7 @@ enum Model {
   Failure
   LoadingModuleInfo(String)
   LoadingModuleIndex(MetaInfoModel, String)
-  LoadingReadme(SidebarModel, MetaInfoModel)
+  LoadingReadme(SidebarModel, MetaInfoModel, ModuleIndex)
   LoadingPackage(ModelBody)
   LoadingPackageReadme(ModelBody)
   Success(ModelBody)
@@ -69,14 +68,17 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotModuleIndex(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
-            Ok(index) =>
+            Ok(index) => {
+              let index = parse_module_index(index)
               (
                 @tea.task(LoadReadme(url)),
                 LoadingReadme(
-                  generate_sidebar_from_module_index(parse_module_index(index)),
+                  generate_sidebar_from_module_index(index),
                   meta,
+                  index,
                 ),
               )
+            }
           }
         LoadModuleIndex(url) =>
           (
@@ -87,13 +89,33 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             model_,
           )
       }
-    LoadingReadme(sidebar, meta) =>
+    LoadingReadme(sidebar, meta, index) =>
       match msg {
-        GotReadme(result) => {
-          match result{
-            Err(_)=>(@tea)
+        GotReadme(result) =>
+          match result {
+            Err(_) =>
+              (
+                @tea.none(),
+                Success({
+                  sidebar,
+                  meta_info: meta,
+                  detail_cards: [],
+                  module_index: index,
+                  navbar: { title: "mooncakes.io" },
+                }),
+              )
+            Ok(result) =>
+              (
+                @tea.none(),
+                Success({
+                  sidebar,
+                  meta_info: meta,
+                  module_index: index,
+                  navbar: { title: "mooncakes.io" },
+                  detail_cards: [ReadmeCard(folded=false, result)],
+                }),
+              )
           }
-        }
         LoadReadme(url) =>
           (
             @http.get(url + "/README.md", expect=Text(Message::GotReadme)),
@@ -103,13 +125,23 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
       }
     LoadingPackage(model) =>
       match msg {
-        GotPackageInfo(result) => {}
+        GotPackageInfo(result) => {
+          match result{
+            Err(_)=>(@tea.none(),Failure)
+            Ok(result)=>{
+              
+            }
+          }
+        }
         LoadPackage(url, path) =>
           (
             @http.get("\{url}/\{path}", expect=Json(Message::GotPackageInfo)),
             model_,
           )
       }
+    LoadingPackageReadme(model)=>{
+
+    }
     Success(model) =>
       match msg {
         ToggleSidebar =>

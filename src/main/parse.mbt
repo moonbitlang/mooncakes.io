@@ -61,7 +61,7 @@ struct Traits {
 ///|
 struct Impl {
   self_ : Trait?
-  trait_ : Trait
+  trait_ : Trait?
   method_ : String
 }
 
@@ -133,13 +133,16 @@ fn parse_trait(json : Json) -> Trait {
 
 ///|
 fn parse_impl(json : Json) -> Impl {
-  let { "self"? : self_, "trait": trait_, "method": String(method_) } = json
+  let { "self"? : self_, "trait"? : trait_, "method": String(method_) } = json
   {
     self_: match self_ {
       Some(x) => Some(parse_trait(x))
       None => None
     },
-    trait_: parse_trait(trait_),
+    trait_: match trait_ {
+      Some(x) => Some(parse_trait(x))
+      None => None
+    },
     method_,
   }
 }
@@ -185,33 +188,34 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
 }
 
 ///|
-fn generate_package_model_from_package(package : Package) -> PackageModel {
-  let childs = package.childs
-  let package = package.body.unwrap()
-  let p : PackageModel = {
-    fullpath: package.path,
-    folded: false,
-    childrens: [],
-  }
-  for trait_ in package.traits {
-    p.childrens.push(trait_.to_item_model(package.path))
-  }
-  for type_ in package.types {
-    p.childrens.push(type_.to_item_model(package.path))
-  }
-  for value in package.values {
-    p.childrens.push({
-      name: value,
-      target: package.path + "/" + value,
-      kind: Value,
-    })
-  }
-  for alias_ in package.typealias_ {
-    p.childrens.push({
-      name: alias_,
-      target: package.path + "/" + alias_,
-      kind: TypeAlias,
-    })
+fn generate_package_model_from_package(package_ : Package) -> PackageModel {
+  let childs = package_.childs
+  let mut p : PackageModel = { fullpath: "", folded: false, childrens: [] }
+  match package_.body {
+    Some(package) => {
+      p = { ..p, fullpath: package.path }
+      for trait_ in package.traits {
+        p.childrens.push(trait_.to_item_model(package.path))
+      }
+      for type_ in package.types {
+        p.childrens.push(type_.to_item_model(package.path))
+      }
+      for value in package.values {
+        p.childrens.push({
+          name: value,
+          target: package.path + "/" + value,
+          kind: Value,
+        })
+      }
+      for alias_ in package.typealias_ {
+        p.childrens.push({
+          name: alias_,
+          target: package.path + "/" + alias_,
+          kind: TypeAlias,
+        })
+      }
+    }
+    None => p = { fullpath: "Empty", folded: false, childrens: [] }
   }
   for child in childs {
     let p_ = generate_package_model_from_package(child.package)

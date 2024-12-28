@@ -6,7 +6,7 @@ enum Message {
   ExpandAllCards
   ItemClick(PackageModel)
   FilterChange(String)
-  LoadModuleInfo(String)
+  LoadModuleInfo
   GotModuleInfo(Result[Json, String])
   LoadModuleIndex
   GotModuleIndex(Result[Json, String])
@@ -53,7 +53,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
                 LoadingModuleIndex(parse_metadata(info), url),
               )
           }
-        LoadModuleInfo(url) =>
+        LoadModuleInfo =>
           (
             @http.get(
               url + "/moon.mod.json",
@@ -95,7 +95,8 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotReadme(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
-            Ok(result) =>
+            Ok(r) => {
+              println("here " + r)
               (
                 @tea.none(),
                 Success({
@@ -103,13 +104,14 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
                   meta_info: meta,
                   module_index: index,
                   navbar: { title: "mooncakes.io" },
-                  detail_cards: [ReadmeCard(folded=false, result)],
+                  detail_cards: [ReadmeCard(folded=false, r)],
                 }),
               )
+            }
           }
         LoadReadme =>
           (
-            if meta.readme != " " {
+            if meta.readme != "" {
               @http.get(
                 url + "/" + meta.readme,
                 expect=Text(Message::GotReadme),
@@ -119,7 +121,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             },
             model_,
           )
-        _ => panic()
       }
     LoadingPackage(model, url, path) =>
       match msg {
@@ -150,6 +151,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotPackageReadme(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
+            // here to do
           }
         LoadPackageReadme(readme) =>
           (
@@ -228,10 +230,6 @@ fn floating_view(cards_expanded : Bool) -> @html.Html[Message] {
 fn view(state : Model) -> @html.Html[Message] {
   match state {
     Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
-    LoadingModuleInfo(_) =>
-      h1(class="text-gray-800 text-2xl", [text("Loading Module Information...")])
-    LoadingReadme(_) =>
-      h1(class="text-gray-800 text-2xl", [text("Loading Readme Information...")])
     Success(model) =>
       div(class="flex flex-col", [
         div([navbar_view(model.navbar)]),
@@ -248,11 +246,17 @@ fn view(state : Model) -> @html.Html[Message] {
         ]),
         div(class=" ", [footer_view()]),
       ])
+    _ => h1(class="text-gray-800 text-2xl", [text("Loading")])
   }
 }
 
 ///| NOTE: This program is only available in the js backend, 
 /// see README.md to getting started.
 fn main {
-
+  @tea.startup(
+    model=LoadingModuleInfo("http://127.0.0.1:3000"),
+    update~,
+    view~,
+    initialize=LoadModuleInfo,
+  )
 }

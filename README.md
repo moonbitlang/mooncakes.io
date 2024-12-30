@@ -1,18 +1,11 @@
-# rabbit-tea-tailwind template
+# 🥮 mooncakes.io
 
-Template for web app using MoonBit, Rabbit-TEA, and Tailwind CSS.
+The distribution platform for MoonBit library, developed in collaboration with [Rabbit Tea](https://github.com/Yoorkin/rabbit-tea) and [Tailwindcss](https://tailwindcss.com/).
 
-![demo](image.png)
+## Build & Run
 
-## Getting started
-
-To get better completion experience in Visual Studio Code, you can install 
-the [Tailwind CSS IntelliSense extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
-
-Clone this repository and run the following commands in the project directory:
-
-```
-npm install
+```bash
+npm i
+moon build --target js
 npm run dev
 ```
-

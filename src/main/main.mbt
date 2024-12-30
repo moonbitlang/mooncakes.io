@@ -96,7 +96,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
           match result {
             Err(_) => (@tea.none(), Failure)
             Ok(r) => {
-              println("here " + r)
               (
                 @tea.none(),
                 Success({

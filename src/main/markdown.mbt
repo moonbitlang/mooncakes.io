@@ -1,10 +1,30 @@
 ///|
+fn unwrap_text(x : @cmark.Inline) -> String {
+  match x {
+    Text(ns) => ns.v
+    _ => abort("not a texted image")
+  }
+}
+
+///|
 fn markdown_view[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
-      text: Text({ v: text, .. }),
+      text: Text({ v: txt, .. }),
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
-    } : @cmark.InlineLink) => (text, link)
+    } : @cmark.InlineLink) => [@html.a(href=link, [text(txt)])]
+    ({
+      text: Image(
+        {
+          v: {
+            text: Text({ v: alt, .. }),
+            reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
+          },
+          ..,
+        }
+      ),
+      reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
+    } : @cmark.InlineLink) => [@html.a(href=link, [@html.img(src~, alt~, [])])]
     _ => abort("not an inline link")
   }
 
@@ -22,14 +42,13 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
       ]
     }
     Emphasis({ v: { inline, .. }, .. }) => [@html.em(inline2html(inline))]
-    Image({ v: link, .. }) => {
-      let (str, src) = unwrap_inline_link(link)
-      [@html.img(src~, [@html.text(str)])]
-    }
+    Image({ v: link, .. }) =>
+      // Todo: Find out why this place is unreachable
+      abort("Unreachable")
     Inlines({ v, .. }) => v.map(inline2html).to_array().flatten()
     Link({ v: link, .. }) => {
-      let (str, href) = unwrap_inline_link(link)
-      [@html.a(href~, [text(str)])]
+      println(link)
+      unwrap_inline_link(link)
     }
     StrongEmphasis({ v: { inline, .. }, .. }) => {
       let inline = inline2html(inline)

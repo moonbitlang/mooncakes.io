@@ -98,9 +98,7 @@ fn item_list_view(
   items : Array[ItemModel],
   filter~ : String
 ) -> @html.Html[Message] {
-  div(class="overflow-y-scroll h-96", [
-    @html.ul(items.map(fn(x) { item_view(x, filter~) })),
-  ])
+  @html.ul(items.map(fn(x) { item_view(x, filter~) }))
 }
 
 ///|
@@ -132,8 +130,7 @@ fn sidebar_view(model : SidebarModel) -> @html.Html[Message] {
       div(class="pt-1 border-t \{hide}", [
         filter_input_view(model.filter),
         div(class="text-gray-700", [items]),
-      ]),
-      floating_view(model.cards_expanded),
+      ])
     ],
   )
   // div(

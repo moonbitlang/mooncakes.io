@@ -223,14 +223,14 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
   }
 }
 
-///|
+///| Todo: Adjust position
 fn floating_view(cards_expanded : Bool) -> @html.Html[Message] {
   let button = if cards_expanded {
     icon_button_view("expansion.svg", text="Fold cards", click=FoldAllCards)
   } else {
     icon_button_view("reduction.svg", text="Expand cards", click=ExpandAllCards)
   }
-  div(class="absolute bottom-4 left-4", [button])
+  div(class="absolute top-4 right-4", [button])
 }
 
 ///|
@@ -243,7 +243,7 @@ fn view(state : Model) -> @html.Html[Message] {
         div(class="flex w-screen", [
           div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
             meta_info_view(model.meta_info),
-            div(class="sticky top-[-1px] h-screen", [
+            div(class="sticky top-[-1px] overflow-y-scroll h-screen", [
               sidebar_view(model.sidebar),
             ]),
           ]),

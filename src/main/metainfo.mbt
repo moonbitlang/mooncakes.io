@@ -19,7 +19,7 @@ fn meta_info_item_view(
 ) -> @html.Html[Message] {
   div(class="flex flex-col py-1 gap-1 text-gray-600", [
     p(class="font-bold text-[0.7em]", [text(title)]),
-    elem,
+    div(class="overflow-auto", [elem]),
   ])
 }
 

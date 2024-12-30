@@ -24,7 +24,7 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
     None => []
   }
   let iter = name.iter()
-  let author = String::from_array(iter.take_while(fn(x) { x == '/' }).collect())
+  let author = String::from_array(iter.take_while(fn(x) { x != '/' }).collect())
   let package_name = String::from_array(
     iter.drop_while(fn(x) { x == '/' }).collect(),
   )

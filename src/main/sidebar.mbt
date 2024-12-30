@@ -130,7 +130,7 @@ fn sidebar_view(model : SidebarModel) -> @html.Html[Message] {
       div(class="pt-1 border-t \{hide}", [
         filter_input_view(model.filter),
         div(class="text-gray-700", [items]),
-      ])
+      ]),
     ],
   )
   // div(

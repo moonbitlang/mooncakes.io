@@ -1,5 +1,6 @@
 ///|
 enum Message {
+  SwitchElement(String)
   ToggleSidebar
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
@@ -95,18 +96,17 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotReadme(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
-            Ok(r) => {
+            Ok(r) =>
               (
                 @tea.none(),
                 Success({
                   sidebar,
                   meta_info: meta,
                   module_index: index,
-                  navbar: { title: "mooncakes.io" },
+                  navbar: { title: "🥮 mooncakes.io" },
                   detail_cards: [ReadmeCard(folded=false, r)],
                 }),
               )
-            }
           }
         LoadReadme =>
           (
@@ -150,7 +150,15 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotPackageReadme(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
-            // here to do
+            Ok(result) =>
+              (
+                @tea.none(),
+                Success({
+                  ..model,
+                  detail_cards: [ReadmeCard(result, folded=false)] +
+                  model.detail_cards,
+                }),
+              )
           }
         LoadPackageReadme(readme) =>
           (

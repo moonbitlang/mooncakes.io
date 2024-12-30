@@ -98,7 +98,9 @@ fn item_list_view(
   items : Array[ItemModel],
   filter~ : String
 ) -> @html.Html[Message] {
-  @html.ul(items.map(fn(x) { item_view(x, filter~) }))
+  div(class="overflow-y-scroll h-96", [
+    @html.ul(items.map(fn(x) { item_view(x, filter~) })),
+  ])
 }
 
 ///|

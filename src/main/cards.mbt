@@ -63,7 +63,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   let header = match card {
     ReadmeCard(_, ..) =>
       p(class="text-sm font-bold py-2 text-gray-600 self-center", [
-        text("Readme"),
+        text("README"),
       ])
     ValueCard(signature~, ..)
     | ImplCard(signature~, ..)

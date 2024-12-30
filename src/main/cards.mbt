@@ -117,7 +117,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
         class="grid grid-cols-[1.5em_auto_6em] grid-rows-[auto_auto] group ",
         [
           div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
-          div(class="col-start-2 row-start-1 overflow-scroll ", [header]),
+          div(class="col-start-2 row-start-1 overflow-auto", [header]),
           div(
             class="col-start-3 row-start-1 max-h-10 flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",
             tool_buttons,

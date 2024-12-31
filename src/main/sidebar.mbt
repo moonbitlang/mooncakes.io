@@ -11,8 +11,9 @@ enum ItemKind {
   Value
   Type
   Trait
-  TypeAlias
   Readme
+  ModuleReadme
+  TypeAlias
 } derive(Show)
 
 ///|
@@ -68,15 +69,30 @@ fn item_button[M](
 fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
   let { name, target, kind } = model
   match kind {
+    ModuleReadme =>
+      item_button(text(name), icon="readme.svg", click=ReturnToModuleReadme)
     Readme =>
-      item_button(text(name), icon="readme.svg", click=ItemClick(target))
-    Type => item_button(text(name), icon="type.svg", click=ItemClick(target))
+      item_button(text(name), icon="readme.svg", click=ItemClick(target, name))
+    Type =>
+      item_button(text(name), icon="type.svg", click=ItemClick(target, name))
     TypeAlias =>
-      item_button(text(name), icon="code-brackets.svg", click=ItemClick(target))
+      item_button(
+        text(name),
+        icon="code-brackets.svg",
+        click=ItemClick(target, name),
+      )
     Value =>
-      item_button(text(name), icon="code-brackets.svg", click=ItemClick(target))
+      item_button(
+        text(name),
+        icon="code-brackets.svg",
+        click=ItemClick(target, name),
+      )
     Trait =>
-      item_button(text(name), icon="components.svg", click=ItemClick(target))
+      item_button(
+        text(name),
+        icon="components.svg",
+        click=ItemClick(target, name),
+      )
     Package({ childrens, folded, .. } as pkg) => {
       let childrens = if filter == "" {
         childrens

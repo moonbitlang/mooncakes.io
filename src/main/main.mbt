@@ -1,11 +1,12 @@
 ///|
 enum Message {
-  SwitchElement(String)
+  SwitchElement
   ToggleSidebar
+  ReturnToModuleReadme
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
   ExpandAllCards
-  ItemClick(String)
+  ItemClick(String, String)
   PackageClick(PackageModel)
   FilterChange(String)
   LoadModuleInfo
@@ -16,8 +17,6 @@ enum Message {
   GotReadme(Result[String, String])
   LoadPackage
   GotPackageInfo(Result[Json, String])
-  LoadPackageReadme(String)
-  GotPackageReadme(Result[String, String])
 } derive(Show)
 
 ///|
@@ -25,7 +24,8 @@ const URL_BASE = "http://127.0.0.1:3000"
 
 ///|
 struct ModelBody {
-  now_package : String
+  now_path : String
+  now_item : String
   sidebar : SidebarModel
   navbar : NavbarModel
   detail_cards : Array[DetailCardModel]
@@ -37,9 +37,8 @@ enum Model {
   Failure
   LoadingModuleInfo(String)
   LoadingModuleIndex(MetaInfoModel, String)
-  LoadingReadme(SidebarModel, MetaInfoModel, String)
+  LoadingReadme(ModelBody, String, Bool)
   LoadingPackage(ModelBody, String, String)
-  LoadingPackageReadme(ModelBody, String, String)
   Success(ModelBody)
 }
 
@@ -61,7 +60,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         LoadModuleInfo =>
           (
             @http.get(
-              url + "/moon.mod.json",
+              URL_BASE + "/" + url + "/moon.mod.json",
               expect=Json(Message::GotModuleInfo),
             ),
             model_,
@@ -73,29 +72,36 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
         GotModuleIndex(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
-            Ok(index) => {
-              let index = parse_module_index(index)
+            Ok(index) =>
               (
                 @tea.task(LoadReadme),
                 LoadingReadme(
-                  generate_sidebar_from_module_index(index),
-                  meta,
+                  {
+                    now_path: meta.module_path,
+                    now_item: "",
+                    sidebar: generate_sidebar_from_module_index(
+                      parse_module_index(index),
+                    ),
+                    meta_info: meta,
+                    navbar: { title: "🥮 mooncakes.io" },
+                    detail_cards: [],
+                  },
                   url,
+                  false,
                 ),
               )
-            }
           }
         LoadModuleIndex =>
           (
             @http.get(
-              url + "/module_index.json",
+              URL_BASE + "/" + url + "/module_index.json",
               expect=Json(Message::GotModuleIndex),
             ),
             model_,
           )
         _ => panic()
       }
-    LoadingReadme(sidebar, meta, url) =>
+    LoadingReadme(model, url, tag) =>
       match msg {
         GotReadme(result) =>
           match result {
@@ -104,19 +110,35 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
               (
                 @tea.none(),
                 Success({
-                  now_package: meta.module_path,
-                  sidebar,
-                  meta_info: meta,
-                  navbar: { title: "🥮 mooncakes.io" },
-                  detail_cards: [ReadmeCard(folded=false, r)],
+                  ..model,
+                  sidebar: {
+                    ..model.sidebar,
+                    items: (if r == "" || tag {
+                      []
+                    } else {
+                      [
+                        {
+                          name: model.meta_info.readme,
+                          target: model.meta_info.module_path,
+                          kind: ModuleReadme,
+                        },
+                      ]
+                    }) +
+                    model.sidebar.items,
+                  },
+                  detail_cards: if r == "" {
+                    []
+                  } else {
+                    [ReadmeCard(folded=false, r)]
+                  },
                 }),
               )
           }
         LoadReadme =>
           (
-            if meta.readme != "" {
+            if model.meta_info.readme != "" {
               @http.get(
-                url + "/" + meta.readme,
+                URL_BASE + "/" + url + "/" + model.meta_info.readme,
                 expect=Text(Message::GotReadme),
               )
             } else {
@@ -126,51 +148,34 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
           )
         _ => panic()
       }
-    LoadingPackage(model, url, path) =>
+    LoadingPackage(model, url, target) =>
       match msg {
+        SwitchElement => (@tea.none(), model_)
         GotPackageInfo(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
             Ok(result) => {
-              let (readme, details) = process_pacakge_info(result)
-              if readme != "" {
-                (
-                  @tea.task(LoadPackageReadme(readme)),
-                  LoadingPackageReadme(
-                    { ..model, detail_cards: details },
-                    url,
-                    path,
-                  ),
-                )
-              } else {
-                (@tea.none(), Success({ ..model, detail_cards: details }))
-              }
-            }
-          }
-        LoadPackage =>
-          (@http.get(url, expect=Json(Message::GotPackageInfo)), model_)
-        _ => panic()
-      }
-    LoadingPackageReadme(model, url, path) =>
-      match msg {
-        GotPackageReadme(result) =>
-          match result {
-            Err(_) => (@tea.none(), Failure)
-            Ok(result) =>
+              let details = process_pacakge_info(result)
+              // (
+              //   @tea.task(SwitchElement),
+              //   LoadingPackage({ ..model, detail_cards: details }, url, target),
+              // )
               (
                 @tea.none(),
                 Success({
                   ..model,
-                  detail_cards: [ReadmeCard(result, folded=false)] +
-                  model.detail_cards,
+                  now_item: target,
+                  now_path: url,
+                  detail_cards: details,
                 }),
               )
+            }
           }
-        LoadPackageReadme(readme) =>
+        LoadPackage =>
           (
             @http.get(
-              "\{url}/\{path}/\{readme}",
-              expect=Text(Message::GotPackageReadme),
+              URL_BASE + "/" + url + "/package_data.json",
+              expect=Json(Message::GotPackageInfo),
             ),
             model_,
           )
@@ -218,10 +223,17 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
           pkg_model.folded = not(pkg_model.folded)
           (@tea.none(), model_)
         }
-        ItemClick(url) => {
-          println(url)
-          (@tea.none(), model_)
-        }
+        ReturnToModuleReadme =>
+          (
+            @tea.task(LoadReadme),
+            LoadingReadme(model, model.meta_info.module_path, true),
+          )
+        ItemClick(path, target) =>
+          if path == model.now_path {
+            (@tea.none(), model_)
+          } else {
+            (@tea.task(LoadPackage), LoadingPackage(model, path, target))
+          }
         FilterChange(value) => {
           model.sidebar.filter = value
           (@tea.none(), model_)
@@ -271,7 +283,7 @@ fn view(state : Model) -> @html.Html[Message] {
 ///|
 fn main {
   @tea.startup(
-    model=LoadingModuleInfo("http://127.0.0.1:3000"),
+    model=LoadingModuleInfo("moonbitlang/core"),
     update~,
     view~,
     initialize=LoadModuleInfo,

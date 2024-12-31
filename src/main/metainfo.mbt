@@ -9,7 +9,7 @@ struct MetaInfoModel {
   description : String
   repository : String
   module_path : String
-}
+} derive(Show)
 
 ///|
 fn meta_info_item_view(

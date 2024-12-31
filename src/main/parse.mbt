@@ -91,12 +91,12 @@ struct Package {
 
 ///|
 impl ToItemModel for Traits with to_item_model(self, base) {
-  { name: self.name, target: base + "/" + self.name, kind: Trait }
+  { name: self.name, target: base, kind: Trait }
 }
 
 ///|
 impl ToItemModel for Type with to_item_model(self, base) {
-  { name: self.name, target: base + "/" + self.name, kind: Type }
+  { name: self.name, target: base, kind: Type }
 }
 
 ///|
@@ -198,11 +198,7 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
   match package_.body {
     Some(package) => {
       if package.readme {
-        p.childrens.push({
-          name: "README",
-          target: package.path + "/" + "README",
-          kind: Readme,
-        })
+        p.childrens.push({ name: "README", target: package.path, kind: Readme })
       }
       p = { ..p, fullpath: package.path }
       for trait_ in package.traits {
@@ -212,18 +208,10 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
         p.childrens.push(type_.to_item_model(package.path))
       }
       for value in package.values {
-        p.childrens.push({
-          name: value,
-          target: package.path + "/" + value,
-          kind: Value,
-        })
+        p.childrens.push({ name: value, target: package.path, kind: Value })
       }
       for alias_ in package.typealias_ {
-        p.childrens.push({
-          name: alias_,
-          target: package.path + "/" + alias_,
-          kind: TypeAlias,
-        })
+        p.childrens.push({ name: alias_, target: package.path, kind: TypeAlias })
       }
     }
     None => p = { fullpath: "Empty", folded: false, childrens: [] }

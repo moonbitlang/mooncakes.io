@@ -1,5 +1,5 @@
 ///|
-fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
+fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
   fn process_value {
     ({ "docstring": String(description), "signature": String(signature) } : Json) =>
       ValueCard(folded=false, signature~, description~)
@@ -24,6 +24,15 @@ fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
     }
   }
 
+  fn process_typealias {
+    ({
+      "name": String(name),
+      "docstring": String(description),
+      "signature": String(signature),
+    } : Json) =>
+      TypeCard(folded=false, description~, signature~, methods=[], impls=[])
+  }
+
   match package {
     {
       "name": String(name),
@@ -32,12 +41,16 @@ fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
       "values": Array(values),
       "readme": String(readme),
     } => {
-      let cards = [
-          ..types.map(process_type),
-          ..alias_.map(process_type),
-          ..values.map(process_value),
-        ]
-      (readme, cards)
+      let cards = []
+      if readme == "" {
+        cards.push(ReadmeCard(folded=false, readme))
+      }
+      cards +
+      [
+        ..types.map(process_type),
+        ..alias_.map(process_typealias),
+        ..values.map(process_value),
+      ]
     }
   }
 }

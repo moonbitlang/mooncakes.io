@@ -75,6 +75,7 @@ struct Type {
 ///|
 struct PackageBody {
   path : String
+  readme : Bool
   traits : Array[Traits]
   types : Array[Type]
   typealias_ : Array[String]
@@ -169,6 +170,8 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
   let {
     "path": String(path),
     "traits": traits,
+    "readme": True
+    | False as readme,
     "types": Array(types),
     "typealias": Array(typealais_),
     "values": Array(values),
@@ -177,6 +180,7 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
   {
     body: Some({
       path,
+      readme: readme == True,
       traits: parse_traits(traits),
       types: types.map(parse_type),
       typealias_: typealais_.map(as_string),
@@ -193,6 +197,13 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
   let mut p : PackageModel = { fullpath: "", folded: false, childrens: [] }
   match package_.body {
     Some(package) => {
+      if package.readme {
+        p.childrens.push({
+          name: "README",
+          target: package.path + "/" + "README",
+          kind: Readme,
+        })
+      }
       p = { ..p, fullpath: package.path }
       for trait_ in package.traits {
         p.childrens.push(trait_.to_item_model(package.path))

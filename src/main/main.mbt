@@ -5,7 +5,8 @@ enum Message {
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
   ExpandAllCards
-  ItemClick(PackageModel)
+  ItemClick(String)
+  PackageClick(PackageModel)
   FilterChange(String)
   LoadModuleInfo
   GotModuleInfo(Result[Json, String])
@@ -20,12 +21,15 @@ enum Message {
 } derive(Show)
 
 ///|
+const URL_BASE = "http://127.0.0.1:3000"
+
+///|
 struct ModelBody {
+  now_package : String
   sidebar : SidebarModel
   navbar : NavbarModel
   detail_cards : Array[DetailCardModel]
   meta_info : MetaInfoModel
-  module_index : ModuleIndex
 }
 
 ///|
@@ -33,7 +37,7 @@ enum Model {
   Failure
   LoadingModuleInfo(String)
   LoadingModuleIndex(MetaInfoModel, String)
-  LoadingReadme(SidebarModel, MetaInfoModel, ModuleIndex, String)
+  LoadingReadme(SidebarModel, MetaInfoModel, String)
   LoadingPackage(ModelBody, String, String)
   LoadingPackageReadme(ModelBody, String, String)
   Success(ModelBody)
@@ -76,7 +80,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
                 LoadingReadme(
                   generate_sidebar_from_module_index(index),
                   meta,
-                  index,
                   url,
                 ),
               )
@@ -90,8 +93,9 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             ),
             model_,
           )
+        _ => panic()
       }
-    LoadingReadme(sidebar, meta, index, url) =>
+    LoadingReadme(sidebar, meta, url) =>
       match msg {
         GotReadme(result) =>
           match result {
@@ -100,9 +104,9 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
               (
                 @tea.none(),
                 Success({
+                  now_package: meta.module_path,
                   sidebar,
                   meta_info: meta,
-                  module_index: index,
                   navbar: { title: "🥮 mooncakes.io" },
                   detail_cards: [ReadmeCard(folded=false, r)],
                 }),
@@ -120,6 +124,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             },
             model_,
           )
+        _ => panic()
       }
     LoadingPackage(model, url, path) =>
       match msg {
@@ -144,6 +149,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
           }
         LoadPackage =>
           (@http.get(url, expect=Json(Message::GotPackageInfo)), model_)
+        _ => panic()
       }
     LoadingPackageReadme(model, url, path) =>
       match msg {
@@ -168,6 +174,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             ),
             model_,
           )
+        _ => panic()
       }
     Success(model) =>
       match msg {
@@ -207,8 +214,12 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             }),
           )
         }
-        ItemClick(pkg_model) => {
+        PackageClick(pkg_model) => {
           pkg_model.folded = not(pkg_model.folded)
+          (@tea.none(), model_)
+        }
+        ItemClick(url) => {
+          println(url)
           (@tea.none(), model_)
         }
         FilterChange(value) => {
@@ -257,8 +268,7 @@ fn view(state : Model) -> @html.Html[Message] {
   }
 }
 
-///| NOTE: This program is only available in the js backend, 
-/// see README.md to getting started.
+///|
 fn main {
   @tea.startup(
     model=LoadingModuleInfo("http://127.0.0.1:3000"),

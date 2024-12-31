@@ -44,10 +44,7 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
       // Todo: Find out why this place is unreachable
       abort("Unreachable")
     Inlines({ v, .. }) => v.map(inline2html).to_array().flatten()
-    Link({ v: link, .. }) => {
-      println(link)
-      unwrap_inline_link(link)
-    }
+    Link({ v: link, .. }) => unwrap_inline_link(link)
     StrongEmphasis({ v: { inline, .. }, .. }) => {
       let inline = inline2html(inline)
       [@html.strong(inline)]

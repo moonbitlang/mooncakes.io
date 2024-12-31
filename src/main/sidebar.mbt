@@ -12,6 +12,7 @@ enum ItemKind {
   Type
   Trait
   TypeAlias
+  Readme
 } derive(Show)
 
 ///|
@@ -67,10 +68,15 @@ fn item_button[M](
 fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
   let { name, target, kind } = model
   match kind {
-    Type => item_button(text(name), icon="type.svg")
-    TypeAlias => item_button(text(name), icon="code-brackets.svg")
-    Value => item_button(text(name), icon="code-brackets.svg")
-    Trait => item_button(text(name), icon="components.svg")
+    Readme =>
+      item_button(text(name), icon="readme.svg", click=ItemClick(target))
+    Type => item_button(text(name), icon="type.svg", click=ItemClick(target))
+    TypeAlias =>
+      item_button(text(name), icon="code-brackets.svg", click=ItemClick(target))
+    Value =>
+      item_button(text(name), icon="code-brackets.svg", click=ItemClick(target))
+    Trait =>
+      item_button(text(name), icon="components.svg", click=ItemClick(target))
     Package({ childrens, folded, .. } as pkg) => {
       let childrens = if filter == "" {
         childrens
@@ -85,7 +91,7 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
       let icon = if folded { "folder-close.svg" } else { "folder-open.svg" }
       @html.ul([
         div(class="inline-block w-full", [
-          item_button(text(name), icon~, click=ItemClick(pkg)),
+          item_button(text(name), icon~, click=PackageClick(pkg)),
         ]),
         list,
       ])

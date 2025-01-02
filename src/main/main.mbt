@@ -150,24 +150,14 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
       }
     LoadingPackage(model, url, target) =>
       match msg {
-        SwitchElement => (@tea.none(), model_)
         GotPackageInfo(result) =>
           match result {
             Err(_) => (@tea.none(), Failure)
             Ok(result) => {
               let details = process_pacakge_info(result)
-              // (
-              //   @tea.task(SwitchElement),
-              //   LoadingPackage({ ..model, detail_cards: details }, url, target),
-              // )
               (
-                @tea.none(),
-                Success({
-                  ..model,
-                  now_item: target,
-                  now_path: url,
-                  detail_cards: details,
-                }),
+                @browser.scroll_to(target),
+                Success({ ..model, detail_cards: details }),
               )
             }
           }
@@ -276,7 +266,10 @@ fn view(state : Model) -> @html.Html[Message] {
         ]),
         div(class=" ", [footer_view()]),
       ])
-    _ => h1(class="text-gray-800 text-2xl", [text("Loading")])
+    LoadingModuleIndex(_) | LoadingModuleInfo(_) =>
+      h1(class="text-gray-800 text-2xl", [text("Loading")])
+    LoadingPackage(model, _, _) | LoadingReadme(model, _, _) =>
+      view(Success(model))
   }
 }
 

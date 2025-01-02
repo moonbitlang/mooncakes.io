@@ -1,9 +1,20 @@
 ///|
 enum DetailCardModel {
-  ValueCard(mut folded~ : Bool, signature~ : String, description~ : String)
-  ImplCard(mut folded~ : Bool, signature~ : String, description~ : String)
+  ValueCard(
+    mut folded~ : Bool,
+    name~ : String,
+    signature~ : String,
+    description~ : String
+  )
+  ImplCard(
+    mut folded~ : Bool,
+    name~ : String,
+    signature~ : String,
+    description~ : String
+  )
   TypeCard(
     mut folded~ : Bool,
+    name~ : String,
     signature~ : String,
     description~ : String,
     methods~ : Array[DetailCardModel],
@@ -11,9 +22,9 @@ enum DetailCardModel {
   )
   TraitCard(
     mut folded~ : Bool,
+    name~ : String,
     signature~ : String,
     description~ : String,
-    methods~ : Array[DetailCardModel],
     impls~ : Array[DetailCardModel]
   )
   ReadmeCard(mut folded~ : Bool, String)
@@ -51,13 +62,13 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   }
 
   // signature 
-  fn signature_view(code) {
+  fn signature_view(code, name) {
     let code_view = @html.pre([
-      @html.code(class="font-mono text-[0.9em] text-blue-800", [
+      @html.code(id=name, class="font-mono text-[0.9em] text-blue-800", [
         hightlight(code),
       ]),
     ])
-    div([div(class="my-2 flex-grow overflow-y-scroll", [code_view])])
+    div([div(class="my-2 flex-grow overflow-auto", [code_view])])
   }
 
   let header = match card {
@@ -65,10 +76,10 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
       p(class="text-sm font-bold py-2 text-gray-600 self-center", [
         text("README"),
       ])
-    ValueCard(signature~, ..)
-    | ImplCard(signature~, ..)
-    | TypeCard(signature~, ..)
-    | TraitCard(signature~, ..) => signature_view(signature)
+    ValueCard(signature~, name~, ..)
+    | ImplCard(signature~, name~, ..)
+    | TypeCard(signature~, name~, ..)
+    | TraitCard(signature~, name~, ..) => signature_view(signature, name)
   }
 
   // tool buttons
@@ -102,10 +113,14 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
 
   // methods or impls
   let subsections = match card {
-    TypeCard(methods~, impls~) | TraitCard(methods~, impls~) => {
+    TypeCard(methods~, impls~, ..) => {
       let methods = methods.map(card_section_view)
       let impls = impls.map(card_section_view)
       [..methods, ..impls]
+    }
+    TraitCard(impls~, ..) => {
+      let impls = impls.map(card_section_view)
+      [..impls]
     }
     _ => []
   }
@@ -169,12 +184,9 @@ fn toggle_folded(self : DetailCardModel) -> Unit {
         x.toggle_folded()
       }
     }
-    TraitCard(impls~, methods~, ..) as card => {
+    TraitCard(impls~, ..) as card => {
       card.folded = not(card.folded)
       for x in impls {
-        x.toggle_folded()
-      }
-      for x in methods {
         x.toggle_folded()
       }
     }

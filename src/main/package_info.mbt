@@ -51,15 +51,14 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
     }
   }
 
-  match package {
-    {
-      "name": String(name),
+  fn process_package {
+    ({
       "types": Array(types),
       "typealias": Array(alias_),
       "values": Array(values),
       "traits": Array(traits),
       "readme": String(readme),
-    } =>
+    } : Json) =>
       (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
       [
         ..types.map(process_type),
@@ -68,4 +67,6 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
         ..values.map(process_value),
       ]
   }
+
+  process_package(package)
 }

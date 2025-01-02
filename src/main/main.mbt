@@ -1,6 +1,5 @@
 ///|
 enum Message {
-  ToggleSidebar
   ReturnToModuleReadme
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
@@ -117,7 +116,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
                     } else {
                       [
                         {
-                          name: model.meta_info.readme,
+                          name: model.meta_info.readme.or_default(),
                           target: model.meta_info.module_path,
                           kind: ModuleReadme,
                         },
@@ -135,13 +134,13 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
           }
         LoadReadme =>
           (
-            if model.meta_info.readme != "" {
-              @http.get(
-                URL_BASE + "/" + url + "/" + model.meta_info.readme,
-                expect=Text(Message::GotReadme),
-              )
-            } else {
-              @tea.task(GotReadme(Ok("")))
+            match model.meta_info.readme {
+              Some(readme) =>
+                @http.get(
+                  URL_BASE + "/" + url + "/" + readme,
+                  expect=Text(Message::GotReadme),
+                )
+              None => @tea.task(GotReadme(Ok("")))
             },
             model_,
           )
@@ -172,14 +171,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
       }
     Success(model) =>
       match msg {
-        ToggleSidebar =>
-          (
-            @tea.none(),
-            Success({
-              ..model,
-              sidebar: { ..model.sidebar, hide: not(model.sidebar.hide) },
-            }),
-          )
         ToggleCardDetail(card) => {
           card.toggle_folded()
           (@tea.none(), model_)

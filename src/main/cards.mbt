@@ -161,7 +161,6 @@ fn card_view(card : DetailCardModel) -> @html.Html[Message] {
       div(class="border rounded overflow-clip bg-white", [
         card_section_view(card),
       ])
-    _ => div(class="border-t", [card_section_view(card)])
   }
 }
 

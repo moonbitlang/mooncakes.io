@@ -2,12 +2,12 @@
 struct MetaInfoModel {
   author : String
   name : String
-  readme : String
+  readme : String?
   version : String
-  license : String
+  license : String?
   keywords : Array[String]
-  description : String
-  repository : String
+  description : String?
+  repository : String?
   module_path : String
 } derive(Show)
 
@@ -34,7 +34,6 @@ fn install_view(path~ : String) -> @html.Html[Message] {
         input_type=Text,
         read_only=true,
       ),
-      // icon_button_view("folder-close.svg"),
     ],
   )
 }
@@ -49,38 +48,58 @@ fn tag_view(value : String) -> @html.Html[Message] {
 
 ///|
 fn meta_info_view(model : MetaInfoModel) -> @html.Html[Message] {
-  div(class="pl-2 mb-6", [
-    div(class="flex flex-row gap-4 items-center mb-2", [
-      h1(class="text-gray-800 text-2xl", [text(model.name)]),
-      @html.h2(class=" border rounded px-2 text-gray-600 text-sm self-center", [
-        text(model.version),
+  div(
+    class="pl-2 mb-6",
+    [
+      div(class="flex flex-row gap-4 items-center mb-2", [
+        h1(class="text-gray-800 text-2xl", [text(model.name)]),
+        @html.h2(
+          class=" border rounded px-2 text-gray-600 text-sm self-center",
+          [text(model.version)],
+        ),
       ]),
-    ]),
-    p(class="text-gray-600 mb-2 text-sm", [text(model.description)]),
-    div(class="flex gap-2 mb-4", model.keywords.map(tag_view)),
-    div(class="flex flex-col gap-2", [
-      meta_info_item_view(
-        title="Install",
-        right_border=false,
-        div([install_view(path=model.module_path)]),
+    ] +
+    (match model.description {
+      Some(d) => [p(class="text-gray-600 mb-2 text-sm", [text(d)])]
+      None => []
+    }) +
+    [
+      div(class="flex gap-2 mb-4", model.keywords.map(tag_view)),
+      div(
+        class="flex flex-col gap-2",
+        [
+          meta_info_item_view(
+            title="Install",
+            right_border=false,
+            div([install_view(path=model.module_path)]),
+          ),
+          meta_info_item_view(
+            title="Author",
+            p(class="text-gray-600", [text(model.author)]),
+          ),
+        ] +
+        (match model.license {
+          Some(l) =>
+            [
+              meta_info_item_view(
+                title="License",
+                p(class="text-gray-600", [text(l)]),
+              ),
+            ]
+          None => []
+        }) +
+        (match model.repository {
+          Some(repo) =>
+            [
+              meta_info_item_view(
+                title="Repository",
+                p([@html.a(class="text-[#c7156b]", href=repo, [text(repo)])]),
+              ),
+              div(class="flex-grow", []),
+            ]
+          None => []
+        }),
       ),
-      meta_info_item_view(
-        title="Author",
-        p(class="text-gray-600", [text(model.author)]),
-      ),
-      meta_info_item_view(
-        title="License",
-        p(class="text-gray-600", [text(model.license)]),
-      ),
-      meta_info_item_view(
-        title="Repository",
-        p([
-          @html.a(class="text-[#c7156b]", href=model.repository, [
-            text(model.repository),
-          ]),
-        ]),
-      ),
-      div(class="flex-grow", []),
-    ]),
-  ])
+    ],
+  )
 }

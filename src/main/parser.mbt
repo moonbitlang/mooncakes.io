@@ -1,5 +1,3 @@
-// Todo: Passing parsing error
-
 ///|
 fn parse_metadata(json : Json) -> MetaInfoModel {
   let {
@@ -11,13 +9,17 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
     "keywords"? : keywords,
     "readme"? : readme,
   } = json
-  let [name, repository, version, license, description, readme] = [
-    name, repository, version, license, description, readme,
-  ].map(fn(x) {
+  let [name, version] = [name, version].map(fn(x) {
     match x {
       Some(String(str)) => str
-      None => ""
+      None => panic()
     }
+  })
+  let [repository, license, description, readme] = [
+    repository, license, description, readme,
+  ].map(fn {
+    Some(x) => Some(x.as_string().unwrap())
+    None => None
   })
   let keywords = match keywords {
     Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })

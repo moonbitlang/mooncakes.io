@@ -204,7 +204,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             @tea.none(),
             Success({
               ..model,
-              sidebar: { ..model.sidebar, cards_expanded: false },
+              sidebar: { ..model.sidebar, cards_expanded: true },
             }),
           )
         }
@@ -235,16 +235,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
   }
 }
 
-///| Todo: Adjust position
-fn floating_view(cards_expanded : Bool) -> @html.Html[Message] {
-  let button = if cards_expanded {
-    icon_button_view("expansion.svg", text="Fold cards", click=FoldAllCards)
-  } else {
-    icon_button_view("reduction.svg", text="Expand cards", click=ExpandAllCards)
-  }
-  div(class="absolute top-4 right-4", [button])
-}
-
 ///|
 fn view(state : Model) -> @html.Html[Message] {
   match state {
@@ -252,6 +242,7 @@ fn view(state : Model) -> @html.Html[Message] {
     Success(model) =>
       div(class="flex flex-col", [
         div([navbar_view(model.navbar)]),
+        div([floating_view(model.sidebar.cards_expanded)]),
         div(class="flex w-screen", [
           div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
             meta_info_view(model.meta_info),

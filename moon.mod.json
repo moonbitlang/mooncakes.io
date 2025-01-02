@@ -1,5 +1,5 @@
 {
-  "name": "username/rabbit-tea-tailwind",
+  "name": "moonbitlang/rabbit-tea-tailwind",
   "version": "0.1.1",
   "deps": {
     "rami3l/cmark": "0.1.5",

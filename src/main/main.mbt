@@ -156,7 +156,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
               let details = process_pacakge_info(result)
               (
                 @browser.scroll_to(target),
-                Success({ ..model, detail_cards: details }),
+                Success({ ..model, now_path: url, detail_cards: details }),
               )
             }
           }
@@ -219,7 +219,7 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
           )
         ItemClick(path, target) =>
           if path == model.now_path {
-            (@tea.none(), model_)
+            (@browser.scroll_to(target), model_)
           } else {
             (@tea.task(LoadPackage), LoadingPackage(model, path, target))
           }

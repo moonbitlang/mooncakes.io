@@ -7,6 +7,16 @@ fn div[M](style~ : Array[String] = .., id? : String, class? : String, click? : M
 
 fn h1[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
 
+fn h2[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn h3[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn h4[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn h5[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
+fn h6[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
 fn hr[M](style~ : Array[String] = .., id? : String, class? : String, childrens~ : Array[@html.Html[M]] = ..) -> @html.Html[M]
 
 fn li[M](style~ : Array[String] = .., id? : String, class? : String, click? : M, Array[@html.Html[M]]) -> @html.Html[M]
@@ -33,6 +43,7 @@ type Message
 impl Show for Message
 
 type MetaInfoModel
+impl Show for MetaInfoModel
 
 type Model
 

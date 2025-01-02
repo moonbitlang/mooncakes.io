@@ -39,17 +39,6 @@ struct SidebarModel {
 }
 
 ///|
-fn sidebar_update(
-  msg : Message,
-  model : SidebarModel
-) -> (@tea.Command[Message], SidebarModel) {
-  match msg {
-
-  }
-  (@tea.none(), model)
-}
-
-///|
 fn item_button[M](
   childrens : @html.Html[M],
   icon? : String,

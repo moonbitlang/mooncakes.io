@@ -73,7 +73,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
 
   let header = match card {
     ReadmeCard(_, ..) =>
-      p(class="text-sm font-bold py-2 text-gray-600 self-center", [
+      p(id="README", class="text-sm font-bold py-2 text-gray-600 self-center", [
         text("README"),
       ])
     ValueCard(signature~, name~, ..)
@@ -87,6 +87,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
     ReadmeCard(_, ..) => []
     _ => [button_view("source"), icon_button_view("share.svg")]
   }
+  let mut description_yes = true
 
   // description
   let description = match card {
@@ -95,6 +96,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
     | ImplCard(description~, ..)
     | TraitCard(description~, ..) =>
       if description == "" {
+        description_yes = false
         @html.nothing()
       } else {
         @html.fragment([
@@ -130,8 +132,12 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
     [
       div(
         class="grid grid-cols-[1.5em_auto_6em] grid-rows-[auto_auto] group ",
+        (if description_yes {
+          [div(class="col-start-1 row-start-1 max-h-10", [fold_button])]
+        } else {
+          []
+        }) +
         [
-          div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
           div(class="col-start-2 row-start-1 overflow-auto", [header]),
           div(
             class="col-start-3 row-start-1 max-h-10 flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",

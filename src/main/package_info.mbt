@@ -59,18 +59,13 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
       "values": Array(values),
       "traits": Array(traits),
       "readme": String(readme),
-    } => {
-      let cards = []
-      if readme == "" {
-        cards.push(ReadmeCard(folded=false, readme))
-      }
-      cards +
+    } =>
+      (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
       [
         ..types.map(process_type),
         ..alias_.map(process_typealias),
         ..traits.map(process_traits),
         ..values.map(process_value),
       ]
-    }
   }
 }

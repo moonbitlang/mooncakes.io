@@ -1,6 +1,5 @@
 ///|
 enum Message {
-  SwitchElement
   ToggleSidebar
   ReturnToModuleReadme
   ToggleCardDetail(DetailCardModel)

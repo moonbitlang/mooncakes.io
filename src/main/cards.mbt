@@ -68,7 +68,12 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
         hightlight(code),
       ]),
     ])
-    div([div(class="my-2 flex-grow overflow-auto", [code_view])])
+    div([
+      div(
+        class="my-2 flex-grow overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+        [code_view],
+      ),
+    ])
   }
 
   let header = match card {
@@ -138,7 +143,10 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
           []
         }) +
         [
-          div(class="col-start-2 row-start-1 overflow-auto", [header]),
+          div(
+            class="col-start-2 row-start-1 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+            [header],
+          ),
           div(
             class="col-start-3 row-start-1 max-h-10 flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",
             tool_buttons,

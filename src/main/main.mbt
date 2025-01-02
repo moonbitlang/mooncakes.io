@@ -231,22 +231,26 @@ fn view(state : Model) -> @html.Html[Message] {
   match state {
     Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
     Success(model) =>
-      div(class="flex flex-col", [
-        div([navbar_view(model.navbar)]),
-        div([floating_view(model.sidebar.cards_expanded)]),
-        div(class="flex w-screen", [
-          div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
-            meta_info_view(model.meta_info),
-            div(class="sticky top-[-1px] overflow-y-scroll h-screen", [
-              sidebar_view(model.sidebar),
+      div(
+        class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
+        [
+          div([navbar_view(model.navbar)]),
+          div([floating_view(model.sidebar.cards_expanded)]),
+          div(class="flex w-full flex-1", [
+            div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
+              meta_info_view(model.meta_info),
+              div(
+                class="sticky top-[-1px] overflow-y-scroll max-h-screen scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+                [sidebar_view(model.sidebar)],
+              ),
+            ]),
+            div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
+              detail_cards_view(model.detail_cards),
             ]),
           ]),
-          div(class="flex-grow overflow-hidden bg-[#fcfcfd]", [
-            detail_cards_view(model.detail_cards),
-          ]),
-        ]),
-        div(class=" ", [footer_view()]),
-      ])
+          footer_view(),
+        ],
+      )
     LoadingModuleIndex(_) | LoadingModuleInfo(_) =>
       h1(class="text-gray-800 text-2xl", [text("Loading")])
     LoadingPackage(model, _, _) | LoadingReadme(model, _, _) =>

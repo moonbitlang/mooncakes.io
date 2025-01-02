@@ -1,4 +1,4 @@
-package username/rabbit-tea-tailwind/main/highlight
+package moonbitlang/rabbit-tea-tailwind/main/highlight
 
 // Values
 fn parse(String) -> Array[CodeSpan]

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright 2024 International Digital Economy Academy
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare](
+  self : (T0, T1),
+  other : (T0, T1)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  self.1.compare(other.1)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare](
+  self : (T0, T1, T2),
+  other : (T0, T1, T2)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  self.2.compare(other.2)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare](
+  self : (T0, T1, T2, T3),
+  other : (T0, T1, T2, T3)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  self.3.compare(other.3)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare](
+  self : (T0, T1, T2, T3, T4),
+  other : (T0, T1, T2, T3, T4)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  self.4.compare(other.4)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare](
+  self : (T0, T1, T2, T3, T4, T5),
+  other : (T0, T1, T2, T3, T4, T5)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  self.5.compare(other.5)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6),
+  other : (T0, T1, T2, T3, T4, T5, T6)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  self.6.compare(other.6)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  self.7.compare(other.7)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  self.8.compare(other.8)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  self.9.compare(other.9)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare, T10 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  let t9 = self.9.compare(other.9)
+  guard t9 == 0 else { return t9 }
+  self.10.compare(other.10)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare, T10 : Compare, T11 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  let t9 = self.9.compare(other.9)
+  guard t9 == 0 else { return t9 }
+  let t10 = self.10.compare(other.10)
+  guard t10 == 0 else { return t10 }
+  self.11.compare(other.11)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare, T10 : Compare, T11 : Compare, T12 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  let t9 = self.9.compare(other.9)
+  guard t9 == 0 else { return t9 }
+  let t10 = self.10.compare(other.10)
+  guard t10 == 0 else { return t10 }
+  let t11 = self.11.compare(other.11)
+  guard t11 == 0 else { return t11 }
+  self.12.compare(other.12)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare, T10 : Compare, T11 : Compare, T12 : Compare, T13 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  let t9 = self.9.compare(other.9)
+  guard t9 == 0 else { return t9 }
+  let t10 = self.10.compare(other.10)
+  guard t10 == 0 else { return t10 }
+  let t11 = self.11.compare(other.11)
+  guard t11 == 0 else { return t11 }
+  let t12 = self.12.compare(other.12)
+  guard t12 == 0 else { return t12 }
+  self.13.compare(other.13)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare, T10 : Compare, T11 : Compare, T12 : Compare, T13 : Compare, T14 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  let t9 = self.9.compare(other.9)
+  guard t9 == 0 else { return t9 }
+  let t10 = self.10.compare(other.10)
+  guard t10 == 0 else { return t10 }
+  let t11 = self.11.compare(other.11)
+  guard t11 == 0 else { return t11 }
+  let t12 = self.12.compare(other.12)
+  guard t12 == 0 else { return t12 }
+  let t13 = self.13.compare(other.13)
+  guard t13 == 0 else { return t13 }
+  self.14.compare(other.14)
+}
+
+///|
+pub fn compare[T0 : Compare, T1 : Compare, T2 : Compare, T3 : Compare, T4 : Compare, T5 : Compare, T6 : Compare, T7 : Compare, T8 : Compare, T9 : Compare, T10 : Compare, T11 : Compare, T12 : Compare, T13 : Compare, T14 : Compare, T15 : Compare](
+  self : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15),
+  other : (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15)
+) -> Int {
+  let t0 = self.0.compare(other.0)
+  guard t0 == 0 else { return t0 }
+  let t1 = self.1.compare(other.1)
+  guard t1 == 0 else { return t1 }
+  let t2 = self.2.compare(other.2)
+  guard t2 == 0 else { return t2 }
+  let t3 = self.3.compare(other.3)
+  guard t3 == 0 else { return t3 }
+  let t4 = self.4.compare(other.4)
+  guard t4 == 0 else { return t4 }
+  let t5 = self.5.compare(other.5)
+  guard t5 == 0 else { return t5 }
+  let t6 = self.6.compare(other.6)
+  guard t6 == 0 else { return t6 }
+  let t7 = self.7.compare(other.7)
+  guard t7 == 0 else { return t7 }
+  let t8 = self.8.compare(other.8)
+  guard t8 == 0 else { return t8 }
+  let t9 = self.9.compare(other.9)
+  guard t9 == 0 else { return t9 }
+  let t10 = self.10.compare(other.10)
+  guard t10 == 0 else { return t10 }
+  let t11 = self.11.compare(other.11)
+  guard t11 == 0 else { return t11 }
+  let t12 = self.12.compare(other.12)
+  guard t12 == 0 else { return t12 }
+  let t13 = self.13.compare(other.13)
+  guard t13 == 0 else { return t13 }
+  let t14 = self.14.compare(other.14)
+  guard t14 == 0 else { return t14 }
+  self.15.compare(other.15)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

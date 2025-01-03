@@ -1,0 +1,140 @@
+{
+  "readme": "# Priority Queue\n\nA priority queue is a data structure capable of maintaining maximum/minimum values at front of the queue, which may have other names in other programming languages (C++ std::priority_queue / Rust BinaryHeap ). The priority queue here is implemented as a pairing heap and has excellent performance.\n\n# Usage\n\n## Create\n\nYou can use `new()` or `of()` to create a priority queue.\n\n```moonbit\nlet queue1 : @priority_queue.T[Int] = @priority_queue.new()\nlet queue2 = @priority_queue.of([1, 2, 3])\n```\n\nNote, however, that the default priority queue created is greater-first; if you need to create a less-first queue, you can write a struct belongs to Compare trait to implement it.\n\n## Length\n\nYou can use `length()` to get the number of elements in the current priority queue.\n\n```moonbit\nlet pq = @priority_queue.of([1, 2, 3, 4, 5])\nprintln(pq.length()) // 5\n```\n\nSimilarly, you can use the `is_empty` to determine whether the priority queue is empty.\n\n```moonbit\nlet pq = @priority_queue.PrioriryQueue::new()\nprintln(pq.is_empty()) // true\n```\n\n## Peek\n\nYou can use `peek()` to look at the head element of a queue, which must be either the maximum or minimum value of an element in the queue, depending on the nature of the specification. The return value of `peek()` is an Option, which means that the result will be `None` when the queue is empty.\n\n```moonbit\nlet pq = @priority_queue.of([1, 2, 3, 4, 5])\nprintln(pq.peek()) // Some(5)\n```\n\n## Push\n\nYou can use `push()` to add elements to the priority queue.\n\n```moonbit\nlet pq : @priority_queue.T[Int] = @priority_queue.new()\nprintln(pq.push(1))\nprintln(pq.push(2))\nprintln(pq.peek()) // Some(2)\n```\n\n## Pop\n\nYou can use `pop()` to pop the element at the front of the priority queue, respectively, and like [Peek](#Peek), its return values are `Option`, loaded with the value of the element being popped.\n\n```moonbit\nlet pq = @priority_queue.of([5, 4, 3, 2, 1])\nprintln(pq.pop()) // Some(5)\n```\n\n```moonbit\nlet pq = @priority_queue.of([5, 4, 3, 2, 1])\nprintln(pq.length()) // 4\n```\n\n## Clear\n\nYou can use `clear` to clear a priority queue.\n\n```moonbit\nlet pq = @priority_queue.of([1, 2, 3, 4, 5])\nprintln(pq.clear())\nprintln(pq.is_empty()) // true\n```\n\n## Copy and Transfer\n\nYou can copy a priority queue using the `copy` method.\n\n```moonbit\nlet pq = @priority_queue.of([1, 2, 3])\nlet pq2 = pq.copy()\n```",
+  "name": "moonbitlang/core/priority_queue",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "",
+      "signature": "type T",
+      "loc": { "line": 22, "column": 8 },
+      "methods": [
+        {
+          "name": "arbitrary",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[X]",
+          "loc": { "line": 284, "column": 83 }
+        },
+        {
+          "name": "clear",
+          "docstring": "\n Clears the queue.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4])\n queue.clear()\n assert_eq!(queue.length(), 0)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::clear[A](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 238, "column": 8 }
+        },
+        {
+          "name": "copy",
+          "docstring": "\n Return a copy of the queue.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4])\n let queue2 = @priority_queue.copy(queue)\n assert_eq!(queue2.length(), 4)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::copy[A](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]",
+          "loc": { "line": 69, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Creates a new priority queue from an array.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4, 5])\n assert_eq!(queue.length(), 5)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::from_array[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]",
+          "loc": { "line": 35, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::from_iter[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[K]) -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[K]",
+          "loc": { "line": 108, "column": 11 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Checks if the priority queue is empty.\n \n # Example\n ```\n let queue : @priority_queue.T[Int] = @priority_queue.new()\n assert_eq!(queue.is_empty(), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::is_empty[A](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 251, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::iter[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 94, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::length[A](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> Int",
+          "loc": { "line": 149, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Creates a new empty priority queue.\n \n # Example\n ```\n let queue : @priority_queue.T[Int] = @priority_queue.new()\n assert_eq!(queue.length(), 0)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::new[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>]() -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]",
+          "loc": { "line": 23, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::of[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]",
+          "loc": { "line": 256, "column": 11 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 279, "column": 49 }
+        },
+        {
+          "name": "peek",
+          "docstring": "\n Peeks at the first value in the priority queue, which returns None if the priority queue is empty.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4])\n let first = queue.peek() // Some(4)\n assert_eq!(first, Some(4))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::peek[A](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> A?",
+          "loc": { "line": 222, "column": 8 }
+        },
+        {
+          "name": "pop",
+          "docstring": "\n Pops the first value from the priority queue, which returns None if the queue is empty.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4])\n let first = queue.pop() // Some(4)\n assert_eq!(first, Some(4))\n assert_eq!(queue.length(), 3)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::pop[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> A?",
+          "loc": { "line": 187, "column": 8 }
+        },
+        {
+          "name": "pop_exn",
+          "docstring": "\n @alert deprecated \"Use `unsafe_pop` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::pop_exn[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 173, "column": 8 }
+        },
+        {
+          "name": "push",
+          "docstring": "\n Adds a value to the priority queue.\n \n # Example\n ```\n let queue = @priority_queue.new()\n queue.push(1)\n assert_eq!(queue.length(), 1)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::push[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A], value : A) -> Unit",
+          "loc": { "line": 208, "column": 8 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::to_array[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
+          "loc": { "line": 75, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        },
+        {
+          "name": "unsafe_pop",
+          "docstring": "\n Pops the first value from the priority queue.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4])\n queue.unsafe_pop()\n assert_eq!(queue.length(), 3)\n ```\n @alert unsafe \"Panic if the queue is empty.\"",
+          "signature": "fn <a href=\"moonbitlang/core/priority_queue#T\">T</a>::unsafe_pop[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 163, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "arbitrary",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/priority_queue#T\">T</a> with arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/priority_queue#T\">T</a>[X]",
+          "loc": { "line": 284, "column": 83 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/priority_queue#T\">T</a> with output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 279, "column": 49 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

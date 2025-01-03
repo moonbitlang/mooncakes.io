@@ -1,12 +1,15 @@
 {
   "devDependencies": {
     "chokidar": "^4.0.1",
-    "tailwindcss": "^3.4.14",
     "tailwind-scrollbar": "^3.1.0",
+    "tailwindcss": "^3.4.14",
     "vite": "^5.4.10"
   },
   "scripts": {
     "dev": "vite"
   },
-  "packageManager": "pnpm@9.1.4+sha256.30a1801ac4e723779efed13a21f4c39f9eb6c9fbb4ced101bce06b422593d7c9"
+  "packageManager": "pnpm@9.1.4+sha256.30a1801ac4e723779efed13a21f4c39f9eb6c9fbb4ced101bce06b422593d7c9",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }

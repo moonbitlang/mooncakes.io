@@ -15,17 +15,15 @@ enum Message {
   GotReadme(Result[String, String])
   LoadPackage
   GotPackageInfo(Result[Json, String])
+  LoadMenu
+  GotMenuInfo(Result[Json, String])
 } derive(Show)
-
-///|
-const URL_BASE = "http://127.0.0.1:3000"
 
 ///|
 struct ModelBody {
   now_path : String
   now_item : String
   sidebar : SidebarModel
-  navbar : NavbarModel
   detail_cards : Array[DetailCardModel]
   meta_info : MetaInfoModel
 }
@@ -33,6 +31,8 @@ struct ModelBody {
 ///|
 enum Model {
   Failure
+  Menu
+  LoadingMenu
   LoadingModuleInfo(String)
   LoadingModuleIndex(MetaInfoModel, String)
   LoadingReadme(ModelBody, String, Bool)
@@ -81,7 +81,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
                       parse_module_index(index),
                     ),
                     meta_info: meta,
-                    navbar: { title: "🥮 mooncakes.io" },
                     detail_cards: [],
                   },
                   url,
@@ -227,14 +226,78 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
 }
 
 ///|
+fn menu_button_view(href : String, text_ : String) -> @html.Html[Message] {
+  @html.a(
+    class="rounded-full border-[#cf4f89] border-2 hover:bg-[#cf4f89] hover:text-white transition-all lg:px-10 px-4 py-2 text-center font-semibold text-[#cf4f89] lg:py-2 lg:text-lg",
+    href~,
+    [text(text_)],
+  )
+}
+
+///|
 fn view(state : Model) -> @html.Html[Message] {
   match state {
-    Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
+    Menu =>
+      div(class="flex min-h-screen flex-col", [
+        div([navbar_view(NAVBAR)]),
+        div(class="flex flex-grow flex-col items-center justify-center", [
+          div(
+            class="flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
+            [
+              div(
+                class="flex flex-1 flex-col justify-center gap-4 px-4 lg:max-w-[50%] lg:gap-8",
+                [
+                  div(
+                    class="flex flex-col items-center gap-2 px-4 lg:items-start lg:gap-4",
+                    [
+                      p(
+                        class="text-xl font-semibold text-gray-600 lg:text-3xl",
+                        [text("Hi! This is")],
+                      ),
+                      h1(class="text-2xl font-semibold lg:text-7xl", [
+                        text("mooncakes."),
+                      ]),
+                      p(
+                        class="text-center text-gray-600 lg:text-start lg:text-3xl lg:leading-tight",
+                        [
+                          text(
+                            "The centralized MoonBit package management platform.",
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              div(
+                class="flex flex-grow-0 items-center justify-center gap-4 lg:justify-start lg:gap-8",
+                [
+                  menu_button_view(
+                    "https://www.moonbitlang.com/download/", "Install Moon",
+                  ),
+                  menu_button_view(
+                    "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+                    "Getting Started",
+                  ),
+                ],
+              ),
+              div(class="flex justify-center px-4", [
+                @html.img(
+                  src="mooncake-pic.png",
+                  alt="logo",
+                  class="h-80 lg:h-96",
+                  [],
+                ),
+              ]),
+            ],
+          ),
+        ]),
+      ])
     Success(model) =>
       div(
         class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
         [
-          div([navbar_view(model.navbar)]),
+          div([navbar_view(NAVBAR)]),
           div([floating_view(model.sidebar.cards_expanded)]),
           div(class="flex w-full flex-1", [
             div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
@@ -251,6 +314,7 @@ fn view(state : Model) -> @html.Html[Message] {
           footer_view(),
         ],
       )
+    Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
     LoadingModuleIndex(_) | LoadingModuleInfo(_) =>
       h1(class="text-gray-800 text-2xl", [text("Loading")])
     LoadingPackage(model, _, _) | LoadingReadme(model, _, _) =>
@@ -266,4 +330,5 @@ fn main {
     view~,
     initialize=LoadModuleInfo,
   )
+  // @tea.startup(model=Menu, update~, view~)
 }

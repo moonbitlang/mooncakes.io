@@ -1,0 +1,35 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/byte",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "max_value",
+      "docstring": "",
+      "signature": "let max_value : Byte",
+      "loc": { "line": 16, "column": 9 }
+    },
+    {
+      "name": "min_value",
+      "docstring": "",
+      "signature": "let min_value : Byte",
+      "loc": { "line": 19, "column": 9 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Byte",
+      "impls": [],
+      "methods": [
+        {
+          "name": "to_uint64",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/byte#Byte\">Byte</a>::to_uint64(self : Byte) -> UInt64",
+          "loc": { "line": 22, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

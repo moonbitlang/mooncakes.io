@@ -164,7 +164,11 @@ fn parse_traits(json : Json) -> Array[Traits] {
 
 ///|
 fn parse_type(json : Json) -> Type {
-  guard let { "name": String(name), "impls": Array(impls), "methods": Array(method_) } = json
+  guard let {
+    "name": String(name),
+    "impls": Array(impls),
+    "methods": Array(method_),
+  } = json
   { name, impls: impls.map(parse_impl), methods: method_.map(as_string) }
 }
 
@@ -215,6 +219,9 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
       }
       for alias_ in package.typealias_ {
         p.childrens.push({ name: alias_, target: package.path, kind: TypeAlias })
+      }
+      for misc in package.misc {
+        p.childrens.push(misc.to_item_model(package.path))
       }
     }
     None => p = { fullpath: "Empty", folded: false, childrens: [] }

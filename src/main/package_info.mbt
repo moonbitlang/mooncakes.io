@@ -39,6 +39,21 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
       TypeCard(folded=false, name~, description~, signature~, methods=[], impls=[])
   }
 
+  fn process_miscs {
+    ({ "name": String(name), "impls": Array(impls), "methods": Array(methods) } : Json) => {
+      let methods = methods.map(process_value)
+      let impls = impls.map(process_impl)
+      TypeCard(
+        folded=false,
+        name~,
+        description="",
+        signature=name,
+        methods~,
+        impls~,
+      )
+    }
+  }
+
   fn process_traits {
     ({
       "name": String(name),
@@ -58,6 +73,7 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
       "values": Array(values),
       "traits": Array(traits),
       "readme": String(readme),
+      "misc": Array(misc),
     } : Json) =>
       (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
       [
@@ -65,6 +81,7 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
         ..alias_.map(process_typealias),
         ..traits.map(process_traits),
         ..values.map(process_value),
+        ..misc.map(process_miscs),
       ]
   }
 

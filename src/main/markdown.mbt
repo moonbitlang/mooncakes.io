@@ -5,7 +5,7 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
       text: Text({ v: txt, .. }),
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [@html.a(href=link, style=["color: blue"], [text(txt)])]
+      [@html.a(class=" text-blue-400", href=link, [text(txt)])]
     ({
       text: Image(
         {

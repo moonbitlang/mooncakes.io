@@ -315,11 +315,11 @@ fn view(state : Model) -> @html.Html[Message] {
         ],
       )
     Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
-    LoadingModuleIndex(_) | LoadingModuleInfo(_) =>
+    LoadingMenu(_) | LoadingModuleIndex(_) | LoadingModuleInfo(_) =>
       h1(class="text-gray-800 text-2xl", [text("Loading")])
     LoadingPackage(model, _, _) | LoadingReadme(model, _, _) =>
       view(Success(model))
-  }
+  } // ↑ to be changed
 }
 
 ///|

@@ -1,6 +1,6 @@
 ///|
 fn parse_metadata(json : Json) -> MetaInfoModel {
-  let {
+  guard let {
     "name"? : name,
     "repository"? : repository,
     "version"? : version,
@@ -9,13 +9,13 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
     "keywords"? : keywords,
     "readme"? : readme,
   } = json
-  let [name, version] = [name, version].map(fn(x) {
+  guard let [name, version] = [name, version].map(fn(x) {
     match x {
       Some(String(str)) => str
-      None => panic()
+      _ => abort("Error when parsing name and version.")
     }
   })
-  let [repository, license, description, readme] = [
+  guard let [repository, license, description, readme] = [
     repository, license, description, readme,
   ].map(fn {
     Some(x) => Some(x.as_string().unwrap())
@@ -24,6 +24,7 @@ fn parse_metadata(json : Json) -> MetaInfoModel {
   let keywords = match keywords {
     Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
     None => []
+    _ => abort("Error when parsing keywords.")
   }
   let iter = name.iter()
   let author = String::from_array(iter.take_while(fn(x) { x != '/' }).collect())
@@ -130,13 +131,13 @@ fn as_string(json : Json) -> String {
 
 ///|
 fn parse_trait(json : Json) -> Trait {
-  let { "name": String(name), "path": String(path) } = json
+  guard let { "name": String(name), "path": String(path) } = json
   { name, path }
 }
 
 ///|
 fn parse_impl(json : Json) -> Impl {
-  let { "self"? : self_, "trait"? : trait_, "method": String(method_) } = json
+  guard let { "self"? : self_, "trait"? : trait_, "method": String(method_) } = json
   {
     self_: match self_ {
       Some(x) => Some(parse_trait(x))
@@ -153,9 +154,9 @@ fn parse_impl(json : Json) -> Impl {
 ///|
 fn parse_traits(json : Json) -> Array[Traits] {
   let result : Array[Traits] = []
-  let Array(traits_list) = json
+  guard let Array(traits_list) = json
   for trait_ in traits_list {
-    let { "name": String(name), "impls": Array(impls) } = trait_
+    guard let { "name": String(name), "impls": Array(impls) } = trait_
     result.push({ name, impls: impls.map(parse_impl) })
   }
   result
@@ -163,13 +164,13 @@ fn parse_traits(json : Json) -> Array[Traits] {
 
 ///|
 fn parse_type(json : Json) -> Type {
-  let { "name": String(name), "impls": Array(impls), "methods": Array(method_) } = json
+  guard let { "name": String(name), "impls": Array(impls), "methods": Array(method_) } = json
   { name, impls: impls.map(parse_impl), methods: method_.map(as_string) }
 }
 
 ///|
 fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
-  let {
+  guard let {
     "path": String(path),
     "traits": traits,
     "readme": True
@@ -231,7 +232,7 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
 
 ///|
 fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
-  let sidebar : SidebarModel = {
+  {
     hide: false,
     filter: "",
     cards_expanded: true,
@@ -239,5 +240,4 @@ fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
     items: generate_package_model_from_package(index.package).childrens,
     dependencies: [],
   }
-  sidebar
 }

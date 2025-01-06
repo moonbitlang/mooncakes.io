@@ -11,8 +11,7 @@ fn button_view[M](value : String, click? : M) -> @html.Html[M] {
 fn icon_button_view[M](
   icon : String,
   text? : String,
-  click? : M,
-  size~ : Int = 25
+  click? : M
 ) -> @html.Html[M] {
   let text = match text {
     None => []

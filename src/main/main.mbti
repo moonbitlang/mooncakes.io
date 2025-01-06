@@ -53,8 +53,6 @@ type ModuleIndex
 
 type ModuleModel
 
-type NavbarModel
-
 type Package
 
 type PackageBody

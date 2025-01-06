@@ -59,29 +59,21 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
   let { name, target, kind } = model
   match kind {
     ModuleReadme =>
-      item_button(text(name), icon="readme.svg", click=ReturnToModuleReadme)
+      item_button(text(name), icon=README_ICON, click=ReturnToModuleReadme)
     Readme =>
-      item_button(text(name), icon="readme.svg", click=ItemClick(target, name))
+      item_button(text(name), icon=README_ICON, click=ItemClick(target, name))
     Type =>
-      item_button(text(name), icon="type.svg", click=ItemClick(target, name))
+      item_button(text(name), icon=TYPE_ICON, click=ItemClick(target, name))
     TypeAlias =>
       item_button(
         text(name),
-        icon="code-brackets.svg",
+        icon=TYPE_ALIAS_ICON,
         click=ItemClick(target, name),
       )
     Value =>
-      item_button(
-        text(name),
-        icon="code-brackets.svg",
-        click=ItemClick(target, name),
-      )
+      item_button(text(name), icon=VALUE_ICON, click=ItemClick(target, name))
     Trait =>
-      item_button(
-        text(name),
-        icon="components.svg",
-        click=ItemClick(target, name),
-      )
+      item_button(text(name), icon=TRAIT_ICON, click=ItemClick(target, name))
     Package({ childrens, folded, .. } as pkg) => {
       let childrens = if filter == "" {
         childrens

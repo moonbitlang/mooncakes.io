@@ -92,30 +92,34 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
     ReadmeCard(_, ..) => []
     _ => [button_view("source"), icon_button_view("share.svg")]
   }
-  let mut description_yes = true
-
   // description
-  let description = match card {
+  let (description, foldable) = match card {
     TypeCard(description~, ..)
     | ValueCard(description~, ..)
     | ImplCard(description~, ..)
     | TraitCard(description~, ..) =>
       if description == "" {
-        description_yes = false
-        @html.nothing()
+        (@html.nothing(), @html.nothing())
       } else {
-        @html.fragment([
-          div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-            div(class="mr-4 mb-6 pt-1", [markdown_view(description)]),
+        (
+          @html.fragment([
+            div(
+              class="col-start-2 col-span-2 row-start-3 \{detail_visibility}",
+              [div(class="mr-4 mb-6 pt-1", [markdown_view(description)])],
+            ),
           ]),
-        ])
+          div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
+        )
       }
     ReadmeCard(description, ..) =>
-      @html.fragment([
-        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-          div(class="mr-4 mb-6", [markdown_view(description)]),
+      (
+        @html.fragment([
+          div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+            div(class="mr-4 mb-6", [markdown_view(description)]),
+          ]),
         ]),
-      ])
+        div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
+      )
   }
 
   // methods or impls
@@ -125,10 +129,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
       let impls = impls.map(card_section_view)
       [..methods, ..impls]
     }
-    TraitCard(impls~, ..) => {
-      let impls = impls.map(card_section_view)
-      [..impls]
-    }
+    TraitCard(impls~, ..) => impls.map(card_section_view)
     _ => []
   }
 
@@ -137,12 +138,8 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
     [
       div(
         class="grid grid-cols-[1.5em_auto_6em] grid-rows-[auto_auto] group ",
-        (if description_yes {
-          [div(class="col-start-1 row-start-1 max-h-10", [fold_button])]
-        } else {
-          []
-        }) +
         [
+          foldable,
           div(
             class="col-start-2 row-start-1 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
             [header],

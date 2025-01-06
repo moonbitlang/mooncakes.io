@@ -23,6 +23,8 @@ fn li[M](style~ : Array[String] = .., id? : String, class? : String, click? : M,
 
 fn p[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
 
+fn section[M](style~ : Array[String] = .., id? : String, class? : String, Array[@html.Html[M]]) -> @html.Html[M]
+
 fn text[M](String) -> @html.Html[M]
 
 fn ul[M](style~ : Array[String] = .., id? : String, class? : String, click? : M, Array[@html.Html[M]]) -> @html.Html[M]

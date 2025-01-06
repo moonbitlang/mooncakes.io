@@ -21,7 +21,8 @@
         "p",
         "hr",
         "ul",
-        "li"
+        "li",
+        "section"
       ]
     },
     "rami3l/cmark/cmark",

@@ -1,47 +1,65 @@
 ///|
-fn parse_metadata(json : Json) -> MetaInfoModel {
-  guard let {
-    "name"? : name,
-    "repository"? : repository,
-    "version"? : version,
-    "license"? : license,
-    "description"? : description,
-    "keywords"? : keywords,
-    "readme"? : readme,
-  } = json
-  guard let [name, version] = [name, version].map(fn(x) {
-    match x {
-      Some(String(str)) => str
-      _ => abort("Error when parsing name and version.")
+fn parse_metadata(modules_json : Json) -> Map[String, MetaInfoModel] {
+  fn parse_package(json : Json) {
+    guard let {
+      "name"? : name,
+      "repository"? : repository,
+      "version"? : version,
+      "license"? : license,
+      "description"? : description,
+      "keywords"? : keywords,
+      "readme"? : readme,
+      "created_at"? : created_at,
+    } = json
+    guard let [name, version] = [name, version].map(fn(x) {
+      match x {
+        Some(String(str)) => str
+        _ => abort("Error when parsing name and version.")
+      }
+    })
+    guard let [repository, license, description, readme] = [
+      repository, license, description, readme,
+    ].map(fn {
+      Some(x) => Some(x.as_string().unwrap())
+      None => None
+    })
+    let keywords = match keywords {
+      Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
+      None => []
+      _ => abort("Error when parsing keywords.")
     }
-  })
-  guard let [repository, license, description, readme] = [
-    repository, license, description, readme,
-  ].map(fn {
-    Some(x) => Some(x.as_string().unwrap())
-    None => None
-  })
-  let keywords = match keywords {
-    Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
-    None => []
-    _ => abort("Error when parsing keywords.")
+    let iter = name.iter()
+    let author = String::from_array(
+      iter.take_while(fn(x) { x != '/' }).collect(),
+    )
+    let package_name = String::from_array(
+      iter.drop_while(fn(x) { x != '/' }).drop(1).collect(),
+    )
+    let created_at = match created_at {
+      Some(json) => Some(as_string(json))
+      None => None
+    }
+    {
+      author,
+      readme,
+      name: package_name,
+      module_path: name,
+      description,
+      version,
+      license,
+      repository,
+      keywords,
+      created_at,
+    }
   }
-  let iter = name.iter()
-  let author = String::from_array(iter.take_while(fn(x) { x != '/' }).collect())
-  let package_name = String::from_array(
-    iter.drop_while(fn(x) { x == '/' }).collect(),
-  )
-  {
-    author,
-    readme,
-    name: package_name,
-    module_path: name,
-    description,
-    version,
-    license,
-    repository,
-    keywords,
+
+  let result = {}
+  guard let { "modules": Array(modules) } = modules_json
+  for module_ in modules {
+    let package = parse_package(module_)
+    result.set(package.name, package)
   }
+  result
 }
 
 ///|

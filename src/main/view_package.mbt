@@ -1,5 +1,5 @@
 ///|
-fn view_package(model : ModelBody) -> @html.Html[Message] {
+fn view_package(model : ModelBodyPackage) -> @html.Html[Message] {
   div(
     class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [

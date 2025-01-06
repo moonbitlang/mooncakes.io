@@ -4,11 +4,10 @@ enum Message {
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
   ExpandAllCards
+  ClickModuleCard(String)
   ItemClick(String, String)
   PackageClick(PackageModel)
   FilterChange(String)
-  LoadModuleInfo
-  GotModuleInfo(Result[Json, String])
   LoadModuleIndex
   GotModuleIndex(Result[Json, String])
   LoadReadme
@@ -20,7 +19,7 @@ enum Message {
 } derive(Show)
 
 ///|
-struct ModelBody {
+struct ModelBodyPackage {
   now_path : String
   now_item : String
   sidebar : SidebarModel
@@ -31,39 +30,33 @@ struct ModelBody {
 ///|
 enum Model {
   Failure
-  Menu
+  Menu(Map[String, MetaInfoModel])
   LoadingMenu
-  LoadingModuleInfo(String)
   LoadingModuleIndex(MetaInfoModel, String)
-  LoadingReadme(ModelBody, String, Bool)
-  LoadingPackage(ModelBody, String, String)
-  Success(ModelBody)
+  LoadingReadme(ModelBodyPackage, String, Bool)
+  LoadingPackage(ModelBodyPackage, String, String)
+  Success(ModelBodyPackage)
 }
 
 ///|
 fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
   match model_ {
     Failure => (@tea.none(), model_)
-    LoadingModuleInfo(url) =>
+    LoadingMenu =>
       match msg {
-        GotModuleInfo(result) =>
-          match result {
-            Err(_) => (@tea.none(), Failure)
-            Ok(info) =>
-              (
-                @tea.task(LoadModuleIndex),
-                LoadingModuleIndex(parse_metadata(info), url),
-              )
-          }
-        LoadModuleInfo =>
+        LoadMenu =>
           (
             @http.get(
-              URL_BASE + "/" + url + "/moon.mod.json",
-              expect=Json(Message::GotModuleInfo),
+              URL_BASE + "/modules.json",
+              expect=Json(Message::GotMenuInfo),
             ),
             model_,
           )
-        _ => panic()
+        GotMenuInfo(result) =>
+          match result {
+            Err(_) => (@tea.none(), Failure)
+            Ok(r) => (@tea.none(), Menu(parse_metadata(r)))
+          }
       }
     LoadingModuleIndex(meta, url) =>
       match msg {
@@ -228,10 +221,10 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
 ///|
 fn view(state : Model) -> @html.Html[Message] {
   match state {
-    Menu => view_menu()
+    Menu(meta) => view_menu(meta)
     Success(model) => view_package(model)
     Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
-    LoadingMenu(_) | LoadingModuleIndex(_) | LoadingModuleInfo(_) =>
+    LoadingMenu(_) | LoadingModuleIndex(_) =>
       h1(class="text-gray-800 text-2xl", [text("Loading")])
     LoadingPackage(model, _, _) | LoadingReadme(model, _, _) =>
       view(Success(model))
@@ -246,5 +239,5 @@ fn main {
   //   view~,
   //   initialize=LoadModuleInfo,
   // )
-  @tea.startup(model=Menu, update~, view~)
+  @tea.startup(model=LoadingMenu, update~, view~, initialize=LoadMenu)
 }

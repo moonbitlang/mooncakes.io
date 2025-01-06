@@ -18,3 +18,9 @@ const VALUE_ICON = "code-brackets.svg"
 
 ///|
 const TRAIT_ICON = "components.svg"
+
+///|
+const INDICES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+///|
+const LOGO = "mooncake-pic.png"

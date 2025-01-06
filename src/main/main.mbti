@@ -49,7 +49,7 @@ impl Show for MetaInfoModel
 
 type Model
 
-type ModelBody
+type ModelBodyPackage
 
 type ModuleIndex
 

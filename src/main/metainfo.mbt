@@ -9,6 +9,7 @@ struct MetaInfoModel {
   description : String?
   repository : String?
   module_path : String
+  created_at : String?
 } derive(Show)
 
 ///|

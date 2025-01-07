@@ -90,7 +90,7 @@ extern "js" fn get_relative_time(date : String) -> String =
 fn view_module_card(meta : MetaInfoModel) -> @html.Html[Message] {
   let tags = meta.keywords.map(fn(keyword) {
     @html.span(
-      class="inline-flex items-center rounded-md bg-gray-50 px-2 text-tiny h-5 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10",
+      class="inline-flex it ems-center rounded-md bg-gray-50 px-2 text-tiny h-5 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10",
       [text(keyword)],
     )
   })
@@ -114,7 +114,7 @@ fn view_module_card(meta : MetaInfoModel) -> @html.Html[Message] {
           h2(class="font-semibold text-gray-800", [text(meta.name)]),
           div(class="text-gray-500 text-tiny flex gap-x-1", [
             @html.span(class="text-gray-500 text-tiny", [
-              text("v\{meta.version} "),
+              text("v\{meta.version}"),
               text("| \{time}"),
             ]),
           ]),
@@ -151,6 +151,14 @@ fn view_all_package(
   INDICES.iter().each(fn(c) { index_map.set(c, []) })
   meta
   .iter()
+  .map(fn(p) {
+    (
+      String::from_array(
+        p.0.iter().drop_while(fn(x) { x != '/' }).drop(1).collect(),
+      ),
+      p.1,
+    )
+  })
   .each(fn(p) {
     let letter = to_upper(p.0[0])
     index_map.get(letter).unwrap().push(p.1)

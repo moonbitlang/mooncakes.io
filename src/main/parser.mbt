@@ -57,7 +57,7 @@ fn parse_metadata(modules_json : Json) -> Map[String, MetaInfoModel] {
   guard let { "modules": Array(modules) } = modules_json
   for module_ in modules {
     let package = parse_package(module_)
-    result.set(package.name, package)
+    result.set(package.module_path, package)
   }
   result
 }

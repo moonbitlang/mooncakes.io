@@ -42,6 +42,16 @@ enum Model {
 fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
   match model_ {
     Failure => (@tea.none(), model_)
+    Menu(metas) =>
+      match msg {
+        ClickModuleCard(path) => {
+          println(path)
+          (
+            @tea.task(LoadModuleIndex),
+            LoadingModuleIndex(metas[path].unwrap(), path),
+          )
+        }
+      }
     LoadingMenu =>
       match msg {
         LoadMenu =>

@@ -2,10 +2,10 @@
 fn view_menu(meta : Map[String, MetaInfoModel]) -> @html.Html[Message] {
   div(class="flex min-h-screen flex-col", [
     view_navbar(NAVBAR),
-    div(
-      class="flex flex-grow flex-col items-center justify-center",
-      [view_welcome(), view_packages_info(meta)],
-    ),
+    div(class="flex flex-grow flex-col items-center justify-center", [
+      view_welcome(),
+      view_packages_info(meta),
+    ]),
   ])
 }
 
@@ -114,7 +114,7 @@ fn view_module_card(meta : MetaInfoModel) -> @html.Html[Message] {
           h2(class="font-semibold text-gray-800", [text(meta.name)]),
           div(class="text-gray-500 text-tiny flex gap-x-1", [
             @html.span(class="text-gray-500 text-tiny", [
-              text("v\{meta.version}"),
+              text("v\{meta.version} "),
               text("| \{time}"),
             ]),
           ]),
@@ -134,10 +134,10 @@ fn view_packages_info(meta : Map[String, MetaInfoModel]) -> @html.Html[Message] 
   div(class="w-full", [
     div(class="bg-[#fbfaf5] flex justify-center", [
       div(class="p-10", [
-        h1(class="py-5 text-2xl text-gray-800 font-semibold", [
-          text("All Mooncakes"),
-          ..view_all_package(meta)
-        ]),
+        h1(
+          class="py-5 text-2xl text-gray-800 font-semibold",
+          [text("All Mooncakes"), ..view_all_package(meta)],
+        ),
       ]),
     ]),
   ])

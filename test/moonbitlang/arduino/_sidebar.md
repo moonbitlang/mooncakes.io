@@ -1,0 +1,8 @@
+- [moonbitlang/arduino](moonbitlang/arduino/)
+- **In this module**
+  - [root package](moonbitlang/arduino/members)
+  - [serial](moonbitlang/arduino/serial/members)
+  - [spi](moonbitlang/arduino/spi/members)
+  - [wifi](moonbitlang/arduino/wifi/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

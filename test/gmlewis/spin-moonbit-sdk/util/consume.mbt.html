@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| `ByteFunc` is a function that operates on a stream of bytes, one byte at a time.
+type ByteFunc (Byte) -> Unit
+
+///|
+let max_buf_size = 4096UL
+
+///| `consume` performs the provided `request`
+/// then consumes its output and optionally calculates
+/// the stream's hash, reporting the byte count and hash back to the caller.
+pub fn consume(
+  request : @types.OutgoingRequest,
+  hash : &@common.HashFunc?,
+  debug~ : Bool = false
+) -> Result[(Int64, String), @types.ErrorCode] {
+  let (byte_func, sum_func) = match hash {
+    Some(hash) => {
+      let byte_func : ByteFunc = fn(b) -> Unit { hash.write(b) }
+      let sum_func = fn() -> String { hash.check_sum() }
+      (Some(byte_func), sum_func)
+    }
+    _ => (None, fn() -> String { "" })
+  }
+  //
+  match consume_func(request, byte_func, debug~) {
+    Ok(count) => Ok((count, sum_func()))
+    Err(e) => Err(e)
+  }
+}
+
+///| `consume_func` performs the provided `request`
+/// then consumes its output and runs the optional
+/// `byte_func` on each byte, then returns the content length
+/// back to the caller.
+pub fn consume_func(
+  request : @types.OutgoingRequest,
+  byte_func : ByteFunc?,
+  debug~ : Bool = false
+) -> Result[Int64, @types.ErrorCode] {
+  let future = match @outgoingHandler.handle(request, None) {
+    Ok(result) => result
+    Err(e) => return Err(e)
+  }
+  let pollable = future.subscribe()
+  pollable.block()
+  let incoming_response = match future.get() {
+    Some(Ok(Ok(result))) => result
+    Some(Ok(Err(e))) => return Err(e)
+    _ => return Err(@types.ErrorCode::InternalError(Some("unknown error 1")))
+  }
+  //
+  let incoming_headers = incoming_response.headers()
+  if debug {
+    let status = incoming_response.status()
+    @log.info("Status code = \{status}")
+    dump_headers(incoming_headers)
+  }
+  //
+  let in_stream = match incoming_response.consume() {
+    Ok(body) => body.stream()
+    _ => return Err(@types.ErrorCode::InternalError(Some("unknown error 2")))
+  }
+  let in_stream = match in_stream {
+    Ok(in_stream) => in_stream
+    _ => return Err(@types.ErrorCode::InternalError(Some("unknown error 3")))
+  }
+  //
+  let mut count = 0L
+  for {
+    let buf = match in_stream.blocking_read(max_buf_size) {
+      Ok(buf) => buf
+      Err(e) => {
+        if e == @streams.Closed {
+          break
+        }
+        let msg = e.to_string()
+        @log.error("in_stream.blocking_read: \{msg}")
+        return Err(@types.ErrorCode::InternalError(Some(msg)))
+      }
+    }
+    count += buf.length().to_int64()
+    if buf.length() == 0 {
+      break
+    }
+    match byte_func {
+      Some(f) =>
+        for b in buf {
+          (f._)(b)
+        }
+      _ => ()
+    }
+  }
+  Ok(count)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

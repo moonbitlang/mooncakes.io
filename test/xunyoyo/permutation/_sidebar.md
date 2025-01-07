@@ -1,0 +1,8 @@
+- [xunyoyo/permutation](xunyoyo/permutation/)
+- **In this module**
+  - [lib/is\_permutation](xunyoyo/permutation/lib/is_permutation/members)
+  - [lib/next\_permutation](xunyoyo/permutation/lib/next_permutation/members)
+  - [lib/prev\_permutation](xunyoyo/permutation/lib/prev_permutation/members)
+  - [main](xunyoyo/permutation/main/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

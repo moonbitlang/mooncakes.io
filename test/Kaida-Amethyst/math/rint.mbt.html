@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| Rounds the input floating-point number to the nearest integer according to the specified rounding mode.
+///
+/// # Arguments
+/// - `x`: The floating-point number to be rounded.
+/// - `round_mode`: The rounding mode to use. Defaults to `FE_TONEAREST` (round to nearest, ties to even).
+///
+/// # Rounding Modes
+/// - `FE_TONEAREST`: Rounds to the nearest integer. If the value is exactly halfway between two integers,
+///   it rounds to the nearest even integer. This is the default behavior.
+/// - `FE_DOWNWARD`: Rounds towards negative infinity (equivalent to `floor`).
+/// - `FE_UPWARD`: Rounds towards positive infinity (equivalent to `ceil`).
+/// - `FE_TOWARDZERO`: Rounds towards zero (equivalent to `trunc`).
+///
+/// # Returns
+/// The rounded floating-point number.
+///
+/// # Example
+/// ```
+/// rint(2.5) // Returns 2.0 (FE_TONEAREST mode)
+/// rint(2.5, FE_DOWNWARD) // Returns 2.0 (FE_DOWNWARD mode)
+/// rint(2.5, FE_UPWARD) // Returns 3.0 (FE_UPWARD mode)
+/// rint(2.5, FE_TOWARDZERO) // Returns 2.0 (FE_TOWARDZERO mode)
+/// ```
+///
+/// # Note
+///
+/// It is equivalent to `nearbyint` function. Note that it's different with C-like languages.
+pub fn rint(x : Double, round_mode~: RoundMode = FE_TONEAREST) -> Double {
+  nearbyint(x, round_mode~)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

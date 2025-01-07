@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| The options for custom drawer.
+// #[derive(Debug, Clone, Default)]
+pub(all) struct DrawerOptions[T] {
+  /// inline style for backdrop
+  backdrop_style : @node.RespoStyle
+  /// inline style for card
+  card_style : @node.RespoStyle
+  /// title of the drawer, defaults to `drawer`
+  title : String?
+  /// render body
+  render : DrawerRenderer[T]
+} derive(Default)
+
+///|
+type DrawerRenderer[T] ((@node.DispatchFn[T]) -> Unit!@node.RespoCommonError) -> @node.RespoNode[
+  T,
+]!@node.RespoCommonError
+
+///|
+fn to_string[T](self : DrawerRenderer[T]) -> String {
+  "(DrawerRenderer \{self})"
+}
+
+///|
+pub fn DrawerRenderer::default[T]() -> DrawerRenderer[T] {
+  fn(_close) { div([]) }
+}
+
+///|
+pub fn DrawerRenderer::new[T](
+  renderer : ((@node.DispatchFn[T]) -> Unit!@node.RespoCommonError) -> @node.RespoNode[
+    T,
+  ]!@node.RespoCommonError
+) -> DrawerRenderer[T] {
+  renderer
+}
+
+///|
+fn run[T](
+  self : DrawerRenderer[T],
+  close : (@node.DispatchFn[T]) -> Unit!@node.RespoCommonError
+) -> @node.RespoNode[T]!@node.RespoCommonError {
+  let f = self._
+  f!(close)
+}
+
+///|
+fn comp_drawer[T](
+  options : DrawerOptions[T],
+  show : Bool,
+  on_close : (@node.DispatchFn[T]) -> Unit
+) -> @node.RespoNode[T]!@node.RespoCommonError {
+  let close = on_close
+  let effect_focus_data : EffectFocus = { show, }
+  let effect_drawer_fade_data : EffectDrawerFade = { show, }
+  @node.RespoComponent::named(
+    "drawer",
+    effects=[
+      effect_focus_data as &@node.RespoEffect,
+      effect_drawer_fade_data as &@node.RespoEffect,
+    ],
+    div(style=respo_style(position=Absolute), [
+      if show {
+        div(
+          class_name=@node.str_spaced([ui_fullscreen, ui_center, css_backdrop]),
+          style=options.backdrop_style,
+          event={}..set(Click, fn(e, dispatch) {
+            match e {
+              Click(original_event~, ..) => original_event.stop_propagation()
+              _ => ()
+            }
+            close(dispatch)
+          }),
+          [
+            div(
+              class_name=@node.str_spaced([
+                ui_column, ui_global, css_drawer_card,
+              ]),
+              style=respo_style(padding=Px(0)).merge(options.card_style),
+              event={}..set(Click, fn(e, _dispatch) {
+                match e {
+                  Click(original_event~, ..) =>
+                    original_event.stop_propagation()
+                  _ => ()
+                }
+              }),
+              [
+                div(class_name=@respo.ui_column, [
+                  div(class_name=ui_center, [
+                    span(inner_text=options.title.or("Drawer"), []),
+                  ]),
+                  space(height=8),
+                  {
+                    let f = options.render
+                    f.run!(fn(dispatch) { close(dispatch) })
+                  },
+                ]),
+              ],
+            ),
+            comp_esc_listener(show, close),
+          ],
+        )
+      } else {
+        span(attrs=respo_attrs()..set("data-name", "placeholder"), [])
+      },
+    ]),
+  ).to_node()
+}
+
+///|
+struct DrawerPluginState {
+  show : Bool
+} derive(Default, ToJson, @json.FromJson)
+
+///| a drawer that you can render you down card body
+// #[derive(Debug, Clone)]
+pub(all) struct DrawerPlugin[T] {
+  state : DrawerPluginState
+  options : DrawerOptions[T]
+  /// tracking content to display
+  cursor : Array[String]
+}
+
+///|
+pub fn render[T : @node.RespoAction](
+  self : DrawerPlugin[T]
+) -> @node.RespoNode[T]!@node.RespoCommonError {
+  let cursor = self.cursor.copy()
+  comp_drawer!(self.options, self.state.show, fn(dispatch) {
+    let ret = dispatch.run_state?(cursor, DrawerPluginState::{ show: false })
+    match ret {
+      Ok(_) => ()
+      Err(e) => @dom_ffi.error_log(e.to_string())
+    }
+  })
+}
+
+///|
+pub fn show[T : @node.RespoAction](
+  self : DrawerPlugin[T],
+  dispatch : @node.DispatchFn[T]
+) -> Unit!@node.RespoCommonError {
+  dispatch.run_state!(self.cursor, DrawerPluginState::{ show: true })
+}
+
+///|
+pub fn close[T : @node.RespoAction](
+  self : DrawerPlugin[T],
+  dispatch : @node.DispatchFn[T]
+) -> Unit!@node.RespoCommonError {
+  dispatch.run_state!(self.cursor, DrawerPluginState::{ show: false })
+}
+
+///|
+pub fn DrawerPlugin::new[T : @node.RespoAction](
+  states : @respo.RespoStatesTree,
+  options : DrawerOptions[T]
+) -> DrawerPlugin[T] {
+  let cursor = states.path()
+  let state : DrawerPluginState = states.cast_branch()
+  { state, options, cursor }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

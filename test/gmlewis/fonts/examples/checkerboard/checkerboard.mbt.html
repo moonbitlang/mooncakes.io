@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+typealias Fill = @draw.Fill
+
+///|
+typealias Graphic = @draw.Graphic
+
+///|
+typealias Group = @draw.Group
+
+///|
+let fill = @draw.fill
+
+///|
+let rgba = @draw.rgba
+
+///|
+let unit_circle = @draw.unit_circle
+
+///|
+let unit_square = @draw.unit_square
+
+///|
+let vec2 = @draw.vec2
+
+///|
+pub fn checkerboard() -> Graphic {
+  let board = []
+  for y in 0..<8 {
+    for x in 0..<8 {
+      board.push(square(x, y))
+      if y < 3 && (x + y) % 2 == 0 {
+        board.push(black_checker(x, y))
+      } else if y > 4 && (x + y) % 2 == 0 {
+        board.push(red_checker(x, y))
+      }
+    }
+  }
+  Group::new(items=board).as_graphic()
+}
+
+///|
+fn single_checker(
+  x : Int,
+  y : Int,
+  outer_fill : Fill?,
+  inner_fill : Fill?
+) -> Graphic {
+  let items = [
+    unit_circle()
+    .transform(
+      position=vec2(0.5 + x.to_double(), 0.5 + y.to_double()),
+      scale=vec2(0.95, 0.95),
+    )
+    .assign_fill(outer_fill)
+    .as_graphic(),
+    unit_circle()
+    .transform(
+      position=vec2(0.5 + x.to_double(), 0.5 + y.to_double()),
+      scale=vec2(0.8, 0.8),
+    )
+    .assign_fill(inner_fill)
+    .as_graphic(),
+  ]
+  Group::new(items~).as_graphic()
+}
+
+///|
+fn black_checker(x : Int, y : Int) -> Graphic {
+  let light_gray = rgba(0.4, 0.4, 0.4, 1).as_fill()
+  let dark_gray = rgba(0.1, 0.1, 0.1, 1).as_fill()
+  single_checker(x, y, light_gray, dark_gray)
+}
+
+///|
+fn red_checker(x : Int, y : Int) -> Graphic {
+  let light_red = rgba(0.8, 0, 0, 1).as_fill()
+  let dark_red = rgba(0.5, 0, 0, 1).as_fill()
+  single_checker(x, y, light_red, dark_red)
+}
+
+///|
+fn square(x : Int, y : Int) -> Graphic {
+  let fill = fill(
+    if (x + y) % 2 == 0 {
+      rgba(0, 0, 0, 1) // black
+    } else {
+      rgba(1, 0, 0, 1) // red
+    },
+  )
+  let v = vec2(0.5 + x.to_double(), 0.5 + y.to_double())
+  unit_square().translate(v).assign_fill(Some(fill)).as_graphic()
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

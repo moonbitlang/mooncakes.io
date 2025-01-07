@@ -1,0 +1,5 @@
+- [peter-jerry-ye/wasi](peter-jerry-ye/wasi/)
+- **In this module**
+  - [root package](peter-jerry-ye/wasi/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

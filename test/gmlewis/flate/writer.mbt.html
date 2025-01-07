@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+struct Writer {
+  d : Compressor
+  // dict : Slice[Byte]
+}
+
+///| `Writer::new` returns a new [@io.WriteCloser] compressing data at the "BestSpeed" level.
+/// It writes its (compressed) data to the provided `buf`.
+pub fn Writer::new(buf : &@io.Writer) -> Writer {
+  let d = Compressor::new(buf)
+  // let dict = Bytes::new(0)
+  // { d, dict }
+  { d, }
+}
+
+// `Writer::new_dict` is like [NewWriter] but initializes the new
+// [Writer] with a preset dictionary. The returned [Writer] behaves
+// as if the dictionary had been written to it without producing
+// any compressed output. The compressed data written to w
+// can only be decompressed by a [Reader] initialized with the
+// same dictionary.
+///|
+pub fn Writer::new_dict(w : &@io.Writer, dict : Slice[Byte]) -> Writer {
+  let dw = { w, }
+  let zw = Writer::new(dw)
+  zw.d.fill_window(dict)
+  // zw.dict.append(dict) // duplicate dictionary for Reset method.
+  zw
+}
+
+///|
+struct DictWriter {
+  w : &@io.Writer
+}
+
+///|
+fn write(self : DictWriter, b : Slice[Byte]) -> (Int, IOError?) {
+  self.w.write(b)
+}
+
+///| `write` writes the provided data to the flate Writer.
+pub fn write(self : Writer, data : Slice[Byte]) -> (Int, IOError?) {
+  let data = Array::from_iter(data.iter()) // unfortunate copy
+  self.d.write(Slice::new(data))
+}
+
+///| `close` closes the input to the flate Writer.
+/// After closing the Writer, the compressed data can be read
+/// from the `@io.Writer` provided to `new`.
+pub fn close(self : Writer) -> IOError? {
+  self.d.close()
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

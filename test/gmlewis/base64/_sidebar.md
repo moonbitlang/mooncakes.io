@@ -1,0 +1,7 @@
+- [gmlewis/base64](gmlewis/base64/)
+- **In this module**
+  - [root package](gmlewis/base64/members)
+  - [decoder](gmlewis/base64/decoder/members)
+  - [encoder](gmlewis/base64/encoder/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

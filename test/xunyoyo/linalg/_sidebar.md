@@ -1,0 +1,6 @@
+- [xunyoyo/linalg](xunyoyo/linalg/)
+- **In this module**
+  - [lib/matrix](xunyoyo/linalg/lib/matrix/members)
+  - [main](xunyoyo/linalg/main/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

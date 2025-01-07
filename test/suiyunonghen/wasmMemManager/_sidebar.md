@@ -1,0 +1,5 @@
+- [suiyunonghen/wasmMemManager](suiyunonghen/wasmMemManager/)
+- **In this module**
+  - [root package](suiyunonghen/wasmMemManager/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

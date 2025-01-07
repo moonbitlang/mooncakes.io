@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">
+
+pub fn zeta(x: Double, y: Double) -> Double {
+  let machep = 1.11022302462515654042e-16
+  let ns = [12.0, -720.0, 30240.0, -1209600.0, 47900160.0,
+  -1.8924375803183791606e9, 7.47242496e10,
+  -2.950130727918164224e12, 1.1646782814350067249e14,
+  -4.5979787224074726105e15, 1.8152105401943546773e17,
+  -7.1661652561756670113e18]
+
+  let mut i = 0
+  let mut a = 0.0
+  let mut b = 0.0
+  let mut k = 0.0
+  let mut s = 0.0
+  let mut t = 0.0
+  let mut w = 0.0
+  let mut e = 0.0
+  let mut f = 0.0
+
+  if x == 1.0 {
+    return double_pos_inf
+  }
+
+  if x < 1.0 {
+    return double_neg_inf
+  }
+
+  if y <= 0.0 {
+    if y == floor(y) {
+      return double_pos_inf
+    }
+    if x != floor(x) {
+      return double_nan
+    }
+  }
+  s = pow(y, -x)
+  a = y
+  b = 0.0
+  while i < 9 || a<= 9.0 {
+    i += 1
+    a += 1.0
+    b = pow(a, -x)
+    s += b
+    if -machep * s < b && b < machep * s {
+      return s
+    }
+  }
+  w = a
+  e = b * w / (x - 1.0)
+  s += e
+  f = 0.5 * b
+  s = s - f
+  a = 1.0
+  k = 0.0
+  for i = 0; i < 12 ; i = i + 1 {
+    a *= x +k
+    b /= w
+    t = a * b / ns[i]
+    s += t
+    t = fabs(t / s)
+    if t < machep {
+      return s
+    }
+    k += 1.0
+    a *= x + k
+    b /= w
+    k += 1.0
+  }
+  s
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

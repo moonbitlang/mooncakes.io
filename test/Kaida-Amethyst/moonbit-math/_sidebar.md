@@ -1,0 +1,6 @@
+- [Kaida-Amethyst/moonbit-math](Kaida-Amethyst/moonbit-math/)
+- **In this module**
+  - [root package](Kaida-Amethyst/moonbit-math/members)
+  - [main](Kaida-Amethyst/moonbit-math/main/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

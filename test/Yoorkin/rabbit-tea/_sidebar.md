@@ -1,0 +1,10 @@
+- [Yoorkin/rabbit-tea](Yoorkin/rabbit-tea/)
+- **In this module**
+  - [root package](Yoorkin/rabbit-tea/members)
+  - [browser](Yoorkin/rabbit-tea/browser/members)
+  - [example](Yoorkin/rabbit-tea/example/members)
+  - [html](Yoorkin/rabbit-tea/html/members)
+  - [http](Yoorkin/rabbit-tea/http/members)
+  - [url](Yoorkin/rabbit-tea/url/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">struct Name {
+  name : String?
+  slot : Int
+} derive(Eq, Hash, Compare)
+
+pub impl Show for Name with output(self : Name, logger : Logger) -> Unit {
+  logger.write_string(self.to_string())
+}
+
+pub fn Name::to_string(self : Name) -> String {
+  let { name, slot } = self
+  match (name, slot) {
+    (None, _) => "_\{slot}"
+    (Some(name), 0) => name
+    (Some(name), _) => "\{name}.\{slot}"
+  }
+}
+
+type! NameFromStringError {
+  InvalidSlotNumber(String, String)
+}
+
+pub impl Show for NameFromStringError with output(
+  self : NameFromStringError,
+  logger : Logger
+) -> Unit {
+  match self {
+    NameFromStringError::InvalidSlotNumber(e, slot_s) =>
+      logger.write_string("Invalid slot number: \{e} (input: \{slot_s})")
+  }
+}
+
+pub fn Name::from_string(s : String) -> Name!NameFromStringError {
+  let first_dot = s.index_of(".")
+  if first_dot != -1 {
+    let name = s.substring(start=0, end=first_dot)
+    let slot_s = s.substring(start=first_dot + 1, end=s.length())
+    try {
+      let slot = @strconv.parse_int!(slot_s, base=10)
+      Name::name_and_slot(name, slot)
+    } catch {
+      @strconv.StrConvError(e) =>
+        raise NameFromStringError::InvalidSlotNumber(e, slot_s)
+    }
+  } else if s.starts_with("_") &&
+    s.length() > 1 &&
+    s
+    .substring(start=1, end=s.length())
+    .iter()
+    .all(fn(c) { c >= '0' && c <= '9' }) {
+    let slot_s = s.substring(start=1, end=s.length())
+    try {
+      let slot = @strconv.parse_int!(slot_s, base=10)
+      Name::slot_only(slot)
+    } catch {
+      @strconv.StrConvError(e) =>
+        raise NameFromStringError::InvalidSlotNumber(e, slot_s)
+    }
+  } else {
+    Name::name_only(s)
+  }
+}
+
+pub fn Name::name_only(name : String) -> Name {
+  { name: Some(name), slot: 0 }
+}
+
+pub fn Name::name_and_slot(name : String, slot : Int) -> Name {
+  { name: Some(name), slot }
+}
+
+pub fn Name::slot_only(slot : Int) -> Name {
+  { name: None, slot }
+}
+
+pub fn Name::to_json(self : Name) -> Json {
+  self.to_string().to_json()
+}
+
+pub fn Name::from_json(json : Json) -> Name! {
+  match json {
+    Json::String(s) => Name::from_string!(s)
+    _ => fail!("Name::from_json: expected a string, but got \{json}")
+  }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

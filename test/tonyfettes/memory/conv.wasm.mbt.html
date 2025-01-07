@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">/// Converts a string to a pointer suitable for WebAssembly memory.
+///
+/// Parameters:
+///
+/// - `str` : The string to be converted.
+///
+/// Returns the pointer to the string in WebAssembly memory.
+pub extern "wasm" fn str2ptr(str : String) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+/// Converts a pointer and length to a string.
+///
+/// Parameters:
+///
+/// - `ptr` : The integer pointer to the start of the string in memory.
+/// - `len` : The length of the string in bytes.
+///
+/// Returns the string constructed from the memory pointed to by `ptr` with the
+/// specified `len`.
+pub extern "wasm" fn ptr2str(ptr : Int, len : Int) -> String =
+  #|(func (param i32) (param i32) (result i32) local.get 0 i32.const 4 i32.sub i32.const 243 i32.store8 local.get 0 i32.const 8 i32.sub)
+
+/// Converts a fixed-size byte array into a raw memory pointer by allocating
+/// memory and copying the bytes.
+///
+/// Parameters:
+///
+/// * `bytes`: A fixed-size array of bytes to be converted to a pointer.
+///
+/// Returns an integer representing the memory address (pointer) where the bytes
+/// are stored.
+pub extern "wasm" fn byte_array2ptr(bytes : FixedArray[Byte]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+/// Converts a memory region pointed by a pointer into a fixed-size array of
+/// bytes and frees the memory afterwards.
+///
+/// Parameters:
+///
+/// * `pointer` : An integer representing the memory address of the source data.
+/// * `length` : The number of bytes to read from the memory address.
+///
+/// Returns a fixed-size array of bytes containing the data read from the memory
+/// address.
+pub extern "wasm" fn ptr2byte_array(ptr : Int, len : Int) -> FixedArray[Byte] =
+  #|(func (param i32) (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a fixed array of unsigned integers to a pointer.
+///
+/// Parameters:
+///
+/// - `array` : A fixed array of unsigned integers (`FixedArray[UInt]`).
+///
+/// Returns an integer representing the pointer to the array.
+pub extern "wasm" fn uint_array2ptr(array : FixedArray[UInt]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+extern "wasm" fn ptr2uint_array_ffi(ptr : Int) -> FixedArray[UInt] =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a pointer and length to a fixed-size array of unsigned integers.
+///
+/// Parameters:
+///
+/// - `ptr` : The pointer to the memory location where the array data starts.
+/// - `len` : The length of the array to be created.
+///
+/// Returns a `FixedArray[UInt]` containing the data from the specified memory
+/// location.
+pub fn ptr2uint_array(ptr : Int, len : Int) -> FixedArray[UInt] {
+  set_header_ffi(ptr - 4, len)
+  ptr2uint_array_ffi(ptr)
+}
+
+/// Converts a fixed array of `UInt64` values to a pointer in WebAssembly memory.
+///
+/// Parameters:
+///
+/// - `array` : A fixed array of `UInt64` values to be converted.
+///
+/// Returns the pointer to the WebAssembly memory where the array is stored.
+pub extern "wasm" fn uint64_array2ptr(array : FixedArray[UInt64]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+extern "wasm" fn ptr2uint64_array_ffi(ptr : Int) -> FixedArray[UInt64] =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a pointer to an array of `UInt64` values. Sets the 64-bit header and
+/// then retrieves the array from the pointer.
+///
+/// Parameters:
+///
+/// - `ptr` : The integer representing the pointer to the array.
+/// - `len` : The length of the array. This parameter is currently unused in the
+/// function.
+///
+/// Returns a `FixedArray[UInt64]` containing the values from the pointer.
+pub fn ptr2uint64_array(ptr : Int, len : Int) -> FixedArray[UInt64] {
+  set_header_ffi(ptr - 4, len)
+  ptr2uint64_array_ffi(ptr)
+}
+
+/// Converts a fixed-size integer array to a pointer.
+///
+/// Parameters:
+///
+/// - `array` : A fixed-size array of integers (`FixedArray[Int]`).
+///
+/// Returns the pointer to the array as an integer.
+pub extern "wasm" fn int_array2ptr(array : FixedArray[Int]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+extern "wasm" fn ptr2int_array_ffi(ptr : Int) -> FixedArray[Int] =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a pointer to an integer array in WebAssembly memory to a fixed-size
+/// array of integers.
+///
+/// Parameters:
+///
+/// - `ptr` : The pointer to the start of the integer array in WebAssembly
+/// memory.
+/// - `len` : The length of the integer array.
+///
+/// Returns a `FixedArray[Int]` containing the integers from the specified memory
+/// location.
+pub fn ptr2int_array(ptr : Int, len : Int) -> FixedArray[Int] {
+  set_header_ffi(ptr - 4, len)
+  ptr2int_array_ffi(ptr)
+}
+
+/// Converts a fixed array of 64-bit integers to a pointer.
+///
+/// Parameters:
+///
+/// - `array` : A fixed array of 64-bit integers (`FixedArray[Int64]`).
+///
+/// Returns an integer representing the pointer to the array.
+pub extern "wasm" fn int64_array2ptr(array : FixedArray[Int64]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+extern "wasm" fn ptr2int64_array_ffi(ptr : Int) -> FixedArray[Int64] =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a pointer to an array of 64-bit integers. Sets the 64-bit header
+/// using an FFI call and then retrieves the array using another FFI call.
+///
+/// Parameters:
+///
+/// - `ptr` : The pointer to the memory location where the array starts.
+/// - `len` : The length of the array. This parameter is currently unused in the
+/// function.
+///
+/// Returns a `FixedArray[Int64]` containing the 64-bit integers from the memory
+/// location pointed to by `ptr`.
+pub fn ptr2int64_array(ptr : Int, len : Int) -> FixedArray[Int64] {
+  set_header_ffi(ptr - 4, len)
+  ptr2int64_array_ffi(ptr)
+}
+
+/// Converts a fixed-size array of floats to a pointer in WebAssembly memory.
+///
+/// Parameters:
+///
+/// - `array` : A fixed-size array of floats (`FixedArray[Float]`) to be
+/// converted.
+///
+/// Returns an integer representing the pointer to the array in WebAssembly
+/// memory.
+pub extern "wasm" fn float_array2ptr(array : FixedArray[Float]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+extern "wasm" fn ptr2float_array_ffi(ptr : Int) -> FixedArray[Float] =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a pointer to a WebAssembly memory buffer into a fixed-length array
+/// of floating-point numbers.
+///
+/// Parameters:
+///
+/// - `ptr` : An integer representing the memory address of the buffer containing
+/// the floating-point numbers.
+/// - `len` : An integer representing the number of floating-point numbers in the
+/// buffer.
+///
+/// Returns a `FixedArray[Float]` containing the floating-point numbers from the
+/// specified memory buffer.
+pub fn ptr2float_array(ptr : Int, len : Int) -> FixedArray[Float] {
+  set_header_ffi(ptr - 4, len)
+  ptr2float_array_ffi(ptr)
+}
+
+/// Converts a fixed array of doubles to a pointer, adjusting the pointer by 8
+/// bytes.
+///
+/// Parameters:
+///
+/// - `array` : A fixed array of doubles (`FixedArray[Double]`).
+///
+/// Returns an integer representing the adjusted pointer.
+pub extern "wasm" fn double_array2ptr(array : FixedArray[Double]) -> Int =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.add)
+
+extern "wasm" fn ptr2double_array_ffi(ptr : Int) -> FixedArray[Double] =
+  #|(func (param i32) (result i32) local.get 0 i32.const 8 i32.sub)
+
+/// Converts a pointer to a double array. Sets the 64-bit header and then
+/// retrieves the double array from the pointer.
+///
+/// Parameters:
+///
+/// - `ptr` : The integer pointer to the start of the double array.
+/// - `len` : The length of the double array (unused in the function).
+///
+/// Returns a `FixedArray[Double]` containing the double values from the pointer.
+pub fn ptr2double_array(ptr : Int, len : Int) -> FixedArray[Double] {
+  set_header_ffi(ptr - 4, len)
+  ptr2double_array_ffi(ptr)
+}
+
+fn set_header_ffi(offset : Int, len : Int) -> Unit {
+  store32(offset, (len << 8) | 241)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

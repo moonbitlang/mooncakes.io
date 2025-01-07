@@ -1,0 +1,5 @@
+- [gmlewis/crc32](gmlewis/crc32/)
+- **In this module**
+  - [root package](gmlewis/crc32/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

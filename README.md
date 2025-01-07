@@ -9,12 +9,3 @@ npm i
 moon build --target js
 npm run dev
 ```
-
-## Test
-
-```bash
-npm i
-moon build --target js
-npm run dev
-node server.js
-```

@@ -1,0 +1,201 @@
+{
+  "readme": "# HashMap\n\nA mutable hash map based on a Robin Hood hash table.\n\n# Usage\n\n## Create\n\nYou can create an empty map using `new()` or construct it using `from_array()`.\n\n```moonbit\nlet map1 = @hashmap.of([1, 2, 3, 4, 5])\nlet map2 : @hashmap.T[String, Int] = @hashmap.new()\n```\n\n## Set & Get\n\nYou can use `set()` to add a key-value pair to the map, and use `get()` to get a value.\n\n```moonbit\nlet map : HashMap[String, Int] = HashMap::new()\nmap.set(\"a\", 1)\nprintln(map.get(\"a\")) // Some(1)\nprintln(map.get_or_default(\"a\", 0)) // 1\nprintln(map.get_or_default(\"b\", 0)) // 0\n```\n\n## Remove\n\nYou can use `remove()` to remove a key-value pair.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nmap.remove(\"a\")\nprintln(map) // of([(\"c\", 3), (\"b\", 2)])\n```\n\n## Contains\n\nYou can use `contains()` to check whether a key exists.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nprintln(map.contains(\"a\")) // true\nprintln(map.contains(\"d\")) // false\n```\n\n## Size & Capacity\n\nYou can use `size()` to get the number of key-value pairs in the map, or `capacity()` to get the current capacity.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nprintln(map.size()) // 3\nprintln(map.capacity()) // 8\n```\n\nSimilarly, you can use `is_empty()` to check whether the map is empty.\n\n```moonbit\nlet map = @hashmap.new()\nprintln(map.is_empty()) // true\n```\n\n## Clear\n\nYou can use `clear` to remove all key-value pairs from the map, but the allocated memory will not change.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nmap.clear()\nprintln(map.is_empty()) // true\n```\n\n## Iteration\n\nYou can use `each()` or `eachi()` to iterate through all key-value pairs.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nmap.each(fn(k, v) { println(\"key: {k}, value:\\{v}\") })\nmap.eachi(fn(i, k, v) { println(\"index:\\{i}, key:\\{k}, value:\\{v}\") })\n```\n\nOr use `iter()` to get an iterator of hashmap.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nprintln(map.iter())\n```\n",
+  "name": "moonbitlang/core/hashmap",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "\n Mutable hash map, not thread safe. \n  \n # Example\n \n ```\n let map = @hashmap.of([(3, \"three\"), (8, \"eight\"), (1, \"one\")])\n assert_eq!(map.get(2), None)\n assert_eq!(map.get(3), Some(\"three\"))\n map.set(3, \"updated\")\n assert_eq!(map.get(3), Some(\"updated\"))\n ```",
+      "signature": "type T",
+      "loc": { "line": 41, "column": 8 },
+      "methods": [
+        {
+          "name": "arbitrary",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::arbitrary[K : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+          "loc": { "line": 266, "column": 8 }
+        },
+        {
+          "name": "capacity",
+          "docstring": "\n Get the capacity of the map.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::capacity[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Int",
+          "loc": { "line": 100, "column": 8 }
+        },
+        {
+          "name": "clear",
+          "docstring": "\n Clears the map, removing all key-value pairs. Keeps the allocated space.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::clear[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Unit",
+          "loc": { "line": 31, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Check if the hash map contains a key.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::contains[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> Bool",
+          "loc": { "line": 187, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterate over all key-value pairs of the map.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::each[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], f : (K, V) -> Unit) -> Unit",
+          "loc": { "line": 112, "column": 8 }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterate over all key-value pairs of the map, with index.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::eachi[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], f : (Int, K, V) -> Unit) -> Unit",
+          "loc": { "line": 123, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Create new hash map from array.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::from_array[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+          "loc": { "line": 48, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::from_iter[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+          "loc": { "line": 72, "column": 11 }
+        },
+        {
+          "name": "get",
+          "docstring": "\n Get the value associated with a key.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::get[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> V?",
+          "loc": { "line": 103, "column": 8 }
+        },
+        {
+          "name": "get_or_default",
+          "docstring": "\n Get the value associated with a key, \n returns the provided default value if the key does not exist.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::get_or_default[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, default : V) -> V",
+          "loc": { "line": 174, "column": 8 }
+        },
+        {
+          "name": "get_or_init",
+          "docstring": "\n Gets the value associated with the given key. If the key doesn't exist in the\n map, initializes it with the result of calling the provided initialization\n function.\n\n Parameters:\n\n * `self` : The hash map.\n * `key` : The key to look up in the map.\n * `init` : A function that takes no arguments and returns a value to be\n associated with the key if it doesn't exist.\n\n Returns the value associated with the key, either existing or newly\n initialized.\n\n Example:\n\n ```moonbit\n test \"get_or_init\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new()\n   let value = map.get_or_init(\"key\", fn() { 42 })\n   inspect!(value, content=\"42\")\n   inspect!(map.get(\"key\"), content=\"Some(42)\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::get_or_init[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, init : () -> V) -> V",
+          "loc": { "line": 155, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Check if the hash map is empty.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::is_empty[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Bool",
+          "loc": { "line": 106, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "\n Returns an iterator of the map.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::iter[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]",
+          "loc": { "line": 38, "column": 8 }
+        },
+        {
+          "name": "iter2",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::iter2[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[K, V]",
+          "loc": { "line": 55, "column": 11 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Create new hash map.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::new[K, V](capacity~ : Int = ..) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+          "loc": { "line": 41, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::of[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, V](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+          "loc": { "line": 250, "column": 11 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::op_get[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> V?",
+          "loc": { "line": 126, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::op_set[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, value : V) -> Unit",
+          "loc": { "line": 97, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::output[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 136, "column": 52 }
+        },
+        {
+          "name": "remove",
+          "docstring": "\n Remove a key-value pair from hash map.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::remove[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> Unit",
+          "loc": { "line": 196, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "\n Set a key-value pair into hash map.\n @alert unsafe \"Panic if the hash map is full.\"",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::set[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, value : V) -> Unit",
+          "loc": { "line": 57, "column": 8 }
+        },
+        {
+          "name": "size",
+          "docstring": "\n Get the number of key-value pairs in the map.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::size[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Int",
+          "loc": { "line": 94, "column": 8 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "\n Converts the map to an array.",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::to_array[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]",
+          "loc": { "line": 80, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "arbitrary",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/hashmap#T\">T</a> with arbitrary[K : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+          "loc": { "line": 266, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/hashmap#T\">T</a> with output[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 136, "column": 52 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Entry",
+      "impls": [],
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#Entry\">Entry</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "MyString",
+      "impls": [],
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashmap#MyString\">MyString</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ]
+    }
+  ]
+}

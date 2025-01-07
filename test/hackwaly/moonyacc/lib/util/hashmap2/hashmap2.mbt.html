@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+struct T[K, V] {
+  mut bucket : FixedArray[Entry[K, V]?]
+  mut entry : Entry[K, V]?
+  mut bitmask : Int
+  mut size : Int
+}
+
+///|
+struct Entry[K, V] {
+  mut value : V
+  mut psl : Int
+  key : K
+  hash : Int
+  prev : Entry[K, V]?
+}
+
+///|
+/// Capacity must be a power of 2.
+pub fn new[K, V](capacity~ : Int) -> T[K, V] {
+  let bucket = FixedArray::make(capacity, None)
+  { bucket, entry: None, bitmask: capacity - 1, size: 0 }
+}
+
+///|
+pub fn size[K, V](self : T[K, V]) -> Int {
+  self.size
+}
+
+///|
+pub fn iter[K, V](self : T[K, V]) -> Iter[(K, V)] {
+  Iter::new(fn(yield_) {
+    loop self.entry {
+      None => IterContinue
+      Some(entry) =>
+        match yield_((entry.key, entry.value)) {
+          IterEnd => return IterEnd
+          IterContinue => continue entry.prev
+        }
+    }
+  })
+}
+
+///|
+pub fn iter2[K, V](self : T[K, V]) -> Iter2[K, V] {
+  Iter2::new(fn(yield_) {
+    loop self.entry {
+      None => IterContinue
+      Some(entry) =>
+        match yield_(entry.key, entry.value) {
+          IterEnd => return IterEnd
+          IterContinue => continue entry.prev
+        }
+    }
+  })
+}
+
+///|
+pub fn get[K : Hash + Eq, V](self : T[K, V], key : K) -> V? {
+  match self.get_entry_with_hash(key, key.hash()) {
+    Some(entry) => Some(entry.value)
+    None => None
+  }
+}
+
+///|
+fn get_entry_with_hash[K : Eq, V](
+  self : T[K, V],
+  key : K,
+  hash : Int
+) -> Entry[K, V]? {
+  let bucket = self.bucket
+  let bitmask = self.bitmask
+  let ideal_index = hash & bitmask
+  for index = ideal_index {
+    match bucket[index] {
+      None => break None
+      Some(entry) => {
+        if entry.hash == hash && entry.key == key {
+          break Some(entry)
+        }
+        if index - ideal_index > entry.psl {
+          break None
+        }
+        continue (index + 1) & bitmask
+      }
+    }
+  }
+}
+
+///|
+pub fn get_or_init[K : Hash + Eq, V](
+  self : T[K, V],
+  key : K,
+  init : (K) -> V
+) -> V {
+  let hash = key.hash()
+  match self.get_entry_with_hash(key, hash) {
+    Some(entry) => entry.value
+    None => {
+      if self.size > self.bitmask / 2 {
+        self.grow()
+      }
+      let value = init(key)
+      let entry = { value, psl: 0, key, hash, prev: self.entry }
+      self.entry = Some(entry)
+      self.size += 1
+      self.put_entry(hash & self.bitmask, self.bitmask, entry)
+      value
+    }
+  }
+}
+
+///|
+pub fn set[K : Hash + Eq, V](self : T[K, V], key : K, value : V) -> Unit {
+  let hash = key.hash()
+  match self.get_entry_with_hash(key, hash) {
+    Some(entry) => entry.value = value
+    None => {
+      if self.size > self.bitmask / 2 {
+        self.grow()
+      }
+      let entry = { value, psl: 0, key, hash, prev: self.entry }
+      self.entry = Some(entry)
+      self.size += 1
+      self.put_entry(hash & self.bitmask, self.bitmask, entry)
+    }
+  }
+}
+
+///|
+fn grow[K, V](self : T[K, V]) -> Unit {
+  let capacity = (self.bitmask + 1) * 2
+  let bitmask = capacity - 1
+  let bucket = FixedArray::make(capacity, None)
+  self.bucket = bucket
+  self.bitmask = bitmask
+  loop self.entry {
+    None => ()
+    Some(entry) => {
+      entry.psl = 0
+      self.put_entry(entry.hash & bitmask, bitmask, entry)
+      continue entry.prev
+    }
+  }
+}
+
+///|
+fn put_entry[K, V](
+  self : T[K, V],
+  index : Int,
+  bitmask : Int,
+  entry : Entry[K, V]
+) -> Unit {
+  let bucket = self.bucket
+  for index = index, entry = entry {
+    match bucket[index] {
+      None => {
+        bucket[index] = Some(entry)
+        break
+      }
+      Some(old_entry) => {
+        let entry = if entry.psl > old_entry.psl {
+          bucket[index] = Some(entry)
+          old_entry
+        } else {
+          entry
+        }
+        entry.psl += 1
+        continue (index + 1) & bitmask, entry
+      }
+    }
+  }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

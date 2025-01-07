@@ -1,0 +1,6 @@
+- [yamajik/dapr](yamajik/dapr/)
+- **In this module**
+  - [root package](yamajik/dapr/members)
+- **Dependencies**
+  - [yamajik/wasi](yamajik/wasi/)
+  - [moonbitlang/core](moonbitlang/core/)

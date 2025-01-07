@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+let next_task_name : String = "_RESPO_CONFIRM_NEXT_TASK"
+
+///| options for confirm dialog
+pub(all) struct ConfirmOptions {
+  /// inline style for backdrop
+  backdrop_style : @node.RespoStyle
+  /// inline style for card
+  card_style : @node.RespoStyle
+  /// message to display
+  text : String?
+  /// text on button
+  button_text : String?
+} derive(Default)
+
+///|
+let button_name : String = "dialog-button"
+
+///|
+fn comp_confirm_modal[T](
+  options : ConfirmOptions,
+  show : Bool,
+  on_confirm : (@node.DispatchFn[T]) -> Unit,
+  on_close : (@node.DispatchFn[T]) -> Unit
+) -> @node.RespoNode[T] {
+  let confirm = on_confirm
+  let close = on_close
+
+  // effect 1
+  let effect_focus_data : EffectFocus = { show, }
+
+  // effect 2
+  let effect_modal_fade_data : EffectModalFade = { show, }
+  @node.RespoComponent::named(
+    "confirm-modal",
+    div(style=respo_style(position=Absolute), [
+      if show {
+        div(
+          class_name=@node.str_spaced([
+            @respo.ui_fullscreen, @respo.ui_center, css_backdrop,
+          ]),
+          style=options.backdrop_style,
+          event={}..set(Click, fn(e, dispatch) {
+            match e {
+              Click(original_event~, ..) => original_event.stop_propagation()
+              _ => ()
+            }
+            let _v = close(dispatch)
+
+          }),
+          [
+            div(
+              class_name=@node.str_spaced([
+                @respo.ui_column, @respo.ui_global, css_modal_card,
+              ]),
+              style=options.card_style,
+              event={}..set(Click, fn(e, _dispatch) {
+                match e {
+                  Click(original_event~, ..) =>
+                    original_event.stop_propagation()
+                  _ => ()
+                }
+                ()
+              }),
+              [
+                div([
+                  span(inner_text=options.text.or("Need confirmation..."), []),
+                  space(height=8),
+                  div(class_name=@respo.ui_row_parted, [
+                    span([]),
+                    button(
+                      inner_text=options.button_text.or("Confirm"),
+                      class_name=str_spaced([
+                        @respo.ui_button, css_button, button_name,
+                      ]),
+                      event={}..set(Click, fn(_e, dispatch) {
+                        confirm(dispatch)
+                        close(dispatch)
+                      }),
+                    ),
+                  ]),
+                ]),
+              ],
+            ),
+            comp_esc_listener(show, close),
+          ],
+        )
+      } else {
+        span(
+          // attrs=@node.respo_attrs(data_name="placeholder"),
+          [],
+        )
+      },
+    ]),
+    effects=[
+      effect_focus_data as &@node.RespoEffect,
+      effect_modal_fade_data as &@node.RespoEffect,
+    ],
+  ).to_node()
+}
+
+///|
+struct ConfirmPluginState {
+  show : Bool
+  text : String?
+} derive(Default, ToJson, @json.FromJson)
+
+///| Popup a confirmation dialog, confirm to process next task
+pub(all) struct ConfirmPlugin[T] {
+  state : ConfirmPluginState
+  options : ConfirmOptions
+  /// tracking content to display
+  text : String?
+  cursor : Array[String]
+  on_confirm : (@node.DispatchFn[T]) -> Unit
+}
+
+///|
+pub fn render[T : @node.RespoAction](
+  self : ConfirmPlugin[T]
+) -> @node.RespoNode[T] {
+  let on_confirm = self.on_confirm
+  let cursor = self.cursor.copy()
+  let state = self.state
+  comp_confirm_modal(
+    self.options,
+    state.show,
+    fn(dispatch) {
+      let c = cursor.copy()
+      let st = state
+      on_confirm(dispatch)
+      let window = @dom_ffi.window()
+      // TODO dirty global variable
+      let _task = window.dirty_call_fn(next_task_name)
+      let ret = dispatch.run_state?(c, ConfirmPluginState::{
+        show: false,
+        text: st.text,
+      })
+      match ret {
+        Ok(_) => ()
+        Err(e) => @dom_ffi.error_log("error: " + e.to_string())
+      }
+      // clean up leaked closure
+      window.dirty_remove_fn(next_task_name)
+    },
+    fn(dispatch) {
+      let st = state
+      let c = cursor.copy()
+      let s : ConfirmPluginState = { show: false, text: st.text }
+      let ret = dispatch.run_state?(c, s)
+      match ret {
+        Ok(_) => ()
+        Err(e) => @dom_ffi.error_log("error: " + e.to_string())
+      }
+      // clean up leaked closure
+      let window = @dom_ffi.window()
+      window.dirty_remove_fn(next_task_name)
+    },
+  )
+}
+
+///|
+pub fn show[T : @node.RespoAction](
+  self : ConfirmPlugin[T],
+  dispatch : @node.DispatchFn[T],
+  next_task : () -> Unit
+) -> Unit!@node.RespoCommonError {
+  let s : ConfirmPluginState = { show: true, text: self.state.text }
+  let window = @dom_ffi.window()
+  window.dirty_set_fn(next_task_name, next_task)
+  dispatch.run_state!(self.cursor, s)
+}
+
+///|
+pub fn ConfirmPlugin::new[T](
+  states : @respo.RespoStatesTree,
+  options : ConfirmOptions,
+  on_confirm : (@node.DispatchFn[T]) -> Unit
+) -> ConfirmPlugin[T] {
+  let cursor = states.path()
+  let state : ConfirmPluginState = states.cast_branch()
+  let instance : ConfirmPlugin[T] = {
+    state,
+    options,
+    text: None,
+    cursor,
+    on_confirm,
+  }
+  instance
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

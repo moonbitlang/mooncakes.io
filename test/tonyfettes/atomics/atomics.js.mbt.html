@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+type Memory
+
+///|
+extern "js" fn initializeMemory(min : Int, max : Int) -> Memory =
+  #|(min, max) => {
+  #|  return new WebAssembly.Memory({ initial: min, maximum: max, shared: true })
+  #|}
+
+///|
+pub let memory : Memory = initializeMemory(1, 1)
+
+///|
+extern "js" fn memory_atomic_wait32_ffi(
+  memory : Memory,
+  addr : Int,
+  expected : Int,
+  timeout : Int64
+) -> Int =
+  #|(memory, addr, expected, timeout) => {
+  #|  return Atomics.wait(new Int32Array(memory.buffer), addr, expected, timeout)
+  #|}
+
+///|
+pub fn memory_atomic_wait32(addr : Int, expected : Int, timeout : Int64) -> Int {
+  memory_atomic_wait32_ffi(memory, addr, expected, timeout)
+}
+
+///|
+extern "js" fn i32_atomic_rmw_cmpxchg_ffi(
+  memory : Memory,
+  addr : Int,
+  expected : Int,
+  replacement : Int
+) -> Int =
+  #|(memory, addr, expected, replacement) => {
+  #|  return Atomics.compareExchange(new Int32Array(memory.buffer), addr, expected, replacement)
+  #|}
+
+///|
+pub fn i32_atomic_rmw_cmpxchg(
+  addr : Int,
+  expected : Int,
+  replacement : Int
+) -> Int {
+  i32_atomic_rmw_cmpxchg_ffi(memory, addr, expected, replacement)
+}
+
+///|
+pub extern "js" fn i32_atomic_store_ffi(
+  memory : Memory,
+  addr : Int,
+  value : Int
+) =
+  #|(memory, addr, value) => {
+  #|  Atomics.store(new Int32Array(memory.buffer), addr, value)
+  #|}
+
+///|
+pub fn i32_atomic_store(addr : Int, value : Int) -> Unit {
+  i32_atomic_store_ffi(memory, addr, value)
+}
+
+///|
+extern "js" fn memory_atomic_notify_ffi(
+  memory : Memory,
+  addr : Int,
+  count : Int
+) =
+  #|(memory, addr, count) => {
+  #|  Atomics.notify(new Int32Array(memory.buffer), addr, count)
+  #|}
+
+///|
+pub fn memory_atomic_notify(addr : Int, count : Int) -> Unit {
+  memory_atomic_notify_ffi(memory, addr, count)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

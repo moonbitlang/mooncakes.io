@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">pub(all) enum Spec {
+  Unit(() -> Unit)
+  String((String) -> Unit)
+  Set_string(Ref[String])
+  Set(Ref[Bool])
+  Clear(Ref[Bool])
+}
+
+fn interpret(
+  trie : @trie.T[Spec],
+  xs : Array[String],
+  fallback : (String) -> Unit
+) -> Unit {
+  loop xs[:] {
+    [] => ()
+    [x, .. as xs] =>
+      match trie.lookup(x) {
+        None => {
+          fallback(x)
+          continue xs
+        }
+        Some(spec) =>
+          match (spec, xs) {
+            (String(f), [y, .. as ys]) => {
+              f(y)
+              continue ys
+            }
+            (Set_string(r), [y, .. as ys]) => {
+              r.val = y
+              continue ys
+            }
+            (String(_), []) | (Set_string(_), []) =>
+              println("missing argument for \{x}")
+            (Set(r), _) => {
+              r.val = true
+              continue xs
+            }
+            (Clear(r), _) => {
+              r.val = false
+              continue xs
+            }
+            (Unit(f), _) => {
+              f()
+              continue xs
+            }
+          }
+      }
+  }
+}
+
+pub fn parse(
+  speclist : Array[(String, String, Spec, String)],
+  rest : (String) -> Unit,
+  usage_msg : String,
+  argv : Array[String]
+) -> Unit {
+  fn aux {
+    ((trie : @trie.T[Spec]), help_msg), (a, b, spec, help) => {
+      let trie = trie.add(a, spec).add(b, spec)
+      let help_msg = help_msg + "  \{a}\t\{b}\t" + help + "\n"
+      (trie, help_msg)
+    }
+  }
+
+  let (trie, help_msg) = speclist.fold(
+    aux,
+    init=(@trie.empty(), usage_msg + "\n options:\n"),
+  )
+  let help_spec = Spec::Unit(fn() { println(help_msg) })
+  let trie = trie.add("--help", help_spec).add("-h", help_spec)
+  interpret(trie, argv, rest)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

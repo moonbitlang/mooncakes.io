@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+struct Store {
+  mut counted : Int
+  mut tasks : Array[Task]
+  states : @respo.RespoStatesTree
+} derive(ToJson, @json.FromJson)
+
+///|
+fn Store::default() -> Store {
+  { counted: 0, tasks: [], states: @respo.RespoStatesTree::default() }
+}
+
+///|
+struct Task {
+  id : String
+  mut done : Bool
+  mut content : String
+  time : Double
+} derive(Default, Eq, Hash, ToJson, @json.FromJson)
+
+// enum IndentOp {
+//   Noop
+//   IncTwice
+// }
+
+///|
+enum ActionOp {
+  Noop
+  StatesChange(@respo.RespoUpdateState)
+  // Intent(IndentOp)
+  Increment
+  Decrement
+  IncTwice
+  AddTask(String, String)
+  RemoveTask(String)
+  UpdateTask(String, String)
+  ToggleTask(String)
+}
+
+///|
+fn ActionOp::default() -> ActionOp {
+  Noop
+}
+
+///|
+impl @respo_node.RespoAction for ActionOp with build_states_action(cursor, a) {
+  StatesChange({ cursor, data: a.map(fn(x) { x.to_json() }) })
+}
+
+///|
+fn ActionOp::to_string(self : ActionOp) -> String {
+  match self {
+    Noop => "Noop"
+    StatesChange(states) =>
+      "StatesChange(\{states.cursor}  \{states.data.to_json()})"
+    // Intent(intent) => "Intent(...)"
+    Increment => "Increment"
+    Decrement => "Decrement"
+    IncTwice => "IncTwice"
+    AddTask(id, content) => "AddTask(" + id + ", " + content + ")"
+    RemoveTask(id) => "RemoveTask(" + id + ")"
+    UpdateTask(id, content) => "UpdateTask(" + id + ", " + content + ")"
+    ToggleTask(id) => "ToggleTask(" + id + ")"
+  }
+}
+
+///|
+fn get_states(self : Store) -> @respo.RespoStatesTree {
+  self.states
+}
+
+///| TODO mutation might break memoization infuture
+fn update(self : Store, op : ActionOp) -> Unit {
+  match op {
+    Increment => self.counted += 1
+    StatesChange(states) => self.states.set_in_mut(states)
+    Decrement => self.counted -= 1
+    AddTask(id, content) => {
+      let task = {
+        id,
+        done: false,
+        content,
+        time: @dom_ffi.window().performance().now().to_double(),
+      }
+      self.tasks.push(task)
+    }
+    RemoveTask(id) => self.tasks = self.tasks.filter(fn(task) { task.id != id })
+    UpdateTask(id, content) =>
+      self.tasks.each(fn(task) { if task.id == id { task.content = content } })
+    ToggleTask(id) =>
+      // self.tasks = self.tasks.map(|task| {
+      //   if task.id == id {
+      //     Task {
+      //       done: !task.done,
+      //       ..task
+      //     }
+      //   } else {
+      //     task
+      //   }
+      // })
+      self.tasks.each(fn(task) {
+        if task.id == id {
+          task.done = not(task.done)
+        }
+      })
+    _ => ()
+  }
+}
+
+///|
+fn to_string(self : Store) -> String {
+  self.to_json().stringify(indent=2)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">pub(all) typealias LazyList[T] = @lazy.LazyList[T]
+
+struct Gen[T] {
+  run_gen : (SampleTree) -> (T, LazyList[SampleTree])
+}
+
+pub fn new[T](g : (SampleTree) -> (T, LazyList[SampleTree])) -> Gen[T] {
+  { run_gen: g }
+}
+
+pub fn run_gen[T](self : Gen[T], x : SampleTree) -> (T, LazyList[SampleTree]) {
+  (self.run_gen)(x)
+}
+
+pub fn fmap[T, U](self : Gen[T], f : (T) -> U) -> Gen[U] {
+  new(
+    fn(x) {
+      let (v, rest) = self.run_gen(x)
+      (f(v), rest)
+    },
+  )
+}
+
+pub fn pure[T](v : T) -> Gen[T] {
+  new(fn(_x) { (v, Nil) })
+}
+
+pub fn combine_shrunk(
+  s : Sample,
+  l : SampleTree,
+  r : SampleTree,
+  ls : @lazy.LazyList[SampleTree],
+  rs : @lazy.LazyList[SampleTree]
+) -> @lazy.LazyList[SampleTree] {
+  fn shortcut(st : @lazy.LazyList[SampleTree]) -> @lazy.LazyList[SampleTree] {
+    match st {
+      Nil => Nil
+      ts => Cons(Minimal, @lazy.from_value(ts))
+    }
+  }
+
+  fn unless_minimal(
+    st : SampleTree,
+    l : @lazy.LazyList[SampleTree]
+  ) -> @lazy.LazyList[SampleTree] {
+    match (st, l) {
+      (Minimal, _) => Nil
+      (_, ts) => ts
+    }
+  }
+
+  unless_minimal(l, ls)
+  .map(fn(l1) { SampleTree(s, fn() { l1 }, fn() { r }) })
+  .concat(
+    unless_minimal(r, rs).map(fn(r1) { SampleTree(s, fn() { l }, fn() { r1 }) }),
+  )
+  |> shortcut
+}
+
+pub fn bind[T, U](self : Gen[T], f : (T) -> Gen[U]) -> Gen[U] {
+  new(
+    fn(st) {
+      let (s, l, r) = st.view()
+      let (a, ls) = self.run_gen(l)
+      let (b, rs) = f(a).run_gen(r)
+      (b, combine_shrunk(s, l, r, ls, rs))
+    },
+  )
+}
+
+pub fn ap[T, U](self : Gen[(T) -> U], g : Gen[T]) -> Gen[U] {
+  self.bind(fn(f) { g.bind(fn(x) { pure(f(x)) }) })
+}
+
+pub fn prim_with(f : (Sample) -> @lazy.LazyList[UInt]) -> Gen[Sample] {
+  new(
+    fn(x) {
+      let (s, l, r) = x.view()
+      (s, f(s).map(fn(s1) { SampleTree(Shrunk(s1), fn() { l }, fn() { r }) }))
+    },
+  )
+}
+
+pub fn prim() -> Gen[UInt] {
+  prim_with(fn(s) { sample_value(s) |> binary }).fmap(sample_value)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

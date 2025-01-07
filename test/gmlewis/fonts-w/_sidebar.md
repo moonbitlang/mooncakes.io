@@ -1,0 +1,13 @@
+- [gmlewis/fonts-w](gmlewis/fonts-w/)
+- **In this module**
+  - [wcsoldoutabta](gmlewis/fonts-w/wcsoldoutabta/members)
+  - [wcsoldoutbbta](gmlewis/fonts-w/wcsoldoutbbta/members)
+  - [wcsoldoutcbta](gmlewis/fonts-w/wcsoldoutcbta/members)
+  - [websymbols\_regular](gmlewis/fonts-w/websymbols_regular/members)
+  - [wellfleet\_regular](gmlewis/fonts-w/wellfleet_regular/members)
+  - [windsong](gmlewis/fonts-w/windsong/members)
+  - [wolveslower](gmlewis/fonts-w/wolveslower/members)
+  - [woodennickelblack](gmlewis/fonts-w/woodennickelblack/members)
+- **Dependencies**
+  - [gmlewis/fonts](gmlewis/fonts/)
+  - [moonbitlang/core](moonbitlang/core/)

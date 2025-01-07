@@ -1,0 +1,6 @@
+- [oboard/mimetype](oboard/mimetype/)
+- **In this module**
+  - [root package](oboard/mimetype/members)
+  - [lib](oboard/mimetype/lib/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

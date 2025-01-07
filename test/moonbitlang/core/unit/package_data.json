@@ -1,0 +1,59 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/unit",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Unit",
+      "impls": [
+        {
+          "name": "hash",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/unit#Unit\">Unit</a> with hash(self : Unit) -> Int",
+          "loc": { "line": 22, "column": 29 }
+        },
+        {
+          "name": "hash_combine",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/unit#Unit\">Unit</a> with hash_combine(self : Unit, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+          "loc": { "line": 28, "column": 29 }
+        }
+      ],
+      "methods": [
+        {
+          "name": "compare",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::compare(self : Unit, _other : Unit) -> Int",
+          "loc": { "line": 39, "column": 8 }
+        },
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::default() -> Unit",
+          "loc": { "line": 34, "column": 14 }
+        },
+        {
+          "name": "hash",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::hash(self : Unit) -> Int",
+          "loc": { "line": 22, "column": 29 }
+        },
+        {
+          "name": "hash_combine",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::hash_combine(self : Unit, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+          "loc": { "line": 28, "column": 29 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::to_string(self : Unit) -> String",
+          "loc": { "line": 16, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

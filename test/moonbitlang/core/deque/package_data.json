@@ -1,0 +1,242 @@
+{
+  "readme": "# Deque\n\nDeque is a double-ended queue implemented as a round-robin queue, supporting O(1) head or tail insertion and querying, just like double-ended queues in other languages(C++ std::deque / Rust VecDeque), here deque also supports random access.\n\n# Usage\n\n## Create\n\nYou can create a deque manually via the `new()` or construct it using the `of()`.\n\n```moonbit\nlet dv : @deque.T[Int] = @deque.new()\nlet dv = @deque.of([1, 2, 3, 4, 5])\n```\n\nIf you want to set the length at creation time to minimize expansion consumption, you can add parameter `capacity` to the `new()` function.\n\n```moonbit\nlet dv = @deque.new(capacity=10)\n```\n\n## Length & Capacity\n\nA deque is an indefinite-length, auto-expandable datatype. You can use `length()` to get the number of elements in the current queue, or `capacity()` to get the current capacity.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv.length() // 5\ndv.capacity() // 5\n```\n\nSimilarly, you can use the `is_empty` to determine whether the queue is empty.\n\n```moonbit\nlet dv : @deque[Int] = @deque.new()\ndv.is_empty() // true\n```\n\nYou can use `reserve_capacity` to reserve capacity, ensures that it can hold at least the number of elements\nspecified by the `capacity` argument.\n\n```moonbit\nlet dv = @deque.of([1])\ndv.reserve_capacity(10)\nprintln(dv.capacity()) // 10\n```\n\nAlso, you can use `shrink_to_fit` to shrink the capacity of the deque.\n\n```moonbit\nlet dv = @deque.new(capacity=10)\ndv.push_back(1)\ndv.push_back(2)\ndv.push_back(3)\nprintln(dv.capacity()) // 10\ndv.shrink_to_fit()\nprintln(dv.capacity()) // 3\n```\n\n## Front & Back & Get\n\nYou can use `front()` and `back()` to get the head and tail elements of the queue, respectively. Since the queue may be empty, their return values are both `Option`, or `None` if the queue is empty.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv.front() // Some(1)\ndv.back() // Some(5)\n```\n\nYou can also use `op_get` to access elements of the queue directly, but be careful not to cross the boundaries!\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv[0] // 1\ndv[4] // 5\n```\n\n## Push & Set\n\nSince the queue is bi-directional, you can use `push_front()` and `push_back()` to add values to the head or tail of the queue, respectively.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv.push_front(6)\ndv.push_front(7)\ndv.push_back(8)\ndv.push_back(9)\n//now: 6 7 1 2 3 4 5 8 9\n```\n\nYou can also use `op_set` to set elements of the queue directly, but be careful not to cross the boundaries!\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv[0] = 5\ndv[0] // 5\n```\n\n## Pop\n\nYou can use `pop_front()` and `pop_back()` to pop the element at the head or tail of the queue, respectively, and like [Front & Back](#Front & Back & Get), their return values are `Option`, loaded with the value of the element being popped.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\nlet back = dv.pop_back() // Some(5)\ndv.back() // Some(4)\nlet front = dv.pop_front() //Some(1)\ndv.front() // Some(2)\ndv.length() // 3\n```\n\nIf you only want to pop an element without getting the return value, you can use `pop_front_exn()` with `pop_back_exn()`.\nThese two functions will panic if the queue is empty.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv.pop_front_exn()\ndv.front() // Some(2)\ndv.pop_back_exn()\ndv.back() // Some(3)\n```\n\n## Clear\n\nYou can use `clear` to clear a deque. But note that the memory it already occupies does not change.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv.clear()\ndv.is_empty() // true\n```\n\n## Equal\n\ndeque supports comparing them directly using `op_equal`.\n\n```moonbit\nlet dqa = @deque.of([1, 2, 3, 4, 5])\nlet dqb = @deque.of([1, 2, 3, 4, 5])\ndqa == dqb // true\n```\n\n## Iter & Map\n\ndeque supports vector-like `iter/iteri/map/mapi` functions and their inverse forms.\n\n```moonbit\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv.each(fn(elem) { print(elem) })\n dv.eachi(fn(i, _elem) { print(i) })\n dv.map(fn(elem) { elem + 1 })\n dv.mapi(fn(i, elem) { elem + i })\n```\n\n## Search & Contains\n\nYou can use `contains()` to find out if a value is in the deque, or `search()` to find its index in the deque.\n\n```moonbit\nlet dv = @deque.of([1, 2, 3, 4, 5])\ndv.contains(1) // true\ndv.contains(6) // false\ndv.search(1) // Some(0)\ndv.search(6) // None\n```\n",
+  "name": "moonbitlang/core/deque",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "",
+      "signature": "type T",
+      "loc": { "line": 17, "column": 8 },
+      "methods": [
+        {
+          "name": "back",
+          "docstring": "\n Return the back element from a deque, or `None` if it is empty.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n assert_eq!(dv.back(), Some(5))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::back[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> A?",
+          "loc": { "line": 137, "column": 8 }
+        },
+        {
+          "name": "capacity",
+          "docstring": "\n Returns the total number of elements the deque can hold without reallocating.",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::capacity[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Int",
+          "loc": { "line": 79, "column": 8 }
+        },
+        {
+          "name": "clear",
+          "docstring": "\n Clears the deque, removing all values.\n\n This method has no effect on the allocated capacity of the deque, only setting the length to 0.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv.clear()\n assert_eq!(dv.length(), 0)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::clear[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 413, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Checks if the array contains an element.\n\n # Example\n ```\n let dv = @deque.of([3, 4, 5])\n assert_true!(dv.contains(3))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::contains[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], value : A) -> Bool",
+          "loc": { "line": 499, "column": 8 }
+        },
+        {
+          "name": "copy",
+          "docstring": "\n Creates a new copy of this deque.",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::copy[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> <a href=\"moonbitlang/core/deque#T\">T</a>[A]",
+          "loc": { "line": 43, "column": 11 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterates over the elements of the deque.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n let mut sum = 0\n dv.each(fn (x) {sum = sum + x})\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::each[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], f : (A) -> Unit) -> Unit",
+          "loc": { "line": 348, "column": 8 }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterates over the elements of the deque with index.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n let mut idx_sum = 0\n dv.eachi(fn (i, _x) {idx_sum = idx_sum + i})\n assert_eq!(idx_sum, 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::eachi[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], f : (Int, A) -> Unit) -> Unit",
+          "loc": { "line": 364, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Creates a new deque from an array.",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::from_array[A](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/deque#T\">T</a>[A]",
+          "loc": { "line": 28, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::from_iter[A](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]) -> <a href=\"moonbitlang/core/deque#T\">T</a>[A]",
+          "loc": { "line": 612, "column": 11 }
+        },
+        {
+          "name": "front",
+          "docstring": "\n Return the front element from a deque, or `None` if it is empty.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n assert_eq!(dv.front(), Some(1))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::front[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> A?",
+          "loc": { "line": 121, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Test if the deque is empty.\n\n # Example\n ```\n let dv = @deque.new()\n assert_eq!(dv.is_empty(), true)\n dv.push_back(1)\n assert_eq!(dv.is_empty(), false)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::is_empty[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 471, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::iter[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 559, "column": 8 }
+        },
+        {
+          "name": "iter2",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::iter2[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[Int, A]",
+          "loc": { "line": 585, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": "\n Returns the deque of elements in the vector.",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::length[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Int",
+          "loc": { "line": 73, "column": 8 }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Maps a function over the elements of the deque.\n\n # Example\n ```\n let dv = @deque.of([3, 4, 5])\n let dv2 = dv.map(fn (x) {x + 1})\n assert_eq!(dv2, @deque.of([4, 5, 6]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::map[A, U](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], f : (A) -> U) -> <a href=\"moonbitlang/core/deque#T\">T</a>[U]",
+          "loc": { "line": 428, "column": 8 }
+        },
+        {
+          "name": "mapi",
+          "docstring": "\n Maps a function over the elements of the deque with index.\n\n # Example\n ```\n let dv = @deque.of([3, 4, 5])\n let dv2 = dv.mapi(fn (i, x) {x + i}) // @deque.of([3, 5, 7])\n assert_eq!(dv2, @deque.of([3, 5, 7]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::mapi[A, U](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], f : (Int, A) -> U) -> <a href=\"moonbitlang/core/deque#T\">T</a>[U]",
+          "loc": { "line": 449, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Creates a new, empty deque.",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::new[A](capacity~ : Int = ..) -> <a href=\"moonbitlang/core/deque#T\">T</a>[A]",
+          "loc": { "line": 17, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::of[A](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/deque#T\">T</a>[A]",
+          "loc": { "line": 58, "column": 11 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "\n Compares two deques for equality.",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], other : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 326, "column": 8 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "\n Retrieves the element at the specified index from the deque.\n\n If you try to access an index which isn’t in the Deque, it will panic.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n assert_eq!(dv[2], 3)\n ```\n @alert unsafe \"Panic if the index is out of bounds.\"",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::op_get[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], index : Int) -> A",
+          "loc": { "line": 284, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "\n Sets the value of the element at the specified index.\n\n If you try to access an index which isn’t in the Deque, it will panic.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv[2] = 1\n assert_eq!(dv[2], 1)\n ```\n @alert unsafe \"Panic if the index is out of bounds.\"",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::op_set[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], index : Int, value : A) -> Unit",
+          "loc": { "line": 310, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 22, "column": 39 }
+        },
+        {
+          "name": "pop_back",
+          "docstring": "\n Removes a back element from a deque and returns it, or `None` if it is empty.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n assert_eq!(dv.pop_back(), Some(5))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::pop_back[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> A?",
+          "loc": { "line": 263, "column": 8 }
+        },
+        {
+          "name": "pop_back_exn",
+          "docstring": "\n @alert deprecated \"Use `unsafe_pop_back` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::pop_back_exn[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 233, "column": 8 }
+        },
+        {
+          "name": "pop_front",
+          "docstring": "\n Removes a front element from a deque and returns it, or `None` if it is empty.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n assert_eq!(dv.pop_front(), Some(1))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::pop_front[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> A?",
+          "loc": { "line": 245, "column": 8 }
+        },
+        {
+          "name": "pop_front_exn",
+          "docstring": "\n @alert deprecated \"Use `unsafe_pop_front` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::pop_front_exn[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 209, "column": 8 }
+        },
+        {
+          "name": "push_back",
+          "docstring": "\n Adds an element to the back of the deque.\n\n If the deque is at capacity, it will be reallocated.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv.push_back(6)\n assert_eq!(dv.back(), Some(6))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::push_back[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], value : A) -> Unit",
+          "loc": { "line": 178, "column": 8 }
+        },
+        {
+          "name": "push_front",
+          "docstring": "\n Adds an element to the front of the deque.\n\n If the deque is at capacity, it will be reallocated.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv.push_front(0)\n assert_eq!(dv.front(), Some(0))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::push_front[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], value : A) -> Unit",
+          "loc": { "line": 156, "column": 8 }
+        },
+        {
+          "name": "reserve_capacity",
+          "docstring": "\n Reserves capacity to ensure that it can hold at least the number of elements\n specified by the `capacity` argument.\n\n # Example\n\n ```\n let dv = @deque.of([1])\n dv.reserve_capacity(10)\n assert_eq!(dv.capacity(), 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::reserve_capacity[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], capacity : Int) -> Unit",
+          "loc": { "line": 514, "column": 8 }
+        },
+        {
+          "name": "rev_each",
+          "docstring": "\n Iterates over the elements of the deque in reversed turn.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n let mut sum = 0\n dv.rev_each(fn (x) {sum = sum + x})\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::rev_each[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], f : (A) -> Unit) -> Unit",
+          "loc": { "line": 380, "column": 8 }
+        },
+        {
+          "name": "rev_eachi",
+          "docstring": "\n Iterates over the elements of the deque in reversed turn with index.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n let mut idx_sum = 0\n dv.rev_eachi(fn (i, _x) {idx_sum = idx_sum + i})\n assert_eq!(idx_sum, 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::rev_eachi[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], f : (Int, A) -> Unit) -> Unit",
+          "loc": { "line": 396, "column": 8 }
+        },
+        {
+          "name": "search",
+          "docstring": "\n\n # Example\n ```\n let dv = @deque.of([3, 4, 5])\n assert_eq!(dv.search(3), Some(0))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::search[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], value : A) -> Int?",
+          "loc": { "line": 482, "column": 8 }
+        },
+        {
+          "name": "shrink_to_fit",
+          "docstring": "\n Shrinks the capacity of the deque as much as possible.\n\n # Example\n\n ```\n let dv = @deque.new(capacity=10)\n dv.push_back(1)\n dv.push_back(2)\n dv.push_back(3)\n assert_eq!(dv.capacity(), 10)\n dv.shrink_to_fit()\n assert_eq!(dv.capacity(), 3)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::shrink_to_fit[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 544, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        },
+        {
+          "name": "unsafe_pop_back",
+          "docstring": "\n Removes a back element from a deque.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv.unsafe_pop_back()\n assert_eq!(dv.back(), Some(4))\n ```\n @alert unsafe \"Panic if the deque is empty.\"",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::unsafe_pop_back[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 223, "column": 8 }
+        },
+        {
+          "name": "unsafe_pop_front",
+          "docstring": "\n Removes a front element from a deque.\n\n # Example\n ```\n let dv = @deque.of([1, 2, 3, 4, 5])\n dv.unsafe_pop_front()\n assert_eq!(dv.front(), Some(2))\n ```\n @alert unsafe \"Panic if the deque is empty.\"",
+          "signature": "fn <a href=\"moonbitlang/core/deque#T\">T</a>::unsafe_pop_front[A](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A]) -> Unit",
+          "loc": { "line": 199, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/deque#T\">T</a> with output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/deque#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 22, "column": 39 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

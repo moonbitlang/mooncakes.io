@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+pub let all_fonts = [
+  "aaarghnormal", "abeezee_italic", "abeezee_regular", "abrilfatface_regular", "acme_regular",
+  "actionjackson", "actor_regular", "aguafinascript_regular", "aileron_black", "aileron_blackitalic",
+  "aileron_bold", "aileron_bolditalic", "aileron_heavy", "aileron_heavyitalic", "aileron_italic",
+  "aileron_light", "aileron_lightitalic", "aileron_regular", "aileron_semibold",
+  "aileron_semibolditalic", "aileron_thin", "aileron_thinitalic", "aileron_ultralight",
+  "aileron_ultralightitalic", "airstream", "alegreya_black", "alegreya_blackitalic",
+  "alegreya_bold", "alegreya_bolditalic", "alegreya_extrabold", "alegreya_extrabolditalic",
+  "alegreya_italic", "alegreya_medium", "alegreya_mediumitalic", "alegreya_regular",
+  "alegreya_semibold", "alegreya_semibolditalic", "alexbrush_regular", "alfaslabone_regular",
+  "allura_regular", "amaranth_bold", "amaranth_bolditalic", "amaranth_italic", "amaranth_regular",
+  "amerika", "amerikasans", "amita_bold", "amita_regular", "anagram", "angstrom",
+  "antelopeh", "antimonyblue", "aquilinetwo", "arizonia_regular", "arvo", "arvo_bold",
+  "arvo_bolditalic", "arvo_italic", "asset_regular", "atomicage_regular", "averagesans_regular",
+  "baloo", "baskervville_italic", "baskervville_regular", "berkshireswash_regular",
+  "bevan_italic", "bevan_regular", "bitstreamverasansmono_bold", "bitstreamverasansmono_boldob",
+  "bitstreamverasansmono_oblique", "bitstreamverasansmono_roman", "blazium", "boringboron",
+  "cacchampagne", "carrelectronicdingbats", "chivo_black", "chivo_blackitalic", "chivo_bold",
+  "chivo_bolditalic", "chivo_extrabold", "chivo_extrabolditalic", "chivo_extralight",
+  "chivo_extralightitalic", "chivo_italic", "chivo_light", "chivo_lightitalic", "chivo_medium",
+  "chivo_mediumitalic", "chivo_regular", "chivo_semibold", "chivo_semibolditalic",
+  "chivo_thin", "chivo_thinitalic", "codon", "coiny_regular", "colophondbz", "combinumeralsltd",
+  "conventionalwisdom", "cosinekatie", "crimsontext_bold", "crimsontext_bolditalic",
+  "crimsontext_italic", "crimsontext_regular", "crimsontext_semibold", "crimsontext_semibolditalic",
+  "davis", "davysregular", "deliusswashcaps_regular", "deutsch_gothic", "diplomata_regular",
+  "dissonant_fractured", "dited", "doctorazul", "dohyeon_regular", "donner", "douglasadamshand",
+  "dysprosium", "ebgaramond_bold", "ebgaramond_bolditalic", "ebgaramond_extrabold",
+  "ebgaramond_extrabolditalic", "ebgaramond_italic", "ebgaramond_medium", "ebgaramond_mediumitalic",
+  "ebgaramond_regular", "ebgaramond_semibold", "ebgaramond_semibolditalic", "edwin_bdita",
+  "edwin_bold", "edwin_italic", "edwin_roman", "embossedblack_normal", "embossedblackwide_normal",
+  "englandhanddb", "entypo", "epilog", "f20db", "f2dumb", "f32768no", "f7hours",
+  "fantasquesansmono_bold", "fantasquesansmono_bolditalic", "fantasquesansmono_italic",
+  "fantasquesansmono_regular", "faraday", "fascinate_inlineregular", "fauxsnowbrk",
+  "firasans_black", "firasans_blackitalic", "firasans_bold", "firasans_bolditalic",
+  "firasans_extrabold", "firasans_extrabolditalic", "firasans_extralight", "firasans_extralightitalic",
+  "firasans_italic", "firasans_light", "firasans_lightitalic", "firasans_medium",
+  "firasans_mediumitalic", "firasans_regular", "firasans_semibold", "firasans_semibolditalic",
+  "firasans_thin", "firasans_thinitalic", "fixedersys1x", "fixedersys2x", "fixedersyslight2x",
+  "fjallaone_regular", "fjord_one", "floralia", "font3933", "fontleroybrown", "forum",
+  "freebooterscript", "freemono", "freemonobold", "freemonoboldoblique", "freemonooblique",
+  "freesans", "freesansbold", "freesansboldoblique", "freesansoblique", "freeserif",
+  "freeserifbold", "freeserifbolditalic", "freeserifitalic", "fresnel", "gaussjordan",
+  "genzschetheyse", "genzschetheysealternate", "geodesic", "geometrysoftpro_boldn",
+  "germs", "gooddogregular", "goudystm", "goudystm_italic", "grandhotel_regular",
+  "gravitasone", "greatvibes_regular", "greenwichmeantime", "grutchshaded", "guildofprofessionalactors",
+  "hanalei_regular", "hanaleifill_regular", "headhunter_regular", "heavydata", "helsinkiregular",
+  "heydingsicons", "hockeyislif", "hydrogenscore", "im_fell_flowers_2", "impactlabel",
+  "impactlabelreversed", "incisedblack_normal", "incisedblackwide_normal", "inconsolata",
+  "initial", "isuckatgolf", "italiana_regular", "italianno_regular", "josefinslab_bold",
+  "josefinslab_bolditalic", "josefinslab_extralight", "josefinslab_extralightitalic",
+  "josefinslab_italic", "josefinslab_light", "josefinslab_lightitalic", "josefinslab_medium",
+  "josefinslab_mediumitalic", "josefinslab_regular", "josefinslab_semibold", "josefinslab_semibolditalic",
+  "josefinslab_thin", "josefinslab_thinitalic", "jura_bold", "jura_light", "jura_medium",
+  "jura_regular", "jura_semibold", "kavivanar_regular", "kawoszeh", "kellssd", "kingthingsitalique",
+  "kingthingsxstitch", "konstytucyja", "kreon_bold", "kreon_light", "kreon_medium",
+  "kreon_regular", "kreon_semibold", "landliebe", "lato_black", "lato_blackitalic",
+  "lato_bold", "lato_bolditalic", "lato_hairline", "lato_hairlineitalic", "lato_italic",
+  "lato_light", "lato_lightitalic", "lato_regular", "latoregular", "leaguegothic_condensed",
+  "leaguegothic_condenseditalic", "leaguegothic_italic", "leaguegothic_regular",
+  "leaguescriptthin_regular", "ledger_regular", "leland", "lelandtext", "levity",
+  "lexographer", "librebaskerville_bold", "librebaskerville_italic", "librebaskerville_regular",
+  "linear", "lobstertwo", "lobstertwo_bold", "lobstertwo_bolditalic", "lobstertwo_italic",
+  "lora_bold", "lora_bolditalic", "lora_italic", "lora_medium", "lora_mediumitalic",
+  "lora_regular", "lora_semibold", "lora_semibolditalic", "loversquarrel_regular",
+  "mayqueen", "melaniegirly", "membra", "merriweather_black", "merriweather_blackitalic",
+  "merriweather_bold", "merriweather_bolditalic", "merriweather_italic", "merriweather_light",
+  "merriweather_lightitalic", "merriweather_regular", "metalanguage", "miama", "modak",
+  "monospacetypewriter", "monoton_regular", "montez_regular", "montserrat_black",
+  "montserrat_blackitalic", "montserrat_bold", "montserrat_bolditalic", "montserrat_extrabold",
+  "montserrat_extrabolditalic", "montserrat_extralight", "montserrat_extralightitalic",
+  "montserrat_italic", "montserrat_light", "montserrat_lightitalic", "montserrat_medium",
+  "montserrat_mediumitalic", "montserrat_regular", "montserrat_semibold", "montserrat_semibolditalic",
+  "montserrat_thin", "montserrat_thinitalic", "mothproofscript", "mplus1p_black",
+  "mplus1p_bold", "mplus1p_extrabold", "mplus1p_light", "mplus1p_medium", "mplus1p_regular",
+  "mplus1p_thin", "mrkmaston_bold", "mrkmaston_regular", "musicdbz", "naturallog",
+  "nonblockingsocket", "notosans_black", "notosans_blackitalic", "notosans_bold",
+  "notosans_bolditalic", "notosans_extrabold", "notosans_extrabolditalic", "notosans_extralight",
+  "notosans_extralightitalic", "notosans_italic", "notosans_light", "notosans_lightitalic",
+  "notosans_medium", "notosans_mediumitalic", "notosans_regular", "notosans_semibold",
+  "notosans_semibolditalic", "notosans_thin", "notosans_thinitalic", "notosanscondensed_black",
+  "notosanscondensed_blackitalic", "notosanscondensed_bold", "notosanscondensed_bolditalic",
+  "notosanscondensed_extrabold", "notosanscondensed_extrabolditalic", "notosanscondensed_extralight",
+  "notosanscondensed_extralightitalic", "notosanscondensed_italic", "notosanscondensed_light",
+  "notosanscondensed_lightitalic", "notosanscondensed_medium", "notosanscondensed_mediumitalic",
+  "notosanscondensed_regular", "notosanscondensed_semibold", "notosanscondensed_semibolditalic",
+  "notosanscondensed_thin", "notosanscondensed_thinitalic", "notosansextracondensed_black",
+  "notosansextracondensed_blackitalic", "notosansextracondensed_bold", "notosansextracondensed_bolditalic",
+  "notosansextracondensed_extrabold", "notosansextracondensed_extrabolditalic", "notosansextracondensed_extralight",
+  "notosansextracondensed_extralightitalic", "notosansextracondensed_italic", "notosansextracondensed_light",
+  "notosansextracondensed_lightitalic", "notosansextracondensed_medium", "notosansextracondensed_mediumitalic",
+  "notosansextracondensed_regular", "notosansextracondensed_semibold", "notosansextracondensed_semibolditalic",
+  "notosansextracondensed_thin", "notosansextracondensed_thinitalic", "notosanssemicondensed_black",
+  "notosanssemicondensed_blackitalic", "notosanssemicondensed_bold", "notosanssemicondensed_bolditalic",
+  "notosanssemicondensed_extrabold", "notosanssemicondensed_extrabolditalic", "notosanssemicondensed_extralight",
+  "notosanssemicondensed_extralightitalic", "notosanssemicondensed_italic", "notosanssemicondensed_light",
+  "notosanssemicondensed_lightitalic", "notosanssemicondensed_medium", "notosanssemicondensed_mediumitalic",
+  "notosanssemicondensed_regular", "notosanssemicondensed_semibold", "notosanssemicondensed_semibolditalic",
+  "notosanssemicondensed_thin", "notosanssemicondensed_thinitalic", "nullpointer",
+  "oi_regular", "oldstandardtt_bold", "oldstandardtt_italic", "oldstandardtt_regular",
+  "oneconstant", "opensans_bold", "opensans_bolditalic", "opensans_extrabold", "opensans_extrabolditalic",
+  "opensans_italic", "opensans_light", "opensans_lightitalic", "opensans_medium",
+  "opensans_mediumitalic", "opensans_regular", "opensans_semibold", "opensans_semibolditalic",
+  "opensanscondensed_bold", "opensanscondensed_bolditalic", "opensanscondensed_extrabold",
+  "opensanscondensed_extrabolditalic", "opensanscondensed_italic", "opensanscondensed_light",
+  "opensanscondensed_lightitalic", "opensanscondensed_medium", "opensanscondensed_mediumitalic",
+  "opensanscondensed_regular", "opensanscondensed_semibold", "opensanscondensed_semibolditalic",
+  "opensanssemicondensed_bold", "opensanssemicondensed_bolditalic", "opensanssemicondensed_extrabold",
+  "opensanssemicondensed_extrabolditalic", "opensanssemicondensed_italic", "opensanssemicondensed_light",
+  "opensanssemicondensed_lightitalic", "opensanssemicondensed_medium", "opensanssemicondensed_mediumitalic",
+  "opensanssemicondensed_regular", "opensanssemicondensed_semibold", "opensanssemicondensed_semibolditalic",
+  "opticbot", "ostrichsans_black", "ostrichsans_bold", "ostrichsans_light", "ostrichsans_medium",
+  "ostrichsansdashed_medium", "ostrichsansinline", "ostrichsansinline_italic", "ostrichsansrounded_medium",
+  "oswald_bold", "oswald_extralight", "oswald_light", "oswald_medium", "oswald_regular",
+  "oswald_semibold", "overlockregular", "oxygen", "oxygen_bold", "oxygen_bolditalic",
+  "oxygen_italic", "oxygenmono_regular", "pacifico", "pacifico_regular", "parisienne_regular",
+  "pinball_data", "pixelcode", "pixelcode_black", "pixelcode_blackitalic", "pixelcode_bold",
+  "pixelcode_bolditalic", "pixelcode_demibold", "pixelcode_demibolditalic", "pixelcode_extrablack",
+  "pixelcode_extrablackitalic", "pixelcode_extrabold", "pixelcode_extrabolditalic",
+  "pixelcode_extralight", "pixelcode_extralightitalic", "pixelcode_italic", "pixelcode_light",
+  "pixelcode_lightitalic", "pixelcode_medium", "pixelcode_mediumitalic", "pixelcode_thin",
+  "pixelcode_thinitalic", "plainblack_normal", "plainblackwide_normal", "plasmadripbrk",
+  "plasmadripemptybrk", "potassiumscandal", "prefix", "princesssofia", "printbold",
+  "printclearly", "printdashed", "printersornamentsone", "progbot", "promocyja",
+  "proteron", "ptsans_bold", "ptsans_bolditalic", "ptsans_italic", "ptsans_regular",
+  "qwigley_regular", "ralewaydots_regular", "rammettoone_regular", "ransom", "realbttsoief",
+  "rechtmanplain", "resurgence", "robotoslab_black", "robotoslab_bold", "robotoslab_extrabold",
+  "robotoslab_extralight", "robotoslab_light", "robotoslab_medium", "robotoslab_regular",
+  "robotoslab_semibold", "robotoslab_thin", "robotteacher", "rothenburgdecorative_normal",
+  "rougescript_regular", "rubik_black", "rubik_blackitalic", "rubik_bold", "rubik_bolditalic",
+  "rubik_italic", "rubik_light", "rubik_lightitalic", "rubik_medium", "rubik_mediumitalic",
+  "rubik_regular", "ruthie_regular", "rye_regular", "sail_regular", "satisfy_regular",
+  "scratch", "scriptinapro", "secret_labs", "sevillana_regular", "sfarcheryblack",
+  "sfarcheryblack_oblique", "sfarcheryblacksc", "sfarcheryblacksc_oblique", "sfwasabi",
+  "sfwasabicondensed", "shadowsintolight", "shojumaru_regular", "shortstack", "shrikhand_regular",
+  "signaltonoise", "signika_bold", "signika_light", "signika_medium", "signika_regular",
+  "signika_semibold", "simpel_medium", "sjonarbok_classic", "slabo27px_regular",
+  "snickles", "sniglet_extrabold", "sniglet_regular", "snootorgpixel10", "sofia_regular",
+  "solveigbold", "solveigbold_italic", "solveigdemibold", "solveigdemibold_italic",
+  "solveigdisplay", "solveigdisplay_italic", "solveigtext", "solveigtext_italic",
+  "sonsieone", "soria_soria", "soucisans", "spacemono_bold", "spacemono_bolditalic",
+  "spacemono_italic", "spacemono_regular", "spiltink", "spirax_regular", "sportrop_regular",
+  "squadaone_regular", "stalemate_regular", "stardosstencil_bold", "stardosstencil_regular",
+  "stateface_regular", "stmarie_thin", "submerged", "symbolsigns_basisset", "synthetiqueot",
+  "tangerine", "tangerine_bold", "technetium", "tetanus", "teutonicno1_demibold",
+  "teutonicno2_demibold", "teutonicno3_demibold", "teutonicno4_demibold", "texgyreadventor_bold",
+  "texgyreadventor_bolditalic", "texgyreadventor_italic", "texgyreadventor_regular",
+  "thisboringparty", "titanone", "toast", "tombats6", "tombats7", "tombats_one",
+  "tombatsfour", "tombatssmilies", "tombatsthree", "tombots", "tommysfirstalphabet",
+  "toms_handwriting", "toms_newroman", "tomsheadache", "topsecret_bold", "tuesday",
+  "two_turtledoves", "typemymusic_notation", "ubuntu_bold", "ubuntu_bolditalic",
+  "ubuntu_italic", "ubuntu_light", "ubuntu_lightitalic", "ubuntu_medium", "ubuntu_mediumitalic",
+  "ubuntu_regular", "ubuntumonoregular", "valium", "vanilla", "vastshadow_regular",
+  "veggieburger", "veggieburger_bold", "veggieburger_light", "veterantypewriter",
+  "vibur", "vtcnumerals", "vtcnumerals_black", "vtcnumerals_outline", "wcsoldoutabta",
+  "wcsoldoutbbta", "wcsoldoutcbta", "websymbols_regular", "wellfleet_regular", "windsong",
+  "wolveslower", "woodennickelblack", "yataghan", "yellowtail", "yellowtail_regular",
+  "yesevaone", "yikatu", "youngserif_regular", "zenda", "zincboomerang", "znikomit",
+  "znikomitno24",
+]
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

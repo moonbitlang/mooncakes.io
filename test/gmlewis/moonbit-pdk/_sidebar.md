@@ -1,0 +1,16 @@
+- [gmlewis/moonbit-pdk](gmlewis/moonbit-pdk/)
+- **In this module**
+  - [examples/add](gmlewis/moonbit-pdk/examples/add/members)
+  - [examples/arrays](gmlewis/moonbit-pdk/examples/arrays/members)
+  - [examples/count-vowels](gmlewis/moonbit-pdk/examples/count-vowels/members)
+  - [examples/greet](gmlewis/moonbit-pdk/examples/greet/members)
+  - [examples/http-get](gmlewis/moonbit-pdk/examples/http-get/members)
+  - [examples/kitchen-sink](gmlewis/moonbit-pdk/examples/kitchen-sink/members)
+  - [pdk](gmlewis/moonbit-pdk/pdk/members)
+  - [pdk/config](gmlewis/moonbit-pdk/pdk/config/members)
+  - [pdk/extism](gmlewis/moonbit-pdk/pdk/extism/members)
+  - [pdk/host](gmlewis/moonbit-pdk/pdk/host/members)
+  - [pdk/http](gmlewis/moonbit-pdk/pdk/http/members)
+  - [pdk/var](gmlewis/moonbit-pdk/pdk/var/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

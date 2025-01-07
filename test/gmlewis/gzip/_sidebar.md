@@ -1,0 +1,10 @@
+- [gmlewis/gzip](gmlewis/gzip/)
+- **In this module**
+  - [root package](gmlewis/gzip/members)
+- **Dependencies**
+  - [gmlewis/base64](gmlewis/base64/)
+  - [gmlewis/crc32](gmlewis/crc32/)
+  - [gmlewis/flate](gmlewis/flate/)
+  - [gmlewis/io](gmlewis/io/)
+  - [moonbitlang/x](moonbitlang/x/)
+  - [moonbitlang/core](moonbitlang/core/)

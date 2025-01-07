@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">type JsArray[T] JsValue
+
+pub extern "js" fn JsArray::new_ffi() -> JsValue =
+  #|() => []
+
+pub extern "js" fn JsArray::mapp_ffi(
+  self : JsValue,
+  f : (JsValue) -> JsValue
+) -> JsValue =
+  #|() => []
+
+pub extern "js" fn JsArray::push_ffi(self : JsValue, value : JsValue) =
+  #|(array, value) => { array.push(value) }
+
+pub extern "js" fn JsArray::length_ffi(self : JsValue) -> Int =
+  #|(array) => array.length
+
+pub fn FromJsValue::from_js_value[T](value : JsValue) -> JsArray[T] {
+  JsArray(value)
+}
+
+pub fn ToJsValue::to_js_value[T](arr : JsArray[T]) -> JsValue {
+  arr.0
+}
+
+pub fn JsArray::new[T]() -> JsArray[T] {
+  JsArray(JsArray::new_ffi())
+}
+
+pub fn get[T : FromJsValue](self : JsArray[T], index : Int) -> T {
+  self.0.get_with_index(index)
+}
+
+pub fn push[T : ToJsValue](self : JsArray[T], value : T) -> Unit {
+  self.0 |> push_ffi(to_js_value(value))
+}
+
+pub fn length[T](self : JsArray[T]) -> Int {
+  length_ffi(self.0)
+}
+
+pub fn JsArray::to_array[T : FromJsValue](value : JsArray[T]) -> Array[T] {
+  let array = Array::with_capacity(value.length())
+  for i = 0; i < value.length(); i = i + 1 {
+    array.push(value.get(i))
+  }
+  array
+}
+
+pub fn JsArray::from_array[T : ToJsValue](arr : Array[T]) -> JsArray[T] {
+  let array = JsArray::new()
+  arr.iter(fn { v => array.push(v) })
+  array
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

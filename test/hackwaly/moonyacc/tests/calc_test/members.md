@@ -1,0 +1,155 @@
+# Documentation
+|Type|description|
+|---|---|
+|[ParseError](#ParseError)||
+|[Token](#Token)||
+|[TokenKind](#TokenKind)||
+|[YYDecision](#YYDecision)||
+|[YYObj\_Int](#YYObj_Int)||
+|[YYObj\_Void](#YYObj_Void)||
+|[YYSymbol](#YYSymbol)||
+|[Position](#Position)||
+
+|Value|description|
+|---|---|
+|[start](#start)||
+
+## ParseError
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,55:::pub(all) enum ParseError {
+  UnexpectedToken(<a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>, (Int, Int), <a href="moonbitlang/core/array#Array">Array</a>[<a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a>])
+}
+```
+
+
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_test#ParseError">ParseError</a> with output(<a href="hackwaly/moonyacc/tests/calc_test#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  ```
+  > automatically derived
+
+#### mooncakes-io-method-mark-Methods
+- #### output
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,57:::fn <a href="hackwaly/moonyacc/tests/calc_test#ParseError">ParseError</a>::output(<a href="hackwaly/moonyacc/tests/calc_test#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  ```
+  > automatically derived
+- #### to\_string
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/traits.mbt,85:::fn <a href="hackwaly/moonyacc/tests/calc_test#ParseError">ParseError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  ```
+  > 
+
+## Token
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,5:::pub(all) enum Token {
+  EOF
+  NUMBER(Int)
+  PLUS
+  MINUS
+  STAR
+  LPAREN
+  RPAREN
+}
+```
+
+
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a> with output(<a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  ```
+  > automatically derived
+
+#### mooncakes-io-method-mark-Methods
+- #### kind
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,16:::fn <a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>::kind(self : <a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>) -> <a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a>
+  ```
+  > 
+- #### output
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,13:::fn <a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>::output(<a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  ```
+  > automatically derived
+- #### to\_string
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/traits.mbt,85:::fn <a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  ```
+  > 
+
+## TokenKind
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,29:::pub(all) enum TokenKind {
+  TK_EOF
+  TK_NUMBER
+  TK_PLUS
+  TK_MINUS
+  TK_STAR
+  TK_LPAREN
+  TK_RPAREN
+}
+```
+
+
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,40:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a> with output(self : <a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  ```
+  > 
+
+#### mooncakes-io-method-mark-Methods
+- #### output
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,40:::fn <a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a>::output(self : <a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  ```
+  > 
+- #### to\_string
+  ```moonbit
+  :::source,hackwaly/moonyacc/tests/calc_test/traits.mbt,85:::fn <a href="hackwaly/moonyacc/tests/calc_test#TokenKind">TokenKind</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  ```
+  > 
+
+## YYDecision
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,75:::type YYDecision
+```
+
+
+## YYObj\_Int
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,66:::type YYObj_Int
+```
+
+
+## YYObj\_Void
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,63:::type YYObj_Void
+```
+
+
+## YYSymbol
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,84:::type YYSymbol
+```
+
+
+## Position
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,2:::type Position = Int
+```
+
+
+## start
+
+```moonbit
+:::source,hackwaly/moonyacc/tests/calc_test/calc.mbt,554:::fn start(read_token : () -> (<a href="hackwaly/moonyacc/tests/calc_test#Token">Token</a>, Int, Int), start_pos : Int) -> Int!<a href="hackwaly/moonyacc/tests/calc_test#ParseError">ParseError</a>
+```
+

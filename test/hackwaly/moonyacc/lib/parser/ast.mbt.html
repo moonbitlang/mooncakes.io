@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+pub(all) struct ParserSpec {
+  header : Code?
+  footer : Code?
+  commands : Array[Command]
+  rules : Array[Rule]
+} derive(ToJson)
+
+///|
+pub(all) typealias Code = String
+
+///|
+pub(all) enum SubstItemDesc {
+  Dollar(Int)
+  StartPos
+  EndPos
+  Loc
+  StartPosOf(ClauseItemIdent)
+  EndPosOf(ClauseItemIdent)
+  LocOf(ClauseItemIdent)
+  SymbolStartPos
+  Sloc
+} derive(Eq, Compare, Show, ToJson)
+
+///|
+pub(all) enum ClauseItemIdent {
+  Dollar(Int)
+  Name(Code)
+} derive(Eq, Compare, Show, ToJson)
+
+///|
+pub(all) struct SubstItem {
+  start : Int
+  end : Int
+  desc : SubstItemDesc
+} derive(Show, ToJson)
+
+///|
+pub(all) typealias Symbol = String
+
+///|
+pub(all) enum Command {
+  Start(Array[Symbol])
+  Token(Array[Symbol], type_~ : Code?)
+  Token1(Symbol, type_~ : Code?, image~ : String)
+  Type(Array[Symbol], type_~ : Code)
+  Derive(traits~ : Code, type_~ : Code)
+  Position(type_~ : Code)
+  Left(Array[Symbol])
+  Right(Array[Symbol])
+  Nonassoc(Array[Symbol])
+} derive(ToJson)
+
+///|
+pub(all) struct Rule {
+  nonterminal : Symbol
+  type_ : Code?
+  clauses : Array[Clause]
+} derive(ToJson)
+
+///|
+pub(all) struct Clause {
+  items : Array[ClauseItem]
+  prec : Symbol?
+  action : ClauseAction
+} derive(ToJson)
+
+///|
+pub(all) struct ClauseAction {
+  code : CodeWithSubst?
+  start : Position
+  end : Position
+} derive(ToJson)
+
+///|
+pub(all) struct CodeWithSubst {
+  code : Code
+  subst : Array[SubstItem]
+} derive(ToJson)
+
+///|
+pub(all) struct ClauseItem {
+  binder : Code?
+  symbol : ClauseItemSymbol
+} derive(ToJson)
+
+///|
+pub(all) enum ClauseItemSymbol {
+  Symbol(Symbol)
+  Image(String)
+} derive(ToJson)
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

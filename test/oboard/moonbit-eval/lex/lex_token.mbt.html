@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// minimoonbit编程语言的词法单元列表，参考MiniMoonBit.g4文件
+
+// Token枚举用于表示源代码中识别出的词法单元。
+// issues
+// 1、暂时保留所有token，等待删除部分token
+// 2、minimoonbit中token部分命名和moonbit关键词相同
+pub(all) enum Token {
+  // 数据
+  Number(Int) //  整数
+  Number_Double(Double) //  浮点数
+
+  // 标识符 对应语法中Var(String)
+  Identifier(String) // 变量名
+  Fun_name(String) // 函数名
+  StringLiteral(String) // 字符串
+
+  // 声明类型or调用函数
+  Unit // Unit
+  Bool // Bool
+  Int // Int
+  Double // Double
+  String // String
+  Tuple // Tuple
+  Array // Array
+  Main // main
+  Not // not
+
+  // 循环
+  Loop // loop
+  For // for
+  While // while
+
+  // 一般关键词
+  Let //  let
+  Mut //  mut
+  If //  if
+  Else //  else
+  Fn //  fn
+  True // ture
+  False // false
+
+  // 运算符号
+  Add //  +
+  AddEqual // +=
+  Sub //  -
+  SubEqual // -=
+  Mul //  *  
+  MulEqual // *=
+  Div //  /
+  DivEqual // /=
+  Assign // =
+  EqEq // ==
+  LessThan // <
+  LessEqual // <=
+  NotEqual // !=
+  GreaterThan // >
+  GreaterEqual // >=
+
+  // 标点符号
+  Comma //  ,
+  Semicolon //  ;
+  Colon //  :
+  PathSep // ::
+  // ！
+  Question // ？
+
+  // 双引号
+  DoubleQuote //  "
+  // 单引号
+  SingleQuote //  '
+
+  // 括号
+  LParen //  (
+  RParen //  )
+  LBracket //  [
+  RBracket //  ]
+  LBrace //  {
+  RBrace //  }
+
+  // 其他
+  Arrow // ->
+  Comment // 注释
+  Newline // \n on linux or mac, \r\n on windows
+  // WS // [ \t\r\n]+ -> skip
+  // 等等
+  Skip // ptoken skip!
+} derive(Show, Eq)
+
+// todo support debug etc.
+pub(all) struct TokenPosition {
+  mut token_number : Int
+  mut line : Int // 行号
+  mut column_start : Int // 列号开始
+  mut column_end : Int // 列号结束
+} derive(Show)
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+- [moonbitlang/x](moonbitlang/x/)
+- **In this module**
+  - [benchmark](moonbitlang/x/benchmark/members)
+  - [crypto](moonbitlang/x/crypto/members)
+  - [encoding](moonbitlang/x/encoding/members)
+  - [fs](moonbitlang/x/fs/members)
+  - [json5](moonbitlang/x/json5/members)
+  - [num](moonbitlang/x/num/members)
+  - [stack](moonbitlang/x/stack/members)
+  - [sys](moonbitlang/x/sys/members)
+  - [time](moonbitlang/x/time/members)
+  - [uuid](moonbitlang/x/uuid/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+pub(all) struct Folder[A] {
+  inline_ext_default : FoldFn[Inline, A]
+  block_ext_default : FoldFn[Block, A]
+  inline : FolderFn[Inline, A]
+  block : FolderFn[Block, A]
+}
+
+///|
+pub(all) typealias FoldFn[A, B] = (Folder[B], B, A) -> B!FolderError
+
+///|
+pub(all) typealias FolderFn[A, B] = (Folder[B], B, A) -> FolderResult[B]
+
+///| The type for folder results.
+/// `Default` means doing the default fold.
+pub(all) enum FolderResult[A] {
+  Default
+  Fold(A)
+} derive(Eq, Show, ToJson)
+
+///|
+pub impl[A] Default for FolderResult[A] with default() { Default }
+
+///|
+pub fn Folder::ret[A](a : A) -> FolderResult[A] {
+  Fold(a)
+}
+
+///|
+pub fn Folder::none[A, B](self : Folder[A], _a : A, _b : B) -> FolderResult[A] {
+  let _ = self
+  Default
+}
+
+///|
+pub fn Folder::inline_ext_none[A](
+  self : Folder[A],
+  _a : A,
+  _b : Inline
+) -> A!FolderError {
+  let _ = self
+  raise FolderError("unknown inline extension")
+}
+
+///|
+pub fn Folder::block_ext_none[A](
+  self : Folder[A],
+  _a : A,
+  _b : Block
+) -> A!FolderError {
+  let _ = self
+  raise FolderError("unknown block extension")
+}
+
+///|
+pub fn Folder::new[A](
+  inline_ext_default~ : FoldFn[Inline, A] = Folder::inline_ext_none,
+  block_ext_default~ : FoldFn[Block, A] = Folder::block_ext_none,
+  inline~ : FolderFn[Inline, A] = Folder::none,
+  block~ : FolderFn[Block, A] = Folder::none
+) -> Folder[A] {
+  { inline_ext_default, block_ext_default, inline, block }
+}
+
+///|
+pub fn Folder::fold_inline[A](
+  self : Folder[A],
+  acc : A,
+  i : Inline
+) -> A!FolderError {
+  guard let Default = (self.inline)(self, acc, i) else { Fold(acc) => acc }
+  match i {
+    Autolink(_)
+    | Break(_)
+    | CodeSpan(_)
+    | RawHtml(_)
+    | Text(_)
+    | ExtMathSpan(_) => acc
+    Image({ v, .. }) | Link({ v, .. }) => self.fold_inline!(acc, v.text)
+    Emphasis({ v, .. }) | StrongEmphasis({ v, .. }) =>
+      self.fold_inline!(acc, v.inline)
+    Inlines({ v: is_, .. }) => {
+      let mut acc = acc
+      for x in is_ {
+        acc = self.fold_inline!(acc, x)
+      }
+      acc
+    }
+    ExtStrikethrough({ v, .. }) => self.fold_inline!(acc, v._)
+    // ext => (self.inline_ext_default)!(self, acc, ext)
+  }
+}
+
+///|
+pub fn Folder::fold_block[A](
+  self : Folder[A],
+  acc : A,
+  b : Block
+) -> A!FolderError {
+  guard let Default = (self.block)(self, acc, b) else { Fold(acc) => acc }
+  match b {
+    BlankLine(_)
+    | CodeBlock(_)
+    | HtmlBlock(_)
+    | LinkRefDefinition(_)
+    | ThematicBreak(_)
+    | ExtMathBlock(_) => acc
+    Heading({ v, .. }) => self.fold_inline!(acc, v.inline)
+    BlockQuote({ v, .. }) => self.fold_block!(acc, v.block)
+    Blocks({ v, .. }) => {
+      let mut acc = acc
+      for x in v {
+        acc = self.fold_block!(acc, x)
+      }
+      acc
+    }
+    List({ v, .. }) => {
+      let mut acc = acc
+      for x in v.items {
+        acc = self.fold_block!(acc, x.v.block)
+      }
+      acc
+    }
+    Paragraph({ v, .. }) => self.fold_inline!(acc, v.inline)
+    ExtTable({ v, .. }) => {
+      let mut acc = acc
+      for x in v.rows {
+        match x.0.v {
+          Header(is_) | Data(is_) =>
+            for y in is_ {
+              acc = self.fold_inline!(acc, y.0)
+            }
+          Sep(_) => ()
+        }
+      }
+      acc
+    }
+    ExtFootnoteDefinition({ v, .. }) => self.fold_block!(acc, v.block)
+    // ext => (self.block_ext_default)!(self, acc, ext)
+  }
+}
+
+///|
+pub fn Folder::fold_doc[A](
+  self : Folder[A],
+  acc : A,
+  doc : Doc
+) -> A!FolderError {
+  self.fold_block!(acc, doc.block)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

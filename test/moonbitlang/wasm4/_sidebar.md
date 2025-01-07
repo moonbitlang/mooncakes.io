@@ -1,0 +1,5 @@
+- [moonbitlang/wasm4](moonbitlang/wasm4/)
+- **In this module**
+  - [root package](moonbitlang/wasm4/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

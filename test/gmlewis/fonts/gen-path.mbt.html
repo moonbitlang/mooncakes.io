@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| `gen_path` "renders" the provided text string into an SVG path
+/// using the provided font information. It performs the necessary
+/// path translations in order to combine the individual glyphs into
+/// a "super glyph" that can be rendered as a whole.
+///
+/// Note that `gen_path` operates on the string as a left-justified whole
+/// and anchors the entire path relative to `anchor` accordingly.
+///
+/// If you want multiple lines centered horizontally, use `gen_paths` instead.
+///
+/// Note that the SVG standard states that positive-Y is "down" with origin
+/// coordinates in the upper-left, however, all SVG fonts appear to have their
+/// origin in the lower left with positive-Y moving "up". This package
+/// attempts to convert the SVG paths such that the font is equally readable
+/// in both the "y_up=false" SVG canvas environment or in a 3D "y_up=true"
+/// rendering environment.
+pub fn gen_path(
+  self : Font,
+  text : String,
+  anchor~ : Anchor = Unchanged,
+  y_up~ : Bool = false
+) -> Glyph!FontError {
+  let mut xmin = 0.0
+  let mut ymin = 0.0
+  let mut xmax = 0.0
+  let mut ymax = 0.0
+  let mut x = 0.0
+  let mut y = 0.0
+  let y_scale = if y_up { 1.0 } else { -1.0 }
+  let char = @buffer.new()
+  let gerber_lp = @buffer.new()
+  let d = @buffer.new()
+  //
+  let mut first = true
+  for c in text {
+    match self.glyphs.get(c.to_string()) {
+      Some(glyph) => {
+        char.write_string(glyph.char)
+        gerber_lp.write_string(glyph.gerber_lp)
+        let (glyph_ymin, glyph_ymax) = if y_scale < 0 {
+          (-glyph.ymax, -glyph.ymin)
+        } else {
+          (glyph.ymin, glyph.ymax)
+        }
+        if first {
+          xmin = glyph.xmin
+          xmax = glyph.xmax
+          ymin = glyph_ymin
+          ymax = glyph_ymax
+          first = false
+        } else {
+          if x + glyph.xmin < xmin {
+            xmin = x + glyph.xmin
+          }
+          if x + glyph.xmax > xmax {
+            xmax = x + glyph.xmax
+          }
+          if y + glyph_ymin < ymin {
+            ymin = y + glyph_ymin
+          }
+          if y + glyph_ymax > ymax {
+            ymax = y + glyph_ymax
+          }
+        }
+        d.write_string(translate_path!(glyph.d, x, y, invert_y=not(y_up)))
+        if glyph.horiz_adv_x > 0.0 {
+          x = x + glyph.horiz_adv_x
+        } else {
+          x = x + self.horiz_adv_x
+        }
+      }
+      None => {
+        char.write_char(c)
+        match c {
+          '\x0a' => { // \n - advance line and return to far left
+            x = 0.0
+            y = y - y_scale * (self.units_per_em - self.descent)
+          }
+          '\x0d' => // \r - advance line only
+            y = y - y_scale * (self.units_per_em - self.descent)
+          // anything else - advance to the right by default width
+          _ => x = x + self.horiz_adv_x
+        }
+      }
+    }
+  }
+  let char = char.contents().to_unchecked_string()
+  let gerber_lp = gerber_lp.contents().to_unchecked_string()
+  let mut d = d.contents().to_unchecked_string()
+  let topy = if y_up { ymax } else { ymin }
+  let boty = if y_up { ymin } else { ymax }
+  let (dx, dy) = match anchor {
+    Unchanged => (0.0, 0.0)
+    TopLeft => (-xmin, -topy)
+    TopCenter => (-(xmin + xmax) / 2, -topy)
+    TopRight => (-xmax, -topy)
+    CenterLeft => (-xmin, -(boty + topy) / 2)
+    Center => (-(xmin + xmax) / 2, -(boty + topy) / 2)
+    CenterRight => (-xmax, -(boty + topy) / 2)
+    BaselineLeft => (-xmin, 0)
+    BaselineCenter => (-(xmin + xmax) / 2, 0)
+    BaselineRight => (-xmax, 0)
+    BottomLeft => (-xmin, -boty)
+    BottomCenter => (-(xmin + xmax) / 2, -boty)
+    BottomRight => (-xmax, -boty)
+    RatioXY(rx, ry) => (-mix(xmin, xmax, rx), -mix(boty, topy, 1.0 - ry))
+  }
+  if anchor != Unchanged {
+    d = translate_path!(d, dx, dy)
+    xmin += dx
+    ymin += dy
+    xmax += dx
+    ymax += dy
+  }
+  { char, horiz_adv_x: 0, gerber_lp, d, xmin, ymin, xmax, ymax }
+}
+
+///|
+fn mix(a : Double, b : Double, t : Double) -> Double {
+  (1.0 - t) * a + t * b
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

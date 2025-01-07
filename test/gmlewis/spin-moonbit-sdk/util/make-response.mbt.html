@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| `make_response` makes a new `OutgoingResponse`.
+pub fn make_response(
+  body : Bytes,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt = 200
+) -> @types.OutgoingResponse {
+  let fields = @types.Fields::from_list([("Content-Type", content_type)]).unwrap()
+  let response = @types.outgoing_response(fields)
+  response
+  .body()
+  .unwrap()
+  .write()
+  .unwrap()
+  .blocking_write_and_flush(body)
+  .unwrap()
+  response.set_status_code(status_code).unwrap()
+  response
+}
+
+///| `respond_bytes` sets response_out to an `OutgoingResponse` from the provided `Bytes`.
+pub fn respond_bytes(
+  response_out : @types.ResponseOutparam,
+  body : Bytes,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt = 200
+) -> Unit {
+  response_out.set(make_response(body, content_type~, status_code~) |> Ok)
+}
+
+///| `make_response_str` makes a new `OutgoingResponse` from the provided `String`.
+pub fn make_response_str(
+  body : String,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt = 200
+) -> @types.OutgoingResponse {
+  let body = @base64.str2bytes(body)
+  make_response(body, content_type~, status_code~)
+}
+
+///| `respond_str` sets response_out to an `OutgoingResponse` from the provided `String`.
+pub fn respond_str(
+  response_out : @types.ResponseOutparam,
+  body : String,
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : UInt = 200
+) -> Unit {
+  response_out.set(make_response_str(body, content_type~, status_code~) |> Ok)
+}
+
+///| `make_404_response` makes a new `OutgoingResponse` with "404 Not Found".
+pub fn make_404_response() -> @types.OutgoingResponse {
+  make_response(b"Not Found", status_code=404)
+}
+
+///| `respond_404` sets response_out to an `OutgoingResponse` with "404 Not Found".
+pub fn respond_404(response_out : @types.ResponseOutparam) -> Unit {
+  response_out.set(make_404_response() |> Ok)
+}
+
+///| `make_500_response` makes a new `OutgoingResponse` with "500 Internal Server Error".
+pub fn make_500_response() -> @types.OutgoingResponse {
+  make_response(b"Internal Server Error", status_code=500)
+}
+
+///| `respond_500` sets response_out to an `OutgoingResponse` with "500 Internal Server Error".
+pub fn respond_500(response_out : @types.ResponseOutparam) -> Unit {
+  response_out.set(make_500_response() |> Ok)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

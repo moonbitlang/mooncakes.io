@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+struct Int128IntSet {
+  a : Int64
+  b : Int64
+} derive(Eq, Compare, Hash)
+
+///|
+pub typealias T = Int128IntSet
+
+///|
+pub fn empty() -> Int128IntSet {
+  { a: 0, b: 0 }
+}
+
+///|
+pub impl Show for Int128IntSet with output(self, logger) {
+  logger.write_string("{")
+  let mut first = true
+  for key in self {
+    if first {
+      first = false
+    } else {
+      logger.write_string(", ")
+    }
+    logger.write_object(key)
+  }
+  logger.write_string("}")
+}
+
+///|
+pub fn iter(self : Int128IntSet) -> Iter[Int] {
+  Iter::new(fn(yield_) {
+    let mut bitmask = self.a
+    while true {
+      if bitmask == 0 {
+        break
+      }
+      let bit = bitmask.ctz()
+      match yield_(bit) {
+        IterEnd => return IterEnd
+        IterContinue => ()
+      }
+      bitmask = bitmask & (bitmask - 1)
+    }
+    let mut bitmask = self.b
+    while true {
+      if bitmask == 0 {
+        break
+      }
+      let bit = bitmask.ctz()
+      match yield_(bit + 64) {
+        IterEnd => return IterEnd
+        IterContinue => ()
+      }
+      bitmask = bitmask & (bitmask - 1)
+    }
+    IterContinue
+  })
+}
+
+///|
+pub fn from_iter(iter : Iter[Int]) -> Int128IntSet {
+  let mut a = 0L
+  let mut b = 0L
+  for key in iter {
+    if key < 64 {
+      a = a | (1L << key)
+    } else {
+      b = b | (1L << (key - 64))
+    }
+  }
+  { a, b }
+}
+
+///|
+pub fn singleton(key : Int) -> Int128IntSet {
+  if key < 64 {
+    { a: 1L << key, b: 0 }
+  } else {
+    { a: 0, b: 1L << (key - 64) }
+  }
+}
+
+///|
+pub fn is_empty(self : Int128IntSet) -> Bool {
+  self.a == 0 && self.b == 0
+}
+
+///|
+pub fn contains(self : Int128IntSet, key : Int) -> Bool {
+  if key < 64 {
+    (self.a & (1L << key)) != 0
+  } else {
+    (self.b & (1L << (key - 64))) != 0
+  }
+}
+
+///|
+pub fn add(self : Int128IntSet, key : Int) -> Int128IntSet {
+  if key < 64 {
+    { a: self.a | (1L << key), b: self.b }
+  } else {
+    { a: self.a, b: self.b | (1L << (key - 64)) }
+  }
+}
+
+///|
+pub fn remove(self : Int128IntSet, key : Int) -> Int128IntSet {
+  if key < 64 {
+    { a: self.a & (1L << key).lnot(), b: self.b }
+  } else {
+    { a: self.a, b: self.b & (1L << (key - 64)).lnot() }
+  }
+}
+
+///|
+pub fn union(self : Int128IntSet, other : Int128IntSet) -> Int128IntSet {
+  { a: self.a | other.a, b: self.b | other.b }
+}
+
+///|
+pub fn intersection(self : Int128IntSet, other : Int128IntSet) -> Int128IntSet {
+  { a: self.a & other.a, b: self.b & other.b }
+}
+
+///|
+pub fn difference(self : Int128IntSet, other : Int128IntSet) -> Int128IntSet {
+  { a: self.a & other.a.lnot(), b: self.b & other.b.lnot() }
+}
+
+///|
+pub fn disjoint(self : Int128IntSet, other : Int128IntSet) -> Bool {
+  (self.a & other.a) == 0 && (self.b & other.b) == 0
+}
+
+///|
+pub fn subset(self : Int128IntSet, other : Int128IntSet) -> Bool {
+  (self.a & other.a) == self.a && (self.b & other.b) == self.b
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

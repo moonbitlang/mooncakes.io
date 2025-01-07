@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| gegenbauer computes the Gegenbauer polynomial of degree n with parameter lambda at x.
+/// # Introduction
+///
+/// Gegenbauer polynomials are orthogonal polynomials on the interval [-1,1] with weight function (1-x^2)^lambda.
+/// The formula for the Gegenbauer polynomial is
+///
+/// \[ C_n^{(\lambda)}(x) = \sum_{k=0}^n \binom{n}{k} \frac{\Gamma(n+2\lambda)}{\Gamma(n-k+1)\Gamma(2\lambda+k)} \left(\frac{x-1}{2}\right)^{n-k} \]
+///
+pub fn gegenbauer(n : UInt, lambda: Double, x: Double) -> Double {
+  if lambda <= (-1.0 / 2.0) {
+    println("lambda > -1/2 is required.");
+    return 0.0
+  }
+
+  if x < 0.0 {
+    if (n & 1) != 0 {
+      return -gegenbauer(n, lambda, -x);
+    }
+    return gegenbauer(n, lambda, -x);
+  }
+
+  if n == 0 {
+    return 1.0;
+  }
+
+  let mut y0 = 1.0;
+  let mut y1 = 2.0 * lambda * x;
+
+  let mut yk = y1;
+  let mut k = 2.0;
+  let n = n.to_uint64().to_double()
+  let k_max = n * (1.0 + double_epsilon);
+
+  let gamma = 2.0 * (lambda - 1.0);
+
+  while k < k_max {
+    yk = ((2.0 + gamma / k) * x * y1 - (1.0 + gamma / k) * y0);
+    y0 = y1;
+    y1 = yk;
+    k += 1.0;
+  }
+  yk
+}
+
+///| gegenbauer_derivative is the derivative of the Gegenbauer polynomial of degree n with parameter lambda at x.
+pub fn gegenbauer_derivative(n: UInt, lambda: Double, x: Double, k: UInt) -> Double {
+  if k > n {
+    return 0.0;
+  }
+  let kf = k.to_uint64().to_double();
+  let gegen = gegenbauer(n - k, lambda + kf, x);
+  let mut scale = 1.0;
+  let mut lambda = lambda;
+  // for j in 0..k {
+  for j = 0U; j < k; j = j + 1 {
+    scale *= 2.0 * lambda;
+    lambda += 1.0;
+  }
+  scale * gegen
+}
+
+///|
+pub fn gegenbauer_prime(n: UInt, lambda: Double, x: Double) -> Double {
+  gegenbauer_derivative(n, lambda, x, 1)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

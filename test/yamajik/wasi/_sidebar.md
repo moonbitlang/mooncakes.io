@@ -1,0 +1,9 @@
+- [yamajik/wasi](yamajik/wasi/)
+- **In this module**
+  - [env](yamajik/wasi/env/members)
+  - [http](yamajik/wasi/http/members)
+  - [log](yamajik/wasi/log/members)
+  - [utils](yamajik/wasi/utils/members)
+- **Dependencies**
+  - [yamajik/wasi-bindings](yamajik/wasi-bindings/)
+  - [moonbitlang/core](moonbitlang/core/)

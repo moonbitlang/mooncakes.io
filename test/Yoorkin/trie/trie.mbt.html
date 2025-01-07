@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">struct T[A] {
+  value : A?
+  forks : @immut/sorted_map.T[Char, T[A]]
+}
+
+pub fn lookup[A](self : T[A], path : String) -> A? {
+  loop path.to_array()[:], self {
+    [], trie => trie.value
+    [x, .. as xs], trie =>
+      match trie.forks[x] {
+        None => None
+        Some(subtree) => continue xs, subtree
+      }
+  }
+}
+
+/// @alert deprecated "use `add` instead"
+pub fn insert[A](self : T[A], path : String, value : A) -> T[A] {
+  self.add(path, value)
+}
+
+pub fn add[A](self : T[A], path : String, value : A) -> T[A] {
+  fn aux {
+    ([] : ArrayView[Char]), trie => T::{ ..trie, value: Some(value) }
+    [x, .. as xs], trie => {
+      let subtree = trie.forks[x].or(
+        { value: None, forks: @immut/sorted_map.empty() },
+      )
+      { ..trie, forks: trie.forks.add(x, aux(xs, subtree)) }
+    }
+  }
+
+  aux(path.to_array()[:], self)
+}
+
+pub fn empty[a]() -> T[a] {
+  T::{ value: None, forks: @immut/sorted_map.empty() }
+}
+
+pub fn T::of[A](data : FixedArray[(String, A)]) -> T[A] {
+  loop 0, empty() {
+    i, trie =>
+      if i == data.length() {
+        trie
+      } else {
+        let (s, v) = data[i]
+        continue i + 1, trie.add(s, v)
+      }
+  }
+}
+
+pub fn T::from_array[A](data : Array[(String, A)]) -> T[A] {
+  loop 0, empty() {
+    i, trie =>
+      if i == data.length() {
+        trie
+      } else {
+        let (s, v) = data[i]
+        continue i + 1, trie.add(s, v)
+      }
+  }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

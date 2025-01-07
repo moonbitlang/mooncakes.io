@@ -1,0 +1,6 @@
+- [smallbearrr/pandas](smallbearrr/pandas/)
+- **In this module**
+  - [lib/pandas](smallbearrr/pandas/lib/pandas/members)
+  - [main](smallbearrr/pandas/main/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

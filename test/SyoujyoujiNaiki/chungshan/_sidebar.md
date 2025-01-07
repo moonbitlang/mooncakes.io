@@ -1,0 +1,6 @@
+- [SyoujyoujiNaiki/chungshan](SyoujyoujiNaiki/chungshan/)
+- **In this module**
+  - [root package](SyoujyoujiNaiki/chungshan/members)
+  - [lib](SyoujyoujiNaiki/chungshan/lib/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

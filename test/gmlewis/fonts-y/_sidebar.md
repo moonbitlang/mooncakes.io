@@ -1,0 +1,11 @@
+- [gmlewis/fonts-y](gmlewis/fonts-y/)
+- **In this module**
+  - [yataghan](gmlewis/fonts-y/yataghan/members)
+  - [yellowtail](gmlewis/fonts-y/yellowtail/members)
+  - [yellowtail\_regular](gmlewis/fonts-y/yellowtail_regular/members)
+  - [yesevaone](gmlewis/fonts-y/yesevaone/members)
+  - [yikatu](gmlewis/fonts-y/yikatu/members)
+  - [youngserif\_regular](gmlewis/fonts-y/youngserif_regular/members)
+- **Dependencies**
+  - [gmlewis/fonts](gmlewis/fonts/)
+  - [moonbitlang/core](moonbitlang/core/)

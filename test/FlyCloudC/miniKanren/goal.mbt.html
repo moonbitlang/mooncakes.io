@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+type Goal (Sub) -> Stream[Sub]
+
+///|
+pub fn eqo(u : Val, v : Val) -> Goal {
+  Goal(
+    fn(s) {
+      match s.unify(u, v) {
+        None => Empty
+        Some(s_) => Cons(s_, Empty)
+      }
+    },
+  )
+}
+
+///|
+pub fn Goal::lor(g1 : Goal, g2 : Goal) -> Goal {
+  Goal(fn { s => mix((g1._)(s), (g2._)(s)) })
+}
+
+///|
+pub fn Goal::land(g1 : Goal, g2 : Goal) -> Goal {
+  Goal(fn { s => (g1._)(s).append_map_fold_mix(g2._) })
+}
+
+///|
+pub fn delay(f : () -> Goal) -> Goal {
+  Goal(fn(s) { Suspension(fn() { (f()._)(s) }) })
+}
+
+///|
+pub fn run(f : (Val) -> Goal) -> Iter[Val] {
+  let qv = fresh_var()
+  let g = f(qv)
+  (g._)(empty_substitution).iter().map(reify(qv))
+}
+
+///|
+fn run_and_display(f : (Val) -> Goal, n? : Int) -> String {
+  let s = run(f)
+  (match n {
+    Some(n) => s.take(n)
+    None => s
+  })
+  .map(Val::to_string)
+  .to_array()
+  |> String::concat(separator="\n")
+}
+
+test "or" {
+  inspect!(
+    run_and_display(
+      fn {
+        v =>
+          eqo(v, Int(1)) | //
+          eqo(v, Int(2))
+      },
+    ),
+    content=
+      #|1
+      #|2
+    ,
+  )
+}
+
+test "and" {
+  inspect!(
+    run_and_display(
+      fn {
+        v => {
+          let t = fresh_var()
+          eqo(t, Int(1)) & //
+          eqo(v, t)
+        }
+      },
+    ),
+    content="1",
+  )
+}
+
+test "delay" {
+  fn manyo {
+    g => g | delay(fn() { manyo(g) })
+  }
+
+  inspect!(
+    run_and_display(
+      n=5,
+      fn {
+        v => //
+          manyo(eqo(v, Int(1)))
+      },
+    ),
+    content=
+      #|1
+      #|1
+      #|1
+      #|1
+      #|1
+    ,
+  )
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

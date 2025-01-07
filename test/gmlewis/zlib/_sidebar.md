@@ -1,0 +1,8 @@
+- [gmlewis/zlib](gmlewis/zlib/)
+- **In this module**
+  - [root package](gmlewis/zlib/members)
+- **Dependencies**
+  - [gmlewis/flate](gmlewis/flate/)
+  - [gmlewis/hash](gmlewis/hash/)
+  - [gmlewis/io](gmlewis/io/)
+  - [moonbitlang/core](moonbitlang/core/)

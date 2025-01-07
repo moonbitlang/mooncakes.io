@@ -1,0 +1,6 @@
+- [tiye/lexicon-fractional-index](tiye/lexicon-fractional-index/)
+- **In this module**
+  - [lib](tiye/lexicon-fractional-index/lib/members)
+  - [main](tiye/lexicon-fractional-index/main/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

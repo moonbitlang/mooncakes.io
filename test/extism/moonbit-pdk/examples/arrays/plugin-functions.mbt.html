@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| `progressive_sum_ints` tests passing arrays of ints.
+pub fn progressive_sum_ints() -> Int {
+  let s = @host.input_string()
+  let jv = try {
+    @json.parse!(s)
+  } catch {
+    e => {
+      @host.set_error("unable to parse input: \{e}")
+      return 1 // failure
+    }
+  }
+  //
+  let ints = match jv.as_array() {
+    Some(arr) => arr.map(fn(jv) { jv.as_number().unwrap().to_int() })
+    _ => {
+      @host.set_error("could not parse array")
+      return 1 // failure
+    }
+  }
+  //
+  let result = process_ints(ints)
+  //
+  let jv = result.to_json()
+  @host.output_json_value(jv)
+  0 // success
+}
+
+///| `progressive_sum_floats` tests passing arrays of floats.
+pub fn progressive_sum_floats() -> Int {
+  let s = @host.input_string()
+  let jv = try {
+    @json.parse!(s)
+  } catch {
+    e => {
+      @host.set_error("unable to parse input: \{e}")
+      return 1 // failure
+    }
+  }
+  //
+  let floats = match jv.as_array() {
+    Some(arr) => arr.map(fn(jv) { jv.as_number().unwrap() })
+    _ => {
+      @host.set_error("could not parse array")
+      return 1 // failure
+    }
+  }
+  //
+  let result = process_floats(floats)
+  //
+  let jv = result.to_json()
+  @host.output_json_value(jv)
+  0 // success
+}
+
+///| `progressive_concat_strings` tests passing arrays of strings.
+pub fn progressive_concat_strings() -> Int {
+  let s = @host.input_string()
+  let jv = try {
+    @json.parse!(s)
+  } catch {
+    e => {
+      @host.set_error("unable to parse input: \{e}")
+      return 1 // failure
+    }
+  }
+  //
+  let strings = match jv.as_array() {
+    Some(arr) => arr.map(fn(jv) { jv.as_string().unwrap() })
+    _ => {
+      @host.set_error("could not parse array")
+      return 1 // failure
+    }
+  }
+  //
+  let result = process_strings(strings)
+  //
+  let jv = result.to_json()
+  @host.output_json_value(jv)
+  0 // success
+}
+
+///| `all_three_object` tests passing an object of all three arrays.
+pub fn all_three_object() -> Int {
+  let s = @host.input_string()
+  let jv = try {
+    @json.parse!(s)
+  } catch {
+    e => {
+      @host.set_error("unable to parse input: \{e}")
+      return 1 // failure
+    }
+  }
+  //
+  let all_three : AllThree = match jv {
+    Object(
+      {
+        "ints": Array(ints),
+        "floats": Array(floats),
+        "strings": Array(strings),
+      }
+    ) => {
+      let ints : Array[Int] = ints
+        .map(fn { n => n.as_number() })
+        .filter(fn { n => not(n.is_empty()) })
+        .map(fn { n => n.unwrap().to_int() })
+      let floats : Array[Double] = floats
+        .map(fn { n => n.as_number() })
+        .filter(fn { n => not(n.is_empty()) })
+        .map(fn { n => n.unwrap() })
+      let strings : Array[String] = strings
+        .map(fn { n => n.as_string() })
+        .filter(fn { n => not(n.is_empty()) })
+        .map(fn { n => n.unwrap() })
+      { ints, floats, strings }
+    }
+    _ => {
+      @host.set_error("unable to parse input: \{s}")
+      return 1 // failure
+    }
+  }
+  //
+  let result = process_all_three(all_three)
+  //
+  let jv = result.to_json()
+  @host.output_json_value(jv)
+  0 // success
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">pub enum Either[L, R] {
+  Left(L)
+  Right(R)
+}
+
+pub fn is_left[L, R](self: Either[L, R]) -> Bool {
+  match self {
+    Either::Left(_) => true
+    Either::Right(_) => false
+  }
+}
+
+pub fn is_right[L, R](self: Either[L, R]) -> Bool {
+  match self {
+    Either::Left(_) => false
+    Either::Right(_) => true
+  }
+}
+
+pub fn left[L, R](self: Either[L, R]) -> Option[L] {
+  match self {
+    Either::Left(l) => Some(l)
+    Either::Right(_) => None
+  }
+}
+
+pub fn right[L, R](self: Either[L, R]) -> Option[R] {
+  match self {
+    Either::Left(_) => None
+    Either::Right(r) => Some(r)
+  }
+}
+
+pub fn flip[L, R](self: Either[L, R]) -> Either[R, L] {
+  match self {
+    Either::Left(l) => Either::Right(l)
+    Either::Right(r) => Either::Left(r)
+  }
+}
+
+pub fn map_left[L, R, L2](self: Either[L, R], f: (L) -> L2) -> Either[L2, R] {
+  match self {
+    Either::Left(l) => Either::Left(f(l))
+    Either::Right(r) => Either::Right(r)
+  }
+}
+
+pub fn map_right[L, R, R2](self: Either[L, R], f: (R) -> R2) -> Either[L, R2] {
+  match self {
+    Either::Left(l) => Either::Left(l)
+    Either::Right(r) => Either::Right(f(r))
+  }
+}
+
+pub fn map_either[L, R, L2, R2](self: Either[L, R], f: (L) -> L2, g: (R) -> R2) -> Either[L2, R2] {
+  match self {
+    Either::Left(l) => Either::Left(f(l))
+    Either::Right(r) => Either::Right(g(r))
+  }
+}
+
+pub fn either[L, R, T](self: Either[L, R], f: (L) -> T, g: (R) -> T) -> T {
+  match self {
+    Either::Left(l) => f(l)
+    Either::Right(r) => g(r)
+  }
+}</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

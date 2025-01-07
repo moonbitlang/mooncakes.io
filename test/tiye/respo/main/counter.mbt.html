@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// // #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, RespoState)]
+///|
+struct MainState {
+  counted : Int
+} derive(Default, ToJson, @json.FromJson)
+
+///|
+fn comp_counter(
+  states : @respo.RespoStatesTree,
+  global_counted : Int
+) -> @respo_node.RespoNode[ActionOp] {
+  let cursor = states.path()
+  let state : MainState = states.cast_branch()
+  let counted = state.counted
+  let on_inc = fn(
+    e : @respo_node.RespoEvent,
+    dispatch : @respo_node.DispatchFn[ActionOp]
+  ) -> Unit!@respo_node.RespoCommonError {
+    @dom_ffi.warn_log("inc click: " + e.to_string())
+    match e {
+      Click(original_event~, ..) => original_event.prevent_default()
+      _ => ()
+    }
+    dispatch.run!(Increment)
+    dispatch.run_state!(cursor, MainState::{ counted: state.counted + 1 })
+  }
+  let on_dec = fn(
+    e : @respo_node.RespoEvent,
+    dispatch : @respo_node.DispatchFn[ActionOp]
+  ) -> Unit!@respo_node.RespoCommonError {
+    @dom_ffi.warn_log("dec click: " + e.to_string())
+    dispatch.run!(Decrement)
+    dispatch.run_state!(cursor, MainState::{ counted: state.counted - 1 })
+  }
+  let on_inc_twice = fn(
+    e : @respo_node.RespoEvent,
+    dispatch : @respo_node.DispatchFn[ActionOp]
+  ) -> Unit!@respo_node.RespoCommonError {
+    @dom_ffi.warn_log("twice click: " + e.to_string())
+    dispatch.run!(IncTwice)
+    dispatch.run_state!(cursor, MainState::{ counted: state.counted + 2 })
+  }
+  @respo_node.div(
+    attrs=@respo_node.respo_attrs()..set("data-comp", "counter"),
+    [
+      @respo_node.div([
+        @respo_node.button(
+          inner_text="demo inc",
+          class_name=@respo.ui_button,
+          style=respo_style(margin=Px(4)),
+          event={}..set(Click, on_inc),
+        ),
+        @respo_node.button(
+          inner_text="demo dec",
+          class_name=@respo.ui_button,
+          style=respo_style(margin=Px(4)),
+          event={}..set(Click, on_dec),
+        ),
+        @respo_node.button(
+          inner_text="demo inc twice",
+          class_name=@respo.ui_button,
+          style=respo_style(margin=Px(4)),
+          event={}..set(Click, on_inc_twice),
+        ),
+      ]),
+      @respo_node.div([
+        @respo_node.text_node(
+          "value is: " + counted.to_string(),
+          style=respo_style(
+            color=Hsluv(270, 100, 40),
+            font_family="Menlo",
+            font_size=counted.reinterpret_as_uint() + 10,
+          ),
+        ),
+      ]),
+      @respo_node.div([
+        text_node("local state: \{counted}"),
+        @respo_node.br(),
+        text_node("global state: " + global_counted.to_string()),
+      ]),
+    ],
+  )
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

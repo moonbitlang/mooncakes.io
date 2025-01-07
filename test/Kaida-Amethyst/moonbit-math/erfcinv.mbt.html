@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| Calculate the inverse complementary error function of the input argument.
+///
+/// # Special Cases
+///
+/// 1. erfcinv(+-0) = +Inf
+/// 2. erfcinv(2) = -inf
+/// 3. erfcinv(x) returns NaN for `x` outside [0, 2]
+/// 4. erfcinv(NaN) = NaN
+pub fn erfcinv(a: Double) -> Double {
+  let mut t = 2.0 - a;
+  let mut p = 0.0
+  if a >= 2.1875e-3 && a <= 1.998125 {
+    t = t * a
+    t = - log2(t)
+    p = -2.00998329e-10
+    p = fma(p, t, 7.63788321e-09)
+    p = fma(p, t, -9.44120231e-08)
+    p = fma(p, t, 1.27279494e-08)
+    p = fma(p, t, 8.98369126e-06)
+    p = fma(p, t, -3.40910883e-05)
+    p = fma(p, t, -7.70850747e-04)
+    p = fma(p, t, 5.54407062e-03)
+    p = fma(p, t, 1.60820886e-01)
+    t = fma(p, t, 8.86226892e-01)
+    t = fma(t, -a, t)
+  } else {
+    t = if a > 1 { t } else { a }
+    t = log2(t)
+    t = rsqrt(-t)
+    p = 1.16093750e+2
+    p = fma(p, t, -2.26577423e+2)
+    p = fma(p, t, 1.96353668e+2)
+    p = fma(p, t, -1.00602257e+2)
+    p = fma(p, t, 3.46447067e+1)
+    p = fma(p, t, -9.10134983e+0)
+    p = fma(p, t, 2.65257812e+0)
+    p = fma(p, t, 4.29913402e-2)
+    p = fma(p, t, -4.46814462e-4)
+    p = fma(1.201122409, t, p * t)
+    if a > 1 { p = -p }
+    t = 1.0 / p
+  }
+  return t
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

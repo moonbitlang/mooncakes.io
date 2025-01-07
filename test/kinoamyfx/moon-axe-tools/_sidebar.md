@@ -1,0 +1,6 @@
+- [kinoamyfx/moon-axe-tools](kinoamyfx/moon-axe-tools/)
+- **In this module**
+  - [root package](kinoamyfx/moon-axe-tools/members)
+  - [lib](kinoamyfx/moon-axe-tools/lib/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

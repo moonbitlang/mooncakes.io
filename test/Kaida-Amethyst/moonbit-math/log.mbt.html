@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">//Method :                  
+// 
+//  1. Argument Reduction: find k and f such that 
+// 
+// 		x = 2^k * (1+f), 
+// 
+//    where  sqrt(2)/2 < 1+f < sqrt(2) .
+//  2. Approximation of log(1+f).
+// Let s = f/(2+f) ; based on log(1+f) = log(1+s) - log(1-s)
+// 	 = 2s + 2/3 s**3 + 2/5 s**5 + .....,
+//      	 = 2s + s*R
+//     We use a special Reme algorithm on [0,0.1716] to generate 
+//	a polynomial of degree 14 to approximate R The maximum error 
+// of this polynomial approximation is bounded by 2**-58.45. In
+// other words,
+// 	        2      4      6      8      10      12      14
+//     R(z) ~ Lg1*s +Lg2*s +Lg3*s +Lg4*s +Lg5*s  +Lg6*s  +Lg7*s
+// 	(the values of Lg1 to Lg7 are listed in the program)
+// and
+//     |      2          14          |     -58.45
+//     | Lg1*s +...+Lg7*s    -  R(z) | <= 2 
+//     |                             |
+// Note that 2s = f - s*f = f - hfsq + s*hfsq, where hfsq = f*f/2.
+// In order to guarantee error in log below 1ulp, we compute log
+// by
+// 	log(1+f) = f - s*(f - R)	(if f is not too large)
+// 	log(1+f) = f - (hfsq - s*(hfsq+R)).	(better accuracy)
+// 3. Finally,  log(x) = k*ln2 + log(1+f).  
+// 		    = k*ln2_hi+(f-(hfsq-(s*(hfsq+R)+k*ln2_lo)))
+//    Here ln2 is split into two floating point number: 
+// 		ln2_hi + ln2_lo,
+//    where n*ln2_hi is always exact for |n| < 2000.
+//
+//Special cases:
+// log(x) is NaN with signal if x < 0 (including -INF) ; 
+// log(+INF) is +INF; log(0) is -INF with signal;
+// log(NaN) is that NaN with no signal.
+//
+///| Return the logrithm of x
+/// # Introduction:
+///
+///  Return the logrithm of x
+///
+/// # Special cases:
+///
+/// 1. log(x) is NaN with signal if x < 0 (including -INF).
+/// 2. log(+INF) is +INF.
+/// 3. log(0) is -INF with signal.
+///
+/// # Accuracy:
+/// 
+/// according to an error analysis, the error is always less than
+/// 
+/// 1 ulp (unit in the last place).
+pub fn log(x: Double) -> Double {
+  x.ln()
+}
+
+test "log" {
+  fn assert_log_ulp!(input, expect) {
+    assert_ulp!(expect, log(input), LOG_MAX_ULP);
+  }
+  assert_log_ulp!(-0.8, double_nan)
+  assert_log_ulp!(-0.7, double_nan)
+  assert_log_ulp!(-0.6, double_nan)
+  assert_log_ulp!(-0.5, double_nan)
+  assert_log_ulp!(-0.4, double_nan)
+  assert_log_ulp!(-0.3, double_nan)
+  assert_log_ulp!(-0.2, double_nan)
+  assert_log_ulp!(-0.1, double_nan)
+  assert_log_ulp!(-0, double_neg_inf)
+  assert_log_ulp!(-3.141592653589793, double_nan)
+  assert_log_ulp!(-1.5707963267948966, double_nan)
+  assert_log_ulp!(-0.7853981633974483, double_nan)
+  assert_log_ulp!(0, double_neg_inf)
+  assert_log_ulp!(0.1, -2.3025850929940455)
+  assert_log_ulp!(0.2, -1.6094379124341003)
+  assert_log_ulp!(0.3, -1.2039728043259361)
+  assert_log_ulp!(0.4, -0.916290731874155)
+  assert_log_ulp!(0.5, -0.6931471805599453)
+  assert_log_ulp!(0.6, -0.5108256237659907)
+  assert_log_ulp!(0.7, -0.35667494393873245)
+  assert_log_ulp!(0.8, -0.2231435513142097)
+  assert_log_ulp!(0.9, -0.10536051565782628)
+  assert_log_ulp!(1, 0)
+  // assert_log_ulp!(3.141592653589793, 1.1447298858494002)
+  // assert_log_ulp!(1.5707963267948966, 0.4515827052894548)
+  // assert_log_ulp!(0.7853981633974483, -0.2415644752704905)
+  // assert_log_ulp!(-1, double_nan)
+  // assert_log_ulp!(-2, double_nan)
+  // assert_log_ulp!(-3, double_nan)
+  // assert_log_ulp!(-4, double_nan)
+  // assert_log_ulp!(-5, double_nan)
+  // assert_log_ulp!(-6, double_nan)
+  // assert_log_ulp!(-7, double_nan)
+  // assert_log_ulp!(-8, double_nan)
+  // assert_log_ulp!(-9, double_nan)
+  // assert_log_ulp!(1, 0)
+  // assert_log_ulp!(2, 0.6931471805599453)
+  // assert_log_ulp!(3, 1.0986122886681098)
+  // assert_log_ulp!(4, 1.3862943611198906)
+  // assert_log_ulp!(5, 1.6094379124341003)
+  // assert_log_ulp!(6, 1.791759469228055)
+  // assert_log_ulp!(7, 1.9459101490553132)
+  // assert_log_ulp!(8, 2.0794415416798357)
+  // assert_log_ulp!(9, 2.1972245773362196)
+  // assert_log_ulp!(10, 2.302585092994046)
+  // assert_log_ulp!(100, 4.605170185988092)
+  // assert_log_ulp!(1000, 6.907755278982137)
+  // assert_log_ulp!(10000, 9.210340371976184)
+  // assert_log_ulp!(2.5, 0.9162907318741551)
+  // assert_log_ulp!(3.4, 1.2237754316221157)
+  // assert_log_ulp!(5.3, 1.667706820558076)
+  // assert_log_ulp!(6.2, 1.824549292051046)
+  // assert_log_ulp!(7.1, 1.9600947840472698)
+  // assert_log_ulp!(8.9, 2.186051276738094)
+  // assert_log_ulp!(9.8, 2.2823823856765264)
+  // assert_log_ulp!(10.7, 2.3702437414678603)
+  // assert_log_ulp!(101.6, 4.6210435351443815)
+  // assert_log_ulp!(1.542, 0.4330802751411378)
+  // assert_log_ulp!(2.846, 1.0459144996676606)
+  // assert_log_ulp!(7.881, 2.0644547993715126)
+  // assert_log_ulp!(3.772, 1.327605364771211)
+  // assert_log_ulp!(-1.542, double_nan)
+  // assert_log_ulp!(-2.846, double_nan)
+  // assert_log_ulp!(-7.881, double_nan)
+  // assert_log_ulp!(-3.772, double_nan)
+  // assert_log_ulp!(-1, double_nan)
+  // assert_log_ulp!(0, double_neg_inf)
+  // assert_log_ulp!(-0, double_neg_inf)
+  // assert_log_ulp!(double_nan, double_nan)
+  // assert_log_ulp!(double_pos_inf, double_pos_inf)
+  // assert_log_ulp!(double_neg_inf, double_nan)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

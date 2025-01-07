@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| `Cmd` represents an SVG command along with its parameters.
+struct Cmd {
+  c : String
+  p : Params
+} derive(Show, Eq)
+
+///|
+let split_re : @regexp.RegExp = @regexp.compile?("^([MLCQZ])([0-9\\.\\-, ]*)").unwrap()
+
+///| `split_path` splits an SVG path into an array of individual commands.
+fn split_path(d : String) -> Array[Cmd]!FontError {
+  let mut d = d
+  let cmds = []
+  while d.length() > 0 {
+    let match_result = split_re.matches(d)
+    match match_result.captures() {
+      [_, c, p] => {
+        d = d.substring(start=c.length() + p.length())
+        let p = parse_params!(p)
+        cmds.push({ c, p })
+      }
+      _ => raise FontError("split_path: unable to split SVG path \{d}")
+    }
+  }
+  cmds
+}
+
+test "split_path" {
+  let d = "M507 24L48 24L48 530L395 530L395 625L48 625L48 723L507 723L507 24ZM395 269L395 433L138 433L138 269L395 269Z"
+  let got = split_path!(d)
+  let want = [
+    { c: "M", p: Params([507.0, 24.0]) },
+    { c: "L", p: Params([48.0, 24.0]) },
+    { c: "L", p: Params([48.0, 530.0]) },
+    { c: "L", p: Params([395.0, 530.0]) },
+    { c: "L", p: Params([395.0, 625.0]) },
+    { c: "L", p: Params([48.0, 625.0]) },
+    { c: "L", p: Params([48.0, 723.0]) },
+    { c: "L", p: Params([507.0, 723.0]) },
+    { c: "L", p: Params([507.0, 24.0]) },
+    { c: "Z", p: Params([]) },
+    { c: "M", p: Params([395.0, 269.0]) },
+    { c: "L", p: Params([395.0, 433.0]) },
+    { c: "L", p: Params([138.0, 433.0]) },
+    { c: "L", p: Params([138.0, 269.0]) },
+    { c: "L", p: Params([395.0, 269.0]) },
+    { c: "Z", p: Params([]) },
+  ]
+  assert_eq!(got, want)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

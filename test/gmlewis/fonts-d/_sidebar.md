@@ -1,0 +1,17 @@
+- [gmlewis/fonts-d](gmlewis/fonts-d/)
+- **In this module**
+  - [davis](gmlewis/fonts-d/davis/members)
+  - [davysregular](gmlewis/fonts-d/davysregular/members)
+  - [deliusswashcaps\_regular](gmlewis/fonts-d/deliusswashcaps_regular/members)
+  - [deutsch\_gothic](gmlewis/fonts-d/deutsch_gothic/members)
+  - [diplomata\_regular](gmlewis/fonts-d/diplomata_regular/members)
+  - [dissonant\_fractured](gmlewis/fonts-d/dissonant_fractured/members)
+  - [dited](gmlewis/fonts-d/dited/members)
+  - [doctorazul](gmlewis/fonts-d/doctorazul/members)
+  - [dohyeon\_regular](gmlewis/fonts-d/dohyeon_regular/members)
+  - [donner](gmlewis/fonts-d/donner/members)
+  - [douglasadamshand](gmlewis/fonts-d/douglasadamshand/members)
+  - [dysprosium](gmlewis/fonts-d/dysprosium/members)
+- **Dependencies**
+  - [gmlewis/fonts](gmlewis/fonts/)
+  - [moonbitlang/core](moonbitlang/core/)

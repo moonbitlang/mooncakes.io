@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+pub(all) enum Method {
+  Get
+  Post
+  Put
+  Delete
+  Patch
+  Options
+  Head
+  Trace
+  Connect
+  Other(String)
+} derive(Show, Eq, Hash)
+
+///|
+pub fn Method::to_string(self : Method) -> String {
+  match self {
+    Method::Get => "GET"
+    Method::Post => "POST"
+    Method::Put => "PUT"
+    Method::Delete => "DELETE"
+    Method::Patch => "PATCH"
+    Method::Options => "OPTIONS"
+    Method::Head => "HEAD"
+    Method::Trace => "TRACE"
+    Method::Connect => "CONNECT"
+    Method::Other(s) => s
+  }
+}
+
+///|
+pub fn Method::from_string(m : String) -> Method {
+  match m {
+    "GET" => Method::Get
+    "POST" => Method::Post
+    "PUT" => Method::Put
+    "DELETE" => Method::Delete
+    "PATCH" => Method::Patch
+    "OPTIONS" => Method::Options
+    "HEAD" => Method::Head
+    "TRACE" => Method::Trace
+    "CONNECT" => Method::Connect
+    s => Method::Other(s)
+  }
+}
+
+///|
+fn Method::to_wasi(self : Method) -> @types.Method {
+  match self {
+    Method::Get => @types.Method::Get
+    Method::Post => @types.Method::Post
+    Method::Put => @types.Method::Put
+    Method::Delete => @types.Method::Delete
+    Method::Patch => @types.Method::Patch
+    Method::Options => @types.Method::Options
+    Method::Head => @types.Method::Head
+    Method::Trace => @types.Method::Trace
+    Method::Connect => @types.Method::Connect
+    Method::Other(s) => @types.Method::Other(s)
+  }
+}
+
+///|
+fn Method::from_wasi(m : @types.Method) -> Method {
+  match m {
+    @types.Method::Get => Method::Get
+    @types.Method::Post => Method::Post
+    @types.Method::Put => Method::Put
+    @types.Method::Delete => Method::Delete
+    @types.Method::Patch => Method::Patch
+    @types.Method::Options => Method::Options
+    @types.Method::Head => Method::Head
+    @types.Method::Trace => Method::Trace
+    @types.Method::Connect => Method::Connect
+    @types.Method::Other(s) => Method::Other(s)
+  }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

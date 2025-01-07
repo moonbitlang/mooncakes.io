@@ -1,0 +1,5 @@
+- [tonyfettes/narray](tonyfettes/narray/)
+- **In this module**
+  - [root package](tonyfettes/narray/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

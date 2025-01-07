@@ -1,0 +1,5 @@
+- [Lampese/moonbit-chalk](Lampese/moonbit-chalk/)
+- **In this module**
+  - [root package](Lampese/moonbit-chalk/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

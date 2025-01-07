@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright 2024 International Digital Economy Academy
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// rfc2104
+
+///|
+pub fn hmac(
+  content : Iter[Byte],
+  hash~ : HashAlgorithm,
+  secret~ : Bytes
+) -> Bytes {
+  // block length of the hash function
+  // TODO: it may not be 64 for all hash algorithms
+  let b = 64
+  let k = if secret.length() > b { hash.hash(secret.iter()) } else { secret }
+  let ipad = k.iter() + Bytes::new(b - k.length()).iter()
+    |> Iter::map(fn(i) { i ^ b'\x36' })
+  let out = hash.hash(ipad + content)
+  let opad = k.iter() + Bytes::new(b - k.length()).iter()
+    |> Iter::map(fn(i) { i ^ b'\x5C' })
+  hash.hash(opad + out.iter())
+}
+
+test "hmac" {
+  inspect!(
+    hmac(
+      b"I would like to buy 100 units.".iter(),
+      hash=HashAlgorithm::MD5,
+      secret=b"666",
+    )
+    |> BigInt::from_octets
+    |> BigInt::to_hex,
+    content="76320C555FF8979F16DF9539E53D4B69",
+  )
+  inspect!(
+    hmac(
+      b"A quick brown fox jumps over the lazy dog".iter(),
+      hash=HashAlgorithm::SHA224,
+      secret=b"12345678901234567890123456789012",
+    )
+    |> BigInt::from_octets
+    |> BigInt::to_hex,
+    content="870650B1A3FDB1318C93CCAFAC0F248DC356414E9FEADF5E0F268FCF",
+  )
+  inspect!(
+    hmac(
+      b"A quick brown fox jumps over the lazy dog".iter(),
+      hash=HashAlgorithm::SHA256,
+      secret=b"I am a secret",
+    )
+    |> BigInt::from_octets
+    |> BigInt::to_hex,
+    content="B7F4909B7EEE9F77A34BB0144864222B8AB6AE3CE1500161BAEBED411AA451EA",
+  )
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

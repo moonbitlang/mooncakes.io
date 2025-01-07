@@ -1,0 +1,5 @@
+- [Yoorkin/trie](Yoorkin/trie/)
+- **In this module**
+  - [root package](Yoorkin/trie/members)
+- **Dependencies**
+  - [moonbitlang/core](moonbitlang/core/)

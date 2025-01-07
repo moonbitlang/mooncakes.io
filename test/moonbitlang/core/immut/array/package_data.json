@@ -1,0 +1,219 @@
+{
+  "readme": "# Immutable Array\n\nImmutable array is a persistent data structure that provides random access and update operations. Based on Clojure's [persistent vector](https://hypirion.com/musings/understanding-persistent-vector-pt-1).\n\n# Usage\n\n## Create\n\nYou can create an empty array using `new()` or construct it using `of()`, or use `from_iter()` to construct it from an iterator.\n\n```moonbit\nlet arr2 = @immut/array.new()\nlet arr1 = @immut/array.of([1, 2, 3, 4, 5])    \nlet arr3 = @immut/array.from_iter((1).upto(5))\nlet arr4 = @immut/array.from_array([1, 2, 3])\n```\n\nOr use `make()`, `makei()` to create an array with some elements.\n\n```moonbit\nlet arr1 = @immut/array.make(5, 1)\nlet arr2 = @immut/array.makei(5, fn(i){i + 1})\nprintln(arr1) // of([1, 1, 1, 1, 1])\nprintln(arr2) // of([1, 2, 3, 4, 5])\n```\n\n## Update \n\nSince the array is immutable, the `set()`, `push()` operation is not in-place. It returns a new array with the updated value.\n\n```moonbit\nlet arr1 = @immut/array.of([1, 2, 3, 4, 5])\nlet arr2 = arr1.set(2, 10).push(6)\nprintln(arr1) // of([1, 2, 3, 4, 5])\nprintln(arr2) // of([1, 2, 10, 4, 5, 6])\n```\n\n## Query\n\nYou can use `op_get()` to get the value at the index, or `length()` to get the length of the array, or `is_empty()` to check whether the array is empty.\n\n```moonbit\nlet arr = @immut/array.of([1, 2, 3, 4, 5])\nprintln(arr[2]) // 3\nprintln(arr.length()) // 5\nprintln(arr.is_empty()) // false\n```\n\n## Iteration\n\nYou can use `iter()` to get an iterator of the array, or use `each()` to iterate over the array.\n\n```moonbit\nlet arr = @immut/array.of([1, 2, 3, 4, 5])\nprintln(\"iterator: \\{arr.iter()}\")\nprintln(arr.each(fn(v) { println(\"element \\{v}\") }))\nprintln(arr.eachi(fn(i, v) { println(\"index: \\{i}, element: \\{v}\") }))\n```\n\n\n",
+  "name": "moonbitlang/core/immut/array",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "",
+      "signature": "type T",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "arbitrary",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[X]",
+          "loc": { "line": 373, "column": 73 }
+        },
+        {
+          "name": "copy",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::copy[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 63, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterate over the array.\n \n # Example\n ```\n let arr = []\n let v = @array.of([1, 2, 3, 4, 5])\n v.each(fn(e) { arr.push(e) })\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::each[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], f : (A) -> Unit) -> Unit",
+          "loc": { "line": 167, "column": 8 }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterate over the array with index.\n \n # Example\n ```\n let arr = []\n let v = @array.of([1, 2, 3, 4, 5])\n v.eachi(fn(i, e) { arr.push(i * e) })\n assert_eq!(arr, [0, 2, 6, 12, 20])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::eachi[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], f : (Int, A) -> Unit) -> Unit",
+          "loc": { "line": 189, "column": 8 }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n Fold the array.\n \n # Example\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v.fold(fn(a, b) { a + b }, init=0), 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::fold[A, B](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 224, "column": 8 }
+        },
+        {
+          "name": "fold_left",
+          "docstring": "\n Fold the array from left to right.\n \n # Example\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v.fold(fn(a, b) { a + b }, init=0), 15)\n ```\n @alert deprecated \"Use `fold` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::fold_left[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], f : (A, A) -> A, init~ : A) -> A",
+          "loc": { "line": 265, "column": 8 }
+        },
+        {
+          "name": "fold_right",
+          "docstring": "\n Fold the array from right to left.\n \n # Example\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v.rev_fold(fn(a, b) { a + b }, init=0), 15)\n ```\n @alert deprecated \"Use `rev_fold` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::fold_right[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], f : (A, A) -> A, init~ : A) -> A",
+          "loc": { "line": 278, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Create a persistent array from an array.\n \n # Example\n ```\n let v = @array.of([1, 2, 3])\n assert_eq!(v, @array.from_array([1, 2, 3]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::from_array[A](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 153, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::from_iter[A](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 53, "column": 11 }
+        },
+        {
+          "name": "hash",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::hash[Self : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : Self) -> Int",
+          "loc": { "line": 40, "column": 1 }
+        },
+        {
+          "name": "hash_combine",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+          "loc": { "line": 381, "column": 39 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::is_empty[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 27, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::iter[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 39, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::length[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> Int",
+          "loc": { "line": 58, "column": 8 }
+        },
+        {
+          "name": "make",
+          "docstring": "\n Create a persistent array with a given length and value.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::make[A](len : Int, value : A) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 357, "column": 11 }
+        },
+        {
+          "name": "makei",
+          "docstring": "\n Create a persistent array with a given length and a function to generate values.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::makei[A](len : Int, f : (Int) -> A) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 363, "column": 11 }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Map a function over the array.\n \n # Example\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v.map(fn(e) { e * 2 }), @array.of([2, 4, 6, 8, 10]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::map[A, B](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], f : (A) -> B) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[B]",
+          "loc": { "line": 290, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Return a new empty array",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::new[A]() -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 17, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::of[A](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 368, "column": 11 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 212, "column": 35 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "\n Get a value at the given index.\n \n # Examples\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v[0], 1)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::op_get[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], index : Int) -> A",
+          "loc": { "line": 84, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 22, "column": 39 }
+        },
+        {
+          "name": "push",
+          "docstring": "\n Push a value to the end of the array.\n \n # Example\n ```\n let v = @array.of([1, 2, 3])\n assert_eq!(v.push(4), @array.of([1, 2, 3, 4]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::push[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], value : A) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 129, "column": 8 }
+        },
+        {
+          "name": "rev_fold",
+          "docstring": "\n Fold the array in reverse order.\n \n # Example\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v.rev_fold(fn(a, b) { a + b }, init=0), 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::rev_fold[A, B](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 244, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "\n Set a value at the given index (immutable).\n \n # Example\n ```\n let v = @array.of([1, 2, 3, 4, 5])\n assert_eq!(v.set(1, 10), @array.of([1, 10, 3, 4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::set[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], index : Int, value : A) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "loc": { "line": 102, "column": 8 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::to_array[A](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
+          "loc": { "line": 32, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "arbitrary",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a> with arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/array#T\">T</a>[X]",
+          "loc": { "line": 373, "column": 73 }
+        },
+        {
+          "name": "hash_combine",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a> with hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+          "loc": { "line": 381, "column": 39 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a> with op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 212, "column": 35 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a> with output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/immut/array#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 22, "column": 39 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Tree",
+      "impls": [],
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/array#Tree\">Tree</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ]
+    }
+  ]
+}

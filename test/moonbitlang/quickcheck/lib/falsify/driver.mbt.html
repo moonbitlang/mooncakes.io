@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">struct Success[T] {
+  result : T
+  seed : RandomState
+  run : TestRun
+} derive(Show)
+
+struct Failure[E] {
+  seed : RandomState
+  run : ShrinkExplain[(E, TestRun), TestRun]
+} derive(Show)
+
+struct Config {
+  tests : Int
+  max_shrinks : Int
+  replay : RandomState?
+  max_ratio : Int
+  verbose : Bool
+  expect_failure : Bool
+} derive(Show)
+
+impl Default for Config with default() {
+  {
+    tests: 100,
+    max_shrinks: 100,
+    replay: None,
+    max_ratio: 10,
+    verbose: false,
+    expect_failure: false,
+  }
+}
+
+struct DriverState[T] {
+  rng : RandomState
+  success : List[Success[T]]
+  todo : Int
+  discarded : Int
+  total_discard : Int
+}
+
+fn append_success[T](
+  rng : RandomState,
+  success : Success[T],
+  acc : DriverState[T]
+) -> DriverState[T] {
+  {
+    ..acc,
+    rng,
+    success: Cons(success, acc.success),
+    todo: acc.todo - 1,
+    discarded: 0,
+  }
+}
+
+pub fn init_state[T](opt : Config) -> DriverState[T] {
+  {
+    rng: opt.replay.or(RandomState::new()),
+    success: Nil,
+    todo: opt.tests,
+    discarded: 0,
+    total_discard: 0,
+  }
+}
+
+fn result_is_valid_shrink[T, E](
+  ra : (TestResult[T, E], TestRun)
+) -> IsValidShrink[(E, TestRun), (T?, TestRun)] {
+  let (res, run) = ra
+  match res {
+    TestFailed(e) => Valid((e, run))
+    TestDiscarded => Invalid((None, run))
+    TestPassed(a) => Invalid((Some(a), run))
+  }
+}
+
+pub fn falsify[T, E](
+  opt : Config,
+  prop : Property[T, E]
+) -> (RandomState, List[Success[T]], Int, Failure[E]?) {
+  let st : DriverState[T] = init_state(opt)
+  fn go(acc : DriverState[T]) -> (List[Success[T]], Int, Failure[E]?) {
+    if acc.todo == 0 {
+      (acc.success, acc.total_discard, None)
+    } else {
+      let later = acc.rng.split()
+      let now = acc.rng
+      let st = from_rng(now)
+      let ((res, run), shrunk) = run_property(prop).run_gen(st)
+      match res {
+        TestPassed(x) => {
+          let success : Success[T] = { result: x, seed: now.clone(), run }
+          if run.deterministic {
+            match (acc.success, acc.total_discard) {
+              (Nil, 0) => (Cons(success, Nil), 0, None)
+              _ => abort("impossible")
+            }
+          } else {
+            go(append_success(later, success, acc))
+          }
+        }
+        TestFailed(e) => {
+          let sf = shrink_from(
+            run_property(prop),
+            result_is_valid_shrink,
+            ((e, run), shrunk),
+          )
+          let explain = limit_steps(
+            sf.e_fmap(@tuple.snd),
+            Some(opt.max_shrinks),
+          )
+          let failure = { seed: acc.rng.clone(), run: explain }
+          (acc.success, acc.total_discard, Some(failure))
+        }
+        TestDiscarded => {
+          let discarded = acc.discarded + 1
+          let total_discard = acc.total_discard + 1
+          let next = { ..acc, rng: later, discarded, total_discard }
+          go(next)
+        }
+      }
+    }
+  }
+
+  let (success, discarded, failed) = go(st)
+  (st.rng, success, discarded, failed)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

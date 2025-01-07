@@ -1,0 +1,471 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/json",
+  "traits": [
+    {
+      "name": "FromJson",
+      "docstring": "\n Trait for types that can be converted from `Json`",
+      "signature": "pub(open) trait FromJson {\n  from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Self!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>\n}",
+      "loc": { "line": 20, "column": 1 },
+      "impls": [
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple6\">Tuple6</a> with from_json[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, E : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, F : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (A, B, C, D, E, F)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 94, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/json#Json\">Json</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 200, "column": 38 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple16\">Tuple16</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T13 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T14 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T15 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 424, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/double#Double\">Double</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Double!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 63, "column": 35 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/option#Option\">Option</a> with from_json[T : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> T?!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 160, "column": 45 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple3\">Tuple3</a> with from_json[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (A, B, C)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 31, "column": 80 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple13\">Tuple13</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 304, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple7\">Tuple7</a> with from_json[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, E : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, F : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, G : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (A, B, C, D, E, F, G)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 118, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/result#Result\">Result</a> with from_json[Ok : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, Err : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Ok, Err]!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 169, "column": 75 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple11\">Tuple11</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 234, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/builtin#Map\">Map</a> with from_json[V : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, V]!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 139, "column": 57 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/bool#Bool\">Bool</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Bool!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 38, "column": 33 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/int#Int\">Int</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Int!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 47, "column": 32 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple10\">Tuple10</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 202, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple12\">Tuple12</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 268, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple8\">Tuple8</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 144, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/unit#Unit\">Unit</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Unit!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 192, "column": 33 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a> with from_json[X : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[X]!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 116, "column": 56 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/char#Char\">Char</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Char!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 79, "column": 33 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple15\">Tuple15</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T13 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T14 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 382, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple14\">Tuple14</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T13 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 342, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple4\">Tuple4</a> with from_json[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (A, B, C, D)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 52, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple2\">Tuple2</a> with from_json[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (A, B)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 16, "column": 63 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple9\">Tuple9</a> with from_json[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (T0, T1, T2, T3, T4, T5, T6, T7, T8)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 172, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/string#String\">String</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> String!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 71, "column": 35 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/int64#Int64\">Int64</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Int64!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 55, "column": 34 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/tuple#Tuple5\">Tuple5</a> with from_json[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, E : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> (A, B, C, D, E)!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 72, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/array#Array\">Array</a> with from_json[X : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[X]!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 100, "column": 51 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a> with from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 92, "column": 35 }
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "JsonDecodeError",
+      "docstring": "",
+      "signature": "pub(all) type! JsonDecodeError (<a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>, String)\n",
+      "loc": { "line": 16, "column": 16 },
+      "methods": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>::op_equal(<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>, <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>) -> Bool",
+          "loc": { "line": 16, "column": 58 }
+        },
+        {
+          "name": "output",
+          "docstring": "automatically derived",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>::output(<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 16, "column": 62 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a> with op_equal(<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>, <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>) -> Bool",
+          "loc": { "line": 16, "column": 58 }
+        },
+        {
+          "name": "output",
+          "docstring": "automatically derived",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a> with output(<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 16, "column": 62 }
+        }
+      ]
+    },
+    {
+      "name": "JsonPath",
+      "docstring": "",
+      "signature": "type JsonPath",
+      "loc": { "line": 16, "column": 6 },
+      "methods": [
+        {
+          "name": "add_index",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>::add_index(self : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>, index : Int) -> <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>",
+          "loc": { "line": 23, "column": 8 }
+        },
+        {
+          "name": "add_key",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>::add_key(self : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>, key : String) -> <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>",
+          "loc": { "line": 28, "column": 8 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>::op_equal(<a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>, <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Bool",
+          "loc": { "line": 20, "column": 10 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>::output(self : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 33, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a> with op_equal(<a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>, <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> Bool",
+          "loc": { "line": 20, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ParseError",
+      "docstring": "",
+      "signature": "pub(all) enum ParseError {\n  InvalidChar(<a href=\"moonbitlang/core/json#Position\">Position</a>, Char)\n  InvalidEof\n  InvalidNumber(<a href=\"moonbitlang/core/json#Position\">Position</a>, String)\n  InvalidIdentEscape(<a href=\"moonbitlang/core/json#Position\">Position</a>)\n}",
+      "loc": { "line": 26, "column": 16 },
+      "methods": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "fn <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>::op_equal(<a href=\"moonbitlang/core/json#ParseError\">ParseError</a>, <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>) -> Bool",
+          "loc": { "line": 31, "column": 10 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>::output(self : <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 47, "column": 35 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>::to_string(self : <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>) -> String",
+          "loc": { "line": 34, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#ParseError\">ParseError</a> with op_equal(<a href=\"moonbitlang/core/json#ParseError\">ParseError</a>, <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>) -> Bool",
+          "loc": { "line": 31, "column": 10 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/json#ParseError\">ParseError</a> with output(self : <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 47, "column": 35 }
+        }
+      ]
+    },
+    {
+      "name": "Position",
+      "docstring": "",
+      "signature": "pub(all) struct Position {\n  line : Int\n  column : Int\n}",
+      "loc": { "line": 20, "column": 17 },
+      "methods": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "fn <a href=\"moonbitlang/core/json#Position\">Position</a>::op_equal(<a href=\"moonbitlang/core/json#Position\">Position</a>, <a href=\"moonbitlang/core/json#Position\">Position</a>) -> Bool",
+          "loc": { "line": 23, "column": 10 }
+        }
+      ],
+      "impls": [
+        {
+          "name": "op_equal",
+          "docstring": "automatically derived",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#Position\">Position</a> with op_equal(<a href=\"moonbitlang/core/json#Position\">Position</a>, <a href=\"moonbitlang/core/json#Position\">Position</a>) -> Bool",
+          "loc": { "line": 23, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [
+    {
+      "name": "JsonValue",
+      "docstring": "\n @alert deprecated \"Definition of json is moved to builtin package, use `Json` instead\"",
+      "signature": "type JsonValue = <a href=\"moonbitlang/core/json#Json\">Json</a>",
+      "loc": { "line": 17, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "from_json",
+      "docstring": "",
+      "signature": "fn from_json[T : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path~ : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a> = ..) -> T!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+      "loc": { "line": 25, "column": 8 }
+    },
+    {
+      "name": "inspect",
+      "docstring": "",
+      "signature": "fn inspect(obj : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, content? : <a href=\"moonbitlang/core/json#Json\">Json</a>, loc~ : <a href=\"moonbitlang/core/builtin#SourceLoc\">SourceLoc</a> = _, args_loc~ : <a href=\"moonbitlang/core/builtin#ArgsLoc\">ArgsLoc</a> = _) -> Unit!<a href=\"moonbitlang/core/builtin#InspectError\">InspectError</a>",
+      "loc": { "line": 217, "column": 8 }
+    },
+    {
+      "name": "parse",
+      "docstring": "",
+      "signature": "fn parse(input : String) -> <a href=\"moonbitlang/core/json#Json\">Json</a>!<a href=\"moonbitlang/core/json#ParseError\">ParseError</a>",
+      "loc": { "line": 26, "column": 8 }
+    },
+    {
+      "name": "valid",
+      "docstring": "",
+      "signature": "fn valid(input : String) -> Bool",
+      "loc": { "line": 16, "column": 8 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Json",
+      "impls": [
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/json#Json\">Json</a> with output(self : <a href=\"moonbitlang/core/json#Json\">Json</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 52, "column": 34 }
+        }
+      ],
+      "methods": [
+        {
+          "name": "as_array",
+          "docstring": "\n Try to get this element as an Array",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::as_array(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/json#Json\">Json</a>]?",
+          "loc": { "line": 54, "column": 8 }
+        },
+        {
+          "name": "as_bool",
+          "docstring": "\n Try to get this element as a Boolean",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::as_bool(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> Bool?",
+          "loc": { "line": 26, "column": 8 }
+        },
+        {
+          "name": "as_null",
+          "docstring": "\n Try to get this element as a Null",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::as_null(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> Unit?",
+          "loc": { "line": 17, "column": 8 }
+        },
+        {
+          "name": "as_number",
+          "docstring": "\n Try to get this element as a Number",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::as_number(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> Double?",
+          "loc": { "line": 36, "column": 8 }
+        },
+        {
+          "name": "as_object",
+          "docstring": "\n Try to get this element as an Object",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::as_object(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"moonbitlang/core/json#Json\">Json</a>]?",
+          "loc": { "line": 72, "column": 8 }
+        },
+        {
+          "name": "as_string",
+          "docstring": "\n Try to get this element as a String",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::as_string(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> String?",
+          "loc": { "line": 45, "column": 8 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "loc": { "line": 200, "column": 38 }
+        },
+        {
+          "name": "item",
+          "docstring": "\n Try to get this element as a Json Array and get the element at the `index` as a Json Value",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::item(self : <a href=\"moonbitlang/core/json#Json\">Json</a>, index : Int) -> <a href=\"moonbitlang/core/json#Json\">Json</a>?",
+          "loc": { "line": 63, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::output(self : <a href=\"moonbitlang/core/json#Json\">Json</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 52, "column": 34 }
+        },
+        {
+          "name": "stringify",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::stringify(self : <a href=\"moonbitlang/core/json#Json\">Json</a>, escape_slash~ : Bool = .., indent~ : Int = ..) -> String",
+          "loc": { "line": 98, "column": 8 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "\n Useful for json interpolation",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::to_json(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 212, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        },
+        {
+          "name": "value",
+          "docstring": "\n Try to get this element as a Json Object and get the element with the `key` as a Json Value",
+          "signature": "fn <a href=\"moonbitlang/core/json#Json\">Json</a>::value(self : <a href=\"moonbitlang/core/json#Json\">Json</a>, key : String) -> <a href=\"moonbitlang/core/json#Json\">Json</a>?",
+          "loc": { "line": 81, "column": 8 }
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "impls": [],
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/json#Token\">Token</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
+          "loc": { "line": 85, "column": 1 }
+        }
+      ]
+    }
+  ]
+}

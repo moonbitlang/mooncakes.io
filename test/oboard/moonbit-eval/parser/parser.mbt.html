@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// 语法解析
+
+// 解析操作符并映射到 Op 枚举
+fn map_op(token : @lex.Token) -> @types.Op? {
+  match token {
+    Add => Some(Add)
+    Sub => Some(Sub)
+    Mul => Some(Mul)
+    Div => Some(Div)
+    EqEq => Some(EqEq)
+    LessThan => Some(LessThan)
+    GreaterThan => Some(GreaterThan)
+    LessEqual => Some(LessEqual)
+    GreaterEqual => Some(GreaterEqual)
+    NotEqual => Some(NotEqual)
+    _ => None
+  }
+}
+
+pub fn parse[V](
+  self : Parser[V],
+  tokens : ArrayView[@lex.Token]
+) -> (V, ArrayView[@lex.Token])? {
+  // match tokens{
+  //   []=> None
+  // }
+  (self._)(tokens) //  self._: self.0
+}
+
+// 对解析结果进行变换
+fn map[I, O](self : Parser[I], f : (I) -> O) -> Parser[O] {
+  fn {
+    input =>
+      match self.parse(input) {
+        Some((token, rest)) => Some((f(token), rest))
+        None => None
+      }
+  }
+}
+
+// 顺序解析：顺序解析，若遇到失败则返回None，提前退出解析。
+fn and[V1, V2](self : Parser[V1], parser2 : Parser[V2]) -> Parser[(V1, V2)] {
+  // and返回值为一个函数（输入input，成功则输出为((value1, value2), rest2)）
+  // 调用bind者，本身为None时，直接返回None；否则则表示parser1解析成功,解析结果为value1和rest1,继续使用parser2解析rest1,解析结果为value2,rest2
+  // 最后解析结果为((value1, value2), rest2)
+  fn {
+    input =>
+      self
+      .parse(input)
+      .bind(
+        fn {
+          (value1, rest1) =>
+            parser2
+            .parse(rest1)
+            .map(fn { (value2, rest2) => ((value1, value2), rest2) })
+        },
+      )
+  }
+}
+
+// 尝试解析：尝试解析每一个部分，若都失败才返回None。
+fn or[Value](self : Parser[Value], parser2 : Parser[Value]) -> Parser[Value] {
+  fn {
+    input =>
+      match self.parse(input) {
+        None => parser2.parse(input)
+        Some(_) as result => result
+      }
+  }
+}
+
+// 重复解析：0次或多次，直到失败为止。
+fn many[Value : Show](self : Parser[Value]) -> Parser[Array[Value]] {
+  fn(input) {
+    // println("Many 1")
+    // println("input: \{input}")
+    // println("self.parse(input): \{self.parse(input)}")
+    let cumul = []
+    let mut rest = input
+
+    // 方法1
+    while true {
+      match self.parse(rest) {
+        None => break
+        Some((v, rest_)) => {
+          cumul.push(v)
+          rest = rest_
+        }
+      }
+    }
+    // println("many()成功解析: \{cumul}")
+    // println("many()尚未解析: \{rest}")
+    Some((cumul, rest))
+
+    // 方法2
+    // loop self.parse(rest) {
+    //   None => break Some((cumul, rest))
+    //   Some((v, rest_)) => {
+    //     println("Many 2")
+    //     println("value: \{v}")
+    //     println("rest_: \{rest_}")
+    //     println("self.parse(rest_): \{self.parse(rest_)}")
+    //     cumul.push(v)
+    //     rest = rest_
+    //     continue self.parse(rest) // to drop
+    //   }
+    // }
+
+  }
+}
+
+fn zero_one[Value : Show](self : Parser[Value]) -> Parser[Array[Value]] {
+  fn(input) {
+    // println("Many 1")
+    // println("input: \{input}")
+    // println("self.parse(input): \{self.parse(input)}")
+    let cumul = []
+    let mut rest = input
+
+    // 方法1
+    while true {
+      match self.parse(rest) {
+        None => break
+        Some((v, rest_)) => {
+          cumul.push(v)
+          rest = rest_
+        }
+      }
+    }
+    // println("many()成功解析: \{cumul}")
+    // println("many()尚未解析: \{rest}")
+    Some((cumul, rest))
+
+    // 方法2
+    // loop self.parse(rest) {
+    //   None => break Some((cumul, rest))
+    //   Some((v, rest_)) => {
+    //     println("Many 2")
+    //     println("value: \{v}")
+    //     println("rest_: \{rest_}")
+    //     println("self.parse(rest_): \{self.parse(rest_)}")
+    //     cumul.push(v)
+    //     rest = rest_
+    //     continue self.parse(rest) // to drop
+    //   }
+    // }
+
+  }
+}
+
+// 递归定义：延迟定义并未使用
+fn Parser::reference[Value](reference : Ref[Parser[Value]]) -> Parser[Value] {
+  fn(input) { reference.val.parse(input) }
+}
+
+// if语句解析器
+fn if_statement(
+  tokens : ArrayView[@lex.Token]
+) -> (@types.Syntax, ArrayView[@lex.Token])? {
+  ptoken(
+    fn {
+      @lex.Token::If => true
+      _ => false
+    },
+  )
+  .and(expression) // 解析条件表达式
+  // .and(statements) // 解析多语句
+  .and(block) // 解析 then 分支
+  .and(
+    ptoken(
+      fn {
+        @lex.Token::Else => true
+        _ => false
+      },
+    ),
+  )
+  .and(block) // 解析 else 分支
+  .map(
+    fn {
+      ((((_, condition), then_branch), _), else_branch) =>
+        @types.Syntax::If(condition, then_branch, else_branch)
+    },
+  )
+  .parse(tokens)
+}
+
+// ()
+fn lparen_rparen_stmt(
+  tokens : ArrayView[@lex.Token]
+) -> (@types.Syntax, ArrayView[@lex.Token])? {
+  lparen.and(rparen).map(fn { _ => @types.Syntax::Unit }).parse(tokens)
+}
+
+// fn newline_stmt(tokens: ArrayView[@lex.Token]) -> Option[(@types.Syntax, ArrayView[@lex.Token])] {
+//     newline_skip
+//     // .many()
+//     .map(fn {  _ => {
+//       @types.Syntax::Unit
+//     }})
+//     .parse(tokens)
+// }
+
+fn block(
+  tokens : ArrayView[@lex.Token]
+) -> (@types.Syntax, ArrayView[@lex.Token])? {
+  parser_context.is_top_level = false
+  // println("block: \{parser_context}")
+  lbrace
+  // lbrace.many().map(fn {_ => None})
+  // .and(expression)
+  // .and(statement()) // 解析单个语句
+  .and(statements) // 解析多个语句
+  .and(separator.many())
+  .and(rbrace)
+  .map(
+    fn {
+      (((_, stmts), _), _rbrace) => {
+        // println("消耗了： \{rbrace}")
+        // println("block内语法是 \{stmts}")
+        parser_context.is_top_level = true
+        // println(parser_context)
+        stmts
+      }
+    },
+  )
+  .parse(tokens)
+}
+
+fn statement() -> Parser[@types.Syntax] {
+  fn(
+    tokens : ArrayView[@lex.Token]
+  ) -> (@types.Syntax, ArrayView[@lex.Token])? {
+    // println("statement tokens: \{tokens}")
+    let mut ast = None
+    if tokens.length() > 0 {
+      // println(tokens.length())
+      let parsers = [
+        fn_main_statement, // fn main {}
+         fn_statement, // fn _(_) {_}
+         let_statement, // let _: _ = _; _
+         for_statement, // for _; _; _ { _ }
+         if_statement, // if _ { _ }
+         assign_statement, // _ = _
+         expression, // _ _ _
+         lparen_rparen_stmt, // ()
+         call_fn_stmt, // _()
+        // newline_stmt,
+        // lbrace,  // 单独解析
+      ]
+      // todo spilt tokens
+      //   RBrace
+      // let mut n = 1
+      for parser in parsers {
+        // println("第\{n}个解析器开始解析")
+        ast = parser(tokens)
+        // println("ast: \{ast}")
+        // n = n+1
+        // match ast{
+        //   None => println("none")
+        //   _ => break
+        // }
+        if ast.is_empty().not() {
+          break
+        }
+      }
+    }
+    ast
+  }
+}
+
+fn statements(
+  tokens : ArrayView[@lex.Token]
+) -> (@types.Syntax, ArrayView[@lex.Token])? {
+  statement()
+  .and(
+    separator_skip.and(statement()).many(),
+    // separator.and(statement()).many() // 0次或多次
+    // statements
+  )
+  .map(
+    fn {
+      (first_stmt, list) => {
+        let stmts = []
+        stmts.push(first_stmt)
+        // let result = list.fold(
+        //   init=first_stmt,
+        //   fn {
+        //     first_stmt, (_, one_statement) => {
+        //       stmts.push(one_statement)
+        //       first_stmt
+        //     }
+        //   },
+        // )
+        list.each(fn { (_, one_statement) => stmts.push(one_statement) })
+
+        // println("stmts fold: \{first_stmt} \{list} -> \{result}")
+        // println("stmts: \{stmts}")
+        @types.Syntax::Seq(stmts)
+        // stmts
+      }
+    },
+  )
+  .parse(tokens)
+}
+
+pub fn parse_syntax(
+  tokens : ArrayView[@lex.Token]
+) -> (@types.Syntax, ArrayView[@lex.Token])? {
+  parser_context.token_length = tokens.length()
+  statements(tokens)
+}
+
+test {
+  let input = "1 + 2 * 3 - 6;"
+  let tokens = []
+  @lex.lex({ str: input, offset: 0, array: tokens })
+  inspect!(
+    tokens,
+    content="[Number(1), Add, Number(2), Mul, Number(3), Sub, Number(6), Semicolon]",
+  )
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  // inspect!(expr,content="Prim(Prim(Int(1), Prim(Int(2), Int(3), Mul, kind=None), Add, kind=None), Int(6), Sub, kind=None)",)
+  inspect!(
+    expr,
+    content="Seq([Prim(Prim(Int(1), Prim(Int(2), Int(3), Mul, kind=None), Add, kind=None), Int(6), Sub, kind=None)])",
+  )
+  let input = "1/2-(3)"
+  let tokens = []
+  @lex.lex({ str: input, offset: 0, array: tokens })
+  inspect!(
+    tokens,
+    content="[Number(1), Div, Number(2), Sub, LParen, Number(3), RParen]",
+  )
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  inspect!(
+    expr,
+    content="Seq([Prim(Prim(Int(1), Int(2), Div, kind=None), Int(3), Sub, kind=None)])",
+  )
+
+  // 多行表达式
+  // 字符串输入
+  let input = "1 + 2 - 3;2;"
+  // 词法解析
+  let tokens = []
+  @lex.lex({ str: input, offset: 0, array: tokens })
+  inspect!(
+    tokens,
+    content="[Number(1), Add, Number(2), Sub, Number(3), Semicolon, Number(2), Semicolon]",
+  )
+  // 语法解析（自顶向下的解释器组合子）
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  println(expr)
+  // inspect!(expr, content="Prim(Prim(Int(1), Int(2), Add, kind=None), Int(3), Sub, kind=None)")
+  inspect!(
+    expr,
+    content="Seq([Prim(Prim(Int(1), Int(2), Add, kind=None), Int(3), Sub, kind=None), Int(2)])",
+  )
+  let input = "1/2-3 \n4*5+6"
+  let tokens = []
+  @lex.lex({ str: input, offset: 0, array: tokens })
+  println(tokens)
+  inspect!(
+    tokens,
+    content="[Number(1), Div, Number(2), Sub, Number(3), Newline, Number(4), Mul, Number(5), Add, Number(6)]",
+  )
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  println(expr)
+  inspect!(
+    expr,
+    content="Seq([Prim(Prim(Int(1), Int(2), Div, kind=None), Int(3), Sub, kind=None), Prim(Prim(Int(4), Int(5), Mul, kind=None), Int(6), Add, kind=None)])",
+  )
+
+  // let input = "+ + 2 * 3 - 6"  // 暂时报错, moonbit支持不报错
+  // let tokens = []
+  // @lex.lex({ str: input, offset: 0, array: tokens })
+  // inspect!(
+  //   tokens,
+  //   content="[Add, Add, Number(2), Mul, Number(3), Sub, Number(6)]",
+  // )
+  // let (expr, _) = parser.parse(tokens[:]).unwrap()
+  // inspect!(
+  //   expr,
+  //   content="Minus(Plus(Add, Multiply(Number(2), Number(3))), Number(6))",
+  // )
+
+  // let语句
+  let tokens = []
+  @lex.lex({ str: "let a:Int=1;2", offset: 0, array: tokens })
+  println(tokens)
+  inspect!(
+    tokens,
+    content="[Let, Identifier(\"a\"), Colon, Int, Assign, Number(1), Semicolon, Number(2)]",
+  )
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  println(expr)
+  inspect!(expr, content="Seq([Let((\"a\", Int), Int(1), Unit), Int(2)])")
+
+  // 多行let
+  let tokens = []
+  @lex.lex({ str: "let a:Int=1;let b:Int=1", offset: 0, array: tokens })
+  println(tokens)
+  inspect!(
+    tokens,
+    content="[Let, Identifier(\"a\"), Colon, Int, Assign, Number(1), Semicolon, Let, Identifier(\"b\"), Colon, Int, Assign, Number(1)]",
+  )
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  println(expr)
+  inspect!(
+    expr,
+    content="Seq([Let((\"a\", Int), Int(1), Unit), Let((\"b\", Int), Int(1), Unit)])",
+  )
+  let tokens = []
+  @lex.lex({ str: "let a:Int=1\nlet b:Int=1", offset: 0, array: tokens })
+  println(tokens)
+  inspect!(
+    tokens,
+    content="[Let, Identifier(\"a\"), Colon, Int, Assign, Number(1), Newline, Let, Identifier(\"b\"), Colon, Int, Assign, Number(1)]",
+  )
+  let (expr, _) = parse_syntax(tokens[:]).unwrap()
+  println(expr)
+  inspect!(
+    expr,
+    content="Seq([Let((\"a\", Int), Int(1), Unit), Let((\"b\", Int), Int(1), Unit)])",
+  )
+
+  // if in file
+  // moon run src/bin/main.mbt -- --end-stage parse test/test_simple_src/if_else.mbt  // success
+  // moon run src/bin/main.mbt -- --end-stage parse test/test_simple_src/if_else2.mbt // failure  换行
+  // moon run src/bin/main.mbt -- --end-stage parse test/test_simple_src/if.mbt // failure  缺少else
+  // moon run src/bin/main.mbt -- --end-stage parse test/test_simple_src/if2.mbt  // failure  缺少else
+
+  // fn in file
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

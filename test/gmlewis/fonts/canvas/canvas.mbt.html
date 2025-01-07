@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| from_graphics renders a Graphic to an HTML5 canvas using its native API.
+/// Note that if the design was created with Y being "up", then it
+/// must be flipped to render properly in the canvas.
+pub fn from_graphic(self : CanvasCtx, g : Graphic, y_up~ : Bool = true) -> Unit {
+  let mut bbox = match g.bounding_box() {
+    Some(box) => box
+    _ => return
+  }
+
+  // flip design if necessary
+  let mut g = g
+  if y_up {
+    let height = bbox.height()
+    let transform = @draw.Transform::new(
+      position=vec2(0, height),
+      scale=vec2(1, -1),
+    )
+    let affine_matrix = @draw.AffineMatrix::from_transform(transform)
+    g = g.clone().affine_transform(affine_matrix)
+    bbox = g.bounding_box().unwrap()
+  }
+
+  //
+  let paths = g.all_paths_and_compound_paths()
+  ignore(
+    Graphic::every(paths, fn(g) {
+      match g {
+        Path(path) => self.render_path(path)
+        CompoundPath(path) => self.render_compound_path(path)
+        _ => ()
+      }
+      true
+    }),
+  )
+}
+
+///|
+fn render_path(self : CanvasCtx, path : Path) -> Unit {
+  self.render_paths([path], path.stroke, path.fill)
+}
+
+///|
+fn render_compound_path(self : CanvasCtx, path : CompoundPath) -> Unit {
+  self.render_paths(path.paths, path.stroke, path.fill)
+}
+
+///|
+fn render_paths(
+  self : CanvasCtx,
+  paths : Array[Path],
+  stroke : Stroke?,
+  fill : Fill?
+) -> Unit {
+  self.set_stroke(stroke)
+  self.set_fill(fill)
+  self.begin_path()
+  for path in paths {
+    self.canvas_commands(path)
+  }
+  if fill != None {
+    self.fill()
+  }
+  if stroke != None {
+    self.stroke()
+  }
+}
+
+///|
+fn canvas_commands(self : CanvasCtx, path : Path) -> Unit {
+  if path.anchors.length() < 2 {
+    return
+  }
+  for index, anchor in path.anchors {
+    let pos = anchor.position
+    if index == 0 {
+      self.move_to(pos.x, pos.y)
+      continue
+    }
+    let last_anchor = path.anchors[index - 1]
+    let h1 = last_anchor.handle_out
+    let h2 = anchor.handle_in
+    if h1.is_zero() && h2.is_zero() {
+      self.line_to(pos.x, pos.y)
+    } else {
+      let last_pos = last_anchor.position
+      let p1 = h1 + last_pos
+      let p2 = h2 + pos
+      self.cubic_bezier_curve_to(p1.x, p1.y, p2.x, p2.y, pos.x, pos.y)
+    }
+  }
+  if path.closed {
+    let last_anchor = path.anchors[path.anchors.length() - 1]
+    let anchor = path.anchors[0]
+    let h1 = last_anchor.handle_out
+    let h2 = anchor.handle_in
+    if not(h1.is_zero()) || not(h2.is_zero()) {
+      let last_pos = last_anchor.position
+      let pos = anchor.position
+      let p1 = h1 + last_pos
+      let p2 = h2 + pos
+      let pos = pos
+      self.cubic_bezier_curve_to(p1.x, p1.y, p2.x, p2.y, pos.x, pos.y)
+    }
+    self.close_path()
+  }
+}
+
+///|
+fn set_stroke(self : CanvasCtx, stroke : Stroke?) -> Unit {
+  match stroke {
+    None => self.set_stroke_color(0, 0, 0, 0)
+    Some(stroke) => {
+      let c = stroke.color
+      self.set_stroke_color(c.r, c.g, c.b, c.a)
+      // TODO: stroke-dasharray
+      // TODO: stroke-dashoffset
+      self.set_line_cap(stroke.cap)
+      self.set_line_join(stroke.join)
+      self.set_miter_limit(stroke.miter_limit)
+      self.set_line_width(stroke.width)
+    }
+  }
+}
+
+///|
+fn set_line_cap(self : CanvasCtx, line_cap : @draw.StrokeCap) -> Unit {
+  match line_cap {
+    @draw.StrokeCap::Butt => self.set_line_cap_butt()
+    @draw.StrokeCap::Round => self.set_line_cap_round()
+    @draw.StrokeCap::Square => self.set_line_cap_square()
+  }
+}
+
+///|
+fn set_line_join(self : CanvasCtx, line_join : @draw.StrokeJoin) -> Unit {
+  match line_join {
+    @draw.StrokeJoin::Miter => self.set_line_join_miter()
+    @draw.StrokeJoin::Round => self.set_line_join_round()
+    @draw.StrokeJoin::Bevel => self.set_line_join_bevel()
+  }
+}
+
+///|
+fn set_fill(self : CanvasCtx, fill : Fill?) -> Unit {
+  match fill {
+    None => self.set_fill_color(0, 0, 0, 0)
+    Some(fill) => {
+      let c = fill.color
+      self.set_fill_color(c.r, c.g, c.b, c.a)
+    }
+  }
+}
+
+///|
+pub fn get_input_bytes(self : CanvasCtx) -> Array[Byte] {
+  let length = self.get_input_length()
+  if length <= 0 {
+    return []
+  }
+  let value = Array::new(capacity=length)
+  for i in 0..<length {
+    value.push(self.get_input_byte_at_offset(i))
+  }
+  value
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

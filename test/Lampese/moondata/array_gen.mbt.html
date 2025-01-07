@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+pub fn rand_array_int(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> Int
+) -> () -> Array[Int] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_char(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> Char
+) -> () -> Array[Char] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_string(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> String
+) -> () -> Array[String] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_bool(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> Bool
+) -> () -> Array[Bool] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_float(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> Float
+) -> () -> Array[Float] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_arrar_double(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> Double
+) -> () -> Array[Double] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_uint(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> UInt
+) -> () -> Array[UInt] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_int64(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> Int64
+) -> () -> Array[Int64] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn rand_array_uint64(
+  self : Gen,
+  len~ : () -> Int = self.rand_int(1, 10),
+  gen~ : () -> UInt64
+) -> () -> Array[UInt64] {
+  let len = len()
+  fn() {
+    let arr = []
+    for i in 0..<len {
+      arr.push(gen())
+    }
+    arr
+  }
+}
+
+///|
+pub fn arr_generator_concat[T](
+  arr_gen~ : () -> Array[T],
+  arr_gen_2~ : () -> Array[T]
+) -> () -> Array[T] {
+  fn() { arr_gen() + arr_gen_2() }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

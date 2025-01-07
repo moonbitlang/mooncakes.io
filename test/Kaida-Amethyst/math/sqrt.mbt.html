@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///| Compute Square Root of a number
+pub fn sqrt(x: Double) -> Double {
+  x.sqrt()
+}
+
+test "sqrt" {
+  fn assert_sqrt_ulp!(input, expect) {
+    assert_ulp!(expect, sqrt(input), SQRT_MAX_ULP);
+  }
+  assert_sqrt_ulp!(-0.8, double_nan)
+  assert_sqrt_ulp!(-0.7, double_nan)
+  assert_sqrt_ulp!(-0, -0)
+  assert_sqrt_ulp!(-0.7853981633974483, double_nan)
+  assert_sqrt_ulp!(0, 0)
+  assert_sqrt_ulp!(0.1, 0.31622776601683794)
+  assert_sqrt_ulp!(0.2, 0.4472135954999579)
+  assert_sqrt_ulp!(0.3, 0.5477225575051661)
+  assert_sqrt_ulp!(0.4, 0.6324555320336759)
+  assert_sqrt_ulp!(0.5, 0.7071067811865476)
+  assert_sqrt_ulp!(0.6, 0.7745966692414834)
+  assert_sqrt_ulp!(0.7, 0.8366600265340756)
+  assert_sqrt_ulp!(0.8, 0.8944271909999159)
+  assert_sqrt_ulp!(0.9, 0.9486832980505138)
+  assert_sqrt_ulp!(1, 1)
+  assert_sqrt_ulp!(3.141592653589793, 1.7724538509055159)
+  assert_sqrt_ulp!(1.5707963267948966, 1.2533141373155001)
+  assert_sqrt_ulp!(0.7853981633974483, 0.8862269254527579)
+  assert_sqrt_ulp!(-1, double_nan)
+  assert_sqrt_ulp!(-2, double_nan)
+  assert_sqrt_ulp!(-3, double_nan)
+  assert_sqrt_ulp!(-4, double_nan)
+  assert_sqrt_ulp!(-5, double_nan)
+  assert_sqrt_ulp!(-6, double_nan)
+  assert_sqrt_ulp!(-7, double_nan)
+  assert_sqrt_ulp!(-8, double_nan)
+  assert_sqrt_ulp!(-9, double_nan)
+  assert_sqrt_ulp!(1, 1)
+  assert_sqrt_ulp!(2, 1.4142135623730951)
+  assert_sqrt_ulp!(3, 1.7320508075688772)
+  assert_sqrt_ulp!(4, 2)
+  assert_sqrt_ulp!(5, 2.23606797749979)
+  assert_sqrt_ulp!(6, 2.449489742783178)
+  assert_sqrt_ulp!(7, 2.6457513110645907)
+  assert_sqrt_ulp!(8, 2.8284271247461903)
+  assert_sqrt_ulp!(9, 3)
+  assert_sqrt_ulp!(10, 3.1622776601683795)
+  assert_sqrt_ulp!(100, 10)
+  assert_sqrt_ulp!(1000, 31.622776601683793)
+  assert_sqrt_ulp!(10000, 100)
+  assert_sqrt_ulp!(2.5, 1.5811388300841898)
+  assert_sqrt_ulp!(3.4, 1.8439088914585775)
+  assert_sqrt_ulp!(5.3, 2.3021728866442674)
+  assert_sqrt_ulp!(6.2, 2.4899799195977463)
+  assert_sqrt_ulp!(7.1, 2.6645825188948455)
+  assert_sqrt_ulp!(8.9, 2.9832867780352594)
+  assert_sqrt_ulp!(9.8, 3.1304951684997055)
+  assert_sqrt_ulp!(10.7, 3.271085446759225)
+  assert_sqrt_ulp!(101.6, 10.079682534683322)
+  assert_sqrt_ulp!(1.542, 1.241772926102031)
+  assert_sqrt_ulp!(2.846, 1.6870091878825082)
+  assert_sqrt_ulp!(7.881, 2.8073118814980282)
+  assert_sqrt_ulp!(3.772, 1.9421637418096342)
+  assert_sqrt_ulp!(0, 0)
+  assert_sqrt_ulp!(-0, -0)
+  assert_sqrt_ulp!(double_nan, double_nan)
+  assert_sqrt_ulp!(double_pos_inf, double_pos_inf)
+  assert_sqrt_ulp!(double_neg_inf, double_nan)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

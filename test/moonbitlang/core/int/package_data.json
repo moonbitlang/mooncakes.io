@@ -1,0 +1,35 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/int",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "max_value",
+      "docstring": "",
+      "signature": "let max_value : Int",
+      "loc": { "line": 16, "column": 9 }
+    },
+    {
+      "name": "min_value",
+      "docstring": "",
+      "signature": "let min_value : Int",
+      "loc": { "line": 19, "column": 9 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Int",
+      "impls": [],
+      "methods": [
+        {
+          "name": "abs",
+          "docstring": "\n Returns the absolute value of an integer.\n \n # Parameters\n \n - `self` : The integer whose absolute value is to be determined.\n \n # Returns\n \n - The absolute value of the input integer.\n \n # Examples\n \n ```\n inspect!(Int::abs(-10), content=\"10\")\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/int#Int\">Int</a>::abs(self : Int) -> Int",
+          "loc": { "line": 37, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

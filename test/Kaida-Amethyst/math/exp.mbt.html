@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">//
+//Method
+// 
+//  1. Argument reduction:
+//     Reduce x to an r so that |r| <= 0.5*ln2 ~ 0.34658.
+// Given x, find r and integer k such that
+//              x = k*ln2 + r,  |r| <= 0.5*ln2.  
+//     Here r will be represented as r = hi-lo for better 
+// accuracy.
+//
+//  2. Approximation of exp(r) by a special rational function on
+// the interval [0,0.34658]:
+// Write
+//     R(r**2) = r*(exp(r)+1)/(exp(r)-1) = 2 + r*r/6 - r**4/360 + ...
+//     We use a special Remes algorithm on [0,0.34658] to generate 
+//	a polynomial of degree 5 to approximate R. The maximum error 
+// of this polynomial approximation is bounded by 2**-59. In
+// other words,
+//     R(z) ~ 2.0 + P1*z + P2*z**2 + P3*z**3 + P4*z**4 + P5*z**5
+// 	(where z=r*r, and the values of P1 to P5 are listed below)
+// and
+//     |                  5          |     -59
+//     | 2.0+P1*z+...+P5*z   -  R(z) | <= 2 
+//     |                             |
+// 
+// The computation of exp(r) thus becomes
+//                            2*r
+// 	exp(r) = 1 + -------
+// 	              R - r
+//                                r*R1(r)	
+// 	       = 1 + r + ----------- (for better accuracy)
+// 	                  2 - R1(r)
+// where
+// 		         2       4             10
+// 	R1(r) = r - (P1*r  + P2*r  + ... + P5*r   ).
+//  3. Scale back to obtain exp(x):
+// From step 1, we have
+//    exp(x) = 2^k * exp(r)
+///| Return exponent of x 
+/// # Introduction:
+///
+/// Compute exp(x)
+///
+/// # Special cases:
+///
+/// 1. exp(INF) is INF, exp(NaN) is NaN;
+/// 2. exp(-INF) is 0, and
+/// 3. for finite argument, only exp(0)=1 is exact.
+///
+/// # Accuracy:
+/// 
+///   according to an error analysis, the error is always less than
+///   1 ulp (unit in the last place).
+///
+pub fn exp(input : Double) -> Double {
+  let mut x = input
+  let one = 1.0
+  let halF = [0.5, -0.5]
+  let o_threshold = 7.09782712893383973096e+02
+  let u_threshold = -7.45133219101941108420e+02
+  let ln2HI = [6.93147180369123816490e-01, -6.93147180369123816490e-01]
+  let ln2LO = [1.90821492927058770002e-10, -1.90821492927058770002e-10]
+  let invln2 = 1.44269504088896338700e+00
+  let p1 = 1.66666666666666019037e-01
+  let p2 = -2.77777777770155933842e-03
+  let p3 = 6.61375632143793436117e-05
+  let p4 = -1.65339022054652515390e-06
+  let p5 = 4.13813679705723846039e-08
+  let e = 2.718281828459045
+  let mut hi = 0.0
+  let mut lo = 0.0
+  let huge = 1.0e+300
+  let twom1000 = 9.33263618503218878990e-302
+  let two1023 = 8.988465674311579539e307
+  let mut k : Int = 0
+  let mut hx : UInt = __hi(input)
+  let xsb : Int = ((hx >> 31) & 1).reinterpret_as_int()
+  hx = hx & 0x7FFFFFFF
+  if hx >= 0x40862E42 {
+    if hx >= 0x7FF00000 {
+      let lx : UInt = __low(input)
+      if ((hx & 0xFFFFF) | lx) != 0 {
+        return input + input
+      } else if xsb == 0 {
+        return input
+      } else {
+        return 0.0
+      }
+    }
+    if input > o_threshold {
+      return huge * huge
+    }
+    if input < u_threshold {
+      return twom1000 * twom1000
+    }
+  }
+  if hx > 0x3FD62E42 {
+    if hx < 0x3FF0A2B2 {
+      if input == 1.0 {
+        return e
+      }
+      hi = input - ln2HI[xsb]
+      lo = ln2LO[xsb]
+      k = 1 - xsb - xsb
+    } else {
+      k = (invln2 * input + halF[xsb]).to_int()
+      let t = k.to_double()
+      hi = input - t * ln2HI[0]
+      lo = t * ln2LO[0]
+    }
+    x = hi - lo
+  } else if hx < 0x3E300000 {
+    if huge + x > one {
+      return one + x
+    }
+  } else {
+    k = 0
+  }
+  let t = x * x
+  let twopk = if k >= -1021 {
+    __combine(
+      (0x3FF00000 + (k.reinterpret_as_uint() << 20).reinterpret_as_int())
+      .to_int64()
+      .reinterpret_as_uint64(),
+      0,
+    )
+  } else {
+    __combine(
+      0x3FF00000UL + ((k + 1000).reinterpret_as_uint() << 20).to_uint64(),
+      0,
+    )
+  }
+  let c = x - t * (p1 + t * (p2 + t * (p3 + t * (p4 + t * p5))))
+  if k == 0 {
+    return one - (x * c / (c - 2.0) - x)
+  }
+  let y = one - (lo - x * c / (2.0 - c) - hi)
+  if k >= -1021 {
+    if k == 1024 {
+      return y * 2.0 * two1023
+    } else {
+      return y * twopk
+    }
+  } else {
+    return y * twopk * twom1000
+  }
+}
+
+test "exp" {
+  fn assert_exp_ulp!(input, expect) {
+    assert_ulp!(expect, exp(input), EXP_MAX_ULP);
+  }
+  assert_exp_ulp!(-1, 0.36787944117144233)
+  assert_exp_ulp!(-2, 0.1353352832366127)
+  assert_exp_ulp!(-3, 0.049787068367863944)
+  assert_exp_ulp!(-4, 0.01831563888873418)
+  assert_exp_ulp!(-5, 0.006737946999085467)
+  assert_exp_ulp!(-6, 0.0024787521766663585)
+  assert_exp_ulp!(-7, 0.0009118819655545162)
+  assert_exp_ulp!(-8, 0.00033546262790251185)
+  assert_exp_ulp!(-9, 0.00012340980408667956)
+  assert_exp_ulp!(1, 2.718281828459045)
+  assert_exp_ulp!(2, 7.38905609893065)
+  assert_exp_ulp!(3, 20.085536923187668)
+  assert_exp_ulp!(4, 54.598150033144236)
+  assert_exp_ulp!(5, 148.4131591025766)
+  assert_exp_ulp!(6, 403.4287934927351)
+  assert_exp_ulp!(7, 1096.6331584284585)
+  assert_exp_ulp!(8, 2980.9579870417283)
+  assert_exp_ulp!(9, 8103.083927575384)
+  assert_exp_ulp!(10, 22026.465794806718)
+  assert_exp_ulp!(100, 26881171418161356000000000000000000000000000)
+  assert_exp_ulp!(1000, double_pos_inf)
+  assert_exp_ulp!(10000, double_pos_inf)
+  assert_exp_ulp!(2.5, 12.182493960703473)
+  assert_exp_ulp!(3.4, 29.96410004739701)
+  assert_exp_ulp!(5.3, 200.33680997479166)
+  assert_exp_ulp!(6.2, 492.7490410932563)
+  assert_exp_ulp!(7.1, 1211.9670744925763)
+  assert_exp_ulp!(8.9, 7331.973539155995)
+  assert_exp_ulp!(9.8, 18033.744927828524)
+  assert_exp_ulp!(10.7, 44355.85513029784)
+  assert_exp_ulp!(101.6, 133143313639875650000000000000000000000000000)
+  assert_exp_ulp!(1.542, 4.673928786933209)
+  assert_exp_ulp!(2.846, 17.218768831241345)
+  assert_exp_ulp!(7.881, 2646.517754639287)
+  assert_exp_ulp!(3.772, 43.466911783522)
+  assert_exp_ulp!(-1.542, 0.21395276770062824)
+  assert_exp_ulp!(-2.846, 0.0580761615305284)
+  assert_exp_ulp!(-7.881, 0.0003778550127793483)
+  assert_exp_ulp!(-3.772, 0.023006005234056975)
+  assert_exp_ulp!(-1, 0.36787944117144233)
+  assert_exp_ulp!(0, 1)
+  assert_exp_ulp!(-0, 1)
+  assert_exp_ulp!(double_nan, double_nan)
+  assert_exp_ulp!(double_pos_inf, double_pos_inf)
+  assert_exp_ulp!(double_neg_inf, 0)
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

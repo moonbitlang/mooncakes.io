@@ -1,0 +1,2385 @@
+{
+	"modules": [
+		{
+			"name": "A-23187/encoding",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "https://github.com/A-23187/moonbit-encoding",
+			"license": "Apache-2.0",
+			"keywords": [
+				"hex",
+				"base64",
+				"base32"
+			],
+			"description": "",
+			"source": "src",
+			"checksum": "4987d227a5219526b0c6473d9c680907eaecee47a31547869bb31a76e170e1a4",
+			"created_at": "2024-11-02T14:16:05.008219+00:00"
+		},
+		{
+			"name": "CAIMEOX/feat-moon",
+			"version": "0.2.0",
+			"readme": "README.md",
+			"repository": "https://github.com/CAIMEOX/feat-moon.git",
+			"license": "MIT",
+			"keywords": [
+				"generation",
+				"functional enumeration"
+			],
+			"description": "Functional enumeration of algebraic types",
+			"checksum": "5dcb342cfc1e1d10ba098638608fcd3f6032d2acf770cf9202a26b5b49d1377c",
+			"created_at": "2024-07-29T01:36:00.892562+00:00"
+		},
+		{
+			"name": "CAIMEOX/list",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "MIT",
+			"keywords": [
+				"list"
+			],
+			"checksum": "fea006a6ff399a191cf752efca97275a76a8b5f4e4711273536a698ecec99fcb",
+			"created_at": "2024-01-23T12:41:53.819691+00:00"
+		},
+		{
+			"name": "CAIMEOX/quickcheck",
+			"version": "0.6.9",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbitlang/quickcheck",
+			"license": "Apache-2.0",
+			"keywords": [
+				"property-based-testing",
+				"quickcheck"
+			],
+			"description": "Automatic testing of MoonBit programs",
+			"source": "src",
+			"checksum": "6c1876438dffe1ba3bc8df5003c77f285e5fe10a0f30855a7bba9a70dd76df8e",
+			"created_at": "2024-11-18T02:37:53.419876+00:00"
+		},
+		{
+			"name": "CAIMEOX/state",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbit-community/state.git",
+			"license": "MIT",
+			"keywords": [
+				"monad",
+				"state"
+			],
+			"description": "An implementation of State Moand in Moonbit",
+			"checksum": "f51aa2feeb72b5432a6e191de083dcc083a6c707aead4ef6f7f6ec5cf9f654cf",
+			"created_at": "2024-04-08T11:06:43.339661+00:00"
+		},
+		{
+			"name": "CAIMEOX/t",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "MIT",
+			"keywords": [],
+			"checksum": "80b2c0361a944122367edf4c7ea0dce3c66d3e7bb146403c12704262b3da39f8",
+			"created_at": "2024-01-23T08:59:05.933896+00:00"
+		},
+		{
+			"name": "CMoonBack/Binary-Exponentiation",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [
+				"math"
+			],
+			"description": "Binary Exponentiation in moonbit",
+			"source": "src",
+			"checksum": "34815b19e513afa6fac6e064c35f944118fc5cb31d14df460de7bf3875669a81",
+			"created_at": "2024-11-27T14:46:06.485815+00:00"
+		},
+		{
+			"name": "CMoonBack/computational-geometry",
+			"version": "0.2.0",
+			"readme": "README.md",
+			"repository": "https://github.com/CMoonBack/Computational-geometry",
+			"license": "Apache-2.0",
+			"keywords": [
+				"math",
+				"geometry"
+			],
+			"description": "computational geometry library in moonbit",
+			"source": "src",
+			"checksum": "13346c893f94b8435f649fcc9717fb6091808aaeea071f08cea8f5447dd8c209",
+			"created_at": "2024-12-23T16:49:28.776659+00:00"
+		},
+		{
+			"name": "CMoonBack/string-Algorithm",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "f44226d975196e78ed43bd8c1002d258f1c53bc13afce08c32a834a55c860b0d",
+			"created_at": "2024-11-27T14:48:40.907576+00:00"
+		},
+		{
+			"name": "FlyCloudC/miniKanren",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "https://github.com/FlyCloudC/miniKanren",
+			"license": "Apache-2.0",
+			"keywords": [
+				"logic programming"
+			],
+			"description": "A Domain Specific Languages for logic programming",
+			"source": "src",
+			"checksum": "90a70b7245f86c843e15a0f155bb77905f1f33ac0e08543a07073d5e1894497c",
+			"created_at": "2024-12-15T13:58:10.625846+00:00"
+		},
+		{
+			"name": "Guest0x0/HAMT",
+			"version": "0.2.1",
+			"checksum": "dec1d71411dc19302462a501411365de8add59019e2a1c1da1cf70597711a476",
+			"keywords": []
+		},
+		{
+			"name": "Guest0x0/dregex",
+			"version": "0.2.5",
+			"checksum": "1fdc395ae3794b63d2086bffa71d81d8d032d0bbd6a4e00c1337a0c47ee06f66",
+			"created_at": "2024-01-31T07:26:46.522026+00:00",
+			"keywords": []
+		},
+		{
+			"name": "Howardzhangdqs/md5",
+			"version": "0.9.3",
+			"readme": "README.md",
+			"license": "Apache-2.0",
+			"keywords": [
+				"md5"
+			],
+			"description": "MD5 的 MoonBit 实现",
+			"homepage": "https://github.com/Howardzhangdqs",
+			"repository": "https://github.com/Howardzhangdqs/moonbit-md5",
+			"checksum": "5e51c0a5ae9ee6e3a7a13d4f580410ba2c37f8600a356c7b0606408e56beffc7",
+			"created_at": "2024-06-25T03:36:16.940117+00:00"
+		},
+		{
+			"name": "Kaida-Amethyst/math",
+			"version": "0.1.10",
+			"readme": "README.md",
+			"repository": "https://github.com/Kaida-Amethyst/Moonbit-Math",
+			"license": "Apache-2.0",
+			"keywords": [
+				"math",
+				"numeric"
+			],
+			"description": "High-precision Math library",
+			"source": "src",
+			"checksum": "ef3204411e74807c1e90cc058c662d423d367c9503204ed6d9f886012e576094",
+			"created_at": "2025-01-03T03:19:13.278285+00:00"
+		},
+		{
+			"name": "Kaida-Amethyst/moonbit-math",
+			"version": "0.1.10",
+			"readme": "README.md",
+			"repository": "https://github.com/Kaida-Amethyst/Moonbit-Math",
+			"license": "Apache-2.0",
+			"keywords": [
+				"math",
+				"numeric"
+			],
+			"description": "High-precision Math library",
+			"source": "src",
+			"checksum": "63350ef62ba69e16ee00e7e923b388e0f04bdd2b9ecb55aad380dc988e75d59a",
+			"created_at": "2025-01-03T03:18:50.261461+00:00"
+		},
+		{
+			"name": "Lampese/moonbit-chalk",
+			"version": "0.3.2",
+			"readme": "README.md",
+			"repository": "https://github.com/Lampese/moonbit-chalk",
+			"license": "MIT",
+			"keywords": [
+				"string",
+				"chalk",
+				"color"
+			],
+			"description": "Terminal string styling support for MoonBit.",
+			"source": "src",
+			"checksum": "6ecf8672786d155125994d402f0743d151258b8982f826a9f2b34be7fb2ec50b",
+			"created_at": "2024-12-04T05:03:31.725799+00:00"
+		},
+		{
+			"name": "Lampese/moondata",
+			"version": "0.2.4",
+			"deps": {
+				"moonbitlang/x": "0.4.16"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "80b928648e4b4a7f2459cb9e58b5ef31ba5ea4e3aa4397a821977026d45ff137",
+			"created_at": "2025-01-06T06:11:48.998097+00:00"
+		},
+		{
+			"name": "PegasusPlusUS/hello",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "24923f540f5b993d3330921cbbe98e2bc049ab61aa7b1e26037406b4699f99bd",
+			"created_at": "2024-12-06T00:59:15.352703+00:00"
+		},
+		{
+			"name": "PerfectPan/base64",
+			"version": "0.1.1",
+			"readme": "README.md",
+			"repository": "",
+			"license": "MIT",
+			"keywords": [
+				"base64"
+			],
+			"description": "base64 encode/decode library",
+			"checksum": "c6268549883e37cbc0c3a2812d5c7ccaf63ea65b330e2867477c3dbc83a4c637",
+			"created_at": "2024-04-07T10:12:53.449671+00:00"
+		},
+		{
+			"name": "SyoujyoujiNaiki/chungshan",
+			"version": "0.2.0",
+			"readme": "README.md",
+			"repository": "github.com/SyoujyoujiNaiki/chungshan",
+			"license": "Apache-2.0",
+			"keywords": [
+				"bitop",
+				"bit operation",
+				"type cast"
+			],
+			"description": "Introduce a list of functions for conversion between UInt64, UInt, Double, Float, Int64, Int and Bytes array.",
+			"source": "src",
+			"checksum": "6cb38d7a0f5e4d3068b517eade43098b0efbbb9fc4ff2272035c90005e4b6b9c",
+			"created_at": "2024-12-05T02:40:39.140668+00:00"
+		},
+		{
+			"name": "Yoorkin/ArgParser",
+			"version": "0.1.7",
+			"deps": {
+				"Yoorkin/trie": "0.2.2"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/Yoorkin/ArgParser",
+			"license": "Apache-2.0",
+			"keywords": [
+				"utils",
+				"command line",
+				"parser"
+			],
+			"description": "command line argument parser",
+			"checksum": "98dc513f454978e94e09685b3651bf7020a9c672bdd5d99195d36a84de078e6c",
+			"created_at": "2024-11-19T10:22:48.386192+00:00"
+		},
+		{
+			"name": "Yoorkin/example/list",
+			"version": "0.1.4",
+			"description": "functional style List for MoonBit",
+			"keywords": [
+				"list",
+				"data structure",
+				"utility"
+			],
+			"homepage": "github.com/Yoorkin/moonbit-list",
+			"repository": "github.com/Yoorkin/moonbit-list",
+			"license": "MIT",
+			"checksum": "3778b3e34ad431d83a920a340d2974883d7ec698e81a682bf6fe900b72249e97",
+			"created_at": "2024-01-26T07:51:20.491181+00:00"
+		},
+		{
+			"name": "Yoorkin/format",
+			"version": "0.1.5",
+			"readme": "README.md",
+			"repository": "https://github.com/Yoorkin/format-mbt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"format",
+				"utils"
+			],
+			"description": "simple printf utils",
+			"checksum": "1d66a79aff9ab9239fa05263a87373b6ee371e3df93070d68ceade4504b50531",
+			"created_at": "2024-07-30T09:45:49.046658+00:00"
+		},
+		{
+			"name": "Yoorkin/hello",
+			"version": "0.1.3",
+			"deps": {
+				"Yoorkin/example/list": "0.1.4"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/path/to/your/repo",
+			"homepage": "https://github.io/project/homepage",
+			"license": "Apache-2.0",
+			"keywords": [
+				"utils",
+				"array",
+				"hello MoonBit"
+			],
+			"checksum": "2174a678c827ce9604c0fc4c670c6d7ca6040fd6e1ce12b39db56a4d34ed48c4",
+			"created_at": "2024-02-04T09:07:20.617611+00:00"
+		},
+		{
+			"name": "Yoorkin/prettyprinter",
+			"version": "0.4.0",
+			"readme": "README.md",
+			"repository": "https://github.com/Yoorkin/prettyprinter",
+			"license": "Apache-2.0",
+			"keywords": [
+				"pretty printer",
+				"utils",
+				"string"
+			],
+			"description": "pretty printer for moonbit",
+			"checksum": "db25789bf3b1c826662a6c13e37815825a3ceaf1cde9f585f32ed4011c95e51a",
+			"created_at": "2024-12-03T06:23:28.200895+00:00"
+		},
+		{
+			"name": "Yoorkin/rabbit-tea",
+			"version": "0.4.1",
+			"readme": "README.md",
+			"repository": "https://github.com/Yoorkin/rabbit-tea",
+			"license": "Apache-2.0",
+			"keywords": [
+				"TEA",
+				"html",
+				"UI",
+				"web"
+			],
+			"description": "TEA web UI framework for MoonBit",
+			"source": "src",
+			"checksum": "3f7ef7f990e9e099900c39c96dff3dfa58cfce6ddfd7916b3f381409f6fd83bc",
+			"created_at": "2025-01-02T06:44:23.089111+00:00"
+		},
+		{
+			"name": "Yoorkin/stack",
+			"version": "0.1.4",
+			"license": "Apache-2.0",
+			"checksum": "48e9123b47ec991e5d698edf59f037e48cb0a00a8aad7db8334a154b7cf2ac9d",
+			"created_at": "2024-09-04T03:19:26.586011+00:00",
+			"keywords": []
+		},
+		{
+			"name": "Yoorkin/trie",
+			"version": "0.2.2",
+			"readme": "README.md",
+			"repository": "https://github.com/Yoorkin/trie",
+			"license": "Apache-2.0",
+			"keywords": [
+				"data structures",
+				"utils",
+				"trie"
+			],
+			"description": "A simple implementation of a Trie data structure",
+			"checksum": "6d81254124f20db67d0a6e0e5c09ae15508b95dd57ae92354d286f5715a3f34b",
+			"created_at": "2024-11-19T10:21:04.268904+00:00"
+		},
+		{
+			"name": "Yu-zh/either",
+			"version": "0.1.0",
+			"checksum": "14c25994a0660926eb2e2fed11194a321255e13ba53e7a44b2dc1286563a231a",
+			"keywords": []
+		},
+		{
+			"name": "YumeCross/schema",
+			"version": "0.4.3",
+			"readme": "README.md",
+			"repository": "https://github.com/YumeXi/schema",
+			"license": "BSD-2-Clause",
+			"keywords": [
+				"json",
+				"schema"
+			],
+			"description": "Json Schema validation for MoonBit.",
+			"source": "src",
+			"checksum": "d111f8caee0814beb1b1600e727a2cb1a99a813d2a79cae05c1e68533d3537b7",
+			"created_at": "2024-11-03T04:15:53.128825+00:00"
+		},
+		{
+			"name": "bob/aegis",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "https://github.com/jedisct1/moonbit-aegis",
+			"license": "MIT",
+			"keywords": [
+				"crypto",
+				"aead",
+				"aegis",
+				"encryption"
+			],
+			"description": "AEGIS cipher implementation in Moonbit",
+			"checksum": "cc11960762350f491b9d371d50f1e775dbbe3bce6fc3c4cb15a9f4fb13997904",
+			"created_at": "2024-05-17T06:57:16.599651+00:00"
+		},
+		{
+			"name": "bobzhang/sexp",
+			"version": "0.1.1",
+			"checksum": "2a19c54f264ea3d7db0ef9d096ad7e2b96d3580831666febbcf87ff09be2c4ae",
+			"keywords": []
+		},
+		{
+			"name": "bobzhang/testa",
+			"version": "0.1.0",
+			"checksum": "7481f81fba87e2a3e86723ba8a18e904bd126af6f8b5ef2f56dafcc9c70f3a5f",
+			"keywords": []
+		},
+		{
+			"name": "bobzhang/testb",
+			"version": "0.1.0",
+			"deps": {
+				"bobzhang/testa": "0.1.0"
+			},
+			"checksum": "4ac24a7b27ecd73288f28ec83106bc83bf0718e99e1138b10e49ea38f48cbce9",
+			"keywords": []
+		},
+		{
+			"name": "bzy-debug/cowsay",
+			"version": "0.1.0",
+			"checksum": "5b6db83b203c97a6a153c7194b99e3114309e9bb4ea7709e1c61e31c4d926aff",
+			"keywords": []
+		},
+		{
+			"name": "bzy-debug/cowsay_lib",
+			"version": "0.1.0",
+			"checksum": "1ba7ab996e32f8fdcaf225ebeaf81f29a4aecb124926d553a7b8e2b062a7d54e",
+			"keywords": []
+		},
+		{
+			"name": "bzy-debug/hello",
+			"version": "0.1.20240510+81e045f4e",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"checksum": "8b8f5bed8489bc7b272f1ad8071ab9a5af42587e86586f6477eb07a82c43517f",
+			"created_at": "2024-05-10T02:59:53.015764+00:00"
+		},
+		{
+			"name": "chawyehsu/punycode",
+			"version": "0.0.3",
+			"readme": "README.md",
+			"repository": "https://github.com/chawyehsu/punycode.mbt",
+			"license": "Apache-2.0 OR Unlicense",
+			"keywords": [
+				"encoding",
+				"punycode",
+				"algorithm",
+				"idna"
+			],
+			"description": "Punycode encoding and decoding in MoonBit",
+			"checksum": "10ae82cdcc561f9d2211fe437e20cea0311144bb1ed4336503cf9ffc8b8da3b6",
+			"created_at": "2024-09-23T12:00:26.755544+00:00"
+		},
+		{
+			"name": "eczn/eczn-utils",
+			"version": "0.2.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"checksum": "412ccd4e9181245081a424333bcb0376b7a8e8a2cc88b7741ec3fb3ba9331cf2",
+			"created_at": "2024-05-01T18:51:02.119094+00:00"
+		},
+		{
+			"name": "enjoecn/easy",
+			"version": "0.1.0",
+			"repository": "https://gitee.com/joe20/moonbit-easy.git",
+			"license": "Apache-2.0",
+			"readme": "README.md",
+			"checksum": "538bb18d70eea2458d4deebfdba6ea8807afc91c93f618e9bc39ac7837b74cd1",
+			"created_at": "2024-06-25T04:39:31.476831+00:00",
+			"keywords": []
+		},
+		{
+			"name": "enjoecn/gb",
+			"version": "0.1.1",
+			"readme": "README.md",
+			"repository": "https://gitee.com/joe20/moonbit-gb.git",
+			"license": "Apache-2.0",
+			"deps": {},
+			"checksum": "e0a6537c71e67dfba529cf137fbfeee1458a0de2cf03a5c7b2283f64932f3d74",
+			"created_at": "2024-07-19T07:34:06.699464+00:00",
+			"keywords": []
+		},
+		{
+			"name": "extism/moonbit-pdk",
+			"version": "0.45.0",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/extism/moonbit-pdk",
+			"license": "Apache-2.0",
+			"keywords": [
+				"extism",
+				"pdk",
+				"moonbit"
+			],
+			"description": "Extism MoonBit PDK: This library can be used to write Extism Plug-ins in MoonBit.",
+			"checksum": "61c001792d21575415f04fc8ef7c259f910c6130542ce57350651fb207b75b72",
+			"created_at": "2024-12-13T16:23:27.737066+00:00"
+		},
+		{
+			"name": "fantix/mmhttp",
+			"version": "0.3.0",
+			"readme": "README.md",
+			"repository": "https://gitee.com/fantix/mmhttp",
+			"license": "MulanPSL-2.0",
+			"keywords": [
+				"http",
+				"parser"
+			],
+			"description": "MoonBit 的 HTTP 工具包",
+			"checksum": "a209b3bf33f9ac7585ffd9920baa042b84de148a8a82c4e0330d45c87af7e47d",
+			"created_at": "2024-06-01T23:39:50.432192+00:00"
+		},
+		{
+			"name": "fantix/muts",
+			"license": "MulanPSL-2.0",
+			"repository": "https://gitee.com/fantix/muts",
+			"version": "0.5.4",
+			"readme": "README.md",
+			"keywords": [
+				"mutable",
+				"data structure"
+			],
+			"description": "非函数式的常用数据结构合集",
+			"checksum": "1db6fe4c9c5bf62731059adae1da2a98400623a1874a5a0effeae28722942fff",
+			"created_at": "2024-03-29T14:33:33.340850+00:00"
+		},
+		{
+			"name": "five-nuts/coreutils",
+			"version": "0.1.3",
+			"deps": {
+				"moonbitlang/x": "0.4.12"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "eedc47b1206edfa0b856508e5996883cf01bb1c4259ca86adfb2089d5f010f48",
+			"created_at": "2024-11-16T11:05:35.555323+00:00"
+		},
+		{
+			"name": "gmlewis/b2",
+			"version": "0.31.0",
+			"deps": {
+				"gmlewis/base64": "0.13.0",
+				"gmlewis/spin-moonbit-sdk": "0.49.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-b2",
+			"license": "Apache-2.0",
+			"keywords": [
+				"b2",
+				"backclaze",
+				"client",
+				"moonbit"
+			],
+			"description": "MoonBit b2 client: This library can be used to communicate with Backblaze B2.",
+			"checksum": "b8bc1365c0c243c58431720f4165fc81001df63c9e3de0b8b0c4067564902003",
+			"created_at": "2024-12-31T01:34:50.396231+00:00"
+		},
+		{
+			"name": "gmlewis/base64",
+			"version": "0.13.0",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-base64",
+			"license": "Apache-2.0",
+			"keywords": [
+				"base64",
+				"moonbit"
+			],
+			"description": "MoonBit base64: provide simple base64 operations.",
+			"checksum": "6e5f2e71a5770c28cbc2308127fbb9d40b4285bb85c13f9b515ecde746306277",
+			"created_at": "2024-12-17T12:10:55.198756+00:00"
+		},
+		{
+			"name": "gmlewis/crc32",
+			"version": "0.8.0",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-crc32",
+			"license": "Apache-2.0",
+			"keywords": [
+				"crc32",
+				"hash",
+				"algorithm",
+				"moonbit"
+			],
+			"description": "MoonBit crc32: provide simple crc32 hash algorithm.",
+			"checksum": "5a1299966828602fd068c43cbe2c9f5d53314bb49309ed7bd049c84642fa26f6",
+			"created_at": "2024-12-17T12:13:15.572945+00:00"
+		},
+		{
+			"name": "gmlewis/flate",
+			"version": "0.33.0",
+			"deps": {
+				"gmlewis/io": "0.19.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-flate",
+			"license": "Apache-2.0",
+			"keywords": [
+				"flate",
+				"algorithm",
+				"lzw",
+				"moonbit"
+			],
+			"description": "MoonBit flate: provide simplified flate (LZW) compression algorithm.",
+			"checksum": "660452b05e4386585bddd068ec8c8a81d2ba5a02099b106a6c8ebb80d0550e25",
+			"created_at": "2024-12-17T12:39:49.482229+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-a",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-a",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "ef9fd58b0e0a1797dfca12e10e81cb3e0c7880d59bb6790f3817b923fce007ad",
+			"created_at": "2025-01-03T21:09:06.119508+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-b",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-b",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "239e3d60d8ee94ce0693671e99b1df281702d95a219566a570537a74652d3a56",
+			"created_at": "2025-01-03T21:09:11.257029+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-c",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-c",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "470cd01d97dbdb6eff282bb1cadad22710d6c803274658742e816cc3116d72f5",
+			"created_at": "2025-01-03T21:09:17.081035+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-d",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-d",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "75ceb969e6563ec45f416eb768f8ff64990627dee87e732fef31eefa5fd252e6",
+			"created_at": "2025-01-03T21:09:21.866227+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-e",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-e",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "ba614cf313ff723ff520b4b4137d80e4305f3af791afa854867abcfe9342e3a4",
+			"created_at": "2025-01-03T21:09:30.400773+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-f",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-f",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "ff8912b97b02206cc2b7bbdd20cdcf4cf9823d34b2a7864dcb0c9d305a41978b",
+			"created_at": "2025-01-03T21:09:47.754485+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-g",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-g",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "8c73f61ca876de1873dffdf4cb9db74e2ad67b5d34a70337a30276e0b07bc361",
+			"created_at": "2025-01-03T21:09:52.735521+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-h",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-h",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "d3c3935a59531c8b1286e60d6e35e73ac6f1ea50057ce01133e3acdaa7a5ebb0",
+			"created_at": "2025-01-03T21:09:57.134866+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-i",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-i",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "8b0628285b29951f7779347199437dee40e0cb81f540c6053eb334d9ed2e5a18",
+			"created_at": "2025-01-03T21:10:01.922853+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-j",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-j",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "ac37e1a3f787bee0d345d829dc103d2ea9207d6898bc2604957d66dc839b8328",
+			"created_at": "2025-01-03T21:10:06.816969+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-k",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-k",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "5f97c71384fde6e3f1dcc3a3ff2f6ece99d6f72b05560794cb86dc6278655556",
+			"created_at": "2025-01-03T21:10:11.414429+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-l",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-l",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "37c27d2868fdf242ce6459bc548f52413316666fde3ad482609ea835c3cd4afe",
+			"created_at": "2025-01-03T21:10:17.759755+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-m",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-m",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "bc0eb302cf6282e47fc896ad58be20e196aca417981cdb026b823cf2471fdb0c",
+			"created_at": "2025-01-03T21:10:30.865723+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-n",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-n",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "6ae9bb1cc5eae8a6c9b4544614efe115cb579de4738512e2223b3aafe8a07af8",
+			"created_at": "2025-01-03T21:10:43.427560+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-o",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-o",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "7138c6380a5614e3f8654cf0bc46c318809700cbc9dab59dcddb794105d1abfb",
+			"created_at": "2025-01-03T21:10:57.548540+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-p",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-p",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "6845f822e93533a7b148008b819636caff397b739f8d4d36d857b5d3729ce242",
+			"created_at": "2025-01-03T21:11:05.345798+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-q",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-q",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "b6e3b7dbec3d25a59dd427e4fc681c39383acaa4fa66d899b60f2f0cd2e62d17",
+			"created_at": "2025-01-03T21:11:09.507321+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-r",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-r",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "275d3d76f4488ed0ca57708e165af46bc275795e1618f0339691108be30747bf",
+			"created_at": "2025-01-03T21:11:17.039918+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-s",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-s",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "3adc9e283b775ac44c21b9ac907a48b27df3249477b2e9b0af29655f1c38a54e",
+			"created_at": "2025-01-03T21:11:25.787683+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-t",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-t",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "4e198dc97e63073fe9e06d0f4316964a993cbc0c78f6d31363d5a1652a45564f",
+			"created_at": "2025-01-03T21:11:33.137395+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-u",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-u",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "cba2db6a3867c47ed5af227836b9996f3bb7deb0fdfe7e233dcf63f237fd96c2",
+			"created_at": "2025-01-03T21:11:38.022370+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-v",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-v",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "5bd7909d917671cfa4c880bb07c19f7a32a124f198855f1ee0ecaeb0f14a672c",
+			"created_at": "2025-01-03T21:11:42.505734+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-w",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-w",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "6e97fdd8a098fd0f51a8ff5e36e9c1cf645b976a152f0dd04b93bc17f77501a0",
+			"created_at": "2025-01-03T21:11:47.621255+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-y",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-y",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "62b70c3ae152aa43d3dbdba00079545013eb64bb95beb829ff0df6939329104b",
+			"created_at": "2025-01-03T21:11:51.945203+00:00"
+		},
+		{
+			"name": "gmlewis/fonts-z",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/fonts": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/mbt-fonts-z",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "09f0734812a4b93671d6927c5c04acc53441fb6707d26a1e080c1cea52c84e14",
+			"created_at": "2025-01-03T21:11:56.406526+00:00"
+		},
+		{
+			"name": "gmlewis/fonts",
+			"version": "0.15.0",
+			"deps": {
+				"moonbitlang/x": "0.4.16",
+				"yj-qin/regexp": "0.3.3"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-fonts",
+			"license": "Apache-2.0",
+			"keywords": [
+				"html5 canvas",
+				"pdf",
+				"svg",
+				"open source",
+				"fonts"
+			],
+			"description": "Experimental package to manipulate open source font data.",
+			"checksum": "f56a7b22774e64d123fef88a93548b233744c898df4b32ed55a6e0b30c09b8a5",
+			"created_at": "2025-01-03T21:08:54.453271+00:00"
+		},
+		{
+			"name": "gmlewis/gzip",
+			"version": "0.31.0",
+			"deps": {
+				"gmlewis/base64": "0.13.0",
+				"gmlewis/crc32": "0.8.0",
+				"gmlewis/flate": "0.33.0",
+				"gmlewis/io": "0.19.0",
+				"moonbitlang/x": "0.4.15"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-gzip",
+			"license": "Apache-2.0",
+			"keywords": [
+				"gzip",
+				"gunzip",
+				"algorithm",
+				"moonbit"
+			],
+			"description": "MoonBit gzip: provide simple gzip and gunzip algorithms.",
+			"checksum": "d2581f35482504b65216b4f3067dae6ca3ef0ab0a6e17c37df54acd4f67d56d9",
+			"created_at": "2024-12-17T12:52:49.878222+00:00"
+		},
+		{
+			"name": "gmlewis/hash",
+			"version": "0.17.0",
+			"deps": {
+				"gmlewis/io": "0.19.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-hash",
+			"license": "Apache-2.0",
+			"keywords": [
+				"hash",
+				"algorithm",
+				"moonbit"
+			],
+			"description": "MoonBit hash: provide hash functions similar to Go.",
+			"checksum": "105259dbc39623d300236aa370b3b9eceac18c1c2416a07ba14b44dc3f17ccee",
+			"created_at": "2024-12-17T12:42:34.073553+00:00"
+		},
+		{
+			"name": "gmlewis/image",
+			"version": "0.14.0",
+			"deps": {
+				"gmlewis/flate": "0.33.0",
+				"gmlewis/hash": "0.17.0",
+				"gmlewis/io": "0.19.0",
+				"gmlewis/zlib": "0.18.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-image",
+			"license": "Apache-2.0",
+			"keywords": [
+				"image",
+				"color",
+				"moonbit"
+			],
+			"description": "MoonBit image: simple image representation.",
+			"checksum": "85af509c04147e8914897b69912933a2218553d800ef251797849f6a26ad9c7f",
+			"created_at": "2024-12-17T13:05:57.921613+00:00"
+		},
+		{
+			"name": "gmlewis/io",
+			"version": "0.19.0",
+			"deps": {
+				"gmlewis/base64": "0.13.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-io",
+			"license": "Apache-2.0",
+			"keywords": [
+				"io",
+				"moonbit"
+			],
+			"description": "MoonBit io: provide simplified I/O abstractions similar to Go.",
+			"checksum": "54af580e5bff811e8a21ad7865b816301abdc734957d80388e0a6c769be2cbf0",
+			"created_at": "2024-12-17T12:35:39.068096+00:00"
+		},
+		{
+			"name": "gmlewis/json",
+			"version": "0.15.0",
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-libs/json",
+			"license": "MIT",
+			"keywords": [
+				"json"
+			],
+			"description": "simple json parser",
+			"checksum": "f16d2bea4bf3f352f1535ccd03fdaeb5717cd5db73cfee4821e1097d9ee75254",
+			"created_at": "2024-07-15T16:00:16.688896+00:00"
+		},
+		{
+			"name": "gmlewis/jsonutil",
+			"version": "0.24.0",
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-libs/tree/gmlewis-master/jsonutil",
+			"license": "MIT",
+			"keywords": [
+				"json"
+			],
+			"description": "DEPRECATED AND ARCHIVED - USE STANDARD LIBRARY INSTEAD",
+			"checksum": "c2afabe02ff5f5cf5770078563c7935c7430767eb4f006030bbc328b50d07368",
+			"created_at": "2024-08-20T13:23:23.993256+00:00"
+		},
+		{
+			"name": "gmlewis/md5",
+			"version": "0.17.0",
+			"deps": {
+				"gmlewis/base64": "0.13.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-md5",
+			"license": "Apache-2.0",
+			"keywords": [
+				"md5",
+				"hash",
+				"algorithm",
+				"moonbit"
+			],
+			"description": "MoonBit md5: provide simple md5 hash algorithm.",
+			"checksum": "b07b17a6aa06f1a2597f4fb24737928964786f992b0e7e981bdc2a4997ad2dd3",
+			"created_at": "2024-12-17T12:20:44.751502+00:00"
+		},
+		{
+			"name": "gmlewis/moonbit-pdk",
+			"version": "0.46.0",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-pdk",
+			"license": "Apache-2.0",
+			"keywords": [
+				"extism",
+				"pdk",
+				"moonbit"
+			],
+			"description": "Extism MoonBit PDK: This library can be used to write Extism Plug-ins in MoonBit.",
+			"checksum": "a40d1c0bc247fc9e27918b80d8898182d5690d1c45ff8844d197a1a9eea462ac",
+			"created_at": "2024-12-17T12:17:09.720700+00:00"
+		},
+		{
+			"name": "gmlewis/sha1",
+			"version": "0.9.0",
+			"deps": {
+				"gmlewis/io": "0.19.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-sha1",
+			"license": "Apache-2.0",
+			"keywords": [
+				"sha1",
+				"hash",
+				"algorithm",
+				"moonbit"
+			],
+			"description": "MoonBit sha1: provide simple sha1 hash algorithm.",
+			"checksum": "08db16bbedbb45122c9c978813d8a9f6fab1b6e3d4e2ff9bcec35303fea2b221",
+			"created_at": "2024-12-17T12:43:33.700910+00:00"
+		},
+		{
+			"name": "gmlewis/sha256",
+			"version": "0.15.0",
+			"deps": {
+				"gmlewis/base64": "0.13.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-sha256",
+			"license": "Apache-2.0",
+			"keywords": [
+				"sha256",
+				"hash",
+				"algorithm",
+				"moonbit"
+			],
+			"description": "MoonBit sha256: provide simple sha256 hash algorithm.",
+			"checksum": "ced55aaa849c38f68503689f11a2c86a5a02a5369923e637a49678088f28d740",
+			"created_at": "2024-12-17T12:22:04.676642+00:00"
+		},
+		{
+			"name": "gmlewis/spin-moonbit-sdk",
+			"version": "0.49.0",
+			"deps": {
+				"gmlewis/base64": "0.13.0",
+				"gmlewis/md5": "0.17.0",
+				"gmlewis/sha256": "0.15.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/spin-moonbit-sdk",
+			"license": "Apache-2.0",
+			"keywords": [
+				"spin",
+				"moonbit",
+				"sdk"
+			],
+			"description": "Experimental Spin SDK for the MoonBit programming language.",
+			"checksum": "d90126b47ffd377f0aeacc874d4e42803a7a60a53089e4239c59959440d1e2c2",
+			"created_at": "2024-12-31T01:33:58.586917+00:00"
+		},
+		{
+			"name": "gmlewis/zlib",
+			"version": "0.18.0",
+			"deps": {
+				"gmlewis/flate": "0.33.0",
+				"gmlewis/hash": "0.17.0",
+				"gmlewis/io": "0.19.0"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/gmlewis/moonbit-zlib",
+			"license": "Apache-2.0",
+			"keywords": [
+				"zlib",
+				"algorithm",
+				"compress",
+				"moonbit"
+			],
+			"description": "MoonBit zlib: provide simplified zlib format compressed data.",
+			"checksum": "24e9dfcaa4b12e3d4460ed0fad566bc5487722b67ff81b32990bd61f8c653f11",
+			"created_at": "2024-12-17T12:50:24.743203+00:00"
+		},
+		{
+			"name": "hackwaly/common",
+			"version": "0.1.24",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"checksum": "f0b6c39ce5a25a5e1e753c566f876ac6ac47970497943a21135932026a366404",
+			"created_at": "2024-03-08T02:22:28.618759+00:00"
+		},
+		{
+			"name": "hackwaly/moonyacc",
+			"version": "0.3.1",
+			"deps": {
+				"moonbitlang/x": "0.4.16",
+				"Yoorkin/ArgParser": "0.1.7"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"exclude": [
+				".editorconfig",
+				"package.json",
+				"pnpm-workspace.yaml",
+				"node_modules",
+				"app",
+				"editor-support"
+			],
+			"checksum": "2905f50ffab30d75c6309fc28c43178263e71d9a84a2cd6b6fffb32619dc5c50",
+			"created_at": "2024-12-23T17:39:47.402951+00:00"
+		},
+		{
+			"name": "jankin_li/Learn_Test1",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "2dabf131ddbb54e50dc6ad39a6fc795dd87ed71ae320cac6ad91e758042ad1f2",
+			"created_at": "2024-10-21T08:10:16.056674+00:00"
+		},
+		{
+			"name": "jankin_li/new_lib",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "dec06f6031b5ebb3ebe64dd375c30fcf61ad78e58a1c27e5c328275166f6dd90",
+			"created_at": "2024-10-22T02:39:11.341304+00:00"
+		},
+		{
+			"name": "jedisct1/aegis",
+			"version": "0.2.1",
+			"readme": "README.md",
+			"repository": "https://github.com/jedisct1/moonbit-aegis",
+			"license": "MIT",
+			"keywords": [
+				"crypto",
+				"aead",
+				"aegis",
+				"encryption"
+			],
+			"description": "AEGIS cipher implementation in Moonbit",
+			"checksum": "cc8f6559af7846307feaac3f7699b82d125cb2c149a11281a63e179b684fab13",
+			"created_at": "2024-09-05T11:54:20.988088+00:00"
+		},
+		{
+			"name": "jumpping/baby",
+			"version": "0.2.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "Ordered set based on balanced binary tree",
+			"source": "src",
+			"checksum": "2fd287363433162170f9b2ea38178b839ccb72732b01fb5fc7df5f6b51bd9ee9",
+			"created_at": "2024-11-27T08:53:04.763310+00:00"
+		},
+		{
+			"name": "kesmeey/fmt",
+			"version": "0.1.3",
+			"readme": "README.md",
+			"repository": "https://github.com/kesmeey/fmt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"format",
+				"utils"
+			],
+			"description": "simple printf utils",
+			"source": "src",
+			"checksum": "efe9c3cd82ef112fe7fb578ee5e6b8e589c853e9492a8fd22b78fdedccabe550",
+			"created_at": "2024-12-24T06:03:28.121121+00:00"
+		},
+		{
+			"name": "kesmeey/tools",
+			"version": "0.1.2",
+			"deps": {
+				"yj-qin/regexp": "0.3.2"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/kesmeey/fmt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"tools",
+				"utility"
+			],
+			"description": "A utility library similar to Hutool in Java.",
+			"source": "src",
+			"checksum": "6d83a7aeb4a5dbda1abf0ade1e53829e92874a6be9081d9597fda9c79ab16a3b",
+			"created_at": "2024-12-30T16:10:01.714466+00:00"
+		},
+		{
+			"name": "kinoamyfx/moon-axe-tools",
+			"version": "0.0.1-SNAPSHOT",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [
+				"lib",
+				"tools",
+				"common"
+			],
+			"description": "",
+			"source": "src",
+			"checksum": "ca244885a550a8cf8b797192380303506816966139043f2313ceaab35373121f",
+			"created_at": "2024-12-02T13:00:38.907603+00:00"
+		},
+		{
+			"name": "ledao/nanoid",
+			"version": "0.1.1",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://gitee.com/ledao/nanoid",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"homepage": "https://gitee.com/ledao/nanoid",
+			"checksum": "36e52e9aa8d97010a255e3b07eaefae80da552a108ab60610b26035905cc12e7",
+			"created_at": "2024-12-27T07:03:12.404784+00:00"
+		},
+		{
+			"name": "lijunchen/unstable_io",
+			"version": "0.1.3",
+			"readme": "README.md",
+			"repository": "https://github.com/lijunchen/unstable-io-mbt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"io"
+			],
+			"description": "Unstable IO package for MoonBit",
+			"checksum": "779dbe20767e77f9e11d63a1340c1b5c9bd8de2efac6394a45baba5123915bef",
+			"created_at": "2024-07-04T08:00:41.577085+00:00"
+		},
+		{
+			"name": "liuly0322/tch_mbt",
+			"version": "0.0.1",
+			"readme": "README.md",
+			"repository": "https://github.com/liuly0322/tch-mbt",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "libtorch FFI bindings(WIP) for MoonBit",
+			"checksum": "405cdcfecb0661c7a563979774832ca9a338579378e29d131b646c17887862c7",
+			"created_at": "2025-01-03T07:46:27.844795+00:00"
+		},
+		{
+			"name": "loneoutpost/core-extra",
+			"version": "0.0.6",
+			"readme": "README.md",
+			"repository": "https://github.com/lone-outpost-oss/mbt-core-extra",
+			"license": "Apache-2.0 OR MIT",
+			"keywords": [
+				"core"
+			],
+			"description": "experimental extras for `moonbit/core`.",
+			"checksum": "ede8820b52a80d26c78dcd1fb1557e39303feeed3476f45d06ba39d322c175ff",
+			"created_at": "2024-06-03T10:11:41.349647+00:00"
+		},
+		{
+			"name": "lucifer1004/mooncake",
+			"version": "0.1.0",
+			"checksum": "f3b0e7bdb0da85a3b26dc8b5cf38174f5e44398add8406f0cc8978c50872e303",
+			"keywords": []
+		},
+		{
+			"name": "mizchi/js_io",
+			"version": "0.1.1",
+			"readme": "README.md",
+			"repository": "https://github.com/mizchi/moonbit-libs/tree/main/js_io",
+			"license": "MIT",
+			"keywords": [
+				"js"
+			],
+			"checksum": "d3d98af2a073fdbf4a9474c7ec58e7670499bdb4b981ad4004231f9eeb2b7751",
+			"created_at": "2024-04-22T02:22:00.182813+00:00"
+		},
+		{
+			"name": "mizchi/js_regexp",
+			"version": "0.0.4",
+			"readme": "README.md",
+			"repository": "https://github.com/mizchi/moonbit-libs/tree/main/moonbit_js_regexp",
+			"license": "MIT",
+			"keywords": [
+				"regexp"
+			],
+			"description": "JS RegExp binding",
+			"checksum": "500e4686661076777242e797b709b9e24803027e292c69c74066f96ff34f7387",
+			"created_at": "2024-04-17T03:43:48.244515+00:00"
+		},
+		{
+			"name": "mizchi/json",
+			"version": "0.4.0",
+			"readme": "README.md",
+			"repository": "https://github.com/mizchi/moonbit-libs/json",
+			"license": "MIT",
+			"keywords": [
+				"json"
+			],
+			"description": "simple json parser",
+			"checksum": "9dbed2439196dc2db3e82870eb68aa069cc0dc70e1f1b81801b8bfdcd759bbd5",
+			"created_at": "2024-04-30T17:39:25.061037+00:00"
+		},
+		{
+			"name": "mizchi/protocol",
+			"version": "0.0.5",
+			"deps": {
+				"mizchi/js_io": "0.1.1"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/mizchi/moonbit-libs/tree/main/js_io",
+			"license": "MIT",
+			"keywords": [
+				"js"
+			],
+			"checksum": "dee2ff364bda00a56d268772ba6e2341d07c1d3360998de769bbbe453ddd9e1b",
+			"created_at": "2024-05-07T20:33:53.012583+00:00"
+		},
+		{
+			"name": "moonbit-courses/minimoonbit-courses",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "56ba2dd7affc3b9e3b6842f6d386a454c04e11a91243f46acc98d241e4ec182c",
+			"created_at": "2024-08-23T07:24:55.418749+00:00"
+		},
+		{
+			"name": "moonbit-js-ffi/js",
+			"version": "0.2.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"checksum": "57eb6497d7bc57db0783a126cc292322d772594448fef4217d45ae0db28264e1",
+			"created_at": "2024-06-13T15:41:51.834985+00:00"
+		},
+		{
+			"name": "moonbitlang/arduino",
+			"version": "0.0.6",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbit-community/moonbit-arduino",
+			"license": "GPL-3.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "0e304390256026c7958557aac62e08362b7f9f704a6170c7fc2c3fe75e56a698",
+			"created_at": "2025-01-03T08:17:31.017633+00:00"
+		},
+		{
+			"name": "moonbitlang/core",
+			"version": "0.1.20241231+ba15a9a4e",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbitlang/core",
+			"license": "Apache-2.0",
+			"keywords": [
+				"core",
+				"standard library"
+			],
+			"checksum": "e0d3c9d6e4d590e207ea5744287b435a26b04ce19caaf0d0c30cc3dee790400a",
+			"created_at": "2024-12-31T06:32:05.752197+00:00"
+		},
+		{
+			"name": "moonbitlang/quickcheck",
+			"version": "0.7.0",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbitlang/quickcheck",
+			"license": "Apache-2.0",
+			"keywords": [
+				"property-based-testing",
+				"quickcheck"
+			],
+			"description": "Automatic testing of MoonBit programs",
+			"source": "src",
+			"checksum": "184654c8b4ff982d20e6ee48cedc4a6439c083c0e79f6c5002d77d79417ee60b",
+			"created_at": "2024-12-23T10:26:38.985196+00:00"
+		},
+		{
+			"name": "moonbitlang/std",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"checksum": "016f0cfdf649ba940ebf49c64de99a55ee338c7d44c9c1c14894449a79497aa2"
+		},
+		{
+			"name": "moonbitlang/wasm4",
+			"version": "0.2.4",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbitlang/wasm4",
+			"license": "Apache-2.0",
+			"keywords": [
+				"game"
+			],
+			"description": "An opinionated binding for WASM-4, a retro game framework using WebAssembly",
+			"checksum": "2f3cd10332885ee30c4b74fed285e99cdff6c5d0c51c5075c7303cd681c1c9f1",
+			"created_at": "2024-11-19T09:34:18.338070+00:00"
+		},
+		{
+			"name": "moonbitlang/x",
+			"version": "0.4.16",
+			"readme": "README.md",
+			"repository": "https://github.com/moonbitlang/x",
+			"license": "Apache-2.0",
+			"keywords": [
+				"experimental",
+				"moonbitlang",
+				"json",
+				"time",
+				"crypto"
+			],
+			"description": "experimental packages for moonbitlang/core",
+			"warn-list": "-29",
+			"checksum": "2c02703d4ca43083a67a505bdee4a2616da73950c5f474477091375069d780c7",
+			"created_at": "2024-12-19T02:10:44.122188+00:00"
+		},
+		{
+			"name": "myfreess/myers-diff",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [
+				"diff",
+				"meyers"
+			],
+			"description": "Myers diff algorithm",
+			"checksum": "fb9c7c1e80c12cf804e1525972d88a95aed12803e83266c600b717c2fd24ccd0",
+			"created_at": "2024-07-18T07:59:34.603097+00:00"
+		},
+		{
+			"name": "oboard/mimetype",
+			"version": "0.1.4",
+			"readme": "README.md",
+			"repository": "https://github.com/oboard/mimetype",
+			"license": "Apache-2.0",
+			"keywords": [
+				"mimetype",
+				"mime",
+				"type"
+			],
+			"description": "Mime types for MoonBit",
+			"source": "src",
+			"checksum": "d176240313d415a4607fbed18ad426005d69ddf135c94cb45c9ac7f83daf91a1",
+			"created_at": "2024-12-04T05:02:41.589738+00:00"
+		},
+		{
+			"name": "oboard/mocket",
+			"version": "0.2.0",
+			"deps": {
+				"oboard/mimetype": "0.1.4",
+				"yj-qin/regexp": "0.3.2",
+				"Lampese/moonbit-chalk": "0.3.1"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/oboard/mocket",
+			"license": "Apache-2.0",
+			"keywords": [
+				"http",
+				"server"
+			],
+			"description": "A web framework for MoonBit.",
+			"source": "src",
+			"checksum": "283b74df83f127a1ca41053c7f48672e10a392f7d529cc42923bcfc5876623f6",
+			"created_at": "2024-12-04T05:03:18.966768+00:00"
+		},
+		{
+			"name": "oboard/moonbit-eval",
+			"version": "0.1.5",
+			"readme": "README.md",
+			"repository": "https://github.com/oboard/moonbit-eval",
+			"license": "Apache-2.0",
+			"keywords": [
+				"moonbit",
+				"eval"
+			],
+			"description": "MoonBit Eval Package",
+			"source": "src",
+			"checksum": "4ce14bf52b0ba9edddd4fb37c0feb026699b54b7f260c81afc34cd9e7d6f8aba",
+			"created_at": "2024-12-04T17:25:01.381477+00:00"
+		},
+		{
+			"name": "oboard/mooncrypto",
+			"version": "0.1.8",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/oboard/mooncrypto",
+			"license": "MIT",
+			"keywords": [
+				"crypto",
+				"加密",
+				"md5",
+				"sha",
+				"base64"
+			],
+			"description": "MoonBit Crypto Library",
+			"checksum": "d92211df4ecbeab1f8a0f4b88e9bd1e2159b3dd83b8125e49e6f9c6fab96e83d",
+			"created_at": "2024-07-30T12:09:43.313495+00:00"
+		},
+		{
+			"name": "oboard/moonetx",
+			"version": "0.1.5",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/oboard/moonetx",
+			"license": "MIT",
+			"keywords": [
+				"moonbit",
+				"moonetx",
+				"network",
+				"networkx"
+			],
+			"description": "MoonBit网络分析扩展",
+			"checksum": "1d83edad0bdee423119f1b525d1563a74cbaa5385e709a8fe75348d90c05e4a1",
+			"created_at": "2024-07-31T07:23:03.295398+00:00"
+		},
+		{
+			"name": "oboard/numoon",
+			"version": "0.3.2",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/oboard/numoon",
+			"license": "Apache-2.0",
+			"keywords": [
+				"moonbit",
+				"numoon",
+				"matrix",
+				"math"
+			],
+			"description": "MoonBit Mathematical Operation",
+			"source": "src",
+			"checksum": "7cec5505437d2a417b314bfd98ede762edf1fe808e177b02e9f7f228e830dcd6",
+			"created_at": "2024-09-11T16:55:17.413690+00:00"
+		},
+		{
+			"name": "peter-jerry-ye/advent_of_code",
+			"version": "0.3.1-fix",
+			"deps": {
+				"peter-jerry-ye/wasi": "0.10.1",
+				"peter-jerry-ye/parser-combinator": "0.5.1"
+			},
+			"checksum": "f4d402a6e88e45120f6cab5806efff7a073bac4784c556492d139991c1bbeb4b",
+			"created_at": "2024-01-26T08:48:45.349484+00:00",
+			"keywords": []
+		},
+		{
+			"name": "peter-jerry-ye/assertion",
+			"version": "0.2.1",
+			"license": "Apache-2.0",
+			"checksum": "ef7e8976ebe8b79e2de4594b63286f83e7acbf80332fb7e7a2fa08f9c9371928",
+			"keywords": []
+		},
+		{
+			"name": "peter-jerry-ye/canvas",
+			"version": "0.5.0",
+			"deps": {
+				"tonyfettes/memory": "0.1.3"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/peter-jerry-ye/canvas",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "(WIP) A Canvas binding library that allows you to draw without writing any JS code",
+			"checksum": "9e3dcbc651769586d23e42fb4de96a8e86141d1f3af19d7fd44929f55b45cef3",
+			"created_at": "2024-12-13T02:41:11.847191+00:00"
+		},
+		{
+			"name": "peter-jerry-ye/json",
+			"version": "0.4.0",
+			"deps": {
+				"peter-jerry-ye/parser-combinator": "0.9.1"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"checksum": "db781fde70e005e58a972df045826b48ff27c778088b9f99055a3adff7654ed8",
+			"created_at": "2024-09-04T02:39:51.114591+00:00",
+			"keywords": []
+		},
+		{
+			"name": "peter-jerry-ye/memory",
+			"version": "0.8.4",
+			"repository": "https://github.com/peter-jerry-ye/memory",
+			"license": "Apache-2.0",
+			"checksum": "a15b0b6c19feab3d427e912d35d258ab5f9e6fc8e4c6629413e4b2343a5f9f60",
+			"created_at": "2024-11-25T08:44:51.346515+00:00",
+			"keywords": []
+		},
+		{
+			"name": "peter-jerry-ye/parser-combinator",
+			"version": "0.9.1",
+			"license": "Apache-2.0",
+			"repository": "https://github.com/peter-jerry-ye/moonbit-parser-combinator",
+			"checksum": "0de0ee17f67835aaa96d5200dbe8091801ea8aa3734569b0e6d27e11f0f45bc3",
+			"created_at": "2024-09-04T02:21:08.851501+00:00",
+			"keywords": []
+		},
+		{
+			"name": "peter-jerry-ye/utils",
+			"version": "0.2.0",
+			"deps": {
+				"moonbitlang/x": "0.4.16"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "MulanPSL-2.0",
+			"keywords": [
+				"utility"
+			],
+			"checksum": "c4c34fc89ff23f3af7650a0397f228b26bd7c31db1f591a308082a656f25bad1",
+			"created_at": "2024-12-23T09:25:14.356677+00:00"
+		},
+		{
+			"name": "peter-jerry-ye/wasi",
+			"version": "0.18.1",
+			"deps": {},
+			"repository": "https://github.com/peter-jerry-ye/wasi",
+			"license": "Apache-2.0",
+			"checksum": "5443dcb4ab65b7b89a580ab89b4011ddeb65e6748715b872871f075ef6f07452",
+			"created_at": "2024-12-26T08:29:35.631685+00:00",
+			"keywords": []
+		},
+		{
+			"name": "rami3l/cmark",
+			"version": "0.1.5",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"warn-list": "-15+15-24+24",
+			"checksum": "d5f50ba116ab1ac1c66c9c96feac4ae44ef48573db77a5a3cdc521856fd5b5bb",
+			"created_at": "2024-12-03T06:14:59.770562+00:00"
+		},
+		{
+			"name": "ruifeng/XMLParser",
+			"version": "0.1.0",
+			"deps": {
+				"peter-jerry-ye/parser-combinator": "0.9.1"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/RuifengFu/XMLParser",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "486ca2be4e0033811cae4729ce2774baf47189cb97d2970803c5e0a9d89ea6f6",
+			"created_at": "2024-12-26T14:05:40.642837+00:00"
+		},
+		{
+			"name": "smallbearrr/pandas",
+			"version": "0.1.9",
+			"readme": "README.md",
+			"repository": "https://github.com/smallbearrr/pandas",
+			"license": "Apache-2.0",
+			"keywords": [
+				"pandas",
+				"dataframe",
+				"data cleaning",
+				"data manipulation"
+			],
+			"description": "",
+			"source": "src",
+			"checksum": "18241fe00364e66efc402f2d68d8aa607f099dafc890f06050dbb40f8c8c2694",
+			"created_at": "2025-01-03T11:51:35.165783+00:00"
+		},
+		{
+			"name": "suiyunonghen/datetime",
+			"version": "0.1.5",
+			"readme": "README.md",
+			"repository": "https://github.com/suiyunonghen/datetime",
+			"license": "Apache-2.0",
+			"keywords": [
+				"datetime",
+				"date",
+				"time"
+			],
+			"description": "datetime type of moonbit",
+			"source": "src",
+			"checksum": "c98a68fcdb7a6e2bd382d9b011a59650f6f9a8af95abd2467266ceb00b9e6c83",
+			"created_at": "2024-12-19T04:16:48.109023+00:00"
+		},
+		{
+			"name": "suiyunonghen/linklist",
+			"version": "0.1.7",
+			"readme": "README.md",
+			"repository": "https://github.com/suiyunonghen/linklist",
+			"license": "Apache-2.0",
+			"keywords": [
+				"Double Linked List",
+				"双链表"
+			],
+			"description": "Double Linked List 双链表",
+			"checksum": "38e362369d4ed6aa4174a4ef57b74d829a57e1d884f6a2f7917b49c059c1a535",
+			"created_at": "2024-11-26T02:28:44.862312+00:00"
+		},
+		{
+			"name": "suiyunonghen/moonvalue",
+			"version": "0.1.12",
+			"deps": {
+				"suiyunonghen/datetime": "0.1.5"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/suiyunonghen/moonvalue",
+			"license": "Apache-2.0",
+			"keywords": [
+				"msgpack",
+				"bson",
+				"moonValue"
+			],
+			"description": "moonbitlang实现的msgpack,bson库",
+			"source": "src",
+			"checksum": "04c0c71fc191f90c8b0fb05c52eb1cc1df7d66976c7ac937a2b28963dfd6ff34",
+			"created_at": "2024-12-19T05:05:30.118565+00:00"
+		},
+		{
+			"name": "suiyunonghen/wasmMemManager",
+			"version": "0.1.2",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/suiyunonghen/wasmMemManager",
+			"license": "Apache-2.0",
+			"keywords": [
+				"memory",
+				"memoryManager"
+			],
+			"description": "wasm的线性内存管理",
+			"source": "src",
+			"checksum": "8ee096bdbfd4333f9e5e52e7de703d65fe25100e021b959313738c3538e720e6",
+			"created_at": "2024-11-19T13:04:49.750516+00:00"
+		},
+		{
+			"name": "summer-boythink/moonorm",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"deps": {},
+			"checksum": "9b35c4a0b4d7a0941fac5cecfcb75f71793059799b9862cb1e92a4371477d9cc",
+			"created_at": "2024-03-15T08:32:45.512162+00:00"
+		},
+		{
+			"name": "tiye/cirru-edn",
+			"version": "0.0.4",
+			"deps": {
+				"tiye/cirru-parser": "0.0.10"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/Cirru/cirru-edn.mbt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"cirru",
+				"edn"
+			],
+			"description": "Extensible Data Notation in Cirru",
+			"source": "src",
+			"checksum": "4374e169484827b89b856d256afd6098533d352f1e6f8f1be99241d6246a304b",
+			"created_at": "2024-12-18T17:47:01.742921+00:00"
+		},
+		{
+			"name": "tiye/cirru-parser",
+			"version": "0.0.10",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "https://github.com/Cirru/parser.mbt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"Cirru"
+			],
+			"source": "src",
+			"description": "parser for Cirru Syntax",
+			"checksum": "87ba15e855feabbc4e3eec44bf580acf4d169c048bd196d823cb7e99a735ade0",
+			"created_at": "2024-12-17T17:30:07.733441+00:00"
+		},
+		{
+			"name": "tiye/dom-ffi",
+			"version": "0.0.6",
+			"readme": "README.md",
+			"repository": "https://github.com/Respo/dom-ffi.mbt",
+			"homepage": "https://github.com/Respo/dom-ffi.mbt",
+			"license": "Apache-2.0",
+			"keywords": [
+				"dom",
+				"ffi"
+			],
+			"description": "DOM FFI (partial. used by Respo.mbt)",
+			"source": "src",
+			"checksum": "5ba99b003e3ac425433faee3194e4fee3db636f42217b6bc366de580e8eccf2d",
+			"created_at": "2024-11-18T17:39:13.224367+00:00"
+		},
+		{
+			"name": "tiye/lexicon-fractional-index",
+			"version": "0.0.2",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "86281c3b66485d07ec10e9c95b9471445db3bdf4b879f67ff4f06e15e0cf60d5",
+			"created_at": "2024-11-09T08:21:56.700548+00:00"
+		},
+		{
+			"name": "tiye/quaternion",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "https://github.com/WebGPU-Art/quaternion",
+			"license": "Apache-2.0",
+			"keywords": [
+				"math",
+				"quaternion"
+			],
+			"description": "Quaternion math library",
+			"source": "src",
+			"checksum": "7c41c081975ffb83f46168d488cd983c199e37eb28112e28d68db4e2a8c51df7",
+			"created_at": "2024-12-30T19:49:17.728829+00:00"
+		},
+		{
+			"name": "tiye/respo",
+			"version": "0.0.21",
+			"deps": {
+				"tiye/dom-ffi": "0.0.6",
+				"tiye/cirru-parser": "0.0.9"
+			},
+			"readme": "README.md",
+			"repository": "https://github.com/Respo/respo.mbt/",
+			"license": "Apache-2.0",
+			"keywords": [
+				"virtual-dom"
+			],
+			"description": "A tiny virtual DOM library(beta)",
+			"source": "src",
+			"checksum": "9723364ca7d35d96e3fa0ae7539341d88ce8673c92cfbd250971148e35d5578e",
+			"created_at": "2024-12-17T17:26:50.684399+00:00"
+		},
+		{
+			"name": "tmkx/hello",
+			"version": "0.0.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"checksum": "0e829e77e7fc1ec0d8d0f127a6d41eafe9ac557d3ccf22baca16fbe2d01b925b",
+			"created_at": "2024-07-03T03:18:08.426528+00:00"
+		},
+		{
+			"name": "tonyfettes/atomics",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "3118fd82b46b4943f0d41501b183401b8a497596d965fab6917dca44bb38596d",
+			"created_at": "2024-12-25T09:28:26.604533+00:00"
+		},
+		{
+			"name": "tonyfettes/memory",
+			"version": "0.1.5",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "Simple memory access and management to be used with WASI FFI",
+			"source": "src",
+			"checksum": "4e6a336a89886d2ffa28fc19360756d12b43b443a051d9effdc92dc935667903",
+			"created_at": "2024-12-05T06:35:03.081836+00:00"
+		},
+		{
+			"name": "tonyfettes/narray",
+			"version": "0.1.0",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "ed6567f961aa3c3a8b6721ccb665d98215a758690a210be955bb31c4dc7b2211",
+			"created_at": "2024-09-29T06:11:35.618944+00:00"
+		},
+		{
+			"name": "tonyfettes/torch",
+			"version": "0.2.7",
+			"readme": "README.md",
+			"repository": "https://github.com/tonyfettes/torch.mbt",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "PyTorch-like tensor operations implemented in MoonBit",
+			"source": "src",
+			"include": [
+				"src"
+			],
+			"exclude": [
+				"__snapshot__"
+			],
+			"checksum": "12f4761f62fc0b1822835295fed5c6d6d68247d9b6d0c62a07c7f3d40ea78832",
+			"created_at": "2024-12-13T04:38:14.936180+00:00"
+		},
+		{
+			"name": "wangziling/hello",
+			"version": "0.0.1",
+			"checksum": "b2aaf79d6506ef578d9a2d7a7477b3fc5d445eb6e4904bface3a09a9b6383d91",
+			"keywords": []
+		},
+		{
+			"name": "wstreet/moontest",
+			"version": "0.1.0",
+			"deps": {},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "760d3289ef1e66fe1f320622b9fd6b03558040e5a5e6e3901602874e9c9c313f",
+			"created_at": "2024-10-21T03:15:18.852797+00:00"
+		},
+		{
+			"name": "xunyoyo/Permutation",
+			"version": "0.1.1",
+			"readme": "README.md",
+			"repository": "https://github.com/xunyoyo/Permutation",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "cf4c2a4a2035382f6a8578a1742339d82fc681b900a81c3f4684f60cbc0c4b02",
+			"created_at": "2024-11-15T10:48:43.405249+00:00"
+		},
+		{
+			"name": "xunyoyo/linalg",
+			"version": "0.2.7",
+			"readme": "README.md",
+			"repository": "https://github.com/xunyoyo/linalg",
+			"license": "Apache-2.0",
+			"keywords": [
+				"algebra",
+				"math"
+			],
+			"description": "Linear Algebra Library",
+			"source": "src",
+			"checksum": "9d2e7e46a4ba4b314658088be7f5e6d05793cc510646ae744012b43505bf71eb",
+			"created_at": "2024-12-30T12:58:17.198022+00:00"
+		},
+		{
+			"name": "xunyoyo/permutation",
+			"version": "0.1.3",
+			"readme": "README.md",
+			"repository": "https://github.com/xunyoyo/permutation",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "Array permutation.",
+			"source": "src",
+			"checksum": "34f79a4cbad8ee0142dfd5a0fc85493612ffd05eaefdb320a633c21697272637",
+			"created_at": "2024-11-17T16:19:56.797966+00:00"
+		},
+		{
+			"name": "yamajik/dapr",
+			"version": "0.1.11",
+			"deps": {
+				"yamajik/wasi": "0.1.25"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "86da34fe8e8393df566b0ab05028b019f540cd816dc44cc185510d1f9bf30408",
+			"created_at": "2024-12-11T07:09:02.084989+00:00"
+		},
+		{
+			"name": "yamajik/wasi-bindings",
+			"version": "0.2.1",
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "d36e4296908dec909a61565e39d85325bd413f96bf5be03981488848577673ab",
+			"created_at": "2024-12-04T08:51:22.804911+00:00"
+		},
+		{
+			"name": "yamajik/wasi",
+			"version": "0.1.25",
+			"deps": {
+				"yamajik/wasi-bindings": "0.2.1"
+			},
+			"readme": "README.md",
+			"repository": "",
+			"license": "Apache-2.0",
+			"keywords": [],
+			"description": "",
+			"source": "src",
+			"checksum": "f0817e4e7e1ae9b587e4e0c06882b1605f7394553d7c8ab96b55758bcea5f999",
+			"created_at": "2024-12-11T07:03:46.754274+00:00"
+		},
+		{
+			"name": "yangqing/hello",
+			"version": "0.2.2",
+			"readme": "README.md",
+			"repository": "https://gitee.com/gogv/moonbit-hello",
+			"license": "MIT",
+			"keywords": [
+				"hello",
+				"greeting",
+				"moonbit"
+			],
+			"description": "MoonBit package management example file.",
+			"source": "src",
+			"checksum": "4b29e3a998bd210e22bc40046f60c8d17dcd24d6f27ef285e908647a41a88b73",
+			"created_at": "2024-09-26T08:29:03.308888+00:00"
+		},
+		{
+			"name": "yj-qin/regexp",
+			"version": "0.3.3",
+			"readme": "README.md",
+			"repository": "https://github.com/yj-qin/regexp",
+			"license": "Apache-2.0",
+			"keywords": [
+				"regexp",
+				"regular",
+				"expression"
+			],
+			"description": "A regular expression library based on a backtracking engine.",
+			"checksum": "c08cdb4d34f723fd657dd74ccf9797e6222a00d203dfaa4886d67eaa3d40e4be",
+			"created_at": "2025-01-02T00:46:04.462017+00:00"
+		},
+		{
+			"name": "yoshitsugu/parsem",
+			"version": "0.0.3",
+			"readme": "README.md",
+			"repository": "https://github.com/yoshitsugu/parsem",
+			"license": "MIT",
+			"keywords": [
+				"parser",
+				"parser combinator"
+			],
+			"description": "Parser combinator for Moonbit",
+			"source": "src",
+			"checksum": "13dc8e425418b18e8a505da4bf2b1ee8d4ca9338e5b4f7bafaf99c2b8988c6b9",
+			"created_at": "2024-12-30T11:13:52.654944+00:00"
+		},
+		{
+			"name": "zxch3n/expect",
+			"version": "0.3.1",
+			"readme": "README.md",
+			"repository": "https://github.com/zxch3n/moon-expect",
+			"license": "Apache-2.0",
+			"keywords": [
+				"test",
+				"utils"
+			],
+			"description": "`expect` is used to create various assertions easily",
+			"checksum": "d645cff4963af012eb6852fdfad8519a8e7f8889dfa58ee33c098463e214cad7",
+			"created_at": "2024-09-18T13:28:18.271534+00:00"
+		}
+	]
+}

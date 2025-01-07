@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+type EdnMapView Map[Edn, Edn]
+
+///| implement Eq for EdnMapView,
+/// TODO: this is not efficient, we should implement a more efficient way to compare two maps
+fn op_equal(self : EdnMapView, other : EdnMapView) -> Bool {
+  let mut equal = true
+  self._.each(
+    fn(k, v) {
+      match other._.get(k) {
+        Some(v2) => if v != v2 { equal = false }
+        None => equal = false
+      }
+    },
+  )
+  if not(equal) {
+    return false
+  }
+  other._.each(
+    fn(k, v) {
+      match self._.get(k) {
+        Some(v2) => if v != v2 { equal = false }
+        None => equal = false
+      }
+    },
+  )
+  equal
+}
+
+///|
+impl Hash for EdnMapView with hash(self) { self._.size() }
+
+///|
+impl Hash for EdnMapView with hash_combine(self, hasher) {
+  self._.each(
+    fn(k, v) {
+      k.hash_combine(hasher)
+      v.hash_combine(hasher)
+    },
+  )
+}
+
+///|
+fn to_string(self : EdnMapView) -> String {
+  let mut s = ""
+  s = s + "(map"
+  self._.each(
+    fn(k, v) { s = s + " (" + k.to_string() + " " + v.to_string() + ")" },
+  )
+  s = s + ")"
+  s
+}
+
+///|
+fn tag_get(self : EdnMapView, k : Edn) -> Edn? {
+  self._.get(k)
+}
+
+///|
+fn str_get(self : EdnMapView, k : String) -> Edn? {
+  self._.get(Edn::Str(k))
+}
+
+///|
+fn get(self : EdnMapView, k : Edn) -> Edn? {
+  self._.get(k)
+}
+
+///|
+fn get_or_nil(self : EdnMapView, k : Edn) -> Edn {
+  match self._.get(k) {
+    Some(v) => v
+    None => Edn::Nil
+  }
+}
+
+///|
+fn insert(self : EdnMapView, k : Edn, v : Edn) -> Unit {
+  self._.set(k, v)
+}
+
+///|
+fn insert_key_str(self : EdnMapView, k : String, v : Edn) -> Unit {
+  self._.set(Edn::Str(k), v)
+}
+
+///|
+fn length(self : EdnMapView) -> UInt {
+  self._.size().reinterpret_as_uint()
+}
+
+///|
+fn is_empty(self : EdnMapView) -> Bool {
+  self._.is_empty()
+}
+
+///|
+fn compare(self : EdnMapView, right : EdnMapView) -> Int {
+  if self._.size() < right._.size() {
+    return -1
+  }
+  if self._.size() > right._.size() {
+    return 1
+  }
+  // order of map is not defined, so we need to sort the keys
+  return 0
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

@@ -16,13 +16,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -30,16 +38,6 @@
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,7:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,4:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### resolve\_next\_address
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/top.mbt,70:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>::resolve_next_address(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">@yamajik/wasi-bindings/interface/wasi/sockets/network.IpAddress</a>?, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">@yamajik/wasi-bindings/interface/wasi/sockets/network.ErrorCode</a>]
@@ -65,11 +63,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/ipNameLookup#ResolveAddressStream">ResolveAddressStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## resolve\_addresses
 

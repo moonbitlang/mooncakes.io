@@ -53,7 +53,7 @@ Internally, it uses the `Chacha8` cipher to generate random numbers. It is a cry
   >  \[double\] returns a pseudo-random 64-bit Double in the range \[0.0, 1.0)
 - #### float
   ```moonbit
-  :::source,moonbitlang/core/random/random.mbt,163:::fn <a href="moonbitlang/core/random#Rand">Rand</a>::float(self : <a href="moonbitlang/core/random#Rand">Rand</a>) -> float
+  :::source,moonbitlang/core/random/random.mbt,163:::fn <a href="moonbitlang/core/random#Rand">Rand</a>::float(self : <a href="moonbitlang/core/random#Rand">Rand</a>) -> Float
   ```
   > 
   >  \[float\] returns a pseudo-random 32-bit Float in the range \[0.0, 1.0)

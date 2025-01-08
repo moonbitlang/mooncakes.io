@@ -1,0 +1,60 @@
+{
+  "readme": "",
+  "name": "oboard/moonbit-eval/parser",
+  "traits": [],
+  "types": [
+    {
+      "name": "Parser",
+      "docstring": "",
+      "signature": "type Parser",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [
+        {
+          "name": "parse",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/parser#Parser\">Parser</a>::parse[V](self : <a href=\"oboard/moonbit-eval/parser#Parser\">Parser</a>[V], tokens : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[<a href=\"oboard/moonbit-eval/lex#Token\">@oboard/moonbit-eval/lex.Token</a>]) -> (V, <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[<a href=\"oboard/moonbit-eval/lex#Token\">@oboard/moonbit-eval/lex.Token</a>])?",
+          "loc": { "line": 20, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "ParserContext",
+      "docstring": "",
+      "signature": "type ParserContext",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/parser#ParserContext\">ParserContext</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"oboard/moonbit-eval/parser#ParserContext\">ParserContext</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 17, "column": 10 }
+            }
+          ],
+          "loc": { "line": 17, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "parse_syntax",
+      "docstring": "",
+      "signature": "fn parse_syntax(tokens : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[<a href=\"oboard/moonbit-eval/lex#Token\">@oboard/moonbit-eval/lex.Token</a>]) -> (<a href=\"oboard/moonbit-eval/types#Syntax\">@oboard/moonbit-eval/types.Syntax</a>, <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[<a href=\"oboard/moonbit-eval/lex#Token\">@oboard/moonbit-eval/lex.Token</a>])?",
+      "loc": { "line": 306, "column": 8 }
+    },
+    {
+      "name": "parser_context",
+      "docstring": "",
+      "signature": "let parser_context : <a href=\"oboard/moonbit-eval/parser#ParserContext\">ParserContext</a>",
+      "loc": { "line": 20, "column": 9 }
+    }
+  ],
+  "misc": []
+}

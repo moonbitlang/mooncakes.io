@@ -73,7 +73,21 @@ pub fn SeriesData::empty(self : SeriesData) -> Bool {
 ///|
 type! EmptyArrayError String derive(Show)
 
-///| erase the element at the given index
+///| Erase an element from the SeriesData at a specified index
+///
+/// # Parameters
+///
+/// - `self` : An instance of the SeriesData
+/// - `index` : The index of the element to be erased
+///
+/// # Errors
+///
+/// - `EmptyArrayError` : Raised if the SeriesData is empty
+///
+/// # Example
+/// ```
+/// data.erase(1)
+/// ```
 pub fn SeriesData::erase(
   self : SeriesData,
   index : Int
@@ -102,7 +116,7 @@ pub fn SeriesData::sort(self : SeriesData) -> Unit {
 ///| get the indices of the sorted elements
 fn SeriesData::get_argsort_indices(
   self : SeriesData,
-  decrease~ : Bool = false
+  descending~ : Bool = false
 ) -> Array[Int] {
   let indices = Array::makei(self.length(), fn(i) { i })
   match self {
@@ -111,7 +125,7 @@ fn SeriesData::get_argsort_indices(
     SeriesData::Bool(data) => indices.sort_by_key(fn(i) { data[i] })
     SeriesData::Str(data) => indices.sort_by_key(fn(i) { data[i] })
   }
-  if decrease {
+  if descending {
     indices.rev_inplace()
   }
   indices
@@ -132,7 +146,7 @@ fn SeriesData::argsort_indices(self : SeriesData, indices : Array[Int]) -> Unit 
 /// # Parameters
 ///
 /// - `self` : An instance of the SeriesData
-/// - `decrease` : A boolean indicating whether to sort in descending order (default is false)
+/// - `descending~` : A boolean indicating whether to sort in descending order (default is false)
 ///
 /// # Returns
 ///
@@ -145,9 +159,9 @@ fn SeriesData::argsort_indices(self : SeriesData, indices : Array[Int]) -> Unit 
 /// ```
 pub fn SeriesData::argsort(
   self : SeriesData,
-  decrease~ : Bool = false
+  descending~ : Bool = false
 ) -> Array[Int] {
-  let indices = self.get_argsort_indices(decrease~)
+  let indices = self.get_argsort_indices(descending~)
   self.argsort_indices(indices)
   indices
 }
@@ -157,7 +171,7 @@ pub fn SeriesData::argsort(
 /// # Parameters
 ///
 /// - `self` : An instance of the SeriesData
-/// - `decrease` : A boolean indicating whether to sort in descending order (default is false)
+/// - `descending~` : A boolean indicating whether to sort in descending order (default is false)
 ///
 /// # Returns
 ///
@@ -168,8 +182,8 @@ pub fn SeriesData::argsort(
 /// let series = Series :: { name: "A", data: SeriesData::Int([3, 1, 2]) }
 /// let sorted_indices = series.argsort()
 /// ```
-pub fn Series::argsort(self : Series, decrease~ : Bool = false) -> Array[Int] {
-  self.data.argsort(decrease~)
+pub fn Series::argsort(self : Series, descending~ : Bool = false) -> Array[Int] {
+  self.data.argsort(descending~)
 }
 
 ///|
@@ -182,6 +196,121 @@ pub fn Series::data(self : Series) -> SeriesData {
   self.data
 }
 
+// type! TypeError String derive(Show)
+///| SeriesData add
+pub fn op_add(self : SeriesData, other : SeriesData) -> SeriesData {
+  match (self, other) {
+    (SeriesData::Int(a), SeriesData::Int(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v + b[i] })
+      SeriesData::Int(res)
+    }
+    (SeriesData::Float(a), SeriesData::Float(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v + b[i] })
+      SeriesData::Float(res)
+    }
+    (SeriesData::Str(a), SeriesData::Str(b)) => SeriesData::Str(a + b)
+    (SeriesData::Int(a), SeriesData::Float(b))
+    | (SeriesData::Float(b), SeriesData::Int(a)) => {
+      let res = b.copy()
+      res.eachi(fn(i, v) { res[i] = v + a[i].to_float() })
+      SeriesData::Float(res)
+    }
+    _ => abort("unsupported types")
+  }
+}
+
+///| Series add
+pub fn op_add(self : Series, other : Series) -> Series {
+  Series::new(self.name(), self.data() + other.data())
+}
+
+///| SeriesData sub
+pub fn op_sub(self : SeriesData, other : SeriesData) -> SeriesData {
+  match (self, other) {
+    (SeriesData::Int(a), SeriesData::Int(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v - b[i] })
+      SeriesData::Int(res)
+    }
+    (SeriesData::Float(a), SeriesData::Float(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v - b[i] })
+      SeriesData::Float(res)
+    }
+    (SeriesData::Int(a), SeriesData::Float(b))
+    | (SeriesData::Float(b), SeriesData::Int(a)) => {
+      let res = b.copy()
+      res.eachi(fn(i, v) { res[i] = v - a[i].to_float() })
+      SeriesData::Float(res)
+    }
+    _ => abort("unsupported types")
+  }
+}
+
+///| Series sub
+pub fn op_sub(self : Series, other : Series) -> Series {
+  Series::new(self.name(), self.data() - other.data())
+}
+
+///| SeriesData mul
+pub fn op_mul(self : SeriesData, other : SeriesData) -> SeriesData {
+  match (self, other) {
+    (SeriesData::Int(a), SeriesData::Int(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v * b[i] })
+      SeriesData::Int(res)
+    }
+    (SeriesData::Float(a), SeriesData::Float(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v * b[i] })
+      SeriesData::Float(res)
+    }
+    (SeriesData::Int(a), SeriesData::Float(b))
+    | (SeriesData::Float(b), SeriesData::Int(a)) => {
+      let res = b.copy()
+      res.eachi(fn(i, v) { res[i] = v * a[i].to_float() })
+      SeriesData::Float(res)
+    }
+    _ => abort("unsupported types")
+  }
+}
+
+///| Series mul
+pub fn op_mul(self : Series, other : Series) -> Series {
+  Series::new(self.name(), self.data() * other.data())
+}
+
+///| SeriesData div
+pub fn op_div(self : SeriesData, other : SeriesData) -> SeriesData {
+  match (self, other) {
+    (SeriesData::Int(a), SeriesData::Int(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v / b[i] })
+      SeriesData::Int(res)
+    }
+    (SeriesData::Float(a), SeriesData::Float(b)) => {
+      let res = a.copy()
+      res.eachi(fn(i, v) { res[i] = v / b[i] })
+      SeriesData::Float(res)
+    }
+    (SeriesData::Int(a), SeriesData::Float(b))
+    | (SeriesData::Float(b), SeriesData::Int(a)) => {
+      let res = b.copy()
+      res.eachi(fn(i, v) { res[i] = v / a[i].to_float() })
+      SeriesData::Float(res)
+    }
+    _ => abort("unsupported types")
+  }
+}
+
+///| Series div
+pub fn op_div(self : Series, other : Series) -> Series {
+  Series::new(self.name(), self.data() / other.data())
+}
+
+///| Tests
 test "series" {
   let series = Series::new("test", SeriesData::Int([1, 2, 3, 4, 5]))
   assert_eq!(series.name(), "test")
@@ -200,6 +329,42 @@ test "argsort" {
   let series = Series::new("test", SeriesData::Int([2, 1, 3, 5, 4]))
   let indices = series.data.argsort()
   inspect!(indices, content="[1, 0, 2, 4, 3]")
+}
+
+test "series_add" {
+  let a = Series::new("a", SeriesData::Float([1.5, 2, 3.5]))
+  let b = Series::new("b", SeriesData::Int([4, 5, 6]))
+  let c = a.data + b.data
+  inspect!(c, content="Float([5.5, 7, 9.5])")
+  let c = a + b
+  inspect!(c, content="{name: \"a\", data: Float([5.5, 7, 9.5])}")
+}
+
+test "series_sub" {
+  let a = Series::new("a", SeriesData::Float([1.5, 2, 3.5]))
+  let b = Series::new("b", SeriesData::Int([4, 5, 6]))
+  let c = a.data - b.data
+  inspect!(c, content="Float([-2.5, -3, -2.5])")
+  let c = a - b
+  inspect!(c, content="{name: \"a\", data: Float([-2.5, -3, -2.5])}")
+}
+
+test "series_mul" {
+  let a = Series::new("a", SeriesData::Float([1.5, 2, 3.5]))
+  let b = Series::new("b", SeriesData::Int([4, 5, 6]))
+  let c = a.data * b.data
+  inspect!(c, content="Float([6, 10, 21])")
+  let c = a * b
+  inspect!(c, content="{name: \"a\", data: Float([6, 10, 21])}")
+}
+
+test "series_div" {
+  let a = Series::new("a", SeriesData::Int([2, 4, 9]))
+  let b = Series::new("b", SeriesData::Int([1, 2, 3]))
+  let c = a.data / b.data
+  inspect!(c, content="Int([2, 2, 3])")
+  let c = a / b
+  inspect!(c, content="{name: \"a\", data: Int([2, 2, 3])}")
 }
 </code></pre>
   <script>

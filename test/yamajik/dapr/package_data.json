@@ -1,0 +1,72 @@
+{
+  "readme": "",
+  "name": "yamajik/dapr",
+  "traits": [],
+  "types": [
+    {
+      "name": "DaprError",
+      "docstring": "",
+      "signature": "pub(all) enum DaprError {\n  InvalidArgument(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n}",
+      "loc": { "line": 1, "column": 16 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HTTPClient",
+      "docstring": "",
+      "signature": "type HTTPClient",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "invoke",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/dapr#HTTPClient\">HTTPClient</a>::invoke[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>](self : <a href=\"yamajik/dapr#HTTPClient\">HTTPClient</a>, app~ : String, method~ : String, data~ : A) -> B!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 24, "column": 20 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/dapr#HTTPClient\">HTTPClient</a>::new(url~ : String = .., runtime_version~ : String = ..) -> <a href=\"yamajik/dapr#HTTPClient\">HTTPClient</a>",
+          "loc": { "line": 8, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "HTTPServer",
+      "docstring": "",
+      "signature": "pub struct HTTPServer {\n  server : <a href=\"yamajik/wasi/http#Server\">@yamajik/wasi/http.Server</a>\n}",
+      "loc": { "line": 2, "column": 22 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>::new(server~ : <a href=\"yamajik/wasi/http#Server\">@yamajik/wasi/http.Server</a> = ..) -> <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>",
+          "loc": { "line": 7, "column": 20 }
+        },
+        {
+          "name": "on_binding",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>::on_binding[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>, name~ : String, method~ : <a href=\"yamajik/wasi/http#Method\">@yamajik/wasi/http.Method</a> = .., handler~ : (A) -> B!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> Unit",
+          "loc": { "line": 29, "column": 20 }
+        },
+        {
+          "name": "on_invoke",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>::on_invoke[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>, name~ : String, method~ : <a href=\"yamajik/wasi/http#Method\">@yamajik/wasi/http.Method</a> = .., handler~ : (A) -> B!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> Unit",
+          "loc": { "line": 14, "column": 20 }
+        },
+        {
+          "name": "serve",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>::serve(self : <a href=\"yamajik/dapr#HTTPServer\">HTTPServer</a>, p0 : Int, p1 : Int) -> Unit",
+          "loc": { "line": 44, "column": 20 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

@@ -1,0 +1,983 @@
+{
+  "readme": "",
+  "name": "gmlewis/image/color",
+  "traits": [
+    {
+      "name": "@gmlewis/image/color.Color",
+      "docstring": " Color can convert itself to alpha-premultiplied 16-bits per channel RGBA.\n The conversion may be lossy.",
+      "signature": "pub(open) trait @gmlewis/image/color.Color {\n  rgba(Self) -> (UInt, UInt, UInt, UInt)\n  model(Self) -> String\n  raw(Self) -> (UInt, UInt, UInt, UInt)\n}",
+      "loc": { "line": 12, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/image/color.Model",
+      "docstring": " Model can convert any [&Color] to one from its own color model. The conversion\n may be lossy.",
+      "signature": "pub(open) trait @gmlewis/image/color.Model {\n  convert(Self, <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Color\">Color</a>\n  name(Self) -> String\n  get_palette(Self) -> <a href=\"gmlewis/image/color#Palette\">Palette</a>?\n}",
+      "loc": { "line": 317, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Alpha",
+      "docstring": " Alpha represents an 8-bit alpha color.",
+      "signature": "pub(all) struct Alpha {\n  a : Byte\n}",
+      "loc": { "line": 199, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha\">Alpha</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Alpha\">Alpha</a>",
+          "loc": { "line": 478, "column": 15 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha\">Alpha</a>::model(_self : <a href=\"gmlewis/image/color#Alpha\">Alpha</a>) -> String",
+          "loc": { "line": 212, "column": 15 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha\">Alpha</a>::new(a : Byte) -> <a href=\"gmlewis/image/color#Alpha\">Alpha</a>",
+          "loc": { "line": 207, "column": 15 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha\">Alpha</a>::raw(self : <a href=\"gmlewis/image/color#Alpha\">Alpha</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 217, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha\">Alpha</a>::rgba(self : <a href=\"gmlewis/image/color#Alpha\">Alpha</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 223, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#Alpha\">Alpha</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#Alpha\">Alpha</a>, <a href=\"gmlewis/image/color#Alpha\">Alpha</a>) -> Bool",
+              "loc": { "line": 201, "column": 16 }
+            }
+          ],
+          "loc": { "line": 201, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#Alpha\">Alpha</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#Alpha\">Alpha</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 201, "column": 10 }
+            }
+          ],
+          "loc": { "line": 201, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Alpha16",
+      "docstring": " Alpha16 represents a 16-bit alpha color.",
+      "signature": "pub(all) struct Alpha16 {\n  a : UInt\n}",
+      "loc": { "line": 229, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>",
+          "loc": { "line": 494, "column": 17 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>::model(_self : <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>) -> String",
+          "loc": { "line": 242, "column": 17 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>::new(a : UInt) -> <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>",
+          "loc": { "line": 237, "column": 17 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>::raw(self : <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 247, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>::rgba(self : <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 252, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>, <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>) -> Bool",
+              "loc": { "line": 231, "column": 16 }
+            }
+          ],
+          "loc": { "line": 231, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 231, "column": 10 }
+            }
+          ],
+          "loc": { "line": 231, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "CMYK",
+      "docstring": " CMYK represents a fully opaque CMYK color, having 8 bits for each of cyan,\n magenta, yellow and black.\n\n It is not associated with any particular color profile.",
+      "signature": "pub(all) struct CMYK {\n  c : Byte\n  m : Byte\n  y : Byte\n  k : Byte\n}",
+      "loc": { "line": 419, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#CMYK\">CMYK</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#CMYK\">CMYK</a>",
+          "loc": { "line": 465, "column": 14 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#CMYK\">CMYK</a>::model(_self : <a href=\"gmlewis/image/color#CMYK\">CMYK</a>) -> String",
+          "loc": { "line": 435, "column": 14 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#CMYK\">CMYK</a>::new(c : Byte, m : Byte, y : Byte, k : Byte) -> <a href=\"gmlewis/image/color#CMYK\">CMYK</a>",
+          "loc": { "line": 430, "column": 14 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#CMYK\">CMYK</a>::raw(self : <a href=\"gmlewis/image/color#CMYK\">CMYK</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 440, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#CMYK\">CMYK</a>::rgba(self : <a href=\"gmlewis/image/color#CMYK\">CMYK</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 445, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#CMYK\">CMYK</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#CMYK\">CMYK</a>, <a href=\"gmlewis/image/color#CMYK\">CMYK</a>) -> Bool",
+              "loc": { "line": 424, "column": 16 }
+            }
+          ],
+          "loc": { "line": 424, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#CMYK\">CMYK</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#CMYK\">CMYK</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 424, "column": 10 }
+            }
+          ],
+          "loc": { "line": 424, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Gray",
+      "docstring": " Gray represents an 8-bit grayscale color.",
+      "signature": "pub(all) struct Gray {\n  y : Byte\n}",
+      "loc": { "line": 257, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray\">Gray</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Gray\">Gray</a>",
+          "loc": { "line": 509, "column": 14 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray\">Gray</a>::model(_self : <a href=\"gmlewis/image/color#Gray\">Gray</a>) -> String",
+          "loc": { "line": 270, "column": 14 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray\">Gray</a>::new(y : Byte) -> <a href=\"gmlewis/image/color#Gray\">Gray</a>",
+          "loc": { "line": 265, "column": 14 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray\">Gray</a>::raw(self : <a href=\"gmlewis/image/color#Gray\">Gray</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 275, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray\">Gray</a>::rgba(self : <a href=\"gmlewis/image/color#Gray\">Gray</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 281, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#Gray\">Gray</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#Gray\">Gray</a>, <a href=\"gmlewis/image/color#Gray\">Gray</a>) -> Bool",
+              "loc": { "line": 259, "column": 16 }
+            }
+          ],
+          "loc": { "line": 259, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#Gray\">Gray</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#Gray\">Gray</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 259, "column": 10 }
+            }
+          ],
+          "loc": { "line": 259, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Gray16",
+      "docstring": " Gray16 represents a 16-bit grayscale color.",
+      "signature": "pub(all) struct Gray16 {\n  y : UInt\n}",
+      "loc": { "line": 287, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray16\">Gray16</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Gray16\">Gray16</a>",
+          "loc": { "line": 535, "column": 16 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray16\">Gray16</a>::model(_self : <a href=\"gmlewis/image/color#Gray16\">Gray16</a>) -> String",
+          "loc": { "line": 300, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray16\">Gray16</a>::new(y : UInt) -> <a href=\"gmlewis/image/color#Gray16\">Gray16</a>",
+          "loc": { "line": 295, "column": 16 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray16\">Gray16</a>::raw(self : <a href=\"gmlewis/image/color#Gray16\">Gray16</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 305, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Gray16\">Gray16</a>::rgba(self : <a href=\"gmlewis/image/color#Gray16\">Gray16</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 311, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#Gray16\">Gray16</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#Gray16\">Gray16</a>, <a href=\"gmlewis/image/color#Gray16\">Gray16</a>) -> Bool",
+              "loc": { "line": 289, "column": 16 }
+            }
+          ],
+          "loc": { "line": 289, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#Gray16\">Gray16</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#Gray16\">Gray16</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 289, "column": 10 }
+            }
+          ],
+          "loc": { "line": 289, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ModelFunc",
+      "docstring": "",
+      "signature": "type ModelFunc",
+      "loc": { "line": 339, "column": 8 },
+      "methods": [
+        {
+          "name": "convert",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#ModelFunc\">ModelFunc</a>::convert(self : <a href=\"gmlewis/image/color#ModelFunc\">ModelFunc</a>, c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Color\">Color</a>",
+          "loc": { "line": 346, "column": 8 }
+        },
+        {
+          "name": "get_palette",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#ModelFunc\">ModelFunc</a>::get_palette(self : <a href=\"gmlewis/image/color#ModelFunc\">ModelFunc</a>) -> <a href=\"gmlewis/image/color#Palette\">Palette</a>?",
+          "loc": { "line": 356, "column": 8 }
+        },
+        {
+          "name": "name",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#ModelFunc\">ModelFunc</a>::name(self : <a href=\"gmlewis/image/color#ModelFunc\">ModelFunc</a>) -> String",
+          "loc": { "line": 351, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "NRGBA",
+      "docstring": " NRGBA represents a non-alpha-premultiplied 32-bit color.",
+      "signature": "pub(all) struct NRGBA {\n  r : Byte\n  g : Byte\n  b : Byte\n  a : Byte\n}",
+      "loc": { "line": 122, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>",
+          "loc": { "line": 424, "column": 15 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>::model(_self : <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>) -> String",
+          "loc": { "line": 138, "column": 15 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>::new(r : Byte, g : Byte, b : Byte, a : Byte) -> <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>",
+          "loc": { "line": 133, "column": 15 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>::raw(self : <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 143, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>::rgba(self : <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 148, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>, <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>) -> Bool",
+              "loc": { "line": 127, "column": 16 }
+            }
+          ],
+          "loc": { "line": 127, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#NRGBA\">NRGBA</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 127, "column": 10 }
+            }
+          ],
+          "loc": { "line": 127, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "NRGBA64",
+      "docstring": " NRGBA64 represents a non-alpha-premultiplied 64-bit color,\n having 16 bits for each of red, green, blue and alpha.",
+      "signature": "pub(all) struct NRGBA64 {\n  r : UInt\n  g : UInt\n  b : UInt\n  a : UInt\n}",
+      "loc": { "line": 165, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>",
+          "loc": { "line": 453, "column": 17 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>::model(_self : <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>) -> String",
+          "loc": { "line": 181, "column": 17 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>::new(r : UInt, g : UInt, b : UInt, a : UInt) -> <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>",
+          "loc": { "line": 176, "column": 17 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>::raw(self : <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 186, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>::rgba(self : <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 191, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>, <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>) -> Bool",
+              "loc": { "line": 170, "column": 16 }
+            }
+          ],
+          "loc": { "line": 170, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#NRGBA64\">NRGBA64</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 170, "column": 10 }
+            }
+          ],
+          "loc": { "line": 170, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "NYCbCrA",
+      "docstring": " NYCbCrA represents a non-alpha-premultiplied Y'CbCr-with-alpha color, having\n 8 bits each for one luma, two chroma and one alpha component.",
+      "signature": "pub(all) struct NYCbCrA {\n  y : Byte\n  cb : Byte\n  cr : Byte\n  a : Byte\n}",
+      "loc": { "line": 271, "column": 17 },
+      "methods": [
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>::model(_self : <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>) -> String",
+          "loc": { "line": 287, "column": 17 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>::new(y : Byte, cb : Byte, cr : Byte, a : Byte) -> <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>",
+          "loc": { "line": 282, "column": 17 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>::raw(self : <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 292, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>::rgba(self : <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 297, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>, <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>) -> Bool",
+              "loc": { "line": 276, "column": 16 }
+            }
+          ],
+          "loc": { "line": 276, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#NYCbCrA\">NYCbCrA</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 276, "column": 10 }
+            }
+          ],
+          "loc": { "line": 276, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Palette",
+      "docstring": " Palette is a palette of colors and satisfies the Model trait.",
+      "signature": "pub(all) type Palette <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[<a href=\"gmlewis/image/color#Color\">Color</a>]",
+      "loc": { "line": 555, "column": 15 },
+      "methods": [
+        {
+          "name": "convert",
+          "docstring": " convert returns the palette color closest to c in Euclidean R,G,B space.",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::convert(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>, c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Color\">Color</a>",
+          "loc": { "line": 610, "column": 8 }
+        },
+        {
+          "name": "from",
+          "docstring": " Palette::from makes a new palette from the provided colors.",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::from(arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/image/color#Color\">Color</a>]) -> <a href=\"gmlewis/image/color#Palette\">Palette</a>",
+          "loc": { "line": 580, "column": 17 }
+        },
+        {
+          "name": "get_palette",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::get_palette(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>) -> <a href=\"gmlewis/image/color#Palette\">Palette</a>?",
+          "loc": { "line": 590, "column": 8 }
+        },
+        {
+          "name": "index",
+          "docstring": " index returns the index of the palette color closest to c in Euclidean\n R,G,B,A space.",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::index(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>, c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> Int",
+          "loc": { "line": 620, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::length(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>) -> Int",
+          "loc": { "line": 600, "column": 8 }
+        },
+        {
+          "name": "name",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::name(_self : <a href=\"gmlewis/image/color#Palette\">Palette</a>) -> String",
+          "loc": { "line": 585, "column": 17 }
+        },
+        {
+          "name": "new",
+          "docstring": " Palette::new makes a new palette with `n` colors (initially all black).",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::new(n : Int) -> <a href=\"gmlewis/image/color#Palette\">Palette</a>",
+          "loc": { "line": 561, "column": 17 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::new_empty() -> <a href=\"gmlewis/image/color#Palette\">Palette</a>",
+          "loc": { "line": 595, "column": 17 }
+        },
+        {
+          "name": "op_as_view",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::op_as_view(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>, start~ : Int = .., end~ : Int) -> <a href=\"gmlewis/image/color#Palette\">Palette</a>",
+          "loc": { "line": 605, "column": 8 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::op_get(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>, idx : Int) -> <a href=\"gmlewis/image/color#Color\">Color</a>",
+          "loc": { "line": 575, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Palette\">Palette</a>::op_set(self : <a href=\"gmlewis/image/color#Palette\">Palette</a>, idx : Int, c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> Unit",
+          "loc": { "line": 570, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RGBA",
+      "docstring": " RGBA represents a traditional 32-bit alpha-premultiplied color, having 8\n bits for each of red, green, blue and alpha.\n\n An alpha-premultiplied color component C has been scaled by alpha (A), so\n has valid values 0 <= C <= A.",
+      "signature": "pub(all) struct RGBA {\n  r : Byte\n  g : Byte\n  b : Byte\n  a : Byte\n}",
+      "loc": { "line": 52, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA\">RGBA</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#RGBA\">RGBA</a>",
+          "loc": { "line": 390, "column": 14 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA\">RGBA</a>::model(_self : <a href=\"gmlewis/image/color#RGBA\">RGBA</a>) -> String",
+          "loc": { "line": 68, "column": 14 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA\">RGBA</a>::new(r : Byte, g : Byte, b : Byte, a : Byte) -> <a href=\"gmlewis/image/color#RGBA\">RGBA</a>",
+          "loc": { "line": 63, "column": 14 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA\">RGBA</a>::raw(self : <a href=\"gmlewis/image/color#RGBA\">RGBA</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 73, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA\">RGBA</a>::rgba(self : <a href=\"gmlewis/image/color#RGBA\">RGBA</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 78, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#RGBA\">RGBA</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#RGBA\">RGBA</a>, <a href=\"gmlewis/image/color#RGBA\">RGBA</a>) -> Bool",
+              "loc": { "line": 57, "column": 16 }
+            }
+          ],
+          "loc": { "line": 57, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#RGBA\">RGBA</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#RGBA\">RGBA</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 57, "column": 10 }
+            }
+          ],
+          "loc": { "line": 57, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "RGBA64",
+      "docstring": " RGBA64 represents a 64-bit alpha-premultiplied color, having 16 bits for\n each of red, green, blue and alpha.\n\n An alpha-premultiplied color component C has been scaled by alpha (A), so\n has valid values 0 <= C <= A.",
+      "signature": "pub(all) struct RGBA64 {\n  r : UInt\n  g : UInt\n  b : UInt\n  a : UInt\n}",
+      "loc": { "line": 91, "column": 17 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>::from(c : <a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>",
+          "loc": { "line": 409, "column": 16 }
+        },
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>::model(_self : <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>) -> String",
+          "loc": { "line": 107, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>::new(r : UInt, g : UInt, b : UInt, a : UInt) -> <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>",
+          "loc": { "line": 102, "column": 16 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>::raw(self : <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 112, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>::rgba(self : <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 117, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>, <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>) -> Bool",
+              "loc": { "line": 96, "column": 16 }
+            }
+          ],
+          "loc": { "line": 96, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#RGBA64\">RGBA64</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 96, "column": 10 }
+            }
+          ],
+          "loc": { "line": 96, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "YCbCr",
+      "docstring": " YCbCr represents a fully opaque 24-bit Y'CbCr color, having 8 bits each for\n one luma and two chroma components.\n\n JPEG, VP8, the MPEG family and other codecs use this color model. Such\n codecs often use the terms YUV and Y'CbCr interchangeably, but strictly\n speaking, the term YUV applies only to analog video signals, and Y' (luma)\n is Y (luminance) after applying gamma correction.\n\n Conversion between RGB and Y'CbCr is lossy and there are multiple, slightly\n different formulae for converting between the two. This package follows\n the JFIF specification at https://www.w3.org/Graphics/JPEG/jfif3.pdf.",
+      "signature": "pub(all) struct YCbCr {\n  y : Byte\n  cb : Byte\n  cr : Byte\n}",
+      "loc": { "line": 170, "column": 17 },
+      "methods": [
+        {
+          "name": "model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>::model(_self : <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>) -> String",
+          "loc": { "line": 185, "column": 15 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>::new(y : Byte, cb : Byte, cr : Byte) -> <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>",
+          "loc": { "line": 180, "column": 15 }
+        },
+        {
+          "name": "raw",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>::raw(self : <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 190, "column": 8 }
+        },
+        {
+          "name": "rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>::rgba(self : <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>) -> (UInt, UInt, UInt, UInt)",
+          "loc": { "line": 195, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>, <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>) -> Bool",
+              "loc": { "line": 174, "column": 16 }
+            }
+          ],
+          "loc": { "line": 174, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image/color#YCbCr\">YCbCr</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 174, "column": 10 }
+            }
+          ],
+          "loc": { "line": 174, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "alpha16_model",
+      "docstring": "",
+      "signature": "let alpha16_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 376, "column": 9 }
+    },
+    {
+      "name": "alpha_model",
+      "docstring": "",
+      "signature": "let alpha_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 373, "column": 9 }
+    },
+    {
+      "name": "black",
+      "docstring": " Standard colors.",
+      "signature": "let black : <a href=\"gmlewis/image/color#Gray16\">Gray16</a>",
+      "loc": { "line": 675, "column": 9 }
+    },
+    {
+      "name": "cmyk_model",
+      "docstring": " cmyk_model is the [Model] for CMYK colors.",
+      "signature": "let cmyk_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 457, "column": 9 }
+    },
+    {
+      "name": "cmyk_to_rgb",
+      "docstring": " cmyk_to_rgb converts a [CMYK] quadruple to an RGB triple.",
+      "signature": "fn cmyk_to_rgb(c : Byte, m : Byte, y : Byte, k : Byte) -> (Byte, Byte, Byte)",
+      "loc": { "line": 399, "column": 8 }
+    },
+    {
+      "name": "gray16_model",
+      "docstring": "",
+      "signature": "let gray16_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 382, "column": 9 }
+    },
+    {
+      "name": "gray_model",
+      "docstring": "",
+      "signature": "let gray_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 379, "column": 9 }
+    },
+    {
+      "name": "model_func",
+      "docstring": " model_func returns a [Model] that invokes f to implement the conversion.",
+      "signature": "fn model_func(f : (<a href=\"gmlewis/image/color#Color\">Color</a>) -> <a href=\"gmlewis/image/color#Color\">Color</a>, name : String, palette : <a href=\"gmlewis/image/color#Palette\">Palette</a>?) -> <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 324, "column": 8 }
+    },
+    {
+      "name": "n_y_cb_cr_a_model",
+      "docstring": " n_y_cb_cr_a_model is the [Model] for non-alpha-premultiplied Y'CbCr-with-alpha\n colors.",
+      "signature": "let n_y_cb_cr_a_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 343, "column": 9 }
+    },
+    {
+      "name": "nrgba64_model",
+      "docstring": "",
+      "signature": "let nrgba64_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 370, "column": 9 }
+    },
+    {
+      "name": "nrgba_model",
+      "docstring": "",
+      "signature": "let nrgba_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 367, "column": 9 }
+    },
+    {
+      "name": "opaque",
+      "docstring": "",
+      "signature": "let opaque : <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>",
+      "loc": { "line": 684, "column": 9 }
+    },
+    {
+      "name": "rgb_to_cmyk",
+      "docstring": " rgb_to_cmyk converts an RGB triple to a CMYK quadruple.",
+      "signature": "fn rgb_to_cmyk(r : Byte, g : Byte, b : Byte) -> (Byte, Byte, Byte, Byte)",
+      "loc": { "line": 377, "column": 8 }
+    },
+    {
+      "name": "rgb_to_y_cb_cr",
+      "docstring": " rgb_to_y_cb_cr converts an RGB triple to a Y'CbCr triple.",
+      "signature": "fn rgb_to_y_cb_cr(r : Byte, g : Byte, b : Byte) -> (Byte, Byte, Byte)",
+      "loc": { "line": 9, "column": 8 }
+    },
+    {
+      "name": "rgba64_model",
+      "docstring": "",
+      "signature": "let rgba64_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 364, "column": 9 }
+    },
+    {
+      "name": "rgba_model",
+      "docstring": " Models for the standard color types.",
+      "signature": "let rgba_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 361, "column": 9 }
+    },
+    {
+      "name": "transparent",
+      "docstring": "",
+      "signature": "let transparent : <a href=\"gmlewis/image/color#Alpha16\">Alpha16</a>",
+      "loc": { "line": 681, "column": 9 }
+    },
+    {
+      "name": "white",
+      "docstring": "",
+      "signature": "let white : <a href=\"gmlewis/image/color#Gray16\">Gray16</a>",
+      "loc": { "line": 678, "column": 9 }
+    },
+    {
+      "name": "y_cb_cr_model",
+      "docstring": " y_cb_cr_model is the [Model] for Y'CbCr colors.",
+      "signature": "let y_cb_cr_model : <a href=\"gmlewis/image/color#Model\">Model</a>",
+      "loc": { "line": 253, "column": 9 }
+    },
+    {
+      "name": "y_cb_cr_to_rgb",
+      "docstring": " y_cb_cr_to_rgb converts a Y'CbCr triple to an RGB triple.",
+      "signature": "fn y_cb_cr_to_rgb(y : Byte, cb : Byte, cr : Byte) -> (Byte, Byte, Byte)",
+      "loc": { "line": 61, "column": 8 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Color",
+      "impls": [],
+      "methods": [
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Color\">Color</a>::op_equal(self : <a href=\"gmlewis/image/color#Color\">Color</a>, o : <a href=\"gmlewis/image/color#Color\">Color</a>) -> Bool",
+          "loc": { "line": 41, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/color#Color\">Color</a>::to_string(self : <a href=\"gmlewis/image/color#Color\">Color</a>) -> String",
+          "loc": { "line": 35, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

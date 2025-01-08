@@ -17,13 +17,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/sorted_map/map.mbt,240:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/sorted_map#T">T</a> with arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/sorted_map/utils.mbt,64:::impl[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/sorted_map/utils.mbt,64:::fn output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/sorted_map/utils.mbt,64:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/sorted_map#T">T</a> with output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/sorted_map/map.mbt,237:::impl[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/sorted_map/map.mbt,240:::fn arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -32,11 +40,6 @@
   ```
   > 
   >  Inserts a key-value pair.
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/sorted_map/map.mbt,240:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]
-  ```
-  > 
 - #### clear
   ```moonbit
   :::source,moonbitlang/core/sorted_map/map.mbt,114:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::clear[K, V](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]) -> Unit
@@ -109,11 +112,6 @@
   :::source,moonbitlang/core/sorted_map/map.mbt,16:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::op_set[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V], key : K, value : V) -> Unit
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/sorted_map/utils.mbt,64:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### remove
   ```moonbit
   :::source,moonbitlang/core/sorted_map/map.mbt,58:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::remove[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V], key : K) -> Unit
@@ -132,11 +130,6 @@
   ```
   > 
   >  Converts the map to an array.
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/sorted_map/traits.mbt,85:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### values
   ```moonbit
   :::source,moonbitlang/core/sorted_map/map.mbt,167:::fn <a href="moonbitlang/core/sorted_map#T">T</a>::values[K, V](self : <a href="moonbitlang/core/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/array#Array">Array</a>[V]

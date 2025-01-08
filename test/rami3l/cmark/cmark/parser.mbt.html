@@ -37,7 +37,7 @@ struct Parser {
   /// Compute heading IDs.
   heading_auto_ids : Bool
   nested_links : Bool
-  mut defs : LabelDefs
+  defs : LabelDefs
   resolver : LabelResolverFn
 
   /// Current `CloserIndex`, for inline parsing.
@@ -61,7 +61,7 @@ struct Parser {
 
 ///|
 fn Parser::new(
-  defs~ : LabelDefs = LabelDefs::empty(),
+  defs~ : LabelDefs = LabelDefs::new(),
   resolver~ : LabelResolverFn = LabelContext::default_resolver,
   nested_links~ : Bool = false,
   heading_auto_ids~ : Bool = false,
@@ -75,9 +75,9 @@ fn Parser::new(
     file,
     i,
     buf: Buffer::new(size_hint=512),
-    no_locs: locs.not(),
-    no_layouts: layout.not(),
-    exts: strict.not(),
+    no_locs: not(locs),
+    no_layouts: not(layout),
+    exts: not(strict),
     heading_auto_ids,
     nested_links,
     defs,
@@ -104,7 +104,7 @@ fn Parser::find_label_defining_key(self : Parser, key : String) -> Label? {
 
 ///|
 fn Parser::set_label_def(self : Parser, l : Label, def : LabelDef) -> Unit {
-  self.defs = self.defs.add(l.key, def)
+  self.defs[l.key] = def
 }
 
 ///|
@@ -295,17 +295,17 @@ fn Parser::layout_clean_raw_span1(
 ///|
 fn Parser::tight_block_lines(
   self : Parser,
-  rev_spans~ : RevSpans
-) -> List[Tight] {
-  self._tight_block_lines(Parser::clean_unesc_unref_span, rev_spans~)
+  spans~ : ArrayView[Span]
+) -> Array[Tight] {
+  self._tight_block_lines(Parser::clean_unesc_unref_span, spans~)
 }
 
 ///|
 fn Parser::raw_tight_block_lines(
   self : Parser,
-  rev_spans~ : RevSpans
-) -> List[Tight] {
-  self._tight_block_lines(fn(p, s) { p.clean_raw_span(s) }, rev_spans~)
+  spans~ : ArrayView[Span]
+) -> Array[Tight] {
+  self._tight_block_lines(fn(p, s) { p.clean_raw_span(s) }, spans~)
 }
 
 ///|
@@ -315,26 +315,29 @@ typealias ParserCleanSpanFn = (Parser, LineSpan) -> StringNode
 fn Parser::_tight_block_lines(
   self : Parser,
   f : ParserCleanSpanFn,
-  rev_spans~ : RevSpans
-) -> List[Tight] {
-  loop List::Nil, rev_spans {
-    acc, Nil => acc
-    acc, Cons({ span: fst_ln, .. }, Nil) =>
-      acc.add({ blanks: "", node: f(self, fst_ln) })
-    acc, Cons({ start: line_start, span }, spans) => {
-      let layout = if self.no_layouts || span.first <= line_start {
-        ""
-      } else {
-        @char.utf_16_clean_raw(
-          self.buf,
-          self.i,
-          first=line_start,
-          last=span.first - 1,
-        )
+  spans~ : ArrayView[Span]
+) -> Array[Tight] {
+  let acc = []
+  for i, span in spans {
+    match (span, i) {
+      ({ span: fst_ln, .. }, 0) =>
+        acc.push({ blanks: "", node: f(self, fst_ln) })
+      ({ start: line_start, span }, _) => {
+        let layout = if self.no_layouts || span.first <= line_start {
+          ""
+        } else {
+          @char.utf_16_clean_raw(
+            self.buf,
+            self.i,
+            first=line_start,
+            last=span.first - 1,
+          )
+        }
+        acc.push({ blanks: layout, node: f(self, span) })
       }
-      continue acc.add({ blanks: layout, node: f(self, span) }), spans
     }
   }
+  acc
 }
 
 ///|
@@ -349,7 +352,7 @@ fn Parser::first_non_blank_over_nl[A](
   lines : A,
   line : LineSpan,
   start~ : BytePos
-) -> (A, LineSpan, List[StringNode], Int)? {
+) -> (LineSpan, Array[StringNode], Int)? {
   match
     @cmark_base.first_non_blank_over_nl(
       next_line~,
@@ -361,17 +364,17 @@ fn Parser::first_non_blank_over_nl[A](
     None => None
     Some(ThisLine(nb)) => {
       let layout = if nb == start {
-        List::Nil
+        []
       } else {
-        List::of([self.clean_raw_span({ ..line, first: start, last: nb - 1 })])
+        [self.clean_raw_span({ ..line, first: start, last: nb - 1 })]
       }
-      Some((lines, line, layout, nb))
+      Some((line, layout, nb))
     }
-    Some(NextLine(lines, newline, nb)) => {
+    Some(NextLine(newline, nb)) => {
       let first_layout = self.clean_raw_span({ ..line, first: start })
       let next_layout = self.clean_raw_span({ ..newline, last: nb - 1 })
-      let layout = List::of([first_layout, next_layout])
-      Some((lines, newline, layout, nb))
+      let layout = [first_layout, next_layout]
+      Some((newline, layout, nb))
     }
   }
 }

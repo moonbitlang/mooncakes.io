@@ -8,16 +8,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/ref/ref.mbt,116:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/ref#Ref">Ref</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/ref#Ref">Ref</a>[X]
+  :::source,moonbitlang/core/ref/ref.mbt,116:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/ref#Ref">Ref</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/ref/ref.mbt,116:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/ref#Ref">Ref</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/ref/ref.mbt,116:::fn <a href="moonbitlang/core/ref#Ref">Ref</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/ref#Ref">Ref</a>[X]
-  ```
-  > 
 - #### map
   ```moonbit
   :::source,moonbitlang/core/ref/ref.mbt,33:::fn <a href="moonbitlang/core/ref#Ref">Ref</a>::map[T, R](self : <a href="moonbitlang/core/ref#Ref">Ref</a>[T], f : (T) -> R) -> <a href="moonbitlang/core/ref#Ref">Ref</a>[R]

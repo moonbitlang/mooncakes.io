@@ -1,10 +1,10 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[IBinBlit](#IBinBlit)| binary blit|
-|[IBinReader](#IBinReader)| binary reader|
-|[IBinWriter](#IBinWriter)| binary writer|
-|[IString](#IString)| utf16 string interface|
+|[@suiyunonghen/moonvalue.IBinBlit](#@suiyunonghen/moonvalue.IBinBlit)| binary blit|
+|[@suiyunonghen/moonvalue.IBinReader](#@suiyunonghen/moonvalue.IBinReader)| binary reader|
+|[@suiyunonghen/moonvalue.IBinWriter](#@suiyunonghen/moonvalue.IBinWriter)| binary writer|
+|[@suiyunonghen/moonvalue.IString](#@suiyunonghen/moonvalue.IString)| utf16 string interface|
 
 |Type|description|
 |---|---|
@@ -22,19 +22,18 @@
 |[MsgpackEncoder](#MsgpackEncoder)||
 |[StringView](#StringView)| share memory string|
 |[ValueData](#ValueData)| data of moonvalue|
-|[IBinReader](#IBinReader)||
 |[IString](#IString)||
-|[MsgPackFormatCode](#MsgPackFormatCode)||
+|[IBinReader](#IBinReader)||
 
 |Value|description|
 |---|---|
 |[utf16\_utf8](#utf16_utf8)||
 |[utf8\_utf16](#utf8_utf16)||
 
-## IBinBlit
+## @suiyunonghen/moonvalue.IBinBlit
 
 ```moonbit
-:::source,suiyunonghen/moonvalue/traits.mbt,714:::pub(open) trait IBinBlit : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> + <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> {
+:::source,suiyunonghen/moonvalue/traits.mbt,714:::pub(open) trait @suiyunonghen/moonvalue.IBinBlit : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> + <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> {
   newBlit() -> Self
   as_binwriter(Self) -> <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>
   as_binreader(Self) -> <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>
@@ -44,17 +43,17 @@
 ```
  binary blit
 
-## IBinReader
+## @suiyunonghen/moonvalue.IBinReader
 
 ```moonbit
-:::source,suiyunonghen/moonvalue/traits.mbt,292:::pub(open) trait IBinReader : <a href="moonbitlang/core/builtin#Show">Show</a> {
+:::source,suiyunonghen/moonvalue/traits.mbt,292:::pub(open) trait @suiyunonghen/moonvalue.IBinReader : <a href="moonbitlang/core/builtin#Show">Show</a> {
   length(Self) -> Int
   read_byte(Self, Int) -> Byte
   read_bool(Self, Int) -> Bool
   read_int16(Self, Int, Bool) -> Int
   read_int32(Self, Int, Bool) -> Int
   read_int64(Self, Int, Bool) -> Int64
-  read_float(Self, Int) -> float
+  read_float(Self, Int) -> Float
   read_double(Self, Int) -> Double
 }
 ```
@@ -62,62 +61,58 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,693:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="moonbitlang/core/array#Array">Array</a> with length(self : <a href="moonbitlang/core/array#Array">Array</a>[Byte]) -> Int
+  :::source,suiyunonghen/moonvalue/traits.mbt,552:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for Bytes
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,552:::fn length(self : Bytes) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,555:::fn read_byte(self : Bytes, offset : Int) -> Byte
+    ```
+    > 
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,581:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a> with length(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>]) -> Int
+  :::source,suiyunonghen/moonvalue/traits.mbt,693:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="moonbitlang/core/array#Array">Array</a>[Byte]
   ```
   > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,552:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="moonbitlang/core/bytes#Bytes">Bytes</a> with length(self : Bytes) -> Int
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,378:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="#$default_impl">$default_impl</a> with read_bool[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int) -> Bool
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,586:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a> with read_bool(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>], offset : Int) -> Bool
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,594:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a> with read_byte(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>], offset : Int) -> Byte
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,555:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="moonbitlang/core/bytes#Bytes">Bytes</a> with read_byte(self : Bytes, offset : Int) -> Byte
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,696:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="moonbitlang/core/array#Array">Array</a> with read_byte(self : <a href="moonbitlang/core/array#Array">Array</a>[Byte], offset : Int) -> Byte
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,329:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="#$default_impl">$default_impl</a> with read_double[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int) -> Double
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,324:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="#$default_impl">$default_impl</a> with read_float[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int) -> float
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,334:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="#$default_impl">$default_impl</a> with read_int16[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int, littleEndian : Bool) -> Int
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,344:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="#$default_impl">$default_impl</a> with read_int32[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int, littleEndian : Bool) -> Int
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,359:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="#$default_impl">$default_impl</a> with read_int64[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int, littleEndian : Bool) -> Int64
-  ```
-  > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,693:::fn length(self : <a href="moonbitlang/core/array#Array">Array</a>[Byte]) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,696:::fn read_byte(self : <a href="moonbitlang/core/array#Array">Array</a>[Byte], offset : Int) -> Byte
+    ```
+    > 
 
-## IBinWriter
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,378:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with read_bool(self : Self, offset : Int) -> Bool
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,329:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with read_double(self : Self, offset : Int) -> Double
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,324:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with read_float(self : Self, offset : Int) -> Float
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,334:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with read_int16(self : Self, offset : Int, littleEndian : Bool) -> Int
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,344:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with read_int32(self : Self, offset : Int, littleEndian : Bool) -> Int
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,359:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with read_int64(self : Self, offset : Int, littleEndian : Bool) -> Int64
+  ```
+  > 
+## @suiyunonghen/moonvalue.IBinWriter
 
 ```moonbit
-:::source,suiyunonghen/moonvalue/traits.mbt,392:::pub(open) trait IBinWriter {
+:::source,suiyunonghen/moonvalue/traits.mbt,392:::pub(open) trait @suiyunonghen/moonvalue.IBinWriter {
   write_byte(Self, Int, Byte) -> Unit
   write_bool(Self, Int, Bool) -> Unit
   write_bytes(Self, Int, Bytes) -> Unit
@@ -125,14 +120,14 @@
   write_int32(Self, Int, Int, Bool) -> Unit
   write_int64(Self, Int, Int64, Bool) -> Unit
   write_double(Self, Int, Double) -> Unit
-  write_float(Self, Int, float) -> Unit
+  write_float(Self, Int, Float) -> Unit
   append_byte(Self, Byte) -> Unit
   append_bool(Self, Bool) -> Unit
   append_int16(Self, Int, Bool) -> Unit
   append_int32(Self, Int, Bool) -> Unit
   append_int64(Self, Int64, Bool) -> Unit
   append_double(Self, Double) -> Unit
-  append_float(Self, float) -> Unit
+  append_float(Self, Float) -> Unit
   write_utf8(Self, <a href="suiyunonghen/moonvalue#IString">IString</a>) -> Unit!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>
 }
 ```
@@ -140,78 +135,86 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,439:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_bool[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, b : Bool) -> Unit
+  :::source,suiyunonghen/moonvalue/traits.mbt,560:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for Bytes
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,560:::fn write_byte(self : Bytes, offset : Int, value : Byte) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,434:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_byte[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, b : Byte) -> Unit
+  :::source,suiyunonghen/moonvalue/traits.mbt,701:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="moonbitlang/core/array#Array">Array</a>[Byte]
   ```
   > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,502:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_double[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, value : Double) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,507:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_float[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, value : float) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,487:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_int16[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, value : Int, littleEndian : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,492:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_int32[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, value : Int, littleEndian : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,497:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with append_int64[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, value : Int64, littleEndian : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,448:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_bool[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, value : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,701:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="moonbitlang/core/array#Array">Array</a> with write_byte(self : <a href="moonbitlang/core/array#Array">Array</a>[Byte], offset : Int, byte : Byte) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,560:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="moonbitlang/core/bytes#Bytes">Bytes</a> with write_byte(self : Bytes, offset : Int, value : Byte) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,457:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_bytes[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, b : Bytes) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,542:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_double[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, v : Double) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,547:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_float[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, v : float) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,472:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_int16[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, value : Int, littleEndian : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,512:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_int32[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, value : Int, littleEndian : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,527:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_int64[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, offset : Int, value : Int64, littleEndian : Bool) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,412:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> for <a href="#$default_impl">$default_impl</a> with write_utf8[Self : <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a>](self : Self, str : <a href="suiyunonghen/moonvalue#IString">IString</a>) -> Unit!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>
-  ```
-  > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,701:::fn write_byte(self : <a href="moonbitlang/core/array#Array">Array</a>[Byte], offset : Int, byte : Byte) -> Unit
+    ```
+    > 
 
-## IString
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,439:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_bool(self : Self, b : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,434:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_byte(self : Self, b : Byte) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,502:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_double(self : Self, value : Double) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,507:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_float(self : Self, value : Float) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,487:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_int16(self : Self, value : Int, littleEndian : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,492:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_int32(self : Self, value : Int, littleEndian : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,497:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with append_int64(self : Self, value : Int64, littleEndian : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,448:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_bool(self : Self, offset : Int, value : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,457:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_bytes(self : Self, offset : Int, b : Bytes) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,542:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_double(self : Self, offset : Int, v : Double) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,547:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_float(self : Self, offset : Int, v : Float) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,472:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_int16(self : Self, offset : Int, value : Int, littleEndian : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,512:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_int32(self : Self, offset : Int, value : Int, littleEndian : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,527:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_int64(self : Self, offset : Int, value : Int64, littleEndian : Bool) -> Unit
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,412:::impl <a href="suiyunonghen/moonvalue#IBinWriter">IBinWriter</a> with write_utf8(self : Self, str : <a href="suiyunonghen/moonvalue#IString">IString</a>) -> Unit!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>
+  ```
+  > 
+## @suiyunonghen/moonvalue.IString
 
 ```moonbit
-:::source,suiyunonghen/moonvalue/traits.mbt,2:::pub(open) trait IString {
+:::source,suiyunonghen/moonvalue/traits.mbt,2:::pub(open) trait @suiyunonghen/moonvalue.IString {
   charCodeAt(Self, Int) -> Int
   length(Self) -> Int
   to_string(Self) -> String
@@ -222,38 +225,30 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,61:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="moonbitlang/core/string#String">String</a> with charCodeAt(self : String, idx : Int) -> Int
+  :::source,suiyunonghen/moonvalue/traits.mbt,61:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for String
   ```
   > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,645:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="suiyunonghen/moonvalue#StringView">StringView</a> with charCodeAt(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes], index : Int) -> Int
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,66:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="moonbitlang/core/string#String">String</a> with length(self : String) -> Int
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,663:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="suiyunonghen/moonvalue#StringView">StringView</a> with length(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]) -> Int
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,44:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="#$default_impl">$default_impl</a> with to_string[Self : <a href="suiyunonghen/moonvalue#IString">IString</a>](self : Self) -> String
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,678:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="suiyunonghen/moonvalue#StringView">StringView</a> with to_string(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]) -> String
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,69:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="moonbitlang/core/string#String">String</a> with to_string(self : String) -> String
-  ```
-  > 
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,10:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="#$default_impl">$default_impl</a> with to_utf8[Self : <a href="suiyunonghen/moonvalue#IString">IString</a>](self : Self) -> <a href="moonbitlang/core/array#Array">Array</a>[Byte]!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>
-  ```
-  > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,61:::fn charCodeAt(self : String, idx : Int) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,66:::fn length(self : String) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,69:::fn to_string(self : String) -> String
+    ```
+    > 
 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,44:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> with to_string(self : Self) -> String
+  ```
+  > 
+* ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,10:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> with to_utf8(self : Self) -> <a href="moonbitlang/core/array#Array">Array</a>[Byte]!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>
+  ```
+  > 
 ## BigEndian
 
 ```moonbit
@@ -302,64 +297,34 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,569:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a> with output[B : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[B], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### length
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,581:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::length(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>]) -> Int
+  :::source,suiyunonghen/moonvalue/traits.mbt,569:::impl[B : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[B]
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,569:::fn output[B : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[B], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,581:::impl <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> for <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>]
+  ```
+  > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,581:::fn length(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>]) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,586:::fn read_bool(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>], offset : Int) -> Bool
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,594:::fn read_byte(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>], offset : Int) -> Byte
+    ```
+    > 
+
+#### mooncakes-io-method-mark-Methods
 - #### newBinaryView
   ```moonbit
   :::source,suiyunonghen/moonvalue/traits.mbt,572:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::newBinaryView[B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](src : B, from : Int, len : Int) -> <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[B]
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,569:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::output[B : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[B], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### read\_bool
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,586:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_bool(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>], offset : Int) -> Bool
-  ```
-  > 
-- #### read\_byte
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,594:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_byte(self : <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>[<a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>], offset : Int) -> Byte
-  ```
-  > 
-- #### read\_double
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,329:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_double[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int) -> Double
-  ```
-  > 
-- #### read\_float
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,324:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_float[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int) -> float
-  ```
-  > 
-- #### read\_int16
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,334:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_int16[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int, littleEndian : Bool) -> Int
-  ```
-  > 
-- #### read\_int32
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,344:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_int32[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int, littleEndian : Bool) -> Int
-  ```
-  > 
-- #### read\_int64
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,359:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::read_int64[Self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self, offset : Int, littleEndian : Bool) -> Int64
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,85:::fn <a href="suiyunonghen/moonvalue#BinaryView">BinaryView</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -405,21 +370,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/bson.mbt,38:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a> with output(<a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/bson.mbt,38:::fn <a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a>::output(<a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,85:::fn <a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,suiyunonghen/moonvalue/bson.mbt,38:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/bson.mbt,38:::fn output(<a href="suiyunonghen/moonvalue#BsonParserError">BsonParserError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## CompValueType
 
@@ -654,7 +611,7 @@
   > 
 - #### set\_float
   ```moonbit
-  :::source,suiyunonghen/moonvalue/moonvalue.mbt,1453:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], value : float) -> Unit
+  :::source,suiyunonghen/moonvalue/moonvalue.mbt,1453:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], value : Float) -> Unit
   ```
   > 
 - #### set\_index\_bin
@@ -684,7 +641,7 @@
   > 
 - #### set\_index\_float
   ```moonbit
-  :::source,suiyunonghen/moonvalue/moonvalue.mbt,1330:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_index_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], index : Int, v : float) -> Unit
+  :::source,suiyunonghen/moonvalue/moonvalue.mbt,1330:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_index_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], index : Int, v : Float) -> Unit
   ```
   > 
 - #### set\_index\_int64
@@ -744,7 +701,7 @@
   > 
 - #### set\_intkey\_float
   ```moonbit
-  :::source,suiyunonghen/moonvalue/moonvalue.mbt,719:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_intkey_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], key : Int64, v : float) -> Unit
+  :::source,suiyunonghen/moonvalue/moonvalue.mbt,719:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_intkey_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], key : Int64, v : Float) -> Unit
   ```
   > 
 - #### set\_intkey\_int64
@@ -799,7 +756,7 @@
   > 
 - #### set\_key\_float
   ```moonbit
-  :::source,suiyunonghen/moonvalue/moonvalue.mbt,525:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_key_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], key : T, v : float) -> Unit
+  :::source,suiyunonghen/moonvalue/moonvalue.mbt,525:::fn <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>::set_key_float[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#MoonValue">MoonValue</a>[T, B], key : T, v : Float) -> Unit
   ```
   > 
 - #### set\_key\_int
@@ -946,17 +903,25 @@
 ```
  share memory string
 
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,645:::impl <a href="suiyunonghen/moonvalue#IString">IString</a> for <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]
+  ```
+  > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,645:::fn charCodeAt(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes], index : Int) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,663:::fn length(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,678:::fn to_string(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]) -> String
+    ```
+    > 
+
 #### mooncakes-io-method-mark-Methods
-- #### charCodeAt
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,645:::fn <a href="suiyunonghen/moonvalue#StringView">StringView</a>::charCodeAt(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes], index : Int) -> Int
-  ```
-  > 
-- #### length
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,663:::fn <a href="suiyunonghen/moonvalue#StringView">StringView</a>::length(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]) -> Int
-  ```
-  > 
 - #### newStringView
   ```moonbit
   :::source,suiyunonghen/moonvalue/traits.mbt,611:::fn <a href="suiyunonghen/moonvalue#StringView">StringView</a>::newStringView[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](source : B, from : Int, len : Int, stringReader : (B, Int, Int) -> T!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>) -> <a href="suiyunonghen/moonvalue#StringView">StringView</a>[T, B]
@@ -965,16 +930,6 @@
 - #### string
   ```moonbit
   :::source,suiyunonghen/moonvalue/traits.mbt,631:::fn <a href="suiyunonghen/moonvalue#StringView">StringView</a>::string[T : <a href="suiyunonghen/moonvalue#IString">IString</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[T, B]) -> String
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,678:::fn <a href="suiyunonghen/moonvalue#StringView">StringView</a>::to_string(self : <a href="suiyunonghen/moonvalue#StringView">StringView</a>[String, Bytes]) -> String
-  ```
-  > 
-- #### to\_utf8
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,10:::fn <a href="suiyunonghen/moonvalue#StringView">StringView</a>::to_utf8[Self : <a href="suiyunonghen/moonvalue#IString">IString</a>](self : Self) -> <a href="moonbitlang/core/array#Array">Array</a>[Byte]!<a href="suiyunonghen/moonvalue#ConvertError">ConvertError</a>
   ```
   > 
 - #### value
@@ -993,7 +948,7 @@
   VT_Int(Int64)
   VT_Double(Double)
   VT_DateTime(<a href="suiyunonghen/datetime#DateTime">@suiyunonghen/datetime.DateTime</a>)
-  VT_Float(float)
+  VT_Float(Float)
   VT_String(T)
   VT_ShareString(<a href="suiyunonghen/moonvalue#StringView">StringView</a>[T, B])
   VT_Bin(B)
@@ -1021,68 +976,43 @@
 ```
 
 
-## IBinReader
-
-
-#### mooncakes-io-implementation-mark-Implementations
-- ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,304:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a> with output(self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_get
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,383:::fn <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>::op_get(self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>, offset : Int) -> Byte
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,304:::fn <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>::output(self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,85:::fn <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
 ## IString
 
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,39:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="suiyunonghen/moonvalue#IString">IString</a> with hash_combine(self : <a href="suiyunonghen/moonvalue#IString">IString</a>, hash : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,suiyunonghen/moonvalue/traits.mbt,34:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="suiyunonghen/moonvalue#IString">IString</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,34:::fn op_equal(self : <a href="suiyunonghen/moonvalue#IString">IString</a>, other : <a href="suiyunonghen/moonvalue#IString">IString</a>) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,34:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="suiyunonghen/moonvalue#IString">IString</a> with op_equal(self : <a href="suiyunonghen/moonvalue#IString">IString</a>, other : <a href="suiyunonghen/moonvalue#IString">IString</a>) -> Bool
+  :::source,suiyunonghen/moonvalue/traits.mbt,39:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="suiyunonghen/moonvalue#IString">IString</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,39:::fn hash_combine(self : <a href="suiyunonghen/moonvalue#IString">IString</a>, hash : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
+
+## IBinReader
+
+
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,suiyunonghen/moonvalue/traits.mbt,304:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,suiyunonghen/moonvalue/traits.mbt,304:::fn output(self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### hash
+- #### op\_get
   ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,40:::fn <a href="suiyunonghen/moonvalue#IString">IString</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,39:::fn <a href="suiyunonghen/moonvalue#IString">IString</a>::hash_combine(self : <a href="suiyunonghen/moonvalue#IString">IString</a>, hash : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,34:::fn <a href="suiyunonghen/moonvalue#IString">IString</a>::op_equal(self : <a href="suiyunonghen/moonvalue#IString">IString</a>, other : <a href="suiyunonghen/moonvalue#IString">IString</a>) -> Bool
-  ```
-  > 
-
-## MsgPackFormatCode
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/moonvalue/traits.mbt,85:::fn <a href="suiyunonghen/moonvalue#MsgPackFormatCode">MsgPackFormatCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,suiyunonghen/moonvalue/traits.mbt,383:::fn <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>::op_get(self : <a href="suiyunonghen/moonvalue#IBinReader">IBinReader</a>, offset : Int) -> Byte
   ```
   > 

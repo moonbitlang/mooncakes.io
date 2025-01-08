@@ -1,0 +1,46 @@
+{
+  "name": "kesmeey",
+  "package": null,
+  "childs": [
+    {
+      "name": "fmt",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "kesmeey/fmt/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "Args_Type", "impls": [], "methods": [] },
+              { "name": "FMT_Type", "impls": [], "methods": [] },
+              {
+                "name": "Formatter",
+                "impls": [],
+                "methods": [ "fmt", "new" ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "format_decimal", "max", "to_base" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "kesmeey/fmt/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

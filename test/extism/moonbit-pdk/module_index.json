@@ -1,0 +1,279 @@
+{
+  "name": "extism",
+  "package": null,
+  "childs": [
+    {
+      "name": "moonbit-pdk",
+      "package": null,
+      "childs": [
+        {
+          "name": "examples",
+          "package": null,
+          "childs": [
+            {
+              "name": "add",
+              "package": {
+                "path": "extism/moonbit-pdk/examples/add",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Add",
+                    "impls": [],
+                    "methods": [ "from_json", "parse" ]
+                  },
+                  {
+                    "name": "ParseError",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Sum",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [ "add" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "arrays",
+              "package": {
+                "path": "extism/moonbit-pdk/examples/arrays",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "AllThree",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [
+                  "all_three_object", "process_all_three", "process_floats",
+                  "process_ints", "process_strings",
+                  "progressive_concat_strings", "progressive_sum_floats",
+                  "progressive_sum_ints"
+                ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "count-vowels",
+              "package": {
+                "path": "extism/moonbit-pdk/examples/count-vowels",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "VowelReport",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [ "count_vowels" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "greet",
+              "package": {
+                "path": "extism/moonbit-pdk/examples/greet",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "greet" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "http-get",
+              "package": {
+                "path": "extism/moonbit-pdk/examples/http-get",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "http_get" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "kitchen-sink",
+              "package": {
+                "path": "extism/moonbit-pdk/examples/kitchen-sink",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "kitchen_sink" ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "pdk",
+          "package": {
+            "path": "extism/moonbit-pdk/pdk",
+            "readme": false,
+            "traits": [
+              {
+                "name": "@extism/moonbit-pdk/pdk.ToUtf16",
+                "impls": [ { "methods": [ "to_utf16" ] } ]
+              },
+              {
+                "name": "@extism/moonbit-pdk/pdk.ToUtf8",
+                "impls": [ { "methods": [ "to_utf8" ] } ]
+              }
+            ],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": [
+            {
+              "name": "config",
+              "package": {
+                "path": "extism/moonbit-pdk/pdk/config",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Config",
+                    "impls": [],
+                    "methods": [ "get", "get_memory" ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "extism",
+              "package": {
+                "path": "extism/moonbit-pdk/pdk/extism",
+                "readme": false,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [
+                  "alloc", "config_get", "error_set", "free", "http_request",
+                  "http_status_code", "input_length", "input_load_u64",
+                  "input_load_u8", "length", "load_u64", "load_u8",
+                  "log_debug", "log_error", "log_info", "log_warn",
+                  "output_set", "store_u64", "store_u8", "var_get", "var_set"
+                ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "host",
+              "package": {
+                "path": "extism/moonbit-pdk/pdk/host",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Memory",
+                    "impls": [],
+                    "methods": [
+                      "allocate", "allocate_bytes", "allocate_json_value",
+                      "allocate_string", "free", "output_memory", "to_bytes",
+                      "to_int", "to_string"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [
+                  "find_memory", "input", "input_string", "log_debug_str",
+                  "log_error_str", "log_info_str", "log_warn_str", "output",
+                  "output_json_value", "output_string", "set_error"
+                ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "http",
+              "package": {
+                "path": "extism/moonbit-pdk/pdk/http",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Header",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": [ "add", "new", "set" ]
+                  },
+                  {
+                    "name": "Method",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [ "to_json" ]
+                  },
+                  {
+                    "name": "Request",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": [ "send" ]
+                  },
+                  {
+                    "name": "Response",
+                    "impls": [],
+                    "methods": [ "output" ]
+                  }
+                ],
+                "typealias": [],
+                "values": [ "new_request" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "var",
+              "package": {
+                "path": "extism/moonbit-pdk/pdk/var",
+                "readme": false,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [
+                  "get_bytes", "get_int", "get_memory", "get_string",
+                  "remove", "set_bytes", "set_int", "set_string"
+                ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

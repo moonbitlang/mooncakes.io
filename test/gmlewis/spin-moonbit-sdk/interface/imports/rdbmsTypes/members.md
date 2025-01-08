@@ -20,30 +20,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,112:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Column">Column</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DbDataType
 
@@ -69,13 +60,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -83,24 +82,9 @@
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,51:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>::from(self : Int) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,31:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>::ordinal(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,28:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbDataType">DbDataType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -129,30 +113,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,88:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#DbValue">DbValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Error\_
 
@@ -169,30 +144,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,10:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## ParameterValue
 
@@ -218,30 +184,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,106:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue">ParameterValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RowSet
 
@@ -255,27 +212,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes/top.mbt,118:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet">RowSet</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived

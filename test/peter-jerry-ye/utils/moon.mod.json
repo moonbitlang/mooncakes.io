@@ -1,0 +1,13 @@
+{
+  "name": "peter-jerry-ye/utils",
+  "version": "0.2.0",
+  "deps": {
+    "moonbitlang/x": "0.4.16"
+  },
+  "readme": "README.md",
+  "repository": "",
+  "license": "MulanPSL-2.0",
+  "keywords": [
+    "utility"
+  ]
+}

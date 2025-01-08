@@ -18,32 +18,25 @@ features, and so on.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,10:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>) -> Unit
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/top.mbt,4:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput#TerminalOutput">TerminalOutput</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 

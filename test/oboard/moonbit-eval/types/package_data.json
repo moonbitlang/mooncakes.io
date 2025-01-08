@@ -1,0 +1,319 @@
+{
+  "readme": "",
+  "name": "oboard/moonbit-eval/types",
+  "traits": [],
+  "types": [
+    {
+      "name": "Fundef",
+      "docstring": "",
+      "signature": "pub(all) struct Fundef {\n  name : (String, <a href=\"oboard/moonbit-eval/types#Type\">Type</a>)\n  args : <a href=\"moonbitlang/core/array#Array\">Array</a>[(String, <a href=\"oboard/moonbit-eval/types#Type\">Type</a>)]\n  body : <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>\n}",
+      "loc": { "line": 44, "column": 17 },
+      "methods": [
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>::from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 84, "column": 16 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>::to_json(self : <a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 72, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 48, "column": 10 }
+            }
+          ],
+          "loc": { "line": 48, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Name",
+      "docstring": "",
+      "signature": "type Name",
+      "loc": { "line": 1, "column": 8 },
+      "methods": [
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"oboard/moonbit-eval/types#Name\">Name</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 80, "column": 14 }
+        },
+        {
+          "name": "from_string",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::from_string(s : String) -> <a href=\"oboard/moonbit-eval/types#Name\">Name</a>!<a href=\"oboard/moonbit-eval/types#NameFromStringError\">NameFromStringError</a>",
+          "loc": { "line": 33, "column": 14 }
+        },
+        {
+          "name": "name_and_slot",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::name_and_slot(name : String, slot : Int) -> <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "loc": { "line": 68, "column": 14 }
+        },
+        {
+          "name": "name_only",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::name_only(name : String) -> <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "loc": { "line": 64, "column": 14 }
+        },
+        {
+          "name": "slot_only",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::slot_only(slot : Int) -> <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "loc": { "line": 72, "column": 14 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::to_json(self : <a href=\"oboard/moonbit-eval/types#Name\">Name</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 76, "column": 14 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Name\">Name</a>::to_string(self : <a href=\"oboard/moonbit-eval/types#Name\">Name</a>) -> String",
+          "loc": { "line": 10, "column": 14 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"oboard/moonbit-eval/types#Name\">Name</a>, <a href=\"oboard/moonbit-eval/types#Name\">Name</a>) -> Int",
+              "loc": { "line": 4, "column": 20 }
+            }
+          ],
+          "loc": { "line": 4, "column": 20 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"oboard/moonbit-eval/types#Name\">Name</a>, <a href=\"oboard/moonbit-eval/types#Name\">Name</a>) -> Bool",
+              "loc": { "line": 4, "column": 10 }
+            }
+          ],
+          "loc": { "line": 4, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "automatically derived",
+              "signature": "fn hash_combine(<a href=\"oboard/moonbit-eval/types#Name\">Name</a>, <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 4, "column": 14 }
+            }
+          ],
+          "loc": { "line": 4, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/types#Name\">Name</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"oboard/moonbit-eval/types#Name\">Name</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 29 }
+            }
+          ],
+          "loc": { "line": 6, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "NameFromStringError",
+      "docstring": "",
+      "signature": "type NameFromStringError",
+      "loc": { "line": 19, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/types#NameFromStringError\">NameFromStringError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"oboard/moonbit-eval/types#NameFromStringError\">NameFromStringError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 23, "column": 44 }
+            }
+          ],
+          "loc": { "line": 23, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Op",
+      "docstring": "",
+      "signature": "pub(all) enum Op {\n  Add\n  Sub\n  Mul\n  Div\n  EqEq\n  LessEqual\n  NotEqual\n  LessThan\n  GreaterThan\n  GreaterEqual\n  And\n  Or\n}",
+      "loc": { "line": 29, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"oboard/moonbit-eval/types#Op\">Op</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"oboard/moonbit-eval/types#Op\">Op</a>, <a href=\"oboard/moonbit-eval/types#Op\">Op</a>) -> Bool",
+              "loc": { "line": 42, "column": 16 }
+            }
+          ],
+          "loc": { "line": 42, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/types#Op\">Op</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"oboard/moonbit-eval/types#Op\">Op</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 42, "column": 10 }
+            }
+          ],
+          "loc": { "line": 42, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"oboard/moonbit-eval/types#Op\">Op</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"oboard/moonbit-eval/types#Op\">Op</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 42, "column": 20 }
+            }
+          ],
+          "loc": { "line": 42, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "Syntax",
+      "docstring": "",
+      "signature": "pub(all) enum Syntax {\n  Unit\n  Bool(Bool)\n  Int(Int)\n  Double(Double)\n  String(String)\n  Var(String)\n  Tuple(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>])\n  Not(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  Array(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>])\n  Neg(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  App(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>])\n  Get(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  If(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  ForIn(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  For(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  Prim(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Op\">Op</a>)\n  Assign(String, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  Let((String, <a href=\"oboard/moonbit-eval/types#Type\">Type</a>), <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, Bool)\n  LetRec(<a href=\"oboard/moonbit-eval/types#Fundef\">Fundef</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  LetTuple(<a href=\"moonbitlang/core/array#Array\">Array</a>[(String, <a href=\"oboard/moonbit-eval/types#Type\">Type</a>)], <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  Put(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>)\n  Seq(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>])\n}",
+      "loc": { "line": 4, "column": 15 },
+      "methods": [
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>::from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 169, "column": 16 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>::to_json(self : <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 127, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"oboard/moonbit-eval/types#Syntax\">Syntax</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 27, "column": 10 }
+            }
+          ],
+          "loc": { "line": 27, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Type",
+      "docstring": "",
+      "signature": "pub(all) enum Type {\n  Unit\n  Bool\n  Int\n  Double\n  String\n  Fun(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"oboard/moonbit-eval/types#Type\">Type</a>], <a href=\"oboard/moonbit-eval/types#Type\">Type</a>)\n  Tuple(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"oboard/moonbit-eval/types#Type\">Type</a>])\n  Array(<a href=\"oboard/moonbit-eval/types#Type\">Type</a>)\n  Var(<a href=\"moonbitlang/core/ref#Ref\">Ref</a>[<a href=\"oboard/moonbit-eval/types#Type\">Type</a>?])\n  Ptr\n}",
+      "loc": { "line": 50, "column": 15 },
+      "methods": [
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::from_json(self : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"oboard/moonbit-eval/types#Type\">Type</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 19, "column": 14 }
+        },
+        {
+          "name": "is_float_like",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::is_float_like(self : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>) -> Bool",
+          "loc": { "line": 75, "column": 14 }
+        },
+        {
+          "name": "is_ptr_like",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::is_ptr_like(self : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>) -> Bool",
+          "loc": { "line": 63, "column": 14 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::op_equal(self : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>, other : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>) -> Bool",
+          "loc": { "line": 103, "column": 14 }
+        },
+        {
+          "name": "repr",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::repr(self : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>) -> <a href=\"oboard/moonbit-eval/types#Type\">Type</a>",
+          "loc": { "line": 119, "column": 14 }
+        },
+        {
+          "name": "size_of",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::size_of(self : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>, size_of_ptr : Int) -> Int",
+          "loc": { "line": 87, "column": 14 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"oboard/moonbit-eval/types#Type\">Type</a>::to_json(self : <a href=\"oboard/moonbit-eval/types#Type\">Type</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 2, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"oboard/moonbit-eval/types#Type\">Type</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"oboard/moonbit-eval/types#Type\">Type</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 61, "column": 10 }
+            }
+          ],
+          "loc": { "line": 61, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

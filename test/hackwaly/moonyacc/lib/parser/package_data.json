@@ -1,0 +1,647 @@
+{
+  "readme": "",
+  "name": "hackwaly/moonyacc/lib/parser",
+  "traits": [],
+  "types": [
+    {
+      "name": "Clause",
+      "docstring": "",
+      "signature": "pub(all) struct Clause {\n  items : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#ClauseItem\">ClauseItem</a>]\n  prec : String?\n  action : <a href=\"hackwaly/moonyacc/lib/parser#ClauseAction\">ClauseAction</a>\n}",
+      "loc": { "line": 62, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#Clause\">Clause</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#Clause\">Clause</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 66, "column": 10 }
+            }
+          ],
+          "loc": { "line": 66, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ClauseAction",
+      "docstring": "",
+      "signature": "pub(all) struct ClauseAction {\n  code : <a href=\"hackwaly/moonyacc/lib/parser#CodeWithSubst\">CodeWithSubst</a>?\n  start : Int\n  end : Int\n}",
+      "loc": { "line": 69, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseAction\">ClauseAction</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#ClauseAction\">ClauseAction</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 73, "column": 10 }
+            }
+          ],
+          "loc": { "line": 73, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ClauseItem",
+      "docstring": "",
+      "signature": "pub(all) struct ClauseItem {\n  binder : String?\n  symbol : <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemSymbol\">ClauseItemSymbol</a>\n}",
+      "loc": { "line": 82, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseItem\">ClauseItem</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItem\">ClauseItem</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 85, "column": 10 }
+            }
+          ],
+          "loc": { "line": 85, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ClauseItemIdent",
+      "docstring": "",
+      "signature": "pub(all) enum ClauseItemIdent {\n  Dollar(Int)\n  Name(String)\n}",
+      "loc": { "line": 26, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>, <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>) -> Int",
+              "loc": { "line": 29, "column": 14 }
+            }
+          ],
+          "loc": { "line": 29, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>, <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>) -> Bool",
+              "loc": { "line": 29, "column": 10 }
+            }
+          ],
+          "loc": { "line": 29, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 29, "column": 23 }
+            }
+          ],
+          "loc": { "line": 29, "column": 23 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 29, "column": 29 }
+            }
+          ],
+          "loc": { "line": 29, "column": 29 }
+        }
+      ]
+    },
+    {
+      "name": "ClauseItemSymbol",
+      "docstring": "",
+      "signature": "pub(all) enum ClauseItemSymbol {\n  Symbol(String)\n  Image(String)\n}",
+      "loc": { "line": 88, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#ClauseItemSymbol\">ClauseItemSymbol</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemSymbol\">ClauseItemSymbol</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 91, "column": 10 }
+            }
+          ],
+          "loc": { "line": 91, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "CodeWithSubst",
+      "docstring": "",
+      "signature": "pub(all) struct CodeWithSubst {\n  code : String\n  subst : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#SubstItem\">SubstItem</a>]\n}",
+      "loc": { "line": 76, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#CodeWithSubst\">CodeWithSubst</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#CodeWithSubst\">CodeWithSubst</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 79, "column": 10 }
+            }
+          ],
+          "loc": { "line": 79, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Command",
+      "docstring": "",
+      "signature": "pub(all) enum Command {\n  Start(<a href=\"moonbitlang/core/array#Array\">Array</a>[String])\n  Token(<a href=\"moonbitlang/core/array#Array\">Array</a>[String], String?)\n  Token1(String, String?, String)\n  Type(<a href=\"moonbitlang/core/array#Array\">Array</a>[String], String)\n  Derive(String, String)\n  Position(String)\n  Left(<a href=\"moonbitlang/core/array#Array\">Array</a>[String])\n  Right(<a href=\"moonbitlang/core/array#Array\">Array</a>[String])\n  Nonassoc(<a href=\"moonbitlang/core/array#Array\">Array</a>[String])\n}",
+      "loc": { "line": 42, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#Command\">Command</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#Command\">Command</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 52, "column": 10 }
+            }
+          ],
+          "loc": { "line": 52, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "LexEngine",
+      "docstring": "",
+      "signature": "pub(all) struct LexEngine {\n  graph : <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int) -> (Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[Int]])]\n  end_nodes : <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[((Int, Int), (Int, Int))])?]\n  start_tags : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]\n  code_blocks_n : Int\n}",
+      "loc": { "line": 39, "column": 17 },
+      "methods": [
+        {
+          "name": "run",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/parser#LexEngine\">LexEngine</a>::run(self : <a href=\"hackwaly/moonyacc/lib/parser#LexEngine\">LexEngine</a>, lexbuf : <a href=\"hackwaly/moonyacc/lib/parser#Lexbuf\">Lexbuf</a>) -> (Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int, Int)])",
+          "loc": { "line": 47, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "LexError",
+      "docstring": "",
+      "signature": "type LexError",
+      "loc": { "line": 99, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Lexbuf",
+      "docstring": "",
+      "signature": "type Lexbuf",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "from_string",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/parser#Lexbuf\">Lexbuf</a>::from_string(content : String) -> <a href=\"hackwaly/moonyacc/lib/parser#Lexbuf\">Lexbuf</a>",
+          "loc": { "line": 8, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Lexer",
+      "docstring": "",
+      "signature": "type Lexer",
+      "loc": { "line": 105, "column": 8 },
+      "methods": [
+        {
+          "name": "next_token",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/parser#Lexer\">Lexer</a>::next_token(self : <a href=\"hackwaly/moonyacc/lib/parser#Lexer\">Lexer</a>) -> (<a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>, Int, Int)!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 3039, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "ParseError",
+      "docstring": "",
+      "signature": "pub(all) enum ParseError {\n  UnexpectedToken(<a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>, (Int, Int), <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#TokenKind\">TokenKind</a>])\n}",
+      "loc": { "line": 117, "column": 16 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ParserSpec",
+      "docstring": "",
+      "signature": "pub(all) struct ParserSpec {\n  header : String?\n  footer : String?\n  commands : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#Command\">Command</a>]\n  rules : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#Rule\">Rule</a>]\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#ParserSpec\">ParserSpec</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#ParserSpec\">ParserSpec</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 7, "column": 10 }
+            }
+          ],
+          "loc": { "line": 7, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Rule",
+      "docstring": "",
+      "signature": "pub(all) struct Rule {\n  nonterminal : String\n  type_ : String?\n  clauses : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#Clause\">Clause</a>]\n}",
+      "loc": { "line": 55, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#Rule\">Rule</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#Rule\">Rule</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 59, "column": 10 }
+            }
+          ],
+          "loc": { "line": 59, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "SubstItem",
+      "docstring": "",
+      "signature": "pub(all) struct SubstItem {\n  start : Int\n  end : Int\n  desc : <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>\n}",
+      "loc": { "line": 32, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"hackwaly/moonyacc/lib/parser#SubstItem\">SubstItem</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"hackwaly/moonyacc/lib/parser#SubstItem\">SubstItem</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 36, "column": 10 }
+            }
+          ],
+          "loc": { "line": 36, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#SubstItem\">SubstItem</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#SubstItem\">SubstItem</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 36, "column": 16 }
+            }
+          ],
+          "loc": { "line": 36, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "SubstItemDesc",
+      "docstring": "",
+      "signature": "pub(all) enum SubstItemDesc {\n  Dollar(Int)\n  StartPos\n  EndPos\n  Loc\n  StartPosOf(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>)\n  EndPosOf(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>)\n  LocOf(<a href=\"hackwaly/moonyacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>)\n  SymbolStartPos\n  Sloc\n}",
+      "loc": { "line": 13, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>, <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>) -> Int",
+              "loc": { "line": 23, "column": 14 }
+            }
+          ],
+          "loc": { "line": 23, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>, <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>) -> Bool",
+              "loc": { "line": 23, "column": 10 }
+            }
+          ],
+          "loc": { "line": 23, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 23, "column": 23 }
+            }
+          ],
+          "loc": { "line": 23, "column": 23 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"hackwaly/moonyacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 23, "column": 29 }
+            }
+          ],
+          "loc": { "line": 23, "column": 29 }
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "docstring": "",
+      "signature": "pub(all) enum Token {\n  EOF\n  IDENT(String)\n  STRING(String)\n  LANGLE_CODE_RANGLE(String)\n  LBRACE_CODE_RBRACE((String, <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/parser#SubstItem\">SubstItem</a>]))\n  PERCENT_LBRACE_CODE_PERCENT_RBRACE(String)\n  ARROW_CODE(String)\n  PERCENT_PERCENT_CODE_EOF(String)\n  PERCENT_PERCENT\n  PERCENT_START\n  PERCENT_TOKEN\n  PERCENT_TYPE\n  PERCENT_POSITION\n  PERCENT_LEFT\n  PERCENT_RIGHT\n  PERCENT_NONASSOC\n  PERCENT_PREC\n  PERCENT_DERIVE\n  COLON\n  BAR\n  EQ\n  SEMI\n}",
+      "loc": { "line": 5, "column": 15 },
+      "methods": [
+        {
+          "name": "kind",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>::kind(self : <a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>) -> <a href=\"hackwaly/moonyacc/lib/parser#TokenKind\">TokenKind</a>",
+          "loc": { "line": 31, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 28, "column": 10 }
+            }
+          ],
+          "loc": { "line": 28, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "TokenKind",
+      "docstring": "",
+      "signature": "pub(all) enum TokenKind {\n  TK_EOF\n  TK_IDENT\n  TK_STRING\n  TK_LANGLE_CODE_RANGLE\n  TK_LBRACE_CODE_RBRACE\n  TK_PERCENT_LBRACE_CODE_PERCENT_RBRACE\n  TK_ARROW_CODE\n  TK_PERCENT_PERCENT_CODE_EOF\n  TK_PERCENT_PERCENT\n  TK_PERCENT_START\n  TK_PERCENT_TOKEN\n  TK_PERCENT_TYPE\n  TK_PERCENT_POSITION\n  TK_PERCENT_LEFT\n  TK_PERCENT_RIGHT\n  TK_PERCENT_NONASSOC\n  TK_PERCENT_PREC\n  TK_PERCENT_DERIVE\n  TK_COLON\n  TK_BAR\n  TK_EQ\n  TK_SEMI\n}",
+      "loc": { "line": 60, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"hackwaly/moonyacc/lib/parser#TokenKind\">TokenKind</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"hackwaly/moonyacc/lib/parser#TokenKind\">TokenKind</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 86, "column": 34 }
+            }
+          ],
+          "loc": { "line": 86, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "YYDecision",
+      "docstring": "",
+      "signature": "type YYDecision",
+      "loc": { "line": 185, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Clause",
+      "docstring": "",
+      "signature": "type YYObj_Clause",
+      "loc": { "line": 134, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_ClauseAction",
+      "docstring": "",
+      "signature": "type YYObj_ClauseAction",
+      "loc": { "line": 155, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_ClauseItem",
+      "docstring": "",
+      "signature": "type YYObj_ClauseItem",
+      "loc": { "line": 149, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_ClauseItemSymbol",
+      "docstring": "",
+      "signature": "type YYObj_ClauseItemSymbol",
+      "loc": { "line": 158, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Code_",
+      "docstring": "",
+      "signature": "type YYObj_Code_",
+      "loc": { "line": 131, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Command",
+      "docstring": "",
+      "signature": "type YYObj_Command",
+      "loc": { "line": 143, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_ParserSpec",
+      "docstring": "",
+      "signature": "type YYObj_ParserSpec",
+      "loc": { "line": 152, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Rule",
+      "docstring": "",
+      "signature": "type YYObj_Rule",
+      "loc": { "line": 128, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_String",
+      "docstring": "",
+      "signature": "type YYObj_String",
+      "loc": { "line": 137, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Symbol",
+      "docstring": "",
+      "signature": "type YYObj_Symbol",
+      "loc": { "line": 140, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Symbol_",
+      "docstring": "",
+      "signature": "type YYObj_Symbol_",
+      "loc": { "line": 146, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj_Void",
+      "docstring": "",
+      "signature": "type YYObj_Void",
+      "loc": { "line": 125, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj__String__Array_SubstItem__",
+      "docstring": "",
+      "signature": "type YYObj__String__Array_SubstItem__",
+      "loc": { "line": 176, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj__immut_list_T_ClauseItem_",
+      "docstring": "",
+      "signature": "type YYObj__immut_list_T_ClauseItem_",
+      "loc": { "line": 173, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj__immut_list_T_Clause_",
+      "docstring": "",
+      "signature": "type YYObj__immut_list_T_Clause_",
+      "loc": { "line": 164, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj__immut_list_T_Command_",
+      "docstring": "",
+      "signature": "type YYObj__immut_list_T_Command_",
+      "loc": { "line": 170, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj__immut_list_T_Rule_",
+      "docstring": "",
+      "signature": "type YYObj__immut_list_T_Rule_",
+      "loc": { "line": 161, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYObj__immut_list_T_Symbol_",
+      "docstring": "",
+      "signature": "type YYObj__immut_list_T_Symbol_",
+      "loc": { "line": 167, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "YYSymbol",
+      "docstring": "",
+      "signature": "type YYSymbol",
+      "loc": { "line": 194, "column": 6 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "Code",
+      "docstring": "",
+      "signature": "type Code = String",
+      "loc": { "line": 10, "column": 1 }
+    },
+    {
+      "name": "Position",
+      "docstring": "",
+      "signature": "type Position = Int",
+      "loc": { "line": 2, "column": 1 }
+    },
+    {
+      "name": "Symbol",
+      "docstring": "",
+      "signature": "type Symbol = String",
+      "loc": { "line": 39, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "new_lexer",
+      "docstring": "",
+      "signature": "fn new_lexer(input : String) -> <a href=\"hackwaly/moonyacc/lib/parser#Lexer\">Lexer</a>",
+      "loc": { "line": 3034, "column": 8 }
+    },
+    {
+      "name": "spec",
+      "docstring": "",
+      "signature": "fn spec(read_token : () -> (<a href=\"hackwaly/moonyacc/lib/parser#Token\">Token</a>, Int, Int), start_pos : Int) -> <a href=\"hackwaly/moonyacc/lib/parser#ParserSpec\">ParserSpec</a>!<a href=\"hackwaly/moonyacc/lib/parser#ParseError\">ParseError</a>",
+      "loc": { "line": 1718, "column": 8 }
+    }
+  ],
+  "misc": []
+}

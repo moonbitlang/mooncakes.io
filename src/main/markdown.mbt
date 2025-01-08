@@ -87,6 +87,12 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
     ThematicBreak(_) => hr()
     ExtTable({ v, .. }) => div([text("markdown Table")])
+    LinkRefDefinition({v,..})=>{println(1)
+      div([text("LinkRefDefinition")])}
+    ExtMathBlock({v,..})=>{println(2)
+    div([text("ExtMathBlock")])}
+    HtmlBlock({v,..})=>{println(3)
+      div([text("HTML Block")])}
     ExtFootnoteDefinition({ v, .. }) => div([text("markdown Footnote")])
   }
 

@@ -1,0 +1,519 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts-l",
+      "package": null,
+      "childs": [
+        {
+          "name": "landliebe",
+          "package": {
+            "path": "gmlewis/fonts-l/landliebe",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_black",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_black",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_blackitalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_blackitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_bold",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_hairline",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_hairline",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_hairlineitalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_hairlineitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_italic",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_light",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_light",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_lightitalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_lightitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lato_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/lato_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "latoregular",
+          "package": {
+            "path": "gmlewis/fonts-l/latoregular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "leaguegothic_condensed",
+          "package": {
+            "path": "gmlewis/fonts-l/leaguegothic_condensed",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "leaguegothic_condenseditalic",
+          "package": {
+            "path": "gmlewis/fonts-l/leaguegothic_condenseditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "leaguegothic_italic",
+          "package": {
+            "path": "gmlewis/fonts-l/leaguegothic_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "leaguegothic_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/leaguegothic_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "leaguescriptthin_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/leaguescriptthin_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ledger_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/ledger_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "leland",
+          "package": {
+            "path": "gmlewis/fonts-l/leland",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lelandtext",
+          "package": {
+            "path": "gmlewis/fonts-l/lelandtext",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "levity",
+          "package": {
+            "path": "gmlewis/fonts-l/levity",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lexographer",
+          "package": {
+            "path": "gmlewis/fonts-l/lexographer",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "librebaskerville_bold",
+          "package": {
+            "path": "gmlewis/fonts-l/librebaskerville_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "librebaskerville_italic",
+          "package": {
+            "path": "gmlewis/fonts-l/librebaskerville_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "librebaskerville_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/librebaskerville_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "linear",
+          "package": {
+            "path": "gmlewis/fonts-l/linear",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lobstertwo",
+          "package": {
+            "path": "gmlewis/fonts-l/lobstertwo",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lobstertwo_bold",
+          "package": {
+            "path": "gmlewis/fonts-l/lobstertwo_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lobstertwo_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lobstertwo_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lobstertwo_italic",
+          "package": {
+            "path": "gmlewis/fonts-l/lobstertwo_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_bold",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_italic",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_medium",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_mediumitalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_mediumitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_semibold",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_semibold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lora_semibolditalic",
+          "package": {
+            "path": "gmlewis/fonts-l/lora_semibolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "loversquarrel_regular",
+          "package": {
+            "path": "gmlewis/fonts-l/loversquarrel_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

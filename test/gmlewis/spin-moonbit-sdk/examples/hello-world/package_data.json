@@ -1,0 +1,28 @@
+{
+  "readme": "# Spin component in MoonBit\n\nThis example is based on this blog post: https://www.moonbitlang.com/blog/component-model\nand this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356567270284446244cccecd101c04e9806f8/examples/wasi-http\n\nIn one terminal window, start up the app:\n\n```shell\n$ spin build --up\n```\n\nThe application can now receive requests at `http://localhost:3000/hello`:\n\n```shell\n$ curl -i localhost:3000/hello\nHTTP/1.1 200 OK\ncontent-type: text/plain\nfoo: bar\ncontent-length: 440\ndate: Thu, 26 Oct 2023 18:18:19 GMT\n\n== REQUEST ==\nURL:     http://localhost:3000/hello\nMethod:  GET\nHeaders:\n  \"Host\": \"localhost:3000\"\n  \"User-Agent\": \"curl/8.1.2\"\n  \"Spin-Full-Url\": \"http://localhost:3000/hello\"\n  \"Spin-Base-Path\": \"/\"\n  \"Spin-Client-Addr\": \"127.0.0.1:52164\"\n  \"Accept\": \"*/*\"\n  \"Spin-Path-Info\": \"\"\n  \"Spin-Matched-Route\": \"/hello\"\n  \"Spin-Raw-Component-Route\": \"/hello\"\n  \"Spin-Component-Route\": \"/hello\"\nBody:\n== RESPONSE ==\nHello Fermyon!\n```\n",
+  "name": "gmlewis/spin-moonbit-sdk/examples/hello-world",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "cabi_realloc",
+      "docstring": "",
+      "signature": "fn cabi_realloc(src_offset : Int, src_size : Int, _dst_alignment : Int, dst_size : Int) -> Int",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "handle",
+      "docstring": " `handle` returns a simple response to a `GET /hello` request.",
+      "signature": "fn handle(request : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types.IncomingRequest</a>, response_out : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types.ResponseOutparam</a>) -> Unit",
+      "loc": { "line": 4, "column": 8 }
+    },
+    {
+      "name": "wasmExportHandle",
+      "docstring": "",
+      "signature": "fn wasmExportHandle(p0 : Int, p1 : Int) -> Unit",
+      "loc": { "line": 12, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -4,7 +4,6 @@
 |[Memory](#Memory)||
 |[MemoryStream](#MemoryStream)||
 |[SeekOrigin](#SeekOrigin)||
-|[MemoryManager](#MemoryManager)||
 
 |Value|description|
 |---|---|
@@ -24,9 +23,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/wasmMemManager/memory.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/wasmMemManager#Memory">Memory</a> with output(<a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,suiyunonghen/wasmMemManager/memory.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,suiyunonghen/wasmMemManager/memory.mbt,6:::fn output(<a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### copyFrom
@@ -59,11 +62,6 @@
   :::source,suiyunonghen/wasmMemManager/memory.mbt,115:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::move_unsafe(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, destPos : Int, srcPos : Int, copyLen : Int) -> Unit
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/wasmMemManager/memory.mbt,6:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::output(<a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### read16
   ```moonbit
   :::source,suiyunonghen/wasmMemManager/memory.mbt,68:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::read16(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int) -> Int?
@@ -106,12 +104,12 @@
   > 
 - #### readFloat
   ```moonbit
-  :::source,suiyunonghen/wasmMemManager/memory.mbt,179:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::readFloat(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int) -> float?
+  :::source,suiyunonghen/wasmMemManager/memory.mbt,179:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::readFloat(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int) -> Float?
   ```
   > 
 - #### readFloat\_unsafe
   ```moonbit
-  :::source,suiyunonghen/wasmMemManager/memory.mbt,187:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::readFloat_unsafe(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int) -> float
+  :::source,suiyunonghen/wasmMemManager/memory.mbt,187:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::readFloat_unsafe(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int) -> Float
   ```
   > 
 - #### readInt32
@@ -159,11 +157,6 @@
   :::source,suiyunonghen/wasmMemManager/memory.mbt,28:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::readUInt32_unsafe(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int) -> UInt
   ```
   > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/wasmMemManager/traits.mbt,85:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### writeByte
   ```moonbit
   :::source,suiyunonghen/wasmMemManager/memory.mbt,256:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::writeByte(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int, value : Int) -> Bool
@@ -186,12 +179,12 @@
   > 
 - #### writeFloat
   ```moonbit
-  :::source,suiyunonghen/wasmMemManager/memory.mbt,204:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::writeFloat(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int, value : float) -> Bool
+  :::source,suiyunonghen/wasmMemManager/memory.mbt,204:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::writeFloat(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int, value : Float) -> Bool
   ```
   > 
 - #### writeFloat\_unsafe
   ```moonbit
-  :::source,suiyunonghen/wasmMemManager/memory.mbt,213:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::writeFloat_unsafe(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int, value : float) -> Unit
+  :::source,suiyunonghen/wasmMemManager/memory.mbt,213:::fn <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>::writeFloat_unsafe(self : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, pos : Int, value : Float) -> Unit
   ```
   > 
 - #### writeInt
@@ -300,13 +293,3 @@
 :::source,suiyunonghen/wasmMemManager/memory.mbt,523:::fn realloc(mem : <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>, newSize : Int) -> <a href="suiyunonghen/wasmMemManager#Memory">Memory</a>
 ```
 
-
-## MemoryManager
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/wasmMemManager/traits.mbt,85:::fn <a href="suiyunonghen/wasmMemManager#MemoryManager">MemoryManager</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

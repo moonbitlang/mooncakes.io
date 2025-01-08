@@ -1,0 +1,70 @@
+{
+  "name": "xunyoyo",
+  "package": null,
+  "childs": [
+    {
+      "name": "permutation",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": null,
+          "childs": [
+            {
+              "name": "is_permutation",
+              "package": {
+                "path": "xunyoyo/permutation/lib/is_permutation",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "is_permutation" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "next_permutation",
+              "package": {
+                "path": "xunyoyo/permutation/lib/next_permutation",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "next_permutation" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "prev_permutation",
+              "package": {
+                "path": "xunyoyo/permutation/lib/prev_permutation",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "prev_permutation" ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "xunyoyo/permutation/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

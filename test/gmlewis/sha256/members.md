@@ -29,7 +29,7 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[HashFunc](#HashFunc)| \`HashFunc\` represents a hash algorithm like \`@crc32\`, \`@md5\`, or \`@sha256\`.|
+|[@gmlewis/sha256.HashFunc](#@gmlewis/sha256.HashFunc)| \`HashFunc\` represents a hash algorithm like \`@crc32\`, \`@md5\`, or \`@sha256\`.|
 
 |Type|description|
 |---|---|
@@ -40,10 +40,10 @@ https://github.com/chawyehsu/moonup
 |---|---|
 |[gen\_hmac](#gen_hmac)| \`gen\_hmac\` generates a base64-encoded String representing|
 
-## HashFunc
+## @gmlewis/sha256.HashFunc
 
 ```moonbit
-:::source,gmlewis/sha256/hash-func.mbt,2:::pub(open) trait HashFunc {
+:::source,gmlewis/sha256/hash-func.mbt,2:::pub(open) trait @gmlewis/sha256.HashFunc {
   name(Self) -> String
   write(Self, Byte) -> Unit
   check_sum(Self) -> String

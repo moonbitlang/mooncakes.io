@@ -1,8 +1,8 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[RespoAction](#RespoAction)||
-|[RespoEffect](#RespoEffect)| implement this on data which creates effect|
+|[@tiye/respo/lib/node.RespoAction](#@tiye/respo/lib/node.RespoAction)||
+|[@tiye/respo/lib/node.RespoEffect](#@tiye/respo/lib/node.RespoEffect)| implement this on data which creates effect|
 
 |Type|description|
 |---|---|
@@ -95,19 +95,19 @@
 |[textarea](#textarea)||
 |[video](#video)||
 
-## RespoAction
+## @tiye/respo/lib/node.RespoAction
 
 ```moonbit
-:::source,tiye/respo/lib/node/node.mbt,174:::pub(open) trait RespoAction {
+:::source,tiye/respo/lib/node/node.mbt,174:::pub(open) trait @tiye/respo/lib/node.RespoAction {
   build_states_action(<a href="moonbitlang/core/array#Array">Array</a>[String], <a href="moonbitlang/core/builtin#ToJson">ToJson</a>?) -> Self
 }
 ```
 
 
-## RespoEffect
+## @tiye/respo/lib/node.RespoEffect
 
 ```moonbit
-:::source,tiye/respo/lib/node/effect.mbt,15:::pub(open) trait RespoEffect : <a href="moonbitlang/core/builtin#ToJson">ToJson</a> {
+:::source,tiye/respo/lib/node/effect.mbt,15:::pub(open) trait @tiye/respo/lib/node.RespoEffect : <a href="moonbitlang/core/builtin#ToJson">ToJson</a> {
   build_effect(Self) -> <a href="tiye/respo/lib/node#RespoEffectBox">RespoEffectBox</a>
   make_handler(Self) -> ((<a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit)
   run(Self, <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
@@ -119,36 +119,34 @@
 ```
  implement this on data which creates effect
 
-#### mooncakes-io-implementation-mark-Implementations
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,57:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with before_unmount[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,57:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with before_unmount(_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
   ```
   >  default handler is empty
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,51:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with before_update[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,51:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with before_update(_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
   ```
   >  default handler is empty
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,28:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with build_effect[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : Self) -> <a href="tiye/respo/lib/node#RespoEffectBox">RespoEffectBox</a>
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,28:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with build_effect(self : Self) -> <a href="tiye/respo/lib/node#RespoEffectBox">RespoEffectBox</a>
   ```
   > 
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,33:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with make_handler[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : Self) -> ((<a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit)
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,33:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with make_handler(self : Self) -> ((<a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit)
   ```
   > 
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,48:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with mounted[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,48:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with mounted(_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
   ```
   >  default handler is empty
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,38:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with run[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : Self, effect_type : <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, el : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,38:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with run(self : Self, effect_type : <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, el : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
   ```
   > 
-- ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,54:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> for <a href="#$default_impl">$default_impl</a> with updated[Self : <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> + <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
+* ```moonbit
+  :::source,tiye/respo/lib/node/effect.mbt,54:::impl <a href="tiye/respo/lib/node#RespoEffect">RespoEffect</a> with updated(_self : Self, _node : <a href="tiye/dom-ffi/lib#Node">@tiye/dom-ffi/lib.Node</a>) -> Unit
   ```
   >  default handler is empty
-
 ## AnchorElementTarget
 
 ```moonbit
@@ -181,11 +179,6 @@
   :::source,tiye/respo/lib/node/dom-change.mbt,234:::fn <a href="tiye/respo/lib/node#ChildDomOp">ChildDomOp</a>::to_cirru[T](self : <a href="tiye/respo/lib/node#ChildDomOp">ChildDomOp</a>[T]) -> <a href="tiye/cirru-parser/lib#Cirru">@tiye/cirru-parser/lib.Cirru</a>
   ```
   > 
-- #### to\_string
-  ```moonbit
-  :::source,tiye/respo/lib/node/traits.mbt,85:::fn <a href="tiye/respo/lib/node#ChildDomOp">ChildDomOp</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## CssBackgroundSize
 
@@ -200,16 +193,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,727:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a> with op_equal(<a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>, <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,727:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,727:::fn op_equal(<a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>, <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,727:::fn <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>::op_equal(<a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>, <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,730:::fn <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>::to_string(self : <a href="tiye/respo/lib/node#CssBackgroundSize">CssBackgroundSize</a>) -> String
@@ -219,14 +211,14 @@
 ## CssBorder
 
 ```moonbit
-:::source,tiye/respo/lib/node/css.mbt,705:::pub(all) type CssBorder (float, <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, <a href="tiye/respo/lib/node#CssColor">CssColor</a>)
+:::source,tiye/respo/lib/node/css.mbt,705:::pub(all) type CssBorder (Float, <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, <a href="tiye/respo/lib/node#CssColor">CssColor</a>)
 ```
 
 
 #### mooncakes-io-method-mark-Methods
 - #### new
   ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,714:::fn <a href="tiye/respo/lib/node#CssBorder">CssBorder</a>::new(width~ : float = .., style~ : <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a> = .., color~ : <a href="tiye/respo/lib/node#CssColor">CssColor</a> = ..) -> <a href="tiye/respo/lib/node#CssBorder">CssBorder</a>
+  :::source,tiye/respo/lib/node/css.mbt,714:::fn <a href="tiye/respo/lib/node#CssBorder">CssBorder</a>::new(width~ : Float = .., style~ : <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a> = .., color~ : <a href="tiye/respo/lib/node#CssColor">CssColor</a> = ..) -> <a href="tiye/respo/lib/node#CssBorder">CssBorder</a>
   ```
   > 
 - #### to\_string
@@ -248,16 +240,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,693:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a> with op_equal(<a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,693:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,693:::fn op_equal(<a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,693:::fn <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>::op_equal(<a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,696:::fn <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>::to_string(self : <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>) -> String
@@ -276,16 +267,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,822:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a> with op_equal(<a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>, <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,822:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,822:::fn op_equal(<a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>, <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,822:::fn <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>::op_equal(<a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>, <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,825:::fn <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>::to_string(self : <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>) -> String
@@ -296,11 +286,11 @@
 
 ```moonbit
 :::source,tiye/respo/lib/node/css.mbt,463:::pub(all) enum CssColor {
-  Hsla(UInt, UInt, UInt, float)
+  Hsla(UInt, UInt, UInt, Float)
   Hsl(UInt, UInt, UInt)
-  Hsluva(UInt, UInt, UInt, float)
+  Hsluva(UInt, UInt, UInt, Float)
   Hsluv(UInt, UInt, UInt)
-  Rgba(UInt, UInt, UInt, float)
+  Rgba(UInt, UInt, UInt, Float)
   Rgb(UInt, UInt, UInt)
   Hex(UInt, UInt, UInt)
   Red
@@ -322,16 +312,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,484:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssColor">CssColor</a> with op_equal(<a href="tiye/respo/lib/node#CssColor">CssColor</a>, <a href="tiye/respo/lib/node#CssColor">CssColor</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,484:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssColor">CssColor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,484:::fn op_equal(<a href="tiye/respo/lib/node#CssColor">CssColor</a>, <a href="tiye/respo/lib/node#CssColor">CssColor</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,484:::fn <a href="tiye/respo/lib/node#CssColor">CssColor</a>::op_equal(<a href="tiye/respo/lib/node#CssColor">CssColor</a>, <a href="tiye/respo/lib/node#CssColor">CssColor</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,487:::fn <a href="tiye/respo/lib/node#CssColor">CssColor</a>::to_string(self : <a href="tiye/respo/lib/node#CssColor">CssColor</a>) -> String
@@ -351,16 +340,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,975:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a> with op_equal(<a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>, <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,975:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,975:::fn op_equal(<a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>, <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,975:::fn <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>::op_equal(<a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>, <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,978:::fn <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>::to_string(self : <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>) -> String
@@ -413,16 +401,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,926:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssCursor">CssCursor</a> with op_equal(<a href="tiye/respo/lib/node#CssCursor">CssCursor</a>, <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,926:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,926:::fn op_equal(<a href="tiye/respo/lib/node#CssCursor">CssCursor</a>, <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,926:::fn <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>::op_equal(<a href="tiye/respo/lib/node#CssCursor">CssCursor</a>, <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,929:::fn <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>::to_string(self : <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>) -> String
@@ -447,16 +434,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,558:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a> with op_equal(<a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>, <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,558:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,558:::fn op_equal(<a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>, <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,558:::fn <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>::op_equal(<a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>, <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,561:::fn <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>::to_string(self : <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>) -> String
@@ -468,7 +454,7 @@
 ```moonbit
 :::source,tiye/respo/lib/node/css.mbt,411:::pub(all) enum CssDuration {
   Ms(Int)
-  S(float)
+  S(Float)
 }
 ```
 
@@ -485,16 +471,16 @@
 ```moonbit
 :::source,tiye/respo/lib/node/css.mbt,987:::pub(all) enum CssFilter {
   None
-  Blur(float)
-  Brightness(float)
-  Contrast(float)
-  Grayscale(float)
-  HueRotate(float)
-  Invert(float)
-  Opacity(float)
-  Saturate(float)
-  Sepia(float)
-  DropShadow(float, float, float, <a href="tiye/respo/lib/node#CssColor">CssColor</a>)
+  Blur(Float)
+  Brightness(Float)
+  Contrast(Float)
+  Grayscale(Float)
+  HueRotate(Float)
+  Invert(Float)
+  Opacity(Float)
+  Saturate(Float)
+  Sepia(Float)
+  DropShadow(Float, Float, Float, <a href="tiye/respo/lib/node#CssColor">CssColor</a>)
   Url(String)
   Revert
   RevertLayer
@@ -525,16 +511,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,674:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a> with op_equal(<a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>, <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,674:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,674:::fn op_equal(<a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>, <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,674:::fn <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>::op_equal(<a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>, <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,677:::fn <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>::to_string(self : <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>) -> String
@@ -556,16 +541,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,653:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a> with op_equal(<a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>, <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,653:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,653:::fn op_equal(<a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>, <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,653:::fn <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>::op_equal(<a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>, <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,656:::fn <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>::to_string(self : <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>) -> String
@@ -586,16 +570,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,596:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a> with op_equal(<a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>, <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,596:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,596:::fn op_equal(<a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>, <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,596:::fn <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>::op_equal(<a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>, <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,599:::fn <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>::to_string(self : <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>) -> String
@@ -618,16 +601,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,632:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a> with op_equal(<a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>, <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,632:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,632:::fn op_equal(<a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>, <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,632:::fn <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>::op_equal(<a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>, <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,635:::fn <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>::to_string(self : <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>) -> String
@@ -647,16 +629,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,579:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a> with op_equal(<a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>, <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,579:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,579:::fn op_equal(<a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>, <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,579:::fn <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>::op_equal(<a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>, <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,582:::fn <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>::to_string(self : <a href="tiye/respo/lib/node#CssFlexWrap">CssFlexWrap</a>) -> String
@@ -678,16 +659,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,857:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a> with op_equal(<a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>, <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,857:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,857:::fn op_equal(<a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>, <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,857:::fn <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>::op_equal(<a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>, <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,860:::fn <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>::to_string(self : <a href="tiye/respo/lib/node#CssFontWeight">CssFontWeight</a>) -> String
@@ -698,9 +678,9 @@
 
 ```moonbit
 :::source,tiye/respo/lib/node/css.mbt,513:::pub(all) enum CssLineHeight {
-  Em(float)
-  Px(float)
-  Percent(float)
+  Em(Float)
+  Px(Float)
+  Percent(Float)
   Normal
 }
 ```
@@ -708,16 +688,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,518:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a> with op_equal(<a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>, <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,518:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,518:::fn op_equal(<a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>, <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,518:::fn <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>::op_equal(<a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>, <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,521:::fn <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>::to_string(self : <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>) -> String
@@ -739,16 +718,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,1032:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a> with op_equal(<a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>, <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,1032:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,1032:::fn op_equal(<a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>, <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,1032:::fn <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>::op_equal(<a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>, <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,1035:::fn <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>::to_string(self : <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>) -> String
@@ -767,16 +745,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,399:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssOutline">CssOutline</a> with op_equal(<a href="tiye/respo/lib/node#CssOutline">CssOutline</a>, <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,399:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,399:::fn op_equal(<a href="tiye/respo/lib/node#CssOutline">CssOutline</a>, <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,399:::fn <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>::op_equal(<a href="tiye/respo/lib/node#CssOutline">CssOutline</a>, <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,402:::fn <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>::to_string(self : <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>) -> String
@@ -797,16 +774,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,744:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a> with op_equal(<a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>, <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,744:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,744:::fn op_equal(<a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>, <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,744:::fn <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>::op_equal(<a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>, <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,747:::fn <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>::to_string(self : <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>) -> String
@@ -846,16 +822,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,449:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssPosition">CssPosition</a> with op_equal(<a href="tiye/respo/lib/node#CssPosition">CssPosition</a>, <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,449:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,449:::fn op_equal(<a href="tiye/respo/lib/node#CssPosition">CssPosition</a>, <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,449:::fn <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>::op_equal(<a href="tiye/respo/lib/node#CssPosition">CssPosition</a>, <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,452:::fn <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>::to_string(self : <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>) -> String
@@ -880,16 +855,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css-size.mbt,11:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssSize">CssSize</a> with op_equal(<a href="tiye/respo/lib/node#CssSize">CssSize</a>, <a href="tiye/respo/lib/node#CssSize">CssSize</a>) -> Bool
+  :::source,tiye/respo/lib/node/css-size.mbt,11:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssSize">CssSize</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css-size.mbt,11:::fn op_equal(<a href="tiye/respo/lib/node#CssSize">CssSize</a>, <a href="tiye/respo/lib/node#CssSize">CssSize</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css-size.mbt,11:::fn <a href="tiye/respo/lib/node#CssSize">CssSize</a>::op_equal(<a href="tiye/respo/lib/node#CssSize">CssSize</a>, <a href="tiye/respo/lib/node#CssSize">CssSize</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css-size.mbt,14:::fn <a href="tiye/respo/lib/node#CssSize">CssSize</a>::to_string(self : <a href="tiye/respo/lib/node#CssSize">CssSize</a>) -> String
@@ -910,16 +884,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,838:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a> with op_equal(<a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>, <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,838:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,838:::fn op_equal(<a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>, <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,838:::fn <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>::op_equal(<a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>, <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,841:::fn <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>::to_string(self : <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>) -> String
@@ -940,16 +913,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,876:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a> with op_equal(<a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>, <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,876:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,876:::fn op_equal(<a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>, <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,876:::fn <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>::op_equal(<a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>, <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,879:::fn <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>::to_string(self : <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>) -> String
@@ -968,16 +940,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,808:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a> with op_equal(<a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>, <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,808:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,808:::fn op_equal(<a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>, <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,808:::fn <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>::op_equal(<a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>, <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,811:::fn <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>::to_string(self : <a href="tiye/respo/lib/node#CssTextOverflow">CssTextOverflow</a>) -> String
@@ -1001,16 +972,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,789:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a> with op_equal(<a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>, <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,789:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,789:::fn op_equal(<a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>, <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,789:::fn <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>::op_equal(<a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>, <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,792:::fn <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>::to_string(self : <a href="tiye/respo/lib/node#CssTimingFunction">CssTimingFunction</a>) -> String
@@ -1024,26 +994,25 @@
   Translate(Int, Int)
   TranslateX(Int)
   TranslateY(Int)
-  Scale(float)
+  Scale(Float)
   Rotate(Int)
   Skew(Int, Int)
-  Matrix(float, float, float, float, float, float)
+  Matrix(Float, Float, Float, Float, Float, Float)
 }
 ```
 
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,765:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTransform">CssTransform</a> with op_equal(<a href="tiye/respo/lib/node#CssTransform">CssTransform</a>, <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,765:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,765:::fn op_equal(<a href="tiye/respo/lib/node#CssTransform">CssTransform</a>, <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,765:::fn <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>::op_equal(<a href="tiye/respo/lib/node#CssTransform">CssTransform</a>, <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,768:::fn <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>::to_string(self : <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>) -> String
@@ -1156,11 +1125,6 @@
 - #### to\_cirru
   ```moonbit
   :::source,tiye/respo/lib/node/dom-change.mbt,113:::fn <a href="tiye/respo/lib/node#DomChange">DomChange</a>::to_cirru[T](self : <a href="tiye/respo/lib/node#DomChange">DomChange</a>[T]) -> <a href="tiye/cirru-parser/lib#Cirru">@tiye/cirru-parser/lib.Cirru</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,tiye/respo/lib/node/traits.mbt,85:::fn <a href="tiye/respo/lib/node#DomChange">DomChange</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -1290,16 +1254,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,70:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a> with op_equal(<a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>) -> Bool
+  :::source,tiye/respo/lib/node/effect.mbt,70:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/effect.mbt,70:::fn op_equal(<a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/effect.mbt,70:::fn <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>::op_equal(<a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>, <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_cirru
   ```moonbit
   :::source,tiye/respo/lib/node/effect.mbt,83:::fn <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>::to_cirru(self : <a href="tiye/respo/lib/node#RespoEffectType">RespoEffectType</a>) -> <a href="tiye/cirru-parser/lib#Cirru">@tiye/cirru-parser/lib.Cirru</a>
@@ -1355,7 +1318,7 @@
 
 ```moonbit
 :::source,tiye/respo/lib/node/listener.mbt,2:::pub(all) enum RespoEvent {
-  Click(float, float, <a href="tiye/dom-ffi/lib#MouseEvent">@tiye/dom-ffi/lib.MouseEvent</a>)
+  Click(Float, Float, <a href="tiye/dom-ffi/lib#MouseEvent">@tiye/dom-ffi/lib.MouseEvent</a>)
   Keyboard(String, UInt, Bool, Bool, Bool, Bool, Bool, <a href="tiye/dom-ffi/lib#KeyboardEvent">@tiye/dom-ffi/lib.KeyboardEvent</a>)
   Input(String, <a href="tiye/dom-ffi/lib#InputEvent">@tiye/dom-ffi/lib.InputEvent</a>)
   Focus(<a href="tiye/dom-ffi/lib#FocusEvent">@tiye/dom-ffi/lib.FocusEvent</a>)
@@ -1401,30 +1364,23 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/listener.mbt,52:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a> with hash_combine(<a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,tiye/respo/lib/node/listener.mbt,52:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a> with op_equal(<a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>, <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>) -> Bool
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### hash
-  ```moonbit
-  :::source,tiye/respo/lib/node/traits.mbt,40:::fn <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
+  :::source,tiye/respo/lib/node/listener.mbt,52:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>
   ```
   > 
-- #### hash\_combine
-  ```moonbit
-  :::source,tiye/respo/lib/node/listener.mbt,52:::fn <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>::hash_combine(<a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  * ```moonbit
+    :::source,tiye/respo/lib/node/listener.mbt,52:::fn op_equal(<a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>, <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,tiye/respo/lib/node/listener.mbt,52:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>
   ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/listener.mbt,52:::fn <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>::op_equal(<a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>, <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/listener.mbt,52:::fn hash_combine(<a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### to\_cirru
   ```moonbit
   :::source,tiye/respo/lib/node/listener.mbt,75:::fn <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>::to_cirru(self : <a href="tiye/respo/lib/node#RespoEventType">RespoEventType</a>) -> <a href="tiye/cirru-parser/lib#Cirru">@tiye/cirru-parser/lib.Cirru</a>
@@ -1445,16 +1401,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/element.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a> with op_equal(<a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>, <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>) -> Bool
+  :::source,tiye/respo/lib/node/element.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/element.mbt,2:::fn op_equal(<a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>, <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/element.mbt,2:::fn <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>::op_equal(<a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>, <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_cirru
   ```moonbit
   :::source,tiye/respo/lib/node/element.mbt,5:::fn <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>::to_cirru(self : <a href="tiye/respo/lib/node#RespoIndexKey">RespoIndexKey</a>) -> <a href="tiye/cirru-parser/lib#Cirru">@tiye/cirru-parser/lib.Cirru</a>
@@ -1497,13 +1452,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,2:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a> with default() -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
+  :::source,tiye/respo/lib/node/css.mbt,2:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,2:::fn default() -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a> with op_equal(<a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>, <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>) -> Bool
+  :::source,tiye/respo/lib/node/css.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/respo/lib/node/css.mbt,2:::fn op_equal(<a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>, <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -1511,11 +1474,6 @@
   :::source,tiye/respo/lib/node/css.mbt,21:::fn <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>::add(self : <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>, property : String, value : String) -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
   ```
   >  for custom styles not defined with enum, use this function to add
-- #### default
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,2:::fn <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>::default() -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
-  ```
-  > automatically derived
 - #### is\_empty
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,6:::fn <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>::is_empty(self : <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>) -> Bool
@@ -1526,11 +1484,6 @@
   :::source,tiye/respo/lib/node/css.mbt,27:::fn <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>::merge(self : <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>, other : <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>) -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/respo/lib/node/css.mbt,2:::fn <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>::op_equal(<a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>, <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/respo/lib/node/css.mbt,11:::fn <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>::to_string(self : <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>) -> String
@@ -1747,7 +1700,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
 ## raf\_loop
 
 ```moonbit
-:::source,tiye/respo/lib/node/util.mbt,16:::fn raf_loop(f : (float) -> Unit!<a href="tiye/respo/lib/node#RespoCommonError">RespoCommonError</a>) -> Unit
+:::source,tiye/respo/lib/node/util.mbt,16:::fn raf_loop(f : (Float) -> Unit!<a href="tiye/respo/lib/node#RespoCommonError">RespoCommonError</a>) -> Unit
 ```
 
 
@@ -1761,7 +1714,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
 ## respo\_style
 
 ```moonbit
-:::source,tiye/respo/lib/node/css.mbt,42:::fn respo_style(color? : <a href="tiye/respo/lib/node#CssColor">CssColor</a>, background_color? : <a href="tiye/respo/lib/node#CssColor">CssColor</a>, font_size? : UInt, font_family? : String, font_weight? : String, text_align? : <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>, display? : <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>, margin? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, border? : <a href="tiye/respo/lib/node#CssBorder">CssBorder</a>, width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, height? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, position? : <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>, top? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, right? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, bottom? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, left? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, float? : String, clear? : String, overflow? : <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>, z_index? : Int, flex? : float, flex_direction? : <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>, justify_content? : <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>, align_items? : <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>, align_content? : <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>, order? : Int, text_decoration? : <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>, text_transform? : String, line_height? : <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>, letter_spacing? : String, white_space? : String, word_break? : <a href="tiye/respo/lib/node#CssWordBreak">CssWordBreak</a>, opacity? : Int, visibility? : String, box_shadow? : String, transition? : String, box_sizing? : <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>, border_radius? : float, padding_top? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding_bottom? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding_left? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding_right? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, min_width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, max_width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, vertical_align? : <a href="tiye/respo/lib/node#CssVerticalAlign">CssVerticalAlign</a>, border_style? : <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, border_color? : <a href="tiye/respo/lib/node#CssColor">CssColor</a>, border_width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, cursor? : <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>, transition_duration? : <a href="tiye/respo/lib/node#CssDuration">CssDuration</a>, transform? : <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>, outline? : <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>, user_select? : <a href="tiye/respo/lib/node#CssUserSelect">CssUserSelect</a>, margin_top? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, margin_bottom? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, margin_left? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, margin_right? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, max_height? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, transform_property? : <a href="moonbitlang/core/array#Array">Array</a>[String], gap? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, content? : String, content_visibility? : <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>, filter? : <a href="tiye/respo/lib/node#CssFilter">CssFilter</a>, object_fit? : <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>, overscroll_behavior_x? : <a href="tiye/respo/lib/node#CssOverscrollBehavior">CssOverscrollBehavior</a>, overscroll_behavior_y? : <a href="tiye/respo/lib/node#CssOverscrollBehavior">CssOverscrollBehavior</a>) -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
+:::source,tiye/respo/lib/node/css.mbt,42:::fn respo_style(color? : <a href="tiye/respo/lib/node#CssColor">CssColor</a>, background_color? : <a href="tiye/respo/lib/node#CssColor">CssColor</a>, font_size? : UInt, font_family? : String, font_weight? : String, text_align? : <a href="tiye/respo/lib/node#CssTextAlign">CssTextAlign</a>, display? : <a href="tiye/respo/lib/node#CssDisplay">CssDisplay</a>, margin? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, border? : <a href="tiye/respo/lib/node#CssBorder">CssBorder</a>, width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, height? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, position? : <a href="tiye/respo/lib/node#CssPosition">CssPosition</a>, top? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, right? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, bottom? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, left? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, float? : String, clear? : String, overflow? : <a href="tiye/respo/lib/node#CssOverflow">CssOverflow</a>, z_index? : Int, flex? : Float, flex_direction? : <a href="tiye/respo/lib/node#CssFlexDirection">CssFlexDirection</a>, justify_content? : <a href="tiye/respo/lib/node#CssFlexJustifyContent">CssFlexJustifyContent</a>, align_items? : <a href="tiye/respo/lib/node#CssFlexAlignItems">CssFlexAlignItems</a>, align_content? : <a href="tiye/respo/lib/node#CssFlexAlignContent">CssFlexAlignContent</a>, order? : Int, text_decoration? : <a href="tiye/respo/lib/node#CssTextDecoration">CssTextDecoration</a>, text_transform? : String, line_height? : <a href="tiye/respo/lib/node#CssLineHeight">CssLineHeight</a>, letter_spacing? : String, white_space? : String, word_break? : <a href="tiye/respo/lib/node#CssWordBreak">CssWordBreak</a>, opacity? : Int, visibility? : String, box_shadow? : String, transition? : String, box_sizing? : <a href="tiye/respo/lib/node#CssBoxSizing">CssBoxSizing</a>, border_radius? : Float, padding_top? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding_bottom? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding_left? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, padding_right? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, min_width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, max_width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, vertical_align? : <a href="tiye/respo/lib/node#CssVerticalAlign">CssVerticalAlign</a>, border_style? : <a href="tiye/respo/lib/node#CssBorderStyle">CssBorderStyle</a>, border_color? : <a href="tiye/respo/lib/node#CssColor">CssColor</a>, border_width? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, cursor? : <a href="tiye/respo/lib/node#CssCursor">CssCursor</a>, transition_duration? : <a href="tiye/respo/lib/node#CssDuration">CssDuration</a>, transform? : <a href="tiye/respo/lib/node#CssTransform">CssTransform</a>, outline? : <a href="tiye/respo/lib/node#CssOutline">CssOutline</a>, user_select? : <a href="tiye/respo/lib/node#CssUserSelect">CssUserSelect</a>, margin_top? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, margin_bottom? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, margin_left? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, margin_right? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, max_height? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, transform_property? : <a href="moonbitlang/core/array#Array">Array</a>[String], gap? : <a href="tiye/respo/lib/node#CssSize">CssSize</a>, content? : String, content_visibility? : <a href="tiye/respo/lib/node#CssContentVisibility">CssContentVisibility</a>, filter? : <a href="tiye/respo/lib/node#CssFilter">CssFilter</a>, object_fit? : <a href="tiye/respo/lib/node#CssObjectFit">CssObjectFit</a>, overscroll_behavior_x? : <a href="tiye/respo/lib/node#CssOverscrollBehavior">CssOverscrollBehavior</a>, overscroll_behavior_y? : <a href="tiye/respo/lib/node#CssOverscrollBehavior">CssOverscrollBehavior</a>) -> <a href="tiye/respo/lib/node#RespoStyle">RespoStyle</a>
 ```
  Create a new RespoStyle object
 

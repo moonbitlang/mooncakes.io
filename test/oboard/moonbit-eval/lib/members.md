@@ -53,33 +53,26 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lib#Value">Value</a> with output(<a href="oboard/moonbit-eval/lib#Value">Value</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lib#Value">Value</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::fn output(<a href="oboard/moonbit-eval/lib#Value">Value</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="oboard/moonbit-eval/lib#Value">Value</a> with to_json(<a href="oboard/moonbit-eval/lib#Value">Value</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="oboard/moonbit-eval/lib#Value">Value</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::fn to_json(<a href="oboard/moonbit-eval/lib#Value">Value</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### op\_equal
   ```moonbit
   :::source,oboard/moonbit-eval/lib/interpreter.mbt,23:::fn <a href="oboard/moonbit-eval/lib#Value">Value</a>::op_equal(self : <a href="oboard/moonbit-eval/lib#Value">Value</a>, other : <a href="oboard/moonbit-eval/lib#Value">Value</a>) -> Bool
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::fn <a href="oboard/moonbit-eval/lib#Value">Value</a>::output(<a href="oboard/moonbit-eval/lib#Value">Value</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,21:::fn <a href="oboard/moonbit-eval/lib#Value">Value</a>::to_json(<a href="oboard/moonbit-eval/lib#Value">Value</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/lib/traits.mbt,85:::fn <a href="oboard/moonbit-eval/lib#Value">Value</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -92,27 +85,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lib#Variable">Variable</a> with output(<a href="oboard/moonbit-eval/lib#Variable">Variable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="oboard/moonbit-eval/lib#Variable">Variable</a> with to_json(<a href="oboard/moonbit-eval/lib#Variable">Variable</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::fn <a href="oboard/moonbit-eval/lib#Variable">Variable</a>::output(<a href="oboard/moonbit-eval/lib#Variable">Variable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::fn <a href="oboard/moonbit-eval/lib#Variable">Variable</a>::to_json(<a href="oboard/moonbit-eval/lib#Variable">Variable</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/lib/traits.mbt,85:::fn <a href="oboard/moonbit-eval/lib#Variable">Variable</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lib#Variable">Variable</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::fn output(<a href="oboard/moonbit-eval/lib#Variable">Variable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="oboard/moonbit-eval/lib#Variable">Variable</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lib/interpreter.mbt,9:::fn to_json(<a href="oboard/moonbit-eval/lib#Variable">Variable</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived

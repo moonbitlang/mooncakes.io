@@ -15,13 +15,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### del
@@ -55,21 +63,11 @@
   >  If the key does not exist, it is set to 0 before performing the operation.
   > An `error::type-error` is returned if the key contains a value of the wrong type
   > or contains a string that can not be represented as integer.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>) -> Bool
-  ```
-  > automatically derived
 - #### open
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,37:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>::open(address : String) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>]
   ```
   >  Open a connection to the Redis instance at `address`.
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,12:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### publish
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,67:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>::publish(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, channel : String, payload : Bytes) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>]
@@ -97,11 +95,6 @@
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,363:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>::srem(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>, key : String, values : <a href="moonbitlang/core/array#Array">Array</a>[String]) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>]
   ```
   >  Remove the specified `values` from the set named `key`, returning the number of newly-removed values.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection">Connection</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Error\_
 
@@ -117,30 +110,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,9:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RedisParameter
 
@@ -154,30 +138,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,26:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter">RedisParameter</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RedisResult
 
@@ -193,27 +168,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/redis/top.mbt,34:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult">RedisResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived

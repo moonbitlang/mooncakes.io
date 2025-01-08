@@ -1,0 +1,16 @@
+{
+  "readme": "An interface providing an optional `terminal-output` for stdout as a\nlink-time authority.",
+  "name": "yamajik/wasi-bindings/interface/wasi/cli/terminalStdout",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "get_terminal_stdout",
+      "docstring": " If stdout is connected to a terminal, return a `terminal-output` handle\n allowing further interaction with it.",
+      "signature": "fn get_terminal_stdout() -> <a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">@yamajik/wasi-bindings/interface/wasi/cli/terminalOutput.TerminalOutput</a>?",
+      "loc": { "line": 4, "column": 8 }
+    }
+  ],
+  "misc": []
+}

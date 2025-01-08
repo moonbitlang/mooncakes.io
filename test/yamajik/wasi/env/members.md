@@ -16,9 +16,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/env/env.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/env#Variable">Variable</a> with output(<a href="yamajik/wasi/env#Variable">Variable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/env/env.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/env#Variable">Variable</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/env/env.mbt,11:::fn output(<a href="yamajik/wasi/env#Variable">Variable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### as\_float
@@ -39,16 +43,6 @@
 - #### as\_string
   ```moonbit
   :::source,yamajik/wasi/env/env.mbt,14:::fn <a href="yamajik/wasi/env#Variable">Variable</a>::as_string(self : <a href="yamajik/wasi/env#Variable">Variable</a>) -> String?
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/env/env.mbt,11:::fn <a href="yamajik/wasi/env#Variable">Variable</a>::output(<a href="yamajik/wasi/env#Variable">Variable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi/env/traits.mbt,85:::fn <a href="yamajik/wasi/env#Variable">Variable</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 

@@ -1,0 +1,34 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/log",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "debug",
+      "docstring": " `debug` prints a string prefixed with \"DEBUG: \" to wasi stderr with a newline.",
+      "signature": "fn debug(s : String, leading_blank_line~ : Bool = ..) -> Unit",
+      "loc": { "line": 12, "column": 8 }
+    },
+    {
+      "name": "error",
+      "docstring": " `error` prints a string prefixed with \"ERROR: \" to wasi stderr with a newline.",
+      "signature": "fn error(s : String, leading_blank_line~ : Bool = ..) -> Unit",
+      "loc": { "line": 32, "column": 8 }
+    },
+    {
+      "name": "info",
+      "docstring": " `info` prints a string prefixed with \"INFO: \" to wasi stderr with a newline.",
+      "signature": "fn info(s : String, leading_blank_line~ : Bool = ..) -> Unit",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "warn",
+      "docstring": " `warn` prints a string prefixed with \"WARNING: \" to wasi stderr with a newline.",
+      "signature": "fn warn(s : String, leading_blank_line~ : Bool = ..) -> Unit",
+      "loc": { "line": 22, "column": 8 }
+    }
+  ],
+  "misc": []
+}

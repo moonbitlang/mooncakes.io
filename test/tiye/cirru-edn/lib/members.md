@@ -40,17 +40,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/edn.mbt,23:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/cirru-edn/lib#Edn">Edn</a> with default() -> <a href="tiye/cirru-edn/lib#Edn">Edn</a>
+  :::source,tiye/cirru-edn/lib/edn.mbt,23:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/cirru-edn/lib#Edn">Edn</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/edn.mbt,23:::fn default() -> <a href="tiye/cirru-edn/lib#Edn">Edn</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/edn.mbt,23:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-edn/lib#Edn">Edn</a> with hash_combine(<a href="tiye/cirru-edn/lib#Edn">Edn</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,tiye/cirru-edn/lib/edn.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#Edn">Edn</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/edn.mbt,23:::fn op_equal(<a href="tiye/cirru-edn/lib#Edn">Edn</a>, <a href="tiye/cirru-edn/lib#Edn">Edn</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/edn.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#Edn">Edn</a> with op_equal(<a href="tiye/cirru-edn/lib#Edn">Edn</a>, <a href="tiye/cirru-edn/lib#Edn">Edn</a>) -> Bool
+  :::source,tiye/cirru-edn/lib/edn.mbt,23:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-edn/lib#Edn">Edn</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/edn.mbt,23:::fn hash_combine(<a href="tiye/cirru-edn/lib#Edn">Edn</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### compare
@@ -58,31 +70,11 @@
   :::source,tiye/cirru-edn/lib/edn.mbt,60:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::compare(self : <a href="tiye/cirru-edn/lib#Edn">Edn</a>, right : <a href="tiye/cirru-edn/lib#Edn">Edn</a>) -> Int
   ```
   > 
-- #### default
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/edn.mbt,23:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::default() -> <a href="tiye/cirru-edn/lib#Edn">Edn</a>
-  ```
-  > automatically derived
-- #### hash
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/traits.mbt,40:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/edn.mbt,23:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::hash_combine(<a href="tiye/cirru-edn/lib#Edn">Edn</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
 - #### is\_literal
   ```moonbit
   :::source,tiye/cirru-edn/lib/edn.mbt,128:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::is_literal(self : <a href="tiye/cirru-edn/lib#Edn">Edn</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/edn.mbt,23:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::op_equal(<a href="tiye/cirru-edn/lib#Edn">Edn</a>, <a href="tiye/cirru-edn/lib#Edn">Edn</a>) -> Bool
-  ```
-  > automatically derived
 - #### str
   ```moonbit
   :::source,tiye/cirru-edn/lib/edn.mbt,106:::fn <a href="tiye/cirru-edn/lib#Edn">Edn</a>::str(s : String) -> <a href="tiye/cirru-edn/lib#Edn">Edn</a>
@@ -118,16 +110,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/buffer.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a> with op_equal(<a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>, <a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>) -> Bool
+  :::source,tiye/cirru-edn/lib/buffer.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/buffer.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>::op_equal(<a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>, <a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/buffer.mbt,2:::fn op_equal(<a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>, <a href="tiye/cirru-edn/lib#EdnBufferView">EdnBufferView</a>) -> Bool
+    ```
+    > automatically derived
 
 ## EdnCommonError
 
@@ -139,48 +128,39 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,2:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a> with default() -> <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,2:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a> with hash_combine(<a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a> with op_equal(<a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a> with output(self : <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,tiye/cirru-edn/lib/lib.mbt,2:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/lib.mbt,2:::fn default() -> <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,tiye/cirru-edn/lib/lib.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/lib.mbt,2:::fn op_equal(<a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,tiye/cirru-edn/lib/lib.mbt,2:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/lib.mbt,2:::fn hash_combine(<a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,tiye/cirru-edn/lib/lib.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/lib.mbt,12:::fn output(self : <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### default
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>::default() -> <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>
-  ```
-  > automatically derived
-- #### hash
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/traits.mbt,40:::fn <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>::hash_combine(<a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>::op_equal(<a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/lib.mbt,12:::fn <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>::output(self : <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### to\_string
   ```moonbit
   :::source,tiye/cirru-edn/lib/lib.mbt,5:::fn <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>::to_string(self : <a href="tiye/cirru-edn/lib#EdnCommonError">EdnCommonError</a>) -> String
@@ -196,16 +176,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/list.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a> with op_equal(<a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>, <a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>) -> Bool
+  :::source,tiye/cirru-edn/lib/list.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/list.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>::op_equal(<a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>, <a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/list.mbt,2:::fn op_equal(<a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>, <a href="tiye/cirru-edn/lib#EdnListView">EdnListView</a>) -> Bool
+    ```
+    > automatically derived
 
 ## EdnMapView
 
@@ -226,16 +203,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/record.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a> with op_equal(<a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>, <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>) -> Bool
+  :::source,tiye/cirru-edn/lib/record.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/record.mbt,5:::fn op_equal(<a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>, <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/record.mbt,5:::fn <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>::op_equal(<a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>, <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/cirru-edn/lib/record.mbt,20:::fn <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>::to_string(self : <a href="tiye/cirru-edn/lib#EdnRecordView">EdnRecordView</a>) -> String
@@ -258,13 +234,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/tag.mbt,2:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a> with hash_combine(<a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,tiye/cirru-edn/lib/tag.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/tag.mbt,2:::fn op_equal(<a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/tag.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a> with op_equal(<a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>) -> Bool
+  :::source,tiye/cirru-edn/lib/tag.mbt,2:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/tag.mbt,2:::fn hash_combine(<a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### compare
@@ -272,21 +256,6 @@
   :::source,tiye/cirru-edn/lib/tag.mbt,20:::fn <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>::compare(self : <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, other : <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>) -> Int
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/traits.mbt,40:::fn <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/tag.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>::hash_combine(<a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/tag.mbt,2:::fn <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>::op_equal(<a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>, <a href="tiye/cirru-edn/lib#EdnTag">EdnTag</a>) -> Bool
-  ```
-  > automatically derived
 
 ## EdnTupleView
 
@@ -300,9 +269,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-edn/lib/tuple.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a> with op_equal(<a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>, <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>) -> Bool
+  :::source,tiye/cirru-edn/lib/tuple.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-edn/lib/tuple.mbt,5:::fn op_equal(<a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>, <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### compare
@@ -315,11 +288,6 @@
   :::source,tiye/cirru-edn/lib/tuple.mbt,8:::fn <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>::new(tag : <a href="tiye/cirru-edn/lib#Edn">Edn</a>, extra : <a href="moonbitlang/core/array#Array">Array</a>[<a href="tiye/cirru-edn/lib#Edn">Edn</a>]) -> <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-edn/lib/tuple.mbt,5:::fn <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>::op_equal(<a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>, <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,tiye/cirru-edn/lib/tuple.mbt,24:::fn <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>::to_string(self : <a href="tiye/cirru-edn/lib#EdnTupleView">EdnTupleView</a>) -> String

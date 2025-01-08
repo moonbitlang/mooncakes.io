@@ -87,20 +87,23 @@ src.transfer(dst)
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,456:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/queue#T">T</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/queue#T">T</a>[X]
+  :::source,moonbitlang/core/queue/queue.mbt,51:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/queue#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/queue/queue.mbt,51:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/queue#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,51:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/queue#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/queue#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/queue/queue.mbt,458:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/queue#T">T</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/queue/queue.mbt,458:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/queue#T">T</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,456:::fn <a href="moonbitlang/core/queue#T">T</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/queue#T">T</a>[X]
-  ```
-  > 
 - #### clear
   ```moonbit
   :::source,moonbitlang/core/queue/queue.mbt,84:::fn <a href="moonbitlang/core/queue#T">T</a>::clear[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> Unit
@@ -115,7 +118,7 @@ src.transfer(dst)
   >  ```
 - #### copy
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,284:::fn <a href="moonbitlang/core/queue#T">T</a>::copy[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> <a href="moonbitlang/core/queue#T">T</a>[A]
+  :::source,moonbitlang/core/queue/queue.mbt,286:::fn <a href="moonbitlang/core/queue#T">T</a>::copy[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> <a href="moonbitlang/core/queue#T">T</a>[A]
   ```
   > 
   >  Returns a copy of the queue.
@@ -128,7 +131,7 @@ src.transfer(dst)
   >  ```
 - #### each
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,230:::fn <a href="moonbitlang/core/queue#T">T</a>::each[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], f : (A) -> Unit) -> Unit
+  :::source,moonbitlang/core/queue/queue.mbt,232:::fn <a href="moonbitlang/core/queue#T">T</a>::each[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], f : (A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the queue.
@@ -141,7 +144,7 @@ src.transfer(dst)
   >  ```
 - #### eachi
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,249:::fn <a href="moonbitlang/core/queue#T">T</a>::eachi[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], f : (Int, A) -> Unit) -> Unit
+  :::source,moonbitlang/core/queue/queue.mbt,251:::fn <a href="moonbitlang/core/queue#T">T</a>::eachi[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], f : (Int, A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the queue with index.
@@ -154,7 +157,7 @@ src.transfer(dst)
   >  ```
 - #### fold
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,268:::fn <a href="moonbitlang/core/queue#T">T</a>::fold[A, B](self : <a href="moonbitlang/core/queue#T">T</a>[A], init~ : B, f : (B, A) -> B) -> B
+  :::source,moonbitlang/core/queue/queue.mbt,270:::fn <a href="moonbitlang/core/queue#T">T</a>::fold[A, B](self : <a href="moonbitlang/core/queue#T">T</a>[A], init~ : B, f : (B, A) -> B) -> B
   ```
   > 
   >  Folds over the queue.
@@ -180,7 +183,7 @@ src.transfer(dst)
   >  ```
 - #### from\_iter
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,368:::fn <a href="moonbitlang/core/queue#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/queue#T">T</a>[A]
+  :::source,moonbitlang/core/queue/queue.mbt,370:::fn <a href="moonbitlang/core/queue#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/queue#T">T</a>[A]
   ```
   > 
   >  Creates a new queue from an iter.
@@ -204,7 +207,7 @@ src.transfer(dst)
   >  ```
 - #### iter
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,346:::fn <a href="moonbitlang/core/queue#T">T</a>::iter[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
+  :::source,moonbitlang/core/queue/queue.mbt,348:::fn <a href="moonbitlang/core/queue#T">T</a>::iter[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
   ```
   > 
   >  Creates an iter from the queue.
@@ -241,7 +244,7 @@ src.transfer(dst)
   >  ```
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,382:::fn <a href="moonbitlang/core/queue#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/queue#T">T</a>[A]
+  :::source,moonbitlang/core/queue/queue.mbt,384:::fn <a href="moonbitlang/core/queue#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/queue#T">T</a>[A]
   ```
   > 
   >  Creates a new queue from a FixedArray.
@@ -251,14 +254,9 @@ src.transfer(dst)
   >  let queue : @queue.T[Int] = @queue.of([1, 2, 3, 4])
   >  assert_eq!(queue.length(), 4)
   >  ```
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,51:::fn <a href="moonbitlang/core/queue#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/queue#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### peek
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,168:::fn <a href="moonbitlang/core/queue#T">T</a>::peek[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/queue/queue.mbt,169:::fn <a href="moonbitlang/core/queue#T">T</a>::peek[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A?
   ```
   > 
   >  Peeks at the first value in the queue, which returns None if the queue is empty.
@@ -270,13 +268,14 @@ src.transfer(dst)
   >  ```
 - #### peek\_exn
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,156:::fn <a href="moonbitlang/core/queue#T">T</a>::peek_exn[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/queue/queue.mbt,157:::fn <a href="moonbitlang/core/queue#T">T</a>::peek_exn[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A
   ```
   > 
   >  @alert deprecated "Use `unsafe_peek` instead"
+  > @coverage.skip
 - #### pop
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,213:::fn <a href="moonbitlang/core/queue#T">T</a>::pop[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/queue/queue.mbt,215:::fn <a href="moonbitlang/core/queue#T">T</a>::pop[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A?
   ```
   > 
   >  Pops the first value from the queue, which returns None if the queue is empty.
@@ -288,10 +287,11 @@ src.transfer(dst)
   >  ```
 - #### pop\_exn
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,201:::fn <a href="moonbitlang/core/queue#T">T</a>::pop_exn[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/queue/queue.mbt,203:::fn <a href="moonbitlang/core/queue#T">T</a>::pop_exn[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A
   ```
   > 
   >  @alert deprecated "Use `unsafe_pop` instead"
+  > @coverage.skip
 - #### push
   ```moonbit
   :::source,moonbitlang/core/queue/queue.mbt,122:::fn <a href="moonbitlang/core/queue#T">T</a>::push[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], x : A) -> Unit
@@ -304,14 +304,9 @@ src.transfer(dst)
   >  let queue : @queue.T[Int] = @queue.new()
   >  queue.push(1)
   >  ```
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/queue/traits.mbt,85:::fn <a href="moonbitlang/core/queue#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transfer
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,318:::fn <a href="moonbitlang/core/queue#T">T</a>::transfer[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], dst : <a href="moonbitlang/core/queue#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/queue/queue.mbt,320:::fn <a href="moonbitlang/core/queue#T">T</a>::transfer[A](self : <a href="moonbitlang/core/queue#T">T</a>[A], dst : <a href="moonbitlang/core/queue#T">T</a>[A]) -> Unit
   ```
   > 
   >  Transfers all elements from one queue to another.
@@ -339,7 +334,7 @@ src.transfer(dst)
   >  @alert unsafe "Panics if the queue is empty."
 - #### unsafe\_pop
   ```moonbit
-  :::source,moonbitlang/core/queue/queue.mbt,184:::fn <a href="moonbitlang/core/queue#T">T</a>::unsafe_pop[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/queue/queue.mbt,185:::fn <a href="moonbitlang/core/queue#T">T</a>::unsafe_pop[A](self : <a href="moonbitlang/core/queue#T">T</a>[A]) -> A
   ```
   > 
   >  Pops the first value from the queue.

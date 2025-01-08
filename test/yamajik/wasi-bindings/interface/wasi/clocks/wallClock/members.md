@@ -35,30 +35,21 @@ It is intended for reporting the current date and time for humans.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::fn <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::fn <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/clocks/wallClock/top.mbt,6:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## now
 

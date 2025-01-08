@@ -1,13 +1,13 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Floating](#Floating)||
-|[FromInt](#FromInt)||
-|[Integer](#Integer)||
-|[Number](#Number)||
-|[ToInt](#ToInt)||
-|[ToInt16](#ToInt16)||
-|[ToInt8](#ToInt8)||
+|[@moonbitlang/arduino.Floating](#@moonbitlang/arduino.Floating)||
+|[@moonbitlang/arduino.FromInt](#@moonbitlang/arduino.FromInt)||
+|[@moonbitlang/arduino.Integer](#@moonbitlang/arduino.Integer)||
+|[@moonbitlang/arduino.Number](#@moonbitlang/arduino.Number)||
+|[@moonbitlang/arduino.ToInt](#@moonbitlang/arduino.ToInt)||
+|[@moonbitlang/arduino.ToInt16](#@moonbitlang/arduino.ToInt16)||
+|[@moonbitlang/arduino.ToInt8](#@moonbitlang/arduino.ToInt8)||
 
 |Type|description|
 |---|---|
@@ -51,28 +51,28 @@
 |[test\_bytes](#test_bytes)||
 |[tone](#tone)||
 
-## Floating
+## @moonbitlang/arduino.Floating
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,59:::pub(open) trait Floating : <a href="moonbitlang/arduino#Number">Number</a> {
+:::source,moonbitlang/arduino/traits.mbt,59:::pub(open) trait @moonbitlang/arduino.Floating : <a href="moonbitlang/arduino#Number">Number</a> {
   is_nan(Self) -> Bool
 }
 ```
 
 
-## FromInt
+## @moonbitlang/arduino.FromInt
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,54:::pub(open) trait FromInt {
+:::source,moonbitlang/arduino/traits.mbt,54:::pub(open) trait @moonbitlang/arduino.FromInt {
   from_int(Int) -> Self
 }
 ```
 
 
-## Integer
+## @moonbitlang/arduino.Integer
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,64:::pub(open) trait Integer : <a href="moonbitlang/arduino#Number">Number</a> {
+:::source,moonbitlang/arduino/traits.mbt,64:::pub(open) trait @moonbitlang/arduino.Integer : <a href="moonbitlang/arduino#Number">Number</a> {
   is_integer(Self) -> Bool
 }
 ```
@@ -80,18 +80,26 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,69:::impl <a href="moonbitlang/arduino#Integer">Integer</a> for <a href="moonbitlang/core/int#Int">Int</a> with is_integer(_x : Int) -> Bool
+  :::source,moonbitlang/arduino/traits.mbt,69:::impl <a href="moonbitlang/arduino#Integer">Integer</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,69:::fn is_integer(_x : Int) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,72:::impl <a href="moonbitlang/arduino#Integer">Integer</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with is_integer(_x : Int64) -> Bool
+  :::source,moonbitlang/arduino/traits.mbt,72:::impl <a href="moonbitlang/arduino#Integer">Integer</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,72:::fn is_integer(_x : Int64) -> Bool
+    ```
+    > 
 
-## Number
+## @moonbitlang/arduino.Number
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,75:::pub(open) trait Number : <a href="moonbitlang/core/builtin#Compare">Compare</a> {
+:::source,moonbitlang/arduino/traits.mbt,75:::pub(open) trait @moonbitlang/arduino.Number : <a href="moonbitlang/core/builtin#Compare">Compare</a> {
   op_add(Self, Self) -> Self
   op_sub(Self, Self) -> Self
   op_mul(Self, Self) -> Self
@@ -105,51 +113,67 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,104:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/float#Float">Float</a> with one() -> float
+  :::source,moonbitlang/arduino/traits.mbt,86:::impl <a href="moonbitlang/arduino#Number">Number</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,98:::fn one() -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,86:::fn zero() -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,101:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with one() -> Int64
+  :::source,moonbitlang/arduino/traits.mbt,89:::impl <a href="moonbitlang/arduino#Number">Number</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,101:::fn one() -> Int64
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,89:::fn zero() -> Int64
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,107:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/double#Double">Double</a> with one() -> Double
+  :::source,moonbitlang/arduino/traits.mbt,92:::impl <a href="moonbitlang/arduino#Number">Number</a> for Float
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,104:::fn one() -> Float
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,92:::fn zero() -> Float
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,98:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/int#Int">Int</a> with one() -> Int
+  :::source,moonbitlang/arduino/traits.mbt,95:::impl <a href="moonbitlang/arduino#Number">Number</a> for Double
   ```
   > 
-- ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,95:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/double#Double">Double</a> with zero() -> Double
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,89:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with zero() -> Int64
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,92:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/float#Float">Float</a> with zero() -> float
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,86:::impl <a href="moonbitlang/arduino#Number">Number</a> for <a href="moonbitlang/core/int#Int">Int</a> with zero() -> Int
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,107:::fn one() -> Double
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,95:::fn zero() -> Double
+    ```
+    > 
 
-## ToInt
+## @moonbitlang/arduino.ToInt
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,20:::pub(open) trait ToInt {
+:::source,moonbitlang/arduino/traits.mbt,20:::pub(open) trait @moonbitlang/arduino.ToInt {
   to_int(Self) -> Int
 }
 ```
 
 
-## ToInt16
+## @moonbitlang/arduino.ToInt16
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,41:::pub(open) trait ToInt16 {
+:::source,moonbitlang/arduino/traits.mbt,41:::pub(open) trait @moonbitlang/arduino.ToInt16 {
   to_int16(Self) -> Int
 }
 ```
@@ -157,18 +181,26 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,46:::impl <a href="moonbitlang/arduino#ToInt16">ToInt16</a> for <a href="moonbitlang/core/int#Int">Int</a> with to_int16(self : Int) -> Int
+  :::source,moonbitlang/arduino/traits.mbt,46:::impl <a href="moonbitlang/arduino#ToInt16">ToInt16</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,46:::fn to_int16(self : Int) -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,49:::impl <a href="moonbitlang/arduino#ToInt16">ToInt16</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with to_int16(self : Int64) -> Int
+  :::source,moonbitlang/arduino/traits.mbt,49:::impl <a href="moonbitlang/arduino#ToInt16">ToInt16</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,49:::fn to_int16(self : Int64) -> Int
+    ```
+    > 
 
-## ToInt8
+## @moonbitlang/arduino.ToInt8
 
 ```moonbit
-:::source,moonbitlang/arduino/traits.mbt,25:::pub(open) trait ToInt8 {
+:::source,moonbitlang/arduino/traits.mbt,25:::pub(open) trait @moonbitlang/arduino.ToInt8 {
   to_int8(Self) -> Int
 }
 ```
@@ -176,17 +208,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,33:::impl <a href="moonbitlang/arduino#ToInt8">ToInt8</a> for <a href="moonbitlang/core/int#Int">Int</a> with to_int8(self : Int) -> Int
+  :::source,moonbitlang/arduino/traits.mbt,30:::impl <a href="moonbitlang/arduino#ToInt8">ToInt8</a> for Byte
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,30:::fn to_int8(self : Byte) -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,30:::impl <a href="moonbitlang/arduino#ToInt8">ToInt8</a> for <a href="moonbitlang/core/byte#Byte">Byte</a> with to_int8(self : Byte) -> Int
+  :::source,moonbitlang/arduino/traits.mbt,33:::impl <a href="moonbitlang/arduino#ToInt8">ToInt8</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,33:::fn to_int8(self : Int) -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/traits.mbt,36:::impl <a href="moonbitlang/arduino#ToInt8">ToInt8</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with to_int8(self : Int64) -> Int
+  :::source,moonbitlang/arduino/traits.mbt,36:::impl <a href="moonbitlang/arduino#ToInt8">ToInt8</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/traits.mbt,36:::fn to_int8(self : Int64) -> Int
+    ```
+    > 
 
 ## DigitalValue
 

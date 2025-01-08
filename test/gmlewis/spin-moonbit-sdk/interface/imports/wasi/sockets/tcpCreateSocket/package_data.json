@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcpCreateSocket",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "create_tcp_socket",
+      "docstring": " Create a new TCP socket.\n\n Similar to `socket(AF_INET or AF_INET6, SOCK_STREAM, IPPROTO_TCP)` in POSIX.\n On IPv6 sockets, IPV6_V6ONLY is enabled by default and can't be configured otherwise.\n\n This function does not require a network capability handle. This is considered to be safe because\n at time of creation, the socket is not bound to any `network` yet. Up to the moment `bind`/`connect`\n is called, the socket is effectively an in-memory configuration object, unable to communicate with the outside world.\n\n All sockets are non-blocking. Use the wasi-poll interface to block on asynchronous operations.\n\n # Typical errors\n - `not-supported`:     The specified `address-family` is not supported. (EAFNOSUPPORT)\n - `new-socket-limit`:  The new socket resource could not be created because of a system limit. (EMFILE, ENFILE)\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/socket.html>\n - <https://man7.org/linux/man-pages/man2/socket.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsasocketw>\n - <https://man.freebsd.org/cgi/man.cgi?query=socket&sektion=2>",
+      "signature": "fn create_tcp_socket(address_family : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpAddressFamily</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcp#TcpSocket\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcp.TcpSocket</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+      "loc": { "line": 23, "column": 8 }
+    }
+  ],
+  "misc": []
+}

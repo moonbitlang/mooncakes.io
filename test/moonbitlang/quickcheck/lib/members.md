@@ -1,8 +1,8 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Shrink](#Shrink)||
-|[Testable](#Testable)||
+|[@moonbitlang/quickcheck/lib.Shrink](#@moonbitlang/quickcheck/lib.Shrink)||
+|[@moonbitlang/quickcheck/lib.Testable](#@moonbitlang/quickcheck/lib.Testable)||
 
 |Type|description|
 |---|---|
@@ -100,25 +100,23 @@
 |[with\_max\_size](#with_max_size)||
 |[with\_max\_success](#with_max_success)||
 
-## Shrink
+## @moonbitlang/quickcheck/lib.Shrink
 
 ```moonbit
-:::source,moonbitlang/quickcheck/lib/shrink.mbt,1:::pub(open) trait Shrink {
+:::source,moonbitlang/quickcheck/lib/shrink.mbt,1:::pub(open) trait @moonbitlang/quickcheck/lib.Shrink {
   shrink(Self) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[Self]
 }
 ```
 
 
-#### mooncakes-io-implementation-mark-Implementations
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/shrink.mbt,5:::impl <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a> for <a href="#$default_impl">$default_impl</a> with shrink[Self : <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a>](_a : Self) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[Self]
+* ```moonbit
+  :::source,moonbitlang/quickcheck/lib/shrink.mbt,5:::impl <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a> with shrink(_a : Self) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[Self]
   ```
   > 
-
-## Testable
+## @moonbitlang/quickcheck/lib.Testable
 
 ```moonbit
-:::source,moonbitlang/quickcheck/lib/testable.mbt,52:::pub(open) trait Testable {
+:::source,moonbitlang/quickcheck/lib/testable.mbt,52:::pub(open) trait @moonbitlang/quickcheck/lib.Testable {
   property(Self) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
 }
 ```
@@ -126,41 +124,37 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,65:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Discard">Discard</a> with property(_self : <a href="moonbitlang/quickcheck/lib#Discard">Discard</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,70:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for Unit
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,70:::fn property(_self : Unit) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,70:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/core/unit#Unit">Unit</a> with property(_self : Unit) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,83:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for Bool
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,83:::fn property(self : Bool) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,88:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Gen">Gen</a> with property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>](self : <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[P]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,93:::impl[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>] <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for P?
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,93:::fn property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>](self : P?) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,83:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/core/bool#Bool">Bool</a> with property(self : Bool) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,75:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib/rose#Rose">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>]
   ```
   > 
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,62:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Property">Property</a> with property(self : <a href="moonbitlang/quickcheck/lib#Property">Property</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,78:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a> with property(self : <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,75:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib/rose#Rose">@moonbitlang/quickcheck/lib/rose.Rose</a> with property(self : <a href="moonbitlang/quickcheck/lib/rose#Rose">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,99:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Arrow">Arrow</a> with property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>, A : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/quickcheck/lib#Arrow">Arrow</a>[A, P]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,93:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/core/option#Option">Option</a> with property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>](self : P?) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,75:::fn property(self : <a href="moonbitlang/quickcheck/lib/rose#Rose">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 
 ## Arrow
 
@@ -169,12 +163,15 @@
 ```
 
 
-#### mooncakes-io-method-mark-Methods
-- #### property
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,99:::fn <a href="moonbitlang/quickcheck/lib#Arrow">Arrow</a>::property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>, A : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/quickcheck/lib#Arrow">Arrow</a>[A, P]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,96:::impl[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>, A : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a> + <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Arrow">Arrow</a>[A, P]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,99:::fn property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>, A : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/quickcheck/lib#Shrink">Shrink</a> + <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/quickcheck/lib#Arrow">Arrow</a>[A, P]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 
 ## Axiom
 
@@ -224,21 +221,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#Callback">Callback</a> with output(<a href="moonbitlang/quickcheck/lib#Callback">Callback</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,23:::fn <a href="moonbitlang/quickcheck/lib#Callback">Callback</a>::output(<a href="moonbitlang/quickcheck/lib#Callback">Callback</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib#Callback">Callback</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#Callback">Callback</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,23:::fn output(<a href="moonbitlang/quickcheck/lib#Callback">Callback</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Config
 
@@ -261,12 +250,15 @@
 ```
 
 
-#### mooncakes-io-method-mark-Methods
-- #### property
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,65:::fn <a href="moonbitlang/quickcheck/lib#Discard">Discard</a>::property(_self : <a href="moonbitlang/quickcheck/lib#Discard">Discard</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,65:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Discard">Discard</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,65:::fn property(_self : <a href="moonbitlang/quickcheck/lib#Discard">Discard</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 
 ## Equivalence
 
@@ -277,9 +269,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/axiom.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/quickcheck/lib/axiom.mbt,4:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>[T]
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/axiom.mbt,4:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### ap
@@ -312,16 +308,6 @@
   :::source,moonbitlang/quickcheck/lib/axiom.mbt,6:::fn <a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>::new[T](lhs : T, rhs : T) -> <a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>[T]
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/axiom.mbt,4:::fn <a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib#Equivalence">Equivalence</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Gen
 
@@ -329,6 +315,16 @@
 :::source,moonbitlang/quickcheck/lib/gen.mbt,4:::type Gen
 ```
  The Gen type represents a generator of values of type T.
+
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,88:::impl[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>] <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[P]
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,88:::fn property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>](self : <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[P]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### ap
@@ -367,11 +363,6 @@
   :::source,moonbitlang/quickcheck/lib/gen.mbt,9:::fn <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>::new[T](gen : (Int, <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> T) -> <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[T]
   ```
   >  Create a new generator from a function
-- #### property
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,88:::fn <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>::property[P : <a href="moonbitlang/quickcheck/lib#Testable">Testable</a>](self : <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[P]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
 - #### resize
   ```moonbit
   :::source,moonbitlang/quickcheck/lib/gen.mbt,222:::fn <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>::resize[T](self : <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[T], size : Int) -> <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[T]
@@ -430,21 +421,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#Kind">Kind</a> with output(<a href="moonbitlang/quickcheck/lib#Kind">Kind</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,29:::fn <a href="moonbitlang/quickcheck/lib#Kind">Kind</a>::output(<a href="moonbitlang/quickcheck/lib#Kind">Kind</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib#Kind">Kind</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#Kind">Kind</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,29:::fn output(<a href="moonbitlang/quickcheck/lib#Kind">Kind</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## ListCompare
 
@@ -455,30 +438,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/state.mbt,194:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a> with op_equal[T : <a href="moonbitlang/core/builtin#Eq">Eq</a>](<a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T], <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T]) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/quickcheck/lib/state.mbt,194:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/state.mbt,194:::fn <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>::op_equal[T : <a href="moonbitlang/core/builtin#Eq">Eq</a>](<a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T], <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T]) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/state.mbt,194:::fn <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/state.mbt,194:::impl[T : <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/state.mbt,194:::fn op_equal[T : <a href="moonbitlang/core/builtin#Eq">Eq</a>](<a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T], <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T]) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/quickcheck/lib/state.mbt,194:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T]
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/state.mbt,194:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib#ListCompare">ListCompare</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Outcome
 
@@ -544,15 +518,20 @@
 ```
 
 
+#### mooncakes-io-implementation-mark-Implementations
+- ```moonbit
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,62:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,62:::fn property(self : <a href="moonbitlang/quickcheck/lib#Property">Property</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
+
 #### mooncakes-io-method-mark-Methods
 - #### make
   ```moonbit
   :::source,moonbitlang/quickcheck/lib/testable.mbt,42:::fn <a href="moonbitlang/quickcheck/lib#Property">Property</a>::make(property : <a href="moonbitlang/quickcheck/lib#Gen">Gen</a>[<a href="moonbitlang/quickcheck/lib/rose#Rose">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>]]) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
-  ```
-  > 
-- #### property
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,62:::fn <a href="moonbitlang/quickcheck/lib#Property">Property</a>::property(self : <a href="moonbitlang/quickcheck/lib#Property">Property</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
   ```
   > 
 - #### run\_prop
@@ -587,26 +566,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/result.mbt,43:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a> with output(<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/result.mbt,43:::fn <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>::output(<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### property
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/testable.mbt,78:::fn <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>::property(self : <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+  :::source,moonbitlang/quickcheck/lib/result.mbt,43:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>
   ```
   > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/result.mbt,43:::fn output(<a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/quickcheck/lib/testable.mbt,78:::impl <a href="moonbitlang/quickcheck/lib#Testable">Testable</a> for <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/testable.mbt,78:::fn property(self : <a href="moonbitlang/quickcheck/lib#SingleResult">SingleResult</a>) -> <a href="moonbitlang/quickcheck/lib#Property">Property</a>
+    ```
+    > 
 
 ## State
 

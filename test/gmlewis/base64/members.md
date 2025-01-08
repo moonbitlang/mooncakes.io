@@ -62,21 +62,13 @@ license that can be found in the LICENSE file.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/base64/base64-decode.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/base64#CorruptInputError">CorruptInputError</a> with output(<a href="gmlewis/base64#CorruptInputError">CorruptInputError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,gmlewis/base64/base64-decode.mbt,7:::fn <a href="gmlewis/base64#CorruptInputError">CorruptInputError</a>::output(<a href="gmlewis/base64#CorruptInputError">CorruptInputError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/base64/traits.mbt,85:::fn <a href="gmlewis/base64#CorruptInputError">CorruptInputError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/base64/base64-decode.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/base64#CorruptInputError">CorruptInputError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/base64/base64-decode.mbt,7:::fn output(<a href="gmlewis/base64#CorruptInputError">CorruptInputError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## bytes2str
 

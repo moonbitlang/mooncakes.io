@@ -11,16 +11,18 @@
 ## max\_value
 
 ```moonbit
-:::source,moonbitlang/core/int/int.mbt,16:::let max_value : Int
+:::source,moonbitlang/core/int/int.mbt,17:::let max_value : Int
 ```
 
+ Maximum value of an integer.
 
 ## min\_value
 
 ```moonbit
-:::source,moonbitlang/core/int/int.mbt,19:::let min_value : Int
+:::source,moonbitlang/core/int/int.mbt,21:::let min_value : Int
 ```
 
+ Minimum value of an integer.
 
 ## Int
 
@@ -28,21 +30,33 @@
 #### mooncakes-io-method-mark-Methods
 - #### abs
   ```moonbit
-  :::source,moonbitlang/core/int/int.mbt,37:::fn <a href="moonbitlang/core/int#Int">Int</a>::abs(self : Int) -> Int
+  :::source,moonbitlang/core/int/int.mbt,41:::fn <a href="moonbitlang/core/int#Int">Int</a>::abs(self : Int) -> Int
   ```
   > 
-  >  Returns the absolute value of an integer.
-  >  
-  >  #### Parameters
-  >  
-  >  - `self` : The integer whose absolute value is to be determined.
-  >  
-  >  #### Returns
-  >  
-  >  - The absolute value of the input integer.
-  >  
-  >  #### Examples
-  >  
+  >  Computes the absolute value of an integer.
+  > 
+  >  Parameters:
+  > 
+  >  * `self` : The integer whose absolute value is to be computed.
+  > 
+  >  Returns the absolute value of the integer.
+  > 
+  >  Example:
+  > 
+  >  ```moonbit
+  >  test "abs" {
+  >    inspect!(@int.abs(42), content="42")
+  >    inspect!(@int.abs(-42), content="42")
+  >    inspect!(@int.abs(0), content="0")
+  >  }
   >  ```
-  >  inspect!(Int::abs(-10), content="10")
-  >  ```
+- #### to\_be\_bytes
+  ```moonbit
+  :::source,moonbitlang/core/int/int.mbt,50:::fn <a href="moonbitlang/core/int#Int">Int</a>::to_be_bytes(self : Int) -> Bytes
+  ```
+  >  Converts the Int to a Bytes in big-endian byte order.
+- #### to\_le\_bytes
+  ```moonbit
+  :::source,moonbitlang/core/int/int.mbt,55:::fn <a href="moonbitlang/core/int#Int">Int</a>::to_le_bytes(self : Int) -> Bytes
+  ```
+  >  Converts the Int to a Bytes in little-endian byte order.

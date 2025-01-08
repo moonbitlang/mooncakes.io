@@ -30,13 +30,21 @@ concrete type is open.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -44,16 +52,6 @@ concrete type is open.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,28:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,22:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_debug\_string
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/top.mbt,39:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>::to_debug_string(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>) -> String
@@ -65,8 +63,3 @@ concrete type is open.
   > It may change across platforms, hosts, or other implementation
   > details. Parsing this string is a major platform-compatibility
   > hazard.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

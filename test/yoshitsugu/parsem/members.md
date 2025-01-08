@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Parsable](#Parsable)||
+|[@yoshitsugu/parsem.Parsable](#@yoshitsugu/parsem.Parsable)||
 
 |Type|description|
 |---|---|
@@ -26,22 +26,30 @@
 |[sequence3](#sequence3)| \||
 |[string](#string)||
 
-## Parsable
+## @yoshitsugu/parsem.Parsable
 
 ```moonbit
-:::source,yoshitsugu/parsem/parser.mbt,41:::trait Parsable
+:::source,yoshitsugu/parsem/parser.mbt,41:::trait @yoshitsugu/parsem.Parsable
 ```
 
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,51:::impl <a href="yoshitsugu/parsem#Parsable">Parsable</a> for <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a> with to_char_list(self : <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]) -> <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]
+  :::source,yoshitsugu/parsem/parser.mbt,46:::impl <a href="yoshitsugu/parsem#Parsable">Parsable</a> for String
   ```
   > 
+  * ```moonbit
+    :::source,yoshitsugu/parsem/parser.mbt,46:::fn to_char_list(self : String) -> <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]
+    ```
+    > 
 - ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,46:::impl <a href="yoshitsugu/parsem#Parsable">Parsable</a> for <a href="moonbitlang/core/string#String">String</a> with to_char_list(self : String) -> <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]
+  :::source,yoshitsugu/parsem/parser.mbt,51:::impl <a href="yoshitsugu/parsem#Parsable">Parsable</a> for <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]
   ```
   > 
+  * ```moonbit
+    :::source,yoshitsugu/parsem/parser.mbt,51:::fn to_char_list(self : <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]) -> <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[Char]
+    ```
+    > 
 
 ## ParseError
 
@@ -52,21 +60,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yoshitsugu/parsem#ParseError">ParseError</a> with output(self : <a href="yoshitsugu/parsem#ParseError">ParseError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yoshitsugu/parsem/parser.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yoshitsugu/parsem#ParseError">ParseError</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,12:::fn <a href="yoshitsugu/parsem#ParseError">ParseError</a>::output(self : <a href="yoshitsugu/parsem#ParseError">ParseError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,yoshitsugu/parsem/traits.mbt,85:::fn <a href="yoshitsugu/parsem#ParseError">ParseError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,yoshitsugu/parsem/parser.mbt,12:::fn output(self : <a href="yoshitsugu/parsem#ParseError">ParseError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## ParseResult
 
@@ -77,21 +77,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,31:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yoshitsugu/parsem#ParseResult">ParseResult</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="yoshitsugu/parsem#ParseResult">ParseResult</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,31:::fn <a href="yoshitsugu/parsem#ParseResult">ParseResult</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="yoshitsugu/parsem#ParseResult">ParseResult</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yoshitsugu/parsem/traits.mbt,85:::fn <a href="yoshitsugu/parsem#ParseResult">ParseResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yoshitsugu/parsem/parser.mbt,31:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yoshitsugu/parsem#ParseResult">ParseResult</a>[T]
   ```
   > 
+  * ```moonbit
+    :::source,yoshitsugu/parsem/parser.mbt,31:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="yoshitsugu/parsem#ParseResult">ParseResult</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Parser
 
@@ -102,9 +94,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yoshitsugu/parsem#Parser">Parser</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="yoshitsugu/parsem#Parser">Parser</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yoshitsugu/parsem/parser.mbt,35:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yoshitsugu/parsem#Parser">Parser</a>[T]
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yoshitsugu/parsem/parser.mbt,35:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="yoshitsugu/parsem#Parser">Parser</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### bind
@@ -120,11 +116,6 @@
   ```
   > 
   >  Transforms the result of the parser using the provided function.
-- #### output
-  ```moonbit
-  :::source,yoshitsugu/parsem/parser.mbt,35:::fn <a href="yoshitsugu/parsem#Parser">Parser</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="yoshitsugu/parsem#Parser">Parser</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### precede
   ```moonbit
   :::source,yoshitsugu/parsem/combinator.mbt,152:::fn <a href="yoshitsugu/parsem#Parser">Parser</a>::precede[T, U](self : <a href="yoshitsugu/parsem#Parser">Parser</a>[T], next_parser : <a href="yoshitsugu/parsem#Parser">Parser</a>[U]) -> <a href="yoshitsugu/parsem#Parser">Parser</a>[T]
@@ -139,11 +130,6 @@
   > 
   >  Applies two parsers sequentially until one of them fails.
   > Returns the result of the last successful parser.
-- #### to\_string
-  ```moonbit
-  :::source,yoshitsugu/parsem/traits.mbt,85:::fn <a href="yoshitsugu/parsem#Parser">Parser</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## any\_char
 

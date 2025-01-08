@@ -55,17 +55,29 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/duration.mbt,19:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#Duration">Duration</a> with compare(<a href="moonbitlang/x/time#Duration">Duration</a>, <a href="moonbitlang/x/time#Duration">Duration</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/duration.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Duration">Duration</a> with op_equal(<a href="moonbitlang/x/time#Duration">Duration</a>, <a href="moonbitlang/x/time#Duration">Duration</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/duration.mbt,142:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Duration">Duration</a> with output(self : <a href="moonbitlang/x/time#Duration">Duration</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/duration.mbt,19:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#Duration">Duration</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/duration.mbt,19:::fn compare(<a href="moonbitlang/x/time#Duration">Duration</a>, <a href="moonbitlang/x/time#Duration">Duration</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/duration.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Duration">Duration</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/duration.mbt,19:::fn op_equal(<a href="moonbitlang/x/time#Duration">Duration</a>, <a href="moonbitlang/x/time#Duration">Duration</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/duration.mbt,142:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Duration">Duration</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/duration.mbt,142:::fn output(self : <a href="moonbitlang/x/time#Duration">Duration</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_duration
@@ -93,11 +105,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/duration.mbt,191:::fn <a href="moonbitlang/x/time#Duration">Duration</a>::add_seconds(self : <a href="moonbitlang/x/time#Duration">Duration</a>, seconds : Int64) -> <a href="moonbitlang/x/time#Duration">Duration</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Adds specified seconds to this duration, and returns a new duration.
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/x/time/duration.mbt,19:::fn <a href="moonbitlang/x/time#Duration">Duration</a>::compare(<a href="moonbitlang/x/time#Duration">Duration</a>, <a href="moonbitlang/x/time#Duration">Duration</a>) -> Int
-  ```
-  > automatically derived
 - #### from\_string
   ```moonbit
   :::source,moonbitlang/x/time/duration.mbt,53:::fn <a href="moonbitlang/x/time#Duration">Duration</a>::from_string(str : String) -> <a href="moonbitlang/x/time#Duration">Duration</a>!<a href="moonbitlang/core/error#Error">Error</a>
@@ -126,16 +133,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 - #### op\_add
   ```moonbit
   :::source,moonbitlang/x/time/duration.mbt,229:::fn <a href="moonbitlang/x/time#Duration">Duration</a>::op_add(self : <a href="moonbitlang/x/time#Duration">Duration</a>, other : <a href="moonbitlang/x/time#Duration">Duration</a>) -> <a href="moonbitlang/x/time#Duration">Duration</a>!<a href="moonbitlang/core/error#Error">Error</a>
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/time/duration.mbt,19:::fn <a href="moonbitlang/x/time#Duration">Duration</a>::op_equal(<a href="moonbitlang/x/time#Duration">Duration</a>, <a href="moonbitlang/x/time#Duration">Duration</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/duration.mbt,142:::fn <a href="moonbitlang/x/time#Duration">Duration</a>::output(self : <a href="moonbitlang/x/time#Duration">Duration</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### seconds
@@ -178,17 +175,29 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/period.mbt,20:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#Period">Period</a> with compare(<a href="moonbitlang/x/time#Period">Period</a>, <a href="moonbitlang/x/time#Period">Period</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/period.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Period">Period</a> with op_equal(<a href="moonbitlang/x/time#Period">Period</a>, <a href="moonbitlang/x/time#Period">Period</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/period.mbt,92:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Period">Period</a> with output(self : <a href="moonbitlang/x/time#Period">Period</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/period.mbt,20:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#Period">Period</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/period.mbt,20:::fn compare(<a href="moonbitlang/x/time#Period">Period</a>, <a href="moonbitlang/x/time#Period">Period</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/period.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Period">Period</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/period.mbt,20:::fn op_equal(<a href="moonbitlang/x/time#Period">Period</a>, <a href="moonbitlang/x/time#Period">Period</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/period.mbt,92:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Period">Period</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/period.mbt,92:::fn output(self : <a href="moonbitlang/x/time#Period">Period</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_days
@@ -216,11 +225,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/period.mbt,112:::fn <a href="moonbitlang/x/time#Period">Period</a>::add_years(self : <a href="moonbitlang/x/time#Period">Period</a>, years : Int) -> <a href="moonbitlang/x/time#Period">Period</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Adds specified years to this period, and returns a new period.
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/x/time/period.mbt,20:::fn <a href="moonbitlang/x/time#Period">Period</a>::compare(<a href="moonbitlang/x/time#Period">Period</a>, <a href="moonbitlang/x/time#Period">Period</a>) -> Int
-  ```
-  > automatically derived
 - #### days
   ```moonbit
   :::source,moonbitlang/x/time/period.mbt,107:::fn <a href="moonbitlang/x/time#Period">Period</a>::days(self : <a href="moonbitlang/x/time#Period">Period</a>) -> Int
@@ -266,19 +270,9 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/period.mbt,159:::fn <a href="moonbitlang/x/time#Period">Period</a>::op_add(self : <a href="moonbitlang/x/time#Period">Period</a>, other : <a href="moonbitlang/x/time#Period">Period</a>) -> <a href="moonbitlang/x/time#Period">Period</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/time/period.mbt,20:::fn <a href="moonbitlang/x/time#Period">Period</a>::op_equal(<a href="moonbitlang/x/time#Period">Period</a>, <a href="moonbitlang/x/time#Period">Period</a>) -> Bool
-  ```
-  > automatically derived
 - #### op\_sub
   ```moonbit
   :::source,moonbitlang/x/time/period.mbt,164:::fn <a href="moonbitlang/x/time#Period">Period</a>::op_sub(self : <a href="moonbitlang/x/time#Period">Period</a>, other : <a href="moonbitlang/x/time#Period">Period</a>) -> <a href="moonbitlang/x/time#Period">Period</a>!<a href="moonbitlang/core/error#Error">Error</a>
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/period.mbt,92:::fn <a href="moonbitlang/x/time#Period">Period</a>::output(self : <a href="moonbitlang/x/time#Period">Period</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### to\_string
@@ -326,9 +320,13 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/plain_date.mbt,103:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#PlainDate">PlainDate</a> with output(self : <a href="moonbitlang/x/time#PlainDate">PlainDate</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/plain_date.mbt,103:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#PlainDate">PlainDate</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_date.mbt,103:::fn output(self : <a href="moonbitlang/x/time#PlainDate">PlainDate</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_days
@@ -436,11 +434,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/plain_date.mbt,183:::fn <a href="moonbitlang/x/time#PlainDate">PlainDate</a>::ordinal(self : <a href="moonbitlang/x/time#PlainDate">PlainDate</a>) -> Int
   ```
   >  Returns the ordinal day of the year.
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_date.mbt,103:::fn <a href="moonbitlang/x/time#PlainDate">PlainDate</a>::output(self : <a href="moonbitlang/x/time#PlainDate">PlainDate</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### to\_string
   ```moonbit
   :::source,moonbitlang/x/time/plain_date.mbt,89:::fn <a href="moonbitlang/x/time#PlainDate">PlainDate</a>::to_string(self : <a href="moonbitlang/x/time#PlainDate">PlainDate</a>) -> String
@@ -496,17 +489,29 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/plain_date_time.mbt,19:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a> with compare(<a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/plain_date_time.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a> with op_equal(<a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/plain_date_time.mbt,84:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a> with output(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/plain_date_time.mbt,19:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_date_time.mbt,19:::fn compare(<a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/plain_date_time.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_date_time.mbt,19:::fn op_equal(<a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/plain_date_time.mbt,84:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_date_time.mbt,84:::fn output(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_days
@@ -559,11 +564,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/plain_date_time.mbt,172:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::add_years(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, years : Int64) -> <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Adds specified years to this datetime, and returns a new datetime.
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_date_time.mbt,19:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::compare(<a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Int
-  ```
-  > automatically derived
 - #### day
   ```moonbit
   :::source,moonbitlang/x/time/plain_date_time.mbt,112:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::day(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Int
@@ -639,21 +639,11 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/plain_date_time.mbt,22:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::of(year : Int, month : Int, day : Int, hour~ : Int = .., minute~ : Int = .., second~ : Int = .., nanosecond~ : Int = ..) -> <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Creates a PlainDateTime from the year, month, day, hour, minute, second and nanosecond.
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_date_time.mbt,19:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::op_equal(<a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,moonbitlang/x/time/plain_date_time.mbt,122:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::ordinal(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Int
   ```
   >  Returns the ordinal day of year of this datetime.
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_date_time.mbt,84:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::output(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### second
   ```moonbit
   :::source,moonbitlang/x/time/plain_date_time.mbt,162:::fn <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>::second(self : <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>) -> Int
@@ -739,17 +729,29 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/plain_time.mbt,21:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#PlainTime">PlainTime</a> with compare(<a href="moonbitlang/x/time#PlainTime">PlainTime</a>, <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/plain_time.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#PlainTime">PlainTime</a> with op_equal(<a href="moonbitlang/x/time#PlainTime">PlainTime</a>, <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/plain_time.mbt,81:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#PlainTime">PlainTime</a> with output(self : <a href="moonbitlang/x/time#PlainTime">PlainTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/plain_time.mbt,21:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/time#PlainTime">PlainTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_time.mbt,21:::fn compare(<a href="moonbitlang/x/time#PlainTime">PlainTime</a>, <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/plain_time.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#PlainTime">PlainTime</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_time.mbt,21:::fn op_equal(<a href="moonbitlang/x/time#PlainTime">PlainTime</a>, <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/plain_time.mbt,81:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#PlainTime">PlainTime</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/plain_time.mbt,81:::fn output(self : <a href="moonbitlang/x/time#PlainTime">PlainTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_duration
@@ -782,11 +784,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/plain_time.mbt,272:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::at_date(self : <a href="moonbitlang/x/time#PlainTime">PlainTime</a>, date : <a href="moonbitlang/x/time#PlainDate">PlainDate</a>) -> <a href="moonbitlang/x/time#PlainDateTime">PlainDateTime</a>
   ```
   >  Combines this time with a date to creates a PlainDateTime
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_time.mbt,21:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::compare(<a href="moonbitlang/x/time#PlainTime">PlainTime</a>, <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Int
-  ```
-  > automatically derived
 - #### from\_nanosecond\_of\_day
   ```moonbit
   :::source,moonbitlang/x/time/plain_time.mbt,133:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::from_nanosecond_of_day(nanosecond : Int64) -> <a href="moonbitlang/x/time#PlainTime">PlainTime</a>!<a href="moonbitlang/core/error#Error">Error</a>
@@ -827,16 +824,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/plain_time.mbt,24:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::of(hour : Int, minute : Int, second : Int, nanosecond : Int) -> <a href="moonbitlang/x/time#PlainTime">PlainTime</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Creates a PlainTime from the hour, minute, second and nanosecond.
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_time.mbt,21:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::op_equal(<a href="moonbitlang/x/time#PlainTime">PlainTime</a>, <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/plain_time.mbt,81:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::output(self : <a href="moonbitlang/x/time#PlainTime">PlainTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### second
   ```moonbit
   :::source,moonbitlang/x/time/plain_time.mbt,96:::fn <a href="moonbitlang/x/time#PlainTime">PlainTime</a>::second(self : <a href="moonbitlang/x/time#PlainTime">PlainTime</a>) -> Int
@@ -895,30 +882,21 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/weekday.mbt,24:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Weekday">Weekday</a> with op_equal(<a href="moonbitlang/x/time#Weekday">Weekday</a>, <a href="moonbitlang/x/time#Weekday">Weekday</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/weekday.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Weekday">Weekday</a> with output(<a href="moonbitlang/x/time#Weekday">Weekday</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/time/weekday.mbt,24:::fn <a href="moonbitlang/x/time#Weekday">Weekday</a>::op_equal(<a href="moonbitlang/x/time#Weekday">Weekday</a>, <a href="moonbitlang/x/time#Weekday">Weekday</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/weekday.mbt,24:::fn <a href="moonbitlang/x/time#Weekday">Weekday</a>::output(<a href="moonbitlang/x/time#Weekday">Weekday</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/time/traits.mbt,85:::fn <a href="moonbitlang/x/time#Weekday">Weekday</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/x/time/weekday.mbt,24:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Weekday">Weekday</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/weekday.mbt,24:::fn op_equal(<a href="moonbitlang/x/time#Weekday">Weekday</a>, <a href="moonbitlang/x/time#Weekday">Weekday</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/weekday.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Weekday">Weekday</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/weekday.mbt,24:::fn output(<a href="moonbitlang/x/time#Weekday">Weekday</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Zone
 
@@ -929,13 +907,21 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/zone.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Zone">Zone</a> with op_equal(<a href="moonbitlang/x/time#Zone">Zone</a>, <a href="moonbitlang/x/time#Zone">Zone</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/time/zone.mbt,42:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Zone">Zone</a> with output(self : <a href="moonbitlang/x/time#Zone">Zone</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/zone.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/time#Zone">Zone</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/zone.mbt,20:::fn op_equal(<a href="moonbitlang/x/time#Zone">Zone</a>, <a href="moonbitlang/x/time#Zone">Zone</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/time/zone.mbt,42:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#Zone">Zone</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/zone.mbt,42:::fn output(self : <a href="moonbitlang/x/time#Zone">Zone</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_fixed
@@ -943,16 +929,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/zone.mbt,32:::fn <a href="moonbitlang/x/time#Zone">Zone</a>::is_fixed(self : <a href="moonbitlang/x/time#Zone">Zone</a>) -> Bool
   ```
   >  Checks if this zone only has one offset.
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/time/zone.mbt,20:::fn <a href="moonbitlang/x/time#Zone">Zone</a>::op_equal(<a href="moonbitlang/x/time#Zone">Zone</a>, <a href="moonbitlang/x/time#Zone">Zone</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/zone.mbt,42:::fn <a href="moonbitlang/x/time#Zone">Zone</a>::output(self : <a href="moonbitlang/x/time#Zone">Zone</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### to\_string
   ```moonbit
   :::source,moonbitlang/x/time/zone.mbt,37:::fn <a href="moonbitlang/x/time#Zone">Zone</a>::to_string(self : <a href="moonbitlang/x/time#Zone">Zone</a>) -> String
@@ -968,9 +944,13 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/zone_offset.mbt,71:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a> with output(self : <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/zone_offset.mbt,71:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/zone_offset.mbt,71:::fn output(self : <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### compare
@@ -1003,11 +983,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/zone_offset.mbt,76:::fn <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>::op_equal(self : <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>, other : <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>) -> Bool
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/zone_offset.mbt,71:::fn <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>::output(self : <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### seconds
   ```moonbit
   :::source,moonbitlang/x/time/zone_offset.mbt,91:::fn <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>::seconds(self : <a href="moonbitlang/x/time#ZoneOffset">ZoneOffset</a>) -> Int
@@ -1028,9 +1003,13 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/time/zoned_date_time.mbt,96:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a> with output(self : <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/time/zoned_date_time.mbt,96:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/time/zoned_date_time.mbt,96:::fn output(self : <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_days
@@ -1161,11 +1140,6 @@ let date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27
   :::source,moonbitlang/x/time/zoned_date_time.mbt,154:::fn <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>::ordinal(self : <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>) -> Int
   ```
   >  Returns the ordinal day of year of this datetime.
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/time/zoned_date_time.mbt,96:::fn <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>::output(self : <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### second
   ```moonbit
   :::source,moonbitlang/x/time/zoned_date_time.mbt,194:::fn <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>::second(self : <a href="moonbitlang/x/time#ZonedDateTime">ZonedDateTime</a>) -> Int

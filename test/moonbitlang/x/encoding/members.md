@@ -30,21 +30,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/encoding/types.mbt,141:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a> with output(self : <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/encoding/types.mbt,141:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/encoding/types.mbt,141:::fn <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>::output(self : <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/encoding/traits.mbt,85:::fn <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/x/encoding/types.mbt,141:::fn output(self : <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## Encoding
 
@@ -67,19 +59,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/encoding/types.mbt,130:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a> with output(self : <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/encoding/types.mbt,130:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/encoding/types.mbt,130:::fn output(self : <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### iter
   ```moonbit
   :::source,moonbitlang/x/encoding/types.mbt,103:::fn <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>::iter(self : <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[Char]
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/encoding/types.mbt,130:::fn <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>::output(self : <a href="moonbitlang/x/encoding#LossyChars">LossyChars</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### to\_string
@@ -97,19 +88,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/encoding/types.mbt,182:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a> with output(self : <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/encoding/types.mbt,182:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/encoding/types.mbt,182:::fn output(self : <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### iter
   ```moonbit
   :::source,moonbitlang/x/encoding/types.mbt,148:::fn <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>::iter(self : <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[<a href="moonbitlang/core/result#Result">Result</a>[Char, <a href="moonbitlang/x/encoding#DecodeError">DecodeError</a>]]
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/encoding/types.mbt,182:::fn <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>::output(self : <a href="moonbitlang/x/encoding#StrictChars">StrictChars</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### to\_string

@@ -1,0 +1,217 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/redis",
+  "traits": [],
+  "types": [
+    {
+      "name": "Connection",
+      "docstring": "",
+      "signature": "pub(all) type Connection Int",
+      "loc": { "line": 12, "column": 15 },
+      "methods": [
+        {
+          "name": "del",
+          "docstring": " Removes the specified keys.\n\n A key is ignored if it does not exist. Returns the number of keys deleted.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::del(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, keys : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 229, "column": 20 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>) -> Unit",
+          "loc": { "line": 18, "column": 20 }
+        },
+        {
+          "name": "execute",
+          "docstring": " Execute an arbitrary Redis command and receive the result.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::execute(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, command : String, arguments : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter\">RedisParameter</a>]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult\">RedisResult</a>], <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 413, "column": 20 }
+        },
+        {
+          "name": "get",
+          "docstring": " Get the value of a key.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::get(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, key : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Bytes?, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 105, "column": 20 }
+        },
+        {
+          "name": "incr",
+          "docstring": " Increments the number stored at key by one.\n\n If the key does not exist, it is set to 0 before performing the operation.\n An `error::type-error` is returned if the key contains a value of the wrong type\n or contains a string that can not be represented as integer.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::incr(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, key : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Int64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 193, "column": 20 }
+        },
+        {
+          "name": "open",
+          "docstring": " Open a connection to the Redis instance at `address`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::open(address : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 37, "column": 20 }
+        },
+        {
+          "name": "publish",
+          "docstring": " Publish a Redis message to the specified channel.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::publish(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, channel : String, payload : Bytes) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 67, "column": 20 }
+        },
+        {
+          "name": "sadd",
+          "docstring": " Add the specified `values` to the set named `key`, returning the number of newly-added values.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::sadd(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, key : String, values : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 270, "column": 20 }
+        },
+        {
+          "name": "set",
+          "docstring": " Set key to value.\n\n If key already holds a value, it is overwritten.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, key : String, value : Bytes) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 151, "column": 20 }
+        },
+        {
+          "name": "smembers",
+          "docstring": " Retrieve the contents of the set named `key`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::smembers(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, key : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[String], <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 320, "column": 20 }
+        },
+        {
+          "name": "srem",
+          "docstring": " Remove the specified `values` from the set named `key`, returning the number of newly-removed values.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>::srem(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, key : String, values : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>]",
+          "loc": { "line": 363, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>) -> Bool",
+              "loc": { "line": 12, "column": 43 }
+            }
+          ],
+          "loc": { "line": 12, "column": 43 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Connection\">Connection</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 12, "column": 37 }
+            }
+          ],
+          "loc": { "line": 12, "column": 37 }
+        }
+      ]
+    },
+    {
+      "name": "Error_",
+      "docstring": " Errors related to interacting with Redis",
+      "signature": "pub(all) enum Error_ {\n  InvalidAddress\n  TooManyConnections\n  TypeError\n  Other(String)\n}",
+      "loc": { "line": 4, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>) -> Bool",
+              "loc": { "line": 9, "column": 16 }
+            }
+          ],
+          "loc": { "line": 9, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#Error_\">Error_</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 9, "column": 10 }
+            }
+          ],
+          "loc": { "line": 9, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "RedisParameter",
+      "docstring": " A parameter type for the general-purpose `execute` function.",
+      "signature": "pub(all) enum RedisParameter {\n  Int64(Int64)\n  Binary(Bytes)\n}",
+      "loc": { "line": 23, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter\">RedisParameter</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter\">RedisParameter</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter\">RedisParameter</a>) -> Bool",
+              "loc": { "line": 26, "column": 16 }
+            }
+          ],
+          "loc": { "line": 26, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter\">RedisParameter</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisParameter\">RedisParameter</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 26, "column": 10 }
+            }
+          ],
+          "loc": { "line": 26, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "RedisResult",
+      "docstring": " A return type for the general-purpose `execute` function.",
+      "signature": "pub(all) enum RedisResult {\n  Nil\n  Status(String)\n  Int64(Int64)\n  Binary(Bytes)\n}",
+      "loc": { "line": 29, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult\">RedisResult</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult\">RedisResult</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult\">RedisResult</a>) -> Bool",
+              "loc": { "line": 34, "column": 16 }
+            }
+          ],
+          "loc": { "line": 34, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult\">RedisResult</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/redis#RedisResult\">RedisResult</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 34, "column": 10 }
+            }
+          ],
+          "loc": { "line": 34, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

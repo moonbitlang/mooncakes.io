@@ -1,0 +1,33 @@
+{
+  "name": "moonbit-js-ffi",
+  "package": null,
+  "childs": [
+    {
+      "name": "js",
+      "package": {
+        "path": "moonbit-js-ffi/js",
+        "readme": true,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "top",
+          "package": {
+            "path": "moonbit-js-ffi/js/top",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

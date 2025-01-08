@@ -100,7 +100,7 @@ bits.
 ## f32\_to\_i32
 
 ```moonbit
-:::source,tonyfettes/memory/wasm.mbt,185:::fn f32_to_i32(value : float) -> Int
+:::source,tonyfettes/memory/wasm.mbt,185:::fn f32_to_i32(value : Float) -> Int
 ```
  Converts a 32-bit floating-point number to a 32-bit signed integer.
 
@@ -114,7 +114,7 @@ number.
 ## f32\_to\_i64
 
 ```moonbit
-:::source,tonyfettes/memory/wasm.mbt,195:::fn f32_to_i64(value : float) -> Int64
+:::source,tonyfettes/memory/wasm.mbt,195:::fn f32_to_i64(value : Float) -> Int64
 ```
  Converts a 32-bit floating-point number to a 64-bit signed integer.
 
@@ -127,7 +127,7 @@ number.
 ## float\_array2ptr
 
 ```moonbit
-:::source,tonyfettes/memory/conv.wasm-gc.mbt,218:::fn float_array2ptr(array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[float]) -> Int
+:::source,tonyfettes/memory/conv.wasm-gc.mbt,218:::fn float_array2ptr(array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Float]) -> Int
 ```
  Converts a fixed-size array of floats to a pointer in WebAssembly memory.
 
@@ -258,7 +258,7 @@ memory.
 ## loadf32
 
 ```moonbit
-:::source,tonyfettes/memory/wasm.mbt,149:::fn loadf32(offset : Int) -> float
+:::source,tonyfettes/memory/wasm.mbt,149:::fn loadf32(offset : Int) -> Float
 ```
  Loads a 32-bit floating-point number from memory at the specified offset.
 
@@ -331,7 +331,7 @@ retrieves the double array gfrom the pointer.
 ## ptr2float\_array
 
 ```moonbit
-:::source,tonyfettes/memory/conv.wasm-gc.mbt,238:::fn ptr2float_array(ptr : Int, len : Int) -> <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[float]
+:::source,tonyfettes/memory/conv.wasm-gc.mbt,238:::fn ptr2float_array(ptr : Int, len : Int) -> <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Float]
 ```
  Converts a pointer to a WebAssembly memory buffer into a fixed-length array
 of floating-point numbers.
@@ -499,7 +499,7 @@ memory.
 ## storef32
 
 ```moonbit
-:::source,tonyfettes/memory/wasm.mbt,138:::fn storef32(offset : Int, value : float) -> Unit
+:::source,tonyfettes/memory/wasm.mbt,138:::fn storef32(offset : Int, value : Float) -> Unit
 ```
  Stores a 32-bit floating-point value at a specified memory offset in the
 WebAssembly linear memory.

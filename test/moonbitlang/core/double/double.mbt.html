@@ -72,6 +72,7 @@ pub fn signum(self : Double) -> Double {
 ///| Returns a "not-a-number" value
 /// 
 /// @alert deprecated "Use `@double.not_a_number` instead"
+/// @coverage.skip
 pub fn Double::nan() -> Double {
   not_a_number
 }
@@ -79,6 +80,7 @@ pub fn Double::nan() -> Double {
 ///|
 /// Returns positive infinity if sign >= 0, negative infinity if sign < 0.
 /// @alert deprecated "Use `@double.infinity` and `@double.neg_infinity` instead"
+/// @coverage.skip
 pub fn Double::inf(sign : Int) -> Double {
   if sign >= 0 {
     infinity
@@ -90,6 +92,7 @@ pub fn Double::inf(sign : Int) -> Double {
 ///|
 /// Returns the smallest positive normal value of Double
 /// @alert deprecated "Use `@double.min_positive` instead"
+/// @coverage.skip
 pub fn Double::min_normal() -> Double {
   min_positive
 }
@@ -215,6 +218,16 @@ pub fn is_close(
       diff <= (relative_tolerance * self).abs()
     ) ||
     diff <= absolute_tolerance
+}
+
+///| Converts the Double to a Bytes in big-endian byte order.
+pub fn to_be_bytes(self : Double) -> Bytes {
+  self.reinterpret_as_uint64().to_be_bytes()
+}
+
+///| Converts the Double to a Bytes in little-endian byte order.
+pub fn to_le_bytes(self : Double) -> Bytes {
+  self.reinterpret_as_uint64().to_le_bytes()
 }
 </code></pre>
   <script>

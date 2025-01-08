@@ -1,0 +1,41 @@
+{
+  "name": "peter-jerry-ye",
+  "package": null,
+  "childs": [
+    {
+      "name": "parser-combinator",
+      "package": {
+        "path": "peter-jerry-ye/parser-combinator",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "Parser",
+            "impls": [],
+            "methods": [
+              "and_then", "apply", "between", "map", "omit_first",
+              "omit_second", "optional", "or_else", "or_others", "parse",
+              "ref", "repeat", "repeat_0_to_n", "repeat_0_to_n_with_sep",
+              "repeat_n", "repeat_n_with_sep", "repeat_with_sep"
+            ]
+          },
+          {
+            "name": "Seq",
+            "impls": [],
+            "methods": [
+              "default", "from_array", "from_list", "from_string",
+              "is_empty", "length", "map", "output", "to_string", "uncons"
+            ]
+          }
+        ],
+        "typealias": [],
+        "values": [
+          "lift2", "one_of", "pchar", "pchar_such_that", "pconst", "pdigit",
+          "pfail", "pint", "pint64", "pstring", "pvalue", "sequence"
+        ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

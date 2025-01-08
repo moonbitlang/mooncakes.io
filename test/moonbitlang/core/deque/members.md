@@ -179,14 +179,48 @@ dv.search(6) // None
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/deque#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,25:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/deque#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/deque/deque.mbt,25:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
+- #### as\_views
+  ```moonbit
+  :::source,moonbitlang/core/deque/deque.mbt,403:::fn <a href="moonbitlang/core/deque#T">T</a>::as_views[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> (<a href="moonbitlang/core/array#ArrayView">ArrayView</a>[A], <a href="moonbitlang/core/array#ArrayView">ArrayView</a>[A])
+  ```
+  > 
+  >  Returns two array views that together represent all elements in the deque in
+  > their correct order. The first view contains elements from the head to the
+  > end of the internal buffer, and the second view contains any remaining
+  > elements from the start of the buffer.
+  > 
+  >  If the deque is empty, returns a pair of empty views. If all elements are
+  > contiguous in memory, the second view will be empty.
+  > 
+  >  Parameters:
+  > 
+  >  * `self` : The deque to be viewed.
+  > 
+  >  Returns a tuple of two array views that together contain all elements of the
+  > deque in order.
+  > 
+  >  Example:
+  > 
+  >  ```moonbit
+  >  test "T::as_views" {
+  >    let dq = @deque.of([1, 2, 3, 4, 5])
+  >    let (v1, v2) = dq.as_views()
+  >    inspect!(v1.length(), content="5")
+  >    inspect!(v2.length(), content="0")
+  >  }
+  >  ```
 - #### back
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,137:::fn <a href="moonbitlang/core/deque#T">T</a>::back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/deque/deque.mbt,140:::fn <a href="moonbitlang/core/deque#T">T</a>::back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
   ```
   > 
   >  Return the back element from a deque, or `None` if it is empty.
@@ -198,13 +232,13 @@ dv.search(6) // None
   >  ```
 - #### capacity
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,79:::fn <a href="moonbitlang/core/deque#T">T</a>::capacity[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Int
+  :::source,moonbitlang/core/deque/deque.mbt,82:::fn <a href="moonbitlang/core/deque#T">T</a>::capacity[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Int
   ```
   > 
   >  Returns the total number of elements the deque can hold without reallocating.
 - #### clear
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,413:::fn <a href="moonbitlang/core/deque#T">T</a>::clear[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,504:::fn <a href="moonbitlang/core/deque#T">T</a>::clear[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
   ```
   > 
   >  Clears the deque, removing all values.
@@ -219,7 +253,7 @@ dv.search(6) // None
   >  ```
 - #### contains
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,499:::fn <a href="moonbitlang/core/deque#T">T</a>::contains[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Bool
+  :::source,moonbitlang/core/deque/deque.mbt,605:::fn <a href="moonbitlang/core/deque#T">T</a>::contains[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Bool
   ```
   > 
   >  Checks if the array contains an element.
@@ -231,13 +265,13 @@ dv.search(6) // None
   >  ```
 - #### copy
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,43:::fn <a href="moonbitlang/core/deque#T">T</a>::copy[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
+  :::source,moonbitlang/core/deque/deque.mbt,46:::fn <a href="moonbitlang/core/deque#T">T</a>::copy[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
   ```
   > 
   >  Creates a new copy of this deque.
 - #### each
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,348:::fn <a href="moonbitlang/core/deque#T">T</a>::each[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> Unit) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,439:::fn <a href="moonbitlang/core/deque#T">T</a>::each[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the elements of the deque.
@@ -251,7 +285,7 @@ dv.search(6) // None
   >  ```
 - #### eachi
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,364:::fn <a href="moonbitlang/core/deque#T">T</a>::eachi[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (Int, A) -> Unit) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,455:::fn <a href="moonbitlang/core/deque#T">T</a>::eachi[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (Int, A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the elements of the deque with index.
@@ -263,20 +297,44 @@ dv.search(6) // None
   >  dv.eachi(fn (i, _x) {idx_sum = idx_sum + i})
   >  assert_eq!(idx_sum, 10)
   >  ```
+- #### filter\_map\_inplace
+  ```moonbit
+  :::source,moonbitlang/core/deque/deque.mbt,739:::fn <a href="moonbitlang/core/deque#T">T</a>::filter_map_inplace[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> A?) -> Unit
+  ```
+  > 
+  >  Filters and maps elements in-place using a provided function. Modifies the
+  > deque to retain only elements for which the provided function returns `Some`,
+  > and updates those elements with the values inside the `Some` variant.
+  > 
+  >  Parameters:
+  > 
+  >  * `self` : The deque to be filtered and mapped.
+  >  * `f` : A function that takes an element and returns either `Some` with a new
+  >    value to replace the element, or `None` to remove the element.
+  > 
+  >  Example:
+  > 
+  >  ```moonbit
+  >  test "filter_map_inplace" {
+  >    let dq = @deque.of([1, 2, 3, 4, 5])
+  >    dq.filter_map_inplace(fn(x) { if x % 2 == 0 { Some(x * 2) } else { None } })
+  >    inspect!(dq, content="@deque.of([4, 8])")
+  >  }
+  >  ```
 - #### from\_array
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,28:::fn <a href="moonbitlang/core/deque#T">T</a>::from_array[A](arr : <a href="moonbitlang/core/array#Array">Array</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
+  :::source,moonbitlang/core/deque/deque.mbt,31:::fn <a href="moonbitlang/core/deque#T">T</a>::from_array[A](arr : <a href="moonbitlang/core/array#Array">Array</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
   ```
   > 
   >  Creates a new deque from an array.
 - #### from\_iter
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,612:::fn <a href="moonbitlang/core/deque#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
+  :::source,moonbitlang/core/deque/deque.mbt,938:::fn <a href="moonbitlang/core/deque#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
   ```
   > 
 - #### front
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,121:::fn <a href="moonbitlang/core/deque#T">T</a>::front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/deque/deque.mbt,124:::fn <a href="moonbitlang/core/deque#T">T</a>::front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
   ```
   > 
   >  Return the front element from a deque, or `None` if it is empty.
@@ -288,7 +346,7 @@ dv.search(6) // None
   >  ```
 - #### is\_empty
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,471:::fn <a href="moonbitlang/core/deque#T">T</a>::is_empty[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/deque/deque.mbt,577:::fn <a href="moonbitlang/core/deque#T">T</a>::is_empty[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Bool
   ```
   > 
   >  Test if the deque is empty.
@@ -302,23 +360,23 @@ dv.search(6) // None
   >  ```
 - #### iter
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,559:::fn <a href="moonbitlang/core/deque#T">T</a>::iter[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
+  :::source,moonbitlang/core/deque/deque.mbt,832:::fn <a href="moonbitlang/core/deque#T">T</a>::iter[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
   ```
   > 
 - #### iter2
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,585:::fn <a href="moonbitlang/core/deque#T">T</a>::iter2[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[Int, A]
+  :::source,moonbitlang/core/deque/deque.mbt,858:::fn <a href="moonbitlang/core/deque#T">T</a>::iter2[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[Int, A]
   ```
   > 
 - #### length
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,73:::fn <a href="moonbitlang/core/deque#T">T</a>::length[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Int
+  :::source,moonbitlang/core/deque/deque.mbt,76:::fn <a href="moonbitlang/core/deque#T">T</a>::length[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Int
   ```
   > 
   >  Returns the deque of elements in the vector.
 - #### map
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,428:::fn <a href="moonbitlang/core/deque#T">T</a>::map[A, U](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> U) -> <a href="moonbitlang/core/deque#T">T</a>[U]
+  :::source,moonbitlang/core/deque/deque.mbt,534:::fn <a href="moonbitlang/core/deque#T">T</a>::map[A, U](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> U) -> <a href="moonbitlang/core/deque#T">T</a>[U]
   ```
   > 
   >  Maps a function over the elements of the deque.
@@ -331,7 +389,7 @@ dv.search(6) // None
   >  ```
 - #### mapi
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,449:::fn <a href="moonbitlang/core/deque#T">T</a>::mapi[A, U](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (Int, A) -> U) -> <a href="moonbitlang/core/deque#T">T</a>[U]
+  :::source,moonbitlang/core/deque/deque.mbt,555:::fn <a href="moonbitlang/core/deque#T">T</a>::mapi[A, U](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (Int, A) -> U) -> <a href="moonbitlang/core/deque#T">T</a>[U]
   ```
   > 
   >  Maps a function over the elements of the deque with index.
@@ -344,24 +402,24 @@ dv.search(6) // None
   >  ```
 - #### new
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,17:::fn <a href="moonbitlang/core/deque#T">T</a>::new[A](capacity~ : Int = ..) -> <a href="moonbitlang/core/deque#T">T</a>[A]
+  :::source,moonbitlang/core/deque/deque.mbt,20:::fn <a href="moonbitlang/core/deque#T">T</a>::new[A](capacity~ : Int = ..) -> <a href="moonbitlang/core/deque#T">T</a>[A]
   ```
   > 
   >  Creates a new, empty deque.
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,58:::fn <a href="moonbitlang/core/deque#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
+  :::source,moonbitlang/core/deque/deque.mbt,61:::fn <a href="moonbitlang/core/deque#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/deque#T">T</a>[A]
   ```
   > 
 - #### op\_equal
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,326:::fn <a href="moonbitlang/core/deque#T">T</a>::op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], other : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/deque/deque.mbt,417:::fn <a href="moonbitlang/core/deque#T">T</a>::op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], other : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Bool
   ```
   > 
   >  Compares two deques for equality.
 - #### op\_get
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,284:::fn <a href="moonbitlang/core/deque#T">T</a>::op_get[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], index : Int) -> A
+  :::source,moonbitlang/core/deque/deque.mbt,337:::fn <a href="moonbitlang/core/deque#T">T</a>::op_get[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], index : Int) -> A
   ```
   > 
   >  Retrieves the element at the specified index from the deque.
@@ -376,7 +434,7 @@ dv.search(6) // None
   >  @alert unsafe "Panic if the index is out of bounds."
 - #### op\_set
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,310:::fn <a href="moonbitlang/core/deque#T">T</a>::op_set[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], index : Int, value : A) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,363:::fn <a href="moonbitlang/core/deque#T">T</a>::op_set[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], index : Int, value : A) -> Unit
   ```
   > 
   >  Sets the value of the element at the specified index.
@@ -390,14 +448,9 @@ dv.search(6) // None
   >  assert_eq!(dv[2], 1)
   >  ```
   >  @alert unsafe "Panic if the index is out of bounds."
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,22:::fn <a href="moonbitlang/core/deque#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### pop\_back
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,263:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/deque/deque.mbt,303:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
   ```
   > 
   >  Removes a back element from a deque and returns it, or `None` if it is empty.
@@ -409,13 +462,14 @@ dv.search(6) // None
   >  ```
 - #### pop\_back\_exn
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,233:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_back_exn[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,260:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_back_exn[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
   ```
   > 
   >  @alert deprecated "Use `unsafe_pop_back` instead"
+  > @coverage.skip
 - #### pop\_front
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,245:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/deque/deque.mbt,272:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> A?
   ```
   > 
   >  Removes a front element from a deque and returns it, or `None` if it is empty.
@@ -427,13 +481,14 @@ dv.search(6) // None
   >  ```
 - #### pop\_front\_exn
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,209:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_front_exn[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,224:::fn <a href="moonbitlang/core/deque#T">T</a>::pop_front_exn[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
   ```
   > 
   >  @alert deprecated "Use `unsafe_pop_front` instead"
+  > @coverage.skip
 - #### push\_back
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,178:::fn <a href="moonbitlang/core/deque#T">T</a>::push_back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,181:::fn <a href="moonbitlang/core/deque#T">T</a>::push_back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Unit
   ```
   > 
   >  Adds an element to the back of the deque.
@@ -448,7 +503,7 @@ dv.search(6) // None
   >  ```
 - #### push\_front
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,156:::fn <a href="moonbitlang/core/deque#T">T</a>::push_front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,159:::fn <a href="moonbitlang/core/deque#T">T</a>::push_front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Unit
   ```
   > 
   >  Adds an element to the front of the deque.
@@ -463,7 +518,7 @@ dv.search(6) // None
   >  ```
 - #### reserve\_capacity
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,514:::fn <a href="moonbitlang/core/deque#T">T</a>::reserve_capacity[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], capacity : Int) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,620:::fn <a href="moonbitlang/core/deque#T">T</a>::reserve_capacity[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], capacity : Int) -> Unit
   ```
   > 
   >  Reserves capacity to ensure that it can hold at least the number of elements
@@ -476,9 +531,33 @@ dv.search(6) // None
   >  dv.reserve_capacity(10)
   >  assert_eq!(dv.capacity(), 10)
   >  ```
+- #### retain
+  ```moonbit
+  :::source,moonbitlang/core/deque/deque.mbt,798:::fn <a href="moonbitlang/core/deque#T">T</a>::retain[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> Bool) -> Unit
+  ```
+  > 
+  >  Filters elements in-place by retaining only the elements that satisfy the
+  > given predicate. Modifies the deque to keep only the elements for which the
+  > predicate function returns `true`.
+  > 
+  >  Parameters:
+  > 
+  >  * `self` : The deque to be filtered.
+  >  * `predicate` : A function that takes an element and returns `true` if the
+  >    element should be kept, `false` if it should be removed.
+  > 
+  >  Example:
+  > 
+  >  ```moonbit
+  >  test "retain" {
+  >    let dq = @deque.of([1, 2, 3, 4, 5])
+  >    dq.retain(fn(x) { x % 2 == 0 })
+  >    inspect!(dq, content="@deque.of([2, 4])")
+  >  }
+  >  ```
 - #### rev\_each
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,380:::fn <a href="moonbitlang/core/deque#T">T</a>::rev_each[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> Unit) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,471:::fn <a href="moonbitlang/core/deque#T">T</a>::rev_each[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the elements of the deque in reversed turn.
@@ -492,7 +571,7 @@ dv.search(6) // None
   >  ```
 - #### rev\_eachi
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,396:::fn <a href="moonbitlang/core/deque#T">T</a>::rev_eachi[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (Int, A) -> Unit) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,487:::fn <a href="moonbitlang/core/deque#T">T</a>::rev_eachi[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], f : (Int, A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the elements of the deque in reversed turn with index.
@@ -504,9 +583,19 @@ dv.search(6) // None
   >  dv.rev_eachi(fn (i, _x) {idx_sum = idx_sum + i})
   >  assert_eq!(idx_sum, 10)
   >  ```
+- #### rev\_iter
+  ```moonbit
+  :::source,moonbitlang/core/deque/deque.mbt,885:::fn <a href="moonbitlang/core/deque#T">T</a>::rev_iter[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
+  ```
+  > 
+- #### rev\_iter2
+  ```moonbit
+  :::source,moonbitlang/core/deque/deque.mbt,911:::fn <a href="moonbitlang/core/deque#T">T</a>::rev_iter2[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[Int, A]
+  ```
+  > 
 - #### search
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,482:::fn <a href="moonbitlang/core/deque#T">T</a>::search[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Int?
+  :::source,moonbitlang/core/deque/deque.mbt,588:::fn <a href="moonbitlang/core/deque#T">T</a>::search[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/deque#T">T</a>[A], value : A) -> Int?
   ```
   > 
   > 
@@ -517,7 +606,7 @@ dv.search(6) // None
   >  ```
 - #### shrink\_to\_fit
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,544:::fn <a href="moonbitlang/core/deque#T">T</a>::shrink_to_fit[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,650:::fn <a href="moonbitlang/core/deque#T">T</a>::shrink_to_fit[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
   ```
   > 
   >  Shrinks the capacity of the deque as much as possible.
@@ -533,14 +622,34 @@ dv.search(6) // None
   >  dv.shrink_to_fit()
   >  assert_eq!(dv.capacity(), 3)
   >  ```
-- #### to\_string
+- #### truncate
   ```moonbit
-  :::source,moonbitlang/core/deque/traits.mbt,85:::fn <a href="moonbitlang/core/deque#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/core/deque/deque.mbt,685:::fn <a href="moonbitlang/core/deque#T">T</a>::truncate[A](self : <a href="moonbitlang/core/deque#T">T</a>[A], len : Int) -> Unit
   ```
   > 
+  >  Shortens the deque in-place, keeping the first `len` elements and dropping
+  > the rest.
+  > 
+  >  If `len` is greater than or equal to the deque's current length, this has no
+  > effect.
+  > 
+  >  Parameters:
+  > 
+  >  * `self` : The deque to be truncated.
+  >  * `len` : The new length of the deque.
+  > 
+  >  Example:
+  > 
+  >  ```moonbit
+  >  test "truncate" {
+  >    let dq = @deque.of([1, 2, 3, 4, 5])
+  >    dq.truncate(3)
+  >    inspect!(dq, content="@deque.of([1, 2, 3])")
+  >  }
+  >  ```
 - #### unsafe\_pop\_back
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,223:::fn <a href="moonbitlang/core/deque#T">T</a>::unsafe_pop_back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,238:::fn <a href="moonbitlang/core/deque#T">T</a>::unsafe_pop_back[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
   ```
   > 
   >  Removes a back element from a deque.
@@ -554,7 +663,7 @@ dv.search(6) // None
   >  @alert unsafe "Panic if the deque is empty."
 - #### unsafe\_pop\_front
   ```moonbit
-  :::source,moonbitlang/core/deque/deque.mbt,199:::fn <a href="moonbitlang/core/deque#T">T</a>::unsafe_pop_front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/deque/deque.mbt,202:::fn <a href="moonbitlang/core/deque#T">T</a>::unsafe_pop_front[A](self : <a href="moonbitlang/core/deque#T">T</a>[A]) -> Unit
   ```
   > 
   >  Removes a front element from a deque.

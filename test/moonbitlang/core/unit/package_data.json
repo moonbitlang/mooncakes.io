@@ -10,16 +10,23 @@
       "name": "Unit",
       "impls": [
         {
-          "name": "hash",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/unit#Unit\">Unit</a> with hash(self : Unit) -> Int",
-          "loc": { "line": 22, "column": 29 }
-        },
-        {
-          "name": "hash_combine",
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/unit#Unit\">Unit</a> with hash_combine(self : Unit, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 28, "column": 29 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Unit",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Unit) -> Int",
+              "loc": { "line": 22, "column": 29 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Unit, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 28, "column": 29 }
+            }
+          ],
+          "loc": { "line": 22, "column": 1 }
         }
       ],
       "methods": [
@@ -34,18 +41,6 @@
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::default() -> Unit",
           "loc": { "line": 34, "column": 14 }
-        },
-        {
-          "name": "hash",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::hash(self : Unit) -> Int",
-          "loc": { "line": 22, "column": 29 }
-        },
-        {
-          "name": "hash_combine",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/unit#Unit\">Unit</a>::hash_combine(self : Unit, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 28, "column": 29 }
         },
         {
           "name": "to_string",

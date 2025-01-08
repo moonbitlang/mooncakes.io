@@ -1,0 +1,1545 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "spin-moonbit-sdk",
+      "package": null,
+      "childs": [
+        {
+          "name": "common",
+          "package": {
+            "path": "gmlewis/spin-moonbit-sdk/common",
+            "readme": false,
+            "traits": [
+              {
+                "name": "@gmlewis/spin-moonbit-sdk/common.HashFunc",
+                "impls": []
+              }
+            ],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "examples",
+          "package": null,
+          "childs": [
+            {
+              "name": "hello-world",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/hello-world",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "kv-store",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/kv-store",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "llm",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/llm",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "now",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/now",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "outbound-http",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/outbound-http",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "redis",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/redis",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "variables",
+              "package": {
+                "path": "gmlewis/spin-moonbit-sdk/examples/variables",
+                "readme": true,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "cabi_realloc", "handle", "wasmExportHandle" ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "ffi",
+          "package": {
+            "path": "gmlewis/spin-moonbit-sdk/ffi",
+            "readme": false,
+            "traits": [
+              { "name": "@gmlewis/spin-moonbit-sdk/ffi.Any", "impls": [] }
+            ],
+            "types": [ { "name": "Cleanup", "impls": [], "methods": [] } ],
+            "typealias": [],
+            "values": [
+              "bytes2ptr", "copy", "double_array2ptr", "extend16", "extend8",
+              "f32_to_i32", "f32_to_i64", "float_array2ptr", "free",
+              "int64_array2ptr", "int_array2ptr", "load16", "load16_u",
+              "load32", "load64", "load8", "load8_u", "loadf32", "loadf64",
+              "malloc", "ptr2bytes", "ptr2double_array", "ptr2float_array",
+              "ptr2int64_array", "ptr2int_array", "ptr2str",
+              "ptr2uint64_array", "ptr2uint_array", "store16", "store32",
+              "store64", "store8", "storef32", "storef64", "str2ptr",
+              "uint64_array2ptr", "uint_array2ptr"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "gen",
+          "package": {
+            "path": "gmlewis/spin-moonbit-sdk/gen",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "cabi_realloc" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "interface",
+          "package": null,
+          "childs": [
+            {
+              "name": "imports",
+              "package": null,
+              "childs": [
+                {
+                  "name": "keyValue",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/keyValue",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "Store",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [
+                          "delete", "drop", "exists", "get", "get_keys",
+                          "open", "set"
+                        ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "llm",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/llm",
+                    "readme": true,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "EmbeddingsResult",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "EmbeddingsUsage",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "InferencingParams",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "InferencingResult",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "InferencingUsage",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "generate_embeddings", "infer" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "mqtt",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/mqtt",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Connection",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [ "drop", "open", "publish" ]
+                      },
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "Qos",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [ "from", "ordinal" ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "mysql",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/mysql",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Connection",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [ "drop", "execute", "open", "query" ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "postgres",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/postgres",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Connection",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [ "drop", "execute", "open", "query" ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "rdbmsTypes",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Column",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "DbDataType",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [ "from", "ordinal" ]
+                      },
+                      {
+                        "name": "DbValue",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "ParameterValue",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "RowSet",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "redis",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/redis",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Connection",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [
+                          "del", "drop", "execute", "get", "incr", "open",
+                          "publish", "sadd", "set", "smembers", "srem"
+                        ]
+                      },
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "RedisParameter",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "RedisResult",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "sqlite",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/sqlite",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Connection",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [ "drop", "execute", "open" ]
+                      },
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "QueryResult",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "RowResult",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "Value",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "variables",
+                  "package": {
+                    "path": "gmlewis/spin-moonbit-sdk/interface/imports/variables",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Error_",
+                        "impls": [
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "get" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "wasi",
+                  "package": null,
+                  "childs": [
+                    {
+                      "name": "cli",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "environment",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/environment",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [
+                              "get_arguments", "get_environment",
+                              "initial_cwd"
+                            ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "exit",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/exit",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "exit" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "stderr",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stderr",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_stderr" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "stdin",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdin",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_stdin" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "stdout",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdout",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_stdout" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "terminalInput",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalInput",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "TerminalInput",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop" ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "terminalOutput",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalOutput",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "TerminalOutput",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop" ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "terminalStderr",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStderr",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_terminal_stderr" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "terminalStdin",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStdin",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_terminal_stdin" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "terminalStdout",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStdout",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_terminal_stdout" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "clocks",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "monotonicClock",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/monotonicClock",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [
+                              "now", "resolution", "subscribe_duration",
+                              "subscribe_instant"
+                            ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "wallClock",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "Datetime",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [ "now", "resolution" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "filesystem",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "preopens",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/preopens",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "get_directories" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "types",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "Advice",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "from", "ordinal" ]
+                              },
+                              {
+                                "name": "Descriptor",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "advise", "append_via_stream",
+                                  "create_directory_at", "drop", "get_flags",
+                                  "get_type", "is_same_object", "link_at",
+                                  "metadata_hash", "metadata_hash_at",
+                                  "open_at", "read", "read_directory",
+                                  "read_via_stream", "readlink_at",
+                                  "remove_directory_at", "rename_at",
+                                  "set_size", "set_times", "set_times_at",
+                                  "stat", "stat_at", "symlink_at", "sync",
+                                  "sync_data", "unlink_file_at", "write",
+                                  "write_via_stream"
+                                ]
+                              },
+                              {
+                                "name": "DescriptorFlags",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "default", "is_set", "set", "unset"
+                                ]
+                              },
+                              {
+                                "name": "DescriptorFlagsFlag",
+                                "impls": [],
+                                "methods": []
+                              },
+                              {
+                                "name": "DescriptorStat",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "DescriptorType",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "from", "ordinal" ]
+                              },
+                              {
+                                "name": "DirectoryEntry",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "DirectoryEntryStream",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "read_directory_entry" ]
+                              },
+                              {
+                                "name": "ErrorCode",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "from", "ordinal" ]
+                              },
+                              {
+                                "name": "MetadataHashValue",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "NewTimestamp",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "OpenFlags",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "default", "is_set", "set", "unset"
+                                ]
+                              },
+                              {
+                                "name": "OpenFlagsFlag",
+                                "impls": [],
+                                "methods": []
+                              },
+                              {
+                                "name": "PathFlags",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "default", "is_set", "set", "unset"
+                                ]
+                              },
+                              {
+                                "name": "PathFlagsFlag",
+                                "impls": [],
+                                "methods": []
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [ "filesystem_error_code" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "http",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "outgoingHandler",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/outgoingHandler",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "handle" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "types",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "DnsErrorPayload",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "ErrorCode",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "FieldSizePayload",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "Fields",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "append", "clone", "delete", "drop",
+                                  "entries", "fields", "from_list", "get",
+                                  "has", "set"
+                                ]
+                              },
+                              {
+                                "name": "FutureIncomingResponse",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "get", "subscribe" ]
+                              },
+                              {
+                                "name": "FutureTrailers",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "get", "subscribe" ]
+                              },
+                              {
+                                "name": "HeaderError",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "IncomingBody",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "finish", "stream" ]
+                              },
+                              {
+                                "name": "IncomingRequest",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "authority", "consume", "drop", "headers",
+                                  "method", "path_with_query", "scheme"
+                                ]
+                              },
+                              {
+                                "name": "IncomingResponse",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "consume", "drop", "headers", "status"
+                                ]
+                              },
+                              {
+                                "name": "Method",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "OutgoingBody",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "finish", "write" ]
+                              },
+                              {
+                                "name": "OutgoingRequest",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "authority", "body", "drop", "headers",
+                                  "method", "outgoing_request",
+                                  "path_with_query", "scheme",
+                                  "set_authority", "set_method",
+                                  "set_path_with_query", "set_scheme"
+                                ]
+                              },
+                              {
+                                "name": "OutgoingResponse",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "body", "drop", "headers",
+                                  "outgoing_response", "set_status_code",
+                                  "status_code"
+                                ]
+                              },
+                              {
+                                "name": "RequestOptions",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "between_bytes_timeout", "connect_timeout",
+                                  "drop", "first_byte_timeout",
+                                  "request_options",
+                                  "set_between_bytes_timeout",
+                                  "set_connect_timeout",
+                                  "set_first_byte_timeout"
+                                ]
+                              },
+                              {
+                                "name": "ResponseOutparam",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "set" ]
+                              },
+                              {
+                                "name": "Scheme",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "TlsAlertReceivedPayload",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [ "http_error_code" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "io",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "error",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error",
+                            "readme": false,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "Error_",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "to_debug_string" ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "poll",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "Pollable",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "block", "drop", "ready" ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [ "poll" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "streams",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
+                            "readme": true,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "InputStream",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "blocking_read", "blocking_skip", "drop",
+                                  "read", "skip", "subscribe"
+                                ]
+                              },
+                              {
+                                "name": "OutputStream",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "blocking_flush", "blocking_splice",
+                                  "blocking_write_and_flush",
+                                  "blocking_write_zeroes_and_flush",
+                                  "check_write", "drop", "flush", "splice",
+                                  "subscribe", "write", "write_zeroes"
+                                ]
+                              },
+                              {
+                                "name": "StreamError",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "random",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "insecure",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/insecure",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [
+                              "get_insecure_random_bytes",
+                              "get_insecure_random_u64"
+                            ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "insecureSeed",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/insecureSeed",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "insecure_seed" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "random",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/random/random",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [
+                              "get_random_bytes", "get_random_u64"
+                            ],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "sockets",
+                      "package": null,
+                      "childs": [
+                        {
+                          "name": "instanceNetwork",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/instanceNetwork",
+                            "readme": true,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "instance_network" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "ipNameLookup",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/ipNameLookup",
+                            "readme": false,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "ResolveAddressStream",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "drop", "resolve_next_address", "subscribe"
+                                ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [ "resolve_addresses" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "network",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network",
+                            "readme": false,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "ErrorCode",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "from", "ordinal" ]
+                              },
+                              {
+                                "name": "IpAddress",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "IpAddressFamily",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "from", "ordinal" ]
+                              },
+                              {
+                                "name": "IpSocketAddress",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "Ipv4SocketAddress",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "Ipv6SocketAddress",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "Network",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop" ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "tcp",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcp",
+                            "readme": false,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "ShutdownType",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "from", "ordinal" ]
+                              },
+                              {
+                                "name": "TcpSocket",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "accept", "address_family", "drop",
+                                  "finish_bind", "finish_connect",
+                                  "finish_listen", "hop_limit",
+                                  "is_listening", "keep_alive_count",
+                                  "keep_alive_enabled",
+                                  "keep_alive_idle_time",
+                                  "keep_alive_interval", "local_address",
+                                  "receive_buffer_size", "remote_address",
+                                  "send_buffer_size", "set_hop_limit",
+                                  "set_keep_alive_count",
+                                  "set_keep_alive_enabled",
+                                  "set_keep_alive_idle_time",
+                                  "set_keep_alive_interval",
+                                  "set_listen_backlog_size",
+                                  "set_receive_buffer_size",
+                                  "set_send_buffer_size", "shutdown",
+                                  "start_bind", "start_connect",
+                                  "start_listen", "subscribe"
+                                ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "tcpCreateSocket",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/tcpCreateSocket",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "create_tcp_socket" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "udp",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp",
+                            "readme": false,
+                            "traits": [],
+                            "types": [
+                              {
+                                "name": "IncomingDatagram",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "IncomingDatagramStream",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [ "drop", "receive", "subscribe" ]
+                              },
+                              {
+                                "name": "OutgoingDatagram",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": []
+                              },
+                              {
+                                "name": "OutgoingDatagramStream",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "check_send", "drop", "send", "subscribe"
+                                ]
+                              },
+                              {
+                                "name": "UdpSocket",
+                                "impls": [
+                                  { "methods": [ "op_equal" ] },
+                                  { "methods": [ "output" ] }
+                                ],
+                                "methods": [
+                                  "address_family", "drop", "finish_bind",
+                                  "local_address", "receive_buffer_size",
+                                  "remote_address", "send_buffer_size",
+                                  "set_receive_buffer_size",
+                                  "set_send_buffer_size",
+                                  "set_unicast_hop_limit", "start_bind",
+                                  "stream", "subscribe", "unicast_hop_limit"
+                                ]
+                              }
+                            ],
+                            "typealias": [],
+                            "values": [],
+                            "misc": []
+                          },
+                          "childs": []
+                        },
+                        {
+                          "name": "udpCreateSocket",
+                          "package": {
+                            "path": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udpCreateSocket",
+                            "readme": false,
+                            "traits": [],
+                            "types": [],
+                            "typealias": [],
+                            "values": [ "create_udp_socket" ],
+                            "misc": []
+                          },
+                          "childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "log",
+          "package": {
+            "path": "gmlewis/spin-moonbit-sdk/log",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "debug", "error", "info", "warn" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "util",
+          "package": {
+            "path": "gmlewis/spin-moonbit-sdk/util",
+            "readme": false,
+            "traits": [],
+            "types": [ { "name": "ByteFunc", "impls": [], "methods": [] } ],
+            "typealias": [],
+            "values": [
+              "consume", "consume_func", "dump_headers", "get_body_bytes",
+              "get_content_length", "make_404_response", "make_500_response",
+              "make_response", "make_response_str", "new_request", "println",
+              "random_int", "respond_404", "respond_500", "respond_bytes",
+              "respond_str", "send_request", "split_path", "stream",
+              "stream_func"
+            ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

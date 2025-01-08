@@ -41,39 +41,29 @@ http://localhost:8080/examples/arrays
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a> with op_equal(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>, <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a> with output(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a> with to_json(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::fn <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>::op_equal(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>, <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::fn <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>::output(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::fn <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>::to_json(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/arrays/traits.mbt,85:::fn <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>
   ```
   > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::fn op_equal(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>, <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::fn output(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/examples/arrays/all-three.mbt,6:::fn to_json(<a href="extism/moonbit-pdk/examples/arrays#AllThree">AllThree</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## all\_three\_object
 

@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "kinoamyfx/moon-axe-tools",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "greeting",
+      "docstring": "",
+      "signature": "fn greeting() -> Unit",
+      "loc": { "line": 1, "column": 8 }
+    }
+  ],
+  "misc": []
+}

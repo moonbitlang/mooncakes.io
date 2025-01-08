@@ -1,0 +1,259 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts-j",
+      "package": null,
+      "childs": [
+        {
+          "name": "josefinslab_bold",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_extralight",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_extralight",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_extralightitalic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_extralightitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_italic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_light",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_light",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_lightitalic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_lightitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_medium",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_mediumitalic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_mediumitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_regular",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_semibold",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_semibold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_semibolditalic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_semibolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_thin",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_thin",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "josefinslab_thinitalic",
+          "package": {
+            "path": "gmlewis/fonts-j/josefinslab_thinitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "jura_bold",
+          "package": {
+            "path": "gmlewis/fonts-j/jura_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "jura_light",
+          "package": {
+            "path": "gmlewis/fonts-j/jura_light",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "jura_medium",
+          "package": {
+            "path": "gmlewis/fonts-j/jura_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "jura_regular",
+          "package": {
+            "path": "gmlewis/fonts-j/jura_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "jura_semibold",
+          "package": {
+            "path": "gmlewis/fonts-j/jura_semibold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

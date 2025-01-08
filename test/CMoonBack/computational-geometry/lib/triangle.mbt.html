@@ -52,15 +52,20 @@
 /// }
 /// ```
 fn circumcenter(a : Point, b : Point, c : Point) -> Point {
-    let x1 : Double = (a.x + b.x) / 2.0
-    let y1 : Double = (a.y + b.y) / 2.0
-    let x2 : Double = x1 - a.y + b.y
-    let y2 : Double = y1 + a.x - b.x
-    let x3 : Double = (a.x + c.x) / 2.0
-    let y3 : Double = (a.y + c.y) / 2.0
-    let x4 : Double = x3 - a.y + c.y
-    let y4 : Double = y3 + a.x - c.x
-    intersection(new_point(x1, y1), new_point(x2, y2), new_point(x3, y3), new_point(x4, y4));
+  let x1 : Double = (a.x + b.x) / 2.0
+  let y1 : Double = (a.y + b.y) / 2.0
+  let x2 : Double = x1 - a.y + b.y
+  let y2 : Double = y1 + a.x - b.x
+  let x3 : Double = (a.x + c.x) / 2.0
+  let y3 : Double = (a.y + c.y) / 2.0
+  let x4 : Double = x3 - a.y + c.y
+  let y4 : Double = y3 + a.x - c.x
+  intersection(
+    new_point(x1, y1),
+    new_point(x2, y2),
+    new_point(x3, y3),
+    new_point(x4, y4),
+  )
 }
 
 ///|
@@ -101,21 +106,21 @@ fn circumcenter(a : Point, b : Point, c : Point) -> Point {
 /// }
 /// ```
 fn incenter(a : Point, b : Point, c : Point) -> Point {
-    let u : Line = new_line(new_point(a.x, a.y), new_point(b.x, b.y))
-    let v : Line = new_line(new_point(b.x, b.y), new_point(c.x, c.y))
-    let m : Double = 0
-    let n : Double = 0
-    u.a = a
-    let mut m : Double = @math.atan2(b.y - a.y, b.x - a.x)
-    let mut n : Double = @math.atan2(c.y - a.y, c.x - a.x)
-    u.b.x = u.a.x + @math.cos((m + n) / 2.0)
-    u.b.y = u.a.y + @math.sin((m + n) / 2.0)
-    v.a = b
-    m = @math.atan2(a.y - b.y, a.x - b.x)
-    n = @math.atan2(c.y - b.y, c.x - b.x)
-    v.b.x = v.a.x + @math.cos((m + n) / 2.0)
-    v.b.y = v.a.y + @math.sin((m + n) / 2.0)
-    intersection(u.a, u.b, v.a, v.b);
+  let u : Line = new_line(new_point(a.x, a.y), new_point(b.x, b.y))
+  let v : Line = new_line(new_point(b.x, b.y), new_point(c.x, c.y))
+  let m : Double = 0
+  let n : Double = 0
+  u.a = a
+  let mut m : Double = @math.atan2(b.y - a.y, b.x - a.x)
+  let mut n : Double = @math.atan2(c.y - a.y, c.x - a.x)
+  u.b.x = u.a.x + @math.cos((m + n) / 2.0)
+  u.b.y = u.a.y + @math.sin((m + n) / 2.0)
+  v.a = b
+  m = @math.atan2(a.y - b.y, a.x - b.x)
+  n = @math.atan2(c.y - b.y, c.x - b.x)
+  v.b.x = v.a.x + @math.cos((m + n) / 2.0)
+  v.b.y = v.a.y + @math.sin((m + n) / 2.0)
+  intersection(u.a, u.b, v.a, v.b)
 }
 
 ///|
@@ -156,17 +161,16 @@ fn incenter(a : Point, b : Point, c : Point) -> Point {
 /// }
 /// ```
 fn perpencenter(a : Point, b : Point, c : Point) -> Point {
-    let u : Line = new_line(a, b)
-    let v : Line = new_line(b, c)
-    u.a = c;
-    u.b.x = u.a.x + b.y - a.y
-    u.b.y = u.a.y - b.x + a.x
-    v.a = b
-    v.b.x = v.a.x - a.y + c.y
-    v.b.y = v.a.y + a.x - c.x
-    intersection(u.a, u.b, v.a, v.b)
+  let u : Line = new_line(a, b)
+  let v : Line = new_line(b, c)
+  u.a = c
+  u.b.x = u.a.x + b.y - a.y
+  u.b.y = u.a.y - b.x + a.x
+  v.a = b
+  v.b.x = v.a.x - a.y + c.y
+  v.b.y = v.a.y + a.x - c.x
+  intersection(u.a, u.b, v.a, v.b)
 }
-
 </code></pre>
   <script>
     let moonbitLanguageFn = hljs => {

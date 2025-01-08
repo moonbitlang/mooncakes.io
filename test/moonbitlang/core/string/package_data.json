@@ -198,15 +198,15 @@
         },
         {
           "name": "trim_left",
-          "docstring": "\n @alert deprecated \"Use `String::trim_start` instead\"",
+          "docstring": "\n @alert deprecated \"Use `String::trim_start` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/string#String\">String</a>::trim_left(self : String, trim_set : String) -> String",
-          "loc": { "line": 17, "column": 8 }
+          "loc": { "line": 18, "column": 8 }
         },
         {
           "name": "trim_right",
-          "docstring": "\n @alert deprecated \"Use `String::trim_end` instead\"",
+          "docstring": "\n @alert deprecated \"Use `String::trim_end` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/string#String\">String</a>::trim_right(self : String, trim_set : String) -> String",
-          "loc": { "line": 23, "column": 8 }
+          "loc": { "line": 25, "column": 8 }
         },
         {
           "name": "trim_space",

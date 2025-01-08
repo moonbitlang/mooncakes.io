@@ -1,0 +1,16 @@
+{
+  "readme": "An interface providing an optional `terminal-input` for stdin as a\nlink-time authority.",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalStdin",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "get_terminal_stdin",
+      "docstring": " If stdin is connected to a terminal, return a `terminal-input` handle\n allowing further interaction with it.",
+      "signature": "fn get_terminal_stdin() -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalInput#TerminalInput\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/terminalInput.TerminalInput</a>?",
+      "loc": { "line": 5, "column": 8 }
+    }
+  ],
+  "misc": []
+}

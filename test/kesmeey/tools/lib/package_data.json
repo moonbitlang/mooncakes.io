@@ -1,0 +1,256 @@
+{
+  "readme": "",
+  "name": "kesmeey/tools/lib",
+  "traits": [],
+  "types": [
+    {
+      "name": "CityCode",
+      "docstring": "",
+      "signature": "pub(all) struct CityCode {\n  code : String\n  name : String\n}",
+      "loc": { "line": 6, "column": 17 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "IdCard",
+      "docstring": "",
+      "signature": "pub(all) struct IdCard {\n  province_code : String\n  city_code : String\n  birth_year : Int\n  birth_month : Int\n  birth_day : Int\n  gender : Int\n  age : Int\n}",
+      "loc": { "line": 53, "column": 17 },
+      "methods": [
+        {
+          "name": "get_age",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::get_age(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> Int",
+          "loc": { "line": 317, "column": 16 }
+        },
+        {
+          "name": "get_birth_date",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::get_birth_date(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> String",
+          "loc": { "line": 298, "column": 16 }
+        },
+        {
+          "name": "get_city_code",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::get_city_code(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> String",
+          "loc": { "line": 290, "column": 16 }
+        },
+        {
+          "name": "get_gender",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::get_gender(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> Int",
+          "loc": { "line": 295, "column": 16 }
+        },
+        {
+          "name": "get_province",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::get_province(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> String",
+          "loc": { "line": 285, "column": 16 }
+        },
+        {
+          "name": "get_province_code",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::get_province_code(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> String",
+          "loc": { "line": 280, "column": 16 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>::to_string(self : <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>) -> String",
+          "loc": { "line": 322, "column": 16 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "check_birthday",
+      "docstring": "",
+      "signature": "fn check_birthday(year : Int, month : Int, day : Int) -> Bool",
+      "loc": { "line": 70, "column": 8 }
+    },
+    {
+      "name": "check_length",
+      "docstring": "",
+      "signature": "fn check_length(id : String) -> Bool",
+      "loc": { "line": 64, "column": 8 }
+    },
+    {
+      "name": "convert_15_to_18",
+      "docstring": " 15位转18位身份证号码",
+      "signature": "fn convert_15_to_18(id : String) -> String?",
+      "loc": { "line": 347, "column": 8 }
+    },
+    {
+      "name": "convert_18_to_15",
+      "docstring": " 18位身份证转15位",
+      "signature": "fn convert_18_to_15(id : String) -> String?",
+      "loc": { "line": 384, "column": 8 }
+    },
+    {
+      "name": "get_province_name",
+      "docstring": "",
+      "signature": "fn get_province_name(code : String) -> String",
+      "loc": { "line": 11, "column": 8 }
+    },
+    {
+      "name": "hide_after",
+      "docstring": "",
+      "signature": "fn hide_after(phone : String) -> String",
+      "loc": { "line": 88, "column": 8 }
+    },
+    {
+      "name": "hide_before",
+      "docstring": "",
+      "signature": "fn hide_before(phone : String) -> String",
+      "loc": { "line": 74, "column": 8 }
+    },
+    {
+      "name": "hide_between",
+      "docstring": "",
+      "signature": "fn hide_between(phone : String) -> String",
+      "loc": { "line": 81, "column": 8 }
+    },
+    {
+      "name": "hide_id_card",
+      "docstring": " 隐藏身份证号码指定位置的数字，替换为 \"*\"",
+      "signature": "fn hide_id_card(id : String, start_include : Int, end_exclude : Int) -> String",
+      "loc": { "line": 332, "column": 8 }
+    },
+    {
+      "name": "is_chinese",
+      "docstring": "",
+      "signature": "fn is_chinese(str : String) -> Bool",
+      "loc": { "line": 28, "column": 8 }
+    },
+    {
+      "name": "is_credit_code",
+      "docstring": "",
+      "signature": "fn is_credit_code(code : String) -> Bool",
+      "loc": { "line": 25, "column": 8 }
+    },
+    {
+      "name": "is_credit_code_simple",
+      "docstring": "",
+      "signature": "fn is_credit_code_simple(code : String) -> Bool",
+      "loc": { "line": 13, "column": 8 }
+    },
+    {
+      "name": "is_leap_year",
+      "docstring": "",
+      "signature": "fn is_leap_year(year : Int) -> Bool",
+      "loc": { "line": 91, "column": 8 }
+    },
+    {
+      "name": "is_mobile_cn",
+      "docstring": "",
+      "signature": "fn is_mobile_cn(phone : String) -> Bool",
+      "loc": { "line": 23, "column": 8 }
+    },
+    {
+      "name": "is_mobile_hk",
+      "docstring": "",
+      "signature": "fn is_mobile_hk(phone : String) -> Bool",
+      "loc": { "line": 30, "column": 8 }
+    },
+    {
+      "name": "is_mobile_mo",
+      "docstring": "",
+      "signature": "fn is_mobile_mo(phone : String) -> Bool",
+      "loc": { "line": 47, "column": 8 }
+    },
+    {
+      "name": "is_mobile_tw",
+      "docstring": "",
+      "signature": "fn is_mobile_tw(phone : String) -> Bool",
+      "loc": { "line": 38, "column": 8 }
+    },
+    {
+      "name": "is_number",
+      "docstring": "",
+      "signature": "fn is_number(str : String) -> Bool",
+      "loc": { "line": 4, "column": 8 }
+    },
+    {
+      "name": "is_tel",
+      "docstring": "",
+      "signature": "fn is_tel(phone : String) -> Bool",
+      "loc": { "line": 56, "column": 8 }
+    },
+    {
+      "name": "is_tel_400_800",
+      "docstring": "",
+      "signature": "fn is_tel_400_800(phone : String) -> Bool",
+      "loc": { "line": 65, "column": 8 }
+    },
+    {
+      "name": "is_valid_18_card",
+      "docstring": "",
+      "signature": "fn is_valid_18_card(id : String) -> Bool",
+      "loc": { "line": 96, "column": 8 }
+    },
+    {
+      "name": "is_valid_card_10",
+      "docstring": "",
+      "signature": "fn is_valid_card_10(id : String) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+      "loc": { "line": 231, "column": 8 }
+    },
+    {
+      "name": "is_valid_card_15",
+      "docstring": "",
+      "signature": "fn is_valid_card_15(id : String) -> Bool",
+      "loc": { "line": 141, "column": 8 }
+    },
+    {
+      "name": "is_valid_email",
+      "docstring": " 验证邮箱是否合法",
+      "signature": "fn is_valid_email(email : String) -> Bool",
+      "loc": { "line": 86, "column": 8 }
+    },
+    {
+      "name": "is_valid_hk_card",
+      "docstring": "",
+      "signature": "fn is_valid_hk_card(id : String) -> Bool",
+      "loc": { "line": 167, "column": 8 }
+    },
+    {
+      "name": "is_valid_tw_card",
+      "docstring": "",
+      "signature": "fn is_valid_tw_card(id : String) -> Bool",
+      "loc": { "line": 203, "column": 8 }
+    },
+    {
+      "name": "parse_id_card",
+      "docstring": "",
+      "signature": "fn parse_id_card(id : String) -> <a href=\"kesmeey/tools/lib#IdCard\">IdCard</a>?",
+      "loc": { "line": 257, "column": 8 }
+    },
+    {
+      "name": "random_credit_code",
+      "docstring": " 生成随机的统一社会信用代码",
+      "signature": "fn random_credit_code() -> String",
+      "loc": { "line": 59, "column": 8 }
+    },
+    {
+      "name": "sub_after",
+      "docstring": "",
+      "signature": "fn sub_after(phone : String) -> String",
+      "loc": { "line": 107, "column": 8 }
+    },
+    {
+      "name": "sub_before",
+      "docstring": "",
+      "signature": "fn sub_before(phone : String) -> String",
+      "loc": { "line": 95, "column": 8 }
+    },
+    {
+      "name": "sub_between",
+      "docstring": "",
+      "signature": "fn sub_between(phone : String) -> String",
+      "loc": { "line": 102, "column": 8 }
+    }
+  ],
+  "misc": []
+}

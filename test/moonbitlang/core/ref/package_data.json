@@ -10,19 +10,20 @@
       "name": "Ref",
       "impls": [
         {
-          "name": "arbitrary",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/ref#Ref\">Ref</a> with arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
-          "loc": { "line": 116, "column": 75 }
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
+              "loc": { "line": 116, "column": 75 }
+            }
+          ],
+          "loc": { "line": 116, "column": 1 }
         }
       ],
       "methods": [
-        {
-          "name": "arbitrary",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/ref#Ref\">Ref</a>::arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
-          "loc": { "line": 116, "column": 75 }
-        },
         {
           "name": "map",
           "docstring": "\n Maps the value of a `Ref` using a given function.\n\n # Example\n\n ```\n assert_eq!(@ref.new(1).map(fn(a){ a + 1 }).val, 2)\n ```",

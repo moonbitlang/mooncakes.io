@@ -20,9 +20,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/rose/rose.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/quickcheck/lib/rose/rose.mbt,5:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[T]
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/rose/rose.mbt,5:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### apply
@@ -43,16 +47,6 @@
 - #### join
   ```moonbit
   :::source,moonbitlang/quickcheck/lib/rose/rose.mbt,11:::fn <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>::join[T](self : <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[<a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[T]]) -> <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[T]
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/rose/rose.mbt,5:::fn <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/rose/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/rose#Rose">Rose</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 

@@ -1,0 +1,82 @@
+{
+  "readme": "",
+  "name": "peter-jerry-ye/utils/codec",
+  "traits": [
+    {
+      "name": "@peter-jerry-ye/utils/codec.Bytes_",
+      "docstring": "",
+      "signature": "pub(open) trait @peter-jerry-ye/utils/codec.Bytes_ {\n  iter(Self) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]\n}",
+      "loc": { "line": 118, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@peter-jerry-ye/utils/codec.Chars",
+      "docstring": "",
+      "signature": "pub(open) trait @peter-jerry-ye/utils/codec.Chars {\n  iter(Self) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Char]\n}",
+      "loc": { "line": 123, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Base64Decoder",
+      "docstring": "",
+      "signature": "type Base64Decoder",
+      "loc": { "line": 153, "column": 8 },
+      "methods": [
+        {
+          "name": "decode",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/codec#Base64Decoder\">Base64Decoder</a>::decode(self : <a href=\"peter-jerry-ye/utils/codec#Base64Decoder\">Base64Decoder</a>, input : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Char], url_safe~ : Bool = ..) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]",
+          "loc": { "line": 164, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/codec#Base64Decoder\">Base64Decoder</a>::new() -> <a href=\"peter-jerry-ye/utils/codec#Base64Decoder\">Base64Decoder</a>",
+          "loc": { "line": 159, "column": 23 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Base64Encoder",
+      "docstring": "",
+      "signature": "type Base64Encoder",
+      "loc": { "line": 59, "column": 8 },
+      "methods": [
+        {
+          "name": "encode",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/codec#Base64Encoder\">Base64Encoder</a>::encode(self : <a href=\"peter-jerry-ye/utils/codec#Base64Encoder\">Base64Encoder</a>, bytes : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte], url_safe~ : Bool = .., padding~ : Bool = ..) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Char]",
+          "loc": { "line": 70, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/codec#Base64Encoder\">Base64Encoder</a>::new() -> <a href=\"peter-jerry-ye/utils/codec#Base64Encoder\">Base64Encoder</a>",
+          "loc": { "line": 65, "column": 23 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "base64_decode",
+      "docstring": " \n Decode ascii text to binary following Base64 defined in RFC 4648\n\n If the string is not padded correctly, an empty `Bytes` will be returned",
+      "signature": "fn base64_decode[T : <a href=\"peter-jerry-ye/utils/codec#Chars\">Chars</a>](input : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T], url_safe~ : Bool = ..) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]",
+      "loc": { "line": 206, "column": 8 }
+    },
+    {
+      "name": "base64_encode",
+      "docstring": " Encode binary to ascii text following Base64 defined in RFC 4648",
+      "signature": "fn base64_encode[T : <a href=\"peter-jerry-ye/utils/codec#Bytes_\">Bytes_</a>](bytes : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T], url_safe~ : Bool = ..) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Char]",
+      "loc": { "line": 128, "column": 8 }
+    }
+  ],
+  "misc": []
+}

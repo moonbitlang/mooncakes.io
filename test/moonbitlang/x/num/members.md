@@ -1,12 +1,12 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Num](#Num)||
+|[@moonbitlang/x/num.Num](#@moonbitlang/x/num.Num)||
 
-## Num
+## @moonbitlang/x/num.Num
 
 ```moonbit
-:::source,moonbitlang/x/num/num.mbt,16:::pub trait Num {
+:::source,moonbitlang/x/num/num.mbt,16:::pub trait @moonbitlang/x/num.Num {
   from_int(Int) -> Self
   op_add(Self, Self) -> Self
   op_sub(Self, Self) -> Self

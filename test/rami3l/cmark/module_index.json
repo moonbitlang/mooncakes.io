@@ -1,0 +1,804 @@
+{
+  "name": "rami3l",
+  "package": null,
+  "childs": [
+    {
+      "name": "cmark",
+      "package": null,
+      "childs": [
+        {
+          "name": "char",
+          "package": {
+            "path": "rami3l/cmark/char",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "ascii_digit_to_int", "ascii_hexdigit_to_int",
+              "ascii_octdigit_to_int", "at", "at_checked",
+              "from_int_checked", "is_ascii", "is_ascii_alpha",
+              "is_ascii_alphanum", "is_ascii_blank", "is_ascii_control",
+              "is_ascii_digit", "is_ascii_graphic", "is_ascii_hexdigit",
+              "is_ascii_lower", "is_ascii_octdigit", "is_ascii_punctuation",
+              "is_ascii_upper", "is_ascii_whitespace", "is_high_surrogate",
+              "is_low_surrogate", "length_utf16", "length_utf32",
+              "length_utf8", "next_char", "prev_char", "rep", "sub_includes",
+              "to_ascii_lower", "to_ascii_upper", "utf_16_clean_raw",
+              "utf_16_clean_unesc_unref", "utf_16_clean_unref"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "cmark",
+          "package": {
+            "path": "rami3l/cmark/cmark",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Atx",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "BState",
+                "impls": [ { "methods": [ "op_equal" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Block",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "defs", "empty", "meta", "normalize" ]
+              },
+              {
+                "name": "BlockHeading",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "BlockHeadingAtxLayout",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [ "default" ]
+              },
+              {
+                "name": "BlockHeadingId",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "BlockHeadingLayout",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "BlockHeadingSetextLayout",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "BlockLine",
+                "impls": [],
+                "methods": [ "list_text_loc", "to_string" ]
+              },
+              {
+                "name": "BlockList",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "map_items", "normalize_items" ]
+              },
+              {
+                "name": "BlockParagraph",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "BlockQuote",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "map_block", "new", "normalize_block" ]
+              },
+              {
+                "name": "BlockStruct",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "BlockThematicBreak",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "Closer",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "CloserIndex",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "CodeBlock",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "language_of_info_string", "make_fence", "new" ]
+              },
+              {
+                "name": "CodeBlockFencedLayout",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "default" ]
+              },
+              {
+                "name": "CodeBlockLayout",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "CodeBlockStruct",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Doc",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "empty", "from_string", "new" ]
+              },
+              {
+                "name": "Fence",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "FenceCodeBlockStruct",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Folder",
+                "impls": [],
+                "methods": [
+                  "block_ext_none", "fold_block", "fold_doc", "fold_inline",
+                  "inline_ext_none", "new", "none", "ret"
+                ]
+              },
+              {
+                "name": "FolderError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "FolderResult",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Footnote",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "map_block", "new", "normalize_block" ]
+              },
+              {
+                "name": "Heading",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "HtmlBlock",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "HtmlBlockStruct",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "IndentedCodeLine",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Inline",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [
+                  "empty", "id", "is_empty", "meta", "normalize",
+                  "to_plain_text"
+                ]
+              },
+              {
+                "name": "InlineAutolink",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "InlineBreak",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "InlineBreakType",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "InlineCodeSpan",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "code", "from_string", "new" ]
+              },
+              {
+                "name": "InlineEmphasis",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "InlineLink",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [
+                  "is_unsafe", "new", "reference_definition",
+                  "referenced_label"
+                ]
+              },
+              {
+                "name": "InlineMathSpan",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "tex" ]
+              },
+              {
+                "name": "InlineRawHtml",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "InlineStrikethrough",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Label",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "compare", "new", "op_equal", "text_loc" ]
+              },
+              {
+                "name": "LabelContext",
+                "impls": [],
+                "methods": [ "default_resolver" ]
+              },
+              {
+                "name": "LabelDef",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "LinkDefinition",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "LinkDefinitionLayout",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "default", "for_dest" ]
+              },
+              { "name": "LinkKind", "impls": [], "methods": [] },
+              {
+                "name": "ListBlockStruct",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "ListItem",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "map_block", "new", "normalize_block" ]
+              },
+              {
+                "name": "ListItemStruct",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "ListTaskStatus",
+                "impls": [],
+                "methods": [ "from_marker" ]
+              },
+              {
+                "name": "Mapper",
+                "impls": [],
+                "methods": [
+                  "block_ext_none", "delete", "inline_ext_none", "map_block",
+                  "map_doc", "map_inline", "new", "none", "ret"
+                ]
+              },
+              {
+                "name": "MapperError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "MapperResult",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Node",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "empty", "map", "new" ]
+              },
+              {
+                "name": "Paragraph",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              { "name": "Parser", "impls": [], "methods": [] },
+              {
+                "name": "ReferenceKind",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "ReferenceLayout",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Seq",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [
+                  "empty", "fold", "from_array", "from_iter", "get",
+                  "is_empty", "iter", "length", "map", "op_get", "op_set",
+                  "rev_fold", "to_array"
+                ]
+              },
+              {
+                "name": "Setext",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "StartColResult",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Table",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "TableAlign",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TableRow",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Tight",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "empty", "list_text_loc", "to_string" ]
+              },
+              {
+                "name": "Token",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenBackticks",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenEmphasisMarks",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenInline",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenLinkStart",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenMathSpanMarks",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenNewline",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenStart",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenStrikethroughMarks",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              }
+            ],
+            "typealias": [
+              "Blanks", "BlanksNode", "BlockBlankLine", "BlockLineBlank",
+              "Count", "FilterMap", "FoldFn", "FolderFn", "InlineText",
+              "LabelDefs", "LabelKey", "LabelMap", "LabelResolverFn",
+              "ListItemBlock", "MapFn", "MapperFn", "StringNode",
+              "TableCellLayout", "TableSep"
+            ],
+            "values": [ "layout_empty", "layout_of_string" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "cmark_base",
+          "package": {
+            "path": "rami3l/cmark/cmark_base",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Exit",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "FencedCodeBlockContinue",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "HtmlBlockEndCond",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "LineSpan",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "LineType",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": [
+                  "atx_heading", "ext_footnote_label", "ext_table_row",
+                  "fenced_code_block_start", "html_block_end",
+                  "html_block_start", "list_marker",
+                  "setext_heading_underline", "thematic_break"
+                ]
+              },
+              {
+                "name": "ListType",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [ "is_same_type" ]
+              },
+              {
+                "name": "Meta",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [
+                  "compare", "is_none", "new", "none", "op_equal", "to_json"
+                ]
+              },
+              {
+                "name": "NextLineResult",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Span",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TextLoc",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "after", "is_empty", "is_none", "none", "reloc", "span",
+                  "to_first", "to_last"
+                ]
+              }
+            ],
+            "typealias": [
+              "BytePos", "FilePath", "First", "HeadingLevel", "Indent",
+              "Last", "LineNum", "LinePos", "Next", "NextLineFn"
+            ],
+            "values": [
+              "autolink_email", "autolink_uri", "byte_pos_none",
+              "could_be_link_ref_definition", "ext_task_marker",
+              "file_path_none", "first_non_blank", "first_non_blank_in_span",
+              "first_non_blank_over_nl", "first_non_escaped_char",
+              "last_non_blank", "line_num_none", "line_pos_none",
+              "link_destination", "link_label", "link_title", "raw_html",
+              "rev_drop_spaces", "run_of"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "cmark_html",
+          "package": {
+            "path": "rami3l/cmark/cmark_html",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "HtmlRenderFootnote",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "State",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [ "from_doc", "renderer", "safe", "xhtml_renderer" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "cmark_renderer",
+          "package": {
+            "path": "rami3l/cmark/cmark_renderer",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Context",
+                "impls": [],
+                "methods": [
+                  "block", "char", "doc", "init", "inline", "new", "string"
+                ]
+              },
+              {
+                "name": "RenderError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Renderer",
+                "impls": [],
+                "methods": [
+                  "buffer_add_doc", "compose", "doc_to_string", "new"
+                ]
+              }
+            ],
+            "typealias": [ "BlockFn", "DocFn", "InitContextFn", "InlineFn" ],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

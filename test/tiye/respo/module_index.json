@@ -1,0 +1,610 @@
+{
+  "name": "tiye",
+  "package": null,
+  "childs": [
+    {
+      "name": "respo",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "tiye/respo/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "RespoApp",
+                "impls": [],
+                "methods": [ "backup_model_beforeunload", "render_loop" ]
+              },
+              {
+                "name": "RespoStatesTree",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "cast_branch", "default", "path", "pick", "set_in_mut",
+                  "to_json", "to_string"
+                ]
+              },
+              {
+                "name": "RespoUpdateState",
+                "impls": [],
+                "methods": [ "to_json" ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "code_fonts", "default_fonts", "fancy_fonts",
+              "mark_need_rerender", "memo_once1", "memo_once2", "memo_once3",
+              "memo_once4", "memo_once5", "memoize1", "memoize2", "memoize3",
+              "memoize4", "memoize5", "normal_fonts", "preset",
+              "render_node", "try_load_storage", "ui_button",
+              "ui_button_danger", "ui_button_primary", "ui_center",
+              "ui_column", "ui_column_dispersive", "ui_column_evenly",
+              "ui_column_parted", "ui_expand", "ui_font_code",
+              "ui_font_fancy", "ui_font_normal", "ui_fullscreen",
+              "ui_global", "ui_input", "ui_link", "ui_row", "ui_row_center",
+              "ui_row_dispersive", "ui_row_evenly", "ui_row_middle",
+              "ui_row_parted", "ui_textarea"
+            ],
+            "misc": []
+          },
+          "childs": [
+            {
+              "name": "dialog",
+              "package": {
+                "path": "tiye/respo/lib/dialog",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "AlertOptions",
+                    "impls": [ { "methods": [ "default" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "AlertPlugin",
+                    "impls": [],
+                    "methods": [ "close", "new", "render", "show" ]
+                  },
+                  {
+                    "name": "AlertPluginState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ConfirmOptions",
+                    "impls": [ { "methods": [ "default" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ConfirmPlugin",
+                    "impls": [],
+                    "methods": [ "new", "render", "show" ]
+                  },
+                  {
+                    "name": "ConfirmPluginState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "DrawerOptions",
+                    "impls": [ { "methods": [ "default" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "DrawerPlugin",
+                    "impls": [],
+                    "methods": [ "close", "new", "render", "show" ]
+                  },
+                  {
+                    "name": "DrawerPluginState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "DrawerRenderer",
+                    "impls": [],
+                    "methods": [ "default", "new" ]
+                  },
+                  {
+                    "name": "EffectDrawerFade",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EffectFocus",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EffectModalClose",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EffectModalFade",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "InputState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ModalOptions",
+                    "impls": [ { "methods": [ "default" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ModalPlugin",
+                    "impls": [],
+                    "methods": [ "close", "new", "render", "show" ]
+                  },
+                  {
+                    "name": "ModalPluginState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ModalRenderer",
+                    "impls": [],
+                    "methods": [ "default", "new" ]
+                  },
+                  {
+                    "name": "PromptOptions",
+                    "impls": [ { "methods": [ "default" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "PromptPlugin",
+                    "impls": [],
+                    "methods": [ "close", "new", "render", "show" ]
+                  },
+                  {
+                    "name": "PromptPluginState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "PromptValidator",
+                    "impls": [],
+                    "methods": [ "new", "to_string" ]
+                  }
+                ],
+                "typealias": [],
+                "values": [ "comp_esc_listener" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "node",
+              "package": {
+                "path": "tiye/respo/lib/node",
+                "readme": false,
+                "traits": [
+                  { "name": "@tiye/respo/lib/node.RespoAction", "impls": [] },
+                  { "name": "@tiye/respo/lib/node.RespoEffect", "impls": [] }
+                ],
+                "types": [
+                  {
+                    "name": "AnchorElementTarget",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "ChildDomOp",
+                    "impls": [],
+                    "methods": [ "to_cirru" ]
+                  },
+                  {
+                    "name": "CssBackgroundSize",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssBorder",
+                    "impls": [],
+                    "methods": [ "new", "to_string" ]
+                  },
+                  {
+                    "name": "CssBorderStyle",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssBoxSizing",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssColor",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssContentVisibility",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssCursor",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssDisplay",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssDuration",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFilter",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFlexAlignContent",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFlexAlignItems",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFlexDirection",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFlexJustifyContent",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFlexWrap",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssFontWeight",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssLineHeight",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssObjectFit",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssOutline",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssOverflow",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssOverscrollBehavior",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssPosition",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssSize",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssTextAlign",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssTextDecoration",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssTextOverflow",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssTimingFunction",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssTransform",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssUserSelect",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssVerticalAlign",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "CssWordBreak",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "DispatchFn",
+                    "impls": [],
+                    "methods": [
+                      "new", "run", "run_empty_state", "run_state",
+                      "to_string"
+                    ]
+                  },
+                  {
+                    "name": "DomChange",
+                    "impls": [],
+                    "methods": [ "get_dom_path", "to_cirru" ]
+                  },
+                  {
+                    "name": "IframeElementLoading",
+                    "impls": [],
+                    "methods": []
+                  },
+                  { "name": "ImgElementLoading", "impls": [], "methods": [] },
+                  {
+                    "name": "RespoCommonError",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  {
+                    "name": "RespoComponent",
+                    "impls": [],
+                    "methods": [ "named", "op_equal", "to_cirru", "to_node" ]
+                  },
+                  {
+                    "name": "RespoCoord",
+                    "impls": [],
+                    "methods": [ "output", "to_cirru", "to_string" ]
+                  },
+                  {
+                    "name": "RespoEffectBox",
+                    "impls": [],
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "name": "RespoEffectType",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_cirru", "to_string" ]
+                  },
+                  {
+                    "name": "RespoElement",
+                    "impls": [],
+                    "methods": [
+                      "op_equal", "set_attribute", "to_cirru", "to_node",
+                      "to_string"
+                    ]
+                  },
+                  {
+                    "name": "RespoEvent",
+                    "impls": [],
+                    "methods": [ "to_string" ]
+                  },
+                  { "name": "RespoEventMark", "impls": [], "methods": [] },
+                  {
+                    "name": "RespoEventType",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] }
+                    ],
+                    "methods": [ "to_cirru", "to_string" ]
+                  },
+                  {
+                    "name": "RespoIndexKey",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": [ "to_cirru", "to_string" ]
+                  },
+                  {
+                    "name": "RespoNode",
+                    "impls": [],
+                    "methods": [ "op_equal", "to_cirru" ]
+                  },
+                  {
+                    "name": "RespoStyle",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "op_equal" ] }
+                    ],
+                    "methods": [ "add", "is_empty", "merge", "to_string" ]
+                  },
+                  {
+                    "name": "TextareaElementAutoComplete",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "VideoElementPreload",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [
+                  "a", "attach_event", "br", "build_dom_tree", "button",
+                  "canvas", "code", "collect_effects_inside_out_as",
+                  "collect_effects_outside_in_as", "coord_path_to_cirru",
+                  "create_element", "declare_contained_style",
+                  "declare_static_style", "diff_tree", "div", "div_listed",
+                  "dom_path_to_cirru", "iframe", "img", "indexes_to_cirru",
+                  "input", "load_coord_target_tree", "p", "patch_tree",
+                  "pre", "raf_loop", "respo_attrs", "respo_style", "space",
+                  "span", "str_spaced", "text_node", "textarea", "video"
+                ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "tiye/respo/main",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "ActionOp", "impls": [], "methods": [] },
+              {
+                "name": "MainState",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "PanelMount",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "PanelState",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Store",
+                "impls": [
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Task",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TaskState",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TaskUpdateEffect",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TodolistState",
+                "impls": [
+                  { "methods": [ "default" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

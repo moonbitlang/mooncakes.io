@@ -49,21 +49,13 @@ $ ./scripts/add.sh '{"a": 20, "b": 21}'
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,17:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a> with output(<a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,17:::fn <a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a>::output(<a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/moonbit-pdk/examples/add/traits.mbt,85:::fn <a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,17:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,17:::fn output(<a href="gmlewis/moonbit-pdk/examples/add#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Sum
 
@@ -74,16 +66,13 @@ $ ./scripts/add.sh '{"a": 20, "b": 21}'
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,34:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/moonbit-pdk/examples/add#Sum">Sum</a> with to_json(<a href="gmlewis/moonbit-pdk/examples/add#Sum">Sum</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,34:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/moonbit-pdk/examples/add#Sum">Sum</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,34:::fn <a href="gmlewis/moonbit-pdk/examples/add#Sum">Sum</a>::to_json(<a href="gmlewis/moonbit-pdk/examples/add#Sum">Sum</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/moonbit-pdk/examples/add/add.mbt,34:::fn to_json(<a href="gmlewis/moonbit-pdk/examples/add#Sum">Sum</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## add
 

@@ -1,0 +1,29 @@
+{
+  "name": "Lampese",
+  "package": null,
+  "childs": [
+    {
+      "name": "moonbit-chalk",
+      "package": {
+        "path": "Lampese/moonbit-chalk",
+        "readme": false,
+        "traits": [],
+        "types": [
+          { "name": "BackGroundColors", "impls": [], "methods": [] },
+          {
+            "name": "Chalk",
+            "impls": [],
+            "methods": [ "background", "color", "modifier", "render" ]
+          },
+          { "name": "Colors", "impls": [], "methods": [] },
+          { "name": "Modifier", "impls": [], "methods": [] },
+          { "name": "Render", "impls": [], "methods": [] }
+        ],
+        "typealias": [],
+        "values": [ "chalk" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

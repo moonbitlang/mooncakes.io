@@ -138,7 +138,6 @@ Like other sequential containers, set also has iterative methods such as `iter`,
 |Type|description|
 |---|---|
 |[T](#T)||
-|[SplitBis](#SplitBis)||
 
 ## T
 
@@ -150,37 +149,69 @@ Like other sequential containers, set also has iterative methods such as `iter`,
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,575:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[X]
+  :::source,moonbitlang/core/immut/sorted_set/generic.mbt,64:::impl[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/generic.mbt,64:::fn compare[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/generic.mbt,64:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with compare[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Int
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,26:::impl[A] <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,26:::fn default[A]() -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,26:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with default[A]() -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+  :::source,moonbitlang/core/immut/sorted_set/generic.mbt,48:::impl[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/generic.mbt,48:::fn op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,548:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,764:::impl[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>] <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,764:::fn hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,762:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,531:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,531:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/generic.mbt,48:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,536:::impl[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>] <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,536:::fn to_json[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,529:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,550:::impl[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,550:::fn from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,534:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a> with to_json[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,577:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/sorted_set#T">T</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,577:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -197,7 +228,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### all
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,478:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::all[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Bool) -> Bool
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,480:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::all[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Bool) -> Bool
   ```
   > 
   >  Test if all values of the ImmutableSet satisfy the predicate.
@@ -209,7 +240,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### any
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,493:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::any[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Bool) -> Bool
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,495:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::any[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Bool) -> Bool
   ```
   > 
   >  Checks if at least one element of the set satisfies the predicate.
@@ -219,30 +250,15 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
   >  assert_eq!(@sorted_set.of([1, 4, 3]).any(fn(v) { v % 2 == 0}), true)
   >  ```
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,575:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[X]
-  ```
-  > 
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/generic.mbt,64:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::compare[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Int
-  ```
-  > 
 - #### contains
   ```moonbit
   :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,262:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::contains[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], value : A) -> Bool
   ```
   > 
   >  Return true if value contain in sorted\_set
-- #### default
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,26:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::default[A]() -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
-  ```
-  > 
 - #### diff
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,340:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::diff[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,342:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::diff[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
   >  Returns the difference between self and other.
@@ -254,9 +270,10 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
   >  
   >  @alert deprecated "Use `difference` instead"
+  > @coverage.skip
 - #### difference
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,352:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::difference[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,354:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::difference[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
   >  Returns the difference between self and other.
@@ -268,7 +285,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### disjoint
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,402:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::disjoint[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,404:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::disjoint[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
   ```
   > 
   >  Returns true if the two sets do not intersect.
@@ -280,7 +297,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### each
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,427:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::each[A](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Unit) -> Unit
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,429:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::each[A](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Unit) -> Unit
   ```
   > 
   >  Iterates over the ImmutableSet.
@@ -294,7 +311,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### filter
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,508:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::filter[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Bool) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,510:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::filter[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> Bool) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
   >  Filter the ImmutableSet.
@@ -306,7 +323,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### fold
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,446:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::fold[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], init~ : B, f : (B, A) -> B) -> B
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,448:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::fold[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], init~ : B, f : (B, A) -> B) -> B
   ```
   > 
   >  Fold the ImmutableSet.
@@ -329,28 +346,19 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   > 
 - #### from\_json
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,568:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > 
-- #### hash
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/traits.mbt,40:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,762:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,570:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
   ```
   > 
 - #### inter
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,307:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::inter[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,308:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::inter[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
   >  @alert deprecated "Use `intersection` instead"
+  > @coverage.skip
 - #### intersection
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,319:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::intersection[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,320:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::intersection[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
   >  Returns the intersection of self with other.
@@ -373,7 +381,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   > 
 - #### map
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,462:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::map[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> B) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[B]
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,464:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::map[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, B : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], f : (A) -> B) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[B]
   ```
   > 
   >  Maps the ImmutableSet.
@@ -430,17 +438,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   > 
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,753:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::of[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/generic.mbt,48:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,529:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,755:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::of[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]
   ```
   > 
 - #### remove
@@ -476,7 +474,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  Returns the one-value ImmutableSet containing only `value`.
 - #### size
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,630:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::size[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Int
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,632:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::size[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Int
   ```
   > 
   >  Get the height of set.
@@ -499,7 +497,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
 - #### subset
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,372:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::subset[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,374:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::subset[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A], other : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> Bool
   ```
   > 
   >  Returns true if self is a subset of other.
@@ -517,12 +515,7 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  Convert ImmutableSet\[T\] to Array\[T\], the result must be ordered.
 - #### to\_json
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,543:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::to_json[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/traits.mbt,85:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/core/immut/sorted_set/immutable_set.mbt,545:::fn <a href="moonbitlang/core/immut/sorted_set#T">T</a>::to_json[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_set#T">T</a>[A]) -> <a href="moonbitlang/core/json#Json">Json</a>
   ```
   > 
 - #### union
@@ -537,13 +530,3 @@ Like other sequential containers, set also has iterative methods such as `iter`,
   >  ```
   >  assert_eq!(@sorted_set.of([3, 4, 5]).union(@sorted_set.of([4, 5, 6])), @sorted_set.of([3, 4, 5, 6]))
   >  ```
-
-## SplitBis
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_set/traits.mbt,85:::fn <a href="moonbitlang/core/immut/sorted_set#SplitBis">SplitBis</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

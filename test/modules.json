@@ -97,7 +97,7 @@
 		},
 		{
 			"name": "CMoonBack/computational-geometry",
-			"version": "0.2.0",
+			"version": "0.2.3",
 			"readme": "README.md",
 			"repository": "https://github.com/CMoonBack/Computational-geometry",
 			"license": "Apache-2.0",
@@ -107,8 +107,8 @@
 			],
 			"description": "computational geometry library in moonbit",
 			"source": "src",
-			"checksum": "13346c893f94b8435f649fcc9717fb6091808aaeea071f08cea8f5447dd8c209",
-			"created_at": "2024-12-23T16:49:28.776659+00:00"
+			"checksum": "1f9ff0649d17612a5b3eb68ad537612f1c63a8868340c32517a2e4a119c0a7bb",
+			"created_at": "2025-01-07T05:20:38.155085+00:00"
 		},
 		{
 			"name": "CMoonBack/string-Algorithm",
@@ -211,7 +211,7 @@
 		},
 		{
 			"name": "Lampese/moondata",
-			"version": "0.2.4",
+			"version": "0.2.6",
 			"deps": {
 				"moonbitlang/x": "0.4.16"
 			},
@@ -221,8 +221,8 @@
 			"keywords": [],
 			"description": "",
 			"source": "src",
-			"checksum": "80b928648e4b4a7f2459cb9e58b5ef31ba5ea4e3aa4397a821977026d45ff137",
-			"created_at": "2025-01-06T06:11:48.998097+00:00"
+			"checksum": "e8cc7b1952fc3037e40e264153236ac80fd6209d241e66cd0a5ff488d3a71af8",
+			"created_at": "2025-01-07T08:22:40.464243+00:00"
 		},
 		{
 			"name": "PegasusPlusUS/hello",
@@ -1667,7 +1667,7 @@
 		},
 		{
 			"name": "moonbitlang/core",
-			"version": "0.1.20241231+ba15a9a4e",
+			"version": "0.1.20250106+004e23479",
 			"readme": "README.md",
 			"repository": "https://github.com/moonbitlang/core",
 			"license": "Apache-2.0",
@@ -1675,8 +1675,8 @@
 				"core",
 				"standard library"
 			],
-			"checksum": "e0d3c9d6e4d590e207ea5744287b435a26b04ce19caaf0d0c30cc3dee790400a",
-			"created_at": "2024-12-31T06:32:05.752197+00:00"
+			"checksum": "fecd312cee81053c8f9370d0df423e3964248b41f90e0b4fe4cec986d7c03818",
+			"created_at": "2025-01-06T09:54:28.907500+00:00"
 		},
 		{
 			"name": "moonbitlang/quickcheck",
@@ -1941,7 +1941,7 @@
 		},
 		{
 			"name": "rami3l/cmark",
-			"version": "0.1.5",
+			"version": "0.2.0",
 			"deps": {},
 			"readme": "README.md",
 			"repository": "",
@@ -1950,8 +1950,8 @@
 			"description": "",
 			"source": "src",
 			"warn-list": "-15+15-24+24",
-			"checksum": "d5f50ba116ab1ac1c66c9c96feac4ae44ef48573db77a5a3cdc521856fd5b5bb",
-			"created_at": "2024-12-03T06:14:59.770562+00:00"
+			"checksum": "168f83a848dc9f8c43560c877be356906034ac75c9e6874760a6b72bf1caafb2",
+			"created_at": "2025-01-08T03:46:34.663585+00:00"
 		},
 		{
 			"name": "ruifeng/XMLParser",
@@ -1970,7 +1970,7 @@
 		},
 		{
 			"name": "smallbearrr/pandas",
-			"version": "0.1.9",
+			"version": "0.2.1",
 			"readme": "README.md",
 			"repository": "https://github.com/smallbearrr/pandas",
 			"license": "Apache-2.0",
@@ -1982,8 +1982,8 @@
 			],
 			"description": "",
 			"source": "src",
-			"checksum": "18241fe00364e66efc402f2d68d8aa607f099dafc890f06050dbb40f8c8c2694",
-			"created_at": "2025-01-03T11:51:35.165783+00:00"
+			"checksum": "715021e9684b008b60341f9a85877cb0378d30559651978d5842320a6e98aea9",
+			"created_at": "2025-01-08T02:14:38.940864+00:00"
 		},
 		{
 			"name": "suiyunonghen/datetime",

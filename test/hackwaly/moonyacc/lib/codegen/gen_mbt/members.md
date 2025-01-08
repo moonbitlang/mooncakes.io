@@ -20,25 +20,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a> with compare(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>) -> Int
+  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::fn compare(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>) -> Int
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a> with op_equal(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::fn <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>::compare(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::fn <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>::op_equal(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,23:::fn op_equal(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision">CodegenDecision</a>) -> Bool
+    ```
+    > automatically derived
 
 ## CodegenSymbol
 
@@ -49,25 +45,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a> with compare(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>) -> Int
+  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::fn compare(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>) -> Int
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a> with op_equal(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::fn <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>::compare(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::fn <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>::op_equal(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/gen_mbt/gen_mbt.mbt,6:::fn op_equal(<a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>, <a href="hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol">CodegenSymbol</a>) -> Bool
+    ```
+    > automatically derived
 
 ## Mode
 

@@ -1,0 +1,33 @@
+{
+  "name": "yangqing",
+  "package": null,
+  "childs": [
+    {
+      "name": "hello",
+      "package": {
+        "path": "yangqing/hello",
+        "readme": false,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [ "greeting" ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "yangqing/hello/lib",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "hello" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

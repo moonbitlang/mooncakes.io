@@ -30,13 +30,21 @@ concrete type is open.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>, <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>, <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -44,16 +52,6 @@ concrete type is open.
   :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,24:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>, <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,21:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_debug\_string
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/io/error/top.mbt,36:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>::to_debug_string(self : <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>) -> String
@@ -65,8 +63,3 @@ concrete type is open.
   > It may change across platforms, hosts, or other implementation
   > details. Parsing this string is a major platform-compatibility
   > hazard.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/error/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/error#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

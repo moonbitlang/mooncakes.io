@@ -94,8 +94,6 @@ println(map.iter())
 |Type|description|
 |---|---|
 |[T](#T)||
-|[Entry](#Entry)||
-|[MyString](#MyString)||
 
 ## T
 
@@ -117,20 +115,23 @@ println(map.iter())
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/hashmap/hashmap.mbt,266:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/hashmap#T">T</a> with arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/hashmap#T">T</a>[K, V]
+  :::source,moonbitlang/core/hashmap/utils.mbt,136:::impl[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/hashmap#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/hashmap/utils.mbt,136:::fn output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/hashmap#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/hashmap/utils.mbt,136:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/hashmap#T">T</a> with output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/hashmap#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/hashmap/hashmap.mbt,263:::impl[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/hashmap#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/hashmap/hashmap.mbt,266:::fn arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/hashmap#T">T</a>[K, V]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/hashmap/hashmap.mbt,266:::fn <a href="moonbitlang/core/hashmap#T">T</a>::arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/hashmap#T">T</a>[K, V]
-  ```
-  > 
 - #### capacity
   ```moonbit
   :::source,moonbitlang/core/hashmap/utils.mbt,100:::fn <a href="moonbitlang/core/hashmap#T">T</a>::capacity[K, V](self : <a href="moonbitlang/core/hashmap#T">T</a>[K, V]) -> Int
@@ -252,11 +253,6 @@ println(map.iter())
   :::source,moonbitlang/core/hashmap/hashmap.mbt,97:::fn <a href="moonbitlang/core/hashmap#T">T</a>::op_set[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/hashmap#T">T</a>[K, V], key : K, value : V) -> Unit
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/hashmap/utils.mbt,136:::fn <a href="moonbitlang/core/hashmap#T">T</a>::output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/hashmap#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### remove
   ```moonbit
   :::source,moonbitlang/core/hashmap/hashmap.mbt,196:::fn <a href="moonbitlang/core/hashmap#T">T</a>::remove[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/hashmap#T">T</a>[K, V], key : K) -> Unit
@@ -282,28 +278,3 @@ println(map.iter())
   ```
   > 
   >  Converts the map to an array.
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/hashmap/traits.mbt,85:::fn <a href="moonbitlang/core/hashmap#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## Entry
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/hashmap/traits.mbt,85:::fn <a href="moonbitlang/core/hashmap#Entry">Entry</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## MyString
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/hashmap/traits.mbt,85:::fn <a href="moonbitlang/core/hashmap#MyString">MyString</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

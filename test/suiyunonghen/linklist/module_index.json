@@ -1,0 +1,39 @@
+{
+  "name": "suiyunonghen",
+  "package": null,
+  "childs": [
+    {
+      "name": "linklist",
+      "package": {
+        "path": "suiyunonghen/linklist",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "LinkList",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": [
+              "add", "bringtofront", "clear", "contains", "default",
+              "drop_while", "filter", "find", "findNode", "from_array",
+              "from_iter", "iter", "lookup", "map", "new", "of", "op_get",
+              "peek", "pop", "push", "remove", "reverse_iter", "reverse_map",
+              "sendtoback", "shift", "to_string", "unshift", "unzip", "zip"
+            ]
+          },
+          {
+            "name": "Node",
+            "impls": [],
+            "methods": [
+              "findNode", "findNodeEx", "iter", "reverse_iter", "rfindNode",
+              "rfindNodeEx", "to_string", "value"
+            ]
+          }
+        ],
+        "typealias": [],
+        "values": [],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

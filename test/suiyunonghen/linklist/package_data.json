@@ -1,0 +1,264 @@
+{
+  "readme": "# moonbit的一个双向链表库\r\n\r\n## 使用 Usage\r\n```\r\nlet list: @linklist.LinkList[Int] = @linklist.LinkList::new().push(123).push(456).push(789)  \r\nlet last=list.peek()\r\nif last==789{\r\n    println(list.pop())\r\n}\r\nlist.remove(123)\r\nif list.shift()==456{\r\n    list.unshift(123)\r\n}\r\nlet _ = list.push(23).push(33).push(34)\r\nfor ele in list{\r\n    println(ele)\r\n}\r\n\r\nprintln(\"下面是反向迭代\")\r\nlet m = list.reverse_iter()\r\nfor str in m{\r\n  println(str)    \r\n}\r\n\r\nlet list = @linklist.LinkList::of([1,2,3,4,5,6,7,8,9])\r\nlet _ =list.drop_while(fn(value)->Bool{\r\n  value % 2 == 0\r\n})\r\nprintln(list)\r\nprintln(list[3])\r\n```",
+  "name": "suiyunonghen/linklist",
+  "traits": [],
+  "types": [
+    {
+      "name": "LinkList",
+      "docstring": "",
+      "signature": "pub struct LinkList {\n  length : Int\n  // private fields\n}",
+      "loc": { "line": 123, "column": 23 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::add[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T) -> Unit",
+          "loc": { "line": 176, "column": 8 }
+        },
+        {
+          "name": "bringtofront",
+          "docstring": " Move the first element found to the beginning of the linked list\n \n # Example\n\n ```\n let list = @linklist.LinkList::of([1,2,3,4,5,6,7,8,9])\n list.bringtofront(4,findFromHead=false)\n // 4<=>1<=>2<=>3<=>5<=>6<=>7<=>8<=>9\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::bringtofront[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T, findFromHead~ : Bool = ..) -> Unit",
+          "loc": { "line": 709, "column": 8 }
+        },
+        {
+          "name": "clear",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::clear[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> Unit",
+          "loc": { "line": 360, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": " Check if the linkList contains the value.",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::contains[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T) -> Bool",
+          "loc": { "line": 495, "column": 8 }
+        },
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::default[T]() -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 744, "column": 18 }
+        },
+        {
+          "name": "drop_while",
+          "docstring": " Drop the longest prefix of a LinkList of elements that satisfies a given predicate.\n\n # Example\n\n ```\n from_array([1, 2, 3, 4]).drop_while(fn(x) { x < 3 })\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::drop_while[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], f : (T) -> Bool) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 551, "column": 8 }
+        },
+        {
+          "name": "filter",
+          "docstring": " Filter the list.\n\n # Example\n\n ```\n println(of([1, 2, 3, 4, 5]).filter(fn(x){ x % 2 == 0}))\n // output: from_array([2, 4])\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::filter[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], f : (T) -> Bool) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 433, "column": 8 }
+        },
+        {
+          "name": "find",
+          "docstring": " Find the first element in the LinkList that satisfies f.\n\n # Example\n\n ```\n println(of([1, 3, 5, 8]).find(fn(element) -> Bool { element % 2 == 0}))\n // output: Some(8)\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::find[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], f : (T) -> Bool) -> T?",
+          "loc": { "line": 614, "column": 8 }
+        },
+        {
+          "name": "findNode",
+          "docstring": " Find the first elementNode in the LinkList that satisfies f.\n\n # Example\n\n ```\n let node5 = list.findNode(fn(value:Int)->Bool{\n     value==5\n   })\n   match node5{\n    Some(v)=>{\n      println(\"查到了内容\\{v},下面准备从这里开始往后迭代\")\n      for value in v{\n        println(value)\n      }\n      println(\"准备反向迭代\")\n      for value in v.reverse_iter(){\n        println(value)\n      }\n    }\n    None=>println(\"悟了\")\n  }\n // output: Some(8)\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::findNode[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], f : (T) -> Bool) -> <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]?",
+          "loc": { "line": 648, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": " Convert array to LinkList.\n\n # Example\n\n ```\n let ls = @LinkList::from_array([1, 2, 3, 4, 5])\n println(ls) // output: 1<=>2<=>3<=>4<=>5\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::from_array[T](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 196, "column": 18 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::from_iter[T](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 752, "column": 18 }
+        },
+        {
+          "name": "iter",
+          "docstring": " for ele in LinkList",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::iter[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]",
+          "loc": { "line": 316, "column": 8 }
+        },
+        {
+          "name": "lookup",
+          "docstring": " Looks up a key in an association LinkList.\n\n # Example\n\n ```\n let ls = from_array([(1, \"a\"), (2, \"b\"), (3, \"c\")])\n ls.lookup(3) // output: Some(\"c\")\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::lookup[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[(A, B)], value : A) -> B?",
+          "loc": { "line": 594, "column": 8 }
+        },
+        {
+          "name": "map",
+          "docstring": " Maps the list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[Int] = @linklist.LinkList::new()\n ..push(1)\n ..push(2)\n ..push(3)\n ..push(4)\n let lst = list.map(fn(v)->Int{v*2})\n // lst=[2,4,6,8]\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::map[A, B](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[A], f : (A) -> B) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[B]",
+          "loc": { "line": 388, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::new[T]() -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 129, "column": 18 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::of[T](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "loc": { "line": 759, "column": 18 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::op_get[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], index : Int) -> T?",
+          "loc": { "line": 137, "column": 8 }
+        },
+        {
+          "name": "peek",
+          "docstring": "Detecting tail data of linked list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[Int] = @linklist.LinkList::new()\n ..push(123)\n ..push(456)\n ..push(789)\n assert_eq!(list.peek(),Some(789))\n assert_eq!(list.peek(),Some(789))\n assert_eq!(list.length,3)\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::peek[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> T?",
+          "loc": { "line": 250, "column": 8 }
+        },
+        {
+          "name": "pop",
+          "docstring": "Pop up data from the end of the linked list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[Int] = @linklist.LinkList::new()\n ..push(123)\n ..push(456)\n ..push(789)\n assert_eq!(list.pop(),Some(789))\n assert_eq!(list.pop(),Some(456))\n assert_eq!(list.pop(),Some(123))\n assert_eq!(list.pop(),None)\n assert_eq!(list.length,0)\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::pop[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> T?",
+          "loc": { "line": 220, "column": 8 }
+        },
+        {
+          "name": "push",
+          "docstring": "Add data to the end of the linked list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[String] = @linklist.LinkList::new()\n ..push(\"test\")\n ..push(\"dxsoft\")\n ..push(\"data\")\n for str in list{\n   println(str)\n } \n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::push[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T) -> Unit",
+          "loc": { "line": 162, "column": 8 }
+        },
+        {
+          "name": "remove",
+          "docstring": " remove value from linkList",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::remove[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T) -> Bool",
+          "loc": { "line": 508, "column": 8 }
+        },
+        {
+          "name": "reverse_iter",
+          "docstring": " reverse iterator\n # Example\n\n ```\n let list: @linklist.LinkList[String] = @linklist.LinkList::new()\n ..push(\"反向\")\n ..push(\"迭代器\")\n let m = list.reverse_iter()\n for str in m{\n   println(str) \n ```\n }",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::reverse_iter[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]",
+          "loc": { "line": 344, "column": 8 }
+        },
+        {
+          "name": "reverse_map",
+          "docstring": " Reverse maps the list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[Int] = @linklist.LinkList::new()\n ..push(1)\n ..push(2)\n ..push(3)\n ..push(4)\n let lst = list.reverse_map(fn(v)->Int{v*2})\n // lst=8<=>6<=>4<=>2\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::reverse_map[A, B](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[A], f : (A) -> B) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[B]",
+          "loc": { "line": 413, "column": 8 }
+        },
+        {
+          "name": "sendtoback",
+          "docstring": " Move the first element found to the end of the linked list\n \n # Example\n\n ```\n let list = @linklist.LinkList::of([1,2,3,4,5,6,7,8,9])\n list.sendtoback(8,findFromEnd=true)\n // 1<=>2<=>3<=>4<=>5<=>6<=>7<=>9<=>8\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::sendtoback[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T, findFromEnd~ : Bool = ..) -> Unit",
+          "loc": { "line": 664, "column": 8 }
+        },
+        {
+          "name": "shift",
+          "docstring": "Pop up data from the head of the linked list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[Int] = @linklist.LinkList::new()\n ..push(123)\n ..push(456)\n ..push(789)\n assert_eq!(list.shift(),Some(123))\n assert_eq!(list.shift(),Some(456))\n assert_eq!(list.shift(),Some(789))\n assert_eq!(list.shift(),None)\n assert_eq!(list.length,0)\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::shift[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> T?",
+          "loc": { "line": 272, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::to_string[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](xs : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]) -> String",
+          "loc": { "line": 184, "column": 18 }
+        },
+        {
+          "name": "unshift",
+          "docstring": "Insert data to the head of the linked list.\n\n # Example\n\n ```\n let list: @linklist.LinkList[String] = @linklist.LinkList::new()\n ..unshift(\"test\")\n ..unshift(\"dxsoft\")\n ..unshift(\"data\")\n for str in list{\n   println(str)\n } \n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::unshift[T](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], value : T) -> Unit",
+          "loc": { "line": 301, "column": 8 }
+        },
+        {
+          "name": "unzip",
+          "docstring": " Unzip two linkLists.\n\n # Example\n\n ```\n let (a,b) = unzip(from_array([(1,2),(3,4),(5,6)]))\n println(a) // output: from_array([1, 3, 5])\n println(b) // output: from_array([2, 4, 6])\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::unzip[A, B](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[(A, B)]) -> (<a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[A], <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[B])",
+          "loc": { "line": 481, "column": 8 }
+        },
+        {
+          "name": "zip",
+          "docstring": " Zip two LinkList.\n If the lists have different lengths, it will return None.\n\n # Example\n\n ```\n let r = zip(of[1, 2, 3, 4, 5]), of([6, 7, 8, 9, 10]))\n println(r) // output: Some((1, 6)<=>(2, 7)<=>(3, 8)<=>(4, 9)<=>(5, 10))\n ```",
+          "signature": "fn <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>::zip[A, B](self : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[A], other : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[B]) -> <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[(A, B)]?",
+          "loc": { "line": 456, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](xs : <a href=\"suiyunonghen/linklist#LinkList\">LinkList</a>[T], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 180, "column": 46 }
+            }
+          ],
+          "loc": { "line": 180, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Node",
+      "docstring": "",
+      "signature": "type Node",
+      "loc": { "line": 15, "column": 8 },
+      "methods": [
+        {
+          "name": "findNode",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::findNode[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T], value : T) -> <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]?",
+          "loc": { "line": 29, "column": 14 }
+        },
+        {
+          "name": "findNodeEx",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::findNodeEx[T](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T], f : (T) -> Bool) -> <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]?",
+          "loc": { "line": 44, "column": 14 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::iter[T](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]",
+          "loc": { "line": 89, "column": 8 }
+        },
+        {
+          "name": "reverse_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::reverse_iter[T](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]",
+          "loc": { "line": 107, "column": 8 }
+        },
+        {
+          "name": "rfindNode",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::rfindNode[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T], value : T) -> <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]?",
+          "loc": { "line": 59, "column": 14 }
+        },
+        {
+          "name": "rfindNodeEx",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::rfindNodeEx[T](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T], f : (T) -> Bool) -> <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]?",
+          "loc": { "line": 74, "column": 14 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::to_string[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]) -> String",
+          "loc": { "line": 25, "column": 8 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/linklist#Node\">Node</a>::value[T](self : <a href=\"suiyunonghen/linklist#Node\">Node</a>[T]) -> T",
+          "loc": { "line": 21, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

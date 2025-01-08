@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "yangqing/hello/lib",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "hello",
+      "docstring": "",
+      "signature": "fn hello() -> String",
+      "loc": { "line": 1, "column": 8 }
+    }
+  ],
+  "misc": []
+}

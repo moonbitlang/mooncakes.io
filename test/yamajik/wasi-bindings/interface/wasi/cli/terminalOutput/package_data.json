@@ -1,0 +1,52 @@
+{
+  "readme": "Terminal output.\n\nIn the future, this may include functions for querying the terminal\nsize, being notified of terminal size changes, querying supported\nfeatures, and so on.",
+  "name": "yamajik/wasi-bindings/interface/wasi/cli/terminalOutput",
+  "traits": [],
+  "types": [
+    {
+      "name": "TerminalOutput",
+      "docstring": " The output side of a terminal.",
+      "signature": "pub(all) type TerminalOutput Int",
+      "loc": { "line": 3, "column": 15 },
+      "methods": [
+        {
+          "name": "drop",
+          "docstring": " Drops a resource handle.",
+          "signature": "fn <a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>::drop(self : <a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>) -> Unit",
+          "loc": { "line": 6, "column": 24 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>, <a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>) -> Bool",
+              "loc": { "line": 3, "column": 47 }
+            }
+          ],
+          "loc": { "line": 3, "column": 47 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi-bindings/interface/wasi/cli/terminalOutput#TerminalOutput\">TerminalOutput</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 3, "column": 41 }
+            }
+          ],
+          "loc": { "line": 3, "column": 41 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

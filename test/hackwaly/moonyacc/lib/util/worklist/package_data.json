@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "hackwaly/moonyacc/lib/util/worklist",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "process",
+      "docstring": "",
+      "signature": "fn process[T](worklist : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T], f : (T, (T) -> Unit) -> Unit) -> Unit",
+      "loc": { "line": 2, "column": 8 }
+    }
+  ],
+  "misc": []
+}

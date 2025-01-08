@@ -1,0 +1,1085 @@
+{
+  "readme": "",
+  "name": "moonbitlang/quickcheck/lib",
+  "traits": [
+    {
+      "name": "@moonbitlang/quickcheck/lib.Shrink",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/quickcheck/lib.Shrink {\n  shrink(Self) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Self]\n}",
+      "loc": { "line": 1, "column": 1 },
+      "default_impls": [
+        {
+          "name": "shrink",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Shrink\">Shrink</a> with shrink(_a : Self) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Self]",
+          "loc": { "line": 5, "column": 1 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "@moonbitlang/quickcheck/lib.Testable",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/quickcheck/lib.Testable {\n  property(Self) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>\n}",
+      "loc": { "line": 52, "column": 1 },
+      "default_impls": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for Unit",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property(_self : Unit) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 70, "column": 33 }
+            }
+          ],
+          "loc": { "line": 70, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for Bool",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property(self : Bool) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 83, "column": 33 }
+            }
+          ],
+          "loc": { "line": 83, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>] <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for P?",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](self : P?) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 93, "column": 45 }
+            }
+          ],
+          "loc": { "line": 93, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property(self : <a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 75, "column": 36 }
+            }
+          ],
+          "loc": { "line": 75, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Arrow",
+      "docstring": "",
+      "signature": "type Arrow",
+      "loc": { "line": 5, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>, A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/quickcheck/lib#Shrink\">Shrink</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/lib#Arrow\">Arrow</a>[A, P]",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>, A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/quickcheck/lib#Shrink\">Shrink</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/quickcheck/lib#Arrow\">Arrow</a>[A, P]) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 99, "column": 8 }
+            }
+          ],
+          "loc": { "line": 96, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Axiom",
+      "docstring": "",
+      "signature": "type Axiom",
+      "loc": { "line": 47, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>::new[T](run_axiom : (T) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>[T]",
+          "loc": { "line": 51, "column": 15 }
+        },
+        {
+          "name": "run",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>::run[T](self : <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>[T], x : T) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]",
+          "loc": { "line": 55, "column": 15 }
+        },
+        {
+          "name": "to_property",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>::to_property[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>[T], cong : (T) -> U, eq : (U, U) -> Bool) -> ((T) -> Bool)",
+          "loc": { "line": 59, "column": 8 }
+        },
+        {
+          "name": "to_property_eq",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>::to_property_eq[T, U : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>[T], cong : (T) -> U) -> ((T) -> Bool)",
+          "loc": { "line": 67, "column": 8 }
+        },
+        {
+          "name": "to_property_parametric",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>::to_property_parametric[T, M, N](self : <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>[T], cong : (T, M) -> N, eq : (N, N) -> Bool) -> (((T, M)) -> Bool)",
+          "loc": { "line": 74, "column": 8 }
+        },
+        {
+          "name": "to_property_parametric_eq",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>::to_property_parametric_eq[T, M, N : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/quickcheck/lib#Axiom\">Axiom</a>[T], cong : (T, M) -> N) -> (((T, M)) -> Bool)",
+          "loc": { "line": 82, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Callback",
+      "docstring": "",
+      "signature": "type Callback",
+      "loc": { "line": 20, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/lib#Callback\">Callback</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/quickcheck/lib#Callback\">Callback</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 23, "column": 10 }
+            }
+          ],
+          "loc": { "line": 23, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Config",
+      "docstring": " Configuration for initializing a test runner.",
+      "signature": "type Config",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Coverage",
+      "docstring": "",
+      "signature": "type Coverage",
+      "loc": { "line": 215, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Discard",
+      "docstring": "",
+      "signature": "type Discard",
+      "loc": { "line": 57, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/lib#Discard\">Discard</a>",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property(_self : <a href=\"moonbitlang/quickcheck/lib#Discard\">Discard</a>) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 65, "column": 36 }
+            }
+          ],
+          "loc": { "line": 65, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Equivalence",
+      "docstring": "",
+      "signature": "type Equivalence",
+      "loc": { "line": 1, "column": 8 },
+      "methods": [
+        {
+          "name": "ap",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>::ap[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[(T) -> U], other : <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[U]",
+          "loc": { "line": 26, "column": 21 }
+        },
+        {
+          "name": "bind",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>::bind[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T], f : (T) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[U]) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[U]",
+          "loc": { "line": 17, "column": 21 }
+        },
+        {
+          "name": "equal_by",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>::equal_by[T](self : <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T], eq : (T, T) -> Bool) -> Bool",
+          "loc": { "line": 43, "column": 8 }
+        },
+        {
+          "name": "fmap",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>::fmap[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T], f : (T) -> U) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[U]",
+          "loc": { "line": 10, "column": 21 }
+        },
+        {
+          "name": "is_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>::is_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]) -> Bool",
+          "loc": { "line": 39, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>::new[T](lhs : T, rhs : T) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]",
+          "loc": { "line": 6, "column": 21 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 4, "column": 10 }
+            }
+          ],
+          "loc": { "line": 4, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Gen",
+      "docstring": " The Gen type represents a generator of values of type T.",
+      "signature": "type Gen",
+      "loc": { "line": 4, "column": 8 },
+      "methods": [
+        {
+          "name": "ap",
+          "docstring": " Applicative Functor instance for Gen[T]",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::ap[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[(T) -> U], v : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U]",
+          "loc": { "line": 75, "column": 8 }
+        },
+        {
+          "name": "array_with_size",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::array_with_size[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], size : Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[T]]",
+          "loc": { "line": 446, "column": 8 }
+        },
+        {
+          "name": "bind",
+          "docstring": " Monad instance for Gen[T]",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::bind[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], f : (T) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U]",
+          "loc": { "line": 80, "column": 8 }
+        },
+        {
+          "name": "feat_random",
+          "docstring": " Generate a value from an enumerable instance (up to a size bound)\n @alert unsafe \"Experimental: May cause stack overflow\"",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::feat_random[T : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">@moonbitlang/quickcheck/lib/feat.Enumerable</a>](size : Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 20, "column": 13 }
+        },
+        {
+          "name": "fmap",
+          "docstring": " Functor instance for Gen[T] (fmap)",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::fmap[T, U](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], f : (T) -> U) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U]",
+          "loc": { "line": 70, "column": 8 }
+        },
+        {
+          "name": "join",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::join[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 90, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " Create a new generator from a function",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::new[T](gen : (Int, <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> T) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 9, "column": 13 }
+        },
+        {
+          "name": "resize",
+          "docstring": " Resize a generator to a specific value",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::resize[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], size : Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 222, "column": 8 }
+        },
+        {
+          "name": "run",
+          "docstring": " Run a generator with a size and random state",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::run[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], i : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> T",
+          "loc": { "line": 25, "column": 13 }
+        },
+        {
+          "name": "sample",
+          "docstring": " Generate a value from a generator",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::sample[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], size~ : Int = .., seed~ : UInt64 = ..) -> T",
+          "loc": { "line": 30, "column": 13 }
+        },
+        {
+          "name": "samples",
+          "docstring": " Generate an array of samples from a generator",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::samples[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], size~ : Int = .., seed~ : UInt64 = ..) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+          "loc": { "line": 40, "column": 13 }
+        },
+        {
+          "name": "scale",
+          "docstring": " Adjust the size parameter of a generator",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::scale[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], f : (Int) -> Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 217, "column": 8 }
+        },
+        {
+          "name": "spawn",
+          "docstring": " Spawn a new generator from an arbitrary instance",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::spawn[T : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>]() -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 14, "column": 13 }
+        },
+        {
+          "name": "such_that",
+          "docstring": " Generate a value that satisfies a predicate",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::such_that[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], pred : (T) -> Bool) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+          "loc": { "line": 246, "column": 8 }
+        },
+        {
+          "name": "such_that_maybe",
+          "docstring": " Attempt to generate a value that satisfies a predicate\n If failures reach the maximum size, return None",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>::such_that_maybe[T](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], pred : (T) -> Bool) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T?]",
+          "loc": { "line": 228, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>] <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[P]",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](self : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[P]) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 88, "column": 49 }
+            }
+          ],
+          "loc": { "line": 88, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "InternalError",
+      "docstring": "",
+      "signature": "type InternalError",
+      "loc": { "line": 2, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Kind",
+      "docstring": "",
+      "signature": "type Kind",
+      "loc": { "line": 26, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/lib#Kind\">Kind</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/quickcheck/lib#Kind\">Kind</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 29, "column": 10 }
+            }
+          ],
+          "loc": { "line": 29, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ListCompare",
+      "docstring": "",
+      "signature": "type ListCompare",
+      "loc": { "line": 194, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/quickcheck/lib#ListCompare\">ListCompare</a>[T]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](<a href=\"moonbitlang/quickcheck/lib#ListCompare\">ListCompare</a>[T], <a href=\"moonbitlang/quickcheck/lib#ListCompare\">ListCompare</a>[T]) -> Bool",
+              "loc": { "line": 194, "column": 36 }
+            }
+          ],
+          "loc": { "line": 194, "column": 36 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/lib#ListCompare\">ListCompare</a>[T]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"moonbitlang/quickcheck/lib#ListCompare\">ListCompare</a>[T], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 194, "column": 40 }
+            }
+          ],
+          "loc": { "line": 194, "column": 40 }
+        }
+      ]
+    },
+    {
+      "name": "Outcome",
+      "docstring": "",
+      "signature": "pub(all) enum Outcome {\n  Success\n  GaveUp\n  Fail(T)\n}",
+      "loc": { "line": 1, "column": 15 },
+      "methods": [
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Outcome\">Outcome</a>::output[T](self : <a href=\"moonbitlang/quickcheck/lib#Outcome\">Outcome</a>[T], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 15, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Outcome\">Outcome</a>::to_string[T](self : <a href=\"moonbitlang/quickcheck/lib#Outcome\">Outcome</a>[T]) -> String",
+          "loc": { "line": 7, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Printer",
+      "docstring": "",
+      "signature": "type Printer",
+      "loc": { "line": 3, "column": 8 },
+      "methods": [
+        {
+          "name": "format",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>::format(self : <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>, str : String) -> String",
+          "loc": { "line": 22, "column": 8 }
+        },
+        {
+          "name": "from_buffer",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>::from_buffer(buf : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>) -> <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>",
+          "loc": { "line": 10, "column": 17 }
+        },
+        {
+          "name": "ident",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>::ident(self : <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>, size~ : Int = ..) -> Unit",
+          "loc": { "line": 14, "column": 8 }
+        },
+        {
+          "name": "unident",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>::unident(self : <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>) -> Unit",
+          "loc": { "line": 18, "column": 8 }
+        },
+        {
+          "name": "write_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>::write_string(self : <a href=\"moonbitlang/quickcheck/lib#Printer\">Printer</a>, str : String) -> Unit",
+          "loc": { "line": 30, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Property",
+      "docstring": "",
+      "signature": "type Property",
+      "loc": { "line": 37, "column": 8 },
+      "methods": [
+        {
+          "name": "make",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>::make(property : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]]) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+          "loc": { "line": 42, "column": 18 }
+        },
+        {
+          "name": "run_prop",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>::run_prop(self : <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]]",
+          "loc": { "line": 47, "column": 18 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property(self : <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 62, "column": 37 }
+            }
+          ],
+          "loc": { "line": 62, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Replay",
+      "docstring": "",
+      "signature": "pub(all) struct Replay {\n  rand_state : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>\n  size : Int\n}",
+      "loc": { "line": 19, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#Replay\">Replay</a>::new(rand_state : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>, size : Int) -> <a href=\"moonbitlang/quickcheck/lib#Replay\">Replay</a>",
+          "loc": { "line": 24, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "SingleResult",
+      "docstring": "",
+      "signature": "type SingleResult",
+      "loc": { "line": 28, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 43, "column": 10 }
+            }
+          ],
+          "loc": { "line": 43, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>",
+          "methods": [
+            {
+              "name": "property",
+              "docstring": "",
+              "signature": "fn property(self : <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+              "loc": { "line": 78, "column": 41 }
+            }
+          ],
+          "loc": { "line": 78, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "State",
+      "docstring": " Internal State of Compiler",
+      "signature": "type State",
+      "loc": { "line": 35, "column": 8 },
+      "methods": [
+        {
+          "name": "complete_test",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#State\">State</a>::complete_test(self : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, _prop : <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>) -> <a href=\"moonbitlang/quickcheck/lib#TestSuccess\">TestSuccess</a>!<a href=\"moonbitlang/quickcheck/lib#TestError\">TestError</a>",
+          "loc": { "line": 95, "column": 8 }
+        },
+        {
+          "name": "find_failure",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#State\">State</a>::find_failure(self : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, res : <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>, ts : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]]) -> <a href=\"moonbitlang/quickcheck/lib#TestSuccess\">TestSuccess</a>!<a href=\"moonbitlang/quickcheck/lib#TestError\">TestError</a>",
+          "loc": { "line": 185, "column": 8 }
+        },
+        {
+          "name": "give_up",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#State\">State</a>::give_up(self : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, _prop : <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>) -> <a href=\"moonbitlang/quickcheck/lib#TestSuccess\">TestSuccess</a>!<a href=\"moonbitlang/quickcheck/lib#TestError\">TestError</a>",
+          "loc": { "line": 114, "column": 8 }
+        },
+        {
+          "name": "local_min",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#State\">State</a>::local_min(self : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, res : <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>, ts : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]]) -> (Int, Int, Int, <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>)",
+          "loc": { "line": 218, "column": 8 }
+        },
+        {
+          "name": "run_single_test",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#State\">State</a>::run_single_test(self : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, prop : <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>) -> <a href=\"moonbitlang/quickcheck/lib#TestSuccess\">TestSuccess</a>!<a href=\"moonbitlang/quickcheck/lib#TestError\">TestError</a>",
+          "loc": { "line": 133, "column": 8 }
+        },
+        {
+          "name": "run_test",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib#State\">State</a>::run_test(self : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, prop : <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>) -> <a href=\"moonbitlang/quickcheck/lib#TestSuccess\">TestSuccess</a>!<a href=\"moonbitlang/quickcheck/lib#TestError\">TestError</a>",
+          "loc": { "line": 84, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "TestError",
+      "docstring": "",
+      "signature": "type TestError",
+      "loc": { "line": 2, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "TestSuccess",
+      "docstring": "",
+      "signature": "type TestSuccess",
+      "loc": { "line": 32, "column": 6 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "RandomState",
+      "docstring": "",
+      "signature": "type RandomState = <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>",
+      "loc": { "line": 1, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "alphabet",
+      "docstring": " Generates alphabet",
+      "signature": "fn alphabet() -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Char]",
+      "loc": { "line": 391, "column": 8 }
+    },
+    {
+      "name": "associative",
+      "docstring": " Associative binary operation.",
+      "signature": "fn associative[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A, A) -> A) -> (((A, A, A)) -> Bool)",
+      "loc": { "line": 41, "column": 8 }
+    },
+    {
+      "name": "callback",
+      "docstring": "",
+      "signature": "fn callback[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, cb : <a href=\"moonbitlang/quickcheck/lib#Callback\">Callback</a>) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 160, "column": 8 }
+    },
+    {
+      "name": "char_range",
+      "docstring": " Generate char within given range [lo, hi]",
+      "signature": "fn char_range(lo : Char, hi : Char) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Char]",
+      "loc": { "line": 424, "column": 8 }
+    },
+    {
+      "name": "classify",
+      "docstring": " Classifies a test case based on a condition",
+      "signature": "fn classify[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, cond : Bool, s : String) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 175, "column": 8 }
+    },
+    {
+      "name": "collect",
+      "docstring": " Attaches a label (Show) to a test case",
+      "signature": "fn collect[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>, T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](p : P, t : T) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 170, "column": 8 }
+    },
+    {
+      "name": "commutative",
+      "docstring": " Commutative binary operation.",
+      "signature": "fn commutative[A, B : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A, A) -> B) -> (((A, A)) -> Bool)",
+      "loc": { "line": 36, "column": 8 }
+    },
+    {
+      "name": "counterexample",
+      "docstring": " Adds a string to the counterexample if the property fails",
+      "signature": "fn counterexample[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, s : String) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 183, "column": 8 }
+    },
+    {
+      "name": "distributive_left",
+      "docstring": " Distributive binary operation over left",
+      "signature": "fn distributive_left[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A, A) -> A, g : (A, A) -> A) -> (((A, A, A)) -> Bool)",
+      "loc": { "line": 46, "column": 8 }
+    },
+    {
+      "name": "distributive_right",
+      "docstring": " Distributive binary operation over right",
+      "signature": "fn distributive_right[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A, A) -> A, g : (A, A) -> A) -> (((A, A, A)) -> Bool)",
+      "loc": { "line": 54, "column": 8 }
+    },
+    {
+      "name": "expect_fail",
+      "docstring": "",
+      "signature": "fn expect_fail[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 244, "column": 8 }
+    },
+    {
+      "name": "expect_gave_up",
+      "docstring": "",
+      "signature": "fn expect_gave_up[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 249, "column": 8 }
+    },
+    {
+      "name": "ext_equal",
+      "docstring": " Extensional equality for function.",
+      "signature": "fn ext_equal[A, B : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A) -> B, g : (A) -> B) -> ((A) -> Bool)",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "failed",
+      "docstring": "",
+      "signature": "fn failed() -> <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>",
+      "loc": { "line": 49, "column": 8 }
+    },
+    {
+      "name": "filter",
+      "docstring": " Filters a property based on a condition",
+      "signature": "fn filter[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, cond : Bool) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 189, "column": 8 }
+    },
+    {
+      "name": "flatten_array",
+      "docstring": " Generate an array of elements from individual generators",
+      "signature": "fn flatten_array[T](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[T]]",
+      "loc": { "line": 308, "column": 8 }
+    },
+    {
+      "name": "flatten_list",
+      "docstring": " Generate a list of elements from individual generators",
+      "signature": "fn flatten_list[T](lst : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[<a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]]",
+      "loc": { "line": 300, "column": 8 }
+    },
+    {
+      "name": "flatten_option",
+      "docstring": " Generate an option from an optional generator",
+      "signature": "fn flatten_option[T](opt : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]?) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T?]",
+      "loc": { "line": 315, "column": 8 }
+    },
+    {
+      "name": "flatten_result",
+      "docstring": " Generate a result of a generator or return the pure error",
+      "signature": "fn flatten_result[T, E](res : <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], E]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]]",
+      "loc": { "line": 323, "column": 8 }
+    },
+    {
+      "name": "forall",
+      "docstring": " Run with an explicit generator",
+      "signature": "fn forall[T : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>, A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](gen : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], f : (A) -> T) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 197, "column": 8 }
+    },
+    {
+      "name": "forall_shrink",
+      "docstring": "",
+      "signature": "fn forall_shrink[T : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>, A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](gen : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], shrinker : (A) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A], f : (A) -> T) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 202, "column": 8 }
+    },
+    {
+      "name": "frequency",
+      "docstring": " Chooses one of the given generators, with a weighted random distribution.\n @alert unsafe \"Panics if the array is empty or total weight is less than one\"",
+      "signature": "fn frequency[T](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int, <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T])]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 259, "column": 8 }
+    },
+    {
+      "name": "frequency_list",
+      "docstring": " Chooses one of the given generators, with a weighted random distribution.\n @alert unsafe \"Panics if the list is empty or total weight is less than one\"",
+      "signature": "fn frequency_list[T](lst : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[(Int, T)]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 287, "column": 8 }
+    },
+    {
+      "name": "idempotent",
+      "docstring": " Idempotent function.",
+      "signature": "fn idempotent[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A) -> A) -> ((A) -> Bool)",
+      "loc": { "line": 7, "column": 8 }
+    },
+    {
+      "name": "if_fail",
+      "docstring": " Adds a callback that will be called if the property fails",
+      "signature": "fn if_fail[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, f : () -> Unit) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 223, "column": 8 }
+    },
+    {
+      "name": "int_bound",
+      "docstring": " Generates int within given bound [0, bound)",
+      "signature": "fn int_bound(bound : Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Int]",
+      "loc": { "line": 396, "column": 8 }
+    },
+    {
+      "name": "int_range",
+      "docstring": " Generates int within given range [lo, hi)",
+      "signature": "fn int_range(lo : Int, hi : Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Int]",
+      "loc": { "line": 414, "column": 8 }
+    },
+    {
+      "name": "integer_bound",
+      "docstring": " Generates integer within given bound [0, bound)",
+      "signature": "fn integer_bound(bound : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>]",
+      "loc": { "line": 405, "column": 8 }
+    },
+    {
+      "name": "inverse",
+      "docstring": " Inverse function.",
+      "signature": "fn inverse[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B](f : (A) -> B, g : (B) -> A) -> ((A) -> Bool)",
+      "loc": { "line": 17, "column": 8 }
+    },
+    {
+      "name": "involutory",
+      "docstring": " Involutory function.",
+      "signature": "fn involutory[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A) -> A) -> ((A) -> Bool)",
+      "loc": { "line": 12, "column": 8 }
+    },
+    {
+      "name": "label",
+      "docstring": " Attaches a label to a test case",
+      "signature": "fn label[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, s : String) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 165, "column": 8 }
+    },
+    {
+      "name": "liftA2",
+      "docstring": " Lift a binary function to generators",
+      "signature": "fn liftA2[A, B, C](f : (A, B) -> C, v : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], w : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[B]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[C]",
+      "loc": { "line": 95, "column": 8 }
+    },
+    {
+      "name": "liftA3",
+      "docstring": " Lift a ternary function to generators",
+      "signature": "fn liftA3[A, B, C, D](f : (A, B, C) -> D, v : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], w : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[B], x : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[C]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[D]",
+      "loc": { "line": 100, "column": 8 }
+    },
+    {
+      "name": "liftA4",
+      "docstring": " Lift a quaternary function to generators",
+      "signature": "fn liftA4[A, B, C, D, E](f : (A, B, C, D) -> E, v : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], w : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[B], x : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[C], y : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[D]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[E]",
+      "loc": { "line": 110, "column": 8 }
+    },
+    {
+      "name": "liftA5",
+      "docstring": " Lift a quinary function to generators",
+      "signature": "fn liftA5[A, B, C, D, E, F](f : (A, B, C, D, E) -> F, v : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], w : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[B], x : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[C], y : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[D], z : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[E]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[F]",
+      "loc": { "line": 125, "column": 8 }
+    },
+    {
+      "name": "liftA6",
+      "docstring": " Lift a senary function to generators",
+      "signature": "fn liftA6[A, B, C, D, E, F, G](ff : (A, B, C, D, E, F) -> G, v : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[A], w : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[B], x : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[C], y : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[D], z : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[E], u : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[F]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[G]",
+      "loc": { "line": 147, "column": 8 }
+    },
+    {
+      "name": "list_with_size",
+      "docstring": "",
+      "signature": "fn list_with_size[T](size : Int, gen : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]]",
+      "loc": { "line": 428, "column": 8 }
+    },
+    {
+      "name": "local_min_found",
+      "docstring": "",
+      "signature": "fn local_min_found(st : <a href=\"moonbitlang/quickcheck/lib#State\">State</a>, res : <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>) -> (Int, Int, Int, <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>)",
+      "loc": { "line": 249, "column": 8 }
+    },
+    {
+      "name": "map_prop",
+      "docstring": "",
+      "signature": "fn map_prop[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](prop : P, f : (<a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]) -> <a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 104, "column": 8 }
+    },
+    {
+      "name": "map_rose_result",
+      "docstring": "",
+      "signature": "fn map_rose_result[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](prop : P, f : (<a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]) -> <a href=\"moonbitlang/quickcheck/lib/rose#Rose\">@moonbitlang/quickcheck/lib/rose.Rose</a>[<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>]) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 109, "column": 8 }
+    },
+    {
+      "name": "map_size",
+      "docstring": "",
+      "signature": "fn map_size[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, f : (Int) -> Int) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 142, "column": 8 }
+    },
+    {
+      "name": "map_total_result",
+      "docstring": "",
+      "signature": "fn map_total_result[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](prop : P, f : (<a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>) -> <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 117, "column": 8 }
+    },
+    {
+      "name": "mono_decrease",
+      "docstring": " Monotonic decreasing function.",
+      "signature": "fn mono_decrease[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A) -> B) -> (((A, A)) -> Bool)",
+      "loc": { "line": 29, "column": 8 }
+    },
+    {
+      "name": "mono_increase",
+      "docstring": " Monotonic increasing function.",
+      "signature": "fn mono_increase[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](f : (A) -> B) -> (((A, A)) -> Bool)",
+      "loc": { "line": 22, "column": 8 }
+    },
+    {
+      "name": "nat",
+      "docstring": "",
+      "signature": "fn nat() -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Int]",
+      "loc": { "line": 363, "column": 8 }
+    },
+    {
+      "name": "neg_int",
+      "docstring": " Generates a negative integer",
+      "signature": "fn neg_int() -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Int]",
+      "loc": { "line": 381, "column": 8 }
+    },
+    {
+      "name": "numeral",
+      "docstring": " Generates a numeral char",
+      "signature": "fn numeral() -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Char]",
+      "loc": { "line": 386, "column": 8 }
+    },
+    {
+      "name": "one_of",
+      "docstring": " Randomly uses one of the given generators. \n @alert unsafe \"Panics if the array is empty\"",
+      "signature": "fn one_of[T](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 332, "column": 8 }
+    },
+    {
+      "name": "one_of_array",
+      "docstring": " Randomly select one element from an array\n @alert unsafe \"Panics if the array is empty\"",
+      "signature": "fn one_of_array[T](val : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 344, "column": 8 }
+    },
+    {
+      "name": "one_of_list",
+      "docstring": " Randomly uses one of the given generators in list\n @alert unsafe \"Panics if the list is empty\"",
+      "signature": "fn one_of_list[T](lst : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 338, "column": 8 }
+    },
+    {
+      "name": "pure",
+      "docstring": " Functor instance for Gen[T] (pure)",
+      "signature": "fn pure[T](val : T) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 65, "column": 8 }
+    },
+    {
+      "name": "pure_eq",
+      "docstring": "",
+      "signature": "fn pure_eq[T](x : T) -> <a href=\"moonbitlang/quickcheck/lib#Equivalence\">Equivalence</a>[T]",
+      "loc": { "line": 35, "column": 8 }
+    },
+    {
+      "name": "quad",
+      "docstring": " Create quad generator from four generators",
+      "signature": "fn quad[T, U, V, W](gen1 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], gen2 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U], gen3 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[V], gen4 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[W]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[(T, U, V, W)]",
+      "loc": { "line": 196, "column": 8 }
+    },
+    {
+      "name": "quick_check",
+      "docstring": "",
+      "signature": "fn quick_check[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](prop : P) -> Unit!<a href=\"moonbitlang/core/builtin#Failure\">Failure</a>",
+      "loc": { "line": 42, "column": 8 }
+    },
+    {
+      "name": "quick_check_fn",
+      "docstring": "",
+      "signature": "fn quick_check_fn[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/quickcheck/lib#Shrink\">Shrink</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](f : (A) -> B) -> Unit!<a href=\"moonbitlang/core/builtin#Failure\">Failure</a>",
+      "loc": { "line": 47, "column": 8 }
+    },
+    {
+      "name": "quick_check_with",
+      "docstring": "",
+      "signature": "fn quick_check_with[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](cfg : <a href=\"moonbitlang/quickcheck/lib#Config\">Config</a>, prop : P) -> Unit!<a href=\"moonbitlang/core/builtin#Failure\">Failure</a>",
+      "loc": { "line": 54, "column": 8 }
+    },
+    {
+      "name": "quick_check_with_result",
+      "docstring": "",
+      "signature": "fn quick_check_with_result[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](cfg : <a href=\"moonbitlang/quickcheck/lib#Config\">Config</a>, prop : P) -> <a href=\"moonbitlang/quickcheck/lib#TestSuccess\">TestSuccess</a>!<a href=\"moonbitlang/quickcheck/lib#TestError\">TestError</a>",
+      "loc": { "line": 76, "column": 8 }
+    },
+    {
+      "name": "rejected",
+      "docstring": "",
+      "signature": "fn rejected() -> <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>",
+      "loc": { "line": 53, "column": 8 }
+    },
+    {
+      "name": "shrinking",
+      "docstring": "",
+      "signature": "fn shrinking[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>, T](shrinker : (T) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T], x0 : T, pf : (T) -> P) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 147, "column": 8 }
+    },
+    {
+      "name": "sized",
+      "docstring": " Create sized generators",
+      "signature": "fn sized[T](f : (Int) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]",
+      "loc": { "line": 212, "column": 8 }
+    },
+    {
+      "name": "small_int",
+      "docstring": " Primitive Generators and Combinators",
+      "signature": "fn small_int() -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[Int]",
+      "loc": { "line": 350, "column": 8 }
+    },
+    {
+      "name": "sorted_list",
+      "docstring": "",
+      "signature": "fn sorted_list[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, gen : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[<a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]]",
+      "loc": { "line": 439, "column": 8 }
+    },
+    {
+      "name": "succeed",
+      "docstring": "",
+      "signature": "fn succeed() -> <a href=\"moonbitlang/quickcheck/lib#SingleResult\">SingleResult</a>",
+      "loc": { "line": 45, "column": 8 }
+    },
+    {
+      "name": "terminate",
+      "docstring": " Modifies a property to make it terminate after the first test",
+      "signature": "fn terminate[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 239, "column": 8 }
+    },
+    {
+      "name": "triple",
+      "docstring": " Create triple generator from three generators",
+      "signature": "fn triple[T, U, V](gen1 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], gen2 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U], gen3 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[V]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[(T, U, V)]",
+      "loc": { "line": 187, "column": 8 }
+    },
+    {
+      "name": "tuple",
+      "docstring": " Create tuple generator from two generators",
+      "signature": "fn tuple[T, U](gen1 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[T], gen2 : <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[U]) -> <a href=\"moonbitlang/quickcheck/lib#Gen\">Gen</a>[(T, U)]",
+      "loc": { "line": 182, "column": 8 }
+    },
+    {
+      "name": "with_discarded_ratio",
+      "docstring": "",
+      "signature": "fn with_discarded_ratio[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, n : Int) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 259, "column": 8 }
+    },
+    {
+      "name": "with_max_shrinks",
+      "docstring": "",
+      "signature": "fn with_max_shrinks[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, n : Int) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 264, "column": 8 }
+    },
+    {
+      "name": "with_max_size",
+      "docstring": "",
+      "signature": "fn with_max_size[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, n : Int) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 269, "column": 8 }
+    },
+    {
+      "name": "with_max_success",
+      "docstring": "",
+      "signature": "fn with_max_success[P : <a href=\"moonbitlang/quickcheck/lib#Testable\">Testable</a>](p : P, n : Int) -> <a href=\"moonbitlang/quickcheck/lib#Property\">Property</a>",
+      "loc": { "line": 254, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -29,25 +29,25 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[ByteReader](#ByteReader)| ByteReader is the interface that wraps the read\_byte method.|
-|[ByteScanner](#ByteScanner)| ByteScanner is the interface that adds the unread\_byte method to the|
-|[ByteWriter](#ByteWriter)| ByteWriter is the interface that wraps the write\_byte method.|
-|[Closer](#Closer)| Closer is the interface that wraps the basic Close method.|
-|[ReadCloser](#ReadCloser)| ReadCloser is the interface that groups the basic Read and Close methods.|
-|[ReadSeekCloser](#ReadSeekCloser)| ReadSeekCloser is the interface that groups the basic Read, Seek and Close|
-|[ReadSeeker](#ReadSeeker)| ReadSeeker is the interface that groups the basic Read and Seek methods.|
-|[ReadWriteCloser](#ReadWriteCloser)| ReadWriteCloser is the interface that groups the basic Read, Write and Close methods.|
-|[ReadWriteSeeker](#ReadWriteSeeker)| ReadWriteSeeker is the interface that groups the basic Read, Write and Seek methods.|
-|[ReadWriter](#ReadWriter)| ReadWriter is the interface that groups the basic Read and Write methods.|
-|[Reader](#Reader)| Reader is the interface that wraps the basic Read method.|
-|[ReaderAt](#ReaderAt)| ReaderAt is the interface that wraps the basic read\_at method.|
-|[ReaderFrom](#ReaderFrom)| ReaderFrom is the interface that wraps the read\_from method.|
-|[Seeker](#Seeker)| Seeker is the interface that wraps the basic Seek method.|
-|[WriteCloser](#WriteCloser)| WriteCloser is the interface that groups the basic Write and Close methods.|
-|[WriteSeeker](#WriteSeeker)| WriteSeeker is the interface that groups the basic Write and Seek methods.|
-|[Writer](#Writer)| Writer is the interface that wraps the basic Write method.|
-|[WriterAt](#WriterAt)| WriterAt is the interface that wraps the basic write\_at method.|
-|[WriterTo](#WriterTo)| WriterTo is the interface that wraps the write\_to method.|
+|[@gmlewis/io.ByteReader](#@gmlewis/io.ByteReader)| ByteReader is the interface that wraps the read\_byte method.|
+|[@gmlewis/io.ByteScanner](#@gmlewis/io.ByteScanner)| ByteScanner is the interface that adds the unread\_byte method to the|
+|[@gmlewis/io.ByteWriter](#@gmlewis/io.ByteWriter)| ByteWriter is the interface that wraps the write\_byte method.|
+|[@gmlewis/io.Closer](#@gmlewis/io.Closer)| Closer is the interface that wraps the basic Close method.|
+|[@gmlewis/io.ReadCloser](#@gmlewis/io.ReadCloser)| ReadCloser is the interface that groups the basic Read and Close methods.|
+|[@gmlewis/io.ReadSeekCloser](#@gmlewis/io.ReadSeekCloser)| ReadSeekCloser is the interface that groups the basic Read, Seek and Close|
+|[@gmlewis/io.ReadSeeker](#@gmlewis/io.ReadSeeker)| ReadSeeker is the interface that groups the basic Read and Seek methods.|
+|[@gmlewis/io.ReadWriteCloser](#@gmlewis/io.ReadWriteCloser)| ReadWriteCloser is the interface that groups the basic Read, Write and Close methods.|
+|[@gmlewis/io.ReadWriteSeeker](#@gmlewis/io.ReadWriteSeeker)| ReadWriteSeeker is the interface that groups the basic Read, Write and Seek methods.|
+|[@gmlewis/io.ReadWriter](#@gmlewis/io.ReadWriter)| ReadWriter is the interface that groups the basic Read and Write methods.|
+|[@gmlewis/io.Reader](#@gmlewis/io.Reader)| Reader is the interface that wraps the basic Read method.|
+|[@gmlewis/io.ReaderAt](#@gmlewis/io.ReaderAt)| ReaderAt is the interface that wraps the basic read\_at method.|
+|[@gmlewis/io.ReaderFrom](#@gmlewis/io.ReaderFrom)| ReaderFrom is the interface that wraps the read\_from method.|
+|[@gmlewis/io.Seeker](#@gmlewis/io.Seeker)| Seeker is the interface that wraps the basic Seek method.|
+|[@gmlewis/io.WriteCloser](#@gmlewis/io.WriteCloser)| WriteCloser is the interface that groups the basic Write and Close methods.|
+|[@gmlewis/io.WriteSeeker](#@gmlewis/io.WriteSeeker)| WriteSeeker is the interface that groups the basic Write and Seek methods.|
+|[@gmlewis/io.Writer](#@gmlewis/io.Writer)| Writer is the interface that wraps the basic Write method.|
+|[@gmlewis/io.WriterAt](#@gmlewis/io.WriterAt)| WriterAt is the interface that wraps the basic write\_at method.|
+|[@gmlewis/io.WriterTo](#@gmlewis/io.WriterTo)| WriterTo is the interface that wraps the write\_to method.|
 
 |Type|description|
 |---|---|
@@ -79,10 +79,10 @@ https://github.com/chawyehsu/moonup
 |[read\_all](#read_all)| read\_all reads from r until an error or eof and returns the data it read.|
 |[read\_full](#read_full)| read\_full reads exactly len(buf) bytes from r into buf.|
 
-## ByteReader
+## @gmlewis/io.ByteReader
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,264:::pub(open) trait ByteReader {
+:::source,gmlewis/io/io.mbt,264:::pub(open) trait @gmlewis/io.ByteReader {
   read_byte(Self) -> (Byte, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -96,10 +96,10 @@ byte was consumed, and the returned byte value is undefined.
 processing. A \[Reader\] that does not implement  ByteReader
 can be wrapped using bufio.NewReader to add this method.
 
-## ByteScanner
+## @gmlewis/io.ByteScanner
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,276:::pub(open) trait ByteScanner {
+:::source,gmlewis/io/io.mbt,276:::pub(open) trait @gmlewis/io.ByteScanner {
   read_byte(Self) -> (Byte, <a href="gmlewis/io#IOError">IOError</a>?)
   unread_byte(Self) -> <a href="gmlewis/io#IOError">IOError</a>?
 }
@@ -113,19 +113,19 @@ return an error, unread the last byte read (or the byte prior to the
 last-unread byte), or (in implementations that support the \[Seeker\] interface)
 seek to one byte before the current offset.
 
-## ByteWriter
+## @gmlewis/io.ByteWriter
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,282:::pub(open) trait ByteWriter {
+:::source,gmlewis/io/io.mbt,282:::pub(open) trait @gmlewis/io.ByteWriter {
   write_byte(Self, Byte) -> <a href="gmlewis/io#IOError">IOError</a>?
 }
 ```
  ByteWriter is the interface that wraps the write\_byte method.
 
-## Closer
+## @gmlewis/io.Closer
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,109:::pub(open) trait Closer {
+:::source,gmlewis/io/io.mbt,109:::pub(open) trait @gmlewis/io.Closer {
   close(Self) -> <a href="gmlewis/io#IOError">IOError</a>?
 }
 ```
@@ -134,20 +134,20 @@ seek to one byte before the current offset.
  The behavior of Close after the first call is undefined.
 Specific implementations may document their own behavior.
 
-## ReadCloser
+## @gmlewis/io.ReadCloser
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,139:::pub(open) trait ReadCloser {
+:::source,gmlewis/io/io.mbt,139:::pub(open) trait @gmlewis/io.ReadCloser {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   close(Self) -> <a href="gmlewis/io#IOError">IOError</a>?
 }
 ```
  ReadCloser is the interface that groups the basic Read and Close methods.
 
-## ReadSeekCloser
+## @gmlewis/io.ReadSeekCloser
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,165:::pub(open) trait ReadSeekCloser {
+:::source,gmlewis/io/io.mbt,165:::pub(open) trait @gmlewis/io.ReadSeekCloser {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   seek(Self, Int64, <a href="gmlewis/io#Whence">Whence</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
   close(Self) -> <a href="gmlewis/io#IOError">IOError</a>?
@@ -156,20 +156,20 @@ Specific implementations may document their own behavior.
  ReadSeekCloser is the interface that groups the basic Read, Seek and Close
 methods.
 
-## ReadSeeker
+## @gmlewis/io.ReadSeeker
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,158:::pub(open) trait ReadSeeker {
+:::source,gmlewis/io/io.mbt,158:::pub(open) trait @gmlewis/io.ReadSeeker {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   seek(Self, Int64, <a href="gmlewis/io#Whence">Whence</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
  ReadSeeker is the interface that groups the basic Read and Seek methods.
 
-## ReadWriteCloser
+## @gmlewis/io.ReadWriteCloser
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,151:::pub(open) trait ReadWriteCloser {
+:::source,gmlewis/io/io.mbt,151:::pub(open) trait @gmlewis/io.ReadWriteCloser {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   write(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   close(Self) -> <a href="gmlewis/io#IOError">IOError</a>?
@@ -177,10 +177,10 @@ methods.
 ```
  ReadWriteCloser is the interface that groups the basic Read, Write and Close methods.
 
-## ReadWriteSeeker
+## @gmlewis/io.ReadWriteSeeker
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,178:::pub(open) trait ReadWriteSeeker {
+:::source,gmlewis/io/io.mbt,178:::pub(open) trait @gmlewis/io.ReadWriteSeeker {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   write(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   seek(Self, Int64, <a href="gmlewis/io#Whence">Whence</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
@@ -188,20 +188,20 @@ methods.
 ```
  ReadWriteSeeker is the interface that groups the basic Read, Write and Seek methods.
 
-## ReadWriter
+## @gmlewis/io.ReadWriter
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,133:::pub(open) trait ReadWriter {
+:::source,gmlewis/io/io.mbt,133:::pub(open) trait @gmlewis/io.ReadWriter {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   write(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
  ReadWriter is the interface that groups the basic Read and Write methods.
 
-## Reader
+## @gmlewis/io.Reader
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,88:::pub(open) trait Reader {
+:::source,gmlewis/io/io.mbt,88:::pub(open) trait @gmlewis/io.Reader {
   read(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -237,10 +237,10 @@ nothing happened; in particular it does not indicate eof.
 
  Implementations must not retain p.
 
-## ReaderAt
+## @gmlewis/io.ReaderAt
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,232:::pub(open) trait ReaderAt {
+:::source,gmlewis/io/io.mbt,232:::pub(open) trait @gmlewis/io.ReaderAt {
   read_at(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte], Int64) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -271,10 +271,10 @@ same input source.
 
  Implementations must not retain p.
 
-## ReaderFrom
+## @gmlewis/io.ReaderFrom
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,191:::pub(open) trait ReaderFrom {
+:::source,gmlewis/io/io.mbt,191:::pub(open) trait @gmlewis/io.ReaderFrom {
   read_from(Self, <a href="gmlewis/io#Reader">Reader</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -286,10 +286,10 @@ Any error except eof encountered during the read is also returned.
 
  The \[copy\] function uses \[ReaderFrom\] if available.
 
-## Seeker
+## @gmlewis/io.Seeker
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,128:::pub(open) trait Seeker {
+:::source,gmlewis/io/io.mbt,128:::pub(open) trait @gmlewis/io.Seeker {
   seek(Self, Int64, <a href="gmlewis/io#Whence">Whence</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -309,30 +309,30 @@ Seeking to any positive offset may be allowed, but if the new offset exceeds
 the size of the underlying object the behavior of subsequent I/O operations
 is implementation-dependent.
 
-## WriteCloser
+## @gmlewis/io.WriteCloser
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,145:::pub(open) trait WriteCloser {
+:::source,gmlewis/io/io.mbt,145:::pub(open) trait @gmlewis/io.WriteCloser {
   write(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   close(Self) -> <a href="gmlewis/io#IOError">IOError</a>?
 }
 ```
  WriteCloser is the interface that groups the basic Write and Close methods.
 
-## WriteSeeker
+## @gmlewis/io.WriteSeeker
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,172:::pub(open) trait WriteSeeker {
+:::source,gmlewis/io/io.mbt,172:::pub(open) trait @gmlewis/io.WriteSeeker {
   write(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
   seek(Self, Int64, <a href="gmlewis/io#Whence">Whence</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
  WriteSeeker is the interface that groups the basic Write and Seek methods.
 
-## Writer
+## @gmlewis/io.Writer
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,101:::pub(open) trait Writer {
+:::source,gmlewis/io/io.mbt,101:::pub(open) trait @gmlewis/io.Writer {
   write(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -346,10 +346,10 @@ Write must not modify the slice data, even temporarily.
 
  Implementations must not retain p.
 
-## WriterAt
+## @gmlewis/io.WriterAt
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,251:::pub(open) trait WriterAt {
+:::source,gmlewis/io/io.mbt,251:::pub(open) trait @gmlewis/io.WriterAt {
   write_at(Self, <a href="gmlewis/io#Slice">Slice</a>[Byte], Int64) -> (Int, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -369,10 +369,10 @@ destination if the ranges do not overlap.
 
  Implementations must not retain p.
 
-## WriterTo
+## @gmlewis/io.WriterTo
 
 ```moonbit
-:::source,gmlewis/io/io.mbt,202:::pub(open) trait WriterTo {
+:::source,gmlewis/io/io.mbt,202:::pub(open) trait @gmlewis/io.WriterTo {
   write_to(Self, <a href="gmlewis/io#Writer">Writer</a>) -> (Int64, <a href="gmlewis/io#IOError">IOError</a>?)
 }
 ```
@@ -479,30 +479,21 @@ written. Any error encountered during the write is also returned.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/io/io.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/io#IOError">IOError</a> with op_equal(<a href="gmlewis/io#IOError">IOError</a>, <a href="gmlewis/io#IOError">IOError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/io/io.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/io#IOError">IOError</a> with output(<a href="gmlewis/io#IOError">IOError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/io/io.mbt,25:::fn <a href="gmlewis/io#IOError">IOError</a>::op_equal(<a href="gmlewis/io#IOError">IOError</a>, <a href="gmlewis/io#IOError">IOError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/io/io.mbt,25:::fn <a href="gmlewis/io#IOError">IOError</a>::output(<a href="gmlewis/io#IOError">IOError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/io/traits.mbt,85:::fn <a href="gmlewis/io#IOError">IOError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/io/io.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/io#IOError">IOError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/io/io.mbt,25:::fn op_equal(<a href="gmlewis/io#IOError">IOError</a>, <a href="gmlewis/io#IOError">IOError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/io/io.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/io#IOError">IOError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/io/io.mbt,25:::fn output(<a href="gmlewis/io#IOError">IOError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## LimitedReader
 
@@ -599,9 +590,13 @@ limitations under the License.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/io/slice.mbt,221:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/io#Slice">Slice</a> with output[X : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="gmlewis/io#Slice">Slice</a>[X], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/io/slice.mbt,221:::impl[X : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/io#Slice">Slice</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/io/slice.mbt,221:::fn output[X : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="gmlewis/io#Slice">Slice</a>[X], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### append
@@ -687,11 +682,6 @@ limitations under the License.
   :::source,gmlewis/io/slice.mbt,45:::fn <a href="gmlewis/io#Slice">Slice</a>::op_set[T](self : <a href="gmlewis/io#Slice">Slice</a>[T], index : Int, value : T) -> Unit
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/io/slice.mbt,221:::fn <a href="gmlewis/io#Slice">Slice</a>::output[X : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="gmlewis/io#Slice">Slice</a>[X], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### push
   ```moonbit
   :::source,gmlewis/io/slice.mbt,129:::fn <a href="gmlewis/io#Slice">Slice</a>::push[T](self : <a href="gmlewis/io#Slice">Slice</a>[T], e : T) -> <a href="gmlewis/io#Slice">Slice</a>[T]
@@ -735,11 +725,6 @@ limitations under the License.
   :::source,gmlewis/io/slice.mbt,261:::fn <a href="gmlewis/io#Slice">Slice</a>::to_bytes(self : <a href="gmlewis/io#Slice">Slice</a>[Byte]) -> Bytes
   ```
   >  to\_bytes returns slice as Bytes.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/io/traits.mbt,85:::fn <a href="gmlewis/io#Slice">Slice</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## TeeReader
 

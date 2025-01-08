@@ -1,0 +1,73 @@
+{
+  "readme": "",
+  "name": "Yu-zh/either",
+  "traits": [],
+  "types": [
+    {
+      "name": "Either",
+      "docstring": "",
+      "signature": "pub enum Either {\n  Left(L)\n  Right(R)\n}",
+      "loc": { "line": 1, "column": 10 },
+      "methods": [
+        {
+          "name": "either",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::either[L, R, T](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R], f : (L) -> T, g : (R) -> T) -> T",
+          "loc": { "line": 62, "column": 8 }
+        },
+        {
+          "name": "flip",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::flip[L, R](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R]) -> <a href=\"Yu-zh/either#Either\">Either</a>[R, L]",
+          "loc": { "line": 34, "column": 8 }
+        },
+        {
+          "name": "is_left",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::is_left[L, R](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R]) -> Bool",
+          "loc": { "line": 6, "column": 8 }
+        },
+        {
+          "name": "is_right",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::is_right[L, R](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R]) -> Bool",
+          "loc": { "line": 13, "column": 8 }
+        },
+        {
+          "name": "left",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::left[L, R](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R]) -> L?",
+          "loc": { "line": 20, "column": 8 }
+        },
+        {
+          "name": "map_either",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::map_either[L, R, L2, R2](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R], f : (L) -> L2, g : (R) -> R2) -> <a href=\"Yu-zh/either#Either\">Either</a>[L2, R2]",
+          "loc": { "line": 55, "column": 8 }
+        },
+        {
+          "name": "map_left",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::map_left[L, R, L2](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R], f : (L) -> L2) -> <a href=\"Yu-zh/either#Either\">Either</a>[L2, R]",
+          "loc": { "line": 41, "column": 8 }
+        },
+        {
+          "name": "map_right",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::map_right[L, R, R2](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R], f : (R) -> R2) -> <a href=\"Yu-zh/either#Either\">Either</a>[L, R2]",
+          "loc": { "line": 48, "column": 8 }
+        },
+        {
+          "name": "right",
+          "docstring": "",
+          "signature": "fn <a href=\"Yu-zh/either#Either\">Either</a>::right[L, R](self : <a href=\"Yu-zh/either#Either\">Either</a>[L, R]) -> R?",
+          "loc": { "line": 27, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

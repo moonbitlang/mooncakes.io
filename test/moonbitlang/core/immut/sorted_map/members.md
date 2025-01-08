@@ -145,37 +145,69 @@ let keys = map.keys() // ["a", "b", "c"]
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,52:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,33:::impl[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,33:::fn compare[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], other : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,33:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with compare[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], other : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Int
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,16:::impl[K, V] <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,16:::fn default[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,16:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with default[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,19:::impl[K : <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,19:::fn op_equal[K : <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], other : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,78:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with from_json[V : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[String, V]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,57:::impl[K : <a href="moonbitlang/core/builtin#Hash">Hash</a>, V : <a href="moonbitlang/core/builtin#Hash">Hash</a>] <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,57:::fn hash_combine[K : <a href="moonbitlang/core/builtin#Hash">Hash</a>, V : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,57:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with hash_combine[K : <a href="moonbitlang/core/builtin#Hash">Hash</a>, V : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,64:::impl[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,64:::fn output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with op_equal[K : <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], other : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Bool
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,69:::impl[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>] <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,69:::fn to_json[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,64:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,78:::impl[V : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>] <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[String, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,78:::fn from_json[V : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[String, V]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,69:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a> with to_json[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,49:::impl[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,52:::fn arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -186,52 +218,38 @@ let keys = map.keys() // ["a", "b", "c"]
   >  Create a new map with a key-value pair inserted.
   > O(log n).
   >  
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,52:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::arbitrary[K : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
-  ```
-  > 
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,33:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::compare[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], other : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Int
-  ```
-  > 
 - #### contains
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,35:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::contains[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K) -> Bool
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,36:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::contains[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K) -> Bool
   ```
   > 
   >  Check if the map contains a key.
   > O(log n).
-- #### default
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,16:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::default[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
-  ```
-  > 
 - #### each
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,97:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::each[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (K, V) -> Unit) -> Unit
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,98:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::each[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (K, V) -> Unit) -> Unit
   ```
   > 
   >  Iterate over the key-value pairs in the map.
 - #### eachi
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,110:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::eachi[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (Int, K, V) -> Unit) -> Unit
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,111:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::eachi[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (Int, K, V) -> Unit) -> Unit
   ```
   > 
   >  Iterate over the key-value pairs with index.
 - #### elems
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,263:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::elems[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/array#Array">Array</a>[V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,264:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::elems[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/array#Array">Array</a>[V]
   ```
   > 
   >  Return all elements of the map in the ascending order of their keys.
 - #### empty
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,17:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::empty[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,18:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::empty[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   >  Create an empty map.
   > @alert deprecated "Use `new()` instead"
+  > @coverage.skip
 - #### filter
   ```moonbit
   :::source,moonbitlang/core/immut/sorted_map/map.mbt,92:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::filter[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], pred : (V) -> Bool) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
@@ -246,124 +264,105 @@ let keys = map.keys() // ["a", "b", "c"]
   >  Filter key-value pairs that satisfy the predicate
 - #### fold
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,148:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::fold[K, V, A](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], init~ : A, f : (A, V) -> A) -> A
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,149:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::fold[K, V, A](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], init~ : A, f : (A, V) -> A) -> A
   ```
   > 
   >  Fold the values in the map.
   > O(n).
 - #### foldl\_with\_key
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,173:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::foldl_with_key[K, V, A](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (A, K, V) -> A, init~ : A) -> A
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,174:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::foldl_with_key[K, V, A](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (A, K, V) -> A, init~ : A) -> A
   ```
   > 
   >  Pre-order fold.
   > O(n).
 - #### foldr\_with\_key
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,155:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::foldr_with_key[K, V, A](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (A, K, V) -> A, init~ : A) -> A
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,156:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::foldr_with_key[K, V, A](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], f : (A, K, V) -> A, init~ : A) -> A
   ```
   > 
   >  Post-order fold.
   > O(n).
 - #### from\_array
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,203:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::from_array[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](array : <a href="moonbitlang/core/array#Array">Array</a>[(K, V)]) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,204:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::from_array[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](array : <a href="moonbitlang/core/array#Array">Array</a>[(K, V)]) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
   >  Build a map from an array of key-value pairs.
   > O(n\*log n).
 - #### from\_iter
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,251:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::from_iter[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[(K, V)]) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,252:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::from_iter[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[(K, V)]) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
 - #### from\_json
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,283:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::from_json[V : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[String, V]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > 
-- #### hash
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits.mbt,40:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,57:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::hash_combine[K : <a href="moonbitlang/core/builtin#Hash">Hash</a>, V : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,284:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::from_json[V : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[String, V]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
   ```
   > 
 - #### insert
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/depercated.mbt,20:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::insert[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K, value : V) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/depercated.mbt,21:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::insert[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K, value : V) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
   >  Create a new map with a key-value pair inserted.
   > O(log n).
   >  
   >  @alert deprecated "Use `add` instead"
+  > @coverage.skip
 - #### is\_empty
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,61:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::is_empty[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Bool
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,62:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::is_empty[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Bool
   ```
   > 
 - #### iter
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,213:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::iter[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[(K, V)]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,214:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::iter[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[(K, V)]
   ```
   > 
 - #### iter2
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,232:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::iter2[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,233:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::iter2[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[K, V]
   ```
   > 
 - #### keys
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,257:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::keys[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/array#Array">Array</a>[K]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,258:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::keys[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/array#Array">Array</a>[K]
   ```
   > 
   >  Return all keys of the map in ascending order.
 - #### lookup
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,74:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::lookup[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K) -> V?
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,75:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::lookup[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K) -> V?
   ```
   > 
   >  Get the value associated with a key.
   > O(log n).
 - #### map
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,127:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::map[K, X, Y](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, X], f : (X) -> Y) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, Y]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,128:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::map[K, X, Y](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, X], f : (X) -> Y) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, Y]
   ```
   > 
   >  Ts over the values in the map.
 - #### map\_with\_key
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,137:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::map_with_key[K, X, Y](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, X], f : (K, X) -> Y) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, Y]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,138:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::map_with_key[K, X, Y](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, X], f : (K, X) -> Y) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, Y]
   ```
   > 
   >  Maps over the key-value pairs in the map.
 - #### new
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,22:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::new[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,23:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::new[K, V]() -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   >  Create an empty map.
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,268:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::of[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[(K, V)]) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,19:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::op_equal[K : <a href="moonbitlang/core/builtin#Eq">Eq</a>, V : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], other : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Bool
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,269:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::of[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[(K, V)]) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
 - #### op\_get
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,91:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::op_get[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K) -> V?
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits_impl.mbt,64:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::output[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,92:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::op_get[K : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V], key : K) -> V?
   ```
   > 
 - #### remove
@@ -375,13 +374,13 @@ let keys = map.keys() // ["a", "b", "c"]
   > If the key is not a member or map, the original map is returned.
 - #### singleton
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,28:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::singleton[K, V](key : K, value : V) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,29:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::singleton[K, V](key : K, value : V) -> <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]
   ```
   > 
   >  Create a map with a single key-value pair.
 - #### size
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,53:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::size[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Int
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,54:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::size[K, V](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> Int
   ```
   > 
   >  Get the number of key-value pairs in the map.
@@ -393,11 +392,6 @@ let keys = map.keys() // ["a", "b", "c"]
   >  Convert to an array of key-value pairs.
 - #### to\_json
   ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,278:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::to_json[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/immut/sorted_map/traits.mbt,85:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/core/immut/sorted_map/utils.mbt,279:::fn <a href="moonbitlang/core/immut/sorted_map#T">T</a>::to_json[K : <a href="moonbitlang/core/builtin#Show">Show</a>, V : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/sorted_map#T">T</a>[K, V]) -> <a href="moonbitlang/core/json#Json">Json</a>
   ```
   > 

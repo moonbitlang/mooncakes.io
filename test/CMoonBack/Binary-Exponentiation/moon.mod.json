@@ -1,0 +1,10 @@
+{
+  "name": "CMoonBack/Binary-Exponentiation",
+  "version": "0.1.0",
+  "readme": "README.md",
+  "repository": "",
+  "license": "Apache-2.0",
+  "keywords": ["math"],
+  "description": "Binary Exponentiation in moonbit",
+  "source": "src"
+}

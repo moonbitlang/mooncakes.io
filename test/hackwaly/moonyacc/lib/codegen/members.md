@@ -69,48 +69,37 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a> with compare(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a> with hash_combine(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a> with op_equal(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a> with to_json(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>::compare(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> Int
-  ```
-  > automatically derived
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
+  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>
   ```
   > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>::hash_combine(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn compare(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>
   ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>::op_equal(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> Bool
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn op_equal(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>
   ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>::to_json(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn hash_combine(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/codegen/types.mbt,35:::fn to_json(<a href="hackwaly/moonyacc/lib/codegen#PubType">PubType</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## TerminalMeta
 

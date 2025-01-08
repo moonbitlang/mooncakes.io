@@ -28,41 +28,38 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,48:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a> with from_json(json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,tiye/cirru-parser/lib/primes.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/cirru-parser/lib/primes.mbt,7:::fn op_equal(<a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,10:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a> with hash(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Int
+  :::source,tiye/cirru-parser/lib/primes.mbt,10:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/cirru-parser/lib/primes.mbt,10:::fn hash(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,tiye/cirru-parser/lib/primes.mbt,23:::fn hash_combine(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,23:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a> with hash_combine(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,tiye/cirru-parser/lib/primes.mbt,48:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>
   ```
   > 
-- ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-parser/lib#Cirru">Cirru</a> with op_equal(<a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Bool
-  ```
-  > automatically derived
+  * ```moonbit
+    :::source,tiye/cirru-parser/lib/primes.mbt,48:::fn from_json(json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### compare
   ```moonbit
   :::source,tiye/cirru-parser/lib/primes.mbt,101:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::compare(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, other : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Int
-  ```
-  > 
-- #### from\_json
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,48:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::from_json(json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > 
-- #### hash
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,10:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::hash(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,23:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::hash_combine(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
   ```
   > 
 - #### is\_comment
@@ -85,11 +82,6 @@
   :::source,tiye/cirru-parser/lib/primes.mbt,122:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::length(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Int
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,7:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::op_equal(<a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>) -> Bool
-  ```
-  > automatically derived
 - #### output
   ```moonbit
   :::source,tiye/cirru-parser/lib/primes.mbt,73:::fn <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>::output(self : <a href="tiye/cirru-parser/lib#Cirru">Cirru</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
@@ -122,21 +114,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,168:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a> with output(<a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/primes.mbt,168:::fn <a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a>::output(<a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/traits.mbt,85:::fn <a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,tiye/cirru-parser/lib/primes.mbt,168:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/cirru-parser/lib/primes.mbt,168:::fn output(<a href="tiye/cirru-parser/lib#CirruLexState">CirruLexState</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## CirruParseError
 
@@ -192,16 +176,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/cirru-parser/lib/writer.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a> with op_equal(<a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>, <a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>) -> Bool
+  :::source,tiye/cirru-parser/lib/writer.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/cirru-parser/lib/writer.mbt,8:::fn <a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>::op_equal(<a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>, <a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,tiye/cirru-parser/lib/writer.mbt,8:::fn op_equal(<a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>, <a href="tiye/cirru-parser/lib#WriterNode">WriterNode</a>) -> Bool
+    ```
+    > automatically derived
 
 ## format
 

@@ -1,0 +1,79 @@
+{
+  "readme": "# moonbitlang/x/benchmark\n\n## Overview\n\nThis section provides some benchmark APIs, which are unstable and may be removed or modified at any time.\n\n## Usage\n\nYou can create Criterion and add tasks(by `add` and `Task::new`) to them like this:\n\n```moonbit\nfn sum(x : Int) -> Int {\n  let mut result = 0\n  for i = 1; i <= x; i = i + 1 {\n    result += x\n    result %= 11451419\n    result -= 2\n    result = result | 1\n    result *= 19190\n    result %= 11451419\n  }\n  result\n}\n\nlet criterion = Criterion::new()\ncriterion.add(Task::new(\"sum\", fn() { sum(10000000) |> ignore }, count=100))\n```\n\nYou need to specify a name and a function to test for each task, with an optional parameter being the number of times it will be executed. In statistical experience, the higher the number of times, the more accurate the results will be, and the default value for the number of times is 10.\n\nNext, you can run these tests：\n\n```moonbit\nlet result=criterion.run()\nprintln(result[\"sum\"])\n```\n\nThe return type is Map[String, TaskResult], which indexes the results of each run by name. Additionally, TaskResult implements the show trait, so it can be directly output.\n\nThe following is a detailed definition of Task/TaskResult:\n\n```moonbit\nstruct Task {\n  name : String // The name of the task\n  f : () -> Unit // The tested function\n  count : Int // Number of tests conducted\n}\n\nstruct TaskResult {\n  task : Task // Task corresponding to the result\n  average : Double // Average execution time\n  max : Double // Maximum execution time per execution\n  min : Double // Minimum execution time per execution\n}\n```\n",
+  "name": "moonbitlang/x/benchmark",
+  "traits": [],
+  "types": [
+    {
+      "name": "Criterion",
+      "docstring": "",
+      "signature": "type Criterion",
+      "loc": { "line": 31, "column": 8 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#Criterion\">Criterion</a>::add(self : <a href=\"moonbitlang/x/benchmark#Criterion\">Criterion</a>, task : <a href=\"moonbitlang/x/benchmark#Task\">Task</a>) -> Unit",
+          "loc": { "line": 60, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#Criterion\">Criterion</a>::new() -> <a href=\"moonbitlang/x/benchmark#Criterion\">Criterion</a>",
+          "loc": { "line": 55, "column": 19 }
+        },
+        {
+          "name": "run",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#Criterion\">Criterion</a>::run(self : <a href=\"moonbitlang/x/benchmark#Criterion\">Criterion</a>) -> <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"moonbitlang/x/benchmark#TaskResult\">TaskResult</a>]",
+          "loc": { "line": 65, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Task",
+      "docstring": "",
+      "signature": "type Task",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#Task\">Task</a>::new(name : String, f : () -> Unit, count~ : Int = ..) -> <a href=\"moonbitlang/x/benchmark#Task\">Task</a>",
+          "loc": { "line": 16, "column": 14 }
+        },
+        {
+          "name": "run",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#Task\">Task</a>::run(self : <a href=\"moonbitlang/x/benchmark#Task\">Task</a>) -> <a href=\"moonbitlang/x/benchmark#TaskResult\">TaskResult</a>",
+          "loc": { "line": 21, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "TaskResult",
+      "docstring": "",
+      "signature": "pub struct TaskResult {\n  task : <a href=\"moonbitlang/x/benchmark#Task\">Task</a>\n  average : Double\n  max : Double\n  min : Double\n}",
+      "loc": { "line": 23, "column": 22 },
+      "methods": [
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#TaskResult\">TaskResult</a>::output(self : <a href=\"moonbitlang/x/benchmark#TaskResult\">TaskResult</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 50, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/benchmark#TaskResult\">TaskResult</a>::to_string(self : <a href=\"moonbitlang/x/benchmark#TaskResult\">TaskResult</a>) -> String",
+          "loc": { "line": 40, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

@@ -29,7 +29,7 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[Reader](#Reader)| The actual read interface needed by \[Decompressor::new\].|
+|[@gmlewis/flate.Reader](#@gmlewis/flate.Reader)| The actual read interface needed by \[Decompressor::new\].|
 
 |Type|description|
 |---|---|
@@ -56,10 +56,10 @@ https://github.com/chawyehsu/moonup
 |[ioeof](#ioeof)||
 |[writer\_closed\_error](#writer_closed_error)||
 
-## Reader
+## @gmlewis/flate.Reader
 
 ```moonbit
-:::source,gmlewis/flate/inflate.mbt,220:::pub(open) trait Reader {
+:::source,gmlewis/flate/inflate.mbt,220:::pub(open) trait @gmlewis/flate.Reader {
   read(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">@gmlewis/io.IOError</a>?)
   read_byte(Self) -> (Byte, <a href="gmlewis/io#IOError">@gmlewis/io.IOError</a>?)
 }
@@ -101,30 +101,21 @@ https://github.com/chawyehsu/moonup
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,107:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#DeflateFast">DeflateFast</a> with op_equal(<a href="gmlewis/flate#DeflateFast">DeflateFast</a>, <a href="gmlewis/flate#DeflateFast">DeflateFast</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,107:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#DeflateFast">DeflateFast</a> with output(<a href="gmlewis/flate#DeflateFast">DeflateFast</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,107:::fn <a href="gmlewis/flate#DeflateFast">DeflateFast</a>::op_equal(<a href="gmlewis/flate#DeflateFast">DeflateFast</a>, <a href="gmlewis/flate#DeflateFast">DeflateFast</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,107:::fn <a href="gmlewis/flate#DeflateFast">DeflateFast</a>::output(<a href="gmlewis/flate#DeflateFast">DeflateFast</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/flate/traits.mbt,85:::fn <a href="gmlewis/flate#DeflateFast">DeflateFast</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/flate/deflate-fast.mbt,107:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#DeflateFast">DeflateFast</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/flate/deflate-fast.mbt,107:::fn op_equal(<a href="gmlewis/flate#DeflateFast">DeflateFast</a>, <a href="gmlewis/flate#DeflateFast">DeflateFast</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/flate/deflate-fast.mbt,107:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#DeflateFast">DeflateFast</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/flate/deflate-fast.mbt,107:::fn output(<a href="gmlewis/flate#DeflateFast">DeflateFast</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DictDecoder
 
@@ -168,30 +159,21 @@ method call must be respected.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,39:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#HCode">HCode</a> with op_equal(<a href="gmlewis/flate#HCode">HCode</a>, <a href="gmlewis/flate#HCode">HCode</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,39:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#HCode">HCode</a> with output(<a href="gmlewis/flate#HCode">HCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,39:::fn <a href="gmlewis/flate#HCode">HCode</a>::op_equal(<a href="gmlewis/flate#HCode">HCode</a>, <a href="gmlewis/flate#HCode">HCode</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,39:::fn <a href="gmlewis/flate#HCode">HCode</a>::output(<a href="gmlewis/flate#HCode">HCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/flate/traits.mbt,85:::fn <a href="gmlewis/flate#HCode">HCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/flate/huffman-code.mbt,39:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#HCode">HCode</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/flate/huffman-code.mbt,39:::fn op_equal(<a href="gmlewis/flate#HCode">HCode</a>, <a href="gmlewis/flate#HCode">HCode</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/flate/huffman-code.mbt,39:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#HCode">HCode</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/flate/huffman-code.mbt,39:::fn output(<a href="gmlewis/flate#HCode">HCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## HuffmanBitWriter
 
@@ -216,30 +198,21 @@ method call must be respected.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a> with op_equal(<a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>, <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a> with output(<a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,13:::fn <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>::op_equal(<a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>, <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,13:::fn <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>::output(<a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/flate/traits.mbt,85:::fn <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/flate/huffman-code.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/flate/huffman-code.mbt,13:::fn op_equal(<a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>, <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/flate/huffman-code.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/flate/huffman-code.mbt,13:::fn output(<a href="gmlewis/flate#HuffmanEncoder">HuffmanEncoder</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## LevelInfo
 
@@ -257,30 +230,21 @@ method call must be respected.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,32:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#LiteralNode">LiteralNode</a> with op_equal(<a href="gmlewis/flate#LiteralNode">LiteralNode</a>, <a href="gmlewis/flate#LiteralNode">LiteralNode</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,32:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#LiteralNode">LiteralNode</a> with output(<a href="gmlewis/flate#LiteralNode">LiteralNode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,32:::fn <a href="gmlewis/flate#LiteralNode">LiteralNode</a>::op_equal(<a href="gmlewis/flate#LiteralNode">LiteralNode</a>, <a href="gmlewis/flate#LiteralNode">LiteralNode</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/flate/huffman-code.mbt,32:::fn <a href="gmlewis/flate#LiteralNode">LiteralNode</a>::output(<a href="gmlewis/flate#LiteralNode">LiteralNode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/flate/traits.mbt,85:::fn <a href="gmlewis/flate#LiteralNode">LiteralNode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/flate/huffman-code.mbt,32:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#LiteralNode">LiteralNode</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/flate/huffman-code.mbt,32:::fn op_equal(<a href="gmlewis/flate#LiteralNode">LiteralNode</a>, <a href="gmlewis/flate#LiteralNode">LiteralNode</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/flate/huffman-code.mbt,32:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#LiteralNode">LiteralNode</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/flate/huffman-code.mbt,32:::fn output(<a href="gmlewis/flate#LiteralNode">LiteralNode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## StepFunc
 
@@ -305,30 +269,21 @@ method call must be respected.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,98:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#TableEntry">TableEntry</a> with op_equal(<a href="gmlewis/flate#TableEntry">TableEntry</a>, <a href="gmlewis/flate#TableEntry">TableEntry</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,98:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#TableEntry">TableEntry</a> with output(<a href="gmlewis/flate#TableEntry">TableEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,98:::fn <a href="gmlewis/flate#TableEntry">TableEntry</a>::op_equal(<a href="gmlewis/flate#TableEntry">TableEntry</a>, <a href="gmlewis/flate#TableEntry">TableEntry</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/flate/deflate-fast.mbt,98:::fn <a href="gmlewis/flate#TableEntry">TableEntry</a>::output(<a href="gmlewis/flate#TableEntry">TableEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/flate/traits.mbt,85:::fn <a href="gmlewis/flate#TableEntry">TableEntry</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/flate/deflate-fast.mbt,98:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/flate#TableEntry">TableEntry</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/flate/deflate-fast.mbt,98:::fn op_equal(<a href="gmlewis/flate#TableEntry">TableEntry</a>, <a href="gmlewis/flate#TableEntry">TableEntry</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/flate/deflate-fast.mbt,98:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#TableEntry">TableEntry</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/flate/deflate-fast.mbt,98:::fn output(<a href="gmlewis/flate#TableEntry">TableEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Token
 
@@ -339,21 +294,13 @@ method call must be respected.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/flate/token.mbt,62:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#Token">Token</a> with output(<a href="gmlewis/flate#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,gmlewis/flate/token.mbt,62:::fn <a href="gmlewis/flate#Token">Token</a>::output(<a href="gmlewis/flate#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/flate/traits.mbt,85:::fn <a href="gmlewis/flate#Token">Token</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/flate/token.mbt,62:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/flate#Token">Token</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/flate/token.mbt,62:::fn output(<a href="gmlewis/flate#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Writer
 

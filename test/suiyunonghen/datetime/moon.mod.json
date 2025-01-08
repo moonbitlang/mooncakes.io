@@ -1,0 +1,10 @@
+{
+  "name": "suiyunonghen/datetime",
+  "version": "0.1.5",
+  "readme": "README.md",
+  "repository": "https://github.com/suiyunonghen/datetime",
+  "license": "Apache-2.0",
+  "keywords": ["datetime","date","time"],
+  "description": "datetime type of moonbit",
+  "source": "src"
+}

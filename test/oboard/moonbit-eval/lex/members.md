@@ -25,21 +25,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lex#Context">Context</a> with output(<a href="oboard/moonbit-eval/lex#Context">Context</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex.mbt,15:::fn <a href="oboard/moonbit-eval/lex#Context">Context</a>::output(<a href="oboard/moonbit-eval/lex#Context">Context</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/traits.mbt,85:::fn <a href="oboard/moonbit-eval/lex#Context">Context</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,oboard/moonbit-eval/lex/lex.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lex#Context">Context</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lex/lex.mbt,15:::fn output(<a href="oboard/moonbit-eval/lex#Context">Context</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## ContextOfNumber
 
@@ -114,30 +106,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="oboard/moonbit-eval/lex#Token">Token</a> with op_equal(<a href="oboard/moonbit-eval/lex#Token">Token</a>, <a href="oboard/moonbit-eval/lex#Token">Token</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lex#Token">Token</a> with output(<a href="oboard/moonbit-eval/lex#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::fn <a href="oboard/moonbit-eval/lex#Token">Token</a>::op_equal(<a href="oboard/moonbit-eval/lex#Token">Token</a>, <a href="oboard/moonbit-eval/lex#Token">Token</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::fn <a href="oboard/moonbit-eval/lex#Token">Token</a>::output(<a href="oboard/moonbit-eval/lex#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/traits.mbt,85:::fn <a href="oboard/moonbit-eval/lex#Token">Token</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="oboard/moonbit-eval/lex#Token">Token</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::fn op_equal(<a href="oboard/moonbit-eval/lex#Token">Token</a>, <a href="oboard/moonbit-eval/lex#Token">Token</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lex#Token">Token</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lex/lex_token.mbt,87:::fn output(<a href="oboard/moonbit-eval/lex#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## TokenPosition
 
@@ -153,21 +136,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex_token.mbt,95:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a> with output(<a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/lex_token.mbt,95:::fn <a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a>::output(<a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/lex/traits.mbt,85:::fn <a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,oboard/moonbit-eval/lex/lex_token.mbt,95:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/lex/lex_token.mbt,95:::fn output(<a href="oboard/moonbit-eval/lex#TokenPosition">TokenPosition</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## lex
 

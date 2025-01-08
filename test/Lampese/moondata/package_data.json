@@ -1,0 +1,172 @@
+{
+  "readme": "",
+  "name": "Lampese/moondata",
+  "traits": [],
+  "types": [
+    {
+      "name": "A",
+      "docstring": "",
+      "signature": "pub enum A {\n  Int(() -> Int)\n  Float(() -> Float)\n  Double(() -> Double)\n  String(() -> String)\n  Bool(() -> Bool)\n  Char(() -> Char)\n  Int64(() -> Int64)\n  UInt64(() -> UInt64)\n  UInt(() -> UInt)\n  ArrayInt(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int])\n  ArrayFloat(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Float])\n  ArrayDouble(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Double])\n  ArrayString(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String])\n  ArrayBool(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Bool])\n  ArrayChar(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Char])\n  ArrayInt64(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int64])\n  ArrayUInt64(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[UInt64])\n  ArrayUInt(() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[UInt])\n}",
+      "loc": { "line": 2, "column": 10 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#A\">A</a>::to_string(self : <a href=\"Lampese/moondata#A\">A</a>) -> String",
+          "loc": { "line": 35, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"Lampese/moondata#A\">A</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"Lampese/moondata#A\">A</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 21, "column": 10 }
+            }
+          ],
+          "loc": { "line": 21, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Gen",
+      "docstring": "",
+      "signature": "type Gen",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::new(state~ : Bytes = ..) -> <a href=\"Lampese/moondata#Gen\">Gen</a>",
+          "loc": { "line": 7, "column": 13 }
+        },
+        {
+          "name": "rand_array",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_array[T](self : <a href=\"Lampese/moondata#Gen\">Gen</a>, len~ : () -> Int = .., gen~ : () -> T) -> (() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T])",
+          "loc": { "line": 2, "column": 8 }
+        },
+        {
+          "name": "rand_array_unique",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_array_unique[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"Lampese/moondata#Gen\">Gen</a>, len~ : () -> Int = .., gen~ : () -> T) -> (() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T])",
+          "loc": { "line": 18, "column": 8 }
+        },
+        {
+          "name": "rand_bool",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_bool(self : <a href=\"Lampese/moondata#Gen\">Gen</a>) -> (() -> Bool)",
+          "loc": { "line": 27, "column": 8 }
+        },
+        {
+          "name": "rand_char",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_char(self : <a href=\"Lampese/moondata#Gen\">Gen</a>) -> (() -> Char)",
+          "loc": { "line": 47, "column": 8 }
+        },
+        {
+          "name": "rand_char_range",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_char_range(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : Int, r : Int) -> (() -> Char)",
+          "loc": { "line": 52, "column": 8 }
+        },
+        {
+          "name": "rand_double",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_double(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : Double, r : Double) -> (() -> Double)",
+          "loc": { "line": 22, "column": 8 }
+        },
+        {
+          "name": "rand_float",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_float(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : Float, r : Float) -> (() -> Float)",
+          "loc": { "line": 17, "column": 8 }
+        },
+        {
+          "name": "rand_int",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_int(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : Int, r : Int) -> (() -> Int)",
+          "loc": { "line": 12, "column": 8 }
+        },
+        {
+          "name": "rand_int64",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_int64(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : Int64, r : Int64) -> (() -> Int64)",
+          "loc": { "line": 37, "column": 8 }
+        },
+        {
+          "name": "rand_string",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_string(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, len~ : () -> Int = .., char_gen~ : () -> Char) -> (() -> String)",
+          "loc": { "line": 57, "column": 8 }
+        },
+        {
+          "name": "rand_uint",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_uint(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : UInt, r : UInt) -> (() -> UInt)",
+          "loc": { "line": 32, "column": 8 }
+        },
+        {
+          "name": "rand_uint64",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::rand_uint64(self : <a href=\"Lampese/moondata#Gen\">Gen</a>, l : UInt64, r : UInt64) -> (() -> UInt64)",
+          "loc": { "line": 42, "column": 8 }
+        },
+        {
+          "name": "select",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Gen\">Gen</a>::select[T](self : <a href=\"Lampese/moondata#Gen\">Gen</a>, fl : <a href=\"moonbitlang/core/array#Array\">Array</a>[() -> T]) -> (() -> T)",
+          "loc": { "line": 8, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Test",
+      "docstring": "",
+      "signature": "pub struct Test {\n  name : String\n  arg : <a href=\"moonbitlang/core/array#Array\">Array</a>[(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Lampese/moondata#A\">A</a>], Int)]\n}",
+      "loc": { "line": 24, "column": 12 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Test\">Test</a>::new(name~ : String, arg~ : <a href=\"moonbitlang/core/array#Array\">Array</a>[(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Lampese/moondata#A\">A</a>], Int)]) -> <a href=\"Lampese/moondata#Test\">Test</a>",
+          "loc": { "line": 30, "column": 14 }
+        },
+        {
+          "name": "run",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moondata#Test\">Test</a>::run(self : <a href=\"Lampese/moondata#Test\">Test</a>, output_dir~ : String, filename~ : String) -> Unit",
+          "loc": { "line": 72, "column": 14 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "arr_generator_concat",
+      "docstring": "",
+      "signature": "fn arr_generator_concat[T](arr_gen~ : () -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T], arr_gen_2~ : () -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> (() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T])",
+      "loc": { "line": 44, "column": 8 }
+    },
+    {
+      "name": "gen_arg_code",
+      "docstring": "",
+      "signature": "fn gen_arg_code(arg : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Lampese/moondata#A\">A</a>]) -> String",
+      "loc": { "line": 59, "column": 8 }
+    },
+    {
+      "name": "lock",
+      "docstring": "",
+      "signature": "fn lock[T](f : () -> T) -> (() -> T)",
+      "loc": { "line": 2, "column": 8 }
+    }
+  ],
+  "misc": []
+}

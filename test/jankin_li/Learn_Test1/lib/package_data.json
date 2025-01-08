@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "jankin_li/Learn_Test1/lib",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "hello",
+      "docstring": "",
+      "signature": "fn hello() -> String",
+      "loc": { "line": 1, "column": 8 }
+    }
+  ],
+  "misc": []
+}

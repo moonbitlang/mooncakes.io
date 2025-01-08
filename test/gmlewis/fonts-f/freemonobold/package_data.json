@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "gmlewis/fonts-f/freemonobold",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "font",
+      "docstring": "",
+      "signature": "let font : <a href=\"gmlewis/fonts#Font\">@gmlewis/fonts.Font</a>",
+      "loc": { "line": 19939, "column": 9 }
+    }
+  ],
+  "misc": []
+}

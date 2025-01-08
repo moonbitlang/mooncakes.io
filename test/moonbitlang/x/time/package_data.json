@@ -1,0 +1,1481 @@
+{
+  "readme": "# Moonbit/Core Time\n\n## Overview\n\nPackage time provides functionality for measuring and manipulating time.\n\nThe calendrical calculations always assume a ISO 8601 calendar, with no leap seconds.\n\nTo create a datatime that represents the current time, you need to obtain the unix second and time zone offset from the [wasi](https://mooncakes.io/docs/#/peter-jerry-ye/wasi/) package (wasm-gc backend) or other FFI functions, and manually create a datetime.\n\n```\n// creates a UTC+8 fixed time zone.\nlet zone = @time.fixed_zone(\"Asia/Shanghai\", 8*60*60)\n\n// creates a ZonedDateTime from unix second and time zone.\nlet date_time = @time.unix(1714227729L, nanosecond=1000, ~zone) // Ok(2024-04-27T22:22:09.000001+08:00[Asia/Shanghai])\n```\n\n## TODOs\n\n- Convert from/to RFC format string.\n- Custom string formatter.\n- Support the time zone offset transition at daylight saving time.\n- Support monotonic clock to accurately measure the elapsed time.\n- Support different calendar system, such as Chinese calendar system.\n",
+  "name": "moonbitlang/x/time",
+  "traits": [],
+  "types": [
+    {
+      "name": "Duration",
+      "docstring": " An amount of time with nanosecond precision.",
+      "signature": "type Duration",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "add_duration",
+          "docstring": " Adds other duration to this duration, and returns a new duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::add_duration(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, other : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 213, "column": 8 }
+        },
+        {
+          "name": "add_hours",
+          "docstring": " Adds specified hours to this duration, and returns a new duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::add_hours(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, hours : Int64) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 167, "column": 8 }
+        },
+        {
+          "name": "add_minutes",
+          "docstring": " Adds specified minutes to this duration, and returns a new duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::add_minutes(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, minutes : Int64) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 179, "column": 8 }
+        },
+        {
+          "name": "add_nanoseconds",
+          "docstring": " Adds specified nanoseconds to this duration, and returns a new duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::add_nanoseconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, nanoseconds : Int64) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 200, "column": 8 }
+        },
+        {
+          "name": "add_seconds",
+          "docstring": " Adds specified seconds to this duration, and returns a new duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::add_seconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, seconds : Int64) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 191, "column": 8 }
+        },
+        {
+          "name": "from_string",
+          "docstring": " Parses a ISO 8601 format string like `PT[n]H[n]M[n].[n]S`.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::from_string(str : String) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 53, "column": 18 }
+        },
+        {
+          "name": "is_neg",
+          "docstring": " Checks if this duration is negative.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::is_neg(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Bool",
+          "loc": { "line": 162, "column": 8 }
+        },
+        {
+          "name": "is_zero",
+          "docstring": " Checks if this duration is zero length.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::is_zero(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Bool",
+          "loc": { "line": 157, "column": 8 }
+        },
+        {
+          "name": "nanoseconds",
+          "docstring": " Returns the number of nanoseconds in this duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::nanoseconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Int",
+          "loc": { "line": 152, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a Duration from hours, minutes, seconds and nanoseconds.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::of(hours~ : Int64 = .., minutes~ : Int64 = .., seconds~ : Int64 = .., nanoseconds~ : Int64 = ..) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 22, "column": 18 }
+        },
+        {
+          "name": "op_add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::op_add(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, other : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 229, "column": 8 }
+        },
+        {
+          "name": "seconds",
+          "docstring": " Returns the number of seconds in this duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::seconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Int64",
+          "loc": { "line": 147, "column": 8 }
+        },
+        {
+          "name": "to_nanoseconds",
+          "docstring": " Converts this duration to the total length in nanoseconds.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::to_nanoseconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Int64",
+          "loc": { "line": 250, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns a string representation of this duration using ISO 8601 representation.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::to_string(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> String",
+          "loc": { "line": 102, "column": 8 }
+        },
+        {
+          "name": "with_nanoseconds",
+          "docstring": " Returns a new duration with the specified nanosecond of second.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::with_nanoseconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, nanoseconds : Int) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 242, "column": 8 }
+        },
+        {
+          "name": "with_seconds",
+          "docstring": " Returns a new duration with the specified amount of seconds.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::with_seconds(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, seconds : Int64) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "loc": { "line": 234, "column": 8 }
+        },
+        {
+          "name": "zero",
+          "docstring": " Returns a zero length duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Duration\">Duration</a>::zero() -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "loc": { "line": 48, "column": 18 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"moonbitlang/x/time#Duration\">Duration</a>, <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Int",
+              "loc": { "line": 19, "column": 14 }
+            }
+          ],
+          "loc": { "line": 19, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/x/time#Duration\">Duration</a>, <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> Bool",
+              "loc": { "line": 19, "column": 10 }
+            }
+          ],
+          "loc": { "line": 19, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#Duration\">Duration</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 142, "column": 33 }
+            }
+          ],
+          "loc": { "line": 142, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Period",
+      "docstring": " An amount of time representing by years, months and days in the ISO-8601 calendar system.",
+      "signature": "type Period",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "add_days",
+          "docstring": " Adds specified days to this period, and returns a new period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::add_days(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, days : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 139, "column": 8 }
+        },
+        {
+          "name": "add_months",
+          "docstring": " Adds specified months to this period, and returns a new period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::add_months(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, months : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 130, "column": 8 }
+        },
+        {
+          "name": "add_period",
+          "docstring": " Adds other period to this period, and returns a new period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::add_period(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, other : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 148, "column": 8 }
+        },
+        {
+          "name": "add_weeks",
+          "docstring": " Adds specified weeks to this period, and returns a new period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::add_weeks(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, weeks : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 121, "column": 8 }
+        },
+        {
+          "name": "add_years",
+          "docstring": " Adds specified years to this period, and returns a new period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::add_years(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, years : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 112, "column": 8 }
+        },
+        {
+          "name": "days",
+          "docstring": " Returns the number of days in this duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::days(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Int",
+          "loc": { "line": 107, "column": 8 }
+        },
+        {
+          "name": "from_string",
+          "docstring": " Parses a ISO 8601 format string like `P[n]Y[n]M[n]D`.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::from_string(str : String) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 37, "column": 16 }
+        },
+        {
+          "name": "is_neg",
+          "docstring": " Checks if this period is negative.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::is_neg(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Bool",
+          "loc": { "line": 220, "column": 8 }
+        },
+        {
+          "name": "is_zero",
+          "docstring": " Checks if this period is zero length.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::is_zero(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Bool",
+          "loc": { "line": 215, "column": 8 }
+        },
+        {
+          "name": "months",
+          "docstring": " Returns the number of months in this duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::months(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Int",
+          "loc": { "line": 102, "column": 8 }
+        },
+        {
+          "name": "multiply",
+          "docstring": " Returns a new period with all elements in this period multiplied by the specified value.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::multiply(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, n : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 169, "column": 8 }
+        },
+        {
+          "name": "negated",
+          "docstring": " Returns a new period with all elements in this period negated.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::negated(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 183, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a Period from years, months, and days.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::of(years~ : Int = .., months~ : Int = .., days~ : Int = ..) -> <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "loc": { "line": 23, "column": 16 }
+        },
+        {
+          "name": "op_add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::op_add(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, other : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 159, "column": 8 }
+        },
+        {
+          "name": "op_sub",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::op_sub(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, other : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 164, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns a string representation of this period using ISO 8601 representation.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::to_string(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> String",
+          "loc": { "line": 70, "column": 8 }
+        },
+        {
+          "name": "to_total_months",
+          "docstring": " Returns the total number of months in this period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::to_total_months(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Int64",
+          "loc": { "line": 225, "column": 8 }
+        },
+        {
+          "name": "with_days",
+          "docstring": " Returns a new period with the specified amount of days.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::with_days(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, days : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "loc": { "line": 206, "column": 8 }
+        },
+        {
+          "name": "with_months",
+          "docstring": " Returns a new period with the specified amount of months.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::with_months(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, months : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "loc": { "line": 197, "column": 8 }
+        },
+        {
+          "name": "with_years",
+          "docstring": " Returns a new period with the specified amount of years.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::with_years(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, years : Int) -> <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "loc": { "line": 188, "column": 8 }
+        },
+        {
+          "name": "years",
+          "docstring": " Returns the number of years in this duration.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::years(self : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Int",
+          "loc": { "line": 97, "column": 8 }
+        },
+        {
+          "name": "zero",
+          "docstring": " Returns a zero length period.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Period\">Period</a>::zero() -> <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "loc": { "line": 32, "column": 16 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"moonbitlang/x/time#Period\">Period</a>, <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Int",
+              "loc": { "line": 20, "column": 14 }
+            }
+          ],
+          "loc": { "line": 20, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/x/time#Period\">Period</a>, <a href=\"moonbitlang/x/time#Period\">Period</a>) -> Bool",
+              "loc": { "line": 20, "column": 10 }
+            }
+          ],
+          "loc": { "line": 20, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#Period\">Period</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 92, "column": 31 }
+            }
+          ],
+          "loc": { "line": 92, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "PlainDate",
+      "docstring": " A date without a time zone in the ISO 8601 calendar system.",
+      "signature": "type PlainDate",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "add_days",
+          "docstring": " Adds specified days to this date, and returns a new date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::add_days(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, days : Int64) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 306, "column": 8 }
+        },
+        {
+          "name": "add_months",
+          "docstring": " Adds specified months to this date, and returns a new date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::add_months(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, months : Int64) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 277, "column": 8 }
+        },
+        {
+          "name": "add_period",
+          "docstring": " Adds a period to this date, and returns a new date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::add_period(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, period : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 317, "column": 8 }
+        },
+        {
+          "name": "add_weeks",
+          "docstring": " Adds specified weeks to this date, and returns a new date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::add_weeks(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, weeks : Int64) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 297, "column": 8 }
+        },
+        {
+          "name": "add_years",
+          "docstring": " Adds specified years to this date, and returns a new date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::add_years(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, years : Int64) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 263, "column": 8 }
+        },
+        {
+          "name": "compare",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::compare(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, other : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 113, "column": 8 }
+        },
+        {
+          "name": "day",
+          "docstring": " Returns the day of the month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::day(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 160, "column": 8 }
+        },
+        {
+          "name": "days_in_month",
+          "docstring": " Returns the number of days in the month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::days_in_month(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 195, "column": 8 }
+        },
+        {
+          "name": "days_in_week",
+          "docstring": " Returns the number of days in the week.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::days_in_week(_self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 190, "column": 19 }
+        },
+        {
+          "name": "days_in_year",
+          "docstring": " Returns the number of days in the year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::days_in_year(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 201, "column": 8 }
+        },
+        {
+          "name": "era",
+          "docstring": " Returns the era of this date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::era(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> String",
+          "loc": { "line": 132, "column": 8 }
+        },
+        {
+          "name": "era_year",
+          "docstring": " Returns the year of the era of this date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::era_year(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 141, "column": 8 }
+        },
+        {
+          "name": "from_string",
+          "docstring": " Creates a PlainDate from a string, like \"2008-08-08\".",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::from_string(str : String) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 60, "column": 19 }
+        },
+        {
+          "name": "from_unix_day",
+          "docstring": " Creates a date from the days count since unix epoch.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::from_unix_day(unix_day : Int64) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 46, "column": 19 }
+        },
+        {
+          "name": "from_year_ord",
+          "docstring": " Creates a PlainDate from year and ordinal day.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::from_year_ord(year : Int, ordinal : Int) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 31, "column": 19 }
+        },
+        {
+          "name": "in_leap_year",
+          "docstring": " Checks if the date is in a leap year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::in_leap_year(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Bool",
+          "loc": { "line": 211, "column": 8 }
+        },
+        {
+          "name": "month",
+          "docstring": " Returns the ordinal number of month in the current year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::month(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 155, "column": 8 }
+        },
+        {
+          "name": "months_in_year",
+          "docstring": " Returns the number of months in the year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::months_in_year(_self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 206, "column": 19 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a PlainDate from the year, month and day.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::of(year : Int, month : Int, day : Int) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 23, "column": 19 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::op_equal(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, other : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Bool",
+          "loc": { "line": 108, "column": 8 }
+        },
+        {
+          "name": "ordinal",
+          "docstring": " Returns the ordinal day of the year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::ordinal(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 183, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns a string representing the date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::to_string(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> String",
+          "loc": { "line": 89, "column": 8 }
+        },
+        {
+          "name": "to_unix_day",
+          "docstring": " Returns the days count since unix epoch of this date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::to_unix_day(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int64",
+          "loc": { "line": 54, "column": 8 }
+        },
+        {
+          "name": "until",
+          "docstring": " Returns the period between this date and another date.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::until(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, end : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> <a href=\"moonbitlang/x/time#Period\">Period</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 326, "column": 8 }
+        },
+        {
+          "name": "weekday",
+          "docstring": " Returns the weekday.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::weekday(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "loc": { "line": 165, "column": 8 }
+        },
+        {
+          "name": "with_day",
+          "docstring": " Returns a new date with the specified day of month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::with_day(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, day : Int) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 242, "column": 8 }
+        },
+        {
+          "name": "with_month",
+          "docstring": " Returns a new date with the specified month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::with_month(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, month : Int) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 229, "column": 8 }
+        },
+        {
+          "name": "with_ordinal",
+          "docstring": " Returns a new date with the specified ordinal day of year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::with_ordinal(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, ordinal : Int) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 255, "column": 8 }
+        },
+        {
+          "name": "with_year",
+          "docstring": " Returns a new date with the specified year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::with_year(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, year : Int) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 216, "column": 8 }
+        },
+        {
+          "name": "year",
+          "docstring": " Returns the number of years relative to a calendar-specific epoch.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>::year(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> Int",
+          "loc": { "line": 150, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 103, "column": 34 }
+            }
+          ],
+          "loc": { "line": 103, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "PlainDateTime",
+      "docstring": " A datetime without a time zone in the ISO 8601 calendar system.",
+      "signature": "type PlainDateTime",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "add_days",
+          "docstring": " Adds specified days to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_days(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, days : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 187, "column": 8 }
+        },
+        {
+          "name": "add_duration",
+          "docstring": " Adds a duration of time to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_duration(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, duration : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 238, "column": 8 }
+        },
+        {
+          "name": "add_hours",
+          "docstring": " Adds specified hours to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_hours(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, hours : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 197, "column": 8 }
+        },
+        {
+          "name": "add_minutes",
+          "docstring": " Adds specified minutes to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_minutes(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, minutes : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 205, "column": 8 }
+        },
+        {
+          "name": "add_months",
+          "docstring": " Adds specified months to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_months(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, months : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 177, "column": 8 }
+        },
+        {
+          "name": "add_nanoseconds",
+          "docstring": " Adds specified nanoseconds to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_nanoseconds(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, nanoseconds : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 227, "column": 8 }
+        },
+        {
+          "name": "add_period",
+          "docstring": " Adds a period of date to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_period(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, period : <a href=\"moonbitlang/x/time#Period\">Period</a>) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 192, "column": 8 }
+        },
+        {
+          "name": "add_seconds",
+          "docstring": " Adds specified seconds to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_seconds(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, seconds : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 216, "column": 8 }
+        },
+        {
+          "name": "add_weeks",
+          "docstring": " Adds specified weeks to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_weeks(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, weeks : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 182, "column": 8 }
+        },
+        {
+          "name": "add_years",
+          "docstring": " Adds specified years to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::add_years(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, years : Int64) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 172, "column": 8 }
+        },
+        {
+          "name": "day",
+          "docstring": " Returns the day of month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::day(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 112, "column": 8 }
+        },
+        {
+          "name": "days_in_month",
+          "docstring": " Returns the number of days in a month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::days_in_month(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 132, "column": 8 }
+        },
+        {
+          "name": "days_in_week",
+          "docstring": " Returns the number of days in a week of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::days_in_week(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 127, "column": 8 }
+        },
+        {
+          "name": "days_in_year",
+          "docstring": " Returns the number of days in a year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::days_in_year(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 137, "column": 8 }
+        },
+        {
+          "name": "era",
+          "docstring": " Returns the era of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::era(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> String",
+          "loc": { "line": 92, "column": 8 }
+        },
+        {
+          "name": "era_year",
+          "docstring": " Returns the year of era of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::era_year(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 97, "column": 8 }
+        },
+        {
+          "name": "from_string",
+          "docstring": " Creates a PlainTime from a string, like '2008-08-08T20:00:00'.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::from_string(str : String) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 63, "column": 23 }
+        },
+        {
+          "name": "from_unix_second",
+          "docstring": " Creates a PlainDateTime from the elapsed seconds since the unix epoch.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::from_unix_second(second : Int64, nanosecond : Int, offset : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 38, "column": 23 }
+        },
+        {
+          "name": "hour",
+          "docstring": " Returns the hour of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::hour(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 152, "column": 8 }
+        },
+        {
+          "name": "in_leap_year",
+          "docstring": " Checks if this datetime is in a leap year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::in_leap_year(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Bool",
+          "loc": { "line": 147, "column": 8 }
+        },
+        {
+          "name": "minute",
+          "docstring": " Returns the minute of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::minute(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 157, "column": 8 }
+        },
+        {
+          "name": "month",
+          "docstring": " Returns the month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::month(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 107, "column": 8 }
+        },
+        {
+          "name": "months_in_year",
+          "docstring": " Returns the number of months in a year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::months_in_year(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 142, "column": 8 }
+        },
+        {
+          "name": "nanosecond",
+          "docstring": " Returns the nanosecond of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::nanosecond(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 167, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a PlainDateTime from the year, month, day, hour, minute, second and nanosecond.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::of(year : Int, month : Int, day : Int, hour~ : Int = .., minute~ : Int = .., second~ : Int = .., nanosecond~ : Int = ..) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 22, "column": 23 }
+        },
+        {
+          "name": "ordinal",
+          "docstring": " Returns the ordinal day of year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::ordinal(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 122, "column": 8 }
+        },
+        {
+          "name": "second",
+          "docstring": " Returns the second of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::second(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 162, "column": 8 }
+        },
+        {
+          "name": "to_plain_date",
+          "docstring": " Returns the date part of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::to_plain_date(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>",
+          "loc": { "line": 292, "column": 8 }
+        },
+        {
+          "name": "to_plain_time",
+          "docstring": " Returns the time part of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::to_plain_time(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "loc": { "line": 297, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns a string representing the datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::to_string(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> String",
+          "loc": { "line": 75, "column": 8 }
+        },
+        {
+          "name": "to_unix_second",
+          "docstring": " Converts this datetime to the elapsed seconds since the unix epoch.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::to_unix_second(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int64",
+          "loc": { "line": 57, "column": 8 }
+        },
+        {
+          "name": "weekday",
+          "docstring": " Returns the weekday of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::weekday(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "loc": { "line": 117, "column": 8 }
+        },
+        {
+          "name": "with_day",
+          "docstring": " Returns a new datetime with the specified day of month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_day(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, day : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 259, "column": 8 }
+        },
+        {
+          "name": "with_hour",
+          "docstring": " Returns a new datetime with the specified hour.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_hour(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, hour : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 269, "column": 8 }
+        },
+        {
+          "name": "with_minute",
+          "docstring": " Returns a new datetime with the specified minute.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_minute(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, minute : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 274, "column": 8 }
+        },
+        {
+          "name": "with_month",
+          "docstring": " Returns a new datetime with the specified month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_month(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, month : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 254, "column": 8 }
+        },
+        {
+          "name": "with_nanosecond",
+          "docstring": " Returns a new datetime with the specified nanosecond.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_nanosecond(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, nanosecond : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 284, "column": 8 }
+        },
+        {
+          "name": "with_ordinal",
+          "docstring": " Returns a new datetime with the specified ordinal day of year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_ordinal(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, ordinal : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 264, "column": 8 }
+        },
+        {
+          "name": "with_second",
+          "docstring": " Returns a new datetime with the specified second.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_second(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, second : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 279, "column": 8 }
+        },
+        {
+          "name": "with_year",
+          "docstring": " Returns a new datetime with the specified year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::with_year(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, year : Int) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 249, "column": 8 }
+        },
+        {
+          "name": "year",
+          "docstring": " Returns the year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>::year(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+          "loc": { "line": 102, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Int",
+              "loc": { "line": 19, "column": 14 }
+            }
+          ],
+          "loc": { "line": 19, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>) -> Bool",
+              "loc": { "line": 19, "column": 10 }
+            }
+          ],
+          "loc": { "line": 19, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 84, "column": 38 }
+            }
+          ],
+          "loc": { "line": 84, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "PlainTime",
+      "docstring": " A time without a time zone",
+      "signature": "type PlainTime",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "add_duration",
+          "docstring": " Adds a duration to this time, and returns a new time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::add_duration(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, duration : <a href=\"moonbitlang/x/time#Duration\">Duration</a>) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 226, "column": 8 }
+        },
+        {
+          "name": "add_hours",
+          "docstring": " Adds specified hours to this time, and returns a new time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::add_hours(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, hours : Int64) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 153, "column": 8 }
+        },
+        {
+          "name": "add_minutes",
+          "docstring": " Adds specified minutes to this time, and returns a new time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::add_minutes(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, minutes : Int64) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 162, "column": 8 }
+        },
+        {
+          "name": "add_nanoseconds",
+          "docstring": " Adds specified nanoseconds to this time, and returns a new time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::add_nanoseconds(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, nanoseconds : Int64) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 207, "column": 8 }
+        },
+        {
+          "name": "add_seconds",
+          "docstring": " Adds specified seconds to this time, and returns a new time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::add_seconds(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, seconds : Int64) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 183, "column": 8 }
+        },
+        {
+          "name": "at_date",
+          "docstring": " Combines this time with a date to creates a PlainDateTime",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::at_date(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, date : <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "loc": { "line": 272, "column": 8 }
+        },
+        {
+          "name": "from_nanosecond_of_day",
+          "docstring": " Creates a PlainTime from the total nanoseconds of the day.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::from_nanosecond_of_day(nanosecond : Int64) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 133, "column": 19 }
+        },
+        {
+          "name": "from_second_of_day",
+          "docstring": " Creates a PlainTime from the total seconds of the day.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::from_second_of_day(second : Int) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 120, "column": 19 }
+        },
+        {
+          "name": "from_string",
+          "docstring": " Creates a PlainTime from a string, like '10:20:30.45678'.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::from_string(str : String) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 38, "column": 19 }
+        },
+        {
+          "name": "hour",
+          "docstring": " Returns the hour of this time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::hour(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int",
+          "loc": { "line": 86, "column": 8 }
+        },
+        {
+          "name": "minute",
+          "docstring": " Returns the minute of this time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::minute(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int",
+          "loc": { "line": 91, "column": 8 }
+        },
+        {
+          "name": "nanosecond",
+          "docstring": " Returns the nanosecond of this time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::nanosecond(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int",
+          "loc": { "line": 101, "column": 8 }
+        },
+        {
+          "name": "nanosecond_of_day",
+          "docstring": " Returns the total nanoseconds of this time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::nanosecond_of_day(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int64",
+          "loc": { "line": 114, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a PlainTime from the hour, minute, second and nanosecond.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::of(hour : Int, minute : Int, second : Int, nanosecond : Int) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 24, "column": 19 }
+        },
+        {
+          "name": "second",
+          "docstring": " Returns the second of this time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::second(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int",
+          "loc": { "line": 96, "column": 8 }
+        },
+        {
+          "name": "second_of_day",
+          "docstring": " Returns the total seconds of this time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::second_of_day(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int",
+          "loc": { "line": 106, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns a string representing the time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::to_string(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> String",
+          "loc": { "line": 63, "column": 19 }
+        },
+        {
+          "name": "until",
+          "docstring": " Returns the duration between this time and another time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::until(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, end : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> <a href=\"moonbitlang/x/time#Duration\">Duration</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 266, "column": 8 }
+        },
+        {
+          "name": "with_hour",
+          "docstring": " Returns a new time with the specified hour.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::with_hour(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, hour : Int) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 234, "column": 8 }
+        },
+        {
+          "name": "with_minute",
+          "docstring": " Returns a new time with the specified minute.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::with_minute(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, minute : Int) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 242, "column": 8 }
+        },
+        {
+          "name": "with_nanosecond",
+          "docstring": " Returns a new time with the specified nanosecond.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::with_nanosecond(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, nanosecond : Int) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 258, "column": 8 }
+        },
+        {
+          "name": "with_second",
+          "docstring": " Returns a new time with the specified second.",
+          "signature": "fn <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>::with_second(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, second : Int) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 250, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Int",
+              "loc": { "line": 21, "column": 14 }
+            }
+          ],
+          "loc": { "line": 21, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>) -> Bool",
+              "loc": { "line": 21, "column": 10 }
+            }
+          ],
+          "loc": { "line": 21, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 81, "column": 34 }
+            }
+          ],
+          "loc": { "line": 81, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Weekday",
+      "docstring": "",
+      "signature": "pub(all) enum Weekday {\n  Monday\n  Tuesday\n  Wednesday\n  Thursday\n  Friday\n  Saturday\n  Sunday\n}",
+      "loc": { "line": 16, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/x/time#Weekday\">Weekday</a>, <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>) -> Bool",
+              "loc": { "line": 24, "column": 10 }
+            }
+          ],
+          "loc": { "line": 24, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/x/time#Weekday\">Weekday</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 24, "column": 14 }
+            }
+          ],
+          "loc": { "line": 24, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Zone",
+      "docstring": " Time zone.",
+      "signature": "type Zone",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "is_fixed",
+          "docstring": " Checks if this zone only has one offset.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Zone\">Zone</a>::is_fixed(self : <a href=\"moonbitlang/x/time#Zone\">Zone</a>) -> Bool",
+          "loc": { "line": 32, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns the zone id.",
+          "signature": "fn <a href=\"moonbitlang/x/time#Zone\">Zone</a>::to_string(self : <a href=\"moonbitlang/x/time#Zone\">Zone</a>) -> String",
+          "loc": { "line": 37, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Zone\">Zone</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/x/time#Zone\">Zone</a>, <a href=\"moonbitlang/x/time#Zone\">Zone</a>) -> Bool",
+              "loc": { "line": 20, "column": 10 }
+            }
+          ],
+          "loc": { "line": 20, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Zone\">Zone</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#Zone\">Zone</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 42, "column": 29 }
+            }
+          ],
+          "loc": { "line": 42, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "ZoneOffset",
+      "docstring": " Time offset from UTC.",
+      "signature": "type ZoneOffset",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "compare",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::compare(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>, other : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> Int",
+          "loc": { "line": 81, "column": 8 }
+        },
+        {
+          "name": "from_seconds",
+          "docstring": " Creates a offset from seconds.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::from_seconds(seconds : Int) -> <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 55, "column": 20 }
+        },
+        {
+          "name": "id",
+          "docstring": " Returns the offset id.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::id(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> String",
+          "loc": { "line": 86, "column": 8 }
+        },
+        {
+          "name": "is_dst",
+          "docstring": " Checks if this offset is daylight saving time.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::is_dst(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> Bool",
+          "loc": { "line": 96, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a offset from hours, minutes and seconds.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::of(hours~ : Int = .., minutes~ : Int = .., seconds~ : Int = ..) -> <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 42, "column": 20 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::op_equal(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>, other : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> Bool",
+          "loc": { "line": 76, "column": 8 }
+        },
+        {
+          "name": "seconds",
+          "docstring": " Returns the total seconds of this offset.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::seconds(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> Int",
+          "loc": { "line": 91, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns the offset id.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>::to_string(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>) -> String",
+          "loc": { "line": 66, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 71, "column": 35 }
+            }
+          ],
+          "loc": { "line": 71, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "ZonedDateTime",
+      "docstring": " A datetime with a time zone and offset in the ISO 8601 calendar system.",
+      "signature": "type ZonedDateTime",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "add_days",
+          "docstring": " Adds specified days to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_days(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, days : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 229, "column": 8 }
+        },
+        {
+          "name": "add_hours",
+          "docstring": " Adds specified hours to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_hours(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, hours : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 234, "column": 8 }
+        },
+        {
+          "name": "add_minutes",
+          "docstring": " Adds specified minutes to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_minutes(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, minutes : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 239, "column": 8 }
+        },
+        {
+          "name": "add_months",
+          "docstring": " Adds specified months to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_months(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, months : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 219, "column": 8 }
+        },
+        {
+          "name": "add_nanoseconds",
+          "docstring": " Adds specified nanoseconds to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_nanoseconds(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, nanoseconds : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 255, "column": 8 }
+        },
+        {
+          "name": "add_seconds",
+          "docstring": " Adds specified seconds to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_seconds(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, seconds : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 247, "column": 8 }
+        },
+        {
+          "name": "add_weeks",
+          "docstring": " Adds specified weeks to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_weeks(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, weeks : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 224, "column": 8 }
+        },
+        {
+          "name": "add_years",
+          "docstring": " Adds specified years to this datetime, and returns a new datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::add_years(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, years : Int64) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 214, "column": 8 }
+        },
+        {
+          "name": "day",
+          "docstring": " Returns the day of month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::day(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 144, "column": 8 }
+        },
+        {
+          "name": "days_in_month",
+          "docstring": " Returns the number of days in a month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::days_in_month(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 164, "column": 8 }
+        },
+        {
+          "name": "days_in_week",
+          "docstring": " Returns the number of days in a month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::days_in_week(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 159, "column": 8 }
+        },
+        {
+          "name": "days_in_year",
+          "docstring": " Returns the number of days in a year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::days_in_year(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 169, "column": 8 }
+        },
+        {
+          "name": "era",
+          "docstring": " Returns the era of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::era(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> String",
+          "loc": { "line": 124, "column": 8 }
+        },
+        {
+          "name": "era_year",
+          "docstring": " Returns the year of era of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::era_year(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 129, "column": 8 }
+        },
+        {
+          "name": "from_plain_datetime",
+          "docstring": " Creates a ZonedDateTime from a PlainDateTime and a time zone.\n The default time zone is UTC+0.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::from_plain_datetime(datetime : <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>, zone~ : <a href=\"moonbitlang/x/time#Zone\">Zone</a> = ..) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>",
+          "loc": { "line": 63, "column": 23 }
+        },
+        {
+          "name": "from_unix_second",
+          "docstring": " Creates a ZonedDateTime from elapsed seconds since the unix epoch and a time zone.\n The default time zone is UTC+0.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::from_unix_second(second : Int64, nanosecond~ : Int = .., zone~ : <a href=\"moonbitlang/x/time#Zone\">Zone</a> = ..) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 72, "column": 23 }
+        },
+        {
+          "name": "hour",
+          "docstring": " Returns the hour of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::hour(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 184, "column": 8 }
+        },
+        {
+          "name": "in_leap_year",
+          "docstring": " Checks if this datetime is in a leap year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::in_leap_year(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Bool",
+          "loc": { "line": 179, "column": 8 }
+        },
+        {
+          "name": "minute",
+          "docstring": " Returns the minute of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::minute(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 189, "column": 8 }
+        },
+        {
+          "name": "month",
+          "docstring": " Returns the month of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::month(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 139, "column": 8 }
+        },
+        {
+          "name": "months_in_year",
+          "docstring": " Returns the number of months in a year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::months_in_year(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 174, "column": 8 }
+        },
+        {
+          "name": "nanosecond",
+          "docstring": " Returns the nanosecond of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::nanosecond(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 199, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": " Creates a ZonedDateTime from year, month, day, hour, minute and second.\n The default time zone is UTC+0.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::of(year : Int, month : Int, day : Int, hour~ : Int = .., minute~ : Int = .., second~ : Int = .., zone~ : <a href=\"moonbitlang/x/time#Zone\">Zone</a> = ..) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 48, "column": 23 }
+        },
+        {
+          "name": "offset",
+          "docstring": " Returns the time offset of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::offset(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>",
+          "loc": { "line": 209, "column": 8 }
+        },
+        {
+          "name": "ordinal",
+          "docstring": " Returns the ordinal day of year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::ordinal(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 154, "column": 8 }
+        },
+        {
+          "name": "second",
+          "docstring": " Returns the second of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::second(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 194, "column": 8 }
+        },
+        {
+          "name": "to_plain_date",
+          "docstring": " Returns the date part of this datetime, without timezone.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::to_plain_date(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>",
+          "loc": { "line": 109, "column": 8 }
+        },
+        {
+          "name": "to_plain_date_time",
+          "docstring": " Returns the datetime part of this datetime, without timezone.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::to_plain_date_time(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "loc": { "line": 119, "column": 8 }
+        },
+        {
+          "name": "to_plain_time",
+          "docstring": " Returns the time part of this datetime, without timezone.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::to_plain_time(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "loc": { "line": 114, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " Returns a string representing this datetime, like \"2008-08-08T20:00:00+8:00[Asia/Beijing]\"",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::to_string(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> String",
+          "loc": { "line": 83, "column": 8 }
+        },
+        {
+          "name": "to_unix_second",
+          "docstring": " Returns the elapsed seconds since the unix epoch.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::to_unix_second(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int64",
+          "loc": { "line": 104, "column": 8 }
+        },
+        {
+          "name": "weekday",
+          "docstring": " Returns the weekday of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::weekday(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "loc": { "line": 149, "column": 8 }
+        },
+        {
+          "name": "with_day",
+          "docstring": " Returns a new datetime with the specified day of the month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_day(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, day : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 273, "column": 8 }
+        },
+        {
+          "name": "with_hour",
+          "docstring": " Returns a new datetime with the specified hour.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_hour(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, hour : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 283, "column": 8 }
+        },
+        {
+          "name": "with_minute",
+          "docstring": " Returns a new datetime with the specified minute.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_minute(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, minute : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 288, "column": 8 }
+        },
+        {
+          "name": "with_month",
+          "docstring": " Returns a new datetime with the specified month.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_month(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, month : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 268, "column": 8 }
+        },
+        {
+          "name": "with_nanosecond",
+          "docstring": " Returns a new datetime with the specified nanosecond.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_nanosecond(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, nanosecond : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 298, "column": 8 }
+        },
+        {
+          "name": "with_ordinal",
+          "docstring": " Returns a new datetime with the specified ordinal day of the year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_ordinal(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, ordinal : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 278, "column": 8 }
+        },
+        {
+          "name": "with_second",
+          "docstring": " Returns a new datetime with the specified second.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_second(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, second : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 293, "column": 8 }
+        },
+        {
+          "name": "with_year",
+          "docstring": " Returns a new datetime with the specified year.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::with_year(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, year : Int) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 263, "column": 8 }
+        },
+        {
+          "name": "year",
+          "docstring": " Returns the year of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::year(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> Int",
+          "loc": { "line": 134, "column": 8 }
+        },
+        {
+          "name": "zone",
+          "docstring": " Returns the time zone of this datetime.",
+          "signature": "fn <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>::zone(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>) -> <a href=\"moonbitlang/x/time#Zone\">Zone</a>",
+          "loc": { "line": 204, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 96, "column": 38 }
+            }
+          ],
+          "loc": { "line": 96, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "date_time",
+      "docstring": " Creates a ZonedDateTime from year, month, day, hour, minute, second and a time zone.\n The default time zone is UTC+0.",
+      "signature": "fn date_time(year : Int, month : Int, day : Int, hour~ : Int = .., minute~ : Int = .., second~ : Int = .., zone~ : <a href=\"moonbitlang/x/time#Zone\">Zone</a> = ..) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 24, "column": 8 }
+    },
+    {
+      "name": "fixed_zone",
+      "docstring": " Creates a time zone with fixed offset from time zone id and offset seconds.",
+      "signature": "fn fixed_zone(id : String, offset_seconds : Int) -> <a href=\"moonbitlang/x/time#Zone\">Zone</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 26, "column": 8 }
+    },
+    {
+      "name": "unix",
+      "docstring": " Creates a ZonedDateTime from elapsed seconds since the unix epoch and a time zone.\n The default time zone is UTC+0.",
+      "signature": "fn unix(second : Int64, nanosecond~ : Int = .., zone~ : <a href=\"moonbitlang/x/time#Zone\">Zone</a> = ..) -> <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 38, "column": 8 }
+    },
+    {
+      "name": "utc_offset",
+      "docstring": " UTC+0 offset.",
+      "signature": "let utc_offset : <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>",
+      "loc": { "line": 35, "column": 9 }
+    },
+    {
+      "name": "utc_zone",
+      "docstring": " UTC time zone.",
+      "signature": "let utc_zone : <a href=\"moonbitlang/x/time#Zone\">Zone</a>",
+      "loc": { "line": 23, "column": 9 }
+    }
+  ],
+  "misc": []
+}

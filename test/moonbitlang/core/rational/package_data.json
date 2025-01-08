@@ -8,38 +8,33 @@
       "docstring": "",
       "signature": "pub(all) type! RationalError String\n",
       "loc": { "line": 167, "column": 16 },
-      "methods": [
-        {
-          "name": "op_equal",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>::op_equal(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, other : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>) -> Bool",
-          "loc": { "line": 177, "column": 36 }
-        },
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>::output(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 170, "column": 38 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
-        }
-      ],
+      "methods": [],
       "impls": [
         {
-          "name": "op_equal",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a> with op_equal(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, other : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>) -> Bool",
-          "loc": { "line": 177, "column": 36 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, other : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>) -> Bool",
+              "loc": { "line": 177, "column": 36 }
+            }
+          ],
+          "loc": { "line": 177, "column": 1 }
         },
         {
-          "name": "output",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a> with output(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 170, "column": 38 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 170, "column": 38 }
+            }
+          ],
+          "loc": { "line": 170, "column": 1 }
         }
       ]
     },
@@ -54,12 +49,6 @@
           "docstring": "\n Returns the absolute value of a rational number.",
           "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::abs(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
           "loc": { "line": 125, "column": 8 }
-        },
-        {
-          "name": "arbitrary",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
-          "loc": { "line": 319, "column": 43 }
         },
         {
           "name": "ceil",
@@ -140,12 +129,6 @@
           "loc": { "line": 77, "column": 8 }
         },
         {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::output(self : <a href=\"moonbitlang/core/rational#T\">T</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 305, "column": 26 }
-        },
-        {
           "name": "reciprocal",
           "docstring": "\n Returns the reciprocal of a rational number.",
           "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::reciprocal(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
@@ -158,12 +141,6 @@
           "loc": { "line": 151, "column": 8 }
         },
         {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
-        },
-        {
           "name": "trunc",
           "docstring": "\n Rounds a rational number towards zero.",
           "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::trunc(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Int64",
@@ -172,16 +149,30 @@
       ],
       "impls": [
         {
-          "name": "arbitrary",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/rational#T\">T</a> with arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
-          "loc": { "line": 319, "column": 43 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/rational#T\">T</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 305, "column": 26 }
+            }
+          ],
+          "loc": { "line": 305, "column": 1 }
         },
         {
-          "name": "output",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/rational#T\">T</a> with output(self : <a href=\"moonbitlang/core/rational#T\">T</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 305, "column": 26 }
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+              "loc": { "line": 319, "column": 43 }
+            }
+          ],
+          "loc": { "line": 319, "column": 1 }
         }
       ]
     }

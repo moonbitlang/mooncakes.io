@@ -10,12 +10,6 @@
       "loc": { "line": 22, "column": 8 },
       "methods": [
         {
-          "name": "arbitrary",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[X]",
-          "loc": { "line": 228, "column": 83 }
-        },
-        {
           "name": "from_array",
           "docstring": "\n Creates a new immutable priority queue from an array.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4, 5])\n assert_eq!(queue.length(), 5)\n ```",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::from_array[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
@@ -28,22 +22,10 @@
           "loc": { "line": 85, "column": 11 }
         },
         {
-          "name": "hash",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::hash[Self : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : Self) -> Int",
-          "loc": { "line": 40, "column": 1 }
-        },
-        {
-          "name": "hash_combine",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 241, "column": 49 }
-        },
-        {
           "name": "is_empty",
           "docstring": "\n Checks if the immutable priority queue is empty.\n \n # Example\n ```\n let queue = @priority_queue.new()\n assert_eq!(queue.is_empty(), true)\n assert_eq!(queue.push(1).is_empty(), false)\n ```",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::is_empty[A](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> Bool",
-          "loc": { "line": 186, "column": 8 }
+          "loc": { "line": 187, "column": 8 }
         },
         {
           "name": "iter",
@@ -55,7 +37,7 @@
           "name": "length",
           "docstring": "\n Return the length of the immutable priority queue.\n \n # Example\n ```\n let queue = @priority_queue.new()\n assert_eq!(queue.length(), 0)\n assert_eq!(queue.push(1).length(), 1)\n ```",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::length[A](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> Int",
-          "loc": { "line": 202, "column": 8 }
+          "loc": { "line": 203, "column": 8 }
         },
         {
           "name": "new",
@@ -67,25 +49,13 @@
           "name": "of",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::of[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
-          "loc": { "line": 207, "column": 11 }
-        },
-        {
-          "name": "op_equal",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::op_equal[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> Bool",
-          "loc": { "line": 236, "column": 40 }
-        },
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 219, "column": 49 }
+          "loc": { "line": 208, "column": 11 }
         },
         {
           "name": "peek",
           "docstring": "\n Peeks at the first value in the immutable priority queue, which returns None if the immutable priority queue is empty.\n \n # Example\n ```\n let queue = @priority_queue.of([1, 2, 3, 4])\n assert_eq!(queue.peek(), Some(4))\n ```",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::peek[A](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> A?",
-          "loc": { "line": 170, "column": 8 }
+          "loc": { "line": 171, "column": 8 }
         },
         {
           "name": "pop",
@@ -95,27 +65,21 @@
         },
         {
           "name": "pop_exn",
-          "docstring": "\n @alert deprecated \"Use `unsafe_pop` instead\"",
+          "docstring": "\n @alert deprecated \"Use `unsafe_pop` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::pop_exn[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
-          "loc": { "line": 146, "column": 8 }
+          "loc": { "line": 147, "column": 8 }
         },
         {
           "name": "push",
           "docstring": "\n Adds a value to the immutable priority queue.\n \n # Example\n ```\n let queue = @priority_queue.new()\n assert_eq!(queue.push(1).length(), 1)\n ```",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::push[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], value : A) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
-          "loc": { "line": 158, "column": 8 }
+          "loc": { "line": 159, "column": 8 }
         },
         {
           "name": "to_array",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::to_array[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
           "loc": { "line": 47, "column": 8 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
         },
         {
           "name": "unsafe_pop",
@@ -126,46 +90,61 @@
       ],
       "impls": [
         {
-          "name": "arbitrary",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a> with arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[X]",
-          "loc": { "line": 228, "column": 83 }
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> Bool",
+              "loc": { "line": 237, "column": 40 }
+            }
+          ],
+          "loc": { "line": 237, "column": 1 }
         },
         {
-          "name": "hash_combine",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a> with hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 241, "column": 49 }
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 242, "column": 49 }
+            }
+          ],
+          "loc": { "line": 242, "column": 1 }
         },
         {
-          "name": "op_equal",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a> with op_equal[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]) -> Bool",
-          "loc": { "line": 236, "column": 40 }
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 220, "column": 49 }
+            }
+          ],
+          "loc": { "line": 220, "column": 1 }
         },
         {
-          "name": "output",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a> with output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 219, "column": 49 }
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/priority_queue#T\">T</a>[X]",
+              "loc": { "line": 229, "column": 83 }
+            }
+          ],
+          "loc": { "line": 229, "column": 1 }
         }
       ]
     }
   ],
   "typealias": [],
   "values": [],
-  "misc": [
-    {
-      "name": "Cont",
-      "impls": [],
-      "methods": [
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/immut/priority_queue#Cont\">Cont</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
-        }
-      ]
-    }
-  ]
+  "misc": []
 }

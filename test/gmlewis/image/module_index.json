@@ -1,0 +1,309 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "image",
+      "package": {
+        "path": "gmlewis/image",
+        "readme": true,
+        "traits": [
+          { "name": "@gmlewis/image.Image", "impls": [] },
+          { "name": "@gmlewis/image.RGBA64Image", "impls": [] }
+        ],
+        "types": [
+          {
+            "name": "Alpha",
+            "impls": [],
+            "methods": [
+              "alpha_at", "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "op_get", "op_set", "opaque", "pix_offset", "raw_data",
+              "rgba64_at", "set", "set_alpha", "set_rgba64", "sub_image"
+            ]
+          },
+          {
+            "name": "Alpha16",
+            "impls": [],
+            "methods": [
+              "alpha16_at", "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "op_get", "op_set", "opaque", "pix_offset", "raw_data",
+              "rgba64_at", "set", "set_alpha16", "set_rgba64", "sub_image"
+            ]
+          },
+          {
+            "name": "CMYK",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "cmyk_at", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "op_get", "opaque", "pix_offset", "raw_data", "rgba64_at",
+              "set", "set_cmyk", "set_rgba64", "sub_image"
+            ]
+          },
+          { "name": "Config", "impls": [], "methods": [ "new_empty" ] },
+          {
+            "name": "Gray",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "gray_at", "new",
+              "new_empty", "op_get", "op_set", "opaque", "pix_offset",
+              "raw_data", "rgba64_at", "set", "set_gray", "set_rgba64",
+              "sub_image"
+            ]
+          },
+          {
+            "name": "Gray16",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "gray16_at", "new",
+              "new_empty", "op_get", "op_set", "opaque", "pix_offset",
+              "raw_data", "rgba64_at", "set", "set_gray16", "set_rgba64",
+              "sub_image"
+            ]
+          },
+          {
+            "name": "NRGBA",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "nrgba_at", "op_get", "op_set", "opaque", "pix_offset",
+              "raw_data", "rgba64_at", "set", "set_nrgba", "set_rgba64",
+              "sub_image"
+            ]
+          },
+          {
+            "name": "NRGBA64",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "nrgba64_at", "op_get", "op_set", "opaque", "pix_offset",
+              "raw_data", "rgba64_at", "set", "set_nrgba64", "set_rgba64",
+              "sub_image"
+            ]
+          },
+          {
+            "name": "Paletted",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "op_get", "op_set", "opaque", "pix_offset", "raw_data",
+              "rgba64_at", "set", "set_color_index", "set_rgba64",
+              "sub_image"
+            ]
+          },
+          {
+            "name": "Point",
+            "impls": [],
+            "methods": [
+              "div", "is_in", "mod", "mul", "op_add", "op_equal", "op_sub",
+              "to_string"
+            ]
+          },
+          {
+            "name": "RGBA",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "op_get", "op_set", "opaque", "pix_offset", "raw_data",
+              "rgba64_at", "rgba_at", "set", "set_rgba", "set_rgba64",
+              "sub_image"
+            ]
+          },
+          {
+            "name": "RGBA64",
+            "impls": [],
+            "methods": [
+              "at", "bounds", "color_index_at", "color_model",
+              "get_bytes_per_pixel", "get_stride", "new", "new_empty",
+              "op_get", "op_set", "opaque", "pix_offset", "raw_data",
+              "rgba64_at", "set", "set_rgba64", "sub_image"
+            ]
+          },
+          {
+            "name": "Rectangle",
+            "impls": [],
+            "methods": [
+              "add", "at", "bounds", "canon", "color_index_at",
+              "color_model", "copy", "dx", "dy", "empty",
+              "get_bytes_per_pixel", "get_stride", "inset", "intersect",
+              "is_in", "new", "op_equal", "opaque", "overlaps", "pix_offset",
+              "raw_data", "rgba64_at", "set", "size", "sub", "sub_image",
+              "to_string", "union"
+            ]
+          },
+          {
+            "name": "SizeError",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          }
+        ],
+        "typealias": [],
+        "values": [ "add2_non_neg", "mul3_non_neg", "pt", "rect" ],
+        "misc": [
+          {
+            "name": "Image",
+            "impls": [],
+            "methods": [ "empty", "new_empty" ]
+          }
+        ]
+      },
+      "childs": [
+        {
+          "name": "color",
+          "package": {
+            "path": "gmlewis/image/color",
+            "readme": false,
+            "traits": [
+              { "name": "@gmlewis/image/color.Color", "impls": [] },
+              { "name": "@gmlewis/image/color.Model", "impls": [] }
+            ],
+            "types": [
+              {
+                "name": "Alpha",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "Alpha16",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "CMYK",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "Gray",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "Gray16",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "ModelFunc",
+                "impls": [],
+                "methods": [ "convert", "get_palette", "name" ]
+              },
+              {
+                "name": "NRGBA",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "NRGBA64",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "NYCbCrA",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "Palette",
+                "impls": [],
+                "methods": [
+                  "convert", "from", "get_palette", "index", "length",
+                  "name", "new", "new_empty", "op_as_view", "op_get",
+                  "op_set"
+                ]
+              },
+              {
+                "name": "RGBA",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "RGBA64",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "from", "model", "new", "raw", "rgba" ]
+              },
+              {
+                "name": "YCbCr",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "model", "new", "raw", "rgba" ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "alpha16_model", "alpha_model", "black", "cmyk_model",
+              "cmyk_to_rgb", "gray16_model", "gray_model", "model_func",
+              "n_y_cb_cr_a_model", "nrgba64_model", "nrgba_model", "opaque",
+              "rgb_to_cmyk", "rgb_to_y_cb_cr", "rgba64_model", "rgba_model",
+              "transparent", "white", "y_cb_cr_model", "y_cb_cr_to_rgb"
+            ],
+            "misc": [
+              {
+                "name": "Color",
+                "impls": [],
+                "methods": [ "op_equal", "to_string" ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "png",
+          "package": {
+            "path": "gmlewis/image/png",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "Decoder", "impls": [], "methods": [ "read" ] },
+              {
+                "name": "Encoder",
+                "impls": [],
+                "methods": [ "enc", "write" ]
+              },
+              { "name": "InterlaceScan", "impls": [], "methods": [] },
+              { "name": "ReaderSize", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [
+              "chunk_order_error", "decode", "decode_config", "encode",
+              "err_negative_read"
+            ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

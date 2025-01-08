@@ -1,0 +1,605 @@
+{
+  "readme": "# gmlewis/io\n[![check](https://github.com/gmlewis/moonbit-io/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-io/actions/workflows/check.yml)\n\nThis is a simplified io package based on Go's implementation:\nhttps://cs.opensource.google/go/go/+/refs/tags/go1.23.2:src/io/io.go\nwhich has the copyright notice:\n\n```\n// Copyright 2009 The Go Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style\n// license that can be found in the LICENSE file.\n```\n\n## Status\n\nThe code has been updated to support compiler:\n\n```bash\n$ moon version --all\nmoon 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moon\nmoonc v0.1.20241216+68e710374 ~/.moon/bin/moonc\nmoonrun 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moonrun\n```\n\nUse `moonup` to manage `moon` compiler versions:\nhttps://github.com/chawyehsu/moonup\n",
+  "name": "gmlewis/io",
+  "traits": [
+    {
+      "name": "@gmlewis/io.ByteReader",
+      "docstring": " ByteReader is the interface that wraps the read_byte method.\n\n read_byte reads and returns the next byte from the input or\n any error encountered. If read_byte returns an error, no input\n byte was consumed, and the returned byte value is undefined.\n\n read_byte provides an efficient interface for byte-at-time\n processing. A [Reader] that does not implement  ByteReader\n can be wrapped using bufio.NewReader to add this method.",
+      "signature": "pub(open) trait @gmlewis/io.ByteReader {\n  read_byte(Self) -> (Byte, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 264, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ByteScanner",
+      "docstring": " ByteScanner is the interface that adds the unread_byte method to the\n basic read_byte method.\n\n unread_byte causes the next call to read_byte to return the last byte read.\n If the last operation was not a successful call to read_byte, unread_byte may\n return an error, unread the last byte read (or the byte prior to the\n last-unread byte), or (in implementations that support the [Seeker] interface)\n seek to one byte before the current offset.",
+      "signature": "pub(open) trait @gmlewis/io.ByteScanner {\n  read_byte(Self) -> (Byte, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  unread_byte(Self) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 276, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ByteWriter",
+      "docstring": " ByteWriter is the interface that wraps the write_byte method.",
+      "signature": "pub(open) trait @gmlewis/io.ByteWriter {\n  write_byte(Self, Byte) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 282, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.Closer",
+      "docstring": " Closer is the interface that wraps the basic Close method.\n\n The behavior of Close after the first call is undefined.\n Specific implementations may document their own behavior.",
+      "signature": "pub(open) trait @gmlewis/io.Closer {\n  close(Self) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 109, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReadCloser",
+      "docstring": " ReadCloser is the interface that groups the basic Read and Close methods.",
+      "signature": "pub(open) trait @gmlewis/io.ReadCloser {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  close(Self) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 139, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReadSeekCloser",
+      "docstring": " ReadSeekCloser is the interface that groups the basic Read, Seek and Close\n methods.",
+      "signature": "pub(open) trait @gmlewis/io.ReadSeekCloser {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  seek(Self, Int64, <a href=\"gmlewis/io#Whence\">Whence</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  close(Self) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 165, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReadSeeker",
+      "docstring": " ReadSeeker is the interface that groups the basic Read and Seek methods.",
+      "signature": "pub(open) trait @gmlewis/io.ReadSeeker {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  seek(Self, Int64, <a href=\"gmlewis/io#Whence\">Whence</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 158, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReadWriteCloser",
+      "docstring": " ReadWriteCloser is the interface that groups the basic Read, Write and Close methods.",
+      "signature": "pub(open) trait @gmlewis/io.ReadWriteCloser {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  write(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  close(Self) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 151, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReadWriteSeeker",
+      "docstring": " ReadWriteSeeker is the interface that groups the basic Read, Write and Seek methods.",
+      "signature": "pub(open) trait @gmlewis/io.ReadWriteSeeker {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  write(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  seek(Self, Int64, <a href=\"gmlewis/io#Whence\">Whence</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 178, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReadWriter",
+      "docstring": " ReadWriter is the interface that groups the basic Read and Write methods.",
+      "signature": "pub(open) trait @gmlewis/io.ReadWriter {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  write(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 133, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.Reader",
+      "docstring": " Reader is the interface that wraps the basic Read method.\n\n Read reads up to len(p) bytes into p. It returns the number of bytes\n read (0 <= n <= len(p)) and any error encountered. Even if Read\n returns n < len(p), it may use all of p as scratch space during the call.\n If some data is available but not len(p) bytes, Read conventionally\n returns what is available instead of waiting for more.\n\n When Read encounters an error or end-of-file condition after\n successfully reading n > 0 bytes, it returns the number of\n bytes read. It may return the (non-None) error from the same call\n or return the error (and n == 0) from a subsequent call.\n An instance of this general case is that a Reader returning\n a non-zero number of bytes at the end of the input stream may\n return either err == eof or err == None. The next Read should\n return 0, eof.\n\n Callers should always process the n > 0 bytes returned before\n considering the error err. Doing so correctly handles I/O errors\n that happen after reading some bytes and also both of the\n allowed eof behaviors.\n\n If len(p) == 0, Read should always return n == 0. It may return a\n non-None error if some error condition is known, such as eof.\n\n Implementations of Read are discouraged from returning a\n zero byte count with a None error, except when len(p) == 0.\n Callers should treat a return of 0 and None as indicating that\n nothing happened; in particular it does not indicate eof.\n\n Implementations must not retain p.",
+      "signature": "pub(open) trait @gmlewis/io.Reader {\n  read(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 88, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReaderAt",
+      "docstring": " ReaderAt is the interface that wraps the basic read_at method.\n\n read_at reads len(p) bytes into p starting at offset off in the\n underlying input source. It returns the number of bytes\n read (0 <= n <= len(p)) and any error encountered.\n\n When read_at returns n < len(p), it returns a non-None error\n explaining why more bytes were not returned. In this respect,\n read_at is stricter than Read.\n\n Even if read_at returns n < len(p), it may use all of p as scratch\n space during the call. If some data is available but not len(p) bytes,\n read_at blocks until either all the data is available or an error occurs.\n In this respect read_at is different from Read.\n\n If the n = len(p) bytes returned by read_at are at the end of the\n input source, read_at may return either err == eof or err == None.\n\n If read_at is reading from an input source with a seek offset,\n read_at should not affect nor be affected by the underlying\n seek offset.\n\n Clients of read_at can execute parallel read_at calls on the\n same input source.\n\n Implementations must not retain p.",
+      "signature": "pub(open) trait @gmlewis/io.ReaderAt {\n  read_at(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte], Int64) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 232, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.ReaderFrom",
+      "docstring": " ReaderFrom is the interface that wraps the read_from method.\n\n read_from reads data from r until eof or error.\n The return value n is the number of bytes read.\n Any error except eof encountered during the read is also returned.\n\n The [copy] function uses [ReaderFrom] if available.",
+      "signature": "pub(open) trait @gmlewis/io.ReaderFrom {\n  read_from(Self, <a href=\"gmlewis/io#Reader\">Reader</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 191, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.Seeker",
+      "docstring": " Seeker is the interface that wraps the basic Seek method.\n\n Seek sets the offset for the next Read or Write to offset,\n interpreted according to whence:\n [SeekStart] means relative to the start of the file,\n [SeekCurrent] means relative to the current offset, and\n [SeekEnd] means relative to the end\n (for example, offset = -2 specifies the penultimate byte of the file).\n Seek returns the new offset relative to the start of the\n file or an error, if any.\n\n Seeking to an offset before the start of the file is an error.\n Seeking to any positive offset may be allowed, but if the new offset exceeds\n the size of the underlying object the behavior of subsequent I/O operations\n is implementation-dependent.",
+      "signature": "pub(open) trait @gmlewis/io.Seeker {\n  seek(Self, Int64, <a href=\"gmlewis/io#Whence\">Whence</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 128, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.WriteCloser",
+      "docstring": " WriteCloser is the interface that groups the basic Write and Close methods.",
+      "signature": "pub(open) trait @gmlewis/io.WriteCloser {\n  write(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  close(Self) -> <a href=\"gmlewis/io#IOError\">IOError</a>?\n}",
+      "loc": { "line": 145, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.WriteSeeker",
+      "docstring": " WriteSeeker is the interface that groups the basic Write and Seek methods.",
+      "signature": "pub(open) trait @gmlewis/io.WriteSeeker {\n  write(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n  seek(Self, Int64, <a href=\"gmlewis/io#Whence\">Whence</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 172, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.Writer",
+      "docstring": " Writer is the interface that wraps the basic Write method.\n\n Write writes len(p) bytes from p to the underlying data stream.\n It returns the number of bytes written from p (0 <= n <= len(p))\n and any error encountered that caused the write to stop early.\n Write must return a non-None error if it returns n < len(p).\n Write must not modify the slice data, even temporarily.\n\n Implementations must not retain p.",
+      "signature": "pub(open) trait @gmlewis/io.Writer {\n  write(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 101, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.WriterAt",
+      "docstring": " WriterAt is the interface that wraps the basic write_at method.\n\n write_at writes len(p) bytes from p to the underlying data stream\n at offset off. It returns the number of bytes written from p (0 <= n <= len(p))\n and any error encountered that caused the write to stop early.\n write_at must return a non-None error if it returns n < len(p).\n\n If write_at is writing to a destination with a seek offset,\n write_at should not affect nor be affected by the underlying\n seek offset.\n\n Clients of write_at can execute parallel write_at calls on the same\n destination if the ranges do not overlap.\n\n Implementations must not retain p.",
+      "signature": "pub(open) trait @gmlewis/io.WriterAt {\n  write_at(Self, <a href=\"gmlewis/io#Slice\">Slice</a>[Byte], Int64) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 251, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/io.WriterTo",
+      "docstring": " WriterTo is the interface that wraps the write_to method.\n\n write_to writes data to w until there's no more data to write or\n when an error occurs. The return value n is the number of bytes\n written. Any error encountered during the write is also returned.\n\n The copy function uses WriterTo if available.",
+      "signature": "pub(open) trait @gmlewis/io.WriterTo {\n  write_to(Self, <a href=\"gmlewis/io#Writer\">Writer</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)\n}",
+      "loc": { "line": 202, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Buffer",
+      "docstring": "",
+      "signature": "type Buffer",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::from(s : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> <a href=\"gmlewis/io#Buffer\">Buffer</a>",
+          "loc": { "line": 20, "column": 16 }
+        },
+        {
+          "name": "length",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::length(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>) -> Int",
+          "loc": { "line": 108, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::new() -> <a href=\"gmlewis/io#Buffer\">Buffer</a>",
+          "loc": { "line": 8, "column": 16 }
+        },
+        {
+          "name": "read",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::read(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>, buf : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 61, "column": 8 }
+        },
+        {
+          "name": "read_byte",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::read_byte(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>) -> (Byte, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 73, "column": 8 }
+        },
+        {
+          "name": "read_from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::read_from(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>, r : <a href=\"gmlewis/io#Reader\">Reader</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 84, "column": 8 }
+        },
+        {
+          "name": "reset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::reset(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>) -> Unit",
+          "loc": { "line": 26, "column": 8 }
+        },
+        {
+          "name": "to_bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::to_bytes(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>) -> Bytes",
+          "loc": { "line": 98, "column": 8 }
+        },
+        {
+          "name": "to_slice",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::to_slice(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>) -> <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]",
+          "loc": { "line": 103, "column": 8 }
+        },
+        {
+          "name": "write",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::write(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>, buf : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 32, "column": 8 }
+        },
+        {
+          "name": "write_bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::write_bytes(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>, buf : Bytes) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 48, "column": 8 }
+        },
+        {
+          "name": "write_string",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Buffer\">Buffer</a>::write_string(self : <a href=\"gmlewis/io#Buffer\">Buffer</a>, s : String) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 55, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Discard",
+      "docstring": "",
+      "signature": "type Discard",
+      "loc": { "line": 672, "column": 8 },
+      "methods": [
+        {
+          "name": "write",
+          "docstring": " Discard implements ReaderFrom as an optimization so copy to\n io.Discard can avoid doing unnecessary work.\n let _ : &ReaderFrom = discard",
+          "signature": "fn <a href=\"gmlewis/io#Discard\">Discard</a>::write(_self : <a href=\"gmlewis/io#Discard\">Discard</a>, p : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+          "loc": { "line": 682, "column": 17 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "IOError",
+      "docstring": " An IOError can be tested with equality checks.",
+      "signature": "pub(all) type! IOError String\n",
+      "loc": { "line": 25, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/io#IOError\">IOError</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/io#IOError\">IOError</a>, <a href=\"gmlewis/io#IOError\">IOError</a>) -> Bool",
+              "loc": { "line": 25, "column": 44 }
+            }
+          ],
+          "loc": { "line": 25, "column": 44 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/io#IOError\">IOError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/io#IOError\">IOError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 25, "column": 38 }
+            }
+          ],
+          "loc": { "line": 25, "column": 38 }
+        }
+      ]
+    },
+    {
+      "name": "LimitedReader",
+      "docstring": " A LimitedReader reads from R but limits the amount of\n data returned to just N bytes. Each call to Read\n updates N to reflect the new amount remaining.\n Read returns eof when N <= 0 or when the underlying R returns eof.",
+      "signature": "type LimitedReader",
+      "loc": { "line": 452, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": " LimitedReader::new returns a Reader that reads from r\n but stops with eof after n bytes.\n The underlying implementation is a LimitedReader.",
+          "signature": "fn <a href=\"gmlewis/io#LimitedReader\">LimitedReader</a>::new(r : <a href=\"gmlewis/io#Reader\">Reader</a>, n : Int64) -> <a href=\"gmlewis/io#LimitedReader\">LimitedReader</a>",
+          "loc": { "line": 441, "column": 23 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "NopCloser",
+      "docstring": "",
+      "signature": "type NopCloser",
+      "loc": { "line": 726, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": " NopCloser::new returns a [ReadCloser] with a no-op Close method wrapping\n the provided [Reader] r.\n If r implements [WriterTo], the returned [ReadCloser] will implement [WriterTo]\n by forwarding calls to r.",
+          "signature": "fn <a href=\"gmlewis/io#NopCloser\">NopCloser</a>::new(r : <a href=\"gmlewis/io#Reader\">Reader</a>) -> <a href=\"gmlewis/io#NopCloser\">NopCloser</a>",
+          "loc": { "line": 708, "column": 19 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "OffsetWriter",
+      "docstring": " An OffsetWriter maps writes at offset base to offset base+off in the underlying writer.",
+      "signature": "type OffsetWriter",
+      "loc": { "line": 579, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#OffsetWriter\">OffsetWriter</a>::new(w : <a href=\"gmlewis/io#WriterAt\">WriterAt</a>, off : Int64) -> <a href=\"gmlewis/io#OffsetWriter\">OffsetWriter</a>",
+          "loc": { "line": 588, "column": 22 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "SectionReader",
+      "docstring": "",
+      "signature": "type SectionReader",
+      "loc": { "line": 492, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": " SectionReader::new returns a [SectionReader] that reads from r\n starting at offset off and stops with eof after n bytes.",
+          "signature": "fn <a href=\"gmlewis/io#SectionReader\">SectionReader</a>::new(r : <a href=\"gmlewis/io#ReaderAt\">ReaderAt</a>, off : Int64, n : Int64) -> <a href=\"gmlewis/io#SectionReader\">SectionReader</a>",
+          "loc": { "line": 473, "column": 23 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Slice",
+      "docstring": " A `Slice` is a slice of an `Array`.\n\n A separate Slice type was needed because of this issue:\n https://github.com/moonbitlang/core/issues/1063\n\n This struct is based on MoonBit's \"ArrayView\" implementation here:\n https://github.com/moonbitlang/core/blob/main/builtin/arrayview.mbt\n which has the following copyright:\n\n Copyright 2024 International Digital Economy Academy\n\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License.",
+      "signature": "type Slice",
+      "loc": { "line": 23, "column": 8 },
+      "methods": [
+        {
+          "name": "append",
+          "docstring": " append appends `s` to the end of the slice, reallocating the underlying\n array if necessary, then returns the new slice.",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::append[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], s : <a href=\"gmlewis/io#Slice\">Slice</a>[T]) -> <a href=\"gmlewis/io#Slice\">Slice</a>[T]",
+          "loc": { "line": 105, "column": 8 }
+        },
+        {
+          "name": "as_array_view",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::as_array_view[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T]) -> <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]",
+          "loc": { "line": 80, "column": 8 }
+        },
+        {
+          "name": "cap",
+          "docstring": " cap returns the total capacity of the slice regardless of the current length.",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::cap[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T]) -> Int",
+          "loc": { "line": 99, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::each[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], f : (T) -> Unit) -> Unit",
+          "loc": { "line": 239, "column": 8 }
+        },
+        {
+          "name": "fold",
+          "docstring": " Fold out values from an Slice according to certain rules.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].fold(init=0, fn { sum, elem => sum + elem })\n sum // 15\n ```",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::fold[A, B](self : <a href=\"gmlewis/io#Slice\">Slice</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 166, "column": 8 }
+        },
+        {
+          "name": "foldi",
+          "docstring": " Fold out values from an Slice according to certain rules with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].foldi(init=0, fn { index, sum, elem => sum + index })\n sum // 10\n ```",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::foldi[A, B](self : <a href=\"gmlewis/io#Slice\">Slice</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": { "line": 196, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::iter[A](self : <a href=\"gmlewis/io#Slice\">Slice</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 134, "column": 8 }
+        },
+        {
+          "name": "iter2",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::iter2[A](self : <a href=\"gmlewis/io#Slice\">Slice</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[Int, A]",
+          "loc": { "line": 147, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": " length returns the length of the slice.",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::length[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T]) -> Int",
+          "loc": { "line": 30, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::new[T](buf : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], start~ : Int = .., end? : Int) -> <a href=\"gmlewis/io#Slice\">Slice</a>[T]",
+          "loc": { "line": 67, "column": 15 }
+        },
+        {
+          "name": "op_as_view",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::op_as_view[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], start~ : Int = .., end? : Int) -> <a href=\"gmlewis/io#Slice\">Slice</a>[T]",
+          "loc": { "line": 86, "column": 8 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": " Compares two slices for equality.",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::op_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], other : <a href=\"gmlewis/io#Slice\">Slice</a>[T]) -> Bool",
+          "loc": { "line": 246, "column": 8 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::op_get[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], index : Int) -> T",
+          "loc": { "line": 35, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::op_set[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], index : Int, value : T) -> Unit",
+          "loc": { "line": 45, "column": 8 }
+        },
+        {
+          "name": "push",
+          "docstring": " push appends `e` to the end of the slice, reallocating the underlying\n array if necessary, then returns the new slice.",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::push[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], e : T) -> <a href=\"gmlewis/io#Slice\">Slice</a>[T]",
+          "loc": { "line": 129, "column": 8 }
+        },
+        {
+          "name": "rev_fold",
+          "docstring": " Fold out values from an Slice according to certain rules in reversed turn.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].rev_fold(init=0, fn { sum, elem => sum + elem })\n sum // 15\n ```",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::rev_fold[A, B](self : <a href=\"gmlewis/io#Slice\">Slice</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 181, "column": 8 }
+        },
+        {
+          "name": "rev_foldi",
+          "docstring": " Fold out values from an Slice according to certain rules in reversed turn with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].rev_foldi(~init=0, fn { index, sum, elem => sum + index })\n sum // 10\n ```",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::rev_foldi[A, B](self : <a href=\"gmlewis/io#Slice\">Slice</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": { "line": 211, "column": 8 }
+        },
+        {
+          "name": "rev_inplace",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::rev_inplace[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T]) -> Unit",
+          "loc": { "line": 230, "column": 8 }
+        },
+        {
+          "name": "swap",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::swap[T](self : <a href=\"gmlewis/io#Slice\">Slice</a>[T], i : Int, j : Int) -> Unit",
+          "loc": { "line": 55, "column": 8 }
+        },
+        {
+          "name": "to_bytes",
+          "docstring": " to_bytes returns slice as Bytes.",
+          "signature": "fn <a href=\"gmlewis/io#Slice\">Slice</a>::to_bytes(self : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> Bytes",
+          "loc": { "line": 261, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/io#Slice\">Slice</a>[X]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"gmlewis/io#Slice\">Slice</a>[X], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 221, "column": 43 }
+            }
+          ],
+          "loc": { "line": 221, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "TeeReader",
+      "docstring": "",
+      "signature": "type TeeReader",
+      "loc": { "line": 641, "column": 8 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": " TeeReader::new returns a [Reader] that writes to w what it reads from r.\n All reads from r performed through it are matched with\n corresponding writes to w. There is no internal buffering -\n the write must complete before the read completes.\n Any error encountered while writing is reported as a read error.",
+          "signature": "fn <a href=\"gmlewis/io#TeeReader\">TeeReader</a>::new(r : <a href=\"gmlewis/io#Reader\">Reader</a>, w : <a href=\"gmlewis/io#Writer\">Writer</a>) -> <a href=\"gmlewis/io#TeeReader\">TeeReader</a>",
+          "loc": { "line": 636, "column": 19 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Whence",
+      "docstring": " Seek whence values.",
+      "signature": "pub(all) enum Whence {\n  SeekStart\n  SeekCurrent\n  SeekEnd\n}",
+      "loc": { "line": 18, "column": 15 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "copy",
+      "docstring": " copy copies from src to dst until either eof is reached\n on src or an error occurs. It returns the number of bytes\n copied and the first error encountered while copying, if any.\n\n A successful copy returns err == None, not err == eof.\n Because copy is defined to read from src until eof, it does\n not treat an eof from Read as an error to be reported.\n\n If src implements [WriterTo],\n the copy is implemented by calling src.write_to(dst).\n Otherwise, if dst implements [ReaderFrom],\n the copy is implemented by calling dst.read_from(src).",
+      "signature": "fn copy(dst : <a href=\"gmlewis/io#Writer\">Writer</a>, src : <a href=\"gmlewis/io#Reader\">Reader</a>) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+      "loc": { "line": 356, "column": 8 }
+    },
+    {
+      "name": "copy_buffer",
+      "docstring": " copy_buffer is identical to copy except that it stages through the\n provided buffer (if one is required) rather than allocating a\n temporary one. If buf is None, one is allocated; otherwise if it has\n zero length, copy_buffer panics.\n\n If either src implements [WriterTo] or dst implements [ReaderFrom],\n buf will not be used to perform the copy.",
+      "signature": "fn copy_buffer(dst : <a href=\"gmlewis/io#Writer\">Writer</a>, src : <a href=\"gmlewis/io#Reader\">Reader</a>, buf : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]?) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+      "loc": { "line": 367, "column": 8 }
+    },
+    {
+      "name": "copy_n",
+      "docstring": " copy_n copies n bytes (or until an error) from src to dst.\n It returns the number of bytes copied and the earliest\n error encountered while copying.\n On return, written == n if and only if err == None.\n\n If dst implements [ReaderFrom], the copy is implemented using it.",
+      "signature": "fn copy_n(dst : <a href=\"gmlewis/io#Writer\">Writer</a>, src : <a href=\"gmlewis/io#Reader\">Reader</a>, n : Int64) -> (Int64, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+      "loc": { "line": 330, "column": 8 }
+    },
+    {
+      "name": "discard",
+      "docstring": " discard is a [Writer] on which all Write calls succeed\n without doing anything.",
+      "signature": "let discard : <a href=\"gmlewis/io#Discard\">Discard</a>",
+      "loc": { "line": 663, "column": 9 }
+    },
+    {
+      "name": "eof",
+      "docstring": " eof is the error returned by Read when no more input is available.\n (Read must return eof itself, not an error wrapping eof,\n because callers will test for eof using ==.)\n Functions should return eof only to signal a graceful end of input.\n If the eof occurs unexpectedly in a structured data stream,\n the appropriate error is either [err_unexpected_eof] or some other error\n giving more detail.",
+      "signature": "let eof : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 44, "column": 9 }
+    },
+    {
+      "name": "err_invalid_write",
+      "docstring": " err_invalid_write means that a write returned an impossible count.",
+      "signature": "let err_invalid_write : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 32, "column": 9 }
+    },
+    {
+      "name": "err_no_progress",
+      "docstring": " err_no_progress is returned by some clients of a [Reader] when\n many calls to Read have failed to return any data or error,\n usually the sign of a broken [Reader] implementation.",
+      "signature": "let err_no_progress : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 53, "column": 9 }
+    },
+    {
+      "name": "err_offset",
+      "docstring": "",
+      "signature": "let err_offset : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 519, "column": 9 }
+    },
+    {
+      "name": "err_short_buffer",
+      "docstring": " err_short_buffer means that a read required a longer buffer than was provided.",
+      "signature": "let err_short_buffer : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 35, "column": 9 }
+    },
+    {
+      "name": "err_short_write",
+      "docstring": " err_short_write means that a write accepted fewer bytes than requested\n but failed to return an explicit error.",
+      "signature": "let err_short_write : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 29, "column": 9 }
+    },
+    {
+      "name": "err_unexpected_eof",
+      "docstring": " err_unexpected_eof means that eof was encountered in the\n middle of reading a fixed-size block or data structure.",
+      "signature": "let err_unexpected_eof : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 48, "column": 9 }
+    },
+    {
+      "name": "err_whence",
+      "docstring": "",
+      "signature": "let err_whence : <a href=\"gmlewis/io#IOError\">IOError</a>",
+      "loc": { "line": 516, "column": 9 }
+    },
+    {
+      "name": "read_all",
+      "docstring": " read_all reads from r until an error or eof and returns the data it read.\n A successful call returns err == None, not err == eof. Because read_all is\n defined to read from src until eof, it does not treat an eof from Read\n as an error to be reported.",
+      "signature": "fn read_all(r : <a href=\"gmlewis/io#Reader\">Reader</a>) -> (<a href=\"gmlewis/io#Slice\">Slice</a>[Byte], <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+      "loc": { "line": 756, "column": 8 }
+    },
+    {
+      "name": "read_full",
+      "docstring": " read_full reads exactly len(buf) bytes from r into buf.\n It returns the number of bytes copied and an error if fewer bytes were read.\n The error is eof only if no bytes were read.\n If an eof happens after reading some but not all the bytes,\n read_full returns [err_unexpected_eof].\n On return, n == len(buf) if and only if err == None.\n If r returns an error having read at least len(buf) bytes, the error is dropped.",
+      "signature": "fn read_full(r : <a href=\"gmlewis/io#Reader\">Reader</a>, buf : <a href=\"gmlewis/io#Slice\">Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">IOError</a>?)",
+      "loc": { "line": 320, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -19,13 +19,21 @@ at once.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### block
@@ -42,16 +50,6 @@ at once.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,10:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,4:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### ready
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/top.mbt,17:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>::ready(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>) -> Bool
@@ -59,11 +57,6 @@ at once.
   >  Return the readiness of a pollable. This function never blocks.
   > 
   >  Returns `true` when the pollable is ready, and `false` otherwise.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">Pollable</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## poll
 

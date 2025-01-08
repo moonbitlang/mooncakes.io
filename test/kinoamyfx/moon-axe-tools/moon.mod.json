@@ -1,0 +1,10 @@
+{
+  "name": "kinoamyfx/moon-axe-tools",
+  "version": "0.0.1-SNAPSHOT",
+  "readme": "README.md",
+  "repository": "",
+  "license": "Apache-2.0",
+  "keywords": ["lib","tools","common"],
+  "description": "",
+  "source": "src"
+}

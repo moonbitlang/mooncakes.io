@@ -1,0 +1,742 @@
+{
+  "readme": "# pretty printer\n\nA declarative-style pretty printer engine, which includes printers for built-in \ntypes such as `Array`, `Map`, and `JsonValue`.\n\n# Install\n\nAdd `Yoorkin/prettyprinter` as dependency by `moon add`.\n\nImport package `prettyprinter` in `moon.pkg.json`, like this:\n\n```\n{\n  \"import\": [\n    \"Yoorkin/prettyprinter\"\n  ]\n}\n```\n\n# Usage\n\n## Print Value\n\nUse `render` to pretty print any type implemented `Pretty` trait.\n\n```moonbit\nlet map = {\n  \"name\": [\"John\", \"Mike\"], \"age\": [\"15\",\"18\"], \"id\": [\"11109121\",\"2000012312\"]\n}\nmap |> @prettyprinter.render() |> println()\n```\n\noutput:\n```\n{\n  \"name\": [\"John\", \"Mike\"],\n  \"age\": [\"15\", \"18\"],\n  \"id\": [\"11109121\", \"2000012312\"]\n}\n```\n\n## Implement Pretty Trait\n\nWrite declarative code to implement a printer for your type. \nSee example in package `prettyprinter/example`.\n\n",
+  "name": "Yoorkin/prettyprinter",
+  "traits": [
+    {
+      "name": "@Yoorkin/prettyprinter.Pretty",
+      "docstring": "",
+      "signature": "pub(open) trait @Yoorkin/prettyprinter.Pretty {\n  pretty(Self) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>\n}",
+      "loc": { "line": 2, "column": 1 },
+      "default_impls": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Unit",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a unit value.",
+              "signature": "fn pretty(_unit : Unit) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 60, "column": 31 }
+            }
+          ],
+          "loc": { "line": 60, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Bool",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a Bool.",
+              "signature": "fn pretty(b : Bool) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 33, "column": 31 }
+            }
+          ],
+          "loc": { "line": 33, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Byte",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty(byte : Byte) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 245, "column": 31 }
+            }
+          ],
+          "loc": { "line": 245, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Char",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a character.",
+              "signature": "fn pretty(c : Char) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 48, "column": 31 }
+            }
+          ],
+          "loc": { "line": 48, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Int",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print an Int.",
+              "signature": "fn pretty(i : Int) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 36, "column": 30 }
+            }
+          ],
+          "loc": { "line": 36, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Int64",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print an Int64.",
+              "signature": "fn pretty(i : Int64) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 39, "column": 32 }
+            }
+          ],
+          "loc": { "line": 39, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for UInt",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a UInt.",
+              "signature": "fn pretty(i : UInt) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 42, "column": 31 }
+            }
+          ],
+          "loc": { "line": 42, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for UInt64",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a UInt64.",
+              "signature": "fn pretty(i : UInt64) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 45, "column": 33 }
+            }
+          ],
+          "loc": { "line": 45, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Float",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a float.",
+              "signature": "fn pretty(f : Float) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 54, "column": 32 }
+            }
+          ],
+          "loc": { "line": 54, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Double",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a double.",
+              "signature": "fn pretty(d : Double) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 51, "column": 33 }
+            }
+          ],
+          "loc": { "line": 51, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for String",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a string.\n \n ```\n pretty(\"Hello, World!\") |> inspect!(content=\"\\\"Hello, World!\\\"\")\n ```",
+              "signature": "fn pretty(str : String) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 30, "column": 33 }
+            }
+          ],
+          "loc": { "line": 30, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for A?",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print an option value.\n \n ```\n let opt = Some(5)\n inspect!(pretty(opt), content=\"Some(5)\")\n ``` ",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](opt : A?) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 83, "column": 41 }
+            }
+          ],
+          "loc": { "line": 83, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/result#Result\">Result</a>[A, B]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a result value.\n \n ```\n let ok : Result[Int, String] = Ok(100)\n let err : Result[Int, String] = Err(\"error\")\n inspect!(pretty(ok), content=\"Ok(100)\")\n inspect!(pretty(err), content=\n   #|Err(\"error\")\n )\n ```",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](res : <a href=\"moonbitlang/core/result#Result\">Result</a>[A, B]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 100, "column": 63 }
+            }
+          ],
+          "loc": { "line": 100, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a FixedArray\n \n ```\n let x  : FixedArray[_] = [1, 2, 3]\n inspect!(\n   pretty(x),\n   content=\"[1, 2, 3]\",\n )\n inspect!(\n   render(x, width=5),\n   content=\n     #|[\n     #|  1,\n     #|  2,\n     #|  3\n     #|]\n   ,\n )\n ```",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 291, "column": 52 }
+            }
+          ],
+          "loc": { "line": 291, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for Bytes",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a Bytes\n \n ```\n let x = Bytes::of([1,2,3,4,5])\n inspect!(pretty(x), content=\"[b'\\\\x01', b'\\\\x02', b'\\\\x03', b'\\\\x04', b'\\\\x05']\")\n inspect!(\n   render(x, width=15),\n   content=\n     #|[\n     #|  b'\\x01', b'\\x02',\n     #|  b'\\x03', b'\\x04',\n     #|  b'\\x05'\n     #|]\n   ,\n )\n ```",
+              "signature": "fn pretty(bytes : Bytes) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 263, "column": 32 }
+            }
+          ],
+          "loc": { "line": 263, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty(buffer : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 396, "column": 36 }
+            }
+          ],
+          "loc": { "line": 396, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print an array.\n \n ```\n let arr = [1, 2, 3, 4]\n inspect!(pretty(arr), content=\"[1, 2, 3, 4]\")\n ```",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](xs : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 68, "column": 47 }
+            }
+          ],
+          "loc": { "line": 68, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a JSON value.\n \n ```\n let user : Json = {\n   \"name\": \"John Doe\",\n   \"age\": 30,\n   \"is_student\": false,\n   \"grades\": [100, 90, 80],\n   \"address\": { \"street\": \"123 Main St\", \"city\": \"Springfield\", \"state\": \"IL\" },\n }\n inspect!(\n   pretty(user),\n   content=\n     #|{\n     #|  \"name\": John Doe,\n     #|  \"age\": 30,\n     #|  \"is_student\": false,\n     #|  \"grades\": [100, 90, 80],\n     #|  \"address\": {\"street\": 123 Main St, \"city\": Springfield, \"state\": IL}\n     #|}\n   ,\n )\n ``` ",
+              "signature": "fn pretty(json : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 167, "column": 31 }
+            }
+          ],
+          "loc": { "line": 167, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/builtin#Map\">Map</a>[A, B]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a map.\n \n ```\n let score : Map[String, Int] = {\n   \"player1\": 1009,\n   \"player2\": 200,\n   \"player3\": 30,\n   \"player4\": 999999999,\n   \"player5\": 999999999,\n }\n inspect!(\n   pretty(score),\n   content=\n     #|{\n     #|  \"player1\": 1009,\n     #|  \"player2\": 200,\n     #|  \"player3\": 30,\n     #|  \"player4\": 999999999,\n     #|  \"player5\": 999999999\n     #|}\n   ,\n )\n ```\n ",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](m : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[A, B]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 131, "column": 60 }
+            }
+          ],
+          "loc": { "line": 131, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/builtin#Set\">Set</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a Set\n \n ``` \n let set = Set::of([1,2,3])\n inspect!(pretty(set), content=\"{1, 2, 3}\")\n inspect!(\n   render(set, width=5),\n   content=\n     #|{\n     #|  1,\n     #|  2,\n     #|  3\n     #|}\n   ,\n )\n ```",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](set : <a href=\"moonbitlang/core/builtin#Set\">Set</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 235, "column": 45 }
+            }
+          ],
+          "loc": { "line": 235, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/deque#T\">@moonbitlang/core/deque.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](deque : <a href=\"moonbitlang/core/deque#T\">@moonbitlang/core/deque.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 399, "column": 50 }
+            }
+          ],
+          "loc": { "line": 399, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/hashmap#T\">@moonbitlang/core/hashmap.T</a>[A, B]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a `@hashmap.T`\n \n ```\n let x = @hashmap.of([(\"key1\",1),(\"key2\",2000)])\n inspect!(pretty(x), content=\n   #|{\"key2\": 2000, \"key1\": 1}\n )\n inspect!(\n   render(x, width=5),\n   content=\n     #|{\n     #|  \"key2\": 2000,\n     #|  \"key1\": 1\n     #|}\n   ,\n )\n ```",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](map : <a href=\"moonbitlang/core/hashmap#T\">@moonbitlang/core/hashmap.T</a>[A, B]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 317, "column": 67 }
+            }
+          ],
+          "loc": { "line": 317, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/hashset#T\">@moonbitlang/core/hashset.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "\n ```\n let x = @hashset.of([\"key1\",\"key2\"])\n inspect!(pretty(x), content=\n   #|{\"key1\", \"key2\"}\n )\n inspect!(\n   render(x, width=5),\n   content=\n     #|{\n     #|  \"key1\",\n     #|  \"key2\"\n     #|}\n   ,\n )\n ```\n ",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](set : <a href=\"moonbitlang/core/hashset#T\">@moonbitlang/core/hashset.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 346, "column": 52 }
+            }
+          ],
+          "loc": { "line": 346, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/immut/array#T\">@moonbitlang/core/immut/array.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](array : <a href=\"moonbitlang/core/immut/array#T\">@moonbitlang/core/immut/array.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 404, "column": 56 }
+            }
+          ],
+          "loc": { "line": 404, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/immut/hashmap#T\">@moonbitlang/core/immut/hashmap.T</a>[A, B]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](map : <a href=\"moonbitlang/core/immut/hashmap#T\">@moonbitlang/core/immut/hashmap.T</a>[A, B]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 409, "column": 73 }
+            }
+          ],
+          "loc": { "line": 409, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/immut/hashset#T\">@moonbitlang/core/immut/hashset.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](set : <a href=\"moonbitlang/core/immut/hashset#T\">@moonbitlang/core/immut/hashset.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 424, "column": 58 }
+            }
+          ],
+          "loc": { "line": 424, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a `@immut/list.T`\n \n ```\n let list = @immut/list.of([(1,'a'), (2,'b'), (3,'c')])\n inspect!(pretty(list), content=\"[(1, a), (2, b), (3, c)]\")\n inspect!(render(list,width=10), content=\n   #|[\n   #|  (1, a),\n   #|  (2, b),\n   #|  (3, c)\n   #|]\n )\n ```",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](list : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 211, "column": 55 }
+            }
+          ],
+          "loc": { "line": 211, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">@moonbitlang/core/immut/sorted_map.T</a>[A, B]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](map : <a href=\"moonbitlang/core/immut/sorted_map#T\">@moonbitlang/core/immut/sorted_map.T</a>[A, B]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 434, "column": 76 }
+            }
+          ],
+          "loc": { "line": 434, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">@moonbitlang/core/immut/sorted_set.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](set : <a href=\"moonbitlang/core/immut/sorted_set#T\">@moonbitlang/core/immut/sorted_set.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 449, "column": 61 }
+            }
+          ],
+          "loc": { "line": 449, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/priority_queue#T\">@moonbitlang/core/priority_queue.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a>](queue : <a href=\"moonbitlang/core/priority_queue#T\">@moonbitlang/core/priority_queue.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 389, "column": 74 }
+            }
+          ],
+          "loc": { "line": 389, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/queue#T\">@moonbitlang/core/queue.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](queue : <a href=\"moonbitlang/core/queue#T\">@moonbitlang/core/queue.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 379, "column": 50 }
+            }
+          ],
+          "loc": { "line": 379, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/sorted_map#T\">@moonbitlang/core/sorted_map.T</a>[A, B]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](map : <a href=\"moonbitlang/core/sorted_map#T\">@moonbitlang/core/sorted_map.T</a>[A, B]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 356, "column": 70 }
+            }
+          ],
+          "loc": { "line": 356, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"moonbitlang/core/sorted_set#T\">@moonbitlang/core/sorted_set.T</a>[A]",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](set : <a href=\"moonbitlang/core/sorted_set#T\">@moonbitlang/core/sorted_set.T</a>[A]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 369, "column": 55 }
+            }
+          ],
+          "loc": { "line": 369, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](pair : (A, B)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 144, "column": 57 }
+            }
+          ],
+          "loc": { "line": 144, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 153, "column": 72 }
+            }
+          ],
+          "loc": { "line": 153, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C, D)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C, D)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 172, "column": 87 }
+            }
+          ],
+          "loc": { "line": 172, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C, D, E)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C, D, E)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 199, "column": 8 }
+            }
+          ],
+          "loc": { "line": 193, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C, D, E, F)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C, D, E, F)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 227, "column": 8 }
+            }
+          ],
+          "loc": { "line": 220, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, G : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C, D, E, F, G)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, G : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C, D, E, F, G)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 258, "column": 8 }
+            }
+          ],
+          "loc": { "line": 250, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, G : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, H : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C, D, E, F, G, H)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, G : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, H : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C, D, E, F, G, H)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 292, "column": 8 }
+            }
+          ],
+          "loc": { "line": 283, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, G : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, H : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, I : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>] <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for (A, B, C, D, E, F, G, H, I)",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": "",
+              "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, B : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, C : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, D : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, E : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, F : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, G : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, H : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>, I : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](tuple : (A, B, C, D, E, F, G, H, I)) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 329, "column": 8 }
+            }
+          ],
+          "loc": { "line": 319, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Document",
+      "docstring": "",
+      "signature": "type Document",
+      "loc": { "line": 34, "column": 6 },
+      "methods": [
+        {
+          "name": "op_add",
+          "docstring": "",
+          "signature": "fn <a href=\"Yoorkin/prettyprinter#Document\">Document</a>::op_add(self : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, other : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+          "loc": { "line": 136, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"Yoorkin/prettyprinter#Document\">Document</a>::to_string(self : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> String",
+          "loc": { "line": 141, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a> for <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+          "methods": [
+            {
+              "name": "pretty",
+              "docstring": " Pretty print a document.",
+              "signature": "fn pretty(doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+              "loc": { "line": 57, "column": 35 }
+            }
+          ],
+          "loc": { "line": 57, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, buf : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 146, "column": 33 }
+            }
+          ],
+          "loc": { "line": 146, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Requirement",
+      "docstring": "",
+      "signature": "type Requirement",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "braces",
+      "docstring": " wraps the given document in braces.\n \n ```\n inspect!(braces(text(\"doc\")), content=\"{doc}\")\n ```",
+      "signature": "fn braces(doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 82, "column": 8 }
+    },
+    {
+      "name": "brackets",
+      "docstring": " wraps the given document in brackets.  \n \n ```\n inspect!(brackets(text(\"doc\")), content=\"[doc]\")\n ```",
+      "signature": "fn brackets(doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 73, "column": 8 }
+    },
+    {
+      "name": "char",
+      "docstring": "",
+      "signature": "fn char(c : Char) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 94, "column": 8 }
+    },
+    {
+      "name": "concat",
+      "docstring": " Concatenate two documents.\n You can also use the `+` operator.",
+      "signature": "fn concat(l : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, r : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 131, "column": 8 }
+    },
+    {
+      "name": "empty",
+      "docstring": " Empty document.\n `render(empty) == \"\"`",
+      "signature": "let empty : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 59, "column": 9 }
+    },
+    {
+      "name": "flow",
+      "docstring": " print each docuemnts in the same line if it fits, insert a line break otherwise.\n \n ```\n let words = [\n   \"The\", \"quick\", \"brown\", \"fox\", \"jumps\", \"over\", \"the\", \"lazy\", \"dog\",\n ]\n let doc = words.map(fn(x){text(x) + space}) |> flow()\n inspect!(doc, content=\"The quick brown fox jumps over the lazy dog \")\n inspect!(\n   render(doc, width=10),\n   content=\n     #|The quick brown \n     #|fox jumps over \n     #|the lazy dog \n   ,\n )\n ```",
+      "signature": "fn flow(doc : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Yoorkin/prettyprinter#Document\">Document</a>]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 112, "column": 8 }
+    },
+    {
+      "name": "group",
+      "docstring": " `group(doc)` tries to render the `doc` on a single line, \n but if the `doc` doesn't fit, or contains a `hardline`, all the `switch` \n inside the `doc` will be rendered with the right document.",
+      "signature": "fn group(doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 112, "column": 8 }
+    },
+    {
+      "name": "hardline",
+      "docstring": " Force line break with current indentation.\n This document will always doesn't fit in the current line.\n \n # Example\n \n ```\n render(text(\"hello\") + nest(hardline + text(\"world\")))\n |> inspect!(\n   content=\n     #|hello\n     #|  world\n   ,\n )\n ```\n ",
+      "signature": "let hardline : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 76, "column": 9 }
+    },
+    {
+      "name": "line",
+      "docstring": " Represents a line break if the line is too long, or a space if it fits.",
+      "signature": "let line : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 86, "column": 9 }
+    },
+    {
+      "name": "list",
+      "docstring": " Concatenate documents.",
+      "signature": "fn list(ls : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Yoorkin/prettyprinter#Document\">Document</a>]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 99, "column": 8 }
+    },
+    {
+      "name": "nest",
+      "docstring": " Nest the document by `n` spaces.\n Any line breaks inside the nested document will be indented by `n` spaces.",
+      "signature": "fn nest(indent~ : Int = .., doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 125, "column": 8 }
+    },
+    {
+      "name": "parens",
+      "docstring": " wraps the given document in parentheses.  \n \n ```\n inspect!(parens(text(\"doc\")), content=\"(doc)\")\n ```",
+      "signature": "fn parens(doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 64, "column": 8 }
+    },
+    {
+      "name": "pretty",
+      "docstring": "",
+      "signature": "fn pretty[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](x : A) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 7, "column": 8 }
+    },
+    {
+      "name": "render",
+      "docstring": " Renders a document as a pretty string with a specified width.\n\n # Arguments\n\n * `x` - The document to render.\n * `width` - The maximum width of the rendered string. Defaults to 80.\n\n # Returns\n\n The rendered string.",
+      "signature": "fn render[A : <a href=\"Yoorkin/prettyprinter#Pretty\">Pretty</a>](document : A, width~ : Int = ..) -> String",
+      "loc": { "line": 21, "column": 8 }
+    },
+    {
+      "name": "separate",
+      "docstring": " This function takes a separator document `sep` and an array of documents `docs` and returns a document\n where each document in the array is separated by the separator document.\n\n # Example\n\n ```\n let sep = text(\"-\")\n let docs = [text(\"Hello\"), text(\"World\"), text(\"!\")]\n separate(sep, docs).pretty() |> inspect!(content=\"Hello-World-!\")\n ```",
+      "signature": "fn separate(sep : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, docs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Yoorkin/prettyprinter#Document\">Document</a>]) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 38, "column": 8 }
+    },
+    {
+      "name": "separate_map",
+      "docstring": " This function takes a separator document, an array of values, and a mapping function, and returns a document\n where each value in the array is mapped to a document using the mapping function, and then separated by the separator document.\n\n # Arguments\n\n * `sep` - The separator document to be used between each mapped value.\n * `xs` - The array of values to be mapped and separated.\n * `f` - The mapping function that takes a value from the array and returns a document.\n\n # Returns\n\n The resulting document where each value is mapped and separated by the separator document.\n\n # Example\n\n ```\n let doc = separate_map(text(\",\"), [1,2,3], pretty)\n inspect!(doc, content=\"1,2,3\") \n ```",
+      "signature": "fn separate_map[A](sep : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, elems : <a href=\"moonbitlang/core/array#Array\">Array</a>[A], f : (A) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 20, "column": 8 }
+    },
+    {
+      "name": "softline",
+      "docstring": " Represents a line break if the line is too long, or nothing if it fits.",
+      "signature": "let softline : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 83, "column": 9 }
+    },
+    {
+      "name": "space",
+      "docstring": " Space character.\n `render(space) == \" \"`",
+      "signature": "let space : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 80, "column": 9 }
+    },
+    {
+      "name": "string",
+      "docstring": " print the string with double quotes.\n \n ```\n inspect!(string(\"Hello, World!\"), content=\"\\\"Hello, World!\\\"\")\n ```",
+      "signature": "fn string(str : String) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 91, "column": 8 }
+    },
+    {
+      "name": "surround",
+      "docstring": " Surrounds the given document with the left and right documents.\n \n `surround(l, r, doc)` is equivalent to `l + doc + r`\n \n # Example\n \n ```\n inspect!(surround(char('['), char(']'), text(\"doc\")), content=\"[doc]\")\n ``` ",
+      "signature": "fn surround(left : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, right : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, doc : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 55, "column": 8 }
+    },
+    {
+      "name": "switch",
+      "docstring": " Switch between two documents based on the available space.\n The left document represents the flatten mode, and the right one the pretty mode.\n If the left document fits, it will be rendered, otherwise the right one.",
+      "signature": "fn switch(l : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>, r : <a href=\"Yoorkin/prettyprinter#Document\">Document</a>) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 119, "column": 8 }
+    },
+    {
+      "name": "text",
+      "docstring": "",
+      "signature": "fn text(s : String) -> <a href=\"Yoorkin/prettyprinter#Document\">Document</a>",
+      "loc": { "line": 89, "column": 8 }
+    }
+  ],
+  "misc": []
+}

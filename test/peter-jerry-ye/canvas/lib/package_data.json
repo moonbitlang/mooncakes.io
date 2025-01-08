@@ -1,0 +1,467 @@
+{
+  "readme": "",
+  "name": "peter-jerry-ye/canvas/lib",
+  "traits": [],
+  "types": [
+    {
+      "name": "CanavsLineCap",
+      "docstring": "",
+      "signature": "pub(all) enum CanavsLineCap {\n  Butt\n  Round\n  Square\n}",
+      "loc": { "line": 49, "column": 15 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#CanavsLineCap\">CanavsLineCap</a>::to_string(self : <a href=\"peter-jerry-ye/canvas/lib#CanavsLineCap\">CanavsLineCap</a>) -> String",
+          "loc": { "line": 55, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Canvas2D",
+      "docstring": " CanvasRenderingContext2D\n \n Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+      "signature": "pub(all) type Canvas2D",
+      "loc": { "line": 18, "column": 15 },
+      "methods": [
+        {
+          "name": "begin_path",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::begin_path(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> Unit",
+          "loc": { "line": 43, "column": 8 }
+        },
+        {
+          "name": "clear_rect",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::clear_rect(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, x : Double, y : Double, width : Double, height : Double) -> Unit",
+          "loc": { "line": 34, "column": 8 }
+        },
+        {
+          "name": "close_path",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::close_path(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> Unit",
+          "loc": { "line": 46, "column": 8 }
+        },
+        {
+          "name": "draw_image",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage\n \n 3-argument syntax",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::draw_image(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, image : <a href=\"peter-jerry-ye/canvas/lib#CanvasImageSource\">CanvasImageSource</a>, dx : Double, dy : Double) -> Unit",
+          "loc": { "line": 339, "column": 8 }
+        },
+        {
+          "name": "draw_image_subpart_with_dimention",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage\n \n 7-argument syntax",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::draw_image_subpart_with_dimention(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, image : <a href=\"peter-jerry-ye/canvas/lib#CanvasImageSource\">CanvasImageSource</a>, sx : Double, sy : Double, swidth : Double, sheight : Double, dx : Double, dy : Double, dwidth : Double, dheight : Double) -> Unit",
+          "loc": { "line": 377, "column": 8 }
+        },
+        {
+          "name": "draw_image_with_dimension",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage\n \n 5-argument syntax",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::draw_image_with_dimension(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, image : <a href=\"peter-jerry-ye/canvas/lib#CanvasImageSource\">CanvasImageSource</a>, dx : Double, dy : Double, dwidth : Double, dheight : Double) -> Unit",
+          "loc": { "line": 356, "column": 8 }
+        },
+        {
+          "name": "fill",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::fill(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, path~ : <a href=\"peter-jerry-ye/canvas/lib#Path2D\">Path2D</a>? = .., fillRule~ : <a href=\"peter-jerry-ye/canvas/lib#CanvasFillRule\">CanvasFillRule</a>? = ..) -> Unit",
+          "loc": { "line": 79, "column": 8 }
+        },
+        {
+          "name": "fill_rect",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::fill_rect(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, x : Double, y : Double, width : Double, height : Double) -> Unit",
+          "loc": { "line": 25, "column": 8 }
+        },
+        {
+          "name": "fill_text",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::fill_text(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, text : String, x : Double, y : Double, max_width~ : Double? = ..) -> Unit",
+          "loc": { "line": 113, "column": 8 }
+        },
+        {
+          "name": "get_line_cap",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::get_line_cap(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> <a href=\"peter-jerry-ye/canvas/lib#CanavsLineCap\">CanavsLineCap</a>",
+          "loc": { "line": 176, "column": 8 }
+        },
+        {
+          "name": "get_line_dash",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::get_line_dash(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Double]",
+          "loc": { "line": 224, "column": 8 }
+        },
+        {
+          "name": "get_line_join",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin\n \n `join` is one of : \"round\" \"bevel\" \"miter",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::get_line_join(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> <a href=\"peter-jerry-ye/canvas/lib#CanvasLineJoin\">CanvasLineJoin</a>",
+          "loc": { "line": 197, "column": 8 }
+        },
+        {
+          "name": "get_line_width",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::get_line_width(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> Double",
+          "loc": { "line": 168, "column": 8 }
+        },
+        {
+          "name": "get_miter_limit",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::get_miter_limit(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>) -> Double",
+          "loc": { "line": 216, "column": 8 }
+        },
+        {
+          "name": "line_to",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::line_to(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, x : Double, y : Double) -> Unit",
+          "loc": { "line": 52, "column": 8 }
+        },
+        {
+          "name": "move_to",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::move_to(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, x : Double, y : Double) -> Unit",
+          "loc": { "line": 49, "column": 8 }
+        },
+        {
+          "name": "scale",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::scale(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, x : Double, y : Double) -> Unit",
+          "loc": { "line": 402, "column": 8 }
+        },
+        {
+          "name": "set_fill_style",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle\n \n The parameter is a string parsed as CSS <color> value.",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_fill_style(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, style : <a href=\"peter-jerry-ye/canvas/lib#CanvasStrokeFillStyle\">CanvasStrokeFillStyle</a>) -> Unit",
+          "loc": { "line": 262, "column": 8 }
+        },
+        {
+          "name": "set_font",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_font(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, font : String) -> Unit",
+          "loc": { "line": 274, "column": 8 }
+        },
+        {
+          "name": "set_line_cap",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_line_cap(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, cap : <a href=\"peter-jerry-ye/canvas/lib#CanavsLineCap\">CanavsLineCap</a>) -> Unit",
+          "loc": { "line": 188, "column": 8 }
+        },
+        {
+          "name": "set_line_dash",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_line_dash(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, segments : <a href=\"moonbitlang/core/array#Array\">Array</a>[Double]) -> Unit",
+          "loc": { "line": 231, "column": 8 }
+        },
+        {
+          "name": "set_line_join",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin\n \n `join` is one of : \"round\" \"bevel\" \"miter\"",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_line_join(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, join : <a href=\"peter-jerry-ye/canvas/lib#CanvasLineJoin\">CanvasLineJoin</a>) -> Unit",
+          "loc": { "line": 211, "column": 8 }
+        },
+        {
+          "name": "set_line_width",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_line_width(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, width : Double) -> Unit",
+          "loc": { "line": 171, "column": 8 }
+        },
+        {
+          "name": "set_miter_limit",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_miter_limit(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, limit : Double) -> Unit",
+          "loc": { "line": 219, "column": 8 }
+        },
+        {
+          "name": "set_stroke_style",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle\n \n The parameter is a string parsed as CSS <color> value.",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::set_stroke_style(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, style : <a href=\"peter-jerry-ye/canvas/lib#CanvasStrokeFillStyle\">CanvasStrokeFillStyle</a>) -> Unit",
+          "loc": { "line": 244, "column": 8 }
+        },
+        {
+          "name": "stroke",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::stroke(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, path~ : <a href=\"peter-jerry-ye/canvas/lib#Path2D\">Path2D</a>? = ..) -> Unit",
+          "loc": { "line": 59, "column": 8 }
+        },
+        {
+          "name": "stroke_rect",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::stroke_rect(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, x : Double, y : Double, width : Double, height : Double) -> Unit",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "stroke_text",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>::stroke_text(self : <a href=\"peter-jerry-ye/canvas/lib#Canvas2D\">Canvas2D</a>, text : String, x : Double, y : Double, max_width~ : Double? = ..) -> Unit",
+          "loc": { "line": 148, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "CanvasFillRule",
+      "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill",
+      "signature": "pub(all) enum CanvasFillRule {\n  Nonzero\n  Evenodd\n}",
+      "loc": { "line": 64, "column": 15 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#CanvasFillRule\">CanvasFillRule</a>::to_string(self : <a href=\"peter-jerry-ye/canvas/lib#CanvasFillRule\">CanvasFillRule</a>) -> String",
+          "loc": { "line": 69, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "CanvasGradient",
+      "docstring": " CanvasGradient\n \n Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient",
+      "signature": "pub(all) type CanvasGradient",
+      "loc": { "line": 28, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "CanvasImageSource",
+      "docstring": "",
+      "signature": "pub(all) enum CanvasImageSource {\n  HTMLImageElement(<a href=\"peter-jerry-ye/canvas/lib#HTMLImageElement\">HTMLImageElement</a>)\n  HTMLCanvasElement(<a href=\"peter-jerry-ye/canvas/lib#HTMLCanvasElement\">HTMLCanvasElement</a>)\n}",
+      "loc": { "line": 93, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "CanvasLineJoin",
+      "docstring": "",
+      "signature": "pub(all) enum CanvasLineJoin {\n  Bevel\n  Miter\n  Round\n}",
+      "loc": { "line": 35, "column": 15 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#CanvasLineJoin\">CanvasLineJoin</a>::to_string(self : <a href=\"peter-jerry-ye/canvas/lib#CanvasLineJoin\">CanvasLineJoin</a>) -> String",
+          "loc": { "line": 41, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "CanvasPattern",
+      "docstring": " CanvasPattern\n \n Reference: https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern",
+      "signature": "pub(all) type CanvasPattern",
+      "loc": { "line": 23, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "CanvasStrokeFillStyle",
+      "docstring": " String | CanvasGradient | CanvasPattern",
+      "signature": "pub(all) enum CanvasStrokeFillStyle {\n  Color(String)\n  Gradient(<a href=\"peter-jerry-ye/canvas/lib#CanvasGradient\">CanvasGradient</a>)\n  Pattern(<a href=\"peter-jerry-ye/canvas/lib#CanvasPattern\">CanvasPattern</a>)\n}",
+      "loc": { "line": 77, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HTMLCanvasElement",
+      "docstring": "",
+      "signature": "pub(all) type HTMLCanvasElement",
+      "loc": { "line": 91, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HTMLImageElement",
+      "docstring": "",
+      "signature": "pub(all) type HTMLImageElement",
+      "loc": { "line": 89, "column": 15 },
+      "methods": [
+        {
+          "name": "make",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#HTMLImageElement\">HTMLImageElement</a>::make(width~ : Int? = .., height~ : Int? = ..) -> <a href=\"peter-jerry-ye/canvas/lib#HTMLImageElement\">HTMLImageElement</a>",
+          "loc": { "line": 25, "column": 26 }
+        },
+        {
+          "name": "set_src",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/src",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#HTMLImageElement\">HTMLImageElement</a>::set_src(image : <a href=\"peter-jerry-ye/canvas/lib#HTMLImageElement\">HTMLImageElement</a>, src : String) -> Unit",
+          "loc": { "line": 42, "column": 26 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "KeyboardEvent",
+      "docstring": "",
+      "signature": "pub(all) type KeyboardEvent",
+      "loc": { "line": 83, "column": 15 },
+      "methods": [
+        {
+          "name": "code",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>::code(self : <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>) -> String",
+          "loc": { "line": 23, "column": 8 }
+        },
+        {
+          "name": "is_composing",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>::is_composing(self : <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 30, "column": 8 }
+        },
+        {
+          "name": "key",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>::key(self : <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>) -> String",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "prevent_default",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>::prevent_default(self : <a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit",
+          "loc": { "line": 33, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "MouseEvent",
+      "docstring": "",
+      "signature": "pub(all) type MouseEvent",
+      "loc": { "line": 85, "column": 15 },
+      "methods": [
+        {
+          "name": "alt_key",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::alt_key(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Bool",
+          "loc": { "line": 22, "column": 8 }
+        },
+        {
+          "name": "buttons",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::buttons(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Int",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "ctrl_key",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::ctrl_key(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Bool",
+          "loc": { "line": 25, "column": 8 }
+        },
+        {
+          "name": "offset_x",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::offset_x(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Double",
+          "loc": { "line": 31, "column": 8 }
+        },
+        {
+          "name": "offset_y",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::offset_y(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Double",
+          "loc": { "line": 34, "column": 8 }
+        },
+        {
+          "name": "prevent_default",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::prevent_default(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Unit",
+          "loc": { "line": 19, "column": 8 }
+        },
+        {
+          "name": "shift_key",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>::shift_key(self : <a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Bool",
+          "loc": { "line": 28, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Path2D",
+      "docstring": " Path2D\n \n Reference: https://developer.mozilla.org/en-US/docs/Web/API/Path2D",
+      "signature": "pub(all) type Path2D",
+      "loc": { "line": 33, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "WheelEvent",
+      "docstring": "",
+      "signature": "pub(all) type WheelEvent",
+      "loc": { "line": 87, "column": 15 },
+      "methods": [
+        {
+          "name": "delta_mode",
+          "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/WheelEvent/deltaMode",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>::delta_mode(self : <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>) -> Int",
+          "loc": { "line": 25, "column": 8 }
+        },
+        {
+          "name": "delta_x",
+          "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/WheelEvent/deltaX",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>::delta_x(self : <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>) -> Double",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "delta_y",
+          "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/WheelEvent/deltaY",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>::delta_y(self : <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>) -> Double",
+          "loc": { "line": 19, "column": 8 }
+        },
+        {
+          "name": "delta_z",
+          "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/WheelEvent/deltaZ",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>::delta_z(self : <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>) -> Double",
+          "loc": { "line": 22, "column": 8 }
+        },
+        {
+          "name": "prevent_default",
+          "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+          "signature": "fn <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>::prevent_default(self : <a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>) -> Unit",
+          "loc": { "line": 28, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "cancel_animation_frame",
+      "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame",
+      "signature": "fn cancel_animation_frame(requestID : Int64) -> Unit",
+      "loc": { "line": 25, "column": 8 }
+    },
+    {
+      "name": "request_animation_frame",
+      "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame",
+      "signature": "fn request_animation_frame(callback : (Int64) -> Unit) -> Int64",
+      "loc": { "line": 18, "column": 8 }
+    },
+    {
+      "name": "set_on_key_down",
+      "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event",
+      "signature": "fn set_on_key_down(callback : (<a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit) -> Unit",
+      "loc": { "line": 16, "column": 8 }
+    },
+    {
+      "name": "set_on_key_up",
+      "docstring": " Reference: https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event",
+      "signature": "fn set_on_key_up(callback : (<a href=\"peter-jerry-ye/canvas/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit) -> Unit",
+      "loc": { "line": 19, "column": 8 }
+    },
+    {
+      "name": "set_on_mouse_enter",
+      "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/Element/mouseenter_event",
+      "signature": "fn set_on_mouse_enter(callback : (<a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Unit) -> Unit",
+      "loc": { "line": 28, "column": 8 }
+    },
+    {
+      "name": "set_on_mouse_move",
+      "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/Element/mousemove_event",
+      "signature": "fn set_on_mouse_move(callback : (<a href=\"peter-jerry-ye/canvas/lib#MouseEvent\">MouseEvent</a>) -> Unit) -> Unit",
+      "loc": { "line": 25, "column": 8 }
+    },
+    {
+      "name": "set_on_wheel",
+      "docstring": " Reference: https://developer.mozilla.org/zh-CN/docs/Web/API/Element/wheel_event",
+      "signature": "fn set_on_wheel(callback : (<a href=\"peter-jerry-ye/canvas/lib#WheelEvent\">WheelEvent</a>) -> Unit) -> Unit",
+      "loc": { "line": 22, "column": 8 }
+    }
+  ],
+  "misc": []
+}

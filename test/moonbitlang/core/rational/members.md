@@ -86,30 +86,21 @@ let b = a.to_string() // "1/2"
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,177:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/rational#RationalError">RationalError</a> with op_equal(self : <a href="moonbitlang/core/rational#RationalError">RationalError</a>, other : <a href="moonbitlang/core/rational#RationalError">RationalError</a>) -> Bool
+  :::source,moonbitlang/core/rational/rational.mbt,177:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/rational#RationalError">RationalError</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/rational/rational.mbt,177:::fn op_equal(self : <a href="moonbitlang/core/rational#RationalError">RationalError</a>, other : <a href="moonbitlang/core/rational#RationalError">RationalError</a>) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,170:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/rational#RationalError">RationalError</a> with output(self : <a href="moonbitlang/core/rational#RationalError">RationalError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/rational/rational.mbt,170:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/rational#RationalError">RationalError</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,177:::fn <a href="moonbitlang/core/rational#RationalError">RationalError</a>::op_equal(self : <a href="moonbitlang/core/rational#RationalError">RationalError</a>, other : <a href="moonbitlang/core/rational#RationalError">RationalError</a>) -> Bool
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,170:::fn <a href="moonbitlang/core/rational#RationalError">RationalError</a>::output(self : <a href="moonbitlang/core/rational#RationalError">RationalError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/rational/traits.mbt,85:::fn <a href="moonbitlang/core/rational#RationalError">RationalError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/core/rational/rational.mbt,170:::fn output(self : <a href="moonbitlang/core/rational#RationalError">RationalError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## T
 
@@ -125,13 +116,21 @@ let b = a.to_string() // "1/2"
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,319:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/rational#T">T</a> with arbitrary(size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/rational#T">T</a>
+  :::source,moonbitlang/core/rational/rational.mbt,305:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/rational#T">T</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/rational/rational.mbt,305:::fn output(self : <a href="moonbitlang/core/rational#T">T</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,305:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/rational#T">T</a> with output(self : <a href="moonbitlang/core/rational#T">T</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/rational/rational.mbt,319:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/rational#T">T</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/rational/rational.mbt,319:::fn arbitrary(size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/rational#T">T</a>
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### abs
@@ -140,11 +139,6 @@ let b = a.to_string() // "1/2"
   ```
   > 
   >  Returns the absolute value of a rational number.
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,319:::fn <a href="moonbitlang/core/rational#T">T</a>::arbitrary(size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/rational#T">T</a>
-  ```
-  > 
 - #### ceil
   ```moonbit
   :::source,moonbitlang/core/rational/rational.mbt,265:::fn <a href="moonbitlang/core/rational#T">T</a>::ceil(self : <a href="moonbitlang/core/rational#T">T</a>) -> Int64
@@ -221,11 +215,6 @@ let b = a.to_string() // "1/2"
   :::source,moonbitlang/core/rational/rational.mbt,77:::fn <a href="moonbitlang/core/rational#T">T</a>::op_sub(self : <a href="moonbitlang/core/rational#T">T</a>, other : <a href="moonbitlang/core/rational#T">T</a>) -> <a href="moonbitlang/core/rational#T">T</a>
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/rational/rational.mbt,305:::fn <a href="moonbitlang/core/rational#T">T</a>::output(self : <a href="moonbitlang/core/rational#T">T</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### reciprocal
   ```moonbit
   :::source,moonbitlang/core/rational/rational.mbt,109:::fn <a href="moonbitlang/core/rational#T">T</a>::reciprocal(self : <a href="moonbitlang/core/rational#T">T</a>) -> <a href="moonbitlang/core/rational#T">T</a>
@@ -238,11 +227,6 @@ let b = a.to_string() // "1/2"
   ```
   > 
   >  Returns the approximate double value of a rational number.
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/rational/traits.mbt,85:::fn <a href="moonbitlang/core/rational#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### trunc
   ```moonbit
   :::source,moonbitlang/core/rational/rational.mbt,289:::fn <a href="moonbitlang/core/rational#T">T</a>::trunc(self : <a href="moonbitlang/core/rational#T">T</a>) -> Int64

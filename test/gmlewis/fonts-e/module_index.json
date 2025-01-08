@@ -1,0 +1,259 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts-e",
+      "package": null,
+      "childs": [
+        {
+          "name": "ebgaramond_bold",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_extrabold",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_extrabold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_extrabolditalic",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_extrabolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_italic",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_medium",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_mediumitalic",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_mediumitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_regular",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_semibold",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_semibold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ebgaramond_semibolditalic",
+          "package": {
+            "path": "gmlewis/fonts-e/ebgaramond_semibolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "edwin_bdita",
+          "package": {
+            "path": "gmlewis/fonts-e/edwin_bdita",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "edwin_bold",
+          "package": {
+            "path": "gmlewis/fonts-e/edwin_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "edwin_italic",
+          "package": {
+            "path": "gmlewis/fonts-e/edwin_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "edwin_roman",
+          "package": {
+            "path": "gmlewis/fonts-e/edwin_roman",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "embossedblack_normal",
+          "package": {
+            "path": "gmlewis/fonts-e/embossedblack_normal",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "embossedblackwide_normal",
+          "package": {
+            "path": "gmlewis/fonts-e/embossedblackwide_normal",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "englandhanddb",
+          "package": {
+            "path": "gmlewis/fonts-e/englandhanddb",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "entypo",
+          "package": {
+            "path": "gmlewis/fonts-e/entypo",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "epilog",
+          "package": {
+            "path": "gmlewis/fonts-e/epilog",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

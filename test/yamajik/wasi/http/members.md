@@ -37,16 +37,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,78:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Authority">Authority</a> with output(<a href="yamajik/wasi/http#Authority">Authority</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/url.mbt,78:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Authority">Authority</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/url.mbt,78:::fn output(<a href="yamajik/wasi/http#Authority">Authority</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,78:::fn <a href="yamajik/wasi/http#Authority">Authority</a>::output(<a href="yamajik/wasi/http#Authority">Authority</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/url.mbt,81:::fn <a href="yamajik/wasi/http#Authority">Authority</a>::to_string(self : <a href="yamajik/wasi/http#Authority">Authority</a>) -> String
@@ -64,9 +63,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/body.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Body">Body</a> with output(<a href="yamajik/wasi/http#Body">Body</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/body.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Body">Body</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/body.mbt,4:::fn output(<a href="yamajik/wasi/http#Body">Body</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### empty
@@ -94,11 +97,6 @@
   :::source,yamajik/wasi/http/body.mbt,7:::fn <a href="yamajik/wasi/http#Body">Body</a>::new(data~ : String) -> <a href="yamajik/wasi/http#Body">Body</a>
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/body.mbt,4:::fn <a href="yamajik/wasi/http#Body">Body</a>::output(<a href="yamajik/wasi/http#Body">Body</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/body.mbt,12:::fn <a href="yamajik/wasi/http#Body">Body</a>::to_string(self : <a href="yamajik/wasi/http#Body">Body</a>) -> String
@@ -166,16 +164,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/content_type.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#ContentType">ContentType</a> with output(<a href="yamajik/wasi/http#ContentType">ContentType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/content_type.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#ContentType">ContentType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/content_type.mbt,10:::fn output(<a href="yamajik/wasi/http#ContentType">ContentType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/content_type.mbt,10:::fn <a href="yamajik/wasi/http#ContentType">ContentType</a>::output(<a href="yamajik/wasi/http#ContentType">ContentType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/content_type.mbt,13:::fn <a href="yamajik/wasi/http#ContentType">ContentType</a>::to_string(self : <a href="yamajik/wasi/http#ContentType">ContentType</a>) -> String
@@ -239,39 +236,31 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,6:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="yamajik/wasi/http#Header">Header</a> with hash_combine(<a href="yamajik/wasi/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi/http#Header">Header</a> with op_equal(<a href="yamajik/wasi/http#Header">Header</a>, <a href="yamajik/wasi/http#Header">Header</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Header">Header</a> with output(<a href="yamajik/wasi/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### hash
-  ```moonbit
-  :::source,yamajik/wasi/http/traits.mbt,40:::fn <a href="yamajik/wasi/http#Header">Header</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
+  :::source,yamajik/wasi/http/header.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi/http#Header">Header</a>
   ```
   > 
-- #### hash\_combine
-  ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,6:::fn <a href="yamajik/wasi/http#Header">Header</a>::hash_combine(<a href="yamajik/wasi/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  * ```moonbit
+    :::source,yamajik/wasi/http/header.mbt,6:::fn op_equal(<a href="yamajik/wasi/http#Header">Header</a>, <a href="yamajik/wasi/http#Header">Header</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi/http/header.mbt,6:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="yamajik/wasi/http#Header">Header</a>
   ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,6:::fn <a href="yamajik/wasi/http#Header">Header</a>::op_equal(<a href="yamajik/wasi/http#Header">Header</a>, <a href="yamajik/wasi/http#Header">Header</a>) -> Bool
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/header.mbt,6:::fn hash_combine(<a href="yamajik/wasi/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi/http/header.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Header">Header</a>
   ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,6:::fn <a href="yamajik/wasi/http#Header">Header</a>::output(<a href="yamajik/wasi/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/header.mbt,6:::fn output(<a href="yamajik/wasi/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/header.mbt,9:::fn <a href="yamajik/wasi/http#Header">Header</a>::to_string(self : <a href="yamajik/wasi/http#Header">Header</a>) -> String
@@ -287,16 +276,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,27:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="yamajik/wasi/http#Headers">Headers</a> with default() -> <a href="yamajik/wasi/http#Headers">Headers</a>
+  :::source,yamajik/wasi/http/header.mbt,27:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="yamajik/wasi/http#Headers">Headers</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/header.mbt,27:::fn default() -> <a href="yamajik/wasi/http#Headers">Headers</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### default
-  ```moonbit
-  :::source,yamajik/wasi/http/header.mbt,27:::fn <a href="yamajik/wasi/http#Headers">Headers</a>::default() -> <a href="yamajik/wasi/http#Headers">Headers</a>
-  ```
-  > automatically derived
 - #### merge
   ```moonbit
   :::source,yamajik/wasi/http/header.mbt,64:::fn <a href="yamajik/wasi/http#Headers">Headers</a>::merge(self : <a href="yamajik/wasi/http#Headers">Headers</a>, other : <a href="yamajik/wasi/http#Headers">Headers</a>) -> Unit
@@ -323,17 +311,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/method.mbt,13:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="yamajik/wasi/http#Method">Method</a> with hash_combine(<a href="yamajik/wasi/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,yamajik/wasi/http/method.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi/http#Method">Method</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/method.mbt,13:::fn op_equal(<a href="yamajik/wasi/http#Method">Method</a>, <a href="yamajik/wasi/http#Method">Method</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi/http/method.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi/http#Method">Method</a> with op_equal(<a href="yamajik/wasi/http#Method">Method</a>, <a href="yamajik/wasi/http#Method">Method</a>) -> Bool
+  :::source,yamajik/wasi/http/method.mbt,13:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="yamajik/wasi/http#Method">Method</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/method.mbt,13:::fn hash_combine(<a href="yamajik/wasi/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi/http/method.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Method">Method</a> with output(<a href="yamajik/wasi/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/method.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Method">Method</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/method.mbt,13:::fn output(<a href="yamajik/wasi/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_string
@@ -341,26 +341,6 @@
   :::source,yamajik/wasi/http/method.mbt,32:::fn <a href="yamajik/wasi/http#Method">Method</a>::from_string(m : String) -> <a href="yamajik/wasi/http#Method">Method</a>
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,yamajik/wasi/http/traits.mbt,40:::fn <a href="yamajik/wasi/http#Method">Method</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,yamajik/wasi/http/method.mbt,13:::fn <a href="yamajik/wasi/http#Method">Method</a>::hash_combine(<a href="yamajik/wasi/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi/http/method.mbt,13:::fn <a href="yamajik/wasi/http#Method">Method</a>::op_equal(<a href="yamajik/wasi/http#Method">Method</a>, <a href="yamajik/wasi/http#Method">Method</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/method.mbt,13:::fn <a href="yamajik/wasi/http#Method">Method</a>::output(<a href="yamajik/wasi/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/method.mbt,16:::fn <a href="yamajik/wasi/http#Method">Method</a>::to_string(self : <a href="yamajik/wasi/http#Method">Method</a>) -> String
@@ -400,16 +380,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,86:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Path">Path</a> with output(<a href="yamajik/wasi/http#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/url.mbt,86:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Path">Path</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/url.mbt,86:::fn output(<a href="yamajik/wasi/http#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,86:::fn <a href="yamajik/wasi/http#Path">Path</a>::output(<a href="yamajik/wasi/http#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### parts
   ```moonbit
   :::source,yamajik/wasi/http/url.mbt,99:::fn <a href="yamajik/wasi/http#Path">Path</a>::parts(self : <a href="yamajik/wasi/http#Path">Path</a>, skip_prefix~ : String = ..) -> <a href="moonbitlang/core/array#Array">Array</a>[String]
@@ -435,16 +414,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,51:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Query">Query</a> with output(<a href="yamajik/wasi/http#Query">Query</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/url.mbt,51:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Query">Query</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/url.mbt,51:::fn output(<a href="yamajik/wasi/http#Query">Query</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,51:::fn <a href="yamajik/wasi/http#Query">Query</a>::output(<a href="yamajik/wasi/http#Query">Query</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/url.mbt,59:::fn <a href="yamajik/wasi/http#Query">Query</a>::to_string(self : <a href="yamajik/wasi/http#Query">Query</a>) -> String
@@ -487,21 +465,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/request.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#RequestError">RequestError</a> with output(<a href="yamajik/wasi/http#RequestError">RequestError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/request.mbt,4:::fn <a href="yamajik/wasi/http#RequestError">RequestError</a>::output(<a href="yamajik/wasi/http#RequestError">RequestError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi/http/traits.mbt,85:::fn <a href="yamajik/wasi/http#RequestError">RequestError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi/http/request.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#RequestError">RequestError</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/request.mbt,4:::fn output(<a href="yamajik/wasi/http#RequestError">RequestError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RequestOptions
 
@@ -512,30 +482,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/request.mbt,9:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a> with default() -> <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi/http/request.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a> with output(<a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### default
-  ```moonbit
-  :::source,yamajik/wasi/http/request.mbt,9:::fn <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>::default() -> <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/request.mbt,9:::fn <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>::output(<a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi/http/traits.mbt,85:::fn <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi/http/request.mbt,9:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/request.mbt,9:::fn default() -> <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi/http/request.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/request.mbt,9:::fn output(<a href="yamajik/wasi/http#RequestOptions">RequestOptions</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Response
 
@@ -588,24 +549,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/router.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#RouterNode">RouterNode</a> with output(<a href="yamajik/wasi/http#RouterNode">RouterNode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/router.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#RouterNode">RouterNode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/router.mbt,6:::fn output(<a href="yamajik/wasi/http#RouterNode">RouterNode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### matches
   ```moonbit
   :::source,yamajik/wasi/http/router.mbt,29:::fn <a href="yamajik/wasi/http#RouterNode">RouterNode</a>::matches(self : <a href="yamajik/wasi/http#RouterNode">RouterNode</a>, s : String) -> Bool
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/router.mbt,6:::fn <a href="yamajik/wasi/http#RouterNode">RouterNode</a>::output(<a href="yamajik/wasi/http#RouterNode">RouterNode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi/http/traits.mbt,85:::fn <a href="yamajik/wasi/http#RouterNode">RouterNode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -625,16 +580,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Scheme">Scheme</a> with output(<a href="yamajik/wasi/http#Scheme">Scheme</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/url.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#Scheme">Scheme</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/url.mbt,12:::fn output(<a href="yamajik/wasi/http#Scheme">Scheme</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,12:::fn <a href="yamajik/wasi/http#Scheme">Scheme</a>::output(<a href="yamajik/wasi/http#Scheme">Scheme</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/url.mbt,15:::fn <a href="yamajik/wasi/http#Scheme">Scheme</a>::to_string(self : <a href="yamajik/wasi/http#Scheme">Scheme</a>) -> String
@@ -706,9 +660,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/status_code.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#StatusCode">StatusCode</a> with output(<a href="yamajik/wasi/http#StatusCode">StatusCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/status_code.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#StatusCode">StatusCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/status_code.mbt,24:::fn output(<a href="yamajik/wasi/http#StatusCode">StatusCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_error
@@ -716,11 +674,6 @@
   :::source,yamajik/wasi/http/status_code.mbt,86:::fn <a href="yamajik/wasi/http#StatusCode">StatusCode</a>::is_error(self : <a href="yamajik/wasi/http#StatusCode">StatusCode</a>) -> Bool
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/status_code.mbt,24:::fn <a href="yamajik/wasi/http#StatusCode">StatusCode</a>::output(<a href="yamajik/wasi/http#StatusCode">StatusCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,yamajik/wasi/http/status_code.mbt,27:::fn <a href="yamajik/wasi/http#StatusCode">StatusCode</a>::to_string(self : <a href="yamajik/wasi/http#StatusCode">StatusCode</a>) -> String
@@ -741,16 +694,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,113:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#URL">URL</a> with output(<a href="yamajik/wasi/http#URL">URL</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi/http/url.mbt,113:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#URL">URL</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/url.mbt,113:::fn output(<a href="yamajik/wasi/http#URL">URL</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,113:::fn <a href="yamajik/wasi/http#URL">URL</a>::output(<a href="yamajik/wasi/http#URL">URL</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### parse
   ```moonbit
   :::source,yamajik/wasi/http/url.mbt,116:::fn <a href="yamajik/wasi/http#URL">URL</a>::parse(url : String) -> <a href="yamajik/wasi/http#URL">URL</a>!<a href="yamajik/wasi/http#URLParseError">URLParseError</a>
@@ -781,21 +733,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#URLParseError">URLParseError</a> with output(<a href="yamajik/wasi/http#URLParseError">URLParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi/http/url.mbt,5:::fn <a href="yamajik/wasi/http#URLParseError">URLParseError</a>::output(<a href="yamajik/wasi/http#URLParseError">URLParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi/http/traits.mbt,85:::fn <a href="yamajik/wasi/http#URLParseError">URLParseError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi/http/url.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi/http#URLParseError">URLParseError</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi/http/url.mbt,5:::fn output(<a href="yamajik/wasi/http#URLParseError">URLParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## URLParser
 

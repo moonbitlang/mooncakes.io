@@ -26,7 +26,7 @@ let b : Bool = @strconv.parse?("true").unwrap() // true
 # Documentation
 |Trait|description|
 |---|---|
-|[FromStr](#FromStr)||
+|[@moonbitlang/core/strconv.FromStr](#@moonbitlang/core/strconv.FromStr)||
 
 |Type|description|
 |---|---|
@@ -40,11 +40,13 @@ let b : Bool = @strconv.parse?("true").unwrap() // true
 |[parse\_double](#parse_double)||
 |[parse\_int](#parse_int)||
 |[parse\_int64](#parse_int64)||
+|[parse\_uint](#parse_uint)||
+|[parse\_uint64](#parse_uint64)||
 
-## FromStr
+## @moonbitlang/core/strconv.FromStr
 
 ```moonbit
-:::source,moonbitlang/core/strconv/traits.mbt,22:::pub(open) trait FromStr {
+:::source,moonbitlang/core/strconv/traits.mbt,22:::pub(open) trait @moonbitlang/core/strconv.FromStr {
   from_string(String) -> Self!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
 }
 ```
@@ -52,21 +54,53 @@ let b : Bool = @strconv.parse?("true").unwrap() // true
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/strconv/traits.mbt,27:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for <a href="moonbitlang/core/bool#Bool">Bool</a> with from_string(str : String) -> Bool!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+  :::source,moonbitlang/core/strconv/traits.mbt,27:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for Bool
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/traits.mbt,27:::fn from_string(str : String) -> Bool!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/strconv/traits.mbt,30:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for <a href="moonbitlang/core/int#Int">Int</a> with from_string(str : String) -> Int!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+  :::source,moonbitlang/core/strconv/traits.mbt,30:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/traits.mbt,30:::fn from_string(str : String) -> Int!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/strconv/traits.mbt,33:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with from_string(str : String) -> Int64!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+  :::source,moonbitlang/core/strconv/traits.mbt,33:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/traits.mbt,33:::fn from_string(str : String) -> Int64!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/strconv/traits.mbt,36:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for <a href="moonbitlang/core/double#Double">Double</a> with from_string(str : String) -> Double!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+  :::source,moonbitlang/core/strconv/traits.mbt,36:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for UInt
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/traits.mbt,36:::fn from_string(str : String) -> UInt!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+    ```
+    > 
+- ```moonbit
+  :::source,moonbitlang/core/strconv/traits.mbt,39:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for UInt64
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/traits.mbt,39:::fn from_string(str : String) -> UInt64!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+    ```
+    > 
+- ```moonbit
+  :::source,moonbitlang/core/strconv/traits.mbt,42:::impl <a href="moonbitlang/core/strconv#FromStr">FromStr</a> for Double
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/traits.mbt,42:::fn from_string(str : String) -> Double!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+    ```
+    > 
 
 ## Decimal
 
@@ -124,26 +158,18 @@ Developed by Ken. Thompson, Russ Cox, Robert Griesemer, Nigel Tao.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/strconv/errors.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a> with output(self : <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/strconv/errors.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/strconv/errors.mbt,19:::fn <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>::output(self : <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/strconv/traits.mbt,85:::fn <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/core/strconv/errors.mbt,19:::fn output(self : <a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## parse
 
 ```moonbit
-:::source,moonbitlang/core/strconv/traits.mbt,39:::fn parse[A : <a href="moonbitlang/core/strconv#FromStr">FromStr</a>](str : String) -> A!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+:::source,moonbitlang/core/strconv/traits.mbt,45:::fn parse[A : <a href="moonbitlang/core/strconv#FromStr">FromStr</a>](str : String) -> A!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
 ```
 
 
@@ -178,4 +204,22 @@ If the `~base` argument is 0, the base will be inferred by the prefix.
 ```
 
  Parse a string in the given base (0, 2 to 36), return a Int64 number or an error.
+If the `~base` argument is 0, the base will be inferred by the prefix.
+
+## parse\_uint
+
+```moonbit
+:::source,moonbitlang/core/strconv/uint.mbt,87:::fn parse_uint(str : String, base~ : Int = ..) -> UInt!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+```
+
+ Parse a string in the given base (0, 2 to 36), return an UInt number or an error.
+If the `~base` argument is 0, the base will be inferred by the prefix.
+
+## parse\_uint64
+
+```moonbit
+:::source,moonbitlang/core/strconv/uint.mbt,24:::fn parse_uint64(str : String, base~ : Int = ..) -> UInt64!<a href="moonbitlang/core/strconv#StrConvError">StrConvError</a>
+```
+
+ Parse a string in the given base (0, 2 to 36), return an UInt64 number or an error.
 If the `~base` argument is 0, the base will be inferred by the prefix.

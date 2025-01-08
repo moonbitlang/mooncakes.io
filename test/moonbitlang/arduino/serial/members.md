@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[SerialPrintable](#SerialPrintable)||
+|[@moonbitlang/arduino/serial.SerialPrintable](#@moonbitlang/arduino/serial.SerialPrintable)||
 
 |Type|description|
 |---|---|
@@ -14,10 +14,10 @@
 |[serial\_read](#serial_read)||
 |[serial\_read\_to\_buffer](#serial_read_to_buffer)||
 
-## SerialPrintable
+## @moonbitlang/arduino/serial.SerialPrintable
 
 ```moonbit
-:::source,moonbitlang/arduino/serial/serial.mbt,55:::pub(open) trait SerialPrintable {
+:::source,moonbitlang/arduino/serial/serial.mbt,55:::pub(open) trait @moonbitlang/arduino/serial.SerialPrintable {
   serial_print(Self) -> Unit
   serial_println(Self) -> Unit
 }
@@ -26,37 +26,53 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,115:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/double#Double">Double</a> with serial_print(self : Double) -> Unit
+  :::source,moonbitlang/arduino/serial/serial.mbt,85:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for Char
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,85:::fn serial_print(self : Char) -> Unit
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,90:::fn serial_println(self : Char) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,95:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/int#Int">Int</a> with serial_print(self : Int) -> Unit
+  :::source,moonbitlang/arduino/serial/serial.mbt,95:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,95:::fn serial_print(self : Int) -> Unit
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,100:::fn serial_println(self : Int) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,105:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with serial_print(self : Int64) -> Unit
+  :::source,moonbitlang/arduino/serial/serial.mbt,105:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,105:::fn serial_print(self : Int64) -> Unit
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,110:::fn serial_println(self : Int64) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,85:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/char#Char">Char</a> with serial_print(self : Char) -> Unit
+  :::source,moonbitlang/arduino/serial/serial.mbt,115:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for Double
   ```
   > 
-- ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,100:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/int#Int">Int</a> with serial_println(self : Int) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,120:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/double#Double">Double</a> with serial_println(self : Double) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,110:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with serial_println(self : Int64) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/arduino/serial/serial.mbt,90:::impl <a href="moonbitlang/arduino/serial#SerialPrintable">SerialPrintable</a> for <a href="moonbitlang/core/char#Char">Char</a> with serial_println(self : Char) -> Unit
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,115:::fn serial_print(self : Double) -> Unit
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/arduino/serial/serial.mbt,120:::fn serial_println(self : Double) -> Unit
+    ```
+    > 
 
 ## Serial
 

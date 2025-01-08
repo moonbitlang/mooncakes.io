@@ -14,14 +14,13 @@
 </head>
 
 <body>
-  <pre><code class="moonbit">// Block lines.
-//
-// In CommonMark blocks, a "line" does not necessarily correspond to
-// a line in the source plain text. For example the lines of a
-// paragraph in a block quote are the lines stripped from the block
-// quote markers.  We call the line resulting from stripping the
-// block structure preceeding a given block a {e block line}.
-///|
+  <pre><code class="moonbit">///| Block lines.
+///
+/// In CommonMark blocks, a "line" does not necessarily correspond to
+/// a line in the source plain text. For example the lines of a
+/// paragraph in a block quote are the lines stripped from the block
+/// quote markers.  We call the line resulting from stripping the
+/// block structure preceeding a given block a {e block line}.
 pub(all) type BlockLine Node[String]
 
 ///|
@@ -33,23 +32,19 @@ pub fn BlockLine::to_string(self : BlockLine) -> String {
 }
 
 ///|
-pub fn BlockLine::list_text_loc(ls : List[BlockLine]) -> TextLoc {
-  match ls {
-    Nil => TextLoc::none()
-    Cons(head, Nil) => head.meta.loc
-    Cons(head, tail) => {
-      let last = tail.unsafe_last()
-      head.meta.loc.reloc(last.meta.loc)
-    }
+pub fn BlockLine::list_text_loc(ls : Seq[BlockLine]) -> TextLoc {
+  match ls._ {
+    [] => TextLoc::none()
+    [head] => head.meta.loc
+    [head,  ..,  last] => head.meta.loc.reloc(last.meta.loc)
   }
 }
 
-// Tight block lines: a block line with its initial blanks trimmed but kept for layout. 
-///|
+///| Tight block lines: a block line with its initial blanks trimmed but kept for layout. 
 pub(all) struct Tight {
   blanks : Blanks
   node : StringNode
-} derive(Eq, FromJson, ToJson)
+} derive(Eq, ToJson)
 
 ///|
 pub fn Tight::empty(meta~ : Meta = Meta::none()) -> Tight {
@@ -67,14 +62,11 @@ pub fn Tight::to_string(self : Tight) -> String {
 }
 
 ///|
-pub fn Tight::list_text_loc(ls : List[Tight]) -> TextLoc {
-  match ls {
-    Nil => TextLoc::none()
-    Cons(head, Nil) => head.node.meta.loc
-    Cons(head, tail) => {
-      let last = tail.unsafe_last()
-      head.node.meta.loc.reloc(last.node.meta.loc)
-    }
+pub fn Tight::list_text_loc(ls : Seq[Tight]) -> TextLoc {
+  match ls._ {
+    [] => TextLoc::none()
+    [head] => head.node.meta.loc
+    [head,  ..,  last] => head.node.meta.loc.reloc(last.node.meta.loc)
   }
 }
 
@@ -84,9 +76,9 @@ fn BlockLine::flush(
   s : String,
   start : Int,
   last : Int,
-  acc : List[StringNode]
-) -> List[StringNode] {
-  acc.add({ meta, v: s.substring(start~, end=last + 1) })
+  acc : Array[StringNode]
+) -> Unit {
+  acc.push({ meta, v: s.substring(start~, end=last + 1) })
 }
 
 ///|
@@ -95,41 +87,43 @@ fn BlockLine::flush_tight(
   s : String,
   start : Int,
   last : Int,
-  acc : List[Tight]
-) -> List[Tight] {
+  acc : Array[Tight]
+) -> Unit {
   // If [s] has newlines, blanks after newlines are layout
   if start > last {
-    return acc.add(Tight::empty(meta~))
+    acc.push(Tight::empty(meta~))
+    return
   }
   // On the first line the blanks are legit 
   if acc.is_empty() {
-    return acc.add(
-      { blanks: "", node: { meta, v: s.substring(start~, end=last + 1) } },
-    )
+    acc.push({
+      blanks: "",
+      node: { meta, v: s.substring(start~, end=last + 1) },
+    })
+    return
   }
   let nb = @cmark_base.first_non_blank(s, last~, start~)
-  acc.add(
-    {
-      blanks: s.substring(start~, end=nb),
-      node: { meta, v: s.substring(start=nb, end=last + 1) },
-    },
-  )
+  acc.push({
+    blanks: s.substring(start~, end=nb),
+    node: { meta, v: s.substring(start=nb, end=last + 1) },
+  })
 }
 
 ///|
-typealias FlushFn[A] = (String, Int, Int, List[A]) -> List[A]
+typealias FlushFn[A] = (String, Int, Int, Array[A]) -> Unit
 
 ///|
-fn _list_of_string[A](flush : FlushFn[A], s : String) -> List[A] {
-  loop s, List::Nil, s.length() - 1, 0, 0 {
+fn _list_of_string[A](flush : FlushFn[A], s : String) -> Array[A] {
+  loop s, [], s.length() - 1, 0, 0 {
     s, acc, max, start, k => {
       if k > max {
-        break flush(s, start, max, acc).rev()
+        flush(s, start, max, acc)
+        break acc
       }
       if not(s[k] == '\n' || s[k] == '\r') {
         continue s, acc, max, start, k + 1
       }
-      let acc = flush(s, start, k - 1, acc)
+      flush(s, start, k - 1, acc)
       let next = k + 1
       let start = if s[k] == '\r' && next <= max && s[next] == '\n' {
         next + 1

@@ -51,13 +51,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -65,24 +73,9 @@ combined with a couple of errors that are always possible:
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,77:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>::from(self : Int) -> <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,50:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>::ordinal(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,47:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">ErrorCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -98,30 +91,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,131:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## IpAddressFamily
 
@@ -135,13 +119,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -149,24 +141,9 @@ combined with a couple of errors that are always possible:
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,119:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::from(self : Int) -> <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,111:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::ordinal(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,108:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -182,30 +159,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,151:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Ipv4SocketAddress
 
@@ -219,30 +187,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,137:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Ipv6SocketAddress
 
@@ -258,30 +217,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,145:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Network
 
@@ -294,13 +244,21 @@ There is no need for this to map 1:1 to a physical network interface.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -308,18 +266,3 @@ There is no need for this to map 1:1 to a physical network interface.
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,8:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/top.mbt,5:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/network/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#Network">Network</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

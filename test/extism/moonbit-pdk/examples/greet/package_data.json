@@ -1,0 +1,16 @@
+{
+  "readme": "# examples/greet\n\nThe `greet.wasm` plugin can be run from the top-level of the repo by\ntyping:\n\n```bash\n$ ./build.sh\n$ ./scripts/python-server.sh\n```\n\nThen open your browser window to:\nhttp://localhost:8080/examples/greet\n\n![greet demo](greet-demo.png)\n",
+  "name": "extism/moonbit-pdk/examples/greet",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "greet",
+      "docstring": " `greet` reads the input string from the host and writes a\n greeting to the host's output string.\n It returns 0 to the host on success.",
+      "signature": "fn greet() -> Int",
+      "loc": { "line": 4, "column": 8 }
+    }
+  ],
+  "misc": []
+}

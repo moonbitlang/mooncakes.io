@@ -1,0 +1,51 @@
+{
+  "readme": "",
+  "name": "Yoorkin/rabbit-tea/http",
+  "traits": [],
+  "types": [
+    {
+      "name": "Body",
+      "docstring": "",
+      "signature": "pub(all) enum Body {\n  Json(<a href=\"moonbitlang/core/json#Json\">Json</a>)\n  Text(String)\n  Empty\n}",
+      "loc": { "line": 8, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Expecting",
+      "docstring": "",
+      "signature": "pub(all) enum Expecting {\n  Json((<a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/core/json#Json\">Json</a>, String]) -> Msg)\n  Text((<a href=\"moonbitlang/core/result#Result\">Result</a>[String, String]) -> Msg)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "delete",
+      "docstring": "",
+      "signature": "fn delete[M](url : String, expect~ : <a href=\"Yoorkin/rabbit-tea/http#Expecting\">Expecting</a>[M]) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 108, "column": 8 }
+    },
+    {
+      "name": "get",
+      "docstring": "",
+      "signature": "fn get[M](url : String, expect~ : <a href=\"Yoorkin/rabbit-tea/http#Expecting\">Expecting</a>[M]) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 103, "column": 8 }
+    },
+    {
+      "name": "patch",
+      "docstring": "",
+      "signature": "fn patch[M](url : String, body : <a href=\"Yoorkin/rabbit-tea/http#Body\">Body</a>, expect~ : <a href=\"Yoorkin/rabbit-tea/http#Expecting\">Expecting</a>[M]) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 122, "column": 8 }
+    },
+    {
+      "name": "post",
+      "docstring": "",
+      "signature": "fn post[M](url : String, body : <a href=\"Yoorkin/rabbit-tea/http#Body\">Body</a>, expect~ : <a href=\"Yoorkin/rabbit-tea/http#Expecting\">Expecting</a>[M]) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 113, "column": 8 }
+    }
+  ],
+  "misc": []
+}

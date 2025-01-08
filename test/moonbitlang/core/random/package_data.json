@@ -18,7 +18,7 @@
         {
           "name": "float",
           "docstring": "\n [float] returns a pseudo-random 32-bit Float in the range [0.0, 1.0)",
-          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::float(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>) -> float",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::float(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>) -> Float",
           "loc": { "line": 163, "column": 14 }
         },
         {

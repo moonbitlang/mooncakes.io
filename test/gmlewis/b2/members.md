@@ -37,21 +37,13 @@ It is a data structure that groups the information you need by API suite.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/b2/api-info.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#APIInfo">APIInfo</a> with output(<a href="gmlewis/b2#APIInfo">APIInfo</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,gmlewis/b2/api-info.mbt,7:::fn <a href="gmlewis/b2#APIInfo">APIInfo</a>::output(<a href="gmlewis/b2#APIInfo">APIInfo</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/b2/traits.mbt,85:::fn <a href="gmlewis/b2#APIInfo">APIInfo</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/b2/api-info.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#APIInfo">APIInfo</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/b2/api-info.mbt,7:::fn output(<a href="gmlewis/b2#APIInfo">APIInfo</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Client
 
@@ -62,9 +54,13 @@ It is a data structure that groups the information you need by API suite.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/b2/client.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#Client">Client</a> with output(<a href="gmlewis/b2#Client">Client</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/b2/client.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#Client">Client</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/b2/client.mbt,15:::fn output(<a href="gmlewis/b2#Client">Client</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### consume\_object
@@ -87,11 +83,6 @@ It is a data structure that groups the information you need by API suite.
   ```
   >  `Client::new` returns a new client to communicate with the b2 (Backblaze) API
   > for the provided `bucket_id` and `bucket_name`.
-- #### output
-  ```moonbit
-  :::source,gmlewis/b2/client.mbt,15:::fn <a href="gmlewis/b2#Client">Client</a>::output(<a href="gmlewis/b2#Client">Client</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### stream\_object
   ```moonbit
   :::source,gmlewis/b2/stream-object.mbt,4:::fn <a href="gmlewis/b2#Client">Client</a>::stream_object(self : <a href="gmlewis/b2#Client">Client</a>, filename : String, response_out : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types.ResponseOutparam</a>, hash~ : <a href="gmlewis/spin-moonbit-sdk/common#HashFunc">@gmlewis/spin-moonbit-sdk/common.HashFunc</a>?, debug~ : Bool = ..) -> String!<a href="gmlewis/b2#ClientError">ClientError</a>
@@ -99,11 +90,6 @@ It is a data structure that groups the information you need by API suite.
   >  `stream_object` performs a GET to retrieve the b2 object, streams it to
   > its https `response_out`, and optionally returns the object's hash using the
   > provided HashFunc.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/b2/traits.mbt,85:::fn <a href="gmlewis/b2#Client">Client</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## ClientError
 
@@ -115,21 +101,13 @@ It is a data structure that groups the information you need by API suite.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/b2/b2.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#ClientError">ClientError</a> with output(<a href="gmlewis/b2#ClientError">ClientError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,gmlewis/b2/b2.mbt,5:::fn <a href="gmlewis/b2#ClientError">ClientError</a>::output(<a href="gmlewis/b2#ClientError">ClientError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/b2/traits.mbt,85:::fn <a href="gmlewis/b2#ClientError">ClientError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/b2/b2.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#ClientError">ClientError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/b2/b2.mbt,5:::fn output(<a href="gmlewis/b2#ClientError">ClientError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## StorageAPI
 
@@ -140,18 +118,10 @@ It is a data structure that groups the information you need by API suite.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/b2/api-info.mbt,81:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#StorageAPI">StorageAPI</a> with output(<a href="gmlewis/b2#StorageAPI">StorageAPI</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,gmlewis/b2/api-info.mbt,81:::fn <a href="gmlewis/b2#StorageAPI">StorageAPI</a>::output(<a href="gmlewis/b2#StorageAPI">StorageAPI</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/b2/traits.mbt,85:::fn <a href="gmlewis/b2#StorageAPI">StorageAPI</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/b2/api-info.mbt,81:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/b2#StorageAPI">StorageAPI</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/b2/api-info.mbt,81:::fn output(<a href="gmlewis/b2#StorageAPI">StorageAPI</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived

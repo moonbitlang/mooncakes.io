@@ -615,12 +615,12 @@
 #### mooncakes-io-method-mark-Methods
 - #### client\_x
   ```moonbit
-  :::source,tiye/dom-ffi/lib/event.mbt,121:::fn <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>::client_x(self : <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>) -> float
+  :::source,tiye/dom-ffi/lib/event.mbt,121:::fn <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>::client_x(self : <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>) -> Float
   ```
   > 
 - #### client\_y
   ```moonbit
-  :::source,tiye/dom-ffi/lib/event.mbt,125:::fn <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>::client_y(self : <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>) -> float
+  :::source,tiye/dom-ffi/lib/event.mbt,125:::fn <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>::client_y(self : <a href="tiye/dom-ffi/lib#MouseEvent">MouseEvent</a>) -> Float
   ```
   > 
 - #### prevent\_default
@@ -727,7 +727,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Navigator
 #### mooncakes-io-method-mark-Methods
 - #### now
   ```moonbit
-  :::source,tiye/dom-ffi/lib/performance.mbt,8:::fn <a href="tiye/dom-ffi/lib#Performance">Performance</a>::now(self : <a href="tiye/dom-ffi/lib#Performance">Performance</a>) -> float
+  :::source,tiye/dom-ffi/lib/performance.mbt,8:::fn <a href="tiye/dom-ffi/lib#Performance">Performance</a>::now(self : <a href="tiye/dom-ffi/lib#Performance">Performance</a>) -> Float
   ```
   > 
 
@@ -864,7 +864,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Navigator
   > 
 - #### request\_animation\_frame
   ```moonbit
-  :::source,tiye/dom-ffi/lib/window.mbt,30:::fn <a href="tiye/dom-ffi/lib#Window">Window</a>::request_animation_frame(self : <a href="tiye/dom-ffi/lib#Window">Window</a>, f : (float) -> Unit) -> Unit
+  :::source,tiye/dom-ffi/lib/window.mbt,30:::fn <a href="tiye/dom-ffi/lib#Window">Window</a>::request_animation_frame(self : <a href="tiye/dom-ffi/lib#Window">Window</a>, f : (Float) -> Unit) -> Unit
   ```
   > 
 - #### set\_onbeforeunload

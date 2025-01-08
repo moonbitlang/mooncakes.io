@@ -1,0 +1,123 @@
+{
+  "readme": "# gmlewis/b2\n[![check](https://github.com/gmlewis/moonbit-b2/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-b2/actions/workflows/check.yml)\n\nThis is a simple b2 client used to retrieve objects from Backblaze B2\nvia its Native API.\n\n## Status\n\nThe code has been updated to support compiler:\n\n```bash\n$ moon version --all\nmoon 0.1.20241219 (e628c26 2024-12-19) ~/.moon/bin/moon\nmoonc v0.1.20241223+62b9a1a85 ~/.moon/bin/moonc\nmoonrun 0.1.20241219 (e628c26 2024-12-19) ~/.moon/bin/moonrun\n```\n\nUse `moonup` to manage `moon` compiler versions:\nhttps://github.com/chawyehsu/moonup\n",
+  "name": "gmlewis/b2",
+  "traits": [],
+  "types": [
+    {
+      "name": "APIInfo",
+      "docstring": " `APIInfo` represents Backblaze B2 Native API info.\n It is a data structure that groups the information you need by API suite.",
+      "signature": "type APIInfo",
+      "loc": { "line": 3, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/b2#APIInfo\">APIInfo</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/b2#APIInfo\">APIInfo</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 7, "column": 10 }
+            }
+          ],
+          "loc": { "line": 7, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Client",
+      "docstring": " `Client` represents an authorized b2 client.",
+      "signature": "type Client",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "consume_object",
+          "docstring": " `consume_object` performs a GET to retrieve the b2 object, consumes it\n and optionally returns the object's hash using the provided HashFunc.",
+          "signature": "fn <a href=\"gmlewis/b2#Client\">Client</a>::consume_object(self : <a href=\"gmlewis/b2#Client\">Client</a>, filename : String, hash~ : <a href=\"gmlewis/spin-moonbit-sdk/common#HashFunc\">@gmlewis/spin-moonbit-sdk/common.HashFunc</a>?, debug~ : Bool = ..) -> String!<a href=\"gmlewis/b2#ClientError\">ClientError</a>",
+          "loc": { "line": 3, "column": 8 }
+        },
+        {
+          "name": "get_download_authorization_url",
+          "docstring": " `get_download_authorization_url` returns a URL that can be used in an\n https GET call to download any files in a bucket with the given `file_name_prefix`.\n Note that if `file_name_prefix` needs to be escaped for suitability within a query parameter,\n you must do that first before calling this function.",
+          "signature": "fn <a href=\"gmlewis/b2#Client\">Client</a>::get_download_authorization_url(self : <a href=\"gmlewis/b2#Client\">Client</a>, file_name_prefix : String, valid_duration_in_seconds~ : Int = .., debug~ : Bool = ..) -> String!<a href=\"gmlewis/b2#ClientError\">ClientError</a>",
+          "loc": { "line": 5, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " `Client::new` returns a new client to communicate with the b2 (Backblaze) API\n for the provided `bucket_id` and `bucket_name`.",
+          "signature": "fn <a href=\"gmlewis/b2#Client\">Client</a>::new(key_id : String, key_secret : String, bucket_id : String, bucket_name : String, debug~ : Bool = ..) -> <a href=\"gmlewis/b2#Client\">Client</a>!<a href=\"gmlewis/b2#ClientError\">ClientError</a>",
+          "loc": { "line": 9, "column": 16 }
+        },
+        {
+          "name": "stream_object",
+          "docstring": " `stream_object` performs a GET to retrieve the b2 object, streams it to\n its https `response_out`, and optionally returns the object's hash using the\n provided HashFunc.",
+          "signature": "fn <a href=\"gmlewis/b2#Client\">Client</a>::stream_object(self : <a href=\"gmlewis/b2#Client\">Client</a>, filename : String, response_out : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types.ResponseOutparam</a>, hash~ : <a href=\"gmlewis/spin-moonbit-sdk/common#HashFunc\">@gmlewis/spin-moonbit-sdk/common.HashFunc</a>?, debug~ : Bool = ..) -> String!<a href=\"gmlewis/b2#ClientError\">ClientError</a>",
+          "loc": { "line": 4, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/b2#Client\">Client</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/b2#Client\">Client</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 15, "column": 10 }
+            }
+          ],
+          "loc": { "line": 15, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ClientError",
+      "docstring": "",
+      "signature": "pub(all) type! ClientError String\n",
+      "loc": { "line": 5, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/b2#ClientError\">ClientError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/b2#ClientError\">ClientError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 5, "column": 42 }
+            }
+          ],
+          "loc": { "line": 5, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "StorageAPI",
+      "docstring": " `StorageAPI` represents Backblaze B2 Native Storage API info.",
+      "signature": "type StorageAPI",
+      "loc": { "line": 21, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/b2#StorageAPI\">StorageAPI</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/b2#StorageAPI\">StorageAPI</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 81, "column": 10 }
+            }
+          ],
+          "loc": { "line": 81, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

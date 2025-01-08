@@ -1,0 +1,3515 @@
+{
+  "readme": "",
+  "name": "rami3l/cmark/cmark",
+  "traits": [],
+  "types": [
+    {
+      "name": "Atx",
+      "docstring": "",
+      "signature": "type Atx",
+      "loc": { "line": 157, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Atx\">Atx</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Atx\">Atx</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 163, "column": 10 }
+            }
+          ],
+          "loc": { "line": 163, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Atx\">Atx</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Atx\">Atx</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 163, "column": 16 }
+            }
+          ],
+          "loc": { "line": 163, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BState",
+      "docstring": "",
+      "signature": "type BState",
+      "loc": { "line": 1657, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#BState\">BState</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#BState\">BState</a>, <a href=\"rami3l/cmark/cmark#BState\">BState</a>) -> Bool",
+              "loc": { "line": 1661, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1661, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Block",
+      "docstring": " A markdown block.",
+      "signature": "pub(all) enum Block {\n  BlankLine(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String])\n  BlockQuote(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>])\n  Blocks(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Block\">Block</a>]])\n  CodeBlock(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>])\n  Heading(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>])\n  HtmlBlock(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#HtmlBlock\">HtmlBlock</a>])\n  LinkRefDefinition(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>])\n  List(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>])\n  Paragraph(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>])\n  ThematicBreak(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>])\n  ExtMathBlock(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>])\n  ExtTable(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#Table\">Table</a>])\n  ExtFootnoteDefinition(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>])\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "defs",
+          "docstring": " Collects the given `Block`'s link definitions (e.g. `LinkRefDefinition`\n and `ExtFootnoteDefinition`) and adds them to `init` (defaults to an empty map).",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Block\">Block</a>::defs(self : <a href=\"rami3l/cmark/cmark#Block\">Block</a>, init~ : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>] = ..) -> <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>]",
+          "loc": { "line": 76, "column": 15 }
+        },
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Block\">Block</a>::empty() -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>",
+          "loc": { "line": 19, "column": 15 }
+        },
+        {
+          "name": "meta",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Block\">Block</a>::meta(self : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a>",
+          "loc": { "line": 24, "column": 15 }
+        },
+        {
+          "name": "normalize",
+          "docstring": " Normalize a block.\n\n `b.normalize()` has the same content as `b` but is such that for any\n occurrence of `Blocks` in `b` the list of blocks `bs`:\n - `bs` is not a singleton list.\n - Has no `Blocks` case. The meta is dropped and the nested\n   blocks are spliced in `bs` where the case occurs.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Block\">Block</a>::normalize(self : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>",
+          "loc": { "line": 49, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Block\">Block</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Block\">Block</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 16, "column": 10 }
+            }
+          ],
+          "loc": { "line": 16, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Block\">Block</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 16, "column": 16 }
+            }
+          ],
+          "loc": { "line": 16, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockHeading",
+      "docstring": " The type for [ATX](https://spec.commonmark.org/0.30/#atx-headings) \n and [Setext](https://spec.commonmark.org/0.30/#setext-headings) headings.",
+      "signature": "pub(all) struct BlockHeading {\n  layout : <a href=\"rami3l/cmark/cmark#BlockHeadingLayout\">BlockHeadingLayout</a>\n  level : Int\n  inline : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>\n  id : <a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>?\n}",
+      "loc": { "line": 216, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>::new(id~ : <a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>? = .., layout~ : <a href=\"rami3l/cmark/cmark#BlockHeadingLayout\">BlockHeadingLayout</a> = .., level~ : Int, inline : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>",
+          "loc": { "line": 257, "column": 22 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 221, "column": 10 }
+            }
+          ],
+          "loc": { "line": 221, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockHeading\">BlockHeading</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 221, "column": 16 }
+            }
+          ],
+          "loc": { "line": 221, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockHeadingAtxLayout",
+      "docstring": "",
+      "signature": "pub(all) struct BlockHeadingAtxLayout {\n  indent : Int\n  after_opening : String\n  closing : String\n}",
+      "loc": { "line": 230, "column": 17 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>::default() -> <a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>",
+          "loc": { "line": 237, "column": 31 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 234, "column": 10 }
+            }
+          ],
+          "loc": { "line": 234, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 234, "column": 26 }
+            }
+          ],
+          "loc": { "line": 234, "column": 26 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 234, "column": 16 }
+            }
+          ],
+          "loc": { "line": 234, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockHeadingId",
+      "docstring": "",
+      "signature": "pub(all) enum BlockHeadingId {\n  Auto(String)\n  Id(String)\n}",
+      "loc": { "line": 251, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 254, "column": 10 }
+            }
+          ],
+          "loc": { "line": 254, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 254, "column": 26 }
+            }
+          ],
+          "loc": { "line": 254, "column": 26 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"rami3l/cmark/cmark#BlockHeadingId\">BlockHeadingId</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 254, "column": 16 }
+            }
+          ],
+          "loc": { "line": 254, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockHeadingLayout",
+      "docstring": "",
+      "signature": "pub(all) enum BlockHeadingLayout {\n  Atx(<a href=\"rami3l/cmark/cmark#BlockHeadingAtxLayout\">BlockHeadingAtxLayout</a>)\n  Setext(<a href=\"rami3l/cmark/cmark#BlockHeadingSetextLayout\">BlockHeadingSetextLayout</a>)\n}",
+      "loc": { "line": 224, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingLayout\">BlockHeadingLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockHeadingLayout\">BlockHeadingLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 227, "column": 10 }
+            }
+          ],
+          "loc": { "line": 227, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingLayout\">BlockHeadingLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockHeadingLayout\">BlockHeadingLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 227, "column": 16 }
+            }
+          ],
+          "loc": { "line": 227, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockHeadingSetextLayout",
+      "docstring": "",
+      "signature": "pub(all) struct BlockHeadingSetextLayout {\n  leading_indent : Int\n  trailing_blanks : String\n  underline_indent : Int\n  underline_count : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[Int]\n  underline_blanks : String\n}",
+      "loc": { "line": 242, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingSetextLayout\">BlockHeadingSetextLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockHeadingSetextLayout\">BlockHeadingSetextLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 248, "column": 10 }
+            }
+          ],
+          "loc": { "line": 248, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockHeadingSetextLayout\">BlockHeadingSetextLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockHeadingSetextLayout\">BlockHeadingSetextLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 248, "column": 16 }
+            }
+          ],
+          "loc": { "line": 248, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockLine",
+      "docstring": " Block lines.\n\n In CommonMark blocks, a \"line\" does not necessarily correspond to\n a line in the source plain text. For example the lines of a\n paragraph in a block quote are the lines stripped from the block\n quote markers.  We call the line resulting from stripping the\n block structure preceeding a given block a {e block line}.",
+      "signature": "pub(all) type BlockLine <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+      "loc": { "line": 8, "column": 15 },
+      "methods": [
+        {
+          "name": "list_text_loc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockLine\">BlockLine</a>::list_text_loc(ls : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#BlockLine\">BlockLine</a>]) -> <a href=\"rami3l/cmark/cmark_base#TextLoc\">@rami3l/cmark/cmark_base.TextLoc</a>",
+          "loc": { "line": 19, "column": 19 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockLine\">BlockLine</a>::to_string(self : <a href=\"rami3l/cmark/cmark#BlockLine\">BlockLine</a>) -> String",
+          "loc": { "line": 14, "column": 19 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "BlockList",
+      "docstring": " The type for [lists](https://spec.commonmark.org/0.30/#lists).",
+      "signature": "pub(all) struct BlockList {\n  ty : <a href=\"rami3l/cmark/cmark_base#ListType\">@rami3l/cmark/cmark_base.ListType</a>\n  tight : Bool\n  items : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>]]\n}",
+      "loc": { "line": 321, "column": 17 },
+      "methods": [
+        {
+          "name": "map_items",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>::map_items(self : <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>, f : (<a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>) -> <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>) -> <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>",
+          "loc": { "line": 328, "column": 19 }
+        },
+        {
+          "name": "normalize_items",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>::normalize_items(self : <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>) -> <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>",
+          "loc": { "line": 336, "column": 19 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 325, "column": 10 }
+            }
+          ],
+          "loc": { "line": 325, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockList\">BlockList</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 325, "column": 16 }
+            }
+          ],
+          "loc": { "line": 325, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockParagraph",
+      "docstring": " The type for [paragraphs](https://spec.commonmark.org/0.30/#paragraphs).",
+      "signature": "pub(all) struct BlockParagraph {\n  leading_indent : Int\n  inline : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>\n  trailing_blanks : String\n}",
+      "loc": { "line": 341, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>::new(leading_indent~ : Int = .., trailing_blanks~ : String = .., inline : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>",
+          "loc": { "line": 348, "column": 24 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 345, "column": 10 }
+            }
+          ],
+          "loc": { "line": 345, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockParagraph\">BlockParagraph</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 345, "column": 16 }
+            }
+          ],
+          "loc": { "line": 345, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockQuote",
+      "docstring": " The type for [block quotes](https://spec.commonmark.org/0.30/#block-quotes).",
+      "signature": "pub(all) struct BlockQuote {\n  indent : Int\n  block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>\n}",
+      "loc": { "line": 99, "column": 17 },
+      "methods": [
+        {
+          "name": "map_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>::map_block(self : <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>, f : (<a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>",
+          "loc": { "line": 112, "column": 20 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>::new(indent~ : Int = .., block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>",
+          "loc": { "line": 107, "column": 20 }
+        },
+        {
+          "name": "normalize_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>::normalize_block(self : <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>) -> <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>",
+          "loc": { "line": 120, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 104, "column": 10 }
+            }
+          ],
+          "loc": { "line": 104, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockQuote\">BlockQuote</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 104, "column": 16 }
+            }
+          ],
+          "loc": { "line": 104, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockStruct",
+      "docstring": "",
+      "signature": "type BlockStruct",
+      "loc": { "line": 192, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockStruct\">BlockStruct</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockStruct\">BlockStruct</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 204, "column": 10 }
+            }
+          ],
+          "loc": { "line": 204, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockStruct\">BlockStruct</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockStruct\">BlockStruct</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 204, "column": 16 }
+            }
+          ],
+          "loc": { "line": 204, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "BlockThematicBreak",
+      "docstring": " The type for [thematic breaks](https://spec.commonmark.org/0.30/#thematic-break).",
+      "signature": "pub(all) struct BlockThematicBreak {\n  indent : Int\n  layout : String\n}",
+      "loc": { "line": 357, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>::new(indent~ : Int = .., layout~ : String = ..) -> <a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>",
+          "loc": { "line": 363, "column": 28 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 360, "column": 10 }
+            }
+          ],
+          "loc": { "line": 360, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 360, "column": 26 }
+            }
+          ],
+          "loc": { "line": 360, "column": 26 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"rami3l/cmark/cmark#BlockThematicBreak\">BlockThematicBreak</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 360, "column": 16 }
+            }
+          ],
+          "loc": { "line": 360, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Closer",
+      "docstring": " Closer indexes.\n\n They map closing delimiters to the position where they\n start. Shortcuts forward searches in inline parsing. See\n `inline_struct`",
+      "signature": "type Closer",
+      "loc": { "line": 6, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"rami3l/cmark/cmark#Closer\">Closer</a>, <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>) -> Int",
+              "loc": { "line": 14, "column": 14 }
+            }
+          ],
+          "loc": { "line": 14, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#Closer\">Closer</a>, <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>) -> Bool",
+              "loc": { "line": 14, "column": 10 }
+            }
+          ],
+          "loc": { "line": 14, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "automatically derived",
+              "signature": "fn hash_combine(<a href=\"rami3l/cmark/cmark#Closer\">Closer</a>, <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 14, "column": 23 }
+            }
+          ],
+          "loc": { "line": 14, "column": 23 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Closer\">Closer</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 14, "column": 29 }
+            }
+          ],
+          "loc": { "line": 14, "column": 29 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Closer\">Closer</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Closer\">Closer</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 14, "column": 35 }
+            }
+          ],
+          "loc": { "line": 14, "column": 35 }
+        }
+      ]
+    },
+    {
+      "name": "CloserIndex",
+      "docstring": "",
+      "signature": "type CloserIndex",
+      "loc": { "line": 20, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#CloserIndex\">CloserIndex</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#CloserIndex\">CloserIndex</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 20, "column": 45 }
+            }
+          ],
+          "loc": { "line": 20, "column": 45 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#CloserIndex\">CloserIndex</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#CloserIndex\">CloserIndex</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 20, "column": 51 }
+            }
+          ],
+          "loc": { "line": 20, "column": 51 }
+        }
+      ]
+    },
+    {
+      "name": "CodeBlock",
+      "docstring": " The type for [indented](https://spec.commonmark.org/0.30/#indented-code-block) and\n [fenced](:https://spec.commonmark.org/0.30/#fenced-code-blocks) code blocks.",
+      "signature": "pub(all) struct CodeBlock {\n  layout : <a href=\"rami3l/cmark/cmark#CodeBlockLayout\">CodeBlockLayout</a>\n  info_string : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]?\n  code : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]]\n}",
+      "loc": { "line": 126, "column": 17 },
+      "methods": [
+        {
+          "name": "language_of_info_string",
+          "docstring": " [language_of_info_string s] extracts a (non-empty) language, the first word of [s] and a trimmed remainder.\n Assumes [s] is {!String.trim}ed which is what {!info_string} gives you.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>::language_of_info_string(s : String) -> (String, String)?",
+          "loc": { "line": 187, "column": 19 }
+        },
+        {
+          "name": "make_fence",
+          "docstring": " [make_fence cb] is a fence character and count suitable for [cb].",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>::make_fence(self : <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>) -> (Char, Int)",
+          "loc": { "line": 165, "column": 19 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>::new(layout~ : <a href=\"rami3l/cmark/cmark#CodeBlockLayout\">CodeBlockLayout</a> = .., info_string~ : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]? = .., code : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]]) -> <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>",
+          "loc": { "line": 151, "column": 19 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 130, "column": 10 }
+            }
+          ],
+          "loc": { "line": 130, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#CodeBlock\">CodeBlock</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 130, "column": 16 }
+            }
+          ],
+          "loc": { "line": 130, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "CodeBlockFencedLayout",
+      "docstring": "",
+      "signature": "pub(all) struct CodeBlockFencedLayout {\n  indent : Int\n  opening_fence : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]\n  closing_fence : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]?\n}",
+      "loc": { "line": 139, "column": 17 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>::default() -> <a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>",
+          "loc": { "line": 146, "column": 31 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 143, "column": 10 }
+            }
+          ],
+          "loc": { "line": 143, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 143, "column": 16 }
+            }
+          ],
+          "loc": { "line": 143, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "CodeBlockLayout",
+      "docstring": "",
+      "signature": "pub(all) enum CodeBlockLayout {\n  Indented\n  Fenced(<a href=\"rami3l/cmark/cmark#CodeBlockFencedLayout\">CodeBlockFencedLayout</a>)\n}",
+      "loc": { "line": 133, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#CodeBlockLayout\">CodeBlockLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#CodeBlockLayout\">CodeBlockLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 136, "column": 10 }
+            }
+          ],
+          "loc": { "line": 136, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#CodeBlockLayout\">CodeBlockLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#CodeBlockLayout\">CodeBlockLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 136, "column": 16 }
+            }
+          ],
+          "loc": { "line": 136, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "CodeBlockStruct",
+      "docstring": "",
+      "signature": "type CodeBlockStruct",
+      "loc": { "line": 151, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#CodeBlockStruct\">CodeBlockStruct</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#CodeBlockStruct\">CodeBlockStruct</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 154, "column": 10 }
+            }
+          ],
+          "loc": { "line": 154, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#CodeBlockStruct\">CodeBlockStruct</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#CodeBlockStruct\">CodeBlockStruct</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 154, "column": 16 }
+            }
+          ],
+          "loc": { "line": 154, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Doc",
+      "docstring": " The type for CommonMark documents.",
+      "signature": "pub(all) struct Doc {\n  nl : String\n  block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>\n  defs : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>]\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>::empty() -> <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>",
+          "loc": { "line": 18, "column": 13 }
+        },
+        {
+          "name": "from_string",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>::from_string(defs~ : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>] = .., resolver~ : (<a href=\"rami3l/cmark/cmark#LabelContext\">LabelContext</a>) -> <a href=\"rami3l/cmark/cmark#Label\">Label</a>? = .., nested_links~ : Bool = .., heading_auto_ids~ : Bool = .., layout~ : Bool = .., locs~ : Bool = .., file~ : String = .., strict~ : Bool = .., s : String) -> <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>",
+          "loc": { "line": 23, "column": 13 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>::new(nl~ : String = .., defs~ : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>] = .., block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>",
+          "loc": { "line": 9, "column": 13 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Doc\">Doc</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 10 }
+            }
+          ],
+          "loc": { "line": 6, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Doc\">Doc</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 6, "column": 16 }
+            }
+          ],
+          "loc": { "line": 6, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Fence",
+      "docstring": "",
+      "signature": "type Fence",
+      "loc": { "line": 136, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Fence\">Fence</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Fence\">Fence</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 142, "column": 10 }
+            }
+          ],
+          "loc": { "line": 142, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Fence\">Fence</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Fence\">Fence</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 142, "column": 16 }
+            }
+          ],
+          "loc": { "line": 142, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "FenceCodeBlockStruct",
+      "docstring": "",
+      "signature": "type FenceCodeBlockStruct",
+      "loc": { "line": 145, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#FenceCodeBlockStruct\">FenceCodeBlockStruct</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#FenceCodeBlockStruct\">FenceCodeBlockStruct</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 148, "column": 10 }
+            }
+          ],
+          "loc": { "line": 148, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#FenceCodeBlockStruct\">FenceCodeBlockStruct</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#FenceCodeBlockStruct\">FenceCodeBlockStruct</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 148, "column": 16 }
+            }
+          ],
+          "loc": { "line": 148, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Folder",
+      "docstring": "",
+      "signature": "pub(all) struct Folder {\n  inline_ext_default : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>\n  block_ext_default : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>\n  inline : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]\n  block : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [
+        {
+          "name": "block_ext_none",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::block_ext_none[A](self : <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], _a : A, _b : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+          "loc": { "line": 47, "column": 16 }
+        },
+        {
+          "name": "fold_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::fold_block[A](self : <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], acc : A, b : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+          "loc": { "line": 96, "column": 16 }
+        },
+        {
+          "name": "fold_doc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::fold_doc[A](self : <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], acc : A, doc : <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+          "loc": { "line": 145, "column": 16 }
+        },
+        {
+          "name": "fold_inline",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::fold_inline[A](self : <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], acc : A, i : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+          "loc": { "line": 67, "column": 16 }
+        },
+        {
+          "name": "inline_ext_none",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::inline_ext_none[A](self : <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], _a : A, _b : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+          "loc": { "line": 37, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::new[A](inline_ext_default~ : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a> = .., block_ext_default~ : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> A!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a> = .., inline~ : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A] = .., block~ : (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], A, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A] = ..) -> <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A]",
+          "loc": { "line": 57, "column": 16 }
+        },
+        {
+          "name": "none",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::none[A, B](self : <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[A], _a : A, _b : B) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+          "loc": { "line": 31, "column": 16 }
+        },
+        {
+          "name": "ret",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Folder\">Folder</a>::ret[A](a : A) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+          "loc": { "line": 26, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "FolderError",
+      "docstring": "",
+      "signature": "pub(all) type! FolderError String\n",
+      "loc": { "line": 2, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 2, "column": 42 }
+            }
+          ],
+          "loc": { "line": 2, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "FolderResult",
+      "docstring": " The type for folder results.\n `Default` means doing the default fold.",
+      "signature": "pub(all) enum FolderResult {\n  Default\n  Fold(A)\n}",
+      "loc": { "line": 17, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "",
+              "signature": "fn default[A]() -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+              "loc": { "line": 23, "column": 46 }
+            }
+          ],
+          "loc": { "line": 23, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](<a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A], <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]) -> Bool",
+              "loc": { "line": 20, "column": 10 }
+            }
+          ],
+          "loc": { "line": 20, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 20, "column": 14 }
+            }
+          ],
+          "loc": { "line": 20, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](<a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 20, "column": 20 }
+            }
+          ],
+          "loc": { "line": 20, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "Footnote",
+      "docstring": "",
+      "signature": "pub(all) struct Footnote {\n  indent : Int\n  label : <a href=\"rami3l/cmark/cmark#Label\">Label</a>\n  defined_label : <a href=\"rami3l/cmark/cmark#Label\">Label</a>?\n  block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>\n}",
+      "loc": { "line": 373, "column": 17 },
+      "methods": [
+        {
+          "name": "map_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>::map_block(self : <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>, f : (<a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>",
+          "loc": { "line": 392, "column": 18 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>::new(indent~ : Int = .., defined_label? : <a href=\"rami3l/cmark/cmark#Label\">Label</a>?, label : <a href=\"rami3l/cmark/cmark#Label\">Label</a>, block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>",
+          "loc": { "line": 381, "column": 18 }
+        },
+        {
+          "name": "normalize_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>::normalize_block(self : <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>) -> <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>",
+          "loc": { "line": 397, "column": 18 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 378, "column": 10 }
+            }
+          ],
+          "loc": { "line": 378, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 378, "column": 16 }
+            }
+          ],
+          "loc": { "line": 378, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Heading",
+      "docstring": "",
+      "signature": "type Heading",
+      "loc": { "line": 174, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Heading\">Heading</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Heading\">Heading</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 177, "column": 10 }
+            }
+          ],
+          "loc": { "line": 177, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Heading\">Heading</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Heading\">Heading</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 177, "column": 16 }
+            }
+          ],
+          "loc": { "line": 177, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "HtmlBlock",
+      "docstring": " The type for [HTML blocks](https://spec.commonmark.org/0.30/#html-blocks).",
+      "signature": "pub(all) type HtmlBlock <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]]",
+      "loc": { "line": 267, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#HtmlBlock\">HtmlBlock</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#HtmlBlock\">HtmlBlock</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 267, "column": 48 }
+            }
+          ],
+          "loc": { "line": 267, "column": 48 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#HtmlBlock\">HtmlBlock</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#HtmlBlock\">HtmlBlock</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 267, "column": 54 }
+            }
+          ],
+          "loc": { "line": 267, "column": 54 }
+        }
+      ]
+    },
+    {
+      "name": "HtmlBlockStruct",
+      "docstring": "",
+      "signature": "type HtmlBlockStruct",
+      "loc": { "line": 180, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#HtmlBlockStruct\">HtmlBlockStruct</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#HtmlBlockStruct\">HtmlBlockStruct</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 183, "column": 10 }
+            }
+          ],
+          "loc": { "line": 183, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#HtmlBlockStruct\">HtmlBlockStruct</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#HtmlBlockStruct\">HtmlBlockStruct</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 183, "column": 16 }
+            }
+          ],
+          "loc": { "line": 183, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "IndentedCodeLine",
+      "docstring": "",
+      "signature": "type IndentedCodeLine",
+      "loc": { "line": 129, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#IndentedCodeLine\">IndentedCodeLine</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#IndentedCodeLine\">IndentedCodeLine</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 133, "column": 10 }
+            }
+          ],
+          "loc": { "line": 133, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#IndentedCodeLine\">IndentedCodeLine</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#IndentedCodeLine\">IndentedCodeLine</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 133, "column": 16 }
+            }
+          ],
+          "loc": { "line": 133, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Inline",
+      "docstring": "",
+      "signature": "pub(all) enum Inline {\n  Autolink(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>])\n  Break(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>])\n  CodeSpan(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>])\n  Emphasis(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>])\n  Image(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>])\n  Inlines(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>]])\n  Link(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>])\n  RawHtml(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>])\n  StrongEmphasis(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>])\n  Text(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String])\n  ExtStrikethrough(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>])\n  ExtMathSpan(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>])\n}",
+      "loc": { "line": 5, "column": 15 },
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>::empty() -> <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>",
+          "loc": { "line": 21, "column": 16 }
+        },
+        {
+          "name": "id",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>::id(self : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, buf~ : <a href=\"moonbitlang/core/builtin#StringBuilder\">StringBuilder</a> = ..) -> String",
+          "loc": { "line": 157, "column": 16 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>::is_empty(self : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> Bool",
+          "loc": { "line": 26, "column": 16 }
+        },
+        {
+          "name": "meta",
+          "docstring": " `meta(i)` is the metadata of `i`.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>::meta(self : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a>",
+          "loc": { "line": 35, "column": 16 }
+        },
+        {
+          "name": "normalize",
+          "docstring": " `normalize(i)` has the same content as `i` but is such that for any\n occurence of `Inlines(is, _)` in `i` the list of inlines `is`:\n - `is` is not a singleton list.\n - Has no two consecutive `Text _` cases. If that occurs the texts are\n   concatenated, the meta of the first one is kept and its text\n   location extended to include the second one.\n - Has no `Inlines _` case. The meta is dropped and the nested\n   inlines are spliced in `is` where the case occurs.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>::normalize(self : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>",
+          "loc": { "line": 65, "column": 16 }
+        },
+        {
+          "name": "to_plain_text",
+          "docstring": " `to_plain_text(i, break_on_soft~, acc~)` has the plain text of `i`\n as a sequence of lines represented by a list of strings to be\n concatenated. If `break_on_soft` is `true` soft line breaks\n are turned into hard line breaks.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>::to_plain_text(self : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, break_on_soft~ : Bool) -> <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[String]]",
+          "loc": { "line": 119, "column": 16 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> Bool",
+              "loc": { "line": 18, "column": 10 }
+            }
+          ],
+          "loc": { "line": 18, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 18, "column": 14 }
+            }
+          ],
+          "loc": { "line": 18, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 18, "column": 20 }
+            }
+          ],
+          "loc": { "line": 18, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineAutolink",
+      "docstring": "",
+      "signature": "pub(all) struct InlineAutolink {\n  is_email : Bool\n  link : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]\n}",
+      "loc": { "line": 204, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>::new(link : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]) -> <a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>",
+          "loc": { "line": 213, "column": 24 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>, <a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>) -> Bool",
+              "loc": { "line": 210, "column": 10 }
+            }
+          ],
+          "loc": { "line": 210, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 210, "column": 14 }
+            }
+          ],
+          "loc": { "line": 210, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineAutolink\">InlineAutolink</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 210, "column": 20 }
+            }
+          ],
+          "loc": { "line": 210, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineBreak",
+      "docstring": "",
+      "signature": "pub(all) struct InlineBreak {\n  layout_before : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]\n  ty : <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>\n  layout_after : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]\n}",
+      "loc": { "line": 219, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>::new(layout_before~ : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String] = .., layout_after~ : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String] = .., ty : <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>) -> <a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>",
+          "loc": { "line": 226, "column": 21 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>, <a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>) -> Bool",
+              "loc": { "line": 223, "column": 10 }
+            }
+          ],
+          "loc": { "line": 223, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 223, "column": 14 }
+            }
+          ],
+          "loc": { "line": 223, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineBreak\">InlineBreak</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 223, "column": 20 }
+            }
+          ],
+          "loc": { "line": 223, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineBreakType",
+      "docstring": "",
+      "signature": "pub(all) enum InlineBreakType {\n  Hard\n  Soft\n}",
+      "loc": { "line": 235, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>, <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>) -> Int",
+              "loc": { "line": 238, "column": 14 }
+            }
+          ],
+          "loc": { "line": 238, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>, <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>) -> Bool",
+              "loc": { "line": 238, "column": 10 }
+            }
+          ],
+          "loc": { "line": 238, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 238, "column": 23 }
+            }
+          ],
+          "loc": { "line": 238, "column": 23 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 238, "column": 39 }
+            }
+          ],
+          "loc": { "line": 238, "column": 39 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"rami3l/cmark/cmark#InlineBreakType\">InlineBreakType</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 238, "column": 29 }
+            }
+          ],
+          "loc": { "line": 238, "column": 29 }
+        }
+      ]
+    },
+    {
+      "name": "InlineCodeSpan",
+      "docstring": " The type for [code spans](https://spec.commonmark.org/0.30/#code-spans).",
+      "signature": "pub(all) struct InlineCodeSpan {\n  backticks : Int\n  code_layout : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]\n}",
+      "loc": { "line": 241, "column": 17 },
+      "methods": [
+        {
+          "name": "code",
+          "docstring": " https://spec.commonmark.org/0.30/#code-spans",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>::code(self : <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>) -> String",
+          "loc": { "line": 318, "column": 24 }
+        },
+        {
+          "name": "from_string",
+          "docstring": " `from_string(s)` is a code span for `s`. `s` can start with or\n include backticks; the appropriate minimal backtick count and\n possible needed leading and trailing space are computed\n accordingly. If `s` contains newlines, blanks after newlines\n are treated as layout like during parsing. `meta` is used for\n the lines of the resulting code layout (see `code_layout`).\n the resulting code layout (see `code_layout`).",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>::from_string(meta~ : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a> = .., s : String) -> <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>",
+          "loc": { "line": 274, "column": 24 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>::new(backticks~ : Int, code_layout : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]) -> <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>",
+          "loc": { "line": 247, "column": 24 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>, <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>) -> Bool",
+              "loc": { "line": 244, "column": 10 }
+            }
+          ],
+          "loc": { "line": 244, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 244, "column": 14 }
+            }
+          ],
+          "loc": { "line": 244, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineCodeSpan\">InlineCodeSpan</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 244, "column": 20 }
+            }
+          ],
+          "loc": { "line": 244, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineEmphasis",
+      "docstring": " The type for emphasis and strong emphasis.\n https://spec.commonmark.org/0.30/#emphasis-and-strong-emphasis",
+      "signature": "pub(all) struct InlineEmphasis {\n  delim : Char\n  inline : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>\n}",
+      "loc": { "line": 334, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>::new(delim~ : Char = .., inline : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>",
+          "loc": { "line": 340, "column": 24 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>, <a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>) -> Bool",
+              "loc": { "line": 337, "column": 10 }
+            }
+          ],
+          "loc": { "line": 337, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 337, "column": 14 }
+            }
+          ],
+          "loc": { "line": 337, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineEmphasis\">InlineEmphasis</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 337, "column": 20 }
+            }
+          ],
+          "loc": { "line": 337, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineLink",
+      "docstring": "",
+      "signature": "pub(all) struct InlineLink {\n  text : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>\n  reference : <a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>\n}",
+      "loc": { "line": 348, "column": 17 },
+      "methods": [
+        {
+          "name": "is_unsafe",
+          "docstring": " `is_unsafe(l)` is `true` if `l` is deemed unsafe.\n This is the case if `l` starts with a caseless match of\n `javascript:`, `vbscript:`, `file:` or `data:` except if\n `data:image/{gif,png,jpeg,webp}`.\n These rules were taken from the C reference implementation of CommonMark\n and are likely incomplete. If you are trying to prevent XSS you should\n post-process rendering outputs with a dedicated HTML sanitizer.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>::is_unsafe(l : String) -> Bool",
+          "loc": { "line": 408, "column": 20 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>::new(text : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, reference : <a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>) -> <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>",
+          "loc": { "line": 374, "column": 20 }
+        },
+        {
+          "name": "reference_definition",
+          "docstring": " `reference_definition(defs, l)` is the definition of `l`'s reference.\n If `l` is an `Inline` reference this returns its link definition\n wrapped in a `LinkDef`. If `l` is `Ref` this looks up the\n `referenced_label` in `defs`.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>::reference_definition(self : <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>, defs : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>]) -> <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>?",
+          "loc": { "line": 391, "column": 20 }
+        },
+        {
+          "name": "referenced_label",
+          "docstring": " `referenced_label(l)` is the label referenced by the label of `l`.\n This is the second label of `Ref(_)` or `None` on inline references.",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>::referenced_label(self : <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>) -> <a href=\"rami3l/cmark/cmark#Label\">Label</a>?",
+          "loc": { "line": 380, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>, <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>) -> Bool",
+              "loc": { "line": 351, "column": 10 }
+            }
+          ],
+          "loc": { "line": 351, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 351, "column": 14 }
+            }
+          ],
+          "loc": { "line": 351, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineLink\">InlineLink</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 351, "column": 20 }
+            }
+          ],
+          "loc": { "line": 351, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineMathSpan",
+      "docstring": "",
+      "signature": "pub(all) struct InlineMathSpan {\n  display : Bool\n  tex_layout : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]\n}",
+      "loc": { "line": 444, "column": 17 },
+      "methods": [
+        {
+          "name": "tex",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>::tex(self : <a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>) -> String",
+          "loc": { "line": 450, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>, <a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>) -> Bool",
+              "loc": { "line": 447, "column": 10 }
+            }
+          ],
+          "loc": { "line": 447, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 447, "column": 14 }
+            }
+          ],
+          "loc": { "line": 447, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineMathSpan\">InlineMathSpan</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 447, "column": 20 }
+            }
+          ],
+          "loc": { "line": 447, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "InlineRawHtml",
+      "docstring": " The type for [inline raw HTML](https://spec.commonmark.org/0.30/#raw-html) (can span multiple lines).",
+      "signature": "pub(all) type InlineRawHtml <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]",
+      "loc": { "line": 429, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>, <a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>) -> Bool",
+              "loc": { "line": 429, "column": 47 }
+            }
+          ],
+          "loc": { "line": 429, "column": 47 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 429, "column": 51 }
+            }
+          ],
+          "loc": { "line": 429, "column": 51 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineRawHtml\">InlineRawHtml</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 429, "column": 57 }
+            }
+          ],
+          "loc": { "line": 429, "column": 57 }
+        }
+      ]
+    },
+    {
+      "name": "InlineStrikethrough",
+      "docstring": "",
+      "signature": "pub(all) type InlineStrikethrough <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>",
+      "loc": { "line": 441, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>, <a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>) -> Bool",
+              "loc": { "line": 441, "column": 49 }
+            }
+          ],
+          "loc": { "line": 441, "column": 49 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 441, "column": 53 }
+            }
+          ],
+          "loc": { "line": 441, "column": 53 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#InlineStrikethrough\">InlineStrikethrough</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 441, "column": 59 }
+            }
+          ],
+          "loc": { "line": 441, "column": 59 }
+        }
+      ]
+    },
+    {
+      "name": "Label",
+      "docstring": " Labels are used by [reference links](https://spec.commonmark.org/0.30/#reference-link) to\n refer to the [definitions](#definitions) of\n [link reference definitions](https://spec.commonmark.org/0.30/#link-reference-definitions),\n [footnote definitions](#footnote-definitions) and your own\n [interpretations](#resolvers).",
+      "signature": "pub(all) struct Label {\n  meta : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a>\n  key : String\n  text : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]\n}",
+      "loc": { "line": 8, "column": 17 },
+      "methods": [
+        {
+          "name": "compare",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Label\">Label</a>::compare(self : <a href=\"rami3l/cmark/cmark#Label\">Label</a>, other : <a href=\"rami3l/cmark/cmark#Label\">Label</a>) -> Int",
+          "loc": { "line": 42, "column": 15 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Label\">Label</a>::new(meta~ : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a> = .., key~ : String, text : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]) -> <a href=\"rami3l/cmark/cmark#Label\">Label</a>",
+          "loc": { "line": 23, "column": 15 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Label\">Label</a>::op_equal(self : <a href=\"rami3l/cmark/cmark#Label\">Label</a>, other : <a href=\"rami3l/cmark/cmark#Label\">Label</a>) -> Bool",
+          "loc": { "line": 37, "column": 15 }
+        },
+        {
+          "name": "text_loc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Label\">Label</a>::text_loc(self : <a href=\"rami3l/cmark/cmark#Label\">Label</a>) -> <a href=\"rami3l/cmark/cmark_base#TextLoc\">@rami3l/cmark/cmark_base.TextLoc</a>",
+          "loc": { "line": 32, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Label\">Label</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Label\">Label</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 12, "column": 10 }
+            }
+          ],
+          "loc": { "line": 12, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Label\">Label</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Label\">Label</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 12, "column": 16 }
+            }
+          ],
+          "loc": { "line": 12, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "LabelContext",
+      "docstring": " `context` is:\n - `Def (prev, current)` when we just hit a\n   [link reference definition](https://spec.commonmark.org/0.30/#link-reference-definitions)\n   or footnote definition that defines the label `current`.\n   If there is already a definition for `current`'s key it is provided in `prev`\n   (whose `meta` has the location of the definition if you parse with locations).\n   If `None` is returned the `current` definition is ignored, and definition `prev`\n   (if any) is kept for the document.\n   If `Some l` is returned `l`'s key will be bound to the parsed definition for `current`\n   in `Doc.defs` at the end of parsing.\n   The result of the resolver is stored in the abstract syntax tree and\n   available via `LinkDefinition.defined_label` and `BlockFootnote.defined_label`.\n - `Ref (kind, ref, def)` when we just hit a link or image\n   referencing label `ref`. `def` is the label defining `ref`'s key\n   in the document (if any). The result of the resolver is the label\n   stored for resolving the reference to its definition in the resulting\n   `InlineLink` node;\n   `None` means that `label` is undefined and the inline becomes\n   `InlineText` like in CommonMark.",
+      "signature": "pub(all) enum LabelContext {\n  Def(<a href=\"rami3l/cmark/cmark#Label\">Label</a>?, <a href=\"rami3l/cmark/cmark#Label\">Label</a>)\n  Ref(<a href=\"rami3l/cmark/cmark#LinkKind\">LinkKind</a>, <a href=\"rami3l/cmark/cmark#Label\">Label</a>, <a href=\"rami3l/cmark/cmark#Label\">Label</a>?)\n}",
+      "loc": { "line": 74, "column": 15 },
+      "methods": [
+        {
+          "name": "default_resolver",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#LabelContext\">LabelContext</a>::default_resolver(self : <a href=\"rami3l/cmark/cmark#LabelContext\">LabelContext</a>) -> <a href=\"rami3l/cmark/cmark#Label\">Label</a>?",
+          "loc": { "line": 89, "column": 22 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "LabelDef",
+      "docstring": "",
+      "signature": "pub(all) enum LabelDef {\n  LinkDef(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>])\n  FootnoteDef(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#Footnote\">Footnote</a>])\n}",
+      "loc": { "line": 47, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 50, "column": 10 }
+            }
+          ],
+          "loc": { "line": 50, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 50, "column": 16 }
+            }
+          ],
+          "loc": { "line": 50, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "LinkDefinition",
+      "docstring": "",
+      "signature": "pub(all) struct LinkDefinition {\n  layout : <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>\n  label : <a href=\"rami3l/cmark/cmark#Label\">Label</a>?\n  defined_label : <a href=\"rami3l/cmark/cmark#Label\">Label</a>?\n  dest : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]?\n  title : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]?\n}",
+      "loc": { "line": 6, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>::new(layout~ : <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a> = .., label~ : <a href=\"rami3l/cmark/cmark#Label\">Label</a>? = .., defined_label~ : <a href=\"rami3l/cmark/cmark#Label\">Label</a>? = .., dest~ : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]? = .., title~ : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]? = ..) -> <a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>",
+          "loc": { "line": 15, "column": 24 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>, <a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>) -> Bool",
+              "loc": { "line": 12, "column": 10 }
+            }
+          ],
+          "loc": { "line": 12, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 12, "column": 14 }
+            }
+          ],
+          "loc": { "line": 12, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 12, "column": 20 }
+            }
+          ],
+          "loc": { "line": 12, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "LinkDefinitionLayout",
+      "docstring": "",
+      "signature": "pub(all) struct LinkDefinitionLayout {\n  indent : Int\n  angled_dest : Bool\n  before_dest : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]]\n  after_dest : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]]\n  title_open_delim : Char\n  after_title : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]]\n}",
+      "loc": { "line": 26, "column": 17 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>::default() -> <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>",
+          "loc": { "line": 36, "column": 30 }
+        },
+        {
+          "name": "for_dest",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>::for_dest(dest : String) -> <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>",
+          "loc": { "line": 48, "column": 30 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>, <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>) -> Bool",
+              "loc": { "line": 33, "column": 10 }
+            }
+          ],
+          "loc": { "line": 33, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 33, "column": 14 }
+            }
+          ],
+          "loc": { "line": 33, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#LinkDefinitionLayout\">LinkDefinitionLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 33, "column": 20 }
+            }
+          ],
+          "loc": { "line": 33, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "LinkKind",
+      "docstring": "",
+      "signature": "pub(all) enum LinkKind {\n  Link\n  Image\n}",
+      "loc": { "line": 80, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ListBlockStruct",
+      "docstring": "",
+      "signature": "type ListBlockStruct",
+      "loc": { "line": 216, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#ListBlockStruct\">ListBlockStruct</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#ListBlockStruct\">ListBlockStruct</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 222, "column": 10 }
+            }
+          ],
+          "loc": { "line": 222, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#ListBlockStruct\">ListBlockStruct</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#ListBlockStruct\">ListBlockStruct</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 222, "column": 16 }
+            }
+          ],
+          "loc": { "line": 222, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "ListItem",
+      "docstring": "",
+      "signature": "pub(all) struct ListItem {\n  before_marker : Int\n  marker : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]\n  after_marker : Int\n  block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>\n  ext_task_marker : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[Char]?\n}",
+      "loc": { "line": 270, "column": 17 },
+      "methods": [
+        {
+          "name": "map_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>::map_block(self : <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>, f : (<a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>",
+          "loc": { "line": 293, "column": 18 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>::new(before_marker~ : Int = .., marker~ : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String] = .., after_marker~ : Int = .., ext_task_marker~ : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[Char]?, block : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>",
+          "loc": { "line": 282, "column": 18 }
+        },
+        {
+          "name": "normalize_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>::normalize_block(self : <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>) -> <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>",
+          "loc": { "line": 298, "column": 18 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 276, "column": 10 }
+            }
+          ],
+          "loc": { "line": 276, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 276, "column": 16 }
+            }
+          ],
+          "loc": { "line": 276, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "ListItemStruct",
+      "docstring": "",
+      "signature": "type ListItemStruct",
+      "loc": { "line": 207, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#ListItemStruct\">ListItemStruct</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#ListItemStruct\">ListItemStruct</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 213, "column": 10 }
+            }
+          ],
+          "loc": { "line": 213, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#ListItemStruct\">ListItemStruct</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#ListItemStruct\">ListItemStruct</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 213, "column": 16 }
+            }
+          ],
+          "loc": { "line": 213, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "ListTaskStatus",
+      "docstring": "",
+      "signature": "pub(all) enum ListTaskStatus {\n  Cancelled\n  Checked\n  Unchecked\n  Other(Char)\n}",
+      "loc": { "line": 303, "column": 15 },
+      "methods": [
+        {
+          "name": "from_marker",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#ListTaskStatus\">ListTaskStatus</a>::from_marker(marker : Char) -> <a href=\"rami3l/cmark/cmark#ListTaskStatus\">ListTaskStatus</a>",
+          "loc": { "line": 311, "column": 24 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Mapper",
+      "docstring": " Abstract syntax tree mappers.\n\n Mappers help with pushing abstract syntax tree transformations in every\n node with a minimal amount of code by defaulting the cases you\n don't handle. The default map maps leaves to themselves and\n otherwise propagates the map to all children.\n\n This map has the form of `List::filter_map`, however it is akin\n to `List.concat_map` as it allows:\n - Node deletion by mapping to `None`\n - Node transformation by mapping to `Some _`\n - Node expansion by mapping to `Some (Inlines _)` or `Some (Blocks _)`",
+      "signature": "pub(all) struct Mapper {\n  inline_ext_default : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>\n  block_ext_default : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>\n  inline : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>]\n  block : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[<a href=\"rami3l/cmark/cmark#Block\">Block</a>]\n}",
+      "loc": { "line": 13, "column": 17 },
+      "methods": [
+        {
+          "name": "block_ext_none",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::block_ext_none[A](self : <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, _a : A) -> A?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>",
+          "loc": { "line": 65, "column": 16 }
+        },
+        {
+          "name": "delete",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::delete[A]() -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "loc": { "line": 40, "column": 16 }
+        },
+        {
+          "name": "inline_ext_none",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::inline_ext_none[A](self : <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, _a : A) -> A?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>",
+          "loc": { "line": 56, "column": 16 }
+        },
+        {
+          "name": "map_block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::map_block(self : <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, b : <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>?",
+          "loc": { "line": 123, "column": 16 }
+        },
+        {
+          "name": "map_doc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::map_doc(self : <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, d : <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>) -> <a href=\"rami3l/cmark/cmark#Doc\">Doc</a>",
+          "loc": { "line": 198, "column": 16 }
+        },
+        {
+          "name": "map_inline",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::map_inline(self : <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, i : <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>?",
+          "loc": { "line": 84, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::new(inline_ext_default~ : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a> = .., block_ext_default~ : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#Block\">Block</a>?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a> = .., inline~ : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Inline\">Inline</a>) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>] = .., block~ : (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, <a href=\"rami3l/cmark/cmark#Block\">Block</a>) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[<a href=\"rami3l/cmark/cmark#Block\">Block</a>] = ..) -> <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>",
+          "loc": { "line": 74, "column": 16 }
+        },
+        {
+          "name": "none",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::none[A](self : <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, _a : A) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "loc": { "line": 50, "column": 16 }
+        },
+        {
+          "name": "ret",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>::ret[A](a : A) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "loc": { "line": 45, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "MapperError",
+      "docstring": "",
+      "signature": "pub(all) type! MapperError String\n",
+      "loc": { "line": 5, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 5, "column": 42 }
+            }
+          ],
+          "loc": { "line": 5, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "MapperResult",
+      "docstring": " The type for mapper results.\n `Default` means doing the default map.",
+      "signature": "pub(all) enum MapperResult {\n  Default\n  Map(A?)\n}",
+      "loc": { "line": 28, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "",
+              "signature": "fn default[A]() -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+              "loc": { "line": 34, "column": 46 }
+            }
+          ],
+          "loc": { "line": 34, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](<a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A], <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]) -> Bool",
+              "loc": { "line": 31, "column": 10 }
+            }
+          ],
+          "loc": { "line": 31, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 31, "column": 14 }
+            }
+          ],
+          "loc": { "line": 31, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](<a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 31, "column": 20 }
+            }
+          ],
+          "loc": { "line": 31, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "Node",
+      "docstring": "",
+      "signature": "pub(all) struct Node {\n  v : A\n  meta : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a>\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Node\">Node</a>::empty(meta~ : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a> = ..) -> <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+          "loc": { "line": 44, "column": 20 }
+        },
+        {
+          "name": "map",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Node\">Node</a>::map[A, B](self : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A], f : (A) -> B) -> <a href=\"rami3l/cmark/cmark#Node\">Node</a>[B]",
+          "loc": { "line": 13, "column": 14 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Node\">Node</a>::new[A](v : A, meta~ : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a> = ..) -> <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A]",
+          "loc": { "line": 8, "column": 14 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](<a href=\"rami3l/cmark/cmark#Node\">Node</a>[A], <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A]) -> Bool",
+              "loc": { "line": 5, "column": 10 }
+            }
+          ],
+          "loc": { "line": 5, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 18, "column": 42 }
+            }
+          ],
+          "loc": { "line": 18, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A]",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "",
+              "signature": "fn to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 29, "column": 46 }
+            }
+          ],
+          "loc": { "line": 29, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Paragraph",
+      "docstring": "",
+      "signature": "type Paragraph",
+      "loc": { "line": 186, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Paragraph\">Paragraph</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Paragraph\">Paragraph</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 189, "column": 10 }
+            }
+          ],
+          "loc": { "line": 189, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Paragraph\">Paragraph</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Paragraph\">Paragraph</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 189, "column": 16 }
+            }
+          ],
+          "loc": { "line": 189, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Parser",
+      "docstring": "",
+      "signature": "type Parser",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ReferenceKind",
+      "docstring": "",
+      "signature": "pub(all) enum ReferenceKind {\n  Inline(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#LinkDefinition\">LinkDefinition</a>])\n  Ref(<a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>, <a href=\"rami3l/cmark/cmark#Label\">Label</a>, <a href=\"rami3l/cmark/cmark#Label\">Label</a>)\n}",
+      "loc": { "line": 354, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>, <a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>) -> Bool",
+              "loc": { "line": 360, "column": 10 }
+            }
+          ],
+          "loc": { "line": 360, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 360, "column": 14 }
+            }
+          ],
+          "loc": { "line": 360, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#ReferenceKind\">ReferenceKind</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 360, "column": 20 }
+            }
+          ],
+          "loc": { "line": 360, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "ReferenceLayout",
+      "docstring": "",
+      "signature": "pub(all) enum ReferenceLayout {\n  Collapsed\n  Full\n  Shortcut\n}",
+      "loc": { "line": 364, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>, <a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>) -> Bool",
+              "loc": { "line": 371, "column": 10 }
+            }
+          ],
+          "loc": { "line": 371, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 371, "column": 14 }
+            }
+          ],
+          "loc": { "line": 371, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 371, "column": 30 }
+            }
+          ],
+          "loc": { "line": 371, "column": 30 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"rami3l/cmark/cmark#ReferenceLayout\">ReferenceLayout</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 371, "column": 20 }
+            }
+          ],
+          "loc": { "line": 371, "column": 20 }
+        }
+      ]
+    },
+    {
+      "name": "Seq",
+      "docstring": "",
+      "signature": "type Seq",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::empty[A]() -> <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]",
+          "loc": { "line": 11, "column": 13 }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::fold[A, B](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 53, "column": 13 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::from_array[A](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]",
+          "loc": { "line": 23, "column": 13 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::from_iter[A](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]) -> <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]",
+          "loc": { "line": 17, "column": 13 }
+        },
+        {
+          "name": "get",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::get[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], idx : Int) -> A?",
+          "loc": { "line": 65, "column": 13 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::is_empty[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]) -> Bool",
+          "loc": { "line": 83, "column": 13 }
+        },
+        {
+          "name": "iter",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::iter[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 35, "column": 13 }
+        },
+        {
+          "name": "length",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::length[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]) -> Int",
+          "loc": { "line": 41, "column": 13 }
+        },
+        {
+          "name": "map",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::map[A, B](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], f : (A) -> B) -> <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[B]",
+          "loc": { "line": 47, "column": 13 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::op_get[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], idx : Int) -> A",
+          "loc": { "line": 71, "column": 13 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::op_set[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], idx : Int, val : A) -> Unit",
+          "loc": { "line": 77, "column": 13 }
+        },
+        {
+          "name": "rev_fold",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::rev_fold[A, B](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 59, "column": 13 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "\n @coverage.skip",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>::to_array[A](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
+          "loc": { "line": 29, "column": 13 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]) -> Bool",
+              "loc": { "line": 2, "column": 29 }
+            }
+          ],
+          "loc": { "line": 2, "column": 29 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 2, "column": 33 }
+            }
+          ],
+          "loc": { "line": 2, "column": 33 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "",
+              "signature": "fn to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 5, "column": 45 }
+            }
+          ],
+          "loc": { "line": 5, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "Setext",
+      "docstring": "",
+      "signature": "type Setext",
+      "loc": { "line": 166, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Setext\">Setext</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Setext\">Setext</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 171, "column": 10 }
+            }
+          ],
+          "loc": { "line": 171, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Setext\">Setext</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Setext\">Setext</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 171, "column": 16 }
+            }
+          ],
+          "loc": { "line": 171, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "StartColResult",
+      "docstring": "",
+      "signature": "type StartColResult",
+      "loc": { "line": 1606, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#StartColResult\">StartColResult</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#StartColResult\">StartColResult</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1609, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1609, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#StartColResult\">StartColResult</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#StartColResult\">StartColResult</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 1609, "column": 16 }
+            }
+          ],
+          "loc": { "line": 1609, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Table",
+      "docstring": "",
+      "signature": "pub(all) struct Table {\n  indent : Int\n  col_count : Int\n  rows : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#TableRow\">TableRow</a>], String)]\n}",
+      "loc": { "line": 409, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Table\">Table</a>::new(indent~ : Int = .., rows : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[(<a href=\"rami3l/cmark/cmark#Node\">Node</a>[<a href=\"rami3l/cmark/cmark#TableRow\">TableRow</a>], String)]) -> <a href=\"rami3l/cmark/cmark#Table\">Table</a>",
+          "loc": { "line": 436, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Table\">Table</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Table\">Table</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 413, "column": 10 }
+            }
+          ],
+          "loc": { "line": 413, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Table\">Table</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Table\">Table</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 413, "column": 16 }
+            }
+          ],
+          "loc": { "line": 413, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TableAlign",
+      "docstring": "",
+      "signature": "pub(all) enum TableAlign {\n  Left\n  Center\n  Right\n}",
+      "loc": { "line": 416, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 420, "column": 10 }
+            }
+          ],
+          "loc": { "line": 420, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 420, "column": 26 }
+            }
+          ],
+          "loc": { "line": 420, "column": 26 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 420, "column": 16 }
+            }
+          ],
+          "loc": { "line": 420, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TableRow",
+      "docstring": "",
+      "signature": "pub(all) enum TableRow {\n  Header(<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[(<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, (String, String))])\n  Sep(<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Node\">Node</a>[(<a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>?, Int)]])\n  Data(<a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[(<a href=\"rami3l/cmark/cmark#Inline\">Inline</a>, (String, String))])\n}",
+      "loc": { "line": 423, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TableRow\">TableRow</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TableRow\">TableRow</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 427, "column": 10 }
+            }
+          ],
+          "loc": { "line": 427, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TableRow\">TableRow</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TableRow\">TableRow</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 427, "column": 16 }
+            }
+          ],
+          "loc": { "line": 427, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "Tight",
+      "docstring": " Tight block lines: a block line with its initial blanks trimmed but kept for layout. ",
+      "signature": "pub(all) struct Tight {\n  blanks : String\n  node : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]\n}",
+      "loc": { "line": 28, "column": 17 },
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>::empty(meta~ : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a> = ..) -> <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>",
+          "loc": { "line": 34, "column": 15 }
+        },
+        {
+          "name": "list_text_loc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>::list_text_loc(ls : <a href=\"rami3l/cmark/cmark#Seq\">Seq</a>[<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>]) -> <a href=\"rami3l/cmark/cmark_base#TextLoc\">@rami3l/cmark/cmark_base.TextLoc</a>",
+          "loc": { "line": 49, "column": 15 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>::to_string(self : <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>) -> String",
+          "loc": { "line": 44, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>, <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>) -> Bool",
+              "loc": { "line": 31, "column": 10 }
+            }
+          ],
+          "loc": { "line": 31, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 39, "column": 30 }
+            }
+          ],
+          "loc": { "line": 39, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Tight\">Tight</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Tight\">Tight</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 31, "column": 14 }
+            }
+          ],
+          "loc": { "line": 31, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "docstring": " Tokens for parsing inlines.\n\n The list of tokens of a paragraph are the points to consider to\n parse it into inlines. Tokens gradually become `Inline` tokens\n containing parsed inlines. Between two tokens there is implicit\n textual data. This data gradually becomes part of `Inline` tokens\n or, at the end of of the parsing process, becomes `Text` inlines.\n\n The token list also represents newlines explicitly, either via\n the `Newline` token or via the `Inline` token since inlines may\n start on a line and up on another one.",
+      "signature": "type Token",
+      "loc": { "line": 14, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#Token\">Token</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#Token\">Token</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 25, "column": 10 }
+            }
+          ],
+          "loc": { "line": 25, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#Token\">Token</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#Token\">Token</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 25, "column": 16 }
+            }
+          ],
+          "loc": { "line": 25, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenBackticks",
+      "docstring": "",
+      "signature": "type TokenBackticks",
+      "loc": { "line": 33, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenBackticks\">TokenBackticks</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenBackticks\">TokenBackticks</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 37, "column": 10 }
+            }
+          ],
+          "loc": { "line": 37, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenBackticks\">TokenBackticks</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenBackticks\">TokenBackticks</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 37, "column": 16 }
+            }
+          ],
+          "loc": { "line": 37, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenEmphasisMarks",
+      "docstring": "",
+      "signature": "type TokenEmphasisMarks",
+      "loc": { "line": 40, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenEmphasisMarks\">TokenEmphasisMarks</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenEmphasisMarks\">TokenEmphasisMarks</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 46, "column": 10 }
+            }
+          ],
+          "loc": { "line": 46, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenEmphasisMarks\">TokenEmphasisMarks</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenEmphasisMarks\">TokenEmphasisMarks</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 46, "column": 16 }
+            }
+          ],
+          "loc": { "line": 46, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenInline",
+      "docstring": "",
+      "signature": "type TokenInline",
+      "loc": { "line": 49, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenInline\">TokenInline</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenInline\">TokenInline</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 54, "column": 10 }
+            }
+          ],
+          "loc": { "line": 54, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenInline\">TokenInline</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenInline\">TokenInline</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 54, "column": 16 }
+            }
+          ],
+          "loc": { "line": 54, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenLinkStart",
+      "docstring": "",
+      "signature": "type TokenLinkStart",
+      "loc": { "line": 57, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenLinkStart\">TokenLinkStart</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenLinkStart\">TokenLinkStart</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 60, "column": 10 }
+            }
+          ],
+          "loc": { "line": 60, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenLinkStart\">TokenLinkStart</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenLinkStart\">TokenLinkStart</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 60, "column": 16 }
+            }
+          ],
+          "loc": { "line": 60, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenMathSpanMarks",
+      "docstring": "",
+      "signature": "type TokenMathSpanMarks",
+      "loc": { "line": 78, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenMathSpanMarks\">TokenMathSpanMarks</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenMathSpanMarks\">TokenMathSpanMarks</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 83, "column": 10 }
+            }
+          ],
+          "loc": { "line": 83, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenMathSpanMarks\">TokenMathSpanMarks</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenMathSpanMarks\">TokenMathSpanMarks</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 83, "column": 16 }
+            }
+          ],
+          "loc": { "line": 83, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenNewline",
+      "docstring": "",
+      "signature": "type TokenNewline",
+      "loc": { "line": 63, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenNewline\">TokenNewline</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenNewline\">TokenNewline</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 68, "column": 10 }
+            }
+          ],
+          "loc": { "line": 68, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenNewline\">TokenNewline</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenNewline\">TokenNewline</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 68, "column": 16 }
+            }
+          ],
+          "loc": { "line": 68, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenStart",
+      "docstring": "",
+      "signature": "type TokenStart",
+      "loc": { "line": 28, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenStart\">TokenStart</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenStart\">TokenStart</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 30, "column": 10 }
+            }
+          ],
+          "loc": { "line": 30, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenStart\">TokenStart</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenStart\">TokenStart</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 30, "column": 16 }
+            }
+          ],
+          "loc": { "line": 30, "column": 16 }
+        }
+      ]
+    },
+    {
+      "name": "TokenStrikethroughMarks",
+      "docstring": "",
+      "signature": "type TokenStrikethroughMarks",
+      "loc": { "line": 71, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark#TokenStrikethroughMarks\">TokenStrikethroughMarks</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark#TokenStrikethroughMarks\">TokenStrikethroughMarks</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 75, "column": 10 }
+            }
+          ],
+          "loc": { "line": 75, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"rami3l/cmark/cmark#TokenStrikethroughMarks\">TokenStrikethroughMarks</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"rami3l/cmark/cmark#TokenStrikethroughMarks\">TokenStrikethroughMarks</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 75, "column": 16 }
+            }
+          ],
+          "loc": { "line": 75, "column": 16 }
+        }
+      ]
+    }
+  ],
+  "typealias": [
+    {
+      "name": "Blanks",
+      "docstring": "",
+      "signature": "type Blanks = String",
+      "loc": { "line": 10, "column": 1 }
+    },
+    {
+      "name": "BlanksNode",
+      "docstring": "",
+      "signature": "type BlanksNode = <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+      "loc": { "line": 41, "column": 1 }
+    },
+    {
+      "name": "BlockBlankLine",
+      "docstring": " The type for [blank lines](https://spec.commonmark.org/0.30/#blank-lines).\n These can be ignored during rendering, they are kept for layout.",
+      "signature": "type BlockBlankLine = String",
+      "loc": { "line": 96, "column": 1 }
+    },
+    {
+      "name": "BlockLineBlank",
+      "docstring": "",
+      "signature": "type BlockLineBlank = <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+      "loc": { "line": 11, "column": 1 }
+    },
+    {
+      "name": "Count",
+      "docstring": "",
+      "signature": "type Count = Int",
+      "loc": { "line": 13, "column": 1 }
+    },
+    {
+      "name": "FilterMap",
+      "docstring": "",
+      "signature": "type FilterMap = A?",
+      "loc": { "line": 37, "column": 1 }
+    },
+    {
+      "name": "FoldFn",
+      "docstring": "",
+      "signature": "type FoldFn = (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[B], B, A) -> B!<a href=\"rami3l/cmark/cmark#FolderError\">FolderError</a>",
+      "loc": { "line": 10, "column": 1 }
+    },
+    {
+      "name": "FolderFn",
+      "docstring": "",
+      "signature": "type FolderFn = (<a href=\"rami3l/cmark/cmark#Folder\">Folder</a>[B], B, A) -> <a href=\"rami3l/cmark/cmark#FolderResult\">FolderResult</a>[B]",
+      "loc": { "line": 13, "column": 1 }
+    },
+    {
+      "name": "InlineText",
+      "docstring": " The type for [textual content](https://spec.commonmark.org/0.30/#textual-content).\n\n Normally these strings should not contain newlines. This can\n however happen if the source had newlines as\n [character references](https://spec.commonmark.org/0.30/#entity-and-numeric-character-references).",
+      "signature": "type InlineText = String",
+      "loc": { "line": 436, "column": 1 }
+    },
+    {
+      "name": "LabelDefs",
+      "docstring": "",
+      "signature": "type LabelDefs = <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"rami3l/cmark/cmark#LabelDef\">LabelDef</a>]",
+      "loc": { "line": 53, "column": 1 }
+    },
+    {
+      "name": "LabelKey",
+      "docstring": " The type for label keys. These are\n [link labels](https://spec.commonmark.org/0.30/#link-label)\n normalized for [matches](https://spec.commonmark.org/0.30/#matches).",
+      "signature": "type LabelKey = String",
+      "loc": { "line": 17, "column": 1 }
+    },
+    {
+      "name": "LabelMap",
+      "docstring": "",
+      "signature": "type LabelMap = <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, V]",
+      "loc": { "line": 20, "column": 1 }
+    },
+    {
+      "name": "LabelResolverFn",
+      "docstring": "",
+      "signature": "type LabelResolverFn = (<a href=\"rami3l/cmark/cmark#LabelContext\">LabelContext</a>) -> <a href=\"rami3l/cmark/cmark#Label\">Label</a>?",
+      "loc": { "line": 86, "column": 1 }
+    },
+    {
+      "name": "ListItemBlock",
+      "docstring": "",
+      "signature": "type ListItemBlock = <a href=\"rami3l/cmark/cmark#ListItem\">ListItem</a>",
+      "loc": { "line": 279, "column": 1 }
+    },
+    {
+      "name": "MapFn",
+      "docstring": "",
+      "signature": "type MapFn = (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, A) -> A?!<a href=\"rami3l/cmark/cmark#MapperError\">MapperError</a>",
+      "loc": { "line": 21, "column": 1 }
+    },
+    {
+      "name": "MapperFn",
+      "docstring": "",
+      "signature": "type MapperFn = (<a href=\"rami3l/cmark/cmark#Mapper\">Mapper</a>, A) -> <a href=\"rami3l/cmark/cmark#MapperResult\">MapperResult</a>[A]",
+      "loc": { "line": 24, "column": 1 }
+    },
+    {
+      "name": "StringNode",
+      "docstring": "",
+      "signature": "type StringNode = <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+      "loc": { "line": 38, "column": 1 }
+    },
+    {
+      "name": "TableCellLayout",
+      "docstring": "",
+      "signature": "type TableCellLayout = (String, String)",
+      "loc": { "line": 433, "column": 1 }
+    },
+    {
+      "name": "TableSep",
+      "docstring": "",
+      "signature": "type TableSep = (<a href=\"rami3l/cmark/cmark#TableAlign\">TableAlign</a>?, Int)",
+      "loc": { "line": 430, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "layout_empty",
+      "docstring": "",
+      "signature": "let layout_empty : <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+      "loc": { "line": 7, "column": 9 }
+    },
+    {
+      "name": "layout_of_string",
+      "docstring": "",
+      "signature": "fn layout_of_string(meta~ : <a href=\"rami3l/cmark/cmark_base#Meta\">@rami3l/cmark/cmark_base.Meta</a> = .., s : String) -> <a href=\"rami3l/cmark/cmark#Node\">Node</a>[String]",
+      "loc": { "line": 2, "column": 8 }
+    }
+  ],
+  "misc": []
+}

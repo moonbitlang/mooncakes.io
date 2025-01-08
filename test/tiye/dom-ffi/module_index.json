@@ -1,0 +1,169 @@
+{
+  "name": "tiye",
+  "package": null,
+  "childs": [
+    {
+      "name": "dom-ffi",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "tiye/dom-ffi/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "BeforeUnloadEvent", "impls": [], "methods": [] },
+              { "name": "BlurEvent", "impls": [], "methods": [] },
+              {
+                "name": "CSSStyleDeclaration",
+                "impls": [],
+                "methods": [ "remove_property", "set_property" ]
+              },
+              {
+                "name": "Document",
+                "impls": [],
+                "methods": [
+                  "body", "create_element", "head", "query_selector"
+                ]
+              },
+              {
+                "name": "Element",
+                "impls": [],
+                "methods": [
+                  "append_child", "data_attribute", "dirty_get_attribute_fn",
+                  "dirty_remove_attribute_fn", "dirty_set_attribute_fn",
+                  "focus", "insert_before", "query_selector",
+                  "reinterpret_as_html_input_element",
+                  "reinterpret_as_html_textarea_element",
+                  "reinterpret_as_node", "remove_attribute",
+                  "remove_data_attribute", "set_attribute",
+                  "set_data_attribute", "set_html_for", "set_inner_html",
+                  "set_inner_text", "set_onclick", "set_ondblclick",
+                  "tag_name", "unset_onclick", "unset_ondblclick"
+                ]
+              },
+              { "name": "FocusEvent", "impls": [], "methods": [] },
+              {
+                "name": "HtmlInputElement",
+                "impls": [],
+                "methods": [
+                  "set_onblur", "set_onchange", "set_onfocus", "set_oninput",
+                  "set_onkeydown", "set_onkeypress", "set_onkeyup",
+                  "set_value", "unset_oninput", "value"
+                ]
+              },
+              {
+                "name": "HtmlTextAreaElement",
+                "impls": [],
+                "methods": [
+                  "set_onblur", "set_onchange", "set_onfocus", "set_oninput",
+                  "set_onkeydown", "set_onkeypress", "set_onkeyup",
+                  "set_value", "value"
+                ]
+              },
+              { "name": "InputEvent", "impls": [], "methods": [ "target" ] },
+              { "name": "JsValue", "impls": [], "methods": [ "then_ffi" ] },
+              {
+                "name": "KeyboardEvent",
+                "impls": [],
+                "methods": [
+                  "alt_key", "char_code", "code", "ctrl_key", "key",
+                  "key_code", "location", "meta_key", "new_with_init_dict",
+                  "prevent_default", "repeat", "set_repeat", "shift_key",
+                  "stop_propagation", "type_", "view"
+                ]
+              },
+              {
+                "name": "KeyboardEventInit",
+                "impls": [],
+                "methods": [
+                  "new", "set_char_code", "set_code", "set_key",
+                  "set_key_code", "set_location", "set_view"
+                ]
+              },
+              {
+                "name": "LocalStorage",
+                "impls": [],
+                "methods": [ "get_item", "remove_item", "set_item" ]
+              },
+              {
+                "name": "Location",
+                "impls": [],
+                "methods": [
+                  "assign", "hash", "host", "hostname", "href", "origin",
+                  "pathname", "port", "protocol", "reload", "replace",
+                  "search", "set_href", "to_string"
+                ]
+              },
+              {
+                "name": "MouseEvent",
+                "impls": [],
+                "methods": [
+                  "client_x", "client_y", "prevent_default",
+                  "stop_propagation"
+                ]
+              },
+              { "name": "Navigator", "impls": [], "methods": [] },
+              {
+                "name": "Node",
+                "impls": [],
+                "methods": [
+                  "append_child", "child_nodes", "children", "clone_node",
+                  "dispatch_event", "first_child", "insert_before",
+                  "owner_document", "parent_element",
+                  "reinterpret_as_element", "remove", "remove_child", "style"
+                ]
+              },
+              { "name": "Performance", "impls": [], "methods": [ "now" ] },
+              { "name": "Promise", "impls": [], "methods": [] },
+              {
+                "name": "URLSearchParams",
+                "impls": [],
+                "methods": [
+                  "append", "delete", "get", "get_all", "has", "set",
+                  "to_string"
+                ]
+              },
+              {
+                "name": "Window",
+                "impls": [],
+                "methods": [
+                  "add_event_listener_with_callback", "dirty_call_fn",
+                  "dirty_call_fn_1", "dirty_get_fn", "dirty_get_fn_1",
+                  "dirty_remove_fn", "dirty_set_fn", "dirty_set_fn_1",
+                  "document", "keyboard_event_init", "local_storage",
+                  "location", "performance",
+                  "remove_event_listener_with_callback",
+                  "request_animation_frame", "set_onbeforeunload",
+                  "set_timeout"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "before_unload_event", "debugger", "error_log",
+              "load_my_window", "log", "new_url_search_params", "random_id",
+              "warn_log", "window"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "tiye/dom-ffi/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

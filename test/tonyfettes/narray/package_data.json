@@ -1,0 +1,151 @@
+{
+  "readme": "",
+  "name": "tonyfettes/narray",
+  "traits": [],
+  "types": [
+    {
+      "name": "Array2",
+      "docstring": "",
+      "signature": "type Array2",
+      "loc": { "line": 1, "column": 6 },
+      "methods": [
+        {
+          "name": "each",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::each[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], f : (T, T) -> Unit) -> Unit",
+          "loc": { "line": 116, "column": 16 }
+        },
+        {
+          "name": "eachi",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::eachi[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], f : (Int, T, T) -> Unit) -> Unit",
+          "loc": { "line": 122, "column": 16 }
+        },
+        {
+          "name": "from_fixed_array",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::from_fixed_array[T](fixed : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[(T, T)]) -> <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]",
+          "loc": { "line": 16, "column": 16 }
+        },
+        {
+          "name": "get",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::get[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int) -> (T, T)?",
+          "loc": { "line": 62, "column": 8 }
+        },
+        {
+          "name": "get_0",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::get_0[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int) -> T?",
+          "loc": { "line": 68, "column": 8 }
+        },
+        {
+          "name": "get_1",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::get_1[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int) -> T?",
+          "loc": { "line": 74, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::iter[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(T, T)]",
+          "loc": { "line": 128, "column": 16 }
+        },
+        {
+          "name": "iter2",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::iter2[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[T, T]",
+          "loc": { "line": 143, "column": 16 }
+        },
+        {
+          "name": "length",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::length[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]) -> Int",
+          "loc": { "line": 46, "column": 8 }
+        },
+        {
+          "name": "make",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::make[T](length : Int, element_0 : T, element_1 : T) -> <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]",
+          "loc": { "line": 7, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::new[T]() -> <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]",
+          "loc": { "line": 3, "column": 16 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], other : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]) -> Bool",
+          "loc": { "line": 105, "column": 8 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_get[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int) -> (T, T)",
+          "loc": { "line": 50, "column": 8 }
+        },
+        {
+          "name": "op_get_0",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_get_0[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int) -> T",
+          "loc": { "line": 54, "column": 8 }
+        },
+        {
+          "name": "op_get_1",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_get_1[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int) -> T",
+          "loc": { "line": 58, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_set[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int, element : (T, T)) -> Unit",
+          "loc": { "line": 80, "column": 8 }
+        },
+        {
+          "name": "op_set_0",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_set_0[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int, element : T) -> Unit",
+          "loc": { "line": 85, "column": 8 }
+        },
+        {
+          "name": "op_set_1",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::op_set_1[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int, element : T) -> Unit",
+          "loc": { "line": 89, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 31, "column": 16 }
+        },
+        {
+          "name": "push",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::push[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], x : T, y : T) -> Unit",
+          "loc": { "line": 158, "column": 16 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::set[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T], index : Int, element_0 : T, element_1 : T) -> Unit",
+          "loc": { "line": 93, "column": 8 }
+        },
+        {
+          "name": "to_fixed_array",
+          "docstring": "",
+          "signature": "fn <a href=\"tonyfettes/narray#Array2\">Array2</a>::to_fixed_array[T](self : <a href=\"tonyfettes/narray#Array2\">Array2</a>[T]) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[(T, T)]",
+          "loc": { "line": 27, "column": 16 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

@@ -3,34 +3,89 @@
   "name": "moonbitlang/core/strconv",
   "traits": [
     {
-      "name": "FromStr",
+      "name": "@moonbitlang/core/strconv.FromStr",
       "docstring": "",
-      "signature": "pub(open) trait FromStr {\n  from_string(String) -> Self!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>\n}",
+      "signature": "pub(open) trait @moonbitlang/core/strconv.FromStr {\n  from_string(String) -> Self!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>\n}",
       "loc": { "line": 22, "column": 1 },
+      "default_impls": [],
       "impls": [
         {
-          "name": "from_string",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for <a href=\"moonbitlang/core/bool#Bool\">Bool</a> with from_string(str : String) -> Bool!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-          "loc": { "line": 27, "column": 32 }
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Bool",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> Bool!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+              "loc": { "line": 27, "column": 32 }
+            }
+          ],
+          "loc": { "line": 27, "column": 1 }
         },
         {
-          "name": "from_string",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for <a href=\"moonbitlang/core/int#Int\">Int</a> with from_string(str : String) -> Int!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-          "loc": { "line": 30, "column": 31 }
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Int",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> Int!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+              "loc": { "line": 30, "column": 31 }
+            }
+          ],
+          "loc": { "line": 30, "column": 1 }
         },
         {
-          "name": "from_string",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for <a href=\"moonbitlang/core/int64#Int64\">Int64</a> with from_string(str : String) -> Int64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-          "loc": { "line": 33, "column": 33 }
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Int64",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> Int64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+              "loc": { "line": 33, "column": 33 }
+            }
+          ],
+          "loc": { "line": 33, "column": 1 }
         },
         {
-          "name": "from_string",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for <a href=\"moonbitlang/core/double#Double\">Double</a> with from_string(str : String) -> Double!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-          "loc": { "line": 36, "column": 34 }
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for UInt",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> UInt!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+              "loc": { "line": 36, "column": 32 }
+            }
+          ],
+          "loc": { "line": 36, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for UInt64",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> UInt64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+              "loc": { "line": 39, "column": 34 }
+            }
+          ],
+          "loc": { "line": 39, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Double",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> Double!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+              "loc": { "line": 42, "column": 34 }
+            }
+          ],
+          "loc": { "line": 42, "column": 1 }
         }
       ]
     }
@@ -80,26 +135,20 @@
       "docstring": "",
       "signature": "pub(all) type! StrConvError String\n",
       "loc": { "line": 16, "column": 16 },
-      "methods": [
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>::output(self : <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 19, "column": 37 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
-        }
-      ],
+      "methods": [],
       "impls": [
         {
-          "name": "output",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a> with output(self : <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 19, "column": 37 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 37 }
+            }
+          ],
+          "loc": { "line": 19, "column": 1 }
         }
       ]
     }
@@ -110,7 +159,7 @@
       "name": "parse",
       "docstring": "",
       "signature": "fn parse[A : <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a>](str : String) -> A!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 39, "column": 8 }
+      "loc": { "line": 45, "column": 8 }
     },
     {
       "name": "parse_bool",
@@ -135,6 +184,18 @@
       "docstring": "\n Parse a string in the given base (0, 2 to 36), return a Int64 number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
       "signature": "fn parse_int64(str : String, base~ : Int = ..) -> Int64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
       "loc": { "line": 30, "column": 8 }
+    },
+    {
+      "name": "parse_uint",
+      "docstring": "\n Parse a string in the given base (0, 2 to 36), return an UInt number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
+      "signature": "fn parse_uint(str : String, base~ : Int = ..) -> UInt!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+      "loc": { "line": 87, "column": 8 }
+    },
+    {
+      "name": "parse_uint64",
+      "docstring": "\n Parse a string in the given base (0, 2 to 36), return an UInt64 number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
+      "signature": "fn parse_uint64(str : String, base~ : Int = ..) -> UInt64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+      "loc": { "line": 24, "column": 8 }
     }
   ],
   "misc": []

@@ -174,16 +174,15 @@ let new_none = none.flatten() // None
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/option/option.mbt,410:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/option#Option">Option</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](i : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> X?
+  :::source,moonbitlang/core/option/option.mbt,410:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for X?
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/option/option.mbt,410:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](i : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> X?
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/option/option.mbt,410:::fn <a href="moonbitlang/core/option#Option">Option</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](i : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> X?
-  ```
-  > 
 - #### bind
   ```moonbit
   :::source,moonbitlang/core/option/option.mbt,184:::fn <a href="moonbitlang/core/option#Option">Option</a>::bind[T, U](self : T?, f : (T) -> U?) -> U?

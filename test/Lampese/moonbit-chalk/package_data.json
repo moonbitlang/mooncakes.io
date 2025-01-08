@@ -1,0 +1,82 @@
+{
+  "readme": "",
+  "name": "Lampese/moonbit-chalk",
+  "traits": [],
+  "types": [
+    {
+      "name": "BackGroundColors",
+      "docstring": "",
+      "signature": "pub(all) enum BackGroundColors {\n  BgBlack\n  BgRed\n  BgGreen\n  BgYellow\n  BgBlue\n  BgMagenta\n  BgCyan\n  BgWhite\n  BgBlackBright\n  BgRedBright\n  BgGreenBright\n  BgYellowBright\n  BgBlueBright\n  BgMagentaBright\n  BgCyanBright\n  BgWhiteBright\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Chalk",
+      "docstring": "",
+      "signature": "pub(all) enum Chalk {\n  Cons(<a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>, <a href=\"Lampese/moonbit-chalk#Render\">Render</a>)\n  Nil\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "background",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>::background(self : <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>, color : <a href=\"Lampese/moonbit-chalk#BackGroundColors\">BackGroundColors</a>) -> <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>",
+          "loc": { "line": 13, "column": 8 }
+        },
+        {
+          "name": "color",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>::color(self : <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>, color : <a href=\"Lampese/moonbit-chalk#Colors\">Colors</a>) -> <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>",
+          "loc": { "line": 23, "column": 8 }
+        },
+        {
+          "name": "modifier",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>::modifier(self : <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>, modifier : <a href=\"Lampese/moonbit-chalk#Modifier\">Modifier</a>) -> <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>",
+          "loc": { "line": 18, "column": 8 }
+        },
+        {
+          "name": "render",
+          "docstring": "",
+          "signature": "fn <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>::render[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>, to_render : T) -> String",
+          "loc": { "line": 28, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Colors",
+      "docstring": "",
+      "signature": "pub(all) enum Colors {\n  Black\n  Red\n  Green\n  Yellow\n  Blue\n  Magenta\n  Cyan\n  White\n  BlackBright\n  RedBright\n  GreenBright\n  YellowBright\n  BlueBright\n  MagentaBright\n  CyanBright\n  WhiteBright\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Modifier",
+      "docstring": "",
+      "signature": "pub(all) enum Modifier {\n  Reset\n  Bold\n  Dim\n  Italic\n  Underline\n  Overline\n  Inverse\n  Hidden\n  Strikethrough\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Render",
+      "docstring": "",
+      "signature": "pub(all) enum Render {\n  RenderBackGround(<a href=\"Lampese/moonbit-chalk#BackGroundColors\">BackGroundColors</a>)\n  RenderColor(<a href=\"Lampese/moonbit-chalk#Colors\">Colors</a>)\n  RenderModifier(<a href=\"Lampese/moonbit-chalk#Modifier\">Modifier</a>)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "chalk",
+      "docstring": "",
+      "signature": "fn chalk() -> <a href=\"Lampese/moonbit-chalk#Chalk\">Chalk</a>",
+      "loc": { "line": 8, "column": 8 }
+    }
+  ],
+  "misc": []
+}

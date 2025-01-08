@@ -1,0 +1,140 @@
+{
+  "readme": "",
+  "name": "extism/moonbit-pdk/pdk/host",
+  "traits": [],
+  "types": [
+    {
+      "name": "Memory",
+      "docstring": " `Memory` represents memory allocated by (and shared with) the host.\n TODO: What kind of error checking needs to happen here?",
+      "signature": "pub(all) struct Memory {\n  offset : Int64\n  length : Int64\n}",
+      "loc": { "line": 3, "column": 17 },
+      "methods": [
+        {
+          "name": "allocate",
+          "docstring": " `Memory::allocate` allocates an uninitialized (determined by host)\n area of shared memory on the host.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::allocate(length : Int64) -> <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>",
+          "loc": { "line": 21, "column": 16 }
+        },
+        {
+          "name": "allocate_bytes",
+          "docstring": " `Memory::allocate_bytes` allocates and initializes host memory\n with the provided (unprocessed) bytes.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::allocate_bytes(bytes : Bytes) -> <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>",
+          "loc": { "line": 27, "column": 16 }
+        },
+        {
+          "name": "allocate_json_value",
+          "docstring": " `Memory::allocate_json_value` allocates and initializes a UTF-8 string\n in host memory that is converted from this `Json`.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::allocate_json_value(j : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>",
+          "loc": { "line": 49, "column": 16 }
+        },
+        {
+          "name": "allocate_string",
+          "docstring": " `Memory::allocate_string` allocates and initializes a UTF-8 string\n in host memory that is converted from this UTF-16 MoonBit String.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::allocate_string(s : String) -> <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>",
+          "loc": { "line": 43, "column": 16 }
+        },
+        {
+          "name": "free",
+          "docstring": " `free` releases this Memory from the host.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::free(self : <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>) -> Unit",
+          "loc": { "line": 15, "column": 8 }
+        },
+        {
+          "name": "output_memory",
+          "docstring": " `output_memory` sets the host's \"output\" to be the contents of this Memory data.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::output_memory(self : <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>) -> Unit",
+          "loc": { "line": 37, "column": 8 }
+        },
+        {
+          "name": "to_bytes",
+          "docstring": " `to_bytes` reads the (unprocessed) bytes residing in the host memory\n to a MoonBit Bytes.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::to_bytes(self : <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>) -> Bytes",
+          "loc": { "line": 71, "column": 8 }
+        },
+        {
+          "name": "to_int",
+          "docstring": " `to_int` reads and converts the u32 residing in the host memory\n to a MoonBit Int.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::to_int(self : <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>) -> Int",
+          "loc": { "line": 61, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " `to_string` reads and converts the UTF-8 string residing in the host memory\n to a UTF-16 MoonBit String.",
+          "signature": "fn <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>::to_string(self : <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>) -> String",
+          "loc": { "line": 55, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "find_memory",
+      "docstring": " `find_memory` returns a `Memory` struct from an offset provided by the host.",
+      "signature": "fn find_memory(offset : Int64) -> <a href=\"extism/moonbit-pdk/pdk/host#Memory\">Memory</a>",
+      "loc": { "line": 9, "column": 8 }
+    },
+    {
+      "name": "input",
+      "docstring": " `input` returns a sequence of (unprocessed) bytes from the host.",
+      "signature": "fn input() -> Bytes",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "input_string",
+      "docstring": " `input_string` returns a (UTF-16) String from the host.",
+      "signature": "fn input_string() -> String",
+      "loc": { "line": 12, "column": 8 }
+    },
+    {
+      "name": "log_debug_str",
+      "docstring": " `log_debug_str` is a helper function to log a debug string to the host.",
+      "signature": "fn log_debug_str(s : String) -> Unit",
+      "loc": { "line": 82, "column": 8 }
+    },
+    {
+      "name": "log_error_str",
+      "docstring": " `log_error_str` is a helper function to log an error string to the host.",
+      "signature": "fn log_error_str(s : String) -> Unit",
+      "loc": { "line": 89, "column": 8 }
+    },
+    {
+      "name": "log_info_str",
+      "docstring": " `log_info_str` is a helper function to log an info string to the host.",
+      "signature": "fn log_info_str(s : String) -> Unit",
+      "loc": { "line": 75, "column": 8 }
+    },
+    {
+      "name": "log_warn_str",
+      "docstring": " `log_warn_str` is a helper function to log a warn string to the host.",
+      "signature": "fn log_warn_str(s : String) -> Unit",
+      "loc": { "line": 68, "column": 8 }
+    },
+    {
+      "name": "output",
+      "docstring": " `output` sends a sequence of (unprocessed) bytes to the host as the plugin's \"output\".",
+      "signature": "fn output(b : Bytes) -> Unit",
+      "loc": { "line": 28, "column": 8 }
+    },
+    {
+      "name": "output_json_value",
+      "docstring": " `output_json_value` converts a MoonBit `Json` to an Extism JSON string\n and sends it to the host.",
+      "signature": "fn output_json_value(j : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> Unit",
+      "loc": { "line": 44, "column": 8 }
+    },
+    {
+      "name": "output_string",
+      "docstring": " `output_string` converts a MoonBit String (UTF-16) to an Extism string (UTF-8)\n and sends it to the host.",
+      "signature": "fn output_string(s : String) -> Unit",
+      "loc": { "line": 38, "column": 8 }
+    },
+    {
+      "name": "set_error",
+      "docstring": " `set_error` converts a MoonBit String (UTF-16) to an Extism string (UTF-8)\n and sends it to the host as its error output.",
+      "signature": "fn set_error(s : String) -> Unit",
+      "loc": { "line": 63, "column": 8 }
+    }
+  ],
+  "misc": []
+}

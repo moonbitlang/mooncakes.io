@@ -23,42 +23,49 @@
       "name": "Int64",
       "impls": [
         {
-          "name": "hash",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/int64#Int64\">Int64</a> with hash(self : Int64) -> Int",
-          "loc": { "line": 33, "column": 30 }
-        },
-        {
-          "name": "hash_combine",
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/int64#Int64\">Int64</a> with hash_combine(self : Int64, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 53, "column": 30 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Int64",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Int64) -> Int",
+              "loc": { "line": 33, "column": 30 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Int64, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 53, "column": 30 }
+            }
+          ],
+          "loc": { "line": 33, "column": 1 }
         }
       ],
       "methods": [
         {
           "name": "abs",
-          "docstring": "",
+          "docstring": "\n Computes the absolute value of a 64-bit integer.\n\n Parameters:\n\n * `self` : The 64-bit integer whose absolute value is to be computed.\n\n Returns the absolute value of the input integer.\n\n Example:\n\n ```moonbit\n test \"abs\" {\n   inspect!(42L.abs(), content=\"42\")\n   inspect!((-42L).abs(), content=\"42\")\n   inspect!(0L.abs(), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::abs(self : Int64) -> Int64",
-          "loc": { "line": 27, "column": 8 }
+          "loc": { "line": 59, "column": 8 }
         },
         {
           "name": "from_int",
-          "docstring": "",
+          "docstring": "\n Converts a 32-bit integer (`Int`) to a 64-bit integer (`Int64`).\n\n Parameters:\n\n * `i` : The integer value to be converted.\n\n Returns the converted 64-bit integer (`Int64`) value.\n\n Example:\n\n ```moonbit\n test \"Int64::from_int\" {\n   inspect!(@int64.from_int(42), content=\"42\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::from_int(i : Int) -> Int64",
-          "loc": { "line": 22, "column": 15 }
+          "loc": { "line": 37, "column": 15 }
         },
         {
-          "name": "hash",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::hash(self : Int64) -> Int",
-          "loc": { "line": 33, "column": 30 }
+          "name": "to_be_bytes",
+          "docstring": " Converts the Int64 to a Bytes in big-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::to_be_bytes(self : Int64) -> Bytes",
+          "loc": { "line": 68, "column": 8 }
         },
         {
-          "name": "hash_combine",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::hash_combine(self : Int64, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 53, "column": 30 }
+          "name": "to_le_bytes",
+          "docstring": " Converts the Int64 to a Bytes in little-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::to_le_bytes(self : Int64) -> Bytes",
+          "loc": { "line": 73, "column": 8 }
         }
       ]
     }

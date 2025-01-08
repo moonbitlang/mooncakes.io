@@ -33,21 +33,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,2:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a> with output(<a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,2:::fn <a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>::output(<a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,SyoujyoujiNaiki/chungshan/lib/traits.mbt,85:::fn <a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,2:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>
   ```
   > 
+  * ```moonbit
+    :::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,2:::fn output(<a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## byte\_array\_to\_double
 
@@ -80,7 +72,7 @@ This function does not check the input so take the risk at your own.
 ## byte\_array\_to\_float
 
 ```moonbit
-:::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,190:::fn byte_array_to_float(bs : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Byte]) -> float!<a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>
+:::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,190:::fn byte_array_to_float(bs : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Byte]) -> Float!<a href="SyoujyoujiNaiki/chungshan/lib#BytesLenErr">BytesLenErr</a>
 ```
  Convert a 4 bytes long FixedArray\[Byte\] into an Float **with** a length check.
 The result is either an Float or an BytesLenErr which requires error handling.
@@ -94,7 +86,7 @@ The result is either an Float or an BytesLenErr which requires error handling.
 ## byte\_array\_to\_float\_raw
 
 ```moonbit
-:::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,206:::fn byte_array_to_float_raw(bs : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Byte]) -> float
+:::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,206:::fn byte_array_to_float_raw(bs : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Byte]) -> Float
 ```
  Convert a 4 bytes long FixedArray\[Byte\] into an Float **without** a length check.
 This function does not check the input so take the risk at your own.
@@ -233,7 +225,7 @@ This function does not check the input so take the risk at your own.
 ## float\_to\_byte\_array
 
 ```moonbit
-:::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,178:::fn float_to_byte_array(f : float) -> <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Byte]
+:::source,SyoujyoujiNaiki/chungshan/lib/chungshan.mbt,178:::fn float_to_byte_array(f : Float) -> <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Byte]
 ```
  Convert a Float into a 4 bytes long FixedArray\[Byte\]
  

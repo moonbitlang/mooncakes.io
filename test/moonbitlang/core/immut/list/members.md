@@ -152,29 +152,53 @@ list.rev() // of([5, 4, 3, 2, 1])
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1116:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/list#T">T</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/list#T">T</a>[X]
+  :::source,moonbitlang/core/immut/list/types.mbt,19:::impl[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/list/types.mbt,19:::fn op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](<a href="moonbitlang/core/immut/list#T">T</a>[A], <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,45:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="moonbitlang/core/immut/list#T">T</a> with from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,moonbitlang/core/immut/list/list.mbt,1136:::impl[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>] <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/list/list.mbt,1136:::fn hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1129:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/list#T">T</a> with hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/list/list.mbt,21:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/list/list.mbt,21:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](xs : <a href="moonbitlang/core/immut/list#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/list/types.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/list#T">T</a> with op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](<a href="moonbitlang/core/immut/list#T">T</a>[A], <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/list#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](xs : <a href="moonbitlang/core/immut/list#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,31:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="moonbitlang/core/immut/list#T">T</a> with to_json[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,moonbitlang/core/immut/list/list.mbt,31:::impl[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>] <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/list/list.mbt,31:::fn to_json[A : <a href="moonbitlang/core/builtin#ToJson">ToJson</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > 
+- ```moonbit
+  :::source,moonbitlang/core/immut/list/list.mbt,45:::impl[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>] <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/list/list.mbt,45:::fn from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > 
+- ```moonbit
+  :::source,moonbitlang/core/immut/list/list.mbt,1123:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/list#T">T</a>[X]
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/list/list.mbt,1123:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/list#T">T</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -194,14 +218,9 @@ list.rev() // of([5, 4, 3, 2, 1])
   ```
   > 
   >  Test if any element of the list satisfies the predicate.
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1116:::fn <a href="moonbitlang/core/immut/list#T">T</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/list#T">T</a>[X]
-  ```
-  > 
 - #### concat
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,331:::fn <a href="moonbitlang/core/immut/list#T">T</a>::concat[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,332:::fn <a href="moonbitlang/core/immut/list#T">T</a>::concat[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Concatenate two lists.
@@ -214,7 +233,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### concat\_map
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,516:::fn <a href="moonbitlang/core/immut/list#T">T</a>::concat_map[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
+  :::source,moonbitlang/core/immut/list/list.mbt,522:::fn <a href="moonbitlang/core/immut/list#T">T</a>::concat_map[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
   ```
   > 
   >  map over the list and concat all results.
@@ -229,21 +248,22 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  assert_eq!(r, @list.from_array([1, 2, 2, 4, 3, 6]))
   >  ```
   >  @alert deprecated "Use `flat_map` instead"
+  > @coverage.skip
 - #### contains
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,758:::fn <a href="moonbitlang/core/immut/list#T">T</a>::contains[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], value : A) -> Bool
+  :::source,moonbitlang/core/immut/list/list.mbt,765:::fn <a href="moonbitlang/core/immut/list#T">T</a>::contains[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], value : A) -> Bool
   ```
   > 
   >  Check if the list contains the value.
 - #### default
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1067:::fn <a href="moonbitlang/core/immut/list#T">T</a>::default[X]() -> <a href="moonbitlang/core/immut/list#T">T</a>[X]
+  :::source,moonbitlang/core/immut/list/list.mbt,1074:::fn <a href="moonbitlang/core/immut/list#T">T</a>::default[X]() -> <a href="moonbitlang/core/immut/list#T">T</a>[X]
   ```
   > 
   >  The empty list
 - #### drop
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,817:::fn <a href="moonbitlang/core/immut/list#T">T</a>::drop[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,824:::fn <a href="moonbitlang/core/immut/list#T">T</a>::drop[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Drop first n elements of the list.
@@ -258,7 +278,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### drop\_while
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,858:::fn <a href="moonbitlang/core/immut/list#T">T</a>::drop_while[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], p : (A) -> Bool) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,865:::fn <a href="moonbitlang/core/immut/list#T">T</a>::drop_while[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], p : (A) -> Bool) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Drop the longest prefix of a list of elements that satisfies a given predicate.
@@ -300,7 +320,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### equal
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1028:::fn <a href="moonbitlang/core/immut/list#T">T</a>::equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/list/list.mbt,1035:::fn <a href="moonbitlang/core/immut/list#T">T</a>::equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
   ```
   > 
   >  Compares two lists for equality.
@@ -324,7 +344,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### filter\_map
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,549:::fn <a href="moonbitlang/core/immut/list#T">T</a>::filter_map[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> B?) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
+  :::source,moonbitlang/core/immut/list/list.mbt,555:::fn <a href="moonbitlang/core/immut/list#T">T</a>::filter_map[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> B?) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
   ```
   > 
   >  Map over the list and keep all `value`s for which the mapped result is `Some(value)`.
@@ -338,7 +358,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### find
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,931:::fn <a href="moonbitlang/core/immut/list#T">T</a>::find[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> Bool) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,938:::fn <a href="moonbitlang/core/immut/list#T">T</a>::find[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> Bool) -> A?
   ```
   > 
   >  Find the first element in the list that satisfies f.
@@ -351,7 +371,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### findi
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,952:::fn <a href="moonbitlang/core/immut/list#T">T</a>::findi[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A, Int) -> Bool) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,959:::fn <a href="moonbitlang/core/immut/list#T">T</a>::findi[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A, Int) -> Bool) -> A?
   ```
   > 
   >  Find the first element in the list that satisfies f and passes the index as an argument.
@@ -364,7 +384,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### flat\_map
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,532:::fn <a href="moonbitlang/core/immut/list#T">T</a>::flat_map[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
+  :::source,moonbitlang/core/immut/list/list.mbt,538:::fn <a href="moonbitlang/core/immut/list#T">T</a>::flat_map[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
   ```
   > 
   >  map over the list and concat all results.
@@ -380,7 +400,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### flatten
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,658:::fn <a href="moonbitlang/core/immut/list#T">T</a>::flatten[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[<a href="moonbitlang/core/immut/list#T">T</a>[A]]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,665:::fn <a href="moonbitlang/core/immut/list#T">T</a>::flatten[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[<a href="moonbitlang/core/immut/list#T">T</a>[A]]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  flatten a list of lists.
@@ -393,7 +413,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### fold
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,375:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (B, A) -> B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,376:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (B, A) -> B) -> B
   ```
   > 
   >  Fold the list from left.
@@ -406,7 +426,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### fold\_left
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,407:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_left[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (B, A) -> B, init~ : B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,409:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_left[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (B, A) -> B, init~ : B) -> B
   ```
   > 
   >  Fold the list from left.
@@ -418,16 +438,18 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  assert_eq!(r, 15)
   >  ```
   >  @alert deprecated "Use `fold` instead"
+  > @coverage.skip
 - #### fold\_lefti
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,456:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_lefti[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (Int, B, A) -> B, init~ : B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,460:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_lefti[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (Int, B, A) -> B, init~ : B) -> B
   ```
   > 
   >  Fold the list from left with index.
   > @alert deprecated "Use `foldi` instead"
+  > @coverage.skip
 - #### fold\_right
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,420:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_right[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A, B) -> B, init~ : B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,423:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_right[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A, B) -> B, init~ : B) -> B
   ```
   > 
   >  Fold the list from right.
@@ -438,16 +460,18 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  assert_eq!(r, 15)
   >  ```
   >  @alert deprecated "Use `rev_fold` instead"
+  > @coverage.skip
 - #### fold\_righti
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,470:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_righti[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (Int, A, B) -> B, init~ : B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,475:::fn <a href="moonbitlang/core/immut/list#T">T</a>::fold_righti[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (Int, A, B) -> B, init~ : B) -> B
   ```
   > 
   >  Fold the list from right with index.
   > @alert deprecated "Use `rev_foldi` instead"
+  > @coverage.skip
 - #### foldi
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,429:::fn <a href="moonbitlang/core/immut/list#T">T</a>::foldi[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (Int, B, A) -> B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,432:::fn <a href="moonbitlang/core/immut/list#T">T</a>::foldi[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (Int, B, A) -> B) -> B
   ```
   > 
   >  Fold the list from left with index.
@@ -466,7 +490,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### from\_iter
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1102:::fn <a href="moonbitlang/core/immut/list#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,1109:::fn <a href="moonbitlang/core/immut/list#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
 - #### from\_json
@@ -474,19 +498,9 @@ list.rev() // of([5, 4, 3, 2, 1])
   :::source,moonbitlang/core/immut/list/list.mbt,61:::fn <a href="moonbitlang/core/immut/list#T">T</a>::from_json[A : <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a>](json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,moonbitlang/core/immut/list/traits.mbt,40:::fn <a href="moonbitlang/core/immut/list#T">T</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1129:::fn <a href="moonbitlang/core/immut/list#T">T</a>::hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > 
 - #### head
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,273:::fn <a href="moonbitlang/core/immut/list#T">T</a>::head[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,274:::fn <a href="moonbitlang/core/immut/list#T">T</a>::head[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
   ```
   > 
   >  Get first element of the list.
@@ -498,13 +512,14 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### head\_exn
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,261:::fn <a href="moonbitlang/core/immut/list#T">T</a>::head_exn[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/immut/list/list.mbt,262:::fn <a href="moonbitlang/core/immut/list#T">T</a>::head_exn[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
   ```
   > 
   >  @alert deprecated "Use `unsafe_head` instead"
+  > @coverage.skip
 - #### init\_
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,314:::fn <a href="moonbitlang/core/immut/list#T">T</a>::init_[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,315:::fn <a href="moonbitlang/core/immut/list#T">T</a>::init_[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Init of the list.
@@ -516,7 +531,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### intercalate
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1061:::fn <a href="moonbitlang/core/immut/list#T">T</a>::intercalate[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[<a href="moonbitlang/core/immut/list#T">T</a>[A]], sep : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,1068:::fn <a href="moonbitlang/core/immut/list#T">T</a>::intercalate[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[<a href="moonbitlang/core/immut/list#T">T</a>[A]], sep : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Similar to intersperse but with a list of values.
@@ -533,7 +548,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### intersperse
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,611:::fn <a href="moonbitlang/core/immut/list#T">T</a>::intersperse[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], separator : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,618:::fn <a href="moonbitlang/core/immut/list#T">T</a>::intersperse[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], separator : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Insert separator to the list.
@@ -546,13 +561,13 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### is\_empty
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,622:::fn <a href="moonbitlang/core/immut/list#T">T</a>::is_empty[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/list/list.mbt,629:::fn <a href="moonbitlang/core/immut/list#T">T</a>::is_empty[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
   ```
   > 
   >  Check if the list is empty.
 - #### is\_prefix
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1012:::fn <a href="moonbitlang/core/immut/list#T">T</a>::is_prefix[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], prefix : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/list/list.mbt,1019:::fn <a href="moonbitlang/core/immut/list#T">T</a>::is_prefix[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], prefix : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
   ```
   > 
   >  Returns true if list starts with prefix.
@@ -564,7 +579,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### is\_suffix
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1044:::fn <a href="moonbitlang/core/immut/list#T">T</a>::is_suffix[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], suffix : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/list/list.mbt,1051:::fn <a href="moonbitlang/core/immut/list#T">T</a>::is_suffix[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], suffix : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
   ```
   > 
   >  Returns true if list ends with suffix.
@@ -576,17 +591,17 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### iter
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1072:::fn <a href="moonbitlang/core/immut/list#T">T</a>::iter[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,1079:::fn <a href="moonbitlang/core/immut/list#T">T</a>::iter[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]
   ```
   > 
 - #### iter2
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1087:::fn <a href="moonbitlang/core/immut/list#T">T</a>::iter2[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[Int, A]
+  :::source,moonbitlang/core/immut/list/list.mbt,1094:::fn <a href="moonbitlang/core/immut/list#T">T</a>::iter2[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/builtin#Iter2">Iter2</a>[Int, A]
   ```
   > 
 - #### last
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,298:::fn <a href="moonbitlang/core/immut/list#T">T</a>::last[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,299:::fn <a href="moonbitlang/core/immut/list#T">T</a>::last[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
   ```
   > 
   >  Last element of the list.
@@ -604,7 +619,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  Get the length of the list.
 - #### lookup
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,915:::fn <a href="moonbitlang/core/immut/list#T">T</a>::lookup[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[(A, B)], v : A) -> B?
+  :::source,moonbitlang/core/immut/list/list.mbt,922:::fn <a href="moonbitlang/core/immut/list#T">T</a>::lookup[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[(A, B)], v : A) -> B?
   ```
   > 
   >  Looks up a key in an association list.
@@ -635,55 +650,46 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  Maps the list with index.
 - #### maximum
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,685:::fn <a href="moonbitlang/core/immut/list#T">T</a>::maximum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,692:::fn <a href="moonbitlang/core/immut/list#T">T</a>::maximum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
   ```
   > 
   >  Get maximum element of the list.
   > Returns None if the list is empty.
 - #### minimum
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,716:::fn <a href="moonbitlang/core/immut/list#T">T</a>::minimum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,723:::fn <a href="moonbitlang/core/immut/list#T">T</a>::minimum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A?
   ```
   > 
   >  Get minimum element of the list.
 - #### nth
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,578:::fn <a href="moonbitlang/core/immut/list#T">T</a>::nth[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> A?
+  :::source,moonbitlang/core/immut/list/list.mbt,585:::fn <a href="moonbitlang/core/immut/list#T">T</a>::nth[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> A?
   ```
   > 
   >  Get nth element of the list or None if the index is out of bounds
 - #### nth\_exn
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,572:::fn <a href="moonbitlang/core/immut/list#T">T</a>::nth_exn[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> A
+  :::source,moonbitlang/core/immut/list/list.mbt,579:::fn <a href="moonbitlang/core/immut/list#T">T</a>::nth_exn[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> A
   ```
   > 
   >  @alert deprecated "Use `unsafe_nth` instead"
+  > @coverage.skip
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,1107:::fn <a href="moonbitlang/core/immut/list#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,1114:::fn <a href="moonbitlang/core/immut/list#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
 - #### op\_add
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,752:::fn <a href="moonbitlang/core/immut/list#T">T</a>::op_add[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,759:::fn <a href="moonbitlang/core/immut/list#T">T</a>::op_add[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Concatenate two lists.
   > 
   >  `a + b` equal to `a.concat(b)`
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/core/immut/list/types.mbt,19:::fn <a href="moonbitlang/core/immut/list#T">T</a>::op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](<a href="moonbitlang/core/immut/list#T">T</a>[A], <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,21:::fn <a href="moonbitlang/core/immut/list#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](xs : <a href="moonbitlang/core/immut/list#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### remove
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,992:::fn <a href="moonbitlang/core/immut/list#T">T</a>::remove[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], elem : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,999:::fn <a href="moonbitlang/core/immut/list#T">T</a>::remove[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], elem : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Removes the first occurrence of the specified element from the list, if it is present.
@@ -695,7 +701,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### remove\_at
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,975:::fn <a href="moonbitlang/core/immut/list#T">T</a>::remove_at[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], index : Int) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,982:::fn <a href="moonbitlang/core/immut/list#T">T</a>::remove_at[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], index : Int) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Removes the element at the specified index in the list.
@@ -707,7 +713,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### rev
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,362:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,363:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Reverse the list.
@@ -719,7 +725,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### rev\_concat
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,347:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev_concat[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,348:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev_concat[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Reverse the first list and concatenate it with the second.
@@ -732,7 +738,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### rev\_fold
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,390:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev_fold[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (A, B) -> B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,391:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev_fold[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (A, B) -> B) -> B
   ```
   > 
   >  Fold the list from right.
@@ -744,7 +750,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### rev\_foldi
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,442:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev_foldi[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (Int, A, B) -> B) -> B
+  :::source,moonbitlang/core/immut/list/list.mbt,445:::fn <a href="moonbitlang/core/immut/list#T">T</a>::rev_foldi[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], init~ : B, f : (Int, A, B) -> B) -> B
   ```
   > 
   >  Fold the list from right with index.
@@ -763,7 +769,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### scan\_left
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,875:::fn <a href="moonbitlang/core/immut/list#T">T</a>::scan_left[A, E](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (E, A) -> E, init~ : E) -> <a href="moonbitlang/core/immut/list#T">T</a>[E]
+  :::source,moonbitlang/core/immut/list/list.mbt,882:::fn <a href="moonbitlang/core/immut/list#T">T</a>::scan_left[A, E](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (E, A) -> E, init~ : E) -> <a href="moonbitlang/core/immut/list#T">T</a>[E]
   ```
   > 
   >  Fold a list and return a list of successive reduced values from the left
@@ -777,7 +783,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### scan\_right
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,896:::fn <a href="moonbitlang/core/immut/list#T">T</a>::scan_right[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A, B) -> B, init~ : B) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
+  :::source,moonbitlang/core/immut/list/list.mbt,903:::fn <a href="moonbitlang/core/immut/list#T">T</a>::scan_right[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], f : (A, B) -> B, init~ : B) -> <a href="moonbitlang/core/immut/list#T">T</a>[B]
   ```
   > 
   >  Fold a list and return a list of successive reduced values from the right
@@ -792,7 +798,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### sort
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,737:::fn <a href="moonbitlang/core/immut/list#T">T</a>::sort[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,744:::fn <a href="moonbitlang/core/immut/list#T">T</a>::sort[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Sort the list in ascending order.
@@ -817,7 +823,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### take
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,792:::fn <a href="moonbitlang/core/immut/list#T">T</a>::take[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,799:::fn <a href="moonbitlang/core/immut/list#T">T</a>::take[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Take first n elements of the list.
@@ -832,7 +838,7 @@ list.rev() // of([5, 4, 3, 2, 1])
   >  ```
 - #### take\_while
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,841:::fn <a href="moonbitlang/core/immut/list#T">T</a>::take_while[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], p : (A) -> Bool) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+  :::source,moonbitlang/core/immut/list/list.mbt,848:::fn <a href="moonbitlang/core/immut/list#T">T</a>::take_while[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], p : (A) -> Bool) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
   ```
   > 
   >  Take the longest prefix of a list of elements that satisfies a given predicate.
@@ -869,31 +875,31 @@ list.rev() // of([5, 4, 3, 2, 1])
   > @alert unsafe "Panic if the list is empty"
 - #### unsafe\_last
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,282:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_last[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/immut/list/list.mbt,283:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_last[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
   ```
   > 
   >  @alert unsafe "Panic if the list is empty"
 - #### unsafe\_maximum
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,667:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_maximum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/immut/list/list.mbt,674:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_maximum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
   ```
   > 
   >  @alert unsafe "Panic if the list is empty"
 - #### unsafe\_minimum
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,699:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_minimum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
+  :::source,moonbitlang/core/immut/list/list.mbt,706:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_minimum[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/list#T">T</a>[A]) -> A
   ```
   > 
   >  @alert unsafe "Panic if the list is empty"
 - #### unsafe\_nth
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,562:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_nth[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> A
+  :::source,moonbitlang/core/immut/list/list.mbt,568:::fn <a href="moonbitlang/core/immut/list#T">T</a>::unsafe_nth[A](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], n : Int) -> A
   ```
   > 
   >  @alert unsafe "Panic if the index is out of bounds"
 - #### zip
   ```moonbit
-  :::source,moonbitlang/core/immut/list/list.mbt,491:::fn <a href="moonbitlang/core/immut/list#T">T</a>::zip[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[B]) -> <a href="moonbitlang/core/immut/list#T">T</a>[(A, B)]?
+  :::source,moonbitlang/core/immut/list/list.mbt,496:::fn <a href="moonbitlang/core/immut/list#T">T</a>::zip[A, B](self : <a href="moonbitlang/core/immut/list#T">T</a>[A], other : <a href="moonbitlang/core/immut/list#T">T</a>[B]) -> <a href="moonbitlang/core/immut/list#T">T</a>[(A, B)]?
   ```
   > 
   >  Zip two lists.
@@ -909,7 +915,7 @@ list.rev() // of([5, 4, 3, 2, 1])
 ## repeat
 
 ```moonbit
-:::source,moonbitlang/core/immut/list/list.mbt,594:::fn repeat[A](n : Int, x : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+:::source,moonbitlang/core/immut/list/list.mbt,601:::fn repeat[A](n : Int, x : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
 ```
 
  Create a list of length n with the given value
@@ -923,14 +929,14 @@ list.rev() // of([5, 4, 3, 2, 1])
 ## singleton
 
 ```moonbit
-:::source,moonbitlang/core/immut/list/list.mbt,1124:::fn singleton[A](x : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+:::source,moonbitlang/core/immut/list/list.mbt,1131:::fn singleton[A](x : A) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
 ```
 
 
 ## unfold
 
 ```moonbit
-:::source,moonbitlang/core/immut/list/list.mbt,774:::fn unfold[A, S](f : (S) -> (A, S)?, init~ : S) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
+:::source,moonbitlang/core/immut/list/list.mbt,781:::fn unfold[A, S](f : (S) -> (A, S)?, init~ : S) -> <a href="moonbitlang/core/immut/list#T">T</a>[A]
 ```
 
  Produces a collection iteratively.
@@ -945,7 +951,7 @@ list.rev() // of([5, 4, 3, 2, 1])
 ## unzip
 
 ```moonbit
-:::source,moonbitlang/core/immut/list/list.mbt,639:::fn unzip[A, B](list : <a href="moonbitlang/core/immut/list#T">T</a>[(A, B)]) -> (<a href="moonbitlang/core/immut/list#T">T</a>[A], <a href="moonbitlang/core/immut/list#T">T</a>[B])
+:::source,moonbitlang/core/immut/list/list.mbt,646:::fn unzip[A, B](list : <a href="moonbitlang/core/immut/list#T">T</a>[(A, B)]) -> (<a href="moonbitlang/core/immut/list#T">T</a>[A], <a href="moonbitlang/core/immut/list#T">T</a>[B])
 ```
 
  Unzip two lists.

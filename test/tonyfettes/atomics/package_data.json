@@ -1,0 +1,34 @@
+{
+  "readme": "",
+  "name": "tonyfettes/atomics",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "i32_atomic_rmw_cmpxchg",
+      "docstring": "",
+      "signature": "fn i32_atomic_rmw_cmpxchg(addr : Int, expected : Int, replacement : Int) -> Int",
+      "loc": { "line": 10, "column": 8 }
+    },
+    {
+      "name": "i32_atomic_store",
+      "docstring": "",
+      "signature": "fn i32_atomic_store(addr : Int, value : Int) -> Unit",
+      "loc": { "line": 22, "column": 8 }
+    },
+    {
+      "name": "memory_atomic_notify",
+      "docstring": "",
+      "signature": "fn memory_atomic_notify(addr : Int, count : Int) -> Int",
+      "loc": { "line": 29, "column": 8 }
+    },
+    {
+      "name": "memory_atomic_wait32",
+      "docstring": "",
+      "signature": "fn memory_atomic_wait32(addr : Int, expected : Int, timeout : Int64) -> Int",
+      "loc": { "line": 2, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Yoorkin",
+  "package": null,
+  "childs": [
+    {
+      "name": "format",
+      "package": {
+        "path": "Yoorkin/format",
+        "readme": true,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [ "format", "printf" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

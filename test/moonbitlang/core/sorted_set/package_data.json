@@ -16,12 +16,6 @@
           "loc": { "line": 86, "column": 8 }
         },
         {
-          "name": "arbitrary",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[X]",
-          "loc": { "line": 429, "column": 83 }
-        },
-        {
           "name": "contains",
           "docstring": "\n Return if a value is contained in the set.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::contains[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], value : V) -> Bool",
@@ -35,75 +29,69 @@
         },
         {
           "name": "diff",
-          "docstring": "\n Returns the difference of two sets.\n \n @alert deprecated \"Use `difference` instead\"",
+          "docstring": "\n Returns the difference of two sets.\n \n @alert deprecated \"Use `difference` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::diff[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], src : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]",
-          "loc": { "line": 251, "column": 8 }
+          "loc": { "line": 252, "column": 8 }
         },
         {
           "name": "difference",
           "docstring": "\n Returns the difference of two sets.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::difference[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], src : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]",
-          "loc": { "line": 259, "column": 8 }
+          "loc": { "line": 260, "column": 8 }
         },
         {
           "name": "disjoint",
           "docstring": "\n Returns if two sets are disjoint.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::disjoint[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], src : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> Bool",
-          "loc": { "line": 290, "column": 8 }
+          "loc": { "line": 292, "column": 8 }
         },
         {
           "name": "each",
           "docstring": "\n Iterates the set.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::each[V](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], f : (V) -> Unit) -> Unit",
-          "loc": { "line": 320, "column": 8 }
+          "loc": { "line": 322, "column": 8 }
         },
         {
           "name": "eachi",
           "docstring": "\n Iterates the set with index.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::eachi[V](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], f : (Int, V) -> Unit) -> Unit",
-          "loc": { "line": 346, "column": 8 }
+          "loc": { "line": 348, "column": 8 }
         },
         {
           "name": "from_iter",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::from_iter[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[V]) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]",
-          "loc": { "line": 413, "column": 11 }
+          "loc": { "line": 415, "column": 11 }
         },
         {
           "name": "intersect",
-          "docstring": "\n Returns the intersection of two sets.\n @alert deprecated \"Use `intersection` instead\"",
+          "docstring": "\n Returns the intersection of two sets.\n @alert deprecated \"Use `intersection` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::intersect[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], src : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]",
-          "loc": { "line": 268, "column": 8 }
+          "loc": { "line": 270, "column": 8 }
         },
         {
           "name": "intersection",
           "docstring": "\n Returns the intersection of two sets.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::intersection[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], src : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]",
-          "loc": { "line": 274, "column": 8 }
+          "loc": { "line": 276, "column": 8 }
         },
         {
           "name": "is_empty",
           "docstring": "\n Returns if MutableSet is empty.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::is_empty[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> Bool",
-          "loc": { "line": 305, "column": 8 }
+          "loc": { "line": 307, "column": 8 }
         },
         {
           "name": "iter",
           "docstring": "\n Returns a iterator.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::iter[V](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[V]",
-          "loc": { "line": 382, "column": 8 }
+          "loc": { "line": 384, "column": 8 }
         },
         {
           "name": "op_equal",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::op_equal[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], other : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> Bool",
-          "loc": { "line": 299, "column": 8 }
-        },
-        {
-          "name": "output",
-          "docstring": "\n Converts the set to string.",
-          "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::output[V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 421, "column": 39 }
+          "loc": { "line": 301, "column": 8 }
         },
         {
           "name": "remove",
@@ -115,25 +103,19 @@
           "name": "size",
           "docstring": "\n Returns the number of elements in the MutableSet.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::size[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> Int64",
-          "loc": { "line": 314, "column": 8 }
+          "loc": { "line": 316, "column": 8 }
         },
         {
           "name": "subset",
           "docstring": "\n Returns if a set is a subset of another set.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::subset[V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], src : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> Bool",
-          "loc": { "line": 282, "column": 8 }
+          "loc": { "line": 284, "column": 8 }
         },
         {
           "name": "to_array",
           "docstring": "\n Converts the set to an array.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::to_array[V](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[V]",
-          "loc": { "line": 374, "column": 8 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/sorted_set#T\">T</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
+          "loc": { "line": 376, "column": 8 }
         },
         {
           "name": "union",
@@ -144,16 +126,30 @@
       ],
       "impls": [
         {
-          "name": "arbitrary",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/sorted_set#T\">T</a> with arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[X]",
-          "loc": { "line": 429, "column": 83 }
+          "signature": "impl[V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "\n Converts the set to string.",
+              "signature": "fn output[V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 423, "column": 39 }
+            }
+          ],
+          "loc": { "line": 423, "column": 1 }
         },
         {
-          "name": "output",
-          "docstring": "\n Converts the set to string.",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/sorted_set#T\">T</a> with output[V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/sorted_set#T\">T</a>[V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 421, "column": 39 }
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/sorted_set#T\">T</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/sorted_set#T\">T</a>[X]",
+              "loc": { "line": 431, "column": 83 }
+            }
+          ],
+          "loc": { "line": 431, "column": 1 }
         }
       ]
     }
@@ -179,18 +175,5 @@
       "loc": { "line": 25, "column": 8 }
     }
   ],
-  "misc": [
-    {
-      "name": "Node",
-      "impls": [],
-      "methods": [
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/sorted_set#Node\">Node</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
-        }
-      ]
-    }
-  ]
+  "misc": []
 }

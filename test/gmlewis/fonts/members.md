@@ -119,30 +119,21 @@ limitations under the License.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/path.mbt,34:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a> with op_equal(<a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>, <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/path.mbt,34:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a> with output(<a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/path.mbt,34:::fn <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>::op_equal(<a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>, <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/path.mbt,34:::fn <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>::output(<a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/path.mbt,34:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path.mbt,34:::fn op_equal(<a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>, <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/path.mbt,34:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path.mbt,34:::fn output(<a href="gmlewis/fonts#AbsoluteCmd">AbsoluteCmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Anchor
 
@@ -169,30 +160,21 @@ to its minimum bounding box.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/anchor.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Anchor">Anchor</a> with op_equal(<a href="gmlewis/fonts#Anchor">Anchor</a>, <a href="gmlewis/fonts#Anchor">Anchor</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/anchor.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Anchor">Anchor</a> with output(<a href="gmlewis/fonts#Anchor">Anchor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/anchor.mbt,25:::fn <a href="gmlewis/fonts#Anchor">Anchor</a>::op_equal(<a href="gmlewis/fonts#Anchor">Anchor</a>, <a href="gmlewis/fonts#Anchor">Anchor</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/anchor.mbt,25:::fn <a href="gmlewis/fonts#Anchor">Anchor</a>::output(<a href="gmlewis/fonts#Anchor">Anchor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#Anchor">Anchor</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/anchor.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Anchor">Anchor</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/anchor.mbt,25:::fn op_equal(<a href="gmlewis/fonts#Anchor">Anchor</a>, <a href="gmlewis/fonts#Anchor">Anchor</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/anchor.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Anchor">Anchor</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/anchor.mbt,25:::fn output(<a href="gmlewis/fonts#Anchor">Anchor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Cmd
 
@@ -203,30 +185,21 @@ to its minimum bounding box.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/split-path.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Cmd">Cmd</a> with op_equal(<a href="gmlewis/fonts#Cmd">Cmd</a>, <a href="gmlewis/fonts#Cmd">Cmd</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/split-path.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Cmd">Cmd</a> with output(<a href="gmlewis/fonts#Cmd">Cmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/split-path.mbt,5:::fn <a href="gmlewis/fonts#Cmd">Cmd</a>::op_equal(<a href="gmlewis/fonts#Cmd">Cmd</a>, <a href="gmlewis/fonts#Cmd">Cmd</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/split-path.mbt,5:::fn <a href="gmlewis/fonts#Cmd">Cmd</a>::output(<a href="gmlewis/fonts#Cmd">Cmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#Cmd">Cmd</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/split-path.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Cmd">Cmd</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/split-path.mbt,5:::fn op_equal(<a href="gmlewis/fonts#Cmd">Cmd</a>, <a href="gmlewis/fonts#Cmd">Cmd</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/split-path.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Cmd">Cmd</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/split-path.mbt,5:::fn output(<a href="gmlewis/fonts#Cmd">Cmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Font
 
@@ -244,28 +217,39 @@ to its minimum bounding box.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts#Font">Font</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts#Font">Font</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Font">Font</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/fonts.mbt,9:::fn op_equal(<a href="gmlewis/fonts#Font">Font</a>, <a href="gmlewis/fonts#Font">Font</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Font">Font</a> with op_equal(<a href="gmlewis/fonts#Font">Font</a>, <a href="gmlewis/fonts#Font">Font</a>) -> Bool
+  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Font">Font</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/fonts.mbt,9:::fn output(<a href="gmlewis/fonts#Font">Font</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Font">Font</a> with output(<a href="gmlewis/fonts#Font">Font</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts#Font">Font</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/fonts.mbt,9:::fn to_json(<a href="gmlewis/fonts#Font">Font</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts#Font">Font</a> with to_json(<a href="gmlewis/fonts#Font">Font</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/fonts.mbt,9:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts#Font">Font</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/fonts.mbt,9:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts#Font">Font</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::fn <a href="gmlewis/fonts#Font">Font</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts#Font">Font</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### gen\_path
   ```moonbit
   :::source,gmlewis/fonts/gen-path.mbt,17:::fn <a href="gmlewis/fonts#Font">Font</a>::gen_path(self : <a href="gmlewis/fonts#Font">Font</a>, text : String, anchor~ : <a href="gmlewis/fonts#Anchor">Anchor</a> = .., y_up~ : Bool = ..) -> <a href="gmlewis/fonts#Glyph">Glyph</a>!<a href="gmlewis/fonts#FontError">FontError</a>
@@ -292,26 +276,6 @@ to its minimum bounding box.
   ```
   >  `gen_paths` handles multiple strings independently so that they
   > can be aligned and distributed more flexibly.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::fn <a href="gmlewis/fonts#Font">Font</a>::op_equal(<a href="gmlewis/fonts#Font">Font</a>, <a href="gmlewis/fonts#Font">Font</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::fn <a href="gmlewis/fonts#Font">Font</a>::output(<a href="gmlewis/fonts#Font">Font</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,9:::fn <a href="gmlewis/fonts#Font">Font</a>::to_json(<a href="gmlewis/fonts#Font">Font</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#Font">Font</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## FontError
 
@@ -323,30 +287,21 @@ to its minimum bounding box.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,12:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#FontError">FontError</a> with op_equal(<a href="gmlewis/fonts#FontError">FontError</a>, <a href="gmlewis/fonts#FontError">FontError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#FontError">FontError</a> with output(<a href="gmlewis/fonts#FontError">FontError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,12:::fn <a href="gmlewis/fonts#FontError">FontError</a>::op_equal(<a href="gmlewis/fonts#FontError">FontError</a>, <a href="gmlewis/fonts#FontError">FontError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/fonts.mbt,12:::fn <a href="gmlewis/fonts#FontError">FontError</a>::output(<a href="gmlewis/fonts#FontError">FontError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#FontError">FontError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/fonts.mbt,12:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#FontError">FontError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/fonts.mbt,12:::fn op_equal(<a href="gmlewis/fonts#FontError">FontError</a>, <a href="gmlewis/fonts#FontError">FontError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/fonts.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#FontError">FontError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/fonts.mbt,12:::fn output(<a href="gmlewis/fonts#FontError">FontError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## GerberLP
 
@@ -360,30 +315,21 @@ to its minimum bounding box.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/path.mbt,40:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#GerberLP">GerberLP</a> with op_equal(<a href="gmlewis/fonts#GerberLP">GerberLP</a>, <a href="gmlewis/fonts#GerberLP">GerberLP</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/path.mbt,40:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#GerberLP">GerberLP</a> with output(<a href="gmlewis/fonts#GerberLP">GerberLP</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/path.mbt,40:::fn <a href="gmlewis/fonts#GerberLP">GerberLP</a>::op_equal(<a href="gmlewis/fonts#GerberLP">GerberLP</a>, <a href="gmlewis/fonts#GerberLP">GerberLP</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/path.mbt,40:::fn <a href="gmlewis/fonts#GerberLP">GerberLP</a>::output(<a href="gmlewis/fonts#GerberLP">GerberLP</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#GerberLP">GerberLP</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/path.mbt,40:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#GerberLP">GerberLP</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path.mbt,40:::fn op_equal(<a href="gmlewis/fonts#GerberLP">GerberLP</a>, <a href="gmlewis/fonts#GerberLP">GerberLP</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/path.mbt,40:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#GerberLP">GerberLP</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path.mbt,40:::fn output(<a href="gmlewis/fonts#GerberLP">GerberLP</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Glyph
 
@@ -406,48 +352,37 @@ and `Paths` which are optimized for processing).
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts#Glyph">Glyph</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts#Glyph">Glyph</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Glyph">Glyph</a> with op_equal(<a href="gmlewis/fonts#Glyph">Glyph</a>, <a href="gmlewis/fonts#Glyph">Glyph</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Glyph">Glyph</a> with output(<a href="gmlewis/fonts#Glyph">Glyph</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts#Glyph">Glyph</a> with to_json(<a href="gmlewis/fonts#Glyph">Glyph</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::fn <a href="gmlewis/fonts#Glyph">Glyph</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts#Glyph">Glyph</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::fn <a href="gmlewis/fonts#Glyph">Glyph</a>::op_equal(<a href="gmlewis/fonts#Glyph">Glyph</a>, <a href="gmlewis/fonts#Glyph">Glyph</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::fn <a href="gmlewis/fonts#Glyph">Glyph</a>::output(<a href="gmlewis/fonts#Glyph">Glyph</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/glyph.mbt,25:::fn <a href="gmlewis/fonts#Glyph">Glyph</a>::to_json(<a href="gmlewis/fonts#Glyph">Glyph</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#Glyph">Glyph</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Glyph">Glyph</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/glyph.mbt,25:::fn op_equal(<a href="gmlewis/fonts#Glyph">Glyph</a>, <a href="gmlewis/fonts#Glyph">Glyph</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Glyph">Glyph</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/glyph.mbt,25:::fn output(<a href="gmlewis/fonts#Glyph">Glyph</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts#Glyph">Glyph</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/glyph.mbt,25:::fn to_json(<a href="gmlewis/fonts#Glyph">Glyph</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/glyph.mbt,25:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts#Glyph">Glyph</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/glyph.mbt,25:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts#Glyph">Glyph</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 ## ParamPair
 
@@ -461,16 +396,15 @@ and `Paths` which are optimized for processing).
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/path-cmd.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#ParamPair">ParamPair</a> with op_equal(<a href="gmlewis/fonts#ParamPair">ParamPair</a>, <a href="gmlewis/fonts#ParamPair">ParamPair</a>) -> Bool
+  :::source,gmlewis/fonts/path-cmd.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#ParamPair">ParamPair</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path-cmd.mbt,5:::fn op_equal(<a href="gmlewis/fonts#ParamPair">ParamPair</a>, <a href="gmlewis/fonts#ParamPair">ParamPair</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/path-cmd.mbt,5:::fn <a href="gmlewis/fonts#ParamPair">ParamPair</a>::op_equal(<a href="gmlewis/fonts#ParamPair">ParamPair</a>, <a href="gmlewis/fonts#ParamPair">ParamPair</a>) -> Bool
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,gmlewis/fonts/path-cmd.mbt,8:::fn <a href="gmlewis/fonts#ParamPair">ParamPair</a>::to_string(self : <a href="gmlewis/fonts#ParamPair">ParamPair</a>) -> String
@@ -486,33 +420,26 @@ and `Paths` which are optimized for processing).
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/parse-params.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Params">Params</a> with op_equal(<a href="gmlewis/fonts#Params">Params</a>, <a href="gmlewis/fonts#Params">Params</a>) -> Bool
+  :::source,gmlewis/fonts/parse-params.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Params">Params</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/parse-params.mbt,2:::fn op_equal(<a href="gmlewis/fonts#Params">Params</a>, <a href="gmlewis/fonts#Params">Params</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/parse-params.mbt,2:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Params">Params</a> with output(<a href="gmlewis/fonts#Params">Params</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/parse-params.mbt,2:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Params">Params</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/parse-params.mbt,2:::fn output(<a href="gmlewis/fonts#Params">Params</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### length
   ```moonbit
   :::source,gmlewis/fonts/parse-params.mbt,5:::fn <a href="gmlewis/fonts#Params">Params</a>::length(self : <a href="gmlewis/fonts#Params">Params</a>) -> Int
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/parse-params.mbt,2:::fn <a href="gmlewis/fonts#Params">Params</a>::op_equal(<a href="gmlewis/fonts#Params">Params</a>, <a href="gmlewis/fonts#Params">Params</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/parse-params.mbt,2:::fn <a href="gmlewis/fonts#Params">Params</a>::output(<a href="gmlewis/fonts#Params">Params</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#Params">Params</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -535,13 +462,21 @@ A `Path` can be converted to a `Glpyh` and vice versa.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/path.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Path">Path</a> with op_equal(<a href="gmlewis/fonts#Path">Path</a>, <a href="gmlewis/fonts#Path">Path</a>) -> Bool
+  :::source,gmlewis/fonts/path.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#Path">Path</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path.mbt,20:::fn op_equal(<a href="gmlewis/fonts#Path">Path</a>, <a href="gmlewis/fonts#Path">Path</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/path.mbt,20:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Path">Path</a> with output(<a href="gmlewis/fonts#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/path.mbt,20:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#Path">Path</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path.mbt,20:::fn output(<a href="gmlewis/fonts#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clone
@@ -557,16 +492,6 @@ A `Path` can be converted to a `Glpyh` and vice versa.
   > every `Cmd` with a processing function.
   > Note that apart from `path_cmd_fn`, `from_glyph` makes no attempt to process the
   > invidual glyphs and simply transforms the representation.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/path.mbt,20:::fn <a href="gmlewis/fonts#Path">Path</a>::op_equal(<a href="gmlewis/fonts#Path">Path</a>, <a href="gmlewis/fonts#Path">Path</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/path.mbt,20:::fn <a href="gmlewis/fonts#Path">Path</a>::output(<a href="gmlewis/fonts#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_glyph
   ```moonbit
   :::source,gmlewis/fonts/path.mbt,92:::fn <a href="gmlewis/fonts#Path">Path</a>::to_glyph(self : <a href="gmlewis/fonts#Path">Path</a>, path_cmd_fn~ : <a href="gmlewis/fonts#PathCmdFn">PathCmdFn</a>? = ..) -> <a href="gmlewis/fonts#Glyph">Glyph</a>
@@ -575,11 +500,6 @@ A `Path` can be converted to a `Glpyh` and vice versa.
   > every `PathCmd` with a processing function.
   > Note that apart from `path_cmd_fn`, `to_glyph` makes no attempt to process the
   > invidual glyphs and simply transforms the representation.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#Path">Path</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## PathCmd
 
@@ -594,13 +514,21 @@ A `Path` can be converted to a `Glpyh` and vice versa.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/path-cmd.mbt,22:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#PathCmd">PathCmd</a> with op_equal(<a href="gmlewis/fonts#PathCmd">PathCmd</a>, <a href="gmlewis/fonts#PathCmd">PathCmd</a>) -> Bool
+  :::source,gmlewis/fonts/path-cmd.mbt,22:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts#PathCmd">PathCmd</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path-cmd.mbt,22:::fn op_equal(<a href="gmlewis/fonts#PathCmd">PathCmd</a>, <a href="gmlewis/fonts#PathCmd">PathCmd</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/path-cmd.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#PathCmd">PathCmd</a> with output(<a href="gmlewis/fonts#PathCmd">PathCmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/path-cmd.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts#PathCmd">PathCmd</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/path-cmd.mbt,22:::fn output(<a href="gmlewis/fonts#PathCmd">PathCmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### bbox
@@ -616,21 +544,6 @@ A `Path` can be converted to a `Glpyh` and vice versa.
 - #### from\_svg\_cmd
   ```moonbit
   :::source,gmlewis/fonts/path-cmd.mbt,25:::fn <a href="gmlewis/fonts#PathCmd">PathCmd</a>::from_svg_cmd(svg_cmd : <a href="gmlewis/fonts#Cmd">Cmd</a>, gerber_lp : <a href="gmlewis/fonts#GerberLP">GerberLP</a>) -> <a href="gmlewis/fonts#PathCmd">PathCmd</a>!<a href="gmlewis/fonts#FontError">FontError</a>
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/path-cmd.mbt,22:::fn <a href="gmlewis/fonts#PathCmd">PathCmd</a>::op_equal(<a href="gmlewis/fonts#PathCmd">PathCmd</a>, <a href="gmlewis/fonts#PathCmd">PathCmd</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/path-cmd.mbt,22:::fn <a href="gmlewis/fonts#PathCmd">PathCmd</a>::output(<a href="gmlewis/fonts#PathCmd">PathCmd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/traits.mbt,85:::fn <a href="gmlewis/fonts#PathCmd">PathCmd</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### to\_svg\_cmd

@@ -1,0 +1,123 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/keyValue",
+  "traits": [],
+  "types": [
+    {
+      "name": "Error_",
+      "docstring": " The set of errors which may be raised by functions in this interface",
+      "signature": "pub(all) enum Error_ {\n  StoreTableFull\n  NoSuchStore\n  AccessDenied\n  Other(String)\n}",
+      "loc": { "line": 14, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>) -> Bool",
+              "loc": { "line": 19, "column": 16 }
+            }
+          ],
+          "loc": { "line": 19, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 10 }
+            }
+          ],
+          "loc": { "line": 19, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Store",
+      "docstring": " An open key-value store",
+      "signature": "pub(all) type Store Int",
+      "loc": { "line": 3, "column": 15 },
+      "methods": [
+        {
+          "name": "delete",
+          "docstring": " Delete the tuple with the specified `key`\n\n No error is raised if a tuple did not previously exist for `key`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::delete(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, key : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>]",
+          "loc": { "line": 139, "column": 15 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>) -> Unit",
+          "loc": { "line": 9, "column": 15 }
+        },
+        {
+          "name": "exists",
+          "docstring": " Return whether a tuple exists for the specified `key`",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::exists(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, key : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Bool, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>]",
+          "loc": { "line": 170, "column": 15 }
+        },
+        {
+          "name": "get",
+          "docstring": " Get the value associated with the specified `key`\n\n Returns `ok(none)` if the key does not exist.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::get(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, key : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Bytes?, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>]",
+          "loc": { "line": 58, "column": 15 }
+        },
+        {
+          "name": "get_keys",
+          "docstring": " Return a list of all the keys",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::get_keys(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[String], <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>]",
+          "loc": { "line": 201, "column": 15 }
+        },
+        {
+          "name": "open",
+          "docstring": " Open the store with the specified label.\n\n `label` must refer to a store allowed in the spin.toml manifest.\n\n `error::no-such-store` will be raised if the `label` is not recognized.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::open(label : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>]",
+          "loc": { "line": 26, "column": 15 }
+        },
+        {
+          "name": "set",
+          "docstring": " Set the `value` associated with the specified `key` overwriting any existing value.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>::set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, key : String, value : Bytes) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_\">Error_</a>]",
+          "loc": { "line": 99, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>) -> Bool",
+              "loc": { "line": 3, "column": 38 }
+            }
+          ],
+          "loc": { "line": 3, "column": 38 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store\">Store</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 3, "column": 32 }
+            }
+          ],
+          "loc": { "line": 3, "column": 32 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

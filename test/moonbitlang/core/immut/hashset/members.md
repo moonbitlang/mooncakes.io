@@ -13,21 +13,37 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,262:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/hashset#T">T</a> with arbitrary[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/hashset#T">T</a>[K]
+  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,250:::impl[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/hashset#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/hashset/HAMT.mbt,250:::fn op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], other : <a href="moonbitlang/core/immut/hashset#T">T</a>[A]) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,245:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/hashset#T">T</a> with hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,245:::impl[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>] <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/hashset#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/hashset/HAMT.mbt,245:::fn hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,250:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/hashset#T">T</a> with op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], other : <a href="moonbitlang/core/immut/hashset#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,218:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/hashset#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/hashset/HAMT.mbt,218:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,218:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/hashset#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,262:::impl[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/hashset#T">T</a>[K]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/hashset/HAMT.mbt,262:::fn arbitrary[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/hashset#T">T</a>[K]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -36,11 +52,6 @@
   ```
   > 
   >  Add a key to the hashset.
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,262:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::arbitrary[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/hashset#T">T</a>[K]
-  ```
-  > 
 - #### contains
   ```moonbit
   :::source,moonbitlang/core/immut/hashset/HAMT.mbt,44:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::contains[A : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], key : A) -> Bool
@@ -61,16 +72,6 @@
 - #### from\_iter
   ```moonbit
   :::source,moonbitlang/core/immut/hashset/HAMT.mbt,213:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::from_iter[A : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/immut/hashset#T">T</a>[A]
-  ```
-  > 
-- #### hash
-  ```moonbit
-  :::source,moonbitlang/core/immut/hashset/traits.mbt,40:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,245:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
   ```
   > 
 - #### is\_empty
@@ -95,16 +96,6 @@
   :::source,moonbitlang/core/immut/hashset/HAMT.mbt,234:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::of[A : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/hashset#T">T</a>[A]
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,250:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], other : <a href="moonbitlang/core/immut/hashset#T">T</a>[A]) -> Bool
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/immut/hashset/HAMT.mbt,218:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### remove
   ```moonbit
   :::source,moonbitlang/core/immut/hashset/HAMT.mbt,121:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::remove[A : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/hashset#T">T</a>[A], key : A) -> <a href="moonbitlang/core/immut/hashset#T">T</a>[A]
@@ -119,8 +110,3 @@
   >  Calculate the size of a set.
   > 
   >  WARNING: this operation is `O(N)` in set size
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/immut/hashset/traits.mbt,85:::fn <a href="moonbitlang/core/immut/hashset#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

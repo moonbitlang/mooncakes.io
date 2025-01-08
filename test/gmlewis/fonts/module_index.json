@@ -1,0 +1,464 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts",
+      "package": {
+        "path": "gmlewis/fonts",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "AbsoluteCmd",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Anchor",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Cmd",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Font",
+            "impls": [
+              { "methods": [ "op_equal" ] },
+              { "methods": [ "output" ] },
+              { "methods": [ "to_json" ] },
+              { "methods": [ "from_json" ] }
+            ],
+            "methods": [ "gen_path", "gen_paths" ]
+          },
+          {
+            "name": "FontError",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "GerberLP",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Glyph",
+            "impls": [
+              { "methods": [ "op_equal" ] },
+              { "methods": [ "output" ] },
+              { "methods": [ "to_json" ] },
+              { "methods": [ "from_json" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "ParamPair",
+            "impls": [ { "methods": [ "op_equal" ] } ],
+            "methods": [ "to_string" ]
+          },
+          {
+            "name": "Params",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": [ "length" ]
+          },
+          {
+            "name": "Path",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": [ "clone", "from_glyph", "to_glyph" ]
+          },
+          {
+            "name": "PathCmd",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": [ "bbox", "clone", "from_svg_cmd", "to_svg_cmd" ]
+          },
+          { "name": "PathCmdFn", "impls": [], "methods": [] },
+          {
+            "name": "Point",
+            "impls": [],
+            "methods": [
+              "div", "is_in", "mul", "op_add", "op_equal", "op_sub",
+              "to_string"
+            ]
+          },
+          {
+            "name": "Rectangle",
+            "impls": [],
+            "methods": [
+              "add", "bounds", "canon", "clone", "dx", "dy", "empty",
+              "extend", "inset", "intersect", "is_in", "new", "op_equal",
+              "overlaps", "size", "sub", "to_string", "union"
+            ]
+          }
+        ],
+        "typealias": [],
+        "values": [
+          "all_fonts", "glyph_bbox", "pt", "rect", "translate_path"
+        ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "canvas",
+          "package": {
+            "path": "gmlewis/fonts/canvas",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "CanvasCtx",
+                "impls": [],
+                "methods": [ "from_graphic", "get_input_bytes" ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "draw",
+          "package": {
+            "path": "gmlewis/fonts/draw",
+            "readme": false,
+            "traits": [
+              { "name": "@gmlewis/fonts/draw.Clonable", "impls": [] }
+            ],
+            "types": [
+              {
+                "name": "AffineMatrix",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "clone", "copy", "determinant", "from_center_scale",
+                  "from_rotation", "from_scale", "from_scale_scalar",
+                  "from_transform", "from_translation",
+                  "from_translation_points", "invert", "is_identity",
+                  "is_inf", "is_invertible", "is_mirror", "is_nan",
+                  "is_orthogonal", "is_uniform_scale", "mul",
+                  "mul_without_translation", "new", "normalize", "op_mul",
+                  "origin", "pre_mul", "pre_mul_without_translation",
+                  "rotate", "scale", "scale_scalar", "skew", "to_transform",
+                  "translate"
+                ]
+              },
+              {
+                "name": "Anchor",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "affine_transform", "affine_transform_without_translation",
+                  "all_anchors", "bounding_box", "clone", "closest_point",
+                  "has_tangent_handles", "has_zero_handles",
+                  "is_contained_by_bounding_box",
+                  "is_intersected_by_bounding_box",
+                  "is_overlapped_by_bounding_box", "loose_bounding_box",
+                  "new", "reverse", "transform"
+                ]
+              },
+              {
+                "name": "BoundingBox",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "area", "boolean_intersect", "canonicalize", "center",
+                  "clone", "contains_bounding_box", "contains_point",
+                  "expand_scalar", "expand_to_include_bounding_box",
+                  "expand_to_include_point", "from_points", "height",
+                  "is_inf", "is_nan", "max_reversed", "new",
+                  "overlaps_bounding_box", "size", "width"
+                ]
+              },
+              {
+                "name": "Color",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "as_fill", "clone", "from_css_string", "from_hsva",
+                  "from_rgb8_number", "luminance", "mix", "new", "set",
+                  "to_css_hex_string", "to_css_rgba_string", "to_css_string",
+                  "to_hsva", "to_rgb8_number"
+                ]
+              },
+              {
+                "name": "CompoundPath",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "affine_transform", "affine_transform_without_translation",
+                  "all_anchors", "as_graphic", "assign_fill",
+                  "assign_stroke", "assign_style", "bounding_box", "clone",
+                  "closest_point", "contains_point", "copy_style",
+                  "first_styled", "has_style",
+                  "is_contained_by_bounding_box",
+                  "is_intersected_by_bounding_box",
+                  "is_overlapped_by_bounding_box", "loose_bounding_box",
+                  "new", "op_get", "op_set", "primitives", "remove_fill",
+                  "remove_stroke", "reverse", "rotate", "scale",
+                  "scale_stroke", "style_contains_point", "transform",
+                  "translate"
+                ]
+              },
+              {
+                "name": "DrawError",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Fill",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [ "clone", "new" ]
+              },
+              {
+                "name": "Graphic",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "affine_transform", "affine_transform_without_translation",
+                  "all_anchors", "all_compound_paths", "all_paths",
+                  "all_paths_and_compound_paths", "assign_fill",
+                  "assign_stroke", "assign_style", "bounding_box", "clone",
+                  "closest_point", "contains_point", "copy_style", "every",
+                  "first_fill", "first_stroke", "first_styled", "fit_to",
+                  "has_style", "is_contained_by_bounding_box",
+                  "is_intersected_by_bounding_box",
+                  "is_overlapped_by_bounding_box", "loose_bounding_box",
+                  "primitives", "remove_fill", "remove_stroke", "reverse",
+                  "rotate", "scale", "scale_stroke", "some",
+                  "style_contains_point", "to_json", "transform", "translate"
+                ]
+              },
+              {
+                "name": "Group",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "affine_transform", "affine_transform_without_translation",
+                  "all_anchors", "all_compound_paths", "all_paths",
+                  "all_paths_and_compound_paths", "as_graphic",
+                  "assign_fill", "assign_stroke", "assign_style",
+                  "bounding_box", "clone", "closest_point", "contains_point",
+                  "copy_style", "first_fill", "first_stroke", "first_styled",
+                  "has_style", "is_contained_by_bounding_box",
+                  "is_intersected_by_bounding_box",
+                  "is_overlapped_by_bounding_box", "loose_bounding_box",
+                  "new", "op_get", "op_set", "primitives", "remove_fill",
+                  "remove_stroke", "reverse", "rotate", "scale",
+                  "scale_stroke", "style_contains_point", "transform",
+                  "translate"
+                ]
+              },
+              {
+                "name": "Path",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "affine_transform", "affine_transform_without_translation",
+                  "as_graphic", "assign_fill", "assign_stroke",
+                  "assign_style", "bounding_box", "clone", "closest_point",
+                  "contains_point", "copy_style", "first_styled",
+                  "from_points", "has_style", "is_contained_by_bounding_box",
+                  "is_intersected_by_bounding_box",
+                  "is_overlapped_by_bounding_box", "loose_bounding_box",
+                  "new", "op_get", "op_set", "primitives", "remove_fill",
+                  "remove_stroke", "reverse", "rotate", "scale",
+                  "scale_stroke", "style_contains_point", "transform",
+                  "translate"
+                ]
+              },
+              {
+                "name": "Stroke",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [ "clone", "new" ]
+              },
+              {
+                "name": "StrokeAlignment",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "StrokeCap",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "StrokeJoin",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TextAlign",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Transform",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "new" ]
+              },
+              {
+                "name": "Vec2",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "from_json" ] }
+                ],
+                "methods": [
+                  "add", "add_scalar", "affine_transform",
+                  "affine_transform_without_translation", "almost_equals",
+                  "angle", "angle_radians", "apply", "ceil", "clone", "copy",
+                  "cross", "distance", "distance_squared", "div",
+                  "div_scalar", "dot", "floor", "from_angle",
+                  "from_angle_radians", "infinity", "is_clockwise_from",
+                  "is_inf", "is_nan", "is_valid", "is_zero", "length",
+                  "length_squared", "max", "min", "mix", "mul", "mul_scalar",
+                  "neg_infinity", "negate", "new", "normalize", "op_add",
+                  "op_div", "op_mul", "op_neg", "op_sub", "project_onto",
+                  "rotate", "rotate90", "rotate_neg90", "rotate_radians",
+                  "round", "round_to_fixed", "round_to_multiple", "set",
+                  "sub", "sub_scalar", "transform"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "bbox", "fill", "group", "rgba", "stroke", "text",
+              "unit_circle", "unit_square", "vec2"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "examples",
+          "package": null,
+          "childs": [
+            {
+              "name": "canvas-checkerboard",
+              "package": {
+                "path": "gmlewis/fonts/examples/canvas-checkerboard",
+                "readme": false,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "draw" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "checkerboard",
+              "package": {
+                "path": "gmlewis/fonts/examples/checkerboard",
+                "readme": false,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [ "checkerboard" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "svg-checkerboard",
+              "package": {
+                "path": "gmlewis/fonts/examples/svg-checkerboard",
+                "readme": false,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "svg",
+          "package": {
+            "path": "gmlewis/fonts/svg",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "from_graphic" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

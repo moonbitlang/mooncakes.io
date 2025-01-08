@@ -24,8 +24,8 @@
 pub(all) struct Label {
   meta : Meta
   key : LabelKey
-  text : List[Tight]
-} derive(Show, FromJson, ToJson)
+  text : Seq[Tight]
+} derive(Show, ToJson)
 
 ///| The type for label keys. These are
 /// [link labels](https://spec.commonmark.org/0.30/#link-label)
@@ -33,13 +33,13 @@ pub(all) struct Label {
 pub(all) typealias LabelKey = String
 
 ///|
-pub(all) typealias LabelMap[V] = @immut/sorted_map.T[LabelKey, V]
+pub(all) typealias LabelMap[V] = Map[LabelKey, V]
 
 ///|
 pub fn Label::new(
   meta~ : Meta = Meta::none(),
   key~ : String,
-  text : List[Tight]
+  text : Seq[Tight]
 ) -> Label {
   { meta, key, text }
 }
@@ -66,7 +66,7 @@ pub(all) enum LabelDef {
 } derive(Show, ToJson)
 
 ///|
-pub(all) typealias LabelDefs = @immut/sorted_map.T[LabelKey, LabelDef]
+pub(all) typealias LabelDefs = Map[LabelKey, LabelDef]
 
 ///| `context` is:
 /// - `Def (prev, current)` when we just hit a

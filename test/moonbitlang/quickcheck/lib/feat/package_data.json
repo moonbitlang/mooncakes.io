@@ -1,0 +1,338 @@
+{
+  "readme": "",
+  "name": "moonbitlang/quickcheck/lib/feat",
+  "traits": [
+    {
+      "name": "@moonbitlang/quickcheck/lib/feat.Enumerable",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/quickcheck/lib/feat.Enumerable {\n  enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[Self]\n}",
+      "loc": { "line": 1, "column": 1 },
+      "default_impls": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for Unit",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[Unit]",
+              "loc": { "line": 61, "column": 35 }
+            }
+          ],
+          "loc": { "line": 61, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for Bool",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[Bool]",
+              "loc": { "line": 5, "column": 35 }
+            }
+          ],
+          "loc": { "line": 5, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for Int",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[Int]",
+              "loc": { "line": 9, "column": 34 }
+            }
+          ],
+          "loc": { "line": 9, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for Int64",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[Int64]",
+              "loc": { "line": 19, "column": 36 }
+            }
+          ],
+          "loc": { "line": 19, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for UInt",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[UInt]",
+              "loc": { "line": 29, "column": 35 }
+            }
+          ],
+          "loc": { "line": 29, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for UInt64",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[UInt64]",
+              "loc": { "line": 33, "column": 37 }
+            }
+          ],
+          "loc": { "line": 33, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[E : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for E?",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate[E : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[E?]",
+              "loc": { "line": 49, "column": 49 }
+            }
+          ],
+          "loc": { "line": 49, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>, E : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate[T : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>, E : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[<a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]]",
+              "loc": { "line": 53, "column": 75 }
+            }
+          ],
+          "loc": { "line": 53, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[E : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[E]",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate[E : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[<a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[E]]",
+              "loc": { "line": 37, "column": 63 }
+            }
+          ],
+          "loc": { "line": 37, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>, B : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a> for (A, B)",
+          "methods": [
+            {
+              "name": "enumerate",
+              "docstring": "",
+              "signature": "fn enumerate[A : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>, B : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[(A, B)]",
+              "loc": { "line": 45, "column": 69 }
+            }
+          ],
+          "loc": { "line": 45, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Enumerate",
+      "docstring": "",
+      "signature": "pub(all) struct Enumerate {\n  parts : <a href=\"moonbitlang/quickcheck/lib/lazy#LazyList\">@moonbitlang/quickcheck/lib/lazy.LazyList</a>[<a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]]\n}",
+      "loc": { "line": 1, "column": 17 },
+      "methods": [
+        {
+          "name": "en_index",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>::en_index[T](self : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T], idx : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>) -> T",
+          "loc": { "line": 21, "column": 8 }
+        },
+        {
+          "name": "eval",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>::eval[T](self : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/lazy#LazyList\">@moonbitlang/quickcheck/lib/lazy.LazyList</a>[<a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]]",
+          "loc": { "line": 5, "column": 8 }
+        },
+        {
+          "name": "fmap",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>::fmap[T, U](self : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T], f : (T) -> U) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[U]",
+          "loc": { "line": 42, "column": 8 }
+        },
+        {
+          "name": "op_add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>::op_add[T](self : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T], other : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+          "loc": { "line": 38, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Finite",
+      "docstring": "",
+      "signature": "pub(all) struct Finite {\n  fCard : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>\n  fIndex : (<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>) -> T\n}",
+      "loc": { "line": 1, "column": 17 },
+      "methods": [
+        {
+          "name": "op_add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>::op_add[T](self : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T], other : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]",
+          "loc": { "line": 29, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>::output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 103, "column": 8 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>::to_array[T](self : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]) -> (<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/quickcheck/lib/lazy#LazyList\">@moonbitlang/quickcheck/lib/lazy.LazyList</a>[T])",
+          "loc": { "line": 88, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>::to_string[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]) -> String",
+          "loc": { "line": 99, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "LazyList",
+      "docstring": "",
+      "signature": "type LazyList = <a href=\"moonbitlang/quickcheck/lib/lazy#LazyList\">@moonbitlang/quickcheck/lib/lazy.LazyList</a>[T]",
+      "loc": { "line": 1, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "app",
+      "docstring": "",
+      "signature": "fn app[T, U](f : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[(T) -> U], e : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[U]",
+      "loc": { "line": 61, "column": 8 }
+    },
+    {
+      "name": "consts",
+      "docstring": "",
+      "signature": "fn consts[T](ls : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[<a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+      "loc": { "line": 65, "column": 8 }
+    },
+    {
+      "name": "default",
+      "docstring": "",
+      "signature": "fn default[T]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+      "loc": { "line": 13, "column": 8 }
+    },
+    {
+      "name": "empty",
+      "docstring": "",
+      "signature": "fn empty[T]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+      "loc": { "line": 9, "column": 8 }
+    },
+    {
+      "name": "fin_app",
+      "docstring": "",
+      "signature": "fn fin_app[M, N](f : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[(M) -> N], e : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[M]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[N]",
+      "loc": { "line": 55, "column": 8 }
+    },
+    {
+      "name": "fin_bind",
+      "docstring": "",
+      "signature": "fn fin_bind[M, N](m : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[M], f : (M) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[N]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[N]",
+      "loc": { "line": 59, "column": 8 }
+    },
+    {
+      "name": "fin_cart",
+      "docstring": "",
+      "signature": "fn fin_cart[T, U](f1 : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T], f2 : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[U]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[(T, U)]",
+      "loc": { "line": 44, "column": 8 }
+    },
+    {
+      "name": "fin_concat",
+      "docstring": "",
+      "signature": "fn fin_concat[M](m : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[M]]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[M]",
+      "loc": { "line": 77, "column": 8 }
+    },
+    {
+      "name": "fin_empty",
+      "docstring": "",
+      "signature": "fn fin_empty[T]() -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]",
+      "loc": { "line": 6, "column": 8 }
+    },
+    {
+      "name": "fin_finite",
+      "docstring": "",
+      "signature": "fn fin_finite(i : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>]",
+      "loc": { "line": 107, "column": 8 }
+    },
+    {
+      "name": "fin_fmap",
+      "docstring": "",
+      "signature": "fn fin_fmap[T, U](f : (T) -> U, f1 : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[U]",
+      "loc": { "line": 33, "column": 8 }
+    },
+    {
+      "name": "fin_mconcat",
+      "docstring": "",
+      "signature": "fn fin_mconcat[M](val : <a href=\"moonbitlang/quickcheck/lib/lazy#LazyList\">@moonbitlang/quickcheck/lib/lazy.LazyList</a>[<a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[M]]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[M]",
+      "loc": { "line": 84, "column": 8 }
+    },
+    {
+      "name": "fin_pure",
+      "docstring": "",
+      "signature": "fn fin_pure[T](x : T) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]",
+      "loc": { "line": 37, "column": 8 }
+    },
+    {
+      "name": "fin_union",
+      "docstring": "",
+      "signature": "fn fin_union[T](f1 : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T], f2 : <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Finite\">Finite</a>[T]",
+      "loc": { "line": 10, "column": 8 }
+    },
+    {
+      "name": "pay",
+      "docstring": "",
+      "signature": "fn pay[T](f : () -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+      "loc": { "line": 46, "column": 8 }
+    },
+    {
+      "name": "product",
+      "docstring": "",
+      "signature": "fn product[T, U](e1 : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T], e2 : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[U]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[(T, U)]",
+      "loc": { "line": 50, "column": 8 }
+    },
+    {
+      "name": "singleton",
+      "docstring": "",
+      "signature": "fn singleton[T](val : T) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+      "loc": { "line": 17, "column": 8 }
+    },
+    {
+      "name": "unary",
+      "docstring": "",
+      "signature": "fn unary[T : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerable\">Enumerable</a>, U](f : (T) -> U) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[U]",
+      "loc": { "line": 69, "column": 8 }
+    },
+    {
+      "name": "union",
+      "docstring": "",
+      "signature": "fn union[T](e1 : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T], e2 : <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]) -> <a href=\"moonbitlang/quickcheck/lib/feat#Enumerate\">Enumerate</a>[T]",
+      "loc": { "line": 34, "column": 8 }
+    }
+  ],
+  "misc": []
+}

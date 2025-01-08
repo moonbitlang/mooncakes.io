@@ -1,0 +1,9 @@
+{
+  "name": "Yoorkin/format",
+  "version": "0.1.5",
+  "readme": "README.md",
+  "repository": "https://github.com/Yoorkin/format-mbt",
+  "license": "Apache-2.0",
+  "keywords": ["format", "utils"],
+  "description": "simple printf utils"
+}

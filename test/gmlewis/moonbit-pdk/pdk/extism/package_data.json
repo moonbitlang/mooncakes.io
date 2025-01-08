@@ -1,0 +1,136 @@
+{
+  "readme": "",
+  "name": "gmlewis/moonbit-pdk/pdk/extism",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "alloc",
+      "docstring": " `alloc` allocates `length` bytes of data with host memory for use by the plugin\n and returns its `offset` within the host memory block.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn alloc(length : Int64) -> Int64",
+      "loc": { "line": 24, "column": 8 }
+    },
+    {
+      "name": "config_get",
+      "docstring": " `config_get` returns the host memory block offset for the \"config\" data associated with\n the key which is represented by the UTF-8 string which as been previously\n written at `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn config_get(offset : Int64) -> Int64",
+      "loc": { "line": 44, "column": 8 }
+    },
+    {
+      "name": "error_set",
+      "docstring": " `error_set` sets the \"error\" data from the plugin to the host to be the memory that\n has been written at `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn error_set(offset : Int64) -> Unit",
+      "loc": { "line": 38, "column": 8 }
+    },
+    {
+      "name": "free",
+      "docstring": " `free` releases the bytes previously allocated with `alloc` at the given `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn free(offset : Int64) -> Unit",
+      "loc": { "line": 28, "column": 8 }
+    },
+    {
+      "name": "http_request",
+      "docstring": " `http_request` sends the HTTP request to the Extism host and returns back the\n memory offset to the response body.",
+      "signature": "fn http_request(req : Int64, body : Int64) -> Int64",
+      "loc": { "line": 81, "column": 8 }
+    },
+    {
+      "name": "http_status_code",
+      "docstring": " `http_status_code` returns the status code for the last-sent `http_request` call.",
+      "signature": "fn http_status_code() -> Int",
+      "loc": { "line": 84, "column": 8 }
+    },
+    {
+      "name": "input_length",
+      "docstring": " `input_length` returns the number of (unprocessed) bytes provided by the host via its input methods.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn input_length() -> Int64",
+      "loc": { "line": 3, "column": 8 }
+    },
+    {
+      "name": "input_load_u64",
+      "docstring": " `input_load_u64` returns the 64-bit unsigned integer of the \"input\" data from the host.\n Note that MoonBit has no unsigned integers,\n so the result is returned as an Int64.\n Also note that `offset` must lie on an 8-byte boundary.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn input_load_u64(offset : Int64) -> Int64",
+      "loc": { "line": 14, "column": 8 }
+    },
+    {
+      "name": "input_load_u8",
+      "docstring": " `input_load_u8` returns the byte at location `offset` of the \"input\" data from the host.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn input_load_u8(offset : Int64) -> Byte",
+      "loc": { "line": 7, "column": 8 }
+    },
+    {
+      "name": "length",
+      "docstring": " `length` returns the number of bytes associated with the block of host memory\n located at `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn length(offset : Int64) -> Int64",
+      "loc": { "line": 19, "column": 8 }
+    },
+    {
+      "name": "load_u64",
+      "docstring": " `load_u64` returns the 64-bit unsigned integer at location `offset` in the host memory block.\n Note that MoonBit has no unsigned integers,\n so the result is returned as an Int64.\n Also note that `offset` must lie on an 8-byte boundary.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn load_u64(offset : Int64) -> Int64",
+      "loc": { "line": 77, "column": 8 }
+    },
+    {
+      "name": "load_u8",
+      "docstring": " `load_u8` returns the Byte located at `offset` in the host memory block.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn load_u8(offset : Int64) -> Byte",
+      "loc": { "line": 63, "column": 8 }
+    },
+    {
+      "name": "log_debug",
+      "docstring": " `log_debug` logs a \"debug\" string to the host from the previously-written UTF-8 string written to `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn log_debug(offset : Int64) -> Unit",
+      "loc": { "line": 96, "column": 8 }
+    },
+    {
+      "name": "log_error",
+      "docstring": " `log_error` logs an \"error\" string to the host from the previously-written UTF-8 string written to `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn log_error(offset : Int64) -> Unit",
+      "loc": { "line": 100, "column": 8 }
+    },
+    {
+      "name": "log_info",
+      "docstring": " `log_info` logs an \"info\" string to the host from the previously-written UTF-8 string written to `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn log_info(offset : Int64) -> Unit",
+      "loc": { "line": 92, "column": 8 }
+    },
+    {
+      "name": "log_warn",
+      "docstring": " `log_warn` logs a \"warning\" string to the host from the previously-written UTF-8 string written to `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn log_warn(offset : Int64) -> Unit",
+      "loc": { "line": 88, "column": 8 }
+    },
+    {
+      "name": "output_set",
+      "docstring": " `output_set` sets the \"output\" data from the plugin to the host to be the memory that\n has been written at `offset` with the given `length`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn output_set(offset : Int64, length : Int64) -> Unit",
+      "loc": { "line": 33, "column": 8 }
+    },
+    {
+      "name": "store_u64",
+      "docstring": " `store_u64` stores the Int64 value `v` at location `offset` in the host memory block.\n Note that MoonBit does not have unsigned integers, but the host interprets\n the provided `v` value as an unsigned 64-bit integer.\n Also note that `offset` must lie on an 8-byte boundary.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn store_u64(offset : Int64, v : Int64) -> Unit",
+      "loc": { "line": 70, "column": 8 }
+    },
+    {
+      "name": "store_u8",
+      "docstring": " `store_u8` stores the Byte `b` at location `offset` in the host memory block.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn store_u8(offset : Int64, b : Byte) -> Unit",
+      "loc": { "line": 59, "column": 8 }
+    },
+    {
+      "name": "var_get",
+      "docstring": " `var_get` returns the host memory block offset for the \"var\" data associated with\n the key which is represented by the UTF-8 string which as been previously\n written at `offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn var_get(offset : Int64) -> Int64",
+      "loc": { "line": 50, "column": 8 }
+    },
+    {
+      "name": "var_set",
+      "docstring": " `var_set` sets the host \"var\" memory keyed by the UTF-8 string located at `offset`\n to be the value which has been previously written at `value_offset`.\n The user of this PDK will typically not call this method directly.",
+      "signature": "fn var_set(offset : Int64, value_offset : Int64) -> Unit",
+      "loc": { "line": 55, "column": 8 }
+    }
+  ],
+  "misc": []
+}

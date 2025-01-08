@@ -181,25 +181,21 @@ rotate: rotate the sprite anti-clockwise 90 degrees, applied after any flipping
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,81:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/wasm4#GamePad">GamePad</a> with default() -> <a href="moonbitlang/wasm4#GamePad">GamePad</a>
+  :::source,moonbitlang/wasm4/memory.mbt,81:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/wasm4#GamePad">GamePad</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/wasm4/memory.mbt,81:::fn default() -> <a href="moonbitlang/wasm4#GamePad">GamePad</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,81:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/wasm4#GamePad">GamePad</a> with op_equal(<a href="moonbitlang/wasm4#GamePad">GamePad</a>, <a href="moonbitlang/wasm4#GamePad">GamePad</a>) -> Bool
+  :::source,moonbitlang/wasm4/memory.mbt,81:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/wasm4#GamePad">GamePad</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### default
-  ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,81:::fn <a href="moonbitlang/wasm4#GamePad">GamePad</a>::default() -> <a href="moonbitlang/wasm4#GamePad">GamePad</a>
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,81:::fn <a href="moonbitlang/wasm4#GamePad">GamePad</a>::op_equal(<a href="moonbitlang/wasm4#GamePad">GamePad</a>, <a href="moonbitlang/wasm4#GamePad">GamePad</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/wasm4/memory.mbt,81:::fn op_equal(<a href="moonbitlang/wasm4#GamePad">GamePad</a>, <a href="moonbitlang/wasm4#GamePad">GamePad</a>) -> Bool
+    ```
+    > automatically derived
 
 ## Mouse
 
@@ -216,25 +212,21 @@ rotate: rotate the sprite anti-clockwise 90 degrees, applied after any flipping
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,109:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/wasm4#Mouse">Mouse</a> with default() -> <a href="moonbitlang/wasm4#Mouse">Mouse</a>
+  :::source,moonbitlang/wasm4/memory.mbt,109:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/wasm4#Mouse">Mouse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/wasm4/memory.mbt,109:::fn default() -> <a href="moonbitlang/wasm4#Mouse">Mouse</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,109:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/wasm4#Mouse">Mouse</a> with op_equal(<a href="moonbitlang/wasm4#Mouse">Mouse</a>, <a href="moonbitlang/wasm4#Mouse">Mouse</a>) -> Bool
+  :::source,moonbitlang/wasm4/memory.mbt,109:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/wasm4#Mouse">Mouse</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### default
-  ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,109:::fn <a href="moonbitlang/wasm4#Mouse">Mouse</a>::default() -> <a href="moonbitlang/wasm4#Mouse">Mouse</a>
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/wasm4/memory.mbt,109:::fn <a href="moonbitlang/wasm4#Mouse">Mouse</a>::op_equal(<a href="moonbitlang/wasm4#Mouse">Mouse</a>, <a href="moonbitlang/wasm4#Mouse">Mouse</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/wasm4/memory.mbt,109:::fn op_equal(<a href="moonbitlang/wasm4#Mouse">Mouse</a>, <a href="moonbitlang/wasm4#Mouse">Mouse</a>) -> Bool
+    ```
+    > automatically derived
 
 ## Netplay
 

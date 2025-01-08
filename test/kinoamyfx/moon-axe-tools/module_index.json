@@ -1,0 +1,33 @@
+{
+  "name": "kinoamyfx",
+  "package": null,
+  "childs": [
+    {
+      "name": "moon-axe-tools",
+      "package": {
+        "path": "kinoamyfx/moon-axe-tools",
+        "readme": false,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [ "greeting" ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "kinoamyfx/moon-axe-tools/lib",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "hello" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

@@ -30,21 +30,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,Yoorkin/rabbit-tea/example/edit.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a> with output(<a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/example/edit.mbt,13:::fn <a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a>::output(<a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/example/traits.mbt,85:::fn <a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,Yoorkin/rabbit-tea/example/edit.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a>
   ```
   > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/example/edit.mbt,13:::fn output(<a href="Yoorkin/rabbit-tea/example#EditMsg">EditMsg</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Message
 
@@ -55,21 +47,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,Yoorkin/rabbit-tea/example/main.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/example#Message">Message</a> with output(<a href="Yoorkin/rabbit-tea/example#Message">Message</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/example/main.mbt,10:::fn <a href="Yoorkin/rabbit-tea/example#Message">Message</a>::output(<a href="Yoorkin/rabbit-tea/example#Message">Message</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/example/traits.mbt,85:::fn <a href="Yoorkin/rabbit-tea/example#Message">Message</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,Yoorkin/rabbit-tea/example/main.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/example#Message">Message</a>
   ```
   > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/example/main.mbt,10:::fn output(<a href="Yoorkin/rabbit-tea/example#Message">Message</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Model
 

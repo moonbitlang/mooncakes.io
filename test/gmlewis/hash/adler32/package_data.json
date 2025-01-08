@@ -1,0 +1,80 @@
+{
+  "readme": "",
+  "name": "gmlewis/hash/adler32",
+  "traits": [],
+  "types": [
+    {
+      "name": "Digest",
+      "docstring": "",
+      "signature": "type Digest",
+      "loc": { "line": 38, "column": 8 },
+      "methods": [
+        {
+          "name": "block_size",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::block_size(_self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>) -> Int",
+          "loc": { "line": 67, "column": 16 }
+        },
+        {
+          "name": "marshal_binary",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::marshal_binary(self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>) -> (<a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte], <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+          "loc": { "line": 78, "column": 8 }
+        },
+        {
+          "name": "reset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::reset(self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>) -> Unit",
+          "loc": { "line": 43, "column": 8 }
+        },
+        {
+          "name": "size",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::size(_self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>) -> Int",
+          "loc": { "line": 62, "column": 16 }
+        },
+        {
+          "name": "sum",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::sum(self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>, p : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 158, "column": 8 }
+        },
+        {
+          "name": "sum32",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::sum32(self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>) -> UInt",
+          "loc": { "line": 153, "column": 8 }
+        },
+        {
+          "name": "unmarshal_binary",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::unmarshal_binary(self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>, b : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?",
+          "loc": { "line": 106, "column": 8 }
+        },
+        {
+          "name": "write",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>::write(self : <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>, p : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+          "loc": { "line": 119, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "checksum",
+      "docstring": "",
+      "signature": "fn checksum(data : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> UInt",
+      "loc": { "line": 170, "column": 8 }
+    },
+    {
+      "name": "new",
+      "docstring": "",
+      "signature": "fn new() -> <a href=\"gmlewis/hash/adler32#Digest\">Digest</a>",
+      "loc": { "line": 53, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,93 @@
+{
+  "readme": "",
+  "name": "gmlewis/image/png",
+  "traits": [],
+  "types": [
+    {
+      "name": "Decoder",
+      "docstring": "",
+      "signature": "type Decoder",
+      "loc": { "line": 161, "column": 8 },
+      "methods": [
+        {
+          "name": "read",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/png#Decoder\">Decoder</a>::read(self : <a href=\"gmlewis/image/png#Decoder\">Decoder</a>, p : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+          "loc": { "line": 457, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Encoder",
+      "docstring": "",
+      "signature": "type Encoder",
+      "loc": { "line": 10, "column": 8 },
+      "methods": [
+        {
+          "name": "enc",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/png#Encoder\">Encoder</a>::enc(self : <a href=\"gmlewis/image/png#Encoder\">Encoder</a>, w : <a href=\"gmlewis/io#Writer\">@gmlewis/io.Writer</a>, m : <a href=\"gmlewis/image#Image\">@gmlewis/image.Image</a>) -> <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?",
+          "loc": { "line": 553, "column": 8 }
+        },
+        {
+          "name": "write",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image/png#Encoder\">Encoder</a>::write(self : <a href=\"gmlewis/image/png#Encoder\">Encoder</a>, b : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+          "loc": { "line": 182, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "InterlaceScan",
+      "docstring": "",
+      "signature": "type InterlaceScan",
+      "loc": { "line": 113, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ReaderSize",
+      "docstring": "",
+      "signature": "type ReaderSize",
+      "loc": { "line": 15, "column": 8 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "chunk_order_error",
+      "docstring": "",
+      "signature": "let chunk_order_error : <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>",
+      "loc": { "line": 218, "column": 9 }
+    },
+    {
+      "name": "decode",
+      "docstring": "",
+      "signature": "fn decode(r : <a href=\"gmlewis/io#Reader\">@gmlewis/io.Reader</a>) -> (<a href=\"gmlewis/image#Image\">@gmlewis/image.Image</a>, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+      "loc": { "line": 1236, "column": 8 }
+    },
+    {
+      "name": "decode_config",
+      "docstring": "",
+      "signature": "fn decode_config(r : <a href=\"gmlewis/io#Reader\">@gmlewis/io.Reader</a>) -> (<a href=\"gmlewis/image#Config\">@gmlewis/image.Config</a>, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+      "loc": { "line": 1260, "column": 8 }
+    },
+    {
+      "name": "encode",
+      "docstring": "",
+      "signature": "fn encode(w : <a href=\"gmlewis/io#Writer\">@gmlewis/io.Writer</a>, m : <a href=\"gmlewis/image#Image\">@gmlewis/image.Image</a>) -> <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?",
+      "loc": { "line": 546, "column": 8 }
+    },
+    {
+      "name": "err_negative_read",
+      "docstring": "",
+      "signature": "let err_negative_read : <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>",
+      "loc": { "line": 57, "column": 9 }
+    }
+  ],
+  "misc": []
+}

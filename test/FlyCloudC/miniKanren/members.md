@@ -71,30 +71,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,FlyCloudC/miniKanren/val.mbt,10:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="FlyCloudC/miniKanren#Val">Val</a> with op_equal(<a href="FlyCloudC/miniKanren#Val">Val</a>, <a href="FlyCloudC/miniKanren#Val">Val</a>) -> Bool
+  :::source,FlyCloudC/miniKanren/val.mbt,10:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="FlyCloudC/miniKanren#Val">Val</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,FlyCloudC/miniKanren/val.mbt,10:::fn op_equal(<a href="FlyCloudC/miniKanren#Val">Val</a>, <a href="FlyCloudC/miniKanren#Val">Val</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,FlyCloudC/miniKanren/val.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="FlyCloudC/miniKanren#Val">Val</a> with output(self : <a href="FlyCloudC/miniKanren#Val">Val</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,FlyCloudC/miniKanren/val.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="FlyCloudC/miniKanren#Val">Val</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,FlyCloudC/miniKanren/val.mbt,10:::fn <a href="FlyCloudC/miniKanren#Val">Val</a>::op_equal(<a href="FlyCloudC/miniKanren#Val">Val</a>, <a href="FlyCloudC/miniKanren#Val">Val</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,FlyCloudC/miniKanren/val.mbt,57:::fn <a href="FlyCloudC/miniKanren#Val">Val</a>::output(self : <a href="FlyCloudC/miniKanren#Val">Val</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,FlyCloudC/miniKanren/traits.mbt,85:::fn <a href="FlyCloudC/miniKanren#Val">Val</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,FlyCloudC/miniKanren/val.mbt,57:::fn output(self : <a href="FlyCloudC/miniKanren#Val">Val</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## VarId
 
@@ -105,16 +96,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,FlyCloudC/miniKanren/val.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="FlyCloudC/miniKanren#VarId">VarId</a> with op_equal(<a href="FlyCloudC/miniKanren#VarId">VarId</a>, <a href="FlyCloudC/miniKanren#VarId">VarId</a>) -> Bool
+  :::source,FlyCloudC/miniKanren/val.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="FlyCloudC/miniKanren#VarId">VarId</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,FlyCloudC/miniKanren/val.mbt,2:::fn <a href="FlyCloudC/miniKanren#VarId">VarId</a>::op_equal(<a href="FlyCloudC/miniKanren#VarId">VarId</a>, <a href="FlyCloudC/miniKanren#VarId">VarId</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,FlyCloudC/miniKanren/val.mbt,2:::fn op_equal(<a href="FlyCloudC/miniKanren#VarId">VarId</a>, <a href="FlyCloudC/miniKanren#VarId">VarId</a>) -> Bool
+    ```
+    > automatically derived
 
 ## appendo
 

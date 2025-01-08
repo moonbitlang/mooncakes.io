@@ -1,0 +1,38 @@
+{
+  "name": "wstreet",
+  "package": null,
+  "childs": [
+    {
+      "name": "moontest",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "wstreet/moontest/lib",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "hello" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "wstreet/moontest/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

@@ -32,21 +32,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/parser/context.mbt,17:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a> with output(<a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/parser/context.mbt,17:::fn <a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a>::output(<a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/parser/traits.mbt,85:::fn <a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,oboard/moonbit-eval/parser/context.mbt,17:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/parser/context.mbt,17:::fn output(<a href="oboard/moonbit-eval/parser#ParserContext">ParserContext</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## parse\_syntax
 

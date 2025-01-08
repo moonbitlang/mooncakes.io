@@ -1,8 +1,8 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Color](#Color)| Color can convert itself to alpha-premultiplied 16-bits per channel RGBA.|
-|[Model](#Model)| Model can convert any \[\&Color\] to one from its own color model. The conversion|
+|[@gmlewis/image/color.Color](#@gmlewis/image/color.Color)| Color can convert itself to alpha-premultiplied 16-bits per channel RGBA.|
+|[@gmlewis/image/color.Model](#@gmlewis/image/color.Model)| Model can convert any \[\&Color\] to one from its own color model. The conversion|
 
 |Type|description|
 |---|---|
@@ -44,10 +44,10 @@
 |[y\_cb\_cr\_model](#y_cb_cr_model)| y\_cb\_cr\_model is the \[Model\] for Y'CbCr colors.|
 |[y\_cb\_cr\_to\_rgb](#y_cb_cr_to_rgb)| y\_cb\_cr\_to\_rgb converts a Y'CbCr triple to an RGB triple.|
 
-## Color
+## @gmlewis/image/color.Color
 
 ```moonbit
-:::source,gmlewis/image/color/color.mbt,12:::pub(open) trait Color {
+:::source,gmlewis/image/color/color.mbt,12:::pub(open) trait @gmlewis/image/color.Color {
   rgba(Self) -> (UInt, UInt, UInt, UInt)
   model(Self) -> String
   raw(Self) -> (UInt, UInt, UInt, UInt)
@@ -56,10 +56,10 @@
  Color can convert itself to alpha-premultiplied 16-bits per channel RGBA.
 The conversion may be lossy.
 
-## Model
+## @gmlewis/image/color.Model
 
 ```moonbit
-:::source,gmlewis/image/color/color.mbt,317:::pub(open) trait Model {
+:::source,gmlewis/image/color/color.mbt,317:::pub(open) trait @gmlewis/image/color.Model {
   convert(Self, <a href="gmlewis/image/color#Color">Color</a>) -> <a href="gmlewis/image/color#Color">Color</a>
   name(Self) -> String
   get_palette(Self) -> <a href="gmlewis/image/color#Palette">Palette</a>?
@@ -79,13 +79,21 @@ may be lossy.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,201:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Alpha">Alpha</a> with op_equal(<a href="gmlewis/image/color#Alpha">Alpha</a>, <a href="gmlewis/image/color#Alpha">Alpha</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,201:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Alpha">Alpha</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,201:::fn op_equal(<a href="gmlewis/image/color#Alpha">Alpha</a>, <a href="gmlewis/image/color#Alpha">Alpha</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,201:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Alpha">Alpha</a> with output(<a href="gmlewis/image/color#Alpha">Alpha</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,201:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Alpha">Alpha</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,201:::fn output(<a href="gmlewis/image/color#Alpha">Alpha</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -103,16 +111,6 @@ may be lossy.
   :::source,gmlewis/image/color/color.mbt,207:::fn <a href="gmlewis/image/color#Alpha">Alpha</a>::new(a : Byte) -> <a href="gmlewis/image/color#Alpha">Alpha</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,201:::fn <a href="gmlewis/image/color#Alpha">Alpha</a>::op_equal(<a href="gmlewis/image/color#Alpha">Alpha</a>, <a href="gmlewis/image/color#Alpha">Alpha</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,201:::fn <a href="gmlewis/image/color#Alpha">Alpha</a>::output(<a href="gmlewis/image/color#Alpha">Alpha</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,217:::fn <a href="gmlewis/image/color#Alpha">Alpha</a>::raw(self : <a href="gmlewis/image/color#Alpha">Alpha</a>) -> (UInt, UInt, UInt, UInt)
@@ -121,11 +119,6 @@ may be lossy.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,223:::fn <a href="gmlewis/image/color#Alpha">Alpha</a>::rgba(self : <a href="gmlewis/image/color#Alpha">Alpha</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#Alpha">Alpha</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -140,13 +133,21 @@ may be lossy.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,231:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Alpha16">Alpha16</a> with op_equal(<a href="gmlewis/image/color#Alpha16">Alpha16</a>, <a href="gmlewis/image/color#Alpha16">Alpha16</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,231:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Alpha16">Alpha16</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,231:::fn op_equal(<a href="gmlewis/image/color#Alpha16">Alpha16</a>, <a href="gmlewis/image/color#Alpha16">Alpha16</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,231:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Alpha16">Alpha16</a> with output(<a href="gmlewis/image/color#Alpha16">Alpha16</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,231:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Alpha16">Alpha16</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,231:::fn output(<a href="gmlewis/image/color#Alpha16">Alpha16</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -164,16 +165,6 @@ may be lossy.
   :::source,gmlewis/image/color/color.mbt,237:::fn <a href="gmlewis/image/color#Alpha16">Alpha16</a>::new(a : UInt) -> <a href="gmlewis/image/color#Alpha16">Alpha16</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,231:::fn <a href="gmlewis/image/color#Alpha16">Alpha16</a>::op_equal(<a href="gmlewis/image/color#Alpha16">Alpha16</a>, <a href="gmlewis/image/color#Alpha16">Alpha16</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,231:::fn <a href="gmlewis/image/color#Alpha16">Alpha16</a>::output(<a href="gmlewis/image/color#Alpha16">Alpha16</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,247:::fn <a href="gmlewis/image/color#Alpha16">Alpha16</a>::raw(self : <a href="gmlewis/image/color#Alpha16">Alpha16</a>) -> (UInt, UInt, UInt, UInt)
@@ -182,11 +173,6 @@ may be lossy.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,252:::fn <a href="gmlewis/image/color#Alpha16">Alpha16</a>::rgba(self : <a href="gmlewis/image/color#Alpha16">Alpha16</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#Alpha16">Alpha16</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -207,13 +193,21 @@ magenta, yellow and black.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,424:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#CMYK">CMYK</a> with op_equal(<a href="gmlewis/image/color#CMYK">CMYK</a>, <a href="gmlewis/image/color#CMYK">CMYK</a>) -> Bool
+  :::source,gmlewis/image/color/ycbcr.mbt,424:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#CMYK">CMYK</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/ycbcr.mbt,424:::fn op_equal(<a href="gmlewis/image/color#CMYK">CMYK</a>, <a href="gmlewis/image/color#CMYK">CMYK</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,424:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#CMYK">CMYK</a> with output(<a href="gmlewis/image/color#CMYK">CMYK</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/ycbcr.mbt,424:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#CMYK">CMYK</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/ycbcr.mbt,424:::fn output(<a href="gmlewis/image/color#CMYK">CMYK</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -231,16 +225,6 @@ magenta, yellow and black.
   :::source,gmlewis/image/color/ycbcr.mbt,430:::fn <a href="gmlewis/image/color#CMYK">CMYK</a>::new(c : Byte, m : Byte, y : Byte, k : Byte) -> <a href="gmlewis/image/color#CMYK">CMYK</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,424:::fn <a href="gmlewis/image/color#CMYK">CMYK</a>::op_equal(<a href="gmlewis/image/color#CMYK">CMYK</a>, <a href="gmlewis/image/color#CMYK">CMYK</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,424:::fn <a href="gmlewis/image/color#CMYK">CMYK</a>::output(<a href="gmlewis/image/color#CMYK">CMYK</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/ycbcr.mbt,440:::fn <a href="gmlewis/image/color#CMYK">CMYK</a>::raw(self : <a href="gmlewis/image/color#CMYK">CMYK</a>) -> (UInt, UInt, UInt, UInt)
@@ -249,11 +233,6 @@ magenta, yellow and black.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/ycbcr.mbt,445:::fn <a href="gmlewis/image/color#CMYK">CMYK</a>::rgba(self : <a href="gmlewis/image/color#CMYK">CMYK</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#CMYK">CMYK</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -268,13 +247,21 @@ magenta, yellow and black.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,259:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Gray">Gray</a> with op_equal(<a href="gmlewis/image/color#Gray">Gray</a>, <a href="gmlewis/image/color#Gray">Gray</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,259:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Gray">Gray</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,259:::fn op_equal(<a href="gmlewis/image/color#Gray">Gray</a>, <a href="gmlewis/image/color#Gray">Gray</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,259:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Gray">Gray</a> with output(<a href="gmlewis/image/color#Gray">Gray</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,259:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Gray">Gray</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,259:::fn output(<a href="gmlewis/image/color#Gray">Gray</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -292,16 +279,6 @@ magenta, yellow and black.
   :::source,gmlewis/image/color/color.mbt,265:::fn <a href="gmlewis/image/color#Gray">Gray</a>::new(y : Byte) -> <a href="gmlewis/image/color#Gray">Gray</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,259:::fn <a href="gmlewis/image/color#Gray">Gray</a>::op_equal(<a href="gmlewis/image/color#Gray">Gray</a>, <a href="gmlewis/image/color#Gray">Gray</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,259:::fn <a href="gmlewis/image/color#Gray">Gray</a>::output(<a href="gmlewis/image/color#Gray">Gray</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,275:::fn <a href="gmlewis/image/color#Gray">Gray</a>::raw(self : <a href="gmlewis/image/color#Gray">Gray</a>) -> (UInt, UInt, UInt, UInt)
@@ -310,11 +287,6 @@ magenta, yellow and black.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,281:::fn <a href="gmlewis/image/color#Gray">Gray</a>::rgba(self : <a href="gmlewis/image/color#Gray">Gray</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#Gray">Gray</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -329,13 +301,21 @@ magenta, yellow and black.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,289:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Gray16">Gray16</a> with op_equal(<a href="gmlewis/image/color#Gray16">Gray16</a>, <a href="gmlewis/image/color#Gray16">Gray16</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,289:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#Gray16">Gray16</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,289:::fn op_equal(<a href="gmlewis/image/color#Gray16">Gray16</a>, <a href="gmlewis/image/color#Gray16">Gray16</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,289:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Gray16">Gray16</a> with output(<a href="gmlewis/image/color#Gray16">Gray16</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,289:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#Gray16">Gray16</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,289:::fn output(<a href="gmlewis/image/color#Gray16">Gray16</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -353,16 +333,6 @@ magenta, yellow and black.
   :::source,gmlewis/image/color/color.mbt,295:::fn <a href="gmlewis/image/color#Gray16">Gray16</a>::new(y : UInt) -> <a href="gmlewis/image/color#Gray16">Gray16</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,289:::fn <a href="gmlewis/image/color#Gray16">Gray16</a>::op_equal(<a href="gmlewis/image/color#Gray16">Gray16</a>, <a href="gmlewis/image/color#Gray16">Gray16</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,289:::fn <a href="gmlewis/image/color#Gray16">Gray16</a>::output(<a href="gmlewis/image/color#Gray16">Gray16</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,305:::fn <a href="gmlewis/image/color#Gray16">Gray16</a>::raw(self : <a href="gmlewis/image/color#Gray16">Gray16</a>) -> (UInt, UInt, UInt, UInt)
@@ -371,11 +341,6 @@ magenta, yellow and black.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,311:::fn <a href="gmlewis/image/color#Gray16">Gray16</a>::rgba(self : <a href="gmlewis/image/color#Gray16">Gray16</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#Gray16">Gray16</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -417,13 +382,21 @@ magenta, yellow and black.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,127:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#NRGBA">NRGBA</a> with op_equal(<a href="gmlewis/image/color#NRGBA">NRGBA</a>, <a href="gmlewis/image/color#NRGBA">NRGBA</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,127:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#NRGBA">NRGBA</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,127:::fn op_equal(<a href="gmlewis/image/color#NRGBA">NRGBA</a>, <a href="gmlewis/image/color#NRGBA">NRGBA</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,127:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#NRGBA">NRGBA</a> with output(<a href="gmlewis/image/color#NRGBA">NRGBA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,127:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#NRGBA">NRGBA</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,127:::fn output(<a href="gmlewis/image/color#NRGBA">NRGBA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -441,16 +414,6 @@ magenta, yellow and black.
   :::source,gmlewis/image/color/color.mbt,133:::fn <a href="gmlewis/image/color#NRGBA">NRGBA</a>::new(r : Byte, g : Byte, b : Byte, a : Byte) -> <a href="gmlewis/image/color#NRGBA">NRGBA</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,127:::fn <a href="gmlewis/image/color#NRGBA">NRGBA</a>::op_equal(<a href="gmlewis/image/color#NRGBA">NRGBA</a>, <a href="gmlewis/image/color#NRGBA">NRGBA</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,127:::fn <a href="gmlewis/image/color#NRGBA">NRGBA</a>::output(<a href="gmlewis/image/color#NRGBA">NRGBA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,143:::fn <a href="gmlewis/image/color#NRGBA">NRGBA</a>::raw(self : <a href="gmlewis/image/color#NRGBA">NRGBA</a>) -> (UInt, UInt, UInt, UInt)
@@ -459,11 +422,6 @@ magenta, yellow and black.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,148:::fn <a href="gmlewis/image/color#NRGBA">NRGBA</a>::rgba(self : <a href="gmlewis/image/color#NRGBA">NRGBA</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#NRGBA">NRGBA</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -482,13 +440,21 @@ having 16 bits for each of red, green, blue and alpha.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,170:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#NRGBA64">NRGBA64</a> with op_equal(<a href="gmlewis/image/color#NRGBA64">NRGBA64</a>, <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,170:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,170:::fn op_equal(<a href="gmlewis/image/color#NRGBA64">NRGBA64</a>, <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,170:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#NRGBA64">NRGBA64</a> with output(<a href="gmlewis/image/color#NRGBA64">NRGBA64</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,170:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,170:::fn output(<a href="gmlewis/image/color#NRGBA64">NRGBA64</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -506,16 +472,6 @@ having 16 bits for each of red, green, blue and alpha.
   :::source,gmlewis/image/color/color.mbt,176:::fn <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>::new(r : UInt, g : UInt, b : UInt, a : UInt) -> <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,170:::fn <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>::op_equal(<a href="gmlewis/image/color#NRGBA64">NRGBA64</a>, <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,170:::fn <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>::output(<a href="gmlewis/image/color#NRGBA64">NRGBA64</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,186:::fn <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>::raw(self : <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>) -> (UInt, UInt, UInt, UInt)
@@ -524,11 +480,6 @@ having 16 bits for each of red, green, blue and alpha.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,191:::fn <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>::rgba(self : <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#NRGBA64">NRGBA64</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -547,13 +498,21 @@ having 16 bits for each of red, green, blue and alpha.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,276:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a> with op_equal(<a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>, <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>) -> Bool
+  :::source,gmlewis/image/color/ycbcr.mbt,276:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/ycbcr.mbt,276:::fn op_equal(<a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>, <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,276:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a> with output(<a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/ycbcr.mbt,276:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/ycbcr.mbt,276:::fn output(<a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### model
@@ -566,16 +525,6 @@ having 16 bits for each of red, green, blue and alpha.
   :::source,gmlewis/image/color/ycbcr.mbt,282:::fn <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>::new(y : Byte, cb : Byte, cr : Byte, a : Byte) -> <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,276:::fn <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>::op_equal(<a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>, <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,276:::fn <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>::output(<a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/ycbcr.mbt,292:::fn <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>::raw(self : <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>) -> (UInt, UInt, UInt, UInt)
@@ -584,11 +533,6 @@ having 16 bits for each of red, green, blue and alpha.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/ycbcr.mbt,297:::fn <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>::rgba(self : <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#NYCbCrA">NYCbCrA</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -675,13 +619,21 @@ has valid values 0 \<= C \<= A.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,57:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#RGBA">RGBA</a> with op_equal(<a href="gmlewis/image/color#RGBA">RGBA</a>, <a href="gmlewis/image/color#RGBA">RGBA</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,57:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#RGBA">RGBA</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,57:::fn op_equal(<a href="gmlewis/image/color#RGBA">RGBA</a>, <a href="gmlewis/image/color#RGBA">RGBA</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#RGBA">RGBA</a> with output(<a href="gmlewis/image/color#RGBA">RGBA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#RGBA">RGBA</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,57:::fn output(<a href="gmlewis/image/color#RGBA">RGBA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -699,16 +651,6 @@ has valid values 0 \<= C \<= A.
   :::source,gmlewis/image/color/color.mbt,63:::fn <a href="gmlewis/image/color#RGBA">RGBA</a>::new(r : Byte, g : Byte, b : Byte, a : Byte) -> <a href="gmlewis/image/color#RGBA">RGBA</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,57:::fn <a href="gmlewis/image/color#RGBA">RGBA</a>::op_equal(<a href="gmlewis/image/color#RGBA">RGBA</a>, <a href="gmlewis/image/color#RGBA">RGBA</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,57:::fn <a href="gmlewis/image/color#RGBA">RGBA</a>::output(<a href="gmlewis/image/color#RGBA">RGBA</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,73:::fn <a href="gmlewis/image/color#RGBA">RGBA</a>::raw(self : <a href="gmlewis/image/color#RGBA">RGBA</a>) -> (UInt, UInt, UInt, UInt)
@@ -717,11 +659,6 @@ has valid values 0 \<= C \<= A.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,78:::fn <a href="gmlewis/image/color#RGBA">RGBA</a>::rgba(self : <a href="gmlewis/image/color#RGBA">RGBA</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#RGBA">RGBA</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -743,13 +680,21 @@ has valid values 0 \<= C \<= A.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,96:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#RGBA64">RGBA64</a> with op_equal(<a href="gmlewis/image/color#RGBA64">RGBA64</a>, <a href="gmlewis/image/color#RGBA64">RGBA64</a>) -> Bool
+  :::source,gmlewis/image/color/color.mbt,96:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#RGBA64">RGBA64</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,96:::fn op_equal(<a href="gmlewis/image/color#RGBA64">RGBA64</a>, <a href="gmlewis/image/color#RGBA64">RGBA64</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/color.mbt,96:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#RGBA64">RGBA64</a> with output(<a href="gmlewis/image/color#RGBA64">RGBA64</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/color.mbt,96:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#RGBA64">RGBA64</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/color.mbt,96:::fn output(<a href="gmlewis/image/color#RGBA64">RGBA64</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -767,16 +712,6 @@ has valid values 0 \<= C \<= A.
   :::source,gmlewis/image/color/color.mbt,102:::fn <a href="gmlewis/image/color#RGBA64">RGBA64</a>::new(r : UInt, g : UInt, b : UInt, a : UInt) -> <a href="gmlewis/image/color#RGBA64">RGBA64</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,96:::fn <a href="gmlewis/image/color#RGBA64">RGBA64</a>::op_equal(<a href="gmlewis/image/color#RGBA64">RGBA64</a>, <a href="gmlewis/image/color#RGBA64">RGBA64</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/color.mbt,96:::fn <a href="gmlewis/image/color#RGBA64">RGBA64</a>::output(<a href="gmlewis/image/color#RGBA64">RGBA64</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,112:::fn <a href="gmlewis/image/color#RGBA64">RGBA64</a>::raw(self : <a href="gmlewis/image/color#RGBA64">RGBA64</a>) -> (UInt, UInt, UInt, UInt)
@@ -785,11 +720,6 @@ has valid values 0 \<= C \<= A.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/color.mbt,117:::fn <a href="gmlewis/image/color#RGBA64">RGBA64</a>::rgba(self : <a href="gmlewis/image/color#RGBA64">RGBA64</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#RGBA64">RGBA64</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -816,13 +746,21 @@ the JFIF specification at https://www.w3.org/Graphics/JPEG/jfif3.pdf.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,174:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#YCbCr">YCbCr</a> with op_equal(<a href="gmlewis/image/color#YCbCr">YCbCr</a>, <a href="gmlewis/image/color#YCbCr">YCbCr</a>) -> Bool
+  :::source,gmlewis/image/color/ycbcr.mbt,174:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image/color#YCbCr">YCbCr</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/ycbcr.mbt,174:::fn op_equal(<a href="gmlewis/image/color#YCbCr">YCbCr</a>, <a href="gmlewis/image/color#YCbCr">YCbCr</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,174:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#YCbCr">YCbCr</a> with output(<a href="gmlewis/image/color#YCbCr">YCbCr</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/image/color/ycbcr.mbt,174:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image/color#YCbCr">YCbCr</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/color/ycbcr.mbt,174:::fn output(<a href="gmlewis/image/color#YCbCr">YCbCr</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### model
@@ -835,16 +773,6 @@ the JFIF specification at https://www.w3.org/Graphics/JPEG/jfif3.pdf.
   :::source,gmlewis/image/color/ycbcr.mbt,180:::fn <a href="gmlewis/image/color#YCbCr">YCbCr</a>::new(y : Byte, cb : Byte, cr : Byte) -> <a href="gmlewis/image/color#YCbCr">YCbCr</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,174:::fn <a href="gmlewis/image/color#YCbCr">YCbCr</a>::op_equal(<a href="gmlewis/image/color#YCbCr">YCbCr</a>, <a href="gmlewis/image/color#YCbCr">YCbCr</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/color/ycbcr.mbt,174:::fn <a href="gmlewis/image/color#YCbCr">YCbCr</a>::output(<a href="gmlewis/image/color#YCbCr">YCbCr</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### raw
   ```moonbit
   :::source,gmlewis/image/color/ycbcr.mbt,190:::fn <a href="gmlewis/image/color#YCbCr">YCbCr</a>::raw(self : <a href="gmlewis/image/color#YCbCr">YCbCr</a>) -> (UInt, UInt, UInt, UInt)
@@ -853,11 +781,6 @@ the JFIF specification at https://www.w3.org/Graphics/JPEG/jfif3.pdf.
 - #### rgba
   ```moonbit
   :::source,gmlewis/image/color/ycbcr.mbt,195:::fn <a href="gmlewis/image/color#YCbCr">YCbCr</a>::rgba(self : <a href="gmlewis/image/color#YCbCr">YCbCr</a>) -> (UInt, UInt, UInt, UInt)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/color/traits.mbt,85:::fn <a href="gmlewis/image/color#YCbCr">YCbCr</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 

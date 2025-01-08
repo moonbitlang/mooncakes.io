@@ -21,21 +21,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/lexicon-fractional-index/lib/lib.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a> with output(<a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,tiye/lexicon-fractional-index/lib/lib.mbt,8:::fn <a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a>::output(<a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,tiye/lexicon-fractional-index/lib/traits.mbt,85:::fn <a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,tiye/lexicon-fractional-index/lib/lib.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/lexicon-fractional-index/lib/lib.mbt,8:::fn output(<a href="tiye/lexicon-fractional-index/lib#KeyError">KeyError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## float64\_approx
 

@@ -29,14 +29,14 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[Hash](#Hash)| Hash is the common interface implemented by all hash functions.|
-|[Hash32](#Hash32)| Hash32 is the common interface implemented by all 32-bit hash functions.|
-|[Hash64](#Hash64)| Hash64 is the common interface implemented by all 64-bit hash functions.|
+|[@gmlewis/hash.Hash](#@gmlewis/hash.Hash)| Hash is the common interface implemented by all hash functions.|
+|[@gmlewis/hash.Hash32](#@gmlewis/hash.Hash32)| Hash32 is the common interface implemented by all 32-bit hash functions.|
+|[@gmlewis/hash.Hash64](#@gmlewis/hash.Hash64)| Hash64 is the common interface implemented by all 64-bit hash functions.|
 
-## Hash
+## @gmlewis/hash.Hash
 
 ```moonbit
-:::source,gmlewis/hash/hash.mbt,30:::pub(open) trait Hash {
+:::source,gmlewis/hash/hash.mbt,30:::pub(open) trait @gmlewis/hash.Hash {
   write(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">@gmlewis/io.IOError</a>?)
   sum(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]
   reset(Self) -> Unit
@@ -61,10 +61,10 @@ decode data written with any previously released version,
 subject to issues such as security fixes.
 See the Go compatibility document for background: https://golang.org/doc/go1compat
 
-## Hash32
+## @gmlewis/hash.Hash32
 
 ```moonbit
-:::source,gmlewis/hash/hash.mbt,54:::pub(open) trait Hash32 {
+:::source,gmlewis/hash/hash.mbt,54:::pub(open) trait @gmlewis/hash.Hash32 {
   sum32(Self) -> UInt
   write(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">@gmlewis/io.IOError</a>?)
   sum(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]
@@ -75,10 +75,10 @@ See the Go compatibility document for background: https://golang.org/doc/go1comp
 ```
  Hash32 is the common interface implemented by all 32-bit hash functions.
 
-## Hash64
+## @gmlewis/hash.Hash64
 
 ```moonbit
-:::source,gmlewis/hash/hash.mbt,65:::pub(open) trait Hash64 {
+:::source,gmlewis/hash/hash.mbt,65:::pub(open) trait @gmlewis/hash.Hash64 {
   sum64() -> UInt64
   write(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href="gmlewis/io#IOError">@gmlewis/io.IOError</a>?)
   sum(Self, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]

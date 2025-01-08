@@ -19,30 +19,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,7:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## IncomingDatagramStream
 
@@ -53,13 +44,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -67,16 +66,6 @@
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,33:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,27:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### receive
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,604:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::receive(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, max_results : UInt64) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>], <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]
@@ -112,11 +101,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## OutgoingDatagram
 
@@ -130,30 +114,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,13:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## OutgoingDatagramStream
 
@@ -164,13 +139,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### check\_send
@@ -193,16 +176,6 @@
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,44:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,38:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### send
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,731:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::send(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, datagrams : <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>]) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt64, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]
@@ -249,11 +222,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## UdpSocket
 
@@ -264,13 +232,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### address\_family
@@ -310,16 +286,6 @@
   >  - <https://man7.org/linux/man-pages/man2/getsockname.2.html>
   >  - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getsockname>
   >  - <https://man.freebsd.org/cgi/man.cgi?getsockname>
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,16:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### receive\_buffer\_size
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,503:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>::receive_buffer_size(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt64, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]
@@ -450,11 +416,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### unicast\_hop\_limit
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp/top.mbt,459:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>::unicast_hop_limit(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[Byte, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]

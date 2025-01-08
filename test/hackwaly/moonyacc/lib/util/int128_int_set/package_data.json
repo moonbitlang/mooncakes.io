@@ -1,0 +1,158 @@
+{
+  "readme": "",
+  "name": "hackwaly/moonyacc/lib/util/int128_int_set",
+  "traits": [],
+  "types": [
+    {
+      "name": "Int128IntSet",
+      "docstring": "",
+      "signature": "type Int128IntSet",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::add(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, key : Int) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "loc": { "line": 99, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::contains(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, key : Int) -> Bool",
+          "loc": { "line": 90, "column": 8 }
+        },
+        {
+          "name": "difference",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::difference(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, other : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "loc": { "line": 127, "column": 8 }
+        },
+        {
+          "name": "disjoint",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::disjoint(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, other : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> Bool",
+          "loc": { "line": 132, "column": 8 }
+        },
+        {
+          "name": "intersection",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::intersection(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, other : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "loc": { "line": 122, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::is_empty(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> Bool",
+          "loc": { "line": 85, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::iter(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Int]",
+          "loc": { "line": 31, "column": 8 }
+        },
+        {
+          "name": "remove",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::remove(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, key : Int) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "loc": { "line": 108, "column": 8 }
+        },
+        {
+          "name": "subset",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::subset(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, other : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> Bool",
+          "loc": { "line": 137, "column": 8 }
+        },
+        {
+          "name": "union",
+          "docstring": "",
+          "signature": "fn <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>::union(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, other : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "loc": { "line": 117, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> Int",
+              "loc": { "line": 5, "column": 14 }
+            }
+          ],
+          "loc": { "line": 5, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>) -> Bool",
+              "loc": { "line": 5, "column": 10 }
+            }
+          ],
+          "loc": { "line": 5, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "automatically derived",
+              "signature": "fn hash_combine(<a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 5, "column": 23 }
+            }
+          ],
+          "loc": { "line": 5, "column": 23 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 16, "column": 37 }
+            }
+          ],
+          "loc": { "line": 16, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [
+    {
+      "name": "T",
+      "docstring": "",
+      "signature": "type T = <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+      "loc": { "line": 8, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "empty",
+      "docstring": "",
+      "signature": "fn empty() -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+      "loc": { "line": 11, "column": 8 }
+    },
+    {
+      "name": "from_iter",
+      "docstring": "",
+      "signature": "fn from_iter(iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Int]) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+      "loc": { "line": 62, "column": 8 }
+    },
+    {
+      "name": "singleton",
+      "docstring": "",
+      "signature": "fn singleton(key : Int) -> <a href=\"hackwaly/moonyacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+      "loc": { "line": 76, "column": 8 }
+    }
+  ],
+  "misc": []
+}

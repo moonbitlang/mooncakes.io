@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Clonable](#Clonable)||
+|[@gmlewis/fonts/draw.Clonable](#@gmlewis/fonts/draw.Clonable)||
 
 |Type|description|
 |---|---|
@@ -35,10 +35,10 @@
 |[unit\_square](#unit_square)| unit\_square constructs a new Group representing a unit square centered at the origin.|
 |[vec2](#vec2)| vec2 returns a new Vec2.|
 
-## Clonable
+## @gmlewis/fonts/draw.Clonable
 
 ```moonbit
-:::source,gmlewis/fonts/draw/path.mbt,46:::trait Clonable
+:::source,gmlewis/fonts/draw/path.mbt,46:::trait @gmlewis/fonts/draw.Clonable
 ```
 
 
@@ -59,13 +59,21 @@ See: https://en.wikipedia.org/wiki/Affine\_transformation
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a> with op_equal(<a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>) -> Bool
+  :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::fn op_equal(<a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a> with output(<a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::fn output(<a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clone
@@ -185,11 +193,6 @@ See: https://en.wikipedia.org/wiki/Affine\_transformation
   ```
   >  normalize scales the basis vectors of this 2D affine matrix
   > so that they have unit length.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::op_equal(<a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>) -> Bool
-  ```
-  > automatically derived
 - #### op\_mul
   ```moonbit
   :::source,gmlewis/fonts/draw/affine-matrix.mbt,131:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::op_mul(self : <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, b : <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>) -> <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>
@@ -201,11 +204,6 @@ See: https://en.wikipedia.org/wiki/Affine\_transformation
   ```
   >  origin translates the matrix such that the center of future
   > scale, rotate, and skew transformations will be `v`.
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/affine-matrix.mbt,13:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::output(<a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### pre\_mul
   ```moonbit
   :::source,gmlewis/fonts/draw/affine-matrix.mbt,153:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::pre_mul(self : <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, m : <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>) -> <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>
@@ -238,11 +236,6 @@ See: https://en.wikipedia.org/wiki/Affine\_transformation
   :::source,gmlewis/fonts/draw/affine-matrix.mbt,194:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::skew(self : <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, angle : Double) -> <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>
   ```
   >  skew skews the Y basis vector of this 2D affine matrix by `angle` degrees.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### to\_transform
   ```moonbit
   :::source,gmlewis/fonts/draw/affine-matrix.mbt,329:::fn <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>::to_transform(self : <a href="gmlewis/fonts/draw#AffineMatrix">AffineMatrix</a>, origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Transform">Transform</a>
@@ -268,21 +261,37 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Anchor">Anchor</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn op_equal(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>, <a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a> with op_equal(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>, <a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> Bool
+  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn output(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a> with output(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn to_json(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a> with to_json(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/anchor.mbt,7:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Anchor">Anchor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Anchor">Anchor</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### affine\_transform
@@ -317,11 +326,6 @@ The position of an Anchor is absolute and the handles are both relative.
   ```
   >  closest\_point returns the closest point to `point` or None if no point is found.
   > area\_of\_interest is used to focus the computation within a smaller region.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Anchor">Anchor</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### has\_tangent\_handles
   ```moonbit
   :::source,gmlewis/fonts/draw/anchor.mbt,127:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::has_tangent_handles(self : <a href="gmlewis/fonts/draw#Anchor">Anchor</a>, tolerance~ : Double = ..) -> Bool
@@ -361,31 +365,11 @@ The position of an Anchor is absolute and the handles are both relative.
   ```
   >  Anchor::new returns a new anchor. You must either create new Vec2 points
   > or clone them before passing them in.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::op_equal(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>, <a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::output(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### reverse
   ```moonbit
   :::source,gmlewis/fonts/draw/anchor.mbt,112:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::reverse(self : <a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> <a href="gmlewis/fonts/draw#Anchor">Anchor</a>
   ```
   >  reverse reverses this Anchor.
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/anchor.mbt,7:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::to_json(<a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transform
   ```moonbit
   :::source,gmlewis/fonts/draw/anchor.mbt,49:::fn <a href="gmlewis/fonts/draw#Anchor">Anchor</a>::transform(self : <a href="gmlewis/fonts/draw#Anchor">Anchor</a>, position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Anchor">Anchor</a>
@@ -404,13 +388,21 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a> with op_equal(<a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> Bool
+  :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::fn op_equal(<a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a> with output(<a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::fn output(<a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### area
@@ -496,16 +488,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/bounding-box.mbt,8:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::new(min~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., max~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>
   ```
   >  BoundingBox::new returns a new empty BoundingBox.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::op_equal(<a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/bounding-box.mbt,5:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::output(<a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### overlaps\_bounding\_box
   ```moonbit
   :::source,gmlewis/fonts/draw/bounding-box.mbt,134:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::overlaps_bounding_box(self : <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>, box : <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> Bool
@@ -516,11 +498,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/bounding-box.mbt,57:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::size(self : <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
   >  size returns a vector representing the (width,height) of the bounding box.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### width
   ```moonbit
   :::source,gmlewis/fonts/draw/bounding-box.mbt,62:::fn <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>::width(self : <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> Double
@@ -541,21 +518,37 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Color">Color</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Color">Color</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Color">Color</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/color.mbt,7:::fn op_equal(<a href="gmlewis/fonts/draw#Color">Color</a>, <a href="gmlewis/fonts/draw#Color">Color</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Color">Color</a> with op_equal(<a href="gmlewis/fonts/draw#Color">Color</a>, <a href="gmlewis/fonts/draw#Color">Color</a>) -> Bool
+  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Color">Color</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/color.mbt,7:::fn output(<a href="gmlewis/fonts/draw#Color">Color</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Color">Color</a> with output(<a href="gmlewis/fonts/draw#Color">Color</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Color">Color</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/color.mbt,7:::fn to_json(<a href="gmlewis/fonts/draw#Color">Color</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Color">Color</a> with to_json(<a href="gmlewis/fonts/draw#Color">Color</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/color.mbt,7:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Color">Color</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/color.mbt,7:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Color">Color</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### as\_fill
@@ -578,11 +571,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/color.mbt,25:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::from_hsva(hue : Double, saturation : Double, value : Double, alpha : Double) -> <a href="gmlewis/fonts/draw#Color">Color</a>
   ```
   >  Color::from\_hsva creates a color by converting HSVA space to RGBA.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Color">Color</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### from\_rgb8\_number
   ```moonbit
   :::source,gmlewis/fonts/draw/color.mbt,155:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::from_rgb8_number(value : UInt) -> <a href="gmlewis/fonts/draw#Color">Color</a>
@@ -603,16 +591,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/color.mbt,10:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::new(r~ : Double = .., g~ : Double = .., b~ : Double = .., a~ : Double = ..) -> <a href="gmlewis/fonts/draw#Color">Color</a>
   ```
   >  Color::new returns a new color.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::op_equal(<a href="gmlewis/fonts/draw#Color">Color</a>, <a href="gmlewis/fonts/draw#Color">Color</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::output(<a href="gmlewis/fonts/draw#Color">Color</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/fonts/draw/color.mbt,173:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::set(self : <a href="gmlewis/fonts/draw#Color">Color</a>, r : Double, g : Double, b : Double, a : Double) -> <a href="gmlewis/fonts/draw#Color">Color</a>
@@ -639,21 +617,11 @@ The position of an Anchor is absolute and the handles are both relative.
   ```
   >  to\_hsva converts this color to the HSVA color space, returning
   > \[hue, saturation, value, alpha\] in the range (0..1).
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/color.mbt,7:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::to_json(<a href="gmlewis/fonts/draw#Color">Color</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
 - #### to\_rgb8\_number
   ```moonbit
   :::source,gmlewis/fonts/draw/color.mbt,268:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::to_rgb8_number(self : <a href="gmlewis/fonts/draw#Color">Color</a>) -> UInt
   ```
   >  to\_rgb8\_number returns a bit-packed number in RGB8 format.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Color">Color</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## CompoundPath
 
@@ -668,17 +636,29 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/compound-path.mbt,6:::fn output(<a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a> with output(<a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/compound-path.mbt,6:::fn to_json(<a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a> with to_json(<a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/compound-path.mbt,6:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### affine\_transform
@@ -748,11 +728,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/compound-path.mbt,172:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::first_styled(self : <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>?
   ```
   >  first\_styled returns this CompoundPath if it is styled or None.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### has\_style
   ```moonbit
   :::source,gmlewis/fonts/draw/compound-path.mbt,181:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::has_style(self : <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>) -> Bool
@@ -797,11 +772,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/compound-path.mbt,28:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::op_set(self : <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>, index : Int, path : <a href="gmlewis/fonts/draw#Path">Path</a>) -> Unit
   ```
   >  op\_set is a convenience function.
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::output(<a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### primitives
   ```moonbit
   :::source,gmlewis/fonts/draw/compound-path.mbt,262:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::primitives(self : <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/fonts/draw#Graphic">Graphic</a>]
@@ -842,16 +812,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/compound-path.mbt,297:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::style_contains_point(_self : <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>, _point : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> Bool
   ```
   >  style\_contains\_point returns true if this path's style contains `point`.
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/compound-path.mbt,6:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::to_json(<a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transform
   ```moonbit
   :::source,gmlewis/fonts/draw/compound-path.mbt,64:::fn <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>::transform(self : <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>, position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#CompoundPath">CompoundPath</a>
@@ -873,30 +833,21 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/draw.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#DrawError">DrawError</a> with op_equal(<a href="gmlewis/fonts/draw#DrawError">DrawError</a>, <a href="gmlewis/fonts/draw#DrawError">DrawError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/draw.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#DrawError">DrawError</a> with output(<a href="gmlewis/fonts/draw#DrawError">DrawError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/draw.mbt,5:::fn <a href="gmlewis/fonts/draw#DrawError">DrawError</a>::op_equal(<a href="gmlewis/fonts/draw#DrawError">DrawError</a>, <a href="gmlewis/fonts/draw#DrawError">DrawError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/draw.mbt,5:::fn <a href="gmlewis/fonts/draw#DrawError">DrawError</a>::output(<a href="gmlewis/fonts/draw#DrawError">DrawError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#DrawError">DrawError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/draw/draw.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#DrawError">DrawError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/draw.mbt,5:::fn op_equal(<a href="gmlewis/fonts/draw#DrawError">DrawError</a>, <a href="gmlewis/fonts/draw#DrawError">DrawError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/draw.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#DrawError">DrawError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/draw.mbt,5:::fn output(<a href="gmlewis/fonts/draw#DrawError">DrawError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Fill
 
@@ -909,21 +860,37 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Fill">Fill</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/fill.mbt,4:::fn op_equal(<a href="gmlewis/fonts/draw#Fill">Fill</a>, <a href="gmlewis/fonts/draw#Fill">Fill</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a> with op_equal(<a href="gmlewis/fonts/draw#Fill">Fill</a>, <a href="gmlewis/fonts/draw#Fill">Fill</a>) -> Bool
+  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/fill.mbt,4:::fn output(<a href="gmlewis/fonts/draw#Fill">Fill</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a> with output(<a href="gmlewis/fonts/draw#Fill">Fill</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/fill.mbt,4:::fn to_json(<a href="gmlewis/fonts/draw#Fill">Fill</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a> with to_json(<a href="gmlewis/fonts/draw#Fill">Fill</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/fill.mbt,4:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Fill">Fill</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/fill.mbt,4:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Fill">Fill</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clone
@@ -931,36 +898,11 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/fill.mbt,17:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::clone(self : <a href="gmlewis/fonts/draw#Fill">Fill</a>) -> <a href="gmlewis/fonts/draw#Fill">Fill</a>
   ```
   >  clone returns a new copy of this Fill.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Fill">Fill</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### new
   ```moonbit
   :::source,gmlewis/fonts/draw/fill.mbt,7:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::new(color~ : <a href="gmlewis/fonts/draw#Color">Color</a> = ..) -> <a href="gmlewis/fonts/draw#Fill">Fill</a>
   ```
   >  Fill::new returns a new fill style.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::op_equal(<a href="gmlewis/fonts/draw#Fill">Fill</a>, <a href="gmlewis/fonts/draw#Fill">Fill</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::output(<a href="gmlewis/fonts/draw#Fill">Fill</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/fill.mbt,4:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::to_json(<a href="gmlewis/fonts/draw#Fill">Fill</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Fill">Fill</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Graphic
 
@@ -975,13 +917,21 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/graphic.mbt,402:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Graphic">Graphic</a> with from_json(json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/graphic.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Graphic">Graphic</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/graphic.mbt,6:::fn output(<a href="gmlewis/fonts/draw#Graphic">Graphic</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/graphic.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Graphic">Graphic</a> with output(<a href="gmlewis/fonts/draw#Graphic">Graphic</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/graphic.mbt,402:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Graphic">Graphic</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/graphic.mbt,402:::fn from_json(json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### affine\_transform
@@ -1083,11 +1033,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/graphic.mbt,374:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::fit_to(self : <a href="gmlewis/fonts/draw#Graphic">Graphic</a>, box : <a href="gmlewis/fonts/draw#BoundingBox">BoundingBox</a>) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>
   ```
   >  fit\_to scales and translates a Graphic to fix in `box`.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/graphic.mbt,402:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::from_json(json : <a href="moonbitlang/core/json#Json">Json</a>, path : <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > 
 - #### has\_style
   ```moonbit
   :::source,gmlewis/fonts/draw/graphic.mbt,216:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::has_style(self : <a href="gmlewis/fonts/draw#Graphic">Graphic</a>) -> Bool
@@ -1117,11 +1062,6 @@ The position of an Anchor is absolute and the handles are both relative.
   ```
   >  loose\_bounding\_box returns an approximate bounding box for all items.
   > It may not be the smallest possible bounding box, but is cheaper to compute.
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/graphic.mbt,6:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::output(<a href="gmlewis/fonts/draw#Graphic">Graphic</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### primitives
   ```moonbit
   :::source,gmlewis/fonts/draw/graphic.mbt,162:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::primitives(self : <a href="gmlewis/fonts/draw#Graphic">Graphic</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/fonts/draw#Graphic">Graphic</a>]
@@ -1173,11 +1113,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/graphic.mbt,393:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::to_json(self : <a href="gmlewis/fonts/draw#Graphic">Graphic</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
   ```
   > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transform
   ```moonbit
   :::source,gmlewis/fonts/draw/graphic.mbt,31:::fn <a href="gmlewis/fonts/draw#Graphic">Graphic</a>::transform(self : <a href="gmlewis/fonts/draw#Graphic">Graphic</a>, position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>
@@ -1200,17 +1135,29 @@ The position of an Anchor is absolute and the handles are both relative.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/group.mbt,4:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Group">Group</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Group">Group</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/group.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Group">Group</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/group.mbt,4:::fn output(<a href="gmlewis/fonts/draw#Group">Group</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/group.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Group">Group</a> with output(<a href="gmlewis/fonts/draw#Group">Group</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/group.mbt,4:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Group">Group</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/group.mbt,4:::fn to_json(<a href="gmlewis/fonts/draw#Group">Group</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/group.mbt,4:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Group">Group</a> with to_json(<a href="gmlewis/fonts/draw#Group">Group</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/group.mbt,4:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Group">Group</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/group.mbt,4:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Group">Group</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### affine\_transform
@@ -1306,11 +1253,6 @@ The position of an Anchor is absolute and the handles are both relative.
   ```
   >  first\_styled returns the first Path or CompoundPath in this Group
   > that has either a fill or a stroke, or None.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/group.mbt,4:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Group">Group</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### has\_style
   ```moonbit
   :::source,gmlewis/fonts/draw/group.mbt,237:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::has_style(self : <a href="gmlewis/fonts/draw#Group">Group</a>) -> Bool
@@ -1356,11 +1298,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/group.mbt,22:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::op_set(self : <a href="gmlewis/fonts/draw#Group">Group</a>, index : Int, graphic : <a href="gmlewis/fonts/draw#Graphic">Graphic</a>) -> Unit
   ```
   >  op\_set is a convenience function.
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/group.mbt,4:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::output(<a href="gmlewis/fonts/draw#Group">Group</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### primitives
   ```moonbit
   :::source,gmlewis/fonts/draw/group.mbt,197:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::primitives(self : <a href="gmlewis/fonts/draw#Group">Group</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/fonts/draw#Graphic">Graphic</a>]
@@ -1401,16 +1338,6 @@ The position of an Anchor is absolute and the handles are both relative.
   :::source,gmlewis/fonts/draw/group.mbt,320:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::style_contains_point(self : <a href="gmlewis/fonts/draw#Group">Group</a>, point : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> Bool
   ```
   >  style\_contains\_point returns true if this Group's style contains `point`.
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/group.mbt,4:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::to_json(<a href="gmlewis/fonts/draw#Group">Group</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transform
   ```moonbit
   :::source,gmlewis/fonts/draw/group.mbt,57:::fn <a href="gmlewis/fonts/draw#Group">Group</a>::transform(self : <a href="gmlewis/fonts/draw#Group">Group</a>, position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Group">Group</a>
@@ -1440,17 +1367,29 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/path.mbt,11:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Path">Path</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Path">Path</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/path.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Path">Path</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/path.mbt,11:::fn output(<a href="gmlewis/fonts/draw#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/path.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Path">Path</a> with output(<a href="gmlewis/fonts/draw#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/path.mbt,11:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Path">Path</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/path.mbt,11:::fn to_json(<a href="gmlewis/fonts/draw#Path">Path</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/path.mbt,11:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Path">Path</a> with to_json(<a href="gmlewis/fonts/draw#Path">Path</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/path.mbt,11:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Path">Path</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/path.mbt,11:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Path">Path</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### affine\_transform
@@ -1515,11 +1454,6 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/path.mbt,331:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::first_styled(self : <a href="gmlewis/fonts/draw#Path">Path</a>) -> <a href="gmlewis/fonts/draw#Graphic">Graphic</a>?
   ```
   >  first\_styled returns this Path if it is styled or None.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/path.mbt,11:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Path">Path</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### from\_points
   ```moonbit
   :::source,gmlewis/fonts/draw/path.mbt,40:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::from_points(points : <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/fonts/draw#Vec2">Vec2</a>], closed~ : Bool = ..) -> <a href="gmlewis/fonts/draw#Path">Path</a>
@@ -1569,11 +1503,6 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/path.mbt,35:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::op_set(self : <a href="gmlewis/fonts/draw#Path">Path</a>, index : Int, anchor : <a href="gmlewis/fonts/draw#Anchor">Anchor</a>) -> Unit
   ```
   >  op\_set is a convenience function.
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/path.mbt,11:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::output(<a href="gmlewis/fonts/draw#Path">Path</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### primitives
   ```moonbit
   :::source,gmlewis/fonts/draw/path.mbt,456:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::primitives(self : <a href="gmlewis/fonts/draw#Path">Path</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/fonts/draw#Graphic">Graphic</a>]
@@ -1614,16 +1543,6 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/path.mbt,491:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::style_contains_point(_self : <a href="gmlewis/fonts/draw#Path">Path</a>, _point : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> Bool
   ```
   >  style\_contains\_point returns true if this path's style contains `point`.
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/path.mbt,11:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::to_json(<a href="gmlewis/fonts/draw#Path">Path</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transform
   ```moonbit
   :::source,gmlewis/fonts/draw/path.mbt,86:::fn <a href="gmlewis/fonts/draw#Path">Path</a>::transform(self : <a href="gmlewis/fonts/draw#Path">Path</a>, position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Path">Path</a>
@@ -1651,21 +1570,37 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Stroke">Stroke</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn op_equal(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>, <a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a> with op_equal(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>, <a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> Bool
+  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn output(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a> with output(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn to_json(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a> with to_json(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/stroke.mbt,9:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Stroke">Stroke</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Stroke">Stroke</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clone
@@ -1673,36 +1608,11 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/stroke.mbt,50:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::clone(self : <a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> <a href="gmlewis/fonts/draw#Stroke">Stroke</a>
   ```
   >  clone returns a new copy of this Stroke.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Stroke">Stroke</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### new
   ```moonbit
   :::source,gmlewis/fonts/draw/stroke.mbt,33:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::new(color~ : <a href="gmlewis/fonts/draw#Color">Color</a> = .., width~ : Double = .., alignment~ : <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a> = .., cap~ : <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a> = .., join~ : <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a> = .., miter_limit~ : Double = ..) -> <a href="gmlewis/fonts/draw#Stroke">Stroke</a>
   ```
   >  Stroke::new returns a new stroke style.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::op_equal(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>, <a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::output(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,9:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::to_json(<a href="gmlewis/fonts/draw#Stroke">Stroke</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Stroke">Stroke</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## StrokeAlignment
 
@@ -1717,48 +1627,37 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a> with op_equal(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>, <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a> with output(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a> with to_json(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>::op_equal(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>, <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>::output(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>::to_json(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn op_equal(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>, <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn output(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn to_json(<a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,16:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,16:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeAlignment">StrokeAlignment</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 ## StrokeCap
 
@@ -1773,48 +1672,37 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a> with op_equal(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>, <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a> with output(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a> with to_json(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>::op_equal(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>, <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>::output(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>::to_json(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn op_equal(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>, <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn output(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn to_json(<a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,23:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,23:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeCap">StrokeCap</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 ## StrokeJoin
 
@@ -1829,48 +1717,37 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a> with op_equal(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>, <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a> with output(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a> with to_json(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>::op_equal(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>, <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>::output(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>::to_json(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn op_equal(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>, <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn output(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn to_json(<a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/stroke.mbt,30:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/stroke.mbt,30:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#StrokeJoin">StrokeJoin</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 ## TextAlign
 
@@ -1885,30 +1762,21 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/text.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a> with op_equal(<a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>, <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/fonts/draw/text.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a> with output(<a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/text.mbt,9:::fn <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>::op_equal(<a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>, <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/text.mbt,9:::fn <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>::output(<a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/fonts/draw/text.mbt,9:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/text.mbt,9:::fn op_equal(<a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>, <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/fonts/draw/text.mbt,9:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/text.mbt,9:::fn output(<a href="gmlewis/fonts/draw#TextAlign">TextAlign</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Transform
 
@@ -1925,13 +1793,21 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/transform.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Transform">Transform</a> with op_equal(<a href="gmlewis/fonts/draw#Transform">Transform</a>, <a href="gmlewis/fonts/draw#Transform">Transform</a>) -> Bool
+  :::source,gmlewis/fonts/draw/transform.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Transform">Transform</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/transform.mbt,8:::fn op_equal(<a href="gmlewis/fonts/draw#Transform">Transform</a>, <a href="gmlewis/fonts/draw#Transform">Transform</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/transform.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Transform">Transform</a> with output(<a href="gmlewis/fonts/draw#Transform">Transform</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/transform.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Transform">Transform</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/transform.mbt,8:::fn output(<a href="gmlewis/fonts/draw#Transform">Transform</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### new
@@ -1939,21 +1815,6 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/transform.mbt,11:::fn <a href="gmlewis/fonts/draw#Transform">Transform</a>::new(position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Transform">Transform</a>
   ```
   >  Transform::new returns a new identity transform.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/transform.mbt,8:::fn <a href="gmlewis/fonts/draw#Transform">Transform</a>::op_equal(<a href="gmlewis/fonts/draw#Transform">Transform</a>, <a href="gmlewis/fonts/draw#Transform">Transform</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/transform.mbt,8:::fn <a href="gmlewis/fonts/draw#Transform">Transform</a>::output(<a href="gmlewis/fonts/draw#Transform">Transform</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Transform">Transform</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Vec2
 
@@ -1967,21 +1828,37 @@ center of the letter 'O'.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a> with from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn op_equal(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>, <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a> with op_equal(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>, <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> Bool
+  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn output(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a> with output(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn to_json(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a> with to_json(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,gmlewis/fonts/draw/vec2.mbt,5:::impl <a href="moonbitlang/core/json#FromJson">@moonbitlang/core/json.FromJson</a> for <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -2087,11 +1964,6 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/vec2.mbt,34:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::from_angle_radians(rad : Double) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
   >  Vec2::from\_angle\_radians returns a new unit vec2 from an angle in radians.
-- #### from\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::from_json(<a href="moonbitlang/core/json#Json">Json</a>, <a href="moonbitlang/core/json#JsonPath">@moonbitlang/core/json.JsonPath</a>) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>!<a href="moonbitlang/core/json#JsonDecodeError">@moonbitlang/core/json.JsonDecodeError</a>
-  ```
-  > automatically derived
 - #### infinity
   ```moonbit
   :::source,gmlewis/fonts/draw/vec2.mbt,13:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::infinity() -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
@@ -2194,11 +2066,6 @@ center of the letter 'O'.
   ```
   >  op\_div divides this vector by vector `other` without modifying either one
   > and returns the result.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::op_equal(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>, <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> Bool
-  ```
-  > automatically derived
 - #### op\_mul
   ```moonbit
   :::source,gmlewis/fonts/draw/vec2.mbt,153:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::op_mul(self : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>, other : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
@@ -2216,11 +2083,6 @@ center of the letter 'O'.
   ```
   >  op\_sub subtracts vector `other` from this vector without modifying either one
   > and returns the result.
-- #### output
-  ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::output(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### project\_onto
   ```moonbit
   :::source,gmlewis/fonts/draw/vec2.mbt,343:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::project_onto(self : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>, v : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
@@ -2278,16 +2140,6 @@ center of the letter 'O'.
   :::source,gmlewis/fonts/draw/vec2.mbt,138:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::sub_scalar(self : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>, s : Double) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>
   ```
   >  sub\_scalar subtracts scalar `s` from this vector.
-- #### to\_json
-  ```moonbit
-  :::source,gmlewis/fonts/draw/vec2.mbt,5:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::to_json(<a href="gmlewis/fonts/draw#Vec2">Vec2</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/fonts/draw/traits.mbt,85:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### transform
   ```moonbit
   :::source,gmlewis/fonts/draw/vec2.mbt,90:::fn <a href="gmlewis/fonts/draw#Vec2">Vec2</a>::transform(self : <a href="gmlewis/fonts/draw#Vec2">Vec2</a>, position~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., rotation~ : Double = .., scale~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = .., skew~ : Double = .., origin~ : <a href="gmlewis/fonts/draw#Vec2">Vec2</a> = ..) -> <a href="gmlewis/fonts/draw#Vec2">Vec2</a>

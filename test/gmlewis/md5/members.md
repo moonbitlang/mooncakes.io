@@ -29,16 +29,16 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[HashFunc](#HashFunc)| \`HashFunc\` represents a hash algorithm like \`@crc32\`, \`@md5\`, or \`@sha256\`.|
+|[@gmlewis/md5.HashFunc](#@gmlewis/md5.HashFunc)| \`HashFunc\` represents a hash algorithm like \`@crc32\`, \`@md5\`, or \`@sha256\`.|
 
 |Type|description|
 |---|---|
 |[Digest](#Digest)| \`Digest\` represents the partial evaluation of a checksum.|
 
-## HashFunc
+## @gmlewis/md5.HashFunc
 
 ```moonbit
-:::source,gmlewis/md5/hash-func.mbt,2:::pub(open) trait HashFunc {
+:::source,gmlewis/md5/hash-func.mbt,2:::pub(open) trait @gmlewis/md5.HashFunc {
   name(Self) -> String
   write(Self, Byte) -> Unit
   check_sum(Self) -> String

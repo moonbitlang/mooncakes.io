@@ -1,0 +1,16 @@
+{
+  "readme": "This interface defines a handler of incoming HTTP Requests. It should\nbe exported by components which can respond to HTTP Requests.",
+  "name": "yamajik/wasi-bindings/gen/interface/wasi/http/incomingHandler",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "handle",
+      "docstring": " This function is invoked with an incoming HTTP Request, and a resource\n `response-outparam` which provides the capability to reply with an HTTP\n Response. The response is sent by calling the `response-outparam.set`\n method, which allows execution to continue after the response has been\n sent. This enables both streaming to the response body, and performing other\n work.\n\n The implementor of this function must write a response to the\n `response-outparam` before returning, or else the caller will respond\n with an error on its behalf.",
+      "signature": "fn handle(_request : <a href=\"yamajik/wasi-bindings/interface/wasi/http/types#IncomingRequest\">@yamajik/wasi-bindings/interface/wasi/http/types.IncomingRequest</a>, _response_out : <a href=\"yamajik/wasi-bindings/interface/wasi/http/types#ResponseOutparam\">@yamajik/wasi-bindings/interface/wasi/http/types.ResponseOutparam</a>) -> Unit",
+      "loc": { "line": 12, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -38,21 +38,21 @@
 ## ascii\_digit\_to\_int
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,78:::fn ascii_digit_to_int(c : Char) -> Int
+:::source,rami3l/cmark/char/ascii.mbt,99:::fn ascii_digit_to_int(c : Char) -> Int
 ```
 
 
 ## ascii\_hexdigit\_to\_int
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,104:::fn ascii_hexdigit_to_int(c : Char) -> Int
+:::source,rami3l/cmark/char/ascii.mbt,131:::fn ascii_hexdigit_to_int(c : Char) -> Int
 ```
 
 
 ## ascii\_octdigit\_to\_int
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,91:::fn ascii_octdigit_to_int(c : Char) -> Int
+:::source,rami3l/cmark/char/ascii.mbt,115:::fn ascii_octdigit_to_int(c : Char) -> Int
 ```
 
 
@@ -87,14 +87,14 @@
 ## is\_ascii\_alpha
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,58:::fn is_ascii_alpha(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,70:::fn is_ascii_alpha(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_alphanum
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,53:::fn is_ascii_alphanum(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,65:::fn is_ascii_alphanum(c : Char) -> Bool
 ```
 
 
@@ -108,63 +108,63 @@
 ## is\_ascii\_control
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,35:::fn is_ascii_control(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,41:::fn is_ascii_control(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_digit
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,73:::fn is_ascii_digit(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,91:::fn is_ascii_digit(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_graphic
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,48:::fn is_ascii_graphic(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,57:::fn is_ascii_graphic(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_hexdigit
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,99:::fn is_ascii_hexdigit(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,123:::fn is_ascii_hexdigit(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_lower
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,68:::fn is_ascii_lower(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,83:::fn is_ascii_lower(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_octdigit
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,86:::fn is_ascii_octdigit(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,107:::fn is_ascii_octdigit(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_punctuation
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,40:::fn is_ascii_punctuation(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,49:::fn is_ascii_punctuation(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_upper
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,63:::fn is_ascii_upper(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,75:::fn is_ascii_upper(c : Char) -> Bool
 ```
 
 
 ## is\_ascii\_whitespace
 
 ```moonbit
-:::source,rami3l/cmark/char/ascii.mbt,30:::fn is_ascii_whitespace(c : Char) -> Bool
+:::source,rami3l/cmark/char/ascii.mbt,33:::fn is_ascii_whitespace(c : Char) -> Bool
 ```
 
 
@@ -248,20 +248,20 @@
 ## utf\_16\_clean\_raw
 
 ```moonbit
-:::source,rami3l/cmark/char/text.mbt,99:::fn utf_16_clean_raw(pad~ : Int = .., buf : <a href="moonbitlang/core/buffer#T">@moonbitlang/core/buffer.T</a>, s : String, first~ : Int, last~ : Int) -> String
+:::source,rami3l/cmark/char/text.mbt,99:::fn utf_16_clean_raw(pad~ : Int = .., buf : <a href="moonbitlang/core/builtin#StringBuilder">StringBuilder</a>, s : String, first~ : Int, last~ : Int) -> String
 ```
 
 
 ## utf\_16\_clean\_unesc\_unref
 
 ```moonbit
-:::source,rami3l/cmark/char/text.mbt,193:::fn utf_16_clean_unesc_unref(buf : <a href="moonbitlang/core/buffer#T">@moonbitlang/core/buffer.T</a>, s : String, first~ : Int, last~ : Int) -> String
+:::source,rami3l/cmark/char/text.mbt,195:::fn utf_16_clean_unesc_unref(buf : <a href="moonbitlang/core/builtin#StringBuilder">StringBuilder</a>, s : String, first~ : Int, last~ : Int) -> String
 ```
 
 
 ## utf\_16\_clean\_unref
 
 ```moonbit
-:::source,rami3l/cmark/char/text.mbt,203:::fn utf_16_clean_unref(buf : <a href="moonbitlang/core/buffer#T">@moonbitlang/core/buffer.T</a>, s : String, first~ : Int, last~ : Int) -> String
+:::source,rami3l/cmark/char/text.mbt,205:::fn utf_16_clean_unref(buf : <a href="moonbitlang/core/builtin#StringBuilder">StringBuilder</a>, s : String, first~ : Int, last~ : Int) -> String
 ```
 

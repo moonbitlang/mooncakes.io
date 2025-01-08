@@ -1,0 +1,199 @@
+{
+  "readme": "",
+  "name": "Yoorkin/rabbit-tea/browser",
+  "traits": [],
+  "types": [
+    {
+      "name": "Command",
+      "docstring": "",
+      "signature": "pub(all) type Command (<a href=\"Yoorkin/rabbit-tea/browser#PredefinedEvent\">PredefinedEvent</a>, (M) -> Unit) -> Unit",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "map",
+          "docstring": " Map the messages in the command to another type.",
+          "signature": "fn <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>::map[A, B](self : <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[A], f : (A) -> B) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[B]",
+          "loc": { "line": 5, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "PredefinedEvent",
+      "docstring": "",
+      "signature": "pub(all) struct PredefinedEvent {\n  on_url_changed : (<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>) -> Unit\n  on_url_request : (<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>) -> Unit\n}",
+      "loc": { "line": 12, "column": 17 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Sandbox",
+      "docstring": "",
+      "signature": "type Sandbox",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "launch",
+          "docstring": " Launch commands. It may trigger the update function.",
+          "signature": "fn <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>::launch[M, Model, View](self : <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>[M, Model, View], cmd : <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]) -> Unit",
+          "loc": { "line": 14, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>::new[Model, Msg, View](model : Model, update : (Msg, Model) -> (<a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[Msg], Model), view : (Model) -> View, after_update~ : (View) -> Unit, attach_to~ : String = .., url_changed? : (<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>) -> Msg, url_request? : (<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>) -> Msg) -> <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>[Msg, Model, View]",
+          "loc": { "line": 40, "column": 17 }
+        },
+        {
+          "name": "refersh",
+          "docstring": " Refresh the view.\n This function will call the view function and patch the result to the DOM.",
+          "signature": "fn <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>::refersh[Msg, Model, View](self : <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>[Msg, Model, View]) -> Unit",
+          "loc": { "line": 34, "column": 8 }
+        },
+        {
+          "name": "update",
+          "docstring": " Update the model and launch commands.",
+          "signature": "fn <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>::update[Msg, Model, View](self : <a href=\"Yoorkin/rabbit-tea/browser#Sandbox\">Sandbox</a>[Msg, Model, View], message : Msg) -> Unit",
+          "loc": { "line": 18, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "UrlRequest",
+      "docstring": "",
+      "signature": "pub(all) enum UrlRequest {\n  Internal(<a href=\"Yoorkin/rabbit-tea/url#Url\">@Yoorkin/rabbit-tea/url.Url</a>)\n  External(<a href=\"Yoorkin/rabbit-tea/url#Url\">@Yoorkin/rabbit-tea/url.Url</a>)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>, <a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>) -> Int",
+              "loc": { "line": 5, "column": 20 }
+            }
+          ],
+          "loc": { "line": 5, "column": 20 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>, <a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>) -> Bool",
+              "loc": { "line": 5, "column": 16 }
+            }
+          ],
+          "loc": { "line": 5, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">UrlRequest</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 5, "column": 10 }
+            }
+          ],
+          "loc": { "line": 5, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "back",
+      "docstring": "",
+      "signature": "fn back[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 8, "column": 8 }
+    },
+    {
+      "name": "batch",
+      "docstring": "",
+      "signature": "fn batch[M](xs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]]) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 29, "column": 8 }
+    },
+    {
+      "name": "forward",
+      "docstring": "",
+      "signature": "fn forward[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 13, "column": 8 }
+    },
+    {
+      "name": "load",
+      "docstring": "",
+      "signature": "fn load[M](url : String) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 18, "column": 8 }
+    },
+    {
+      "name": "none",
+      "docstring": "",
+      "signature": "fn none[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 24, "column": 8 }
+    },
+    {
+      "name": "push_url",
+      "docstring": "",
+      "signature": "fn push_url[M](url : String) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 28, "column": 8 }
+    },
+    {
+      "name": "reload",
+      "docstring": "",
+      "signature": "fn reload[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 23, "column": 8 }
+    },
+    {
+      "name": "replace_url",
+      "docstring": " ",
+      "signature": "fn replace_url[M](url : String) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 37, "column": 8 }
+    },
+    {
+      "name": "scroll_by_pos",
+      "docstring": "",
+      "signature": "fn scroll_by_pos[M](x : Int, y : Int) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 7, "column": 8 }
+    },
+    {
+      "name": "scroll_to",
+      "docstring": "",
+      "signature": "fn scroll_to[M](element : String) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 12, "column": 8 }
+    },
+    {
+      "name": "scroll_to_bottom",
+      "docstring": "",
+      "signature": "fn scroll_to_bottom[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 22, "column": 8 }
+    },
+    {
+      "name": "scroll_to_pos",
+      "docstring": "",
+      "signature": "fn scroll_to_pos[M](x : Int, y : Int) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "scroll_to_top",
+      "docstring": "",
+      "signature": "fn scroll_to_top[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 17, "column": 8 }
+    },
+    {
+      "name": "task",
+      "docstring": "",
+      "signature": "fn task[M](message : M) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">Command</a>[M]",
+      "loc": { "line": 34, "column": 8 }
+    }
+  ],
+  "misc": []
+}

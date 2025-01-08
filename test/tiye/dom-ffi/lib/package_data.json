@@ -1,0 +1,1041 @@
+{
+  "readme": "",
+  "name": "tiye/dom-ffi/lib",
+  "traits": [],
+  "types": [
+    {
+      "name": "BeforeUnloadEvent",
+      "docstring": "",
+      "signature": "pub(all) type BeforeUnloadEvent",
+      "loc": { "line": 36, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "BlurEvent",
+      "docstring": "",
+      "signature": "pub(all) type BlurEvent",
+      "loc": { "line": 110, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "CSSStyleDeclaration",
+      "docstring": "",
+      "signature": "pub(all) type CSSStyleDeclaration",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "remove_property",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#CSSStyleDeclaration\">CSSStyleDeclaration</a>::remove_property(self : <a href=\"tiye/dom-ffi/lib#CSSStyleDeclaration\">CSSStyleDeclaration</a>, name : String) -> Unit",
+          "loc": { "line": 16, "column": 20 }
+        },
+        {
+          "name": "set_property",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#CSSStyleDeclaration\">CSSStyleDeclaration</a>::set_property(self : <a href=\"tiye/dom-ffi/lib#CSSStyleDeclaration\">CSSStyleDeclaration</a>, name : String, value : String) -> Unit",
+          "loc": { "line": 8, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Document",
+      "docstring": "",
+      "signature": "pub(all) type Document",
+      "loc": { "line": 1, "column": 15 },
+      "methods": [
+        {
+          "name": "body",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Document\">Document</a>::body(self : <a href=\"tiye/dom-ffi/lib#Document\">Document</a>) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 7, "column": 20 }
+        },
+        {
+          "name": "create_element",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Document\">Document</a>::create_element(self : <a href=\"tiye/dom-ffi/lib#Document\">Document</a>, name : String) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 247, "column": 20 }
+        },
+        {
+          "name": "head",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Document\">Document</a>::head(self : <a href=\"tiye/dom-ffi/lib#Document\">Document</a>) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 11, "column": 20 }
+        },
+        {
+          "name": "query_selector",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Document\">Document</a>::query_selector(self : <a href=\"tiye/dom-ffi/lib#Document\">Document</a>, selector : String) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 14, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Element",
+      "docstring": "",
+      "signature": "pub(all) type Element",
+      "loc": { "line": 23, "column": 15 },
+      "methods": [
+        {
+          "name": "append_child",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::append_child(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> Unit",
+          "loc": { "line": 61, "column": 20 }
+        },
+        {
+          "name": "data_attribute",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::data_attribute(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String) -> String",
+          "loc": { "line": 55, "column": 20 }
+        },
+        {
+          "name": "dirty_get_attribute_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::dirty_get_attribute_fn(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String) -> (() -> Bool)",
+          "loc": { "line": 51, "column": 20 }
+        },
+        {
+          "name": "dirty_remove_attribute_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::dirty_remove_attribute_fn(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String) -> Unit",
+          "loc": { "line": 66, "column": 20 }
+        },
+        {
+          "name": "dirty_set_attribute_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::dirty_set_attribute_fn(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool) -> Unit",
+          "loc": { "line": 58, "column": 20 }
+        },
+        {
+          "name": "focus",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::focus(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> Unit",
+          "loc": { "line": 265, "column": 29 }
+        },
+        {
+          "name": "insert_before",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::insert_before(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, new_child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, reference_child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> Unit",
+          "loc": { "line": 200, "column": 20 }
+        },
+        {
+          "name": "query_selector",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::query_selector(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, selector : String) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 240, "column": 29 }
+        },
+        {
+          "name": "reinterpret_as_html_input_element",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::reinterpret_as_html_input_element(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>",
+          "loc": { "line": 114, "column": 20 }
+        },
+        {
+          "name": "reinterpret_as_html_textarea_element",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::reinterpret_as_html_textarea_element(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>",
+          "loc": { "line": 207, "column": 20 }
+        },
+        {
+          "name": "reinterpret_as_node",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::reinterpret_as_node(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> <a href=\"tiye/dom-ffi/lib#Node\">Node</a>",
+          "loc": { "line": 16, "column": 20 }
+        },
+        {
+          "name": "remove_attribute",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::remove_attribute(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String) -> Unit",
+          "loc": { "line": 45, "column": 20 }
+        },
+        {
+          "name": "remove_data_attribute",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::remove_data_attribute(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String) -> Unit",
+          "loc": { "line": 58, "column": 20 }
+        },
+        {
+          "name": "set_attribute",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_attribute(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String, value : String) -> Unit",
+          "loc": { "line": 37, "column": 20 }
+        },
+        {
+          "name": "set_data_attribute",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_data_attribute(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, name : String, value : String) -> Unit",
+          "loc": { "line": 48, "column": 20 }
+        },
+        {
+          "name": "set_html_for",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_html_for(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, html : String) -> Unit",
+          "loc": { "line": 31, "column": 20 }
+        },
+        {
+          "name": "set_inner_html",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_inner_html(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, html : String) -> Unit",
+          "loc": { "line": 25, "column": 20 }
+        },
+        {
+          "name": "set_inner_text",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_inner_text(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, text : String) -> Unit",
+          "loc": { "line": 28, "column": 20 }
+        },
+        {
+          "name": "set_onclick",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_onclick(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, f : (<a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>) -> Unit) -> Unit",
+          "loc": { "line": 221, "column": 20 }
+        },
+        {
+          "name": "set_ondblclick",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::set_ondblclick(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>, f : (<a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>) -> Unit) -> Unit",
+          "loc": { "line": 231, "column": 20 }
+        },
+        {
+          "name": "tag_name",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::tag_name(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> String",
+          "loc": { "line": 34, "column": 20 }
+        },
+        {
+          "name": "unset_onclick",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::unset_onclick(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> Unit",
+          "loc": { "line": 227, "column": 20 }
+        },
+        {
+          "name": "unset_ondblclick",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Element\">Element</a>::unset_ondblclick(self : <a href=\"tiye/dom-ffi/lib#Element\">Element</a>) -> Unit",
+          "loc": { "line": 237, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "FocusEvent",
+      "docstring": "",
+      "signature": "pub(all) type FocusEvent",
+      "loc": { "line": 108, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HtmlInputElement",
+      "docstring": "",
+      "signature": "pub(all) type HtmlInputElement",
+      "loc": { "line": 112, "column": 15 },
+      "methods": [
+        {
+          "name": "set_onblur",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_onblur(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#BlurEvent\">BlurEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 122, "column": 20 }
+        },
+        {
+          "name": "set_onchange",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_onchange(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#InputEvent\">InputEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 150, "column": 20 }
+        },
+        {
+          "name": "set_onfocus",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_onfocus(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#FocusEvent\">FocusEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 129, "column": 20 }
+        },
+        {
+          "name": "set_oninput",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_oninput(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#InputEvent\">InputEvent</a>) -> Unit) -> Unit",
+          "loc": { "line": 164, "column": 20 }
+        },
+        {
+          "name": "set_onkeydown",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_onkeydown(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 79, "column": 20 }
+        },
+        {
+          "name": "set_onkeypress",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_onkeypress(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 65, "column": 20 }
+        },
+        {
+          "name": "set_onkeyup",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_onkeyup(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 93, "column": 20 }
+        },
+        {
+          "name": "set_value",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::set_value(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>, value : String) -> Unit",
+          "loc": { "line": 183, "column": 20 }
+        },
+        {
+          "name": "unset_oninput",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::unset_oninput(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>) -> Unit",
+          "loc": { "line": 170, "column": 20 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>::value(self : <a href=\"tiye/dom-ffi/lib#HtmlInputElement\">HtmlInputElement</a>) -> String",
+          "loc": { "line": 180, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "HtmlTextAreaElement",
+      "docstring": "",
+      "signature": "pub(all) type HtmlTextAreaElement",
+      "loc": { "line": 119, "column": 15 },
+      "methods": [
+        {
+          "name": "set_onblur",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_onblur(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#BlurEvent\">BlurEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 136, "column": 20 }
+        },
+        {
+          "name": "set_onchange",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_onchange(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#InputEvent\">InputEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 157, "column": 20 }
+        },
+        {
+          "name": "set_onfocus",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_onfocus(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#FocusEvent\">FocusEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 143, "column": 20 }
+        },
+        {
+          "name": "set_oninput",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_oninput(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#InputEvent\">InputEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 174, "column": 20 }
+        },
+        {
+          "name": "set_onkeydown",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_onkeydown(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 86, "column": 20 }
+        },
+        {
+          "name": "set_onkeypress",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_onkeypress(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 72, "column": 20 }
+        },
+        {
+          "name": "set_onkeyup",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_onkeyup(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit?) -> Unit",
+          "loc": { "line": 100, "column": 20 }
+        },
+        {
+          "name": "set_value",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::set_value(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>, value : String) -> Unit",
+          "loc": { "line": 189, "column": 20 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>::value(self : <a href=\"tiye/dom-ffi/lib#HtmlTextAreaElement\">HtmlTextAreaElement</a>) -> String",
+          "loc": { "line": 186, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "InputEvent",
+      "docstring": "",
+      "signature": "pub(all) type InputEvent",
+      "loc": { "line": 106, "column": 15 },
+      "methods": [
+        {
+          "name": "target",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#InputEvent\">InputEvent</a>::target(self : <a href=\"tiye/dom-ffi/lib#InputEvent\">InputEvent</a>) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 262, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "JsValue",
+      "docstring": "",
+      "signature": "pub(all) type JsValue",
+      "loc": { "line": 3, "column": 15 },
+      "methods": [
+        {
+          "name": "then_ffi",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#JsValue\">JsValue</a>::then_ffi(self : <a href=\"tiye/dom-ffi/lib#JsValue\">JsValue</a>, f : (<a href=\"tiye/dom-ffi/lib#JsValue\">JsValue</a>) -> <a href=\"tiye/dom-ffi/lib#JsValue\">JsValue</a>) -> <a href=\"tiye/dom-ffi/lib#Promise\">Promise</a>[<a href=\"tiye/dom-ffi/lib#JsValue\">JsValue</a>]",
+          "loc": { "line": 9, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "KeyboardEvent",
+      "docstring": "",
+      "signature": "pub(all) type KeyboardEvent",
+      "loc": { "line": 1, "column": 15 },
+      "methods": [
+        {
+          "name": "alt_key",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::alt_key(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 30, "column": 20 }
+        },
+        {
+          "name": "char_code",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::char_code(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> UInt",
+          "loc": { "line": 47, "column": 20 }
+        },
+        {
+          "name": "code",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::code(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> String",
+          "loc": { "line": 44, "column": 20 }
+        },
+        {
+          "name": "ctrl_key",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::ctrl_key(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 26, "column": 20 }
+        },
+        {
+          "name": "key",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::key(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> String",
+          "loc": { "line": 10, "column": 20 }
+        },
+        {
+          "name": "key_code",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::key_code(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> UInt",
+          "loc": { "line": 18, "column": 20 }
+        },
+        {
+          "name": "location",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::location(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> UInt",
+          "loc": { "line": 50, "column": 20 }
+        },
+        {
+          "name": "meta_key",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::meta_key(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 34, "column": 20 }
+        },
+        {
+          "name": "new_with_init_dict",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::new_with_init_dict(type_ : String, event_init_dict : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>) -> <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>",
+          "loc": { "line": 3, "column": 35 }
+        },
+        {
+          "name": "prevent_default",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::prevent_default(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit",
+          "loc": { "line": 57, "column": 20 }
+        },
+        {
+          "name": "repeat",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::repeat(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 38, "column": 20 }
+        },
+        {
+          "name": "set_repeat",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::set_repeat(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>, repeat : Bool) -> Unit",
+          "loc": { "line": 64, "column": 20 }
+        },
+        {
+          "name": "shift_key",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::shift_key(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 22, "column": 20 }
+        },
+        {
+          "name": "stop_propagation",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::stop_propagation(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Unit",
+          "loc": { "line": 60, "column": 20 }
+        },
+        {
+          "name": "type_",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::type_(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> String",
+          "loc": { "line": 14, "column": 20 }
+        },
+        {
+          "name": "view",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>::view(self : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> <a href=\"tiye/dom-ffi/lib#Window\">Window</a>",
+          "loc": { "line": 41, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "KeyboardEventInit",
+      "docstring": " need to init function first before creating real event",
+      "signature": "pub(all) type KeyboardEventInit",
+      "loc": { "line": 68, "column": 15 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::new() -> <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>",
+          "loc": { "line": 70, "column": 39 }
+        },
+        {
+          "name": "set_char_code",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::set_char_code(self : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>, char_code : UInt) -> Unit",
+          "loc": { "line": 85, "column": 20 }
+        },
+        {
+          "name": "set_code",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::set_code(self : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>, code : String) -> Unit",
+          "loc": { "line": 82, "column": 20 }
+        },
+        {
+          "name": "set_key",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::set_key(self : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>, key : String) -> Unit",
+          "loc": { "line": 79, "column": 20 }
+        },
+        {
+          "name": "set_key_code",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::set_key_code(self : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>, key_code : UInt) -> Unit",
+          "loc": { "line": 100, "column": 20 }
+        },
+        {
+          "name": "set_location",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::set_location(self : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>, location : UInt) -> Unit",
+          "loc": { "line": 94, "column": 20 }
+        },
+        {
+          "name": "set_view",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>::set_view(self : <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>, view : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>) -> Unit",
+          "loc": { "line": 91, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "LocalStorage",
+      "docstring": "",
+      "signature": "pub(all) type LocalStorage",
+      "loc": { "line": 1, "column": 15 },
+      "methods": [
+        {
+          "name": "get_item",
+          "docstring": " TODO undefined is used to trick `String?` type, need more solid solution",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>::get_item(self : <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>, key : String) -> String?",
+          "loc": { "line": 7, "column": 20 }
+        },
+        {
+          "name": "remove_item",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>::remove_item(self : <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>, key : String) -> Unit",
+          "loc": { "line": 17, "column": 20 }
+        },
+        {
+          "name": "set_item",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>::set_item(self : <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>, key : String, value : String) -> Unit",
+          "loc": { "line": 10, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Location",
+      "docstring": " https://developer.mozilla.org/en-US/docs/Web/API/Location",
+      "signature": "pub(all) type Location",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "assign",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::assign(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>, url : String) -> Unit",
+          "loc": { "line": 37, "column": 20 }
+        },
+        {
+          "name": "hash",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::hash(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 31, "column": 20 }
+        },
+        {
+          "name": "host",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::host(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 16, "column": 20 }
+        },
+        {
+          "name": "hostname",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::hostname(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 19, "column": 20 }
+        },
+        {
+          "name": "href",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::href(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 7, "column": 20 }
+        },
+        {
+          "name": "origin",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::origin(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 34, "column": 20 }
+        },
+        {
+          "name": "pathname",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::pathname(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 25, "column": 20 }
+        },
+        {
+          "name": "port",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::port(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 22, "column": 20 }
+        },
+        {
+          "name": "protocol",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::protocol(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 13, "column": 20 }
+        },
+        {
+          "name": "reload",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::reload(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> Unit",
+          "loc": { "line": 40, "column": 20 }
+        },
+        {
+          "name": "replace",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::replace(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>, url : String) -> Unit",
+          "loc": { "line": 43, "column": 20 }
+        },
+        {
+          "name": "search",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::search(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 28, "column": 20 }
+        },
+        {
+          "name": "set_href",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::set_href(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>, href : String) -> Unit",
+          "loc": { "line": 10, "column": 20 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Location\">Location</a>::to_string(self : <a href=\"tiye/dom-ffi/lib#Location\">Location</a>) -> String",
+          "loc": { "line": 46, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "MouseEvent",
+      "docstring": "",
+      "signature": "pub(all) type MouseEvent",
+      "loc": { "line": 112, "column": 15 },
+      "methods": [
+        {
+          "name": "client_x",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>::client_x(self : <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>) -> Float",
+          "loc": { "line": 121, "column": 20 }
+        },
+        {
+          "name": "client_y",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>::client_y(self : <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>) -> Float",
+          "loc": { "line": 125, "column": 20 }
+        },
+        {
+          "name": "prevent_default",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>::prevent_default(self : <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>) -> Unit",
+          "loc": { "line": 117, "column": 20 }
+        },
+        {
+          "name": "stop_propagation",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>::stop_propagation(self : <a href=\"tiye/dom-ffi/lib#MouseEvent\">MouseEvent</a>) -> Unit",
+          "loc": { "line": 114, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Navigator",
+      "docstring": " `window.navigator` object\n https://developer.mozilla.org/en-US/docs/Web/API/Navigator",
+      "signature": "pub(all) type Navigator",
+      "loc": { "line": 3, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Node",
+      "docstring": " DOM Node type\n <https://developer.mozilla.org/en-US/docs/Web/API/Node>",
+      "signature": "pub(all) type Node",
+      "loc": { "line": 3, "column": 15 },
+      "methods": [
+        {
+          "name": "append_child",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::append_child(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> Unit",
+          "loc": { "line": 250, "column": 20 }
+        },
+        {
+          "name": "child_nodes",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::child_nodes(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"tiye/dom-ffi/lib#Node\">Node</a>]",
+          "loc": { "line": 5, "column": 20 }
+        },
+        {
+          "name": "children",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::children(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"tiye/dom-ffi/lib#Node\">Node</a>]",
+          "loc": { "line": 9, "column": 20 }
+        },
+        {
+          "name": "clone_node",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::clone_node(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, deep~ : Bool = ..) -> <a href=\"tiye/dom-ffi/lib#Node\">Node</a>",
+          "loc": { "line": 106, "column": 20 }
+        },
+        {
+          "name": "dispatch_event",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::dispatch_event(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, event : <a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool",
+          "loc": { "line": 54, "column": 20 }
+        },
+        {
+          "name": "first_child",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::first_child(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"tiye/dom-ffi/lib#Node\">Node</a>",
+          "loc": { "line": 20, "column": 20 }
+        },
+        {
+          "name": "insert_before",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::insert_before(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, new_child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, reference_child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>?) -> Unit",
+          "loc": { "line": 254, "column": 20 }
+        },
+        {
+          "name": "owner_document",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::owner_document(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"tiye/dom-ffi/lib#Document\">Document</a>",
+          "loc": { "line": 109, "column": 20 }
+        },
+        {
+          "name": "parent_element",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::parent_element(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 196, "column": 20 }
+        },
+        {
+          "name": "reinterpret_as_element",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::reinterpret_as_element(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"tiye/dom-ffi/lib#Element\">Element</a>",
+          "loc": { "line": 12, "column": 20 }
+        },
+        {
+          "name": "remove",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::remove(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> Unit",
+          "loc": { "line": 213, "column": 20 }
+        },
+        {
+          "name": "remove_child",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::remove_child(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>, child : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> Unit",
+          "loc": { "line": 217, "column": 20 }
+        },
+        {
+          "name": "style",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Node\">Node</a>::style(self : <a href=\"tiye/dom-ffi/lib#Node\">Node</a>) -> <a href=\"tiye/dom-ffi/lib#CSSStyleDeclaration\">CSSStyleDeclaration</a>",
+          "loc": { "line": 4, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Performance",
+      "docstring": "",
+      "signature": "pub(all) type Performance",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "now",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Performance\">Performance</a>::now(self : <a href=\"tiye/dom-ffi/lib#Performance\">Performance</a>) -> Float",
+          "loc": { "line": 8, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Promise",
+      "docstring": "",
+      "signature": "pub(all) struct Promise {\n  val : T\n}",
+      "loc": { "line": 5, "column": 17 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "URLSearchParams",
+      "docstring": " https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams",
+      "signature": "pub(all) type URLSearchParams",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "append",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::append(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>, name : String, value : String) -> Unit",
+          "loc": { "line": 26, "column": 20 }
+        },
+        {
+          "name": "delete",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::delete(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>, name : String) -> Unit",
+          "loc": { "line": 33, "column": 20 }
+        },
+        {
+          "name": "get",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::get(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>, name : String) -> String",
+          "loc": { "line": 10, "column": 20 }
+        },
+        {
+          "name": "get_all",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::get_all(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>, name : String) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+          "loc": { "line": 13, "column": 20 }
+        },
+        {
+          "name": "has",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::has(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>, name : String) -> Bool",
+          "loc": { "line": 7, "column": 20 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::set(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>, name : String, value : String) -> Unit",
+          "loc": { "line": 19, "column": 20 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>::to_string(self : <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>) -> String",
+          "loc": { "line": 36, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Window",
+      "docstring": " window",
+      "signature": "pub(all) type Window",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "add_event_listener_with_callback",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::add_event_listener_with_callback(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, type_ : String, f : (<a href=\"tiye/dom-ffi/lib#KeyboardEvent\">KeyboardEvent</a>) -> Bool) -> Unit",
+          "loc": { "line": 8, "column": 20 }
+        },
+        {
+          "name": "dirty_call_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_call_fn(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String) -> Unit",
+          "loc": { "line": 16, "column": 20 }
+        },
+        {
+          "name": "dirty_call_fn_1",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_call_fn_1(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String, v1 : String) -> Unit",
+          "loc": { "line": 39, "column": 20 }
+        },
+        {
+          "name": "dirty_get_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_get_fn(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String) -> (() -> Unit)",
+          "loc": { "line": 8, "column": 20 }
+        },
+        {
+          "name": "dirty_get_fn_1",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_get_fn_1(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String) -> ((String) -> Unit)",
+          "loc": { "line": 24, "column": 20 }
+        },
+        {
+          "name": "dirty_remove_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_remove_fn(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String) -> Unit",
+          "loc": { "line": 20, "column": 20 }
+        },
+        {
+          "name": "dirty_set_fn",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_set_fn(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String, f : () -> Unit) -> Unit",
+          "loc": { "line": 12, "column": 20 }
+        },
+        {
+          "name": "dirty_set_fn_1",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::dirty_set_fn_1(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, name : String, f : (String) -> Unit) -> Unit",
+          "loc": { "line": 31, "column": 20 }
+        },
+        {
+          "name": "document",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::document(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>) -> <a href=\"tiye/dom-ffi/lib#Document\">Document</a>",
+          "loc": { "line": 3, "column": 20 }
+        },
+        {
+          "name": "keyboard_event_init",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::keyboard_event_init(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, type_ : String) -> <a href=\"tiye/dom-ffi/lib#KeyboardEventInit\">KeyboardEventInit</a>",
+          "loc": { "line": 73, "column": 20 }
+        },
+        {
+          "name": "local_storage",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::local_storage(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>) -> <a href=\"tiye/dom-ffi/lib#LocalStorage\">LocalStorage</a>",
+          "loc": { "line": 3, "column": 20 }
+        },
+        {
+          "name": "location",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::location(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>) -> <a href=\"tiye/dom-ffi/lib#Location\">Location</a>",
+          "loc": { "line": 4, "column": 20 }
+        },
+        {
+          "name": "performance",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::performance(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>) -> <a href=\"tiye/dom-ffi/lib#Performance\">Performance</a>",
+          "loc": { "line": 4, "column": 20 }
+        },
+        {
+          "name": "remove_event_listener_with_callback",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::remove_event_listener_with_callback(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, type_ : String, f : () -> Bool) -> Unit",
+          "loc": { "line": 16, "column": 20 }
+        },
+        {
+          "name": "request_animation_frame",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::request_animation_frame(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, f : (Float) -> Unit) -> Unit",
+          "loc": { "line": 30, "column": 20 }
+        },
+        {
+          "name": "set_onbeforeunload",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::set_onbeforeunload(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, f : (<a href=\"tiye/dom-ffi/lib#BeforeUnloadEvent\">BeforeUnloadEvent</a>) -> Unit) -> Unit",
+          "loc": { "line": 41, "column": 20 }
+        },
+        {
+          "name": "set_timeout",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/dom-ffi/lib#Window\">Window</a>::set_timeout(self : <a href=\"tiye/dom-ffi/lib#Window\">Window</a>, f : () -> Unit, ms : UInt) -> Unit",
+          "loc": { "line": 23, "column": 20 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "before_unload_event",
+      "docstring": "",
+      "signature": "fn before_unload_event() -> <a href=\"tiye/dom-ffi/lib#BeforeUnloadEvent\">BeforeUnloadEvent</a>",
+      "loc": { "line": 38, "column": 20 }
+    },
+    {
+      "name": "debugger",
+      "docstring": "",
+      "signature": "fn debugger() -> Unit",
+      "loc": { "line": 1, "column": 20 }
+    },
+    {
+      "name": "error_log",
+      "docstring": "",
+      "signature": "fn error_log(msg : String) -> Unit",
+      "loc": { "line": 7, "column": 20 }
+    },
+    {
+      "name": "load_my_window",
+      "docstring": " this file contains dirty functions that Respo requires to call js",
+      "signature": "fn load_my_window() -> <a href=\"tiye/dom-ffi/lib#Window\">Window</a>",
+      "loc": { "line": 4, "column": 20 }
+    },
+    {
+      "name": "log",
+      "docstring": "",
+      "signature": "fn log(msg : String) -> Unit",
+      "loc": { "line": 1, "column": 20 }
+    },
+    {
+      "name": "new_url_search_params",
+      "docstring": "",
+      "signature": "fn new_url_search_params(s : String) -> <a href=\"tiye/dom-ffi/lib#URLSearchParams\">URLSearchParams</a>",
+      "loc": { "line": 4, "column": 20 }
+    },
+    {
+      "name": "random_id",
+      "docstring": " a temporary solution for generating random id",
+      "signature": "fn random_id() -> String",
+      "loc": { "line": 47, "column": 20 }
+    },
+    {
+      "name": "warn_log",
+      "docstring": "",
+      "signature": "fn warn_log(msg : String) -> Unit",
+      "loc": { "line": 4, "column": 20 }
+    },
+    {
+      "name": "window",
+      "docstring": "",
+      "signature": "fn window() -> <a href=\"tiye/dom-ffi/lib#Window\">Window</a>",
+      "loc": { "line": 4, "column": 20 }
+    }
+  ],
+  "misc": []
+}

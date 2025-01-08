@@ -36,39 +36,29 @@ http://localhost:8080/examples/count-vowels
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a> with op_equal(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>, <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a> with output(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a> with to_json(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::fn <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>::op_equal(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>, <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::fn <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>::output(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::fn <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>::to_json(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,extism/moonbit-pdk/examples/count-vowels/traits.mbt,85:::fn <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>
   ```
   > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::fn op_equal(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>, <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::fn output(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/examples/count-vowels/count-vowels.mbt,10:::fn to_json(<a href="extism/moonbit-pdk/examples/count-vowels#VowelReport">VowelReport</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## count\_vowels
 

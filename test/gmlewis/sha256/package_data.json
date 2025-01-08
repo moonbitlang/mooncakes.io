@@ -1,0 +1,73 @@
+{
+  "readme": "# gmlewis/sha256\n[![check](https://github.com/gmlewis/moonbit-sha256/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-sha256/actions/workflows/check.yml)\n\nThis is a simple sha256 hash algorithm based on Go's implementation:\nhttps://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha256/sha256.go\nwhich has the copyright notice:\n\n```\n// Copyright 2009 The Go Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style\n// license that can be found in the LICENSE file.\n```\n\n## Status\n\nThe code has been updated to support compiler:\n\n```bash\n$ moon version --all\nmoon 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moon\nmoonc v0.1.20241216+68e710374 ~/.moon/bin/moonc\nmoonrun 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moonrun\n```\n\nUse `moonup` to manage `moon` compiler versions:\nhttps://github.com/chawyehsu/moonup\n",
+  "name": "gmlewis/sha256",
+  "traits": [
+    {
+      "name": "@gmlewis/sha256.HashFunc",
+      "docstring": " `HashFunc` represents a hash algorithm like `@crc32`, `@md5`, or `@sha256`.",
+      "signature": "pub(open) trait @gmlewis/sha256.HashFunc {\n  name(Self) -> String\n  write(Self, Byte) -> Unit\n  check_sum(Self) -> String\n}",
+      "loc": { "line": 2, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Digest",
+      "docstring": " `Digest` represents the partial evaluation of a checksum.",
+      "signature": "type Digest",
+      "loc": { "line": 43, "column": 8 },
+      "methods": [
+        {
+          "name": "check_sum",
+          "docstring": " `check_sum` returns the final sha256sum as a hex string.",
+          "signature": "fn <a href=\"gmlewis/sha256#Digest\">Digest</a>::check_sum(self : <a href=\"gmlewis/sha256#Digest\">Digest</a>) -> String",
+          "loc": { "line": 76, "column": 8 }
+        },
+        {
+          "name": "name",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/sha256#Digest\">Digest</a>::name(self : <a href=\"gmlewis/sha256#Digest\">Digest</a>) -> String",
+          "loc": { "line": 71, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " `Digest::new` returns a new, reset Digest, ready to sum.",
+          "signature": "fn <a href=\"gmlewis/sha256#Digest\">Digest</a>::new() -> <a href=\"gmlewis/sha256#Digest\">Digest</a>",
+          "loc": { "line": 54, "column": 16 }
+        },
+        {
+          "name": "reset",
+          "docstring": " `reset` resets a digest for re-use.",
+          "signature": "fn <a href=\"gmlewis/sha256#Digest\">Digest</a>::reset(self : <a href=\"gmlewis/sha256#Digest\">Digest</a>) -> Unit",
+          "loc": { "line": 124, "column": 8 }
+        },
+        {
+          "name": "write",
+          "docstring": " `write` writes a byte to the digest.",
+          "signature": "fn <a href=\"gmlewis/sha256#Digest\">Digest</a>::write(self : <a href=\"gmlewis/sha256#Digest\">Digest</a>, b : Byte) -> Unit",
+          "loc": { "line": 138, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "HMAC",
+      "docstring": "",
+      "signature": "type HMAC",
+      "loc": { "line": 21, "column": 8 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "gen_hmac",
+      "docstring": " `gen_hmac` generates a base64-encoded String representing\n the SHA256 signature of the provided `body` using the provided\n `client_secret` key.",
+      "signature": "fn gen_hmac(body : Bytes, client_secret : Bytes) -> String",
+      "loc": { "line": 11, "column": 8 }
+    }
+  ],
+  "misc": []
+}

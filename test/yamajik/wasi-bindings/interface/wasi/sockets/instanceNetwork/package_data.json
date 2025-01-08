@@ -1,0 +1,16 @@
+{
+  "readme": "This interface provides a value-export of the default network handle..",
+  "name": "yamajik/wasi-bindings/interface/wasi/sockets/instanceNetwork",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "instance_network",
+      "docstring": " Get a handle to the default network.",
+      "signature": "fn instance_network() -> <a href=\"yamajik/wasi-bindings/interface/wasi/sockets/network#Network\">@yamajik/wasi-bindings/interface/wasi/sockets/network.Network</a>",
+      "loc": { "line": 3, "column": 8 }
+    }
+  ],
+  "misc": []
+}

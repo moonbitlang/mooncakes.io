@@ -1,0 +1,314 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp",
+  "traits": [],
+  "types": [
+    {
+      "name": "IncomingDatagram",
+      "docstring": " A received datagram.",
+      "signature": "pub(all) struct IncomingDatagram {\n  data : Bytes\n  remote_address : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpSocketAddress</a>\n}",
+      "loc": { "line": 4, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram\">IncomingDatagram</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram\">IncomingDatagram</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram\">IncomingDatagram</a>) -> Bool",
+              "loc": { "line": 7, "column": 16 }
+            }
+          ],
+          "loc": { "line": 7, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram\">IncomingDatagram</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram\">IncomingDatagram</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 7, "column": 10 }
+            }
+          ],
+          "loc": { "line": 7, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "IncomingDatagramStream",
+      "docstring": "",
+      "signature": "pub(all) type IncomingDatagramStream Int",
+      "loc": { "line": 27, "column": 15 },
+      "methods": [
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>) -> Unit",
+          "loc": { "line": 33, "column": 32 }
+        },
+        {
+          "name": "receive",
+          "docstring": " Receive messages on the socket.\n\n This function attempts to receive up to `max-results` datagrams on the socket without blocking.\n The returned list may contain fewer elements than requested, but never more.\n\n This function returns successfully with an empty list when either:\n - `max-results` is 0, or:\n - `max-results` is greater than 0, but no results are immediately available.\n This function never returns `error(would-block)`.\n\n # Typical errors\n - `remote-unreachable`: The remote address is not reachable. (ECONNRESET, ENETRESET on Windows, EHOSTUNREACH, EHOSTDOWN, ENETUNREACH, ENETDOWN, ENONET)\n - `connection-refused`: The connection was refused. (ECONNREFUSED)\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/recvfrom.html>\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/recvmsg.html>\n - <https://man7.org/linux/man-pages/man2/recv.2.html>\n - <https://man7.org/linux/man-pages/man2/recvmmsg.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-recv>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-recvfrom>\n - <https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms741687(v=vs.85)>\n - <https://man.freebsd.org/cgi/man.cgi?query=recv&sektion=2>",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>::receive(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>, max_results : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagram\">IncomingDatagram</a>], <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 604, "column": 32 }
+        },
+        {
+          "name": "subscribe",
+          "docstring": " Create a `pollable` which will resolve once the stream is ready to receive again.\n\n Note: this function is here for WASI Preview2 only.\n It's planned to be removed when `future` is natively supported in Preview3.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>::subscribe(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+          "loc": { "line": 665, "column": 32 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>) -> Bool",
+              "loc": { "line": 27, "column": 55 }
+            }
+          ],
+          "loc": { "line": 27, "column": 55 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 27, "column": 49 }
+            }
+          ],
+          "loc": { "line": 27, "column": 49 }
+        }
+      ]
+    },
+    {
+      "name": "OutgoingDatagram",
+      "docstring": " A datagram to be sent out.",
+      "signature": "pub(all) struct OutgoingDatagram {\n  data : Bytes\n  remote_address : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpSocketAddress</a>?\n}",
+      "loc": { "line": 10, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram\">OutgoingDatagram</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram\">OutgoingDatagram</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram\">OutgoingDatagram</a>) -> Bool",
+              "loc": { "line": 13, "column": 16 }
+            }
+          ],
+          "loc": { "line": 13, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram\">OutgoingDatagram</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram\">OutgoingDatagram</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 13, "column": 10 }
+            }
+          ],
+          "loc": { "line": 13, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "OutgoingDatagramStream",
+      "docstring": "",
+      "signature": "pub(all) type OutgoingDatagramStream Int",
+      "loc": { "line": 38, "column": 15 },
+      "methods": [
+        {
+          "name": "check_send",
+          "docstring": " Check readiness for sending. This function never blocks.\n\n Returns the number of datagrams permitted for the next call to `send`,\n or an error. Calling `send` with more datagrams than this function has\n permitted will trap.\n\n When this function returns ok(0), the `subscribe` pollable will\n become ready when this function will report at least ok(1), or an\n error.\n\n Never returns `would-block`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>::check_send(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 683, "column": 32 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>) -> Unit",
+          "loc": { "line": 44, "column": 32 }
+        },
+        {
+          "name": "send",
+          "docstring": " Send messages on the socket.\n\n This function attempts to send all provided `datagrams` on the socket without blocking and\n returns how many messages were actually sent (or queued for sending). This function never\n returns `error(would-block)`. If none of the datagrams were able to be sent, `ok(0)` is returned.\n\n This function semantically behaves the same as iterating the `datagrams` list and sequentially\n sending each individual datagram until either the end of the list has been reached or the first error occurred.\n If at least one datagram has been sent successfully, this function never returns an error.\n\n If the input list is empty, the function returns `ok(0)`.\n\n Each call to `send` must be permitted by a preceding `check-send`. Implementations must trap if\n either `check-send` was not called or `datagrams` contains more items than `check-send` permitted.\n\n # Typical errors\n - `invalid-argument`:        The `remote-address` has the wrong address family. (EAFNOSUPPORT)\n - `invalid-argument`:        The IP address in `remote-address` is set to INADDR_ANY (`0.0.0.0` / `::`). (EDESTADDRREQ, EADDRNOTAVAIL)\n - `invalid-argument`:        The port in `remote-address` is set to 0. (EDESTADDRREQ, EADDRNOTAVAIL)\n - `invalid-argument`:        The socket is in \"connected\" mode and `remote-address` is `some` value that does not match the address passed to `stream`. (EISCONN)\n - `invalid-argument`:        The socket is not \"connected\" and no value for `remote-address` was provided. (EDESTADDRREQ)\n - `remote-unreachable`:      The remote address is not reachable. (ECONNRESET, ENETRESET on Windows, EHOSTUNREACH, EHOSTDOWN, ENETUNREACH, ENETDOWN, ENONET)\n - `connection-refused`:      The connection was refused. (ECONNREFUSED)\n - `datagram-too-large`:      The datagram is too large. (EMSGSIZE)\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/sendto.html>\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/sendmsg.html>\n - <https://man7.org/linux/man-pages/man2/send.2.html>\n - <https://man7.org/linux/man-pages/man2/sendmmsg.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-send>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-sendto>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsasendmsg>\n - <https://man.freebsd.org/cgi/man.cgi?query=send&sektion=2>",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>::send(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>, datagrams : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagram\">OutgoingDatagram</a>]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 731, "column": 32 }
+        },
+        {
+          "name": "subscribe",
+          "docstring": " Create a `pollable` which will resolve once the stream is ready to send again.\n\n Note: this function is here for WASI Preview2 only.\n It's planned to be removed when `future` is natively supported in Preview3.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>::subscribe(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+          "loc": { "line": 805, "column": 32 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>) -> Bool",
+              "loc": { "line": 38, "column": 55 }
+            }
+          ],
+          "loc": { "line": 38, "column": 55 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 38, "column": 49 }
+            }
+          ],
+          "loc": { "line": 38, "column": 49 }
+        }
+      ]
+    },
+    {
+      "name": "UdpSocket",
+      "docstring": " A UDP socket handle.",
+      "signature": "pub(all) type UdpSocket Int",
+      "loc": { "line": 16, "column": 15 },
+      "methods": [
+        {
+          "name": "address_family",
+          "docstring": " Whether this is a IPv4 or IPv6 socket.\n\n Equivalent to the SO_DOMAIN socket option.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::address_family(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpAddressFamily</a>",
+          "loc": { "line": 448, "column": 19 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> Unit",
+          "loc": { "line": 22, "column": 19 }
+        },
+        {
+          "name": "finish_bind",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::finish_bind(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 153, "column": 19 }
+        },
+        {
+          "name": "local_address",
+          "docstring": " Get the current bound address.\n\n POSIX mentions:\n > If the socket has not been bound to a local name, the value\n > stored in the object pointed to by `address` is unspecified.\n\n WASI is stricter and requires `local-address` to return `invalid-state` when the socket hasn't been bound yet.\n\n # Typical errors\n - `invalid-state`: The socket is not bound to any local address.\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/getsockname.html>\n - <https://man7.org/linux/man-pages/man2/getsockname.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getsockname>\n - <https://man.freebsd.org/cgi/man.cgi?getsockname>",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::local_address(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpSocketAddress</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 337, "column": 19 }
+        },
+        {
+          "name": "receive_buffer_size",
+          "docstring": " The kernel buffer space reserved for sends/receives on this socket.\n\n If the provided value is 0, an `invalid-argument` error is returned.\n Any other value will never cause an error, but it might be silently clamped and/or rounded.\n I.e. after setting a value, reading the same setting back may return a different value.\n\n Equivalent to the SO_RCVBUF and SO_SNDBUF socket options.\n\n # Typical errors\n - `invalid-argument`:     (set) The provided value was 0.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::receive_buffer_size(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 503, "column": 19 }
+        },
+        {
+          "name": "remote_address",
+          "docstring": " Get the address the socket is currently streaming to.\n\n # Typical errors\n - `invalid-state`: The socket is not streaming to a specific remote address. (ENOTCONN)\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/getpeername.html>\n - <https://man7.org/linux/man-pages/man2/getpeername.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getpeername>\n - <https://man.freebsd.org/cgi/man.cgi?query=getpeername&sektion=2&n=1>",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::remote_address(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpSocketAddress</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 396, "column": 19 }
+        },
+        {
+          "name": "send_buffer_size",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::send_buffer_size(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 538, "column": 19 }
+        },
+        {
+          "name": "set_receive_buffer_size",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::set_receive_buffer_size(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, value : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 518, "column": 19 }
+        },
+        {
+          "name": "set_send_buffer_size",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::set_send_buffer_size(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, value : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 553, "column": 19 }
+        },
+        {
+          "name": "set_unicast_hop_limit",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::set_unicast_hop_limit(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, value : Byte) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 474, "column": 19 }
+        },
+        {
+          "name": "start_bind",
+          "docstring": " Bind the socket to a specific network on the provided IP address and port.\n\n If the IP address is zero (`0.0.0.0` in IPv4, `::` in IPv6), it is left to the implementation to decide which\n network interface(s) to bind to.\n If the port is zero, the socket will be bound to a random free port.\n\n # Typical errors\n - `invalid-argument`:          The `local-address` has the wrong address family. (EAFNOSUPPORT, EFAULT on Windows)\n - `invalid-state`:             The socket is already bound. (EINVAL)\n - `address-in-use`:            No ephemeral ports available. (EADDRINUSE, ENOBUFS on Windows)\n - `address-in-use`:            Address is already in use. (EADDRINUSE)\n - `address-not-bindable`:      `local-address` is not an address that the `network` can bind to. (EADDRNOTAVAIL)\n - `not-in-progress`:           A `bind` operation is not in progress.\n - `would-block`:               Can't finish the operation, it is still in progress. (EWOULDBLOCK, EAGAIN)\n\n # Implementors note\n Unlike in POSIX, in WASI the bind operation is async. This enables\n interactive WASI hosts to inject permission prompts. Runtimes that\n don't want to make use of this ability can simply call the native\n `bind` as part of either `start-bind` or `finish-bind`.\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/bind.html>\n - <https://man7.org/linux/man-pages/man2/bind.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-bind>\n - <https://man.freebsd.org/cgi/man.cgi?query=bind&sektion=2&format=html>",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::start_bind(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, network : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.Network</a>, local_address : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpSocketAddress</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 74, "column": 19 }
+        },
+        {
+          "name": "stream",
+          "docstring": " Set up inbound & outbound communication channels, optionally to a specific peer.\n\n This function only changes the local socket configuration and does not generate any network traffic.\n On success, the `remote-address` of the socket is updated. The `local-address` may be updated as well,\n based on the best network path to `remote-address`.\n\n When a `remote-address` is provided, the returned streams are limited to communicating with that specific peer:\n - `send` can only be used to send to this destination.\n - `receive` will only return datagrams sent from the provided `remote-address`.\n\n This method may be called multiple times on the same socket to change its association, but\n only the most recently returned pair of streams will be operational. Implementations may trap if\n the streams returned by a previous invocation haven't been dropped yet before calling `stream` again.\n\n The POSIX equivalent in pseudo-code is:\n ```text\n if (was previously connected) {\n connect(s, AF_UNSPEC)\n }\n if (remote_address is Some) {\n connect(s, remote_address)\n }\n ```\n\n Unlike in POSIX, the socket must already be explicitly bound.\n\n # Typical errors\n - `invalid-argument`:          The `remote-address` has the wrong address family. (EAFNOSUPPORT)\n - `invalid-argument`:          The IP address in `remote-address` is set to INADDR_ANY (`0.0.0.0` / `::`). (EDESTADDRREQ, EADDRNOTAVAIL)\n - `invalid-argument`:          The port in `remote-address` is set to 0. (EDESTADDRREQ, EADDRNOTAVAIL)\n - `invalid-state`:             The socket is not bound.\n - `address-in-use`:            Tried to perform an implicit bind, but there were no ephemeral ports available. (EADDRINUSE, EADDRNOTAVAIL on Linux, EAGAIN on BSD)\n - `remote-unreachable`:        The remote address is not reachable. (ECONNRESET, ENETRESET, EHOSTUNREACH, EHOSTDOWN, ENETUNREACH, ENETDOWN, ENONET)\n - `connection-refused`:        The connection was refused. (ECONNREFUSED)\n\n # References\n - <https://pubs.opengroup.org/onlinepubs/9699919799/functions/connect.html>\n - <https://man7.org/linux/man-pages/man2/connect.2.html>\n - <https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-connect>\n - <https://man.freebsd.org/cgi/man.cgi?connect>",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::stream(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, remote_address : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.IpSocketAddress</a>?) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#IncomingDatagramStream\">IncomingDatagramStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#OutgoingDatagramStream\">OutgoingDatagramStream</a>), <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 207, "column": 19 }
+        },
+        {
+          "name": "subscribe",
+          "docstring": " Create a `pollable` which will resolve once the socket is ready for I/O.\n\n Note: this function is here for WASI Preview2 only.\n It's planned to be removed when `future` is natively supported in Preview3.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::subscribe(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+          "loc": { "line": 576, "column": 19 }
+        },
+        {
+          "name": "unicast_hop_limit",
+          "docstring": " Equivalent to the IP_TTL & IPV6_UNICAST_HOPS socket options.\n\n If the provided value is 0, an `invalid-argument` error is returned.\n\n # Typical errors\n - `invalid-argument`:     (set) The TTL value must be 1 or higher.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>::unicast_hop_limit(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Byte, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network.ErrorCode</a>]",
+          "loc": { "line": 459, "column": 19 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>) -> Bool",
+              "loc": { "line": 16, "column": 42 }
+            }
+          ],
+          "loc": { "line": 16, "column": 42 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/udp#UdpSocket\">UdpSocket</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 16, "column": 36 }
+            }
+          ],
+          "loc": { "line": 16, "column": 36 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

@@ -40,30 +40,21 @@ their headers, trailers, and bodies.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,27:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#DnsErrorPayload">DnsErrorPayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## ErrorCode
 
@@ -115,30 +106,21 @@ https://www.iana.org/assignments/http-proxy-status/http-proxy-status.xhtml\#tabl
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,83:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## FieldSizePayload
 
@@ -152,30 +134,21 @@ https://www.iana.org/assignments/http-proxy-status/http-proxy-status.xhtml\#tabl
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,39:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FieldSizePayload">FieldSizePayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Fields
 
@@ -195,13 +168,21 @@ operations will fail with `header-error.immutable`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### append
@@ -282,16 +263,6 @@ operations will fail with `header-error.immutable`.
   ```
   >  Returns `true` when the key is present in this `fields`. If the key is
   > syntactically invalid, `false` is returned.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,103:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,639:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>::set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>, name : String, value : <a href="moonbitlang/core/array#Array">Array</a>[Bytes]) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>]
@@ -300,11 +271,6 @@ operations will fail with `header-error.immutable`.
   > key, if they have been set.
   > 
   >  Fails with `header-error.immutable` if the `fields` are immutable.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## FutureIncomingResponse
 
@@ -319,13 +285,21 @@ provide the HTTP Response corresponding to the sent Request.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -351,16 +325,6 @@ provide the HTTP Response corresponding to the sent Request.
   > occured. Errors may also occur while consuming the response body,
   > but those will be reported by the `incoming-body` and its
   > `output-stream` child.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,252:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### subscribe
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,2399:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>::subscribe(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>
@@ -368,11 +332,6 @@ provide the HTTP Response corresponding to the sent Request.
   >  Returns a pollable which becomes ready when either the Response has
   > been received, or an error has occured. When this pollable is ready,
   > the `get` method will return `some`.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureIncomingResponse">FutureIncomingResponse</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## FutureTrailers
 
@@ -387,13 +346,21 @@ complete Request or Response body has been received.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -424,16 +391,6 @@ complete Request or Response body has been received.
   > resource is immutable, and a child. Use of the `set`, `append`, or
   > `delete` methods will return an error, and the resource must be
   > dropped before the parent `future-trailers` is dropped.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,200:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### subscribe
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,1668:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>::subscribe(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>
@@ -441,11 +398,6 @@ complete Request or Response body has been received.
   >  Returns a pollable which becomes ready when either the trailers have
   > been received, or an error has occured. When this pollable is ready,
   > the `get` method will return `some`.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#FutureTrailers">FutureTrailers</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## HeaderError
 
@@ -461,30 +413,21 @@ setting or appending to a `fields` resource.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,91:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#HeaderError">HeaderError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## IncomingBody
 
@@ -502,13 +445,21 @@ the body contents or waiting on trailers at any given time.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -522,16 +473,6 @@ the body contents or waiting on trailers at any given time.
   ```
   >  Takes ownership of `incoming-body`, and returns a `future-trailers`.
   > This function will trap if the `input-stream` child is still alive.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,185:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### stream
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,1641:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>::stream(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.InputStream</a>, Unit]
@@ -551,11 +492,6 @@ the body contents or waiting on trailers at any given time.
   > backpressure is to be applied when the user is consuming the body,
   > and for that backpressure to not inhibit delivery of the trailers if
   > the user does not read the entire body.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingBody">IncomingBody</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## IncomingRequest
 
@@ -566,13 +502,21 @@ the body contents or waiting on trailers at any given time.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### authority
@@ -608,16 +552,6 @@ the body contents or waiting on trailers at any given time.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,784:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>::method(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>
   ```
   >  Returns the method of the incoming request.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,114:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### path\_with\_query
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,808:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>::path_with_query(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>) -> String?
@@ -628,11 +562,6 @@ the body contents or waiting on trailers at any given time.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,824:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>::scheme(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>?
   ```
   >  Returns the protocol scheme from the request.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest">IncomingRequest</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## IncomingResponse
 
@@ -643,13 +572,21 @@ the body contents or waiting on trailers at any given time.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### consume
@@ -674,26 +611,11 @@ the body contents or waiting on trailers at any given time.
   > 
   >  This headers resource is a child: it must be dropped before the parent
   > `incoming-response` is dropped.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,167:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### status
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,1593:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>::status(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>) -> UInt
   ```
   >  Returns the status code from the incoming response.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingResponse">IncomingResponse</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Method
 
@@ -715,30 +637,21 @@ the body contents or waiting on trailers at any given time.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,14:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## OutgoingBody
 
@@ -764,13 +677,21 @@ Request, or sending a late status code for the Response.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -791,21 +712,6 @@ Request, or sending a late status code for the Response.
   > constructed with a Content-Length header, and the contents written
   > to the body (via `write`) does not match the value given in the
   > Content-Length.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,237:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### write
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,2098:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>::write(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingBody">OutgoingBody</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.OutputStream</a>, Unit]
@@ -829,13 +735,21 @@ Request, or sending a late status code for the Response.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### authority
@@ -877,11 +791,6 @@ Request, or sending a late status code for the Response.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,928:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>::method(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Method">Method</a>
   ```
   >  Get the Method for the Request.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>) -> Bool
-  ```
-  > automatically derived
 - #### outgoing\_request
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,902:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>::outgoing_request(headers : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>
@@ -896,11 +805,6 @@ Request, or sending a late status code for the Response.
   > and `authority`, or `headers` which are not permitted to be sent.
   > It is the obligation of the `outgoing-handler.handle` implementation
   > to reject invalid constructions of `outgoing-request`.
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,125:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### path\_with\_query
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,993:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>::path_with_query(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>) -> String?
@@ -941,11 +845,6 @@ Request, or sending a late status code for the Response.
   >  Set the HTTP Related Scheme for the Request. When `none`, the
   > implementation may choose an appropriate default scheme. Fails if the
   > string given is not a syntactically valid uri scheme.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingRequest">OutgoingRequest</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## OutgoingResponse
 
@@ -956,13 +855,21 @@ Request, or sending a late status code for the Response.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### body
@@ -991,11 +898,6 @@ Request, or sending a late status code for the Response.
   >  This headers resource is a child: it must be dropped before the parent
   > `outgoing-request` is dropped, or its ownership is transfered to
   > another component by e.g. `outgoing-handler.handle`.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>) -> Bool
-  ```
-  > automatically derived
 - #### outgoing\_response
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,2026:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>::outgoing_response(headers : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Fields">Fields</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>
@@ -1005,11 +907,6 @@ Request, or sending a late status code for the Response.
   > `set-status-code` method.
   > 
   >  * `headers` is the HTTP Headers for the Response.
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,211:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set\_status\_code
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,2041:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>::set_status_code(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, status_code : UInt) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, Unit]
@@ -1021,11 +918,6 @@ Request, or sending a late status code for the Response.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,2034:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>::status_code(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>) -> UInt
   ```
   >  Get the HTTP Status Code for the Response.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## RequestOptions
 
@@ -1041,13 +933,21 @@ blocking call to `wasi:io/poll.poll`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### between\_bytes\_timeout
@@ -1071,16 +971,6 @@ blocking call to `wasi:io/poll.poll`.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,1213:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>::first_byte_timeout(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>) -> UInt64?
   ```
   >  The timeout for receiving the first byte of the Response body.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,141:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### request\_options
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,1171:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>::request_options() -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>
@@ -1105,11 +995,6 @@ blocking call to `wasi:io/poll.poll`.
   ```
   >  Set the timeout for receiving the first byte of the Response body. An
   > error return value indicates that this timeout is not supported.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#RequestOptions">RequestOptions</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## ResponseOutparam
 
@@ -1124,13 +1009,21 @@ other argument to `incoming-handler.handle`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -1138,16 +1031,6 @@ other argument to `incoming-handler.handle`.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,162:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,156:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,1295:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>::set(param : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>, response : <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#OutgoingResponse">OutgoingResponse</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ErrorCode">ErrorCode</a>]) -> Unit
@@ -1161,11 +1044,6 @@ other argument to `incoming-handler.handle`.
   > 
   >  The user may provide an `error` to `response` to allow the
   > implementation determine how to respond with an HTTP error response.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam">ResponseOutparam</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Scheme
 
@@ -1180,30 +1058,21 @@ other argument to `incoming-handler.handle`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,21:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#Scheme">Scheme</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## TlsAlertReceivedPayload
 
@@ -1217,30 +1086,21 @@ other argument to `incoming-handler.handle`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types/top.mbt,33:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#TlsAlertReceivedPayload">TlsAlertReceivedPayload</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## http\_error\_code
 

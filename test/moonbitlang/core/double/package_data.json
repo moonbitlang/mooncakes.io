@@ -47,22 +47,36 @@
       "name": "Double",
       "impls": [
         {
-          "name": "hash",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/double#Double\">Double</a> with hash(self : Double) -> Int",
-          "loc": { "line": 160, "column": 31 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Double",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Double) -> Int",
+              "loc": { "line": 163, "column": 31 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Double, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 168, "column": 31 }
+            }
+          ],
+          "loc": { "line": 163, "column": 1 }
         },
         {
-          "name": "hash_combine",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/double#Double\">Double</a> with hash_combine(self : Double, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 165, "column": 31 }
-        },
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/double#Double\">Double</a> with output(self : Double, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 176, "column": 31 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Double",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : Double, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 179, "column": 31 }
+            }
+          ],
+          "loc": { "line": 179, "column": 1 }
         }
       ],
       "methods": [
@@ -97,52 +111,40 @@
           "loc": { "line": 34, "column": 16 }
         },
         {
-          "name": "hash",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::hash(self : Double) -> Int",
-          "loc": { "line": 160, "column": 31 }
-        },
-        {
-          "name": "hash_combine",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::hash_combine(self : Double, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-          "loc": { "line": 165, "column": 31 }
-        },
-        {
           "name": "inf",
-          "docstring": "\n Returns positive infinity if sign >= 0, negative infinity if sign < 0.\n @alert deprecated \"Use `@double.infinity` and `@double.neg_infinity` instead\"",
+          "docstring": "\n Returns positive infinity if sign >= 0, negative infinity if sign < 0.\n @alert deprecated \"Use `@double.infinity` and `@double.neg_infinity` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::inf(sign : Int) -> Double",
-          "loc": { "line": 66, "column": 16 }
+          "loc": { "line": 68, "column": 16 }
         },
         {
           "name": "is_close",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::is_close(self : Double, other : Double, relative_tolerance~ : Double = .., absolute_tolerance~ : Double = ..) -> Bool",
-          "loc": { "line": 181, "column": 8 }
+          "loc": { "line": 184, "column": 8 }
         },
         {
           "name": "is_inf",
           "docstring": "\n Check whether the double is infinity",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::is_inf(self : Double) -> Bool",
-          "loc": { "line": 90, "column": 8 }
+          "loc": { "line": 93, "column": 8 }
         },
         {
           "name": "is_nan",
           "docstring": "\n Check whether the double is a \"not-a-number\" value",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::is_nan(self : Double) -> Bool",
-          "loc": { "line": 83, "column": 8 }
+          "loc": { "line": 86, "column": 8 }
         },
         {
           "name": "is_neg_inf",
           "docstring": "\n Check whether the double is negative infinity",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::is_neg_inf(self : Double) -> Bool",
-          "loc": { "line": 102, "column": 8 }
+          "loc": { "line": 105, "column": 8 }
         },
         {
           "name": "is_pos_inf",
           "docstring": "\n Check whether the double is positive infinity",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::is_pos_inf(self : Double) -> Bool",
-          "loc": { "line": 96, "column": 8 }
+          "loc": { "line": 99, "column": 8 }
         },
         {
           "name": "ln",
@@ -164,27 +166,21 @@
         },
         {
           "name": "min_normal",
-          "docstring": "\n Returns the smallest positive normal value of Double\n @alert deprecated \"Use `@double.min_positive` instead\"",
+          "docstring": "\n Returns the smallest positive normal value of Double\n @alert deprecated \"Use `@double.min_positive` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::min_normal() -> Double",
-          "loc": { "line": 77, "column": 16 }
+          "loc": { "line": 80, "column": 16 }
         },
         {
           "name": "nan",
-          "docstring": " Returns a \"not-a-number\" value\n \n @alert deprecated \"Use `@double.not_a_number` instead\"",
+          "docstring": " Returns a \"not-a-number\" value\n \n @alert deprecated \"Use `@double.not_a_number` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::nan() -> Double",
-          "loc": { "line": 59, "column": 16 }
+          "loc": { "line": 60, "column": 16 }
         },
         {
           "name": "op_mod",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::op_mod(self : Double, other : Double) -> Double",
-          "loc": { "line": 58, "column": 8 }
-        },
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::output(self : Double, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 176, "column": 31 }
+          "loc": { "line": 16, "column": 8 }
         },
         {
           "name": "pow",
@@ -205,10 +201,22 @@
           "loc": { "line": 46, "column": 8 }
         },
         {
+          "name": "to_be_bytes",
+          "docstring": " Converts the Double to a Bytes in big-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::to_be_bytes(self : Double) -> Bytes",
+          "loc": { "line": 208, "column": 8 }
+        },
+        {
+          "name": "to_le_bytes",
+          "docstring": " Converts the Double to a Bytes in little-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::to_le_bytes(self : Double) -> Bytes",
+          "loc": { "line": 213, "column": 8 }
+        },
+        {
           "name": "to_string",
           "docstring": "\n @intrinsic %f64.to_string",
           "signature": "fn <a href=\"moonbitlang/core/double#Double\">Double</a>::to_string(self : Double) -> String",
-          "loc": { "line": 171, "column": 8 }
+          "loc": { "line": 174, "column": 8 }
         },
         {
           "name": "trunc",

@@ -1,0 +1,11 @@
+{
+  "name": "tiye/dom-ffi",
+  "version": "0.0.6",
+  "readme": "README.md",
+  "repository": "https://github.com/Respo/dom-ffi.mbt",
+  "homepage": "https://github.com/Respo/dom-ffi.mbt",
+  "license": "Apache-2.0",
+  "keywords": ["dom", "ffi"],
+  "description": "DOM FFI (partial. used by Respo.mbt)",
+  "source": "src"
+}

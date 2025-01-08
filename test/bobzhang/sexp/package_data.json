@@ -1,0 +1,54 @@
+{
+  "readme": "\n\n# Sexp library in [MoonBit](moonbitlang.com)\n",
+  "name": "bobzhang/sexp",
+  "traits": [],
+  "types": [
+    {
+      "name": "Sexp",
+      "docstring": "\n sexp types\n",
+      "signature": "pub enum Sexp {\n  Atom(String, Bool)\n  List(<a href=\"bobzhang/sexp#Sexp_list\">Sexp_list</a>)\n}",
+      "loc": { "line": 11, "column": 10 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"bobzhang/sexp#Sexp\">Sexp</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"bobzhang/sexp#Sexp\">Sexp</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 15, "column": 8 }
+            }
+          ],
+          "loc": { "line": 15, "column": 8 }
+        }
+      ]
+    },
+    {
+      "name": "Sexp_list",
+      "docstring": "",
+      "signature": "pub enum Sexp_list {\n  Nil\n  Cons(<a href=\"bobzhang/sexp#Sexp\">Sexp</a>, <a href=\"bobzhang/sexp#Sexp_list\">Sexp_list</a>)\n}",
+      "loc": { "line": 2, "column": 10 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"bobzhang/sexp#Sexp_list\">Sexp_list</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"bobzhang/sexp#Sexp_list\">Sexp_list</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 8 }
+            }
+          ],
+          "loc": { "line": 6, "column": 8 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

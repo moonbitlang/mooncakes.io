@@ -1,0 +1,2693 @@
+{
+  "readme": "# WASI Preview 1 implementation for MoonBit\n\n⚠️ It's a complete rewrite since 0.17.0\n\n- [x] Wasm Backend\n- [ ] Wasm-GC Backend\n\nNote: not all APIs are fully tested.\n\n## Implemented functions\n\n- [x] `args_get`\n- [x] `args_sizes_get`\n- [x] `environ_get`\n- [x] `environ_sizes_get`\n- [x] `clock_res_get`\n- [x] `clock_time_get`\n- [x] `fd_advise`\n- [x] `fd_allocate`\n- [x] `fd_close`\n- [x] `fd_datasync`\n- [x] `fd_fdstat_get`\n- [x] `fd_fdstat_set_flags`\n- [x] `fd_fdstat_set_rights`\n- [x] `fd_filestat_get`\n- [x] `fd_filestat_set_size`\n- [x] `fd_filestat_set_times`\n- [x] `fd_pread`\n- [x] `fd_prestat_get`\n- [x] `fd_prestat_dir_name`\n- [x] `fd_pwrite`\n- [x] `fd_read`\n- [x] `fd_readdir`\n- [x] `fd_renumber`\n- [x] `fd_seek`\n- [x] `fd_sync`\n- [x] `fd_tell`\n- [x] `fd_write`\n- [x] `path_create_directory`\n- [x] `path_filestat_get`\n- [x] `path_filestat_set_times`\n- [x] `path_link`\n- [x] `path_open`\n- [x] `path_readlink`\n- [x] `path_remove_directory`\n- [x] `path_rename`\n- [x] `path_symlink`\n- [x] `path_unlink_file`\n- [x] `poll_oneoff`\n- [x] `proc_exit`\n- [x] `proc_raise`\n- [x] `sched_yield`\n- [x] `random_get`\n- [x] `sock_accept`\n- [x] `sock_recv`\n- [x] `sock_send`\n- [x] `sock_shutdown`\n\n## Develop\n\n### Testing\n\n- Requirements: you need wasmtime & deno. You may use wasmedge or wamr if you replace the `wasmtime` in `test.ts`, but it may cause different testing result.\n- Comamnds: `deno task test:build && deno task test`",
+  "name": "peter-jerry-ye/wasi",
+  "traits": [],
+  "types": [
+    {
+      "name": "Advice",
+      "docstring": " File or memory access pattern advisory information.\n \n - Normal: The application has no advice to give on its behavior with respect to the specified data.\n - Sequential: The application expects to access the specified data sequentially from lower offsets to higher offsets.\n - Random: The application expects to access the specified data in a random order.\n - Willneed: The application expects to access the specified data in the near future.\n - Dontneed: The application expects that it will not access the specified data in the near future.\n - Noreuse: The application expects to access the specified data once and then not reuse it afterwards.",
+      "signature": "pub(all) enum Advice {\n  Normal\n  Sequential\n  Random\n  Willneed\n  Dontneed\n  Noreuse\n}",
+      "loc": { "line": 518, "column": 15 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>?",
+          "loc": { "line": 538, "column": 16 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>::value(self : <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>) -> UInt",
+          "loc": { "line": 527, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>, <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>) -> Bool",
+              "loc": { "line": 525, "column": 10 }
+            }
+          ],
+          "loc": { "line": 525, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 525, "column": 14 }
+            }
+          ],
+          "loc": { "line": 525, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "CIOVec",
+      "docstring": " A region of memory for scatter/gather writes.\n \n - `buf`: The address of the buffer to be written.\n - `buf_len`: The length of the buffer to be written.",
+      "signature": "pub(all) struct CIOVec {\n  buf : Int\n  buf_len : <a href=\"peter-jerry-ye/wasi#Size\">Size</a>\n}",
+      "loc": { "line": 406, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#CIOVec\">CIOVec</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#CIOVec\">CIOVec</a>, <a href=\"peter-jerry-ye/wasi#CIOVec\">CIOVec</a>) -> Bool",
+              "loc": { "line": 409, "column": 10 }
+            }
+          ],
+          "loc": { "line": 409, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#CIOVec\">CIOVec</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#CIOVec\">CIOVec</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 409, "column": 14 }
+            }
+          ],
+          "loc": { "line": 409, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "ClockId",
+      "docstring": " Identifiers for clocks.\n \n - Realtime: The clock measuring real time. Time value zero corresponds with 1970-01-01T00:00:00Z.\n - Monotonic: The store-wide monotonic clock, which is defined as a clock measuring\n real time, whose value cannot be adjusted and which cannot have negative\n clock jumps. The epoch of this clock is undefined. The absolute time\n value of this clock therefore has no meaning.\n - ProcessCPUTimeId: The CPU-time clock associated with the current process.\n - ThreadCPUTimeId: The CPU-time clock associated with the current thread.",
+      "signature": "pub(all) enum ClockId {\n  RealTime\n  Monotonic\n  ProcessCPUTimeId\n  ThreadCPUTimeId\n}",
+      "loc": { "line": 18, "column": 15 },
+      "methods": [
+        {
+          "name": "clock_res_get",
+          "docstring": " Return the resolution of a clock.\n \n Implementations are required to provide a non-zero value for supported clocks.\n For unsupported clocks, return `errno::inval`.\n \n Note: This is similar to `clock_getres` in POSIX.\n \n @param `self` The clock for which to return the resolution.  \n @return The resolution of the clock, or an error if one happened.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>::clock_res_get(self : <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>) -> <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 137, "column": 8 }
+        },
+        {
+          "name": "clock_time_get",
+          "docstring": " Return the time value of a clock\n \n Note: This is similar to `clock_gettime` in POSIX.\n \n @param `self` The clodk for which to return the time.  \n @param `precision` The maximum lag (exclusive) that the returned time value may have, compared to its actual value.  \n @return The time value of the clock.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>::clock_time_get(self : <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>, precision : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>) -> <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 158, "column": 8 }
+        },
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>?",
+          "loc": { "line": 34, "column": 17 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>::value(self : <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>) -> UInt",
+          "loc": { "line": 25, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>, <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>) -> Bool",
+              "loc": { "line": 23, "column": 10 }
+            }
+          ],
+          "loc": { "line": 23, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 23, "column": 14 }
+            }
+          ],
+          "loc": { "line": 23, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Device",
+      "docstring": " Identifier for a device containing a file system. Can be used in combination\n with `inode` to uniquely identify a file or directory in the filesystem.",
+      "signature": "pub(all) type Device UInt64",
+      "loc": { "line": 609, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Device\">Device</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Device\">Device</a>, <a href=\"peter-jerry-ye/wasi#Device\">Device</a>) -> Bool",
+              "loc": { "line": 609, "column": 36 }
+            }
+          ],
+          "loc": { "line": 609, "column": 36 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Device\">Device</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Device\">Device</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 609, "column": 40 }
+            }
+          ],
+          "loc": { "line": 609, "column": 40 }
+        }
+      ]
+    },
+    {
+      "name": "DirCookie",
+      "docstring": " A reference to the offset of a directory entry.\n \n The value 0 signifies the start of the directory.",
+      "signature": "pub(all) type DirCookie UInt64",
+      "loc": { "line": 441, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a>, <a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a>) -> Bool",
+              "loc": { "line": 441, "column": 39 }
+            }
+          ],
+          "loc": { "line": 441, "column": 39 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 441, "column": 43 }
+            }
+          ],
+          "loc": { "line": 441, "column": 43 }
+        }
+      ]
+    },
+    {
+      "name": "DirEnt",
+      "docstring": " A directory entry.\n \n - `d_next`: The offset of the next directory entry stored in the buffer.\n - `d_ino`: The serial number of the file referred to by this directory entry.\n - `d_namlen`: The length of the name of the directory entry.\n - `d_type`: The type of the file referred to by this directory entry.",
+      "signature": "pub(all) struct DirEnt {\n  d_next : <a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a>\n  d_ino : <a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>\n  d_namlen : <a href=\"peter-jerry-ye/wasi#DirNamlen\">DirNamlen</a>\n  d_type : <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>\n}",
+      "loc": { "line": 503, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#DirEnt\">DirEnt</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#DirEnt\">DirEnt</a>, <a href=\"peter-jerry-ye/wasi#DirEnt\">DirEnt</a>) -> Bool",
+              "loc": { "line": 508, "column": 10 }
+            }
+          ],
+          "loc": { "line": 508, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#DirEnt\">DirEnt</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#DirEnt\">DirEnt</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 508, "column": 14 }
+            }
+          ],
+          "loc": { "line": 508, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "DirNamlen",
+      "docstring": " The type for the `dirent::d_namlen` field of `dirent` struct.",
+      "signature": "pub(all) type DirNamlen UInt",
+      "loc": { "line": 444, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#DirNamlen\">DirNamlen</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#DirNamlen\">DirNamlen</a>, <a href=\"peter-jerry-ye/wasi#DirNamlen\">DirNamlen</a>) -> Bool",
+              "loc": { "line": 444, "column": 37 }
+            }
+          ],
+          "loc": { "line": 444, "column": 37 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#DirNamlen\">DirNamlen</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#DirNamlen\">DirNamlen</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 444, "column": 41 }
+            }
+          ],
+          "loc": { "line": 444, "column": 41 }
+        }
+      ]
+    },
+    {
+      "name": "Errno",
+      "docstring": " Error codes returned by functions.\n Not all of these error codes are returned by the functions provided by this\n API; some are used in higher-level library layers, and others are provided\n merely for alignment with POSIX.\n \n See : https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md#-errno-variant",
+      "signature": "pub(all) enum Errno {\n  Success\n  TooBig\n  Acces\n  Addrinuse\n  Addrnotavail\n  Afnosupport\n  Again\n  Already\n  Badf\n  Badmsg\n  Busy\n  Canceled\n  Child\n  Connaborted\n  Connrefused\n  Connreset\n  Deadlock\n  Destaddrreq\n  Dom\n  Dquot\n  Exist\n  Fault\n  Fbig\n  Hostunreach\n  Idrm\n  Ilseq\n  Inprogress\n  Intr\n  Inval\n  IO\n  Isconn\n  Isdir\n  Loop\n  Mfile\n  Mlink\n  Msgsize\n  Multihop\n  Nametoolong\n  Netdown\n  Netreset\n  Netunreach\n  Nfile\n  Nobufs\n  Nodev\n  Noent\n  Noexec\n  Nolck\n  Nolink\n  Nomem\n  Nomsg\n  Noprotoopt\n  Nospc\n  Nosys\n  Notconn\n  Notdir\n  Notempty\n  Notrecoverable\n  Notsock\n  Notsup\n  Notty\n  Nxio\n  Overflow\n  Ownerdead\n  Perm\n  Pipe\n  Proto\n  Protonosupport\n  Prototype\n  Range\n  Rofs\n  Spipe\n  Srch\n  Stale\n  Timedout\n  Txtbsy\n  Xdev\n  Notcapable\n}",
+      "loc": { "line": 50, "column": 16 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>?",
+          "loc": { "line": 212, "column": 15 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>::value(self : <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>) -> UInt",
+          "loc": { "line": 130, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>, <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>) -> Bool",
+              "loc": { "line": 128, "column": 10 }
+            }
+          ],
+          "loc": { "line": 128, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 128, "column": 14 }
+            }
+          ],
+          "loc": { "line": 128, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Event",
+      "docstring": " An event that occurred.\n \n - `userdata`: User-provided value that got attched to `subscription::userdata`.\n - `error`: If non-zero, an error that occurred while processing the subscription request.\n - `type_`: The type of the event that occurred.\n - `fd_readwrite`: The contents of the event, if it is an `eventtype::fd_read` or `eventtype::fd_write`. `eventtype::clock` events ignore this field.",
+      "signature": "pub(all) struct Event {\n  userdata : <a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>\n  error : <a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>\n  type_ : <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>\n  fd_readwrite : <a href=\"peter-jerry-ye/wasi#Event_fd_readwrite\">Event_fd_readwrite</a>\n}",
+      "loc": { "line": 826, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Event\">Event</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Event\">Event</a>, <a href=\"peter-jerry-ye/wasi#Event\">Event</a>) -> Bool",
+              "loc": { "line": 831, "column": 10 }
+            }
+          ],
+          "loc": { "line": 831, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Event\">Event</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Event\">Event</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 831, "column": 14 }
+            }
+          ],
+          "loc": { "line": 831, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "EventRWFlag",
+      "docstring": " The state of the file descriptor subscribed to with `eventtype::fd_read` or `eventtype::fd_write`.\n \n - Fd_readwrite_hangup: The peer of this socket has closed or disconnected.",
+      "signature": "pub(all) enum EventRWFlag {\n  Fd_readwrite_hangup\n}",
+      "loc": { "line": 788, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>) -> UInt",
+          "loc": { "line": 792, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>, <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>) -> Bool",
+              "loc": { "line": 790, "column": 10 }
+            }
+          ],
+          "loc": { "line": 790, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 790, "column": 14 }
+            }
+          ],
+          "loc": { "line": 790, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "EventRWFlags",
+      "docstring": " The state of the file descriptor subscribed to with `eventtype::fd_read` or `eventtype::fd_write`.",
+      "signature": "pub(all) type EventRWFlags UInt",
+      "loc": { "line": 779, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>) -> Bool",
+          "loc": { "line": 806, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>",
+          "loc": { "line": 781, "column": 22 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>) -> <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>",
+          "loc": { "line": 798, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#EventRWFlag\">EventRWFlag</a>) -> <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>",
+          "loc": { "line": 802, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>, <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>) -> Bool",
+              "loc": { "line": 779, "column": 40 }
+            }
+          ],
+          "loc": { "line": 779, "column": 40 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 779, "column": 44 }
+            }
+          ],
+          "loc": { "line": 779, "column": 44 }
+        }
+      ]
+    },
+    {
+      "name": "EventType",
+      "docstring": " Type of a subscription to an event or its occurrence.\n \n - Clock: The time value of clock `subscription_clock::id` has reached timestamp `subscription_clock::timeout`.\n - Fd_read: File descriptor `subscription_fd_readwrite::file_descriptor` has data available for reading. This event always triggers for regular files.\n - Fd_write: File descriptor `subscription_fd_readwrite::file_descriptor` has capacity available for writing. This event always triggers for regular files.",
+      "signature": "pub(all) enum EventType {\n  Clock\n  Fd_read\n  Fd_write\n}",
+      "loc": { "line": 755, "column": 15 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>?",
+          "loc": { "line": 769, "column": 19 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>::value(self : <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>) -> UInt",
+          "loc": { "line": 761, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>, <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>) -> Bool",
+              "loc": { "line": 759, "column": 10 }
+            }
+          ],
+          "loc": { "line": 759, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#EventType\">EventType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 759, "column": 14 }
+            }
+          ],
+          "loc": { "line": 759, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Event_fd_readwrite",
+      "docstring": " The contents of an `event` when type is `eventtype::fd_read` or\n `eventtype::fd_write`.\n \n - `nbytes`: Number of bytes available for reading or writing.\n - `flags`: The state of the file descriptor.",
+      "signature": "pub(all) struct Event_fd_readwrite {\n  nbytes : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>\n  flags : <a href=\"peter-jerry-ye/wasi#EventRWFlags\">EventRWFlags</a>\n}",
+      "loc": { "line": 815, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Event_fd_readwrite\">Event_fd_readwrite</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Event_fd_readwrite\">Event_fd_readwrite</a>, <a href=\"peter-jerry-ye/wasi#Event_fd_readwrite\">Event_fd_readwrite</a>) -> Bool",
+              "loc": { "line": 818, "column": 10 }
+            }
+          ],
+          "loc": { "line": 818, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Event_fd_readwrite\">Event_fd_readwrite</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Event_fd_readwrite\">Event_fd_readwrite</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 818, "column": 14 }
+            }
+          ],
+          "loc": { "line": 818, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "ExitCode",
+      "docstring": " Exit code generated by a process when exiting.",
+      "signature": "pub(all) type ExitCode UInt",
+      "loc": { "line": 907, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#ExitCode\">ExitCode</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#ExitCode\">ExitCode</a>, <a href=\"peter-jerry-ye/wasi#ExitCode\">ExitCode</a>) -> Bool",
+              "loc": { "line": 907, "column": 36 }
+            }
+          ],
+          "loc": { "line": 907, "column": 36 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#ExitCode\">ExitCode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#ExitCode\">ExitCode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 907, "column": 40 }
+            }
+          ],
+          "loc": { "line": 907, "column": 40 }
+        }
+      ]
+    },
+    {
+      "name": "Fd",
+      "docstring": " A file descriptor handle",
+      "signature": "pub(all) type Fd Int",
+      "loc": { "line": 391, "column": 15 },
+      "methods": [
+        {
+          "name": "fd_advise",
+          "docstring": " Provide file advisory information on a file ddescriptor\n \n Note: This is similar to `posix_fadvise` in POSIX.\n \n @param `offset` The offset within the file to which the advisory applies.  \n @param `len` The length of the region to which the advisory applies.  \n @param `advice` The advice.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_advise(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, offset : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>, len : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>, advice : <a href=\"peter-jerry-ye/wasi#Advice\">Advice</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 184, "column": 8 }
+        },
+        {
+          "name": "fd_allocate",
+          "docstring": " Force the allocaiton of space in a file.\n \n Note: This is similar to `posix_fallocate` in POSIX.\n \n @param `offset` The offset at which to start allocating.  \n @param `len` The length of the area that is allocated.  \n @return The error code.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_allocate(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, offset : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>, len : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 206, "column": 8 }
+        },
+        {
+          "name": "fd_close",
+          "docstring": " Close a file descriptor.\n \n Note: This is similar to `close` in POSIX.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_close(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 219, "column": 8 }
+        },
+        {
+          "name": "fd_datasync",
+          "docstring": " Synchronize the data of a file to disk.\n \n Note: This is similar to `fdatasync` in POSIX.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_datasync(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 232, "column": 8 }
+        },
+        {
+          "name": "fd_fdstat_get",
+          "docstring": " Get the attributes of a file descriptor.\n \n Note: This returns similar flags to `fcntl(fd, F_GETFL)` in POSIX, as well as additional fields.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_fdstat_get(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> <a href=\"peter-jerry-ye/wasi#FdStat\">FdStat</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 245, "column": 8 }
+        },
+        {
+          "name": "fd_fdstat_set_flags",
+          "docstring": " Adjust the flags associated with a file descriptor.\n \n Note: This is similar to `fcntl(fd, F_SETFL, flags)` in POSIX.\n \n @param `flags` The desired values of the file descriptor flags.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_fdstat_set_flags(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, flags : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 276, "column": 8 }
+        },
+        {
+          "name": "fd_fdstat_set_rights",
+          "docstring": " Adjust the rights associated with a file descriptor.\n \n This can only be used to remove rights, and returns `errno::notcapable` if called in a way that would attempt to add rights.\n \n @param `fs_rights_base` The desired rights of the file descriptor.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_fdstat_set_rights(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, fs_rights_base : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, fs_rights_inheriting : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 295, "column": 8 }
+        },
+        {
+          "name": "fd_filestat_get",
+          "docstring": " Return the attributes of an open file",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_filestat_get(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> <a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 314, "column": 8 }
+        },
+        {
+          "name": "fd_filestat_set_size",
+          "docstring": " Adjust the size of an open file. If this increases the file's size, the extra bytes are filled with zeros.\n \n Note: This is similar to `ftruncate` in POSIX.\n \n @param `size` The desired file size.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_filestat_set_size(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, size : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 343, "column": 8 }
+        },
+        {
+          "name": "fd_filestat_set_times",
+          "docstring": " Adjust the timestamps of an open file or directory.\n \n Note: This is similar to `futimens` in POSIX.\n \n @param `atim` The desired value of the data access timestamp.  \n @param `mtim` The desired value of the data modification timestamp.  \n @param `fst_flags` A bitmask indicating which timestamps to adjust.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_filestat_set_times(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, atim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>, mtim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>, fst_flags : <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 365, "column": 8 }
+        },
+        {
+          "name": "fd_pread",
+          "docstring": " Read from a file descriptor, without using and updating the file descriptor's offset.\n \n Note: This is similar to `preadv` in Linux (and other Unix-es).",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_pread(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, iovs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]], offset : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>) -> <a href=\"peter-jerry-ye/wasi#Size\">Size</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 389, "column": 8 }
+        },
+        {
+          "name": "fd_prestat_dir_name",
+          "docstring": " Return a description of the given preopened file descriptor.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_prestat_dir_name(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> String!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 439, "column": 8 }
+        },
+        {
+          "name": "fd_prestat_get",
+          "docstring": " Return a description of the given preopened file descriptor.\n \n Note: consider using `fd_prestat_dir_name` directly.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_prestat_get(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> <a href=\"peter-jerry-ye/wasi#PreStat\">PreStat</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 420, "column": 8 }
+        },
+        {
+          "name": "fd_read",
+          "docstring": " Read from a file descriptor.\n \n Note: This is similar to `readv` in POSIX.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_read(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, iovs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]]) -> <a href=\"peter-jerry-ye/wasi#Size\">Size</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 458, "column": 8 }
+        },
+        {
+          "name": "fd_readdir",
+          "docstring": " Read directory entries from a directory.\n When successful, the contents of the output buffer consist of a sequence of\n directory entries. Each directory entry consists of a `dirent` object,\n followed by `dirent::d_namlen` bytes holding the name of the directory\n entry.\n\n This function fills the output buffer as much as possible, potentially\n truncating the last directory entry. This allows the caller to grow its\n read buffer size in case it's too small to fit a single large directory\n entry, or skip the oversized directory entry.\n\n Entries for the special `.` and `..` directory entries are included in the\n sequence.\n \n @param `cookie`: The location within the directory to start reading.  \n @param `size`: The buffer used to read.  \n @return The entries untruncated and whether there's still other entries.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_readdir(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, cookie~ : <a href=\"peter-jerry-ye/wasi#DirCookie\">DirCookie</a> = .., buffer~ : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte] = ..) -> (<a href=\"moonbitlang/core/array#Array\">Array</a>[(String, <a href=\"peter-jerry-ye/wasi#DirEnt\">DirEnt</a>)], Bool)!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 505, "column": 8 }
+        },
+        {
+          "name": "fd_renumber",
+          "docstring": " Atomically replace a file descriptor by renumbering another file descriptor.\n\n Due to the strong focus on thread safety, this environment does not provide\n a mechanism to duplicate or renumber a file descriptor to an arbitrary\n number, like `dup2()`. This would be prone to race conditions, as an actual\n file descriptor with the same number could be allocated by a different\n thread at the same time.\n\n This function provides a way to atomically renumber file descriptors, which\n would disappear if `dup2()` were to be removed entirely.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_renumber(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, to : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 561, "column": 8 }
+        },
+        {
+          "name": "fd_seek",
+          "docstring": " Move the offset of a file descriptor.\n \n Note: This is similar to `lseek` in POSIX.\n \n @param `offset` The number of bytes to move.  \n @param `whence` The base from which the offset is calculated.  \n @return The new offset of the file descriptor, relative to the start of the file.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_seek(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, offset : <a href=\"peter-jerry-ye/wasi#FileDelta\">FileDelta</a>, whence : <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>) -> <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 583, "column": 8 }
+        },
+        {
+          "name": "fd_sync",
+          "docstring": " Synchronize the data and metadata of a file to disk.\n \n Note: This is similar to `fsync` in POSIX.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_sync(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 604, "column": 8 }
+        },
+        {
+          "name": "fd_tell",
+          "docstring": " Return the current offset of a file descriptor.\n \n Note: This is similar to `lseek(fd, 0, SEEK_CUR)` in POSIX.\n \n @return The current offset of the file descriptor, relative to the start of the file.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_tell(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 619, "column": 8 }
+        },
+        {
+          "name": "fd_write",
+          "docstring": " Write to a file descriptor.\n \n Note: This is similar to `writev` in POSIX.\n \n Like POSIX, any calls of `write` (and other functions to read or write)\n for a regular file by other threads in the WASI process should not be\n interleaved while `write` is executed.\n \n Note: it may write less than demanded.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::fd_write(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, contents : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]]) -> <a href=\"peter-jerry-ye/wasi#Size\">Size</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 642, "column": 8 }
+        },
+        {
+          "name": "path_create_directory",
+          "docstring": " Create a directory.\n \n Note: This is similar to `mkdirat` in POSIX.\n \n @param `path` The path at which to create the directory.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_create_directory(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, path : String) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 671, "column": 8 }
+        },
+        {
+          "name": "path_filestat_get",
+          "docstring": " Return the attributes of a file or directory.\n \n Note: This is similar to `stat` in POSIX.\n \n @param `flags` Flags determining the method of how the path is resolved.  \n @param `path` The path of the file or directory to inspect.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_filestat_get(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, flags : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, path : String) -> <a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 697, "column": 8 }
+        },
+        {
+          "name": "path_filestat_set_times",
+          "docstring": " Adjust the timestamps of a file or directory.\n \n Note: This is similar to `utimensat` in POSIX.\n \n @param `flag` Flags determining the method of how the path is resolved.  \n @param `path` The path of the file or directory to operate on.  \n @param `atim` The desired values of the data access timestamp.  \n @param `mtim` The desired values of the data modification timestamp.  \n @param `fst_flags` A bitmask indicating which timestamps to adjust.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_filestat_set_times(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, flags : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, path : String, atim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>, mtim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>, fst_flags : <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 747, "column": 8 }
+        },
+        {
+          "name": "path_link",
+          "docstring": " Create a hard link.\n \n Note: This is similar to `linkat` in POSIX.\n \n @param `old_flags` Flags determining the method of how the path is resolved.  \n @param `old_path` The source path from which to link.  \n @param `new_fd` The wroking directory at which the resolution of the new path starts.  \n @param `new_path` The destination path at which to create the hard link.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_link(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, old_flags : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, old_path : String, new_fd : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, new_path : String) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 792, "column": 8 }
+        },
+        {
+          "name": "path_open",
+          "docstring": " Open a file or directory.\n \n The returned file descriptor is not guaranteed to be the lowest-numbered\n file descriptor not currently open; it is randomized to prevent\n applications from depending on making assumptions about indexes, since this\n is error-prone in multi-threaded contexts. The returned file descriptor is\n guaranteed to be less than 2^31.\n \n Note: This is similar to `openat` in POSIX.\n \n @param `dirflags` Flags determining the method of how the path is resolved.  \n @param `path` The path of the file or directory to open.  \n @param `oflags` The method by which to open the file.  \n @param `fs_rights_base` The initial rights of the newly created file descriptor. The\n        implementation is allowed to return a file descriptor with fewer rights\n        than specified, if and only if those rights do not apply to the type of\n        file being opened. The *base* rights are rights that will apply to operations \n        using the file descriptor itself.  \n @param `fs_rights_inheriting` The initial rights of the newly created file descriptor. The\n        implementation is allowed to return a file descriptor with fewer rights\n        than specified, if and only if those rights do not apply to the type of\n        file being opened. The *inheriting* rights are rights that apply to\n        file descriptors derived from it.  \n @return The file descriptor of the file that has been opened.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_open(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, dirflags : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, path : String, oflags : <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>, fs_rights_base : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, fs_rights_inheriting : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, fs_flags : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>) -> <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 858, "column": 8 }
+        },
+        {
+          "name": "path_readlink",
+          "docstring": " Read the contents of a symbolic link.\n \n Note: This is similar to `readlinkat` in POSIX. If `buf` is not large\n enough to store the contents of the link, the first `buf_len` bytes will be\n written `buf`.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_readlink(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, path : String, buffer~ : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte] = ..) -> <a href=\"peter-jerry-ye/wasi#Size\">Size</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 906, "column": 8 }
+        },
+        {
+          "name": "path_remove_directory",
+          "docstring": " Remove a directory.\n \n Return `errno::notempty` if the directory is not empty.\n \n Note: This is similar to `unlinkat(fd, path, AT_REMOVEDIR)` in POSIX.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_remove_directory(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, path : String) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 943, "column": 8 }
+        },
+        {
+          "name": "path_rename",
+          "docstring": " Rename a file or directory.\n \n Note: This is similar to `renameat` in POSIX.\n \n @param `old_path` The source path of the file or directory to rename.  \n @param `new_fd` The working directory at which the resolution of the new path starts.  \n @param `new_path` The destination path of the file or directory to rename.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_rename(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, old_path : String, new_fd : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, new_path : String) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 971, "column": 8 }
+        },
+        {
+          "name": "path_unlink_file",
+          "docstring": " Unlink a file.\n \n Return `errno::isdir` if the path refers to a directory.\n \n Note: This is similar to `unlinkat(fd, path, 0)` in POSIX.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::path_unlink_file(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, path : String) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 1043, "column": 8 }
+        },
+        {
+          "name": "sock_accept",
+          "docstring": " Accept a new incoming connection on a socket.\n \n Note: This is similar to `accept` in POSIX.\n \n @param `self` The listening socket.  \n @param `flags` The desired values of the file descriptor flags.  \n @return New socket connection.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::sock_accept(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, flags : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>) -> <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 1191, "column": 8 }
+        },
+        {
+          "name": "sock_recv",
+          "docstring": " Receive a message from a socket.\n \n Note: This is similar to `recv` in POSIX, though it also supports reading\n the data into multiple buffers in the manner of `readv`.\n \n @param `contents` List of scatter/gather vectors to which to store data.  \n @param `flags` Message flags.  \n @return Number of bytes stored in the buffers and message flags.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::sock_recv(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, contents : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]], flags : <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>) -> (<a href=\"peter-jerry-ye/wasi#Size\">Size</a>, <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>)!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 1220, "column": 8 }
+        },
+        {
+          "name": "sock_send",
+          "docstring": " Send a message on a socket.\n \n Note: This is similar to `send` in POSIX, though it also supports writing\n the data from multiple buffers in the manner of `writev`.\n \n @param `contents` List of scatter/gather vectors to which to retrieve the data.  \n @param `flags` Message flags.  \n @return The number of bytes transmitted.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::sock_send(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, contents : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]], flags : <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>) -> <a href=\"peter-jerry-ye/wasi#Size\">Size</a>!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 1272, "column": 8 }
+        },
+        {
+          "name": "sock_shutdown",
+          "docstring": " Shut down socket send and receive channels.\n \n Note: This is similar to `shutdown` in POSIX.\n \n @param `how` Which channels on the socket to shut down.",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>::sock_shutdown(self : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, how : <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+          "loc": { "line": 1305, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>) -> Bool",
+              "loc": { "line": 391, "column": 29 }
+            }
+          ],
+          "loc": { "line": 391, "column": 29 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 391, "column": 33 }
+            }
+          ],
+          "loc": { "line": 391, "column": 33 }
+        }
+      ]
+    },
+    {
+      "name": "FdFlag",
+      "docstring": " File descriptor flags.\n \n - Append: Append mode: Data written to the file is always appended to the file's end.\n - Dsync: Write according to synchronized I/O data integrity completion. Only the data stored in the file is synchronized.\n - Nonblock: Non-blocking mode.\n - Rsync: Synchronized read I/O operations.\n - Sync: Write according to synchronized I/O file integrity completion. In addition to synchronizing the data stored in the file, the implementation may also synchronously update the file's metadata.",
+      "signature": "pub(all) enum FdFlag {\n  Append\n  Dsync\n  Nonblock\n  Rsync\n  Sync\n}",
+      "loc": { "line": 564, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>) -> UInt",
+          "loc": { "line": 572, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>, <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>) -> Bool",
+              "loc": { "line": 570, "column": 10 }
+            }
+          ],
+          "loc": { "line": 570, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 570, "column": 14 }
+            }
+          ],
+          "loc": { "line": 570, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "FdFlags",
+      "docstring": " File descriptor flag.",
+      "signature": "pub(all) type FdFlags UInt",
+      "loc": { "line": 551, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>) -> Bool",
+          "loc": { "line": 590, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>",
+          "loc": { "line": 553, "column": 17 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>) -> <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>",
+          "loc": { "line": 582, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#FdFlag\">FdFlag</a>) -> <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>",
+          "loc": { "line": 586, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>, <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>) -> Bool",
+              "loc": { "line": 551, "column": 35 }
+            }
+          ],
+          "loc": { "line": 551, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 551, "column": 39 }
+            }
+          ],
+          "loc": { "line": 551, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "FdStat",
+      "docstring": " File descriptor attributes.\n \n - `fs_filetype`: File type.\n - `fs_flags`: File descriptor flags.\n - `fs_rights_base`: Rights that apply to this file descriptor.\n - `fs_rights_inheriting`: Maximum set of rights that may be installed on new file descriptors that are created through this file descriptor, e.g., through `path_open`.",
+      "signature": "pub(all) struct FdStat {\n  fs_filetype : <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>\n  fs_flags : <a href=\"peter-jerry-ye/wasi#FdFlags\">FdFlags</a>\n  fs_rights_base : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>\n  fs_rights_inheriting : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>\n}",
+      "loc": { "line": 600, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FdStat\">FdStat</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FdStat\">FdStat</a>, <a href=\"peter-jerry-ye/wasi#FdStat\">FdStat</a>) -> Bool",
+              "loc": { "line": 605, "column": 10 }
+            }
+          ],
+          "loc": { "line": 605, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FdStat\">FdStat</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FdStat\">FdStat</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 605, "column": 14 }
+            }
+          ],
+          "loc": { "line": 605, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "FileDelta",
+      "docstring": " Relative offset within a file.",
+      "signature": "pub(all) type FileDelta Int64",
+      "loc": { "line": 412, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FileDelta\">FileDelta</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FileDelta\">FileDelta</a>, <a href=\"peter-jerry-ye/wasi#FileDelta\">FileDelta</a>) -> Bool",
+              "loc": { "line": 412, "column": 38 }
+            }
+          ],
+          "loc": { "line": 412, "column": 38 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FileDelta\">FileDelta</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FileDelta\">FileDelta</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 412, "column": 42 }
+            }
+          ],
+          "loc": { "line": 412, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "FileSize",
+      "docstring": " Non-negative file size or length of a region within a file.",
+      "signature": "pub(all) type FileSize UInt64",
+      "loc": { "line": 4, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>, <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>) -> Bool",
+              "loc": { "line": 4, "column": 38 }
+            }
+          ],
+          "loc": { "line": 4, "column": 38 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 4, "column": 42 }
+            }
+          ],
+          "loc": { "line": 4, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "FileStat",
+      "docstring": " File attributes.\n \n - `dev`: Device ID of device containing the file.\n - `ino`: File serial number.\n - `filetype`: File type.\n - `nlink`: Number of hard links to the file.\n - `size`: For regular files, the file size in bytes. For symbolic links, the length in bytes of the pathname contained in the symbolic link.\n - `atim`: Last data access timestamp. This can be 0 if the underlying platform doesn't provide suitable timestamp for this file.\n - `mtim`: Last data modification timestamp. This can be 0 if the underlying platform doesn't provide suitable timestamp for this file.\n - `ctim`: Last file status change timestamp. This can be 0 if the underlying platform doesn't provide suitable timestamp for this file.",
+      "signature": "pub(all) struct FileStat {\n  dev : <a href=\"peter-jerry-ye/wasi#Device\">Device</a>\n  ino : <a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>\n  filetype : <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>\n  nlink : <a href=\"peter-jerry-ye/wasi#LinkCount\">LinkCount</a>\n  size : <a href=\"peter-jerry-ye/wasi#FileSize\">FileSize</a>\n  atim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>\n  mtim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>\n  ctim : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>\n}",
+      "loc": { "line": 735, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>, <a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>) -> Bool",
+              "loc": { "line": 744, "column": 10 }
+            }
+          ],
+          "loc": { "line": 744, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FileStat\">FileStat</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 744, "column": 14 }
+            }
+          ],
+          "loc": { "line": 744, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "FileType",
+      "docstring": " The type of a file descriptor or file.\n \n - Unknown: The type of the file descriptor or file is unknown or is different from any of the other types specified.\n - Block_device: The file descriptor or file refers to a block device inode.\n - Character_device: The file descriptor or file refers to a character device inode.\n - Directory: The file descriptor or file refers to a directory inode.\n - Regular_file: The file descriptor or file refers to a regular file inode.\n - Socket_dgram: The file descriptor or file refers to a datagram socket.\n - Socket_stream: The file descriptor or file refers to a byte-stream socket.\n - Symbolic_link: The file refers to a symbolic link inode.",
+      "signature": "pub(all) enum FileType {\n  Unknown\n  Block_device\n  Character_device\n  Directory\n  Regular_file\n  Socket_dgram\n  Socket_stream\n  Symbolic_link\n}",
+      "loc": { "line": 459, "column": 15 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>::from_value(value : Int) -> <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>?",
+          "loc": { "line": 483, "column": 18 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>::value(self : <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>) -> Int",
+          "loc": { "line": 470, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>, <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>) -> Bool",
+              "loc": { "line": 468, "column": 10 }
+            }
+          ],
+          "loc": { "line": 468, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FileType\">FileType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 468, "column": 14 }
+            }
+          ],
+          "loc": { "line": 468, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "FstFlag",
+      "docstring": " Which file time attributes to adjust\n \n - Atim: Adjust the last access timestamp to the value stored in `filestat::atim`.\n - Atim_now: Adjust the last access timestamp to the time of clock `clockid::realtime`.\n - Mtim: Adjust the last modification timestamp to the value stored in `filestat::mtim`.\n - Mtim_now: Adjust the last modification timestamp to the time of clock `clockid::realtime`.",
+      "signature": "pub(all) enum FstFlag {\n  Atim\n  Atim_now\n  Mtim\n  Mtim_now\n}",
+      "loc": { "line": 624, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>) -> UInt",
+          "loc": { "line": 631, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>, <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>) -> Bool",
+              "loc": { "line": 629, "column": 10 }
+            }
+          ],
+          "loc": { "line": 629, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 629, "column": 14 }
+            }
+          ],
+          "loc": { "line": 629, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "FstFlags",
+      "docstring": " Which file time attributes to adjust",
+      "signature": "pub(all) type FstFlags UInt",
+      "loc": { "line": 612, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>) -> Bool",
+          "loc": { "line": 648, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>",
+          "loc": { "line": 614, "column": 18 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>) -> <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>",
+          "loc": { "line": 640, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#FstFlag\">FstFlag</a>) -> <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>",
+          "loc": { "line": 644, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>, <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>) -> Bool",
+              "loc": { "line": 612, "column": 36 }
+            }
+          ],
+          "loc": { "line": 612, "column": 36 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#FstFlags\">FstFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 612, "column": 40 }
+            }
+          ],
+          "loc": { "line": 612, "column": 40 }
+        }
+      ]
+    },
+    {
+      "name": "IOVec",
+      "docstring": " A region of memory for scatter/gather reads.\n \n - `buf`: The address of the buffer to be filled.\n - `buf_len`: The length of the buffer to be filled.",
+      "signature": "pub(all) struct IOVec {\n  buf : Int\n  buf_len : <a href=\"peter-jerry-ye/wasi#Size\">Size</a>\n}",
+      "loc": { "line": 397, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#IOVec\">IOVec</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#IOVec\">IOVec</a>, <a href=\"peter-jerry-ye/wasi#IOVec\">IOVec</a>) -> Bool",
+              "loc": { "line": 400, "column": 10 }
+            }
+          ],
+          "loc": { "line": 400, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#IOVec\">IOVec</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#IOVec\">IOVec</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 400, "column": 14 }
+            }
+          ],
+          "loc": { "line": 400, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Inode",
+      "docstring": " File serial number that is unique within its file system.",
+      "signature": "pub(all) type Inode UInt64",
+      "loc": { "line": 447, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>, <a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>) -> Bool",
+              "loc": { "line": 447, "column": 35 }
+            }
+          ],
+          "loc": { "line": 447, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Inode\">Inode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 447, "column": 39 }
+            }
+          ],
+          "loc": { "line": 447, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "LinkCount",
+      "docstring": " Number of hard links to an inode.",
+      "signature": "pub(all) type LinkCount UInt64",
+      "loc": { "line": 723, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#LinkCount\">LinkCount</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#LinkCount\">LinkCount</a>, <a href=\"peter-jerry-ye/wasi#LinkCount\">LinkCount</a>) -> Bool",
+              "loc": { "line": 723, "column": 39 }
+            }
+          ],
+          "loc": { "line": 723, "column": 39 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#LinkCount\">LinkCount</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#LinkCount\">LinkCount</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 723, "column": 43 }
+            }
+          ],
+          "loc": { "line": 723, "column": 43 }
+        }
+      ]
+    },
+    {
+      "name": "LookupFlag",
+      "docstring": "",
+      "signature": "pub(all) enum LookupFlag {\n  Symlink_follow\n}",
+      "loc": { "line": 659, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>) -> UInt",
+          "loc": { "line": 663, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>, <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>) -> Bool",
+              "loc": { "line": 661, "column": 10 }
+            }
+          ],
+          "loc": { "line": 661, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 661, "column": 14 }
+            }
+          ],
+          "loc": { "line": 661, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "LookupFlags",
+      "docstring": " Flags dermining the method of how paths are resolved.",
+      "signature": "pub(all) type LookupFlags UInt",
+      "loc": { "line": 653, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>) -> Bool",
+          "loc": { "line": 677, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>",
+          "loc": { "line": 655, "column": 21 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>) -> <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>",
+          "loc": { "line": 669, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#LookupFlag\">LookupFlag</a>) -> <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>",
+          "loc": { "line": 673, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>) -> Bool",
+              "loc": { "line": 653, "column": 39 }
+            }
+          ],
+          "loc": { "line": 653, "column": 39 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#LookupFlags\">LookupFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 653, "column": 43 }
+            }
+          ],
+          "loc": { "line": 653, "column": 43 }
+        }
+      ]
+    },
+    {
+      "name": "OpenFlag",
+      "docstring": " Open flags used by `path_open`.\n \n - Create: Create the file if it does not exist.\n - Directory: Fail if not a directory.\n - Excl: Fail if the file already exists.\n - Trunc: Truncate the file to size 0.",
+      "signature": "pub(all) enum OpenFlag {\n  Create\n  Directory\n  Excl\n  Trunc\n}",
+      "loc": { "line": 694, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>) -> UInt",
+          "loc": { "line": 701, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>, <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>) -> Bool",
+              "loc": { "line": 699, "column": 10 }
+            }
+          ],
+          "loc": { "line": 699, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 699, "column": 14 }
+            }
+          ],
+          "loc": { "line": 699, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "OpenFlags",
+      "docstring": " Open flags used by `path_open`.",
+      "signature": "pub(all) type OpenFlags UInt",
+      "loc": { "line": 682, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>) -> Bool",
+          "loc": { "line": 718, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>",
+          "loc": { "line": 684, "column": 19 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>) -> <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>",
+          "loc": { "line": 710, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#OpenFlag\">OpenFlag</a>) -> <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>",
+          "loc": { "line": 714, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>, <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>) -> Bool",
+              "loc": { "line": 682, "column": 37 }
+            }
+          ],
+          "loc": { "line": 682, "column": 37 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#OpenFlags\">OpenFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 682, "column": 41 }
+            }
+          ],
+          "loc": { "line": 682, "column": 41 }
+        }
+      ]
+    },
+    {
+      "name": "PreOpenType",
+      "docstring": " Identifiers for preopened capabilites.\n \n - Dir: A pre-opened directory.",
+      "signature": "pub(all) enum PreOpenType {\n  Dir\n}",
+      "loc": { "line": 1181, "column": 15 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>?",
+          "loc": { "line": 1191, "column": 21 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>::value(self : <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>) -> UInt",
+          "loc": { "line": 1185, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>, <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>) -> Bool",
+              "loc": { "line": 1183, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1183, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#PreOpenType\">PreOpenType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1183, "column": 14 }
+            }
+          ],
+          "loc": { "line": 1183, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "PreStat",
+      "docstring": " Information about a pre-opened capability.",
+      "signature": "pub(all) enum PreStat {\n  Dir(<a href=\"peter-jerry-ye/wasi#PreStat_dir\">PreStat_dir</a>)\n}",
+      "loc": { "line": 1206, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#PreStat\">PreStat</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#PreStat\">PreStat</a>, <a href=\"peter-jerry-ye/wasi#PreStat\">PreStat</a>) -> Bool",
+              "loc": { "line": 1208, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1208, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#PreStat\">PreStat</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#PreStat\">PreStat</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1208, "column": 14 }
+            }
+          ],
+          "loc": { "line": 1208, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "PreStat_dir",
+      "docstring": " The content of a `prestat` when type is `preopentype::dir`.\n \n - `pr_name_len`: The length of the directory name for use with `fd_prestat_dir_name`.",
+      "signature": "pub(all) struct PreStat_dir {\n  pr_name_len : <a href=\"peter-jerry-ye/wasi#Size\">Size</a>\n}",
+      "loc": { "line": 1201, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#PreStat_dir\">PreStat_dir</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#PreStat_dir\">PreStat_dir</a>, <a href=\"peter-jerry-ye/wasi#PreStat_dir\">PreStat_dir</a>) -> Bool",
+              "loc": { "line": 1203, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1203, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#PreStat_dir\">PreStat_dir</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#PreStat_dir\">PreStat_dir</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1203, "column": 14 }
+            }
+          ],
+          "loc": { "line": 1203, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "RiFlag",
+      "docstring": " Flags provided to `sock_recv`.\n \n - Recv_peek: Returns the message without removing it from the socket's receive queue.\n - Recv_waitall: On byte-stream sockets, block until the full amount of data can be returned.",
+      "signature": "pub(all) enum RiFlag {\n  Recv_peek\n  Recv_waitall\n}",
+      "loc": { "line": 1059, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>) -> UInt",
+          "loc": { "line": 1064, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>, <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>) -> Bool",
+              "loc": { "line": 1062, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1062, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1062, "column": 14 }
+            }
+          ],
+          "loc": { "line": 1062, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "RiFlags",
+      "docstring": " Flags provided to `sock_recv`.",
+      "signature": "pub(all) type RiFlags UInt",
+      "loc": { "line": 1049, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>) -> Bool",
+          "loc": { "line": 1079, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>",
+          "loc": { "line": 1051, "column": 17 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>) -> <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>",
+          "loc": { "line": 1071, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#RiFlag\">RiFlag</a>) -> <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>",
+          "loc": { "line": 1075, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>, <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>) -> Bool",
+              "loc": { "line": 1049, "column": 35 }
+            }
+          ],
+          "loc": { "line": 1049, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#RiFlags\">RiFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1049, "column": 39 }
+            }
+          ],
+          "loc": { "line": 1049, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "Right",
+      "docstring": "  File descriptor rights, determining which actions may be performed.",
+      "signature": "pub(all) enum Right {\n  Fd_datasync\n  Fd_read\n  Fd_seek\n  Fd_fdstat_set_flags\n  Fd_sync\n  Fd_tell\n  Fd_write\n  Fd_advice\n  Fd_allocate\n  Path_create_directory\n  Path_create_file\n  Path_link_source\n  Path_link_target\n  Path_open\n  Fd_readdir\n  Path_readlink\n  Path_rename_source\n  Path_rename_target\n  Path_filestat_get\n  Path_filestat_set_size\n  Path_filestat_set_times\n  Fd_filestat_get\n  Fd_filestat_set_size\n  Fd_filestat_set_times\n  Path_symlink\n  Path_remove_directory\n  Path_unlink_file\n  Poll_fd_readwrite\n  Sock_shutdown\n  Sock_accept\n}",
+      "loc": { "line": 310, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Right\">Right</a>::value(self : <a href=\"peter-jerry-ye/wasi#Right\">Right</a>) -> UInt64",
+          "loc": { "line": 343, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Right\">Right</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Right\">Right</a>, <a href=\"peter-jerry-ye/wasi#Right\">Right</a>) -> Bool",
+              "loc": { "line": 341, "column": 10 }
+            }
+          ],
+          "loc": { "line": 341, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Right\">Right</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Right\">Right</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 341, "column": 14 }
+            }
+          ],
+          "loc": { "line": 341, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Rights",
+      "docstring": "  File descriptor rights, determining which actions may be performed.",
+      "signature": "pub(all) type Rights UInt64",
+      "loc": { "line": 303, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, right : <a href=\"peter-jerry-ye/wasi#Right\">Right</a>) -> Bool",
+          "loc": { "line": 386, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>::new() -> <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>",
+          "loc": { "line": 305, "column": 16 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>::set(self : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, right : <a href=\"peter-jerry-ye/wasi#Right\">Right</a>) -> <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>",
+          "loc": { "line": 378, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>::unset(self : <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, right : <a href=\"peter-jerry-ye/wasi#Right\">Right</a>) -> <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>",
+          "loc": { "line": 382, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>) -> Bool",
+              "loc": { "line": 303, "column": 36 }
+            }
+          ],
+          "loc": { "line": 303, "column": 36 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Rights\">Rights</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 303, "column": 40 }
+            }
+          ],
+          "loc": { "line": 303, "column": 40 }
+        }
+      ]
+    },
+    {
+      "name": "RoFlag",
+      "docstring": " Flags returned by `sock_recv`.\n \n - Recv_data_truncated: Returned by `sock_recv`: Message data has been truncated.",
+      "signature": "pub(all) enum RoFlag {\n  Recv_data_truncated\n}",
+      "loc": { "line": 1093, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>) -> UInt",
+          "loc": { "line": 1097, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>, <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>) -> Bool",
+              "loc": { "line": 1095, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1095, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1095, "column": 14 }
+            }
+          ],
+          "loc": { "line": 1095, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "RoFlags",
+      "docstring": " Flags returned by `sock_recv`.",
+      "signature": "pub(all) type RoFlags UInt",
+      "loc": { "line": 1084, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>) -> Bool",
+          "loc": { "line": 1111, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>",
+          "loc": { "line": 1086, "column": 17 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>) -> <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>",
+          "loc": { "line": 1103, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#RoFlag\">RoFlag</a>) -> <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>",
+          "loc": { "line": 1107, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>, <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>) -> Bool",
+              "loc": { "line": 1084, "column": 35 }
+            }
+          ],
+          "loc": { "line": 1084, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#RoFlags\">RoFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1084, "column": 39 }
+            }
+          ],
+          "loc": { "line": 1084, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "SdFlag",
+      "docstring": " Which channels on a socket to shut down.\n \n - Rd: Disables further receive operations.\n - Wr: Disables further send operations.",
+      "signature": "pub(all) enum SdFlag {\n  Rd\n  Wr\n}",
+      "loc": { "line": 1154, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>) -> UInt",
+          "loc": { "line": 1159, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>, <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>) -> Bool",
+              "loc": { "line": 1157, "column": 10 }
+            }
+          ],
+          "loc": { "line": 1157, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1157, "column": 14 }
+            }
+          ],
+          "loc": { "line": 1157, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "SdFlags",
+      "docstring": " Which channels on a socket to shut down.",
+      "signature": "pub(all) type SdFlags UInt",
+      "loc": { "line": 1144, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>) -> Bool",
+          "loc": { "line": 1174, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>",
+          "loc": { "line": 1146, "column": 17 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>) -> <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>",
+          "loc": { "line": 1166, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SdFlag\">SdFlag</a>) -> <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>",
+          "loc": { "line": 1170, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>, <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>) -> Bool",
+              "loc": { "line": 1144, "column": 35 }
+            }
+          ],
+          "loc": { "line": 1144, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#SdFlags\">SdFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1144, "column": 39 }
+            }
+          ],
+          "loc": { "line": 1144, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "SiFlag",
+      "docstring": " Flags returned by `sock_send`. As there are currently no flags defined, it must be set to zero.",
+      "signature": "pub(all) type SiFlag",
+      "loc": { "line": 1123, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>) -> UInt",
+          "loc": { "line": 1125, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>, <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>) -> Bool",
+              "loc": { "line": 1123, "column": 32 }
+            }
+          ],
+          "loc": { "line": 1123, "column": 32 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1123, "column": 36 }
+            }
+          ],
+          "loc": { "line": 1123, "column": 36 }
+        }
+      ]
+    },
+    {
+      "name": "SiFlags",
+      "docstring": " Flags provided to `sock_send`. As there are currently no flags defined, it must be set to zero.",
+      "signature": "pub(all) type SiFlags UInt",
+      "loc": { "line": 1116, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>) -> Bool",
+          "loc": { "line": 1139, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>",
+          "loc": { "line": 1118, "column": 17 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>) -> <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>",
+          "loc": { "line": 1131, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SiFlag\">SiFlag</a>) -> <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>",
+          "loc": { "line": 1135, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>, <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>) -> Bool",
+              "loc": { "line": 1116, "column": 35 }
+            }
+          ],
+          "loc": { "line": 1116, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#SiFlags\">SiFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1116, "column": 39 }
+            }
+          ],
+          "loc": { "line": 1116, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "Signal",
+      "docstring": " Signal condition.\n \n - None: No signal. Note that POSIX has special semantics for kill(pid, 0), so this value is reserved.\n - Hup: Hangup. Action: Terminates the process.\n - Inte: Terminate interrupt signal. Action: Terminates the process.\n - Quit: Terminal quit signal. Action: Terminates the process.\n - Ill: Illegal instruction. Action: Terminates the process.\n - Trap: Trace/breakpoint trap. Action: Terminates the process.\n - Abrt: Process abort signal. Action: Terminates the process.\n - Bus: Access to an undefined portion of a memory object. Action: Terminates the process.\n - Fpe: Erroneous arithmetic operation. Action: Terminates the process.\n - Kill: Kill. Action: Terminates the process.\n - Usr1: User-defined signal 1. Action: Terminates the process.\n - Segv: Invalid memory reference. Action: Terminates the process.\n - Usr2: User-defined signal 2. Action: Terminates the process.\n - Pipe: Write on a pipe with no one to read it. Action: Ignored.\n - Alrm: Alarm clock. Action: Terminates the process.\n - Chld: Child process terminated, stopped, or continued. Action: Ignored.\n - Cont: Continue executing, if stopped. Action: Continues the process.\n - Stop: Stop executing. Action: Stops the process.\n - Tstp: Terminal stop signal. Action: Stops the process.\n - Ttin: Background process attempting read. Action: Stops the process.\n - Ttou: Background process attempting write. Action: Stops the process.\n - Urg: High bandwidth data is available at a socket. Action: Ignored.\n - Xcpu: CPU time limit exceeded. Action: Terminates the process.\n - Xfsz: File size limit exceeded. Action: Terminates the process.\n - Vtalrm: Virtual timer expired. Action: Terminates the process.\n - Prof: Profiling timer expired. Action: Terminates the process.\n - Winch: Window changed. Action: Ignored.\n - Poll: I/O possible. Action: Terminates the process.\n - Pwr: Power failure. Action: Terminates the process.\n - Sys: Bad system call. Action: Terminates the process.",
+      "signature": "pub(all) enum Signal {\n  None\n  Hup\n  Inte\n  Quit\n  Ill\n  Trap\n  Abrt\n  Bus\n  Fpe\n  Kill\n  Usr1\n  Segv\n  Usr2\n  Pipe\n  Alrm\n  Term\n  Chld\n  Cont\n  Stop\n  Tstp\n  Ttin\n  Ttou\n  Urg\n  Xcpu\n  Xfsz\n  Vtalrm\n  Prof\n  Winch\n  Poll\n  Pwr\n  Sys\n}",
+      "loc": { "line": 941, "column": 15 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>?",
+          "loc": { "line": 1011, "column": 16 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>::value(self : <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>) -> UInt",
+          "loc": { "line": 975, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>, <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>) -> Bool",
+              "loc": { "line": 973, "column": 10 }
+            }
+          ],
+          "loc": { "line": 973, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 973, "column": 14 }
+            }
+          ],
+          "loc": { "line": 973, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Size",
+      "docstring": "",
+      "signature": "pub(all) type Size UInt",
+      "loc": { "line": 1, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Size\">Size</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Size\">Size</a>, <a href=\"peter-jerry-ye/wasi#Size\">Size</a>) -> Bool",
+              "loc": { "line": 1, "column": 32 }
+            }
+          ],
+          "loc": { "line": 1, "column": 32 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Size\">Size</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Size\">Size</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 1, "column": 36 }
+            }
+          ],
+          "loc": { "line": 1, "column": 36 }
+        }
+      ]
+    },
+    {
+      "name": "SubclockFlag",
+      "docstring": " Flags determining how to interpret the timestamp provided in `subscription::timeout`.\n \n - Subscription_clock_abstime: \n   If set, treat the timestamp provided in\n   `subscription_clock::timeout` as an absolute timestamp of clock\n   `subscription_clock::id`. If clear, treat the timestamp\n   provided in `subscription_clock::timeout` relative to the\n   current time value of clock `subscription_clock::id`.",
+      "signature": "pub(all) enum SubclockFlag {\n  Subscription_clock_abstime\n}",
+      "loc": { "line": 848, "column": 15 },
+      "methods": [
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>::value(self : <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>) -> UInt",
+          "loc": { "line": 852, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>, <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>) -> Bool",
+              "loc": { "line": 850, "column": 10 }
+            }
+          ],
+          "loc": { "line": 850, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 850, "column": 14 }
+            }
+          ],
+          "loc": { "line": 850, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "SubclockFlags",
+      "docstring": " Flags determining how to interpret the timestamp provided in `subscription::timeout`.",
+      "signature": "pub(all) type SubclockFlags UInt",
+      "loc": { "line": 834, "column": 15 },
+      "methods": [
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>::is_set(self : <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>) -> Bool",
+          "loc": { "line": 866, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>::new() -> <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>",
+          "loc": { "line": 836, "column": 23 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>::set(self : <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>) -> <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>",
+          "loc": { "line": 858, "column": 8 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>::unset(self : <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>, flag : <a href=\"peter-jerry-ye/wasi#SubclockFlag\">SubclockFlag</a>) -> <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>",
+          "loc": { "line": 862, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>, <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>) -> Bool",
+              "loc": { "line": 834, "column": 41 }
+            }
+          ],
+          "loc": { "line": 834, "column": 41 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 834, "column": 45 }
+            }
+          ],
+          "loc": { "line": 834, "column": 45 }
+        }
+      ]
+    },
+    {
+      "name": "Subscription",
+      "docstring": " Subscription to an event.\n \n - `userdata`: User-provided value that is attached to the subscription in the implementaiton and returned through `event::userdata`.\n - `u`: The type of the event to which to subscribe, and its contents.",
+      "signature": "pub(all) struct Subscription {\n  userdata : <a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>\n  u : <a href=\"peter-jerry-ye/wasi#Subscription_u\">Subscription_u</a>\n}",
+      "loc": { "line": 901, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Subscription\">Subscription</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Subscription\">Subscription</a>, <a href=\"peter-jerry-ye/wasi#Subscription\">Subscription</a>) -> Bool",
+              "loc": { "line": 904, "column": 10 }
+            }
+          ],
+          "loc": { "line": 904, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Subscription\">Subscription</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Subscription\">Subscription</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 904, "column": 14 }
+            }
+          ],
+          "loc": { "line": 904, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Subscription_clock",
+      "docstring": " The contents of a `subscription` when type is `eventtype::clock`.\n \n - `id`: The clock against which to compare the timestamp.\n - `timeout`: The absolute or relative timestamp.\n - `precision`: The amount of time that the implementation may wait additionally to coalesce with other events.\n - `flags`: Flags specifying whether the timeout is absolute or relative.",
+      "signature": "pub(all) struct Subscription_clock {\n  id : <a href=\"peter-jerry-ye/wasi#ClockId\">ClockId</a>\n  timeout : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>\n  precision : <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>\n  flags : <a href=\"peter-jerry-ye/wasi#SubclockFlags\">SubclockFlags</a>\n}",
+      "loc": { "line": 876, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Subscription_clock\">Subscription_clock</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Subscription_clock\">Subscription_clock</a>, <a href=\"peter-jerry-ye/wasi#Subscription_clock\">Subscription_clock</a>) -> Bool",
+              "loc": { "line": 881, "column": 10 }
+            }
+          ],
+          "loc": { "line": 881, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Subscription_clock\">Subscription_clock</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Subscription_clock\">Subscription_clock</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 881, "column": 14 }
+            }
+          ],
+          "loc": { "line": 881, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Subscription_fd_readwrite",
+      "docstring": " The contents of a `subscription` when type is `eventtype::fd_read` or `eventtype::fd_write`.\n \n - `file_descriptor`: The file descriptor on which to wait for it to become ready for reading or writing.",
+      "signature": "pub(all) struct Subscription_fd_readwrite {\n  file_descriptor : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>\n}",
+      "loc": { "line": 886, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>, <a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>) -> Bool",
+              "loc": { "line": 888, "column": 10 }
+            }
+          ],
+          "loc": { "line": 888, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 888, "column": 14 }
+            }
+          ],
+          "loc": { "line": 888, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "Subscription_u",
+      "docstring": " The contents of a `subscription`.",
+      "signature": "pub(all) enum Subscription_u {\n  Clock(<a href=\"peter-jerry-ye/wasi#Subscription_clock\">Subscription_clock</a>)\n  Fd_read(<a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>)\n  Fd_write(<a href=\"peter-jerry-ye/wasi#Subscription_fd_readwrite\">Subscription_fd_readwrite</a>)\n}",
+      "loc": { "line": 891, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Subscription_u\">Subscription_u</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Subscription_u\">Subscription_u</a>, <a href=\"peter-jerry-ye/wasi#Subscription_u\">Subscription_u</a>) -> Bool",
+              "loc": { "line": 895, "column": 10 }
+            }
+          ],
+          "loc": { "line": 895, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Subscription_u\">Subscription_u</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Subscription_u\">Subscription_u</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 895, "column": 14 }
+            }
+          ],
+          "loc": { "line": 895, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "TimeStamp",
+      "docstring": " Timestamp in nanoseconds.",
+      "signature": "pub(all) type TimeStamp UInt64",
+      "loc": { "line": 7, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>, <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>) -> Bool",
+              "loc": { "line": 7, "column": 39 }
+            }
+          ],
+          "loc": { "line": 7, "column": 39 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#TimeStamp\">TimeStamp</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 7, "column": 43 }
+            }
+          ],
+          "loc": { "line": 7, "column": 43 }
+        }
+      ]
+    },
+    {
+      "name": "Userdata",
+      "docstring": " User-provided value that may be attached to objects that is retained when\n extracted from the implementation.",
+      "signature": "pub(all) type Userdata UInt64",
+      "loc": { "line": 748, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>, <a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>) -> Bool",
+              "loc": { "line": 748, "column": 38 }
+            }
+          ],
+          "loc": { "line": 748, "column": 38 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Userdata\">Userdata</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 748, "column": 42 }
+            }
+          ],
+          "loc": { "line": 748, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "Whence",
+      "docstring": " The position relative to which to set the offset of the file descriptor",
+      "signature": "pub(all) enum Whence {\n  Set\n  Cur\n  End\n}",
+      "loc": { "line": 415, "column": 15 },
+      "methods": [
+        {
+          "name": "from_value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>::from_value(value : UInt) -> <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>?",
+          "loc": { "line": 429, "column": 16 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>::value(self : <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>) -> UInt",
+          "loc": { "line": 421, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>, <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>) -> Bool",
+              "loc": { "line": 419, "column": 10 }
+            }
+          ],
+          "loc": { "line": 419, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/wasi#Whence\">Whence</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 419, "column": 14 }
+            }
+          ],
+          "loc": { "line": 419, "column": 14 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "args_get",
+      "docstring": " Read command-line argument data.\n\n The size of the array should match that returned by `args_sizes_get`.\n\n Each argument is **not** `\\0` terminated.\n\n The first argument should be a string containing the \"name\" of the\n program. This need not be a usable filesystem path or even file name,\n and may even be a fixed string. Subsequent arguments are the arguments\n passed to the program by the user.",
+      "signature": "fn args_get() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 33, "column": 8 }
+    },
+    {
+      "name": "args_sizes_get",
+      "docstring": " Return command-line argument data sizes.\n \n @return Returns the number of arguments and the size of the argument string data, or an error.",
+      "signature": "fn args_sizes_get() -> (Int, Int)!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 6, "column": 8 }
+    },
+    {
+      "name": "decode_utf8",
+      "docstring": " Decode a UTF-8 byte array into a string",
+      "signature": "fn decode_utf8(bytes : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]) -> String",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "encode_utf8",
+      "docstring": " Encode a string into a UTF-8 byte array",
+      "signature": "fn encode_utf8(string : String) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]",
+      "loc": { "line": 43, "column": 8 }
+    },
+    {
+      "name": "environ_get",
+      "docstring": " Read environment variable data.\n \n The size of the array should match that returned by `environ_sizes_get`.",
+      "signature": "fn environ_get() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[(String, String)]!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 91, "column": 8 }
+    },
+    {
+      "name": "environ_sizes_get",
+      "docstring": " Return environment variable data sizes.\n \n @return Returns the number of environment variables arguments and the size of the environment variable data.",
+      "signature": "fn environ_sizes_get() -> (Int, Int)!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 71, "column": 8 }
+    },
+    {
+      "name": "path_symlink",
+      "docstring": " Create a symbolic link.\n \n Note: This is similar to `symlinkat` in POSIX.",
+      "signature": "fn path_symlink(old_path : String, fd : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>, new_path : String) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 1010, "column": 8 }
+    },
+    {
+      "name": "poll_oneoff",
+      "docstring": " Concurrently poll for the occurrence of a set of events.\n \n If `nsubscriptions` is 0, returns `errno::inval`.\n \n @param `in_` The events to which to subscribe.  \n @return The events that have occurred.",
+      "signature": "fn poll_oneoff(in_ : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"peter-jerry-ye/wasi#Subscription\">Subscription</a>]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"peter-jerry-ye/wasi#Event\">Event</a>]!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 1068, "column": 8 }
+    },
+    {
+      "name": "proc_exit",
+      "docstring": " Terminate the process normally. An exit code of 0 indicates successful\n termination of the program. The meanings of other values is dependent on\n the environment.\n \n Note: the accepted range may depend on the runtime, meaning that it may\n become an error to return a value outside the accepted range of exit codes,\n making the actual error code environment-dependent.",
+      "signature": "fn proc_exit(rval : UInt) -> Unit",
+      "loc": { "line": 1129, "column": 8 }
+    },
+    {
+      "name": "proc_raise",
+      "docstring": " Send a signal to the process of the calling thread.\n \n Note: This is similar to `raise` in POSIX.\n \n @param `sig` The signal condition to trigger.",
+      "signature": "fn proc_raise(sig : <a href=\"peter-jerry-ye/wasi#Signal\">Signal</a>) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 1140, "column": 8 }
+    },
+    {
+      "name": "random_get",
+      "docstring": " Write high-quality random data into a buffer.\n \n This function blocks when the implementaiton is unable to immediately\n provide sufficient high-quality random data.\n \n This function may execute slowly, so when larget mounts of random data are\n required, it's advisable to use this function to seed a pseudo-random\n number generator, rather than to provide the random data directly.",
+      "signature": "fn random_get(buf : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]) -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 1171, "column": 8 }
+    },
+    {
+      "name": "sched_yield",
+      "docstring": " Temporarily yield execution of the calling thread.\n \n Note: This is similar to `sched_yield` in POSIX.",
+      "signature": "fn sched_yield() -> Unit!<a href=\"peter-jerry-ye/wasi#Errno\">Errno</a>",
+      "loc": { "line": 1153, "column": 8 }
+    },
+    {
+      "name": "stderr",
+      "docstring": "",
+      "signature": "let stderr : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>",
+      "loc": { "line": 1214, "column": 9 }
+    },
+    {
+      "name": "stdin",
+      "docstring": "",
+      "signature": "let stdin : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>",
+      "loc": { "line": 1210, "column": 9 }
+    },
+    {
+      "name": "stdout",
+      "docstring": "",
+      "signature": "let stdout : <a href=\"peter-jerry-ye/wasi#Fd\">Fd</a>",
+      "loc": { "line": 1212, "column": 9 }
+    }
+  ],
+  "misc": []
+}

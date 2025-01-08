@@ -1,0 +1,10 @@
+{
+  "name": "Kaida-Amethyst/math",
+  "version": "0.1.10",
+  "readme": "README.md",
+  "repository": "https://github.com/Kaida-Amethyst/Moonbit-Math",
+  "license": "Apache-2.0",
+  "keywords": ["math", "numeric"],
+  "description": "High-precision Math library",
+  "source": "src"
+}

@@ -16,8 +16,6 @@ Allocator will take control over the whole linear memory. Memory will grow autom
 |Type|description|
 |---|---|
 |[Memory](#Memory)| Represent memory 内存|
-|[Chunk](#Chunk)||
-|[LinearMemory](#LinearMemory)||
 
 |Value|description|
 |---|---|
@@ -35,9 +33,13 @@ Allocator will take control over the whole linear memory. Memory will grow autom
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/memory#Memory">Memory</a> with output(<a href="peter-jerry-ye/memory#Memory">Memory</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/memory#Memory">Memory</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,19:::fn output(<a href="peter-jerry-ye/memory#Memory">Memory</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### free
@@ -77,11 +79,6 @@ Allocator will take control over the whole linear memory. Memory will grow autom
   >  Create memory 创建内存
   > Only valid if it is actually an allocated memory that is in use
   > 当该内存确实为被分配的内存时输入合法
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,19:::fn <a href="peter-jerry-ye/memory#Memory">Memory</a>::output(<a href="peter-jerry-ye/memory#Memory">Memory</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### reallocate
   ```moonbit
   :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,330:::fn <a href="peter-jerry-ye/memory#Memory">Memory</a>::reallocate(self : <a href="peter-jerry-ye/memory#Memory">Memory</a>, _alignment : Int, new_length : Int) -> <a href="peter-jerry-ye/memory#Memory">Memory</a>?
@@ -112,11 +109,6 @@ Allocator will take control over the whole linear memory. Memory will grow autom
   :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,85:::fn <a href="peter-jerry-ye/memory#Memory">Memory</a>::storef64(self : <a href="peter-jerry-ye/memory#Memory">Memory</a>, offset : Int, value : Double) -> Unit?
   ```
   >  Store Float64 存储64位浮点数
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/memory/traits.mbt,85:::fn <a href="peter-jerry-ye/memory#Memory">Memory</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## allocate
 
@@ -124,23 +116,3 @@ Allocator will take control over the whole linear memory. Memory will grow autom
 :::source,peter-jerry-ye/memory/memory.wasm-gc.mbt,238:::fn allocate(size : Int) -> <a href="peter-jerry-ye/memory#Memory">Memory</a>?
 ```
  Allocate memory 分配内存
-
-## Chunk
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/memory/traits.mbt,85:::fn <a href="peter-jerry-ye/memory#Chunk">Chunk</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## LinearMemory
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/memory/traits.mbt,85:::fn <a href="peter-jerry-ye/memory#LinearMemory">LinearMemory</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

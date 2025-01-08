@@ -1,0 +1,38 @@
+{
+  "name": "CMoonBack",
+  "package": null,
+  "childs": [
+    {
+      "name": "Binary-Exponentiation",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "CMoonBack/Binary-Exponentiation/lib",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "CMoonBack/Binary-Exponentiation/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

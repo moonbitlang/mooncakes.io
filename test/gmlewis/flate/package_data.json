@@ -1,0 +1,366 @@
+{
+  "readme": "# gmlewis/flate\n[![check](https://github.com/gmlewis/moonbit-flate/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-flate/actions/workflows/check.yml)\n\nThis is a simplified flate compression algorithm based on Go's implementation:\nhttps://cs.opensource.google/go/go/+/refs/tags/go1.23.1:src/compress/flate/deflatefast.go\nwhich has the copyright notice:\n\n```\n// Copyright 2016 The Go Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style\n// license that can be found in the LICENSE file.\n```\n\n## Status\n\nThe code has been updated to support compiler:\n\n```bash\n$ moon version --all\nmoon 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moon\nmoonc v0.1.20241216+68e710374 ~/.moon/bin/moonc\nmoonrun 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moonrun\n```\n\nUse `moonup` to manage `moon` compiler versions:\nhttps://github.com/chawyehsu/moonup\n",
+  "name": "gmlewis/flate",
+  "traits": [
+    {
+      "name": "@gmlewis/flate.Reader",
+      "docstring": " The actual read interface needed by [Decompressor::new].",
+      "signature": "pub(open) trait @gmlewis/flate.Reader {\n  read(Self, <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)\n  read_byte(Self) -> (Byte, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)\n}",
+      "loc": { "line": 220, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Compressor",
+      "docstring": "",
+      "signature": "type Compressor",
+      "loc": { "line": 44, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Decompressor",
+      "docstring": "",
+      "signature": "type Decompressor",
+      "loc": { "line": 229, "column": 8 },
+      "methods": [
+        {
+          "name": "close",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/flate#Decompressor\">Decompressor</a>::close(self : <a href=\"gmlewis/flate#Decompressor\">Decompressor</a>) -> <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?",
+          "loc": { "line": 381, "column": 8 }
+        },
+        {
+          "name": "read",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/flate#Decompressor\">Decompressor</a>::read(self : <a href=\"gmlewis/flate#Decompressor\">Decompressor</a>, b : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+          "loc": { "line": 353, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "DeflateFast",
+      "docstring": "",
+      "signature": "type DeflateFast",
+      "loc": { "line": 103, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/flate#DeflateFast\">DeflateFast</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/flate#DeflateFast\">DeflateFast</a>, <a href=\"gmlewis/flate#DeflateFast\">DeflateFast</a>) -> Bool",
+              "loc": { "line": 107, "column": 16 }
+            }
+          ],
+          "loc": { "line": 107, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/flate#DeflateFast\">DeflateFast</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/flate#DeflateFast\">DeflateFast</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 107, "column": 10 }
+            }
+          ],
+          "loc": { "line": 107, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "DictDecoder",
+      "docstring": " DictDecoder implements the LZ77 sliding dictionary as used in decompression.\n LZ77 decompresses data through sequences of two forms of commands:\n\n   - Literal insertions: Runs of one or more symbols are inserted into the data\n     stream as is. This is accomplished through the write_byte method for a\n     single symbol, or combinations of write_slice/write_mark for multiple symbols.\n     Any valid stream must start with a literal insertion if no preset dictionary\n     is used.\n\n   - Backward copies: Runs of one or more symbols are copied from previously\n     emitted data. Backward copies come as the tuple (dist, length) where dist\n     determines how far back in the stream to copy from and length determines how\n     many bytes to copy. Note that it is valid for the length to be greater than\n     the distance. Since LZ77 uses forward copies, that situation is used to\n     perform a form of run-length encoding on repeated runs of symbols.\n     The write_copy and try_write_copy are used to implement this command.\n\n For performance reasons, this implementation performs little to no sanity\n checks about the arguments. As such, the invariants documented for each\n method call must be respected.",
+      "signature": "type DictDecoder",
+      "loc": { "line": 28, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "DictWriter",
+      "docstring": "",
+      "signature": "type DictWriter",
+      "loc": { "line": 32, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HCode",
+      "docstring": "",
+      "signature": "type HCode",
+      "loc": { "line": 36, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/flate#HCode\">HCode</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/flate#HCode\">HCode</a>, <a href=\"gmlewis/flate#HCode\">HCode</a>) -> Bool",
+              "loc": { "line": 39, "column": 16 }
+            }
+          ],
+          "loc": { "line": 39, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/flate#HCode\">HCode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/flate#HCode\">HCode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 39, "column": 10 }
+            }
+          ],
+          "loc": { "line": 39, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "HuffmanBitWriter",
+      "docstring": "",
+      "signature": "type HuffmanBitWriter",
+      "loc": { "line": 78, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HuffmanDecoder",
+      "docstring": "",
+      "signature": "type HuffmanDecoder",
+      "loc": { "line": 79, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "HuffmanEncoder",
+      "docstring": "",
+      "signature": "type HuffmanEncoder",
+      "loc": { "line": 9, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/flate#HuffmanEncoder\">HuffmanEncoder</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/flate#HuffmanEncoder\">HuffmanEncoder</a>, <a href=\"gmlewis/flate#HuffmanEncoder\">HuffmanEncoder</a>) -> Bool",
+              "loc": { "line": 13, "column": 16 }
+            }
+          ],
+          "loc": { "line": 13, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/flate#HuffmanEncoder\">HuffmanEncoder</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/flate#HuffmanEncoder\">HuffmanEncoder</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 13, "column": 10 }
+            }
+          ],
+          "loc": { "line": 13, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "LevelInfo",
+      "docstring": "",
+      "signature": "type LevelInfo",
+      "loc": { "line": 43, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "LiteralNode",
+      "docstring": "",
+      "signature": "type LiteralNode",
+      "loc": { "line": 29, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/flate#LiteralNode\">LiteralNode</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/flate#LiteralNode\">LiteralNode</a>, <a href=\"gmlewis/flate#LiteralNode\">LiteralNode</a>) -> Bool",
+              "loc": { "line": 32, "column": 16 }
+            }
+          ],
+          "loc": { "line": 32, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/flate#LiteralNode\">LiteralNode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/flate#LiteralNode\">LiteralNode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 32, "column": 10 }
+            }
+          ],
+          "loc": { "line": 32, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "StepFunc",
+      "docstring": "",
+      "signature": "type StepFunc",
+      "loc": { "line": 272, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "StepState",
+      "docstring": "",
+      "signature": "type StepState",
+      "loc": { "line": 266, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "TableEntry",
+      "docstring": "",
+      "signature": "type TableEntry",
+      "loc": { "line": 95, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/flate#TableEntry\">TableEntry</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/flate#TableEntry\">TableEntry</a>, <a href=\"gmlewis/flate#TableEntry\">TableEntry</a>) -> Bool",
+              "loc": { "line": 98, "column": 16 }
+            }
+          ],
+          "loc": { "line": 98, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/flate#TableEntry\">TableEntry</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/flate#TableEntry\">TableEntry</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 98, "column": 10 }
+            }
+          ],
+          "loc": { "line": 98, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "docstring": "",
+      "signature": "type Token",
+      "loc": { "line": 62, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/flate#Token\">Token</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/flate#Token\">Token</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 62, "column": 24 }
+            }
+          ],
+          "loc": { "line": 62, "column": 24 }
+        }
+      ]
+    },
+    {
+      "name": "Writer",
+      "docstring": "",
+      "signature": "type Writer",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "close",
+          "docstring": " `close` closes the input to the flate Writer.\n After closing the Writer, the compressed data can be read\n from the `@io.Writer` provided to `new`.",
+          "signature": "fn <a href=\"gmlewis/flate#Writer\">Writer</a>::close(self : <a href=\"gmlewis/flate#Writer\">Writer</a>) -> <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?",
+          "loc": { "line": 50, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " `Writer::new` returns a new [@io.WriteCloser] compressing data at the \"BestSpeed\" level.\n It writes its (compressed) data to the provided `buf`.",
+          "signature": "fn <a href=\"gmlewis/flate#Writer\">Writer</a>::new(buf : <a href=\"gmlewis/io#Writer\">@gmlewis/io.Writer</a>) -> <a href=\"gmlewis/flate#Writer\">Writer</a>",
+          "loc": { "line": 9, "column": 16 }
+        },
+        {
+          "name": "new_dict",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/flate#Writer\">Writer</a>::new_dict(w : <a href=\"gmlewis/io#Writer\">@gmlewis/io.Writer</a>, dict : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> <a href=\"gmlewis/flate#Writer\">Writer</a>",
+          "loc": { "line": 23, "column": 16 }
+        },
+        {
+          "name": "write",
+          "docstring": " `write` writes the provided data to the flate Writer.",
+          "signature": "fn <a href=\"gmlewis/flate#Writer\">Writer</a>::write(self : <a href=\"gmlewis/flate#Writer\">Writer</a>, data : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> (Int, <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>?)",
+          "loc": { "line": 42, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "ioeof",
+      "docstring": "",
+      "signature": "let ioeof : <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>",
+      "loc": { "line": 19, "column": 9 }
+    },
+    {
+      "name": "writer_closed_error",
+      "docstring": "",
+      "signature": "let writer_closed_error : <a href=\"gmlewis/io#IOError\">@gmlewis/io.IOError</a>",
+      "loc": { "line": 151, "column": 9 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Reader",
+      "impls": [],
+      "methods": [
+        {
+          "name": "new",
+          "docstring": " `Reader::new` returns a new [@io.ReadCloser] that can be used\n to read the uncompressed version of r.",
+          "signature": "fn <a href=\"gmlewis/flate#Reader\">Reader</a>::new(r : <a href=\"gmlewis/flate#Reader\">Reader</a>) -> <a href=\"gmlewis/flate#Decompressor\">Decompressor</a>",
+          "loc": { "line": 276, "column": 17 }
+        },
+        {
+          "name": "new_dict",
+          "docstring": " `Reader::new_dict` is like [NewReader] but initializes the reader\n with a preset dictionary. The returned [Reader] behaves as if\n the uncompressed data stream started with the given dictionary,\n which has already been read. NewReaderDict is typically used\n to read data compressed by NewWriterDict.",
+          "signature": "fn <a href=\"gmlewis/flate#Reader\">Reader</a>::new_dict(r : <a href=\"gmlewis/flate#Reader\">Reader</a>, dict : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]) -> <a href=\"gmlewis/flate#Decompressor\">Decompressor</a>",
+          "loc": { "line": 285, "column": 17 }
+        }
+      ]
+    }
+  ]
+}

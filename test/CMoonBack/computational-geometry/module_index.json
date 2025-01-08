@@ -1,0 +1,56 @@
+{
+  "name": "CMoonBack",
+  "package": null,
+  "childs": [
+    {
+      "name": "computational-geometry",
+      "package": {
+        "path": "CMoonBack/computational-geometry",
+        "readme": false,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "CMoonBack/computational-geometry/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "Circle", "impls": [], "methods": [] },
+              { "name": "Line", "impls": [], "methods": [] },
+              { "name": "Line3d", "impls": [], "methods": [] },
+              { "name": "Plane3d", "impls": [], "methods": [] },
+              { "name": "Point", "impls": [], "methods": [] },
+              { "name": "Point3d", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [
+              "new_line", "new_line3d", "new_plane_3d", "new_point",
+              "new_point3d"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "CMoonBack/computational-geometry/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

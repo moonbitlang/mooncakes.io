@@ -1,0 +1,371 @@
+{
+  "readme": "",
+  "name": "tiye/respo/lib",
+  "traits": [],
+  "types": [
+    {
+      "name": "RespoApp",
+      "docstring": " get basic App structure",
+      "signature": "pub(all) struct RespoApp {\n  store : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[Model]\n  storage_key : String\n  mount_target : <a href=\"tiye/dom-ffi/lib#Node\">@tiye/dom-ffi/lib.Node</a>\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [
+        {
+          "name": "backup_model_beforeunload",
+          "docstring": " backup store to local storage before unload",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoApp\">RespoApp</a>::backup_model_beforeunload[Model : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"tiye/respo/lib#RespoApp\">RespoApp</a>[Model]) -> Unit",
+          "loc": { "line": 9, "column": 8 }
+        },
+        {
+          "name": "render_loop",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoApp\">RespoApp</a>::render_loop[Model, ActionOp](self : <a href=\"tiye/respo/lib#RespoApp\">RespoApp</a>[Model], renderer : () -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[ActionOp]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>, dispatch_action : (ActionOp) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> Unit",
+          "loc": { "line": 54, "column": 18 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RespoStatesTree",
+      "docstring": " Respo maintains states in a tree structure, where the keys are strings,\n each child component \"picks\" a key to attach its own state to the tree,\n and it dispatches events to global store to update the state.",
+      "signature": "pub(all) struct RespoStatesTree {\n  data : <a href=\"moonbitlang/core/json#Json\">Json</a>?\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  branches : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>]\n}",
+      "loc": { "line": 6, "column": 17 },
+      "methods": [
+        {
+          "name": "cast_branch",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::cast_branch[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a> + <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> + <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>) -> T",
+          "loc": { "line": 76, "column": 8 }
+        },
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::default() -> <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>",
+          "loc": { "line": 43, "column": 25 }
+        },
+        {
+          "name": "path",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::path(self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+          "loc": { "line": 71, "column": 8 }
+        },
+        {
+          "name": "pick",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::pick(self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>, name : String) -> <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>",
+          "loc": { "line": 106, "column": 8 }
+        },
+        {
+          "name": "set_in_mut",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::set_in_mut(self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>, change : <a href=\"tiye/respo/lib#RespoUpdateState\">RespoUpdateState</a>) -> Unit",
+          "loc": { "line": 128, "column": 8 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::to_json(self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 23, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>::to_string(self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>) -> String",
+          "loc": { "line": 33, "column": 25 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal(self : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>, other : <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>) -> Bool",
+              "loc": { "line": 16, "column": 38 }
+            }
+          ],
+          "loc": { "line": 16, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "",
+              "signature": "fn from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib#RespoStatesTree\">RespoStatesTree</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 54, "column": 50 }
+            }
+          ],
+          "loc": { "line": 54, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "RespoUpdateState",
+      "docstring": " framework defined action for updating states branch",
+      "signature": "pub(all) struct RespoUpdateState {\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  data : <a href=\"moonbitlang/core/json#Json\">Json</a>?\n}",
+      "loc": { "line": 161, "column": 17 },
+      "methods": [
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib#RespoUpdateState\">RespoUpdateState</a>::to_json(self : <a href=\"tiye/respo/lib#RespoUpdateState\">RespoUpdateState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 171, "column": 26 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "code_fonts",
+      "docstring": "",
+      "signature": "let code_fonts : String",
+      "loc": { "line": 18, "column": 9 }
+    },
+    {
+      "name": "default_fonts",
+      "docstring": "",
+      "signature": "let default_fonts : String",
+      "loc": { "line": 15, "column": 9 }
+    },
+    {
+      "name": "fancy_fonts",
+      "docstring": "",
+      "signature": "let fancy_fonts : String",
+      "loc": { "line": 21, "column": 9 }
+    },
+    {
+      "name": "mark_need_rerender",
+      "docstring": "",
+      "signature": "fn mark_need_rerender() -> Unit",
+      "loc": { "line": 16, "column": 8 }
+    },
+    {
+      "name": "memo_once1",
+      "docstring": " Memoize a function with a single cache slot, taking one argument.",
+      "signature": "fn memo_once1[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K) -> V) -> ((K) -> V)",
+      "loc": { "line": 4, "column": 8 }
+    },
+    {
+      "name": "memo_once2",
+      "docstring": " Memoize a function with a single cache slot, taking two arguments.",
+      "signature": "fn memo_once2[K1 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2) -> V) -> ((K1, K2) -> V)",
+      "loc": { "line": 26, "column": 8 }
+    },
+    {
+      "name": "memo_once3",
+      "docstring": " Memoize a function with a single cache slot, taking three arguments.",
+      "signature": "fn memo_once3[K1 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K3 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2, K3) -> V) -> ((K1, K2, K3) -> V)",
+      "loc": { "line": 48, "column": 8 }
+    },
+    {
+      "name": "memo_once4",
+      "docstring": " Memoize a function with a single cache slot, taking four arguments.",
+      "signature": "fn memo_once4[K1 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K3 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K4 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2, K3, K4) -> V) -> ((K1, K2, K3, K4) -> V)",
+      "loc": { "line": 72, "column": 8 }
+    },
+    {
+      "name": "memo_once5",
+      "docstring": " Memoize a function with a single cache slot, taking five arguments.",
+      "signature": "fn memo_once5[K1 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K3 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K4 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K5 : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2, K3, K4, K5) -> V) -> ((K1, K2, K3, K4, K5) -> V)",
+      "loc": { "line": 96, "column": 8 }
+    },
+    {
+      "name": "memoize1",
+      "docstring": "",
+      "signature": "fn memoize1[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K) -> V) -> ((K) -> V)",
+      "loc": { "line": 4, "column": 8 }
+    },
+    {
+      "name": "memoize2",
+      "docstring": "",
+      "signature": "fn memoize2[K1 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2) -> V) -> ((K1, K2) -> V)",
+      "loc": { "line": 19, "column": 8 }
+    },
+    {
+      "name": "memoize3",
+      "docstring": "",
+      "signature": "fn memoize3[K1 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K3 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2, K3) -> V) -> ((K1, K2, K3) -> V)",
+      "loc": { "line": 36, "column": 8 }
+    },
+    {
+      "name": "memoize4",
+      "docstring": "",
+      "signature": "fn memoize4[K1 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K3 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K4 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2, K3, K4) -> V) -> ((K1, K2, K3, K4) -> V)",
+      "loc": { "line": 53, "column": 8 }
+    },
+    {
+      "name": "memoize5",
+      "docstring": "",
+      "signature": "fn memoize5[K1 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K2 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K3 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K4 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, K5 : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](f : (K1, K2, K3, K4, K5) -> V) -> ((K1, K2, K3, K4, K5) -> V)",
+      "loc": { "line": 70, "column": 8 }
+    },
+    {
+      "name": "normal_fonts",
+      "docstring": "",
+      "signature": "let normal_fonts : String",
+      "loc": { "line": 24, "column": 9 }
+    },
+    {
+      "name": "preset",
+      "docstring": " common CSS resets for Respo pages",
+      "signature": "let preset : String",
+      "loc": { "line": 396, "column": 9 }
+    },
+    {
+      "name": "render_node",
+      "docstring": " render elements",
+      "signature": "fn render_node[T, U](mount_target : <a href=\"tiye/dom-ffi/lib#Node\">@tiye/dom-ffi/lib.Node</a>, store : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[U], renderer : () -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>, dispatch_action : (T) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>, _interval : Float?) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+      "loc": { "line": 25, "column": 8 }
+    },
+    {
+      "name": "try_load_storage",
+      "docstring": "",
+      "signature": "fn try_load_storage[Model : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> + <a href=\"moonbitlang/core/builtin#Default\">Default</a>](key : String) -> Model",
+      "loc": { "line": 25, "column": 8 }
+    },
+    {
+      "name": "ui_button",
+      "docstring": "",
+      "signature": "let ui_button : String",
+      "loc": { "line": 75, "column": 9 }
+    },
+    {
+      "name": "ui_button_danger",
+      "docstring": "",
+      "signature": "let ui_button_danger : String",
+      "loc": { "line": 134, "column": 9 }
+    },
+    {
+      "name": "ui_button_primary",
+      "docstring": "",
+      "signature": "let ui_button_primary : String",
+      "loc": { "line": 99, "column": 9 }
+    },
+    {
+      "name": "ui_center",
+      "docstring": " layout items in column and center them with flexbox\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_center : String",
+      "loc": { "line": 166, "column": 9 }
+    },
+    {
+      "name": "ui_column",
+      "docstring": " layout items in column and center them with flexbox\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_column : String",
+      "loc": { "line": 182, "column": 9 }
+    },
+    {
+      "name": "ui_column_dispersive",
+      "docstring": " layout items in column with flexbox, space around\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_column_dispersive : String",
+      "loc": { "line": 188, "column": 9 }
+    },
+    {
+      "name": "ui_column_evenly",
+      "docstring": " layout items in column with flexbox, space evenly\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_column_evenly : String",
+      "loc": { "line": 204, "column": 9 }
+    },
+    {
+      "name": "ui_column_parted",
+      "docstring": " layout items in column with flexbox, space between\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_column_parted : String",
+      "loc": { "line": 220, "column": 9 }
+    },
+    {
+      "name": "ui_expand",
+      "docstring": " expand item with flex:1",
+      "signature": "let ui_expand : String",
+      "loc": { "line": 235, "column": 9 }
+    },
+    {
+      "name": "ui_font_code",
+      "docstring": " monospace font for code, Source Code Pro, Menlo, Ubuntu Mono, Consolas",
+      "signature": "let ui_font_code : String",
+      "loc": { "line": 255, "column": 9 }
+    },
+    {
+      "name": "ui_font_fancy",
+      "docstring": " fancy font for title, Josefin Sans, Helvetica neue, Arial\n refers to https://fonts.google.com/specimen/Josefin+Sans or https://cdn.tiye.me/favored-fonts/main-fonts.css",
+      "signature": "let ui_font_fancy : String",
+      "loc": { "line": 261, "column": 9 }
+    },
+    {
+      "name": "ui_font_normal",
+      "docstring": " normal font for text, Hind, Helvatica, Arial\n refers to https://fonts.google.com/specimen/Hind or https://cdn.tiye.me/favored-fonts/main-fonts.css",
+      "signature": "let ui_font_normal : String",
+      "loc": { "line": 267, "column": 9 }
+    },
+    {
+      "name": "ui_fullscreen",
+      "docstring": " full page with absolute position",
+      "signature": "let ui_fullscreen : String",
+      "loc": { "line": 238, "column": 9 }
+    },
+    {
+      "name": "ui_global",
+      "docstring": "",
+      "signature": "let ui_global : String",
+      "loc": { "line": 27, "column": 9 }
+    },
+    {
+      "name": "ui_input",
+      "docstring": "",
+      "signature": "let ui_input : String",
+      "loc": { "line": 43, "column": 9 }
+    },
+    {
+      "name": "ui_link",
+      "docstring": "",
+      "signature": "let ui_link : String",
+      "loc": { "line": 291, "column": 9 }
+    },
+    {
+      "name": "ui_row",
+      "docstring": " layout items in row with flexbox, items are stretched\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_row : String",
+      "loc": { "line": 311, "column": 9 }
+    },
+    {
+      "name": "ui_row_center",
+      "docstring": " layout items in row with flexbox, center them\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_row_center : String",
+      "loc": { "line": 317, "column": 9 }
+    },
+    {
+      "name": "ui_row_dispersive",
+      "docstring": " layout items in row with flexbox, space around\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_row_dispersive : String",
+      "loc": { "line": 333, "column": 9 }
+    },
+    {
+      "name": "ui_row_evenly",
+      "docstring": " layout items in row with flexbox, space evenly\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_row_evenly : String",
+      "loc": { "line": 349, "column": 9 }
+    },
+    {
+      "name": "ui_row_middle",
+      "docstring": " layout items in row with flexbox, space between\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_row_middle : String",
+      "loc": { "line": 365, "column": 9 }
+    },
+    {
+      "name": "ui_row_parted",
+      "docstring": " layout items in row with flexbox, space between\n demos https://ui.respo-mvc.org/#/layouts.html",
+      "signature": "let ui_row_parted : String",
+      "loc": { "line": 381, "column": 9 }
+    },
+    {
+      "name": "ui_textarea",
+      "docstring": "",
+      "signature": "let ui_textarea : String",
+      "loc": { "line": 272, "column": 9 }
+    }
+  ],
+  "misc": []
+}

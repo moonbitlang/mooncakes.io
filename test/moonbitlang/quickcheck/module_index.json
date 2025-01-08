@@ -1,0 +1,362 @@
+{
+  "name": "moonbitlang",
+  "package": null,
+  "childs": [
+    {
+      "name": "quickcheck",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "moonbitlang/quickcheck/lib",
+            "readme": false,
+            "traits": [
+              { "name": "@moonbitlang/quickcheck/lib.Shrink", "impls": [] },
+              {
+                "name": "@moonbitlang/quickcheck/lib.Testable",
+                "impls": [
+                  { "methods": [ "property" ] },
+                  { "methods": [ "property" ] },
+                  { "methods": [ "property" ] },
+                  { "methods": [ "property" ] }
+                ]
+              }
+            ],
+            "types": [
+              {
+                "name": "Arrow",
+                "impls": [ { "methods": [ "property" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Axiom",
+                "impls": [],
+                "methods": [
+                  "new", "run", "to_property", "to_property_eq",
+                  "to_property_parametric", "to_property_parametric_eq"
+                ]
+              },
+              {
+                "name": "Callback",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              { "name": "Config", "impls": [], "methods": [] },
+              { "name": "Coverage", "impls": [], "methods": [] },
+              {
+                "name": "Discard",
+                "impls": [ { "methods": [ "property" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Equivalence",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "ap", "bind", "equal_by", "fmap", "is_equal", "new"
+                ]
+              },
+              {
+                "name": "Gen",
+                "impls": [ { "methods": [ "property" ] } ],
+                "methods": [
+                  "ap", "array_with_size", "bind", "feat_random", "fmap",
+                  "join", "new", "resize", "run", "sample", "samples",
+                  "scale", "spawn", "such_that", "such_that_maybe"
+                ]
+              },
+              { "name": "InternalError", "impls": [], "methods": [] },
+              {
+                "name": "Kind",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "ListCompare",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Outcome",
+                "impls": [],
+                "methods": [ "output", "to_string" ]
+              },
+              {
+                "name": "Printer",
+                "impls": [],
+                "methods": [
+                  "format", "from_buffer", "ident", "unident", "write_string"
+                ]
+              },
+              {
+                "name": "Property",
+                "impls": [ { "methods": [ "property" ] } ],
+                "methods": [ "make", "run_prop" ]
+              },
+              { "name": "Replay", "impls": [], "methods": [ "new" ] },
+              {
+                "name": "SingleResult",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "property" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "State",
+                "impls": [],
+                "methods": [
+                  "complete_test", "find_failure", "give_up", "local_min",
+                  "run_single_test", "run_test"
+                ]
+              },
+              { "name": "TestError", "impls": [], "methods": [] },
+              { "name": "TestSuccess", "impls": [], "methods": [] }
+            ],
+            "typealias": [ "RandomState" ],
+            "values": [
+              "alphabet", "associative", "callback", "char_range",
+              "classify", "collect", "commutative", "counterexample",
+              "distributive_left", "distributive_right", "expect_fail",
+              "expect_gave_up", "ext_equal", "failed", "filter",
+              "flatten_array", "flatten_list", "flatten_option",
+              "flatten_result", "forall", "forall_shrink", "frequency",
+              "frequency_list", "idempotent", "if_fail", "int_bound",
+              "int_range", "integer_bound", "inverse", "involutory", "label",
+              "liftA2", "liftA3", "liftA4", "liftA5", "liftA6",
+              "list_with_size", "local_min_found", "map_prop",
+              "map_rose_result", "map_size", "map_total_result",
+              "mono_decrease", "mono_increase", "nat", "neg_int", "numeral",
+              "one_of", "one_of_array", "one_of_list", "pure", "pure_eq",
+              "quad", "quick_check", "quick_check_fn", "quick_check_with",
+              "quick_check_with_result", "rejected", "shrinking", "sized",
+              "small_int", "sorted_list", "succeed", "terminate", "triple",
+              "tuple", "with_discarded_ratio", "with_max_shrinks",
+              "with_max_size", "with_max_success"
+            ],
+            "misc": []
+          },
+          "childs": [
+            {
+              "name": "falsify",
+              "package": {
+                "path": "moonbitlang/quickcheck/lib/falsify",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Config",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  { "name": "DriverState", "impls": [], "methods": [] },
+                  { "name": "Either", "impls": [], "methods": [] },
+                  {
+                    "name": "Failure",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Gen",
+                    "impls": [],
+                    "methods": [
+                      "ap", "apS", "bind", "fmap", "ifS", "run_gen",
+                      "sample", "select", "shrink_from"
+                    ]
+                  },
+                  { "name": "IsValidShrink", "impls": [], "methods": [] },
+                  { "name": "Property", "impls": [], "methods": [ "run" ] },
+                  {
+                    "name": "Sample",
+                    "impls": [],
+                    "methods": [ "sample_value" ]
+                  },
+                  {
+                    "name": "SampleTree",
+                    "impls": [],
+                    "methods": [ "map", "mod", "view" ]
+                  },
+                  {
+                    "name": "ShrinkExplain",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [
+                      "limit_steps", "shrink_history", "shrink_outcome"
+                    ]
+                  },
+                  {
+                    "name": "ShrinkHistroy",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Success",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  { "name": "TestResult", "impls": [], "methods": [] },
+                  {
+                    "name": "TestRun",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "LazyList", "List", "RandomState" ],
+                "values": [
+                  "collect", "combine_shrunk", "constant", "discard",
+                  "falsify", "from_rng", "from_seed", "gen", "info",
+                  "init_state", "init_test_run", "label", "mk_property",
+                  "new", "prim", "prim_with", "pure", "run_property",
+                  "second", "shrink_to_list", "test_gen"
+                ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "feat",
+              "package": {
+                "path": "moonbitlang/quickcheck/lib/feat",
+                "readme": false,
+                "traits": [
+                  {
+                    "name": "@moonbitlang/quickcheck/lib/feat.Enumerable",
+                    "impls": [
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] },
+                      { "methods": [ "enumerate" ] }
+                    ]
+                  }
+                ],
+                "types": [
+                  {
+                    "name": "Enumerate",
+                    "impls": [],
+                    "methods": [ "en_index", "eval", "fmap", "op_add" ]
+                  },
+                  {
+                    "name": "Finite",
+                    "impls": [],
+                    "methods": [
+                      "op_add", "output", "to_array", "to_string"
+                    ]
+                  }
+                ],
+                "typealias": [ "LazyList" ],
+                "values": [
+                  "app", "consts", "default", "empty", "fin_app", "fin_bind",
+                  "fin_cart", "fin_concat", "fin_empty", "fin_finite",
+                  "fin_fmap", "fin_mconcat", "fin_pure", "fin_union", "pay",
+                  "product", "singleton", "unary", "union"
+                ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "internal_shrinking",
+              "package": {
+                "path": "moonbitlang/quickcheck/lib/internal_shrinking",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ShrinkTree",
+                    "impls": [],
+                    "methods": [
+                      "bind", "draw", "from_shinker", "from_value",
+                      "get_value", "output", "smap", "to_string"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [ "join" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "lazy",
+              "package": {
+                "path": "moonbitlang/quickcheck/lib/lazy",
+                "readme": false,
+                "traits": [
+                  {
+                    "name": "@moonbitlang/quickcheck/lib/lazy.Monoid",
+                    "impls": []
+                  }
+                ],
+                "types": [
+                  {
+                    "name": "LazyList",
+                    "impls": [],
+                    "methods": [
+                      "concat", "drop_while", "fold_left", "fold_right",
+                      "head", "index", "length", "map", "op_add", "output",
+                      "split_at", "tail", "tails", "take_while", "to_string",
+                      "unfold"
+                    ]
+                  },
+                  {
+                    "name": "LazyRef",
+                    "impls": [],
+                    "methods": [ "force", "from_thunk", "from_value" ]
+                  }
+                ],
+                "typealias": [],
+                "values": [
+                  "default", "infinite_stream", "repeat", "sum", "to_lazy",
+                  "zip_lazy_normal", "zip_plus", "zip_with"
+                ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "rose",
+              "package": {
+                "path": "moonbitlang/quickcheck/lib/rose",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Rose",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [ "apply", "bind", "fmap", "join" ]
+                  }
+                ],
+                "typealias": [],
+                "values": [ "new", "pure" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "utils",
+              "package": {
+                "path": "moonbitlang/quickcheck/lib/utils",
+                "readme": false,
+                "traits": [],
+                "types": [],
+                "typealias": [],
+                "values": [
+                  "apply_while", "const_", "curry3", "curry4", "flip",
+                  "fresh_name", "id", "pair_function", "removes"
+                ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,757 @@
+{
+  "readme": "WASI filesystem is a filesystem API primarily intended to let users run WASI\nprograms that access their files on their existing filesystems, without\nsignificant overhead.\n\nIt is intended to be roughly portable between Unix-family platforms and\nWindows, though it does not hide many of the major differences.\n\nPaths are passed as interface-type `string`s, meaning they must consist of\na sequence of Unicode Scalar Values (USVs). Some filesystems may contain\npaths which are not accessible by this API.\n\nThe directory separator in WASI is always the forward-slash (`/`).\n\nAll paths in WASI are relative paths, and are interpreted relative to a\n`descriptor` referring to a base directory. If a `path` argument to any WASI\nfunction starts with `/`, or if any step of resolving a `path`, including\n`..` and symbolic link steps, reaches a directory outside of the base\ndirectory, or reaches a symlink to an absolute or rooted path in the\nunderlying filesystem, the function fails with `error-code::not-permitted`.\n\nFor more information about WASI path resolution and sandboxing, see\n[WASI filesystem path resolution].\n\n[WASI filesystem path resolution]: https://github.com/WebAssembly/wasi-filesystem/blob/main/path-resolution.md",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types",
+  "traits": [],
+  "types": [
+    {
+      "name": "Advice",
+      "docstring": " File or memory access pattern advisory information.",
+      "signature": "pub(all) enum Advice {\n  NORMAL\n  SEQUENTIAL\n  RANDOM\n  WILL_NEED\n  DONT_NEED\n  NO_REUSE\n}",
+      "loc": { "line": 335, "column": 15 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>::from(self : Int) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>",
+          "loc": { "line": 357, "column": 16 }
+        },
+        {
+          "name": "ordinal",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>::ordinal(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>) -> Int",
+          "loc": { "line": 345, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>) -> Bool",
+              "loc": { "line": 342, "column": 16 }
+            }
+          ],
+          "loc": { "line": 342, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 342, "column": 10 }
+            }
+          ],
+          "loc": { "line": 342, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Descriptor",
+      "docstring": " A descriptor is a reference to a filesystem object, which may be a file,\n directory, named pipe, special file, or other object on which filesystem\n calls may be made.",
+      "signature": "pub(all) type Descriptor Int",
+      "loc": { "line": 379, "column": 15 },
+      "methods": [
+        {
+          "name": "advise",
+          "docstring": " Provide file advisory information on a descriptor.\n\n This is similar to `posix_fadvise` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::advise(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, offset : UInt64, length : UInt64, advice : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice\">Advice</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 484, "column": 20 }
+        },
+        {
+          "name": "append_via_stream",
+          "docstring": " Return a stream for appending to a file, if available.\n\n May fail with an error-code describing why the file cannot be appended.\n\n Note: This allows using `write-stream`, which is similar to `write` with\n `O_APPEND` in in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::append_via_stream(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.OutputStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 464, "column": 20 }
+        },
+        {
+          "name": "create_directory_at",
+          "docstring": " Create a directory.\n\n Note: This is similar to `mkdirat` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::create_directory_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 758, "column": 20 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> Unit",
+          "loc": { "line": 385, "column": 20 }
+        },
+        {
+          "name": "get_flags",
+          "docstring": " Get flags associated with a descriptor.\n\n Note: This returns similar flags to `fcntl(fd, F_GETFL)` in POSIX.\n\n Note: This returns the value that was the `fs_flags` value returned\n from `fdstat_get` in earlier versions of WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::get_flags(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 531, "column": 20 }
+        },
+        {
+          "name": "get_type",
+          "docstring": " Get the dynamic type of a descriptor.\n\n Note: This returns the same value as the `type` field of the `fd-stat`\n returned by `stat`, `stat-at` and similar.\n\n Note: This returns similar flags to the `st_mode & S_IFMT` value provided\n by `fstat` in POSIX.\n\n Note: This returns the value that was the `fs_filetype` value returned\n from `fdstat_get` in earlier versions of WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::get_type(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 555, "column": 20 }
+        },
+        {
+          "name": "is_same_object",
+          "docstring": " Test whether two descriptors refer to the same filesystem object.\n\n In POSIX, this corresponds to testing whether the two descriptors have the\n same device (`st_dev`) and inode (`st_ino` or `d_ino`) numbers.\n wasi-filesystem does not expose device and inode numbers, so this function\n may be used instead.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::is_same_object(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> Bool",
+          "loc": { "line": 1190, "column": 20 }
+        },
+        {
+          "name": "link_at",
+          "docstring": " Create a hard link.\n\n Note: This is similar to `linkat` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::link_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, old_path_flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, old_path : String, new_descriptor : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, new_path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 968, "column": 20 }
+        },
+        {
+          "name": "metadata_hash",
+          "docstring": " Return a hash of the metadata associated with a filesystem object referred\n to by a descriptor.\n\n This returns a hash of the last-modification timestamp and file size, and\n may also include the inode number, device number, birth timestamp, and\n other metadata fields that may change when the file is modified or\n replaced. It may also include a secret value chosen by the\n implementation and not otherwise exposed.\n\n Implementations are encourated to provide the following properties:\n\n - If the file is not modified or replaced, the computed hash value should\n usually not change.\n - If the object is modified or replaced, the computed hash value should\n usually change.\n - The inputs to the hash should not be easily computable from the\n computed hash.\n\n However, none of these is required.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::metadata_hash(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1217, "column": 20 }
+        },
+        {
+          "name": "metadata_hash_at",
+          "docstring": " Return a hash of the metadata associated with a filesystem object referred\n to by a directory descriptor and a relative path.\n\n This performs the same hash computation as `metadata-hash`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::metadata_hash_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path_flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1239, "column": 20 }
+        },
+        {
+          "name": "open_at",
+          "docstring": " Open a file or directory.\n\n The returned descriptor is not guaranteed to be the lowest-numbered\n descriptor not currently open/ it is randomized to prevent applications\n from depending on making assumptions about indexes, since this is\n error-prone in multi-threaded contexts. The returned descriptor is\n guaranteed to be less than 2**31.\n\n If `flags` contains `descriptor-flags::mutate-directory`, and the base\n descriptor doesn't have `descriptor-flags::mutate-directory` set,\n `open-at` fails with `error-code::read-only`.\n\n If `flags` contains `write` or `mutate-directory`, or `open-flags`\n contains `truncate` or `create`, and the base descriptor doesn't have\n `descriptor-flags::mutate-directory` set, `open-at` fails with\n `error-code::read-only`.\n\n Note: This is similar to `openat` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::open_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path_flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, path : String, open_flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>, flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1015, "column": 20 }
+        },
+        {
+          "name": "read",
+          "docstring": " Read from a descriptor, without using and updating the descriptor's offset.\n\n This function returns a list of bytes containing the data that was\n read, along with a bool which, when true, indicates that the end of the\n file was reached. The returned list will contain up to `length` bytes; it\n may return fewer than requested, if the end of the file is reached or\n if the I/O operation is interrupted.\n\n In the future, this may change to return a `stream<u8, error-code>`.\n\n Note: This is similar to `pread` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::read(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, length : UInt64, offset : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[(Bytes, Bool), <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 655, "column": 20 }
+        },
+        {
+          "name": "read_directory",
+          "docstring": " Read directory entries from a directory.\n\n On filesystems where directories contain entries referring to themselves\n and their parents, often named `.` and `..` respectively, these entries\n are omitted.\n\n This always returns a new stream which starts at the beginning of the\n directory. Multiple streams may be active on the same directory, and they\n do not interfere with each other.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::read_directory(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 720, "column": 20 }
+        },
+        {
+          "name": "read_via_stream",
+          "docstring": " Return a stream for reading from a file, if available.\n\n May fail with an error-code describing why the file cannot be read.\n\n Multiple read, write, and append streams may be active on the same open\n file and they do not interfere with each other.\n\n Note: This allows using `read-stream`, which is similar to `read` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::read_via_stream(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, offset : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.InputStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 408, "column": 20 }
+        },
+        {
+          "name": "readlink_at",
+          "docstring": " Read the contents of a symbolic link.\n\n If the contents contain an absolute or rooted path in the underlying\n filesystem, this function fails with `error-code::not-permitted`.\n\n Note: This is similar to `readlinkat` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::readlink_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[String, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1048, "column": 20 }
+        },
+        {
+          "name": "remove_directory_at",
+          "docstring": " Remove a directory.\n\n Return `error-code::not-empty` if the directory is not empty.\n\n Note: This is similar to `unlinkat(fd, path, AT_REMOVEDIR)` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::remove_directory_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1077, "column": 20 }
+        },
+        {
+          "name": "rename_at",
+          "docstring": " Rename a filesystem object.\n\n Note: This is similar to `renameat` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::rename_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, old_path : String, new_descriptor : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, new_path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1101, "column": 20 }
+        },
+        {
+          "name": "set_size",
+          "docstring": " Adjust the size of an open file. If this increases the file's size, the\n extra bytes are filled with zeros.\n\n Note: This was called `fd_filestat_set_size` in earlier versions of WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::set_size(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, size : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 573, "column": 20 }
+        },
+        {
+          "name": "set_times",
+          "docstring": " Adjust the timestamps of an open file or directory.\n\n Note: This is similar to `futimens` in POSIX.\n\n Note: This was called `fd_filestat_set_times` in earlier versions of WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::set_times(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, data_access_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>, data_modification_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 597, "column": 20 }
+        },
+        {
+          "name": "set_times_at",
+          "docstring": " Adjust the timestamps of a file or directory.\n\n Note: This is similar to `utimensat` in POSIX.\n\n Note: This was called `path_filestat_set_times` in earlier versions of\n WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::set_times_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path_flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, path : String, data_access_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>, data_modification_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 912, "column": 20 }
+        },
+        {
+          "name": "stat",
+          "docstring": " Return the attributes of an open file or directory.\n\n Note: This is similar to `fstat` in POSIX, except that it does not return\n device and inode information. For testing whether two descriptors refer to\n the same underlying filesystem object, use `is-same-object`. To obtain\n additional data that can be used do determine whether a file has been\n modified, use `metadata-hash`.\n\n Note: This was called `fd_filestat_get` in earlier versions of WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::stat(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 788, "column": 20 }
+        },
+        {
+          "name": "stat_at",
+          "docstring": " Return the attributes of a file or directory.\n\n Note: This is similar to `fstatat` in POSIX, except that it does not\n return device and inode information. See the `stat` description for a\n discussion of alternatives.\n\n Note: This was called `path_filestat_get` in earlier versions of WASI.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::stat_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path_flags : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 845, "column": 20 }
+        },
+        {
+          "name": "symlink_at",
+          "docstring": " Create a symbolic link (also known as a \"symlink\").\n\n If `old-path` starts with `/`, the function fails with\n `error-code::not-permitted`.\n\n Note: This is similar to `symlinkat` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::symlink_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, old_path : String, new_path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1134, "column": 20 }
+        },
+        {
+          "name": "sync",
+          "docstring": " Synchronize the data and metadata of a file to disk.\n\n This function succeeds with no effect if the file descriptor is not\n opened for writing.\n\n Note: This is similar to `fsync` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::sync(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 743, "column": 20 }
+        },
+        {
+          "name": "sync_data",
+          "docstring": " Synchronize the data of a file to disk.\n\n This function succeeds with no effect if the file descriptor is not\n opened for writing.\n\n Note: This is similar to `fdatasync` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::sync_data(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 513, "column": 20 }
+        },
+        {
+          "name": "unlink_file_at",
+          "docstring": " Unlink a filesystem object that is not a directory.\n\n Return `error-code::is-directory` if the path refers to a directory.\n Note: This is similar to `unlinkat(fd, path, 0)` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::unlink_file_at(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, path : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1163, "column": 20 }
+        },
+        {
+          "name": "write",
+          "docstring": " Write to a descriptor, without using and updating the descriptor's offset.\n\n It is valid to write past the end of a file; the file is extended to the\n extent of the write, with bytes between the previous end and the start of\n the write set to zero.\n\n In the future, this may change to take a `stream<u8, error-code>`.\n\n Note: This is similar to `pwrite` in POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::write(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, buffer : Bytes, offset : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 688, "column": 20 }
+        },
+        {
+          "name": "write_via_stream",
+          "docstring": " Return a stream for writing to a file, if available.\n\n May fail with an error-code describing why the file cannot be written.\n\n Note: This allows using `write-stream`, which is similar to `write` in\n POSIX.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>::write_via_stream(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, offset : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.OutputStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 436, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>) -> Bool",
+              "loc": { "line": 379, "column": 43 }
+            }
+          ],
+          "loc": { "line": 379, "column": 43 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor\">Descriptor</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 379, "column": 37 }
+            }
+          ],
+          "loc": { "line": 379, "column": 37 }
+        }
+      ]
+    },
+    {
+      "name": "DescriptorFlags",
+      "docstring": " Descriptor flags.\n\n Note: This was called `fdflags` in earlier versions of WASI.",
+      "signature": "pub(all) type DescriptorFlags Byte",
+      "loc": { "line": 49, "column": 15 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>::default() -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>",
+          "loc": { "line": 52, "column": 25 }
+        },
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>::is_set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlagsFlag\">DescriptorFlagsFlag</a>) -> Bool",
+          "loc": { "line": 95, "column": 25 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>::set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlagsFlag\">DescriptorFlagsFlag</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>",
+          "loc": { "line": 79, "column": 25 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>::unset(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlagsFlag\">DescriptorFlagsFlag</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>",
+          "loc": { "line": 87, "column": 25 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>) -> Bool",
+              "loc": { "line": 49, "column": 49 }
+            }
+          ],
+          "loc": { "line": 49, "column": 49 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags\">DescriptorFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 49, "column": 43 }
+            }
+          ],
+          "loc": { "line": 49, "column": 43 }
+        }
+      ]
+    },
+    {
+      "name": "DescriptorFlagsFlag",
+      "docstring": "",
+      "signature": "pub(all) enum DescriptorFlagsFlag {\n  READ\n  WRITE\n  FILE_INTEGRITY_SYNC\n  DATA_INTEGRITY_SYNC\n  REQUESTED_WRITE_SYNC\n  MUTATE_DIRECTORY\n}",
+      "loc": { "line": 57, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "DescriptorStat",
+      "docstring": " File attributes.\n\n Note: This was called `filestat` in earlier versions of WASI.",
+      "signature": "pub(all) struct DescriptorStat {\n  type_ : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>\n  link_count : UInt64\n  size : UInt64\n  data_access_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock.Datetime</a>?\n  data_modification_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock.Datetime</a>?\n  status_change_timestamp : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock.Datetime</a>?\n}",
+      "loc": { "line": 181, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>) -> Bool",
+              "loc": { "line": 188, "column": 16 }
+            }
+          ],
+          "loc": { "line": 188, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat\">DescriptorStat</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 188, "column": 10 }
+            }
+          ],
+          "loc": { "line": 188, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "DescriptorType",
+      "docstring": " The type of a filesystem object referenced by a descriptor.\n\n Note: This was called `filetype` in earlier versions of WASI.",
+      "signature": "pub(all) enum DescriptorType {\n  UNKNOWN\n  BLOCK_DEVICE\n  CHARACTER_DEVICE\n  DIRECTORY\n  FIFO\n  SYMBOLIC_LINK\n  REGULAR_FILE\n  SOCKET\n}",
+      "loc": { "line": 6, "column": 15 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>::from(self : Int) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>",
+          "loc": { "line": 32, "column": 24 }
+        },
+        {
+          "name": "ordinal",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>::ordinal(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>) -> Int",
+          "loc": { "line": 18, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>) -> Bool",
+              "loc": { "line": 15, "column": 16 }
+            }
+          ],
+          "loc": { "line": 15, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 15, "column": 10 }
+            }
+          ],
+          "loc": { "line": 15, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "DirectoryEntry",
+      "docstring": " A directory entry.",
+      "signature": "pub(all) struct DirectoryEntry {\n  type_ : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType\">DescriptorType</a>\n  name : String\n}",
+      "loc": { "line": 198, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry\">DirectoryEntry</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry\">DirectoryEntry</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry\">DirectoryEntry</a>) -> Bool",
+              "loc": { "line": 201, "column": 16 }
+            }
+          ],
+          "loc": { "line": 201, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry\">DirectoryEntry</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry\">DirectoryEntry</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 201, "column": 10 }
+            }
+          ],
+          "loc": { "line": 201, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "DirectoryEntryStream",
+      "docstring": " A stream of directory entries.",
+      "signature": "pub(all) type DirectoryEntryStream Int",
+      "loc": { "line": 390, "column": 15 },
+      "methods": [
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>) -> Unit",
+          "loc": { "line": 396, "column": 30 }
+        },
+        {
+          "name": "read_directory_entry",
+          "docstring": " Read a single directory entry from a `directory-entry-stream`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>::read_directory_entry(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry\">DirectoryEntry</a>?, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>]",
+          "loc": { "line": 1267, "column": 30 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>) -> Bool",
+              "loc": { "line": 390, "column": 53 }
+            }
+          ],
+          "loc": { "line": 390, "column": 53 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream\">DirectoryEntryStream</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 390, "column": 47 }
+            }
+          ],
+          "loc": { "line": 390, "column": 47 }
+        }
+      ]
+    },
+    {
+      "name": "ErrorCode",
+      "docstring": " Error codes returned by functions, similar to `errno` in POSIX.\n Not all of these error codes are returned by the functions provided by this\n API; some are used in higher-level library layers, and others are provided\n merely for alignment with POSIX.",
+      "signature": "pub(all) enum ErrorCode {\n  ACCESS\n  WOULD_BLOCK\n  ALREADY\n  BAD_DESCRIPTOR\n  BUSY\n  DEADLOCK\n  QUOTA\n  EXIST\n  FILE_TOO_LARGE\n  ILLEGAL_BYTE_SEQUENCE\n  IN_PROGRESS\n  INTERRUPTED\n  INVALID\n  IO\n  IS_DIRECTORY\n  LOOP\n  TOO_MANY_LINKS\n  MESSAGE_SIZE\n  NAME_TOO_LONG\n  NO_DEVICE\n  NO_ENTRY\n  NO_LOCK\n  INSUFFICIENT_MEMORY\n  INSUFFICIENT_SPACE\n  NOT_DIRECTORY\n  NOT_EMPTY\n  NOT_RECOVERABLE\n  UNSUPPORTED\n  NO_TTY\n  NO_SUCH_DEVICE\n  OVERFLOW\n  NOT_PERMITTED\n  PIPE\n  READ_ONLY\n  INVALID_SEEK\n  TEXT_FILE_BUSY\n  CROSS_DEVICE\n}",
+      "loc": { "line": 207, "column": 15 },
+      "methods": [
+        {
+          "name": "from",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>::from(self : Int) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>",
+          "loc": { "line": 291, "column": 19 }
+        },
+        {
+          "name": "ordinal",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>::ordinal(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>) -> Int",
+          "loc": { "line": 248, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>) -> Bool",
+              "loc": { "line": 245, "column": 16 }
+            }
+          ],
+          "loc": { "line": 245, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 245, "column": 10 }
+            }
+          ],
+          "loc": { "line": 245, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "MetadataHashValue",
+      "docstring": " A 128-bit hash value, split into parts because wasm doesn't have a\n 128-bit integer type.",
+      "signature": "pub(all) struct MetadataHashValue {\n  lower : UInt64\n  upper : UInt64\n}",
+      "loc": { "line": 371, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>) -> Bool",
+              "loc": { "line": 374, "column": 16 }
+            }
+          ],
+          "loc": { "line": 374, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue\">MetadataHashValue</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 374, "column": 10 }
+            }
+          ],
+          "loc": { "line": 374, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "NewTimestamp",
+      "docstring": " When setting a timestamp, this gives the value to set it to.",
+      "signature": "pub(all) enum NewTimestamp {\n  NoChange\n  Now\n  Timestamp(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock.Datetime</a>)\n}",
+      "loc": { "line": 191, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>) -> Bool",
+              "loc": { "line": 195, "column": 16 }
+            }
+          ],
+          "loc": { "line": 195, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp\">NewTimestamp</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 195, "column": 10 }
+            }
+          ],
+          "loc": { "line": 195, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "OpenFlags",
+      "docstring": " Open flags used by `open-at`.",
+      "signature": "pub(all) type OpenFlags Byte",
+      "loc": { "line": 138, "column": 15 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>::default() -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>",
+          "loc": { "line": 141, "column": 19 }
+        },
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>::is_set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlagsFlag\">OpenFlagsFlag</a>) -> Bool",
+          "loc": { "line": 174, "column": 19 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>::set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlagsFlag\">OpenFlagsFlag</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>",
+          "loc": { "line": 164, "column": 19 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>::unset(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlagsFlag\">OpenFlagsFlag</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>",
+          "loc": { "line": 169, "column": 19 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>) -> Bool",
+              "loc": { "line": 138, "column": 43 }
+            }
+          ],
+          "loc": { "line": 138, "column": 43 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags\">OpenFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 138, "column": 37 }
+            }
+          ],
+          "loc": { "line": 138, "column": 37 }
+        }
+      ]
+    },
+    {
+      "name": "OpenFlagsFlag",
+      "docstring": "",
+      "signature": "pub(all) enum OpenFlagsFlag {\n  CREATE\n  DIRECTORY\n  EXCLUSIVE\n  TRUNCATE\n}",
+      "loc": { "line": 146, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "PathFlags",
+      "docstring": " Flags determining the method of how paths are resolved.",
+      "signature": "pub(all) type PathFlags Byte",
+      "loc": { "line": 103, "column": 15 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>::default() -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>",
+          "loc": { "line": 106, "column": 19 }
+        },
+        {
+          "name": "is_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>::is_set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlagsFlag\">PathFlagsFlag</a>) -> Bool",
+          "loc": { "line": 133, "column": 19 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>::set(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlagsFlag\">PathFlagsFlag</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>",
+          "loc": { "line": 123, "column": 19 }
+        },
+        {
+          "name": "unset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>::unset(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, other : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlagsFlag\">PathFlagsFlag</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>",
+          "loc": { "line": 128, "column": 19 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>) -> Bool",
+              "loc": { "line": 103, "column": 43 }
+            }
+          ],
+          "loc": { "line": 103, "column": 43 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags\">PathFlags</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 103, "column": 37 }
+            }
+          ],
+          "loc": { "line": 103, "column": 37 }
+        }
+      ]
+    },
+    {
+      "name": "PathFlagsFlag",
+      "docstring": "",
+      "signature": "pub(all) enum PathFlagsFlag {\n  SYMLINK_FOLLOW\n}",
+      "loc": { "line": 111, "column": 15 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "filesystem_error_code",
+      "docstring": " Attempts to extract a filesystem-related `error-code` from the stream\n `error` provided.\n\n Stream operations which return `stream-error::last-operation-failed`\n have a payload with more information about the operation that failed.\n This payload can be passed through to this function to see if there's\n filesystem-related information about the error to return.\n\n Note that this function is fallible because not all stream-related\n errors are filesystem-related errors.",
+      "signature": "fn filesystem_error_code(err : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error.Error_</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode\">ErrorCode</a>?",
+      "loc": { "line": 1304, "column": 8 }
+    }
+  ],
+  "misc": []
+}

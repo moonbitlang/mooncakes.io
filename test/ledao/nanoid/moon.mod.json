@@ -1,0 +1,12 @@
+{
+  "name": "ledao/nanoid",
+  "version": "0.1.1",
+  "deps": {},
+  "readme": "README.md",
+  "repository": "https://gitee.com/ledao/nanoid",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "description": "",
+  "source": "src",
+  "homepage": "https://gitee.com/ledao/nanoid"
+}

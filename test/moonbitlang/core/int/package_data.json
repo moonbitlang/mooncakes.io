@@ -7,15 +7,15 @@
   "values": [
     {
       "name": "max_value",
-      "docstring": "",
+      "docstring": "\n Maximum value of an integer.",
       "signature": "let max_value : Int",
-      "loc": { "line": 16, "column": 9 }
+      "loc": { "line": 17, "column": 9 }
     },
     {
       "name": "min_value",
-      "docstring": "",
+      "docstring": "\n Minimum value of an integer.",
       "signature": "let min_value : Int",
-      "loc": { "line": 19, "column": 9 }
+      "loc": { "line": 21, "column": 9 }
     }
   ],
   "misc": [
@@ -25,9 +25,21 @@
       "methods": [
         {
           "name": "abs",
-          "docstring": "\n Returns the absolute value of an integer.\n \n # Parameters\n \n - `self` : The integer whose absolute value is to be determined.\n \n # Returns\n \n - The absolute value of the input integer.\n \n # Examples\n \n ```\n inspect!(Int::abs(-10), content=\"10\")\n ```",
+          "docstring": "\n Computes the absolute value of an integer.\n\n Parameters:\n\n * `self` : The integer whose absolute value is to be computed.\n\n Returns the absolute value of the integer.\n\n Example:\n\n ```moonbit\n test \"abs\" {\n   inspect!(@int.abs(42), content=\"42\")\n   inspect!(@int.abs(-42), content=\"42\")\n   inspect!(@int.abs(0), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/int#Int\">Int</a>::abs(self : Int) -> Int",
-          "loc": { "line": 37, "column": 8 }
+          "loc": { "line": 41, "column": 8 }
+        },
+        {
+          "name": "to_be_bytes",
+          "docstring": " Converts the Int to a Bytes in big-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/int#Int\">Int</a>::to_be_bytes(self : Int) -> Bytes",
+          "loc": { "line": 50, "column": 8 }
+        },
+        {
+          "name": "to_le_bytes",
+          "docstring": " Converts the Int to a Bytes in little-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/int#Int\">Int</a>::to_le_bytes(self : Int) -> Bytes",
+          "loc": { "line": 55, "column": 8 }
         }
       ]
     }

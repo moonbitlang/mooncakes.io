@@ -16,13 +16,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -35,11 +43,6 @@
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,79:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>::execute(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, statement : String, parameters : <a href="moonbitlang/core/array#Array">Array</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>]) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>]
   ```
   >  Execute a statement returning back data if there is any
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>) -> Bool
-  ```
-  > automatically derived
 - #### open
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,48:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>::open(database : String) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>]
@@ -49,16 +52,6 @@
   >  If `database` is "default", the default instance is opened.
   > 
   >  `error::no-such-database` will be raised if the `name` is not recognized.
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,4:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Connection">Connection</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Error\_
 
@@ -75,30 +68,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,21:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## QueryResult
 
@@ -112,30 +96,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,41:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#QueryResult">QueryResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RowResult
 
@@ -148,30 +123,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,35:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#RowResult">RowResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Value
 
@@ -188,27 +154,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/sqlite/top.mbt,30:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/sqlite#Value">Value</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived

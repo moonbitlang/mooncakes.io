@@ -1,0 +1,109 @@
+{
+  "readme": "",
+  "name": "hackwaly/moonyacc/lib/codegen/gen_mbt",
+  "traits": [],
+  "types": [
+    {
+      "name": "CodegenDecision",
+      "docstring": "",
+      "signature": "type CodegenDecision",
+      "loc": { "line": 18, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision\">CodegenDecision</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision\">CodegenDecision</a>, <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision\">CodegenDecision</a>) -> Int",
+              "loc": { "line": 23, "column": 14 }
+            }
+          ],
+          "loc": { "line": 23, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision\">CodegenDecision</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision\">CodegenDecision</a>, <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenDecision\">CodegenDecision</a>) -> Bool",
+              "loc": { "line": 23, "column": 10 }
+            }
+          ],
+          "loc": { "line": 23, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "CodegenSymbol",
+      "docstring": "",
+      "signature": "type CodegenSymbol",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol\">CodegenSymbol</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol\">CodegenSymbol</a>, <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol\">CodegenSymbol</a>) -> Int",
+              "loc": { "line": 6, "column": 14 }
+            }
+          ],
+          "loc": { "line": 6, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol\">CodegenSymbol</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol\">CodegenSymbol</a>, <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#CodegenSymbol\">CodegenSymbol</a>) -> Bool",
+              "loc": { "line": 6, "column": 10 }
+            }
+          ],
+          "loc": { "line": 6, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Mode",
+      "docstring": "",
+      "signature": "pub(all) enum Mode {\n  Default\n  JsonCst(<a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#TokenPayloadRewrite\">TokenPayloadRewrite</a>?)\n}",
+      "loc": { "line": 53, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "TokenPayloadRewrite",
+      "docstring": "",
+      "signature": "pub(all) enum TokenPayloadRewrite {\n  NoPayload\n  JsonPayload\n}",
+      "loc": { "line": 59, "column": 15 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "codegen",
+      "docstring": "",
+      "signature": "fn codegen(grammar : <a href=\"hackwaly/moonyacc/lib/grm#Grammar\">@hackwaly/moonyacc/lib/grm.Grammar</a>, automaton : <a href=\"hackwaly/moonyacc/lib/lr1#Automaton\">@hackwaly/moonyacc/lib/lr1.Automaton</a>, meta : <a href=\"hackwaly/moonyacc/lib/codegen#MetaProvider\">@hackwaly/moonyacc/lib/codegen.MetaProvider</a>, output : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>, external_tokens~ : Bool = .., no_comments~ : Bool = .., mode~ : <a href=\"hackwaly/moonyacc/lib/codegen/gen_mbt#Mode\">Mode</a> = ..) -> Unit",
+      "loc": { "line": 183, "column": 8 }
+    },
+    {
+      "name": "codegen_tokens",
+      "docstring": "",
+      "signature": "fn codegen_tokens(terminals : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"hackwaly/moonyacc/lib/grm#Terminal\">@hackwaly/moonyacc/lib/grm.Terminal</a>], terminal_meta : (String) -> <a href=\"hackwaly/moonyacc/lib/codegen#TerminalMeta\">@hackwaly/moonyacc/lib/codegen.TerminalMeta</a>, output : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>, no_comments~ : Bool = .., derive_map~ : <a href=\"moonbitlang/core/immut/hashmap#T\">@moonbitlang/core/immut/hashmap.T</a>[<a href=\"hackwaly/moonyacc/lib/codegen#PubType\">@hackwaly/moonyacc/lib/codegen.PubType</a>, String] = ..) -> Unit",
+      "loc": { "line": 65, "column": 8 }
+    }
+  ],
+  "misc": []
+}

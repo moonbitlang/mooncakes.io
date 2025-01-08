@@ -24,21 +24,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a> with output(<a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,57:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a>::output(<a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/traits.mbt,85:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,57:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,57:::fn output(<a href="hackwaly/moonyacc/tests/calc_jsoncst_test#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Token
 
@@ -57,24 +49,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a> with output(<a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,13:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,13:::fn output(<a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### kind
   ```moonbit
   :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,16:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>::kind(self : <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>) -> <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,13:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>::output(<a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/traits.mbt,85:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#Token">Token</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -95,21 +81,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,40:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a> with output(self : <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,40:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,40:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>::output(self : <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/traits.mbt,85:::fn <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/tests/calc_jsoncst_test/calc_jsoncst.mbt,40:::fn output(self : <a href="hackwaly/moonyacc/tests/calc_jsoncst_test#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## YYDecision
 

@@ -16,51 +16,60 @@
 <body>
   <pre><code class="moonbit">//A minimum value, taking into account the error of the computational geometry,
 //if a certain number is less than eps, then this number is 0
+///|
 let eps : Double = 0.00000001
+
+///|
 fn iszero(x : Double) -> Bool {
-  if x.abs() < eps{
+  if x.abs() < eps {
     true
   } else {
     false
   }
 }
 
+///|
 fn max(a : Double, b : Double) -> Double {
   @math.maximum(a, b)
 }
 
+///|
 fn min(a : Double, b : Double) -> Double {
   @math.minimum(a, b)
 }
 
+///|
 struct Point {
   mut x : Double
   mut y : Double
 }
 
-fn op_eq(self: Point, other: Point) -> Bool {
+///|
+fn op_eq(self : Point, other : Point) -> Bool {
   if self.x == other.x && self.y == other.y {
     true
   } else {
     false
-  } 
+  }
 }
 
-fn op_add(self: Point, other: Point) -> Point {
-  {x : self.x + other.x, y : self.y + other.y}
+///|
+fn op_add(self : Point, other : Point) -> Point {
+  { x: self.x + other.x, y: self.y + other.y }
 }
 
-fn op_sub(self: Point, other: Point) -> Point {
-  {x : self.x - other.x, y : self.y - other.y}
+///|
+fn op_sub(self : Point, other : Point) -> Point {
+  { x: self.x - other.x, y: self.y - other.y }
 }
 
-
+///|
 struct Line {
   mut a : Point
   b : Point
 }
 
-/// Calculates the cross product of two vectors formed by three points. The first
+///| Calculates the cross product of two vectors formed by three points. The first
 /// vector is from point `origin` to point `p1`, and the second vector is from
 /// point `origin` to point `p2`. The cross product determines the relative
 /// orientation of the two vectors (counterclockwise being positive, clockwise
@@ -107,7 +116,7 @@ fn mul(p1 : Point, p2 : Point, p0 : Point) -> Double {
   (p1.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p1.y - p0.y)
 }
 
-/// Calculates the dot product of two vectors formed by three points. The first
+///| Calculates the dot product of two vectors formed by three points. The first
 /// vector is from point `origin` to point `p1`, and the second vector is from
 /// point `origin` to point `p2`.
 ///
@@ -146,7 +155,7 @@ fn dot(p1 : Point, p2 : Point, p0 : Point) -> Double {
   (p1.x - p0.x) * (p2.x - p0.x) + (p1.y - p0.y) * (p2.y - p0.y)
 }
 
-/// Calculates the Euclidean distance between two points in a 2D plane using the
+///| Calculates the Euclidean distance between two points in a 2D plane using the
 /// formula √((x₁-x₂)² + (y₁-y₂)²).
 ///
 /// Parameters:
@@ -182,7 +191,7 @@ fn distance(p1 : Point, p2 : Point) -> Double {
   Double::sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y))
 }
 
-/// Determines if three points are collinear (lie on the same straight line).
+///| Determines if three points are collinear (lie on the same straight line).
 ///
 /// Parameters:
 ///
@@ -223,7 +232,7 @@ fn dots_inline(p1 : Point, p2 : Point, p3 : Point) -> Bool {
   iszero(mul(p1, p2, p3))
 }
 
-/// Determines whether a point lies on a line segment, including the endpoints. A
+///| Determines whether a point lies on a line segment, including the endpoints. A
 /// point is considered to be on the line segment if it is collinear with the
 /// segment's endpoints and its coordinates lie within the segment's bounds.
 ///
@@ -273,7 +282,7 @@ fn dot_online_in(p : Point, l : Line) -> Bool {
   f1 && f2 && f3
 }
 
-/// Determines whether a point lies strictly on a line segment, excluding the
+///| Determines whether a point lies strictly on a line segment, excluding the
 /// endpoints. A point is considered to be strictly on the line segment if it is
 /// collinear with the segment's endpoints and lies between them, but is not
 /// equal to either endpoint.
@@ -324,7 +333,7 @@ fn dot_online_ex(p : Point, l : Line) -> Bool {
   f1 && f2 && f3
 }
 
-/// Determines whether two points lie on the same side of a line. Points are
+///| Determines whether two points lie on the same side of a line. Points are
 /// considered to be on the same side if the cross products of vectors formed
 /// from the line segment's endpoints to each point have the same sign.
 ///
@@ -368,7 +377,7 @@ fn same_side(p1 : Point, p2 : Point, l : Line) -> Bool {
   mul(l.a, p1, l.b) * mul(l.a, p2, l.b) > eps
 }
 
-/// Determines whether two points lie on opposite sides of a line segment. Points
+///| Determines whether two points lie on opposite sides of a line segment. Points
 /// are considered to be on opposite sides if the cross products of vectors
 /// formed from the line segment's endpoints to each point have different signs.
 ///
@@ -412,7 +421,7 @@ fn opposite_side(p1 : Point, p2 : Point, l : Line) -> Bool {
   mul(l.a, p1, l.b) * mul(l.a, p2, l.b) < -eps
 }
 
-/// Calculates the symmetric point (reflection) of a point with respect to a line
+///| Calculates the symmetric point (reflection) of a point with respect to a line
 /// defined by two points. The symmetric point is the mirror image of the
 /// original point across the line.
 ///
@@ -456,13 +465,14 @@ fn symmetric_point(p1 : Point, l1 : Point, l2 : Point) -> Point {
     ry = p1.y
   } else {
     let k : Double = (l1.y - l2.y) / (l1.x - l2.x)
-    rx = (k * k * l1.x * 2 + k * p1.y * 2 - k * l1.y * 2 - k * k * p1.x + p1.x) / (k * k + 1)
+    rx = (k * k * l1.x * 2 + k * p1.y * 2 - k * l1.y * 2 - k * k * p1.x + p1.x) /
+      (k * k + 1)
     ry = p1.y - (rx - p1.x) / k
   }
   new_point(rx, ry)
 }
 
-/// Determines whether two line segments intersect. Uses the concept of cross
+///| Determines whether two line segments intersect. Uses the concept of cross
 /// products and bounding boxes to efficiently check for intersection.
 ///
 /// Parameters:
@@ -512,7 +522,7 @@ fn isIntersected(s1 : Point, e1 : Point, s2 : Point, e2 : Point) -> Bool {
   f1 && f2 && f3 && f4 && f5 && f6
 }
 
-/// Calculates the intersection point of two line segments defined by their
+///| Calculates the intersection point of two line segments defined by their
 /// endpoints. Uses parametric form of line equations to find the exact point
 /// where the lines intersect.
 ///
@@ -553,15 +563,17 @@ fn isIntersected(s1 : Point, e1 : Point, s2 : Point, e2 : Point) -> Bool {
 fn intersection(u1 : Point, u2 : Point, v1 : Point, v2 : Point) -> Point {
   let mut rx : Double = u1.x
   let mut ry : Double = u1.y
-  let t1 : Double = (u1.x - v1.x) * (v1.y - v2.y) - (u1.y - v1.y) * (v1.x - v2.x)
-  let t2 : Double = (u1.x - u2.x) * (v1.y - v2.y) - (u1.y - u2.y) * (v1.x - v2.x)
+  let t1 : Double = (u1.x - v1.x) * (v1.y - v2.y) -
+    (u1.y - v1.y) * (v1.x - v2.x)
+  let t2 : Double = (u1.x - u2.x) * (v1.y - v2.y) -
+    (u1.y - u2.y) * (v1.x - v2.x)
   let t : Double = t1 / t2
   rx = rx + (u2.x - u1.x) * t
   ry = ry + (u2.y - u1.y) * t
   new_point(rx, ry)
 }
 
-/// Calculates the projection point of a given point onto a line defined by two
+///| Calculates the projection point of a given point onto a line defined by two
 /// points. The projection point is the point on the line that is closest to the
 /// given point, forming a perpendicular line from the original point to the
 /// line.
@@ -657,7 +669,8 @@ fn dis_p_to_line(p : Point, l1 : Point, l2 : Point) -> Double {
   let ans : Point = intersection(p, r, l1, l2)
   distance(p, ans)
 }
-/// Calculates the closest point on a line segment to a given point. The result
+
+///| Calculates the closest point on a line segment to a given point. The result
 /// is either the projection of the point onto the line segment (if the
 /// projection falls within the segment) or one of the segment's endpoints (if
 /// the projection falls outside the segment).
@@ -723,7 +736,7 @@ fn p_to_seg(p : Point, l1 : Point, l2 : Point) -> Point {
   ans
 }
 
-/// Creates a new point in a 2D coordinate system with the specified x and y
+///| Creates a new point in a 2D coordinate system with the specified x and y
 /// coordinates.
 ///
 /// Parameters:
@@ -754,15 +767,12 @@ fn p_to_seg(p : Point, l1 : Point, l2 : Point) -> Point {
 ///   inspect!(p.y, content="0.0")
 /// }
 /// ```
-pub fn new_point(
-  x_ : Double,
-  y_ : Double
-) -> Point {
-  let ans = {x : x_, y : y_}
+pub fn new_point(x_ : Double, y_ : Double) -> Point {
+  let ans = { x: x_, y: y_ }
   ans
 }
 
-/// Creates a new line segment in a 2D coordinate system defined by two
+///| Creates a new line segment in a 2D coordinate system defined by two
 /// endpoints.
 ///
 /// Parameters:
@@ -805,14 +815,12 @@ pub fn new_point(
 ///   inspect!(line.b.y, content="1.0")
 /// }
 /// ```
-pub fn new_line(
-  a_ : Point,
-  b_ : Point
-) -> Line {
-  let ans : Line = {a : a_, b : b_}
+pub fn new_line(a_ : Point, b_ : Point) -> Line {
+  let ans : Line = { a: a_, b: b_ }
   ans
 }
 
+///|
 fn main {
   let a = new_point(0, 0)
   let b = new_point(1, 1)
@@ -828,7 +836,8 @@ fn main {
   // println(dots_inline(a, b, c))
   // println(dot_online_in(a, l1))
   // println(dot_online_ex(a, l1))
-}</code></pre>
+}
+</code></pre>
   <script>
     let moonbitLanguageFn = hljs => {
       return {

@@ -16,12 +16,6 @@
           "loc": { "line": 38, "column": 8 }
         },
         {
-          "name": "default",
-          "docstring": "automatically derived",
-          "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::default() -> <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
-          "loc": { "line": 19, "column": 16 }
-        },
-        {
           "name": "new",
           "docstring": "\n Create a new RandomState from an optional seed.",
           "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::new(seed~ : UInt64 = ..) -> <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
@@ -42,7 +36,7 @@
         {
           "name": "next_float",
           "docstring": "\n Get the next random number as a float in [0, 1]",
-          "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::next_float(self : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>) -> float",
+          "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::next_float(self : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>) -> Float",
           "loc": { "line": 94, "column": 8 }
         },
         {
@@ -82,35 +76,37 @@
           "loc": { "line": 50, "column": 8 }
         },
         {
-          "name": "output",
-          "docstring": "automatically derived",
-          "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::output(<a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 19, "column": 10 }
-        },
-        {
           "name": "split",
           "docstring": "\n Generates an independent random number generator.",
           "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::split(self : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>) -> <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
           "loc": { "line": 108, "column": 8 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
         }
       ],
       "impls": [
         {
-          "name": "default",
-          "docstring": "automatically derived",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a> with default() -> <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
+              "loc": { "line": 19, "column": 16 }
+            }
+          ],
           "loc": { "line": 19, "column": 16 }
         },
         {
-          "name": "output",
-          "docstring": "automatically derived",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a> with output(<a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 10 }
+            }
+          ],
           "loc": { "line": 19, "column": 10 }
         }
       ]

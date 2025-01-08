@@ -18,7 +18,7 @@
 pub(all) enum Block {
   BlankLine(Node[BlockBlankLine])
   BlockQuote(Node[BlockQuote])
-  Blocks(Node[List[Block]])
+  Blocks(Node[Seq[Block]])
   CodeBlock(Node[CodeBlock])
   Heading(Node[BlockHeading])
   HtmlBlock(Node[HtmlBlock])
@@ -29,11 +29,11 @@ pub(all) enum Block {
   ExtMathBlock(Node[CodeBlock])
   ExtTable(Node[Table])
   ExtFootnoteDefinition(Node[Footnote])
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub fn Block::empty() -> Block {
-  Blocks({ v: Nil, meta: Meta::none() })
+  Blocks({ v: [], meta: Meta::none() })
 }
 
 ///|
@@ -66,15 +66,18 @@ pub fn Block::normalize(self : Block) -> Block {
   match self {
     BlockQuote(bl) => BlockQuote(bl.map(BlockQuote::normalize_block))
     List(bl) => List(bl.map(BlockList::normalize_items))
-    Blocks({ v: Cons(b, bs), meta }) => {
-      let bs = loop List::Nil.add(b.normalize()), bs {
-        acc, Cons(Blocks({ v: bs1, .. }), bs) =>
-          continue acc, bs1.rev().rev_concat(bs)
-        acc, Cons(b, bs) => continue acc.add(b.normalize()), bs
-        acc, Nil => acc.rev()
+    Blocks({ v: Seq([.., _] as bs), meta }) => {
+      let mut bs = bs
+      let acc = [bs.pop().unwrap().normalize()]
+      for {
+        match bs.pop() {
+          Some(Blocks({ v: bs1, .. })) => bs += bs1._
+          Some(b) => acc.push(b.normalize())
+          None => break
+        }
       }
-      match bs {
-        Cons(b, Nil) => b
+      match acc {
+        [b] => b
         _ => Blocks({ v: bs, meta })
       }
     }
@@ -88,19 +91,18 @@ pub fn Block::normalize(self : Block) -> Block {
 /// and `ExtFootnoteDefinition`) and adds them to `init` (defaults to an empty map).
 pub fn Block::defs(
   self : Block,
-  init~ : LabelDefs = LabelDefs::empty()
+  init~ : LabelDefs = LabelDefs::new()
 ) -> LabelDefs {
   match self {
     BlockQuote(bl) => bl.v.block.defs(init~)
     Blocks(bl) => bl.v.fold(init~, fn(init, b) { b.defs(init~) })
     List(bl) => bl.v.items.fold(init~, fn(init, it) { it.v.block.defs(init~) })
     LinkRefDefinition(bl) =>
-      bl.v.defined_label.map_or(init, fn(it) { init.add(it.key, LinkDef(bl)) })
+      bl.v.defined_label.map_or(init, fn(it) { init..set(it.key, LinkDef(bl)) })
     ExtFootnoteDefinition(footnote) =>
-      footnote.v.defined_label.map_or(
-        init,
-        fn(it) { init.add(it.key, FootnoteDef(footnote)) },
-      )
+      footnote.v.defined_label.map_or(init, fn(it) {
+        init..set(it.key, FootnoteDef(footnote))
+      })
     _ => init
   }
 }
@@ -115,7 +117,7 @@ pub(all) struct BlockQuote {
   indent : Indent
   /// The quoted block.
   block : Block
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub fn BlockQuote::new(indent~ : Int = 0, block : Block) -> BlockQuote {
@@ -140,21 +142,21 @@ pub fn BlockQuote::normalize_block(self : BlockQuote) -> BlockQuote {
 pub(all) struct CodeBlock {
   layout : CodeBlockLayout
   info_string : StringNode?
-  code : List[StringNode]
-} derive(Show, FromJson, ToJson)
+  code : Seq[StringNode]
+} derive(Show, ToJson)
 
 ///|
 pub(all) enum CodeBlockLayout {
   Indented
   Fenced(CodeBlockFencedLayout)
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub(all) struct CodeBlockFencedLayout {
   indent : Indent
   opening_fence : StringNode
   closing_fence : StringNode?
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub fn CodeBlockFencedLayout::default() -> CodeBlockFencedLayout {
@@ -165,7 +167,7 @@ pub fn CodeBlockFencedLayout::default() -> CodeBlockFencedLayout {
 pub fn CodeBlock::new(
   layout~ : CodeBlockLayout = Fenced(CodeBlockFencedLayout::default()),
   info_string~ : StringNode? = None,
-  code : List[StringNode]
+  code : Seq[StringNode]
 ) -> CodeBlock {
   let layout = match (info_string, layout) {
     (Some(_), Indented) =>
@@ -175,30 +177,29 @@ pub fn CodeBlock::new(
   { layout, info_string, code }
 }
 
-// [make_fence cb] is a fence character and count suitable for [cb].
-///|
+///| [make_fence cb] is a fence character and count suitable for [cb].
 pub fn CodeBlock::make_fence(self : CodeBlock) -> (Char, Count) {
   let ch = match self.info_string {
     Some(info) => if info.v.contains_char('`') { '~' } else { '`' }
     _ => '`'
   }
-  let counts = loop ch, List::Nil, self.code {
-    _, counts, Nil => counts
-    ch, counts, Cons({ v: c, .. }, cs) => {
-      let mut k = 0
-      while k < c.length() && c[k] == ch {
-        k += 1
-      }
-      let counts = if k != 0 { counts.add(k) } else { counts }
-      continue ch, counts, cs
+  let counts = @sorted_set.new()
+  for n in self.code {
+    let c = n.v
+    let k = for k = 0; k < c.length() && c[k] == ch; k = k + 1 {
+
+    } else {
+      k
+    }
+    if k != 0 {
+      counts.add(k)
     }
   }
   (ch, InlineCodeSpan::min_backticks(min=3, counts))
 }
 
-// [language_of_info_string s] extracts a (non-empty) language, the first word of [s] and a trimmed remainder.
-// Assumes [s] is {!String.trim}ed which is what {!info_string} gives you.
-///|
+///| [language_of_info_string s] extracts a (non-empty) language, the first word of [s] and a trimmed remainder.
+/// Assumes [s] is {!String.trim}ed which is what {!info_string} gives you.
 pub fn CodeBlock::language_of_info_string(s : String) -> (String, String)? {
   if s.is_empty() {
     return None
@@ -233,13 +234,13 @@ pub(all) struct BlockHeading {
   level : Int
   inline : Inline
   id : BlockHeadingId?
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub(all) enum BlockHeadingLayout {
   Atx(BlockHeadingAtxLayout)
   Setext(BlockHeadingSetextLayout)
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub(all) struct BlockHeadingAtxLayout {
@@ -260,7 +261,7 @@ pub(all) struct BlockHeadingSetextLayout {
   underline_indent : Indent
   underline_count : Node[Count]
   underline_blanks : Blanks
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub(all) enum BlockHeadingId {
@@ -279,7 +280,7 @@ pub fn BlockHeading::new(
 }
 
 ///| The type for [HTML blocks](https://spec.commonmark.org/0.30/#html-blocks).
-pub(all) type HtmlBlock List[StringNode] derive(Show, FromJson, ToJson)
+pub(all) type HtmlBlock Seq[StringNode] derive(Show, ToJson)
 
 ///|
 pub(all) struct ListItem {
@@ -288,7 +289,7 @@ pub(all) struct ListItem {
   after_marker : Indent
   block : Block
   ext_task_marker : Node[Char]?
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub(all) typealias ListItemBlock = ListItem
@@ -336,8 +337,8 @@ pub fn ListTaskStatus::from_marker(marker : Char) -> ListTaskStatus {
 pub(all) struct BlockList {
   ty : ListType
   tight : Bool
-  items : List[Node[ListItem]]
-} derive(Show, FromJson, ToJson)
+  items : Seq[Node[ListItem]]
+} derive(Show, ToJson)
 
 ///|
 pub fn BlockList::map_items(
@@ -357,7 +358,7 @@ pub(all) struct BlockParagraph {
   leading_indent : Indent
   inline : Inline
   trailing_blanks : Blanks
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub fn BlockParagraph::new(
@@ -390,7 +391,7 @@ pub(all) struct Footnote {
   label : Label
   defined_label : Label?
   block : Block
-} derive(Show, FromJson, ToJson)
+} derive(Show, ToJson)
 
 ///|
 pub fn Footnote::new(
@@ -424,8 +425,8 @@ fn Label::stub(label : Label, defined_label : Label?) -> LabelDef {
 pub(all) struct Table {
   indent : Indent
   col_count : Count
-  rows : List[(Node[TableRow], Blanks)]
-} derive(Show, FromJson, ToJson)
+  rows : Seq[(Node[TableRow], Blanks)]
+} derive(Show, ToJson)
 
 ///|
 pub(all) enum TableAlign {
@@ -436,10 +437,10 @@ pub(all) enum TableAlign {
 
 ///|
 pub(all) enum TableRow {
-  Header(List[(Inline, TableCellLayout)])
-  Sep(List[Node[TableSep]])
-  Data(List[(Inline, TableCellLayout)])
-} derive(Show, FromJson, ToJson)
+  Header(Seq[(Inline, TableCellLayout)])
+  Sep(Seq[Node[TableSep]])
+  Data(Seq[(Inline, TableCellLayout)])
+} derive(Show, ToJson)
 
 ///|
 pub(all) typealias TableSep = (TableAlign?, Count)
@@ -450,29 +451,27 @@ pub(all) typealias TableCellLayout = (Blanks, Blanks)
 ///|
 pub fn Table::new(
   indent~ : Indent = 0,
-  rows : List[(Node[TableRow], Blanks)]
+  rows : Seq[(Node[TableRow], Blanks)]
 ) -> Table {
-  {
-    indent,
-    rows,
-    col_count: loop 0, rows {
-      c, Cons(({ v: Header(cols) | Data(cols), .. }, _), rs) =>
-        continue @math.maximum(cols.length(), c), rs
-      c, Cons(({ v: Sep(cols), .. }, _), rs) =>
-        continue @math.maximum(cols.length(), c), rs
-      c, Nil => c
-    },
+  let mut col_count = 0
+  for row in rows {
+    match row.0.v {
+      Header(cols) | Data(cols) =>
+        col_count = @math.maximum(col_count, cols.length())
+      Sep(cols) => col_count = @math.maximum(col_count, cols.length())
+    }
   }
+  { indent, rows, col_count }
 }
 
 ///|
-pub fn Table::parse_sep_row(
-  cs : List[(Inline, TableCellLayout)]
-) -> List[Node[TableSep]]? {
-  loop List::Nil, cs {
-    acc, Nil => Some(acc.rev())
-    acc, Cons((Text({ v, meta }), ("", "")), cs) => {
-      guard v.is_empty().not() else { None }
+fn Table::parse_sep_row(
+  cs : ArrayView[(Inline, TableCellLayout)]
+) -> Array[Node[TableSep]]? {
+  loop [], cs {
+    acc, [] => Some(acc)
+    acc, [(Text({ v, meta }), ("", "")), .. as cs] => {
+      guard not(v.is_empty()) else { None }
       let max = v.length() - 1
       let first_colon = v[0] == ':'
       let last_colon = v[max] == ':'
@@ -489,7 +488,7 @@ pub fn Table::parse_sep_row(
           (true, false) => Some(Left)
           (false, true) => Some(Right)
         }
-        continue acc.add({ v: (sep, count), meta }), cs
+        continue acc..push({ v: (sep, count), meta }), cs
       }
     }
     _, _ => None

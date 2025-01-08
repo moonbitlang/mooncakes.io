@@ -191,16 +191,15 @@ let new_result = result.bind(fn(x) { Ok(x + 1) }) // Ok(43)
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/result/result.mbt,415:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/result#Result">Result</a> with arbitrary[T : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[T, E]
+  :::source,moonbitlang/core/result/result.mbt,412:::impl[T : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/result#Result">Result</a>[T, E]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/result/result.mbt,415:::fn arbitrary[T : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[T, E]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/result/result.mbt,415:::fn <a href="moonbitlang/core/result#Result">Result</a>::arbitrary[T : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[T, E]
-  ```
-  > 
 - #### bind
   ```moonbit
   :::source,moonbitlang/core/result/result.mbt,226:::fn <a href="moonbitlang/core/result#Result">Result</a>::bind[T, E, U](self : <a href="moonbitlang/core/result#Result">Result</a>[T, E], g : (T) -> <a href="moonbitlang/core/result#Result">Result</a>[U, E]) -> <a href="moonbitlang/core/result#Result">Result</a>[U, E]

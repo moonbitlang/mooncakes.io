@@ -163,33 +163,26 @@ Note: not all APIs are fully tested.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,525:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Advice">Advice</a> with op_equal(<a href="peter-jerry-ye/wasi#Advice">Advice</a>, <a href="peter-jerry-ye/wasi#Advice">Advice</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,525:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Advice">Advice</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,525:::fn op_equal(<a href="peter-jerry-ye/wasi#Advice">Advice</a>, <a href="peter-jerry-ye/wasi#Advice">Advice</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,525:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Advice">Advice</a> with output(<a href="peter-jerry-ye/wasi#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,525:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Advice">Advice</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,525:::fn output(<a href="peter-jerry-ye/wasi#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,538:::fn <a href="peter-jerry-ye/wasi#Advice">Advice</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#Advice">Advice</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,525:::fn <a href="peter-jerry-ye/wasi#Advice">Advice</a>::op_equal(<a href="peter-jerry-ye/wasi#Advice">Advice</a>, <a href="peter-jerry-ye/wasi#Advice">Advice</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,525:::fn <a href="peter-jerry-ye/wasi#Advice">Advice</a>::output(<a href="peter-jerry-ye/wasi#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Advice">Advice</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value
@@ -213,30 +206,21 @@ Note: not all APIs are fully tested.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,409:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a> with op_equal(<a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>, <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,409:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a> with output(<a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,409:::fn <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>::op_equal(<a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>, <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,409:::fn <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>::output(<a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,409:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,409:::fn op_equal(<a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>, <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,409:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,409:::fn output(<a href="peter-jerry-ye/wasi#CIOVec">CIOVec</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## ClockId
 
@@ -260,13 +244,21 @@ Note: not all APIs are fully tested.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#ClockId">ClockId</a> with op_equal(<a href="peter-jerry-ye/wasi#ClockId">ClockId</a>, <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,23:::fn op_equal(<a href="peter-jerry-ye/wasi#ClockId">ClockId</a>, <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#ClockId">ClockId</a> with output(<a href="peter-jerry-ye/wasi#ClockId">ClockId</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,23:::fn output(<a href="peter-jerry-ye/wasi#ClockId">ClockId</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clock\_res\_get
@@ -298,21 +290,6 @@ Note: not all APIs are fully tested.
   :::source,peter-jerry-ye/wasi/types.mbt,34:::fn <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>?
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,23:::fn <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>::op_equal(<a href="peter-jerry-ye/wasi#ClockId">ClockId</a>, <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,23:::fn <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>::output(<a href="peter-jerry-ye/wasi#ClockId">ClockId</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,25:::fn <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>::value(self : <a href="peter-jerry-ye/wasi#ClockId">ClockId</a>) -> UInt
@@ -329,30 +306,21 @@ with `inode` to uniquely identify a file or directory in the filesystem.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,609:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Device">Device</a> with op_equal(<a href="peter-jerry-ye/wasi#Device">Device</a>, <a href="peter-jerry-ye/wasi#Device">Device</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,609:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Device">Device</a> with output(<a href="peter-jerry-ye/wasi#Device">Device</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,609:::fn <a href="peter-jerry-ye/wasi#Device">Device</a>::op_equal(<a href="peter-jerry-ye/wasi#Device">Device</a>, <a href="peter-jerry-ye/wasi#Device">Device</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,609:::fn <a href="peter-jerry-ye/wasi#Device">Device</a>::output(<a href="peter-jerry-ye/wasi#Device">Device</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Device">Device</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,609:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Device">Device</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,609:::fn op_equal(<a href="peter-jerry-ye/wasi#Device">Device</a>, <a href="peter-jerry-ye/wasi#Device">Device</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,609:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Device">Device</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,609:::fn output(<a href="peter-jerry-ye/wasi#Device">Device</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DirCookie
 
@@ -365,30 +333,21 @@ with `inode` to uniquely identify a file or directory in the filesystem.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,441:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a> with op_equal(<a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>, <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,441:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a> with output(<a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,441:::fn <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>::op_equal(<a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>, <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,441:::fn <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>::output(<a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,441:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,441:::fn op_equal(<a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>, <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,441:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,441:::fn output(<a href="peter-jerry-ye/wasi#DirCookie">DirCookie</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DirEnt
 
@@ -409,30 +368,21 @@ with `inode` to uniquely identify a file or directory in the filesystem.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,508:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a> with op_equal(<a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>, <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,508:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a> with output(<a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,508:::fn <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>::op_equal(<a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>, <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,508:::fn <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>::output(<a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,508:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,508:::fn op_equal(<a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>, <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,508:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,508:::fn output(<a href="peter-jerry-ye/wasi#DirEnt">DirEnt</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DirNamlen
 
@@ -443,30 +393,21 @@ with `inode` to uniquely identify a file or directory in the filesystem.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,444:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a> with op_equal(<a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>, <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,444:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a> with output(<a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,444:::fn <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>::op_equal(<a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>, <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,444:::fn <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>::output(<a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,444:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,444:::fn op_equal(<a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>, <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,444:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,444:::fn output(<a href="peter-jerry-ye/wasi#DirNamlen">DirNamlen</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Errno
 
@@ -560,33 +501,26 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,128:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Errno">Errno</a> with op_equal(<a href="peter-jerry-ye/wasi#Errno">Errno</a>, <a href="peter-jerry-ye/wasi#Errno">Errno</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,128:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Errno">Errno</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,128:::fn op_equal(<a href="peter-jerry-ye/wasi#Errno">Errno</a>, <a href="peter-jerry-ye/wasi#Errno">Errno</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,128:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Errno">Errno</a> with output(<a href="peter-jerry-ye/wasi#Errno">Errno</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,128:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Errno">Errno</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,128:::fn output(<a href="peter-jerry-ye/wasi#Errno">Errno</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,212:::fn <a href="peter-jerry-ye/wasi#Errno">Errno</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#Errno">Errno</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,128:::fn <a href="peter-jerry-ye/wasi#Errno">Errno</a>::op_equal(<a href="peter-jerry-ye/wasi#Errno">Errno</a>, <a href="peter-jerry-ye/wasi#Errno">Errno</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,128:::fn <a href="peter-jerry-ye/wasi#Errno">Errno</a>::output(<a href="peter-jerry-ye/wasi#Errno">Errno</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Errno">Errno</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value
@@ -614,30 +548,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,831:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Event">Event</a> with op_equal(<a href="peter-jerry-ye/wasi#Event">Event</a>, <a href="peter-jerry-ye/wasi#Event">Event</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,831:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Event">Event</a> with output(<a href="peter-jerry-ye/wasi#Event">Event</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,831:::fn <a href="peter-jerry-ye/wasi#Event">Event</a>::op_equal(<a href="peter-jerry-ye/wasi#Event">Event</a>, <a href="peter-jerry-ye/wasi#Event">Event</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,831:::fn <a href="peter-jerry-ye/wasi#Event">Event</a>::output(<a href="peter-jerry-ye/wasi#Event">Event</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Event">Event</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,831:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Event">Event</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,831:::fn op_equal(<a href="peter-jerry-ye/wasi#Event">Event</a>, <a href="peter-jerry-ye/wasi#Event">Event</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,831:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Event">Event</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,831:::fn output(<a href="peter-jerry-ye/wasi#Event">Event</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## EventRWFlag
 
@@ -652,30 +577,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,790:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>, <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,790:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a> with output(<a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,790:::fn <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>, <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,790:::fn <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>::output(<a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,790:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,790:::fn op_equal(<a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>, <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,790:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,790:::fn output(<a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,792:::fn <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>::value(self : <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>) -> UInt
@@ -691,13 +609,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,779:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,779:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,779:::fn op_equal(<a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,779:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a> with output(<a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,779:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,779:::fn output(<a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -710,24 +636,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,781:::fn <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>::new() -> <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,779:::fn <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,779:::fn <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>::output(<a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,798:::fn <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>::set(self : <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>, flag : <a href="peter-jerry-ye/wasi#EventRWFlag">EventRWFlag</a>) -> <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#EventRWFlags">EventRWFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -753,33 +664,26 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,759:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#EventType">EventType</a> with op_equal(<a href="peter-jerry-ye/wasi#EventType">EventType</a>, <a href="peter-jerry-ye/wasi#EventType">EventType</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,759:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#EventType">EventType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,759:::fn op_equal(<a href="peter-jerry-ye/wasi#EventType">EventType</a>, <a href="peter-jerry-ye/wasi#EventType">EventType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,759:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#EventType">EventType</a> with output(<a href="peter-jerry-ye/wasi#EventType">EventType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,759:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#EventType">EventType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,759:::fn output(<a href="peter-jerry-ye/wasi#EventType">EventType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,769:::fn <a href="peter-jerry-ye/wasi#EventType">EventType</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#EventType">EventType</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,759:::fn <a href="peter-jerry-ye/wasi#EventType">EventType</a>::op_equal(<a href="peter-jerry-ye/wasi#EventType">EventType</a>, <a href="peter-jerry-ye/wasi#EventType">EventType</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,759:::fn <a href="peter-jerry-ye/wasi#EventType">EventType</a>::output(<a href="peter-jerry-ye/wasi#EventType">EventType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#EventType">EventType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value
@@ -804,30 +708,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,818:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a> with op_equal(<a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>, <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,818:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a> with output(<a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,818:::fn <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>::op_equal(<a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>, <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,818:::fn <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>::output(<a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,818:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,818:::fn op_equal(<a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>, <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,818:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,818:::fn output(<a href="peter-jerry-ye/wasi#Event_fd_readwrite">Event_fd_readwrite</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## ExitCode
 
@@ -838,30 +733,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,907:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a> with op_equal(<a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>, <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,907:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a> with output(<a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,907:::fn <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>::op_equal(<a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>, <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,907:::fn <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>::output(<a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,907:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,907:::fn op_equal(<a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>, <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,907:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,907:::fn output(<a href="peter-jerry-ye/wasi#ExitCode">ExitCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Fd
 
@@ -872,13 +758,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,391:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Fd">Fd</a> with op_equal(<a href="peter-jerry-ye/wasi#Fd">Fd</a>, <a href="peter-jerry-ye/wasi#Fd">Fd</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,391:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Fd">Fd</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,391:::fn op_equal(<a href="peter-jerry-ye/wasi#Fd">Fd</a>, <a href="peter-jerry-ye/wasi#Fd">Fd</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,391:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Fd">Fd</a> with output(<a href="peter-jerry-ye/wasi#Fd">Fd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,391:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Fd">Fd</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,391:::fn output(<a href="peter-jerry-ye/wasi#Fd">Fd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### fd\_advise
@@ -1068,16 +962,6 @@ merely for alignment with POSIX.
   > interleaved while `write` is executed.
   >  
   >  Note: it may write less than demanded.
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,391:::fn <a href="peter-jerry-ye/wasi#Fd">Fd</a>::op_equal(<a href="peter-jerry-ye/wasi#Fd">Fd</a>, <a href="peter-jerry-ye/wasi#Fd">Fd</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,391:::fn <a href="peter-jerry-ye/wasi#Fd">Fd</a>::output(<a href="peter-jerry-ye/wasi#Fd">Fd</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### path\_create\_directory
   ```moonbit
   :::source,peter-jerry-ye/wasi/top.mbt,671:::fn <a href="peter-jerry-ye/wasi#Fd">Fd</a>::path_create_directory(self : <a href="peter-jerry-ye/wasi#Fd">Fd</a>, path : String) -> Unit!<a href="peter-jerry-ye/wasi#Errno">Errno</a>
@@ -1232,11 +1116,6 @@ merely for alignment with POSIX.
   >  Note: This is similar to `shutdown` in POSIX.
   >  
   >  @param `how` Which channels on the socket to shut down.
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Fd">Fd</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## FdFlag
 
@@ -1259,30 +1138,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,570:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>, <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,570:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a> with output(<a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,570:::fn <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>, <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,570:::fn <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>::output(<a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,570:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,570:::fn op_equal(<a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>, <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,570:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,570:::fn output(<a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,572:::fn <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>::value(self : <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>) -> UInt
@@ -1298,13 +1170,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,551:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,551:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,551:::fn op_equal(<a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,551:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a> with output(<a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,551:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,551:::fn output(<a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -1317,24 +1197,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,553:::fn <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>::new() -> <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,551:::fn <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,551:::fn <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>::output(<a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,582:::fn <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>::set(self : <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>, flag : <a href="peter-jerry-ye/wasi#FdFlag">FdFlag</a>) -> <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FdFlags">FdFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -1362,30 +1227,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,605:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FdStat">FdStat</a> with op_equal(<a href="peter-jerry-ye/wasi#FdStat">FdStat</a>, <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,605:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FdStat">FdStat</a> with output(<a href="peter-jerry-ye/wasi#FdStat">FdStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,605:::fn <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>::op_equal(<a href="peter-jerry-ye/wasi#FdStat">FdStat</a>, <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,605:::fn <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>::output(<a href="peter-jerry-ye/wasi#FdStat">FdStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,605:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,605:::fn op_equal(<a href="peter-jerry-ye/wasi#FdStat">FdStat</a>, <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,605:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FdStat">FdStat</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,605:::fn output(<a href="peter-jerry-ye/wasi#FdStat">FdStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## FileDelta
 
@@ -1396,30 +1252,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,412:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a> with op_equal(<a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>, <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,412:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a> with output(<a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,412:::fn <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>::op_equal(<a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>, <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,412:::fn <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>::output(<a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,412:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,412:::fn op_equal(<a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>, <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,412:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,412:::fn output(<a href="peter-jerry-ye/wasi#FileDelta">FileDelta</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## FileSize
 
@@ -1430,30 +1277,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileSize">FileSize</a> with op_equal(<a href="peter-jerry-ye/wasi#FileSize">FileSize</a>, <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileSize">FileSize</a> with output(<a href="peter-jerry-ye/wasi#FileSize">FileSize</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,4:::fn <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>::op_equal(<a href="peter-jerry-ye/wasi#FileSize">FileSize</a>, <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,4:::fn <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>::output(<a href="peter-jerry-ye/wasi#FileSize">FileSize</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,4:::fn op_equal(<a href="peter-jerry-ye/wasi#FileSize">FileSize</a>, <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,4:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileSize">FileSize</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,4:::fn output(<a href="peter-jerry-ye/wasi#FileSize">FileSize</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## FileStat
 
@@ -1482,30 +1320,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,744:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileStat">FileStat</a> with op_equal(<a href="peter-jerry-ye/wasi#FileStat">FileStat</a>, <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,744:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileStat">FileStat</a> with output(<a href="peter-jerry-ye/wasi#FileStat">FileStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,744:::fn <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>::op_equal(<a href="peter-jerry-ye/wasi#FileStat">FileStat</a>, <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,744:::fn <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>::output(<a href="peter-jerry-ye/wasi#FileStat">FileStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,744:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,744:::fn op_equal(<a href="peter-jerry-ye/wasi#FileStat">FileStat</a>, <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,744:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileStat">FileStat</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,744:::fn output(<a href="peter-jerry-ye/wasi#FileStat">FileStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## FileType
 
@@ -1534,33 +1363,26 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,468:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileType">FileType</a> with op_equal(<a href="peter-jerry-ye/wasi#FileType">FileType</a>, <a href="peter-jerry-ye/wasi#FileType">FileType</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,468:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FileType">FileType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,468:::fn op_equal(<a href="peter-jerry-ye/wasi#FileType">FileType</a>, <a href="peter-jerry-ye/wasi#FileType">FileType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,468:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileType">FileType</a> with output(<a href="peter-jerry-ye/wasi#FileType">FileType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,468:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FileType">FileType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,468:::fn output(<a href="peter-jerry-ye/wasi#FileType">FileType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,483:::fn <a href="peter-jerry-ye/wasi#FileType">FileType</a>::from_value(value : Int) -> <a href="peter-jerry-ye/wasi#FileType">FileType</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,468:::fn <a href="peter-jerry-ye/wasi#FileType">FileType</a>::op_equal(<a href="peter-jerry-ye/wasi#FileType">FileType</a>, <a href="peter-jerry-ye/wasi#FileType">FileType</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,468:::fn <a href="peter-jerry-ye/wasi#FileType">FileType</a>::output(<a href="peter-jerry-ye/wasi#FileType">FileType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FileType">FileType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value
@@ -1588,30 +1410,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,629:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>, <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,629:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a> with output(<a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,629:::fn <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>, <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,629:::fn <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>::output(<a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,629:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,629:::fn op_equal(<a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>, <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,629:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,629:::fn output(<a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,631:::fn <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>::value(self : <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>) -> UInt
@@ -1627,13 +1442,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,612:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,612:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,612:::fn op_equal(<a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,612:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a> with output(<a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,612:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,612:::fn output(<a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -1646,24 +1469,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,614:::fn <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>::new() -> <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,612:::fn <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,612:::fn <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>::output(<a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,640:::fn <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>::set(self : <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>, flag : <a href="peter-jerry-ye/wasi#FstFlag">FstFlag</a>) -> <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#FstFlags">FstFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -1687,30 +1495,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,400:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#IOVec">IOVec</a> with op_equal(<a href="peter-jerry-ye/wasi#IOVec">IOVec</a>, <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,400:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#IOVec">IOVec</a> with output(<a href="peter-jerry-ye/wasi#IOVec">IOVec</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,400:::fn <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>::op_equal(<a href="peter-jerry-ye/wasi#IOVec">IOVec</a>, <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,400:::fn <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>::output(<a href="peter-jerry-ye/wasi#IOVec">IOVec</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,400:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,400:::fn op_equal(<a href="peter-jerry-ye/wasi#IOVec">IOVec</a>, <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,400:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#IOVec">IOVec</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,400:::fn output(<a href="peter-jerry-ye/wasi#IOVec">IOVec</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Inode
 
@@ -1721,30 +1520,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,447:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Inode">Inode</a> with op_equal(<a href="peter-jerry-ye/wasi#Inode">Inode</a>, <a href="peter-jerry-ye/wasi#Inode">Inode</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,447:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Inode">Inode</a> with output(<a href="peter-jerry-ye/wasi#Inode">Inode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,447:::fn <a href="peter-jerry-ye/wasi#Inode">Inode</a>::op_equal(<a href="peter-jerry-ye/wasi#Inode">Inode</a>, <a href="peter-jerry-ye/wasi#Inode">Inode</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,447:::fn <a href="peter-jerry-ye/wasi#Inode">Inode</a>::output(<a href="peter-jerry-ye/wasi#Inode">Inode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Inode">Inode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,447:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Inode">Inode</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,447:::fn op_equal(<a href="peter-jerry-ye/wasi#Inode">Inode</a>, <a href="peter-jerry-ye/wasi#Inode">Inode</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,447:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Inode">Inode</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,447:::fn output(<a href="peter-jerry-ye/wasi#Inode">Inode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## LinkCount
 
@@ -1755,30 +1545,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,723:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a> with op_equal(<a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>, <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,723:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a> with output(<a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,723:::fn <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>::op_equal(<a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>, <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,723:::fn <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>::output(<a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,723:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,723:::fn op_equal(<a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>, <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,723:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,723:::fn output(<a href="peter-jerry-ye/wasi#LinkCount">LinkCount</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## LookupFlag
 
@@ -1791,30 +1572,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,661:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>, <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,661:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a> with output(<a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,661:::fn <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>, <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,661:::fn <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>::output(<a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,661:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,661:::fn op_equal(<a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>, <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,661:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,661:::fn output(<a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,663:::fn <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>::value(self : <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>) -> UInt
@@ -1830,13 +1604,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,653:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,653:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,653:::fn op_equal(<a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,653:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a> with output(<a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,653:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,653:::fn output(<a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -1849,24 +1631,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,655:::fn <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>::new() -> <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,653:::fn <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,653:::fn <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>::output(<a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,669:::fn <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>::set(self : <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>, flag : <a href="peter-jerry-ye/wasi#LookupFlag">LookupFlag</a>) -> <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#LookupFlags">LookupFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -1894,30 +1661,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,699:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>, <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,699:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a> with output(<a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,699:::fn <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>, <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,699:::fn <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>::output(<a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,699:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,699:::fn op_equal(<a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>, <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,699:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,699:::fn output(<a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,701:::fn <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>::value(self : <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>) -> UInt
@@ -1933,13 +1693,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,682:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,682:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,682:::fn op_equal(<a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,682:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a> with output(<a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,682:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,682:::fn output(<a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -1952,24 +1720,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,684:::fn <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>::new() -> <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,682:::fn <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,682:::fn <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>::output(<a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,710:::fn <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>::set(self : <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>, flag : <a href="peter-jerry-ye/wasi#OpenFlag">OpenFlag</a>) -> <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#OpenFlags">OpenFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -1991,33 +1744,26 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1183:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a> with op_equal(<a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>, <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,1183:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1183:::fn op_equal(<a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>, <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1183:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a> with output(<a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,1183:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1183:::fn output(<a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1191:::fn <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1183:::fn <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>::op_equal(<a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>, <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1183:::fn <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>::output(<a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#PreOpenType">PreOpenType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value
@@ -2037,30 +1783,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1208:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#PreStat">PreStat</a> with op_equal(<a href="peter-jerry-ye/wasi#PreStat">PreStat</a>, <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1208:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#PreStat">PreStat</a> with output(<a href="peter-jerry-ye/wasi#PreStat">PreStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1208:::fn <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>::op_equal(<a href="peter-jerry-ye/wasi#PreStat">PreStat</a>, <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1208:::fn <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>::output(<a href="peter-jerry-ye/wasi#PreStat">PreStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1208:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1208:::fn op_equal(<a href="peter-jerry-ye/wasi#PreStat">PreStat</a>, <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1208:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#PreStat">PreStat</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1208:::fn output(<a href="peter-jerry-ye/wasi#PreStat">PreStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## PreStat\_dir
 
@@ -2075,30 +1812,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1203:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a> with op_equal(<a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>, <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1203:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a> with output(<a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1203:::fn <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>::op_equal(<a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>, <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1203:::fn <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>::output(<a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1203:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1203:::fn op_equal(<a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>, <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1203:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1203:::fn output(<a href="peter-jerry-ye/wasi#PreStat_dir">PreStat_dir</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RiFlag
 
@@ -2115,30 +1843,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1062:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>, <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1062:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a> with output(<a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1062:::fn <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>, <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1062:::fn <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>::output(<a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1062:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1062:::fn op_equal(<a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>, <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1062:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1062:::fn output(<a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1064:::fn <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>::value(self : <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>) -> UInt
@@ -2154,13 +1875,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1049:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,1049:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1049:::fn op_equal(<a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1049:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a> with output(<a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,1049:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1049:::fn output(<a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -2173,24 +1902,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,1051:::fn <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>::new() -> <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1049:::fn <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1049:::fn <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>::output(<a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1071:::fn <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>::set(self : <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>, flag : <a href="peter-jerry-ye/wasi#RiFlag">RiFlag</a>) -> <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#RiFlags">RiFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -2239,30 +1953,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,341:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Right">Right</a> with op_equal(<a href="peter-jerry-ye/wasi#Right">Right</a>, <a href="peter-jerry-ye/wasi#Right">Right</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,341:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Right">Right</a> with output(<a href="peter-jerry-ye/wasi#Right">Right</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,341:::fn <a href="peter-jerry-ye/wasi#Right">Right</a>::op_equal(<a href="peter-jerry-ye/wasi#Right">Right</a>, <a href="peter-jerry-ye/wasi#Right">Right</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,341:::fn <a href="peter-jerry-ye/wasi#Right">Right</a>::output(<a href="peter-jerry-ye/wasi#Right">Right</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Right">Right</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,341:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Right">Right</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,341:::fn op_equal(<a href="peter-jerry-ye/wasi#Right">Right</a>, <a href="peter-jerry-ye/wasi#Right">Right</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,341:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Right">Right</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,341:::fn output(<a href="peter-jerry-ye/wasi#Right">Right</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,343:::fn <a href="peter-jerry-ye/wasi#Right">Right</a>::value(self : <a href="peter-jerry-ye/wasi#Right">Right</a>) -> UInt64
@@ -2278,13 +1985,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,303:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Rights">Rights</a> with op_equal(<a href="peter-jerry-ye/wasi#Rights">Rights</a>, <a href="peter-jerry-ye/wasi#Rights">Rights</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,303:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Rights">Rights</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,303:::fn op_equal(<a href="peter-jerry-ye/wasi#Rights">Rights</a>, <a href="peter-jerry-ye/wasi#Rights">Rights</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,303:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Rights">Rights</a> with output(<a href="peter-jerry-ye/wasi#Rights">Rights</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,303:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Rights">Rights</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,303:::fn output(<a href="peter-jerry-ye/wasi#Rights">Rights</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -2297,24 +2012,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,305:::fn <a href="peter-jerry-ye/wasi#Rights">Rights</a>::new() -> <a href="peter-jerry-ye/wasi#Rights">Rights</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,303:::fn <a href="peter-jerry-ye/wasi#Rights">Rights</a>::op_equal(<a href="peter-jerry-ye/wasi#Rights">Rights</a>, <a href="peter-jerry-ye/wasi#Rights">Rights</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,303:::fn <a href="peter-jerry-ye/wasi#Rights">Rights</a>::output(<a href="peter-jerry-ye/wasi#Rights">Rights</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,378:::fn <a href="peter-jerry-ye/wasi#Rights">Rights</a>::set(self : <a href="peter-jerry-ye/wasi#Rights">Rights</a>, right : <a href="peter-jerry-ye/wasi#Right">Right</a>) -> <a href="peter-jerry-ye/wasi#Rights">Rights</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Rights">Rights</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -2336,30 +2036,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1095:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>, <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1095:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a> with output(<a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1095:::fn <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>, <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1095:::fn <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>::output(<a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1095:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1095:::fn op_equal(<a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>, <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1095:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1095:::fn output(<a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1097:::fn <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>::value(self : <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>) -> UInt
@@ -2375,13 +2068,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1084:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,1084:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1084:::fn op_equal(<a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1084:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a> with output(<a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,1084:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1084:::fn output(<a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -2394,24 +2095,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,1086:::fn <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>::new() -> <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1084:::fn <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1084:::fn <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>::output(<a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1103:::fn <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>::set(self : <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>, flag : <a href="peter-jerry-ye/wasi#RoFlag">RoFlag</a>) -> <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#RoFlags">RoFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -2435,30 +2121,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1157:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>, <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1157:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a> with output(<a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1157:::fn <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>, <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1157:::fn <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>::output(<a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1157:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1157:::fn op_equal(<a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>, <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1157:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1157:::fn output(<a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1159:::fn <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>::value(self : <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>) -> UInt
@@ -2474,13 +2153,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1144:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,1144:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1144:::fn op_equal(<a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1144:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a> with output(<a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,1144:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1144:::fn output(<a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -2493,24 +2180,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,1146:::fn <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>::new() -> <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1144:::fn <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1144:::fn <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>::output(<a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1166:::fn <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>::set(self : <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>, flag : <a href="peter-jerry-ye/wasi#SdFlag">SdFlag</a>) -> <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#SdFlags">SdFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -2528,30 +2200,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1123:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>, <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1123:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a> with output(<a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1123:::fn <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>, <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1123:::fn <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>::output(<a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1123:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1123:::fn op_equal(<a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>, <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1123:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1123:::fn output(<a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1125:::fn <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>::value(self : <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>) -> UInt
@@ -2567,13 +2232,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1116:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,1116:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1116:::fn op_equal(<a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1116:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a> with output(<a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,1116:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1116:::fn output(<a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -2586,24 +2259,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,1118:::fn <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>::new() -> <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1116:::fn <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1116:::fn <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>::output(<a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1131:::fn <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>::set(self : <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>, flag : <a href="peter-jerry-ye/wasi#SiFlag">SiFlag</a>) -> <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#SiFlags">SiFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -2684,33 +2342,26 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,973:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Signal">Signal</a> with op_equal(<a href="peter-jerry-ye/wasi#Signal">Signal</a>, <a href="peter-jerry-ye/wasi#Signal">Signal</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,973:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Signal">Signal</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,973:::fn op_equal(<a href="peter-jerry-ye/wasi#Signal">Signal</a>, <a href="peter-jerry-ye/wasi#Signal">Signal</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,973:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Signal">Signal</a> with output(<a href="peter-jerry-ye/wasi#Signal">Signal</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,973:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Signal">Signal</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,973:::fn output(<a href="peter-jerry-ye/wasi#Signal">Signal</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,1011:::fn <a href="peter-jerry-ye/wasi#Signal">Signal</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#Signal">Signal</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,973:::fn <a href="peter-jerry-ye/wasi#Signal">Signal</a>::op_equal(<a href="peter-jerry-ye/wasi#Signal">Signal</a>, <a href="peter-jerry-ye/wasi#Signal">Signal</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,973:::fn <a href="peter-jerry-ye/wasi#Signal">Signal</a>::output(<a href="peter-jerry-ye/wasi#Signal">Signal</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Signal">Signal</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value
@@ -2728,30 +2379,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Size">Size</a> with op_equal(<a href="peter-jerry-ye/wasi#Size">Size</a>, <a href="peter-jerry-ye/wasi#Size">Size</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Size">Size</a> with output(<a href="peter-jerry-ye/wasi#Size">Size</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1:::fn <a href="peter-jerry-ye/wasi#Size">Size</a>::op_equal(<a href="peter-jerry-ye/wasi#Size">Size</a>, <a href="peter-jerry-ye/wasi#Size">Size</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,1:::fn <a href="peter-jerry-ye/wasi#Size">Size</a>::output(<a href="peter-jerry-ye/wasi#Size">Size</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Size">Size</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,1:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Size">Size</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1:::fn op_equal(<a href="peter-jerry-ye/wasi#Size">Size</a>, <a href="peter-jerry-ye/wasi#Size">Size</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,1:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Size">Size</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,1:::fn output(<a href="peter-jerry-ye/wasi#Size">Size</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## SubclockFlag
 
@@ -2771,30 +2413,23 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,850:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a> with op_equal(<a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>, <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,850:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a> with output(<a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,850:::fn <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>::op_equal(<a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>, <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,850:::fn <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>::output(<a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,850:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,850:::fn op_equal(<a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>, <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,850:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,850:::fn output(<a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,852:::fn <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>::value(self : <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>) -> UInt
@@ -2810,13 +2445,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,834:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a> with op_equal(<a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,834:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,834:::fn op_equal(<a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,834:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a> with output(<a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,834:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,834:::fn output(<a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### is\_set
@@ -2829,24 +2472,9 @@ merely for alignment with POSIX.
   :::source,peter-jerry-ye/wasi/types.mbt,836:::fn <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>::new() -> <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,834:::fn <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>::op_equal(<a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,834:::fn <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>::output(<a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,858:::fn <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>::set(self : <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>, flag : <a href="peter-jerry-ye/wasi#SubclockFlag">SubclockFlag</a>) -> <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#SubclockFlags">SubclockFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -2870,30 +2498,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,904:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription">Subscription</a> with op_equal(<a href="peter-jerry-ye/wasi#Subscription">Subscription</a>, <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,904:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription">Subscription</a> with output(<a href="peter-jerry-ye/wasi#Subscription">Subscription</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,904:::fn <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>::op_equal(<a href="peter-jerry-ye/wasi#Subscription">Subscription</a>, <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,904:::fn <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>::output(<a href="peter-jerry-ye/wasi#Subscription">Subscription</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,904:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,904:::fn op_equal(<a href="peter-jerry-ye/wasi#Subscription">Subscription</a>, <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,904:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription">Subscription</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,904:::fn output(<a href="peter-jerry-ye/wasi#Subscription">Subscription</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Subscription\_clock
 
@@ -2914,30 +2533,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,881:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a> with op_equal(<a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>, <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,881:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a> with output(<a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,881:::fn <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>::op_equal(<a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>, <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,881:::fn <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>::output(<a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,881:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,881:::fn op_equal(<a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>, <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,881:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,881:::fn output(<a href="peter-jerry-ye/wasi#Subscription_clock">Subscription_clock</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Subscription\_fd\_readwrite
 
@@ -2952,30 +2562,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,888:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a> with op_equal(<a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>, <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,888:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a> with output(<a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,888:::fn <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>::op_equal(<a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>, <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,888:::fn <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>::output(<a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,888:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,888:::fn op_equal(<a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>, <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,888:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,888:::fn output(<a href="peter-jerry-ye/wasi#Subscription_fd_readwrite">Subscription_fd_readwrite</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Subscription\_u
 
@@ -2990,30 +2591,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,895:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a> with op_equal(<a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>, <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,895:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a> with output(<a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,895:::fn <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>::op_equal(<a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>, <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,895:::fn <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>::output(<a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,895:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,895:::fn op_equal(<a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>, <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,895:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,895:::fn output(<a href="peter-jerry-ye/wasi#Subscription_u">Subscription_u</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## TimeStamp
 
@@ -3024,30 +2616,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a> with op_equal(<a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>, <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a> with output(<a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,7:::fn <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>::op_equal(<a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>, <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,7:::fn <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>::output(<a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,7:::fn op_equal(<a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>, <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,7:::fn output(<a href="peter-jerry-ye/wasi#TimeStamp">TimeStamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Userdata
 
@@ -3059,30 +2642,21 @@ extracted from the implementation.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,748:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Userdata">Userdata</a> with op_equal(<a href="peter-jerry-ye/wasi#Userdata">Userdata</a>, <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,748:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Userdata">Userdata</a> with output(<a href="peter-jerry-ye/wasi#Userdata">Userdata</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,748:::fn <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>::op_equal(<a href="peter-jerry-ye/wasi#Userdata">Userdata</a>, <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,748:::fn <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>::output(<a href="peter-jerry-ye/wasi#Userdata">Userdata</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/wasi/types.mbt,748:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,748:::fn op_equal(<a href="peter-jerry-ye/wasi#Userdata">Userdata</a>, <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,peter-jerry-ye/wasi/types.mbt,748:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Userdata">Userdata</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,748:::fn output(<a href="peter-jerry-ye/wasi#Userdata">Userdata</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Whence
 
@@ -3097,33 +2671,26 @@ extracted from the implementation.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,419:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Whence">Whence</a> with op_equal(<a href="peter-jerry-ye/wasi#Whence">Whence</a>, <a href="peter-jerry-ye/wasi#Whence">Whence</a>) -> Bool
+  :::source,peter-jerry-ye/wasi/types.mbt,419:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="peter-jerry-ye/wasi#Whence">Whence</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,419:::fn op_equal(<a href="peter-jerry-ye/wasi#Whence">Whence</a>, <a href="peter-jerry-ye/wasi#Whence">Whence</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,419:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Whence">Whence</a> with output(<a href="peter-jerry-ye/wasi#Whence">Whence</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/wasi/types.mbt,419:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/wasi#Whence">Whence</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/wasi/types.mbt,419:::fn output(<a href="peter-jerry-ye/wasi#Whence">Whence</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_value
   ```moonbit
   :::source,peter-jerry-ye/wasi/types.mbt,429:::fn <a href="peter-jerry-ye/wasi#Whence">Whence</a>::from_value(value : UInt) -> <a href="peter-jerry-ye/wasi#Whence">Whence</a>?
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,419:::fn <a href="peter-jerry-ye/wasi#Whence">Whence</a>::op_equal(<a href="peter-jerry-ye/wasi#Whence">Whence</a>, <a href="peter-jerry-ye/wasi#Whence">Whence</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/types.mbt,419:::fn <a href="peter-jerry-ye/wasi#Whence">Whence</a>::output(<a href="peter-jerry-ye/wasi#Whence">Whence</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/wasi/traits.mbt,85:::fn <a href="peter-jerry-ye/wasi#Whence">Whence</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### value

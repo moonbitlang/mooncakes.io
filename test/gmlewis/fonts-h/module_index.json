@@ -1,0 +1,116 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts-h",
+      "package": null,
+      "childs": [
+        {
+          "name": "hanalei_regular",
+          "package": {
+            "path": "gmlewis/fonts-h/hanalei_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "hanaleifill_regular",
+          "package": {
+            "path": "gmlewis/fonts-h/hanaleifill_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "headhunter_regular",
+          "package": {
+            "path": "gmlewis/fonts-h/headhunter_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "heavydata",
+          "package": {
+            "path": "gmlewis/fonts-h/heavydata",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "helsinkiregular",
+          "package": {
+            "path": "gmlewis/fonts-h/helsinkiregular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "heydingsicons",
+          "package": {
+            "path": "gmlewis/fonts-h/heydingsicons",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "hockeyislif",
+          "package": {
+            "path": "gmlewis/fonts-h/hockeyislif",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "hydrogenscore",
+          "package": {
+            "path": "gmlewis/fonts-h/hydrogenscore",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

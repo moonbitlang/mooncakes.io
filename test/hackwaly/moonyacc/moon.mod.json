@@ -1,0 +1,22 @@
+{
+  "name": "hackwaly/moonyacc",
+  "version": "0.3.1",
+  "deps": {
+    "moonbitlang/x": "0.4.16",
+    "Yoorkin/ArgParser": "0.1.7"
+  },
+  "readme": "README.md",
+  "repository": "",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "description": "",
+  "source": "src",
+  "exclude": [
+    ".editorconfig",
+    "package.json",
+    "pnpm-workspace.yaml",
+    "node_modules",
+    "app",
+    "editor-support"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdin",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "get_stdin",
+      "docstring": "",
+      "signature": "fn get_stdin() -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.InputStream</a>",
+      "loc": { "line": 4, "column": 8 }
+    }
+  ],
+  "misc": []
+}

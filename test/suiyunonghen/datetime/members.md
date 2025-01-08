@@ -23,13 +23,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,778:::impl <a href="moonbitlang/core/strconv#FromStr">@moonbitlang/core/strconv.FromStr</a> for <a href="suiyunonghen/datetime#DateTime">DateTime</a> with from_string(str : String) -> <a href="suiyunonghen/datetime#DateTime">DateTime</a>!<a href="moonbitlang/core/strconv#StrConvError">@moonbitlang/core/strconv.StrConvError</a>
+  :::source,suiyunonghen/datetime/datetime.mbt,267:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#DateTime">DateTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/datetime/datetime.mbt,267:::fn output(self : <a href="suiyunonghen/datetime#DateTime">DateTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,267:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#DateTime">DateTime</a> with output(self : <a href="suiyunonghen/datetime#DateTime">DateTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,suiyunonghen/datetime/datetime.mbt,778:::impl <a href="moonbitlang/core/strconv#FromStr">@moonbitlang/core/strconv.FromStr</a> for <a href="suiyunonghen/datetime#DateTime">DateTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/datetime/datetime.mbt,778:::fn from_string(str : String) -> <a href="suiyunonghen/datetime#DateTime">DateTime</a>!<a href="moonbitlang/core/strconv#StrConvError">@moonbitlang/core/strconv.StrConvError</a>
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### day\_span
@@ -55,11 +63,6 @@
 - #### decode\_time
   ```moonbit
   :::source,suiyunonghen/datetime/datetime.mbt,331:::fn <a href="suiyunonghen/datetime#DateTime">DateTime</a>::decode_time(self : <a href="suiyunonghen/datetime#DateTime">DateTime</a>) -> <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>
-  ```
-  > 
-- #### from\_string
-  ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,778:::fn <a href="suiyunonghen/datetime#DateTime">DateTime</a>::from_string(str : String) -> <a href="suiyunonghen/datetime#DateTime">DateTime</a>!<a href="moonbitlang/core/strconv#StrConvError">@moonbitlang/core/strconv.StrConvError</a>
   ```
   > 
 - #### from\_timezone
@@ -162,19 +165,9 @@
   :::source,suiyunonghen/datetime/datetime.mbt,450:::fn <a href="suiyunonghen/datetime#DateTime">DateTime</a>::op_sub(self : <a href="suiyunonghen/datetime#DateTime">DateTime</a>, other : <a href="suiyunonghen/datetime#DateTime">DateTime</a>) -> Double
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,267:::fn <a href="suiyunonghen/datetime#DateTime">DateTime</a>::output(self : <a href="suiyunonghen/datetime#DateTime">DateTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### seconds\_between
   ```moonbit
   :::source,suiyunonghen/datetime/datetime.mbt,497:::fn <a href="suiyunonghen/datetime#DateTime">DateTime</a>::seconds_between(self : <a href="suiyunonghen/datetime#DateTime">DateTime</a>, then : <a href="suiyunonghen/datetime#DateTime">DateTime</a>) -> Int64
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/datetime/traits.mbt,85:::fn <a href="suiyunonghen/datetime#DateTime">DateTime</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### to\_timezone
@@ -222,9 +215,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,93:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#SystemDate">SystemDate</a> with output(self : <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,suiyunonghen/datetime/datetime.mbt,93:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/datetime/datetime.mbt,93:::fn output(self : <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### inc\_month
@@ -232,19 +229,9 @@
   :::source,suiyunonghen/datetime/datetime.mbt,71:::fn <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>::inc_month(self : <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>, numMonth : Int) -> (<a href="suiyunonghen/datetime#SystemDate">SystemDate</a>, <a href="moonbitlang/core/array#Array">Array</a>[Int])
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,93:::fn <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>::output(self : <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### to\_datetime
   ```moonbit
   :::source,suiyunonghen/datetime/datetime.mbt,66:::fn <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>::to_datetime(self : <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>) -> <a href="suiyunonghen/datetime#DateTime">DateTime</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/datetime/traits.mbt,85:::fn <a href="suiyunonghen/datetime#SystemDate">SystemDate</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -260,24 +247,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,137:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a> with output(self : <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,suiyunonghen/datetime/datetime.mbt,137:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/datetime/datetime.mbt,137:::fn output(self : <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,137:::fn <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>::output(self : <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### to\_datetime
   ```moonbit
   :::source,suiyunonghen/datetime/datetime.mbt,124:::fn <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>::to_datetime(self : <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>) -> <a href="suiyunonghen/datetime#DateTime">DateTime</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/datetime/traits.mbt,85:::fn <a href="suiyunonghen/datetime#SystemDateTime">SystemDateTime</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -295,24 +276,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,111:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#SystemTime">SystemTime</a> with output(self : <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,suiyunonghen/datetime/datetime.mbt,111:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/datetime/datetime.mbt,111:::fn output(self : <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/datetime/datetime.mbt,111:::fn <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>::output(self : <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>, l : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### to\_datetime
   ```moonbit
   :::source,suiyunonghen/datetime/datetime.mbt,106:::fn <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>::to_datetime(self : <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>) -> <a href="suiyunonghen/datetime#DateTime">DateTime</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,suiyunonghen/datetime/traits.mbt,85:::fn <a href="suiyunonghen/datetime#SystemTime">SystemTime</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 

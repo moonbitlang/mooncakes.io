@@ -20,26 +20,21 @@
           "docstring": "\n Create a new coverage counter with the given size.\n\n @coverage.skip ",
           "signature": "fn <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>::new(size : Int) -> <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>",
           "loc": { "line": 27, "column": 25 }
-        },
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>::output(self : <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 41, "column": 40 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
         }
       ],
       "impls": [
         {
-          "name": "output",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a> with output(self : <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 41, "column": 40 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 41, "column": 40 }
+            }
+          ],
+          "loc": { "line": 41, "column": 1 }
         }
       ]
     }

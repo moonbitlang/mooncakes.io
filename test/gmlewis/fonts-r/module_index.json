@@ -1,0 +1,402 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts-r",
+      "package": null,
+      "childs": [
+        {
+          "name": "ralewaydots_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/ralewaydots_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rammettoone_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/rammettoone_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ransom",
+          "package": {
+            "path": "gmlewis/fonts-r/ransom",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "realbttsoief",
+          "package": {
+            "path": "gmlewis/fonts-r/realbttsoief",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rechtmanplain",
+          "package": {
+            "path": "gmlewis/fonts-r/rechtmanplain",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "resurgence",
+          "package": {
+            "path": "gmlewis/fonts-r/resurgence",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_black",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_black",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_bold",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_extrabold",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_extrabold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_extralight",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_extralight",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_light",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_light",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_medium",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_semibold",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_semibold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotoslab_thin",
+          "package": {
+            "path": "gmlewis/fonts-r/robotoslab_thin",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "robotteacher",
+          "package": {
+            "path": "gmlewis/fonts-r/robotteacher",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rothenburgdecorative_normal",
+          "package": {
+            "path": "gmlewis/fonts-r/rothenburgdecorative_normal",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rougescript_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/rougescript_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_black",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_black",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_blackitalic",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_blackitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_bold",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_italic",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_light",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_light",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_lightitalic",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_lightitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_medium",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_mediumitalic",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_mediumitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rubik_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/rubik_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ruthie_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/ruthie_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rye_regular",
+          "package": {
+            "path": "gmlewis/fonts-r/rye_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

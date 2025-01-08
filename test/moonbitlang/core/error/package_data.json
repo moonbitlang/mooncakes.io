@@ -10,26 +10,20 @@
       "name": "Error",
       "impls": [
         {
-          "name": "output",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/error#Error\">Error</a> with output(self : <a href=\"moonbitlang/core/error#Error\">Error</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 19, "column": 30 }
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/error#Error\">Error</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 30 }
+            }
+          ],
+          "loc": { "line": 19, "column": 1 }
         }
       ],
-      "methods": [
-        {
-          "name": "output",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/error#Error\">Error</a>::output(self : <a href=\"moonbitlang/core/error#Error\">Error</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 19, "column": 30 }
-        },
-        {
-          "name": "to_string",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/error#Error\">Error</a>::to_string[Self : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : Self) -> String",
-          "loc": { "line": 85, "column": 1 }
-        }
-      ]
+      "methods": []
     }
   ]
 }

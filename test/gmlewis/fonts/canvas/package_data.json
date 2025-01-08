@@ -1,0 +1,31 @@
+{
+  "readme": "",
+  "name": "gmlewis/fonts/canvas",
+  "traits": [],
+  "types": [
+    {
+      "name": "CanvasCtx",
+      "docstring": "",
+      "signature": "type CanvasCtx",
+      "loc": { "line": 21, "column": 6 },
+      "methods": [
+        {
+          "name": "from_graphic",
+          "docstring": " from_graphics renders a Graphic to an HTML5 canvas using its native API.\n Note that if the design was created with Y being \"up\", then it\n must be flipped to render properly in the canvas.",
+          "signature": "fn <a href=\"gmlewis/fonts/canvas#CanvasCtx\">CanvasCtx</a>::from_graphic(self : <a href=\"gmlewis/fonts/canvas#CanvasCtx\">CanvasCtx</a>, g : <a href=\"gmlewis/fonts/draw#Graphic\">@gmlewis/fonts/draw.Graphic</a>, y_up~ : Bool = ..) -> Unit",
+          "loc": { "line": 4, "column": 8 }
+        },
+        {
+          "name": "get_input_bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/fonts/canvas#CanvasCtx\">CanvasCtx</a>::get_input_bytes(self : <a href=\"gmlewis/fonts/canvas#CanvasCtx\">CanvasCtx</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]",
+          "loc": { "line": 155, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

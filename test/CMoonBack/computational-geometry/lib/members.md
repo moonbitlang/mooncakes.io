@@ -4,9 +4,9 @@
 |[Circle](#Circle)||
 |[Line](#Line)||
 |[Line3d](#Line3d)||
+|[Plane3d](#Plane3d)||
 |[Point](#Point)||
 |[Point3d](#Point3d)||
-|[plane3d](#plane3d)||
 
 |Value|description|
 |---|---|
@@ -19,49 +19,49 @@
 ## Circle
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/circle.mbt,1:::type Circle
+:::source,CMoonBack/computational-geometry/lib/circle.mbt,2:::type Circle
 ```
 
 
 ## Line
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/line.mbt,42:::type Line
+:::source,CMoonBack/computational-geometry/lib/line.mbt,51:::type Line
 ```
 
 
 ## Line3d
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/3Dgeometry.mbt,7:::type Line3d
+:::source,CMoonBack/computational-geometry/lib/3D_geometry_pre.mbt,9:::type Line3d
+```
+
+
+## Plane3d
+
+```moonbit
+:::source,CMoonBack/computational-geometry/lib/3D_geometry_pre.mbt,15:::type Plane3d
 ```
 
 
 ## Point
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/line.mbt,20:::type Point
+:::source,CMoonBack/computational-geometry/lib/line.mbt,26:::type Point
 ```
 
 
 ## Point3d
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/3Dgeometry.mbt,1:::type Point3d
-```
-
-
-## plane3d
-
-```moonbit
-:::source,CMoonBack/computational-geometry/lib/3Dgeometry.mbt,12:::type plane3d
+:::source,CMoonBack/computational-geometry/lib/3D_geometry_pre.mbt,2:::type Point3d
 ```
 
 
 ## new\_line
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/line.mbt,792:::fn new_line(a_ : <a href="CMoonBack/computational-geometry/lib#Point">Point</a>, b_ : <a href="CMoonBack/computational-geometry/lib#Point">Point</a>) -> <a href="CMoonBack/computational-geometry/lib#Line">Line</a>
+:::source,CMoonBack/computational-geometry/lib/line.mbt,802:::fn new_line(a_ : <a href="CMoonBack/computational-geometry/lib#Point">Point</a>, b_ : <a href="CMoonBack/computational-geometry/lib#Point">Point</a>) -> <a href="CMoonBack/computational-geometry/lib#Line">Line</a>
 ```
  Creates a new line segment in a 2D coordinate system defined by two
 endpoints.
@@ -110,7 +110,7 @@ endpoints.
 ## new\_line3d
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/3Dgeometry.mbt,321:::fn new_line3d(a_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>, b_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>) -> <a href="CMoonBack/computational-geometry/lib#Line3d">Line3d</a>
+:::source,CMoonBack/computational-geometry/lib/3D_geometry_pre.mbt,319:::fn new_line3d(a_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>, b_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>) -> <a href="CMoonBack/computational-geometry/lib#Line3d">Line3d</a>
 ```
 
  Creates a new 3D line segment defined by two endpoints in a three-dimensional
@@ -141,7 +141,7 @@ specified points.
 ## new\_plane\_3d
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/3Dgeometry.mbt,357:::fn new_plane_3d(a_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>, b_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>, c_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>) -> <a href="CMoonBack/computational-geometry/lib#plane3d">plane3d</a>
+:::source,CMoonBack/computational-geometry/lib/3D_geometry_pre.mbt,352:::fn new_plane_3d(a_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>, b_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>, c_ : <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>) -> <a href="CMoonBack/computational-geometry/lib#Plane3d">Plane3d</a>
 ```
 
  Creates a new 3D plane defined by three non-collinear points. The plane is
@@ -175,7 +175,7 @@ three given points.
 ## new\_point
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/line.mbt,741:::fn new_point(x_ : Double, y_ : Double) -> <a href="CMoonBack/computational-geometry/lib#Point">Point</a>
+:::source,CMoonBack/computational-geometry/lib/line.mbt,754:::fn new_point(x_ : Double, y_ : Double) -> <a href="CMoonBack/computational-geometry/lib#Point">Point</a>
 ```
  Creates a new point in a 2D coordinate system with the specified x and y
 coordinates.
@@ -212,7 +212,7 @@ coordinates.
 ## new\_point3d
 
 ```moonbit
-:::source,CMoonBack/computational-geometry/lib/3Dgeometry.mbt,287:::fn new_point3d(x_ : Double, y_ : Double, z_ : Double) -> <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>
+:::source,CMoonBack/computational-geometry/lib/3D_geometry_pre.mbt,289:::fn new_point3d(x_ : Double, y_ : Double, z_ : Double) -> <a href="CMoonBack/computational-geometry/lib#Point3d">Point3d</a>
 ```
 
  Creates a new point in a 3D coordinate system with the specified x, y, and z

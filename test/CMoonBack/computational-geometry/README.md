@@ -1,45 +1,3 @@
-
-<div id="mod-info">
-    <h1 id="mod-title"> computational-geometry <span id="mod-version">v0.2.0</span></h1>
-    computational geometry library in moonbit
-    <hr/>
-    <div id="mod-meta-data">
-        <div>
-            <p>Author</p>
-            <p>CMoonBack</p>
-        </div>
-        <div>
-            <p>License</p>
-            <p>Apache-2.0</p>
-        </div>
-        <div>
-            <p>Repository</p>
-            <p><a href="https://github.com/CMoonBack/Computational-geometry">https://github.com/CMoonBack/Computational-geometry</a></p>
-        </div>
-        <div>
-            <p>Keywords</p>
-            <ul id="mod-keywords">
-                <li>math</li>
-                <li>geometry</li>
-            </ul>
-        </div>
-    </div>
-    <hr/>
-    <div id="mod-install-info">
-        <h3>Install</h3>
-        <p>Run the following command in your project directory: </p>
-        <pre><code> moon add CMoonBack/computational-geometry </code></pre>
-    <div id="build-error"> 
-      <svg t="1727332159497" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5301" width="16" height="16"><path d="M545.718857 130.608762c11.337143 6.265905 20.699429 15.555048 26.989714 26.819048l345.014858 617.667047a68.87619 68.87619 0 0 1-26.989715 93.915429c-10.313143 5.705143-21.942857 8.704-33.718857 8.704H166.985143A69.266286 69.266286 0 0 1 97.52381 808.643048c0-11.751619 2.998857-23.28381 8.752761-33.548191l344.990477-617.642667a69.656381 69.656381 0 0 1 94.451809-26.819047zM512 191.000381L166.985143 808.643048H856.990476L512 191.000381zM546.718476 670.47619v69.071239h-69.461333V670.47619h69.485714z m0-298.374095v252.318476h-69.461333V372.102095h69.485714z" p-id="5302" fill="#707070"></path></svg>
-      <div>
-        <p id="build-error-title">This module cannot build with MoonBit nightly</p>
-      </div>
-    </div>
-    </div>
-</div>
-
-
-
 # Computational Geometry library
 
 This repository contains a library of computational geometry implemented in Moonbit. 
@@ -110,10 +68,48 @@ convex hull correlation, 3D geometric correlation, etc.
 - **distance3d**: Calculates the distance between two points.
 - **vlen**: Calculates the length of a vector.
 
+#### Dots on
+
+Including the determination of whether three points are collinear, 
+whether four points are coplanar, whether a point lies on a segment, 
+and whether a point lies on a spatial triangle.
+
+#### Side
+
+Including the judgment of whether 
+two points are on the same side/different sides of a line segment, 
+and determining whether two points are on the same side/different sides of a plane.
+
+#### Parallel
+
+This includes determining whether two lines are parallel, 
+whether two planes are parallel, 
+and whether a line and a plane are parallel.
+
+#### Perpendicular
+
+This includes determining whether two lines are perpendicular, 
+and whether two planes are perpendicular.
+
+#### Intersect
+
+This includes determining whether two segments intersect, 
+and whether a segment intersects with a triangle.
+
+#### Intersection
+
+It includes calculating the intersection of two straight lines, 
+calculating the intersection of a straight line and a plane, 
+and calculating the intersection of two planes.
+
+#### Calculations
+
+It includes calculating the distance from the point to the straight line, the distance from the calculated point to the plane, the distance from the straight line to the straight line, the cos value of the angle between two straight lines, the cos value of the angle between two square meters, and the sin value of the angle between the straight line and the plane.
+
 
 ## Usages
 
-For how to use,see the [core](https://github.com/CMoonBack/Computational-geometry/tree/main/src/lib) in the repository.
+For how to use,see the [code](https://github.com/CMoonBack/Computational-geometry/tree/main/src/lib) in the repository.
 
 Specific usages are being written.
 

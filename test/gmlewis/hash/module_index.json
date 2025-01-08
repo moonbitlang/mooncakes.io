@@ -1,0 +1,67 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "hash",
+      "package": {
+        "path": "gmlewis/hash",
+        "readme": true,
+        "traits": [
+          { "name": "@gmlewis/hash.Hash", "impls": [] },
+          { "name": "@gmlewis/hash.Hash32", "impls": [] },
+          { "name": "@gmlewis/hash.Hash64", "impls": [] }
+        ],
+        "types": [],
+        "typealias": [],
+        "values": [],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "adler32",
+          "package": {
+            "path": "gmlewis/hash/adler32",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Digest",
+                "impls": [],
+                "methods": [
+                  "block_size", "marshal_binary", "reset", "size", "sum",
+                  "sum32", "unmarshal_binary", "write"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "checksum", "new" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "crc32",
+          "package": {
+            "path": "gmlewis/hash/crc32",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Digest",
+                "impls": [],
+                "methods": [
+                  "block_size", "reset", "size", "sum", "sum32", "write"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "new" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

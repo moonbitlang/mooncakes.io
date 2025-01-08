@@ -21,9 +21,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,48:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Fundef">Fundef</a> with output(<a href="oboard/moonbit-eval/types#Fundef">Fundef</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,oboard/moonbit-eval/types/types.mbt,48:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/types.mbt,48:::fn output(<a href="oboard/moonbit-eval/types#Fundef">Fundef</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_json
@@ -31,19 +35,9 @@
   :::source,oboard/moonbit-eval/types/utils.mbt,84:::fn <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>::from_json(json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,48:::fn <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>::output(<a href="oboard/moonbit-eval/types#Fundef">Fundef</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_json
   ```moonbit
   :::source,oboard/moonbit-eval/types/utils.mbt,72:::fn <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>::to_json(self : <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/traits.mbt,85:::fn <a href="oboard/moonbit-eval/types#Fundef">Fundef</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -56,28 +50,39 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,4:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="oboard/moonbit-eval/types#Name">Name</a> with compare(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="oboard/moonbit-eval/types#Name">Name</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,4:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="oboard/moonbit-eval/types#Name">Name</a> with hash_combine(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="oboard/moonbit-eval/types#Name">Name</a> with op_equal(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="oboard/moonbit-eval/types#Name">Name</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Name">Name</a> with output(self : <a href="oboard/moonbit-eval/types#Name">Name</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,oboard/moonbit-eval/types/name.mbt,4:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="oboard/moonbit-eval/types#Name">Name</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/name.mbt,4:::fn compare(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="oboard/moonbit-eval/types#Name">Name</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/types/name.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="oboard/moonbit-eval/types#Name">Name</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/name.mbt,4:::fn op_equal(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="oboard/moonbit-eval/types#Name">Name</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/types/name.mbt,4:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="oboard/moonbit-eval/types#Name">Name</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/name.mbt,4:::fn hash_combine(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/types/name.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Name">Name</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/name.mbt,6:::fn output(self : <a href="oboard/moonbit-eval/types#Name">Name</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,4:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::compare(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="oboard/moonbit-eval/types#Name">Name</a>) -> Int
-  ```
-  > automatically derived
 - #### from\_json
   ```moonbit
   :::source,oboard/moonbit-eval/types/name.mbt,80:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::from_json(json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="oboard/moonbit-eval/types#Name">Name</a>!<a href="moonbitlang/core/error#Error">Error</a>
@@ -88,16 +93,6 @@
   :::source,oboard/moonbit-eval/types/name.mbt,33:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::from_string(s : String) -> <a href="oboard/moonbit-eval/types#Name">Name</a>!<a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/traits.mbt,40:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,4:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::hash_combine(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
 - #### name\_and\_slot
   ```moonbit
   :::source,oboard/moonbit-eval/types/name.mbt,68:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::name_and_slot(name : String, slot : Int) -> <a href="oboard/moonbit-eval/types#Name">Name</a>
@@ -106,16 +101,6 @@
 - #### name\_only
   ```moonbit
   :::source,oboard/moonbit-eval/types/name.mbt,64:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::name_only(name : String) -> <a href="oboard/moonbit-eval/types#Name">Name</a>
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,4:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::op_equal(<a href="oboard/moonbit-eval/types#Name">Name</a>, <a href="oboard/moonbit-eval/types#Name">Name</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,6:::fn <a href="oboard/moonbit-eval/types#Name">Name</a>::output(self : <a href="oboard/moonbit-eval/types#Name">Name</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### slot\_only
@@ -143,21 +128,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a> with output(self : <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,oboard/moonbit-eval/types/name.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/name.mbt,23:::fn <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>::output(self : <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/traits.mbt,85:::fn <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/name.mbt,23:::fn output(self : <a href="oboard/moonbit-eval/types#NameFromStringError">NameFromStringError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## Op
 
@@ -181,39 +158,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,42:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="oboard/moonbit-eval/types#Op">Op</a> with op_equal(<a href="oboard/moonbit-eval/types#Op">Op</a>, <a href="oboard/moonbit-eval/types#Op">Op</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,42:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Op">Op</a> with output(<a href="oboard/moonbit-eval/types#Op">Op</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,42:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="oboard/moonbit-eval/types#Op">Op</a> with to_json(<a href="oboard/moonbit-eval/types#Op">Op</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,42:::fn <a href="oboard/moonbit-eval/types#Op">Op</a>::op_equal(<a href="oboard/moonbit-eval/types#Op">Op</a>, <a href="oboard/moonbit-eval/types#Op">Op</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,42:::fn <a href="oboard/moonbit-eval/types#Op">Op</a>::output(<a href="oboard/moonbit-eval/types#Op">Op</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,42:::fn <a href="oboard/moonbit-eval/types#Op">Op</a>::to_json(<a href="oboard/moonbit-eval/types#Op">Op</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/traits.mbt,85:::fn <a href="oboard/moonbit-eval/types#Op">Op</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,oboard/moonbit-eval/types/types.mbt,42:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="oboard/moonbit-eval/types#Op">Op</a>
   ```
   > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/types.mbt,42:::fn op_equal(<a href="oboard/moonbit-eval/types#Op">Op</a>, <a href="oboard/moonbit-eval/types#Op">Op</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/types/types.mbt,42:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Op">Op</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/types.mbt,42:::fn output(<a href="oboard/moonbit-eval/types#Op">Op</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,oboard/moonbit-eval/types/types.mbt,42:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="oboard/moonbit-eval/types#Op">Op</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/types.mbt,42:::fn to_json(<a href="oboard/moonbit-eval/types#Op">Op</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## Syntax
 
@@ -247,9 +214,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,27:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Syntax">Syntax</a> with output(<a href="oboard/moonbit-eval/types#Syntax">Syntax</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,oboard/moonbit-eval/types/types.mbt,27:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/types.mbt,27:::fn output(<a href="oboard/moonbit-eval/types#Syntax">Syntax</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_json
@@ -257,19 +228,9 @@
   :::source,oboard/moonbit-eval/types/utils.mbt,169:::fn <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>::from_json(json : <a href="moonbitlang/core/json#Json">Json</a>) -> <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,27:::fn <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>::output(<a href="oboard/moonbit-eval/types#Syntax">Syntax</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_json
   ```moonbit
   :::source,oboard/moonbit-eval/types/utils.mbt,127:::fn <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>::to_json(self : <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/traits.mbt,85:::fn <a href="oboard/moonbit-eval/types#Syntax">Syntax</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -293,9 +254,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,61:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Type">Type</a> with output(<a href="oboard/moonbit-eval/types#Type">Type</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,oboard/moonbit-eval/types/types.mbt,61:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="oboard/moonbit-eval/types#Type">Type</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,oboard/moonbit-eval/types/types.mbt,61:::fn output(<a href="oboard/moonbit-eval/types#Type">Type</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_json
@@ -318,11 +283,6 @@
   :::source,oboard/moonbit-eval/types/types.mbt,103:::fn <a href="oboard/moonbit-eval/types#Type">Type</a>::op_equal(self : <a href="oboard/moonbit-eval/types#Type">Type</a>, other : <a href="oboard/moonbit-eval/types#Type">Type</a>) -> Bool
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/types.mbt,61:::fn <a href="oboard/moonbit-eval/types#Type">Type</a>::output(<a href="oboard/moonbit-eval/types#Type">Type</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### repr
   ```moonbit
   :::source,oboard/moonbit-eval/types/types.mbt,119:::fn <a href="oboard/moonbit-eval/types#Type">Type</a>::repr(self : <a href="oboard/moonbit-eval/types#Type">Type</a>) -> <a href="oboard/moonbit-eval/types#Type">Type</a>
@@ -336,10 +296,5 @@
 - #### to\_json
   ```moonbit
   :::source,oboard/moonbit-eval/types/utils.mbt,2:::fn <a href="oboard/moonbit-eval/types#Type">Type</a>::to_json(self : <a href="oboard/moonbit-eval/types#Type">Type</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,oboard/moonbit-eval/types/traits.mbt,85:::fn <a href="oboard/moonbit-eval/types#Type">Type</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 

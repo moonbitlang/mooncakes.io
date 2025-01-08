@@ -1,0 +1,21 @@
+{
+  "name": "gmlewis/gzip",
+  "version": "0.31.0",
+  "deps": {
+    "gmlewis/base64": "0.13.0",
+    "gmlewis/crc32": "0.8.0",
+    "gmlewis/flate": "0.33.0",
+    "gmlewis/io": "0.19.0",
+    "moonbitlang/x": "0.4.15"
+  },
+  "readme": "README.md",
+  "repository": "https://github.com/gmlewis/moonbit-gzip",
+  "license": "Apache-2.0",
+  "keywords": [
+    "gzip",
+    "gunzip",
+    "algorithm",
+    "moonbit"
+  ],
+  "description": "MoonBit gzip: provide simple gzip and gunzip algorithms."
+}

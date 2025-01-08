@@ -20,9 +20,13 @@ generated code.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/coverage/coverage.mbt,41:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a> with output(self : <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/coverage/coverage.mbt,41:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/coverage/coverage.mbt,41:::fn output(self : <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### incr
@@ -41,16 +45,6 @@ generated code.
   >  Create a new coverage counter with the given size.
   > 
   >  @coverage.skip
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/coverage/coverage.mbt,41:::fn <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a>::output(self : <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/coverage/traits.mbt,85:::fn <a href="moonbitlang/core/coverage#CoverageCounter">CoverageCounter</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## end
 

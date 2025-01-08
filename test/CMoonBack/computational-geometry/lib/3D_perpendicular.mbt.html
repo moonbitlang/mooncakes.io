@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">///|
+/// Determines whether two line segments in 3D space are perpendicular. Line
+/// segments are considered perpendicular if their direction vectors are
+/// orthogonal, which occurs when their dot product equals zero (within a small
+/// epsilon value to account for floating-point arithmetic).
+///
+/// Parameters:
+///
+/// * `first_line` : The first line segment, defined by two points in 3D space.
+/// * `second_line` : The second line segment, defined by two points in 3D space.
+///
+/// Returns `true` if the line segments are perpendicular, `false` otherwise.
+///
+/// Examples:
+///
+/// ```moonbit
+/// test "perpendicular_line/perpendicular" {
+///   let l1 = new_line3d(new_point3d(0.0, 0.0, 0.0), new_point3d(1.0, 0.0, 0.0))
+///   let l2 = new_line3d(new_point3d(0.0, 0.0, 0.0), new_point3d(0.0, 1.0, 0.0))
+///   // Lines along x-axis and y-axis should be perpendicular
+///   inspect!(perpendicular_line(l1, l2), content="true")
+/// }
+/// 
+/// test "perpendicular_line/not_perpendicular" {
+///   let l1 = new_line3d(new_point3d(0.0, 0.0, 0.0), new_point3d(1.0, 0.0, 0.0))
+///   let l2 = new_line3d(new_point3d(0.0, 0.0, 0.0), new_point3d(1.0, 1.0, 0.0))
+///   // Lines at 45-degree angle should not be perpendicular
+///   inspect!(perpendicular_line(l1, l2), content="false")
+/// }
+/// ```
+fn perpendicular_line(u : Line3d, v : Line3d) -> Bool {
+  iszero(dot3d(subt(u.a, u.b), subt(v.a, v.b)))
+}
+
+///|
+/// Determines whether two planes in 3D space are perpendicular to each other.
+/// Planes are considered perpendicular if their normal vectors are
+/// perpendicular, which is checked by examining if the dot product of their
+/// normal vectors is zero (within a small epsilon for floating-point precision).
+///
+/// Parameters:
+///
+/// * `first_plane` : The first plane, defined by three non-collinear points.
+/// * `second_plane` : The second plane, defined by three non-collinear points.
+///
+/// Returns `true` if the planes are perpendicular to each other, `false`
+/// otherwise.
+///
+/// Examples:
+///
+/// ```moonbit
+/// test "perpendicular_plane" {
+///   let plane1 = new_plane_3d(
+///     new_point3d(0.0, 0.0, 0.0),
+///     new_point3d(1.0, 0.0, 0.0),
+///     new_point3d(0.0, 1.0, 0.0),
+///   )
+///   let plane2 = new_plane_3d(
+///     new_point3d(0.0, 0.0, 0.0),
+///     new_point3d(1.0, 0.0, 0.0),
+///     new_point3d(1.0, 0.0, 1.0),
+///   )
+///   // First plane is the xy-plane (normal: 0,0,1)
+///   // Second plane is the xz-plane (normal: 0,1,0)
+///   // These planes should be perpendicular
+///   inspect!(perpendicular_plane(plane1, plane2), content="true")
+/// }
+/// 
+/// test "perpendicular_plane/not_perpendicular" {
+///   let plane1 = new_plane_3d(
+///     new_point3d(0.0, 0.0, 0.0),
+///     new_point3d(1.0, 0.0, 0.0),
+///     new_point3d(0.0, 1.0, 0.0),
+///   )
+///   let plane2 = new_plane_3d(
+///     new_point3d(0.0, 0.0, 1.0),
+///     new_point3d(1.0, 0.0, 1.0),
+///     new_point3d(0.0, 1.0, 1.0),
+///   )
+///   // Parallel planes should not be perpendicular
+///   inspect!(perpendicular_plane(plane1, plane2), content="false")
+/// }
+/// ```
+fn perpendicular_plane(u : Plane3d, v : Plane3d) -> Bool {
+  iszero(dot3d(pvec_plane(u), pvec_plane(v)))
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+{
+  "name": "peter-jerry-ye",
+  "package": null,
+  "childs": [
+    {
+      "name": "canvas",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "peter-jerry-ye/canvas/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "CanavsLineCap",
+                "impls": [],
+                "methods": [ "to_string" ]
+              },
+              {
+                "name": "Canvas2D",
+                "impls": [],
+                "methods": [
+                  "begin_path", "clear_rect", "close_path", "draw_image",
+                  "draw_image_subpart_with_dimention",
+                  "draw_image_with_dimension", "fill", "fill_rect",
+                  "fill_text", "get_line_cap", "get_line_dash",
+                  "get_line_join", "get_line_width", "get_miter_limit",
+                  "line_to", "move_to", "scale", "set_fill_style",
+                  "set_font", "set_line_cap", "set_line_dash",
+                  "set_line_join", "set_line_width", "set_miter_limit",
+                  "set_stroke_style", "stroke", "stroke_rect", "stroke_text"
+                ]
+              },
+              {
+                "name": "CanvasFillRule",
+                "impls": [],
+                "methods": [ "to_string" ]
+              },
+              { "name": "CanvasGradient", "impls": [], "methods": [] },
+              { "name": "CanvasImageSource", "impls": [], "methods": [] },
+              {
+                "name": "CanvasLineJoin",
+                "impls": [],
+                "methods": [ "to_string" ]
+              },
+              { "name": "CanvasPattern", "impls": [], "methods": [] },
+              { "name": "CanvasStrokeFillStyle", "impls": [], "methods": [] },
+              { "name": "HTMLCanvasElement", "impls": [], "methods": [] },
+              {
+                "name": "HTMLImageElement",
+                "impls": [],
+                "methods": [ "make", "set_src" ]
+              },
+              {
+                "name": "KeyboardEvent",
+                "impls": [],
+                "methods": [
+                  "code", "is_composing", "key", "prevent_default"
+                ]
+              },
+              {
+                "name": "MouseEvent",
+                "impls": [],
+                "methods": [
+                  "alt_key", "buttons", "ctrl_key", "offset_x", "offset_y",
+                  "prevent_default", "shift_key"
+                ]
+              },
+              { "name": "Path2D", "impls": [], "methods": [] },
+              {
+                "name": "WheelEvent",
+                "impls": [],
+                "methods": [
+                  "delta_mode", "delta_x", "delta_y", "delta_z",
+                  "prevent_default"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "cancel_animation_frame", "request_animation_frame",
+              "set_on_key_down", "set_on_key_up", "set_on_mouse_enter",
+              "set_on_mouse_move", "set_on_wheel"
+            ],
+            "misc": []
+          },
+          "childs": [
+            {
+              "name": "js",
+              "package": {
+                "path": "peter-jerry-ye/canvas/lib/js",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "JS_String",
+                    "impls": [],
+                    "methods": [
+                      "empty", "from_string", "length", "log", "to_string"
+                    ]
+                  },
+                  {
+                    "name": "JS_double_array",
+                    "impls": [],
+                    "methods": [
+                      "empty", "from_array", "length", "to_array"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

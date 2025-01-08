@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "yamajik/wasi-bindings/interface/wasi/filesystem/preopens",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "get_directories",
+      "docstring": " Return the set of preopened directories, and their path.",
+      "signature": "fn get_directories() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[(<a href=\"yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor\">@yamajik/wasi-bindings/interface/wasi/filesystem/types.Descriptor</a>, String)]",
+      "loc": { "line": 3, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "gmlewis/fonts-i/incisedblack_normal",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "font",
+      "docstring": "",
+      "signature": "let font : <a href=\"gmlewis/fonts#Font\">@gmlewis/fonts.Font</a>",
+      "loc": { "line": 769, "column": 9 }
+    }
+  ],
+  "misc": []
+}

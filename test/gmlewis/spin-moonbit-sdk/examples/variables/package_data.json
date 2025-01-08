@@ -1,0 +1,28 @@
+{
+  "readme": "# Spin component in MoonBit\n\nThis example is based on this blog post: https://www.moonbitlang.com/blog/component-model\nand this GitHub example: https://github.com/moonbitlang/moonbit-docs/tree/464356567270284446244cccecd101c04e9806f8/examples/wasi-http\n\nIn one terminal window, start up the app and provide the \"secret\" value:\n\n```shell\n$ ./run.sh\n```\n\nThen in another terminal window, get the \"secret\" variable value:\n\n```shell\n$ curl -i localhost:3000/variables/secret_var_name\nHTTP/1.1 200 OK\ncontent-type: text/plain\ntransfer-encoding: chunked\ndate: Fri, 16 Aug 2024 13:28:12 GMT\n\nsecret_var_name_value\n```\n",
+  "name": "gmlewis/spin-moonbit-sdk/examples/variables",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "cabi_realloc",
+      "docstring": "",
+      "signature": "fn cabi_realloc(src_offset : Int, src_size : Int, _dst_alignment : Int, dst_size : Int) -> Int",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "handle",
+      "docstring": " `handle` handles a `GET /variables/:key` request, gets the value\n in Spin variables associated with `:key` and returns the value or `404 Not Found`.",
+      "signature": "fn handle(request : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#IncomingRequest\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types.IncomingRequest</a>, response_out : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types#ResponseOutparam\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/http/types.ResponseOutparam</a>) -> Unit",
+      "loc": { "line": 5, "column": 8 }
+    },
+    {
+      "name": "wasmExportHandle",
+      "docstring": "",
+      "signature": "fn wasmExportHandle(p0 : Int, p1 : Int) -> Unit",
+      "loc": { "line": 12, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -62,13 +62,21 @@ For more information about WASI path resolution and sandboxing, see
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -76,24 +84,9 @@ For more information about WASI path resolution and sandboxing, see
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,365:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>::from(self : Int) -> <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,353:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>::ordinal(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,350:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Advice">Advice</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -108,13 +101,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### advise
@@ -218,11 +219,6 @@ calls may be made.
   > to by a directory descriptor and a relative path.
   > 
   >  This performs the same hash computation as `metadata-hash`.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>) -> Bool
-  ```
-  > automatically derived
 - #### open\_at
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,1047:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>::open_at(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, path_flags : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, path : String, open_flags : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, flags : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
@@ -245,11 +241,6 @@ calls may be made.
   > `error-code::read-only`.
   > 
   >  Note: This is similar to `openat` in POSIX.
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,387:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### read
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,659:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>::read(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, length : UInt64, offset : UInt64) -> <a href="moonbitlang/core/result#Result">Result</a>[(Bytes, Bool), <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
@@ -397,11 +388,6 @@ calls may be made.
   > opened for writing.
   > 
   >  Note: This is similar to `fdatasync` in POSIX.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### unlink\_file\_at
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,1205:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>::unlink_file_at(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#Descriptor">Descriptor</a>, path : String) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
@@ -445,13 +431,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### default
@@ -464,24 +458,9 @@ calls may be made.
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,96:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::is_set(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, other : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlagsFlag">DescriptorFlagsFlag</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,48:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,78:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::set(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, other : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlagsFlag">DescriptorFlagsFlag</a>) -> <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -522,30 +501,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,196:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DescriptorType
 
@@ -567,13 +537,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -581,24 +559,9 @@ calls may be made.
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,31:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>::from(self : Int) -> <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,17:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>::ordinal(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,14:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DescriptorType">DescriptorType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -614,30 +577,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,209:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DirectoryEntryStream
 
@@ -648,13 +602,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -662,26 +624,11 @@ calls may be made.
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,399:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,396:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### read\_directory\_entry
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,1319:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::read_directory_entry(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>?, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
   ```
   >  Read a single directory entry from a `directory-entry-stream`.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## ErrorCode
 
@@ -733,13 +680,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -747,24 +702,9 @@ merely for alignment with POSIX.
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,299:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>::from(self : Int) -> <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,256:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>::ordinal(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,253:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#ErrorCode">ErrorCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -781,30 +721,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,382:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## NewTimestamp
 
@@ -819,30 +750,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,203:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## OpenFlags
 
@@ -853,13 +775,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### default
@@ -872,24 +802,9 @@ merely for alignment with POSIX.
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,181:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>::is_set(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, other : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlagsFlag">OpenFlagsFlag</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,143:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,169:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>::set(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>, other : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlagsFlag">OpenFlagsFlag</a>) -> <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#OpenFlags">OpenFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -919,13 +834,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### default
@@ -938,24 +861,9 @@ merely for alignment with POSIX.
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,137:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>::is_set(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, other : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlagsFlag">PathFlagsFlag</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,105:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/top.mbt,125:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>::set(self : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>, other : <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlagsFlag">PathFlagsFlag</a>) -> <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/filesystem/types/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/filesystem/types#PathFlags">PathFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset

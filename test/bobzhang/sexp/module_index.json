@@ -1,0 +1,30 @@
+{
+  "name": "bobzhang",
+  "package": null,
+  "childs": [
+    {
+      "name": "sexp",
+      "package": {
+        "path": "bobzhang/sexp",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "Sexp",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": []
+          },
+          {
+            "name": "Sexp_list",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": []
+          }
+        ],
+        "typealias": [],
+        "values": [],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

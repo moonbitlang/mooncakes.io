@@ -1,0 +1,78 @@
+{
+  "readme": "",
+  "name": "Yoorkin/rabbit-tea/example",
+  "traits": [],
+  "types": [
+    {
+      "name": "CardModel",
+      "docstring": "",
+      "signature": "type CardModel",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "EditModel",
+      "docstring": "",
+      "signature": "type EditModel",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "EditMsg",
+      "docstring": "",
+      "signature": "type EditMsg",
+      "loc": { "line": 8, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"Yoorkin/rabbit-tea/example#EditMsg\">EditMsg</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"Yoorkin/rabbit-tea/example#EditMsg\">EditMsg</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 13, "column": 10 }
+            }
+          ],
+          "loc": { "line": 13, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Message",
+      "docstring": "",
+      "signature": "type Message",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"Yoorkin/rabbit-tea/example#Message\">Message</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"Yoorkin/rabbit-tea/example#Message\">Message</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 10, "column": 10 }
+            }
+          ],
+          "loc": { "line": 10, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Model",
+      "docstring": "",
+      "signature": "type Model",
+      "loc": { "line": 13, "column": 6 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

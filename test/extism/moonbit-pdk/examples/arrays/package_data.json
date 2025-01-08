@@ -1,0 +1,107 @@
+{
+  "readme": "# examples/arrays\n\nThe `arrays.wasm` plugin can be run from the top-level of the repo by\ntyping:\n\n```bash\n$ ./build.sh\n$ ./scripts/python-server.sh\n```\n\nThen open your browser window to:\nhttp://localhost:8080/examples/arrays\n",
+  "name": "extism/moonbit-pdk/examples/arrays",
+  "traits": [],
+  "types": [
+    {
+      "name": "AllThree",
+      "docstring": " `AllThree` represents a JSON object with all three array types.",
+      "signature": "pub(all) struct AllThree {\n  ints : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]\n  floats : <a href=\"moonbitlang/core/array#Array\">Array</a>[Double]\n  strings : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>, <a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>) -> Bool",
+              "loc": { "line": 6, "column": 10 }
+            }
+          ],
+          "loc": { "line": 6, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 14 }
+            }
+          ],
+          "loc": { "line": 6, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 6, "column": 20 }
+            }
+          ],
+          "loc": { "line": 6, "column": 20 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "all_three_object",
+      "docstring": " `all_three_object` tests passing an object of all three arrays.",
+      "signature": "fn all_three_object() -> Int",
+      "loc": { "line": 83, "column": 8 }
+    },
+    {
+      "name": "process_all_three",
+      "docstring": " `process_all_three` processes all three array types.",
+      "signature": "fn process_all_three(all3 : <a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>) -> <a href=\"extism/moonbit-pdk/examples/arrays#AllThree\">AllThree</a>",
+      "loc": { "line": 9, "column": 8 }
+    },
+    {
+      "name": "process_floats",
+      "docstring": " `process_floats` sums up an array of floats.",
+      "signature": "fn process_floats(floats : <a href=\"moonbitlang/core/array#Array\">Array</a>[Double]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Double]",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "process_ints",
+      "docstring": " `process_ints` sums up an array of ints.",
+      "signature": "fn process_ints(ints : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "process_strings",
+      "docstring": " `process_strings` concatenates an array of strings.",
+      "signature": "fn process_strings(strings : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+      "loc": { "line": 2, "column": 8 }
+    },
+    {
+      "name": "progressive_concat_strings",
+      "docstring": " `progressive_concat_strings` tests passing arrays of strings.",
+      "signature": "fn progressive_concat_strings() -> Int",
+      "loc": { "line": 56, "column": 8 }
+    },
+    {
+      "name": "progressive_sum_floats",
+      "docstring": " `progressive_sum_floats` tests passing arrays of floats.",
+      "signature": "fn progressive_sum_floats() -> Int",
+      "loc": { "line": 29, "column": 8 }
+    },
+    {
+      "name": "progressive_sum_ints",
+      "docstring": " `progressive_sum_ints` tests passing arrays of ints.",
+      "signature": "fn progressive_sum_ints() -> Int",
+      "loc": { "line": 2, "column": 8 }
+    }
+  ],
+  "misc": []
+}

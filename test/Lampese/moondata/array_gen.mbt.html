@@ -15,13 +15,13 @@
 
 <body>
   <pre><code class="moonbit">///|
-pub fn rand_array_int(
+pub fn rand_array[T](
   self : Gen,
   len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> Int
-) -> () -> Array[Int] {
-  let len = len()
+  gen~ : () -> T
+) -> () -> Array[T] {
   fn() {
+    let len = len()
     let arr = []
     for i in 0..<len {
       arr.push(gen())
@@ -31,128 +31,26 @@ pub fn rand_array_int(
 }
 
 ///|
-pub fn rand_array_char(
+pub fn rand_array_unique[T : Eq + Hash](
   self : Gen,
   len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> Char
-) -> () -> Array[Char] {
-  let len = len()
+  gen~ : () -> T
+) -> () -> Array[T] {
   fn() {
+    let len = len()
     let arr = []
+    let set = @hashset.new()
     for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_array_string(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> String
-) -> () -> Array[String] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_array_bool(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> Bool
-) -> () -> Array[Bool] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_array_float(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> Float
-) -> () -> Array[Float] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_arrar_double(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> Double
-) -> () -> Array[Double] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_array_uint(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> UInt
-) -> () -> Array[UInt] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_array_int64(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> Int64
-) -> () -> Array[Int64] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
-    }
-    arr
-  }
-}
-
-///|
-pub fn rand_array_uint64(
-  self : Gen,
-  len~ : () -> Int = self.rand_int(1, 10),
-  gen~ : () -> UInt64
-) -> () -> Array[UInt64] {
-  let len = len()
-  fn() {
-    let arr = []
-    for i in 0..<len {
-      arr.push(gen())
+      while true {
+        let elem = gen()
+        if set.contains(elem) {
+          continue
+        } else {
+          set.add(elem)
+          arr.push(elem)
+          break
+        }
+      }
     }
     arr
   }

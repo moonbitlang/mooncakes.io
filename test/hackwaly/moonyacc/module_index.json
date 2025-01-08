@@ -1,0 +1,705 @@
+{
+  "name": "hackwaly",
+  "package": null,
+  "childs": [
+    {
+      "name": "moonyacc",
+      "package": null,
+      "childs": [
+        {
+          "name": "jsapi",
+          "package": {
+            "path": "hackwaly/moonyacc/jsapi",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "CompileResult", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [
+              "compile", "default_mode", "json_cst_json_payload_mode",
+              "json_cst_mode", "json_cst_no_payload_mode"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lib",
+          "package": null,
+          "childs": [
+            {
+              "name": "codegen",
+              "package": {
+                "path": "hackwaly/moonyacc/lib/codegen",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  { "name": "BindingSubject", "impls": [], "methods": [] },
+                  { "name": "MetaProvider", "impls": [], "methods": [] },
+                  { "name": "NonTerminalMeta", "impls": [], "methods": [] },
+                  { "name": "ProductionMeta", "impls": [], "methods": [] },
+                  {
+                    "name": "PubType",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  { "name": "TerminalMeta", "impls": [], "methods": [] }
+                ],
+                "typealias": [ "CodeFragment" ],
+                "values": [],
+                "misc": []
+              },
+              "childs": [
+                {
+                  "name": "gen_mbt",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/codegen/gen_mbt",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "CodegenDecision",
+                        "impls": [
+                          { "methods": [ "compare" ] },
+                          { "methods": [ "op_equal" ] }
+                        ],
+                        "methods": []
+                      },
+                      {
+                        "name": "CodegenSymbol",
+                        "impls": [
+                          { "methods": [ "compare" ] },
+                          { "methods": [ "op_equal" ] }
+                        ],
+                        "methods": []
+                      },
+                      { "name": "Mode", "impls": [], "methods": [] },
+                      {
+                        "name": "TokenPayloadRewrite",
+                        "impls": [],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "codegen", "codegen_tokens" ],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            },
+            {
+              "name": "driver",
+              "package": {
+                "path": "hackwaly/moonyacc/lib/driver",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  { "name": "Mode", "impls": [], "methods": [] },
+                  {
+                    "name": "TokenPayloadRewrite",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [ "compile" ],
+                "misc": []
+              },
+              "childs": [
+                {
+                  "name": "util",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/driver/util",
+                    "readme": false,
+                    "traits": [],
+                    "types": [],
+                    "typealias": [],
+                    "values": [ "exit", "println_to_stderr" ],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            },
+            {
+              "name": "grm",
+              "package": {
+                "path": "hackwaly/moonyacc/lib/grm",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Associativity",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "BuilderContext",
+                    "impls": [],
+                    "methods": [ "add_production", "set_prec", "set_start" ]
+                  },
+                  { "name": "Grammar", "impls": [], "methods": [] },
+                  {
+                    "name": "Nonterminal",
+                    "impls": [
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": [ "compare", "op_equal" ]
+                  },
+                  {
+                    "name": "Nullability",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Production",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": [ "output_with_opt_dot" ]
+                  },
+                  {
+                    "name": "Symbol",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Terminal",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "BuilderSymbol" ],
+                "values": [ "build" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "lr1",
+              "package": {
+                "path": "hackwaly/moonyacc/lib/lr1",
+                "readme": false,
+                "traits": [
+                  {
+                    "name": "@hackwaly/moonyacc/lib/lr1.AbstractLookaheadSet",
+                    "impls": []
+                  }
+                ],
+                "types": [
+                  {
+                    "name": "Automaton",
+                    "impls": [],
+                    "methods": [ "build" ]
+                  },
+                  {
+                    "name": "ConflictLocation",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Decision",
+                    "impls": [ { "methods": [ "op_equal" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EncodedLR0Item",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] }
+                    ],
+                    "methods": [
+                      "decode", "decode_postdot", "decode_production", "new",
+                      "unsafe_shift"
+                    ]
+                  },
+                  {
+                    "name": "EncodedLR0ItemSet",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash", "hash_combine" ] }
+                    ],
+                    "methods": [
+                      "decode_iter", "empty", "from_sorted_array"
+                    ]
+                  },
+                  { "name": "EncodedLR1ItemSet", "impls": [], "methods": [] },
+                  {
+                    "name": "EncodedLookaheadSet",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EncodedSymbolicLookaheadSet",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "EpsilonLookaheadSet",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "LR0Item",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] }
+                    ],
+                    "methods": [ "new", "postdot", "shift" ]
+                  },
+                  { "name": "LR0Node", "impls": [], "methods": [] },
+                  {
+                    "name": "LR1Item",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": [ "core", "postdot", "shift" ]
+                  },
+                  {
+                    "name": "LR1ItemGroup",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  { "name": "LR1PreState", "impls": [], "methods": [] },
+                  {
+                    "name": "LR1State",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] }
+                    ],
+                    "methods": [ "iter_item_groups", "set_action" ]
+                  },
+                  {
+                    "name": "Lookahead",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ResolveConflictError",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [ "build_closure_fn", "resolve_conflicts" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "parser",
+              "package": {
+                "path": "hackwaly/moonyacc/lib/parser",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Clause",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseAction",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseItem",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseItemIdent",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseItemSymbol",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "CodeWithSubst",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Command",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  { "name": "LexEngine", "impls": [], "methods": [ "run" ] },
+                  { "name": "LexError", "impls": [], "methods": [] },
+                  {
+                    "name": "Lexbuf",
+                    "impls": [],
+                    "methods": [ "from_string" ]
+                  },
+                  {
+                    "name": "Lexer",
+                    "impls": [],
+                    "methods": [ "next_token" ]
+                  },
+                  { "name": "ParseError", "impls": [], "methods": [] },
+                  {
+                    "name": "ParserSpec",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Rule",
+                    "impls": [ { "methods": [ "to_json" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "SubstItem",
+                    "impls": [
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "SubstItemDesc",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  { "name": "YYDecision", "impls": [], "methods": [] },
+                  { "name": "YYObj_Clause", "impls": [], "methods": [] },
+                  {
+                    "name": "YYObj_ClauseAction",
+                    "impls": [],
+                    "methods": []
+                  },
+                  { "name": "YYObj_ClauseItem", "impls": [], "methods": [] },
+                  {
+                    "name": "YYObj_ClauseItemSymbol",
+                    "impls": [],
+                    "methods": []
+                  },
+                  { "name": "YYObj_Code_", "impls": [], "methods": [] },
+                  { "name": "YYObj_Command", "impls": [], "methods": [] },
+                  { "name": "YYObj_ParserSpec", "impls": [], "methods": [] },
+                  { "name": "YYObj_Rule", "impls": [], "methods": [] },
+                  { "name": "YYObj_String", "impls": [], "methods": [] },
+                  { "name": "YYObj_Symbol", "impls": [], "methods": [] },
+                  { "name": "YYObj_Symbol_", "impls": [], "methods": [] },
+                  { "name": "YYObj_Void", "impls": [], "methods": [] },
+                  {
+                    "name": "YYObj__String__Array_SubstItem__",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "YYObj__immut_list_T_ClauseItem_",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "YYObj__immut_list_T_Clause_",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "YYObj__immut_list_T_Command_",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "YYObj__immut_list_T_Rule_",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "YYObj__immut_list_T_Symbol_",
+                    "impls": [],
+                    "methods": []
+                  },
+                  { "name": "YYSymbol", "impls": [], "methods": [] }
+                ],
+                "typealias": [ "Code", "Position", "Symbol" ],
+                "values": [ "new_lexer", "spec" ],
+                "misc": []
+              },
+              "childs": [
+                {
+                  "name": "test",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/parser/test",
+                    "readme": false,
+                    "traits": [],
+                    "types": [],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            },
+            {
+              "name": "util",
+              "package": null,
+              "childs": [
+                {
+                  "name": "hashmap2",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/util/hashmap2",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      { "name": "Entry", "impls": [], "methods": [] },
+                      {
+                        "name": "T",
+                        "impls": [],
+                        "methods": [
+                          "get", "get_or_init", "iter", "iter2", "set",
+                          "size"
+                        ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "new" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "int128_int_set",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/util/int128_int_set",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Int128IntSet",
+                        "impls": [
+                          { "methods": [ "compare" ] },
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "hash_combine" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [
+                          "add", "contains", "difference", "disjoint",
+                          "intersection", "is_empty", "iter", "remove",
+                          "subset", "union"
+                        ]
+                      }
+                    ],
+                    "typealias": [ "T" ],
+                    "values": [ "empty", "from_iter", "singleton" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "small_int_set",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/util/small_int_set",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "SmallIntSet",
+                        "impls": [
+                          { "methods": [ "compare" ] },
+                          { "methods": [ "op_equal" ] },
+                          { "methods": [ "hash_combine" ] },
+                          { "methods": [ "output" ] }
+                        ],
+                        "methods": [
+                          "add", "contains", "difference", "disjoint",
+                          "from_iter", "intersection", "is_empty", "iter",
+                          "remove", "subset", "union"
+                        ]
+                      }
+                    ],
+                    "typealias": [ "T" ],
+                    "values": [ "empty", "singleton" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "stamp",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/util/stamp",
+                    "readme": false,
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Stamp",
+                        "impls": [ { "methods": [ "op_equal" ] } ],
+                        "methods": [ "initial", "new" ]
+                      }
+                    ],
+                    "typealias": [ "T" ],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "worklist",
+                  "package": {
+                    "path": "hackwaly/moonyacc/lib/util/worklist",
+                    "readme": false,
+                    "traits": [],
+                    "types": [],
+                    "typealias": [],
+                    "values": [ "process" ],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "hackwaly/moonyacc/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "tests",
+          "package": null,
+          "childs": [
+            {
+              "name": "calc_jsoncst_test",
+              "package": {
+                "path": "hackwaly/moonyacc/tests/calc_jsoncst_test",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ParseError",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  { "name": "YYDecision", "impls": [], "methods": [] },
+                  { "name": "YYObj_Json", "impls": [], "methods": [] },
+                  { "name": "YYSymbol", "impls": [], "methods": [] }
+                ],
+                "typealias": [ "Position" ],
+                "values": [ "start" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "calc_test",
+              "package": {
+                "path": "hackwaly/moonyacc/tests/calc_test",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ParseError",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  { "name": "YYDecision", "impls": [], "methods": [] },
+                  { "name": "YYObj_Int", "impls": [], "methods": [] },
+                  { "name": "YYObj_Void", "impls": [], "methods": [] },
+                  { "name": "YYSymbol", "impls": [], "methods": [] }
+                ],
+                "typealias": [ "Position" ],
+                "values": [ "start" ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

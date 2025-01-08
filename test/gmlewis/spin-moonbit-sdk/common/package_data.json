@@ -1,0 +1,18 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/common",
+  "traits": [
+    {
+      "name": "@gmlewis/spin-moonbit-sdk/common.HashFunc",
+      "docstring": " `HashFunc` represents a hash algorithm like `@md5` or `@sha256`.",
+      "signature": "pub(open) trait @gmlewis/spin-moonbit-sdk/common.HashFunc {\n  name(Self) -> String\n  write(Self, Byte) -> Unit\n  check_sum(Self) -> String\n}",
+      "loc": { "line": 2, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

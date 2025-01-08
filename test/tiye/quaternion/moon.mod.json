@@ -1,0 +1,10 @@
+{
+  "name": "tiye/quaternion",
+  "version": "0.1.0",
+  "readme": "README.md",
+  "repository": "https://github.com/WebGPU-Art/quaternion",
+  "license": "Apache-2.0",
+  "keywords": ["math", "quaternion"],
+  "description": "Quaternion math library",
+  "source": "src"
+}

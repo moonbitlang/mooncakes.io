@@ -22,27 +22,39 @@
 
 ```moonbit
 :::source,tiye/quaternion/lib/quaternion.mbt,2:::pub(all) struct Quaternion {
-  w : float
-  x : float
-  y : float
-  z : float
+  w : Float
+  x : Float
+  y : Float
+  z : Float
 }
 ```
  Quaternion {w, x, y, z}
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,378:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/quaternion/lib#Quaternion">Quaternion</a> with default() -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+  :::source,tiye/quaternion/lib/quaternion.mbt,378:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/quaternion/lib/quaternion.mbt,378:::fn default() -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+    ```
+    > 
 - ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/quaternion/lib#Quaternion">Quaternion</a> with op_equal(<a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,36:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/quaternion/lib#Quaternion">Quaternion</a> with output(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,tiye/quaternion/lib/quaternion.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
   ```
   > 
+  * ```moonbit
+    :::source,tiye/quaternion/lib/quaternion.mbt,7:::fn op_equal(<a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,tiye/quaternion/lib/quaternion.mbt,36:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,tiye/quaternion/lib/quaternion.mbt,36:::fn output(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### conjugate
@@ -94,14 +106,9 @@
   >    inspect!(q, content="Quaternion { w: 1.0, x: -2.0, y: -3.0, z: -4.0 }")
   >  }
   >  ```
-- #### default
-  ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,378:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::default() -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
-  ```
-  > 
 - #### dot
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,278:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::dot(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, other : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> float
+  :::source,tiye/quaternion/lib/quaternion.mbt,278:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::dot(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, other : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> Float
   ```
   > 
   >  Computes the dot product (scalar product) of two quaternions. The dot product
@@ -125,18 +132,18 @@
   >  ```
 - #### from\_euler\_angles
   ```moonbit
-  :::source,tiye/quaternion/lib/euler.mbt,3:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::from_euler_angles(x : float, y : float, z : float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+  :::source,tiye/quaternion/lib/euler.mbt,3:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::from_euler_angles(x : Float, y : Float, z : Float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
   ```
   >  Construct a quaternion representing the given euler angle rotations (in radians)
   > Notice: this function is not well tested yet
 - #### from\_wxyz
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,732:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::from_wxyz(arr : <a href="moonbitlang/core/array#Array">Array</a>[float]) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>!<a href="tiye/quaternion/lib#QuatError">QuatError</a>
+  :::source,tiye/quaternion/lib/quaternion.mbt,732:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::from_wxyz(arr : <a href="moonbitlang/core/array#Array">Array</a>[Float]) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>!<a href="tiye/quaternion/lib#QuatError">QuatError</a>
   ```
   > 
 - #### from\_xyzw\_array
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,740:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::from_xyzw_array(arr : <a href="moonbitlang/core/array#Array">Array</a>[float]) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>!<a href="tiye/quaternion/lib#QuatError">QuatError</a>
+  :::source,tiye/quaternion/lib/quaternion.mbt,740:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::from_xyzw_array(arr : <a href="moonbitlang/core/array#Array">Array</a>[Float]) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>!<a href="tiye/quaternion/lib#QuatError">QuatError</a>
   ```
   >  from\_xyzw\_array
 - #### id
@@ -212,7 +219,7 @@
   >  ```
 - #### length
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,373:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::length(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> float
+  :::source,tiye/quaternion/lib/quaternion.mbt,373:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::length(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> Float
   ```
   > 
   >  Computes the Euclidean length (magnitude) of a quaternion by taking the
@@ -234,7 +241,7 @@
   >  ```
 - #### new
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,144:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::new(w? : float, x? : float, y? : float, z? : float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+  :::source,tiye/quaternion/lib/quaternion.mbt,144:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::new(w? : Float, x? : Float, y? : Float, z? : Float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
   ```
   > 
   >  Creates a new quaternion with optional components. If any component is not
@@ -372,11 +379,6 @@
   >    inspect!(q1.op_eq(q2), content="true")
   >  }
   >  ```
-- #### op\_equal
-  ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,7:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::op_equal(<a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> Bool
-  ```
-  > automatically derived
 - #### op\_mul
   ```moonbit
   :::source,tiye/quaternion/lib/quaternion.mbt,522:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::op_mul(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, other : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
@@ -504,14 +506,9 @@
   >    inspect!(q1, content="Quaternion { w: 1.0, x: 2.0, y: 3.0, z: 4.0 }")
   >  }
   >  ```
-- #### output
-  ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,36:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::output(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### roughly\_eq
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,436:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::roughly_eq(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, other : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, epsilon? : float) -> Bool
+  :::source,tiye/quaternion/lib/quaternion.mbt,436:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::roughly_eq(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, other : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, epsilon? : Float) -> Bool
   ```
   > 
   >  Determines if two quaternions are approximately equal within a specified
@@ -538,7 +535,7 @@
   >  ```
 - #### scale
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,179:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::scale(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, t : float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+  :::source,tiye/quaternion/lib/quaternion.mbt,179:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::scale(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, t : Float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
   ```
   > 
   >  Performs element-wise multiplication of a quaternion with a scalar value,
@@ -563,7 +560,7 @@
   >  ```
 - #### scale\_mut
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,202:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::scale_mut(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, t : float) -> Unit
+  :::source,tiye/quaternion/lib/quaternion.mbt,202:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::scale_mut(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>, t : Float) -> Unit
   ```
   > 
   >  Scales a quaternion by multiplying each component with a scalar value
@@ -586,7 +583,7 @@
   >  ```
 - #### square\_length
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,351:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::square_length(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> float
+  :::source,tiye/quaternion/lib/quaternion.mbt,351:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::square_length(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> Float
   ```
   > 
   >  Computes the squared length (or squared norm) of a quaternion by summing up
@@ -633,7 +630,7 @@
   >  ```
 - #### to\_wxyz
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,701:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::to_wxyz(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[float]
+  :::source,tiye/quaternion/lib/quaternion.mbt,701:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::to_wxyz(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[Float]
   ```
   > 
   >  Converts a quaternion to an array of floats in the order \[w, x, y, z\].
@@ -655,7 +652,7 @@
   >  ```
 - #### to\_xyzw
   ```moonbit
-  :::source,tiye/quaternion/lib/quaternion.mbt,724:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::to_xyzw(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[float]
+  :::source,tiye/quaternion/lib/quaternion.mbt,724:::fn <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>::to_xyzw(self : <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>) -> <a href="moonbitlang/core/array#Array">Array</a>[Float]
   ```
   > 
   >  Converts a quaternion to an array of floats in the order \[x, y, z, w\], which
@@ -680,14 +677,14 @@
 ## max\_value
 
 ```moonbit
-:::source,tiye/quaternion/lib/quaternion.mbt,383:::let max_value : float
+:::source,tiye/quaternion/lib/quaternion.mbt,383:::let max_value : Float
 ```
 
 
 ## q
 
 ```moonbit
-:::source,tiye/quaternion/lib/quaternion.mbt,64:::fn q(w : float, x : float, y : float, z : float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
+:::source,tiye/quaternion/lib/quaternion.mbt,64:::fn q(w : Float, x : Float, y : Float, z : Float) -> <a href="tiye/quaternion/lib#Quaternion">Quaternion</a>
 ```
 
  Creates a new quaternion with the given components. This is a shorter

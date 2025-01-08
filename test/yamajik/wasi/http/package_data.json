@@ -1,0 +1,809 @@
+{
+  "readme": "",
+  "name": "yamajik/wasi/http",
+  "traits": [],
+  "types": [
+    {
+      "name": "Authority",
+      "docstring": "",
+      "signature": "type Authority",
+      "loc": { "line": 78, "column": 6 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Authority\">Authority</a>::to_string(self : <a href=\"yamajik/wasi/http#Authority\">Authority</a>) -> String",
+          "loc": { "line": 81, "column": 19 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Authority\">Authority</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Authority\">Authority</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 78, "column": 30 }
+            }
+          ],
+          "loc": { "line": 78, "column": 30 }
+        }
+      ]
+    },
+    {
+      "name": "Body",
+      "docstring": "",
+      "signature": "pub struct Body {\n  data : String\n}",
+      "loc": { "line": 2, "column": 22 },
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Body\">Body</a>::empty() -> <a href=\"yamajik/wasi/http#Body\">Body</a>",
+          "loc": { "line": 17, "column": 14 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Body\">Body</a>::from_json(data~ : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"yamajik/wasi/http#Body\">Body</a>",
+          "loc": { "line": 27, "column": 14 }
+        },
+        {
+          "name": "from_text",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Body\">Body</a>::from_text(data~ : String) -> <a href=\"yamajik/wasi/http#Body\">Body</a>",
+          "loc": { "line": 22, "column": 14 }
+        },
+        {
+          "name": "json",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Body\">Body</a>::json(self : <a href=\"yamajik/wasi/http#Body\">Body</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>!<a href=\"moonbitlang/core/json#ParseError\">@moonbitlang/core/json.ParseError</a>",
+          "loc": { "line": 32, "column": 14 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Body\">Body</a>::new(data~ : String) -> <a href=\"yamajik/wasi/http#Body\">Body</a>",
+          "loc": { "line": 7, "column": 14 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Body\">Body</a>::to_string(self : <a href=\"yamajik/wasi/http#Body\">Body</a>) -> String",
+          "loc": { "line": 12, "column": 14 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Body\">Body</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Body\">Body</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 4, "column": 10 }
+            }
+          ],
+          "loc": { "line": 4, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Client",
+      "docstring": "",
+      "signature": "type Client",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "delete",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::delete(self : <a href=\"yamajik/wasi/http#Client\">Client</a>, path~ : String = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 90, "column": 16 }
+        },
+        {
+          "name": "get",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::get(self : <a href=\"yamajik/wasi/http#Client\">Client</a>, path~ : String = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 46, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::new(url~ : String = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = .., middlewares~ : <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a> = .., logger~ : <a href=\"yamajik/wasi/log#Logger\">@yamajik/wasi/log.Logger</a> = ..) -> <a href=\"yamajik/wasi/http#Client\">Client</a>",
+          "loc": { "line": 11, "column": 16 }
+        },
+        {
+          "name": "patch",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::patch(self : <a href=\"yamajik/wasi/http#Client\">Client</a>, path~ : String = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 79, "column": 16 }
+        },
+        {
+          "name": "post",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::post(self : <a href=\"yamajik/wasi/http#Client\">Client</a>, path~ : String = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 57, "column": 16 }
+        },
+        {
+          "name": "put",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::put(self : <a href=\"yamajik/wasi/http#Client\">Client</a>, path~ : String = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 68, "column": 16 }
+        },
+        {
+          "name": "request",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Client\">Client</a>::request(self : <a href=\"yamajik/wasi/http#Client\">Client</a>, path~ : String, method~ : <a href=\"yamajik/wasi/http#Method\">Method</a>, headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 22, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "ContentType",
+      "docstring": "",
+      "signature": "pub(all) enum ContentType {\n  TextPlain\n  TextHtml\n  ApplicationJson\n  ApplicationXml\n  ApplicationFormUrlEncoded\n  MultipartFormData\n  Other(String)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#ContentType\">ContentType</a>::to_string(self : <a href=\"yamajik/wasi/http#ContentType\">ContentType</a>) -> String",
+          "loc": { "line": 13, "column": 21 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#ContentType\">ContentType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#ContentType\">ContentType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 10, "column": 10 }
+            }
+          ],
+          "loc": { "line": 10, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "HTTPError",
+      "docstring": "",
+      "signature": "pub(all) enum HTTPError {\n  BadRequest(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  Unauthorized(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  Forbidden(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  NotFound(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  InternalServerError(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  NotImplemented(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  BadGateway(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  ServiceUnavailable(<a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n  Other(UInt, <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>)\n}",
+      "loc": { "line": 2, "column": 16 },
+      "methods": [
+        {
+          "name": "code",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>::code(self : <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>) -> <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>",
+          "loc": { "line": 15, "column": 19 }
+        },
+        {
+          "name": "from_error",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>::from_error(err : <a href=\"moonbitlang/core/error#Error\">Error</a>) -> <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>",
+          "loc": { "line": 67, "column": 19 }
+        },
+        {
+          "name": "from_response",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>::from_response(resp : <a href=\"yamajik/wasi/http#Response\">Response</a>) -> <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>?!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 50, "column": 19 }
+        },
+        {
+          "name": "json",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>::json(self : <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 30, "column": 19 }
+        },
+        {
+          "name": "to_response",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>::to_response(self : <a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>",
+          "loc": { "line": 45, "column": 19 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Header",
+      "docstring": "",
+      "signature": "pub(all) enum Header {\n  ContentType\n  ContentLength\n  Custom(String)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Header\">Header</a>::to_string(self : <a href=\"yamajik/wasi/http#Header\">Header</a>) -> String",
+          "loc": { "line": 9, "column": 16 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"yamajik/wasi/http#Header\">Header</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"yamajik/wasi/http#Header\">Header</a>, <a href=\"yamajik/wasi/http#Header\">Header</a>) -> Bool",
+              "loc": { "line": 6, "column": 22 }
+            }
+          ],
+          "loc": { "line": 6, "column": 22 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"yamajik/wasi/http#Header\">Header</a>",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "automatically derived",
+              "signature": "fn hash_combine(<a href=\"yamajik/wasi/http#Header\">Header</a>, <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 6, "column": 16 }
+            }
+          ],
+          "loc": { "line": 6, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Header\">Header</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Header\">Header</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 10 }
+            }
+          ],
+          "loc": { "line": 6, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Headers",
+      "docstring": "",
+      "signature": "type Headers",
+      "loc": { "line": 27, "column": 6 },
+      "methods": [
+        {
+          "name": "merge",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Headers\">Headers</a>::merge(self : <a href=\"yamajik/wasi/http#Headers\">Headers</a>, other : <a href=\"yamajik/wasi/http#Headers\">Headers</a>) -> Unit",
+          "loc": { "line": 64, "column": 17 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"yamajik/wasi/http#Headers\">Headers</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"yamajik/wasi/http#Headers\">Headers</a>",
+              "loc": { "line": 27, "column": 41 }
+            }
+          ],
+          "loc": { "line": 27, "column": 41 }
+        }
+      ]
+    },
+    {
+      "name": "Method",
+      "docstring": "",
+      "signature": "pub(all) enum Method {\n  Get\n  Post\n  Put\n  Delete\n  Patch\n  Options\n  Head\n  Trace\n  Connect\n  Other(String)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "from_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Method\">Method</a>::from_string(m : String) -> <a href=\"yamajik/wasi/http#Method\">Method</a>",
+          "loc": { "line": 32, "column": 16 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Method\">Method</a>::to_string(self : <a href=\"yamajik/wasi/http#Method\">Method</a>) -> String",
+          "loc": { "line": 16, "column": 16 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"yamajik/wasi/http#Method\">Method</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"yamajik/wasi/http#Method\">Method</a>, <a href=\"yamajik/wasi/http#Method\">Method</a>) -> Bool",
+              "loc": { "line": 13, "column": 16 }
+            }
+          ],
+          "loc": { "line": 13, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"yamajik/wasi/http#Method\">Method</a>",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "automatically derived",
+              "signature": "fn hash_combine(<a href=\"yamajik/wasi/http#Method\">Method</a>, <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 13, "column": 20 }
+            }
+          ],
+          "loc": { "line": 13, "column": 20 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Method\">Method</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Method\">Method</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 13, "column": 10 }
+            }
+          ],
+          "loc": { "line": 13, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Middlewares",
+      "docstring": "",
+      "signature": "type Middlewares",
+      "loc": { "line": 5, "column": 6 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a>::new(capacity~ : Int = ..) -> <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a>",
+          "loc": { "line": 8, "column": 21 }
+        },
+        {
+          "name": "push",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a>::push(self : <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a>, m : ((<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> ((<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>)) -> Unit",
+          "loc": { "line": 13, "column": 21 }
+        },
+        {
+          "name": "wrap",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a>::wrap(self : <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a>, h : (<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> ((<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>)",
+          "loc": { "line": 18, "column": 21 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Path",
+      "docstring": "",
+      "signature": "type Path",
+      "loc": { "line": 86, "column": 6 },
+      "methods": [
+        {
+          "name": "parts",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Path\">Path</a>::parts(self : <a href=\"yamajik/wasi/http#Path\">Path</a>, skip_prefix~ : String = ..) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+          "loc": { "line": 99, "column": 14 }
+        },
+        {
+          "name": "starts_with",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Path\">Path</a>::starts_with(self : <a href=\"yamajik/wasi/http#Path\">Path</a>, prefix : String) -> Bool",
+          "loc": { "line": 94, "column": 14 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Path\">Path</a>::to_string(self : <a href=\"yamajik/wasi/http#Path\">Path</a>) -> String",
+          "loc": { "line": 89, "column": 14 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Path\">Path</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Path\">Path</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 86, "column": 25 }
+            }
+          ],
+          "loc": { "line": 86, "column": 25 }
+        }
+      ]
+    },
+    {
+      "name": "Query",
+      "docstring": "",
+      "signature": "type Query",
+      "loc": { "line": 51, "column": 6 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Query\">Query</a>::to_string(self : <a href=\"yamajik/wasi/http#Query\">Query</a>) -> String",
+          "loc": { "line": 59, "column": 15 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Query\">Query</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Query\">Query</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 51, "column": 39 }
+            }
+          ],
+          "loc": { "line": 51, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "Request",
+      "docstring": "",
+      "signature": "pub struct Request {\n  url : <a href=\"yamajik/wasi/http#URL\">URL</a>\n  method : <a href=\"yamajik/wasi/http#Method\">Method</a>\n  headers : <a href=\"yamajik/wasi/http#Headers\">Headers</a>\n  body : <a href=\"yamajik/wasi/http#Body\">Body</a>\n  options : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a>\n}",
+      "loc": { "line": 23, "column": 22 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Request\">Request</a>::new(url~ : <a href=\"yamajik/wasi/http#URL\">URL</a>, method~ : <a href=\"yamajik/wasi/http#Method\">Method</a>, headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = .., options~ : <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a> = ..) -> <a href=\"yamajik/wasi/http#Request\">Request</a>",
+          "loc": { "line": 32, "column": 17 }
+        },
+        {
+          "name": "send",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Request\">Request</a>::send(self : <a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"yamajik/wasi/http#RequestError\">RequestError</a>",
+          "loc": { "line": 84, "column": 17 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RequestError",
+      "docstring": "",
+      "signature": "pub enum RequestError {\n  WASIError(<a href=\"yamajik/wasi-bindings/interface/wasi/http/types#ErrorCode\">@yamajik/wasi-bindings/interface/wasi/http/types.ErrorCode</a>)\n}",
+      "loc": { "line": 2, "column": 21 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#RequestError\">RequestError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#RequestError\">RequestError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 4, "column": 10 }
+            }
+          ],
+          "loc": { "line": 4, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "RequestOptions",
+      "docstring": "",
+      "signature": "pub type RequestOptions",
+      "loc": { "line": 7, "column": 22 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a>",
+              "loc": { "line": 9, "column": 16 }
+            }
+          ],
+          "loc": { "line": 9, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#RequestOptions\">RequestOptions</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 9, "column": 10 }
+            }
+          ],
+          "loc": { "line": 9, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Response",
+      "docstring": "",
+      "signature": "pub struct Response {\n  status_code : <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>\n  headers : <a href=\"yamajik/wasi/http#Headers\">Headers</a>\n  body : <a href=\"yamajik/wasi/http#Body\">Body</a>\n}",
+      "loc": { "line": 2, "column": 22 },
+      "methods": [
+        {
+          "name": "json",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Response\">Response</a>::json(status_code~ : <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a> = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., data~ : <a href=\"moonbitlang/core/json#Json\">Json</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>",
+          "loc": { "line": 27, "column": 18 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Response\">Response</a>::new(status_code~ : <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a> = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., body~ : <a href=\"yamajik/wasi/http#Body\">Body</a> = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>",
+          "loc": { "line": 9, "column": 18 }
+        },
+        {
+          "name": "text",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Response\">Response</a>::text(status_code~ : <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a> = .., headers~ : <a href=\"yamajik/wasi/http#Headers\">Headers</a> = .., data~ : String = ..) -> <a href=\"yamajik/wasi/http#Response\">Response</a>",
+          "loc": { "line": 18, "column": 18 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Router",
+      "docstring": "",
+      "signature": "type Router",
+      "loc": { "line": 108, "column": 8 },
+      "methods": [
+        {
+          "name": "on_handle",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Router\">Router</a>::on_handle(self : <a href=\"yamajik/wasi/http#Router\">Router</a>, path~ : String, method~ : <a href=\"yamajik/wasi/http#Method\">Method</a>, handler~ : (<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> Unit",
+          "loc": { "line": 123, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RouterNode",
+      "docstring": "",
+      "signature": "type RouterNode",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [
+        {
+          "name": "matches",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#RouterNode\">RouterNode</a>::matches(self : <a href=\"yamajik/wasi/http#RouterNode\">RouterNode</a>, s : String) -> Bool",
+          "loc": { "line": 29, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#RouterNode\">RouterNode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#RouterNode\">RouterNode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 10 }
+            }
+          ],
+          "loc": { "line": 6, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "RouterTree",
+      "docstring": "",
+      "signature": "type RouterTree",
+      "loc": { "line": 38, "column": 8 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Scheme",
+      "docstring": "",
+      "signature": "type Scheme",
+      "loc": { "line": 8, "column": 6 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Scheme\">Scheme</a>::to_string(self : <a href=\"yamajik/wasi/http#Scheme\">Scheme</a>) -> String",
+          "loc": { "line": 15, "column": 16 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#Scheme\">Scheme</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#Scheme\">Scheme</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 12, "column": 10 }
+            }
+          ],
+          "loc": { "line": 12, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "Server",
+      "docstring": "",
+      "signature": "type Server",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "handle",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Server\">Server</a>::handle(self : <a href=\"yamajik/wasi/http#Server\">Server</a>, req : <a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"yamajik/wasi/http#HTTPError\">HTTPError</a>",
+          "loc": { "line": 51, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Server\">Server</a>::new(router~ : <a href=\"yamajik/wasi/http#Router\">Router</a> = .., middlewares~ : <a href=\"yamajik/wasi/http#Middlewares\">Middlewares</a> = .., logger~ : <a href=\"yamajik/wasi/log#Logger\">@yamajik/wasi/log.Logger</a> = ..) -> <a href=\"yamajik/wasi/http#Server\">Server</a>",
+          "loc": { "line": 9, "column": 16 }
+        },
+        {
+          "name": "on_handle",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Server\">Server</a>::on_handle(self : <a href=\"yamajik/wasi/http#Server\">Server</a>, path~ : String, method~ : <a href=\"yamajik/wasi/http#Method\">Method</a>, handler~ : (<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> Unit",
+          "loc": { "line": 18, "column": 16 }
+        },
+        {
+          "name": "router",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Server\">Server</a>::router(self : <a href=\"yamajik/wasi/http#Server\">Server</a>, prefix : String) -> <a href=\"yamajik/wasi/http#Router\">Router</a>",
+          "loc": { "line": 28, "column": 16 }
+        },
+        {
+          "name": "serve",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#Server\">Server</a>::serve(self : <a href=\"yamajik/wasi/http#Server\">Server</a>, p0 : Int, p1 : Int) -> Unit",
+          "loc": { "line": 33, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "StatusCode",
+      "docstring": "",
+      "signature": "pub enum StatusCode {\n  Ok\n  Created\n  Accepted\n  NoContent\n  MultipleChoices\n  MovedPermanently\n  Found\n  SeeOther\n  NotModified\n  UseProxy\n  TemporaryRedirect\n  PermanentRedirect\n  BadRequest\n  Unauthorized\n  Forbidden\n  NotFound\n  InternalServerError\n  NotImplemented\n  BadGateway\n  ServiceUnavailable\n  Other(UInt)\n}",
+      "loc": { "line": 2, "column": 20 },
+      "methods": [
+        {
+          "name": "is_error",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>::is_error(self : <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>) -> Bool",
+          "loc": { "line": 86, "column": 20 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>::to_string(self : <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>) -> String",
+          "loc": { "line": 27, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#StatusCode\">StatusCode</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 24, "column": 10 }
+            }
+          ],
+          "loc": { "line": 24, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "URL",
+      "docstring": "",
+      "signature": "pub struct URL {\n  scheme : <a href=\"yamajik/wasi/http#Scheme\">Scheme</a>\n  authority : <a href=\"yamajik/wasi/http#Authority\">Authority</a>\n  path : <a href=\"yamajik/wasi/http#Path\">Path</a>\n  query : <a href=\"yamajik/wasi/http#Query\">Query</a>\n}",
+      "loc": { "line": 108, "column": 22 },
+      "methods": [
+        {
+          "name": "parse",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#URL\">URL</a>::parse(url : String) -> <a href=\"yamajik/wasi/http#URL\">URL</a>!<a href=\"yamajik/wasi/http#URLParseError\">URLParseError</a>",
+          "loc": { "line": 116, "column": 13 }
+        },
+        {
+          "name": "parse_path_with_query",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#URL\">URL</a>::parse_path_with_query(scheme : <a href=\"yamajik/wasi/http#Scheme\">Scheme</a>, authority : String, path_with_query : String) -> <a href=\"yamajik/wasi/http#URL\">URL</a>",
+          "loc": { "line": 121, "column": 13 }
+        },
+        {
+          "name": "path_with_query",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#URL\">URL</a>::path_with_query(self : <a href=\"yamajik/wasi/http#URL\">URL</a>) -> String",
+          "loc": { "line": 136, "column": 13 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"yamajik/wasi/http#URL\">URL</a>::to_string(self : <a href=\"yamajik/wasi/http#URL\">URL</a>) -> String",
+          "loc": { "line": 131, "column": 13 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#URL\">URL</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#URL\">URL</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 113, "column": 10 }
+            }
+          ],
+          "loc": { "line": 113, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "URLParseError",
+      "docstring": "",
+      "signature": "type URLParseError",
+      "loc": { "line": 2, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yamajik/wasi/http#URLParseError\">URLParseError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yamajik/wasi/http#URLParseError\">URLParseError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 5, "column": 10 }
+            }
+          ],
+          "loc": { "line": 5, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "URLParser",
+      "docstring": "",
+      "signature": "type URLParser",
+      "loc": { "line": 141, "column": 8 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "Handler",
+      "docstring": "",
+      "signature": "type Handler = (<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 2, "column": 1 }
+    },
+    {
+      "name": "Middleware",
+      "docstring": "",
+      "signature": "type Middleware = ((<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>) -> ((<a href=\"yamajik/wasi/http#Request\">Request</a>) -> <a href=\"yamajik/wasi/http#Response\">Response</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>)",
+      "loc": { "line": 2, "column": 1 }
+    }
+  ],
+  "values": [],
+  "misc": []
+}

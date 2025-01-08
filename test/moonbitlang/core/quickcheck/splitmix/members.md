@@ -12,13 +12,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a> with default() -> <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
+  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::fn default() -> <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a> with output(<a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::fn output(<a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clone
@@ -27,11 +35,6 @@
   ```
   > 
   >  Clone a RandomState.
-- #### default
-  ```moonbit
-  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::default() -> <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
-  ```
-  > automatically derived
 - #### new
   ```moonbit
   :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,32:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::new(seed~ : UInt64 = ..) -> <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
@@ -52,7 +55,7 @@
   >  Get the next random number as a double in \[0, 1\]
 - #### next\_float
   ```moonbit
-  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,94:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::next_float(self : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>) -> float
+  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,94:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::next_float(self : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>) -> Float
   ```
   > 
   >  Get the next random number as a float in \[0, 1\]
@@ -92,19 +95,9 @@
   ```
   > 
   >  Get the next random number as a 64-bit unsigned integer.
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,19:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::output(<a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### split
   ```moonbit
   :::source,moonbitlang/core/quickcheck/splitmix/random.mbt,108:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::split(self : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>) -> <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>
   ```
   > 
   >  Generates an independent random number generator.
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/quickcheck/splitmix/traits.mbt,85:::fn <a href="moonbitlang/core/quickcheck/splitmix#RandomState">RandomState</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

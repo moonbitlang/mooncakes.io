@@ -1,0 +1,13 @@
+{
+  "name": "gmlewis/base64",
+  "version": "0.13.0",
+  "deps": {},
+  "readme": "README.md",
+  "repository": "https://github.com/gmlewis/moonbit-base64",
+  "license": "Apache-2.0",
+  "keywords": [
+    "base64",
+    "moonbit"
+  ],
+  "description": "MoonBit base64: provide simple base64 operations."
+}

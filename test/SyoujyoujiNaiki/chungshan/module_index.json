@@ -1,0 +1,49 @@
+{
+  "name": "SyoujyoujiNaiki",
+  "package": null,
+  "childs": [
+    {
+      "name": "chungshan",
+      "package": {
+        "path": "SyoujyoujiNaiki/chungshan",
+        "readme": false,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "SyoujyoujiNaiki/chungshan/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "BytesLenErr",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "byte_array_to_double", "byte_array_to_double_raw",
+              "byte_array_to_float", "byte_array_to_float_raw",
+              "byte_array_to_int", "byte_array_to_int64",
+              "byte_array_to_int64_raw", "byte_array_to_int_raw",
+              "byte_array_to_uint", "byte_array_to_uint64",
+              "byte_array_to_uint64_raw", "byte_array_to_uint_raw",
+              "double_to_byte_array", "float_to_byte_array",
+              "int64_to_byte_array", "int_to_byte_array",
+              "uint64_to_byte_array", "uint_to_byte_array"
+            ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

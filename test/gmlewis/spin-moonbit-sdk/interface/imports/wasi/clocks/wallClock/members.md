@@ -35,30 +35,21 @@ It is intended for reporting the current date and time for humans.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock/top.mbt,7:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/wallClock#Datetime">Datetime</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## now
 

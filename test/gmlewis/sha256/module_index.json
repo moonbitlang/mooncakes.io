@@ -1,0 +1,26 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "sha256",
+      "package": {
+        "path": "gmlewis/sha256",
+        "readme": true,
+        "traits": [ { "name": "@gmlewis/sha256.HashFunc", "impls": [] } ],
+        "types": [
+          {
+            "name": "Digest",
+            "impls": [],
+            "methods": [ "check_sum", "name", "new", "reset", "write" ]
+          },
+          { "name": "HMAC", "impls": [], "methods": [] }
+        ],
+        "typealias": [],
+        "values": [ "gen_hmac" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

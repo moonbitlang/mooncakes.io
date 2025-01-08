@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Any](#Any)||
+|[@yamajik/wasi-bindings/ffi.Any](#@yamajik/wasi-bindings/ffi.Any)||
 
 |Type|description|
 |---|---|
@@ -47,10 +47,10 @@
 |[uint64\_array2ptr](#uint64_array2ptr)||
 |[uint\_array2ptr](#uint_array2ptr)||
 
-## Any
+## @yamajik/wasi-bindings/ffi.Any
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,197:::pub(open) trait Any {
+:::source,yamajik/wasi-bindings/ffi/top.mbt,197:::pub(open) trait @yamajik/wasi-bindings/ffi.Any {
 }
 ```
 
@@ -104,21 +104,21 @@
 ## f32\_to\_i32
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,68:::fn f32_to_i32(value : float) -> Int
+:::source,yamajik/wasi-bindings/ffi/top.mbt,68:::fn f32_to_i32(value : Float) -> Int
 ```
 
 
 ## f32\_to\_i64
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,72:::fn f32_to_i64(value : float) -> Int64
+:::source,yamajik/wasi-bindings/ffi/top.mbt,72:::fn f32_to_i64(value : Float) -> Int64
 ```
 
 
 ## float\_array2ptr
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,140:::fn float_array2ptr(array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[float]) -> Int
+:::source,yamajik/wasi-bindings/ffi/top.mbt,140:::fn float_array2ptr(array : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Float]) -> Int
 ```
 
 
@@ -188,7 +188,7 @@
 ## loadf32
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,56:::fn loadf32(offset : Int) -> float
+:::source,yamajik/wasi-bindings/ffi/top.mbt,56:::fn loadf32(offset : Int) -> Float
 ```
 
 
@@ -223,7 +223,7 @@
 ## ptr2float\_array
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,156:::fn ptr2float_array(ptr : Int) -> <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[float]
+:::source,yamajik/wasi-bindings/ffi/top.mbt,156:::fn ptr2float_array(ptr : Int) -> <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[Float]
 ```
 
 
@@ -293,7 +293,7 @@
 ## storef32
 
 ```moonbit
-:::source,yamajik/wasi-bindings/ffi/top.mbt,52:::fn storef32(offset : Int, value : float) -> Unit
+:::source,yamajik/wasi-bindings/ffi/top.mbt,52:::fn storef32(offset : Int, value : Float) -> Unit
 ```
 
 

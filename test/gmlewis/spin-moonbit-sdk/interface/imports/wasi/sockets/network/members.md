@@ -51,13 +51,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -65,24 +73,9 @@ combined with a couple of errors that are always possible:
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,80:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>::from(self : Int) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,53:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>::ordinal(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,50:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#ErrorCode">ErrorCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -98,30 +91,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,134:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddress">IpAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## IpAddressFamily
 
@@ -135,13 +119,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -149,24 +141,9 @@ combined with a couple of errors that are always possible:
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,122:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::from(self : Int) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,114:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::ordinal(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,111:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpAddressFamily">IpAddressFamily</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -182,30 +159,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,154:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#IpSocketAddress">IpSocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Ipv4SocketAddress
 
@@ -219,30 +187,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,140:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv4SocketAddress">Ipv4SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Ipv6SocketAddress
 
@@ -258,30 +217,21 @@ combined with a couple of errors that are always possible:
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,148:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Ipv6SocketAddress">Ipv6SocketAddress</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Network
 
@@ -294,32 +244,25 @@ There is no need for this to map 1:1 to a physical network interface.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,12:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>) -> Unit
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/top.mbt,6:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/sockets/network#Network">Network</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 

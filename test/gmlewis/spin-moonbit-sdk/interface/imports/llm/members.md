@@ -27,30 +27,21 @@ A WASI interface dedicated to performing inferencing for Large Language Models.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,41:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsResult">EmbeddingsResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## EmbeddingsUsage
 
@@ -63,30 +54,21 @@ A WASI interface dedicated to performing inferencing for Large Language Models.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,35:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#EmbeddingsUsage">EmbeddingsUsage</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Error\_
 
@@ -101,30 +83,21 @@ A WASI interface dedicated to performing inferencing for Large Language Models.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,18:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## InferencingParams
 
@@ -142,30 +115,21 @@ A WASI interface dedicated to performing inferencing for Large Language Models.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,11:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingParams">InferencingParams</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## InferencingResult
 
@@ -179,30 +143,21 @@ A WASI interface dedicated to performing inferencing for Large Language Models.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,30:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingResult">InferencingResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## InferencingUsage
 
@@ -216,30 +171,21 @@ A WASI interface dedicated to performing inferencing for Large Language Models.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/llm/top.mbt,24:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/llm#InferencingUsage">InferencingUsage</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## generate\_embeddings
 

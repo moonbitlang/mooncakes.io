@@ -27,16 +27,16 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[HashFunc](#HashFunc)| \`HashFunc\` represents a hash algorithm like \`@crc32\`, \`@md5\`, or \`@sha256\`.|
+|[@gmlewis/crc32.HashFunc](#@gmlewis/crc32.HashFunc)| \`HashFunc\` represents a hash algorithm like \`@crc32\`, \`@md5\`, or \`@sha256\`.|
 
 |Type|description|
 |---|---|
 |[Digest](#Digest)| \`@crc32.Digest\` implements the 32-bit cyclic redundancy check, or CRC-32,|
 
-## HashFunc
+## @gmlewis/crc32.HashFunc
 
 ```moonbit
-:::source,gmlewis/crc32/hash-func.mbt,2:::pub(open) trait HashFunc {
+:::source,gmlewis/crc32/hash-func.mbt,2:::pub(open) trait @gmlewis/crc32.HashFunc {
   name(Self) -> String
   write(Self, Byte) -> Unit
   check_sum(Self) -> String

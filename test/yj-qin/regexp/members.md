@@ -58,11 +58,6 @@ println(match_result.named_captures()) // {"addr": "12345", "host": "test.com"}
 |[MatchResult](#MatchResult)||
 |[ParseError](#ParseError)||
 |[RegExp](#RegExp)||
-|[Ast](#Ast)||
-|[CharClass](#CharClass)||
-|[OpCode](#OpCode)||
-|[Program](#Program)||
-|[RunningStatus](#RunningStatus)||
 
 |Value|description|
 |---|---|
@@ -77,9 +72,13 @@ println(match_result.named_captures()) // {"addr": "12345", "host": "test.com"}
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yj-qin/regexp/result.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yj-qin/regexp#MatchResult">MatchResult</a> with output(<a href="yj-qin/regexp#MatchResult">MatchResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yj-qin/regexp/result.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yj-qin/regexp#MatchResult">MatchResult</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yj-qin/regexp/result.mbt,6:::fn output(<a href="yj-qin/regexp#MatchResult">MatchResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### captures
@@ -92,19 +91,9 @@ println(match_result.named_captures()) // {"addr": "12345", "host": "test.com"}
   :::source,yj-qin/regexp/result.mbt,19:::fn <a href="yj-qin/regexp#MatchResult">MatchResult</a>::named_captures(self : <a href="yj-qin/regexp#MatchResult">MatchResult</a>) -> <a href="moonbitlang/core/builtin#Map">Map</a>[String, String]
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,yj-qin/regexp/result.mbt,6:::fn <a href="yj-qin/regexp#MatchResult">MatchResult</a>::output(<a href="yj-qin/regexp#MatchResult">MatchResult</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### success
   ```moonbit
   :::source,yj-qin/regexp/result.mbt,9:::fn <a href="yj-qin/regexp#MatchResult">MatchResult</a>::success(self : <a href="yj-qin/regexp#MatchResult">MatchResult</a>) -> Bool
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#MatchResult">MatchResult</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -132,30 +121,21 @@ println(match_result.named_captures()) // {"addr": "12345", "host": "test.com"}
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yj-qin/regexp/parser.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yj-qin/regexp#ParseError">ParseError</a> with op_equal(<a href="yj-qin/regexp#ParseError">ParseError</a>, <a href="yj-qin/regexp#ParseError">ParseError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yj-qin/regexp/parser.mbt,20:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yj-qin/regexp#ParseError">ParseError</a> with output(<a href="yj-qin/regexp#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yj-qin/regexp/parser.mbt,20:::fn <a href="yj-qin/regexp#ParseError">ParseError</a>::op_equal(<a href="yj-qin/regexp#ParseError">ParseError</a>, <a href="yj-qin/regexp#ParseError">ParseError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yj-qin/regexp/parser.mbt,20:::fn <a href="yj-qin/regexp#ParseError">ParseError</a>::output(<a href="yj-qin/regexp#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#ParseError">ParseError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yj-qin/regexp/parser.mbt,20:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yj-qin/regexp#ParseError">ParseError</a>
   ```
   > 
+  * ```moonbit
+    :::source,yj-qin/regexp/parser.mbt,20:::fn op_equal(<a href="yj-qin/regexp#ParseError">ParseError</a>, <a href="yj-qin/regexp#ParseError">ParseError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yj-qin/regexp/parser.mbt,20:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yj-qin/regexp#ParseError">ParseError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yj-qin/regexp/parser.mbt,20:::fn output(<a href="yj-qin/regexp#ParseError">ParseError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## RegExp
 
@@ -182,53 +162,3 @@ println(match_result.named_captures()) // {"addr": "12345", "host": "test.com"}
 :::source,yj-qin/regexp/regexp.mbt,15:::fn compile(pattern : String) -> <a href="yj-qin/regexp#RegExp">RegExp</a>!<a href="moonbitlang/core/error#Error">Error</a>
 ```
 
-
-## Ast
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#Ast">Ast</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## CharClass
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#CharClass">CharClass</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## OpCode
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#OpCode">OpCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## Program
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#Program">Program</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## RunningStatus
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,yj-qin/regexp/traits.mbt,85:::fn <a href="yj-qin/regexp#RunningStatus">RunningStatus</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

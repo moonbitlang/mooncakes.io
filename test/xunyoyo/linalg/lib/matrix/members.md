@@ -748,11 +748,6 @@
   >    inspect!(vtv.approx_eq(i), content="true")
   >  }
   >  ```
-- #### to\_string
-  ```moonbit
-  :::source,xunyoyo/linalg/lib/matrix/traits.mbt,85:::fn <a href="xunyoyo/linalg/lib/matrix#Matrix">Matrix</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### tr
   ```moonbit
   :::source,xunyoyo/linalg/lib/matrix/matrix.mbt,201:::fn <a href="xunyoyo/linalg/lib/matrix#Matrix">Matrix</a>::tr(self : <a href="xunyoyo/linalg/lib/matrix#Matrix">Matrix</a>) -> Double

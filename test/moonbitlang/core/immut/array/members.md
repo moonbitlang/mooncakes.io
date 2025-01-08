@@ -64,7 +64,6 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
 |Type|description|
 |---|---|
 |[T](#T)||
-|[Tree](#Tree)||
 
 ## T
 
@@ -75,28 +74,39 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,373:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/array#T">T</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/array#T">T</a>[X]
+  :::source,moonbitlang/core/immut/array/array.mbt,212:::impl[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/array#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/array/array.mbt,212:::fn op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], other : <a href="moonbitlang/core/immut/array#T">T</a>[A]) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,381:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/array#T">T</a> with hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/immut/array/array.mbt,383:::impl[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>] <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/immut/array#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/array/array.mbt,383:::fn hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,212:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/core/immut/array#T">T</a> with op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], other : <a href="moonbitlang/core/immut/array#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/array/array.mbt,22:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/array#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/array/array.mbt,22:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/immut/array#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/immut/array/array.mbt,375:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/immut/array#T">T</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/immut/array/array.mbt,375:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/array#T">T</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,373:::fn <a href="moonbitlang/core/immut/array#T">T</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/immut/array#T">T</a>[X]
-  ```
-  > 
 - #### copy
   ```moonbit
   :::source,moonbitlang/core/immut/array/array.mbt,63:::fn <a href="moonbitlang/core/immut/array#T">T</a>::copy[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A]) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
@@ -144,7 +154,7 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
   >  ```
 - #### fold\_left
   ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,265:::fn <a href="moonbitlang/core/immut/array#T">T</a>::fold_left[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], f : (A, A) -> A, init~ : A) -> A
+  :::source,moonbitlang/core/immut/array/array.mbt,266:::fn <a href="moonbitlang/core/immut/array#T">T</a>::fold_left[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], f : (A, A) -> A, init~ : A) -> A
   ```
   > 
   >  Fold the array from left to right.
@@ -155,9 +165,10 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
   >  assert_eq!(v.fold(fn(a, b) { a + b }, init=0), 15)
   >  ```
   >  @alert deprecated "Use `fold` instead"
+  > @coverage.skip
 - #### fold\_right
   ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,278:::fn <a href="moonbitlang/core/immut/array#T">T</a>::fold_right[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], f : (A, A) -> A, init~ : A) -> A
+  :::source,moonbitlang/core/immut/array/array.mbt,280:::fn <a href="moonbitlang/core/immut/array#T">T</a>::fold_right[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], f : (A, A) -> A, init~ : A) -> A
   ```
   > 
   >  Fold the array from right to left.
@@ -168,6 +179,7 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
   >  assert_eq!(v.rev_fold(fn(a, b) { a + b }, init=0), 15)
   >  ```
   >  @alert deprecated "Use `rev_fold` instead"
+  > @coverage.skip
 - #### from\_array
   ```moonbit
   :::source,moonbitlang/core/immut/array/array.mbt,153:::fn <a href="moonbitlang/core/immut/array#T">T</a>::from_array[A](arr : <a href="moonbitlang/core/array#Array">Array</a>[A]) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
@@ -183,16 +195,6 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
 - #### from\_iter
   ```moonbit
   :::source,moonbitlang/core/immut/array/array.mbt,53:::fn <a href="moonbitlang/core/immut/array#T">T</a>::from_iter[A](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[A]) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
-  ```
-  > 
-- #### hash
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/traits.mbt,40:::fn <a href="moonbitlang/core/immut/array#T">T</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,381:::fn <a href="moonbitlang/core/immut/array#T">T</a>::hash_combine[A : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
   ```
   > 
 - #### is\_empty
@@ -212,19 +214,19 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
   > 
 - #### make
   ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,357:::fn <a href="moonbitlang/core/immut/array#T">T</a>::make[A](len : Int, value : A) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
+  :::source,moonbitlang/core/immut/array/array.mbt,359:::fn <a href="moonbitlang/core/immut/array#T">T</a>::make[A](len : Int, value : A) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
   ```
   > 
   >  Create a persistent array with a given length and value.
 - #### makei
   ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,363:::fn <a href="moonbitlang/core/immut/array#T">T</a>::makei[A](len : Int, f : (Int) -> A) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
+  :::source,moonbitlang/core/immut/array/array.mbt,365:::fn <a href="moonbitlang/core/immut/array#T">T</a>::makei[A](len : Int, f : (Int) -> A) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
   ```
   > 
   >  Create a persistent array with a given length and a function to generate values.
 - #### map
   ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,290:::fn <a href="moonbitlang/core/immut/array#T">T</a>::map[A, B](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], f : (A) -> B) -> <a href="moonbitlang/core/immut/array#T">T</a>[B]
+  :::source,moonbitlang/core/immut/array/array.mbt,292:::fn <a href="moonbitlang/core/immut/array#T">T</a>::map[A, B](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], f : (A) -> B) -> <a href="moonbitlang/core/immut/array#T">T</a>[B]
   ```
   > 
   >  Map a function over the array.
@@ -242,12 +244,7 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
   >  Return a new empty array
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,368:::fn <a href="moonbitlang/core/immut/array#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,212:::fn <a href="moonbitlang/core/immut/array#T">T</a>::op_equal[A : <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], other : <a href="moonbitlang/core/immut/array#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/immut/array/array.mbt,370:::fn <a href="moonbitlang/core/immut/array#T">T</a>::of[A](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
   ```
   > 
 - #### op\_get
@@ -262,11 +259,6 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
   >  let v = @array.of([1, 2, 3, 4, 5])
   >  assert_eq!(v[0], 1)
   >  ```
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/array.mbt,22:::fn <a href="moonbitlang/core/immut/array#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### push
   ```moonbit
   :::source,moonbitlang/core/immut/array/array.mbt,129:::fn <a href="moonbitlang/core/immut/array#T">T</a>::push[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A], value : A) -> <a href="moonbitlang/core/immut/array#T">T</a>[A]
@@ -306,20 +298,5 @@ println(arr.eachi(fn(i, v) { println("index: \{i}, element: \{v}") }))
 - #### to\_array
   ```moonbit
   :::source,moonbitlang/core/immut/array/array.mbt,32:::fn <a href="moonbitlang/core/immut/array#T">T</a>::to_array[A](self : <a href="moonbitlang/core/immut/array#T">T</a>[A]) -> <a href="moonbitlang/core/array#Array">Array</a>[A]
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/traits.mbt,85:::fn <a href="moonbitlang/core/immut/array#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## Tree
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/immut/array/traits.mbt,85:::fn <a href="moonbitlang/core/immut/array#Tree">Tree</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 

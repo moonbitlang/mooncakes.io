@@ -62,13 +62,21 @@ For more information about WASI path resolution and sandboxing, see
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -76,24 +84,9 @@ For more information about WASI path resolution and sandboxing, see
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,357:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>::from(self : Int) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,345:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>::ordinal(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,342:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Advice">Advice</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -108,13 +101,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### advise
@@ -218,11 +219,6 @@ calls may be made.
   > to by a directory descriptor and a relative path.
   > 
   >  This performs the same hash computation as `metadata-hash`.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>) -> Bool
-  ```
-  > automatically derived
 - #### open\_at
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,1015:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>::open_at(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, path_flags : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, path : String, open_flags : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, flags : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
@@ -245,11 +241,6 @@ calls may be made.
   > `error-code::read-only`.
   > 
   >  Note: This is similar to `openat` in POSIX.
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,379:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### read
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,655:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>::read(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, length : UInt64, offset : UInt64) -> <a href="moonbitlang/core/result#Result">Result</a>[(Bytes, Bool), <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
@@ -397,11 +388,6 @@ calls may be made.
   > opened for writing.
   > 
   >  Note: This is similar to `fdatasync` in POSIX.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### unlink\_file\_at
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,1163:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>::unlink_file_at(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#Descriptor">Descriptor</a>, path : String) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
@@ -445,13 +431,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### default
@@ -464,24 +458,9 @@ calls may be made.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,95:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::is_set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, other : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlagsFlag">DescriptorFlagsFlag</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,49:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,79:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>, other : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlagsFlag">DescriptorFlagsFlag</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorFlags">DescriptorFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -522,30 +501,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,188:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorStat">DescriptorStat</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DescriptorType
 
@@ -567,13 +537,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -581,24 +559,9 @@ calls may be made.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,32:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>::from(self : Int) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,18:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>::ordinal(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,15:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DescriptorType">DescriptorType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -614,30 +577,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,201:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DirectoryEntryStream
 
@@ -648,13 +602,21 @@ calls may be made.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -662,26 +624,11 @@ calls may be made.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,396:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,390:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### read\_directory\_entry
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,1267:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::read_directory_entry(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntry">DirectoryEntry</a>?, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>]
   ```
   >  Read a single directory entry from a `directory-entry-stream`.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#DirectoryEntryStream">DirectoryEntryStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## ErrorCode
 
@@ -733,13 +680,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -747,24 +702,9 @@ merely for alignment with POSIX.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,291:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>::from(self : Int) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,248:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>::ordinal(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,245:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#ErrorCode">ErrorCode</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -781,30 +721,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,374:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#MetadataHashValue">MetadataHashValue</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## NewTimestamp
 
@@ -819,30 +750,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,195:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#NewTimestamp">NewTimestamp</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## OpenFlags
 
@@ -853,13 +775,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### default
@@ -872,24 +802,9 @@ merely for alignment with POSIX.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,174:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>::is_set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, other : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlagsFlag">OpenFlagsFlag</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,138:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,164:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>::set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>, other : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlagsFlag">OpenFlagsFlag</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#OpenFlags">OpenFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset
@@ -919,13 +834,21 @@ merely for alignment with POSIX.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### default
@@ -938,24 +861,9 @@ merely for alignment with POSIX.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,133:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>::is_set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, other : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlagsFlag">PathFlagsFlag</a>) -> Bool
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,103:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/top.mbt,123:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>::set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>, other : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlagsFlag">PathFlagsFlag</a>) -> <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/filesystem/types#PathFlags">PathFlags</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unset

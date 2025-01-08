@@ -18,30 +18,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,19:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Store
 
@@ -52,13 +43,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### delete
@@ -90,11 +89,6 @@
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,201:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>::get_keys(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="moonbitlang/core/array#Array">Array</a>[String], <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>]
   ```
   >  Return a list of all the keys
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>) -> Bool
-  ```
-  > automatically derived
 - #### open
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,26:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>::open(label : String) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>]
@@ -104,18 +98,8 @@
   >  `label` must refer to a store allowed in the spin.toml manifest.
   > 
   >  `error::no-such-store` will be raised if the `label` is not recognized.
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,3:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/top.mbt,99:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>::set(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>, key : String, value : Bytes) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Error_">Error_</a>]
   ```
   >  Set the `value` associated with the specified `key` overwriting any existing value.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/keyValue/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/keyValue#Store">Store</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

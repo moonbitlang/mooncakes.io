@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/gen",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "cabi_realloc",
+      "docstring": "",
+      "signature": "fn cabi_realloc(src_offset : Int, src_size : Int, _dst_alignment : Int, dst_size : Int) -> Int",
+      "loc": { "line": 2, "column": 8 }
+    }
+  ],
+  "misc": []
+}

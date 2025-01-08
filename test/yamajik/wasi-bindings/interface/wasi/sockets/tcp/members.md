@@ -17,13 +17,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from
@@ -31,24 +39,9 @@
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,20:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>::from(self : Int) -> <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>) -> Bool
-  ```
-  > automatically derived
 - #### ordinal
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,11:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>::ordinal(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>) -> Int
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,8:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#ShutdownType">ShutdownType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -81,13 +74,21 @@ the term "bound" without backticks it actually means: in the `bound` state *or h
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### accept
@@ -239,16 +240,6 @@ the term "bound" without backticks it actually means: in the `bound` state *or h
   >  - <https://man7.org/linux/man-pages/man2/getsockname.2.html>
   >  - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getsockname>
   >  - <https://man.freebsd.org/cgi/man.cgi?getsockname>
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,50:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### receive\_buffer\_size
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/top.mbt,864:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>::receive_buffer_size(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt64, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">@yamajik/wasi-bindings/interface/wasi/sockets/network.ErrorCode</a>]
@@ -495,8 +486,3 @@ the term "bound" without backticks it actually means: in the `bound` state *or h
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/tcp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/tcp#TcpSocket">TcpSocket</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

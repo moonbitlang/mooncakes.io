@@ -103,9 +103,13 @@ st.to_array() // [1, 2, 3]
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/stack/types.mbt,19:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/x/stack#Stack">Stack</a> with default[T : <a href="moonbitlang/core/builtin#Default">Default</a>]() -> <a href="moonbitlang/x/stack#Stack">Stack</a>[T]
+  :::source,moonbitlang/x/stack/types.mbt,19:::impl[T : <a href="moonbitlang/core/builtin#Default">Default</a>] <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="moonbitlang/x/stack#Stack">Stack</a>[T]
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/stack/types.mbt,19:::fn default[T : <a href="moonbitlang/core/builtin#Default">Default</a>]() -> <a href="moonbitlang/x/stack#Stack">Stack</a>[T]
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### clear
@@ -121,11 +125,6 @@ st.to_array() // [1, 2, 3]
   >  s.clear()
   >  println(s) // Stack::[]
   >  ```
-- #### default
-  ```moonbit
-  :::source,moonbitlang/x/stack/types.mbt,19:::fn <a href="moonbitlang/x/stack#Stack">Stack</a>::default[T : <a href="moonbitlang/core/builtin#Default">Default</a>]() -> <a href="moonbitlang/x/stack#Stack">Stack</a>[T]
-  ```
-  > automatically derived
 - #### drop
   ```moonbit
   :::source,moonbitlang/x/stack/stack.mbt,324:::fn <a href="moonbitlang/x/stack#Stack">Stack</a>::drop[T](self : <a href="moonbitlang/x/stack#Stack">Stack</a>[T]) -> Unit

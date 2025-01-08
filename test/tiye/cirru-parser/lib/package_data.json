@@ -1,0 +1,230 @@
+{
+  "readme": "",
+  "name": "tiye/cirru-parser/lib",
+  "traits": [],
+  "types": [
+    {
+      "name": "Cirru",
+      "docstring": " Cirru uses nested Vecters and Strings as data structure",
+      "signature": "pub(all) enum Cirru {\n  Leaf(String)\n  List(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>])\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [
+        {
+          "name": "compare",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::compare(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>, other : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Int",
+          "loc": { "line": 101, "column": 8 }
+        },
+        {
+          "name": "is_comment",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::is_comment(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Bool",
+          "loc": { "line": 154, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::is_empty(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Bool",
+          "loc": { "line": 130, "column": 8 }
+        },
+        {
+          "name": "is_nested",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::is_nested(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Bool",
+          "loc": { "line": 138, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::length(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Int",
+          "loc": { "line": 122, "column": 8 }
+        },
+        {
+          "name": "output",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::output(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+          "loc": { "line": 73, "column": 8 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::to_json(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 34, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>::to_string(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> String",
+          "loc": { "line": 78, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>, <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Bool",
+              "loc": { "line": 7, "column": 10 }
+            }
+          ],
+          "loc": { "line": 7, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>) -> Int",
+              "loc": { "line": 10, "column": 30 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 23, "column": 30 }
+            }
+          ],
+          "loc": { "line": 10, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "",
+              "signature": "fn from_json(json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 48, "column": 40 }
+            }
+          ],
+          "loc": { "line": 48, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "CirruLexItem",
+      "docstring": "",
+      "signature": "type CirruLexItem",
+      "loc": { "line": 171, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "CirruLexState",
+      "docstring": "",
+      "signature": "type CirruLexState",
+      "loc": { "line": 162, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"tiye/cirru-parser/lib#CirruLexState\">CirruLexState</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"tiye/cirru-parser/lib#CirruLexState\">CirruLexState</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 168, "column": 10 }
+            }
+          ],
+          "loc": { "line": 168, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "CirruParseError",
+      "docstring": "",
+      "signature": "type CirruParseError",
+      "loc": { "line": 70, "column": 7 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": " display Cirru parse error",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#CirruParseError\">CirruParseError</a>::to_string(self : <a href=\"tiye/cirru-parser/lib#CirruParseError\">CirruParseError</a>) -> String",
+          "loc": { "line": 73, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "CirruWriterOptions",
+      "docstring": " options for writer, `use_inline` for more compact format.",
+      "signature": "pub(all) struct CirruWriterOptions {\n  use_inline : Bool\n}",
+      "loc": { "line": 146, "column": 17 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "FormatCirruError",
+      "docstring": "",
+      "signature": "pub(all) type! FormatCirruError String\n",
+      "loc": { "line": 168, "column": 16 },
+      "methods": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/cirru-parser/lib#FormatCirruError\">FormatCirruError</a>::to_string(self : <a href=\"tiye/cirru-parser/lib#FormatCirruError\">FormatCirruError</a>) -> String",
+          "loc": { "line": 171, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "FormatError",
+      "docstring": "",
+      "signature": "type FormatError",
+      "loc": { "line": 2, "column": 7 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "WriterNode",
+      "docstring": "",
+      "signature": "type WriterNode",
+      "loc": { "line": 2, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/cirru-parser/lib#WriterNode\">WriterNode</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"tiye/cirru-parser/lib#WriterNode\">WriterNode</a>, <a href=\"tiye/cirru-parser/lib#WriterNode\">WriterNode</a>) -> Bool",
+              "loc": { "line": 8, "column": 10 }
+            }
+          ],
+          "loc": { "line": 8, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "format",
+      "docstring": " format Cirru code, use options to control `use_inline` option",
+      "signature": "fn format(xs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>], options : <a href=\"tiye/cirru-parser/lib#CirruWriterOptions\">CirruWriterOptions</a>) -> String!<a href=\"tiye/cirru-parser/lib#FormatCirruError\">FormatCirruError</a>",
+      "loc": { "line": 331, "column": 8 }
+    },
+    {
+      "name": "format_to_lisp",
+      "docstring": " format program to Cirru to Lisp-like code",
+      "signature": "fn format_to_lisp(xs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>]) -> String!<a href=\"tiye/cirru-parser/lib#FormatError\">FormatError</a>",
+      "loc": { "line": 5, "column": 8 }
+    },
+    {
+      "name": "parse",
+      "docstring": " main function to parse Cirru code into syntax tree",
+      "signature": "fn parse(code : String) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"tiye/cirru-parser/lib#Cirru\">Cirru</a>]!<a href=\"tiye/cirru-parser/lib#CirruParseError\">CirruParseError</a>",
+      "loc": { "line": 61, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "gmlewis/image",
+  "version": "0.14.0",
+  "deps": {
+    "gmlewis/flate": "0.33.0",
+    "gmlewis/hash": "0.17.0",
+    "gmlewis/io": "0.19.0",
+    "gmlewis/zlib": "0.18.0"
+  },
+  "readme": "README.md",
+  "repository": "https://github.com/gmlewis/moonbit-image",
+  "license": "Apache-2.0",
+  "keywords": [
+    "image",
+    "color",
+    "moonbit"
+  ],
+  "description": "MoonBit image: simple image representation."
+}

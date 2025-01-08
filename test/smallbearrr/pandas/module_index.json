@@ -1,0 +1,116 @@
+{
+  "name": "smallbearrr",
+  "package": null,
+  "childs": [
+    {
+      "name": "pandas",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": null,
+          "childs": [
+            {
+              "name": "pandas",
+              "package": {
+                "path": "smallbearrr/pandas/lib/pandas",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ColumnNotFoundError",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "DType",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "DataFrame",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": [
+                      "add_column", "add_row", "column", "data",
+                      "drop_column", "drop_row", "filter", "head", "hstack",
+                      "new", "rename", "select_columns", "select_rows",
+                      "shape", "sort", "vstack"
+                    ]
+                  },
+                  {
+                    "name": "DuplicateColumnError",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EmptyArrayError",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "InconsistentSeriesLength",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "IndexOutOfBounds",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "InvalidType",
+                    "impls": [ { "methods": [ "output" ] } ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Series",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": [
+                      "argsort", "data", "name", "new", "op_add", "op_div",
+                      "op_mul", "op_sub"
+                    ]
+                  },
+                  {
+                    "name": "SeriesData",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": [
+                      "argsort", "empty", "erase", "length", "op_add",
+                      "op_div", "op_mul", "op_sub", "sort"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "smallbearrr/pandas/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

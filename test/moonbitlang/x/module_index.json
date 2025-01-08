@@ -1,0 +1,391 @@
+{
+  "name": "moonbitlang",
+  "package": null,
+  "childs": [
+    {
+      "name": "x",
+      "package": null,
+      "childs": [
+        {
+          "name": "benchmark",
+          "package": {
+            "path": "moonbitlang/x/benchmark",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "Criterion",
+                "impls": [],
+                "methods": [ "add", "new", "run" ]
+              },
+              { "name": "Task", "impls": [], "methods": [ "new", "run" ] },
+              {
+                "name": "TaskResult",
+                "impls": [],
+                "methods": [ "output", "to_string" ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "crypto",
+          "package": {
+            "path": "moonbitlang/x/crypto",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "MD5Context",
+                "impls": [],
+                "methods": [ "finalize", "new", "update" ]
+              },
+              {
+                "name": "SM3Context",
+                "impls": [],
+                "methods": [
+                  "finalize", "new", "update", "update_from_iter"
+                ]
+              },
+              {
+                "name": "Sha256Context",
+                "impls": [],
+                "methods": [
+                  "finalize", "new", "update", "update_from_iter"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "bytes_to_hex_string", "chacha12", "chacha20", "chacha8",
+              "md5", "sha1", "sha224", "sha224_from_iter", "sha256",
+              "sha256_from_iter", "sm3", "sm3_from_iter",
+              "uints_to_hex_string"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "encoding",
+          "package": {
+            "path": "moonbitlang/x/encoding",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "DecodeError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              { "name": "Encoding", "impls": [], "methods": [] },
+              {
+                "name": "LossyChars",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "iter", "to_string" ]
+              },
+              {
+                "name": "StrictChars",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "iter", "to_string" ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "decode_lossy", "decode_strict", "encode", "to_utf16_bytes",
+              "to_utf16be_bytes", "to_utf16le_bytes", "to_utf8_bytes",
+              "write_utf16_char", "write_utf16be_char", "write_utf16le_char",
+              "write_utf8_char"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fs",
+          "package": {
+            "path": "moonbitlang/x/fs",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "IOError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "create_dir", "is_dir", "is_file", "path_exists", "read_dir",
+              "read_file_to_bytes", "read_file_to_string", "remove_dir",
+              "remove_file", "write_bytes_to_file", "write_string_to_file"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "json5",
+          "package": {
+            "path": "moonbitlang/x/json5",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "ParseError",
+                "impls": [],
+                "methods": [ "output", "to_string" ]
+              },
+              {
+                "name": "ParseErrorData",
+                "impls": [ { "methods": [ "op_equal" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Position",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [ "parse" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "num",
+          "package": {
+            "path": "moonbitlang/x/num",
+            "readme": false,
+            "traits": [ { "name": "@moonbitlang/x/num.Num", "impls": [] } ],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "stack",
+          "package": {
+            "path": "moonbitlang/x/stack",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "Stack",
+                "impls": [ { "methods": [ "default" ] } ],
+                "methods": [
+                  "clear", "drop", "drop_result", "each", "equal", "fold",
+                  "from_array", "from_list", "from_stack", "is_empty",
+                  "length", "new", "of", "op_equal", "output", "peek",
+                  "peek_exn", "pop", "push", "push_array", "push_list",
+                  "push_stack", "return_with_clear", "to_array", "to_list",
+                  "to_string", "unsafe_pop"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "sys",
+          "package": {
+            "path": "moonbitlang/x/sys",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "exit", "get_cli_args", "get_env_vars", "set_env_var"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "time",
+          "package": {
+            "path": "moonbitlang/x/time",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "Duration",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "add_duration", "add_hours", "add_minutes",
+                  "add_nanoseconds", "add_seconds", "from_string", "is_neg",
+                  "is_zero", "nanoseconds", "of", "op_add", "seconds",
+                  "to_nanoseconds", "to_string", "with_nanoseconds",
+                  "with_seconds", "zero"
+                ]
+              },
+              {
+                "name": "Period",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "add_days", "add_months", "add_period", "add_weeks",
+                  "add_years", "days", "from_string", "is_neg", "is_zero",
+                  "months", "multiply", "negated", "of", "op_add", "op_sub",
+                  "to_string", "to_total_months", "with_days", "with_months",
+                  "with_years", "years", "zero"
+                ]
+              },
+              {
+                "name": "PlainDate",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "add_days", "add_months", "add_period", "add_weeks",
+                  "add_years", "compare", "day", "days_in_month",
+                  "days_in_week", "days_in_year", "era", "era_year",
+                  "from_string", "from_unix_day", "from_year_ord",
+                  "in_leap_year", "month", "months_in_year", "of",
+                  "op_equal", "ordinal", "to_string", "to_unix_day", "until",
+                  "weekday", "with_day", "with_month", "with_ordinal",
+                  "with_year", "year"
+                ]
+              },
+              {
+                "name": "PlainDateTime",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "add_days", "add_duration", "add_hours", "add_minutes",
+                  "add_months", "add_nanoseconds", "add_period",
+                  "add_seconds", "add_weeks", "add_years", "day",
+                  "days_in_month", "days_in_week", "days_in_year", "era",
+                  "era_year", "from_string", "from_unix_second", "hour",
+                  "in_leap_year", "minute", "month", "months_in_year",
+                  "nanosecond", "of", "ordinal", "second", "to_plain_date",
+                  "to_plain_time", "to_string", "to_unix_second", "weekday",
+                  "with_day", "with_hour", "with_minute", "with_month",
+                  "with_nanosecond", "with_ordinal", "with_second",
+                  "with_year", "year"
+                ]
+              },
+              {
+                "name": "PlainTime",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "add_duration", "add_hours", "add_minutes",
+                  "add_nanoseconds", "add_seconds", "at_date",
+                  "from_nanosecond_of_day", "from_second_of_day",
+                  "from_string", "hour", "minute", "nanosecond",
+                  "nanosecond_of_day", "of", "second", "second_of_day",
+                  "to_string", "until", "with_hour", "with_minute",
+                  "with_nanosecond", "with_second"
+                ]
+              },
+              {
+                "name": "Weekday",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Zone",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "is_fixed", "to_string" ]
+              },
+              {
+                "name": "ZoneOffset",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "compare", "from_seconds", "id", "is_dst", "of",
+                  "op_equal", "seconds", "to_string"
+                ]
+              },
+              {
+                "name": "ZonedDateTime",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "add_days", "add_hours", "add_minutes", "add_months",
+                  "add_nanoseconds", "add_seconds", "add_weeks", "add_years",
+                  "day", "days_in_month", "days_in_week", "days_in_year",
+                  "era", "era_year", "from_plain_datetime",
+                  "from_unix_second", "hour", "in_leap_year", "minute",
+                  "month", "months_in_year", "nanosecond", "of", "offset",
+                  "ordinal", "second", "to_plain_date", "to_plain_date_time",
+                  "to_plain_time", "to_string", "to_unix_second", "weekday",
+                  "with_day", "with_hour", "with_minute", "with_month",
+                  "with_nanosecond", "with_ordinal", "with_second",
+                  "with_year", "year", "zone"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "date_time", "fixed_zone", "unix", "utc_offset", "utc_zone"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "uuid",
+          "package": {
+            "path": "moonbitlang/x/uuid",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "UUID",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "as_version", "hash", "to_bytes", "to_string", "variant",
+                  "version"
+                ]
+              },
+              {
+                "name": "Variant",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Version",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [ "from_bytes", "from_hex" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

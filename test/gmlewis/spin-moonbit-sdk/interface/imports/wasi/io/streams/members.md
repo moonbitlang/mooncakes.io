@@ -27,13 +27,21 @@ for using `wasi:io/poll`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### blocking\_read
@@ -53,16 +61,6 @@ for using `wasi:io/poll`.
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,23:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>::drop(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>) -> Unit
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,17:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### read
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,71:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>::read(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, len : UInt64) -> <a href="moonbitlang/core/result#Result">Result</a>[Bytes, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>]
@@ -111,11 +109,6 @@ for using `wasi:io/poll`.
   > The created `pollable` is a child resource of the `input-stream`.
   > Implementations may trap if the `input-stream` is dropped before
   > all derived `pollable`s created with this function are dropped.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## OutputStream
 
@@ -133,13 +126,21 @@ polled for using `wasi:io/poll`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>) -> Bool
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### blocking\_flush
@@ -245,16 +246,6 @@ polled for using `wasi:io/poll`.
   > writes (`check-write` will return `ok(0)`) until the flush has
   > completed. The `subscribe` pollable will become ready when the
   > flush has completed and the stream can accept more writes.
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,35:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### splice
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,518:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>::splice(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, src : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream">InputStream</a>, len : UInt64) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt64, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>]
@@ -286,11 +277,6 @@ polled for using `wasi:io/poll`.
   >  The created `pollable` is a child resource of the `output-stream`.
   > Implementations may trap if the `output-stream` is dropped before
   > all derived `pollable`s created with this function are dropped.
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### write
   ```moonbit
   :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,258:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>::write(self : <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream">OutputStream</a>, contents : Bytes) -> <a href="moonbitlang/core/result#Result">Result</a>[Unit, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>]
@@ -331,27 +317,18 @@ polled for using `wasi:io/poll`.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a> with op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a> with output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>::op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>::output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/traits.mbt,85:::fn <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::fn op_equal(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>, <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams/top.mbt,7:::fn output(<a href="gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError">StreamError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived

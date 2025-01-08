@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Enumerable](#Enumerable)||
+|[@moonbitlang/quickcheck/lib/feat.Enumerable](#@moonbitlang/quickcheck/lib/feat.Enumerable)||
 
 |Type|description|
 |---|---|
@@ -31,10 +31,10 @@
 |[unary](#unary)||
 |[union](#union)||
 
-## Enumerable
+## @moonbitlang/quickcheck/lib/feat.Enumerable
 
 ```moonbit
-:::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,1:::pub(open) trait Enumerable {
+:::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,1:::pub(open) trait @moonbitlang/quickcheck/lib/feat.Enumerable {
   enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Self]
 }
 ```
@@ -42,45 +42,85 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,5:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/bool#Bool">Bool</a> with enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Bool]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,61:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for Unit
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,61:::fn enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Unit]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,37:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a> with enumerate[E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[<a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[E]]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,5:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for Bool
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,5:::fn enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Bool]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,45:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/tuple#Tuple2">Tuple2</a> with enumerate[A : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>, B : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[(A, B)]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,9:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for Int
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,9:::fn enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Int]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,29:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/uint#UInt">UInt</a> with enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[UInt]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,19:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for Int64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,19:::fn enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Int64]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,9:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/int#Int">Int</a> with enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Int]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,29:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for UInt
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,29:::fn enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[UInt]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,49:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/option#Option">Option</a> with enumerate[E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[E?]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,33:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for UInt64
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,33:::fn enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[UInt64]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,61:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/unit#Unit">Unit</a> with enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Unit]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,49:::impl[E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>] <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for E?
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,49:::fn enumerate[E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[E?]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,33:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/uint64#UInt64">UInt64</a> with enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[UInt64]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,53:::impl[T : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>, E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>] <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/result#Result">Result</a>[T, E]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,53:::fn enumerate[T : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>, E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[<a href="moonbitlang/core/result#Result">Result</a>[T, E]]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,53:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/result#Result">Result</a> with enumerate[T : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>, E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[<a href="moonbitlang/core/result#Result">Result</a>[T, E]]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,37:::impl[E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>] <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[E]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,37:::fn enumerate[E : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[<a href="moonbitlang/core/immut/list#T">@moonbitlang/core/immut/list.T</a>[E]]
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,19:::impl <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for <a href="moonbitlang/core/int64#Int64">Int64</a> with enumerate() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[Int64]
+  :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,45:::impl[A : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>, B : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>] <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a> for (A, B)
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/feat/enumerable.mbt,45:::fn enumerate[A : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>, B : <a href="moonbitlang/quickcheck/lib/feat#Enumerable">Enumerable</a>]() -> <a href="moonbitlang/quickcheck/lib/feat#Enumerate">Enumerate</a>[(A, B)]
+    ```
+    > 
 
 ## Enumerate
 

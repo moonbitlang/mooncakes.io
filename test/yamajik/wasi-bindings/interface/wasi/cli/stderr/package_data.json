@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "yamajik/wasi-bindings/interface/wasi/cli/stderr",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "get_stderr",
+      "docstring": "",
+      "signature": "fn get_stderr() -> <a href=\"yamajik/wasi-bindings/interface/wasi/io/streams#OutputStream\">@yamajik/wasi-bindings/interface/wasi/io/streams.OutputStream</a>",
+      "loc": { "line": 4, "column": 8 }
+    }
+  ],
+  "misc": []
+}

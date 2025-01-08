@@ -1,0 +1,56 @@
+{
+  "name": "Kaida-Amethyst",
+  "package": null,
+  "childs": [
+    {
+      "name": "moonbit-math",
+      "package": {
+        "path": "Kaida-Amethyst/moonbit-math",
+        "readme": false,
+        "traits": [],
+        "types": [ { "name": "RoundMode", "impls": [], "methods": [] } ],
+        "typealias": [],
+        "values": [
+          "DIGITS", "DOUBLE_EPSILON", "DOUBLE_MAX", "DOUBLE_MAX_10_EXP",
+          "DOUBLE_MAX_EXP", "DOUBLE_MIN", "DOUBLE_MIN_10_EXP",
+          "DOUBLE_MIN_EXP", "DOUBLE_MIN_POSITIVE", "E", "GOLDEN_RATIO",
+          "INT64_MAX", "INT_MAX", "INV_SQRT_PI", "LN10", "LN2", "LOG10E",
+          "LOG2E", "MANTISSA_DIGITS", "ONE_OVER_PI", "PI", "PI_OVER_2",
+          "PI_OVER_4", "RADIX", "SQRT1_OVER_2", "SQRT2", "SQRT3", "SQRT5",
+          "TWO_OVER_PI", "TWO_OVER_SQRTPI", "UINT64_MAX", "UINT_MAX", "acos",
+          "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil",
+          "clamp", "cos", "cosh", "cospi", "digamma", "div_euclid", "erf",
+          "erfc", "erfcinv", "erfcx", "erfinv", "exp", "exp10", "exp2",
+          "expm1", "fast_rsqrt", "fdim", "floor", "fma", "fract", "frexp",
+          "gamma", "gegenbauer", "gegenbauer_derivative", "gegenbauer_prime",
+          "gelu", "hermite", "hypot", "ilogb", "isfinite", "isinf", "isnan",
+          "isninf", "isnormal", "ispinf", "issubnormal", "j0", "j1", "jn",
+          "ldexp", "lerp", "ln_1p", "log", "log10", "log1p", "log2",
+          "logaddexp", "logsumexp", "nearbyint", "nextafter", "norm",
+          "norm3d", "norm4d", "normcdf", "normcdfinv", "pow", "powi", "pown",
+          "rcbrt", "rem_euclid", "rhypot", "rint", "rnorm", "rnorm3d",
+          "rnorm4d", "round", "roundeven", "rsqrt", "scalbn", "signum",
+          "sin", "sincos", "sincospi", "sinh", "sinpi", "sqrt", "sqrt1pm1",
+          "tan", "tanh", "to_degrees", "to_radians", "trunc", "y0", "y1",
+          "yn", "zeta"
+        ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "main",
+          "package": {
+            "path": "Kaida-Amethyst/moonbit-math/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

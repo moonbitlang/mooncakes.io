@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[AbstractLookaheadSet](#AbstractLookaheadSet)||
+|[@hackwaly/moonyacc/lib/lr1.AbstractLookaheadSet](#@hackwaly/moonyacc/lib/lr1.AbstractLookaheadSet)||
 
 |Type|description|
 |---|---|
@@ -28,10 +28,10 @@
 |[build\_closure\_fn](#build_closure_fn)||
 |[resolve\_conflicts](#resolve_conflicts)| Resolve conflicts by using precedence and associativity information|
 
-## AbstractLookaheadSet
+## @hackwaly/moonyacc/lib/lr1.AbstractLookaheadSet
 
 ```moonbit
-:::source,hackwaly/moonyacc/lib/lr1/abstract_lookahead_set.mbt,2:::trait AbstractLookaheadSet
+:::source,hackwaly/moonyacc/lib/lr1/abstract_lookahead_set.mbt,2:::trait @hackwaly/moonyacc/lib/lr1.AbstractLookaheadSet
 ```
 
 
@@ -65,30 +65,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a> with hash_combine(<a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>, <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>) -> Bool
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>
   ```
   > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::fn <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>::hash_combine(<a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>, <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>
   ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::fn <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>, <a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,112:::fn hash_combine(<a href="hackwaly/moonyacc/lib/lr1#ConflictLocation">ConflictLocation</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Decision
 
@@ -104,16 +95,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,32:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>, <a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,32:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,32:::fn <a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>, <a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,32:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>, <a href="hackwaly/moonyacc/lib/lr1#Decision">Decision</a>) -> Bool
+    ```
+    > automatically derived
 
 ## EncodedLR0Item
 
@@ -124,24 +112,31 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a> with compare(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::fn compare(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> Int
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a> with hash_combine(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::fn hash_combine(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::compare(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> Int
-  ```
-  > automatically derived
 - #### decode
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,13:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::decode(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, grammar : <a href="hackwaly/moonyacc/lib/grm#Grammar">@hackwaly/moonyacc/lib/grm.Grammar</a>) -> <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>
@@ -157,26 +152,11 @@
   :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,23:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::decode_production(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, grammar : <a href="hackwaly/moonyacc/lib/grm#Grammar">@hackwaly/moonyacc/lib/grm.Grammar</a>) -> <a href="hackwaly/moonyacc/lib/grm#Production">@hackwaly/moonyacc/lib/grm.Production</a>
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::hash_combine(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
 - #### new
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,5:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::new(production : <a href="hackwaly/moonyacc/lib/grm#Production">@hackwaly/moonyacc/lib/grm.Production</a>, dot : Int) -> <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,2:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> Bool
-  ```
-  > automatically derived
 - #### unsafe\_shift
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item.mbt,41:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>::unsafe_shift(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>) -> <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>
@@ -195,31 +175,38 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,40:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a> with default() -> <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,40:::impl <a href="moonbitlang/core/builtin#Default">Default</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,40:::fn default() -> <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
+    ```
+    > 
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,19:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a> with hash(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,8:::fn op_equal(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, other : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,13:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a> with hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, _hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,13:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
   ```
   > 
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,8:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a> with op_equal(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, other : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>) -> Bool
-  ```
-  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,19:::fn hash(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,13:::fn hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, _hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### decode\_iter
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,52:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>::decode_iter(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, grammar : <a href="hackwaly/moonyacc/lib/grm#Grammar">@hackwaly/moonyacc/lib/grm.Grammar</a>) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[(Int, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>)]
-  ```
-  > 
-- #### default
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>::default() -> <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
   ```
   > 
 - #### empty
@@ -232,21 +219,6 @@
   :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,45:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>::from_sorted_array(items : <a href="moonbitlang/core/array#Array">Array</a>[<a href="hackwaly/moonyacc/lib/lr1#EncodedLR0Item">EncodedLR0Item</a>]) -> <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,19:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>::hash(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,13:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>::hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, _hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lr0_item_set.mbt,8:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>::op_equal(self : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>, other : <a href="hackwaly/moonyacc/lib/lr1#EncodedLR0ItemSet">EncodedLR0ItemSet</a>) -> Bool
-  ```
-  > 
 
 ## EncodedLR1ItemSet
 
@@ -254,13 +226,6 @@
 :::source,hackwaly/moonyacc/lib/lr1/encoded_lr1_item_set.mbt,2:::type EncodedLR1ItemSet
 ```
 
-
-#### mooncakes-io-method-mark-Methods
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLR1ItemSet">EncodedLR1ItemSet</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
 
 ## EncodedLookaheadSet
 
@@ -273,39 +238,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a> with compare(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a> with hash_combine(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>) -> Bool
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>::compare(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>) -> Int
-  ```
-  > automatically derived
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>
   ```
   > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>::hash_combine(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::fn compare(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>
   ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::fn <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>) -> Bool
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/encoded_lookahead_set.mbt,4:::fn hash_combine(<a href="hackwaly/moonyacc/lib/lr1#EncodedLookaheadSet">EncodedLookaheadSet</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
 
 ## EncodedSymbolicLookaheadSet
 
@@ -333,44 +288,36 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a> with compare(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a> with hash_combine(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> Bool
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>::compare(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> Int
-  ```
-  > automatically derived
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>
   ```
   > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>::hash_combine(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::fn compare(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::fn hash_combine(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > automatically derived
+
+#### mooncakes-io-method-mark-Methods
 - #### new
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,8:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>::new(production : <a href="hackwaly/moonyacc/lib/grm#Production">@hackwaly/moonyacc/lib/grm.Production</a>, dot : Int) -> <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,5:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> Bool
-  ```
-  > automatically derived
 - #### postdot
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/lr0_item.mbt,13:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>::postdot(self : <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>) -> <a href="hackwaly/moonyacc/lib/grm#Symbol">@hackwaly/moonyacc/lib/grm.Symbol</a>?
@@ -389,13 +336,6 @@
 ```
 
 
-#### mooncakes-io-method-mark-Methods
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#LR0Node">LR0Node</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-
 ## LR1Item
 
 ```moonbit
@@ -409,37 +349,34 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a> with compare(<a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a> with output(self : <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::fn compare(<a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,29:::fn output(self : <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>::compare(<a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> Int
-  ```
-  > automatically derived
 - #### core
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,9:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>::core(self : <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> <a href="hackwaly/moonyacc/lib/lr1#LR0Item">LR0Item</a>
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,6:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,29:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>::output(self : <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### postdot
@@ -450,11 +387,6 @@
 - #### shift
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/lr1_item.mbt,23:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>::shift(self : <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>) -> <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1Item">LR1Item</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -470,21 +402,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a> with output(self : <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,8:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,8:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>::output(self : <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,8:::fn output(self : <a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## LR1PreState
 
@@ -508,42 +432,34 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,75:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a> with compare(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, other : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,75:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,75:::fn compare(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, other : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> Int
+    ```
+    > 
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,80:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a> with hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,72:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,72:::fn op_equal(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, other : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> Bool
+    ```
+    > 
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,72:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a> with op_equal(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, other : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,80:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,80:::fn hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,75:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>::compare(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, other : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> Int
-  ```
-  > 
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,80:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>::hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > 
 - #### iter\_item\_groups
   ```moonbit
   :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,85:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>::iter_item_groups(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[<a href="hackwaly/moonyacc/lib/lr1#LR1ItemGroup">LR1ItemGroup</a>]
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/automaton.mbt,72:::fn <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>::op_equal(self : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>, other : <a href="hackwaly/moonyacc/lib/lr1#LR1State">LR1State</a>) -> Bool
   ```
   > 
 - #### set\_action
@@ -564,53 +480,37 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a> with compare(<a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>) -> Int
+  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::fn compare(<a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>) -> Int
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,8:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a> with hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::fn op_equal(<a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a> with op_equal(<a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,8:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,8:::fn hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a> with output(self : <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::fn <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>::compare(<a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>) -> Int
-  ```
-  > automatically derived
-- #### hash
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,40:::fn <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>::hash[Self : <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : Self) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,8:::fn <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>::hash_combine(self : <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,5:::fn <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>::op_equal(<a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,16:::fn <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>::output(self : <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/lr1/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/lr1/lookahead.mbt,16:::fn output(self : <a href="hackwaly/moonyacc/lib/lr1#Lookahead">Lookahead</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## ResolveConflictError
 

@@ -63,17 +63,29 @@ endian byte order.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/uuid/uuid.mbt,43:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/uuid#UUID">UUID</a> with compare(<a href="moonbitlang/x/uuid#UUID">UUID</a>, <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/uuid/uuid.mbt,43:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/uuid#UUID">UUID</a> with op_equal(<a href="moonbitlang/x/uuid#UUID">UUID</a>, <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/uuid/uuid.mbt,201:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/uuid#UUID">UUID</a> with output(self : <a href="moonbitlang/x/uuid#UUID">UUID</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/uuid/uuid.mbt,43:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="moonbitlang/x/uuid#UUID">UUID</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/uuid/uuid.mbt,43:::fn compare(<a href="moonbitlang/x/uuid#UUID">UUID</a>, <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/uuid/uuid.mbt,43:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/uuid#UUID">UUID</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/uuid/uuid.mbt,43:::fn op_equal(<a href="moonbitlang/x/uuid#UUID">UUID</a>, <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/uuid/uuid.mbt,201:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/uuid#UUID">UUID</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/uuid/uuid.mbt,201:::fn output(self : <a href="moonbitlang/x/uuid#UUID">UUID</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### as\_version
@@ -81,24 +93,9 @@ endian byte order.
   :::source,moonbitlang/x/uuid/variant.mbt,92:::fn <a href="moonbitlang/x/uuid#UUID">UUID</a>::as_version(self : <a href="moonbitlang/x/uuid#UUID">UUID</a>, version : <a href="moonbitlang/x/uuid#Version">Version</a>) -> <a href="moonbitlang/x/uuid#UUID">UUID</a>
   ```
   >  Converts this UUID to RFC-4122 with the given version number.
-- #### compare
-  ```moonbit
-  :::source,moonbitlang/x/uuid/uuid.mbt,43:::fn <a href="moonbitlang/x/uuid#UUID">UUID</a>::compare(<a href="moonbitlang/x/uuid#UUID">UUID</a>, <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Int
-  ```
-  > automatically derived
 - #### hash
   ```moonbit
   :::source,moonbitlang/x/uuid/ops.mbt,16:::fn <a href="moonbitlang/x/uuid#UUID">UUID</a>::hash(self : <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Int
-  ```
-  > 
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/uuid/uuid.mbt,43:::fn <a href="moonbitlang/x/uuid#UUID">UUID</a>::op_equal(<a href="moonbitlang/x/uuid#UUID">UUID</a>, <a href="moonbitlang/x/uuid#UUID">UUID</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/uuid/uuid.mbt,201:::fn <a href="moonbitlang/x/uuid#UUID">UUID</a>::output(self : <a href="moonbitlang/x/uuid#UUID">UUID</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### to\_bytes
@@ -139,21 +136,13 @@ endian byte order.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/uuid/variant.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/uuid#Variant">Variant</a> with output(<a href="moonbitlang/x/uuid#Variant">Variant</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/uuid/variant.mbt,24:::fn <a href="moonbitlang/x/uuid#Variant">Variant</a>::output(<a href="moonbitlang/x/uuid#Variant">Variant</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/uuid/traits.mbt,85:::fn <a href="moonbitlang/x/uuid#Variant">Variant</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/x/uuid/variant.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/uuid#Variant">Variant</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/uuid/variant.mbt,24:::fn output(<a href="moonbitlang/x/uuid#Variant">Variant</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Version
 
@@ -174,21 +163,13 @@ endian byte order.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/uuid/variant.mbt,37:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/uuid#Version">Version</a> with output(<a href="moonbitlang/x/uuid#Version">Version</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/uuid/variant.mbt,37:::fn <a href="moonbitlang/x/uuid#Version">Version</a>::output(<a href="moonbitlang/x/uuid#Version">Version</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/uuid/traits.mbt,85:::fn <a href="moonbitlang/x/uuid#Version">Version</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/x/uuid/variant.mbt,37:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/uuid#Version">Version</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/uuid/variant.mbt,37:::fn output(<a href="moonbitlang/x/uuid#Version">Version</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## from\_bytes
 

@@ -1,0 +1,1561 @@
+{
+  "readme": "# gmlewis/image\n[![check](https://github.com/gmlewis/moonbit-image/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-image/actions/workflows/check.yml)\n\nThis is a simple image representation based on Go's implementation:\nhttps://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/image/image.go\nwhich has the copyright notice:\n\n```\n// Copyright 2009 The Go Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style\n// license that can be found in the LICENSE file.\n```\n\n## Status\n\nThe code has been updated to support compiler:\n\n```bash\n$ moon version --all\nmoon 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moon\nmoonc v0.1.20241216+68e710374 ~/.moon/bin/moonc\nmoonrun 0.1.20241216 (b57ed1c 2024-12-16) ~/.moon/bin/moonrun\n```\n\nUse `moonup` to manage `moon` compiler versions:\nhttps://github.com/chawyehsu/moonup\n",
+  "name": "gmlewis/image",
+  "traits": [
+    {
+      "name": "@gmlewis/image.Image",
+      "docstring": " Image is a finite rectangular grid of [color.Color] values taken from a color\n model.",
+      "signature": "pub(open) trait @gmlewis/image.Image {\n  color_model(Self) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>\n  bounds(Self) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n  at(Self, Int, Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>\n  opaque(Self) -> Bool\n  set(Self, Int, Int, <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit\n  sub_image(Self, <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>\n  raw_data(Self) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  get_bytes_per_pixel(Self) -> Int\n  get_stride(Self) -> Int\n  pix_offset(Self, Int, Int) -> Int\n  color_index_at(Self, Int, Int) -> Byte\n}",
+      "loc": { "line": 42, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@gmlewis/image.RGBA64Image",
+      "docstring": " RGBA64Image is an [Image] whose pixels can be converted directly to a\n color.RGBA64.",
+      "signature": "pub(open) trait @gmlewis/image.RGBA64Image {\n  rgba64_at(Self, Int, Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>\n  color_model(Self) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>\n  bounds(Self) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n  at(Self, Int, Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>\n}",
+      "loc": { "line": 81, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Alpha",
+      "docstring": "",
+      "signature": "pub(all) struct Alpha {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 843, "column": 17 },
+      "methods": [
+        {
+          "name": "alpha_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::alpha_at(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Alpha\">@gmlewis/image/color.Alpha</a>",
+          "loc": { "line": 909, "column": 8 }
+        },
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::at(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 897, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::bounds(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 887, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::color_index_at(_self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 877, "column": 15 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::color_model(_self : <a href=\"gmlewis/image#Alpha\">Alpha</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 882, "column": 15 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#Alpha\">Alpha</a>) -> Int",
+          "loc": { "line": 867, "column": 15 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::get_stride(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>) -> Int",
+          "loc": { "line": 872, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Alpha\">Alpha</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 994, "column": 15 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::new_empty() -> <a href=\"gmlewis/image#Alpha\">Alpha</a>",
+          "loc": { "line": 857, "column": 15 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::op_get(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 892, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::op_set(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 925, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::opaque(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>) -> Bool",
+          "loc": { "line": 974, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::pix_offset(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 920, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::raw_data(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 862, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::rgba64_at(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 902, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::set(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 930, "column": 8 }
+        },
+        {
+          "name": "set_alpha",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::set_alpha(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Alpha\">@gmlewis/image/color.Alpha</a>) -> Unit",
+          "loc": { "line": 949, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::set_rgba64(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 940, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha\">Alpha</a>::sub_image(self : <a href=\"gmlewis/image#Alpha\">Alpha</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 960, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Alpha16",
+      "docstring": "",
+      "signature": "pub(all) struct Alpha16 {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 1004, "column": 17 },
+      "methods": [
+        {
+          "name": "alpha16_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::alpha16_at(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Alpha16\">@gmlewis/image/color.Alpha16</a>",
+          "loc": { "line": 1069, "column": 8 }
+        },
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::at(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1058, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::bounds(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 1048, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::color_index_at(_self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 1038, "column": 17 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::color_model(_self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 1043, "column": 17 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>) -> Int",
+          "loc": { "line": 1028, "column": 17 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::get_stride(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>) -> Int",
+          "loc": { "line": 1033, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Alpha16\">Alpha16</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 1163, "column": 17 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::new_empty() -> <a href=\"gmlewis/image#Alpha16\">Alpha16</a>",
+          "loc": { "line": 1018, "column": 17 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::op_get(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1053, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::op_set(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1086, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::opaque(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>) -> Bool",
+          "loc": { "line": 1143, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::pix_offset(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 1081, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::raw_data(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 1023, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::rgba64_at(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 1063, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::set(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1091, "column": 8 }
+        },
+        {
+          "name": "set_alpha16",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::set_alpha16(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Alpha16\">@gmlewis/image/color.Alpha16</a>) -> Unit",
+          "loc": { "line": 1112, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::set_rgba64(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 1102, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Alpha16\">Alpha16</a>::sub_image(self : <a href=\"gmlewis/image#Alpha16\">Alpha16</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 1129, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "CMYK",
+      "docstring": "",
+      "signature": "pub(all) struct CMYK {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 1474, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::at(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1528, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::bounds(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 1518, "column": 8 }
+        },
+        {
+          "name": "cmyk_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::cmyk_at(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#CMYK\">@gmlewis/image/color.CMYK</a>",
+          "loc": { "line": 1539, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::color_index_at(_self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 1508, "column": 14 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::color_model(_self : <a href=\"gmlewis/image#CMYK\">CMYK</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 1513, "column": 14 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#CMYK\">CMYK</a>) -> Int",
+          "loc": { "line": 1498, "column": 14 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::get_stride(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>) -> Int",
+          "loc": { "line": 1503, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#CMYK\">CMYK</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 1624, "column": 14 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::new_empty() -> <a href=\"gmlewis/image#CMYK\">CMYK</a>",
+          "loc": { "line": 1488, "column": 14 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::op_get(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1523, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::opaque(_self : <a href=\"gmlewis/image#CMYK\">CMYK</a>) -> Bool",
+          "loc": { "line": 1618, "column": 14 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::pix_offset(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 1555, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::raw_data(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 1493, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::rgba64_at(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 1533, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::set(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1560, "column": 8 }
+        },
+        {
+          "name": "set_cmyk",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::set_cmyk(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#CMYK\">@gmlewis/image/color.CMYK</a>) -> Unit",
+          "loc": { "line": 1590, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::set_rgba64(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 1573, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#CMYK\">CMYK</a>::sub_image(self : <a href=\"gmlewis/image#CMYK\">CMYK</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 1604, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Config",
+      "docstring": " Config holds an image's color model and dimensions.",
+      "signature": "pub(all) struct Config {\n  color_model : <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>\n  width : Int\n  height : Int\n}",
+      "loc": { "line": 29, "column": 17 },
+      "methods": [
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Config\">Config</a>::new_empty() -> <a href=\"gmlewis/image#Config\">Config</a>",
+          "loc": { "line": 36, "column": 16 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Gray",
+      "docstring": "",
+      "signature": "pub(all) struct Gray {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 1173, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::at(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1227, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::bounds(self : <a href=\"gmlewis/image#Gray\">Gray</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 1217, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::color_index_at(_self : <a href=\"gmlewis/image#Gray\">Gray</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 1207, "column": 14 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::color_model(_self : <a href=\"gmlewis/image#Gray\">Gray</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 1212, "column": 14 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#Gray\">Gray</a>) -> Int",
+          "loc": { "line": 1197, "column": 14 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::get_stride(self : <a href=\"gmlewis/image#Gray\">Gray</a>) -> Int",
+          "loc": { "line": 1202, "column": 8 }
+        },
+        {
+          "name": "gray_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::gray_at(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Gray\">@gmlewis/image/color.Gray</a>",
+          "loc": { "line": 1239, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Gray\">Gray</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 1312, "column": 14 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::new_empty() -> <a href=\"gmlewis/image#Gray\">Gray</a>",
+          "loc": { "line": 1187, "column": 14 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::op_get(self : <a href=\"gmlewis/image#Gray\">Gray</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1222, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::op_set(self : <a href=\"gmlewis/image#Gray\">Gray</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1255, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::opaque(_self : <a href=\"gmlewis/image#Gray\">Gray</a>) -> Bool",
+          "loc": { "line": 1306, "column": 14 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::pix_offset(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 1250, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::raw_data(self : <a href=\"gmlewis/image#Gray\">Gray</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 1192, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::rgba64_at(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 1232, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::set(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1260, "column": 8 }
+        },
+        {
+          "name": "set_gray",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::set_gray(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Gray\">@gmlewis/image/color.Gray</a>) -> Unit",
+          "loc": { "line": 1281, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::set_rgba64(self : <a href=\"gmlewis/image#Gray\">Gray</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 1270, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray\">Gray</a>::sub_image(self : <a href=\"gmlewis/image#Gray\">Gray</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 1292, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Gray16",
+      "docstring": "",
+      "signature": "pub(all) struct Gray16 {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 1322, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::at(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1376, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::bounds(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 1366, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::color_index_at(_self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 1356, "column": 16 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::color_model(_self : <a href=\"gmlewis/image#Gray16\">Gray16</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 1361, "column": 16 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#Gray16\">Gray16</a>) -> Int",
+          "loc": { "line": 1346, "column": 16 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::get_stride(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>) -> Int",
+          "loc": { "line": 1351, "column": 8 }
+        },
+        {
+          "name": "gray16_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::gray16_at(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Gray16\">@gmlewis/image/color.Gray16</a>",
+          "loc": { "line": 1387, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Gray16\">Gray16</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 1464, "column": 16 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::new_empty() -> <a href=\"gmlewis/image#Gray16\">Gray16</a>",
+          "loc": { "line": 1336, "column": 16 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::op_get(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1371, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::op_set(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1404, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::opaque(_self : <a href=\"gmlewis/image#Gray16\">Gray16</a>) -> Bool",
+          "loc": { "line": 1458, "column": 16 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::pix_offset(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 1399, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::raw_data(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 1341, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::rgba64_at(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 1381, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::set(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1409, "column": 8 }
+        },
+        {
+          "name": "set_gray16",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::set_gray16(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Gray16\">@gmlewis/image/color.Gray16</a>) -> Unit",
+          "loc": { "line": 1432, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::set_rgba64(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 1420, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Gray16\">Gray16</a>::sub_image(self : <a href=\"gmlewis/image#Gray16\">Gray16</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 1444, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "NRGBA",
+      "docstring": "",
+      "signature": "pub(all) struct NRGBA {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 463, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::at(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 517, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::bounds(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 507, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::color_index_at(_self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 497, "column": 15 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::color_model(_self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 502, "column": 15 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>) -> Int",
+          "loc": { "line": 487, "column": 15 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::get_stride(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>) -> Int",
+          "loc": { "line": 492, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#NRGBA\">NRGBA</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 635, "column": 15 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::new_empty() -> <a href=\"gmlewis/image#NRGBA\">NRGBA</a>",
+          "loc": { "line": 477, "column": 15 }
+        },
+        {
+          "name": "nrgba_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::nrgba_at(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#NRGBA\">@gmlewis/image/color.NRGBA</a>",
+          "loc": { "line": 528, "column": 8 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::op_get(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 512, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::op_set(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 549, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::opaque(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>) -> Bool",
+          "loc": { "line": 615, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::pix_offset(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 544, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::raw_data(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 482, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::rgba64_at(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 522, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::set(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 554, "column": 8 }
+        },
+        {
+          "name": "set_nrgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::set_nrgba(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#NRGBA\">@gmlewis/image/color.NRGBA</a>) -> Unit",
+          "loc": { "line": 587, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::set_rgba64(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 567, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA\">NRGBA</a>::sub_image(self : <a href=\"gmlewis/image#NRGBA\">NRGBA</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 601, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "NRGBA64",
+      "docstring": "",
+      "signature": "pub(all) struct NRGBA64 {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 645, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::at(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 699, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::bounds(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 689, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::color_index_at(_self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 679, "column": 17 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::color_model(_self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 684, "column": 17 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>) -> Int",
+          "loc": { "line": 669, "column": 17 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::get_stride(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>) -> Int",
+          "loc": { "line": 674, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 833, "column": 17 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::new_empty() -> <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>",
+          "loc": { "line": 659, "column": 17 }
+        },
+        {
+          "name": "nrgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::nrgba64_at(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#NRGBA64\">@gmlewis/image/color.NRGBA64</a>",
+          "loc": { "line": 710, "column": 8 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::op_get(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 694, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::op_set(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 730, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::opaque(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>) -> Bool",
+          "loc": { "line": 813, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::pix_offset(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 725, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::raw_data(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 664, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::rgba64_at(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 704, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::set(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 735, "column": 8 }
+        },
+        {
+          "name": "set_nrgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::set_nrgba64(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#NRGBA64\">@gmlewis/image/color.NRGBA64</a>) -> Unit",
+          "loc": { "line": 776, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::set_rgba64(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 752, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>::sub_image(self : <a href=\"gmlewis/image#NRGBA64\">NRGBA64</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 799, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Paletted",
+      "docstring": "",
+      "signature": "pub(all) struct Paletted {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n  palette : <a href=\"gmlewis/image/color#Palette\">@gmlewis/image/color.Palette</a>\n}",
+      "loc": { "line": 1634, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::at(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1680, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::bounds(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 1670, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::color_index_at(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int) -> Byte",
+          "loc": { "line": 1738, "column": 8 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::color_model(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 1665, "column": 8 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#Paletted\">Paletted</a>) -> Int",
+          "loc": { "line": 1655, "column": 18 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::get_stride(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>) -> Int",
+          "loc": { "line": 1660, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, p : <a href=\"gmlewis/image/color#Palette\">@gmlewis/image/color.Palette</a>) -> <a href=\"gmlewis/image#Paletted\">Paletted</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 1808, "column": 18 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::new_empty() -> <a href=\"gmlewis/image#Paletted\">Paletted</a>",
+          "loc": { "line": 1820, "column": 18 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::op_get(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 1675, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::op_set(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1715, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::opaque(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>) -> Bool",
+          "loc": { "line": 1782, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::pix_offset(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 1710, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::raw_data(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 1650, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::rgba64_at(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 1692, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::set(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 1720, "column": 8 }
+        },
+        {
+          "name": "set_color_index",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::set_color_index(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int, index : Byte) -> Unit",
+          "loc": { "line": 1747, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::set_rgba64(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 1729, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Paletted\">Paletted</a>::sub_image(self : <a href=\"gmlewis/image#Paletted\">Paletted</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 1758, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Point",
+      "docstring": "",
+      "signature": "pub(all) struct Point {\n  x : Int\n  y : Int\n}",
+      "loc": { "line": 10, "column": 17 },
+      "methods": [
+        {
+          "name": "div",
+          "docstring": " div returns the vector p/k.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::div(self : <a href=\"gmlewis/image#Point\">Point</a>, k : Int) -> <a href=\"gmlewis/image#Point\">Point</a>",
+          "loc": { "line": 36, "column": 8 }
+        },
+        {
+          "name": "is_in",
+          "docstring": " is_in reports whether p is in r.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::is_in(self : <a href=\"gmlewis/image#Point\">Point</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Bool",
+          "loc": { "line": 41, "column": 8 }
+        },
+        {
+          "name": "mod",
+          "docstring": " mod returns the point q in r such that p.X-q.X is a multiple of r's width\n and p.Y-q.Y is a multiple of r's height.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::mod(self : <a href=\"gmlewis/image#Point\">Point</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Point\">Point</a>",
+          "loc": { "line": 47, "column": 8 }
+        },
+        {
+          "name": "mul",
+          "docstring": " mul returns the vector p*k.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::mul(self : <a href=\"gmlewis/image#Point\">Point</a>, k : Int) -> <a href=\"gmlewis/image#Point\">Point</a>",
+          "loc": { "line": 31, "column": 8 }
+        },
+        {
+          "name": "op_add",
+          "docstring": " op_add (+) returns the vector p+q.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::op_add(self : <a href=\"gmlewis/image#Point\">Point</a>, q : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image#Point\">Point</a>",
+          "loc": { "line": 21, "column": 8 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": " op_equal reports whether p and q are equal.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::op_equal(self : <a href=\"gmlewis/image#Point\">Point</a>, q : <a href=\"gmlewis/image#Point\">Point</a>) -> Bool",
+          "loc": { "line": 62, "column": 8 }
+        },
+        {
+          "name": "op_sub",
+          "docstring": " op_sub (-) returns the vector p-q.",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::op_sub(self : <a href=\"gmlewis/image#Point\">Point</a>, q : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image#Point\">Point</a>",
+          "loc": { "line": 26, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " to_string returns a string representation of p like \"(3,4)\".",
+          "signature": "fn <a href=\"gmlewis/image#Point\">Point</a>::to_string(self : <a href=\"gmlewis/image#Point\">Point</a>) -> String",
+          "loc": { "line": 16, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RGBA",
+      "docstring": " RGBA is an in-memory image whose At method returns [color.RGBA] values.",
+      "signature": "pub(all) struct RGBA {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 116, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::at(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 170, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::bounds(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 160, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::color_index_at(_self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 150, "column": 14 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::color_model(_self : <a href=\"gmlewis/image#RGBA\">RGBA</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 155, "column": 14 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#RGBA\">RGBA</a>) -> Int",
+          "loc": { "line": 140, "column": 14 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::get_stride(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>) -> Int",
+          "loc": { "line": 145, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#RGBA\">RGBA</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 290, "column": 14 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::new_empty() -> <a href=\"gmlewis/image#RGBA\">RGBA</a>",
+          "loc": { "line": 130, "column": 14 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::op_get(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 165, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::op_set(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 213, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::opaque(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>) -> Bool",
+          "loc": { "line": 270, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::pix_offset(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 208, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::raw_data(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 135, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::rgba64_at(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 175, "column": 8 }
+        },
+        {
+          "name": "rgba_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::rgba_at(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA\">@gmlewis/image/color.RGBA</a>",
+          "loc": { "line": 192, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::set(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 218, "column": 8 }
+        },
+        {
+          "name": "set_rgba",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::set_rgba(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA\">@gmlewis/image/color.RGBA</a>) -> Unit",
+          "loc": { "line": 243, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::set_rgba64(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 231, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": " sub_image returns an image representing the portion of the image p visible\n through r. The returned value shares pixels with the original image.",
+          "signature": "fn <a href=\"gmlewis/image#RGBA\">RGBA</a>::sub_image(self : <a href=\"gmlewis/image#RGBA\">RGBA</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 256, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RGBA64",
+      "docstring": "",
+      "signature": "pub(all) struct RGBA64 {\n  pix : <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]\n  stride : Int\n  rect : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>\n}",
+      "loc": { "line": 300, "column": 17 },
+      "methods": [
+        {
+          "name": "at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::at(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 354, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::bounds(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 344, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::color_index_at(_self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 334, "column": 16 }
+        },
+        {
+          "name": "color_model",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::color_model(_self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 339, "column": 16 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>) -> Int",
+          "loc": { "line": 324, "column": 16 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::get_stride(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>) -> Int",
+          "loc": { "line": 329, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::new(r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#RGBA64\">RGBA64</a>!<a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "loc": { "line": 453, "column": 16 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::new_empty() -> <a href=\"gmlewis/image#RGBA64\">RGBA64</a>",
+          "loc": { "line": 314, "column": 16 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::op_get(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 349, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::op_set(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, p : <a href=\"gmlewis/image#Point\">Point</a>, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 379, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::opaque(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>) -> Bool",
+          "loc": { "line": 433, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::pix_offset(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, x : Int, y : Int) -> Int",
+          "loc": { "line": 374, "column": 8 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::raw_data(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 319, "column": 8 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::rgba64_at(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 359, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::set(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 384, "column": 8 }
+        },
+        {
+          "name": "set_rgba64",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::set_rgba64(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, x : Int, y : Int, c : <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>) -> Unit",
+          "loc": { "line": 401, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#RGBA64\">RGBA64</a>::sub_image(self : <a href=\"gmlewis/image#RGBA64\">RGBA64</a>, r : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 419, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Rectangle",
+      "docstring": " A Rectangle contains the points with Min.X <= X < Max.X, Min.Y <= Y < Max.Y.\n It is well-formed if Min.X <= Max.X and likewise for Y. Points are always\n well-formed. A rectangle's methods always return well-formed outputs for\n well-formed inputs.\n\n A Rectangle is also an [Image] whose bounds are the rectangle itself. At\n returns color.Opaque for points in the rectangle and color.Transparent\n otherwise.",
+      "signature": "pub(all) struct Rectangle {\n  min : <a href=\"gmlewis/image#Point\">Point</a>\n  max : <a href=\"gmlewis/image#Point\">Point</a>\n}",
+      "loc": { "line": 79, "column": 17 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": " add returns the rectangle r translated by p.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::add(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 163, "column": 8 }
+        },
+        {
+          "name": "at",
+          "docstring": " at implements the [Image] trait.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::at(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>",
+          "loc": { "line": 302, "column": 8 }
+        },
+        {
+          "name": "bounds",
+          "docstring": " bounds implements the [Image] trait.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::bounds(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 318, "column": 8 }
+        },
+        {
+          "name": "canon",
+          "docstring": " canon returns the canonical version of r. The returned rectangle has minimum\n and maximum coordinates swapped if necessary so that it is well-formed.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::canon(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 286, "column": 8 }
+        },
+        {
+          "name": "color_index_at",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::color_index_at(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, _x : Int, _y : Int) -> Byte",
+          "loc": { "line": 128, "column": 19 }
+        },
+        {
+          "name": "color_model",
+          "docstring": " color_model implements the [Image] trait.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::color_model(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image/color#Model\">@gmlewis/image/color.Model</a>",
+          "loc": { "line": 323, "column": 19 }
+        },
+        {
+          "name": "copy",
+          "docstring": " copy makes a copy of the provided rectangle without changing it.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::copy(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 138, "column": 8 }
+        },
+        {
+          "name": "dx",
+          "docstring": " dx returns r's width.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::dx(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Int",
+          "loc": { "line": 148, "column": 8 }
+        },
+        {
+          "name": "dy",
+          "docstring": " dy returns r's height.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::dy(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Int",
+          "loc": { "line": 153, "column": 8 }
+        },
+        {
+          "name": "empty",
+          "docstring": " empty reports whether the rectangle contains no points.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::empty(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Bool",
+          "loc": { "line": 251, "column": 8 }
+        },
+        {
+          "name": "get_bytes_per_pixel",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::get_bytes_per_pixel(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Int",
+          "loc": { "line": 118, "column": 19 }
+        },
+        {
+          "name": "get_stride",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::get_stride(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Int",
+          "loc": { "line": 123, "column": 19 }
+        },
+        {
+          "name": "inset",
+          "docstring": " inset returns the rectangle r inset by n, which may be negative. If either\n of r's dimensions is less than 2*n then an empty rectangle near the center\n of r will be returned.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::inset(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, n : Int) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 181, "column": 8 }
+        },
+        {
+          "name": "intersect",
+          "docstring": " intersect returns the largest rectangle contained by both r and s. If the\n two rectangles do not overlap then the zero rectangle will be returned.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::intersect(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, s : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 202, "column": 8 }
+        },
+        {
+          "name": "is_in",
+          "docstring": " is_in reports whether every point in r is in s.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::is_in(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, s : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Bool",
+          "loc": { "line": 272, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " Rectangle::new returns an empty (all zeros) rectangle.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::new() -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 88, "column": 19 }
+        },
+        {
+          "name": "op_equal",
+          "docstring": " op_equal reports whether r and s contain the same set of points. All empty\n rectangles are considered equal.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::op_equal(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, s : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Bool",
+          "loc": { "line": 257, "column": 8 }
+        },
+        {
+          "name": "opaque",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::opaque(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Bool",
+          "loc": { "line": 93, "column": 19 }
+        },
+        {
+          "name": "overlaps",
+          "docstring": " overlaps reports whether r and s have a non-empty intersection.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::overlaps(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, s : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> Bool",
+          "loc": { "line": 262, "column": 8 }
+        },
+        {
+          "name": "pix_offset",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::pix_offset(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, _x : Int, _y : Int) -> Int",
+          "loc": { "line": 133, "column": 19 }
+        },
+        {
+          "name": "raw_data",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::raw_data(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/io#Slice\">@gmlewis/io.Slice</a>[Byte]",
+          "loc": { "line": 113, "column": 19 }
+        },
+        {
+          "name": "rgba64_at",
+          "docstring": " rgba64_at implements the [RGBA64Image] trait.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::rgba64_at(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, x : Int, y : Int) -> <a href=\"gmlewis/image/color#RGBA64\">@gmlewis/image/color.RGBA64</a>",
+          "loc": { "line": 310, "column": 8 }
+        },
+        {
+          "name": "set",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::set(_self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, _x : Int, _y : Int, _c : <a href=\"gmlewis/image/color#Color\">@gmlewis/image/color.Color</a>) -> Unit",
+          "loc": { "line": 98, "column": 19 }
+        },
+        {
+          "name": "size",
+          "docstring": " size returns r's width and height.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::size(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Point\">Point</a>",
+          "loc": { "line": 158, "column": 8 }
+        },
+        {
+          "name": "sub",
+          "docstring": " sub returns the rectangle r translated by -p.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::sub(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, p : <a href=\"gmlewis/image#Point\">Point</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 171, "column": 8 }
+        },
+        {
+          "name": "sub_image",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::sub_image(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, _o : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 108, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": " to_string returns a string representation of r like \"(3,4)-(6,5)\".",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::to_string(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> String",
+          "loc": { "line": 143, "column": 8 }
+        },
+        {
+          "name": "union",
+          "docstring": " union returns the smallest rectangle that contains both r and s.",
+          "signature": "fn <a href=\"gmlewis/image#Rectangle\">Rectangle</a>::union(self : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>, s : <a href=\"gmlewis/image#Rectangle\">Rectangle</a>) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+          "loc": { "line": 227, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "SizeError",
+      "docstring": "",
+      "signature": "type SizeError",
+      "loc": { "line": 94, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/image#SizeError\">SizeError</a>, <a href=\"gmlewis/image#SizeError\">SizeError</a>) -> Bool",
+              "loc": { "line": 94, "column": 37 }
+            }
+          ],
+          "loc": { "line": 94, "column": 37 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/image#SizeError\">SizeError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/image#SizeError\">SizeError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 94, "column": 31 }
+            }
+          ],
+          "loc": { "line": 94, "column": 31 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "add2_non_neg",
+      "docstring": " add2_non_neg returns (x + y), unless at least one argument is negative or if\n the computation overflows the int type, in which case it returns -1.",
+      "signature": "fn add2_non_neg(x : Int, y : Int) -> Int",
+      "loc": { "line": 356, "column": 8 }
+    },
+    {
+      "name": "mul3_non_neg",
+      "docstring": " mul3_non_neg returns (x * y * z), unless at least one argument is negative or\n if the computation overflows the int type, in which case it returns -1.",
+      "signature": "fn mul3_non_neg(x : Int, y : Int, z : Int) -> Int",
+      "loc": { "line": 338, "column": 8 }
+    },
+    {
+      "name": "pt",
+      "docstring": " pt is shorthand for [Point]{X, Y}.",
+      "signature": "fn pt(x : Int, y : Int) -> <a href=\"gmlewis/image#Point\">Point</a>",
+      "loc": { "line": 67, "column": 8 }
+    },
+    {
+      "name": "rect",
+      "docstring": " rect is shorthand for [Rectangle]{Pt(x0, y0), [Pt](x1, y1)}. The returned\n rectangle has minimum and maximum coordinates swapped if necessary so that\n it is well-formed.",
+      "signature": "fn rect(x0 : Int, y0 : Int, x1 : Int, y1 : Int) -> <a href=\"gmlewis/image#Rectangle\">Rectangle</a>",
+      "loc": { "line": 330, "column": 8 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Image",
+      "impls": [],
+      "methods": [
+        {
+          "name": "empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Image\">Image</a>::empty(self : <a href=\"gmlewis/image#Image\">Image</a>) -> Bool",
+          "loc": { "line": 75, "column": 8 }
+        },
+        {
+          "name": "new_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/image#Image\">Image</a>::new_empty() -> <a href=\"gmlewis/image#Image\">Image</a>",
+          "loc": { "line": 70, "column": 16 }
+        }
+      ]
+    }
+  ]
+}

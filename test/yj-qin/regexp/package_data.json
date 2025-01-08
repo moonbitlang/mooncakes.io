@@ -1,0 +1,114 @@
+{
+  "readme": "# RegExp\n[![check](https://github.com/yj-qin/regexp/actions/workflows/check.yml/badge.svg)](https://github.com/yj-qin/regexp/actions/workflows/check.yml)\n\nA regular expression module based on a backtracking engine. Due to backtracking during matching, some regular expressions will run for a long time under specific inputs, also known as catastrophic backtracking.\nThe design of the bytecode and interpreter was heavily inspired by the .NET regular expression library.\n\n## Usage\n\n```\nlet regexp = @regexp.compile(\"^(?<addr>[a-zA-Z0-9._%+-]+)@(?<host>[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,})$\")?\nlet match_result = regexp.matches(\"12345@test.com\")\nprintln(match_result.success()) // true\nprintln(match_result.captures()) // [\"12345@test.com\", \"12345\", \"test.com\"]\nprintln(match_result.named_captures()) // {\"addr\": \"12345\", \"host\": \"test.com\"}\n```\n\n## Features\n\n### Character classes\n\n- [x] Character range\n- [x] Escapes (e.g. `\\d`, `\\D`, `\\s`, `\\S`, `\\w`, `\\W`)\n\n### Assertions\n\n- [x] Begin of input\n- [x] End of input\n- [ ] Word boundary\n- [ ] Lookaround\n\n### Groups\n\n- [x] Capturing group\n- [x] Non-capturing group\n- [x] Named capturing group\n\n### Backreferences\n\n- [ ] Group backreference\n- [ ] Named backreference\n\n### Quantifiers\n\n- [x] Zero or more (\\*)\n- [x] Zero or one (?)\n- [x] One or more (+)\n- [x] Range ({n}, {n,}, {n, m})\n- [x] Non-greedy\n\n### Encodings\n\n- [ ] Unicode\n",
+  "name": "yj-qin/regexp",
+  "traits": [],
+  "types": [
+    {
+      "name": "MatchResult",
+      "docstring": "",
+      "signature": "type MatchResult",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "captures",
+          "docstring": "",
+          "signature": "fn <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>::captures(self : <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+          "loc": { "line": 14, "column": 8 }
+        },
+        {
+          "name": "named_captures",
+          "docstring": "",
+          "signature": "fn <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>::named_captures(self : <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>) -> <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, String]",
+          "loc": { "line": 19, "column": 8 }
+        },
+        {
+          "name": "success",
+          "docstring": "",
+          "signature": "fn <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>::success(self : <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>) -> Bool",
+          "loc": { "line": 9, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 6, "column": 10 }
+            }
+          ],
+          "loc": { "line": 6, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ParseError",
+      "docstring": "",
+      "signature": "pub(all) enum ParseError {\n  InternalParserError\n  UnmatchedGroupBegin(Int)\n  UnmatchedGroupEnd(Int)\n  UnmatchedGroupName(Int)\n  EmptyGroupName(Int)\n  EmptyGroup(Int)\n  UnmatchedCharClassEnd(Int)\n  UnspecifiedLoopTarget(Int)\n  InvalidLoop(Int)\n  LoopCountOutOfRange(Int)\n  LoopMaxCountSmallerThanMinCount(Int)\n  EndPatternAtEscape(Int)\n  ClassMissingBracket(Int)\n  GroupMissingParen(Int)\n}",
+      "loc": { "line": 5, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"yj-qin/regexp#ParseError\">ParseError</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"yj-qin/regexp#ParseError\">ParseError</a>, <a href=\"yj-qin/regexp#ParseError\">ParseError</a>) -> Bool",
+              "loc": { "line": 20, "column": 10 }
+            }
+          ],
+          "loc": { "line": 20, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"yj-qin/regexp#ParseError\">ParseError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"yj-qin/regexp#ParseError\">ParseError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 20, "column": 14 }
+            }
+          ],
+          "loc": { "line": 20, "column": 14 }
+        }
+      ]
+    },
+    {
+      "name": "RegExp",
+      "docstring": "",
+      "signature": "type RegExp",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [
+        {
+          "name": "matches",
+          "docstring": "",
+          "signature": "fn <a href=\"yj-qin/regexp#RegExp\">RegExp</a>::matches(self : <a href=\"yj-qin/regexp#RegExp\">RegExp</a>, text : String, start~ : Int = .., end~ : Int = ..) -> <a href=\"yj-qin/regexp#MatchResult\">MatchResult</a>",
+          "loc": { "line": 25, "column": 8 }
+        },
+        {
+          "name": "pattern",
+          "docstring": "",
+          "signature": "fn <a href=\"yj-qin/regexp#RegExp\">RegExp</a>::pattern(self : <a href=\"yj-qin/regexp#RegExp\">RegExp</a>) -> String",
+          "loc": { "line": 20, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "compile",
+      "docstring": "",
+      "signature": "fn compile(pattern : String) -> <a href=\"yj-qin/regexp#RegExp\">RegExp</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 15, "column": 8 }
+    }
+  ],
+  "misc": []
+}

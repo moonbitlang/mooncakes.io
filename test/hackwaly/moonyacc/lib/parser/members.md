@@ -61,16 +61,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,66:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#Clause">Clause</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#Clause">Clause</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,66:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#Clause">Clause</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,66:::fn <a href="hackwaly/moonyacc/lib/parser#Clause">Clause</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#Clause">Clause</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,66:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#Clause">Clause</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## ClauseAction
 
@@ -85,16 +82,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,73:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseAction">ClauseAction</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseAction">ClauseAction</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,73:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseAction">ClauseAction</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,73:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseAction">ClauseAction</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseAction">ClauseAction</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,73:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseAction">ClauseAction</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## ClauseItem
 
@@ -108,16 +102,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,85:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItem">ClauseItem</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItem">ClauseItem</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,85:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItem">ClauseItem</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,85:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItem">ClauseItem</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItem">ClauseItem</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,85:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItem">ClauseItem</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## ClauseItemIdent
 
@@ -131,48 +122,37 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a> with compare(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a> with op_equal(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a> with output(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>::compare(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>::op_equal(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>::output(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn compare(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn op_equal(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn output(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,29:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItemIdent">ClauseItemIdent</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## ClauseItemSymbol
 
@@ -186,16 +166,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,91:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemSymbol">ClauseItemSymbol</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItemSymbol">ClauseItemSymbol</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,91:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ClauseItemSymbol">ClauseItemSymbol</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,91:::fn <a href="hackwaly/moonyacc/lib/parser#ClauseItemSymbol">ClauseItemSymbol</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItemSymbol">ClauseItemSymbol</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,91:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#ClauseItemSymbol">ClauseItemSymbol</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## CodeWithSubst
 
@@ -209,16 +186,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,79:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#CodeWithSubst">CodeWithSubst</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#CodeWithSubst">CodeWithSubst</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,79:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#CodeWithSubst">CodeWithSubst</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,79:::fn <a href="hackwaly/moonyacc/lib/parser#CodeWithSubst">CodeWithSubst</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#CodeWithSubst">CodeWithSubst</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,79:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#CodeWithSubst">CodeWithSubst</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## Command
 
@@ -239,16 +213,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,52:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#Command">Command</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#Command">Command</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,52:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#Command">Command</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,52:::fn <a href="hackwaly/moonyacc/lib/parser#Command">Command</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#Command">Command</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,52:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#Command">Command</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## LexEngine
 
@@ -327,16 +298,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,7:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ParserSpec">ParserSpec</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#ParserSpec">ParserSpec</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,7:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#ParserSpec">ParserSpec</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,7:::fn <a href="hackwaly/moonyacc/lib/parser#ParserSpec">ParserSpec</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#ParserSpec">ParserSpec</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,7:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#ParserSpec">ParserSpec</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## Rule
 
@@ -351,16 +319,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,59:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#Rule">Rule</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#Rule">Rule</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,59:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#Rule">Rule</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,59:::fn <a href="hackwaly/moonyacc/lib/parser#Rule">Rule</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#Rule">Rule</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,59:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#Rule">Rule</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## SubstItem
 
@@ -375,30 +340,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a> with output(<a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>::output(<a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::fn output(<a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,36:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#SubstItem">SubstItem</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## SubstItemDesc
 
@@ -419,48 +375,37 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a> with compare(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a> with op_equal(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a> with output(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a> with to_json(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>::compare(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>::op_equal(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>::output(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_json
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>::to_json(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>
   ```
   > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn compare(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn op_equal(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn output(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/ast.mbt,23:::fn to_json(<a href="hackwaly/moonyacc/lib/parser#SubstItemDesc">SubstItemDesc</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 ## Token
 
@@ -494,24 +439,18 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/parser.mbt,28:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#Token">Token</a> with output(<a href="hackwaly/moonyacc/lib/parser#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/parser/parser.mbt,28:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#Token">Token</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/parser.mbt,28:::fn output(<a href="hackwaly/moonyacc/lib/parser#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### kind
   ```moonbit
   :::source,hackwaly/moonyacc/lib/parser/parser.mbt,31:::fn <a href="hackwaly/moonyacc/lib/parser#Token">Token</a>::kind(self : <a href="hackwaly/moonyacc/lib/parser#Token">Token</a>) -> <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/parser.mbt,28:::fn <a href="hackwaly/moonyacc/lib/parser#Token">Token</a>::output(<a href="hackwaly/moonyacc/lib/parser#Token">Token</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/parser#Token">Token</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -547,21 +486,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/parser.mbt,86:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a> with output(self : <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,hackwaly/moonyacc/lib/parser/parser.mbt,86:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/parser.mbt,86:::fn <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>::output(self : <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/parser/traits.mbt,85:::fn <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/parser/parser.mbt,86:::fn output(self : <a href="hackwaly/moonyacc/lib/parser#TokenKind">TokenKind</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## YYDecision
 

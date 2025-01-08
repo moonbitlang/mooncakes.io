@@ -1,0 +1,43 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "gzip",
+      "package": {
+        "path": "gmlewis/gzip",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "CompressionLevel",
+            "impls": [
+              { "methods": [ "compare" ] },
+              { "methods": [ "op_equal" ] },
+              { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          { "name": "Header", "impls": [], "methods": [ "new" ] },
+          {
+            "name": "Reader",
+            "impls": [],
+            "methods": [ "close", "multistream", "new", "read", "reset" ]
+          },
+          {
+            "name": "Writer",
+            "impls": [],
+            "methods": [ "close", "flush", "new", "write" ]
+          }
+        ],
+        "typealias": [],
+        "values": [
+          "best_speed", "err_checksum", "err_header", "err_unexpected_eof",
+          "ioeof"
+        ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

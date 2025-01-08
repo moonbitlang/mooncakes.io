@@ -1,0 +1,41 @@
+{
+  "readme": "",
+  "name": "Yoorkin/rabbit-tea",
+  "traits": [],
+  "types": [],
+  "typealias": [
+    {
+      "name": "Command",
+      "docstring": "",
+      "signature": "type Command = <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 2, "column": 1 }
+    }
+  ],
+  "values": [
+    {
+      "name": "batch",
+      "docstring": "",
+      "signature": "fn batch[M](xs : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]]) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 10, "column": 8 }
+    },
+    {
+      "name": "none",
+      "docstring": "",
+      "signature": "fn none[M]() -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 5, "column": 8 }
+    },
+    {
+      "name": "startup",
+      "docstring": " Start the application.",
+      "signature": "fn startup[Model, Message](model~ : Model, update~ : (Message, Model) -> (<a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[Message], Model), view~ : (Model) -> <a href=\"Yoorkin/rabbit-tea/html#Html\">@Yoorkin/rabbit-tea/html.Html</a>[Message], initialize? : Message, url_changed? : (<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">@Yoorkin/rabbit-tea/browser.UrlRequest</a>) -> Message, url_request? : (<a href=\"Yoorkin/rabbit-tea/browser#UrlRequest\">@Yoorkin/rabbit-tea/browser.UrlRequest</a>) -> Message) -> Unit",
+      "loc": { "line": 20, "column": 8 }
+    },
+    {
+      "name": "task",
+      "docstring": "",
+      "signature": "fn task[M](message : M) -> <a href=\"Yoorkin/rabbit-tea/browser#Command\">@Yoorkin/rabbit-tea/browser.Command</a>[M]",
+      "loc": { "line": 15, "column": 8 }
+    }
+  ],
+  "misc": []
+}

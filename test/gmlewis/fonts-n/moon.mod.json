@@ -1,0 +1,18 @@
+{
+  "name": "gmlewis/fonts-n",
+  "version": "0.15.0",
+  "deps": {
+    "gmlewis/fonts": "0.15.0"
+  },
+  "readme": "README.md",
+  "repository": "https://github.com/gmlewis/mbt-fonts-n",
+  "license": "Apache-2.0",
+  "keywords": [
+    "html5 canvas",
+    "pdf",
+    "svg",
+    "open source",
+    "fonts"
+  ],
+  "description": "Experimental package to manipulate open source font data."
+}

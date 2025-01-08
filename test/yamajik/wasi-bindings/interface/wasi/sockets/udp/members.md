@@ -19,30 +19,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,6:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## IncomingDatagramStream
 
@@ -53,13 +44,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### drop
@@ -67,16 +66,6 @@
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,27:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,24:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### receive
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,623:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::receive(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>, max_results : UInt64) -> <a href="moonbitlang/core/result#Result">Result</a>[<a href="moonbitlang/core/array#Array">Array</a>[<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagram">IncomingDatagram</a>], <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">@yamajik/wasi-bindings/interface/wasi/sockets/network.ErrorCode</a>]
@@ -112,11 +101,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#IncomingDatagramStream">IncomingDatagramStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## OutgoingDatagram
 
@@ -130,30 +114,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>
   ```
   > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,12:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## OutgoingDatagramStream
 
@@ -164,13 +139,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### check\_send
@@ -193,16 +176,6 @@
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,36:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,33:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### send
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,762:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::send(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>, datagrams : <a href="moonbitlang/core/array#Array">Array</a>[<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagram">OutgoingDatagram</a>]) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt64, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">@yamajik/wasi-bindings/interface/wasi/sockets/network.ErrorCode</a>]
@@ -249,11 +222,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#OutgoingDatagramStream">OutgoingDatagramStream</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## UdpSocket
 
@@ -264,13 +232,21 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### address\_family
@@ -310,16 +286,6 @@
   >  - <https://man7.org/linux/man-pages/man2/getsockname.2.html>
   >  - <https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-getsockname>
   >  - <https://man.freebsd.org/cgi/man.cgi?getsockname>
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,15:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### receive\_buffer\_size
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,517:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>::receive_buffer_size(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[UInt64, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">@yamajik/wasi-bindings/interface/wasi/sockets/network.ErrorCode</a>]
@@ -450,11 +416,6 @@
   > 
   >  Note: this function is here for WASI Preview2 only.
   > It's planned to be removed when `future` is natively supported in Preview3.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### unicast\_hop\_limit
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/sockets/udp/top.mbt,471:::fn <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>::unicast_hop_limit(self : <a href="yamajik/wasi-bindings/interface/wasi/sockets/udp#UdpSocket">UdpSocket</a>) -> <a href="moonbitlang/core/result#Result">Result</a>[Byte, <a href="yamajik/wasi-bindings/interface/wasi/sockets/network#ErrorCode">@yamajik/wasi-bindings/interface/wasi/sockets/network.ErrorCode</a>]

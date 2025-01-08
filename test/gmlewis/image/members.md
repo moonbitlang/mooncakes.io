@@ -29,8 +29,8 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[Image](#Image)| Image is a finite rectangular grid of \[color.Color\] values taken from a color|
-|[RGBA64Image](#RGBA64Image)| RGBA64Image is an \[Image\] whose pixels can be converted directly to a|
+|[@gmlewis/image.Image](#@gmlewis/image.Image)| Image is a finite rectangular grid of \[color.Color\] values taken from a color|
+|[@gmlewis/image.RGBA64Image](#@gmlewis/image.RGBA64Image)| RGBA64Image is an \[Image\] whose pixels can be converted directly to a|
 
 |Type|description|
 |---|---|
@@ -57,10 +57,10 @@ https://github.com/chawyehsu/moonup
 |[pt](#pt)| pt is shorthand for \[Point\]{X, Y}.|
 |[rect](#rect)| rect is shorthand for \[Rectangle\]{Pt(x0, y0), \[Pt\](x1, y1)}. The returned|
 
-## Image
+## @gmlewis/image.Image
 
 ```moonbit
-:::source,gmlewis/image/image.mbt,42:::pub(open) trait Image {
+:::source,gmlewis/image/image.mbt,42:::pub(open) trait @gmlewis/image.Image {
   color_model(Self) -> <a href="gmlewis/image/color#Model">@gmlewis/image/color.Model</a>
   bounds(Self) -> <a href="gmlewis/image#Rectangle">Rectangle</a>
   at(Self, Int, Int) -> <a href="gmlewis/image/color#Color">@gmlewis/image/color.Color</a>
@@ -77,10 +77,10 @@ https://github.com/chawyehsu/moonup
  Image is a finite rectangular grid of \[color.Color\] values taken from a color
 model.
 
-## RGBA64Image
+## @gmlewis/image.RGBA64Image
 
 ```moonbit
-:::source,gmlewis/image/image.mbt,81:::pub(open) trait RGBA64Image {
+:::source,gmlewis/image/image.mbt,81:::pub(open) trait @gmlewis/image.RGBA64Image {
   rgba64_at(Self, Int, Int) -> <a href="gmlewis/image/color#RGBA64">@gmlewis/image/color.RGBA64</a>
   color_model(Self) -> <a href="gmlewis/image/color#Model">@gmlewis/image/color.Model</a>
   bounds(Self) -> <a href="gmlewis/image#Rectangle">Rectangle</a>
@@ -1396,30 +1396,21 @@ otherwise.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/image/image.mbt,94:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image#SizeError">SizeError</a> with op_equal(<a href="gmlewis/image#SizeError">SizeError</a>, <a href="gmlewis/image#SizeError">SizeError</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/image/image.mbt,94:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image#SizeError">SizeError</a> with output(<a href="gmlewis/image#SizeError">SizeError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/image/image.mbt,94:::fn <a href="gmlewis/image#SizeError">SizeError</a>::op_equal(<a href="gmlewis/image#SizeError">SizeError</a>, <a href="gmlewis/image#SizeError">SizeError</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/image/image.mbt,94:::fn <a href="gmlewis/image#SizeError">SizeError</a>::output(<a href="gmlewis/image#SizeError">SizeError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/image/traits.mbt,85:::fn <a href="gmlewis/image#SizeError">SizeError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/image/image.mbt,94:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/image#SizeError">SizeError</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/image/image.mbt,94:::fn op_equal(<a href="gmlewis/image#SizeError">SizeError</a>, <a href="gmlewis/image#SizeError">SizeError</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/image/image.mbt,94:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/image#SizeError">SizeError</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/image/image.mbt,94:::fn output(<a href="gmlewis/image#SizeError">SizeError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## add2\_non\_neg
 

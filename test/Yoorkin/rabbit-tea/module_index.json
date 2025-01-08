@@ -1,0 +1,157 @@
+{
+  "name": "Yoorkin",
+  "package": null,
+  "childs": [
+    {
+      "name": "rabbit-tea",
+      "package": {
+        "path": "Yoorkin/rabbit-tea",
+        "readme": false,
+        "traits": [],
+        "types": [],
+        "typealias": [ "Command" ],
+        "values": [ "batch", "none", "startup", "task" ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "browser",
+          "package": {
+            "path": "Yoorkin/rabbit-tea/browser",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "Command", "impls": [], "methods": [ "map" ] },
+              { "name": "PredefinedEvent", "impls": [], "methods": [] },
+              {
+                "name": "Sandbox",
+                "impls": [],
+                "methods": [ "launch", "new", "refersh", "update" ]
+              },
+              {
+                "name": "UrlRequest",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "back", "batch", "forward", "load", "none", "push_url",
+              "reload", "replace_url", "scroll_by_pos", "scroll_to",
+              "scroll_to_bottom", "scroll_to_pos", "scroll_to_top", "task"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "example",
+          "package": {
+            "path": "Yoorkin/rabbit-tea/example",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "CardModel", "impls": [], "methods": [] },
+              { "name": "EditModel", "impls": [], "methods": [] },
+              {
+                "name": "EditMsg",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Message",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              { "name": "Model", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "html",
+          "package": {
+            "path": "Yoorkin/rabbit-tea/html",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "AutoComplete", "impls": [], "methods": [] },
+              {
+                "name": "Html",
+                "impls": [],
+                "methods": [ "map", "to_virtual_dom" ]
+              },
+              { "name": "InputType", "impls": [], "methods": [] },
+              { "name": "Target", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [
+              "a", "b", "blockquote", "br", "button", "canvas", "code", "dd",
+              "div", "dl", "dt", "em", "form", "fragment", "h1", "h2", "h3",
+              "h4", "h5", "h6", "hr", "i", "iframe", "img", "input", "label",
+              "li", "node", "nothing", "ol", "p", "pre", "span", "strong",
+              "sub", "sup", "text", "u", "ul"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "http",
+          "package": {
+            "path": "Yoorkin/rabbit-tea/http",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "Body", "impls": [], "methods": [] },
+              { "name": "Expecting", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [ "delete", "get", "patch", "post" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "url",
+          "package": {
+            "path": "Yoorkin/rabbit-tea/url",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Protocol",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Url",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [ "to_string" ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "parse" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

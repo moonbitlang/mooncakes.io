@@ -1,0 +1,1153 @@
+{
+  "readme": "",
+  "name": "suiyunonghen/moonvalue",
+  "traits": [
+    {
+      "name": "@suiyunonghen/moonvalue.IBinBlit",
+      "docstring": " binary blit",
+      "signature": "pub(open) trait @suiyunonghen/moonvalue.IBinBlit : <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> + <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> {\n  newBlit() -> Self\n  as_binwriter(Self) -> <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a>\n  as_binreader(Self) -> <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>\n  blit(Self, Int, Self, Int, Int) -> Unit\n  append_data(Self, Self) -> Unit\n}",
+      "loc": { "line": 714, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@suiyunonghen/moonvalue.IBinReader",
+      "docstring": " binary reader",
+      "signature": "pub(open) trait @suiyunonghen/moonvalue.IBinReader : <a href=\"moonbitlang/core/builtin#Show\">Show</a> {\n  length(Self) -> Int\n  read_byte(Self, Int) -> Byte\n  read_bool(Self, Int) -> Bool\n  read_int16(Self, Int, Bool) -> Int\n  read_int32(Self, Int, Bool) -> Int\n  read_int64(Self, Int, Bool) -> Int64\n  read_float(Self, Int) -> Float\n  read_double(Self, Int) -> Double\n}",
+      "loc": { "line": 292, "column": 1 },
+      "default_impls": [
+        {
+          "name": "read_bool",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> with read_bool(self : Self, offset : Int) -> Bool",
+          "loc": { "line": 378, "column": 1 }
+        },
+        {
+          "name": "read_double",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> with read_double(self : Self, offset : Int) -> Double",
+          "loc": { "line": 329, "column": 1 }
+        },
+        {
+          "name": "read_float",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> with read_float(self : Self, offset : Int) -> Float",
+          "loc": { "line": 324, "column": 1 }
+        },
+        {
+          "name": "read_int16",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> with read_int16(self : Self, offset : Int, littleEndian : Bool) -> Int",
+          "loc": { "line": 334, "column": 1 }
+        },
+        {
+          "name": "read_int32",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> with read_int32(self : Self, offset : Int, littleEndian : Bool) -> Int",
+          "loc": { "line": 344, "column": 1 }
+        },
+        {
+          "name": "read_int64",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> with read_int64(self : Self, offset : Int, littleEndian : Bool) -> Int64",
+          "loc": { "line": 359, "column": 1 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> for Bytes",
+          "methods": [
+            {
+              "name": "length",
+              "docstring": "",
+              "signature": "fn length(self : Bytes) -> Int",
+              "loc": { "line": 552, "column": 36 }
+            },
+            {
+              "name": "read_byte",
+              "docstring": "",
+              "signature": "fn read_byte(self : Bytes, offset : Int) -> Byte",
+              "loc": { "line": 555, "column": 36 }
+            }
+          ],
+          "loc": { "line": 552, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> for <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]",
+          "methods": [
+            {
+              "name": "length",
+              "docstring": "",
+              "signature": "fn length(self : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]) -> Int",
+              "loc": { "line": 693, "column": 42 }
+            },
+            {
+              "name": "read_byte",
+              "docstring": "",
+              "signature": "fn read_byte(self : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte], offset : Int) -> Byte",
+              "loc": { "line": 696, "column": 42 }
+            }
+          ],
+          "loc": { "line": 693, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "@suiyunonghen/moonvalue.IBinWriter",
+      "docstring": " binary writer",
+      "signature": "pub(open) trait @suiyunonghen/moonvalue.IBinWriter {\n  write_byte(Self, Int, Byte) -> Unit\n  write_bool(Self, Int, Bool) -> Unit\n  write_bytes(Self, Int, Bytes) -> Unit\n  write_int16(Self, Int, Int, Bool) -> Unit\n  write_int32(Self, Int, Int, Bool) -> Unit\n  write_int64(Self, Int, Int64, Bool) -> Unit\n  write_double(Self, Int, Double) -> Unit\n  write_float(Self, Int, Float) -> Unit\n  append_byte(Self, Byte) -> Unit\n  append_bool(Self, Bool) -> Unit\n  append_int16(Self, Int, Bool) -> Unit\n  append_int32(Self, Int, Bool) -> Unit\n  append_int64(Self, Int64, Bool) -> Unit\n  append_double(Self, Double) -> Unit\n  append_float(Self, Float) -> Unit\n  write_utf8(Self, <a href=\"suiyunonghen/moonvalue#IString\">IString</a>) -> Unit!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>\n}",
+      "loc": { "line": 392, "column": 1 },
+      "default_impls": [
+        {
+          "name": "append_bool",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_bool(self : Self, b : Bool) -> Unit",
+          "loc": { "line": 439, "column": 1 }
+        },
+        {
+          "name": "append_byte",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_byte(self : Self, b : Byte) -> Unit",
+          "loc": { "line": 434, "column": 1 }
+        },
+        {
+          "name": "append_double",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_double(self : Self, value : Double) -> Unit",
+          "loc": { "line": 502, "column": 1 }
+        },
+        {
+          "name": "append_float",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_float(self : Self, value : Float) -> Unit",
+          "loc": { "line": 507, "column": 1 }
+        },
+        {
+          "name": "append_int16",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_int16(self : Self, value : Int, littleEndian : Bool) -> Unit",
+          "loc": { "line": 487, "column": 1 }
+        },
+        {
+          "name": "append_int32",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_int32(self : Self, value : Int, littleEndian : Bool) -> Unit",
+          "loc": { "line": 492, "column": 1 }
+        },
+        {
+          "name": "append_int64",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with append_int64(self : Self, value : Int64, littleEndian : Bool) -> Unit",
+          "loc": { "line": 497, "column": 1 }
+        },
+        {
+          "name": "write_bool",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_bool(self : Self, offset : Int, value : Bool) -> Unit",
+          "loc": { "line": 448, "column": 1 }
+        },
+        {
+          "name": "write_bytes",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_bytes(self : Self, offset : Int, b : Bytes) -> Unit",
+          "loc": { "line": 457, "column": 1 }
+        },
+        {
+          "name": "write_double",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_double(self : Self, offset : Int, v : Double) -> Unit",
+          "loc": { "line": 542, "column": 1 }
+        },
+        {
+          "name": "write_float",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_float(self : Self, offset : Int, v : Float) -> Unit",
+          "loc": { "line": 547, "column": 1 }
+        },
+        {
+          "name": "write_int16",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_int16(self : Self, offset : Int, value : Int, littleEndian : Bool) -> Unit",
+          "loc": { "line": 472, "column": 1 }
+        },
+        {
+          "name": "write_int32",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_int32(self : Self, offset : Int, value : Int, littleEndian : Bool) -> Unit",
+          "loc": { "line": 512, "column": 1 }
+        },
+        {
+          "name": "write_int64",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_int64(self : Self, offset : Int, value : Int64, littleEndian : Bool) -> Unit",
+          "loc": { "line": 527, "column": 1 }
+        },
+        {
+          "name": "write_utf8",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> with write_utf8(self : Self, str : <a href=\"suiyunonghen/moonvalue#IString\">IString</a>) -> Unit!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>",
+          "loc": { "line": 412, "column": 1 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> for Bytes",
+          "methods": [
+            {
+              "name": "write_byte",
+              "docstring": "",
+              "signature": "fn write_byte(self : Bytes, offset : Int, value : Byte) -> Unit",
+              "loc": { "line": 560, "column": 36 }
+            }
+          ],
+          "loc": { "line": 560, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> for <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]",
+          "methods": [
+            {
+              "name": "write_byte",
+              "docstring": "",
+              "signature": "fn write_byte(self : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte], offset : Int, byte : Byte) -> Unit",
+              "loc": { "line": 701, "column": 42 }
+            }
+          ],
+          "loc": { "line": 701, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "@suiyunonghen/moonvalue.IString",
+      "docstring": " utf16 string interface",
+      "signature": "pub(open) trait @suiyunonghen/moonvalue.IString {\n  charCodeAt(Self, Int) -> Int\n  length(Self) -> Int\n  to_string(Self) -> String\n  to_utf8(Self) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>\n}",
+      "loc": { "line": 2, "column": 1 },
+      "default_impls": [
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IString\">IString</a> with to_string(self : Self) -> String",
+          "loc": { "line": 44, "column": 1 }
+        },
+        {
+          "name": "to_utf8",
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IString\">IString</a> with to_utf8(self : Self) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>",
+          "loc": { "line": 10, "column": 1 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IString\">IString</a> for String",
+          "methods": [
+            {
+              "name": "charCodeAt",
+              "docstring": "",
+              "signature": "fn charCodeAt(self : String, idx : Int) -> Int",
+              "loc": { "line": 61, "column": 34 }
+            },
+            {
+              "name": "length",
+              "docstring": "",
+              "signature": "fn length(self : String) -> Int",
+              "loc": { "line": 66, "column": 34 }
+            },
+            {
+              "name": "to_string",
+              "docstring": "",
+              "signature": "fn to_string(self : String) -> String",
+              "loc": { "line": 69, "column": 34 }
+            }
+          ],
+          "loc": { "line": 61, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "BigEndian",
+      "docstring": "",
+      "signature": "type BigEndian",
+      "loc": { "line": 182, "column": 6 },
+      "methods": [
+        {
+          "name": "uint16",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BigEndian\">BigEndian</a>::uint16(bytes : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> UInt",
+          "loc": { "line": 185, "column": 19 }
+        },
+        {
+          "name": "uint16Bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BigEndian\">BigEndian</a>::uint16Bytes(v : UInt) -> Bytes",
+          "loc": { "line": 194, "column": 19 }
+        },
+        {
+          "name": "uint32",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BigEndian\">BigEndian</a>::uint32(bytes : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> UInt",
+          "loc": { "line": 202, "column": 19 }
+        },
+        {
+          "name": "uint32Bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BigEndian\">BigEndian</a>::uint32Bytes(v : UInt) -> Bytes",
+          "loc": { "line": 220, "column": 19 }
+        },
+        {
+          "name": "uint64",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BigEndian\">BigEndian</a>::uint64(bytes : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> UInt64",
+          "loc": { "line": 230, "column": 19 }
+        },
+        {
+          "name": "uint64Bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BigEndian\">BigEndian</a>::uint64Bytes(v : UInt64) -> Bytes",
+          "loc": { "line": 278, "column": 19 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "BinaryView",
+      "docstring": " share memory binary",
+      "signature": "type BinaryView",
+      "loc": { "line": 565, "column": 8 },
+      "methods": [
+        {
+          "name": "newBinaryView",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>::newBinaryView[B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](src : B, from : Int, len : Int) -> <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B]",
+          "loc": { "line": 572, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 569, "column": 10 }
+            }
+          ],
+          "loc": { "line": 569, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> for <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[<a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>]",
+          "methods": [
+            {
+              "name": "length",
+              "docstring": "",
+              "signature": "fn length(self : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[<a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>]) -> Int",
+              "loc": { "line": 581, "column": 54 }
+            },
+            {
+              "name": "read_bool",
+              "docstring": "",
+              "signature": "fn read_bool(self : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[<a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>], offset : Int) -> Bool",
+              "loc": { "line": 586, "column": 54 }
+            },
+            {
+              "name": "read_byte",
+              "docstring": "",
+              "signature": "fn read_byte(self : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[<a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>], offset : Int) -> Byte",
+              "loc": { "line": 594, "column": 54 }
+            }
+          ],
+          "loc": { "line": 581, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "BsonParser",
+      "docstring": " \n Bson parser",
+      "signature": "type BsonParser",
+      "loc": { "line": 42, "column": 8 },
+      "methods": [
+        {
+          "name": "newparser_with_str_array",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BsonParser\">BsonParser</a>::newparser_with_str_array(shareBinary : Bool, binary : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]) -> <a href=\"suiyunonghen/moonvalue#BsonParser\">BsonParser</a>[String, <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]]",
+          "loc": { "line": 569, "column": 20 }
+        },
+        {
+          "name": "newparser_with_str_bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BsonParser\">BsonParser</a>::newparser_with_str_bytes(shareBinary : Bool, binary : Bytes) -> <a href=\"suiyunonghen/moonvalue#BsonParser\">BsonParser</a>[String, Bytes]",
+          "loc": { "line": 583, "column": 20 }
+        },
+        {
+          "name": "parse",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#BsonParser\">BsonParser</a>::parse[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#BsonParser\">BsonParser</a>[T, B]) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]!<a href=\"suiyunonghen/moonvalue#BsonParserError\">BsonParserError</a>",
+          "loc": { "line": 67, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "BsonParserError",
+      "docstring": " \n msgpack parse error",
+      "signature": "pub(all) enum BsonParserError {\n  BsonEof\n  InvalidateBsonDoc(String)\n  InvalidateBsonDataType(String)\n  InvalidateBsonKey(String)\n  InvalidateStringValue(String)\n  InvalidateBsonBin(String)\n}",
+      "loc": { "line": 31, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/moonvalue#BsonParserError\">BsonParserError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"suiyunonghen/moonvalue#BsonParserError\">BsonParserError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 38, "column": 10 }
+            }
+          ],
+          "loc": { "line": 38, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "CompValueType",
+      "docstring": "",
+      "signature": "pub(all) enum CompValueType {\n  StrMap\n  IntMap\n  Array\n}",
+      "loc": { "line": 926, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ConvertError",
+      "docstring": "",
+      "signature": "pub(all) type! ConvertError String\n",
+      "loc": { "line": 21, "column": 16 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "KeyInfo",
+      "docstring": "",
+      "signature": "type KeyInfo",
+      "loc": { "line": 221, "column": 6 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "LittleEndian",
+      "docstring": "",
+      "signature": "type LittleEndian",
+      "loc": { "line": 72, "column": 6 },
+      "methods": [
+        {
+          "name": "uint16",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#LittleEndian\">LittleEndian</a>::uint16(bytes : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> UInt",
+          "loc": { "line": 75, "column": 22 }
+        },
+        {
+          "name": "uint16Bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#LittleEndian\">LittleEndian</a>::uint16Bytes(v : UInt) -> Bytes",
+          "loc": { "line": 84, "column": 22 }
+        },
+        {
+          "name": "uint32",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#LittleEndian\">LittleEndian</a>::uint32(bytes : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> UInt",
+          "loc": { "line": 92, "column": 22 }
+        },
+        {
+          "name": "uint32Bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#LittleEndian\">LittleEndian</a>::uint32Bytes(v : UInt) -> Bytes",
+          "loc": { "line": 110, "column": 22 }
+        },
+        {
+          "name": "uint64",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#LittleEndian\">LittleEndian</a>::uint64(bytes : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> UInt64",
+          "loc": { "line": 120, "column": 22 }
+        },
+        {
+          "name": "uint64Bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#LittleEndian\">LittleEndian</a>::uint64Bytes(v : UInt64) -> Bytes",
+          "loc": { "line": 168, "column": 22 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "MoonValue",
+      "docstring": "",
+      "signature": "type MoonValue",
+      "loc": { "line": 25, "column": 8 },
+      "methods": [
+        {
+          "name": "add_arr_object",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::add_arr_object[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], valueType : <a href=\"suiyunonghen/moonvalue#CompValueType\">CompValueType</a>) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]",
+          "loc": { "line": 1205, "column": 8 }
+        },
+        {
+          "name": "add_intkey_object",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::add_intkey_object[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, valueType : <a href=\"suiyunonghen/moonvalue#CompValueType\">CompValueType</a>) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]",
+          "loc": { "line": 1073, "column": 8 }
+        },
+        {
+          "name": "add_key_object",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::add_key_object[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, valueType : <a href=\"suiyunonghen/moonvalue#CompValueType\">CompValueType</a>) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]",
+          "loc": { "line": 933, "column": 8 }
+        },
+        {
+          "name": "as_bool",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::as_bool[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], default~ : Bool) -> Bool",
+          "loc": { "line": 408, "column": 8 }
+        },
+        {
+          "name": "as_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::as_datetime[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], default~ : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a> = ..) -> <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>",
+          "loc": { "line": 84, "column": 8 }
+        },
+        {
+          "name": "as_double",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::as_double[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], default~ : Double = ..) -> Double",
+          "loc": { "line": 59, "column": 8 }
+        },
+        {
+          "name": "as_int",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::as_int[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], default~ : Int64 = ..) -> Int64",
+          "loc": { "line": 383, "column": 8 }
+        },
+        {
+          "name": "as_str",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::as_str[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], default~ : String) -> String",
+          "loc": { "line": 361, "column": 8 }
+        },
+        {
+          "name": "as_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::as_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], default~ : T) -> T",
+          "loc": { "line": 345, "column": 8 }
+        },
+        {
+          "name": "bool_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::bool_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, default : Bool) -> Bool",
+          "loc": { "line": 309, "column": 8 }
+        },
+        {
+          "name": "bool_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::bool_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, default : Bool) -> Bool",
+          "loc": { "line": 261, "column": 8 }
+        },
+        {
+          "name": "convert2Array",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::convert2Array[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> Unit",
+          "loc": { "line": 1477, "column": 8 }
+        },
+        {
+          "name": "convert2IntKV",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::convert2IntKV[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> Unit",
+          "loc": { "line": 1411, "column": 8 }
+        },
+        {
+          "name": "convert2KV",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::convert2KV[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> Unit",
+          "loc": { "line": 1404, "column": 8 }
+        },
+        {
+          "name": "datetime_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::datetime_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, default : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>",
+          "loc": { "line": 333, "column": 8 }
+        },
+        {
+          "name": "datetime_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::datetime_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, default : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>",
+          "loc": { "line": 285, "column": 8 }
+        },
+        {
+          "name": "double_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::double_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, default : Double) -> Double",
+          "loc": { "line": 321, "column": 8 }
+        },
+        {
+          "name": "double_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::double_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, default : Double) -> Double",
+          "loc": { "line": 273, "column": 8 }
+        },
+        {
+          "name": "int_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::int_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, default : Int64) -> Int64",
+          "loc": { "line": 297, "column": 8 }
+        },
+        {
+          "name": "int_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::int_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, default : Int64) -> Int64",
+          "loc": { "line": 249, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "\n iterate all childs",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::iter[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]]",
+          "loc": { "line": 1575, "column": 8 }
+        },
+        {
+          "name": "iter2",
+          "docstring": "\n only iterate on map[IString,moonvalue]",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::iter2[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[T, <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]]",
+          "loc": { "line": 1616, "column": 8 }
+        },
+        {
+          "name": "iter_intmap_array",
+          "docstring": "\n only iterate on arrays or intmap",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::iter_intmap_array[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[Int64, <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]]",
+          "loc": { "line": 1639, "column": 8 }
+        },
+        {
+          "name": "new_array",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::new_array[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]]) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]",
+          "loc": { "line": 38, "column": 19 }
+        },
+        {
+          "name": "new_object",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::new_object[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](data : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[T, <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]]) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]",
+          "loc": { "line": 31, "column": 19 }
+        },
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::op_get[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]?",
+          "loc": { "line": 466, "column": 8 }
+        },
+        {
+          "name": "op_set",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::op_set[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, val : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> Unit",
+          "loc": { "line": 434, "column": 8 }
+        },
+        {
+          "name": "parent",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::parent[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]?",
+          "loc": { "line": 52, "column": 8 }
+        },
+        {
+          "name": "set_bool",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_bool[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], value : Bool) -> Unit",
+          "loc": { "line": 1418, "column": 8 }
+        },
+        {
+          "name": "set_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_datetime[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], value : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>) -> Unit",
+          "loc": { "line": 1461, "column": 8 }
+        },
+        {
+          "name": "set_double",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_double[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], value : Double) -> Unit",
+          "loc": { "line": 1445, "column": 8 }
+        },
+        {
+          "name": "set_float",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_float[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], value : Float) -> Unit",
+          "loc": { "line": 1453, "column": 8 }
+        },
+        {
+          "name": "set_index_bin",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_bin[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : B) -> Unit",
+          "loc": { "line": 1279, "column": 8 }
+        },
+        {
+          "name": "set_index_bool",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_bool[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : Bool) -> Unit",
+          "loc": { "line": 1364, "column": 8 }
+        },
+        {
+          "name": "set_index_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_datetime[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>) -> Unit",
+          "loc": { "line": 1313, "column": 8 }
+        },
+        {
+          "name": "set_index_double",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_double[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : Double) -> Unit",
+          "loc": { "line": 1347, "column": 8 }
+        },
+        {
+          "name": "set_index_ext",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_ext[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : B, extType : Int) -> Unit",
+          "loc": { "line": 683, "column": 8 }
+        },
+        {
+          "name": "set_index_float",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_float[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : Float) -> Unit",
+          "loc": { "line": 1330, "column": 8 }
+        },
+        {
+          "name": "set_index_int64",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_int64[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : Int64) -> Unit",
+          "loc": { "line": 1387, "column": 8 }
+        },
+        {
+          "name": "set_index_share_bin",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_share_bin[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B]) -> Unit",
+          "loc": { "line": 1296, "column": 8 }
+        },
+        {
+          "name": "set_index_share_ext",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_share_ext[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B], extType : Int) -> Unit",
+          "loc": { "line": 701, "column": 8 }
+        },
+        {
+          "name": "set_index_share_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_share_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B]) -> Unit",
+          "loc": { "line": 1262, "column": 8 }
+        },
+        {
+          "name": "set_index_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_index_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, v : T) -> Unit",
+          "loc": { "line": 1245, "column": 8 }
+        },
+        {
+          "name": "set_int",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_int[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], value : Int64) -> Unit",
+          "loc": { "line": 1430, "column": 8 }
+        },
+        {
+          "name": "set_intkey_bin",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_bin[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : B) -> Unit",
+          "loc": { "line": 735, "column": 8 }
+        },
+        {
+          "name": "set_intkey_bool",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_bool[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : Bool) -> Unit",
+          "loc": { "line": 865, "column": 8 }
+        },
+        {
+          "name": "set_intkey_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_datetime[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>) -> Unit",
+          "loc": { "line": 767, "column": 8 }
+        },
+        {
+          "name": "set_intkey_double",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_double[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : Double) -> Unit",
+          "loc": { "line": 783, "column": 8 }
+        },
+        {
+          "name": "set_intkey_ext",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_ext[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : B, extType : Int) -> Unit",
+          "loc": { "line": 644, "column": 8 }
+        },
+        {
+          "name": "set_intkey_float",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_float[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : Float) -> Unit",
+          "loc": { "line": 719, "column": 8 }
+        },
+        {
+          "name": "set_intkey_int64",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_int64[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : Int64) -> Unit",
+          "loc": { "line": 894, "column": 8 }
+        },
+        {
+          "name": "set_intkey_share_bin",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_share_bin[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B]) -> Unit",
+          "loc": { "line": 751, "column": 8 }
+        },
+        {
+          "name": "set_intkey_share_ext",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_share_ext[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B], extType : Int) -> Unit",
+          "loc": { "line": 662, "column": 8 }
+        },
+        {
+          "name": "set_intkey_share_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_share_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B]) -> Unit",
+          "loc": { "line": 848, "column": 8 }
+        },
+        {
+          "name": "set_intkey_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_intkey_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : Int64, v : T) -> Unit",
+          "loc": { "line": 832, "column": 8 }
+        },
+        {
+          "name": "set_key_bin",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_bin[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : B) -> Unit",
+          "loc": { "line": 557, "column": 8 }
+        },
+        {
+          "name": "set_key_bool",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_bool[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, bool : Bool) -> Unit",
+          "loc": { "line": 496, "column": 8 }
+        },
+        {
+          "name": "set_key_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_datetime[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : <a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>) -> Unit",
+          "loc": { "line": 589, "column": 8 }
+        },
+        {
+          "name": "set_key_double",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_double[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : Double) -> Unit",
+          "loc": { "line": 541, "column": 8 }
+        },
+        {
+          "name": "set_key_ext",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_ext[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : B, extType : Int) -> Unit",
+          "loc": { "line": 605, "column": 8 }
+        },
+        {
+          "name": "set_key_float",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_float[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : Float) -> Unit",
+          "loc": { "line": 525, "column": 8 }
+        },
+        {
+          "name": "set_key_int",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_int[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : Int) -> Unit",
+          "loc": { "line": 487, "column": 8 }
+        },
+        {
+          "name": "set_key_int64",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_int64[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : Int64) -> Unit",
+          "loc": { "line": 910, "column": 8 }
+        },
+        {
+          "name": "set_key_share_bin",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_share_bin[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B]) -> Unit",
+          "loc": { "line": 573, "column": 8 }
+        },
+        {
+          "name": "set_key_share_ext",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_share_ext[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : <a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B], extType : Int) -> Unit",
+          "loc": { "line": 623, "column": 8 }
+        },
+        {
+          "name": "set_key_share_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_share_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B]) -> Unit",
+          "loc": { "line": 815, "column": 8 }
+        },
+        {
+          "name": "set_key_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_key_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, v : T) -> Unit",
+          "loc": { "line": 799, "column": 8 }
+        },
+        {
+          "name": "set_nil",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_nil[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> Unit",
+          "loc": { "line": 1438, "column": 8 }
+        },
+        {
+          "name": "set_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::set_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], value : T) -> Unit",
+          "loc": { "line": 1469, "column": 8 }
+        },
+        {
+          "name": "str_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::str_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, default : String) -> String",
+          "loc": { "line": 201, "column": 8 }
+        },
+        {
+          "name": "str_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::str_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, default : String) -> String",
+          "loc": { "line": 174, "column": 8 }
+        },
+        {
+          "name": "string_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::string_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int, default : T) -> T",
+          "loc": { "line": 228, "column": 8 }
+        },
+        {
+          "name": "string_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::string_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T, default : T) -> T",
+          "loc": { "line": 153, "column": 8 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::to_string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> String",
+          "loc": { "line": 1494, "column": 8 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::value[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> <a href=\"suiyunonghen/moonvalue#ValueData\">ValueData</a>[T, B]",
+          "loc": { "line": 45, "column": 8 }
+        },
+        {
+          "name": "value_by_index",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::value_by_index[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], index : Int) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]?",
+          "loc": { "line": 136, "column": 8 }
+        },
+        {
+          "name": "value_by_key",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>::value_by_key[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B], key : T) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]?",
+          "loc": { "line": 110, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "MsgPackParser",
+      "docstring": " msgpack parser",
+      "signature": "type MsgPackParser",
+      "loc": { "line": 43, "column": 8 },
+      "methods": [
+        {
+          "name": "newparser_with_str_array",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MsgPackParser\">MsgPackParser</a>::newparser_with_str_array(shareBinary : Bool, binary : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]) -> <a href=\"suiyunonghen/moonvalue#MsgPackParser\">MsgPackParser</a>[String, <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]]",
+          "loc": { "line": 716, "column": 23 }
+        },
+        {
+          "name": "newparser_with_str_bytes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MsgPackParser\">MsgPackParser</a>::newparser_with_str_bytes(shareBinary : Bool, binary : Bytes) -> <a href=\"suiyunonghen/moonvalue#MsgPackParser\">MsgPackParser</a>[String, Bytes]",
+          "loc": { "line": 773, "column": 23 }
+        },
+        {
+          "name": "parse",
+          "docstring": " parse msgpack",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MsgPackParser\">MsgPackParser</a>::parse[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MsgPackParser\">MsgPackParser</a>[T, B]) -> <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]!<a href=\"suiyunonghen/moonvalue#MsgPackParserError\">MsgPackParserError</a>",
+          "loc": { "line": 214, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "MsgPackParserError",
+      "docstring": " msgpack parse error",
+      "signature": "pub(all) enum MsgPackParserError {\n  InvalidateMsgPackMapType(String)\n  ErrorUtf8String(String)\n  ErrorExtError(String)\n  ErrorKey(String)\n  ErrorIntKey(String)\n}",
+      "loc": { "line": 228, "column": 16 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "MsgpackEncoder",
+      "docstring": "",
+      "signature": "type MsgpackEncoder",
+      "loc": { "line": 787, "column": 8 },
+      "methods": [
+        {
+          "name": "encode",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MsgpackEncoder\">MsgpackEncoder</a>::encode[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinBlit\">IBinBlit</a> + <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> + <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#MsgpackEncoder\">MsgpackEncoder</a>[B], value : <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]) -> Unit",
+          "loc": { "line": 1027, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#MsgpackEncoder\">MsgpackEncoder</a>::new[B : <a href=\"suiyunonghen/moonvalue#IBinBlit\">IBinBlit</a> + <a href=\"suiyunonghen/moonvalue#IBinWriter\">IBinWriter</a> + <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](writer : B) -> <a href=\"suiyunonghen/moonvalue#MsgpackEncoder\">MsgpackEncoder</a>[B]",
+          "loc": { "line": 792, "column": 24 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "StringView",
+      "docstring": " share memory string",
+      "signature": "type StringView",
+      "loc": { "line": 602, "column": 8 },
+      "methods": [
+        {
+          "name": "newStringView",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>::newStringView[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](source : B, from : Int, len : Int, stringReader : (B, Int, Int) -> T!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>) -> <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B]",
+          "loc": { "line": 611, "column": 20 }
+        },
+        {
+          "name": "string",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>::string[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B]) -> String",
+          "loc": { "line": 631, "column": 8 }
+        },
+        {
+          "name": "value",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>::value[T : <a href=\"suiyunonghen/moonvalue#IString\">IString</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B]) -> T!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>",
+          "loc": { "line": 621, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"suiyunonghen/moonvalue#IString\">IString</a> for <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[String, Bytes]",
+          "methods": [
+            {
+              "name": "charCodeAt",
+              "docstring": "",
+              "signature": "fn charCodeAt(self : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[String, Bytes], index : Int) -> Int",
+              "loc": { "line": 645, "column": 53 }
+            },
+            {
+              "name": "length",
+              "docstring": "",
+              "signature": "fn length(self : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[String, Bytes]) -> Int",
+              "loc": { "line": 663, "column": 53 }
+            },
+            {
+              "name": "to_string",
+              "docstring": "",
+              "signature": "fn to_string(self : <a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[String, Bytes]) -> String",
+              "loc": { "line": 678, "column": 53 }
+            }
+          ],
+          "loc": { "line": 645, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "ValueData",
+      "docstring": " data of moonvalue",
+      "signature": "pub(all) enum ValueData {\n  VT_Null\n  VT_True\n  VT_False\n  VT_Int(Int64)\n  VT_Double(Double)\n  VT_DateTime(<a href=\"suiyunonghen/datetime#DateTime\">@suiyunonghen/datetime.DateTime</a>)\n  VT_Float(Float)\n  VT_String(T)\n  VT_ShareString(<a href=\"suiyunonghen/moonvalue#StringView\">StringView</a>[T, B])\n  VT_Bin(B)\n  VT_ShareBin(<a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B])\n  VT_Ext(B, Int)\n  VT_ShareExt(<a href=\"suiyunonghen/moonvalue#BinaryView\">BinaryView</a>[B], Int)\n  VT_Obj(<a href=\"moonbitlang/core/builtin#Map\">Map</a>[T, <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]])\n  VT_Array(<a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]])\n  VT_IntKeyObj(<a href=\"moonbitlang/core/builtin#Map\">Map</a>[Int64, <a href=\"suiyunonghen/moonvalue#MoonValue\">MoonValue</a>[T, B]])\n}",
+      "loc": { "line": 5, "column": 15 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "utf16_utf8",
+      "docstring": "",
+      "signature": "fn utf16_utf8(str : String) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>",
+      "loc": { "line": 24, "column": 8 }
+    },
+    {
+      "name": "utf8_utf16",
+      "docstring": "",
+      "signature": "fn utf8_utf16(utf8Arr : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[Byte]) -> String!<a href=\"suiyunonghen/moonvalue#ConvertError\">ConvertError</a>",
+      "loc": { "line": 47, "column": 8 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "IString",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"suiyunonghen/moonvalue#IString\">IString</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal(self : <a href=\"suiyunonghen/moonvalue#IString\">IString</a>, other : <a href=\"suiyunonghen/moonvalue#IString\">IString</a>) -> Bool",
+              "loc": { "line": 34, "column": 31 }
+            }
+          ],
+          "loc": { "line": 34, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"suiyunonghen/moonvalue#IString\">IString</a>",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : <a href=\"suiyunonghen/moonvalue#IString\">IString</a>, hash : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 39, "column": 33 }
+            }
+          ],
+          "loc": { "line": 39, "column": 1 }
+        }
+      ],
+      "methods": []
+    },
+    {
+      "name": "IBinReader",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>, l : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 304, "column": 36 }
+            }
+          ],
+          "loc": { "line": 304, "column": 1 }
+        }
+      ],
+      "methods": [
+        {
+          "name": "op_get",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>::op_get(self : <a href=\"suiyunonghen/moonvalue#IBinReader\">IBinReader</a>, offset : Int) -> Byte",
+          "loc": { "line": 383, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

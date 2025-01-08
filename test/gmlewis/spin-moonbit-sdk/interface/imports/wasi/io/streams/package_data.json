@@ -1,0 +1,219 @@
+{
+  "readme": "WASI I/O is an I/O abstraction API which is currently focused on providing\nstream types.\n\nIn the future, the component model is expected to add built-in stream types;\nwhen it does, they are expected to subsume this API.",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams",
+  "traits": [],
+  "types": [
+    {
+      "name": "InputStream",
+      "docstring": " An input bytestream.\n\n `input-stream`s are *non-blocking* to the extent practical on underlying\n platforms. I/O operations always return promptly; if fewer bytes are\n promptly available than requested, they return the number of bytes promptly\n available, which could even be zero. To wait for data to be available,\n use the `subscribe` function to obtain a `pollable` which can be polled\n for using `wasi:io/poll`.",
+      "signature": "pub(all) type InputStream Int",
+      "loc": { "line": 17, "column": 15 },
+      "methods": [
+        {
+          "name": "blocking_read",
+          "docstring": " Read bytes from a stream, after blocking until at least one byte can\n be read. Except for blocking, behavior is identical to `read`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>::blocking_read(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Bytes, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 105, "column": 21 }
+        },
+        {
+          "name": "blocking_skip",
+          "docstring": " Skip bytes from a stream, after blocking until at least one byte\n can be skipped. Except for blocking behavior, identical to `skip`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>::blocking_skip(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 172, "column": 21 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>) -> Unit",
+          "loc": { "line": 23, "column": 21 }
+        },
+        {
+          "name": "read",
+          "docstring": " Perform a non-blocking read from the stream.\n\n When the source of a `read` is binary data, the bytes from the source\n are returned verbatim. When the source of a `read` is known to the\n implementation to be text, bytes containing the UTF-8 encoding of the\n text are returned.\n\n This function returns a list of bytes containing the read data,\n when successful. The returned list will contain up to `len` bytes;\n it may return fewer than requested, but not more. The list is\n empty when no bytes are available for reading at this time. The\n pollable given by `subscribe` will be ready when more bytes are\n available.\n\n This function fails with a `stream-error` when the operation\n encounters an error, giving `last-operation-failed`, or when the\n stream is closed, giving `closed`.\n\n When the caller gives a `len` of 0, it represents a request to\n read 0 bytes. If the stream is still open, this call should\n succeed and return an empty list, or otherwise fail with `closed`.\n\n The `len` parameter is a `u64`, which could represent a list of u8 which\n is not possible to allocate in wasm32, or not desirable to allocate as\n as a return value by the callee. The callee may return a list of bytes\n less than `len` in size while more bytes are available for reading.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>::read(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Bytes, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 71, "column": 21 }
+        },
+        {
+          "name": "skip",
+          "docstring": " Skip bytes from a stream. Returns number of bytes skipped.\n\n Behaves identical to `read`, except instead of returning a list\n of bytes, returns the number of bytes consumed from the stream.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>::skip(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 141, "column": 21 }
+        },
+        {
+          "name": "subscribe",
+          "docstring": " Create a `pollable` which will resolve once either the specified stream\n has bytes available to read or the other end of the stream has been\n closed.\n The created `pollable` is a child resource of the `input-stream`.\n Implementations may trap if the `input-stream` is dropped before\n all derived `pollable`s created with this function are dropped.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>::subscribe(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+          "loc": { "line": 207, "column": 21 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>) -> Bool",
+              "loc": { "line": 17, "column": 44 }
+            }
+          ],
+          "loc": { "line": 17, "column": 44 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 17, "column": 38 }
+            }
+          ],
+          "loc": { "line": 17, "column": 38 }
+        }
+      ]
+    },
+    {
+      "name": "OutputStream",
+      "docstring": " An output bytestream.\n\n `output-stream`s are *non-blocking* to the extent practical on\n underlying platforms. Except where specified otherwise, I/O operations also\n always return promptly, after the number of bytes that can be written\n promptly, which could even be zero. To wait for the stream to be ready to\n accept data, the `subscribe` function to obtain a `pollable` which can be\n polled for using `wasi:io/poll`.",
+      "signature": "pub(all) type OutputStream Int",
+      "loc": { "line": 35, "column": 15 },
+      "methods": [
+        {
+          "name": "blocking_flush",
+          "docstring": " Request to flush buffered output, and block until flush completes\n and stream is ready for writing again.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::blocking_flush(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 378, "column": 22 }
+        },
+        {
+          "name": "blocking_splice",
+          "docstring": " Read from one stream and write to another, with blocking.\n\n This is similar to `splice`, except that it blocks until the\n `output-stream` is ready for writing, and the `input-stream`\n is ready for reading, before performing the `splice`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::blocking_splice(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, src : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 554, "column": 22 }
+        },
+        {
+          "name": "blocking_write_and_flush",
+          "docstring": " Perform a write of up to 4096 bytes, and then flush the stream. Block\n until all of these operations are complete, or an error occurs.\n\n This is a convenience wrapper around the use of `check-write`,\n `subscribe`, `write`, and `flush`, and is implemented with the\n following pseudo-code:\n\n ```text\n let pollable = this.subscribe();\n while !contents.is_empty() {\n // Wait for the stream to become writable\n pollable.block();\n let Ok(n) = this.check-write(); // eliding error handling\n let len = min(n, contents.len());\n let (chunk, rest) = contents.split_at(len);\n this.write(chunk  );            // eliding error handling\n contents = rest;\n }\n this.flush();\n // Wait for completion of `flush`\n pollable.block();\n // Check for any errors that arose during `flush`\n let _ = this.check-write();         // eliding error handling\n ```",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::blocking_write_and_flush(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, contents : Bytes) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 313, "column": 22 }
+        },
+        {
+          "name": "blocking_write_zeroes_and_flush",
+          "docstring": " Perform a write of up to 4096 zeroes, and then flush the stream.\n Block until all of these operations are complete, or an error\n occurs.\n\n This is a convenience wrapper around the use of `check-write`,\n `subscribe`, `write-zeroes`, and `flush`, and is implemented with\n the following pseudo-code:\n\n ```text\n let pollable = this.subscribe();\n while num_zeroes != 0 {\n // Wait for the stream to become writable\n pollable.block();\n let Ok(n) = this.check-write(); // eliding error handling\n let len = min(n, num_zeroes);\n this.write-zeroes(len);         // eliding error handling\n num_zeroes -= len;\n }\n this.flush();\n // Wait for completion of `flush`\n pollable.block();\n // Check for any errors that arose during `flush`\n let _ = this.check-write();         // eliding error handling\n ```",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::blocking_write_zeroes_and_flush(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 476, "column": 22 }
+        },
+        {
+          "name": "check_write",
+          "docstring": " Check readiness for writing. This function never blocks.\n\n Returns the number of bytes permitted for the next call to `write`,\n or an error. Calling `write` with more bytes than this function has\n permitted will trap.\n\n When this function returns 0 bytes, the `subscribe` pollable will\n become ready when this function will report at least 1 byte, or an\n error.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::check_write(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 221, "column": 22 }
+        },
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>) -> Unit",
+          "loc": { "line": 41, "column": 22 }
+        },
+        {
+          "name": "flush",
+          "docstring": " Request to flush buffered output. This function never blocks.\n\n This tells the output-stream that the caller intends any buffered\n output to be flushed. the output which is expected to be flushed\n is all that has been passed to `write` prior to this call.\n\n Upon calling this function, the `output-stream` will not accept any\n writes (`check-write` will return `ok(0)`) until the flush has\n completed. The `subscribe` pollable will become ready when the\n flush has completed and the stream can accept more writes.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::flush(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 354, "column": 22 }
+        },
+        {
+          "name": "splice",
+          "docstring": " Read from one stream and write to another.\n\n The behavior of splice is equivelant to:\n 1. calling `check-write` on the `output-stream`\n 2. calling `read` on the `input-stream` with the smaller of the\n `check-write` permitted length and the `len` provided to `splice`\n 3. calling `write` on the `output-stream` with that read data.\n\n Any error reported by the call to `check-write`, `read`, or\n `write` ends the splice and reports that error.\n\n This function returns the number of bytes transferred; it may be less\n than `len`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::splice(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, src : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#InputStream\">InputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 518, "column": 22 }
+        },
+        {
+          "name": "subscribe",
+          "docstring": " Create a `pollable` which will resolve once the output-stream\n is ready for more writing, or an error has occured. When this\n pollable is ready, `check-write` will return `ok(n)` with n>0, or an\n error.\n\n If the stream is closed, this pollable is always ready immediately.\n\n The created `pollable` is a child resource of the `output-stream`.\n Implementations may trap if the `output-stream` is dropped before\n all derived `pollable`s created with this function are dropped.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::subscribe(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+          "loc": { "line": 412, "column": 22 }
+        },
+        {
+          "name": "write",
+          "docstring": " Perform a write. This function never blocks.\n\n When the destination of a `write` is binary data, the bytes from\n `contents` are written verbatim. When the destination of a `write` is\n known to the implementation to be text, the bytes of `contents` are\n transcoded from UTF-8 into the encoding of the destination and then\n written.\n\n Precondition: check-write gave permit of Ok(n) and contents has a\n length of less than or equal to n. Otherwise, this function will trap.\n\n returns Err(closed) without writing if the stream has closed since\n the last call to check-write provided a permit.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::write(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, contents : Bytes) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 258, "column": 22 }
+        },
+        {
+          "name": "write_zeroes",
+          "docstring": " Write zeroes to a stream.\n\n This should be used precisely like `write` with the exact same\n preconditions (must use check-write first), but instead of\n passing a list of bytes, you simply pass the number of zero-bytes\n that should be written.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>::write_zeroes(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, len : UInt64) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>]",
+          "loc": { "line": 423, "column": 22 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>) -> Bool",
+              "loc": { "line": 35, "column": 45 }
+            }
+          ],
+          "loc": { "line": 35, "column": 45 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">OutputStream</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 35, "column": 39 }
+            }
+          ],
+          "loc": { "line": 35, "column": 39 }
+        }
+      ]
+    },
+    {
+      "name": "StreamError",
+      "docstring": " An error for input-stream and output-stream operations.",
+      "signature": "pub(all) enum StreamError {\n  LastOperationFailed(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error#Error_\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/error.Error_</a>)\n  Closed\n}",
+      "loc": { "line": 4, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>) -> Bool",
+              "loc": { "line": 7, "column": 16 }
+            }
+          ],
+          "loc": { "line": 7, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#StreamError\">StreamError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 7, "column": 10 }
+            }
+          ],
+          "loc": { "line": 7, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

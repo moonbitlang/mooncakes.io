@@ -715,7 +715,7 @@ https://people.maths.ox.ac.uk/gilesm/codes/erfinv/gems.pdf
 ## fast\_rsqrt
 
 ```moonbit
-:::source,Kaida-Amethyst/moonbit-math/fast_rsqrt.mbt,2:::fn fast_rsqrt(x : float) -> float
+:::source,Kaida-Amethyst/moonbit-math/fast_rsqrt.mbt,2:::fn fast_rsqrt(x : Float) -> Float
 ```
  Inverse square root approximation using the fast inverse square root algorithm.
 

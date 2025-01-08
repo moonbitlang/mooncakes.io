@@ -11,7 +11,6 @@ Currently, only parsing is implemented.
 |[ParseError](#ParseError)||
 |[ParseErrorData](#ParseErrorData)||
 |[Position](#Position)||
-|[Token](#Token)||
 
 |Value|description|
 |---|---|
@@ -51,16 +50,13 @@ Currently, only parsing is implemented.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/json5/types.mbt,27:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a> with op_equal(<a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>, <a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>) -> Bool
+  :::source,moonbitlang/x/json5/types.mbt,27:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>
   ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/json5/types.mbt,27:::fn <a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>::op_equal(<a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>, <a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>) -> Bool
-  ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/json5/types.mbt,27:::fn op_equal(<a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>, <a href="moonbitlang/x/json5#ParseErrorData">ParseErrorData</a>) -> Bool
+    ```
+    > automatically derived
 
 ## Position
 
@@ -74,30 +70,21 @@ Currently, only parsing is implemented.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/json5/types.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/json5#Position">Position</a> with op_equal(<a href="moonbitlang/x/json5#Position">Position</a>, <a href="moonbitlang/x/json5#Position">Position</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,moonbitlang/x/json5/types.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/json5#Position">Position</a> with output(<a href="moonbitlang/x/json5#Position">Position</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### op\_equal
-  ```moonbit
-  :::source,moonbitlang/x/json5/types.mbt,19:::fn <a href="moonbitlang/x/json5#Position">Position</a>::op_equal(<a href="moonbitlang/x/json5#Position">Position</a>, <a href="moonbitlang/x/json5#Position">Position</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/json5/types.mbt,19:::fn <a href="moonbitlang/x/json5#Position">Position</a>::output(<a href="moonbitlang/x/json5#Position">Position</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/json5/traits.mbt,85:::fn <a href="moonbitlang/x/json5#Position">Position</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/x/json5/types.mbt,19:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="moonbitlang/x/json5#Position">Position</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/x/json5/types.mbt,19:::fn op_equal(<a href="moonbitlang/x/json5#Position">Position</a>, <a href="moonbitlang/x/json5#Position">Position</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,moonbitlang/x/json5/types.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/json5#Position">Position</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,moonbitlang/x/json5/types.mbt,19:::fn output(<a href="moonbitlang/x/json5#Position">Position</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## parse
 
@@ -105,13 +92,3 @@ Currently, only parsing is implemented.
 :::source,moonbitlang/x/json5/parse.mbt,16:::fn parse(input : String) -> <a href="moonbitlang/core/json#Json">Json</a>!<a href="moonbitlang/x/json5#ParseError">ParseError</a>
 ```
 
-
-## Token
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/json5/traits.mbt,85:::fn <a href="moonbitlang/x/json5#Token">Token</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

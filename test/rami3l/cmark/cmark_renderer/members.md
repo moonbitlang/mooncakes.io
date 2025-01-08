@@ -14,8 +14,8 @@
 ```moonbit
 :::source,rami3l/cmark/cmark_renderer/renderer.mbt,34:::pub(all) struct Context {
   renderer : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>
-  state : <a href="moonbitlang/core/builtin#Map">Map</a>[String, <a href="moonbitlang/core/json#Json">Json</a>]
-  b : <a href="moonbitlang/core/buffer#T">@moonbitlang/core/buffer.T</a>
+  state : <a href="moonbitlang/core/error#Error">Error</a>?
+  b : <a href="moonbitlang/core/builtin#StringBuilder">StringBuilder</a>
   doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>
 }
 ```
@@ -24,22 +24,17 @@
 #### mooncakes-io-method-mark-Methods
 - #### block
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,88:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::block(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, block : <a href="rami3l/cmark/cmark#Block">@rami3l/cmark/cmark.Block</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
-  ```
-  > 
-- #### byte
-  ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,64:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::byte(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, byte : Byte) -> Unit
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,83:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::block(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, block : <a href="rami3l/cmark/cmark#Block">@rami3l/cmark/cmark.Block</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
 - #### char
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,69:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::char(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, ch : Char) -> Unit
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,64:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::char(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, ch : Char) -> Unit
   ```
   > 
 - #### doc
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,97:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::doc(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,92:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::doc(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
 - #### init
@@ -49,17 +44,17 @@
   > 
 - #### inline
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,79:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::inline(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, inline : <a href="rami3l/cmark/cmark#Inline">@rami3l/cmark/cmark.Inline</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,74:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::inline(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, inline : <a href="rami3l/cmark/cmark#Inline">@rami3l/cmark/cmark.Inline</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
 - #### new
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,42:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::new(renderer : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>, b : <a href="moonbitlang/core/buffer#T">@moonbitlang/core/buffer.T</a>) -> <a href="rami3l/cmark/cmark_renderer#Context">Context</a>
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,42:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::new(renderer : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>, b : <a href="moonbitlang/core/builtin#StringBuilder">StringBuilder</a>) -> <a href="rami3l/cmark/cmark_renderer#Context">Context</a>
   ```
   > 
 - #### string
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,74:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::string(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, str : String) -> Unit
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,69:::fn <a href="rami3l/cmark/cmark_renderer#Context">Context</a>::string(self : <a href="rami3l/cmark/cmark_renderer#Context">Context</a>, str : String) -> Unit
   ```
   > 
 
@@ -73,21 +68,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/error.mbt,2:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a> with output(<a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/error.mbt,2:::fn <a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a>::output(<a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/traits.mbt,85:::fn <a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,rami3l/cmark/cmark_renderer/error.mbt,2:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a>
   ```
   > 
+  * ```moonbit
+    :::source,rami3l/cmark/cmark_renderer/error.mbt,2:::fn output(<a href="rami3l/cmark/cmark_renderer#RenderError">RenderError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Renderer
 
@@ -106,7 +93,7 @@
 #### mooncakes-io-method-mark-Methods
 - #### buffer\_add\_doc
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,115:::fn <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>::buffer_add_doc(self : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>, buf : <a href="moonbitlang/core/buffer#T">@moonbitlang/core/buffer.T</a>, doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,110:::fn <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>::buffer_add_doc(self : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>, buf : <a href="moonbitlang/core/builtin#StringBuilder">StringBuilder</a>, doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
 - #### compose
@@ -116,7 +103,7 @@
   > 
 - #### doc\_to\_string
   ```moonbit
-  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,108:::fn <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>::doc_to_string(self : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>, doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>) -> String!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,rami3l/cmark/cmark_renderer/renderer.mbt,103:::fn <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>::doc_to_string(self : <a href="rami3l/cmark/cmark_renderer#Renderer">Renderer</a>, doc : <a href="rami3l/cmark/cmark#Doc">@rami3l/cmark/cmark.Doc</a>) -> String!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   > 
 - #### new

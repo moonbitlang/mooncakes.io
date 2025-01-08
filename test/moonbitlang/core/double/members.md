@@ -59,17 +59,25 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,160:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/double#Double">Double</a> with hash(self : Double) -> Int
+  :::source,moonbitlang/core/double/double.mbt,163:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for Double
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/double/double.mbt,163:::fn hash(self : Double) -> Int
+    ```
+    > 
+  * ```moonbit
+    :::source,moonbitlang/core/double/double.mbt,168:::fn hash_combine(self : Double, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,165:::impl <a href="moonbitlang/core/builtin#Hash">Hash</a> for <a href="moonbitlang/core/double#Double">Double</a> with hash_combine(self : Double, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
+  :::source,moonbitlang/core/double/double.mbt,179:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for Double
   ```
   > 
-- ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,176:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/double#Double">Double</a> with output(self : Double, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/core/double/double.mbt,179:::fn output(self : Double, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### abs
@@ -97,49 +105,40 @@
   :::source,moonbitlang/core/double/double.mbt,34:::fn <a href="moonbitlang/core/double#Double">Double</a>::from_int(i : Int) -> Double
   ```
   > 
-- #### hash
-  ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,160:::fn <a href="moonbitlang/core/double#Double">Double</a>::hash(self : Double) -> Int
-  ```
-  > 
-- #### hash\_combine
-  ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,165:::fn <a href="moonbitlang/core/double#Double">Double</a>::hash_combine(self : Double, hasher : <a href="moonbitlang/core/builtin#Hasher">Hasher</a>) -> Unit
-  ```
-  > 
 - #### inf
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,66:::fn <a href="moonbitlang/core/double#Double">Double</a>::inf(sign : Int) -> Double
+  :::source,moonbitlang/core/double/double.mbt,68:::fn <a href="moonbitlang/core/double#Double">Double</a>::inf(sign : Int) -> Double
   ```
   > 
   >  Returns positive infinity if sign \>= 0, negative infinity if sign \< 0.
   > @alert deprecated "Use `@double.infinity` and `@double.neg_infinity` instead"
+  > @coverage.skip
 - #### is\_close
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,181:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_close(self : Double, other : Double, relative_tolerance~ : Double = .., absolute_tolerance~ : Double = ..) -> Bool
+  :::source,moonbitlang/core/double/double.mbt,184:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_close(self : Double, other : Double, relative_tolerance~ : Double = .., absolute_tolerance~ : Double = ..) -> Bool
   ```
   > 
 - #### is\_inf
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,90:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_inf(self : Double) -> Bool
+  :::source,moonbitlang/core/double/double.mbt,93:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_inf(self : Double) -> Bool
   ```
   > 
   >  Check whether the double is infinity
 - #### is\_nan
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,83:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_nan(self : Double) -> Bool
+  :::source,moonbitlang/core/double/double.mbt,86:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_nan(self : Double) -> Bool
   ```
   > 
   >  Check whether the double is a "not-a-number" value
 - #### is\_neg\_inf
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,102:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_neg_inf(self : Double) -> Bool
+  :::source,moonbitlang/core/double/double.mbt,105:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_neg_inf(self : Double) -> Bool
   ```
   > 
   >  Check whether the double is negative infinity
 - #### is\_pos\_inf
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,96:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_pos_inf(self : Double) -> Bool
+  :::source,moonbitlang/core/double/double.mbt,99:::fn <a href="moonbitlang/core/double#Double">Double</a>::is_pos_inf(self : Double) -> Bool
   ```
   > 
   >  Check whether the double is positive infinity
@@ -160,26 +159,23 @@
   > 
 - #### min\_normal
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,77:::fn <a href="moonbitlang/core/double#Double">Double</a>::min_normal() -> Double
+  :::source,moonbitlang/core/double/double.mbt,80:::fn <a href="moonbitlang/core/double#Double">Double</a>::min_normal() -> Double
   ```
   > 
   >  Returns the smallest positive normal value of Double
   > @alert deprecated "Use `@double.min_positive` instead"
+  > @coverage.skip
 - #### nan
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,59:::fn <a href="moonbitlang/core/double#Double">Double</a>::nan() -> Double
+  :::source,moonbitlang/core/double/double.mbt,60:::fn <a href="moonbitlang/core/double#Double">Double</a>::nan() -> Double
   ```
   >  Returns a "not-a-number" value
   >  
   >  @alert deprecated "Use `@double.not_a_number` instead"
+  > @coverage.skip
 - #### op\_mod
   ```moonbit
-  :::source,moonbitlang/core/double/mod_nonjs.mbt,58:::fn <a href="moonbitlang/core/double#Double">Double</a>::op_mod(self : Double, other : Double) -> Double
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,176:::fn <a href="moonbitlang/core/double#Double">Double</a>::output(self : Double, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/double/mod_nonjs.mbt,16:::fn <a href="moonbitlang/core/double#Double">Double</a>::op_mod(self : Double, other : Double) -> Double
   ```
   > 
 - #### pow
@@ -201,9 +197,19 @@
   >  - If the double is positive, returns 1.0.
   >  - If the double is negative, returns -1.0.
   >  - Otherwise, returns the double itself (0.0, -0.0 and NaN).
+- #### to\_be\_bytes
+  ```moonbit
+  :::source,moonbitlang/core/double/double.mbt,208:::fn <a href="moonbitlang/core/double#Double">Double</a>::to_be_bytes(self : Double) -> Bytes
+  ```
+  >  Converts the Double to a Bytes in big-endian byte order.
+- #### to\_le\_bytes
+  ```moonbit
+  :::source,moonbitlang/core/double/double.mbt,213:::fn <a href="moonbitlang/core/double#Double">Double</a>::to_le_bytes(self : Double) -> Bytes
+  ```
+  >  Converts the Double to a Bytes in little-endian byte order.
 - #### to\_string
   ```moonbit
-  :::source,moonbitlang/core/double/double.mbt,171:::fn <a href="moonbitlang/core/double#Double">Double</a>::to_string(self : Double) -> String
+  :::source,moonbitlang/core/double/double.mbt,174:::fn <a href="moonbitlang/core/double#Double">Double</a>::to_string(self : Double) -> String
   ```
   > 
   >  @intrinsic %f64.to\_string

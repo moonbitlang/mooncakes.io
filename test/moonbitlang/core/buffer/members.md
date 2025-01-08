@@ -28,9 +28,13 @@ Buffer, since it is optimized for all targets.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/buffer/buffer.mbt,229:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/buffer#T">T</a> with output(self : <a href="moonbitlang/core/buffer#T">T</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/buffer/buffer.mbt,229:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/buffer#T">T</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/buffer/buffer.mbt,229:::fn output(self : <a href="moonbitlang/core/buffer#T">T</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### contents
@@ -55,11 +59,6 @@ Buffer, since it is optimized for all targets.
   :::source,moonbitlang/core/buffer/buffer.mbt,81:::fn <a href="moonbitlang/core/buffer#T">T</a>::new(size_hint~ : Int = ..) -> <a href="moonbitlang/core/buffer#T">T</a>
   ```
   >  Create a buffer with initial capacity (in bytes).
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/buffer/buffer.mbt,229:::fn <a href="moonbitlang/core/buffer#T">T</a>::output(self : <a href="moonbitlang/core/buffer#T">T</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### reset
   ```moonbit
   :::source,moonbitlang/core/buffer/buffer.mbt,218:::fn <a href="moonbitlang/core/buffer#T">T</a>::reset(self : <a href="moonbitlang/core/buffer#T">T</a>) -> Unit
@@ -72,15 +71,16 @@ Buffer, since it is optimized for all targets.
   > 
 - #### to\_string
   ```moonbit
-  :::source,moonbitlang/core/buffer/deprecated.mbt,19:::fn <a href="moonbitlang/core/buffer#T">T</a>::to_string(self : <a href="moonbitlang/core/buffer#T">T</a>) -> String
+  :::source,moonbitlang/core/buffer/deprecated.mbt,20:::fn <a href="moonbitlang/core/buffer#T">T</a>::to_string(self : <a href="moonbitlang/core/buffer#T">T</a>) -> String
   ```
   > 
   >  Return a new string contains the data in buffer.
   >  
   >  @alert deprecated "Use `Buffer::contents` to read the contents of the buffer"
+  > @coverage.skip
 - #### to\_unchecked\_string
   ```moonbit
-  :::source,moonbitlang/core/buffer/deprecated.mbt,29:::fn <a href="moonbitlang/core/buffer#T">T</a>::to_unchecked_string(self : <a href="moonbitlang/core/buffer#T">T</a>) -> String
+  :::source,moonbitlang/core/buffer/deprecated.mbt,31:::fn <a href="moonbitlang/core/buffer#T">T</a>::to_unchecked_string(self : <a href="moonbitlang/core/buffer#T">T</a>) -> String
   ```
   > 
   >  Return a new unchecked string contains the data in buffer.
@@ -88,6 +88,7 @@ Buffer, since it is optimized for all targets.
   > it simply copy the bytes into a new String.
   >  
   >  @alert deprecated "Use `Buffer::contents` to read the contents of the buffer"
+  > @coverage.skip
 - #### write\_byte
   ```moonbit
   :::source,moonbitlang/core/buffer/buffer.mbt,211:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_byte(self : <a href="moonbitlang/core/buffer#T">T</a>, value : Byte) -> Unit
@@ -117,12 +118,12 @@ Buffer, since it is optimized for all targets.
   >  Write a Double into buffer in little endian format.
 - #### write\_float\_be
   ```moonbit
-  :::source,moonbitlang/core/buffer/buffer.mbt,165:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_float_be(self : <a href="moonbitlang/core/buffer#T">T</a>, value : float) -> Unit
+  :::source,moonbitlang/core/buffer/buffer.mbt,165:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_float_be(self : <a href="moonbitlang/core/buffer#T">T</a>, value : Float) -> Unit
   ```
   >  Write a Float into buffer in big endian format.
 - #### write\_float\_le
   ```moonbit
-  :::source,moonbitlang/core/buffer/buffer.mbt,170:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_float_le(self : <a href="moonbitlang/core/buffer#T">T</a>, value : float) -> Unit
+  :::source,moonbitlang/core/buffer/buffer.mbt,170:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_float_le(self : <a href="moonbitlang/core/buffer#T">T</a>, value : Float) -> Unit
   ```
   >  Write a Float into buffer in little endian format.
 - #### write\_int64\_be
@@ -157,11 +158,12 @@ Buffer, since it is optimized for all targets.
   >  Write a string into buffer in little endian format.
 - #### write\_sub\_string
   ```moonbit
-  :::source,moonbitlang/core/buffer/deprecated.mbt,36:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_sub_string(self : <a href="moonbitlang/core/buffer#T">T</a>, value : String, start : Int, len : Int) -> Unit
+  :::source,moonbitlang/core/buffer/deprecated.mbt,39:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_sub_string(self : <a href="moonbitlang/core/buffer#T">T</a>, value : String, start : Int, len : Int) -> Unit
   ```
   > 
   >  Write a sub-string into buffer.
   > @alert deprecated "Use `Buffer::write_substring` instead"
+  > @coverage.skip
 - #### write\_substring
   ```moonbit
   :::source,moonbitlang/core/buffer/buffer.mbt,189:::fn <a href="moonbitlang/core/buffer#T">T</a>::write_substring(self : <a href="moonbitlang/core/buffer#T">T</a>, value : String, start : Int, len : Int) -> Unit

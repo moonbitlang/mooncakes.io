@@ -1,0 +1,31 @@
+{
+  "readme": "",
+  "name": "oboard/moonbit-eval/typing",
+  "traits": [],
+  "types": [
+    {
+      "name": "TyErr",
+      "docstring": "",
+      "signature": "type TyErr",
+      "loc": { "line": 9, "column": 7 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "extenv",
+      "docstring": "",
+      "signature": "let extenv : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, <a href=\"oboard/moonbit-eval/types#Type\">@oboard/moonbit-eval/types.Type</a>]",
+      "loc": { "line": 34, "column": 9 }
+    },
+    {
+      "name": "typing",
+      "docstring": "",
+      "signature": "fn typing(e : <a href=\"oboard/moonbit-eval/types#Syntax\">@oboard/moonbit-eval/types.Syntax</a>) -> <a href=\"oboard/moonbit-eval/types#Syntax\">@oboard/moonbit-eval/types.Syntax</a>!<a href=\"oboard/moonbit-eval/typing#TyErr\">TyErr</a>",
+      "loc": { "line": 113, "column": 8 }
+    }
+  ],
+  "misc": []
+}

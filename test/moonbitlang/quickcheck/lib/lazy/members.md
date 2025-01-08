@@ -1,7 +1,7 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Monoid](#Monoid)||
+|[@moonbitlang/quickcheck/lib/lazy.Monoid](#@moonbitlang/quickcheck/lib/lazy.Monoid)||
 
 |Type|description|
 |---|---|
@@ -19,10 +19,10 @@
 |[zip\_plus](#zip_plus)||
 |[zip\_with](#zip_with)||
 
-## Monoid
+## @moonbitlang/quickcheck/lib/lazy.Monoid
 
 ```moonbit
-:::source,moonbitlang/quickcheck/lib/lazy/lazy_list.mbt,6:::pub(open) trait Monoid {
+:::source,moonbitlang/quickcheck/lib/lazy/lazy_list.mbt,6:::pub(open) trait @moonbitlang/quickcheck/lib/lazy.Monoid {
   op_add(Self, Self) -> Self
 }
 ```

@@ -89,8 +89,6 @@ println(m1.symmetric_difference(m2)) // of(["a", "d"])
 |Type|description|
 |---|---|
 |[T](#T)||
-|[Entry](#Entry)||
-|[MyString](#MyString)||
 
 ## T
 
@@ -110,59 +108,62 @@ println(m1.symmetric_difference(m2)) // of(["a", "d"])
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,241:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/hashset#T">T</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/hashset#T">T</a>[X]
+  :::source,moonbitlang/core/hashset/hashset.mbt,331:::impl[K : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/hashset/hashset.mbt,331:::fn output[K : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,330:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/hashset#T">T</a> with output[K : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,242:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/hashset#T">T</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/hashset/hashset.mbt,242:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/hashset#T">T</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,55:::fn <a href="moonbitlang/core/hashset#T">T</a>::add[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,56:::fn <a href="moonbitlang/core/hashset#T">T</a>::add[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Unit
   ```
   > 
   >  Insert a key into hash set.
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,241:::fn <a href="moonbitlang/core/hashset#T">T</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/hashset#T">T</a>[X]
-  ```
-  > 
 - #### capacity
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,144:::fn <a href="moonbitlang/core/hashset#T">T</a>::capacity[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Int
+  :::source,moonbitlang/core/hashset/hashset.mbt,145:::fn <a href="moonbitlang/core/hashset#T">T</a>::capacity[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Int
   ```
   > 
   >  Get the capacity of the set.
 - #### clear
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,177:::fn <a href="moonbitlang/core/hashset#T">T</a>::clear[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,178:::fn <a href="moonbitlang/core/hashset#T">T</a>::clear[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Unit
   ```
   > 
   >  Clears the set, removing all keys. Keeps the allocated space.
 - #### contains
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,92:::fn <a href="moonbitlang/core/hashset#T">T</a>::contains[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Bool
+  :::source,moonbitlang/core/hashset/hashset.mbt,93:::fn <a href="moonbitlang/core/hashset#T">T</a>::contains[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Bool
   ```
   > 
   >  Check if the hash set contains a key.
 - #### difference
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,204:::fn <a href="moonbitlang/core/hashset#T">T</a>::difference[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
+  :::source,moonbitlang/core/hashset/hashset.mbt,205:::fn <a href="moonbitlang/core/hashset#T">T</a>::difference[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
   >  Difference of two hash sets.
 - #### each
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,156:::fn <a href="moonbitlang/core/hashset#T">T</a>::each[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K], f : (K) -> Unit) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,157:::fn <a href="moonbitlang/core/hashset#T">T</a>::each[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K], f : (K) -> Unit) -> Unit
   ```
   > 
   >  Iterate over all keys of the set.
 - #### eachi
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,162:::fn <a href="moonbitlang/core/hashset#T">T</a>::eachi[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K], f : (Int, K) -> Unit) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,163:::fn <a href="moonbitlang/core/hashset#T">T</a>::eachi[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K], f : (Int, K) -> Unit) -> Unit
   ```
   > 
   >  Iterate over all keys of the set, with index.
@@ -174,32 +175,33 @@ println(m1.symmetric_difference(m2)) // of(["a", "d"])
   >  Create new hash set from array.
 - #### from\_iter
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,234:::fn <a href="moonbitlang/core/hashset#T">T</a>::from_iter[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
+  :::source,moonbitlang/core/hashset/hashset.mbt,235:::fn <a href="moonbitlang/core/hashset#T">T</a>::from_iter[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](iter : <a href="moonbitlang/core/builtin#Iter">Iter</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
 - #### insert
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,49:::fn <a href="moonbitlang/core/hashset#T">T</a>::insert[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,50:::fn <a href="moonbitlang/core/hashset#T">T</a>::insert[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Unit
   ```
   > 
   >  Insert a key into hash set.
   > @alert unsafe "Panic if the hash set is full."
   > @alert deprecated "Use `add` instead."
+  > @coverage.skip
 - #### intersection
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,196:::fn <a href="moonbitlang/core/hashset#T">T</a>::intersection[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
+  :::source,moonbitlang/core/hashset/hashset.mbt,197:::fn <a href="moonbitlang/core/hashset#T">T</a>::intersection[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
   >  Intersection of two hash sets.
 - #### is\_empty
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,150:::fn <a href="moonbitlang/core/hashset#T">T</a>::is_empty[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Bool
+  :::source,moonbitlang/core/hashset/hashset.mbt,151:::fn <a href="moonbitlang/core/hashset#T">T</a>::is_empty[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Bool
   ```
   > 
   >  Check if the hash set is empty.
 - #### iter
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,220:::fn <a href="moonbitlang/core/hashset#T">T</a>::iter[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[K]
+  :::source,moonbitlang/core/hashset/hashset.mbt,221:::fn <a href="moonbitlang/core/hashset#T">T</a>::iter[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[K]
   ```
   > 
 - #### new
@@ -213,58 +215,28 @@ println(m1.symmetric_difference(m2)) // of(["a", "d"])
   :::source,moonbitlang/core/hashset/hashset.mbt,39:::fn <a href="moonbitlang/core/hashset#T">T</a>::of[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,330:::fn <a href="moonbitlang/core/hashset#T">T</a>::output[K : <a href="moonbitlang/core/builtin#Show">Show</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
 - #### remove
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,114:::fn <a href="moonbitlang/core/hashset#T">T</a>::remove[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Unit
+  :::source,moonbitlang/core/hashset/hashset.mbt,115:::fn <a href="moonbitlang/core/hashset#T">T</a>::remove[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], key : K) -> Unit
   ```
   > 
   >  Remove a key from hash set.
 - #### size
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,138:::fn <a href="moonbitlang/core/hashset#T">T</a>::size[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Int
+  :::source,moonbitlang/core/hashset/hashset.mbt,139:::fn <a href="moonbitlang/core/hashset#T">T</a>::size[K](self : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> Int
   ```
   > 
   >  Get the number of keys in the set.
 - #### symmetric\_difference
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,212:::fn <a href="moonbitlang/core/hashset#T">T</a>::symmetric_difference[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
+  :::source,moonbitlang/core/hashset/hashset.mbt,213:::fn <a href="moonbitlang/core/hashset#T">T</a>::symmetric_difference[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
   >  Symmetric difference of two hash sets.
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/hashset/traits.mbt,85:::fn <a href="moonbitlang/core/hashset#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 - #### union
   ```moonbit
-  :::source,moonbitlang/core/hashset/hashset.mbt,187:::fn <a href="moonbitlang/core/hashset#T">T</a>::union[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
+  :::source,moonbitlang/core/hashset/hashset.mbt,188:::fn <a href="moonbitlang/core/hashset#T">T</a>::union[K : <a href="moonbitlang/core/builtin#Hash">Hash</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/hashset#T">T</a>[K], other : <a href="moonbitlang/core/hashset#T">T</a>[K]) -> <a href="moonbitlang/core/hashset#T">T</a>[K]
   ```
   > 
   >  Union of two hash sets.
   > @alert unsafe "Panic if the hash set is full."
-
-## Entry
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/hashset/traits.mbt,85:::fn <a href="moonbitlang/core/hashset#Entry">Entry</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
-
-## MyString
-
-
-#### mooncakes-io-method-mark-Methods
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/hashset/traits.mbt,85:::fn <a href="moonbitlang/core/hashset#MyString">MyString</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

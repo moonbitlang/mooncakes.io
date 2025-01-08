@@ -29,7 +29,7 @@ https://github.com/chawyehsu/moonup
 # Documentation
 |Trait|description|
 |---|---|
-|[resetter](#resetter)| resetter resets a ReadCloser returned by \[Reader::new\] or \[Reader::new\_dict\]|
+|[@gmlewis/zlib.resetter](#@gmlewis/zlib.resetter)| resetter resets a ReadCloser returned by \[Reader::new\] or \[Reader::new\_dict\]|
 
 |Type|description|
 |---|---|
@@ -42,10 +42,10 @@ https://github.com/chawyehsu/moonup
 |[err\_dictionary](#err_dictionary)| err\_dictionary is returned when reading ZLIB data that has an invalid dictionary.|
 |[err\_header](#err_header)| err\_header is returned when reading ZLIB data that has an invalid header.|
 
-## resetter
+## @gmlewis/zlib.resetter
 
 ```moonbit
-:::source,gmlewis/zlib/reader.mbt,57:::pub(open) trait resetter {
+:::source,gmlewis/zlib/reader.mbt,57:::pub(open) trait @gmlewis/zlib.resetter {
   reset(Self, <a href="gmlewis/io#Reader">@gmlewis/io.Reader</a>, <a href="gmlewis/io#Slice">@gmlewis/io.Slice</a>[Byte]) -> <a href="gmlewis/io#IOError">@gmlewis/io.IOError</a>?
 }
 ```

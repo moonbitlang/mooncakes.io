@@ -1,0 +1,70 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/postgres",
+  "traits": [],
+  "types": [
+    {
+      "name": "Connection",
+      "docstring": " A connection to a postgres database.",
+      "signature": "pub(all) type Connection Int",
+      "loc": { "line": 4, "column": 15 },
+      "methods": [
+        {
+          "name": "drop",
+          "docstring": "",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>::drop(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>) -> Unit",
+          "loc": { "line": 10, "column": 20 }
+        },
+        {
+          "name": "execute",
+          "docstring": " Execute command to the database.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>::execute(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>, statement : String, params : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue\">@gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes.ParameterValue</a>]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[UInt64, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_\">@gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes.Error_</a>]",
+          "loc": { "line": 262, "column": 20 }
+        },
+        {
+          "name": "open",
+          "docstring": " Open a connection to the Postgres instance at `address`.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>::open(address : String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_\">@gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes.Error_</a>]",
+          "loc": { "line": 15, "column": 20 }
+        },
+        {
+          "name": "query",
+          "docstring": " Query the database.",
+          "signature": "fn <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>::query(self : <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>, statement : String, params : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#ParameterValue\">@gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes.ParameterValue</a>]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#RowSet\">@gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes.RowSet</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes#Error_\">@gmlewis/spin-moonbit-sdk/interface/imports/rdbmsTypes.Error_</a>]",
+          "loc": { "line": 60, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>, <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>) -> Bool",
+              "loc": { "line": 4, "column": 43 }
+            }
+          ],
+          "loc": { "line": 4, "column": 43 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"gmlewis/spin-moonbit-sdk/interface/imports/postgres#Connection\">Connection</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 4, "column": 37 }
+            }
+          ],
+          "loc": { "line": 4, "column": 37 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

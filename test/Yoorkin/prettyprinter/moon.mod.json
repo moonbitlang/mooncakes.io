@@ -1,0 +1,13 @@
+{
+  "name": "Yoorkin/prettyprinter",
+  "version": "0.4.0",
+  "readme": "README.md",
+  "repository": "https://github.com/Yoorkin/prettyprinter",
+  "license": "Apache-2.0",
+  "keywords": [
+    "pretty printer",
+    "utils",
+    "string"
+  ],
+  "description": "pretty printer for moonbit"
+}

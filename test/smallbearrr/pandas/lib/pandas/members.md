@@ -21,28 +21,20 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a> with output(<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,22:::fn <a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>::output(<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,22:::fn output(<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DType
 
 ```moonbit
 :::source,smallbearrr/pandas/lib/pandas/series.mbt,2:::pub(all) enum DType {
   Int(Int)
-  Float(float)
+  Float(Float)
   Bool(Bool)
   Str(String)
 }
@@ -51,39 +43,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="smallbearrr/pandas/lib/pandas#DType">DType</a> with compare(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="smallbearrr/pandas/lib/pandas#DType">DType</a> with op_equal(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#DType">DType</a> with output(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::fn <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>::compare(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::fn <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>::op_equal(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::fn <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>::output(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::fn compare(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::fn op_equal(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#DType">DType</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,7:::fn output(<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DataFrame
 
@@ -98,9 +80,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,79:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a> with output(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,79:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>
   ```
-  >  Trait Show for DataFrame
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,79:::fn output(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    >  Trait Show for DataFrame
 
 #### mooncakes-io-method-mark-Methods
 - #### add\_column
@@ -130,7 +116,7 @@
   >  ```
 - #### add\_row
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,332:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::add_row(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, row : <a href="moonbitlang/core/array#Array">Array</a>[<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>]) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,361:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::add_row(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, row : <a href="moonbitlang/core/array#Array">Array</a>[<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>]) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Add a new row to the DataFrame
   > 
@@ -155,6 +141,29 @@
   >    Series::new("B", SeriesData::Float([1.1, 2.2, 3.3]))
   >  ])
   >  df.add_row([DType::Int(4), DType::Float(4.4)])
+  >  ```
+- #### column
+  ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,257:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::column(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, col_name : String) -> <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
+  ```
+  >  Select a column from the DataFrame
+  > 
+  >  #### Parameters
+  > 
+  >  - `self` : An instance of the DataFrame
+  >  - `col_name` : Column name to be selected
+  > 
+  >  #### Returns
+  > 
+  >  - `Series` : Series contain selected columns
+  >  
+  >  #### Errors
+  >  
+  >  - `ColumnNotFoundError` : Raised if a column is not found
+  > 
+  >  #### Example
+  >  ```
+  >  let col_selected = df.column("col_name")
   >  ```
 - #### data
   ```moonbit
@@ -182,7 +191,7 @@
   >  ```
 - #### drop\_row
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,298:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::drop_row(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, row_index : Int) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,327:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::drop_row(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, row_index : Int) -> Unit!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Drop a row from the DataFrame
   > 
@@ -205,7 +214,7 @@
   >  ```
 - #### filter
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,495:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::filter(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, name : String, f : (<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Bool) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="moonbitlang/core/error#Error">Error</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,524:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::filter(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, name : String, f : (<a href="smallbearrr/pandas/lib/pandas#DType">DType</a>) -> Bool) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
   >  Filter rows in the DataFrame based on a condition
   > 
@@ -242,6 +251,31 @@
   >  ```
   >  df.head()
   >  ```
+- #### hstack
+  ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,690:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::hstack(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, other : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="moonbitlang/core/error#Error">Error</a>
+  ```
+  >  Horizontally stack two DataFrames
+  > 
+  >  #### Parameters
+  > 
+  >  - `self` : An instance of the DataFrame
+  >  - `other` : Another DataFrame to be stacked horizontally
+  > 
+  >  #### Returns
+  > 
+  >  - `DataFrame` : A new DataFrame resulting from the horizontal stacking of the two DataFrames
+  > 
+  >  #### Example
+  >  ```
+  >  let df1 = DataFrame::new!([
+  >    Series::new("A", SeriesData::Int([1, 2, 3]))
+  >  ])
+  >  let df2 = DataFrame::new!([
+  >    Series::new("B", SeriesData::Int([4, 5, 6]))
+  >  ])
+  >  let df_stacked = df1.hstack!(df2)
+  >  ```
 - #### new
   ```moonbit
   :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,53:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::new(data : <a href="moonbitlang/core/array#Array">Array</a>[<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>]) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>
@@ -269,14 +303,9 @@
   >    Series::new("D", SeriesData::Str(["a", "b", "c", "d", "e", "f"])),
   >  ])
   >  ```
-- #### output
+- #### rename
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,79:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::output(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  >  Trait Show for DataFrame
-- #### rename\_column
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,227:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::rename_column(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, old_name : String, new_name : String) -> Unit!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,227:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::rename(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, old_name : String, new_name : String) -> Unit!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
   ```
   >  Rename a column in the DataFrame
   > 
@@ -304,7 +333,7 @@
   >  ```
 - #### select\_columns
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,257:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::select_columns(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, cols : <a href="moonbitlang/core/array#Array">Array</a>[String]) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,286:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::select_columns(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, cols : <a href="moonbitlang/core/array#Array">Array</a>[String]) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
   ```
   >  Select specific columns from the DataFrame
   > 
@@ -327,7 +356,7 @@
   >  ```
 - #### select\_rows
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,387:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::select_rows(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, range? : (Int, Int), indices? : <a href="moonbitlang/core/array#Array">Array</a>[Int]) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,416:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::select_rows(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, range? : (Int, Int), indices? : <a href="moonbitlang/core/array#Array">Array</a>[Int]) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>
   ```
   >  Select specific rows from the DataFrame
   > 
@@ -358,7 +387,7 @@
   > 
 - #### sort
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,569:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::sort(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, col_name : String, decrease~ : Bool = ..) -> Unit!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,598:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::sort(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, col_name : String, descending~ : Bool = ..) -> Unit!<a href="smallbearrr/pandas/lib/pandas#ColumnNotFoundError">ColumnNotFoundError</a>
   ```
   >  Sort the DataFrame by a specified column
   > 
@@ -366,7 +395,7 @@
   > 
   >  - `self` : An instance of the DataFrame
   >  - `col_name` : The name of the column to sort by
-  >  - `decrease~` : Whether to sort in descending order (default is false)
+  >  - `descending~` : Whether to sort in descending order (default is false)
   > 
   >  #### Returns
   > 
@@ -382,14 +411,39 @@
   >    Series::new("A", SeriesData::Int([3, 1, 2])), 
   >    Series::new("B", SeriesData::Float([3.3, 1.1, 2.2]))
   >  ])
-  >  df.sort("A", decrease=true)
+  >  df.sort("A", descending=true)
   >  inspect!(df.data()[0].data(), content="Int([1, 2, 3])")
   >  ```
-- #### to\_string
+- #### vstack
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,640:::fn <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>::vstack(self : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>, other : <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>) -> <a href="smallbearrr/pandas/lib/pandas#DataFrame">DataFrame</a>!<a href="moonbitlang/core/error#Error">Error</a>
   ```
+  >  Vertically stack two DataFrames
   > 
+  >  #### Parameters
+  > 
+  >  - `self` : An instance of the DataFrame
+  >  - `other` : Another DataFrame to be stacked vertically
+  > 
+  >  #### Returns
+  > 
+  >  - `DataFrame` : A new DataFrame resulting from the vertical stacking of the two DataFrames
+  > 
+  >  #### Errors
+  > 
+  >  - `InconsistentSeriesLength` : Raised if the number of columns in the two DataFrames is not the same
+  >  - `InvalidType` : Raised if the data types of the corresponding columns in the two DataFrames are not the same
+  > 
+  >  #### Example
+  >  ```
+  >  let df1 = DataFrame::new!([
+  >    Series::new("A", SeriesData::Int([1, 2, 3]))
+  >  ])
+  >  let df2 = DataFrame::new!([
+  >    Series::new("A", SeriesData::Int([4, 5, 6]))
+  >  ])
+  >  let df_stacked = df1.vstack!(df2)
+  >  ```
 
 ## DuplicateColumnError
 
@@ -400,21 +454,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a> with output(<a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,19:::fn <a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a>::output(<a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,19:::fn output(<a href="smallbearrr/pandas/lib/pandas#DuplicateColumnError">DuplicateColumnError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## EmptyArrayError
 
@@ -425,21 +471,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,58:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a> with output(<a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,58:::fn <a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>::output(<a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,58:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,58:::fn output(<a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## InconsistentSeriesLength
 
@@ -450,21 +488,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a> with output(<a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,16:::fn <a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>::output(<a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,16:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,16:::fn output(<a href="smallbearrr/pandas/lib/pandas#InconsistentSeriesLength">InconsistentSeriesLength</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## IndexOutOfBounds
 
@@ -475,21 +505,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a> with output(<a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,25:::fn <a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>::output(<a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,25:::fn output(<a href="smallbearrr/pandas/lib/pandas#IndexOutOfBounds">IndexOutOfBounds</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## InvalidType
 
@@ -500,21 +522,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,28:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a> with output(<a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,28:::fn <a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a>::output(<a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,28:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a>
   ```
   > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/data_frame.mbt,28:::fn output(<a href="smallbearrr/pandas/lib/pandas#InvalidType">InvalidType</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Series
 
@@ -528,25 +542,33 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="smallbearrr/pandas/lib/pandas#Series">Series</a> with op_equal(<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> Bool
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::fn op_equal(<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#Series">Series</a> with output(<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::fn output(<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### argsort
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,155:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::argsort(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, decrease~ : Bool = ..) -> <a href="moonbitlang/core/array#Array">Array</a>[Int]
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,169:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::argsort(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, descending~ : Bool = ..) -> <a href="moonbitlang/core/array#Array">Array</a>[Int]
   ```
   >  Sort the SeriesData in Series and return the indices of the sorted elements
   > 
   >  #### Parameters
   > 
   >  - `self` : An instance of the SeriesData
-  >  - `decrease` : A boolean indicating whether to sort in descending order (default is false)
+  >  - `descending~` : A boolean indicating whether to sort in descending order (default is false)
   > 
   >  #### Returns
   > 
@@ -559,12 +581,12 @@
   >  ```
 - #### data
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,165:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::data(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,179:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::data(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
   ```
   > 
 - #### name
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,160:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::name(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> String
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,174:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::name(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> String
   ```
   > 
 - #### new
@@ -586,28 +608,33 @@
   >  ```
   >  let series = Series::new("A", SeriesData::Int([1, 2, 3]))
   >  ```
-- #### op\_equal
+- #### op\_add
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::op_equal(<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> Bool
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,209:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::op_add(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, other : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>
   ```
-  > automatically derived
-- #### output
+  >  Series add
+- #### op\_div
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,21:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::output(<a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,293:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::op_div(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, other : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>
   ```
-  > automatically derived
-- #### to\_string
+  >  Series div
+- #### op\_mul
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,265:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::op_mul(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, other : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>
   ```
-  > 
+  >  Series mul
+- #### op\_sub
+  ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,237:::fn <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>::op_sub(self : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>, other : <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>) -> <a href="smallbearrr/pandas/lib/pandas#Series">Series</a>
+  ```
+  >  Series sub
 
 ## SeriesData
 
 ```moonbit
 :::source,smallbearrr/pandas/lib/pandas/series.mbt,10:::pub(all) enum SeriesData {
   Int(<a href="moonbitlang/core/array#Array">Array</a>[Int])
-  Float(<a href="moonbitlang/core/array#Array">Array</a>[float])
+  Float(<a href="moonbitlang/core/array#Array">Array</a>[Float])
   Bool(<a href="moonbitlang/core/array#Array">Array</a>[Bool])
   Str(<a href="moonbitlang/core/array#Array">Array</a>[String])
 }
@@ -616,25 +643,33 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a> with op_equal(<a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> Bool
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::fn op_equal(<a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a> with output(<a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::fn output(<a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### argsort
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,130:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::argsort(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, decrease~ : Bool = ..) -> <a href="moonbitlang/core/array#Array">Array</a>[Int]
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,144:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::argsort(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, descending~ : Bool = ..) -> <a href="moonbitlang/core/array#Array">Array</a>[Int]
   ```
   >  Sort the SeriesData and return the indices of the sorted elements
   > 
   >  #### Parameters
   > 
   >  - `self` : An instance of the SeriesData
-  >  - `decrease` : A boolean indicating whether to sort in descending order (default is false)
+  >  - `descending~` : A boolean indicating whether to sort in descending order (default is false)
   > 
   >  #### Returns
   > 
@@ -652,31 +687,50 @@
   >  Check if the SeriesData is empty
 - #### erase
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,61:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::erase(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, index : Int) -> Unit!<a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,75:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::erase(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, index : Int) -> Unit!<a href="smallbearrr/pandas/lib/pandas#EmptyArrayError">EmptyArrayError</a>
   ```
-  >  erase the element at the given index
+  >  Erase an element from the SeriesData at a specified index
+  > 
+  >  #### Parameters
+  > 
+  >  - `self` : An instance of the SeriesData
+  >  - `index` : The index of the element to be erased
+  > 
+  >  #### Errors
+  > 
+  >  - `EmptyArrayError` : Raised if the SeriesData is empty
+  > 
+  >  #### Example
+  >  ```
+  >  data.erase(1)
+  >  ```
 - #### length
   ```moonbit
   :::source,smallbearrr/pandas/lib/pandas/series.mbt,43:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::length(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> Int
   ```
   >  Get the length of the SeriesData
-- #### op\_equal
+- #### op\_add
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::op_equal(<a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> Bool
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,185:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::op_add(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, other : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
   ```
-  > automatically derived
-- #### output
+  >  SeriesData add
+- #### op\_div
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,15:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::output(<a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,270:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::op_div(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, other : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
   ```
-  > automatically derived
+  >  SeriesData div
+- #### op\_mul
+  ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,242:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::op_mul(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, other : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
+  ```
+  >  SeriesData mul
+- #### op\_sub
+  ```moonbit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,214:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::op_sub(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>, other : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>
+  ```
+  >  SeriesData sub
 - #### sort
   ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/series.mbt,77:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::sort(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> Unit
+  :::source,smallbearrr/pandas/lib/pandas/series.mbt,91:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::sort(self : <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>) -> Unit
   ```
   >  Sort the SeriesData
-- #### to\_string
-  ```moonbit
-  :::source,smallbearrr/pandas/lib/pandas/traits.mbt,85:::fn <a href="smallbearrr/pandas/lib/pandas#SeriesData">SeriesData</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 

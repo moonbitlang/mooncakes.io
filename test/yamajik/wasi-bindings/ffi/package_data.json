@@ -1,0 +1,250 @@
+{
+  "readme": "",
+  "name": "yamajik/wasi-bindings/ffi",
+  "traits": [
+    {
+      "name": "@yamajik/wasi-bindings/ffi.Any",
+      "docstring": "",
+      "signature": "pub(open) trait @yamajik/wasi-bindings/ffi.Any {\n}",
+      "loc": { "line": 197, "column": 1 },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "Cleanup",
+      "docstring": "",
+      "signature": "pub(all) struct Cleanup {\n  address : Int\n  size : Int\n  align : Int\n}",
+      "loc": { "line": 200, "column": 17 },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "bytes2ptr",
+      "docstring": "",
+      "signature": "fn bytes2ptr(bytes : Bytes) -> Int",
+      "loc": { "line": 116, "column": 22 }
+    },
+    {
+      "name": "copy",
+      "docstring": "",
+      "signature": "fn copy(dest : Int, src : Int) -> Unit",
+      "loc": { "line": 94, "column": 8 }
+    },
+    {
+      "name": "double_array2ptr",
+      "docstring": "",
+      "signature": "fn double_array2ptr(array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Double]) -> Int",
+      "loc": { "line": 144, "column": 22 }
+    },
+    {
+      "name": "extend16",
+      "docstring": "",
+      "signature": "fn extend16(value : Int) -> Int",
+      "loc": { "line": 4, "column": 22 }
+    },
+    {
+      "name": "extend8",
+      "docstring": "",
+      "signature": "fn extend8(value : Int) -> Int",
+      "loc": { "line": 8, "column": 22 }
+    },
+    {
+      "name": "f32_to_i32",
+      "docstring": "",
+      "signature": "fn f32_to_i32(value : Float) -> Int",
+      "loc": { "line": 68, "column": 22 }
+    },
+    {
+      "name": "f32_to_i64",
+      "docstring": "",
+      "signature": "fn f32_to_i64(value : Float) -> Int64",
+      "loc": { "line": 72, "column": 22 }
+    },
+    {
+      "name": "float_array2ptr",
+      "docstring": "",
+      "signature": "fn float_array2ptr(array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Float]) -> Int",
+      "loc": { "line": 140, "column": 22 }
+    },
+    {
+      "name": "free",
+      "docstring": "",
+      "signature": "fn free(position : Int) -> Unit",
+      "loc": { "line": 90, "column": 22 }
+    },
+    {
+      "name": "int64_array2ptr",
+      "docstring": "",
+      "signature": "fn int64_array2ptr(array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Int64]) -> Int",
+      "loc": { "line": 136, "column": 22 }
+    },
+    {
+      "name": "int_array2ptr",
+      "docstring": "",
+      "signature": "fn int_array2ptr(array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Int]) -> Int",
+      "loc": { "line": 132, "column": 22 }
+    },
+    {
+      "name": "load16",
+      "docstring": "",
+      "signature": "fn load16(offset : Int) -> Int",
+      "loc": { "line": 28, "column": 22 }
+    },
+    {
+      "name": "load16_u",
+      "docstring": "",
+      "signature": "fn load16_u(offset : Int) -> Int",
+      "loc": { "line": 32, "column": 22 }
+    },
+    {
+      "name": "load32",
+      "docstring": "",
+      "signature": "fn load32(offset : Int) -> Int",
+      "loc": { "line": 40, "column": 22 }
+    },
+    {
+      "name": "load64",
+      "docstring": "",
+      "signature": "fn load64(offset : Int) -> Int64",
+      "loc": { "line": 48, "column": 22 }
+    },
+    {
+      "name": "load8",
+      "docstring": "",
+      "signature": "fn load8(offset : Int) -> Int",
+      "loc": { "line": 20, "column": 22 }
+    },
+    {
+      "name": "load8_u",
+      "docstring": "",
+      "signature": "fn load8_u(offset : Int) -> Int",
+      "loc": { "line": 16, "column": 22 }
+    },
+    {
+      "name": "loadf32",
+      "docstring": "",
+      "signature": "fn loadf32(offset : Int) -> Float",
+      "loc": { "line": 56, "column": 22 }
+    },
+    {
+      "name": "loadf64",
+      "docstring": "",
+      "signature": "fn loadf64(offset : Int) -> Double",
+      "loc": { "line": 64, "column": 22 }
+    },
+    {
+      "name": "malloc",
+      "docstring": "",
+      "signature": "fn malloc(size : Int) -> Int",
+      "loc": { "line": 80, "column": 8 }
+    },
+    {
+      "name": "ptr2bytes",
+      "docstring": "",
+      "signature": "fn ptr2bytes(ptr : Int) -> Bytes",
+      "loc": { "line": 120, "column": 22 }
+    },
+    {
+      "name": "ptr2double_array",
+      "docstring": "",
+      "signature": "fn ptr2double_array(ptr : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Double]",
+      "loc": { "line": 184, "column": 8 }
+    },
+    {
+      "name": "ptr2float_array",
+      "docstring": "",
+      "signature": "fn ptr2float_array(ptr : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Float]",
+      "loc": { "line": 156, "column": 22 }
+    },
+    {
+      "name": "ptr2int64_array",
+      "docstring": "",
+      "signature": "fn ptr2int64_array(ptr : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Int64]",
+      "loc": { "line": 174, "column": 8 }
+    },
+    {
+      "name": "ptr2int_array",
+      "docstring": "",
+      "signature": "fn ptr2int_array(ptr : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Int]",
+      "loc": { "line": 152, "column": 22 }
+    },
+    {
+      "name": "ptr2str",
+      "docstring": "",
+      "signature": "fn ptr2str(ptr : Int) -> String",
+      "loc": { "line": 112, "column": 22 }
+    },
+    {
+      "name": "ptr2uint64_array",
+      "docstring": "",
+      "signature": "fn ptr2uint64_array(ptr : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt64]",
+      "loc": { "line": 164, "column": 8 }
+    },
+    {
+      "name": "ptr2uint_array",
+      "docstring": "",
+      "signature": "fn ptr2uint_array(ptr : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt]",
+      "loc": { "line": 148, "column": 22 }
+    },
+    {
+      "name": "store16",
+      "docstring": "",
+      "signature": "fn store16(offset : Int, value : Int) -> Unit",
+      "loc": { "line": 24, "column": 22 }
+    },
+    {
+      "name": "store32",
+      "docstring": "",
+      "signature": "fn store32(offset : Int, value : Int) -> Unit",
+      "loc": { "line": 36, "column": 22 }
+    },
+    {
+      "name": "store64",
+      "docstring": "",
+      "signature": "fn store64(offset : Int, value : Int64) -> Unit",
+      "loc": { "line": 44, "column": 22 }
+    },
+    {
+      "name": "store8",
+      "docstring": "",
+      "signature": "fn store8(offset : Int, value : Int) -> Unit",
+      "loc": { "line": 12, "column": 22 }
+    },
+    {
+      "name": "storef32",
+      "docstring": "",
+      "signature": "fn storef32(offset : Int, value : Float) -> Unit",
+      "loc": { "line": 52, "column": 22 }
+    },
+    {
+      "name": "storef64",
+      "docstring": "",
+      "signature": "fn storef64(offset : Int, value : Double) -> Unit",
+      "loc": { "line": 60, "column": 22 }
+    },
+    {
+      "name": "str2ptr",
+      "docstring": "",
+      "signature": "fn str2ptr(str : String) -> Int",
+      "loc": { "line": 108, "column": 22 }
+    },
+    {
+      "name": "uint64_array2ptr",
+      "docstring": "",
+      "signature": "fn uint64_array2ptr(array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt64]) -> Int",
+      "loc": { "line": 128, "column": 22 }
+    },
+    {
+      "name": "uint_array2ptr",
+      "docstring": "",
+      "signature": "fn uint_array2ptr(array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt]) -> Int",
+      "loc": { "line": 124, "column": 22 }
+    }
+  ],
+  "misc": []
+}

@@ -19,13 +19,21 @@ at once.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a> with op_equal(<a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>, <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>) -> Bool
+  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::fn op_equal(<a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>, <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a> with output(<a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::fn output(<a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### block
@@ -42,16 +50,6 @@ at once.
   :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,6:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>::drop(self : <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>) -> Unit
   ```
   >  Drops a resource handle.
-- #### op\_equal
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>::op_equal(<a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>, <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,3:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>::output(<a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### ready
   ```moonbit
   :::source,yamajik/wasi-bindings/interface/wasi/io/poll/top.mbt,14:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>::ready(self : <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>) -> Bool
@@ -59,11 +57,6 @@ at once.
   >  Return the readiness of a pollable. This function never blocks.
   > 
   >  Returns `true` when the pollable is ready, and `false` otherwise.
-- #### to\_string
-  ```moonbit
-  :::source,yamajik/wasi-bindings/interface/wasi/io/poll/traits.mbt,85:::fn <a href="yamajik/wasi-bindings/interface/wasi/io/poll#Pollable">Pollable</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## poll
 

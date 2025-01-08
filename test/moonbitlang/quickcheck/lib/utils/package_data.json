@@ -1,0 +1,64 @@
+{
+  "readme": "",
+  "name": "moonbitlang/quickcheck/lib/utils",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "apply_while",
+      "docstring": "",
+      "signature": "fn apply_while[T](x : T, f : (T) -> T, cond : (T) -> Bool) -> <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]",
+      "loc": { "line": 40, "column": 8 }
+    },
+    {
+      "name": "const_",
+      "docstring": "",
+      "signature": "fn const_[T, U](t : T) -> ((U) -> T)",
+      "loc": { "line": 59, "column": 8 }
+    },
+    {
+      "name": "curry3",
+      "docstring": "",
+      "signature": "fn curry3[A, B, C, D](f : (A, B, C) -> D) -> ((A) -> ((B) -> ((C) -> D)))",
+      "loc": { "line": 11, "column": 8 }
+    },
+    {
+      "name": "curry4",
+      "docstring": "",
+      "signature": "fn curry4[A, B, C, D, E](f : (A, B, C, D) -> E) -> ((A) -> ((B) -> ((C) -> ((D) -> E))))",
+      "loc": { "line": 16, "column": 8 }
+    },
+    {
+      "name": "flip",
+      "docstring": "",
+      "signature": "fn flip[M, N, Z](f : (M, N) -> Z) -> ((N, M) -> Z)",
+      "loc": { "line": 67, "column": 8 }
+    },
+    {
+      "name": "fresh_name",
+      "docstring": "",
+      "signature": "fn fresh_name() -> String",
+      "loc": { "line": 4, "column": 8 }
+    },
+    {
+      "name": "id",
+      "docstring": "",
+      "signature": "fn id[T](x : T) -> T",
+      "loc": { "line": 57, "column": 8 }
+    },
+    {
+      "name": "pair_function",
+      "docstring": "",
+      "signature": "fn pair_function[A, B, C](f : (A, B) -> C) -> (((A, B)) -> C)",
+      "loc": { "line": 63, "column": 8 }
+    },
+    {
+      "name": "removes",
+      "docstring": "",
+      "signature": "fn removes[T](k : Int, n : Int, xs : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]) -> <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[<a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]]",
+      "loc": { "line": 22, "column": 8 }
+    }
+  ],
+  "misc": []
+}

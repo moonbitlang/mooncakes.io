@@ -21,39 +21,29 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a> with compare(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a> with op_equal(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a> with output(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::fn <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>::compare(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::fn <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>::op_equal(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::fn <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>::output(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/traits.mbt,85:::fn <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>
   ```
   > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::fn compare(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::fn op_equal(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/url/url.mbt,25:::fn output(<a href="Yoorkin/rabbit-tea/url#Protocol">Protocol</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Url
 
@@ -80,34 +70,31 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="Yoorkin/rabbit-tea/url#Url">Url</a> with compare(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> Int
+  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="Yoorkin/rabbit-tea/url#Url">Url</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::fn compare(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> Int
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="Yoorkin/rabbit-tea/url#Url">Url</a> with op_equal(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> Bool
+  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="Yoorkin/rabbit-tea/url#Url">Url</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::fn op_equal(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/url#Url">Url</a> with output(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Yoorkin/rabbit-tea/url#Url">Url</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::fn output(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::fn <a href="Yoorkin/rabbit-tea/url#Url">Url</a>::compare(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::fn <a href="Yoorkin/rabbit-tea/url#Url">Url</a>::op_equal(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,Yoorkin/rabbit-tea/url/url.mbt,18:::fn <a href="Yoorkin/rabbit-tea/url#Url">Url</a>::output(<a href="Yoorkin/rabbit-tea/url#Url">Url</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,Yoorkin/rabbit-tea/url/url.mbt,28:::fn <a href="Yoorkin/rabbit-tea/url#Url">Url</a>::to_string(self : <a href="Yoorkin/rabbit-tea/url#Url">Url</a>) -> String

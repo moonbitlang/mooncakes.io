@@ -1,0 +1,16 @@
+{
+  "readme": "",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/cli/stdout",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "get_stdout",
+      "docstring": "",
+      "signature": "fn get_stdout() -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams#OutputStream\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/streams.OutputStream</a>",
+      "loc": { "line": 4, "column": 8 }
+    }
+  ],
+  "misc": []
+}

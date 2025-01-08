@@ -98,23 +98,26 @@ let pq2 = pq.copy()
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,284:::impl <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/priority_queue#T">T</a> with arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/priority_queue#T">T</a>[X]
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,280:::impl[A : <a href="moonbitlang/core/builtin#Show">Show</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/priority_queue#T">T</a>[A]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/priority_queue/priority_queue.mbt,280:::fn output[A : <a href="moonbitlang/core/builtin#Show">Show</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 - ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,279:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/core/priority_queue#T">T</a> with output[A : <a href="moonbitlang/core/builtin#Show">Show</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,285:::impl[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>] <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href="moonbitlang/core/priority_queue#T">T</a>[X]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/core/priority_queue/priority_queue.mbt,285:::fn arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/priority_queue#T">T</a>[X]
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
-- #### arbitrary
-  ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,284:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::arbitrary[X : <a href="moonbitlang/core/quickcheck#Arbitrary">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](size : Int, rs : <a href="moonbitlang/core/quickcheck/splitmix#RandomState">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href="moonbitlang/core/priority_queue#T">T</a>[X]
-  ```
-  > 
 - #### clear
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,238:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::clear[A](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,239:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::clear[A](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> Unit
   ```
   > 
   >  Clears the queue.
@@ -157,7 +160,7 @@ let pq2 = pq.copy()
   > 
 - #### is\_empty
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,251:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::is_empty[A](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> Bool
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,252:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::is_empty[A](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> Bool
   ```
   > 
   >  Checks if the priority queue is empty.
@@ -191,17 +194,12 @@ let pq2 = pq.copy()
   >  ```
 - #### of
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,256:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::of[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/priority_queue#T">T</a>[A]
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,279:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::output[A : <a href="moonbitlang/core/builtin#Show">Show</a> + <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,257:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::of[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](arr : <a href="moonbitlang/core/array#FixedArray">FixedArray</a>[A]) -> <a href="moonbitlang/core/priority_queue#T">T</a>[A]
   ```
   > 
 - #### peek
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,222:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::peek[A](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,223:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::peek[A](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> A?
   ```
   > 
   >  Peeks at the first value in the priority queue, which returns None if the priority queue is empty.
@@ -214,7 +212,7 @@ let pq2 = pq.copy()
   >  ```
 - #### pop
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,187:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::pop[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> A?
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,188:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::pop[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> A?
   ```
   > 
   >  Pops the first value from the priority queue, which returns None if the queue is empty.
@@ -228,13 +226,14 @@ let pq2 = pq.copy()
   >  ```
 - #### pop\_exn
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,173:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::pop_exn[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> Unit
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,174:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::pop_exn[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> Unit
   ```
   > 
   >  @alert deprecated "Use `unsafe_pop` instead"
+  > @coverage.skip
 - #### push
   ```moonbit
-  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,208:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::push[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A], value : A) -> Unit
+  :::source,moonbitlang/core/priority_queue/priority_queue.mbt,209:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::push[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A], value : A) -> Unit
   ```
   > 
   >  Adds a value to the priority queue.
@@ -248,11 +247,6 @@ let pq2 = pq.copy()
 - #### to\_array
   ```moonbit
   :::source,moonbitlang/core/priority_queue/priority_queue.mbt,75:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::to_array[A : <a href="moonbitlang/core/builtin#Compare">Compare</a> + <a href="moonbitlang/core/builtin#Eq">Eq</a>](self : <a href="moonbitlang/core/priority_queue#T">T</a>[A]) -> <a href="moonbitlang/core/array#Array">Array</a>[A]
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/core/priority_queue/traits.mbt,85:::fn <a href="moonbitlang/core/priority_queue#T">T</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 - #### unsafe\_pop

@@ -35,19 +35,20 @@
       "name": "Option",
       "impls": [
         {
-          "name": "arbitrary",
           "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/option#Option\">Option</a> with arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](i : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> X?",
-          "loc": { "line": 410, "column": 71 }
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for X?",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](i : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> X?",
+              "loc": { "line": 410, "column": 71 }
+            }
+          ],
+          "loc": { "line": 410, "column": 1 }
         }
       ],
       "methods": [
-        {
-          "name": "arbitrary",
-          "docstring": "",
-          "signature": "fn <a href=\"moonbitlang/core/option#Option\">Option</a>::arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](i : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> X?",
-          "loc": { "line": 410, "column": 71 }
-        },
         {
           "name": "bind",
           "docstring": "\n Binds an option to a function that returns another option.\n\n # Example\n\n ```\n let a = Option::Some(5)\n let r1 = a.bind(fn(x){ Some(x * 2) })\n assert_eq!(r1, Some(10))\n let b : Option[Int] = None\n let r2 = b.bind(fn(x){ Some(x * 2) })\n assert_eq!(r2, None)\n ```",

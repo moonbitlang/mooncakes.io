@@ -1,0 +1,195 @@
+{
+  "name": "oboard",
+  "package": null,
+  "childs": [
+    {
+      "name": "moonbit-eval",
+      "package": null,
+      "childs": [
+        {
+          "name": "lex",
+          "package": {
+            "path": "oboard/moonbit-eval/lex",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Context",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              { "name": "ContextOfNumber", "impls": [], "methods": [] },
+              {
+                "name": "Token",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "TokenPosition",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [ "lex", "token_postion", "token_postion_array" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lib",
+          "package": {
+            "path": "oboard/moonbit-eval/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "ClosureInterpreter",
+                "impls": [],
+                "methods": [ "add_extern_fn", "new" ]
+              },
+              {
+                "name": "MoonBitVM",
+                "impls": [],
+                "methods": [ "eval", "new" ]
+              },
+              {
+                "name": "Value",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": [ "op_equal" ]
+              },
+              {
+                "name": "Variable",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "parser",
+          "package": {
+            "path": "oboard/moonbit-eval/parser",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "Parser", "impls": [], "methods": [ "parse" ] },
+              {
+                "name": "ParserContext",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [ "parse_syntax", "parser_context" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "types",
+          "package": {
+            "path": "oboard/moonbit-eval/types",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "Fundef",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "from_json", "to_json" ]
+              },
+              {
+                "name": "Name",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "from_json", "from_string", "name_and_slot", "name_only",
+                  "slot_only", "to_json", "to_string"
+                ]
+              },
+              {
+                "name": "NameFromStringError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Op",
+                "impls": [
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "to_json" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Syntax",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "from_json", "to_json" ]
+              },
+              {
+                "name": "Type",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "from_json", "is_float_like", "is_ptr_like", "op_equal",
+                  "repr", "size_of", "to_json"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "typing",
+          "package": {
+            "path": "oboard/moonbit-eval/typing",
+            "readme": false,
+            "traits": [],
+            "types": [ { "name": "TyErr", "impls": [], "methods": [] } ],
+            "typealias": [],
+            "values": [ "extenv", "typing" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "util",
+          "package": {
+            "path": "oboard/moonbit-eval/util",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "IndentLogger",
+                "impls": [
+                  { "methods": [ "write_char", "write_substring" ] }
+                ],
+                "methods": [ "indent", "new", "outdent", "write_string" ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "die", "i32_to_hex", "i64_to_hex" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

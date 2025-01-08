@@ -1,0 +1,36 @@
+{
+  "name": "Lampese",
+  "package": null,
+  "childs": [
+    {
+      "name": "moondata",
+      "package": {
+        "path": "Lampese/moondata",
+        "readme": false,
+        "traits": [],
+        "types": [
+          {
+            "name": "A",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": [ "to_string" ]
+          },
+          {
+            "name": "Gen",
+            "impls": [],
+            "methods": [
+              "new", "rand_array", "rand_array_unique", "rand_bool",
+              "rand_char", "rand_char_range", "rand_double", "rand_float",
+              "rand_int", "rand_int64", "rand_string", "rand_uint",
+              "rand_uint64", "select"
+            ]
+          },
+          { "name": "Test", "impls": [], "methods": [ "new", "run" ] }
+        ],
+        "typealias": [],
+        "values": [ "arr_generator_concat", "gen_arg_code", "lock" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

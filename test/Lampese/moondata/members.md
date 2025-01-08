@@ -16,7 +16,7 @@
 ```moonbit
 :::source,Lampese/moondata/argument.mbt,2:::pub enum A {
   Int(() -> Int)
-  Float(() -> float)
+  Float(() -> Float)
   Double(() -> Double)
   String(() -> String)
   Bool(() -> Bool)
@@ -25,7 +25,7 @@
   UInt64(() -> UInt64)
   UInt(() -> UInt)
   ArrayInt(() -> <a href="moonbitlang/core/array#Array">Array</a>[Int])
-  ArrayFloat(() -> <a href="moonbitlang/core/array#Array">Array</a>[float])
+  ArrayFloat(() -> <a href="moonbitlang/core/array#Array">Array</a>[Float])
   ArrayDouble(() -> <a href="moonbitlang/core/array#Array">Array</a>[Double])
   ArrayString(() -> <a href="moonbitlang/core/array#Array">Array</a>[String])
   ArrayBool(() -> <a href="moonbitlang/core/array#Array">Array</a>[Bool])
@@ -39,16 +39,15 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,Lampese/moondata/argument.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Lampese/moondata#A">A</a> with output(<a href="Lampese/moondata#A">A</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,Lampese/moondata/argument.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="Lampese/moondata#A">A</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,Lampese/moondata/argument.mbt,21:::fn output(<a href="Lampese/moondata#A">A</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,Lampese/moondata/argument.mbt,21:::fn <a href="Lampese/moondata#A">A</a>::output(<a href="Lampese/moondata#A">A</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_string
   ```moonbit
   :::source,Lampese/moondata/argument.mbt,35:::fn <a href="Lampese/moondata#A">A</a>::to_string(self : <a href="Lampese/moondata#A">A</a>) -> String
@@ -68,49 +67,14 @@
   :::source,Lampese/moondata/primitive_gen.mbt,7:::fn <a href="Lampese/moondata#Gen">Gen</a>::new(state~ : Bytes = ..) -> <a href="Lampese/moondata#Gen">Gen</a>
   ```
   > 
-- #### rand\_arrar\_double
+- #### rand\_array
   ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,82:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_arrar_double(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> Double) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[Double])
+  :::source,Lampese/moondata/array_gen.mbt,2:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array[T](self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> T) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[T])
   ```
   > 
-- #### rand\_array\_bool
+- #### rand\_array\_unique
   ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,50:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_bool(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> Bool) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[Bool])
-  ```
-  > 
-- #### rand\_array\_char
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,18:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_char(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> Char) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[Char])
-  ```
-  > 
-- #### rand\_array\_float
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,66:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_float(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> float) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[float])
-  ```
-  > 
-- #### rand\_array\_int
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,2:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_int(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> Int) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[Int])
-  ```
-  > 
-- #### rand\_array\_int64
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,114:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_int64(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> Int64) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[Int64])
-  ```
-  > 
-- #### rand\_array\_string
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,34:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_string(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> String) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[String])
-  ```
-  > 
-- #### rand\_array\_uint
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,98:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_uint(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> UInt) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[UInt])
-  ```
-  > 
-- #### rand\_array\_uint64
-  ```moonbit
-  :::source,Lampese/moondata/array_gen.mbt,130:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_uint64(self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> UInt64) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[UInt64])
+  :::source,Lampese/moondata/array_gen.mbt,18:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_array_unique[T : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>](self : <a href="Lampese/moondata#Gen">Gen</a>, len~ : () -> Int = .., gen~ : () -> T) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[T])
   ```
   > 
 - #### rand\_bool
@@ -135,7 +99,7 @@
   > 
 - #### rand\_float
   ```moonbit
-  :::source,Lampese/moondata/primitive_gen.mbt,17:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_float(self : <a href="Lampese/moondata#Gen">Gen</a>, l : float, r : float) -> (() -> float)
+  :::source,Lampese/moondata/primitive_gen.mbt,17:::fn <a href="Lampese/moondata#Gen">Gen</a>::rand_float(self : <a href="Lampese/moondata#Gen">Gen</a>, l : Float, r : Float) -> (() -> Float)
   ```
   > 
 - #### rand\_int
@@ -165,7 +129,7 @@
   > 
 - #### select
   ```moonbit
-  :::source,Lampese/moondata/const.mbt,8:::fn <a href="Lampese/moondata#Gen">Gen</a>::select[T](self : <a href="Lampese/moondata#Gen">Gen</a>, fl : <a href="moonbitlang/core/array#Array">Array</a>[() -> T]) -> T
+  :::source,Lampese/moondata/const.mbt,8:::fn <a href="Lampese/moondata#Gen">Gen</a>::select[T](self : <a href="Lampese/moondata#Gen">Gen</a>, fl : <a href="moonbitlang/core/array#Array">Array</a>[() -> T]) -> (() -> T)
   ```
   > 
 
@@ -194,7 +158,7 @@
 ## arr\_generator\_concat
 
 ```moonbit
-:::source,Lampese/moondata/array_gen.mbt,146:::fn arr_generator_concat[T](arr_gen~ : () -> <a href="moonbitlang/core/array#Array">Array</a>[T], arr_gen_2~ : () -> <a href="moonbitlang/core/array#Array">Array</a>[T]) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[T])
+:::source,Lampese/moondata/array_gen.mbt,44:::fn arr_generator_concat[T](arr_gen~ : () -> <a href="moonbitlang/core/array#Array">Array</a>[T], arr_gen_2~ : () -> <a href="moonbitlang/core/array#Array">Array</a>[T]) -> (() -> <a href="moonbitlang/core/array#Array">Array</a>[T])
 ```
 
 

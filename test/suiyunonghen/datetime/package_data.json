@@ -1,0 +1,371 @@
+{
+  "readme": "",
+  "name": "suiyunonghen/datetime",
+  "traits": [],
+  "types": [
+    {
+      "name": "DateTime",
+      "docstring": "\n  日期时间类型,1899-12-30 00:00:00作为0时间\n  日期规则为到1899-12-30号的天数+当前的毫秒数/一天的总共毫秒数集合",
+      "signature": "pub(all) type DateTime Double",
+      "loc": { "line": 4, "column": 15 },
+      "methods": [
+        {
+          "name": "day_span",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::day_span(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Double",
+          "loc": { "line": 456, "column": 8 }
+        },
+        {
+          "name": "days_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::days_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int",
+          "loc": { "line": 537, "column": 8 }
+        },
+        {
+          "name": "decode",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::decode(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> <a href=\"suiyunonghen/datetime#SystemDateTime\">SystemDateTime</a>",
+          "loc": { "line": 345, "column": 8 }
+        },
+        {
+          "name": "decode_date",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::decode_date(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>",
+          "loc": { "line": 283, "column": 8 }
+        },
+        {
+          "name": "decode_time",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::decode_time(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> <a href=\"suiyunonghen/datetime#SystemTime\">SystemTime</a>",
+          "loc": { "line": 331, "column": 8 }
+        },
+        {
+          "name": "from_timezone",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::from_timezone(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, timezone : <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 32, "column": 18 }
+        },
+        {
+          "name": "from_unix_mseconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::from_unix_mseconds(seconds : Int64) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 355, "column": 18 }
+        },
+        {
+          "name": "from_unix_seconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::from_unix_seconds(seconds : Int64) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 350, "column": 18 }
+        },
+        {
+          "name": "hours_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::hours_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 480, "column": 8 }
+        },
+        {
+          "name": "inc_day",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_day(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, days : Int) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 565, "column": 8 }
+        },
+        {
+          "name": "inc_hour",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_hour(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, hour : Int64) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 220, "column": 8 }
+        },
+        {
+          "name": "inc_milliseconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_milliseconds(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, milliseconds : Int64) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 203, "column": 8 }
+        },
+        {
+          "name": "inc_minutes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_minutes(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, minutes : Int64) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 215, "column": 8 }
+        },
+        {
+          "name": "inc_month",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_month(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, monthNum : Int) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 547, "column": 8 }
+        },
+        {
+          "name": "inc_seconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_seconds(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, seconds : Int64) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 210, "column": 8 }
+        },
+        {
+          "name": "inc_year",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::inc_year(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, yearNum : Int) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 560, "column": 8 }
+        },
+        {
+          "name": "milliseconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::milliseconds(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 225, "column": 8 }
+        },
+        {
+          "name": "milliseconds_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::milliseconds_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 507, "column": 8 }
+        },
+        {
+          "name": "minutes_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::minutes_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 490, "column": 8 }
+        },
+        {
+          "name": "month_span",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::month_span(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Double",
+          "loc": { "line": 470, "column": 8 }
+        },
+        {
+          "name": "months_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::months_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int",
+          "loc": { "line": 527, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::new(year : Int, month : Int, day : Int, hour : Int, minute : Int, seconds : Int, milliseconds : Int) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>?",
+          "loc": { "line": 405, "column": 18 }
+        },
+        {
+          "name": "new_date",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::new_date(year : Int, month : Int, day : Int) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>?",
+          "loc": { "line": 360, "column": 18 }
+        },
+        {
+          "name": "new_time",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::new_time(hour : Int, minute : Int, seconds : Int, milliseconds : Int) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>?",
+          "loc": { "line": 388, "column": 18 }
+        },
+        {
+          "name": "op_sub",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::op_sub(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, other : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Double",
+          "loc": { "line": 450, "column": 8 }
+        },
+        {
+          "name": "seconds_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::seconds_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 497, "column": 8 }
+        },
+        {
+          "name": "to_timezone",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::to_timezone(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, timezone : <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 26, "column": 18 }
+        },
+        {
+          "name": "unix_millseconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::unix_millseconds(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 230, "column": 8 }
+        },
+        {
+          "name": "unix_seconds",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::unix_seconds(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int64",
+          "loc": { "line": 235, "column": 8 }
+        },
+        {
+          "name": "week_span",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::week_span(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Double",
+          "loc": { "line": 475, "column": 8 }
+        },
+        {
+          "name": "year_span",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::year_span(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Double",
+          "loc": { "line": 465, "column": 8 }
+        },
+        {
+          "name": "years_between",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>::years_between(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, then : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>) -> Int",
+          "loc": { "line": 517, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>, l : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 267, "column": 33 }
+            }
+          ],
+          "loc": { "line": 267, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">@moonbitlang/core/strconv.FromStr</a> for <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "methods": [
+            {
+              "name": "from_string",
+              "docstring": "",
+              "signature": "fn from_string(str : String) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>!<a href=\"moonbitlang/core/strconv#StrConvError\">@moonbitlang/core/strconv.StrConvError</a>",
+              "loc": { "line": 778, "column": 45 }
+            }
+          ],
+          "loc": { "line": 778, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "SystemDate",
+      "docstring": "",
+      "signature": "pub(all) struct SystemDate {\n  dayofweek : Int\n  year : Int\n  month : Int\n  day : Int\n}",
+      "loc": { "line": 58, "column": 17 },
+      "methods": [
+        {
+          "name": "inc_month",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>::inc_month(self : <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>, numMonth : Int) -> (<a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>, <a href=\"moonbitlang/core/array#Array\">Array</a>[Int])",
+          "loc": { "line": 71, "column": 8 }
+        },
+        {
+          "name": "to_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>::to_datetime(self : <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 66, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>, l : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 93, "column": 35 }
+            }
+          ],
+          "loc": { "line": 93, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "SystemDateTime",
+      "docstring": "",
+      "signature": "pub(all) struct SystemDateTime {\n  date : <a href=\"suiyunonghen/datetime#SystemDate\">SystemDate</a>\n  time : <a href=\"suiyunonghen/datetime#SystemTime\">SystemTime</a>\n}",
+      "loc": { "line": 118, "column": 17 },
+      "methods": [
+        {
+          "name": "to_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#SystemDateTime\">SystemDateTime</a>::to_datetime(self : <a href=\"suiyunonghen/datetime#SystemDateTime\">SystemDateTime</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 124, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/datetime#SystemDateTime\">SystemDateTime</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"suiyunonghen/datetime#SystemDateTime\">SystemDateTime</a>, l : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 137, "column": 39 }
+            }
+          ],
+          "loc": { "line": 137, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "SystemTime",
+      "docstring": "",
+      "signature": "pub(all) struct SystemTime {\n  hour : Int\n  minute : Int\n  second : Int\n  milliseconds : Int\n}",
+      "loc": { "line": 98, "column": 17 },
+      "methods": [
+        {
+          "name": "to_datetime",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#SystemTime\">SystemTime</a>::to_datetime(self : <a href=\"suiyunonghen/datetime#SystemTime\">SystemTime</a>) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>",
+          "loc": { "line": 106, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"suiyunonghen/datetime#SystemTime\">SystemTime</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"suiyunonghen/datetime#SystemTime\">SystemTime</a>, l : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 111, "column": 35 }
+            }
+          ],
+          "loc": { "line": 111, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "TimeZone",
+      "docstring": "",
+      "signature": "pub(all) struct TimeZone {\n  offset_hours : Int\n  offset_minutes : Int\n}",
+      "loc": { "line": 7, "column": 17 },
+      "methods": [
+        {
+          "name": "difference",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>::difference(self : <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>, other : <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>) -> Int",
+          "loc": { "line": 41, "column": 18 }
+        },
+        {
+          "name": "new_timezone",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>::new_timezone(offset_hours : Int, offset_minutes : Int) -> <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>",
+          "loc": { "line": 13, "column": 18 }
+        },
+        {
+          "name": "offset_in_minutes",
+          "docstring": "",
+          "signature": "fn <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>::offset_in_minutes(self : <a href=\"suiyunonghen/datetime#TimeZone\">TimeZone</a>) -> Int",
+          "loc": { "line": 21, "column": 18 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "is_leap_year",
+      "docstring": "",
+      "signature": "fn is_leap_year(year : Int) -> Bool",
+      "loc": { "line": 240, "column": 8 }
+    },
+    {
+      "name": "parse_datetime",
+      "docstring": "\n datetime formats\n YYYY-MM-DD HH:MM:SS.zzz\n YYYY-MM-DDTHH:MM:SS.zzz\n YYYY-MM-DD\n YY-MM-DD\n HH:MM:SS.zzz\n HH:MM:SS",
+      "signature": "fn parse_datetime(str : String) -> <a href=\"suiyunonghen/datetime#DateTime\">DateTime</a>!<a href=\"moonbitlang/core/strconv#StrConvError\">@moonbitlang/core/strconv.StrConvError</a>",
+      "loc": { "line": 599, "column": 8 }
+    }
+  ],
+  "misc": []
+}

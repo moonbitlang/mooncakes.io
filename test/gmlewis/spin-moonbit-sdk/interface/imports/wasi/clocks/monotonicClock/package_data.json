@@ -1,0 +1,34 @@
+{
+  "readme": "WASI Monotonic Clock is a clock API intended to let users measure elapsed\ntime.\n\nIt is intended to be portable at least between Unix-family platforms and\nWindows.\n\nA monotonic clock is a clock which has an unspecified initial value, and\nsuccessive reads of the clock will produce non-decreasing values.\n\nIt is intended for measuring elapsed time.",
+  "name": "gmlewis/spin-moonbit-sdk/interface/imports/wasi/clocks/monotonicClock",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "now",
+      "docstring": " Read the current value of the clock.\n\n The clock is monotonic, therefore calling this function repeatedly will\n produce a sequence of non-decreasing values.",
+      "signature": "fn now() -> UInt64",
+      "loc": { "line": 7, "column": 8 }
+    },
+    {
+      "name": "resolution",
+      "docstring": " Query the resolution of the clock. Returns the duration of time\n corresponding to a clock tick.",
+      "signature": "fn resolution() -> UInt64",
+      "loc": { "line": 14, "column": 8 }
+    },
+    {
+      "name": "subscribe_duration",
+      "docstring": " Create a `pollable` which will resolve once the given duration has\n elapsed, starting at the time at which this function was called.\n occured.",
+      "signature": "fn subscribe_duration(when : UInt64) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+      "loc": { "line": 29, "column": 8 }
+    },
+    {
+      "name": "subscribe_instant",
+      "docstring": " Create a `pollable` which will resolve once the specified instant\n occured.",
+      "signature": "fn subscribe_instant(when : UInt64) -> <a href=\"gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll#Pollable\">@gmlewis/spin-moonbit-sdk/interface/imports/wasi/io/poll.Pollable</a>",
+      "loc": { "line": 21, "column": 8 }
+    }
+  ],
+  "misc": []
+}

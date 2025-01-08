@@ -28,21 +28,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/x/fs/fs.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/fs#IOError">IOError</a> with output(self : <a href="moonbitlang/x/fs#IOError">IOError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/x/fs/fs.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/x/fs#IOError">IOError</a>
   ```
   > 
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/x/fs/fs.mbt,21:::fn <a href="moonbitlang/x/fs#IOError">IOError</a>::output(self : <a href="moonbitlang/x/fs#IOError">IOError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/x/fs/traits.mbt,85:::fn <a href="moonbitlang/x/fs#IOError">IOError</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
+  * ```moonbit
+    :::source,moonbitlang/x/fs/fs.mbt,21:::fn output(self : <a href="moonbitlang/x/fs#IOError">IOError</a>, logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 ## create\_dir
 

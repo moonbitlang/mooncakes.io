@@ -1,0 +1,78 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "io",
+      "package": {
+        "path": "gmlewis/io",
+        "readme": true,
+        "traits": [
+          { "name": "@gmlewis/io.ByteReader", "impls": [] },
+          { "name": "@gmlewis/io.ByteScanner", "impls": [] },
+          { "name": "@gmlewis/io.ByteWriter", "impls": [] },
+          { "name": "@gmlewis/io.Closer", "impls": [] },
+          { "name": "@gmlewis/io.ReadCloser", "impls": [] },
+          { "name": "@gmlewis/io.ReadSeekCloser", "impls": [] },
+          { "name": "@gmlewis/io.ReadSeeker", "impls": [] },
+          { "name": "@gmlewis/io.ReadWriteCloser", "impls": [] },
+          { "name": "@gmlewis/io.ReadWriteSeeker", "impls": [] },
+          { "name": "@gmlewis/io.ReadWriter", "impls": [] },
+          { "name": "@gmlewis/io.Reader", "impls": [] },
+          { "name": "@gmlewis/io.ReaderAt", "impls": [] },
+          { "name": "@gmlewis/io.ReaderFrom", "impls": [] },
+          { "name": "@gmlewis/io.Seeker", "impls": [] },
+          { "name": "@gmlewis/io.WriteCloser", "impls": [] },
+          { "name": "@gmlewis/io.WriteSeeker", "impls": [] },
+          { "name": "@gmlewis/io.Writer", "impls": [] },
+          { "name": "@gmlewis/io.WriterAt", "impls": [] },
+          { "name": "@gmlewis/io.WriterTo", "impls": [] }
+        ],
+        "types": [
+          {
+            "name": "Buffer",
+            "impls": [],
+            "methods": [
+              "from", "length", "new", "read", "read_byte", "read_from",
+              "reset", "to_bytes", "to_slice", "write", "write_bytes",
+              "write_string"
+            ]
+          },
+          { "name": "Discard", "impls": [], "methods": [ "write" ] },
+          {
+            "name": "IOError",
+            "impls": [
+              { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+            ],
+            "methods": []
+          },
+          { "name": "LimitedReader", "impls": [], "methods": [ "new" ] },
+          { "name": "NopCloser", "impls": [], "methods": [ "new" ] },
+          { "name": "OffsetWriter", "impls": [], "methods": [ "new" ] },
+          { "name": "SectionReader", "impls": [], "methods": [ "new" ] },
+          {
+            "name": "Slice",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": [
+              "append", "as_array_view", "cap", "each", "fold", "foldi",
+              "iter", "iter2", "length", "new", "op_as_view", "op_equal",
+              "op_get", "op_set", "push", "rev_fold", "rev_foldi",
+              "rev_inplace", "swap", "to_bytes"
+            ]
+          },
+          { "name": "TeeReader", "impls": [], "methods": [ "new" ] },
+          { "name": "Whence", "impls": [], "methods": [] }
+        ],
+        "typealias": [],
+        "values": [
+          "copy", "copy_buffer", "copy_n", "discard", "eof",
+          "err_invalid_write", "err_no_progress", "err_offset",
+          "err_short_buffer", "err_short_write", "err_unexpected_eof",
+          "err_whence", "read_all", "read_full"
+        ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

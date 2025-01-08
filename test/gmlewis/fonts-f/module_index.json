@@ -1,0 +1,688 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "fonts-f",
+      "package": null,
+      "childs": [
+        {
+          "name": "f20db",
+          "package": {
+            "path": "gmlewis/fonts-f/f20db",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "f2dumb",
+          "package": {
+            "path": "gmlewis/fonts-f/f2dumb",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "f32768no",
+          "package": {
+            "path": "gmlewis/fonts-f/f32768no",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "f7hours",
+          "package": {
+            "path": "gmlewis/fonts-f/f7hours",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fantasquesansmono_bold",
+          "package": {
+            "path": "gmlewis/fonts-f/fantasquesansmono_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fantasquesansmono_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-f/fantasquesansmono_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fantasquesansmono_italic",
+          "package": {
+            "path": "gmlewis/fonts-f/fantasquesansmono_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fantasquesansmono_regular",
+          "package": {
+            "path": "gmlewis/fonts-f/fantasquesansmono_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "faraday",
+          "package": {
+            "path": "gmlewis/fonts-f/faraday",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fascinate_inlineregular",
+          "package": {
+            "path": "gmlewis/fonts-f/fascinate_inlineregular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fauxsnowbrk",
+          "package": {
+            "path": "gmlewis/fonts-f/fauxsnowbrk",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_black",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_black",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_blackitalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_blackitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_bold",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_bold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_bolditalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_bolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_extrabold",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_extrabold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_extrabolditalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_extrabolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_extralight",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_extralight",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_extralightitalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_extralightitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_italic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_italic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_light",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_light",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_lightitalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_lightitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_medium",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_medium",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_mediumitalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_mediumitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_regular",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_semibold",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_semibold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_semibolditalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_semibolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_thin",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_thin",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "firasans_thinitalic",
+          "package": {
+            "path": "gmlewis/fonts-f/firasans_thinitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fixedersys1x",
+          "package": {
+            "path": "gmlewis/fonts-f/fixedersys1x",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fixedersys2x",
+          "package": {
+            "path": "gmlewis/fonts-f/fixedersys2x",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fixedersyslight2x",
+          "package": {
+            "path": "gmlewis/fonts-f/fixedersyslight2x",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fjallaone_regular",
+          "package": {
+            "path": "gmlewis/fonts-f/fjallaone_regular",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fjord_one",
+          "package": {
+            "path": "gmlewis/fonts-f/fjord_one",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "floralia",
+          "package": {
+            "path": "gmlewis/fonts-f/floralia",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "font3933",
+          "package": {
+            "path": "gmlewis/fonts-f/font3933",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fontleroybrown",
+          "package": {
+            "path": "gmlewis/fonts-f/fontleroybrown",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "forum",
+          "package": {
+            "path": "gmlewis/fonts-f/forum",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freebooterscript",
+          "package": {
+            "path": "gmlewis/fonts-f/freebooterscript",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freemono",
+          "package": {
+            "path": "gmlewis/fonts-f/freemono",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freemonobold",
+          "package": {
+            "path": "gmlewis/fonts-f/freemonobold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freemonoboldoblique",
+          "package": {
+            "path": "gmlewis/fonts-f/freemonoboldoblique",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freemonooblique",
+          "package": {
+            "path": "gmlewis/fonts-f/freemonooblique",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freesans",
+          "package": {
+            "path": "gmlewis/fonts-f/freesans",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freesansbold",
+          "package": {
+            "path": "gmlewis/fonts-f/freesansbold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freesansboldoblique",
+          "package": {
+            "path": "gmlewis/fonts-f/freesansboldoblique",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freesansoblique",
+          "package": {
+            "path": "gmlewis/fonts-f/freesansoblique",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freeserif",
+          "package": {
+            "path": "gmlewis/fonts-f/freeserif",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freeserifbold",
+          "package": {
+            "path": "gmlewis/fonts-f/freeserifbold",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freeserifbolditalic",
+          "package": {
+            "path": "gmlewis/fonts-f/freeserifbolditalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "freeserifitalic",
+          "package": {
+            "path": "gmlewis/fonts-f/freeserifitalic",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "fresnel",
+          "package": {
+            "path": "gmlewis/fonts-f/fresnel",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "font" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

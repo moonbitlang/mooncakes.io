@@ -1,0 +1,19 @@
+{
+  "name": "chawyehsu",
+  "package": null,
+  "childs": [
+    {
+      "name": "punycode",
+      "package": {
+        "path": "chawyehsu/punycode",
+        "readme": true,
+        "traits": [],
+        "types": [],
+        "typealias": [],
+        "values": [ "decode", "encode" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

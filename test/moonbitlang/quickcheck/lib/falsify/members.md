@@ -52,21 +52,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a> with output(<a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,19:::fn <a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a>::output(<a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,19:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,19:::fn output(<a href="moonbitlang/quickcheck/lib/falsify#Config">Config</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## DriverState
 
@@ -91,21 +83,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a> with output[E : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a>[E], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,10:::fn <a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a>::output[E : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a>[E], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,10:::impl[E : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a>[E]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,10:::fn output[E : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#Failure">Failure</a>[E], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Gen
 
@@ -229,9 +213,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,10:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a> with output[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,10:::impl[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N]
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,10:::fn output[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### limit\_steps
@@ -239,11 +227,6 @@
   :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,12:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>::limit_steps[P, N](self : <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N], n : Int?) -> <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N]
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,10:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>::output[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### shrink\_history
   ```moonbit
   :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,29:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>::shrink_history[P, N](self : <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N]) -> <a href="moonbitlang/core/array#Array">Array</a>[P]
@@ -252,11 +235,6 @@
 - #### shrink\_outcome
   ```moonbit
   :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,41:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>::shrink_outcome[P, N](self : <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>[P, N]) -> (P, <a href="moonbitlang/quickcheck/lib/lazy#LazyList">@moonbitlang/quickcheck/lib/lazy.LazyList</a>[N]?)
-  ```
-  > 
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkExplain">ShrinkExplain</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
   ```
   > 
 
@@ -269,21 +247,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a> with output[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a>[P, N], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,5:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a>::output[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a>[P, N], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,5:::impl[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a>[P, N]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/falsify/shrinking.mbt,5:::fn output[P : <a href="moonbitlang/core/builtin#Show">Show</a>, N : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#ShrinkHistroy">ShrinkHistroy</a>[P, N], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Success
 
@@ -294,21 +264,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,5:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,5:::fn <a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,5:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a>[T]
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/falsify/driver.mbt,5:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](<a href="moonbitlang/quickcheck/lib/falsify#Success">Success</a>[T], <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## TestResult
 
@@ -326,21 +288,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/property.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a> with output(<a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/property.mbt,7:::fn <a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a>::output(<a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,moonbitlang/quickcheck/lib/falsify/traits.mbt,85:::fn <a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,moonbitlang/quickcheck/lib/falsify/property.mbt,7:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a>
   ```
   > 
+  * ```moonbit
+    :::source,moonbitlang/quickcheck/lib/falsify/property.mbt,7:::fn output(<a href="moonbitlang/quickcheck/lib/falsify#TestRun">TestRun</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## LazyList
 

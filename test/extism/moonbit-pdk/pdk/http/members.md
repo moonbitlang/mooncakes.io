@@ -20,17 +20,29 @@ Multiple values for a single key are not deduped.
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="extism/moonbit-pdk/pdk/http#Header">Header</a> with op_equal(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>) -> Bool
+  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::fn op_equal(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>) -> Bool
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/pdk/http#Header">Header</a> with output(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::fn output(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 - ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/pdk/http#Header">Header</a> with to_json(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::fn to_json(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -44,31 +56,11 @@ Multiple values for a single key are not deduped.
   :::source,extism/moonbit-pdk/pdk/http/header.mbt,6:::fn <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>::new() -> <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>
   ```
   >  `Header::new` returns a new Header.
-- #### op\_equal
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::fn <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>::op_equal(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::fn <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>::output(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### set
   ```moonbit
   :::source,extism/moonbit-pdk/pdk/http/header.mbt,20:::fn <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>::set(self : <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>, key : String, value : String) -> Unit
   ```
   >  `set` overwrites a value to a named (by `key`) header field.
-- #### to\_json
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/header.mbt,3:::fn <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>::to_json(<a href="extism/moonbit-pdk/pdk/http#Header">Header</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/traits.mbt,85:::fn <a href="extism/moonbit-pdk/pdk/http#Header">Header</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Method
 
@@ -90,26 +82,20 @@ Descriptions are from: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/method.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/pdk/http#Method">Method</a> with output(<a href="extism/moonbit-pdk/pdk/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,extism/moonbit-pdk/pdk/http/method.mbt,22:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="extism/moonbit-pdk/pdk/http#Method">Method</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/pdk/http/method.mbt,22:::fn output(<a href="extism/moonbit-pdk/pdk/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/method.mbt,22:::fn <a href="extism/moonbit-pdk/pdk/http#Method">Method</a>::output(<a href="extism/moonbit-pdk/pdk/http#Method">Method</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_json
   ```moonbit
   :::source,extism/moonbit-pdk/pdk/http/method.mbt,25:::fn <a href="extism/moonbit-pdk/pdk/http#Method">Method</a>::to_json(self : <a href="extism/moonbit-pdk/pdk/http#Method">Method</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
   ```
   >  `Method::to_json` is required because `derive(ToJson)` generates `{"$tag":"GET"}` here instead of `"GET"`.
-- #### to\_string
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/traits.mbt,85:::fn <a href="extism/moonbit-pdk/pdk/http#Method">Method</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## Request
 
@@ -124,9 +110,13 @@ Descriptions are from: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/http.mbt,6:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/pdk/http#Request">Request</a> with to_json(<a href="extism/moonbit-pdk/pdk/http#Request">Request</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+  :::source,extism/moonbit-pdk/pdk/http/http.mbt,6:::impl <a href="moonbitlang/core/builtin#ToJson">ToJson</a> for <a href="extism/moonbit-pdk/pdk/http#Request">Request</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,extism/moonbit-pdk/pdk/http/http.mbt,6:::fn to_json(<a href="extism/moonbit-pdk/pdk/http#Request">Request</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### send
@@ -136,11 +126,6 @@ Descriptions are from: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
   >  `send` sends the `Request` to the host, waits for a response,
   > and returns it to the caller.
   > Note that the (optional) `body` is freed by this call.
-- #### to\_json
-  ```moonbit
-  :::source,extism/moonbit-pdk/pdk/http/http.mbt,6:::fn <a href="extism/moonbit-pdk/pdk/http#Request">Request</a>::to_json(<a href="extism/moonbit-pdk/pdk/http#Request">Request</a>) -> <a href="moonbitlang/core/json#Json">Json</a>
-  ```
-  > automatically derived
 
 ## Response
 

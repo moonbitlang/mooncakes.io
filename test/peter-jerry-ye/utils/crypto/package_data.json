@@ -1,0 +1,185 @@
+{
+  "readme": "",
+  "name": "peter-jerry-ye/utils/crypto",
+  "traits": [],
+  "types": [
+    {
+      "name": "HashAlgorithm",
+      "docstring": "",
+      "signature": "pub(all) enum HashAlgorithm {\n  MD5\n  SHA224\n  SHA256\n}",
+      "loc": { "line": 16, "column": 15 },
+      "methods": [
+        {
+          "name": "hash",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>::hash(self : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>, input : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+          "loc": { "line": 42, "column": 8 }
+        },
+        {
+          "name": "oid",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>::oid(self : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]",
+          "loc": { "line": 23, "column": 8 }
+        },
+        {
+          "name": "oid_with_rsa_encryption",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>::oid_with_rsa_encryption(self : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]",
+          "loc": { "line": 32, "column": 8 }
+        },
+        {
+          "name": "pkcs1_v1_5_digest_algorithms",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>::pkcs1_v1_5_digest_algorithms(self : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>) -> <a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>",
+          "loc": { "line": 51, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RSAPrivKey",
+      "docstring": "",
+      "signature": "pub(all) enum RSAPrivKey {\n  Pair(<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, Int)\n  Quintuple(<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/array#Array\">Array</a>[(<a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>)], Int)\n}",
+      "loc": { "line": 25, "column": 15 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "RSAPubKey",
+      "docstring": "",
+      "signature": "pub(all) struct RSAPubKey {\n  modulus : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>\n  exponent : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>\n  length : Int\n}",
+      "loc": { "line": 18, "column": 17 },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "X690",
+      "docstring": "",
+      "signature": "pub(all) struct X690 {\n  tag : <a href=\"peter-jerry-ye/utils/crypto#X690Type\">X690Type</a>\n  construction : <a href=\"peter-jerry-ye/utils/crypto#X690Construction\">X690Construction</a>\n  class : <a href=\"peter-jerry-ye/utils/crypto#X690Class\">X690Class</a>\n  content : Bytes\n}",
+      "loc": { "line": 192, "column": 17 },
+      "methods": [
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>::from_iter(bytes : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>]",
+          "loc": { "line": 317, "column": 14 }
+        },
+        {
+          "name": "to_bytes",
+          "docstring": " Assuming length is definite",
+          "signature": "fn <a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>::to_bytes(self : <a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>) -> Bytes",
+          "loc": { "line": 266, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/utils/crypto#X690\">X690</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 197, "column": 10 }
+            }
+          ],
+          "loc": { "line": 197, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "X690Class",
+      "docstring": "",
+      "signature": "pub(all) enum X690Class {\n  Universal\n  Application\n  ContextSpecific\n  Private\n}",
+      "loc": { "line": 24, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/utils/crypto#X690Class\">X690Class</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/utils/crypto#X690Class\">X690Class</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 29, "column": 10 }
+            }
+          ],
+          "loc": { "line": 29, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "X690Construction",
+      "docstring": "",
+      "signature": "pub(all) enum X690Construction {\n  Primitive\n  Constructed\n}",
+      "loc": { "line": 18, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/utils/crypto#X690Construction\">X690Construction</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/utils/crypto#X690Construction\">X690Construction</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 21, "column": 10 }
+            }
+          ],
+          "loc": { "line": 21, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "X690Type",
+      "docstring": "",
+      "signature": "pub(all) enum X690Type {\n  Boolean\n  Integer\n  BitString\n  OctetString\n  Null\n  ObjectIdentifier\n  ObjectDescriptor\n  External\n  Real\n  Enumerated\n  EmbeddedPDV\n  UTF8String\n  RelativeOID\n  Time\n  Sequence\n  Set\n  NumericString\n  PrintableString\n  TeletexString\n  VideotexString\n  IA5String\n  UTCTime\n  GeneralizedTime\n  GraphicString\n  VisibleString\n  GeneralString\n  UniversalString\n  CharacterString\n  BMPString\n  Date\n  TimeOfDay\n  DateTime\n  Duration\n  OID_IRI\n  Relative_OID_IRI\n}",
+      "loc": { "line": 70, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/utils/crypto#X690Type\">X690Type</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/utils/crypto#X690Type\">X690Type</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 106, "column": 10 }
+            }
+          ],
+          "loc": { "line": 106, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "hmac",
+      "docstring": "",
+      "signature": "fn hmac(content : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte], hash~ : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a>, secret~ : Bytes) -> Bytes",
+      "loc": { "line": 18, "column": 8 }
+    },
+    {
+      "name": "oid_to_bytes",
+      "docstring": "",
+      "signature": "fn oid_to_bytes(tree : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]) -> Bytes",
+      "loc": { "line": 255, "column": 8 }
+    },
+    {
+      "name": "rsassa_pkcs1_v1_5_sign",
+      "docstring": "",
+      "signature": "fn rsassa_pkcs1_v1_5_sign(bytes : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte], priv_key : <a href=\"peter-jerry-ye/utils/crypto#RSAPrivKey\">RSAPrivKey</a>, hash~ : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a> = ..) -> <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>",
+      "loc": { "line": 39, "column": 8 }
+    },
+    {
+      "name": "rsassa_pkcs1_v1_5_verify",
+      "docstring": "",
+      "signature": "fn rsassa_pkcs1_v1_5_verify(bytes : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte], modulus : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, exponent : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, signature : <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>, hash~ : <a href=\"peter-jerry-ye/utils/crypto#HashAlgorithm\">HashAlgorithm</a> = .., length~ : Int = ..) -> Bool",
+      "loc": { "line": 82, "column": 8 }
+    }
+  ],
+  "misc": []
+}

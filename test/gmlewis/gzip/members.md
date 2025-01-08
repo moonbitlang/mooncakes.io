@@ -51,39 +51,29 @@ https://github.com/chawyehsu/moonup
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,gmlewis/gzip/gzip.mbt,11:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a> with compare(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>) -> Int
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/gzip/gzip.mbt,11:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a> with op_equal(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>) -> Bool
-  ```
-  > automatically derived
-- ```moonbit
-  :::source,gmlewis/gzip/gzip.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a> with output(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### compare
-  ```moonbit
-  :::source,gmlewis/gzip/gzip.mbt,11:::fn <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>::compare(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>) -> Int
-  ```
-  > automatically derived
-- #### op\_equal
-  ```moonbit
-  :::source,gmlewis/gzip/gzip.mbt,11:::fn <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>::op_equal(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>) -> Bool
-  ```
-  > automatically derived
-- #### output
-  ```moonbit
-  :::source,gmlewis/gzip/gzip.mbt,11:::fn <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>::output(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,gmlewis/gzip/traits.mbt,85:::fn <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,gmlewis/gzip/gzip.mbt,11:::impl <a href="moonbitlang/core/builtin#Compare">Compare</a> for <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>
   ```
   > 
+  * ```moonbit
+    :::source,gmlewis/gzip/gzip.mbt,11:::fn compare(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>) -> Int
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/gzip/gzip.mbt,11:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/gzip/gzip.mbt,11:::fn op_equal(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>) -> Bool
+    ```
+    > automatically derived
+- ```moonbit
+  :::source,gmlewis/gzip/gzip.mbt,11:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>
+  ```
+  > 
+  * ```moonbit
+    :::source,gmlewis/gzip/gzip.mbt,11:::fn output(<a href="gmlewis/gzip#CompressionLevel">CompressionLevel</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## Header
 

@@ -1,0 +1,25 @@
+{
+  "name": "liuly0322",
+  "package": null,
+  "childs": [
+    {
+      "name": "tch_mbt",
+      "package": null,
+      "childs": [
+        {
+          "name": "torch",
+          "package": {
+            "path": "liuly0322/tch_mbt/torch",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

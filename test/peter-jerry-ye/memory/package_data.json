@@ -1,0 +1,118 @@
+{
+  "readme": "# 简陋内存管理 Naive Memory Allocator \n\n超级简陋的链表实现。仅限Wasm-gc后端。\n内存管理将管理整块线性内存。自动增长内存。\n\nSuper naive implementation with linkedlist. Wasm-GC Only.\nAllocator will take control over the whole linear memory. Memory will grow automatically.\n\n## 使用 Usage\n\n- `allocate(size: Int) -> Option[Memory]`\n- `memory.reallocate(_alignment: Int, new_size: Int) -> Option[Memory]`\n- `memory.free() -> Option[Unit]`",
+  "name": "peter-jerry-ye/memory",
+  "traits": [],
+  "types": [
+    {
+      "name": "Memory",
+      "docstring": " Represent memory 内存",
+      "signature": "pub struct Memory {\n  offset : Int\n  length : Int\n}",
+      "loc": { "line": 16, "column": 22 },
+      "methods": [
+        {
+          "name": "free",
+          "docstring": " Free Memory 释放内存",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::free(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>) -> Unit?",
+          "loc": { "line": 317, "column": 8 }
+        },
+        {
+          "name": "load32",
+          "docstring": " Load Int32 读取32位整数",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::load32(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int) -> Int?",
+          "loc": { "line": 31, "column": 8 }
+        },
+        {
+          "name": "load64",
+          "docstring": " Load Int64 读取64位整数",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::load64(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int) -> Int64?",
+          "loc": { "line": 40, "column": 8 }
+        },
+        {
+          "name": "load8",
+          "docstring": " Load Byte 读取字节",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::load8(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int) -> Int?",
+          "loc": { "line": 22, "column": 8 }
+        },
+        {
+          "name": "load_bytes",
+          "docstring": " Load Bytes 读取数据块",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::load_bytes(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>) -> Bytes",
+          "loc": { "line": 94, "column": 8 }
+        },
+        {
+          "name": "loadf64",
+          "docstring": " Load Float64 读取64位浮点数",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::loadf64(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int) -> Double?",
+          "loc": { "line": 49, "column": 8 }
+        },
+        {
+          "name": "make",
+          "docstring": " Create memory 创建内存\n Only valid if it is actually an allocated memory that is in use\n 当该内存确实为被分配的内存时输入合法",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::make(offset : Int, length : Int) -> <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>?",
+          "loc": { "line": 193, "column": 16 }
+        },
+        {
+          "name": "reallocate",
+          "docstring": " Reallocate Memory 重新分配内存",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::reallocate(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, _alignment : Int, new_length : Int) -> <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>?",
+          "loc": { "line": 330, "column": 8 }
+        },
+        {
+          "name": "store32",
+          "docstring": " Store Int32 存储32位整数",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::store32(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int, value : Int) -> Unit?",
+          "loc": { "line": 67, "column": 8 }
+        },
+        {
+          "name": "store64",
+          "docstring": " Store Int64 存储64位整数",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::store64(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int, value : Int64) -> Unit?",
+          "loc": { "line": 76, "column": 8 }
+        },
+        {
+          "name": "store8",
+          "docstring": " Store Byte 存储字节",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::store8(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int, value : Int) -> Unit?",
+          "loc": { "line": 58, "column": 8 }
+        },
+        {
+          "name": "store_bytes",
+          "docstring": " Store Bytes 存储数据块",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::store_bytes(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, bytes : Bytes) -> Unit",
+          "loc": { "line": 103, "column": 8 }
+        },
+        {
+          "name": "storef64",
+          "docstring": " Store Float64 存储64位浮点数",
+          "signature": "fn <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>::storef64(self : <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, offset : Int, value : Double) -> Unit?",
+          "loc": { "line": 85, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"peter-jerry-ye/memory#Memory\">Memory</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 10 }
+            }
+          ],
+          "loc": { "line": 19, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "allocate",
+      "docstring": " Allocate memory 分配内存",
+      "signature": "fn allocate(size : Int) -> <a href=\"peter-jerry-ye/memory#Memory\">Memory</a>?",
+      "loc": { "line": 238, "column": 8 }
+    }
+  ],
+  "misc": []
+}

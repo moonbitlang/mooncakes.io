@@ -1,0 +1,16 @@
+{
+  "readme": "This interface defines a handler of outgoing HTTP Requests. It should be\nimported by components which wish to make HTTP Requests.",
+  "name": "yamajik/wasi-bindings/interface/wasi/http/outgoingHandler",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "handle",
+      "docstring": " This function is invoked with an outgoing HTTP Request, and it returns\n a resource `future-incoming-response` which represents an HTTP Response\n which may arrive in the future.\n\n The `options` argument accepts optional parameters for the HTTP\n protocol's transport layer.\n\n This function may return an error if the `outgoing-request` is invalid\n or not allowed to be made. Otherwise, protocol errors are reported\n through the `future-incoming-response`.",
+      "signature": "fn handle(request : <a href=\"yamajik/wasi-bindings/interface/wasi/http/types#OutgoingRequest\">@yamajik/wasi-bindings/interface/wasi/http/types.OutgoingRequest</a>, options : <a href=\"yamajik/wasi-bindings/interface/wasi/http/types#RequestOptions\">@yamajik/wasi-bindings/interface/wasi/http/types.RequestOptions</a>?) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"yamajik/wasi-bindings/interface/wasi/http/types#FutureIncomingResponse\">@yamajik/wasi-bindings/interface/wasi/http/types.FutureIncomingResponse</a>, <a href=\"yamajik/wasi-bindings/interface/wasi/http/types#ErrorCode\">@yamajik/wasi-bindings/interface/wasi/http/types.ErrorCode</a>]",
+      "loc": { "line": 12, "column": 8 }
+    }
+  ],
+  "misc": []
+}

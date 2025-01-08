@@ -1,8 +1,8 @@
 # Documentation
 |Trait|description|
 |---|---|
-|[Bytes\_](#Bytes_)||
-|[Chars](#Chars)||
+|[@peter-jerry-ye/utils/codec.Bytes\_](#@peter-jerry-ye/utils/codec.Bytes_)||
+|[@peter-jerry-ye/utils/codec.Chars](#@peter-jerry-ye/utils/codec.Chars)||
 
 |Type|description|
 |---|---|
@@ -14,19 +14,19 @@
 |[base64\_decode](#base64_decode)| |
 |[base64\_encode](#base64_encode)| Encode binary to ascii text following Base64 defined in RFC 4648|
 
-## Bytes\_
+## @peter-jerry-ye/utils/codec.Bytes\_
 
 ```moonbit
-:::source,peter-jerry-ye/utils/codec/base64.mbt,118:::pub(open) trait Bytes_ {
+:::source,peter-jerry-ye/utils/codec/base64.mbt,118:::pub(open) trait @peter-jerry-ye/utils/codec.Bytes_ {
   iter(Self) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[Byte]
 }
 ```
 
 
-## Chars
+## @peter-jerry-ye/utils/codec.Chars
 
 ```moonbit
-:::source,peter-jerry-ye/utils/codec/base64.mbt,123:::pub(open) trait Chars {
+:::source,peter-jerry-ye/utils/codec/base64.mbt,123:::pub(open) trait @peter-jerry-ye/utils/codec.Chars {
   iter(Self) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[Char]
 }
 ```

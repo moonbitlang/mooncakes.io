@@ -1,0 +1,141 @@
+{
+  "readme": "",
+  "name": "rami3l/cmark/cmark_renderer",
+  "traits": [],
+  "types": [
+    {
+      "name": "Context",
+      "docstring": "",
+      "signature": "pub(all) struct Context {\n  renderer : <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>\n  state : <a href=\"moonbitlang/core/error#Error\">Error</a>?\n  b : <a href=\"moonbitlang/core/builtin#StringBuilder\">StringBuilder</a>\n  doc : <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>\n}",
+      "loc": { "line": 34, "column": 17 },
+      "methods": [
+        {
+          "name": "block",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::block(self : <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, block : <a href=\"rami3l/cmark/cmark#Block\">@rami3l/cmark/cmark.Block</a>) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 83, "column": 17 }
+        },
+        {
+          "name": "char",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::char(self : <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, ch : Char) -> Unit",
+          "loc": { "line": 64, "column": 17 }
+        },
+        {
+          "name": "doc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::doc(self : <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, doc : <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 92, "column": 17 }
+        },
+        {
+          "name": "init",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::init(self : <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, doc : <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Unit",
+          "loc": { "line": 47, "column": 17 }
+        },
+        {
+          "name": "inline",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::inline(self : <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, inline : <a href=\"rami3l/cmark/cmark#Inline\">@rami3l/cmark/cmark.Inline</a>) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 74, "column": 17 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::new(renderer : <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>, b : <a href=\"moonbitlang/core/builtin#StringBuilder\">StringBuilder</a>) -> <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>",
+          "loc": { "line": 42, "column": 17 }
+        },
+        {
+          "name": "string",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>::string(self : <a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, str : String) -> Unit",
+          "loc": { "line": 69, "column": 17 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "RenderError",
+      "docstring": "",
+      "signature": "pub(all) type! RenderError String\n",
+      "loc": { "line": 2, "column": 16 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"rami3l/cmark/cmark_renderer#RenderError\">RenderError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"rami3l/cmark/cmark_renderer#RenderError\">RenderError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 2, "column": 42 }
+            }
+          ],
+          "loc": { "line": 2, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "Renderer",
+      "docstring": " Renderer abstraction.\n\n Stateful renderer abstraction to render documents in memory.",
+      "signature": "pub(all) struct Renderer {\n  init_context : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Unit\n  inline : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Inline\">@rami3l/cmark/cmark.Inline</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a>\n  block : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Block\">@rami3l/cmark/cmark.Block</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a>\n  doc : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a>\n}",
+      "loc": { "line": 4, "column": 17 },
+      "methods": [
+        {
+          "name": "buffer_add_doc",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>::buffer_add_doc(self : <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>, buf : <a href=\"moonbitlang/core/builtin#StringBuilder\">StringBuilder</a>, doc : <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 110, "column": 18 }
+        },
+        {
+          "name": "compose",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>::compose(self : <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>, other : <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>) -> <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>",
+          "loc": { "line": 22, "column": 18 }
+        },
+        {
+          "name": "doc_to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>::doc_to_string(self : <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>, doc : <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> String!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 103, "column": 18 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>::new(init_context~ : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Unit = .., inline~ : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Inline\">@rami3l/cmark/cmark.Inline</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a> = .., block~ : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Block\">@rami3l/cmark/cmark.Block</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a> = .., doc~ : (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a> = ..) -> <a href=\"rami3l/cmark/cmark_renderer#Renderer\">Renderer</a>",
+          "loc": { "line": 12, "column": 18 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "BlockFn",
+      "docstring": "",
+      "signature": "type BlockFn = (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Block\">@rami3l/cmark/cmark.Block</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 58, "column": 1 }
+    },
+    {
+      "name": "DocFn",
+      "docstring": "",
+      "signature": "type DocFn = (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 61, "column": 1 }
+    },
+    {
+      "name": "InitContextFn",
+      "docstring": "",
+      "signature": "type InitContextFn = (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Doc\">@rami3l/cmark/cmark.Doc</a>) -> Unit",
+      "loc": { "line": 52, "column": 1 }
+    },
+    {
+      "name": "InlineFn",
+      "docstring": "",
+      "signature": "type InlineFn = (<a href=\"rami3l/cmark/cmark_renderer#Context\">Context</a>, <a href=\"rami3l/cmark/cmark#Inline\">@rami3l/cmark/cmark.Inline</a>) -> Bool!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 55, "column": 1 }
+    }
+  ],
+  "values": [],
+  "misc": []
+}

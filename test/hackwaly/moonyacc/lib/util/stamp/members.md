@@ -13,9 +13,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,hackwaly/moonyacc/lib/util/stamp/stamp.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a> with op_equal(<a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>, <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>) -> Bool
+  :::source,hackwaly/moonyacc/lib/util/stamp/stamp.mbt,2:::impl <a href="moonbitlang/core/builtin#Eq">Eq</a> for <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,hackwaly/moonyacc/lib/util/stamp/stamp.mbt,2:::fn op_equal(<a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>, <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>) -> Bool
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### initial
@@ -28,11 +32,6 @@
   :::source,hackwaly/moonyacc/lib/util/stamp/stamp.mbt,19:::fn <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>::new() -> <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>
   ```
   > 
-- #### op\_equal
-  ```moonbit
-  :::source,hackwaly/moonyacc/lib/util/stamp/stamp.mbt,2:::fn <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>::op_equal(<a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>, <a href="hackwaly/moonyacc/lib/util/stamp#Stamp">Stamp</a>) -> Bool
-  ```
-  > automatically derived
 
 ## T
 

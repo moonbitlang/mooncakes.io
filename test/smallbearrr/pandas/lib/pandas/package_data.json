@@ -1,0 +1,483 @@
+{
+  "readme": "",
+  "name": "smallbearrr/pandas/lib/pandas",
+  "traits": [],
+  "types": [
+    {
+      "name": "ColumnNotFoundError",
+      "docstring": "",
+      "signature": "type ColumnNotFoundError",
+      "loc": { "line": 22, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 22, "column": 41 }
+            }
+          ],
+          "loc": { "line": 22, "column": 41 }
+        }
+      ]
+    },
+    {
+      "name": "DType",
+      "docstring": "",
+      "signature": "pub(all) enum DType {\n  Int(Int)\n  Float(Float)\n  Bool(Bool)\n  Str(String)\n}",
+      "loc": { "line": 2, "column": 15 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>, <a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>) -> Int",
+              "loc": { "line": 7, "column": 20 }
+            }
+          ],
+          "loc": { "line": 7, "column": 20 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>, <a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>) -> Bool",
+              "loc": { "line": 7, "column": 16 }
+            }
+          ],
+          "loc": { "line": 7, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 7, "column": 10 }
+            }
+          ],
+          "loc": { "line": 7, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "DataFrame",
+      "docstring": "",
+      "signature": "pub(all) struct DataFrame {\n  data : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>]\n  shape : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]\n  index : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, Int]\n}",
+      "loc": { "line": 2, "column": 17 },
+      "methods": [
+        {
+          "name": "add_column",
+          "docstring": " Add a new column to the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `col` : The Series to be added as a new column\n\n # Returns\n\n - `Unit!` : This function adds a new column to the DataFrame or raises an error\n\n # Errors\n\n - `InconsistentSeriesLength`: Series length is not equal to the DataFrame length\n - `DuplicateColumnError`: Series name already exists\n\n # Example\n ```\n let new_column = Series::new(\"B\", SeriesData::Int([1, 2, 3]))\n df.add_column(new_column)\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::add_column(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, col : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 157, "column": 19 }
+        },
+        {
+          "name": "add_row",
+          "docstring": " Add a new row to the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `row` : An array of DType representing the new row to be added\n\n # Returns\n\n - `Unit` : This function adds a new row to the DataFrame\n\n # Errors\n\n - `InconsistentSeriesLength` : Raised if the row length does not match the DataFrame column length\n - `InvalidType` : if there is a type mismatch\n\n # Example\n ```\n let mut df = DataFrame::new([\n   Series::new(\"A\", SeriesData::Int([1, 2, 3])), \n   Series::new(\"B\", SeriesData::Float([1.1, 2.2, 3.3]))\n ])\n df.add_row([DType::Int(4), DType::Float(4.4)])\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::add_row(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, row : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>]) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 361, "column": 19 }
+        },
+        {
+          "name": "column",
+          "docstring": " Select a column from the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `col_name` : Column name to be selected\n\n # Returns\n\n - `Series` : Series contain selected columns\n \n # Errors\n \n - `ColumnNotFoundError` : Raised if a column is not found\n\n # Example\n ```\n let col_selected = df.column(\"col_name\")\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::column(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, col_name : String) -> <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>!<a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>",
+          "loc": { "line": 257, "column": 19 }
+        },
+        {
+          "name": "data",
+          "docstring": "",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::data(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>]",
+          "loc": { "line": 74, "column": 19 }
+        },
+        {
+          "name": "drop_column",
+          "docstring": " Drop a column from the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `col_name` : The name of the column to be dropped\n\n # Returns\n\n - `Unit` : This function drops a column from the DataFrame\n\n # Example\n ```\n df.drop_column(\"column_name\")\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::drop_column(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, col_name : String) -> Unit!<a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>",
+          "loc": { "line": 188, "column": 19 }
+        },
+        {
+          "name": "drop_row",
+          "docstring": " Drop a row from the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `row` : The index of the row to be dropped\n\n # Returns\n\n - `Unit` : This function drops a row from the DataFrame\n\n # Errors\n\n - `IndexOutOfBounds` : Raised if the row index is out of bounds\n\n # Example\n ```\n df.drop_row(0)\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::drop_row(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, row_index : Int) -> Unit!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 327, "column": 19 }
+        },
+        {
+          "name": "filter",
+          "docstring": " Filter rows in the DataFrame based on a condition\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `name` : The name of the column to apply the filter on\n - `f` : A function that takes a `DType` and returns a `Bool` indicating whether the row should be included\n\n # Returns\n\n - `DataFrame` : A new DataFrame containing only the rows that satisfy the condition\n\n # Example\n ```\n let df = DataFrame::new([Series::new(\"A\", SeriesData::Int([1, 2, 3, 4, 5, 6]))])\n let filtered = df.filter(\"A\", fn(x) -> Bool { x < DType::Int(3) })\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::filter(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, name : String, f : (<a href=\"smallbearrr/pandas/lib/pandas#DType\">DType</a>) -> Bool) -> <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 524, "column": 19 }
+        },
+        {
+          "name": "head",
+          "docstring": " Display the first few rows of the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n\n # Returns\n\n - `Unit` : This function prints the first few rows of the DataFrame\n\n # Example\n ```\n df.head()\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::head(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>) -> Unit",
+          "loc": { "line": 115, "column": 19 }
+        },
+        {
+          "name": "hstack",
+          "docstring": " Horizontally stack two DataFrames\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `other` : Another DataFrame to be stacked horizontally\n\n # Returns\n\n - `DataFrame` : A new DataFrame resulting from the horizontal stacking of the two DataFrames\n\n # Example\n ```\n let df1 = DataFrame::new!([\n   Series::new(\"A\", SeriesData::Int([1, 2, 3]))\n ])\n let df2 = DataFrame::new!([\n   Series::new(\"B\", SeriesData::Int([4, 5, 6]))\n ])\n let df_stacked = df1.hstack!(df2)\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::hstack(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 690, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " Create a new DataFrame\n\n # Parameters\n\n - `data` : Array of Series\n\n # Returns\n\n - `DataFrame!InconsistentSeriesLength` : A new DataFrame instance\n\n # Errors\n\n - `InconsistentSeriesLength` : Raised if the lengths of the Series are not equal\n\n # Example\n ```\n let df = DataFrame::new!([\n   Series::new(\"A\", SeriesData::Int([1, 1, 3, 1, 1, 6])),\n   Series::new(\"B\", SeriesData::Float([1.5, 2.0, 3.5, 4.0, 5.5, 6.0])),\n   Series::new(\"C\", SeriesData::Bool([true, false, true, false, true, false])),\n   Series::new(\"D\", SeriesData::Str([\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"])),\n ])\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::new(data : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>]) -> <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>!<a href=\"smallbearrr/pandas/lib/pandas#InconsistentSeriesLength\">InconsistentSeriesLength</a>",
+          "loc": { "line": 53, "column": 19 }
+        },
+        {
+          "name": "rename",
+          "docstring": " Rename a column in the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `old_name` : The current name of the column to be renamed\n - `new_name` : The new name for the column\n\n # Returns\n\n - `Unit` : This function renames a column in the DataFrame\n \n # Errors\n \n - `ColumnNotFoundError` : Raised if the column is not found\n\n # Example\n ```\n test {\n   let mut df = DataFrame::new([Series::new(\"A\", SeriesData::Int([1, 2]))])\n   df.rename(\"A\", \"B\")\n   inspect!(df.data()[0].name(), context=\"B\")\n }\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::rename(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, old_name : String, new_name : String) -> Unit!<a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>",
+          "loc": { "line": 227, "column": 19 }
+        },
+        {
+          "name": "select_columns",
+          "docstring": " Select specific columns from the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `cols` : An array of column names to be selected\n\n # Returns\n\n - `DataFrame` : A new DataFrame containing only the selected columns\n \n # Errors\n \n - `ColumnNotFoundError` : Raised if a column is not found\n\n # Example\n ```\n let df_selected = df.select_columns([\"col_name1\", \"col_name2\"])\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::select_columns(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, cols : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]) -> <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>!<a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>",
+          "loc": { "line": 286, "column": 19 }
+        },
+        {
+          "name": "select_rows",
+          "docstring": " Select specific rows from the DataFrame\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `range` : An optional tuple representing the range of rows to be selected (inclusive start, exclusive end)\n - `indices` : An optional array of row indices to be selected\n\n # Returns\n\n - `DataFrame` : A new DataFrame containing only the selected rows\n \n # Errors\n \n - `IndexOutOfBounds` : Raised if the row index is out of bounds\n\n # Example\n ```\n let df_selected_range = df.select_rows(range=(1, 4))\n \n let df_selected_indices = df.select_rows(indices=[1, 3, 5])\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::select_rows(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, range? : (Int, Int), indices? : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]) -> <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>!<a href=\"smallbearrr/pandas/lib/pandas#IndexOutOfBounds\">IndexOutOfBounds</a>",
+          "loc": { "line": 416, "column": 19 }
+        },
+        {
+          "name": "shape",
+          "docstring": "",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::shape(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]",
+          "loc": { "line": 69, "column": 19 }
+        },
+        {
+          "name": "sort",
+          "docstring": " Sort the DataFrame by a specified column\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `col_name` : The name of the column to sort by\n - `descending~` : Whether to sort in descending order (default is false)\n\n # Returns\n\n - `Unit` : This function sorts the DataFrame in place\n\n # Errors\n\n - `ColumnNotFoundError` : Raised if the specified column is not found\n\n # Example\n ```\n let df = DataFrame::new([\n   Series::new(\"A\", SeriesData::Int([3, 1, 2])), \n   Series::new(\"B\", SeriesData::Float([3.3, 1.1, 2.2]))\n ])\n df.sort(\"A\", descending=true)\n inspect!(df.data()[0].data(), content=\"Int([1, 2, 3])\")\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::sort(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, col_name : String, descending~ : Bool = ..) -> Unit!<a href=\"smallbearrr/pandas/lib/pandas#ColumnNotFoundError\">ColumnNotFoundError</a>",
+          "loc": { "line": 598, "column": 19 }
+        },
+        {
+          "name": "vstack",
+          "docstring": " Vertically stack two DataFrames\n\n # Parameters\n\n - `self` : An instance of the DataFrame\n - `other` : Another DataFrame to be stacked vertically\n\n # Returns\n\n - `DataFrame` : A new DataFrame resulting from the vertical stacking of the two DataFrames\n\n # Errors\n\n - `InconsistentSeriesLength` : Raised if the number of columns in the two DataFrames is not the same\n - `InvalidType` : Raised if the data types of the corresponding columns in the two DataFrames are not the same\n\n # Example\n ```\n let df1 = DataFrame::new!([\n   Series::new(\"A\", SeriesData::Int([1, 2, 3]))\n ])\n let df2 = DataFrame::new!([\n   Series::new(\"A\", SeriesData::Int([4, 5, 6]))\n ])\n let df_stacked = df1.vstack!(df2)\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>::vstack(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": { "line": 640, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": " Trait Show for DataFrame",
+              "signature": "fn output(self : <a href=\"smallbearrr/pandas/lib/pandas#DataFrame\">DataFrame</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 79, "column": 34 }
+            }
+          ],
+          "loc": { "line": 79, "column": 1 }
+        }
+      ]
+    },
+    {
+      "name": "DuplicateColumnError",
+      "docstring": "",
+      "signature": "type DuplicateColumnError",
+      "loc": { "line": 19, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#DuplicateColumnError\">DuplicateColumnError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#DuplicateColumnError\">DuplicateColumnError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 42 }
+            }
+          ],
+          "loc": { "line": 19, "column": 42 }
+        }
+      ]
+    },
+    {
+      "name": "EmptyArrayError",
+      "docstring": "",
+      "signature": "type EmptyArrayError",
+      "loc": { "line": 58, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#EmptyArrayError\">EmptyArrayError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#EmptyArrayError\">EmptyArrayError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 58, "column": 37 }
+            }
+          ],
+          "loc": { "line": 58, "column": 37 }
+        }
+      ]
+    },
+    {
+      "name": "InconsistentSeriesLength",
+      "docstring": "",
+      "signature": "type InconsistentSeriesLength",
+      "loc": { "line": 16, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#InconsistentSeriesLength\">InconsistentSeriesLength</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#InconsistentSeriesLength\">InconsistentSeriesLength</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 16, "column": 46 }
+            }
+          ],
+          "loc": { "line": 16, "column": 46 }
+        }
+      ]
+    },
+    {
+      "name": "IndexOutOfBounds",
+      "docstring": "",
+      "signature": "type IndexOutOfBounds",
+      "loc": { "line": 25, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#IndexOutOfBounds\">IndexOutOfBounds</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#IndexOutOfBounds\">IndexOutOfBounds</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 25, "column": 38 }
+            }
+          ],
+          "loc": { "line": 25, "column": 38 }
+        }
+      ]
+    },
+    {
+      "name": "InvalidType",
+      "docstring": "",
+      "signature": "type InvalidType",
+      "loc": { "line": 28, "column": 7 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#InvalidType\">InvalidType</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#InvalidType\">InvalidType</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 28, "column": 33 }
+            }
+          ],
+          "loc": { "line": 28, "column": 33 }
+        }
+      ]
+    },
+    {
+      "name": "Series",
+      "docstring": "",
+      "signature": "pub(all) struct Series {\n  name : String\n  data : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>\n}",
+      "loc": { "line": 18, "column": 17 },
+      "methods": [
+        {
+          "name": "argsort",
+          "docstring": " Sort the SeriesData in Series and return the indices of the sorted elements\n\n # Parameters\n\n - `self` : An instance of the SeriesData\n - `descending~` : A boolean indicating whether to sort in descending order (default is false)\n\n # Returns\n\n - `Array[Int]` : An array of indices representing the sorted order of the elements\n\n # Example\n ```\n let series = Series :: { name: \"A\", data: SeriesData::Int([3, 1, 2]) }\n let sorted_indices = series.argsort()\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::argsort(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, descending~ : Bool = ..) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]",
+          "loc": { "line": 169, "column": 16 }
+        },
+        {
+          "name": "data",
+          "docstring": "",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::data(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "loc": { "line": 179, "column": 16 }
+        },
+        {
+          "name": "name",
+          "docstring": "",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::name(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> String",
+          "loc": { "line": 174, "column": 16 }
+        },
+        {
+          "name": "new",
+          "docstring": " Create a new Series\n\n # Parameters\n\n - `name` : The name of the Series\n - `values` : The data contained in the Series\n\n # Returns\n\n - `Series` : A new Series instance\n\n # Example\n ```\n let series = Series::new(\"A\", SeriesData::Int([1, 2, 3]))\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::new(name : String, values : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "loc": { "line": 38, "column": 16 }
+        },
+        {
+          "name": "op_add",
+          "docstring": " Series add",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::op_add(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "loc": { "line": 209, "column": 8 }
+        },
+        {
+          "name": "op_div",
+          "docstring": " Series div",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::op_div(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "loc": { "line": 293, "column": 8 }
+        },
+        {
+          "name": "op_mul",
+          "docstring": " Series mul",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::op_mul(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "loc": { "line": 265, "column": 8 }
+        },
+        {
+          "name": "op_sub",
+          "docstring": " Series sub",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>::op_sub(self : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "loc": { "line": 237, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>) -> Bool",
+              "loc": { "line": 21, "column": 16 }
+            }
+          ],
+          "loc": { "line": 21, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#Series\">Series</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 21, "column": 10 }
+            }
+          ],
+          "loc": { "line": 21, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "SeriesData",
+      "docstring": "",
+      "signature": "pub(all) enum SeriesData {\n  Int(<a href=\"moonbitlang/core/array#Array\">Array</a>[Int])\n  Float(<a href=\"moonbitlang/core/array#Array\">Array</a>[Float])\n  Bool(<a href=\"moonbitlang/core/array#Array\">Array</a>[Bool])\n  Str(<a href=\"moonbitlang/core/array#Array\">Array</a>[String])\n}",
+      "loc": { "line": 10, "column": 15 },
+      "methods": [
+        {
+          "name": "argsort",
+          "docstring": " Sort the SeriesData and return the indices of the sorted elements\n\n # Parameters\n\n - `self` : An instance of the SeriesData\n - `descending~` : A boolean indicating whether to sort in descending order (default is false)\n\n # Returns\n\n - `Array[Int]` : An array of indices representing the sorted order of the elements\n\n # Example\n ```\n let data = SeriesData::Int([3, 1, 2])\n let sorted_indices = data.argsort()\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::argsort(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, descending~ : Bool = ..) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]",
+          "loc": { "line": 144, "column": 20 }
+        },
+        {
+          "name": "empty",
+          "docstring": " Check if the SeriesData is empty",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::empty(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> Bool",
+          "loc": { "line": 53, "column": 20 }
+        },
+        {
+          "name": "erase",
+          "docstring": " Erase an element from the SeriesData at a specified index\n\n # Parameters\n\n - `self` : An instance of the SeriesData\n - `index` : The index of the element to be erased\n\n # Errors\n\n - `EmptyArrayError` : Raised if the SeriesData is empty\n\n # Example\n ```\n data.erase(1)\n ```",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::erase(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, index : Int) -> Unit!<a href=\"smallbearrr/pandas/lib/pandas#EmptyArrayError\">EmptyArrayError</a>",
+          "loc": { "line": 75, "column": 20 }
+        },
+        {
+          "name": "length",
+          "docstring": " Get the length of the SeriesData",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::length(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> Int",
+          "loc": { "line": 43, "column": 20 }
+        },
+        {
+          "name": "op_add",
+          "docstring": " SeriesData add",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::op_add(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "loc": { "line": 185, "column": 8 }
+        },
+        {
+          "name": "op_div",
+          "docstring": " SeriesData div",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::op_div(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "loc": { "line": 270, "column": 8 }
+        },
+        {
+          "name": "op_mul",
+          "docstring": " SeriesData mul",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::op_mul(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "loc": { "line": 242, "column": 8 }
+        },
+        {
+          "name": "op_sub",
+          "docstring": " SeriesData sub",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::op_sub(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, other : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "loc": { "line": 214, "column": 8 }
+        },
+        {
+          "name": "sort",
+          "docstring": " Sort the SeriesData",
+          "signature": "fn <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>::sort(self : <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> Unit",
+          "loc": { "line": 91, "column": 20 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>) -> Bool",
+              "loc": { "line": 15, "column": 16 }
+            }
+          ],
+          "loc": { "line": 15, "column": 16 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"smallbearrr/pandas/lib/pandas#SeriesData\">SeriesData</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 15, "column": 10 }
+            }
+          ],
+          "loc": { "line": 15, "column": 10 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

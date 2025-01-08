@@ -1,0 +1,29 @@
+{
+  "name": "peter-jerry-ye",
+  "package": null,
+  "childs": [
+    {
+      "name": "memory",
+      "package": {
+        "path": "peter-jerry-ye/memory",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "Memory",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": [
+              "free", "load32", "load64", "load8", "load_bytes", "loadf64",
+              "make", "reallocate", "store32", "store64", "store8",
+              "store_bytes", "storef64"
+            ]
+          }
+        ],
+        "typealias": [],
+        "values": [ "allocate" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

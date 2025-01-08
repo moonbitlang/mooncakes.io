@@ -1,0 +1,57 @@
+{
+  "name": "gmlewis",
+  "package": null,
+  "childs": [
+    {
+      "name": "base64",
+      "package": {
+        "path": "gmlewis/base64",
+        "readme": true,
+        "traits": [],
+        "types": [
+          {
+            "name": "CorruptInputError",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": []
+          }
+        ],
+        "typealias": [],
+        "values": [
+          "bytes2str", "std_decode2bytes", "std_decode2str",
+          "std_encode2bytes", "std_encode2str", "str2bytes",
+          "url_decode2bytes", "url_decode2str", "url_encode2bytes",
+          "url_encode2str"
+        ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "decoder",
+          "package": {
+            "path": "gmlewis/base64/decoder",
+            "readme": true,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "utf8" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "encoder",
+          "package": {
+            "path": "gmlewis/base64/encoder",
+            "readme": true,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "utf8" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

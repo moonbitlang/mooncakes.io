@@ -1,0 +1,45 @@
+{
+  "name": "suiyunonghen",
+  "package": null,
+  "childs": [
+    {
+      "name": "wasmMemManager",
+      "package": {
+        "path": "suiyunonghen/wasmMemManager",
+        "readme": false,
+        "traits": [],
+        "types": [
+          {
+            "name": "Memory",
+            "impls": [ { "methods": [ "output" ] } ],
+            "methods": [
+              "copyFrom", "copyFrom_unsafe", "fill", "fill_unsafe",
+              "moveData", "move_unsafe", "read16", "read16_unsafe", "read8s",
+              "read8s_unsafe", "readByte", "readByte_unsafe", "readDouble",
+              "readDouble_unsafe", "readFloat", "readFloat_unsafe",
+              "readInt32", "readInt32_unsafe", "readInt64",
+              "readInt64_unsafe", "readString", "readU16", "readU16_unsafe",
+              "readUInt32", "readUInt32_unsafe", "writeByte",
+              "writeByte_unsafe", "writeDouble", "writeDouble_unsafe",
+              "writeFloat", "writeFloat_unsafe", "writeInt", "writeInt64",
+              "writeInt64_unsafe", "writeInt_unsafe", "writeString",
+              "writeU16", "writeU16_unsafe"
+            ]
+          },
+          {
+            "name": "MemoryStream",
+            "impls": [],
+            "methods": [
+              "free", "new", "position", "seek", "setPosition", "setSize"
+            ]
+          },
+          { "name": "SeekOrigin", "impls": [], "methods": [] }
+        ],
+        "typealias": [],
+        "values": [ "freeMemory", "getMemory", "realloc" ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

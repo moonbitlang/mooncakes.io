@@ -1,0 +1,829 @@
+{
+  "readme": "",
+  "name": "tiye/respo/lib/dialog",
+  "traits": [],
+  "types": [
+    {
+      "name": "AlertOptions",
+      "docstring": " The options for alert modal.",
+      "signature": "pub(all) struct AlertOptions {\n  backdrop_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  card_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  text : String?\n  button_text : String?\n}",
+      "loc": { "line": 3, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#AlertOptions\">AlertOptions</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#AlertOptions\">AlertOptions</a>",
+              "loc": { "line": 12, "column": 10 }
+            }
+          ],
+          "loc": { "line": 12, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "AlertPlugin",
+      "docstring": " abstraction for Alert modal, new with `AlertOption`,\n just displaying a message, you read it, you close it",
+      "signature": "pub(all) struct AlertPlugin {\n  state : <a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>\n  options : <a href=\"tiye/respo/lib/dialog#AlertOptions\">AlertOptions</a>\n  text : String?\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  on_read : (<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit\n}",
+      "loc": { "line": 94, "column": 17 },
+      "methods": [
+        {
+          "name": "close",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>::close[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit",
+          "loc": { "line": 166, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>::new[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](states : <a href=\"tiye/respo/lib#RespoStatesTree\">@tiye/respo/lib.RespoStatesTree</a>, options : <a href=\"tiye/respo/lib/dialog#AlertOptions\">AlertOptions</a>, on_read : (<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit) -> <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>[T]",
+          "loc": { "line": 181, "column": 21 }
+        },
+        {
+          "name": "render",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>::render[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>[T]) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]",
+          "loc": { "line": 104, "column": 8 }
+        },
+        {
+          "name": "show",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>::show[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#AlertPlugin\">AlertPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T], text : String?) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 157, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "AlertPluginState",
+      "docstring": "",
+      "signature": "type AlertPluginState",
+      "loc": { "line": 87, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>",
+              "loc": { "line": 90, "column": 10 }
+            }
+          ],
+          "loc": { "line": 90, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 90, "column": 19 }
+            }
+          ],
+          "loc": { "line": 90, "column": 19 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#AlertPluginState\">AlertPluginState</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 90, "column": 27 }
+            }
+          ],
+          "loc": { "line": 90, "column": 27 }
+        }
+      ]
+    },
+    {
+      "name": "ConfirmOptions",
+      "docstring": " options for confirm dialog",
+      "signature": "pub(all) struct ConfirmOptions {\n  backdrop_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  card_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  text : String?\n  button_text : String?\n}",
+      "loc": { "line": 5, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#ConfirmOptions\">ConfirmOptions</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#ConfirmOptions\">ConfirmOptions</a>",
+              "loc": { "line": 14, "column": 10 }
+            }
+          ],
+          "loc": { "line": 14, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ConfirmPlugin",
+      "docstring": " Popup a confirmation dialog, confirm to process next task",
+      "signature": "pub(all) struct ConfirmPlugin {\n  state : <a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>\n  options : <a href=\"tiye/respo/lib/dialog#ConfirmOptions\">ConfirmOptions</a>\n  text : String?\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  on_confirm : (<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit\n}",
+      "loc": { "line": 109, "column": 17 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ConfirmPlugin\">ConfirmPlugin</a>::new[T](states : <a href=\"tiye/respo/lib#RespoStatesTree\">@tiye/respo/lib.RespoStatesTree</a>, options : <a href=\"tiye/respo/lib/dialog#ConfirmOptions\">ConfirmOptions</a>, on_confirm : (<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit) -> <a href=\"tiye/respo/lib/dialog#ConfirmPlugin\">ConfirmPlugin</a>[T]",
+          "loc": { "line": 175, "column": 23 }
+        },
+        {
+          "name": "render",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ConfirmPlugin\">ConfirmPlugin</a>::render[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#ConfirmPlugin\">ConfirmPlugin</a>[T]) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]",
+          "loc": { "line": 119, "column": 8 }
+        },
+        {
+          "name": "show",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ConfirmPlugin\">ConfirmPlugin</a>::show[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#ConfirmPlugin\">ConfirmPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T], next_task : () -> Unit) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 163, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "ConfirmPluginState",
+      "docstring": "",
+      "signature": "type ConfirmPluginState",
+      "loc": { "line": 103, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>",
+              "loc": { "line": 106, "column": 10 }
+            }
+          ],
+          "loc": { "line": 106, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 106, "column": 19 }
+            }
+          ],
+          "loc": { "line": 106, "column": 19 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#ConfirmPluginState\">ConfirmPluginState</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 106, "column": 27 }
+            }
+          ],
+          "loc": { "line": 106, "column": 27 }
+        }
+      ]
+    },
+    {
+      "name": "DrawerOptions",
+      "docstring": " The options for custom drawer.",
+      "signature": "pub(all) struct DrawerOptions {\n  backdrop_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  card_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  title : String?\n  render : <a href=\"tiye/respo/lib/dialog#DrawerRenderer\">DrawerRenderer</a>[T]\n}",
+      "loc": { "line": 3, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#DrawerOptions\">DrawerOptions</a>[T]",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>]() -> <a href=\"tiye/respo/lib/dialog#DrawerOptions\">DrawerOptions</a>[T]",
+              "loc": { "line": 12, "column": 10 }
+            }
+          ],
+          "loc": { "line": 12, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "DrawerPlugin",
+      "docstring": " a drawer that you can render you down card body",
+      "signature": "pub(all) struct DrawerPlugin {\n  state : <a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>\n  options : <a href=\"tiye/respo/lib/dialog#DrawerOptions\">DrawerOptions</a>[T]\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n}",
+      "loc": { "line": 117, "column": 17 },
+      "methods": [
+        {
+          "name": "close",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>::close[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 147, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>::new[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](states : <a href=\"tiye/respo/lib#RespoStatesTree\">@tiye/respo/lib.RespoStatesTree</a>, options : <a href=\"tiye/respo/lib/dialog#DrawerOptions\">DrawerOptions</a>[T]) -> <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>[T]",
+          "loc": { "line": 155, "column": 22 }
+        },
+        {
+          "name": "render",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>::render[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>[T]) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 125, "column": 8 }
+        },
+        {
+          "name": "show",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>::show[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#DrawerPlugin\">DrawerPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 139, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "DrawerPluginState",
+      "docstring": "",
+      "signature": "type DrawerPluginState",
+      "loc": { "line": 111, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>",
+              "loc": { "line": 113, "column": 10 }
+            }
+          ],
+          "loc": { "line": 113, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 113, "column": 19 }
+            }
+          ],
+          "loc": { "line": 113, "column": 19 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#DrawerPluginState\">DrawerPluginState</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 113, "column": 27 }
+            }
+          ],
+          "loc": { "line": 113, "column": 27 }
+        }
+      ]
+    },
+    {
+      "name": "DrawerRenderer",
+      "docstring": "",
+      "signature": "type DrawerRenderer",
+      "loc": { "line": 15, "column": 6 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#DrawerRenderer\">DrawerRenderer</a>::default[T]() -> <a href=\"tiye/respo/lib/dialog#DrawerRenderer\">DrawerRenderer</a>[T]",
+          "loc": { "line": 25, "column": 24 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#DrawerRenderer\">DrawerRenderer</a>::new[T](renderer : ((<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> <a href=\"tiye/respo/lib/dialog#DrawerRenderer\">DrawerRenderer</a>[T]",
+          "loc": { "line": 30, "column": 24 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "EffectDrawerFade",
+      "docstring": "",
+      "signature": "type EffectDrawerFade",
+      "loc": { "line": 74, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>, <a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>) -> Bool",
+              "loc": { "line": 76, "column": 10 }
+            }
+          ],
+          "loc": { "line": 76, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 76, "column": 14 }
+            }
+          ],
+          "loc": { "line": 76, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#EffectDrawerFade\">EffectDrawerFade</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 76, "column": 22 }
+            }
+          ],
+          "loc": { "line": 76, "column": 22 }
+        }
+      ]
+    },
+    {
+      "name": "EffectFocus",
+      "docstring": "",
+      "signature": "type EffectFocus",
+      "loc": { "line": 2, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>, <a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>) -> Bool",
+              "loc": { "line": 4, "column": 10 }
+            }
+          ],
+          "loc": { "line": 4, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 4, "column": 14 }
+            }
+          ],
+          "loc": { "line": 4, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#EffectFocus\">EffectFocus</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 4, "column": 22 }
+            }
+          ],
+          "loc": { "line": 4, "column": 22 }
+        }
+      ]
+    },
+    {
+      "name": "EffectModalClose",
+      "docstring": "",
+      "signature": "type EffectModalClose",
+      "loc": { "line": 126, "column": 6 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>, <a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>) -> Bool",
+              "loc": { "line": 126, "column": 35 }
+            }
+          ],
+          "loc": { "line": 126, "column": 35 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 126, "column": 39 }
+            }
+          ],
+          "loc": { "line": 126, "column": 39 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#EffectModalClose\">EffectModalClose</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 126, "column": 47 }
+            }
+          ],
+          "loc": { "line": 126, "column": 47 }
+        }
+      ]
+    },
+    {
+      "name": "EffectModalFade",
+      "docstring": "",
+      "signature": "type EffectModalFade",
+      "loc": { "line": 22, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>, <a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>) -> Bool",
+              "loc": { "line": 24, "column": 10 }
+            }
+          ],
+          "loc": { "line": 24, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 24, "column": 14 }
+            }
+          ],
+          "loc": { "line": 24, "column": 14 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#EffectModalFade\">EffectModalFade</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 24, "column": 22 }
+            }
+          ],
+          "loc": { "line": 24, "column": 22 }
+        }
+      ]
+    },
+    {
+      "name": "InputState",
+      "docstring": "",
+      "signature": "type InputState",
+      "loc": { "line": 59, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#InputState\">InputState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#InputState\">InputState</a>",
+              "loc": { "line": 62, "column": 10 }
+            }
+          ],
+          "loc": { "line": 62, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#InputState\">InputState</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#InputState\">InputState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 62, "column": 19 }
+            }
+          ],
+          "loc": { "line": 62, "column": 19 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#InputState\">InputState</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#InputState\">InputState</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 62, "column": 27 }
+            }
+          ],
+          "loc": { "line": 62, "column": 27 }
+        }
+      ]
+    },
+    {
+      "name": "ModalOptions",
+      "docstring": " The options for custom modal.",
+      "signature": "pub(all) struct ModalOptions {\n  backdrop_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  card_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  title : String?\n  render : <a href=\"tiye/respo/lib/dialog#ModalRenderer\">ModalRenderer</a>[T]\n}",
+      "loc": { "line": 3, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#ModalOptions\">ModalOptions</a>[T]",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>]() -> <a href=\"tiye/respo/lib/dialog#ModalOptions\">ModalOptions</a>[T]",
+              "loc": { "line": 12, "column": 10 }
+            }
+          ],
+          "loc": { "line": 12, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "ModalPlugin",
+      "docstring": " a modal that you can render you down card body",
+      "signature": "pub(all) struct ModalPlugin {\n  state : <a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>\n  options : <a href=\"tiye/respo/lib/dialog#ModalOptions\">ModalOptions</a>[T]\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n}",
+      "loc": { "line": 115, "column": 17 },
+      "methods": [
+        {
+          "name": "close",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>::close[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 147, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>::new[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](states : <a href=\"tiye/respo/lib#RespoStatesTree\">@tiye/respo/lib.RespoStatesTree</a>, options : <a href=\"tiye/respo/lib/dialog#ModalOptions\">ModalOptions</a>[T]) -> <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>[T]",
+          "loc": { "line": 155, "column": 21 }
+        },
+        {
+          "name": "render",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>::render[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>[T]) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 125, "column": 8 }
+        },
+        {
+          "name": "show",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>::show[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#ModalPlugin\">ModalPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 139, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "ModalPluginState",
+      "docstring": "",
+      "signature": "type ModalPluginState",
+      "loc": { "line": 109, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>",
+              "loc": { "line": 111, "column": 10 }
+            }
+          ],
+          "loc": { "line": 111, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 111, "column": 19 }
+            }
+          ],
+          "loc": { "line": 111, "column": 19 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#ModalPluginState\">ModalPluginState</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 111, "column": 27 }
+            }
+          ],
+          "loc": { "line": 111, "column": 27 }
+        }
+      ]
+    },
+    {
+      "name": "ModalRenderer",
+      "docstring": "",
+      "signature": "pub(all) type ModalRenderer ((<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+      "loc": { "line": 18, "column": 15 },
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ModalRenderer\">ModalRenderer</a>::default[T]() -> <a href=\"tiye/respo/lib/dialog#ModalRenderer\">ModalRenderer</a>[T]",
+          "loc": { "line": 21, "column": 23 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#ModalRenderer\">ModalRenderer</a>::new[T](renderer : ((<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> <a href=\"tiye/respo/lib/dialog#ModalRenderer\">ModalRenderer</a>[T]",
+          "loc": { "line": 26, "column": 23 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "PromptOptions",
+      "docstring": " options for prompt dialog",
+      "signature": "pub(all) struct PromptOptions {\n  backdrop_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  card_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  text : String?\n  button_text : String?\n  initial_value : String?\n  multilines : Bool\n  input_style : <a href=\"tiye/respo/lib/node#RespoStyle\">@tiye/respo/lib/node.RespoStyle</a>\n  validator : <a href=\"tiye/respo/lib/dialog#PromptValidator\">PromptValidator</a>?\n}",
+      "loc": { "line": 6, "column": 17 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#PromptOptions\">PromptOptions</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#PromptOptions\">PromptOptions</a>",
+              "loc": { "line": 23, "column": 10 }
+            }
+          ],
+          "loc": { "line": 23, "column": 10 }
+        }
+      ]
+    },
+    {
+      "name": "PromptPlugin",
+      "docstring": " a dialog for prompt, request for some input, and submit",
+      "signature": "pub(all) struct PromptPlugin {\n  states : <a href=\"tiye/respo/lib#RespoStatesTree\">@tiye/respo/lib.RespoStatesTree</a>\n  state : <a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>\n  options : <a href=\"tiye/respo/lib/dialog#PromptOptions\">PromptOptions</a>\n  text : String?\n  cursor : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  on_submit : (String, <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>\n}",
+      "loc": { "line": 240, "column": 17 },
+      "methods": [
+        {
+          "name": "close",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>::close[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 304, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>::new[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](states : <a href=\"tiye/respo/lib#RespoStatesTree\">@tiye/respo/lib.RespoStatesTree</a>, options : <a href=\"tiye/respo/lib/dialog#PromptOptions\">PromptOptions</a>, on_submit : (String, <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>) -> <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>[T]",
+          "loc": { "line": 315, "column": 22 }
+        },
+        {
+          "name": "render",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>::render[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>[T]) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]",
+          "loc": { "line": 251, "column": 8 }
+        },
+        {
+          "name": "show",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>::show[T : <a href=\"tiye/respo/lib/node#RespoAction\">@tiye/respo/lib/node.RespoAction</a>](self : <a href=\"tiye/respo/lib/dialog#PromptPlugin\">PromptPlugin</a>[T], dispatch : <a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T], next_task : (String) -> Unit) -> Unit!<a href=\"tiye/respo/lib/node#RespoCommonError\">@tiye/respo/lib/node.RespoCommonError</a>",
+          "loc": { "line": 290, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "PromptPluginState",
+      "docstring": "",
+      "signature": "type PromptPluginState",
+      "loc": { "line": 233, "column": 8 },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "automatically derived",
+              "signature": "fn default() -> <a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>",
+              "loc": { "line": 236, "column": 10 }
+            }
+          ],
+          "loc": { "line": 236, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 236, "column": 19 }
+            }
+          ],
+          "loc": { "line": 236, "column": 19 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "automatically derived",
+              "signature": "fn from_json(<a href=\"moonbitlang/core/json#Json\">Json</a>, <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"tiye/respo/lib/dialog#PromptPluginState\">PromptPluginState</a>!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 236, "column": 27 }
+            }
+          ],
+          "loc": { "line": 236, "column": 27 }
+        }
+      ]
+    },
+    {
+      "name": "PromptValidator",
+      "docstring": "",
+      "signature": "pub(all) type PromptValidator (String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, String]",
+      "loc": { "line": 29, "column": 15 },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#PromptValidator\">PromptValidator</a>::new(f : (String) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, String]) -> <a href=\"tiye/respo/lib/dialog#PromptValidator\">PromptValidator</a>",
+          "loc": { "line": 42, "column": 25 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"tiye/respo/lib/dialog#PromptValidator\">PromptValidator</a>::to_string(self : <a href=\"tiye/respo/lib/dialog#PromptValidator\">PromptValidator</a>) -> String",
+          "loc": { "line": 32, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "comp_esc_listener",
+      "docstring": " handle global keydown event",
+      "signature": "fn comp_esc_listener[T](_show : Bool, on_close : (<a href=\"tiye/respo/lib/node#DispatchFn\">@tiye/respo/lib/node.DispatchFn</a>[T]) -> Unit) -> <a href=\"tiye/respo/lib/node#RespoNode\">@tiye/respo/lib/node.RespoNode</a>[T]",
+      "loc": { "line": 166, "column": 8 }
+    }
+  ],
+  "misc": []
+}

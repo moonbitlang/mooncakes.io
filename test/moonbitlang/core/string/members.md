@@ -283,16 +283,18 @@
   >  Removes all trailing chars contained in the given string.
 - #### trim\_left
   ```moonbit
-  :::source,moonbitlang/core/string/deprecated.mbt,17:::fn <a href="moonbitlang/core/string#String">String</a>::trim_left(self : String, trim_set : String) -> String
+  :::source,moonbitlang/core/string/deprecated.mbt,18:::fn <a href="moonbitlang/core/string#String">String</a>::trim_left(self : String, trim_set : String) -> String
   ```
   > 
   >  @alert deprecated "Use `String::trim_start` instead"
+  > @coverage.skip
 - #### trim\_right
   ```moonbit
-  :::source,moonbitlang/core/string/deprecated.mbt,23:::fn <a href="moonbitlang/core/string#String">String</a>::trim_right(self : String, trim_set : String) -> String
+  :::source,moonbitlang/core/string/deprecated.mbt,25:::fn <a href="moonbitlang/core/string#String">String</a>::trim_right(self : String, trim_set : String) -> String
   ```
   > 
   >  @alert deprecated "Use `String::trim_end` instead"
+  > @coverage.skip
 - #### trim\_space
   ```moonbit
   :::source,moonbitlang/core/string/string.mbt,244:::fn <a href="moonbitlang/core/string#String">String</a>::trim_space(self : String) -> String

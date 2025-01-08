@@ -1,0 +1,182 @@
+{
+  "readme": "# moonbitlang/x/crypto\n\n## Overview\n\nA collection of cryptographic hash functions and utilities.\n\n## Usage\n\n> Strings in MoonBit are UTF-16 LE encoded.\n\n### SHA-1\n\n```moonbit\nlet input = \"The quick brown fox jumps over the lazy dog\"\nprintln(bytes_to_hex_string(sha1(input.to_bytes())))\n// => bd136cb58899c93173c33a90dde95ead0d0cf6df\n```\n\n### MD5\n\n```moonbit\nlet input = \"The quick brown fox jumps over the lazy dog\"\nprintln(bytes_to_hex_string(md5(input.to_bytes())))\n// => b0986ae6ee1eefee8a4a399090126837\n\n// buffered\nlet ctx = MD5Context::new()\nctx.update(b\"a\") \nctx.update(b\"b\") \nctx.update(b\"c\") \nprintln(bytes_to_hex_string(ctx.finalize())) // or `ctx.compute()`\n// => ce1473cf80c6b3fda8e3dfc006adc315\n```\n\n### SM3\n\n```moonbit\nlet input = \"The quick brown fox jumps over the lazy dog\"\nprintln(bytes_to_hex_string(sm3(input.to_bytes())))\n// => fc2b31896629e88652ca1e3be449ec7ec93f7e5e29769f273fb973bc1858c66d\n\n\n//buffered\nlet ctx = SM3Context::new()\nctx.update(b\"a\") \nctx.update(b\"b\") \nctx.update(b\"c\") \nprintln(bytes_to_hex_string(ctx.finalize()))\n// => 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0\n```\n",
+  "name": "moonbitlang/x/crypto",
+  "traits": [],
+  "types": [
+    {
+      "name": "MD5Context",
+      "docstring": "",
+      "signature": "type MD5Context",
+      "loc": { "line": 20, "column": 8 },
+      "methods": [
+        {
+          "name": "finalize",
+          "docstring": " an alias of `MD5Context::compute()`",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#MD5Context\">MD5Context</a>::finalize(self : <a href=\"moonbitlang/x/crypto#MD5Context\">MD5Context</a>) -> Bytes",
+          "loc": { "line": 35, "column": 20 }
+        },
+        {
+          "name": "new",
+          "docstring": " Instantiate a MD5 context",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#MD5Context\">MD5Context</a>::new() -> <a href=\"moonbitlang/x/crypto#MD5Context\">MD5Context</a>",
+          "loc": { "line": 40, "column": 20 }
+        },
+        {
+          "name": "update",
+          "docstring": " update the state of given context from new `data` ",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#MD5Context\">MD5Context</a>::update(self : <a href=\"moonbitlang/x/crypto#MD5Context\">MD5Context</a>, data : Bytes) -> Unit",
+          "loc": { "line": 30, "column": 20 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "SM3Context",
+      "docstring": "",
+      "signature": "type SM3Context",
+      "loc": { "line": 20, "column": 8 },
+      "methods": [
+        {
+          "name": "finalize",
+          "docstring": " Compute the SM3 digest from given SM3Context",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>::finalize(self : <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>) -> Bytes",
+          "loc": { "line": 248, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " Instantiate a SM3 context",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>::new() -> <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>",
+          "loc": { "line": 28, "column": 20 }
+        },
+        {
+          "name": "update",
+          "docstring": " update the state of given context from new `data` ",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>::update(self : <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>, data : Bytes) -> Unit",
+          "loc": { "line": 212, "column": 8 }
+        },
+        {
+          "name": "update_from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>::update_from_iter(self : <a href=\"moonbitlang/x/crypto#SM3Context\">SM3Context</a>, data : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Unit",
+          "loc": { "line": 198, "column": 8 }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Sha256Context",
+      "docstring": "",
+      "signature": "type Sha256Context",
+      "loc": { "line": 16, "column": 8 },
+      "methods": [
+        {
+          "name": "finalize",
+          "docstring": " Compute the Sha256 digest from given Sha256Context",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>::finalize(self : <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>) -> Bytes",
+          "loc": { "line": 181, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": " Instantiate a Sha256 context\n `reg` is the initial hash value. Defaults to Sha256's.",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>::new(reg~ : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt] = ..) -> <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>",
+          "loc": { "line": 25, "column": 23 }
+        },
+        {
+          "name": "update",
+          "docstring": " update the state of given context from new `data` ",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>::update(self : <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>, data : Bytes) -> Unit",
+          "loc": { "line": 145, "column": 8 }
+        },
+        {
+          "name": "update_from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>::update_from_iter(self : <a href=\"moonbitlang/x/crypto#Sha256Context\">Sha256Context</a>, data : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Unit",
+          "loc": { "line": 131, "column": 8 }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "bytes_to_hex_string",
+      "docstring": " print a sequence of byte in hex representation",
+      "signature": "fn bytes_to_hex_string(input : Bytes) -> String",
+      "loc": { "line": 21, "column": 8 }
+    },
+    {
+      "name": "chacha12",
+      "docstring": " Encrypts a block of data using the ChaCha12 algorithm.\n - [key] must be 8 32-bit unsigned integers.\n - [counter] is the counter value.\n - [block] is the block of data to be encrypted.\n - [nonce] is default to 0\n - Returns the encrypted block of data.",
+      "signature": "fn chacha12(key : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt], counter : UInt, block : Bytes, nonce~ : UInt = ..) -> Bytes!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 319, "column": 8 }
+    },
+    {
+      "name": "chacha20",
+      "docstring": " Encrypts a block of data using the ChaCha20 algorithm.\n - [key] must be 8 32-bit unsigned integers.\n - [counter] is the counter value.\n - [block] is the block of data to be encrypted.\n - [nonce] is default to 0\n - Returns the encrypted block of data.",
+      "signature": "fn chacha20(key : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt], counter : UInt, block : Bytes, nonce~ : UInt = ..) -> Bytes!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 337, "column": 8 }
+    },
+    {
+      "name": "chacha8",
+      "docstring": " Encrypts a block of data using the ChaCha8 algorithm.\n - [key] must be 8 32-bit unsigned integers.\n - [counter] is the counter value.\n - [block] is the block of data to be encrypted.\n - [nonce] is default to 0\n - Returns the encrypted block of data.",
+      "signature": "fn chacha8(key : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[UInt], counter : UInt, block : Bytes, nonce~ : UInt = ..) -> Bytes!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+      "loc": { "line": 301, "column": 8 }
+    },
+    {
+      "name": "md5",
+      "docstring": " Compute the MD5 digest of some `data` based on [RFC1321](https://www.ietf.org/rfc/rfc1321.txt).\n - Note that MD5 is considered _cryptographically broken_.\n Unless mandated, more secure alternatives should be preferred.",
+      "signature": "fn md5(data : Bytes) -> Bytes",
+      "loc": { "line": 231, "column": 8 }
+    },
+    {
+      "name": "sha1",
+      "docstring": "",
+      "signature": "fn sha1(input : Bytes) -> Bytes",
+      "loc": { "line": 16, "column": 8 }
+    },
+    {
+      "name": "sha224",
+      "docstring": "",
+      "signature": "fn sha224(data : Bytes) -> Bytes",
+      "loc": { "line": 16, "column": 8 }
+    },
+    {
+      "name": "sha224_from_iter",
+      "docstring": "",
+      "signature": "fn sha224_from_iter(data : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+      "loc": { "line": 26, "column": 8 }
+    },
+    {
+      "name": "sha256",
+      "docstring": " Compute the Sha256 digest in `Bytes` of some `data`. Note that Sha256 is big-endian.",
+      "signature": "fn sha256(data : Bytes) -> Bytes",
+      "loc": { "line": 186, "column": 8 }
+    },
+    {
+      "name": "sha256_from_iter",
+      "docstring": "",
+      "signature": "fn sha256_from_iter(data : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+      "loc": { "line": 193, "column": 8 }
+    },
+    {
+      "name": "sm3",
+      "docstring": " Compute the SM3 digest in `Bytes` of some `data`. Note that SM3 is big-endian.",
+      "signature": "fn sm3(data : Bytes) -> Bytes",
+      "loc": { "line": 253, "column": 8 }
+    },
+    {
+      "name": "sm3_from_iter",
+      "docstring": "",
+      "signature": "fn sm3_from_iter(data : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+      "loc": { "line": 260, "column": 8 }
+    },
+    {
+      "name": "uints_to_hex_string",
+      "docstring": " print a sequence of uint in hex representation",
+      "signature": "fn uints_to_hex_string(input : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[UInt]) -> String",
+      "loc": { "line": 46, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -84,9 +84,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,197:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690">X690</a> with output(<a href="peter-jerry-ye/utils/crypto#X690">X690</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,peter-jerry-ye/utils/crypto/ber.mbt,197:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690">X690</a>
   ```
-  > automatically derived
+  > 
+  * ```moonbit
+    :::source,peter-jerry-ye/utils/crypto/ber.mbt,197:::fn output(<a href="peter-jerry-ye/utils/crypto#X690">X690</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 #### mooncakes-io-method-mark-Methods
 - #### from\_iter
@@ -94,21 +98,11 @@
   :::source,peter-jerry-ye/utils/crypto/ber.mbt,317:::fn <a href="peter-jerry-ye/utils/crypto#X690">X690</a>::from_iter(bytes : <a href="moonbitlang/core/builtin#Iter">Iter</a>[Byte]) -> <a href="moonbitlang/core/builtin#Iter">Iter</a>[<a href="peter-jerry-ye/utils/crypto#X690">X690</a>]
   ```
   > 
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,197:::fn <a href="peter-jerry-ye/utils/crypto#X690">X690</a>::output(<a href="peter-jerry-ye/utils/crypto#X690">X690</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
 - #### to\_bytes
   ```moonbit
   :::source,peter-jerry-ye/utils/crypto/ber.mbt,266:::fn <a href="peter-jerry-ye/utils/crypto#X690">X690</a>::to_bytes(self : <a href="peter-jerry-ye/utils/crypto#X690">X690</a>) -> Bytes
   ```
   >  Assuming length is definite
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/traits.mbt,85:::fn <a href="peter-jerry-ye/utils/crypto#X690">X690</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
-  ```
-  > 
 
 ## X690Class
 
@@ -124,21 +118,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a> with output(<a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,29:::fn <a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a>::output(<a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/traits.mbt,85:::fn <a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/utils/crypto/ber.mbt,29:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/utils/crypto/ber.mbt,29:::fn output(<a href="peter-jerry-ye/utils/crypto#X690Class">X690Class</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## X690Construction
 
@@ -152,21 +138,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a> with output(<a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,21:::fn <a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a>::output(<a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/traits.mbt,85:::fn <a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/utils/crypto/ber.mbt,21:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/utils/crypto/ber.mbt,21:::fn output(<a href="peter-jerry-ye/utils/crypto#X690Construction">X690Construction</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## X690Type
 
@@ -213,21 +191,13 @@
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,106:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a> with output(<a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-
-#### mooncakes-io-method-mark-Methods
-- #### output
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/ber.mbt,106:::fn <a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a>::output(<a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
-  ```
-  > automatically derived
-- #### to\_string
-  ```moonbit
-  :::source,peter-jerry-ye/utils/crypto/traits.mbt,85:::fn <a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a>::to_string[Self : <a href="moonbitlang/core/builtin#Show">Show</a>](self : Self) -> String
+  :::source,peter-jerry-ye/utils/crypto/ber.mbt,106:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a>
   ```
   > 
+  * ```moonbit
+    :::source,peter-jerry-ye/utils/crypto/ber.mbt,106:::fn output(<a href="peter-jerry-ye/utils/crypto#X690Type">X690Type</a>, <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > automatically derived
 
 ## hmac
 

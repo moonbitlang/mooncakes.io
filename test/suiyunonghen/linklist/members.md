@@ -48,9 +48,13 @@ println(list[3])
 
 #### mooncakes-io-implementation-mark-Implementations
 - ```moonbit
-  :::source,suiyunonghen/linklist/linklist.mbt,180:::impl <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/linklist#LinkList">LinkList</a> with output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](xs : <a href="suiyunonghen/linklist#LinkList">LinkList</a>[T], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+  :::source,suiyunonghen/linklist/linklist.mbt,180:::impl[T : <a href="moonbitlang/core/builtin#Show">Show</a>] <a href="moonbitlang/core/builtin#Show">Show</a> for <a href="suiyunonghen/linklist#LinkList">LinkList</a>[T]
   ```
   > 
+  * ```moonbit
+    :::source,suiyunonghen/linklist/linklist.mbt,180:::fn output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](xs : <a href="suiyunonghen/linklist#LinkList">LinkList</a>[T], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
+    ```
+    > 
 
 #### mooncakes-io-method-mark-Methods
 - #### add
@@ -212,11 +216,6 @@ println(list[3])
 - #### op\_get
   ```moonbit
   :::source,suiyunonghen/linklist/linklist.mbt,137:::fn <a href="suiyunonghen/linklist#LinkList">LinkList</a>::op_get[T](self : <a href="suiyunonghen/linklist#LinkList">LinkList</a>[T], index : Int) -> T?
-  ```
-  > 
-- #### output
-  ```moonbit
-  :::source,suiyunonghen/linklist/linklist.mbt,180:::fn <a href="suiyunonghen/linklist#LinkList">LinkList</a>::output[T : <a href="moonbitlang/core/builtin#Show">Show</a>](xs : <a href="suiyunonghen/linklist#LinkList">LinkList</a>[T], logger : <a href="moonbitlang/core/builtin#Logger">Logger</a>) -> Unit
   ```
   > 
 - #### peek

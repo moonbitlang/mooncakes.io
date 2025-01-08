@@ -81,9 +81,7 @@ struct Traits {
 
 ///|
 struct Impl {
-  self_ : Trait?
-  trait_ : Trait?
-  method_ : String
+  methods : Array[String]
 }
 
 ///|
@@ -155,18 +153,8 @@ fn parse_trait(json : Json) -> Trait {
 
 ///|
 fn parse_impl(json : Json) -> Impl {
-  guard let { "self"? : self_, "trait"? : trait_, "method": String(method_) } = json
-  {
-    self_: match self_ {
-      Some(x) => Some(parse_trait(x))
-      None => None
-    },
-    trait_: match trait_ {
-      Some(x) => Some(parse_trait(x))
-      None => None
-    },
-    method_,
-  }
+  guard let { "methods": Array(methods) } = json
+  { methods: methods.map(as_string) }
 }
 
 ///|

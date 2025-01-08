@@ -1,0 +1,58 @@
+{
+  "name": "kesmeey",
+  "package": null,
+  "childs": [
+    {
+      "name": "tools",
+      "package": null,
+      "childs": [
+        {
+          "name": "lib",
+          "package": {
+            "path": "kesmeey/tools/lib",
+            "readme": false,
+            "traits": [],
+            "types": [
+              { "name": "CityCode", "impls": [], "methods": [] },
+              {
+                "name": "IdCard",
+                "impls": [],
+                "methods": [
+                  "get_age", "get_birth_date", "get_city_code", "get_gender",
+                  "get_province", "get_province_code", "to_string"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "check_birthday", "check_length", "convert_15_to_18",
+              "convert_18_to_15", "get_province_name", "hide_after",
+              "hide_before", "hide_between", "hide_id_card", "is_chinese",
+              "is_credit_code", "is_credit_code_simple", "is_leap_year",
+              "is_mobile_cn", "is_mobile_hk", "is_mobile_mo", "is_mobile_tw",
+              "is_number", "is_tel", "is_tel_400_800", "is_valid_18_card",
+              "is_valid_card_10", "is_valid_card_15", "is_valid_email",
+              "is_valid_hk_card", "is_valid_tw_card", "parse_id_card",
+              "random_credit_code", "sub_after", "sub_before", "sub_between"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "kesmeey/tools/main",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

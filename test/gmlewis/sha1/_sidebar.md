@@ -1,6 +1,0 @@
-- [gmlewis/sha1](gmlewis/sha1/)
-- **In this module**
-  - [root package](gmlewis/sha1/members)
-- **Dependencies**
-  - [gmlewis/io](gmlewis/io/)
-  - [moonbitlang/core](moonbitlang/core/)

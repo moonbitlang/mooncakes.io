@@ -1,9 +1,0 @@
-{
-  "name": "chawyehsu/punycode",
-  "version": "0.0.3",
-  "readme": "README.md",
-  "repository": "https://github.com/chawyehsu/punycode.mbt",
-  "license": "Apache-2.0 OR Unlicense",
-  "keywords": ["encoding", "punycode", "algorithm", "idna"],
-  "description": "Punycode encoding and decoding in MoonBit"
-}

@@ -1,6 +1,0 @@
-- [jankin\_li/Learn\_Test1](jankin_li/Learn_Test1/)
-- **In this module**
-  - [lib](jankin_li/Learn_Test1/lib/members)
-  - [main](jankin_li/Learn_Test1/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

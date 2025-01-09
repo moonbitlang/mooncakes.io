@@ -1,6 +1,0 @@
-- [tiye/cirru-parser](tiye/cirru-parser/)
-- **In this module**
-  - [lib](tiye/cirru-parser/lib/members)
-  - [main](tiye/cirru-parser/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

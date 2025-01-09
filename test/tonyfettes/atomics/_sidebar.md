@@ -1,5 +1,0 @@
-- [tonyfettes/atomics](tonyfettes/atomics/)
-- **In this module**
-  - [root package](tonyfettes/atomics/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

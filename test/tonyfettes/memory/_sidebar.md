@@ -1,5 +1,0 @@
-- [tonyfettes/memory](tonyfettes/memory/)
-- **In this module**
-  - [root package](tonyfettes/memory/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

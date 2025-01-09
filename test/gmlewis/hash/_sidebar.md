@@ -1,8 +1,0 @@
-- [gmlewis/hash](gmlewis/hash/)
-- **In this module**
-  - [root package](gmlewis/hash/members)
-  - [adler32](gmlewis/hash/adler32/members)
-  - [crc32](gmlewis/hash/crc32/members)
-- **Dependencies**
-  - [gmlewis/io](gmlewis/io/)
-  - [moonbitlang/core](moonbitlang/core/)

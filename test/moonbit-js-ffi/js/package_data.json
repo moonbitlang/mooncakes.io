@@ -1,9 +1,0 @@
-{
-  "readme": "# moonbit-js-ffi/js\n\n## Description\n\njs is a collection of core functions and classes for the MoonBit JavaScript FFI library.\n\n## Installation\n\n```bash\n moon add moonbit-js-ffi/js\n```\n\n\n## Usage\n\nSee [top](./top/) folder.\n\n## About\n\nThis work was inspired from [peter-jerry-ye/worker](https://github.com/peter-jerry-ye/worker).\n",
-  "name": "moonbit-js-ffi/js",
-  "traits": [],
-  "types": [],
-  "typealias": [],
-  "values": [],
-  "misc": []
-}

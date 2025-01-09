@@ -1,6 +1,0 @@
-- [Lampese/moondata](Lampese/moondata/)
-- **In this module**
-  - [root package](Lampese/moondata/members)
-- **Dependencies**
-  - [moonbitlang/x](moonbitlang/x/)
-  - [moonbitlang/core](moonbitlang/core/)

@@ -1,5 +1,0 @@
-- [yoshitsugu/parsem](yoshitsugu/parsem/)
-- **In this module**
-  - [root package](yoshitsugu/parsem/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

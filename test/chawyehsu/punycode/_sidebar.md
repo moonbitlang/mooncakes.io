@@ -1,5 +1,0 @@
-- [chawyehsu/punycode](chawyehsu/punycode/)
-- **In this module**
-  - [root package](chawyehsu/punycode/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

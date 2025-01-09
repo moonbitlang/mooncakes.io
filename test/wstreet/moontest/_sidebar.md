@@ -1,6 +1,0 @@
-- [wstreet/moontest](wstreet/moontest/)
-- **In this module**
-  - [lib](wstreet/moontest/lib/members)
-  - [main](wstreet/moontest/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

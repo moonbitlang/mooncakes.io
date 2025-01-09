@@ -1,5 +1,0 @@
-- [FlyCloudC/miniKanren](FlyCloudC/miniKanren/)
-- **In this module**
-  - [root package](FlyCloudC/miniKanren/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

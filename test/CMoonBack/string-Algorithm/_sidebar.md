@@ -1,7 +1,0 @@
-- [CMoonBack/string-Algorithm](CMoonBack/string-Algorithm/)
-- **In this module**
-  - [root package](CMoonBack/string-Algorithm/members)
-  - [lib](CMoonBack/string-Algorithm/lib/members)
-  - [main](CMoonBack/string-Algorithm/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

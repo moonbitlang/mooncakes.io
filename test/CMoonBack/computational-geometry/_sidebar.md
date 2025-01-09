@@ -1,7 +1,0 @@
-- [CMoonBack/computational-geometry](CMoonBack/computational-geometry/)
-- **In this module**
-  - [root package](CMoonBack/computational-geometry/members)
-  - [lib](CMoonBack/computational-geometry/lib/members)
-  - [main](CMoonBack/computational-geometry/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

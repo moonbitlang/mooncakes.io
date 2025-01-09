@@ -1,5 +1,0 @@
-- [tiye/quaternion](tiye/quaternion/)
-- **In this module**
-  - [lib](tiye/quaternion/lib/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

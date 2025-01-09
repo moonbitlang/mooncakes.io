@@ -1,6 +1,0 @@
-- [yangqing/hello](yangqing/hello/)
-- **In this module**
-  - [root package](yangqing/hello/members)
-  - [lib](yangqing/hello/lib/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

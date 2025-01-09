@@ -1,5 +1,0 @@
-- [Yu-zh/either](Yu-zh/either/)
-- **In this module**
-  - [root package](Yu-zh/either/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

@@ -1,7 +1,0 @@
-- [peter-jerry-ye/canvas](peter-jerry-ye/canvas/)
-- **In this module**
-  - [lib](peter-jerry-ye/canvas/lib/members)
-  - [lib/js](peter-jerry-ye/canvas/lib/js/members)
-- **Dependencies**
-  - [tonyfettes/memory](tonyfettes/memory/)
-  - [moonbitlang/core](moonbitlang/core/)

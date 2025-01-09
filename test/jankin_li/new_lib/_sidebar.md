@@ -1,6 +1,0 @@
-- [jankin\_li/new\_lib](jankin_li/new_lib/)
-- **In this module**
-  - [root package](jankin_li/new_lib/members)
-  - [lib](jankin_li/new_lib/lib/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

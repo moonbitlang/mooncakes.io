@@ -1,5 +1,0 @@
-- [peter-jerry-ye/parser-combinator](peter-jerry-ye/parser-combinator/)
-- **In this module**
-  - [root package](peter-jerry-ye/parser-combinator/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

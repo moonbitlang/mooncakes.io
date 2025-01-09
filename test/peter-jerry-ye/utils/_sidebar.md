@@ -1,7 +1,0 @@
-- [peter-jerry-ye/utils](peter-jerry-ye/utils/)
-- **In this module**
-  - [codec](peter-jerry-ye/utils/codec/members)
-  - [crypto](peter-jerry-ye/utils/crypto/members)
-- **Dependencies**
-  - [moonbitlang/x](moonbitlang/x/)
-  - [moonbitlang/core](moonbitlang/core/)

@@ -1,6 +1,0 @@
-- [kesmeey/fmt](kesmeey/fmt/)
-- **In this module**
-  - [lib](kesmeey/fmt/lib/members)
-  - [main](kesmeey/fmt/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

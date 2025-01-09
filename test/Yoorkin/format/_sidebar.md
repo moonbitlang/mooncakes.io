@@ -1,5 +1,0 @@
-- [Yoorkin/format](Yoorkin/format/)
-- **In this module**
-  - [root package](Yoorkin/format/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

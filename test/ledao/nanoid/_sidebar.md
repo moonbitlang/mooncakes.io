@@ -1,6 +1,0 @@
-- [ledao/nanoid](ledao/nanoid/)
-- **In this module**
-  - [root package](ledao/nanoid/members)
-  - [lib](ledao/nanoid/lib/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

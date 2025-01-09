@@ -1,5 +1,0 @@
-- [yj-qin/regexp](yj-qin/regexp/)
-- **In this module**
-  - [root package](yj-qin/regexp/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

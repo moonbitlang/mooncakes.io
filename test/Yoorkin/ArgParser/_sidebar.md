@@ -1,6 +1,0 @@
-- [Yoorkin/ArgParser](Yoorkin/ArgParser/)
-- **In this module**
-  - [root package](Yoorkin/ArgParser/members)
-- **Dependencies**
-  - [Yoorkin/trie](Yoorkin/trie/)
-  - [moonbitlang/core](moonbitlang/core/)

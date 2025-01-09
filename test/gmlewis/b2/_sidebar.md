@@ -1,7 +1,0 @@
-- [gmlewis/b2](gmlewis/b2/)
-- **In this module**
-  - [root package](gmlewis/b2/members)
-- **Dependencies**
-  - [gmlewis/base64](gmlewis/base64/)
-  - [gmlewis/spin-moonbit-sdk](gmlewis/spin-moonbit-sdk/)
-  - [moonbitlang/core](moonbitlang/core/)

@@ -1,6 +1,0 @@
-- [CMoonBack/Binary-Exponentiation](CMoonBack/Binary-Exponentiation/)
-- **In this module**
-  - [lib](CMoonBack/Binary-Exponentiation/lib/members)
-  - [main](CMoonBack/Binary-Exponentiation/main/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

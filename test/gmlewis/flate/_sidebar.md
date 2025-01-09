@@ -1,8 +1,0 @@
-- [gmlewis/flate](gmlewis/flate/)
-- **In this module**
-  - [root package](gmlewis/flate/members)
-  - [decoder](gmlewis/flate/decoder/members)
-  - [encoder](gmlewis/flate/encoder/members)
-- **Dependencies**
-  - [gmlewis/io](gmlewis/io/)
-  - [moonbitlang/core](moonbitlang/core/)

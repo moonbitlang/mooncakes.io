@@ -1,5 +1,0 @@
-- [suiyunonghen/linklist](suiyunonghen/linklist/)
-- **In this module**
-  - [root package](suiyunonghen/linklist/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

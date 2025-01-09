@@ -1,6 +1,0 @@
-- [moonbit-js-ffi/js](moonbit-js-ffi/js/)
-- **In this module**
-  - [root package](moonbit-js-ffi/js/members)
-  - [top](moonbit-js-ffi/js/top/members)
-- **Dependencies**
-  - [moonbitlang/core](moonbitlang/core/)

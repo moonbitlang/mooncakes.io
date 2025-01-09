@@ -21,7 +21,6 @@ enum Message {
 ///|
 struct ModelBodyPackage {
   now_path : String
-  now_item : String
   sidebar : SidebarModel
   detail_cards : Array[DetailCardModel]
   meta_info : MetaInfoModel
@@ -79,7 +78,6 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
                 LoadingReadme(
                   {
                     now_path: meta.module_path,
-                    now_item: "",
                     sidebar: generate_sidebar_from_module_index(
                       parse_module_index(index),
                     ),

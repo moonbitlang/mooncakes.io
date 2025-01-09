@@ -9,10 +9,8 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
   }
 
   fn process_impl {
-    ({
-      "docstring": String(description),
-      "signature": String(signature),
-    } : Json) => ImplCard(folded=false, name=signature, signature~, description~)
+    ({ "docstring": String(description), "signature": String(signature) } : Json) =>
+      ImplCard(folded=false, name=signature, signature~, description~)
   }
 
   fn process_type {

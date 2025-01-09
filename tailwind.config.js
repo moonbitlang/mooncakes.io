@@ -3,8 +3,8 @@ module.exports = {
   content: ["./src/**/*.{html,js,mbt}"],
   theme: {
     fontFamily: {
-      sans: ['"Poppins"', "sans-serif"],
-      fira: ['"Fira Sans"'],
+      sans: ['"Poppins"', "Source Sans Pro"],
+      roboto: ['"Roboto Mono"'],
     },
     extend: {
       animation: {
@@ -13,8 +13,6 @@ module.exports = {
       dropShadow: {
         logo: "0 0 5rem #F3AD61",
       },
-    },
-    extend: {
       fontSize: {
         tiny: "0.7rem",
       },

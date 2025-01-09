@@ -214,11 +214,11 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
         p.childrens.push({ name: "README", target: package.path, kind: Readme })
       }
       p = { ..p, fullpath: package.path }
-      for trait_ in package.traits {
-        p.childrens.push(trait_.to_item_model(package.path))
-      }
       for type_ in package.types {
         p.childrens.push(type_.to_item_model(package.path))
+      }
+      for trait_ in package.traits {
+        p.childrens.push(trait_.to_item_model(package.path))
       }
       for value in package.values {
         p.childrens.push({ name: value, target: package.path, kind: Value })

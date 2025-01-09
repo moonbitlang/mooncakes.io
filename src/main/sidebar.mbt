@@ -128,7 +128,6 @@ fn sidebar_view(model : SidebarModel) -> @html.Html[Message] {
   let hide = if model.hide { "hidden" } else { "" }
   let items = item_list_view(model.items, filter=model.filter)
   div(
-    class="font-roboto",
     // class="sticky top-0 h-screen",
     [
       div(class="pt-1 border-t \{hide}", [

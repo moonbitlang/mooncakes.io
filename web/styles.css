@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;800&display=swap');
 
 @tailwind base;
@@ -7,6 +7,6 @@
 
 @layer base {
   html {
-    font-family: "Poppins", system-ui, -apple-system;
+    font-family: "Fira Sans", "sans-se", system-ui, -apple-system;
   }
 }

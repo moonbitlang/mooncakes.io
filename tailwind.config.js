@@ -3,7 +3,8 @@ module.exports = {
   content: ["./src/**/*.{html,js,mbt}"],
   theme: {
     fontFamily: {
-      sans: ['"Poppins"', "Source Sans Pro"],
+      title: ['"Poppins"'],
+      sans: ["Fira Sans", "sans-se"],
       roboto: ['"Roboto Mono"'],
     },
     extend: {

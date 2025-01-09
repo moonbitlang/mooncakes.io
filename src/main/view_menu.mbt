@@ -12,7 +12,7 @@ fn view_menu(meta : Map[String, MetaInfoModel]) -> @html.Html[Message] {
 ///|
 fn view_welcome() -> @html.Html[Message] {
   div(
-    class="flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
+    class="font-title flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
     [
       div(
         class="flex flex-1 flex-col justify-center gap-4 px-4 lg:max-w-[50%] lg:gap-8",

@@ -8,10 +8,11 @@ struct ItemModel {
 ///|
 enum ItemKind {
   Package(PackageModel)
-  Function
-  Let
+  Value
   Type
   Trait
+  Readme
+  ModuleReadme
   TypeAlias
 } derive(Show)
 
@@ -38,17 +39,6 @@ struct SidebarModel {
 }
 
 ///|
-fn sidebar_update(
-  msg : Message,
-  model : SidebarModel
-) -> (@tea.Command[Message], SidebarModel) {
-  match msg {
-
-  }
-  (@tea.none(), model)
-}
-
-///|
 fn item_button[M](
   childrens : @html.Html[M],
   icon? : String,
@@ -68,11 +58,22 @@ fn item_button[M](
 fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
   let { name, target, kind } = model
   match kind {
-    Type => item_button(text(name), icon="type.svg")
-    TypeAlias => item_button(text(name), icon="code-brackets.svg")
-    Let => item_button(text(name), icon="code-brackets.svg")
-    Function => item_button(text(name), icon="code-brackets.svg")
-    Trait => item_button(text(name), icon="components.svg")
+    ModuleReadme =>
+      item_button(text(name), icon=README_ICON, click=ReturnToModuleReadme)
+    Readme =>
+      item_button(text(name), icon=README_ICON, click=ItemClick(target, name))
+    Type =>
+      item_button(text(name), icon=TYPE_ICON, click=ItemClick(target, name))
+    TypeAlias =>
+      item_button(
+        text(name),
+        icon=TYPE_ALIAS_ICON,
+        click=ItemClick(target, name),
+      )
+    Value =>
+      item_button(text(name), icon=VALUE_ICON, click=ItemClick(target, name))
+    Trait =>
+      item_button(text(name), icon=TRAIT_ICON, click=ItemClick(target, name))
     Package({ childrens, folded, .. } as pkg) => {
       let childrens = if filter == "" {
         childrens
@@ -87,7 +88,7 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Message] {
       let icon = if folded { "folder-close.svg" } else { "folder-open.svg" }
       @html.ul([
         div(class="inline-block w-full", [
-          item_button(text(name), icon~, click=ItemClick(pkg)),
+          item_button(text(name), icon~, click=PackageClick(pkg)),
         ]),
         list,
       ])
@@ -133,7 +134,6 @@ fn sidebar_view(model : SidebarModel) -> @html.Html[Message] {
         filter_input_view(model.filter),
         div(class="text-gray-700", [items]),
       ]),
-      floating_view(model.cards_expanded),
     ],
   )
   // div(

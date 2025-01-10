@@ -1,0 +1,35 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/char",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Char",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Char",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Char) -> Int",
+              "loc": { "line": 16, "column": 29 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Char, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 19, "column": 29 }
+            }
+          ],
+          "loc": { "line": 16, "column": 1 }
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

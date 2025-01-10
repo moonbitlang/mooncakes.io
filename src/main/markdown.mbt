@@ -2,9 +2,29 @@
 fn markdown_view[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
-      text: Text({ v: text, .. }),
+      text: Text({ v: txt, .. }),
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
-    } : @cmark.InlineLink) => (text, link)
+    } : @cmark.InlineLink) =>
+      [@html.a(class=" text-blue-400", href=link, [text(txt)])]
+    ({
+      text: Image(
+        {
+          v: {
+            text: Text({ v: alt, .. }),
+            reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
+          },
+          ..,
+        }
+      ),
+      reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
+    } : @cmark.InlineLink) =>
+      [
+        @html.a(
+          href=link,
+          style=["display: inline-block"],
+          [@html.img(src~, alt~, [])],
+        ),
+      ]
     _ => abort("not an inline link")
   }
 
@@ -16,27 +36,24 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
         @html.code(
-          class="font-mono bg-gray-100 px-1 py-[1px] text-sm border border-gray-200 rounded",
+          class="font-roboto bg-gray-100 px-1 py-[1px] text-sm border border-gray-200 rounded",
           tight,
         ),
       ]
     }
     Emphasis({ v: { inline, .. }, .. }) => [@html.em(inline2html(inline))]
-    Image({ v: link, .. }) => {
-      let (str, src) = unwrap_inline_link(link)
-      [@html.img(src~, [@html.text(str)])]
-    }
+    Image({ v: _, .. }) =>
+      // Todo: Find out why this place is unreachable
+      abort("Unreachable")
     Inlines({ v, .. }) => v.map(inline2html).to_array().flatten()
-    Link({ v: link, .. }) => {
-      let (str, href) = unwrap_inline_link(link)
-      [@html.a(href~, [text(str)])]
-    }
+    Link({ v: link, .. }) => unwrap_inline_link(link)
     StrongEmphasis({ v: { inline, .. }, .. }) => {
       let inline = inline2html(inline)
       [@html.strong(inline)]
     }
     Text({ v: str, .. }) => [text(str)]
     RawHtml(_) => ...
+    ExtMathSpan(_) => ...
     ExtStrikethrough({ v: _, .. }) => ...
   }
 
@@ -54,29 +71,45 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
           separator="\n",
         )
         |> hightlight()
-      @html.pre(class="bg-gray-100 p-4 my-4 font-mono text-sm rounded", [
-        @html.code([code]),
-      ])
+      @html.pre(
+        class="bg-gray-100 p-4 my-4 text-sm rounded",
+        [@html.code(class="font-roboto", [code])],
+      )
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)
       match level {
-        1 => h1(class="text-gray-900 font-semibold text-3xl mt-4 mb-2", inline)
+        _..<1 => abort("Heading level <1")
+        1 =>
+          h4(
+            class="text-gray-900 font-semibold text-3xl mt-4 mb-2",
+            inline,
+          )
         2 =>
-          @html.h2(
+          h5(
             class="text-gray-900 text-2xl mt-4 mb-2 pb-2 border-b",
             inline,
           )
-        3 => @html.h3(class="text-gray-900 text-xl", inline)
-        4 => @html.h4(class="text-gray-900 text-xl", inline)
-        5 => @html.h5(class="text-gray-900 text-xl", inline)
-        6 => @html.h6(class="text-gray-900 text-xl", inline)
+        3 => h6(class="text-gray-900 text-xl", inline)
+        4..<_ => div(class="text-gray-900 text-xl", inline)
       }
     }
     List({ v, .. }) => div([text("markdown List")])
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
     ThematicBreak(_) => hr()
     ExtTable({ v, .. }) => div([text("markdown Table")])
+    LinkRefDefinition({ v, .. }) => {
+      println(1)
+      div([text("LinkRefDefinition")])
+    }
+    ExtMathBlock({ v, .. }) => {
+      println(2)
+      div([text("ExtMathBlock")])
+    }
+    HtmlBlock({ v, .. }) => {
+      println(3)
+      div([text("HTML Block")])
+    }
     ExtFootnoteDefinition({ v, .. }) => div([text("markdown Footnote")])
   }
 

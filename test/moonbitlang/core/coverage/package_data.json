@@ -1,0 +1,58 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/coverage",
+  "traits": [],
+  "types": [
+    {
+      "name": "CoverageCounter",
+      "docstring": "\n The `CoverageCounter` structure is used for keeping track of the number of\n times each chunk of code is executed. It's not very useful outside of\n generated code.",
+      "signature": "type CoverageCounter",
+      "loc": { "line": 19, "column": 8 },
+      "methods": [
+        {
+          "name": "incr",
+          "docstring": "\n Increment the specified tracking index.\n\n @coverage.skip ",
+          "signature": "fn <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>::incr(self : <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>, idx : Int) -> Unit",
+          "loc": { "line": 35, "column": 25 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Create a new coverage counter with the given size.\n\n @coverage.skip ",
+          "signature": "fn <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>::new(size : Int) -> <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>",
+          "loc": { "line": 27, "column": 25 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 41, "column": 40 }
+            }
+          ],
+          "loc": { "line": 41, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "end",
+      "docstring": "\n Output the counters to stdout for coverage report usages. The counter data\n is printed as a map of `{ counter_id: counter_contents }`, enclosed between\n a pair of delimiters.\n\n An example output of this function is like the following:\n\n ```plaintext\n ----- BEGIN MOONBIT COVERAGE -----\n {\n \"foo/foo\": [1, 2, 3, 4]\n , \"foo/bar\": [5, 6, 7, 8]\n }\n ----- END MOONBIT COVERAGE -----\n ```",
+      "signature": "fn end() -> Unit",
+      "loc": { "line": 103, "column": 8 }
+    },
+    {
+      "name": "track",
+      "docstring": "\n Add the given counter along its ID to the tracking list.\n\n @coverage.skip",
+      "signature": "fn track(name : String, counter : <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>) -> Unit",
+      "loc": { "line": 66, "column": 8 }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,164 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/float",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "infinity",
+      "docstring": "",
+      "signature": "let infinity : Float",
+      "loc": { "line": 19, "column": 9 }
+    },
+    {
+      "name": "max_value",
+      "docstring": "",
+      "signature": "let max_value : Float",
+      "loc": { "line": 25, "column": 9 }
+    },
+    {
+      "name": "min_positive",
+      "docstring": "",
+      "signature": "let min_positive : Float",
+      "loc": { "line": 31, "column": 9 }
+    },
+    {
+      "name": "min_value",
+      "docstring": "",
+      "signature": "let min_value : Float",
+      "loc": { "line": 28, "column": 9 }
+    },
+    {
+      "name": "neg_infinity",
+      "docstring": "",
+      "signature": "let neg_infinity : Float",
+      "loc": { "line": 22, "column": 9 }
+    },
+    {
+      "name": "not_a_number",
+      "docstring": "",
+      "signature": "let not_a_number : Float",
+      "loc": { "line": 16, "column": 9 }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Float",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Float",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Float) -> Int",
+              "loc": { "line": 47, "column": 30 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Float, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 52, "column": 30 }
+            }
+          ],
+          "loc": { "line": 47, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Float",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : Float, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 37, "column": 30 }
+            }
+          ],
+          "loc": { "line": 37, "column": 1 }
+        }
+      ],
+      "methods": [
+        {
+          "name": "abs",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::abs(self : Float) -> Float",
+          "loc": { "line": 34, "column": 8 }
+        },
+        {
+          "name": "ceil",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::ceil(self : Float) -> Float",
+          "loc": { "line": 19, "column": 8 }
+        },
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::default() -> Float",
+          "loc": { "line": 42, "column": 15 }
+        },
+        {
+          "name": "exp",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::exp(self : Float) -> Float",
+          "loc": { "line": 74, "column": 8 }
+        },
+        {
+          "name": "floor",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::floor(self : Float) -> Float",
+          "loc": { "line": 22, "column": 8 }
+        },
+        {
+          "name": "ln",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::ln(self : Float) -> Float",
+          "loc": { "line": 51, "column": 8 }
+        },
+        {
+          "name": "op_mod",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::op_mod(self : Float, other : Float) -> Float",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "pow",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::pow(self : Float, other : Float) -> Float",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "round",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::round(self : Float) -> Float",
+          "loc": { "line": 26, "column": 8 }
+        },
+        {
+          "name": "to_be_bytes",
+          "docstring": " Converts the Float to a Bytes in big-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::to_be_bytes(self : Float) -> Bytes",
+          "loc": { "line": 57, "column": 8 }
+        },
+        {
+          "name": "to_int",
+          "docstring": "\n Converts a floating-point number to an integer, with proper handling of\n special cases such as NaN and values outside the range of 32-bit integers.\n\n Parameters:\n\n * `self` : The floating-point number to be converted.\n\n Returns an integer representation of the float value. Specifically:\n * `0` for `@float.not_a_number` (NaN),\n * `@int.max_value` (2147483647) for values greater than `@int.max_value`,\n * `@int.min_value` (-2147483648) for values less than `@int.min_value`.\n * truncated (towards zero) integer value for other cases.\n\n Examples:\n\n ```moonbit\n test \"Float::to_int/normal\" {\n   inspect!((1.5 : Float).to_int(), content=\"1\")\n   inspect!((-1.5 : Float).to_int(), content=\"-1\")\n   inspect!(@float.not_a_number.to_int(), content=\"0\")\n   inspect!(@float.infinity.to_int(), content=\"2147483647\")\n   inspect!(@float.neg_infinity.to_int(), content=\"-2147483648\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::to_int(self : Float) -> Int",
+          "loc": { "line": 40, "column": 15 }
+        },
+        {
+          "name": "to_le_bytes",
+          "docstring": " Converts the Float to a Bytes in little-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::to_le_bytes(self : Float) -> Bytes",
+          "loc": { "line": 62, "column": 8 }
+        },
+        {
+          "name": "trunc",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::trunc(self : Float) -> Float",
+          "loc": { "line": 16, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

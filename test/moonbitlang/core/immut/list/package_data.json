@@ -1,0 +1,543 @@
+{
+  "readme": "# Immutable List\n\nList is implemented as a **linked list**, supporting O(1) head access.\n- Moonbit list is **homogeneous** list, which means all elements in the list must be of the same type.\n- Moonbit list does not support random access well, you can only access elements by iterating through the list. If you need randomly access the nth element, you should use `Array` instead.\n\n# Usage\n\n## Building lists \n\nYou can create a list manually via the `new()` or construct it using the `of()` method: \n```moonbit\nlet list0 : @immut/list.T[Int] = @immut/list.new()\nlet list1 = @immut/list.of([1, 2, 3, 4, 5])\n```\n\nOr use `Cons` constructor directly (Adds a single element to the beginning of a list):\n```moonbit\nlet list = @immut/list.Cons(1, Cons(2, Cons(3, Nil)))\n```\n\nBuild a repeated list by using the `repeat()` method:\n```moonbit\nprintln(@immut/list.repeat(3, 1)) // of([1, 1, 1])\n```\n\n## Pattern matching\nYou can use pattern matching to destructure a list:\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nmatch list {\n    Cons(head, tail) => println(head)\n    Nil => println(\"Empty list\")\n}\n```\n\n## Iterating over a list\nThe standard library provides a lot of tools for iterating over a list, such as `each()`, `eachi()`, etc. (For details check the API documentation)\n```moonbit\nlet list = @immut.list.of([1, 2, 3, 4, 5])\nlet list1 = list.each(fn (ele) { println(ele) }) \n```\n\n## Appending / Joining lists\nTo simply concatenate two lists, you can use the `concat()` method (or `+` operator):\n```moonbit\nlet list1 = @immut/list.of([1, 2, 3])\nlet list2 = @immut/list.of([4, 5, 6])\nlet list3 = list1.concat(list2) // of([1, 2, 3, 4, 5, 6])\nlet list4 = list1 + list2 // of([1, 2, 3, 4, 5, 6])\n```\n\nFor concatenating multiple lists (especially the length is unknown), you can use the `flatten()` method:\n```moonbit\nlet ls1 = @immut/list.of([1, 2, 3])\nlet ls2 = @immut/list.of([4, 5, 6])\nlet ls3 = @immut/list.of([7, 8, 9])\nlet ls4 = @immut/list.of([ls1, ls2, ls3])\nprintln(ls4.flatten()) // of([1, 2, 3, 4, 5, 6, 7, 8, 9])\n```\n\nTo insert separate elements into a list, you can use the `intersperse()` method:\n\n```moonbit\nlet list = @immut/list.of([1, 2, 3])\nprintln(list.intersperse(0)) // of([1, 0, 2, 0, 3])\n```\n\n## Filtering / Rejecting / Selecting elements\nThere are three ways to filter / reject / select multiple elements from a list:\n- Go through the entire list and decide whether the element should be present in the resultant list or not. Use `filter` for this.\n- To extract the first (or last) N elements of a list (and N is independent of the contents of the list). Use `take` or `drop` in this case.\n- To stop selecting elements (terminate the iteration) as soon as a condition is met, using `take_while` or `drop_while`\n\n```moonbit\nlet ls = @immut/list.of([1, 2, 3, 4, 5])\nls.filter(fn (ele) { ele % 2 == 0 }) // of([2, 4])\nls.take(2) // of([1, 2])\nls.drop(2) // of([3, 4, 5])\nls.take_while(fn (ele) { ele < 3 }) // of([1, 2])\nls.drop_while(fn (ele) { ele < 3 }) // of([3, 4, 5])\n```\n\n## Accessing elements / sub-lists\nYou can access the head of the list using the `head()` (O(1)) method. It returns `Some(head)` or `None` if the list is empty.\nAnd access the last element using the `last()` method (O(n)). \n\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nprintln(list.head()) // Some(1)\nprintln(list.last()) // 5\n```\n\nFor randomly accessing, you can use the `nth()` method, which returns the nth element in the list (O(n)). \nIf the index is out of bounds, it returns `None`.\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nlist.nth(2) // Some(3)\nlist.nth(8) // None\n```\n\nTo get a sub-list from the list, you can use the `init_()` method for getting all elements except the last one, and `tail()` for getting all elements except the first one.\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nlist.init_() // of([1, 2, 3, 4])\nlist.tail() // of([2, 3, 4, 5])\n```\n\n## Reducing Lists\nYou can reduce (fold) a list to a single value using the `fold()` method.\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nlist.fold(init=0, fn(acc, x) { acc + x }) // 15\n```\n\nThere are some special folds that you can use like `any`, `all`, `sum`, `maximum`, and `minimum`. Check the API documentation below for more details.\n\n## List transformations\nTo transform list elements, you can use the `map()` method.\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nlist.map(fn (ele) { ele * 2 }) // of([2, 4, 6, 8, 10])\n```\n\nThe `rev` method reverses the list.\n```moonbit\nlet list = @immut/list.of([1, 2, 3, 4, 5])\nlist.rev() // of([5, 4, 3, 2, 1])\n```",
+  "name": "moonbitlang/core/immut/list",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "",
+      "signature": "pub(all) enum T {\n  Nil\n  Cons(A, <a href=\"moonbitlang/core/immut/list#T\">T</a>[A])\n}",
+      "loc": { "line": 16, "column": 15 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::add[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], head : A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 16, "column": 8 }
+        },
+        {
+          "name": "all",
+          "docstring": "\n Test if all elements of the list satisfy the predicate.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::all[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> Bool) -> Bool",
+          "loc": { "line": 218, "column": 8 }
+        },
+        {
+          "name": "any",
+          "docstring": "\n Test if any element of the list satisfies the predicate.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::any[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> Bool) -> Bool",
+          "loc": { "line": 227, "column": 8 }
+        },
+        {
+          "name": "concat",
+          "docstring": "\n Concatenate two lists.\n\n # Example\n\n ```\n let ls = @list.of([1, 2, 3, 4, 5]).concat(@list.of([6, 7, 8, 9, 10]))\n assert_eq!(ls, @list.of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::concat[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 332, "column": 8 }
+        },
+        {
+          "name": "concat_map",
+          "docstring": "\n map over the list and concat all results.\n\n `concat_map(f, ls)` equal to `ls.map(f).fold(Nil, fn(acc, x) { acc.concat(x) })))`\n\n # Example\n\n ```\n let ls = @list.from_array([1, 2, 3])\n let r = ls.flat_map(fn(x) { @list.from_array([x, x * 2]) })\n assert_eq!(r, @list.from_array([1, 2, 2, 4, 3, 6]))\n ```\n @alert deprecated \"Use `flat_map` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::concat_map[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 522, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Check if the list contains the value.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::contains[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], value : A) -> Bool",
+          "loc": { "line": 765, "column": 8 }
+        },
+        {
+          "name": "default",
+          "docstring": "\n The empty list",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::default[X]() -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[X]",
+          "loc": { "line": 1074, "column": 11 }
+        },
+        {
+          "name": "drop",
+          "docstring": "\n Drop first n elements of the list.\n If the list is shorter than n, return an empty list.\n\n # Example\n\n ```\n let ls = @list.of([1, 2, 3, 4, 5])\n let r = ls.drop(3)\n assert_eq!(r, @list.of([4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::drop[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], n : Int) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 824, "column": 8 }
+        },
+        {
+          "name": "drop_while",
+          "docstring": "\n Drop the longest prefix of a list of elements that satisfies a given predicate.\n\n # Example\n\n ```\n let ls = @list.from_array([1, 2, 3, 4])\n let r = ls.drop_while(fn(x) { x < 3 })\n assert_eq!(r, @list.of([3, 4]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::drop_while[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], p : (A) -> Bool) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 865, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterates over the list.\n\n # Example\n\n ```\n let arr = []\n @list.of([1, 2, 3, 4, 5]).each(fn(x) { arr.push(x) })\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::each[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> Unit) -> Unit",
+          "loc": { "line": 103, "column": 8 }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterates over the list with index.\n\n # Example\n\n ```\n let arr = []\n @list.of([1, 2, 3, 4, 5]).eachi(fn(i, x) { arr.push(\"(\\{i},\\{x})\") })\n assert_eq!(arr, [\"(0,1)\", \"(1,2)\", \"(2,3)\", \"(3,4)\", \"(4,5)\"])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::eachi[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (Int, A) -> Unit) -> Unit",
+          "loc": { "line": 123, "column": 8 }
+        },
+        {
+          "name": "equal",
+          "docstring": "\n Compares two lists for equality.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3]).equal(@list.of([1, 2, 3])), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 1035, "column": 8 }
+        },
+        {
+          "name": "filter",
+          "docstring": "\n Filter the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).filter(fn(x){ x % 2 == 0}), @list.of([2, 4]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::filter[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> Bool) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 204, "column": 8 }
+        },
+        {
+          "name": "filter_map",
+          "docstring": "\n Map over the list and keep all `value`s for which the mapped result is `Some(value)`.\n\n # Example\n\n ```\n let ls = @list.of([4, 2, 2, 6, 3, 1])\n let r = ls.filter_map(fn(x) { if (x >= 3) { Some(x) } else { None } })\n assert_eq!(r, @list.of([4, 6, 3]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::filter_map[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> B?) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 555, "column": 8 }
+        },
+        {
+          "name": "find",
+          "docstring": "\n Find the first element in the list that satisfies f.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 3, 5, 8]).find(fn(element) -> Bool { element % 2 == 0}), Some(8))\n assert_eq!(@list.of([1, 3, 5]).find(fn(element) -> Bool { element % 2 == 0}), None)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::find[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> Bool) -> A?",
+          "loc": { "line": 938, "column": 8 }
+        },
+        {
+          "name": "findi",
+          "docstring": "\n Find the first element in the list that satisfies f and passes the index as an argument.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 3, 5, 8]).findi(fn(element, index) -> Bool { (element % 2 == 0) && (index == 3) }), Some(8))\n assert_eq!(@list.of([1, 3, 8, 5]).findi(fn(element, index) -> Bool { (element % 2 == 0) && (index == 3) }), None)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::findi[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A, Int) -> Bool) -> A?",
+          "loc": { "line": 959, "column": 8 }
+        },
+        {
+          "name": "flat_map",
+          "docstring": "\n map over the list and concat all results.\n\n `flat_map(f, ls)` equal to `ls.map(f).fold(Nil, fn(acc, x) { acc.concat(x) })))`\n\n # Example\n\n ```\n let ls = @list.from_array([1, 2, 3])\n let r = ls.flat_map(fn(x) { @list.from_array([x, x * 2]) })\n assert_eq!(r, @list.from_array([1, 2, 2, 4, 3, 6]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::flat_map[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 538, "column": 8 }
+        },
+        {
+          "name": "flatten",
+          "docstring": "\n flatten a list of lists.\n\n # Example\n\n ```\n let ls = @list.flatten(@list.from_array([@list.from_array([1,2,3]), @list.from_array([4,5,6]), @list.from_array([7,8,9])]))\n assert_eq!(ls, @list.from_array([1, 2, 3, 4, 5, 6, 7, 8, 9]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::flatten[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[<a href=\"moonbitlang/core/immut/list#T\">T</a>[A]]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 665, "column": 8 }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n Fold the list from left.\n\n # Example\n\n ```\n let r = @list.of([1, 2, 3, 4, 5]).fold(init=0, fn(acc, x) { acc + x })\n assert_eq!(r, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::fold[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 376, "column": 8 }
+        },
+        {
+          "name": "fold_left",
+          "docstring": "\n Fold the list from left.\n\n # Example\n\n ```\n let r = @list.of([1, 2, 3, 4, 5]).fold(init=0, fn(acc, x) { acc + x })\n assert_eq!(r, 15)\n ```\n @alert deprecated \"Use `fold` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::fold_left[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (B, A) -> B, init~ : B) -> B",
+          "loc": { "line": 409, "column": 8 }
+        },
+        {
+          "name": "fold_lefti",
+          "docstring": "\n Fold the list from left with index.\n @alert deprecated \"Use `foldi` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::fold_lefti[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (Int, B, A) -> B, init~ : B) -> B",
+          "loc": { "line": 460, "column": 8 }
+        },
+        {
+          "name": "fold_right",
+          "docstring": "\n Fold the list from right.\n\n # Example\n ```\n let r = @list.of([1, 2, 3, 4, 5]).rev_fold(fn(x, acc) { x + acc }, init=0)\n assert_eq!(r, 15)\n ```\n @alert deprecated \"Use `rev_fold` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::fold_right[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A, B) -> B, init~ : B) -> B",
+          "loc": { "line": 423, "column": 8 }
+        },
+        {
+          "name": "fold_righti",
+          "docstring": "\n Fold the list from right with index.\n @alert deprecated \"Use `rev_foldi` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::fold_righti[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (Int, A, B) -> B, init~ : B) -> B",
+          "loc": { "line": 475, "column": 8 }
+        },
+        {
+          "name": "foldi",
+          "docstring": "\n Fold the list from left with index.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::foldi[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": { "line": 432, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Convert array to list.\n\n # Example\n\n ```\n let ls = @list.of([1, 2, 3, 4, 5])\n assert_eq!(ls, @list.from_array([1, 2, 3, 4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::from_array[A](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 76, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::from_iter[A](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 1109, "column": 11 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::from_json[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+          "loc": { "line": 61, "column": 11 }
+        },
+        {
+          "name": "head",
+          "docstring": "\n Get first element of the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).head(), Some(1))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::head[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A?",
+          "loc": { "line": 274, "column": 8 }
+        },
+        {
+          "name": "head_exn",
+          "docstring": "\n @alert deprecated \"Use `unsafe_head` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::head_exn[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A",
+          "loc": { "line": 262, "column": 8 }
+        },
+        {
+          "name": "init_",
+          "docstring": "\n Init of the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).init_(), @list.of([1, 2, 3, 4]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::init_[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 315, "column": 8 }
+        },
+        {
+          "name": "intercalate",
+          "docstring": "\n Similar to intersperse but with a list of values.\n\n # Example\n ```\n let ls = @list.of([\n    @list.of([1, 2, 3]),\n    @list.of([4, 5, 6]),\n    @list.of([7, 8, 9]),\n ])\n let r = ls.intercalate(@list.of([0]))\n assert_eq!(r, @list.of([1, 2, 3, 0, 4, 5, 6, 0, 7, 8, 9]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::intercalate[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[<a href=\"moonbitlang/core/immut/list#T\">T</a>[A]], sep : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 1068, "column": 8 }
+        },
+        {
+          "name": "intersperse",
+          "docstring": "\n Insert separator to the list.\n\n # Example\n\n ```\n let ls = @list.intersperse(@list.from_array([\"1\", \"2\", \"3\", \"4\", \"5\"]), \"|\")\n assert_eq!(ls, @list.from_array([\"1\", \"|\", \"2\", \"|\", \"3\", \"|\", \"4\", \"|\", \"5\"]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::intersperse[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], separator : A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 618, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Check if the list is empty.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::is_empty[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 629, "column": 8 }
+        },
+        {
+          "name": "is_prefix",
+          "docstring": "\n Returns true if list starts with prefix.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).is_prefix(@list.of([1, 2, 3])), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::is_prefix[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], prefix : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 1019, "column": 8 }
+        },
+        {
+          "name": "is_suffix",
+          "docstring": "\n Returns true if list ends with suffix.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).is_suffix(@list.of([3, 4, 5])), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::is_suffix[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], suffix : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 1051, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::iter[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 1079, "column": 8 }
+        },
+        {
+          "name": "iter2",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::iter2[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[Int, A]",
+          "loc": { "line": 1094, "column": 8 }
+        },
+        {
+          "name": "last",
+          "docstring": "\n Last element of the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).last(), Some(5))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::last[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A?",
+          "loc": { "line": 299, "column": 8 }
+        },
+        {
+          "name": "length",
+          "docstring": "\n Get the length of the list.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::length[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> Int",
+          "loc": { "line": 86, "column": 8 }
+        },
+        {
+          "name": "lookup",
+          "docstring": "\n Looks up a key in an association list.\n\n # Example\n\n ```\n let ls = @list.from_array([(1, \"a\"), (2, \"b\"), (3, \"c\")])\n assert_eq!(ls.lookup(3), Some(\"c\"))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::lookup[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[(A, B)], v : A) -> B?",
+          "loc": { "line": 922, "column": 8 }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Maps the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).map(fn(x){ x * 2}), @list.of([2, 4, 6, 8, 10]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::map[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> B) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 141, "column": 8 }
+        },
+        {
+          "name": "mapi",
+          "docstring": "\n Maps the list with index.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::mapi[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (Int, A) -> B) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 150, "column": 8 }
+        },
+        {
+          "name": "maximum",
+          "docstring": "\n Get maximum element of the list.\n Returns None if the list is empty.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::maximum[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A?",
+          "loc": { "line": 692, "column": 8 }
+        },
+        {
+          "name": "minimum",
+          "docstring": "\n Get minimum element of the list.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::minimum[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A?",
+          "loc": { "line": 723, "column": 8 }
+        },
+        {
+          "name": "nth",
+          "docstring": "\n Get nth element of the list or None if the index is out of bounds",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::nth[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], n : Int) -> A?",
+          "loc": { "line": 585, "column": 8 }
+        },
+        {
+          "name": "nth_exn",
+          "docstring": "\n @alert deprecated \"Use `unsafe_nth` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::nth_exn[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], n : Int) -> A",
+          "loc": { "line": 579, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::of[A](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 1114, "column": 11 }
+        },
+        {
+          "name": "op_add",
+          "docstring": "\n Concatenate two lists.\n\n `a + b` equal to `a.concat(b)`",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::op_add[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 759, "column": 8 }
+        },
+        {
+          "name": "remove",
+          "docstring": "\n Removes the first occurrence of the specified element from the list, if it is present.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).remove(3), @list.of([1, 2, 4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::remove[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], elem : A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 999, "column": 8 }
+        },
+        {
+          "name": "remove_at",
+          "docstring": "\n Removes the element at the specified index in the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).remove_at(2), @list.of([1, 2, 4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::remove_at[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], index : Int) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 982, "column": 8 }
+        },
+        {
+          "name": "rev",
+          "docstring": "\n Reverse the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).rev(), @list.of([5, 4, 3, 2, 1]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::rev[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 363, "column": 8 }
+        },
+        {
+          "name": "rev_concat",
+          "docstring": "\n Reverse the first list and concatenate it with the second.\n\n # Example\n\n ```\n let ls = @list.of([1, 2, 3, 4, 5]).rev_concat(@list.of([6, 7, 8, 9, 10]))\n assert_eq!(ls, @list.of([5, 4, 3, 2, 1, 6, 7, 8, 9, 10]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::rev_concat[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 348, "column": 8 }
+        },
+        {
+          "name": "rev_fold",
+          "docstring": "\n Fold the list from right.\n\n # Example\n ```\n let r = @list.of([1, 2, 3, 4, 5]).rev_fold(fn(x, acc) { x + acc }, init=0)\n assert_eq!(r, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::rev_fold[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], init~ : B, f : (A, B) -> B) -> B",
+          "loc": { "line": 391, "column": 8 }
+        },
+        {
+          "name": "rev_foldi",
+          "docstring": "\n Fold the list from right with index.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::rev_foldi[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], init~ : B, f : (Int, A, B) -> B) -> B",
+          "loc": { "line": 445, "column": 8 }
+        },
+        {
+          "name": "rev_map",
+          "docstring": "\n Maps the list and reverses the result.\n\n `list.rev_map(f)` is equivalent to `list.map(f).rev()` but more efficient.\n\n # Example\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).rev_map(fn(x) { x * 2 }), @list.of([10, 8, 6, 4, 2]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::rev_map[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A) -> B) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 170, "column": 8 }
+        },
+        {
+          "name": "scan_left",
+          "docstring": "\n Fold a list and return a list of successive reduced values from the left\n\n # Example\n\n ```\n let ls = @list.of([1, 2, 3, 4, 5])\n let r = ls.scan_left(fn(acc, x) { acc + x }, init=0)\n assert_eq!(r, @list.of([0, 1, 3, 6, 10, 15]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::scan_left[A, E](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (E, A) -> E, init~ : E) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[E]",
+          "loc": { "line": 882, "column": 8 }
+        },
+        {
+          "name": "scan_right",
+          "docstring": "\n Fold a list and return a list of successive reduced values from the right\n\n Note that the order of parameters on the accumulating function are reversed.\n\n # Example\n ```\n let ls = @list.of([1, 2, 3, 4, 5])\n let r = ls.scan_right(fn(x, acc) { acc + x }, init=0)\n assert_eq!(r, @list.of([15, 14, 12, 9, 5, 0]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::scan_right[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], f : (A, B) -> B, init~ : B) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]",
+          "loc": { "line": 903, "column": 8 }
+        },
+        {
+          "name": "sort",
+          "docstring": "\n Sort the list in ascending order.\n\n # Example\n\n ```\n let ls = @list.sort(@list.from_array([1,123,52,3,6,0,-6,-76]))\n assert_eq!(ls, @list.from_array([-76, -6, 0, 1, 3, 6, 52, 123]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::sort[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 744, "column": 8 }
+        },
+        {
+          "name": "tail",
+          "docstring": "\n Tail of the list.\n\n # Example\n\n ```\n assert_eq!(@list.of([1, 2, 3, 4, 5]).tail(), @list.of([2, 3, 4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::tail[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 242, "column": 8 }
+        },
+        {
+          "name": "take",
+          "docstring": "\n Take first n elements of the list.\n If the list is shorter than n, return the whole list.\n\n # Example\n\n ```\n let ls = @list.of([1, 2, 3, 4, 5])\n let r = ls.take(3)\n assert_eq!(r, @list.of([1, 2, 3]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::take[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], n : Int) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 799, "column": 8 }
+        },
+        {
+          "name": "take_while",
+          "docstring": "\n Take the longest prefix of a list of elements that satisfies a given predicate.\n\n # Example\n\n ```\n let ls = @list.from_array([1, 2, 3, 4])\n let r = ls.take_while(fn(x) { x < 3 })\n assert_eq!(r, @list.of([1, 2]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::take_while[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], p : (A) -> Bool) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "loc": { "line": 848, "column": 8 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "\n Convert list to array.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::to_array[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
+          "loc": { "line": 179, "column": 8 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 40, "column": 11 }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::to_string[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](xs : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> String",
+          "loc": { "line": 26, "column": 11 }
+        },
+        {
+          "name": "unsafe_head",
+          "docstring": "\n Get first element of the list.\n @alert unsafe \"Panic if the list is empty\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::unsafe_head[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A",
+          "loc": { "line": 252, "column": 8 }
+        },
+        {
+          "name": "unsafe_last",
+          "docstring": "\n @alert unsafe \"Panic if the list is empty\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::unsafe_last[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A",
+          "loc": { "line": 283, "column": 8 }
+        },
+        {
+          "name": "unsafe_maximum",
+          "docstring": "\n @alert unsafe \"Panic if the list is empty\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::unsafe_maximum[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A",
+          "loc": { "line": 674, "column": 8 }
+        },
+        {
+          "name": "unsafe_minimum",
+          "docstring": "\n @alert unsafe \"Panic if the list is empty\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::unsafe_minimum[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> A",
+          "loc": { "line": 706, "column": 8 }
+        },
+        {
+          "name": "unsafe_nth",
+          "docstring": "\n @alert unsafe \"Panic if the index is out of bounds\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::unsafe_nth[A](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], n : Int) -> A",
+          "loc": { "line": 568, "column": 8 }
+        },
+        {
+          "name": "zip",
+          "docstring": "\n Zip two lists.\n If the lists have different lengths, it will return None.\n\n # Example\n\n ```\n let r = @list.zip(@list.of([1, 2, 3, 4, 5]), @list.of([6, 7, 8, 9, 10]))\n assert_eq!(r, Some(@list.from_array([(1, 6), (2, 7), (3, 8), (4, 9), (5, 10)])))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/list#T\">T</a>::zip[A, B](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/list#T\">T</a>[B]) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[(A, B)]?",
+          "loc": { "line": 496, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](<a href=\"moonbitlang/core/immut/list#T\">T</a>[A], <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> Bool",
+              "loc": { "line": 19, "column": 10 }
+            }
+          ],
+          "loc": { "line": 19, "column": 10 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 1136, "column": 39 }
+            }
+          ],
+          "loc": { "line": 1136, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](xs : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 21, "column": 39 }
+            }
+          ],
+          "loc": { "line": 21, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "",
+              "signature": "fn to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 31, "column": 43 }
+            }
+          ],
+          "loc": { "line": 31, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "",
+              "signature": "fn from_json[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 45, "column": 59 }
+            }
+          ],
+          "loc": { "line": 45, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/list#T\">T</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[X]",
+              "loc": { "line": 1123, "column": 73 }
+            }
+          ],
+          "loc": { "line": 1123, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "repeat",
+      "docstring": "\n Create a list of length n with the given value\n\n # Example\n\n ```\n assert_eq!(@list.repeat(5, 1), @list.from_array([1, 1, 1, 1, 1]))\n ```",
+      "signature": "fn repeat[A](n : Int, x : A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+      "loc": { "line": 601, "column": 8 }
+    },
+    {
+      "name": "singleton",
+      "docstring": "",
+      "signature": "fn singleton[A](x : A) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+      "loc": { "line": 1131, "column": 8 }
+    },
+    {
+      "name": "unfold",
+      "docstring": "\n Produces a collection iteratively.\n\n # Example\n\n ```\n let r = @list.unfold(init=0, fn { i => if i == 3 { None } else { Some((i, i + 1)) } })\n assert_eq!(r, @list.from_array([0, 1, 2]))\n ```",
+      "signature": "fn unfold[A, S](f : (S) -> (A, S)?, init~ : S) -> <a href=\"moonbitlang/core/immut/list#T\">T</a>[A]",
+      "loc": { "line": 781, "column": 8 }
+    },
+    {
+      "name": "unzip",
+      "docstring": "\n Unzip two lists.\n\n # Example\n\n ```\n let (a,b) = @list.unzip(@list.from_array([(1,2),(3,4),(5,6)]))\n assert_eq!(a, @list.from_array([1, 3, 5]))\n assert_eq!(b, @list.from_array([2, 4, 6]))\n ```",
+      "signature": "fn unzip[A, B](list : <a href=\"moonbitlang/core/immut/list#T\">T</a>[(A, B)]) -> (<a href=\"moonbitlang/core/immut/list#T\">T</a>[A], <a href=\"moonbitlang/core/immut/list#T\">T</a>[B])",
+      "loc": { "line": 646, "column": 8 }
+    }
+  ],
+  "misc": []
+}

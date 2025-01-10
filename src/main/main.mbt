@@ -1,318 +1,251 @@
 ///|
 enum Message {
-  ToggleSidebar
+  ReturnToModuleReadme
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
   ExpandAllCards
-  ItemClick(PackageModel)
+  ClickModuleCard(String)
+  ItemClick(String, String)
+  PackageClick(PackageModel)
   FilterChange(String)
+  LoadModuleIndex
+  GotModuleIndex(Result[Json, String])
+  LoadReadme
+  GotReadme(Result[String, String])
+  LoadPackage
+  GotPackageInfo(Result[Json, String])
+  LoadMenu
+  GotMenuInfo(Result[Json, String])
 } derive(Show)
 
 ///|
-struct Model {
-  count : Int
+struct ModelBodyPackage {
+  now_path : String
   sidebar : SidebarModel
-  navbar : NavbarModel
   detail_cards : Array[DetailCardModel]
   meta_info : MetaInfoModel
 }
 
 ///|
-fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
-  match msg {
-    ToggleSidebar =>
-      (
-        @tea.none(),
-        { ..model, sidebar: { ..model.sidebar, hide: not(model.sidebar.hide) } },
-      )
-    ToggleCardDetail(card) => {
-      card.toggle_folded()
-      (@tea.none(), model)
-    }
-    FoldAllCards => {
-      for card in model.detail_cards {
-        card.toggle_folded()
-      }
-      (
-        @tea.none(),
-        { ..model, sidebar: { ..model.sidebar, cards_expanded: false } },
-      )
-    }
-    ExpandAllCards => {
-      for card in model.detail_cards {
-        card.toggle_folded()
-      }
-      (
-        @tea.none(),
-        { ..model, sidebar: { ..model.sidebar, cards_expanded: false } },
-      )
-    }
-    ItemClick(pkg_model) => {
-      pkg_model.folded = not(pkg_model.folded)
-      (@tea.none(), model)
-    }
-    FilterChange(value) => {
-      model.sidebar.filter = value
-      (@tea.none(), model)
-    }
-    msg => {
-      println("Got message \{msg}")
-      (@tea.none(), model)
-    }
-  }
+enum Model {
+  Failure
+  Menu(Map[String, MetaInfoModel])
+  LoadingMenu
+  LoadingModuleIndex(MetaInfoModel, String)
+  LoadingReadme(ModelBodyPackage, String, Bool)
+  LoadingPackage(ModelBodyPackage, String, String)
+  Success(ModelBodyPackage)
 }
 
 ///|
-fn floating_view(cards_expanded : Bool) -> @html.Html[Message] {
-  let button = if cards_expanded {
-    icon_button_view("expansion.svg", text="Fold cards", click=FoldAllCards)
-  } else {
-    icon_button_view("reduction.svg", text="Expand cards", click=ExpandAllCards)
-  }
-  div(class="absolute bottom-4 left-4", [button])
-}
-
-///|
-fn view(model : Model) -> @html.Html[Message] {
-  div(class="flex flex-col", [
-    div([navbar_view(model.navbar)]),
-    div(class="flex w-screen", [
-      div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
-        meta_info_view(model.meta_info),
-        div(class="sticky top-[-1px] h-screen", [sidebar_view(model.sidebar)]),
-      ]),
-      div(class="flex-grow overflow-hidden bg-[#fcfcfd]", [
-        detail_cards_view(model.detail_cards),
-      ]),
-    ]),
-    div(class=" ", [footer_view()]),
-  ])
-}
-
-///| NOTE: This program is only available in the js backend, 
-/// see README.md to getting started.
-fn main {
-  let (_, detail_cards) = process_pacakge_info(package_info)
-  let readme_card = ReadmeCard(
-    #| # Immutable Map
-    #| 
-    #| An immutable tree map based on size balanced tree.
-    #| 
-    #| # Usage
-    #| 
-    #| ## Create
-    #| 
-    #| You can create an empty map using `new()` or construct it with a single key-value pair using `singleton()`.
-    #| 
-    #| ```moonbit
-    #| let map1 : @immut/sorted_map.T[String, Int] = @immut/sorted_map.new()
-    #| let map2 = @immut/sorted_map.singleton("a", 1)
-    #| ```
-    #| 
-    #| Also, you can construct it from an array using `of()` or `from_array()`.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| ```
-    #| 
-    #| ## Insert & Lookup
-    #| 
-    #| You can use `insert()` to add a key-value pair to the map and create a new map. Or use `lookup()` to get the value associated with a key.
-    #| 
-    #| ```moonbit
-    #| let map : @immut/sorted_map.T[String,Int] = @immut/sorted_map.new()
-    #| let map = map.insert("a", 1)
-    #| println(map.lookup("a")) // Some(1)
-    #| ```
-    #| 
-    #| ## Remove
-    #| 
-    #| You can use `remove()` to remove a key-value pair from the map.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| let map = map.remove("a")
-    #| ```
-    #| 
-    #| ## Contains
-    #| 
-    #| You can use `contains()` to check whether a key exists.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| println(map.contains("a")) // true
-    #| println(map.contains("d")) // false
-    #| ```
-    #| 
-    #| > let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| > println(map.contains("a")) // true
-    #| > println(map.contains("d")) // false
-    #|
-    #| ## Size
-    #| 
-    #| You can use `size()` to get the number of key-value pairs in the map.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| println(map.size()) // 3
-    #| ```
-    #| 
-    #| Similarly, you can use `is_empty()` to check whether the map is empty.
-    #| 
-    #| ```moonbit
-    #| let map : @immut/sorted_map.T[String, Int] = @immut/sorted_map.new()
-    #| println(map.is_empty()) // true
-    #| ```
-    #| 
-    #| ## Traversal
-    #| 
-    #| Use `each()` or `eachi()` to iterate through all key-value pairs.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| map.each(fn(k, v) { println("key:\{k}, value:\{v}") })
-    #| map.eachi(fn(i, k, v) { println("index:\{i}, key:\{k}, value:\{v}") })
-    #| ```
-    #| 
-    #| Use `map()` or `map_with_key()` to map a function over all values.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| let map = map.map(fn(v) { v + 1 })
-    #| let map = map.map_with_key(fn(_k, v) { v + 1 })
-    #| ```
-    #| 
-    #| Use `fold()` or `foldl_with_key()` to fold the values in the map. The default order of fold is Pre-order.
-    #| Similarly, you can use `foldr_with_key()` to do a Post-order fold.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| map.fold(fn (acc, v) { acc + v }, ~init=0) // 6
-    #| map.foldl_with_key(fn (acc, k, v) { acc + k + v.to_string() }, ~init="") // "a1b2c3"
-    #| map.foldr_with_key(fn (acc, k, v) { acc + k + v.to_string() }, ~init="") // "c3b2a1"
-    #| ```
-    #| 
-    #| Use `filter()` or `filter_with_key()` to filter all keys/values that satisfy the predicate.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| let map = map.filter(fn (v) { v > 1 })
-    #| let map = map.filter_with_key(fn (k, v) { k > "a" && v > 1 })
-    #| ```
-    #| 
-    #| ## Conversion
-    #| 
-    #| Use `elems()` to get all values in ascending order of their keys.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| let elems = map.elems() // [1, 2, 3]
-    #| ```
-    #| 
-    #| Use `keys()` to get all keys of the map in ascending order.
-    #| 
-    #| ```moonbit
-    #| let map = @immut/sorted_map.of([("a", 1), ("b", 2), ("c", 3)])
-    #| let keys = map.keys() // ["a", "b", "c"]
-    #| ```
-    #| 
-    #| 
-    ,
-    folded=false,
-  )
-  let detail_cards = [readme_card, ..detail_cards]
-  let model = {
-    count: 0,
-    navbar: { title: "mooncakes.io" },
-    detail_cards,
-    meta_info: {
-      name: "sorted_map",
-      author: "yorkin",
-      version: "0.1.1",
-      repository: "github.com/yoorkin/prettyprinter",
-      description: "a pretty printer for moonbit",
-      keywords: ["util", "prettyprint", "doc"],
-      license: "Apache",
-      module_path: "yoorkin/prettyprinter",
-    },
-    sidebar: {
-      cards_expanded: true,
-      filter: "",
-      module_path: "yorkin/prettyprint",
-      hide: false,
-      items: [
-        {
-          name: "lib",
-          target: "lib",
-          kind: Package({
-            fullpath: "user/lib",
-            folded: false,
-            childrens: [
-              {
-                name: "main",
-                target: "lib/hello",
-                kind: Package({
-                  fullpath: "user/lib/hello",
-                  childrens: [
-                    {
-                      name: "function1",
-                      target: "lib/main/function1",
-                      kind: Function,
-                    },
-                    {
-                      name: "trait1",
-                      target: "lib/main/function1",
-                      kind: Trait,
-                    },
-                    { name: "type1", target: "lib/main/function1", kind: Type },
-                    {
-                      name: "function2",
-                      target: "lib/main/function2",
-                      kind: Function,
-                    },
-                    { name: "type1", target: "lib/main/type1", kind: Type },
-                  ],
-                  folded: true,
+fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
+  match model_ {
+    Failure => (@tea.none(), model_)
+    Menu(metas) =>
+      match msg {
+        ClickModuleCard(path) => {
+          println(path)
+          (
+            @tea.task(LoadModuleIndex),
+            LoadingModuleIndex(metas[path].unwrap(), path),
+          )
+        }
+      }
+    LoadingMenu =>
+      match msg {
+        LoadMenu =>
+          (
+            @http.get(
+              URL_BASE + "/modules.json",
+              expect=Json(Message::GotMenuInfo),
+            ),
+            model_,
+          )
+        GotMenuInfo(result) =>
+          match result {
+            Err(_) => (@tea.none(), Failure)
+            Ok(r) => (@tea.none(), Menu(parse_metadata(r)))
+          }
+      }
+    LoadingModuleIndex(meta, url) =>
+      match msg {
+        GotModuleIndex(result) =>
+          match result {
+            Err(_) => (@tea.none(), Failure)
+            Ok(index) =>
+              (
+                @tea.task(LoadReadme),
+                LoadingReadme(
+                  {
+                    now_path: meta.module_path,
+                    sidebar: generate_sidebar_from_module_index(
+                      parse_module_index(index),
+                    ),
+                    meta_info: meta,
+                    detail_cards: [],
+                  },
+                  url,
+                  false,
+                ),
+              )
+          }
+        LoadModuleIndex =>
+          (
+            @http.get(
+              URL_BASE + "/" + url + "/module_index.json",
+              expect=Json(Message::GotModuleIndex),
+            ),
+            model_,
+          )
+        _ => panic()
+      }
+    LoadingReadme(model, url, tag) =>
+      match msg {
+        GotReadme(result) =>
+          match result {
+            Err(_) => (@tea.none(), Failure)
+            Ok(r) =>
+              (
+                @tea.none(),
+                Success({
+                  ..model,
+                  sidebar: {
+                    ..model.sidebar,
+                    items: (if r == "" || tag {
+                      []
+                    } else {
+                      [
+                        {
+                          name: model.meta_info.readme.or_default(),
+                          target: model.meta_info.module_path,
+                          kind: ModuleReadme,
+                        },
+                      ]
+                    }) +
+                    model.sidebar.items,
+                  },
+                  detail_cards: if r == "" {
+                    []
+                  } else {
+                    [ReadmeCard(folded=false, r)]
+                  },
                 }),
-              },
-              {
-                name: "function1",
-                target: "lib/main/function1",
-                kind: Function,
-              },
-              {
-                name: "function2",
-                target: "lib/main/function2",
-                kind: Function,
-              },
-              { name: "type1", target: "lib/main/type1", kind: Type },
-            ],
-          }),
-        },
-        {
-          name: "hello",
-          target: "lib/hello",
-          kind: Package({
-            fullpath: "user/lib/hello",
-            childrens: [
-              {
-                name: "function1",
-                target: "lib/main/function1",
-                kind: Function,
-              },
-              {
-                name: "function2",
-                target: "lib/main/function2",
-                kind: Function,
-              },
-              { name: "type1", target: "lib/main/type1", kind: Type },
-            ],
-            folded: true,
-          }),
-        },
-      ],
-      dependencies: [],
-    },
+              )
+          }
+        LoadReadme =>
+          (
+            match model.meta_info.readme {
+              Some(readme) =>
+                @http.get(
+                  URL_BASE + "/" + url + "/" + readme,
+                  expect=Text(Message::GotReadme),
+                )
+              None => @tea.task(GotReadme(Ok("")))
+            },
+            model_,
+          )
+        _ => panic()
+      }
+    LoadingPackage(model, url, target) =>
+      match msg {
+        GotPackageInfo(result) =>
+          match result {
+            Err(_) => (@tea.none(), Failure)
+            Ok(result) => {
+              let details = process_pacakge_info(result)
+              (
+                @browser.scroll_to(target),
+                Success({ ..model, now_path: url, detail_cards: details }),
+              )
+            }
+          }
+        LoadPackage =>
+          (
+            @http.get(
+              URL_BASE + "/" + url + "/package_data.json",
+              expect=Json(Message::GotPackageInfo),
+            ),
+            model_,
+          )
+        _ => panic()
+      }
+    Success(model) =>
+      match msg {
+        ToggleCardDetail(card) => {
+          card.toggle_folded()
+          (@tea.none(), model_)
+        }
+        FoldAllCards => {
+          for card in model.detail_cards {
+            card.toggle_folded()
+          }
+          (
+            @tea.none(),
+            Success({
+              ..model,
+              sidebar: { ..model.sidebar, cards_expanded: false },
+            }),
+          )
+        }
+        ExpandAllCards => {
+          for card in model.detail_cards {
+            card.toggle_folded()
+          }
+          (
+            @tea.none(),
+            Success({
+              ..model,
+              sidebar: { ..model.sidebar, cards_expanded: true },
+            }),
+          )
+        }
+        PackageClick(pkg_model) => {
+          pkg_model.folded = not(pkg_model.folded)
+          (@tea.none(), model_)
+        }
+        ReturnToModuleReadme =>
+          (
+            @tea.task(LoadReadme),
+            LoadingReadme(model, model.meta_info.module_path, true),
+          )
+        ItemClick(path, target) =>
+          if path == model.now_path {
+            (@browser.scroll_to(target), model_)
+          } else {
+            (@tea.task(LoadPackage), LoadingPackage(model, path, target))
+          }
+        FilterChange(value) => {
+          model.sidebar.filter = value
+          (@tea.none(), model_)
+        }
+        msg => {
+          println("Got message \{msg}")
+          (@tea.none(), model_)
+        }
+      }
   }
-  @tea.startup(model~, update~, view~)
+}
+
+///|
+fn view(state : Model) -> @html.Html[Message] {
+  match state {
+    Menu(meta) => view_menu(meta)
+    Success(model) => view_package(model)
+    Failure => h1(class="text-gray-800 text-2xl", [text("Failure")])
+    LoadingMenu(_) | LoadingModuleIndex(_) =>
+      h1(class="text-gray-800 text-2xl", [text("Loading")])
+    LoadingPackage(model, _, _) | LoadingReadme(model, _, _) =>
+      view(Success(model))
+  } // ↑ to be changed
+}
+
+///|
+fn main {
+  // @tea.startup(
+  //   model=LoadingModuleInfo("moonbitlang/core"),
+  //   update~,
+  //   view~,
+  //   initialize=LoadModuleInfo,
+  // )
+  @tea.startup(model=LoadingMenu, update~, view~, initialize=LoadMenu)
 }

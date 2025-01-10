@@ -1,0 +1,138 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/immut/hashset",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "\n An immutable hash set data structure",
+      "signature": "type T",
+      "loc": { "line": 25, "column": 6 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "\n Add a key to the hashset.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::add[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], key : A) -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "loc": { "line": 115, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Lookup a value from the hash set",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::contains[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], key : A) -> Bool",
+          "loc": { "line": 44, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterate through the elements in a hash set",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::each[A](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], f : (A) -> Unit) -> Unit",
+          "loc": { "line": 192, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::from_array[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "loc": { "line": 223, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::from_iter[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]) -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "loc": { "line": 213, "column": 11 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Returns true if the hash set is empty.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::is_empty[A](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 183, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "\n Converted to Iter",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::iter[A](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 203, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::new[A]() -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "loc": { "line": 38, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::of[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "loc": { "line": 234, "column": 11 }
+        },
+        {
+          "name": "remove",
+          "docstring": "\n Remove an element from a set",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::remove[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], key : A) -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "loc": { "line": 121, "column": 8 }
+        },
+        {
+          "name": "size",
+          "docstring": "\n Calculate the size of a set.\n\n WARNING: this operation is `O(N)` in set size",
+          "signature": "fn <a href=\"moonbitlang/core/immut/hashset#T\">T</a>::size[A](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]) -> Int",
+          "loc": { "line": 165, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]) -> Bool",
+              "loc": { "line": 250, "column": 35 }
+            }
+          ],
+          "loc": { "line": 250, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 245, "column": 39 }
+            }
+          ],
+          "loc": { "line": 245, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 218, "column": 39 }
+            }
+          ],
+          "loc": { "line": 218, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[K]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/hashset#T\">T</a>[K]",
+              "loc": { "line": 262, "column": 85 }
+            }
+          ],
+          "loc": { "line": 262, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

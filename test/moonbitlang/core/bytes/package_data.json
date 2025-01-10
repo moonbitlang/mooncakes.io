@@ -1,0 +1,84 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/bytes",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Bytes",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Bytes",
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Bytes) -> Int",
+              "loc": { "line": 45, "column": 30 }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Bytes, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 48, "column": 30 }
+            }
+          ],
+          "loc": { "line": 45, "column": 1 }
+        }
+      ],
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::default() -> Bytes",
+          "loc": { "line": 95, "column": 15 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Makes a new Bytes with the given byte array.\n \n # Usage\n \n ```\n let b = @bytes.from_array([b'\\x41', b'\\x42'])\n assert_eq!(b, b\"AB\")\n ```\n ",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::from_array(arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]) -> Bytes",
+          "loc": { "line": 25, "column": 15 }
+        },
+        {
+          "name": "from_fixedarray",
+          "docstring": "\n Makes a new Bytes from a fixedarray.",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::from_fixedarray(arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte], len? : Int) -> Bytes",
+          "loc": { "line": 31, "column": 15 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::from_iter(iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+          "loc": { "line": 54, "column": 15 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::iter(self : Bytes) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]",
+          "loc": { "line": 82, "column": 8 }
+        },
+        {
+          "name": "of",
+          "docstring": "\n Makes a new Bytes with the given byte fixedarray.\n \n # Usage\n \n ```\n let b = @bytes.of([b'\\x41', b'\\x42'])\n assert_eq!(b, b\"AB\")\n ```\n TODO: marked as intrinsic, inline if it is constant",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::of(arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]) -> Bytes",
+          "loc": { "line": 68, "column": 15 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::to_array(self : Bytes) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]",
+          "loc": { "line": 73, "column": 8 }
+        },
+        {
+          "name": "to_fixedarray",
+          "docstring": "\n Converts a Bytes to a fixedarray.",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::to_fixedarray(self : Bytes, len? : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]",
+          "loc": { "line": 41, "column": 15 }
+        }
+      ]
+    }
+  ]
+}

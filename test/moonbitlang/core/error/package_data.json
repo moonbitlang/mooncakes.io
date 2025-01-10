@@ -1,0 +1,29 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/error",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Error",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/error#Error\">Error</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 19, "column": 30 }
+            }
+          ],
+          "loc": { "line": 19, "column": 1 }
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

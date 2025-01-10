@@ -1,0 +1,60 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/ref",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Ref",
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
+              "loc": { "line": 116, "column": 75 }
+            }
+          ],
+          "loc": { "line": 116, "column": 1 }
+        }
+      ],
+      "methods": [
+        {
+          "name": "map",
+          "docstring": "\n Maps the value of a `Ref` using a given function.\n\n # Example\n\n ```\n assert_eq!(@ref.new(1).map(fn(a){ a + 1 }).val, 2)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/ref#Ref\">Ref</a>::map[T, R](self : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[T], f : (T) -> R) -> <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[R]",
+          "loc": { "line": 33, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n create a reference from value",
+          "signature": "fn <a href=\"moonbitlang/core/ref#Ref\">Ref</a>::new[T](x : T) -> <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[T]",
+          "loc": { "line": 17, "column": 13 }
+        },
+        {
+          "name": "protect",
+          "docstring": "\n This function allows you to temporarily replace the value of a reference with a new value, \n execute a given function, and then restore the original value of the reference.\n\n # Arguments\n\n - `self`: The reference whose value will be temporarily replaced.\n - `a`: The new value to assign to the reference.\n - `f`: The function to execute while the reference value is replaced.\n\n # Returns\n\n The result of executing the provided function `f`.\n \n # Example\n \n ```\n let x = @ref.new(1)\n x.protect(2, fn!(){\n   x.val = 3\n })\n assert_eq!(x.val, 1)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/ref#Ref\">Ref</a>::protect[T, R](self : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[T], a : T, f : () -> R) -> R",
+          "loc": { "line": 60, "column": 8 }
+        },
+        {
+          "name": "swap",
+          "docstring": "\n Swaps the values of two references.\n\n # Example\n\n ```\n let x = @ref.new(1)\n let y = @ref.new(2)\n @ref.swap(x, y)\n assert_eq!(x.val, 2)\n assert_eq!(y.val, 1)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/ref#Ref\">Ref</a>::swap[T](self : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[T], that : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[T]) -> Unit",
+          "loc": { "line": 80, "column": 8 }
+        },
+        {
+          "name": "update",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/ref#Ref\">Ref</a>::update[T](self : <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[T], f : (T) -> T) -> Unit",
+          "loc": { "line": 95, "column": 8 }
+        }
+      ]
+    }
+  ]
+}

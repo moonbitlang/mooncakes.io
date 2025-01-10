@@ -5,7 +5,7 @@
       "path": "Yoorkin/rabbit-tea",
       "alias": "tea"
     },
-    "Yoorkin/rabbit-tea/adapter",
+    "Yoorkin/rabbit-tea/http",
     {
       "path": "Yoorkin/rabbit-tea/html",
       "alias": "html",
@@ -13,14 +13,21 @@
         "div",
         "text",
         "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
         "p",
         "hr",
         "ul",
-        "li"
+        "li",
+        "section"
       ]
     },
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",
-    "username/rabbit-tea-tailwind/main/highlight"
+    "moonbitlang/rabbit-tea-tailwind/main/highlight",
+    "Yoorkin/rabbit-tea/browser"
   ]
 }

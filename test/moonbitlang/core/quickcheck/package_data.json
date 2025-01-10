@@ -1,0 +1,214 @@
+{
+  "readme": "",
+  "name": "moonbitlang/core/quickcheck",
+  "traits": [
+    {
+      "name": "@moonbitlang/core/quickcheck.Arbitrary",
+      "docstring": "\n Trait for types that can be randomly generated",
+      "signature": "pub(open) trait @moonbitlang/core/quickcheck.Arbitrary {\n  arbitrary(Int, <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Self\n}",
+      "loc": { "line": 17, "column": 1 },
+      "default_impls": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Unit",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(_ : Int, _ : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Unit",
+              "loc": { "line": 25, "column": 34 }
+            }
+          ],
+          "loc": { "line": 25, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Bool",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(_ : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Bool",
+              "loc": { "line": 28, "column": 34 }
+            }
+          ],
+          "loc": { "line": 28, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Byte",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(_ : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Byte",
+              "loc": { "line": 49, "column": 34 }
+            }
+          ],
+          "loc": { "line": 49, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Char",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(_ : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Char",
+              "loc": { "line": 86, "column": 34 }
+            }
+          ],
+          "loc": { "line": 86, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Int",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Int",
+              "loc": { "line": 31, "column": 33 }
+            }
+          ],
+          "loc": { "line": 31, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Int64",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Int64",
+              "loc": { "line": 62, "column": 35 }
+            }
+          ],
+          "loc": { "line": 62, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for UInt",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> UInt",
+              "loc": { "line": 40, "column": 34 }
+            }
+          ],
+          "loc": { "line": 40, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for UInt64",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> UInt64",
+              "loc": { "line": 71, "column": 36 }
+            }
+          ],
+          "loc": { "line": 71, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Float",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(_ : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Float",
+              "loc": { "line": 80, "column": 35 }
+            }
+          ],
+          "loc": { "line": 80, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Double",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(_ : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Double",
+              "loc": { "line": 83, "column": 36 }
+            }
+          ],
+          "loc": { "line": 83, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for String",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> String",
+              "loc": { "line": 92, "column": 36 }
+            }
+          ],
+          "loc": { "line": 92, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Bytes",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> Bytes",
+              "loc": { "line": 52, "column": 35 }
+            }
+          ],
+          "loc": { "line": 52, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>",
+              "loc": { "line": 102, "column": 36 }
+            }
+          ],
+          "loc": { "line": 102, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[X]",
+              "loc": { "line": 111, "column": 52 }
+            }
+          ],
+          "loc": { "line": 111, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "gen",
+      "docstring": "",
+      "signature": "fn gen[T : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a>](size? : Int, state? : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> T",
+      "loc": { "line": 133, "column": 8 }
+    },
+    {
+      "name": "samples",
+      "docstring": "",
+      "signature": "fn samples[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a>](x : Int) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[X]",
+      "loc": { "line": 16, "column": 8 }
+    }
+  ],
+  "misc": []
+}

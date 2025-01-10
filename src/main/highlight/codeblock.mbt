@@ -76,7 +76,6 @@ pub fn parse(signature : String) -> Array[CodeSpan] {
           | ','
           | '?'
           | '!'
-          | '='
           | '~'
           | '@'
           | '.'

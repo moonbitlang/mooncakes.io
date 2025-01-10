@@ -1,0 +1,50 @@
+package moonbitlang/rabbit-tea-tailwind/main
+
+// Values
+
+// Types and methods
+type DetailCardModel
+impl Show for DetailCardModel
+
+type Impl
+
+type ItemKind
+impl Show for ItemKind
+
+type ItemModel
+impl Show for ItemModel
+
+type Message
+impl Show for Message
+
+type MetaInfoModel
+impl Show for MetaInfoModel
+
+type Model
+
+type ModelBodyPackage
+
+type ModuleIndex
+
+type ModuleModel
+
+type Package
+
+type PackageBody
+
+type PackageModel
+impl Show for PackageModel
+
+type SidebarModel
+
+type Trait
+
+type Traits
+
+type Type
+
+// Type aliases
+
+// Traits
+trait ToItemModel
+

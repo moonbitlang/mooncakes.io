@@ -1,0 +1,16 @@
+{
+  "readme": "# Prev Permutation\n\n这是一个用Moonbit语言实现的`prev_permutation`函数，用于生成数组的上一个字典序排列。\n\n## 功能\n\n`prev_permutation`函数生成给定数组的上一个字典序排列。如果当前排列是第一个排列，则返回`false`并将数组重新排列为最后一个排列（降序）。\n\n## 示例\n\n```moonbit\nfn main {\n  let a = [1, 2, 3]\n  let has_prev = prev_permutation(a)\n  println(a) // 输出: [1, 2, 3]\n  println(has_prev) // 输出: false\n}\n```",
+  "name": "xunyoyo/permutation/lib/prev_permutation",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "prev_permutation",
+      "docstring": " |\n 生成数组的上一个字典序排列。\n\n # Example\n ```\n let a = [1, 2, 3]\n let has_prev = prev_permutation(a)\n println(a) // 输出: [1, 2, 3]\n println(has_prev) // 输出: true\n ```\n @alert unsafe \"如果数组为空或只有一个元素，将返回 false。\"",
+      "signature": "fn prev_permutation[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> Bool",
+      "loc": { "line": 22, "column": 8 }
+    }
+  ],
+  "misc": []
+}

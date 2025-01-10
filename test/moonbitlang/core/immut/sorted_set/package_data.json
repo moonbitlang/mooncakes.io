@@ -1,0 +1,322 @@
+{
+  "readme": "# Immutable Set\n\nImmutableSet is an immutable, persistent implementation of the set structure (each operation returns a new ImmutableSet), implemented here using a balance tree.\n\n# Usage\n\n## Create\n\nSince set is based on comparison, the type used to construct ImmutableSet needs to implement Compare trait.\n\nYou can create an empty ImmutableSet with a value separately through the following methods, or create it directly from the Array.\n\n```moonbit\nlet set1 : @immut/sorted_set.T[Int] = @immut/sorted_set.new()\nlet set2 = @immut/sorted_set.singleton(1)\nlet set4 = @immut/sorted_set.from_array([1])\nlet set5= @immut/sorted_set.of([1])\n```\n\n## Convertion\n\nYou can convert an immutable set to an array, which will be sorted.\n\n```moonbit\nlet set = @immut/sorted_set.of([3, 2, 1])\nprintln(set.to_array()) // [1, 2, 3]\n```\n\n## Add & Remove\n\nYou can use `add` to add an element to the ImmutableSet.\n\n```moonbit\nlet set = @immut/sorted_set.of([1, 2, 3, 4])\nprintln(set.add(5)) // of([1, 2, 3, 4, 5])\n```\n\nYou can use `remove` to remove a specific value.\n\n```moonbit\n@immut/sorted_set.of([3, 8, 1]).remove(8) // of([1, 3]))\n```\n\n## Max & Min & Contains\n\nYou can use `contains` to query whether an element is in the set.\n\n```moonbit\nlet set = @immut/sorted_set.of([1, 2, 3, 4])\nprintln(set.contains(1)) // true\nprintln(set.contains(5)) // false\n```\n\nYou can also use `min` and `max` to obtain the minimum or maximum value in the set. When the set is empty, an error will be reported, and they have corresponding Option versions to handle this.\n\n```moonbit\nlet set = @immut/sorted_set.of([1, 2, 3, 4])\nprintln(set.min()) // 1\nprintln(set.max()) // 4\nprintln(set.min_option()) // Some(1)\nprintln(set.max_option()) // Some(4)\n```\n\n## Split & Union & Inter & Diff & Filter\n\nYou can provide an intermediate value to divide a set into two sets by `split`, and whether the intermediate value is in the set will also be returned as the return value.\n\n```moonbit\nlet (left, present, right) = @immut/sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1]).split(5)\n/// present // true\n/// left // of([1, 2, 3, 4])\n/// right // of([6, 7, 8, 9])\n```\n\nAt the same time, you can use union and inter to take the union or intersection of two sets.\n\n```moonbit\nlet set1 = @immut/sorted_set.of([3, 4, 5])\nlet set2 = @immut/sorted_set.of([4, 5, 6])\nprintln(set1.union(set2)) // of([3, 4, 5, 6])\nprintln(set1.inter(set2)) // of([4, 5])\n```\n\nYou can also use the `diff` function to obtain the difference between two sets.\n\n```moonbit\nlet set1 = @immut/sorted_set.of([1, 2, 3])\nlet set2 = @immut/sorted_set.of([4, 5, 1])\nprintln(set1.diff(set2)) // of([2, 3])\n```\n\nYou can use `filter` to filter the elements in the set.\n\n```moonbit\nlet set = @immut/sorted_set.of([1, 2, 3, 4, 5, 6])\nprintln(set.filter(fn(v) { v % 2 == 0})) // of([2, 4, 6]))\n```\n\n## Subset & Disjoint\n\nYou can use `subsets` and `disjoint` to determine the inclusion and separation relationship between two sets\n\n```moonbit\n@immut/sorted_set.of([1, 2, 3]).subset(of(@immut/sorted_set.[7, 2, 9, 4, 5, 6, 3, 8, 1])) |> println // true\n@immut/sorted_set.of([1, 2, 3]).disjoint(@immut/sorted_set.of([4, 5, 6])) |> println // true\n```\n\n## Iter & Fold & Map\n\nLike other sequential containers, set also has iterative methods such as `iter`, `fold`, and `map`, and their order is based on the comparison being less than the order.\n\n```moonbit\n@immut/sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1]).each(println)\n@immut/sorted_set.of([1, 2, 3, 4, 5]).fold(init=0, fn(acc, x) { acc + x }) // 15\n@immut/sorted_set.of([1, 2, 3].map(fn(x){ x * 2})) |> println// of([2, 4, 6]))\n```\n\n## All & Any\n\n`all` and `any` can detect whether all elements in the set match or if there are elements that match.\n\n```moonbit\n@immut/sorted_set.of([2, 4, 6]).all(fn(v) { v % 2 == 0}) |> println // true\n@immut/sorted_set.of([1, 4, 3]).any(fn(v) { v % 2 == 0}) |> println // true\n```\n\n## Empty\n\n`is_empty` can determine whether a set is empty.\n\n```moonbit\n@immut/sorted_set.of([]).is_empty() // true\n@immut/sorted_set.of([1]).is_empty() // false\n```\n",
+  "name": "moonbitlang/core/immut/sorted_set",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "\n ImmutableSets are represented by balanced binary trees (the heights of the children differ by at most 2).",
+      "signature": "type T",
+      "loc": { "line": 21, "column": 6 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "\n Insert a value into the ImmutableSet.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([6, 3, 8, 1]).add(5), @sorted_set.of([1, 3, 5, 6, 8]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::add[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], value : A) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 92, "column": 8 }
+        },
+        {
+          "name": "all",
+          "docstring": "\n Test if all values of the ImmutableSet satisfy the predicate.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([2, 4, 6]).all(fn(v) { v % 2 == 0}), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::all[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], f : (A) -> Bool) -> Bool",
+          "loc": { "line": 480, "column": 8 }
+        },
+        {
+          "name": "any",
+          "docstring": "\n Checks if at least one element of the set satisfies the predicate.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 4, 3]).any(fn(v) { v % 2 == 0}), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::any[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], f : (A) -> Bool) -> Bool",
+          "loc": { "line": 495, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Return true if value contain in sorted_set",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::contains[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], value : A) -> Bool",
+          "loc": { "line": 262, "column": 8 }
+        },
+        {
+          "name": "diff",
+          "docstring": "\n Returns the difference between self and other.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3]).difference(@sorted_set.of([4, 5, 1])), @sorted_set.of([2, 3]))\n ```\n \n @alert deprecated \"Use `difference` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::diff[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 342, "column": 8 }
+        },
+        {
+          "name": "difference",
+          "docstring": "\n Returns the difference between self and other.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3]).difference(@sorted_set.of([4, 5, 1])), @sorted_set.of([2, 3]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::difference[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 354, "column": 8 }
+        },
+        {
+          "name": "disjoint",
+          "docstring": "\n Returns true if the two sets do not intersect.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3]).disjoint(@sorted_set.of([4, 5, 6])), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::disjoint[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 404, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterates over the ImmutableSet.\n \n # Example\n \n ```\n let arr = []\n @sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1]).each(fn(x) { arr.push(x) })\n assert_eq!(arr, [1, 2, 3, 4, 5, 6, 7, 8, 9])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::each[A](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], f : (A) -> Unit) -> Unit",
+          "loc": { "line": 429, "column": 8 }
+        },
+        {
+          "name": "filter",
+          "docstring": "\n Filter the ImmutableSet.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3, 4, 5, 6]).filter(fn(v) { v % 2 == 0}), @sorted_set.of([2, 4, 6]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::filter[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], f : (A) -> Bool) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 510, "column": 8 }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n Fold the ImmutableSet.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3, 4, 5]).fold(init=0, fn(acc, x) { acc + x }), 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::fold[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": { "line": 448, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Initialize an ImmutableSet[T] from a Array[T]",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::from_array[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](array : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 36, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::from_iter[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 39, "column": 11 }
+        },
+        {
+          "name": "from_json",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::from_json[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+          "loc": { "line": 570, "column": 11 }
+        },
+        {
+          "name": "inter",
+          "docstring": "\n @alert deprecated \"Use `intersection` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::inter[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 308, "column": 8 }
+        },
+        {
+          "name": "intersection",
+          "docstring": "\n Returns the intersection of self with other.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([3, 4, 5]).intersection(@sorted_set.of([4, 5, 6])), @sorted_set.of([4, 5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::intersection[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 320, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Returns true if sorted_set is empty",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::is_empty[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 253, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::iter[A](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": { "line": 20, "column": 8 }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Maps the ImmutableSet.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3]).map(fn(x){ x * 2}), @sorted_set.of([2, 4, 6]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::map[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, B : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], f : (A) -> B) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[B]",
+          "loc": { "line": 464, "column": 8 }
+        },
+        {
+          "name": "max",
+          "docstring": "\n Returns the largest value in the sorted_set.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1]).max(), 9)\n ```\n @alert unsafe \"Panic if the sorted_set is empty.\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::max[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> A",
+          "loc": { "line": 195, "column": 8 }
+        },
+        {
+          "name": "max_option",
+          "docstring": "\n Returns the largest value in the ImmutableSet.\n But returns None when the value does not exist.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::max_option[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> A?",
+          "loc": { "line": 209, "column": 8 }
+        },
+        {
+          "name": "min",
+          "docstring": "\n Returns the smallest value in the sorted_set.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1]).min(), 1)\n ```\n @alert unsafe \"Panic if the sorted_set is empty.\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::min[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> A",
+          "loc": { "line": 161, "column": 8 }
+        },
+        {
+          "name": "min_option",
+          "docstring": "\n Returns the smallest value in the sorted_set.\n But returns None when the value does not exist.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::min_option[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> A?",
+          "loc": { "line": 175, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::new[A]() -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 21, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::of[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 755, "column": 11 }
+        },
+        {
+          "name": "remove",
+          "docstring": "\n Remove n value from the ImmutableSet.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([3, 8, 1]).remove(8), @sorted_set.of([1, 3]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::remove[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], value : A) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 126, "column": 8 }
+        },
+        {
+          "name": "remove_min",
+          "docstring": "\n Remove the smallest value,\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([3, 4, 5]).remove_min(), @sorted_set.of([4, 5]))\n ```\n @alert unsafe \"Panic if the ImmutableSet is empty.\"",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::remove_min[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 73, "column": 8 }
+        },
+        {
+          "name": "singleton",
+          "docstring": "\n Returns the one-value ImmutableSet containing only `value`.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::singleton[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](value : A) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 30, "column": 11 }
+        },
+        {
+          "name": "size",
+          "docstring": "\n Get the height of set.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::size[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> Int",
+          "loc": { "line": 632, "column": 8 }
+        },
+        {
+          "name": "split",
+          "docstring": "\n Returns a triple (left, present, right), where left < divide < right.\n present == false if self contains no value equal to divide, \n present == true  if self contains an value equal to divide.\n \n # Example\n \n ```\n let (left, present, right) = @sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1]).split(5)\n assert_eq!(present, true)\n assert_eq!(left, @sorted_set.of([1, 2, 3, 4]))\n assert_eq!(right, @sorted_set.of([6, 7, 8, 9]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::split[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], divide : A) -> (<a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], Bool, <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A])",
+          "loc": { "line": 233, "column": 8 }
+        },
+        {
+          "name": "subset",
+          "docstring": "\n Returns true if self is a subset of other.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([1, 2, 3]).subset(@sorted_set.of([7, 2, 9, 4, 5, 6, 3, 8, 1])), true)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::subset[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> Bool",
+          "loc": { "line": 374, "column": 8 }
+        },
+        {
+          "name": "to_array",
+          "docstring": "\n Convert ImmutableSet[T] to Array[T], the result must be ordered.",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::to_array[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[A]",
+          "loc": { "line": 46, "column": 8 }
+        },
+        {
+          "name": "to_json",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "loc": { "line": 545, "column": 11 }
+        },
+        {
+          "name": "union",
+          "docstring": "\n Returns the union of self and other.\n \n # Example\n \n ```\n assert_eq!(@sorted_set.of([3, 4, 5]).union(@sorted_set.of([4, 5, 6])), @sorted_set.of([3, 4, 5, 6]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>::union[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "loc": { "line": 281, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "",
+              "signature": "fn compare[A : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> Int",
+              "loc": { "line": 64, "column": 45 }
+            }
+          ],
+          "loc": { "line": 64, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "default",
+              "docstring": "",
+              "signature": "fn default[A]() -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+              "loc": { "line": 26, "column": 35 }
+            }
+          ],
+          "loc": { "line": 26, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], other : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> Bool",
+              "loc": { "line": 48, "column": 35 }
+            }
+          ],
+          "loc": { "line": 48, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": { "line": 764, "column": 39 }
+            }
+          ],
+          "loc": { "line": 764, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 531, "column": 39 }
+            }
+          ],
+          "loc": { "line": 531, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "",
+              "signature": "fn to_json[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>](self : <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": { "line": 536, "column": 43 }
+            }
+          ],
+          "loc": { "line": 536, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]",
+          "methods": [
+            {
+              "name": "from_json",
+              "docstring": "",
+              "signature": "fn from_json[A : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](json : <a href=\"moonbitlang/core/json#Json\">Json</a>, path : <a href=\"moonbitlang/core/json#JsonPath\">@moonbitlang/core/json.JsonPath</a>) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[A]!<a href=\"moonbitlang/core/json#JsonDecodeError\">@moonbitlang/core/json.JsonDecodeError</a>",
+              "loc": { "line": 550, "column": 69 }
+            }
+          ],
+          "loc": { "line": 550, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/immut/sorted_set#T\">T</a>[X]",
+              "loc": { "line": 577, "column": 83 }
+            }
+          ],
+          "loc": { "line": 577, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

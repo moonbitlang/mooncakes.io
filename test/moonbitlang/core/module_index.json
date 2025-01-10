@@ -1,0 +1,1665 @@
+{
+  "name": "moonbitlang",
+  "package": null,
+  "childs": [
+    {
+      "name": "core",
+      "package": null,
+      "childs": [
+        {
+          "name": "array",
+          "package": {
+            "path": "moonbitlang/core/array",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "ArrayView",
+                "impls": [],
+                "methods": [
+                  "all", "any", "contains", "each", "eachi", "rev_inplace"
+                ]
+              },
+              {
+                "name": "Array",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": [
+                  "copy", "filter_map", "from_iter", "last", "makei",
+                  "map_option", "push_iter", "shuffle", "shuffle_in_place",
+                  "sort", "sort_by", "sort_by_key"
+                ]
+              },
+              {
+                "name": "FixedArray",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": [
+                  "all", "any", "contains", "copy", "each", "eachi",
+                  "ends_with", "fold", "fold_left", "fold_lefti",
+                  "fold_right", "fold_righti", "foldi", "from_array",
+                  "from_iter", "is_sorted", "last", "makei", "map", "mapi",
+                  "new", "new_with_index", "op_add", "op_equal", "rev",
+                  "rev_each", "rev_eachi", "rev_fold", "rev_foldi",
+                  "rev_inplace", "search", "sort", "sort_by", "sort_by_key",
+                  "stable_sort", "starts_with", "swap"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "bool",
+          "package": {
+            "path": "moonbitlang/core/bool",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "Bool",
+                "impls": [ { "methods": [ "hash", "hash_combine" ] } ],
+                "methods": [ "to_int", "to_int64", "to_uint", "to_uint64" ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "buffer",
+          "package": {
+            "path": "moonbitlang/core/buffer",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "contents", "is_empty", "length", "new", "reset",
+                  "to_bytes", "to_string", "to_unchecked_string",
+                  "write_byte", "write_bytes", "write_char",
+                  "write_double_be", "write_double_le", "write_float_be",
+                  "write_float_le", "write_int64_be", "write_int64_le",
+                  "write_int_be", "write_int_le", "write_object",
+                  "write_string", "write_sub_string", "write_substring",
+                  "write_uint64_be", "write_uint64_le", "write_uint_be",
+                  "write_uint_le"
+                ]
+              }
+            ],
+            "typealias": [ "Buffer" ],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "builtin",
+          "package": {
+            "path": "moonbitlang/core/builtin",
+            "readme": false,
+            "traits": [
+              { "name": "Compare", "impls": [] },
+              { "name": "Default", "impls": [] },
+              { "name": "Eq", "impls": [] },
+              {
+                "name": "Hash",
+                "impls": [
+                  { "methods": [ "hash", "hash_combine" ] },
+                  { "methods": [ "hash", "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] },
+                  { "methods": [ "hash_combine" ] }
+                ]
+              },
+              { "name": "Logger", "impls": [] },
+              {
+                "name": "Show",
+                "impls": [
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output", "to_string" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output", "to_string" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] },
+                  { "methods": [ "output" ] }
+                ]
+              },
+              {
+                "name": "ToJson",
+                "impls": [
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] },
+                  { "methods": [ "to_json" ] }
+                ]
+              }
+            ],
+            "types": [
+              {
+                "name": "ArgsLoc",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "to_json" ]
+              },
+              {
+                "name": "Array",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "append", "binary_search", "binary_search_by", "blit_to",
+                  "capacity", "chunk_by", "chunks", "clear", "compare",
+                  "contains", "dedup", "default", "drain", "each", "eachi",
+                  "ends_with", "extract_if", "filter", "find_index",
+                  "flatten", "fold", "fold_left", "fold_lefti", "fold_right",
+                  "fold_righti", "foldi", "from_fixed_array", "get",
+                  "insert", "is_empty", "is_sorted", "iter", "iter2",
+                  "length", "make", "map", "map_inplace", "mapi",
+                  "mapi_inplace", "new", "op_add", "op_as_view", "op_equal",
+                  "op_get", "op_set", "pop", "pop_exn", "push", "remove",
+                  "repeat", "reserve_capacity", "resize", "retain", "rev",
+                  "rev_each", "rev_eachi", "rev_fold", "rev_foldi",
+                  "rev_inplace", "search", "search_by", "shrink_to_fit",
+                  "split", "split_at", "starts_with", "strip_prefix",
+                  "strip_suffix", "swap", "to_json", "unsafe_blit",
+                  "unsafe_blit_fixed", "unsafe_get", "unsafe_pop"
+                ]
+              },
+              {
+                "name": "ArrayView",
+                "impls": [
+                  { "methods": [ "compare" ] },
+                  { "methods": [ "op_equal" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "filter", "fold", "foldi", "iter", "length", "map",
+                  "map_inplace", "mapi", "mapi_inplace", "op_as_view",
+                  "op_get", "op_set", "rev_fold", "rev_foldi", "swap",
+                  "to_json", "to_string", "unsafe_get"
+                ]
+              },
+              {
+                "name": "BigInt",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "asr", "compare", "from_hex", "from_int", "from_int64",
+                  "from_octets", "from_string", "from_uint", "from_uint64",
+                  "is_zero", "land", "lor", "lsl", "lxor", "op_add",
+                  "op_div", "op_equal", "op_mod", "op_mul", "op_neg",
+                  "op_shl", "op_shr", "op_sub", "pow", "shl", "shr",
+                  "to_hex", "to_int", "to_int64", "to_json", "to_octets",
+                  "to_string", "to_uint", "to_uint64"
+                ]
+              },
+              {
+                "name": "BytesView",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "iter", "length", "op_as_view", "op_get", "to_double_be",
+                  "to_double_le", "to_float_be", "to_float_le",
+                  "to_int64_be", "to_int64_le", "to_int_be", "to_int_le",
+                  "to_uint64_be", "to_uint64_le", "to_uint_be", "to_uint_le",
+                  "unsafe_get"
+                ]
+              },
+              {
+                "name": "Failure",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Hasher",
+                "impls": [],
+                "methods": [
+                  "combine", "combine_bool", "combine_byte", "combine_bytes",
+                  "combine_char", "combine_double", "combine_float",
+                  "combine_int", "combine_int64", "combine_string",
+                  "combine_uint", "combine_uint64", "combine_unit",
+                  "finalize", "new"
+                ]
+              },
+              { "name": "InspectError", "impls": [], "methods": [] },
+              {
+                "name": "Iter",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "all", "any", "append", "collect", "concat", "contains",
+                  "count", "drop", "drop_while", "each", "eachi", "empty",
+                  "filter", "filter_map", "find_first", "flat_map", "fold",
+                  "head", "intersperse", "iter", "just_run", "last", "map",
+                  "map_option", "map_while", "new", "op_add", "op_as_view",
+                  "peek", "prepend", "repeat", "run", "singleton", "take",
+                  "take_while", "tap", "to_array"
+                ]
+              },
+              {
+                "name": "Iter2",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "each", "iter", "iter2", "new", "run", "to_array"
+                ]
+              },
+              {
+                "name": "IterResult",
+                "impls": [ { "methods": [ "op_equal" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Json",
+                "impls": [ { "methods": [ "op_equal" ] } ],
+                "methods": [ "default" ]
+              },
+              {
+                "name": "Map",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "capacity", "clear", "contains", "default", "each",
+                  "eachi", "from_array", "from_iter", "get",
+                  "get_or_default", "get_or_init", "is_empty", "iter",
+                  "iter2", "keys", "new", "of", "op_equal", "op_get",
+                  "op_set", "remove", "set", "size", "to_array", "to_json",
+                  "values"
+                ]
+              },
+              {
+                "name": "Set",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "add", "add_and_check", "capacity", "clear", "contains",
+                  "difference", "each", "eachi", "from_array", "from_iter",
+                  "insert", "intersection", "is_empty", "iter", "new", "of",
+                  "op_equal", "remove", "remove_and_check", "size",
+                  "symmetric_difference", "to_array", "to_json", "union"
+                ]
+              },
+              { "name": "SnapshotError", "impls": [], "methods": [] },
+              {
+                "name": "SourceLoc",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "to_string" ]
+              },
+              {
+                "name": "StringBuilder",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "is_empty", "new", "reset", "to_string", "write_char",
+                  "write_object", "write_string", "write_substring"
+                ]
+              },
+              {
+                "name": "UninitializedArray",
+                "impls": [],
+                "methods": [
+                  "length", "make", "op_as_view", "op_get", "op_set"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "abort", "assert_eq", "assert_false", "assert_not_eq",
+              "assert_true", "dump", "fail", "ignore", "inspect", "not",
+              "op_ge", "op_gt", "op_le", "op_lt", "op_notequal", "panic",
+              "physical_equal", "print", "println"
+            ],
+            "misc": [
+              {
+                "name": "Tuple16",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple15",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple14",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple13",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple12",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple11",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple10",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple9",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple8",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple7",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple6",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple5",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple4",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple3",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Tuple2",
+                "impls": [],
+                "methods": [ "compare", "op_equal" ]
+              },
+              {
+                "name": "Logger",
+                "impls": [],
+                "methods": [ "write_iter", "write_object" ]
+              },
+              {
+                "name": "Bytes",
+                "impls": [],
+                "methods": [
+                  "blit", "blit_from_string", "copy", "length", "make",
+                  "makei", "new", "of_string", "op_as_view", "op_equal",
+                  "op_get", "op_set", "set_utf16_char", "set_utf8_char",
+                  "sub_string", "to_string", "to_unchecked_string",
+                  "unsafe_get"
+                ]
+              },
+              {
+                "name": "FixedArray",
+                "impls": [],
+                "methods": [
+                  "blit_from_bytes", "blit_from_string", "blit_to",
+                  "default", "fill", "get", "iter", "iter2", "length",
+                  "make", "op_get", "op_set", "set", "set_utf16_char",
+                  "set_utf16be_char", "set_utf16le_char", "set_utf8_char",
+                  "to_json", "unsafe_blit", "unsafe_get"
+                ]
+              },
+              {
+                "name": "Result",
+                "impls": [],
+                "methods": [ "op_equal", "to_json" ]
+              },
+              {
+                "name": "Option",
+                "impls": [],
+                "methods": [ "op_equal", "to_json", "to_string", "unwrap" ]
+              },
+              {
+                "name": "String",
+                "impls": [],
+                "methods": [
+                  "escape", "get", "length", "make", "op_add", "op_equal",
+                  "op_get", "substring", "to_json", "to_string"
+                ]
+              },
+              {
+                "name": "Double",
+                "impls": [],
+                "methods": [
+                  "compare", "convert_uint", "convert_uint64", "default",
+                  "op_add", "op_div", "op_equal", "op_mul", "op_neg",
+                  "op_neq", "op_sub", "reinterpret_as_i64",
+                  "reinterpret_as_int64", "reinterpret_as_u64",
+                  "reinterpret_as_uint64", "sqrt", "to_float", "to_int",
+                  "to_int64", "to_json", "until", "upto"
+                ]
+              },
+              {
+                "name": "Float",
+                "impls": [],
+                "methods": [
+                  "compare", "op_add", "op_div", "op_equal", "op_mul",
+                  "op_neg", "op_neq", "op_sub", "reinterpret_as_int",
+                  "reinterpret_as_uint", "sqrt", "to_double", "to_json",
+                  "until", "upto"
+                ]
+              },
+              {
+                "name": "UInt64",
+                "impls": [],
+                "methods": [
+                  "clz", "compare", "ctz", "default", "extend_uint", "land",
+                  "lnot", "lor", "lsl", "lsr", "lxor", "op_add", "op_div",
+                  "op_equal", "op_mod", "op_mul", "op_shl", "op_shr",
+                  "op_sub", "popcnt", "reinterpret_as_double",
+                  "reinterpret_as_int64", "shl", "shr", "to_byte",
+                  "to_double", "to_float", "to_int", "to_int64", "to_string",
+                  "to_uint", "trunc_double", "upto"
+                ]
+              },
+              {
+                "name": "UInt",
+                "impls": [],
+                "methods": [
+                  "clz", "compare", "ctz", "land", "lnot", "lor", "lsl",
+                  "lsr", "lxor", "op_add", "op_div", "op_equal", "op_mod",
+                  "op_mul", "op_neq", "op_shl", "op_shr", "op_sub", "popcnt",
+                  "reinterpret_as_float", "reinterpret_as_int", "shl", "shr",
+                  "to_byte", "to_float", "to_int", "to_string", "to_uint64",
+                  "trunc_double", "upto"
+                ]
+              },
+              {
+                "name": "Int64",
+                "impls": [],
+                "methods": [
+                  "asr", "clz", "compare", "ctz", "default", "land", "lnot",
+                  "lor", "lsl", "lsr", "lxor", "op_add", "op_div",
+                  "op_equal", "op_mod", "op_mul", "op_neg", "op_shl",
+                  "op_shr", "op_sub", "popcnt", "reinterpret_as_double",
+                  "reinterpret_as_uint64", "shl", "shr", "to_byte",
+                  "to_double", "to_float", "to_int", "to_json", "to_string",
+                  "to_uint64", "until", "upto"
+                ]
+              },
+              {
+                "name": "Int",
+                "impls": [],
+                "methods": [
+                  "asr", "clz", "compare", "ctz", "default", "is_neg",
+                  "is_non_neg", "is_non_pos", "is_pos", "land", "lnot",
+                  "lor", "lsl", "lsr", "lxor", "op_add", "op_div",
+                  "op_equal", "op_mod", "op_mul", "op_neg", "op_shl",
+                  "op_shr", "op_sub", "popcnt", "reinterpret_as_float",
+                  "reinterpret_as_uint", "shl", "shr", "to_byte",
+                  "to_double", "to_float", "to_int64", "to_json",
+                  "to_string", "to_uint", "to_uint64", "until", "upto"
+                ]
+              },
+              {
+                "name": "Char",
+                "impls": [],
+                "methods": [
+                  "compare", "default", "from_int", "op_equal", "op_sub",
+                  "to_int", "to_json", "to_string", "to_uint"
+                ]
+              },
+              {
+                "name": "Byte",
+                "impls": [],
+                "methods": [
+                  "compare", "default", "land", "lnot", "lor", "lsl", "lsr",
+                  "lxor", "op_add", "op_div", "op_equal", "op_mul", "op_shl",
+                  "op_shr", "op_sub", "to_float", "to_int", "to_int64",
+                  "to_string", "to_uint"
+                ]
+              },
+              {
+                "name": "Bool",
+                "impls": [],
+                "methods": [
+                  "compare", "default", "not", "op_compare", "op_equal",
+                  "to_json", "to_string"
+                ]
+              },
+              {
+                "name": "Unit",
+                "impls": [],
+                "methods": [ "op_equal", "to_json" ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "byte",
+          "package": {
+            "path": "moonbitlang/core/byte",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "max_value", "min_value" ],
+            "misc": [
+              { "name": "Byte", "impls": [], "methods": [ "to_uint64" ] }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "bytes",
+          "package": {
+            "path": "moonbitlang/core/bytes",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "Bytes",
+                "impls": [ { "methods": [ "hash", "hash_combine" ] } ],
+                "methods": [
+                  "default", "from_array", "from_fixedarray", "from_iter",
+                  "iter", "of", "to_array", "to_fixedarray"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "char",
+          "package": {
+            "path": "moonbitlang/core/char",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "Char",
+                "impls": [ { "methods": [ "hash", "hash_combine" ] } ],
+                "methods": []
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "coverage",
+          "package": {
+            "path": "moonbitlang/core/coverage",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "CoverageCounter",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [ "incr", "new" ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "end", "track" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "deque",
+          "package": {
+            "path": "moonbitlang/core/deque",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "as_views", "back", "capacity", "clear", "contains",
+                  "copy", "each", "eachi", "filter_map_inplace",
+                  "from_array", "from_iter", "front", "is_empty", "iter",
+                  "iter2", "length", "map", "mapi", "new", "of", "op_equal",
+                  "op_get", "op_set", "pop_back", "pop_back_exn",
+                  "pop_front", "pop_front_exn", "push_back", "push_front",
+                  "reserve_capacity", "retain", "rev_each", "rev_eachi",
+                  "rev_iter", "rev_iter2", "search", "shrink_to_fit",
+                  "truncate", "unsafe_pop_back", "unsafe_pop_front"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "double",
+          "package": {
+            "path": "moonbitlang/core/double",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "infinity", "max_value", "min_positive", "min_value",
+              "neg_infinity", "not_a_number"
+            ],
+            "misc": [
+              {
+                "name": "Double",
+                "impls": [
+                  { "methods": [ "hash", "hash_combine" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "abs", "ceil", "exp", "floor", "from_int", "inf",
+                  "is_close", "is_inf", "is_nan", "is_neg_inf", "is_pos_inf",
+                  "ln", "log10", "log2", "min_normal", "nan", "op_mod",
+                  "pow", "round", "signum", "to_be_bytes", "to_le_bytes",
+                  "to_string", "trunc"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "error",
+          "package": {
+            "path": "moonbitlang/core/error",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "Error",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "float",
+          "package": {
+            "path": "moonbitlang/core/float",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "infinity", "max_value", "min_positive", "min_value",
+              "neg_infinity", "not_a_number"
+            ],
+            "misc": [
+              {
+                "name": "Float",
+                "impls": [
+                  { "methods": [ "hash", "hash_combine" ] },
+                  { "methods": [ "output" ] }
+                ],
+                "methods": [
+                  "abs", "ceil", "default", "exp", "floor", "ln", "op_mod",
+                  "pow", "round", "to_be_bytes", "to_int", "to_le_bytes",
+                  "trunc"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "hashmap",
+          "package": {
+            "path": "moonbitlang/core/hashmap",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "capacity", "clear", "contains", "each", "eachi",
+                  "from_array", "from_iter", "get", "get_or_default",
+                  "get_or_init", "is_empty", "iter", "iter2", "new", "of",
+                  "op_get", "op_set", "remove", "set", "size", "to_array"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "hashset",
+          "package": {
+            "path": "moonbitlang/core/hashset",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "add", "capacity", "clear", "contains", "difference",
+                  "each", "eachi", "from_array", "from_iter", "insert",
+                  "intersection", "is_empty", "iter", "new", "of", "remove",
+                  "size", "symmetric_difference", "union"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "immut",
+          "package": null,
+          "childs": [
+            {
+              "name": "array",
+              "package": {
+                "path": "moonbitlang/core/immut/array",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "copy", "each", "eachi", "fold", "fold_left",
+                      "fold_right", "from_array", "from_iter", "is_empty",
+                      "iter", "length", "make", "makei", "map", "new", "of",
+                      "op_get", "push", "rev_fold", "set", "to_array"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "hashmap",
+              "package": {
+                "path": "moonbitlang/core/immut/hashmap",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "add", "each", "find", "from_array", "from_iter",
+                      "iter", "new", "of", "op_get", "remove", "size"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "hashset",
+              "package": {
+                "path": "moonbitlang/core/immut/hashset",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "add", "contains", "each", "from_array", "from_iter",
+                      "is_empty", "iter", "new", "of", "remove", "size"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "list",
+              "package": {
+                "path": "moonbitlang/core/immut/list",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "add", "all", "any", "concat", "concat_map",
+                      "contains", "default", "drop", "drop_while", "each",
+                      "eachi", "equal", "filter", "filter_map", "find",
+                      "findi", "flat_map", "flatten", "fold", "fold_left",
+                      "fold_lefti", "fold_right", "fold_righti", "foldi",
+                      "from_array", "from_iter", "from_json", "head",
+                      "head_exn", "init_", "intercalate", "intersperse",
+                      "is_empty", "is_prefix", "is_suffix", "iter", "iter2",
+                      "last", "length", "lookup", "map", "mapi", "maximum",
+                      "minimum", "nth", "nth_exn", "of", "op_add", "remove",
+                      "remove_at", "rev", "rev_concat", "rev_fold",
+                      "rev_foldi", "rev_map", "scan_left", "scan_right",
+                      "sort", "tail", "take", "take_while", "to_array",
+                      "to_json", "to_string", "unsafe_head", "unsafe_last",
+                      "unsafe_maximum", "unsafe_minimum", "unsafe_nth", "zip"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [ "repeat", "singleton", "unfold", "unzip" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "priority_queue",
+              "package": {
+                "path": "moonbitlang/core/immut/priority_queue",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "from_array", "from_iter", "is_empty", "iter",
+                      "length", "new", "of", "peek", "pop", "pop_exn",
+                      "push", "to_array", "unsafe_pop"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "sorted_map",
+              "package": {
+                "path": "moonbitlang/core/immut/sorted_map",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "default" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "add", "contains", "each", "eachi", "elems", "empty",
+                      "filter", "filter_with_key", "fold", "foldl_with_key",
+                      "foldr_with_key", "from_array", "from_iter",
+                      "from_json", "insert", "is_empty", "iter", "iter2",
+                      "keys", "lookup", "map", "map_with_key", "new", "of",
+                      "op_get", "remove", "singleton", "size", "to_array",
+                      "to_json"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "sorted_set",
+              "package": {
+                "path": "moonbitlang/core/immut/sorted_set",
+                "readme": true,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "T",
+                    "impls": [
+                      { "methods": [ "compare" ] },
+                      { "methods": [ "default" ] },
+                      { "methods": [ "op_equal" ] },
+                      { "methods": [ "hash_combine" ] },
+                      { "methods": [ "output" ] },
+                      { "methods": [ "to_json" ] },
+                      { "methods": [ "from_json" ] },
+                      { "methods": [ "arbitrary" ] }
+                    ],
+                    "methods": [
+                      "add", "all", "any", "contains", "diff", "difference",
+                      "disjoint", "each", "filter", "fold", "from_array",
+                      "from_iter", "from_json", "inter", "intersection",
+                      "is_empty", "iter", "map", "max", "max_option", "min",
+                      "min_option", "new", "of", "remove", "remove_min",
+                      "singleton", "size", "split", "subset", "to_array",
+                      "to_json", "union"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "int",
+          "package": {
+            "path": "moonbitlang/core/int",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "max_value", "min_value" ],
+            "misc": [
+              {
+                "name": "Int",
+                "impls": [],
+                "methods": [ "abs", "to_be_bytes", "to_le_bytes" ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "int64",
+          "package": {
+            "path": "moonbitlang/core/int64",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "max_value", "min_value" ],
+            "misc": [
+              {
+                "name": "Int64",
+                "impls": [ { "methods": [ "hash", "hash_combine" ] } ],
+                "methods": [
+                  "abs", "from_int", "to_be_bytes", "to_le_bytes"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "json",
+          "package": {
+            "path": "moonbitlang/core/json",
+            "readme": false,
+            "traits": [
+              {
+                "name": "@moonbitlang/core/json.FromJson",
+                "impls": [
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] },
+                  { "methods": [ "from_json" ] }
+                ]
+              }
+            ],
+            "types": [
+              {
+                "name": "JsonDecodeError",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "JsonPath",
+                "impls": [ { "methods": [ "op_equal" ] } ],
+                "methods": [ "add_index", "add_key", "output" ]
+              },
+              {
+                "name": "ParseError",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": [ "to_string" ]
+              },
+              {
+                "name": "Position",
+                "impls": [ { "methods": [ "op_equal" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [ "JsonValue" ],
+            "values": [ "from_json", "inspect", "parse", "valid" ],
+            "misc": [
+              {
+                "name": "Json",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": [
+                  "as_array", "as_bool", "as_null", "as_number", "as_object",
+                  "as_string", "item", "stringify", "to_json", "value"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "math",
+          "package": {
+            "path": "moonbitlang/core/math",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "PI", "acos", "asin", "atan", "atan2", "ceil", "cos", "exp",
+              "floor", "ln", "log10", "log2", "maximum", "minimum", "pi",
+              "round", "sin", "tan", "trunc"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "option",
+          "package": {
+            "path": "moonbitlang/core/option",
+            "readme": true,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "empty", "some", "unless", "when" ],
+            "misc": [
+              {
+                "name": "Option",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": [
+                  "bind", "compare", "default", "filter", "flatten",
+                  "is_empty", "iter", "map", "map_or", "map_or_else", "or",
+                  "or_default", "or_else", "or_error"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "priority_queue",
+          "package": {
+            "path": "moonbitlang/core/priority_queue",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "clear", "copy", "from_array", "from_iter", "is_empty",
+                  "iter", "length", "new", "of", "peek", "pop", "pop_exn",
+                  "push", "to_array", "unsafe_pop"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "queue",
+          "package": {
+            "path": "moonbitlang/core/queue",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "clear", "copy", "each", "eachi", "fold", "from_array",
+                  "from_iter", "is_empty", "iter", "length", "new", "of",
+                  "peek", "peek_exn", "pop", "pop_exn", "push", "transfer",
+                  "unsafe_peek", "unsafe_pop"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "quickcheck",
+          "package": {
+            "path": "moonbitlang/core/quickcheck",
+            "readme": false,
+            "traits": [
+              {
+                "name": "@moonbitlang/core/quickcheck.Arbitrary",
+                "impls": [
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] },
+                  { "methods": [ "arbitrary" ] }
+                ]
+              }
+            ],
+            "types": [],
+            "typealias": [],
+            "values": [ "gen", "samples" ],
+            "misc": []
+          },
+          "childs": [
+            {
+              "name": "splitmix",
+              "package": {
+                "path": "moonbitlang/core/quickcheck/splitmix",
+                "readme": false,
+                "traits": [],
+                "types": [
+                  {
+                    "name": "RandomState",
+                    "impls": [
+                      { "methods": [ "default" ] },
+                      { "methods": [ "output" ] }
+                    ],
+                    "methods": [
+                      "clone", "new", "next", "next_double", "next_float",
+                      "next_int", "next_int64", "next_positive_int",
+                      "next_two_uint", "next_uint", "next_uint64", "split"
+                    ]
+                  }
+                ],
+                "typealias": [],
+                "values": [],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        },
+        {
+          "name": "random",
+          "package": {
+            "path": "moonbitlang/core/random",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "Rand",
+                "impls": [],
+                "methods": [
+                  "double", "float", "int", "int64", "new", "shuffle",
+                  "uint", "uint64"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rational",
+          "package": {
+            "path": "moonbitlang/core/rational",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "RationalError",
+                "impls": [
+                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                ],
+                "methods": []
+              },
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "abs", "ceil", "compare", "floor", "fract", "from_double",
+                  "is_integer", "neg", "new", "op_add", "op_div", "op_equal",
+                  "op_mul", "op_sub", "reciprocal", "to_double", "trunc"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "ref",
+          "package": {
+            "path": "moonbitlang/core/ref",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "Ref",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": [ "map", "new", "protect", "swap", "update" ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "result",
+          "package": {
+            "path": "moonbitlang/core/result",
+            "readme": true,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "err", "ok", "wrap0", "wrap1", "wrap2" ],
+            "misc": [
+              {
+                "name": "Result",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": [
+                  "bind", "compare", "flatten", "fold", "is_err", "is_ok",
+                  "map", "map_err", "or", "or_else", "to_option",
+                  "to_string", "unwrap", "unwrap_or_error"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "sorted_map",
+          "package": {
+            "path": "moonbitlang/core/sorted_map",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "add", "clear", "contains", "each", "eachi", "from_iter",
+                  "get", "is_empty", "iter", "iter2", "keys", "op_equal",
+                  "op_get", "op_set", "remove", "size", "to_array", "values"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "new", "of" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "sorted_set",
+          "package": {
+            "path": "moonbitlang/core/sorted_set",
+            "readme": true,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [
+                  { "methods": [ "output" ] }, { "methods": [ "arbitrary" ] }
+                ],
+                "methods": [
+                  "add", "contains", "deep_clone", "diff", "difference",
+                  "disjoint", "each", "eachi", "from_iter", "intersect",
+                  "intersection", "is_empty", "iter", "op_equal", "remove",
+                  "size", "subset", "to_array", "union"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "new", "of", "singleton" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "strconv",
+          "package": {
+            "path": "moonbitlang/core/strconv",
+            "readme": true,
+            "traits": [
+              {
+                "name": "@moonbitlang/core/strconv.FromStr",
+                "impls": [
+                  { "methods": [ "from_string" ] },
+                  { "methods": [ "from_string" ] },
+                  { "methods": [ "from_string" ] },
+                  { "methods": [ "from_string" ] },
+                  { "methods": [ "from_string" ] },
+                  { "methods": [ "from_string" ] }
+                ]
+              }
+            ],
+            "types": [
+              {
+                "name": "Decimal",
+                "impls": [],
+                "methods": [
+                  "from_int64", "new", "parse_decimal", "shift", "to_double"
+                ]
+              },
+              {
+                "name": "StrConvError",
+                "impls": [ { "methods": [ "output" ] } ],
+                "methods": []
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "parse", "parse_bool", "parse_double", "parse_int",
+              "parse_int64", "parse_uint", "parse_uint64"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "string",
+          "package": {
+            "path": "moonbitlang/core/string",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "String",
+                "impls": [],
+                "methods": [
+                  "compare", "concat", "contains", "contains_char",
+                  "default", "ends_with", "fold", "from_array", "from_iter",
+                  "index_of", "is_blank", "is_empty", "iter", "iter2",
+                  "last_index_of", "pad_end", "pad_start", "repeat",
+                  "replace", "replace_all", "rev", "rev_fold", "rev_iter",
+                  "split", "starts_with", "to_array", "to_bytes", "to_lower",
+                  "to_upper", "trim", "trim_end", "trim_left", "trim_right",
+                  "trim_space", "trim_start"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "test",
+          "package": {
+            "path": "moonbitlang/core/test",
+            "readme": false,
+            "traits": [],
+            "types": [
+              {
+                "name": "T",
+                "impls": [],
+                "methods": [ "snapshot", "write", "writeln" ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "eq", "fail", "is", "is_false", "is_not", "is_true", "ne",
+              "same_object"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "tuple",
+          "package": {
+            "path": "moonbitlang/core/tuple",
+            "readme": true,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "curry", "fst", "map_both", "map_fst", "map_snd", "pair",
+              "snd", "swap", "uncurry"
+            ],
+            "misc": [
+              {
+                "name": "Tuple7",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Tuple6",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Tuple5",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Tuple4",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Tuple3",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": []
+              },
+              {
+                "name": "Tuple2",
+                "impls": [ { "methods": [ "arbitrary" ] } ],
+                "methods": []
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "uint",
+          "package": {
+            "path": "moonbitlang/core/uint",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "max_value", "min_value" ],
+            "misc": [
+              {
+                "name": "UInt",
+                "impls": [],
+                "methods": [
+                  "default", "to_be_bytes", "to_int64", "to_le_bytes"
+                ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "uint64",
+          "package": {
+            "path": "moonbitlang/core/uint64",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [ "max_value", "min_value" ],
+            "misc": [
+              {
+                "name": "UInt64",
+                "impls": [],
+                "methods": [ "to_be_bytes", "to_le_bytes" ]
+              }
+            ]
+          },
+          "childs": []
+        },
+        {
+          "name": "unit",
+          "package": {
+            "path": "moonbitlang/core/unit",
+            "readme": false,
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": [
+              {
+                "name": "Unit",
+                "impls": [ { "methods": [ "hash", "hash_combine" ] } ],
+                "methods": [ "compare", "default", "to_string" ]
+              }
+            ]
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

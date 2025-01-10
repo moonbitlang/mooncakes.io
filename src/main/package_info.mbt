@@ -1,13 +1,16 @@
 ///|
-fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
+fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
   fn process_value {
-    ({ "docstring": String(description), "signature": String(signature) } : Json) =>
-      ValueCard(folded=false, signature~, description~)
+    ({
+      "name": String(name),
+      "docstring": String(description),
+      "signature": String(signature),
+    } : Json) => ValueCard(folded=false, name~, signature~, description~)
   }
 
   fn process_impl {
-    ({ "name": String(name) } : Json) =>
-      ImplCard(folded=false, signature="", description="")
+    ({ "docstring": String(description), "signature": String(signature) } : Json) =>
+      ImplCard(folded=false, name=signature, signature~, description~)
   }
 
   fn process_type {
@@ -20,23 +23,64 @@ fn process_pacakge_info(package : Json) -> (String, Array[DetailCardModel]) {
     } : Json) => {
       let methods = methods.map(process_value)
       let impls = impls.map(process_impl)
-      TypeCard(folded=false, description~, signature~, methods~, impls~)
+      TypeCard(folded=false, name~, description~, signature~, methods~, impls~)
     }
   }
 
-  match package {
-    {
+  fn process_typealias {
+    ({
       "name": String(name),
-      "types": Array(types),
-      "typealias": Array(alias),
-      "values": Array(values),
-    } => {
-      let cards = [
-          ..types.map(process_type),
-          ..alias.map(process_type),
-          ..values.map(process_value),
-        ]
-      (name, cards)
+      "docstring": String(description),
+      "signature": String(signature),
+    } : Json) =>
+      TypeCard(folded=false, name~, description~, signature~, methods=[], impls=[])
+  }
+
+  fn process_miscs {
+    ({ "name": String(name), "impls": Array(impls), "methods": Array(methods) } : Json) => {
+      let methods = methods.map(process_value)
+      let impls = impls.map(process_impl)
+      TypeCard(
+        folded=false,
+        name~,
+        description="",
+        signature=name,
+        methods~,
+        impls~,
+      )
     }
   }
+
+  fn process_traits {
+    ({
+      "name": String(name),
+      "docstring": String(description),
+      "signature": String(signature),
+      "impls": Array(impls),
+    } : Json) => {
+      let impls = impls.map(process_impl)
+      TraitCard(folded=false, name~, description~, signature~, impls~)
+    }
+  }
+
+  fn process_package {
+    ({
+      "types": Array(types),
+      "typealias": Array(alias_),
+      "values": Array(values),
+      "traits": Array(traits),
+      "readme": String(readme),
+      "misc": Array(misc),
+    } : Json) =>
+      (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
+      [
+        ..types.map(process_type),
+        ..alias_.map(process_typealias),
+        ..traits.map(process_traits),
+        ..values.map(process_value),
+        ..misc.map(process_miscs),
+      ]
+  }
+
+  process_package(package)
 }

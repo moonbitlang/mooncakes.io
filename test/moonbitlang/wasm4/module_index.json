@@ -1,0 +1,59 @@
+{
+  "name": "moonbitlang",
+  "package": null,
+  "childs": [
+    {
+      "name": "wasm4",
+      "package": {
+        "path": "moonbitlang/wasm4",
+        "readme": true,
+        "traits": [],
+        "types": [
+          { "name": "ADSR", "impls": [], "methods": [ "new" ] },
+          { "name": "ADSRVolume", "impls": [], "methods": [ "new" ] },
+          { "name": "BlitFlag", "impls": [], "methods": [] },
+          { "name": "Color", "impls": [], "methods": [] },
+          {
+            "name": "GamePad",
+            "impls": [
+              { "methods": [ "default" ] }, { "methods": [ "op_equal" ] }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Mouse",
+            "impls": [
+              { "methods": [ "default" ] }, { "methods": [ "op_equal" ] }
+            ],
+            "methods": []
+          },
+          { "name": "Netplay", "impls": [], "methods": [] },
+          { "name": "Note", "impls": [], "methods": [ "new" ] },
+          {
+            "name": "Sprite",
+            "impls": [],
+            "methods": [ "blit", "blit_sub" ]
+          },
+          { "name": "ToneChannel", "impls": [], "methods": [] },
+          { "name": "ToneFlag", "impls": [], "methods": [ "new" ] },
+          { "name": "ToneMode", "impls": [], "methods": [] },
+          { "name": "TonePan", "impls": [], "methods": [] }
+        ],
+        "typealias": [],
+        "values": [
+          "disk_read", "disk_write", "get_draw_colors", "get_frame_buffer",
+          "get_gamepad", "get_mouse", "get_netplay", "get_palette",
+          "get_system_hide_gamepad_overlay",
+          "get_system_preserve_framebuffer", "hline", "line", "oval", "rect",
+          "rgb", "screen_height", "screen_width", "set_draw_colors",
+          "set_frame_buffer", "set_palette",
+          "set_system_hide_gamepad_overlay",
+          "set_system_preserve_framebuffer", "sprite", "text", "tone",
+          "tone_note_mode", "trace", "vline"
+        ],
+        "misc": []
+      },
+      "childs": []
+    }
+  ]
+}

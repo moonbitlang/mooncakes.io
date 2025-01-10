@@ -1,0 +1,160 @@
+{
+  "readme": "# HashSet\n\nA mutable hash set based on a Robin Hood hash table.\n\n# Usage\n\n## Create\n\nYou can create an empty set using `new()` or construct it using `from_array()`.\n\n```moonbit\nlet set1 = @hashset.of([1, 2, 3, 4, 5])\nlet set2 : @hashset.T[String] = @hashset.new()\n```\n\n## Insert & Contain\n\nYou can use `insert()` to add a key to the set, and `contains()` to check whether a key exists.\n\n```moonbit\nlet set : @hashset.T[String] = @hashset.new()\nset.insert(\"a\")\nprintln(set.contains(\"a\")) // true\n```\n\n## Remove\n\nYou can use `remove()` to remove a key.\n\n```moonbit\nlet set = @hashset.of([(\"a\"), (\"b\"), (\"c\")])\nset.remove(\"a\")\nprintln(set.contains(\"a\")) // false\n```\n\n## Size & Capacity\n\nYou can use `size()` to get the number of keys in the set, or `capacity()` to get the current capacity.\n\n```moonbit\nlet set = @hashset.of([(\"a\"), (\"b\"), (\"c\")])\nprintln(set.size()) // 3\nprintln(set.capacity()) // 8\n```\n\nSimilarly, you can use `is_empty()` to check whether the set is empty.\n\n```moonbit\nlet set = @hashset.new()\nprintln(set.is_empty()) // true\n```\n\n## Clear\n\nYou can use `clear` to remove all keys from the set, but the allocated memory will not change.\n\n```moonbit\nlet set = @hashset.of([(\"a\"), (\"b\"), (\"c\")])\nset.clear()\nprintln(set.is_empty()) // true\n```\n\n## Iteration\n\nYou can use `each()` or `eachi()` to iterate through all keys.\n\n```moonbit\nlet set = @hashset.of([(\"a\"), (\"b\"), (\"c\")])\nset.each(fn(k) { println(\"element: \\{k}\") })\nset.eachi(fn(i, k) { println(\"index: \\{i}, element:\\{k}\") })\n```\n\n## Set Operations\n\nYou can use `union()`, `intersection()`, `difference()` and `symmetric_difference()` to perform set operations.\n\n```moonbit\nlet m1 = @hashset.of([\"a\", \"b\", \"c\"])\nlet m2 = @hashset.of([\"b\", \"c\", \"d\"])\nprintln(m1.union(m2)) // of([\"a\", \"b\", \"c\", \"d\"])\nprintln(m1.intersection(m2)) // of([\"b\", \"c\"])\nprintln(m1.difference(m2)) // of([\"a\"])\nprintln(m1.symmetric_difference(m2)) // of([\"a\", \"d\"])\n```\n\n",
+  "name": "moonbitlang/core/hashset",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "\n Mutable hash set, not thread safe. \n  \n # Example\n \n ```\n let set = @hashset.of([(3, \"three\"), (8, \"eight\"), (1, \"one\")])\n set.add((4, \"four\"))\n assert_eq!(set.contains((4, \"four\")), true)\n ```",
+      "signature": "type T",
+      "loc": { "line": 38, "column": 8 },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "\n Insert a key into hash set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::add[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Unit",
+          "loc": { "line": 56, "column": 8 }
+        },
+        {
+          "name": "capacity",
+          "docstring": "\n Get the capacity of the set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::capacity[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Int",
+          "loc": { "line": 145, "column": 8 }
+        },
+        {
+          "name": "clear",
+          "docstring": "\n Clears the set, removing all keys. Keeps the allocated space.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::clear[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Unit",
+          "loc": { "line": 178, "column": 8 }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Check if the hash set contains a key.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::contains[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Bool",
+          "loc": { "line": 93, "column": 8 }
+        },
+        {
+          "name": "difference",
+          "docstring": "\n Difference of two hash sets.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::difference[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 205, "column": 8 }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterate over all keys of the set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::each[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], f : (K) -> Unit) -> Unit",
+          "loc": { "line": 157, "column": 8 }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterate over all keys of the set, with index.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::eachi[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], f : (Int, K) -> Unit) -> Unit",
+          "loc": { "line": 163, "column": 8 }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Create new hash set from array.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::from_array[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 32, "column": 11 }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::from_iter[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 235, "column": 11 }
+        },
+        {
+          "name": "insert",
+          "docstring": "\n Insert a key into hash set.\n @alert unsafe \"Panic if the hash set is full.\"\n @alert deprecated \"Use `add` instead.\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::insert[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Unit",
+          "loc": { "line": 50, "column": 8 }
+        },
+        {
+          "name": "intersection",
+          "docstring": "\n Intersection of two hash sets.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::intersection[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 197, "column": 8 }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Check if the hash set is empty.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::is_empty[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Bool",
+          "loc": { "line": 151, "column": 8 }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::iter[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[K]",
+          "loc": { "line": 221, "column": 8 }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Create new hash set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::new[K]() -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 21, "column": 11 }
+        },
+        {
+          "name": "of",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::of[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 39, "column": 11 }
+        },
+        {
+          "name": "remove",
+          "docstring": "\n Remove a key from hash set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::remove[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Unit",
+          "loc": { "line": 115, "column": 8 }
+        },
+        {
+          "name": "size",
+          "docstring": "\n Get the number of keys in the set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::size[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Int",
+          "loc": { "line": 139, "column": 8 }
+        },
+        {
+          "name": "symmetric_difference",
+          "docstring": "\n Symmetric difference of two hash sets.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::symmetric_difference[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 213, "column": 8 }
+        },
+        {
+          "name": "union",
+          "docstring": "\n Union of two hash sets.\n @alert unsafe \"Panic if the hash set is full.\"",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::union[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": { "line": 188, "column": 8 }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": { "line": 331, "column": 39 }
+            }
+          ],
+          "loc": { "line": 331, "column": 1 }
+        },
+        {
+          "docstring": "",
+          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/hashset#T\">T</a>[X]",
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[X]",
+              "loc": { "line": 242, "column": 85 }
+            }
+          ],
+          "loc": { "line": 242, "column": 1 }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

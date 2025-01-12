@@ -1,5 +1,5 @@
 ///|
-fn hightlight[M](moonbit : String) -> @html.Html[M] {
+fn codeblock_view[M](moonbit : String) -> @html.Html[M] {
   let spans = @highlight.parse(moonbit)
   let elems = spans.map(fn {
     Code(s) => @html.span([text(s)])

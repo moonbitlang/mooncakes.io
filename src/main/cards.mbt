@@ -65,7 +65,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   fn signature_view(code, name) {
     let code_view = @html.pre([
       @html.code(id=name, class="font-mono text-[0.9em] text-blue-800", [
-        hightlight(code),
+        codeblock_view(code),
       ]),
     ])
     div([

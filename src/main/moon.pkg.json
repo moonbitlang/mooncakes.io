@@ -28,6 +28,11 @@
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",
     "moonbitlang/mooncakes-io/highlight",
+    { 
+      "path":"moonbitlang/mooncakes-io/generic_views", 
+      "alias": "views", 
+      "value": ["button_view", "icon_button_view"] 
+    },
     "Yoorkin/rabbit-tea/browser"
   ]
 }

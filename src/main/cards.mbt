@@ -65,7 +65,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   fn signature_view(code, name) {
     let code_view = @html.pre([
       @html.code(id=name, class="font-mono text-[0.9em] text-blue-800", [
-        codeblock_view(code),
+        @views.codeblock_view(code),
       ]),
     ])
     div([
@@ -105,7 +105,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
           @html.fragment([
             div(
               class="col-start-2 col-span-2 row-start-3 \{detail_visibility}",
-              [div(class="mr-4 mb-6 pt-1", [markdown_view(description)])],
+              [div(class="mr-4 mb-6 pt-1", [@views.markdown_view(description)])],
             ),
           ]),
           div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
@@ -115,7 +115,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
       (
         @html.fragment([
           div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-            div(class="mr-4 mb-6", [markdown_view(description)]),
+            div(class="mr-4 mb-6", [@views.markdown_view(description)]),
           ]),
         ]),
         div(class="col-start-1 row-start-1 max-h-10", [fold_button]),

@@ -102,21 +102,16 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
         (@html.nothing(), @html.nothing())
       } else {
         (
-          @html.fragment([
-            div(
-              class="col-start-2 col-span-2 row-start-3 \{detail_visibility}",
-              [div(class="mr-4 mb-6 pt-1", [markdown_view(description)])],
-            ),
+          div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+            div(class="mr-4 mb-6 pt-1", [markdown_view(description)]),
           ]),
           div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
         )
       }
     ReadmeCard(description, ..) =>
       (
-        @html.fragment([
-          div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-            div(class="mr-4 mb-6", [markdown_view(description)]),
-          ]),
+        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+          div(class="mr-4 mb-6", [markdown_view(description)]),
         ]),
         div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
       )

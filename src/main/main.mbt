@@ -240,12 +240,11 @@ fn view(state : Model) -> @html.Html[Message] {
 }
 
 ///|
+fn load(url : @url.Url) -> (@tea.Command[Message], Model) {
+  (@tea.task(LoadMenu), LoadingMenu)
+}
+
+///|
 fn main {
-  // @tea.startup(
-  //   model=LoadingModuleInfo("moonbitlang/core"),
-  //   update~,
-  //   view~,
-  //   initialize=LoadModuleInfo,
-  // )
-  @tea.startup(model=LoadingMenu, update~, view~, initialize=LoadMenu)
+  @tea.application(initialize=load, update~, view~)
 }

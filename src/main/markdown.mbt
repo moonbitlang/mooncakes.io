@@ -19,11 +19,9 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
       [
-        @html.a(
-          href=link,
-          style=["display: inline-block"],
-          [@html.img(src~, alt~, [])],
-        ),
+        @html.a(href=link, style=["display: inline-block"], [
+          @html.img(src~, alt~, []),
+        ]),
       ]
     _ => abort("not an inline link")
   }
@@ -71,25 +69,16 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
           separator="\n",
         )
         |> hightlight()
-      @html.pre(
-        class="bg-gray-100 p-4 my-4 text-sm rounded",
-        [@html.code(class="font-roboto", [code])],
-      )
+      @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
+        @html.code(class="font-roboto", [code]),
+      ])
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)
       match level {
         _..<1 => abort("Heading level <1")
-        1 =>
-          h4(
-            class="text-gray-900 font-semibold text-3xl mt-4 mb-2",
-            inline,
-          )
-        2 =>
-          h5(
-            class="text-gray-900 text-2xl mt-4 mb-2 pb-2 border-b",
-            inline,
-          )
+        1 => h4(class="text-gray-900 font-semibold text-3xl mt-4 mb-2", inline)
+        2 => h5(class="text-gray-900 text-2xl mt-4 mb-2 pb-2 border-b", inline)
         3 => h6(class="text-gray-900 text-xl", inline)
         4..<_ => div(class="text-gray-900 text-xl", inline)
       }

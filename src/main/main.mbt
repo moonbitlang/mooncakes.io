@@ -208,12 +208,14 @@ fn update(msg : Message, model_ : Model) -> (@tea.Command[Message], Model) {
             @tea.task(LoadReadme),
             LoadingReadme(model, model.meta_info.module_path, true),
           )
-        ItemClick(path, target) =>
+        ItemClick(path, target) =>{
+          println(target)
           if path == model.now_path {
             (@browser.scroll_to(target), model_)
           } else {
             (@tea.task(LoadPackage), LoadingPackage(model, path, target))
           }
+        }
         FilterChange(value) => {
           model.sidebar.filter = value
           (@tea.none(), model_)

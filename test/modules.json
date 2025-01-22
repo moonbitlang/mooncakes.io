@@ -1,18 +1,6 @@
 {
   "modules": [
     {
-      "name": "moonbitlang/arduino",
-      "version": "0.0.6",
-      "readme": "README.md",
-      "repository": "https://github.com/moonbit-community/moonbit-arduino",
-      "license": "GPL-3.0",
-      "keywords": [],
-      "description": "",
-      "source": "src",
-      "checksum": "0e304390256026c7958557aac62e08362b7f9f704a6170c7fc2c3fe75e56a698",
-      "created_at": "2025-01-03T08:17:31.017633+00:00"
-    },
-    {
       "name": "moonbitlang/core",
       "version": "0.1.20250106+004e23479",
       "readme": "README.md",
@@ -65,18 +53,6 @@
       "warn-list": "-29",
       "checksum": "2c02703d4ca43083a67a505bdee4a2616da73950c5f474477091375069d780c7",
       "created_at": "2024-12-19T02:10:44.122188+00:00"
-    },
-    {
-      "name": "xunyoyo/Permutation",
-      "version": "0.1.1",
-      "readme": "README.md",
-      "repository": "https://github.com/xunyoyo/Permutation",
-      "license": "Apache-2.0",
-      "keywords": [],
-      "description": "",
-      "source": "src",
-      "checksum": "cf4c2a4a2035382f6a8578a1742339d82fc681b900a81c3f4684f60cbc0c4b02",
-      "created_at": "2024-11-15T10:48:43.405249+00:00"
     },
     {
       "name": "xunyoyo/linalg",

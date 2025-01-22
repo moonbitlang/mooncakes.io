@@ -9,6 +9,12 @@ pub(all) enum Loading {
   Success(T)
 }
 
+pub(all) enum QueuedLoading {
+  Loading(U)
+  Failed
+  Success(T)
+}
+
 // Type aliases
 
 // Traits

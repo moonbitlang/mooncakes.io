@@ -35,6 +35,7 @@ struct SidebarModel {
   items : Array[ItemModel]
   dependencies : Array[ModuleModel]
   mut filter : String
+  mut readme:Bool
   cards_expanded : Bool
 }
 
@@ -45,6 +46,7 @@ fn SidebarModel::empty() -> SidebarModel {
     items: [],
     dependencies: [],
     filter: "",
+    readme: false,
     cards_expanded: false,
   }
 }
@@ -135,10 +137,10 @@ fn filter_input_view(value : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn sidebar_view(model : @load.Loading[SidebarModel]) -> @html.Html[Msg] {
+fn sidebar_view(model : @load.QueuedLoading[SidebarModel, Array[ItemModel]]) -> @html.Html[Msg] {
   match model {
     Failed => @html.nothing()
-    Loading => @html.text("Loading...")
+    Loading(_) => @html.text("Loading...")
     Success(model) => {
       let hide = if model.hide { "hidden" } else { "" }
       let items = item_list_view(model.items, filter=model.filter)

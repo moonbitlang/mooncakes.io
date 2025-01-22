@@ -1,0 +1,15 @@
+package moonbitlang/mooncakes/main/load
+
+// Values
+
+// Types and methods
+pub(all) enum Loading {
+  Loading
+  Failed
+  Success(T)
+}
+
+// Type aliases
+
+// Traits
+

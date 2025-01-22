@@ -1,16 +1,17 @@
 ///|
-fn view_menu(meta : Map[String, MetaInfoModel]) -> @html.Html[Message] {
+fn view_menu(meta : Map[String, @meta.MetaInfoModel]) -> @html.Html[Msg] {
   div(class="flex min-h-screen flex-col", [
-    view_navbar(NAVBAR),
+    @constants.navbar(),
     div(class="flex flex-grow flex-col items-center justify-center", [
       view_welcome(),
       view_packages_info(meta),
     ]),
+    @constants.footer(),
   ])
 }
 
 ///|
-fn view_welcome() -> @html.Html[Message] {
+fn view_welcome() -> @html.Html[Msg] {
   div(
     class="font-title flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
     [
@@ -50,7 +51,7 @@ fn view_welcome() -> @html.Html[Message] {
         ],
       ),
       div(class="flex justify-center px-4", [
-        @html.img(src=LOGO, alt="logo", class="h-80 lg:h-96", []),
+        @html.img(src=@constants.LOGO, alt="logo", class="h-80 lg:h-96", []),
       ]),
     ],
   )
@@ -87,7 +88,7 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|}
 
 ///|
-fn view_module_card(meta : MetaInfoModel) -> @html.Html[Message] {
+fn view_module_card(meta : @meta.MetaInfoModel) -> @html.Html[Msg] {
   let tags = meta.keywords.map(fn(keyword) {
     @html.span(
       class="inline-flex it ems-center rounded-md bg-gray-50 px-2 text-tiny h-5 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10",
@@ -130,7 +131,7 @@ fn view_module_card(meta : MetaInfoModel) -> @html.Html[Message] {
 }
 
 ///|
-fn view_packages_info(meta : Map[String, MetaInfoModel]) -> @html.Html[Message] {
+fn view_packages_info(meta : Map[String, @meta.MetaInfoModel]) -> @html.Html[Msg] {
   div(class="w-full", [
     div(class="bg-[#fbfaf5] flex justify-center", [
       div(class="p-10", [
@@ -145,10 +146,10 @@ fn view_packages_info(meta : Map[String, MetaInfoModel]) -> @html.Html[Message] 
 
 ///|
 fn view_all_package(
-  meta : Map[String, MetaInfoModel]
-) -> Array[@html.Html[Message]] {
-  let index_map : Map[Char, Array[MetaInfoModel]] = {}
-  INDICES.iter().each(fn(c) { index_map.set(c, []) })
+  meta : Map[String, @meta.MetaInfoModel]
+) -> Array[@html.Html[Msg]] {
+  let index_map : Map[Char, Array[@meta.MetaInfoModel]] = {}
+  @constants.INDICES.iter().each(fn(c) { index_map.set(c, []) })
   meta
   .iter()
   .map(fn(p) {

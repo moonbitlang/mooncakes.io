@@ -1,0 +1,52 @@
+package moonbitlang/mooncakes/main/package
+
+alias @Yoorkin/rabbit-tea/browser as @browser
+alias @Yoorkin/rabbit-tea/html as @html
+
+// Values
+fn load(String) -> (@browser.Command[Msg], Model)
+
+fn update(Msg, Model) -> (@browser.Command[Msg], Model)
+
+fn view(Model) -> @html.T[Msg]
+
+// Types and methods
+type DetailCardModel
+impl Show for DetailCardModel
+
+type Impl
+
+type ItemKind
+impl Show for ItemKind
+
+type ItemModel
+impl Show for ItemModel
+
+type Model
+
+type ModuleIndex
+
+type ModuleModel
+
+type Msg
+
+type Package
+
+type PackageBody
+
+type PackageModel
+impl Show for PackageModel
+
+type SidebarModel
+
+type Trait
+
+type Traits
+
+type Type
+
+// Type aliases
+
+// Traits
+trait ToItemModel
+

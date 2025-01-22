@@ -28,19 +28,20 @@ enum DetailCardModel {
     impls~ : Array[DetailCardModel]
   )
   ReadmeCard(mut folded~ : Bool, String)
+  FailureCard(String)
 } derive(Show)
 
 ///|
-fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
+fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   let fold_button = div(
     click=ToggleCardDetail(card),
     class="w-full h-full flex",
     [
       @html.img(
         src=if card.is_folded() {
-          "section-close.svg"
+          @constants.SECTION_CLOSE
         } else {
-          "section-open.svg"
+          @constants.SECTION_OPEN
         },
         class="group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",
         [],
@@ -90,7 +91,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
   // tool buttons
   let tool_buttons = match card {
     ReadmeCard(_, ..) => []
-    _ => [button_view("source"), icon_button_view("share.svg")]
+    _ => [button_view("source"), icon_button_view(@constants.SHARE)]
   }
   // description
   let (description, foldable) = match card {
@@ -112,6 +113,13 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
       (
         div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
           div(class="mr-4 mb-6", [markdown_view(description)]),
+        ]),
+        div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
+      )
+    FailureCard(info) =>
+      (
+        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+          @html.text("Failed to load this card: \{info}"),
         ]),
         div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
       )
@@ -154,7 +162,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Message] {
 }
 
 ///|
-fn card_view(card : DetailCardModel) -> @html.Html[Message] {
+fn card_view(card : DetailCardModel) -> @html.Html[Msg] {
   match card {
     ReadmeCard(_, ..) => div([card_section_view(card)])
     _ =>
@@ -200,7 +208,7 @@ fn toggle_folded(self : DetailCardModel) -> Unit {
 }
 
 ///|
-fn detail_cards_view(cards : Array[DetailCardModel]) -> @html.Html[Message] {
+fn detail_cards_view(cards : Array[DetailCardModel]) -> @html.Html[Msg] {
   div(class="", [
     div(
       class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2",

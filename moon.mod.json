@@ -1,9 +1,9 @@
 {
-  "name": "moonbitlang/rabbit-tea-tailwind",
+  "name": "moonbitlang/mooncakes",
   "version": "0.1.1",
   "deps": {
     "rami3l/cmark": "0.1.5",
-    "Yoorkin/rabbit-tea": "0.5.1"
+    "Yoorkin/rabbit-tea": "0.5.7"
   },
   "readme": "README.md",
   "repository": "",

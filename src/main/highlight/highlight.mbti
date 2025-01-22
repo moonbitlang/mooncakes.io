@@ -1,4 +1,4 @@
-package moonbitlang/rabbit-tea-tailwind/main/highlight
+package moonbitlang/mooncakes/main/highlight
 
 // Values
 fn parse(String) -> Array[CodeSpan]

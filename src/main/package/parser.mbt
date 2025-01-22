@@ -1,6 +1,6 @@
 ///|
-fn parse_metadata(modules_json : Json) -> Map[String, MetaInfoModel] {
-  fn parse_package(json : Json) {
+fn parse_metadata(modules_json : Json) -> Result[@meta.MetaInfoModel, String] {
+  fn parse_package(json : Json) -> Result[@meta.MetaInfoModel, String] {
     guard let {
       "name"? : name,
       "repository"? : repository,
@@ -9,20 +9,25 @@ fn parse_metadata(modules_json : Json) -> Map[String, MetaInfoModel] {
       "description"? : description,
       "keywords"? : keywords,
       "readme"? : readme,
-      "created_at"? : created_at,
-    } = json
+    } = json else {
+      _ => Err("Error when parsing metadata.")
+    }
     guard let [name, version] = [name, version].map(fn(x) {
       match x {
         Some(String(str)) => str
         _ => abort("Error when parsing name and version.")
       }
-    })
+    }) else {
+      _ => Err("Error when parsing name and version.")
+    }
     guard let [repository, license, description, readme] = [
       repository, license, description, readme,
     ].map(fn {
       Some(x) => Some(x.as_string().unwrap())
       None => None
-    })
+    }) else {
+      _ => Err("Error when parsing repository, license, description, readme.")
+    }
     let keywords = match keywords {
       Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
       None => []
@@ -35,11 +40,7 @@ fn parse_metadata(modules_json : Json) -> Map[String, MetaInfoModel] {
     let package_name = String::from_array(
       iter.drop_while(fn(x) { x != '/' }).drop(1).collect(),
     )
-    let created_at = match created_at {
-      Some(json) => Some(as_string(json))
-      None => None
-    }
-    {
+    Ok({
       author,
       readme,
       name: package_name,
@@ -49,17 +50,11 @@ fn parse_metadata(modules_json : Json) -> Map[String, MetaInfoModel] {
       license,
       repository,
       keywords,
-      created_at,
-    }
+      created_at: None,
+    })
   }
 
-  let result = {}
-  guard let { "modules": Array(modules) } = modules_json
-  for module_ in modules {
-    let package = parse_package(module_)
-    result.set(package.module_path, package)
-  }
-  result
+  parse_package(modules_json)
 }
 
 ///|
@@ -125,10 +120,10 @@ struct ModuleIndex {
 }
 
 ///|
-fn parse_module_index(json : Json) -> ModuleIndex {
+fn parse_module_index_inner(json : Json) -> ModuleIndex {
   match json {
     { "name": String(name), "package": package, "childs": Array(childs) } => {
-      let childs = childs.map(parse_module_index)
+      let childs = childs.map(parse_module_index_inner)
       {
         name,
         package: match package {
@@ -138,6 +133,12 @@ fn parse_module_index(json : Json) -> ModuleIndex {
       }
     }
   }
+}
+
+///|
+/// Todo: more smarter error handling
+fn parse_module_index(json : Json) -> Result[ModuleIndex, String] {
+  Ok(parse_module_index_inner(json))
 }
 
 ///|

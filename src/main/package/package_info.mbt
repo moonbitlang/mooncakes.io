@@ -1,5 +1,5 @@
 ///|
-fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
+fn process_pacakge_info(package : Json) -> Result[Array[DetailCardModel], String] {
   fn process_value {
     ({
       "name": String(name),
@@ -82,5 +82,5 @@ fn process_pacakge_info(package : Json) -> Array[DetailCardModel] {
       ]
   }
 
-  process_package(package)
+  Ok(process_package(package))
 }

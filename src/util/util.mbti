@@ -1,9 +1,9 @@
-package moonbitlang/mooncakes/load
+package moonbitlang/mooncakes/util
 
 // Values
 
 // Types and methods
-pub(all) enum Loading {
+pub(all) enum Status {
   Loading
   Failed
   Success(T)

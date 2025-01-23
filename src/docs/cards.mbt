@@ -59,7 +59,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   fn signature_view(code, name) {
     let code_view = @html.pre([
       @html.code(id=name, class="font-mono text-[0.9em] text-blue-800", [
-        @view.highlight(code),
+        @view.code_block(code),
       ]),
     ])
     div([
@@ -84,7 +84,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   // tool buttons
   let tool_buttons = match card {
     ReadmeCard(_, ..) => []
-    _ => [@view.button_view("source"), @view.icon_button_view(@config.SHARE)]
+    _ => [@view.button("source"), @view.icon_button(@config.SHARE)]
   }
   // description
   let (description, foldable) = match card {
@@ -97,7 +97,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
       } else {
         (
           div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-            div(class="mr-4 mb-6 pt-1", [@view.markdown_view(description)]),
+            div(class="mr-4 mb-6 pt-1", [@view.markdown(description)]),
           ]),
           div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
         )
@@ -105,7 +105,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
     ReadmeCard(description, ..) =>
       (
         div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-          div(class="mr-4 mb-6", [@view.markdown_view(description)]),
+          div(class="mr-4 mb-6", [@view.markdown(description)]),
         ]),
         div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
       )

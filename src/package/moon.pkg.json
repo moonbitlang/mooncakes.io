@@ -29,7 +29,7 @@
     "rami3l/cmark/cmark_base",
     "moonbitlang/mooncakes/highlight",
     "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/constants",
+    "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/meta",
     "moonbitlang/mooncakes/load"
   ]

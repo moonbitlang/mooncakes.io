@@ -1,4 +1,4 @@
-package moonbitlang/mooncakes/main/constants
+package moonbitlang/mooncakes/config
 
 alias @Yoorkin/rabbit-tea/html as @html
 

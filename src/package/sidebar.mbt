@@ -34,12 +34,7 @@ struct SidebarModel {
 
 ///|
 fn SidebarModel::empty() -> SidebarModel {
-  {
-    hide: false,
-    items: [],
-    filter: "",
-    cards_expanded: false,
-  }
+  { hide: false, items: [], filter: "", cards_expanded: false }
 }
 
 ///|

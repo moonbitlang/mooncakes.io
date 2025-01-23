@@ -165,7 +165,7 @@ fn is_folded(self : DetailCardModel) -> Bool {
     | ImplCard(folded~, ..)
     | TypeCard(folded~, ..)
     | TraitCard(folded~, ..)
-    | ReadmeCard(folded~, _) => folded  
+    | ReadmeCard(folded~, _) => folded
   }
 }
 

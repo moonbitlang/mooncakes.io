@@ -14,7 +14,7 @@ fn process_package_info(
   fn process_impl {
     ({ "docstring": String(description), "signature": String(signature) } : Json) =>
       ImplCard(folded=false, name=signature, signature~, description~)
-      _ => panic() // FIXME
+    _ => panic() // FIXME
   }
 
   fn process_type {

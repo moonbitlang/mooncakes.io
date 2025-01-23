@@ -71,7 +71,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           Ok(package_info) => // FIXME: clean up detail_cards
             { ..model, detail_cards: [..model.detail_cards, ..package_info] }
           Err(_) => // FIXME: handle error correctly
-            { ..model, detail_cards: [..model.detail_cards ] }
+            { ..model, detail_cards: [..model.detail_cards] }
         },
       )
     ToggleCardDetail(detail_card) => {

@@ -15,6 +15,7 @@ type DetailCardModel
 impl Show for DetailCardModel
 
 type Impl
+impl Show for Impl
 
 type ItemKind
 impl Show for ItemKind
@@ -25,8 +26,6 @@ impl Show for ItemModel
 type Model
 
 type ModuleIndex
-
-type ModuleModel
 
 type Msg
 
@@ -39,11 +38,11 @@ impl Show for PackageModel
 
 type SidebarModel
 
-type Trait
-
 type Traits
+impl Show for Traits
 
 type Type
+impl Show for Type
 
 // Type aliases
 

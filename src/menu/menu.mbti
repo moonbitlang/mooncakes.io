@@ -1,9 +1,9 @@
-package moonbitlang/mooncakes/main/menu
+package moonbitlang/mooncakes/menu
 
 alias @Yoorkin/rabbit-tea/browser as @browser
 alias @Yoorkin/rabbit-tea/html as @html
-alias @moonbitlang/mooncakes/main/load as @load
-alias @moonbitlang/mooncakes/main/meta as @meta
+alias @moonbitlang/mooncakes/load as @load
+alias @moonbitlang/mooncakes/meta as @meta
 
 // Values
 fn load() -> (@browser.Command[Msg], Model)

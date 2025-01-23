@@ -245,20 +245,13 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
 }
 
 ///|
-fn generate_sidebar_from_module_index(
-  index : ModuleIndex,
-  queue : Array[ItemModel]
-) -> SidebarModel {
+fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
   {
     hide: false,
     filter: "",
     cards_expanded: true,
     module_path: index.name,
-    items: [
-      ..queue,
-      ..generate_package_model_from_package(index.package).childrens,
-    ],
-    readme: queue.length() > 0,
+    items: generate_package_model_from_package(index.package).childrens,
     dependencies: [],
   }
 }

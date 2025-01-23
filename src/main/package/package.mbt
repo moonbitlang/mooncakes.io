@@ -16,14 +16,14 @@ enum Msg {
 ///|
 struct Model {
   now_path : String
-  sidebar : @load.QueuedLoading[SidebarModel, Array[ItemModel]]
+  sidebar : @load.Loading[SidebarModel]
   detail_cards : Array[DetailCardModel]
   meta_info : @load.Loading[@meta.MetaInfoModel]
 }
 
 ///|
 fn Model::empty() -> Model {
-  { now_path: "", sidebar: Loading([]), detail_cards: [], meta_info: Loading }
+  { now_path: "", sidebar: Loading, detail_cards: [], meta_info: Loading }
 }
 
 ///|
@@ -58,50 +58,35 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           Err(_) => { ..model, meta_info: Failed }
         },
       )
-    GotModuleIndex(result) => {
-      guard let Loading(queue) = model.sidebar
+    GotModuleIndex(result) =>
       (
         @tea.none(),
         match result {
-          Ok(module_index) =>
+          Ok(module_index) =>{
             {
               ..model,
-              sidebar: Success(
-                generate_sidebar_from_module_index(module_index, queue),
-              ),
+              sidebar: Success(generate_sidebar_from_module_index(module_index)),
             }
+          }
           Err(_) => { ..model, sidebar: Failed }
         },
       )
-    }
-    GotReadme(result) => {
-      match model.sidebar {
-        Failed => ()
-        Loading(queue) =>
-          queue.push(ItemModel::{
-            name: "README",
-            target: "",
-            kind: ItemKind::ModuleReadme,
-          })
-        Success(sidebar) =>
-          if not(sidebar.readme) {
-            sidebar.items.insert(0, ItemModel::{
-              name: "README",
-              target: "",
-              kind: ItemKind::ModuleReadme,
-            })
-            sidebar.readme = true
-          }
-      }
+    GotReadme(result) =>
       (
         @tea.none(),
         match result {
           Ok(readme) =>
-            { ..model, detail_cards: [ReadmeCard(readme, folded=false)] }
-          Err(x) => { ..model, detail_cards: [FailureCard(x)] }
+            {
+              ..model,
+              detail_cards: [
+                ReadmeCard(readme, folded=false),
+                ..model.detail_cards,
+              ],
+            }
+          Err(x) =>
+            { ..model, detail_cards: [FailureCard(x), ..model.detail_cards] }
         },
       )
-    }
     GotPackageInfo(result) =>
       (
         @tea.none(),

@@ -14,9 +14,9 @@ enum Msg {
 ///|
 struct Model {
   now_path : String
-  sidebar : @load.Loading[SidebarModel]
+  sidebar : @util.Status[SidebarModel]
   detail_cards : Array[DetailCardModel]
-  meta_info : @load.Loading[@meta.MetaInfoModel]
+  meta_info : @util.Status[@meta.MetaInfoModel]
 }
 
 ///|

@@ -5,7 +5,7 @@ pub enum Msg {
 }
 
 ///|
-pub type Model @load.Loading[Map[String, @meta.MetaInfoModel]]
+pub type Model @util.Status[Map[String, @meta.MetaInfoModel]]
 
 ///|
 pub fn load() -> (@tea.Command[Msg], Model) {

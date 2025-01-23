@@ -4,7 +4,6 @@
       "path": "Yoorkin/rabbit-tea",
       "alias": "tea"
     },
-    "Yoorkin/rabbit-tea/url",
     "Yoorkin/rabbit-tea/http",
     {
       "path": "Yoorkin/rabbit-tea/html",
@@ -13,20 +12,14 @@
         "div",
         "text",
         "h1",
-        "h2",
-        "h3",
         "h4",
         "h5",
         "h6",
         "p",
         "hr",
-        "ul",
-        "li",
-        "section"
       ]
     },
     "rami3l/cmark/cmark",
-    "rami3l/cmark/cmark_base",
     "moonbitlang/mooncakes/highlight",
     "Yoorkin/rabbit-tea/browser",
     "moonbitlang/mooncakes/config",

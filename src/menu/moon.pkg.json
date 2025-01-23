@@ -4,7 +4,6 @@
       "path": "Yoorkin/rabbit-tea",
       "alias": "tea"
     },
-    "Yoorkin/rabbit-tea/url",
     "Yoorkin/rabbit-tea/http",
     {
       "path": "Yoorkin/rabbit-tea/html",
@@ -14,14 +13,8 @@
         "text",
         "h1",
         "h2",
-        "h3",
-        "h4",
-        "h5",
-        "h6",
-        "p",
         "hr",
-        "ul",
-        "li",
+        "p",
         "section"
       ]
     },

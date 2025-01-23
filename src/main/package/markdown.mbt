@@ -68,7 +68,7 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
           code.map(fn(node) { node.v }).to_array(),
           separator="\n",
         )
-        |> hightlight()
+        |> highlight()
       @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
         @html.code(class="font-roboto", [code]),
       ])

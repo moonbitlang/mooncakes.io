@@ -22,7 +22,7 @@ enum ParseState {
   ParsingUIdent(acc~ : List[Char], List[Char])
   ParsingLinkL(acc~ : List[Char], List[Char])
   ParsingLinkM(href~ : String, acc~ : List[Char], List[Char])
-  ParsingLinkR(href~ : String, conetnt~ : String, List[Char])
+  ParsingLinkR(href~ : String, content~ : String, List[Char])
   ParsingSpace(Int, List[Char])
   ParsingCode(acc~ : List[Char], List[Char])
   ParsingString(acc~ : List[Char], List[Char])

@@ -101,7 +101,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         (
           @http.get(
             @constants.URL_BASE + "/" + path + "/package_data.json",
-            expect=Json(Msg::GotPackageInfo, process_pacakge_info),
+            expect=Json(Msg::GotPackageInfo, process_package_info),
           ),
           { ..model, now_path: path, detail_cards: [] },
         )

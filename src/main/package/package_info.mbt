@@ -1,5 +1,5 @@
 ///|
-fn process_pacakge_info(
+fn process_package_info(
   package : Json
 ) -> Result[Array[DetailCardModel], String] {
   fn process_value {

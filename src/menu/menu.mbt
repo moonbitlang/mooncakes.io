@@ -26,7 +26,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         @tea.none(),
         match result {
           Ok(modules) => Success(modules)
-          Err(error) => Failed
+          Err(_) => Failed
         },
       )
     ClickModuleCard(module_name) =>

@@ -22,9 +22,7 @@ enum ParseState {
   ParsingUIdent(acc~ : List[Char], List[Char])
   ParsingLinkL(acc~ : List[Char], List[Char])
   ParsingLinkM(href~ : String, acc~ : List[Char], List[Char])
-  ParsingLinkR(href~ : String, content~ : String, List[Char])
   ParsingSpace(Int, List[Char])
-  ParsingCode(acc~ : List[Char], List[Char])
   ParsingString(acc~ : List[Char], List[Char])
   ParsingNumber(acc~ : List[Char], List[Char])
 }
@@ -41,7 +39,7 @@ pub fn parse(signature : String) -> Array[CodeSpan] {
   let signature = signature.to_array() |> @immut/list.from_array()
   fn parse(state, spans : List[CodeSpan]) {
     match state {
-      ParsingStart(Cons('A'..='Z' | '/' as x, xs)) =>
+      ParsingStart(Cons('A'..='Z' as x, xs)) =>
         parse(ParsingUIdent(acc=Cons(x, Nil), xs), spans)
       ParsingStart(Cons('a'..='z' | '/' as x, xs)) =>
         parse(ParsingLIdent(acc=Cons(x, Nil), xs), spans)
@@ -88,8 +86,7 @@ pub fn parse(signature : String) -> Array[CodeSpan] {
       ) => parse(ParsingStart(xs), Cons(Symbol(String::from_array([x])), spans))
       ParsingStart(Cons('0'..='9' as x, xs)) =>
         parse(ParsingNumber(acc=Cons(x, Nil), xs), spans)
-      ParsingStart(Cons('"' as x, xs)) =>
-        parse(ParsingString(acc=Nil, xs), spans)
+      ParsingStart(Cons('"', xs)) => parse(ParsingString(acc=Nil, xs), spans)
       ParsingNumber(Cons('0'..='9' as x, xs), acc~) =>
         parse(ParsingNumber(acc=Cons(x, acc), xs), spans)
       ParsingNumber(xs, acc~) =>

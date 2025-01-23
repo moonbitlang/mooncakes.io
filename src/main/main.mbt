@@ -8,7 +8,6 @@ enum Message {
 
 ///|
 enum Model {
-  NotFound
   Menu(@menu.Model)
   Package(@package.Model)
 }
@@ -58,7 +57,6 @@ fn view(model : Model) -> @html.Html[Message] {
   match model {
     Menu(model) => @menu.view(model).map(Message::GotMenuMsg)
     Package(model) => @package.view(model).map(Message::GotPackageMsg)
-    NotFound => @html.div([@html.text("Not Found")])
   }
 }
 

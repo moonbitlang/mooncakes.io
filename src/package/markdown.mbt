@@ -50,9 +50,7 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
       [@html.strong(inline)]
     }
     Text({ v: str, .. }) => [text(str)]
-    RawHtml(_) => ...
-    ExtMathSpan(_) => ...
-    ExtStrikethrough({ v: _, .. }) => ...
+    RawHtml(_) | ExtMathSpan(_) | ExtStrikethrough({ v: _, .. }) => panic() // FIXME
   }
 
   fn block2html {
@@ -83,32 +81,35 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
         4..<_ => div(class="text-gray-900 text-xl", inline)
       }
     }
-    List({ v, .. }) => div([text("markdown List")])
+    List(_) => div([text("markdown List")]) // FIXME
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
     ThematicBreak(_) => hr()
-    ExtTable({ v, .. }) => div([text("markdown Table")])
-    LinkRefDefinition({ v, .. }) => {
+    ExtTable(_) => div([text("markdown Table")]) // FIXME
+    LinkRefDefinition(_) => {
+      // FIXME
       println(1)
       div([text("LinkRefDefinition")])
     }
-    ExtMathBlock({ v, .. }) => {
+    ExtMathBlock(_) => {
+      // FIXME
       println(2)
       div([text("ExtMathBlock")])
     }
-    HtmlBlock({ v, .. }) => {
+    HtmlBlock(_) => {
+      // FIXME
       println(3)
       div([text("HTML Block")])
     }
-    ExtFootnoteDefinition({ v, .. }) => div([text("markdown Footnote")])
+    ExtFootnoteDefinition(_) => div([text("markdown Footnote")]) // FIXME
   }
 
   let folder : @cmark.Folder[Array[@html.Html[M]]] = {
-    inline_ext_default: fn(folder, acc, inline) { acc },
-    block_ext_default: fn(folder, acc, block) { acc },
-    inline: fn(folder, acc, inline) {
+    inline_ext_default: fn(_, acc, _) { acc },
+    block_ext_default: fn(_, acc, _) { acc },
+    inline: fn(_, acc, inline) {
       @cmark.FolderResult::Fold([..acc, ..inline2html(inline)])
     },
-    block: fn(folder, acc, block) {
+    block: fn(_, acc, block) {
       @cmark.FolderResult::Fold([..acc, block2html(block)])
     },
   }

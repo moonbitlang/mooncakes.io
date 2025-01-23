@@ -8,11 +8,13 @@ fn process_package_info(
       "docstring": String(description),
       "signature": String(signature),
     } : Json) => ValueCard(folded=false, name~, signature~, description~)
+    _ => panic() // FIXME
   }
 
   fn process_impl {
     ({ "docstring": String(description), "signature": String(signature) } : Json) =>
       ImplCard(folded=false, name=signature, signature~, description~)
+      _ => panic() // FIXME
   }
 
   fn process_type {
@@ -27,6 +29,7 @@ fn process_package_info(
       let impls = impls.map(process_impl)
       TypeCard(folded=false, name~, description~, signature~, methods~, impls~)
     }
+    _ => panic() // FIXME
   }
 
   fn process_typealias {
@@ -36,6 +39,7 @@ fn process_package_info(
       "signature": String(signature),
     } : Json) =>
       TypeCard(folded=false, name~, description~, signature~, methods=[], impls=[])
+    _ => panic() // FIXME
   }
 
   fn process_miscs {
@@ -51,6 +55,7 @@ fn process_package_info(
         impls~,
       )
     }
+    _ => panic() // FIXME
   }
 
   fn process_traits {
@@ -63,6 +68,7 @@ fn process_package_info(
       let impls = impls.map(process_impl)
       TraitCard(folded=false, name~, description~, signature~, impls~)
     }
+    _ => panic() // FIXME
   }
 
   fn process_package {
@@ -82,6 +88,7 @@ fn process_package_info(
         ..values.map(process_value),
         ..misc.map(process_miscs),
       ]
+    _ => panic() // FIXME
   }
 
   Ok(process_package(package))

@@ -68,14 +68,14 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       (
         @tea.none(),
         match result {
-          Ok(package_info) =>
+          Ok(package_info) => // FIXME: clean up detail_cards
             { ..model, detail_cards: [..model.detail_cards, ..package_info] }
-          Err(x) =>
-            { ..model, detail_cards: [..model.detail_cards, FailureCard(x)] }
+          Err(_) => // FIXME: handle error correctly
+            { ..model, detail_cards: [..model.detail_cards ] }
         },
       )
     ToggleCardDetail(detail_card) => {
-      detail_card.toggle_folded()
+      detail_card.toggle_folded() // FIXME: fix this bug
       (@tea.none(), model)
     }
     FoldAllCards => {

@@ -12,18 +12,13 @@
         "div",
         "text",
         "h1",
-        "h4",
-        "h5",
-        "h6",
         "p",
-        "hr",
       ]
     },
-    "rami3l/cmark/cmark",
-    "moonbitlang/mooncakes/highlight",
     "Yoorkin/rabbit-tea/browser",
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/meta",
+    "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/util"
   ]
 }

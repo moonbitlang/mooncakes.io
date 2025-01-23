@@ -5,9 +5,9 @@ fn floating_view(sidebar : @util.Status[SidebarModel]) -> @html.Html[Msg] {
     _ => false
   }
   let button = if cards_expanded {
-    icon_button_view(@config.EXPANSION, text="Fold cards", click=FoldAllCards)
+    @view.icon_button_view(@config.EXPANSION, text="Fold cards", click=FoldAllCards)
   } else {
-    icon_button_view(
+    @view.icon_button_view(
       @config.REDUCTION,
       text="Expand cards",
       click=ExpandAllCards,

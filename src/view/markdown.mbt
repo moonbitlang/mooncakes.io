@@ -1,5 +1,5 @@
 ///|
-fn markdown_view[M](markdown : String) -> @html.Html[M] {
+pub fn markdown_view[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
       text: Text({ v: txt, .. }),

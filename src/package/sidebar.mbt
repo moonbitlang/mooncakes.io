@@ -73,31 +73,31 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
     Readme =>
       item_button(
         text(name),
-        icon=@constants.README_ICON,
+        icon=@config.README_ICON,
         click=ItemClick(target, name),
       )
     Type =>
       item_button(
         text(name),
-        icon=@constants.TYPE_ICON,
+        icon=@config.TYPE_ICON,
         click=ItemClick(target, name),
       )
     TypeAlias =>
       item_button(
         text(name),
-        icon=@constants.TYPE_ALIAS_ICON,
+        icon=@config.TYPE_ALIAS_ICON,
         click=ItemClick(target, name),
       )
     Value =>
       item_button(
         text(name),
-        icon=@constants.VALUE_ICON,
+        icon=@config.VALUE_ICON,
         click=ItemClick(target, name),
       )
     Trait =>
       item_button(
         text(name),
-        icon=@constants.TRAIT_ICON,
+        icon=@config.TRAIT_ICON,
         click=ItemClick(target, name),
       )
     Package({ childrens, folded, .. } as pkg) => {
@@ -111,11 +111,7 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
       } else {
         div(class="pl-4", childrens.map(fn(x) { item_view(x, filter~) }))
       }
-      let icon = if folded {
-        @constants.FOLDER_CLOSE
-      } else {
-        @constants.FOLDER_OPEN
-      }
+      let icon = if folded { @config.FOLDER_CLOSE } else { @config.FOLDER_OPEN }
       @html.ul([
         div(class="inline-block w-full", [
           item_button(text(name), icon~, click=PackageClick(pkg)),
@@ -137,7 +133,7 @@ fn item_list_view(
 ///|
 fn filter_input_view(value : String) -> @html.Html[Msg] {
   let icon = if value == "" {
-    @html.img(class="size-[16px] self-center mr-2", src=@constants.FILTER, [])
+    @html.img(class="size-[16px] self-center mr-2", src=@config.FILTER, [])
   } else {
     div([])
   }

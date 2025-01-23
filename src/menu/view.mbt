@@ -1,12 +1,12 @@
 ///|
 fn view_menu(meta : Map[String, @meta.MetaInfoModel]) -> @html.Html[Msg] {
   div(class="flex min-h-screen flex-col", [
-    @constants.navbar(),
+    @config.navbar(),
     div(class="flex flex-grow flex-col items-center justify-center", [
       view_welcome(),
       view_packages_info(meta),
     ]),
-    @constants.footer(),
+    @config.footer(),
   ])
 }
 
@@ -51,7 +51,7 @@ fn view_welcome() -> @html.Html[Msg] {
         ],
       ),
       div(class="flex justify-center px-4", [
-        @html.img(src=@constants.LOGO, alt="logo", class="h-80 lg:h-96", []),
+        @html.img(src=@config.LOGO, alt="logo", class="h-80 lg:h-96", []),
       ]),
     ],
   )
@@ -151,7 +151,7 @@ fn view_all_package(
   meta : Map[String, @meta.MetaInfoModel]
 ) -> Array[@html.Html[Msg]] {
   let index_map : Map[Char, Array[@meta.MetaInfoModel]] = {}
-  @constants.INDICES.iter().each(fn(c) { index_map.set(c, []) })
+  @config.INDICES.iter().each(fn(c) { index_map.set(c, []) })
   meta
   .iter()
   .map(fn(p) {

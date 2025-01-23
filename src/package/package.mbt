@@ -29,11 +29,11 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
   (
     @tea.batch([
       @http.get(
-        @constants.URL_BASE + "/" + path + "/moon.mod.json",
+        @config.URL_BASE + "/" + path + "/moon.mod.json",
         expect=Json(Msg::GotMetaInfo, parse_metadata),
       ),
       @http.get(
-        @constants.URL_BASE + "/" + path + "/module_index.json",
+        @config.URL_BASE + "/" + path + "/module_index.json",
         expect=Json(Msg::GotModuleIndex, parse_module_index),
       ),
     ]),
@@ -100,7 +100,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       } else {
         (
           @http.get(
-            @constants.URL_BASE + "/" + path + "/package_data.json",
+            @config.URL_BASE + "/" + path + "/package_data.json",
             expect=Json(Msg::GotPackageInfo, process_package_info),
           ),
           { ..model, now_path: path, detail_cards: [] },
@@ -119,7 +119,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   div(
     class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
-      div([@constants.navbar()]),
+      div([@config.navbar()]),
       div([floating_view(model.sidebar)]),
       div(class="flex w-full flex-1", [
         div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
@@ -133,7 +133,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
           detail_cards_view(model.detail_cards),
         ]),
       ]),
-      @constants.footer(),
+      @config.footer(),
     ],
   )
 }

@@ -27,10 +27,10 @@
     },
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",
-    "moonbitlang/mooncakes/main/highlight",
+    "moonbitlang/mooncakes/highlight",
     "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/main/constants",
-    "moonbitlang/mooncakes/main/meta",
-    "moonbitlang/mooncakes/main/load"
+    "moonbitlang/mooncakes/config",
+    "moonbitlang/mooncakes/meta",
+    "moonbitlang/mooncakes/load"
   ]
 }

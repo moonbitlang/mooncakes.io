@@ -11,7 +11,7 @@ pub type Model @load.Loading[Map[String, @meta.MetaInfoModel]]
 pub fn load() -> (@tea.Command[Msg], Model) {
   (
     @http.get(
-      @constants.URL_BASE + "/modules.json",
+      @config.URL_BASE + "/modules.json",
       expect=Json(Msg::GotMenuInfo, parse_metadata),
     ),
     Loading,

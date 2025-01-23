@@ -39,9 +39,9 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
     [
       @html.img(
         src=if card.is_folded() {
-          @constants.SECTION_CLOSE
+          @config.SECTION_CLOSE
         } else {
-          @constants.SECTION_OPEN
+          @config.SECTION_OPEN
         },
         class="group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",
         [],
@@ -91,7 +91,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   // tool buttons
   let tool_buttons = match card {
     ReadmeCard(_, ..) => []
-    _ => [button_view("source"), icon_button_view(@constants.SHARE)]
+    _ => [button_view("source"), icon_button_view(@config.SHARE)]
   }
   // description
   let (description, foldable) = match card {

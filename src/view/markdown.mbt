@@ -1,5 +1,5 @@
 ///|
-fn markdown_view[M](markdown : String) -> @html.Html[M] {
+pub fn markdown[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
       text: Text({ v: txt, .. }),
@@ -66,7 +66,7 @@ fn markdown_view[M](markdown : String) -> @html.Html[M] {
           code.map(fn(node) { node.v }).to_array(),
           separator="\n",
         )
-        |> highlight()
+        |> code_block()
       @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
         @html.code(class="font-roboto", [code]),
       ])

@@ -1,5 +1,5 @@
 ///|
-fn button_view[M](value : String, click? : M) -> @html.Html[M] {
+pub fn button[M](value : String, click? : M) -> @html.Html[M] {
   div(
     class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
     click?,
@@ -8,7 +8,7 @@ fn button_view[M](value : String, click? : M) -> @html.Html[M] {
 }
 
 ///|
-fn icon_button_view[M](
+pub fn icon_button[M](
   icon : String,
   text? : String,
   click? : M

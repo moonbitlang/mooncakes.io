@@ -1,0 +1,26 @@
+package moonbitlang/mooncakes/main/meta
+
+// Values
+
+// Types and methods
+pub(all) struct MetaInfoModel {
+  author : String
+  name : String
+  readme : String?
+  version : String
+  license : String?
+  keywords : Array[String]
+  description : String?
+  repository : String?
+  module_path : String
+  created_at : String?
+}
+impl MetaInfoModel {
+  empty() -> Self
+}
+impl Show for MetaInfoModel
+
+// Type aliases
+
+// Traits
+

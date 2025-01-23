@@ -1,5 +1,4 @@
 {
-  "is-main": true,
   "import": [
     {
       "path": "Yoorkin/rabbit-tea",
@@ -29,8 +28,6 @@
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",
     "moonbitlang/mooncakes/main/highlight",
-    "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/main/menu",
-    "moonbitlang/mooncakes/main/package"
+    "Yoorkin/rabbit-tea/browser"
   ]
 }

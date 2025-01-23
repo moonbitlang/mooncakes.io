@@ -12,15 +12,13 @@
         "div",
         "text",
         "h1",
-        "h2",
-        "hr",
         "p",
-        "section"
       ]
     },
     "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/meta",
     "moonbitlang/mooncakes/config",
+    "moonbitlang/mooncakes/page/meta",
+    "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/util"
   ]
 }

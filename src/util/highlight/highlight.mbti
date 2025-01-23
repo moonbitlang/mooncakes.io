@@ -1,4 +1,4 @@
-package moonbitlang/mooncakes/highlight
+package moonbitlang/mooncakes/util/highlight
 
 // Values
 fn parse(String) -> Array[CodeSpan]

@@ -12,7 +12,6 @@ enum ItemKind {
   Type
   Trait
   Readme
-  ModuleReadme
   TypeAlias
 } derive(Show)
 
@@ -24,30 +23,18 @@ struct PackageModel {
 } derive(Show)
 
 ///|
-struct ModuleModel {
-  fullpath : String
-}
-
-///|
 struct SidebarModel {
-  module_path : String
+  // module_path : String // FIXME
   hide : Bool
   items : Array[ItemModel]
-  dependencies : Array[ModuleModel]
+  // dependencies : Array[ModuleModel] // FIXME
   mut filter : String
   cards_expanded : Bool
 }
 
 ///|
 fn SidebarModel::empty() -> SidebarModel {
-  {
-    module_path: "",
-    hide: false,
-    items: [],
-    dependencies: [],
-    filter: "",
-    cards_expanded: false,
-  }
+  { hide: false, items: [], filter: "", cards_expanded: false }
 }
 
 ///|

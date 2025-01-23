@@ -28,7 +28,6 @@ enum DetailCardModel {
     impls~ : Array[DetailCardModel]
   )
   ReadmeCard(mut folded~ : Bool, String)
-  FailureCard(String)
 } derive(Show)
 
 ///|
@@ -48,12 +47,6 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
       ),
     ],
   )
-
-  // background color
-  let bg = match card {
-    ReadmeCard(_, ..) => ""
-    _ => "bg-white"
-  }
 
   // visibility of the detail section
   let detail_visibility = if card.is_folded() {
@@ -113,13 +106,6 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
       (
         div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
           div(class="mr-4 mb-6", [markdown_view(description)]),
-        ]),
-        div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
-      )
-    FailureCard(info) =>
-      (
-        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-          @html.text("Failed to load this card: \{info}"),
         ]),
         div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
       )

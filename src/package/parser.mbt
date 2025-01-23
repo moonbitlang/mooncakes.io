@@ -63,28 +63,22 @@ trait ToItemModel {
 }
 
 ///|
-struct Trait {
-  name : String
-  path : String
-}
-
-///|
 struct Traits {
   name : String
   impls : Array[Impl]
-}
+} derive(Show)
 
 ///|
 struct Impl {
   methods : Array[String]
-}
+} derive(Show)
 
 ///|
 struct Type {
   name : String
   impls : Array[Impl]
   methods : Array[String]
-}
+} derive(Show)
 
 ///|
 struct PackageBody {
@@ -132,6 +126,7 @@ fn parse_module_index_inner(json : Json) -> ModuleIndex {
         },
       }
     }
+    _ => panic() // FIXME: handle error
   }
 }
 
@@ -144,12 +139,6 @@ fn parse_module_index(json : Json) -> Result[ModuleIndex, String] {
 ///|
 fn as_string(json : Json) -> String {
   json.as_string().unwrap()
-}
-
-///|
-fn parse_trait(json : Json) -> Trait {
-  guard let { "name": String(name), "path": String(path) } = json
-  { name, path }
 }
 
 ///|
@@ -250,8 +239,6 @@ fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
     hide: false,
     filter: "",
     cards_expanded: true,
-    module_path: index.name,
     items: generate_package_model_from_package(index.package).childrens,
-    dependencies: [],
   }
 }

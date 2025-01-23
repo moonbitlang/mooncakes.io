@@ -1,5 +1,5 @@
 ///|
-pub(all) enum Loading[T] {
+pub(all) enum Status[T] {
   Loading
   Failed
   Success(T)

@@ -137,7 +137,7 @@ fn filter_input_view(value : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn sidebar_view(model : @load.Loading[SidebarModel]) -> @html.Html[Msg] {
+fn sidebar_view(model : @util.Status[SidebarModel]) -> @html.Html[Msg] {
   match model {
     Failed => @html.nothing()
     Loading => @html.text("Loading...")

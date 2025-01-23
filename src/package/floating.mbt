@@ -1,5 +1,5 @@
 ///|
-fn floating_view(sidebar : @load.Loading[SidebarModel]) -> @html.Html[Msg] {
+fn floating_view(sidebar : @util.Status[SidebarModel]) -> @html.Html[Msg] {
   let cards_expanded = match sidebar {
     Success(sidebar) => sidebar.cards_expanded
     _ => false

@@ -14,6 +14,6 @@
       ]
     },
     "rami3l/cmark/cmark",
-    "moonbitlang/mooncakes/highlight",
+    "moonbitlang/mooncakes/util/highlight",
   ]
 }

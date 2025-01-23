@@ -1,8 +1,8 @@
-package moonbitlang/mooncakes/home
+package moonbitlang/mooncakes/page/home
 
 alias @Yoorkin/rabbit-tea/browser as @browser
 alias @Yoorkin/rabbit-tea/html as @html
-alias @moonbitlang/mooncakes/meta as @meta
+alias @moonbitlang/mooncakes/page/meta as @meta
 alias @moonbitlang/mooncakes/util as @util
 
 // Values

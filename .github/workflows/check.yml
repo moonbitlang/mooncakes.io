@@ -38,7 +38,7 @@ jobs:
           moon test --target js --serial
 
       - name: moon check
-        run: moon check --target js
+        run: moon check --target js --deny-warn
 
       - name: moon info
         run: |

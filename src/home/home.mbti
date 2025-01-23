@@ -1,9 +1,9 @@
-package moonbitlang/mooncakes/menu
+package moonbitlang/mooncakes/home
 
 alias @Yoorkin/rabbit-tea/browser as @browser
 alias @Yoorkin/rabbit-tea/html as @html
-alias @moonbitlang/mooncakes/load as @load
 alias @moonbitlang/mooncakes/meta as @meta
+alias @moonbitlang/mooncakes/util as @util
 
 // Values
 fn load() -> (@browser.Command[Msg], Model)
@@ -13,7 +13,7 @@ fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 fn view(Model) -> @html.T[Msg]
 
 // Types and methods
-pub type Model @load.Loading[Map[String, @meta.MetaInfoModel]]
+pub type Model @util.Status[Map[String, @meta.MetaInfoModel]]
 
 pub enum Msg {
   GotMenuInfo(Result[Map[String, @meta.MetaInfoModel], String])

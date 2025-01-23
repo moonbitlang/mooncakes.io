@@ -1,6 +1,6 @@
 ///|
 enum Message {
-  GotMenuMsg(@menu.Msg)
+  GotHomeMsg(@home.Msg)
   GotPackageMsg(@package.Msg)
   LinkClicked(@browser.UrlRequest)
   UrlChanged(@url.Url)
@@ -8,7 +8,7 @@ enum Message {
 
 ///|
 enum Model {
-  Menu(@menu.Model)
+  Home(@home.Model)
   Package(@package.Model)
 }
 
@@ -25,8 +25,8 @@ fn update_with[SubModel, SubMsg](
 ///|
 fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
   match (msg, model) {
-    (GotMenuMsg(msg), Menu(model)) =>
-      @menu.update(msg, model) |> update_with(Model::Menu, Message::GotMenuMsg)
+    (GotHomeMsg(msg), Home(model)) =>
+      @home.update(msg, model) |> update_with(Model::Home, Message::GotHomeMsg)
     (GotPackageMsg(msg), Package(model)) =>
       @package.update(msg, model)
       |> update_with(Model::Package, Message::GotPackageMsg)
@@ -44,7 +44,7 @@ fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
 fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
   let paths = url.path.split("/").collect()
   match paths {
-    ["/"] | [] => @menu.load() |> update_with(Model::Menu, Message::GotMenuMsg)
+    ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
     _ =>
       @package.load(url.path)
       |> update_with(Model::Package, Message::GotPackageMsg)
@@ -55,7 +55,7 @@ fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
 ///|
 fn view(model : Model) -> @html.Html[Message] {
   match model {
-    Menu(model) => @menu.view(model).map(Message::GotMenuMsg)
+    Home(model) => @home.view(model).map(Message::GotHomeMsg)
     Package(model) => @package.view(model).map(Message::GotPackageMsg)
   }
 }

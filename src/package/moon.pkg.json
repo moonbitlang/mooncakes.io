@@ -24,6 +24,6 @@
     "Yoorkin/rabbit-tea/browser",
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/meta",
-    "moonbitlang/mooncakes/load"
+    "moonbitlang/mooncakes/util"
   ]
 }

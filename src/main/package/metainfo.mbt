@@ -36,7 +36,9 @@ fn tag_view(value : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn meta_info_view(model : @load.Loading[@meta.MetaInfoModel]) -> @html.Html[Msg] {
+fn meta_info_view(
+  model : @load.Loading[@meta.MetaInfoModel]
+) -> @html.Html[Msg] {
   match model {
     Failed => @html.nothing()
     Loading => @html.text("Loading...")

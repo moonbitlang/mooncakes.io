@@ -21,10 +21,14 @@ pub fn load() -> (@tea.Command[Msg], Model) {
 ///|
 pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
   match msg {
-    GotMenuInfo(result) => (@tea.none(), match result {
-      Ok(modules) => Success(modules)
-      Err(error) => Failed
-    })
+    GotMenuInfo(result) =>
+      (
+        @tea.none(),
+        match result {
+          Ok(modules) => Success(modules)
+          Err(error) => Failed
+        },
+      )
     ClickModuleCard(module_name) =>
       (@browser.push_url("/" + module_name), model)
   }

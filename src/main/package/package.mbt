@@ -1,6 +1,5 @@
 ///|
 enum Msg {
-  ReturnToModuleReadme
   ToggleCardDetail(DetailCardModel)
   FoldAllCards
   ExpandAllCards
@@ -9,7 +8,6 @@ enum Msg {
   FilterChange(String)
   GotMetaInfo(Result[@meta.MetaInfoModel, String])
   GotModuleIndex(Result[ModuleIndex, String])
-  GotReadme(Result[String, String])
   GotPackageInfo(Result[Array[DetailCardModel], String])
 }
 
@@ -35,10 +33,6 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
         expect=Json(Msg::GotMetaInfo, parse_metadata),
       ),
       @http.get(
-        @constants.URL_BASE + "/" + path + "/README.md",
-        expect=Text(Msg::GotReadme),
-      ),
-      @http.get(
         @constants.URL_BASE + "/" + path + "/module_index.json",
         expect=Json(Msg::GotModuleIndex, parse_module_index),
       ),
@@ -62,29 +56,12 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       (
         @tea.none(),
         match result {
-          Ok(module_index) =>{
+          Ok(module_index) =>
             {
               ..model,
               sidebar: Success(generate_sidebar_from_module_index(module_index)),
             }
-          }
           Err(_) => { ..model, sidebar: Failed }
-        },
-      )
-    GotReadme(result) =>
-      (
-        @tea.none(),
-        match result {
-          Ok(readme) =>
-            {
-              ..model,
-              detail_cards: [
-                ReadmeCard(readme, folded=false),
-                ..model.detail_cards,
-              ],
-            }
-          Err(x) =>
-            { ..model, detail_cards: [FailureCard(x), ..model.detail_cards] }
         },
       )
     GotPackageInfo(result) =>
@@ -97,17 +74,6 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             { ..model, detail_cards: [..model.detail_cards, FailureCard(x)] }
         },
       )
-    ReturnToModuleReadme => {
-      guard let Success(meta_info) = model.meta_info
-      let module_path = meta_info.module_path
-      (
-        @http.get(
-          @constants.URL_BASE + "/" + module_path + "/README.md",
-          expect=Text(Msg::GotReadme),
-        ),
-        { ..model, detail_cards: [] },
-      )
-    }
     ToggleCardDetail(detail_card) => {
       detail_card.toggle_folded()
       (@tea.none(), model)

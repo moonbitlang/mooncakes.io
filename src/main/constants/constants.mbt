@@ -46,11 +46,13 @@ pub const SHARE = "/share.svg"
 ///|
 pub const LOGO = "/mooncake-pic.png"
 
+///|
 pub fn navbar[M]() -> @html.Html[M] {
   div(class="font-title h-14 w-full px-8 p-4 border-b select-none", [
     h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
   ])
 }
+
 ///|
 pub fn footer[M]() -> @html.Html[M] {
   div(

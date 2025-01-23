@@ -131,7 +131,9 @@ fn view_module_card(meta : @meta.MetaInfoModel) -> @html.Html[Msg] {
 }
 
 ///|
-fn view_packages_info(meta : Map[String, @meta.MetaInfoModel]) -> @html.Html[Msg] {
+fn view_packages_info(
+  meta : Map[String, @meta.MetaInfoModel]
+) -> @html.Html[Msg] {
   div(class="w-full", [
     div(class="bg-[#fbfaf5] flex justify-center", [
       div(class="p-10", [

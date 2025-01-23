@@ -38,6 +38,7 @@ struct SidebarModel {
   cards_expanded : Bool
 }
 
+///|
 fn SidebarModel::empty() -> SidebarModel {
   {
     module_path: "",
@@ -69,12 +70,18 @@ fn item_button[M](
 fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
   let { name, target, kind } = model
   match kind {
-    ModuleReadme =>
-      item_button(text(name), icon=@constants.README_ICON, click=ReturnToModuleReadme)
     Readme =>
-      item_button(text(name), icon=@constants.README_ICON, click=ItemClick(target, name))
+      item_button(
+        text(name),
+        icon=@constants.README_ICON,
+        click=ItemClick(target, name),
+      )
     Type =>
-      item_button(text(name), icon=@constants.TYPE_ICON, click=ItemClick(target, name))
+      item_button(
+        text(name),
+        icon=@constants.TYPE_ICON,
+        click=ItemClick(target, name),
+      )
     TypeAlias =>
       item_button(
         text(name),
@@ -82,9 +89,17 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
         click=ItemClick(target, name),
       )
     Value =>
-      item_button(text(name), icon=@constants.VALUE_ICON, click=ItemClick(target, name))
+      item_button(
+        text(name),
+        icon=@constants.VALUE_ICON,
+        click=ItemClick(target, name),
+      )
     Trait =>
-      item_button(text(name), icon=@constants.TRAIT_ICON, click=ItemClick(target, name))
+      item_button(
+        text(name),
+        icon=@constants.TRAIT_ICON,
+        click=ItemClick(target, name),
+      )
     Package({ childrens, folded, .. } as pkg) => {
       let childrens = if filter == "" {
         childrens
@@ -96,7 +111,11 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
       } else {
         div(class="pl-4", childrens.map(fn(x) { item_view(x, filter~) }))
       }
-      let icon = if folded { @constants.FOLDER_CLOSE } else { @constants.FOLDER_OPEN }
+      let icon = if folded {
+        @constants.FOLDER_CLOSE
+      } else {
+        @constants.FOLDER_OPEN
+      }
       @html.ul([
         div(class="inline-block w-full", [
           item_button(text(name), icon~, click=PackageClick(pkg)),
@@ -142,14 +161,12 @@ fn sidebar_view(model : @load.Loading[SidebarModel]) -> @html.Html[Msg] {
     Success(model) => {
       let hide = if model.hide { "hidden" } else { "" }
       let items = item_list_view(model.items, filter=model.filter)
-      div(
-        [
-          div(class="pt-1 border-t \{hide}", [
-            filter_input_view(model.filter),
-            div(class="text-gray-700", [items]),
-          ]),
-        ],
-      )
+      div([
+        div(class="pt-1 border-t \{hide}", [
+          filter_input_view(model.filter),
+          div(class="text-gray-700", [items]),
+        ]),
+      ])
     }
   }
 }

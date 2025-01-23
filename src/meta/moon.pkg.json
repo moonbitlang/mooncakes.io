@@ -27,7 +27,7 @@
     },
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",
-    "moonbitlang/mooncakes/main/highlight",
+    "moonbitlang/mooncakes/highlight",
     "Yoorkin/rabbit-tea/browser"
   ]
 }

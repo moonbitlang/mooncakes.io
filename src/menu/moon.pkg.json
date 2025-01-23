@@ -26,8 +26,8 @@
       ]
     },
     "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/main/meta",
-    "moonbitlang/mooncakes/main/constants",
-    "moonbitlang/mooncakes/main/load"
+    "moonbitlang/mooncakes/meta",
+    "moonbitlang/mooncakes/constants",
+    "moonbitlang/mooncakes/load"
   ]
 }

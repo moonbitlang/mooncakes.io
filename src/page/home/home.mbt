@@ -1,11 +1,17 @@
 ///|
 pub enum Msg {
-  GotModuleIndices(Result[Map[String, ModuleIndex], String])
+  GotModuleIndices(Result[Indices, String])
   ClickModuleCard(String)
 }
 
 ///|
-pub type Model @util.Status[Map[String, ModuleIndex]]
+pub type Model @util.Status[Indices]
+
+///|
+struct Indices {
+  recently_updated : Array[ModuleIndex]
+  all_modules : Map[Char, Array[ModuleIndex]]
+}
 
 ///|
 pub(all) struct ModuleIndex {
@@ -47,18 +53,22 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  match model._ {
+  let module_list = match model._ {
     Loading => @html.text("Loading...")
     Failed => @html.text("Load Failed")
-    Success(modules) => view_menu(modules)
+    Success(indices) => module_list(indices)
   }
+  div(class="flex min-h-screen flex-col", [
+    @view.navbar(),
+    div(class="flex flex-grow flex-col items-center justify-center", [welcome()]),
+    module_list,
+    @view.footer(),
+  ])
 }
 
 ///|
-fn decode_module_indices(
-  modules_json : Json
-) -> Result[Map[String, ModuleIndex], String] {
-  fn parse_index {
+fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
+  fn decode_index {
     ({
       "name": String(path),
       "version": String(version),
@@ -83,13 +93,37 @@ fn decode_module_indices(
     _ => Err("Error when parsing metadata.")
   }
 
-  let result = {}
+  fn to_upper(c : Char) -> Char {
+    if c >= 'a' && c <= 'z' {
+      Char::from_int(c.to_int() - 'a'.to_int() + 'A'.to_int())
+    } else {
+      c
+    }
+  }
+
   guard let { "modules": Array(modules) } = modules_json
+  let indices = []
   for mod in modules {
-    match parse_index(mod) {
-      Ok(index) => result.set(index.path, index)
+    match decode_index(mod) {
+      Ok(index) => indices.push(index)
       Err(msg) => return Err(msg)
     }
   }
-  Ok(result)
+  indices.sort_by(fn(a, b) { a.name.compare(b.name) })
+  let all_modules = {}
+  for index in indices {
+    let first_letter = to_upper(index.name[0])
+    match all_modules.get(first_letter) {
+      None => all_modules[first_letter] = [index]
+      Some(indices) => indices.push(index)
+    }
+  }
+
+  // FIXME: sort indices by time
+  let recently_updated = indices
+    ..sort_by(fn(a, b) { a.name.compare(b.name) })
+    .iter()
+    .take(6)
+    .collect()
+  Ok({ recently_updated, all_modules })
 }

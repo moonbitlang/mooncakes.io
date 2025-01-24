@@ -1,17 +1,5 @@
 ///|
-fn view_menu(meta : Map[String, ModuleIndex]) -> @html.Html[Msg] {
-  div(class="flex min-h-screen flex-col", [
-    @view.navbar(),
-    div(class="flex flex-grow flex-col items-center justify-center", [
-      view_welcome(),
-      view_packages_info(meta),
-    ]),
-    @view.footer(),
-  ])
-}
-
-///|
-fn view_welcome() -> @html.Html[Msg] {
+fn welcome() -> @html.Html[Msg] {
   div(
     class="font-title flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
     [
@@ -58,15 +46,6 @@ fn view_welcome() -> @html.Html[Msg] {
 }
 
 ///|
-fn to_upper(c : Char) -> Char {
-  if c >= 'a' && c <= 'z' {
-    Char::from_int(c.to_int() - 'a'.to_int() + 'A'.to_int())
-  } else {
-    c
-  }
-}
-
-///|
 extern "js" fn get_relative_time(date : String) -> String =
   #|function getRelativeTime(dateString) {
   #|  const date = new Date(dateString);
@@ -88,7 +67,7 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|}
 
 ///|
-fn view_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
+fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   let keywords = match mod.keywords {
     None => @html.nothing()
     Some(keywords) =>
@@ -143,42 +122,15 @@ fn view_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
 }
 
 ///|
-fn view_packages_info(meta : Map[String, ModuleIndex]) -> @html.Html[Msg] {
-  div(class="w-full", [
-    div(class="bg-[#fbfaf5] flex justify-center", [
-      div(class="p-10", [
-        h1(
-          class="py-5 text-2xl text-gray-800 font-semibold",
-          [text("All Mooncakes"), ..view_all_package(meta)],
-        ),
-      ]),
-    ]),
-  ])
-}
-
-///|
-fn view_all_package(meta : Map[String, ModuleIndex]) -> Array[@html.Html[Msg]] {
-  let index_map : Map[Char, Array[ModuleIndex]] = {}
-  @config.INDICES.iter().each(fn(c) { index_map.set(c, []) })
-  meta
-  .iter()
-  .map(fn(p) {
-    (
-      String::from_array(
-        p.0.iter().drop_while(fn(x) { x != '/' }).drop(1).collect(),
-      ),
-      p.1,
-    )
-  })
-  .each(fn(p) {
-    let letter = to_upper(p.0[0])
-    index_map.get(letter).unwrap().push(p.1)
-  })
-  index_map
-  .iter()
-  .map(fn(couple) {
-    let (letter, packages) = couple
-    if couple.1.length() > 0 {
+fn module_list(indices : Indices) -> @html.Html[Msg] {
+  let recently_updated = indices.recently_updated
+    .iter()
+    .map(module_card)
+    .collect()
+  let all_modules = indices.all_modules
+    .iter()
+    .map(fn(couple) {
+      let (letter, indices) = couple
       div([
         div([
           h2(class="px-1 py-4 text-xl text-gray-900 font-semibold", [
@@ -186,14 +138,27 @@ fn view_all_package(meta : Map[String, ModuleIndex]) -> Array[@html.Html[Msg]] {
           ]),
           div(
             class="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 gird-flow-row auto-rows-max gap-y-4 gap-x-4",
-            packages.map(view_module_card),
+            indices.map(module_card),
           ),
           hr(class="mt-8 mb-4"),
         ]),
       ])
-    } else {
-      @html.nothing()
-    }
-  })
-  .collect()
+    })
+    .collect()
+  div(class="w-full bg-[#fbfaf5] flex justify-center px-5", [
+    div(class="max-w-[1000px]", [
+      div(
+        [
+          h2(class="py-5 text-2xl text-gray-800 font-semibold", [
+            text("Recently Updated"),
+          ]),
+          div(class="flex flex-wrap gap-2", recently_updated),
+          h2(class="py-5 text-2xl text-gray-800 font-semibold", [
+            text("All Mooncakes"),
+          ]),
+          ..all_modules,
+        ],
+      ),
+    ]),
+  ])
 }

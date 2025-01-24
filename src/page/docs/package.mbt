@@ -119,7 +119,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   div(
     class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
-      div([@config.navbar()]),
+      div([@view.navbar()]),
       div([floating_view(model.sidebar)]),
       div(class="flex w-full flex-1", [
         div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
@@ -133,7 +133,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
           detail_cards_view(model.detail_cards),
         ]),
       ]),
-      @config.footer(),
+      @view.footer(),
     ],
   )
 }

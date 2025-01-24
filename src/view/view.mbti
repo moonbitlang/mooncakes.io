@@ -15,6 +15,8 @@ fn markdown[M](String) -> @html.T[M]
 
 fn navbar[M]() -> @html.T[M]
 
+fn not_found[M]() -> @html.T[M]
+
 // Types and methods
 
 // Type aliases

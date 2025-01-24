@@ -10,6 +10,7 @@ enum Message {
 enum Model {
   Home(@home.Model)
   Docs(@docs.Model)
+  NotFound
 }
 
 ///|
@@ -44,8 +45,11 @@ fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
   let paths = url.path.split("/").collect()
   match paths {
     ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
-    _ => @docs.load(url.path) |> update_with(Model::Docs, Message::GotDocsMsg)
-    // _ => (@tea.none(), NotFound)// We need to wait the test files move to other folder
+    ["docs", .. module_path] =>
+      module_path.fold(fn(x, y) { x + "/" + y }, init="")
+      |> @docs.load()
+      |> update_with(Model::Docs, Message::GotDocsMsg)
+    _ => (@tea.none(), NotFound)
   }
 }
 
@@ -54,6 +58,7 @@ fn view(model : Model) -> @html.Html[Message] {
   match model {
     Home(model) => @home.view(model).map(Message::GotHomeMsg)
     Docs(model) => @docs.view(model).map(Message::GotDocsMsg)
+    NotFound => @view.not_found()
   }
 }
 

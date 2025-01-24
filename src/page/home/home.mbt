@@ -1,11 +1,11 @@
 ///|
 pub enum Msg {
-  GotMenuInfo(Result[Map[String, MetaInfoModel], String])
+  GotMenuInfo(Result[Map[String, ModuleIndex], String])
   ClickModuleCard(String)
 }
 
 ///|
-pub type Model @util.Status[Map[String, MetaInfoModel]]
+pub type Model @util.Status[Map[String, ModuleIndex]]
 
 ///|
 pub fn load() -> (@tea.Command[Msg], Model) {

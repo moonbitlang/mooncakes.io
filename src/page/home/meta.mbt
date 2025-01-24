@@ -1,10 +1,10 @@
 ///| Todo： Optional option not displayed
-pub(all) struct MetaInfoModel {
+pub(all) struct ModuleIndex {
   author : String
   name : String
+  path : String
   version : String
-  keywords : Array[String]
+  keywords : Array[String]?
   description : String?
-  module_path : String
   created_at : String?
 }

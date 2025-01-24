@@ -1,12 +1,12 @@
 ///|
 fn view_menu(meta : Map[String, @meta.MetaInfoModel]) -> @html.Html[Msg] {
   div(class="flex min-h-screen flex-col", [
-    @config.navbar(),
+    @view.navbar(),
     div(class="flex flex-grow flex-col items-center justify-center", [
       view_welcome(),
       view_packages_info(meta),
     ]),
-    @config.footer(),
+    @view.footer(),
   ])
 }
 

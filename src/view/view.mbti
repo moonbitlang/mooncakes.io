@@ -7,9 +7,13 @@ fn button[M](String, click? : M) -> @html.T[M]
 
 fn code_block[M](String) -> @html.T[M]
 
+fn footer[M]() -> @html.T[M]
+
 fn icon_button[M](String, text? : String, click? : M) -> @html.T[M]
 
 fn markdown[M](String) -> @html.T[M]
+
+fn navbar[M]() -> @html.T[M]
 
 // Types and methods
 

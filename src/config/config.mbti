@@ -1,7 +1,5 @@
 package moonbitlang/mooncakes/config
 
-alias @Yoorkin/rabbit-tea/html as @html
-
 // Values
 const EXPANSION : String = "/expansion.svg"
 
@@ -34,10 +32,6 @@ const TYPE_ICON : String = "/type.svg"
 const URL_BASE : String = "http://127.0.0.1:3000"
 
 const VALUE_ICON : String = "/code-brackets.svg"
-
-fn footer[M]() -> @html.T[M]
-
-fn navbar[M]() -> @html.T[M]
 
 // Types and methods
 

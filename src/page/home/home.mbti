@@ -25,7 +25,7 @@ pub(all) struct ModuleIndex {
 }
 
 pub enum Msg {
-  GotMenuInfo(Result[Map[String, ModuleIndex], String])
+  GotModuleIndices(Result[Map[String, ModuleIndex], String])
   ClickModuleCard(String)
 }
 

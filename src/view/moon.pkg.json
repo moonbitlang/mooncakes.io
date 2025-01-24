@@ -11,7 +11,8 @@
         "h6",
         "p",
         "hr",
-        "h1"
+        "h1",
+        "a"
       ]
     },
     "rami3l/cmark/cmark",

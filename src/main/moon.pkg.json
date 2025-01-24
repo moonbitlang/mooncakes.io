@@ -11,6 +11,7 @@
       "alias": "html"
     },
     "Yoorkin/rabbit-tea/browser",
+    "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/page/home",
     "moonbitlang/mooncakes/page/docs"
   ]

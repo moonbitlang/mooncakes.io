@@ -8,18 +8,9 @@
     {
       "path": "Yoorkin/rabbit-tea/html",
       "alias": "html",
-      "value": [
-        "div",
-        "text",
-        "h1",
-        "h2",
-        "hr",
-        "p",
-        "section"
-      ]
+      "value": ["div", "text", "h1", "h2", "hr", "p", "section"]
     },
     "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/page/meta",
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/util"

@@ -1,8 +1,4 @@
-package moonbitlang/mooncakes/page/meta
-
-// Values
-
-// Types and methods
+///| Todo： Optional option not displayed
 pub(all) struct MetaInfoModel {
   author : String
   name : String
@@ -13,14 +9,4 @@ pub(all) struct MetaInfoModel {
   description : String?
   repository : String?
   module_path : String
-  created_at : String?
-}
-impl MetaInfoModel {
-  empty() -> Self
-}
-impl Show for MetaInfoModel
-
-// Type aliases
-
-// Traits
-
+} derive(Show)

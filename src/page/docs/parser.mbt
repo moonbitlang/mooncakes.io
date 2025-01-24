@@ -1,6 +1,6 @@
 ///|
-fn parse_metadata(modules_json : Json) -> Result[@meta.MetaInfoModel, String] {
-  fn parse_package(json : Json) -> Result[@meta.MetaInfoModel, String] {
+fn parse_metadata(modules_json : Json) -> Result[MetaInfoModel, String] {
+  fn parse_package(json : Json) -> Result[MetaInfoModel, String] {
     guard let {
       "name"? : name,
       "repository"? : repository,
@@ -23,7 +23,7 @@ fn parse_metadata(modules_json : Json) -> Result[@meta.MetaInfoModel, String] {
     guard let [repository, license, description, readme] = [
       repository, license, description, readme,
     ].map(fn {
-      Some(x) => Some(x.as_string().unwrap())
+      Some(x) => x.as_string()
       None => None
     }) else {
       _ => Err("Error when parsing repository, license, description, readme.")
@@ -50,7 +50,6 @@ fn parse_metadata(modules_json : Json) -> Result[@meta.MetaInfoModel, String] {
       license,
       repository,
       keywords,
-      created_at: None,
     })
   }
 

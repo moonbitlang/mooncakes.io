@@ -6,7 +6,7 @@ enum Msg {
   ItemClick(String, String)
   PackageClick(PackageModel)
   FilterChange(String)
-  GotMetaInfo(Result[@meta.MetaInfoModel, String])
+  GotMetaInfo(Result[MetaInfoModel, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageInfo(Result[Array[DetailCardModel], String])
 }
@@ -16,7 +16,7 @@ struct Model {
   now_path : String
   sidebar : @util.Status[SidebarModel]
   detail_cards : Array[DetailCardModel]
-  meta_info : @util.Status[@meta.MetaInfoModel]
+  meta_info : @util.Status[MetaInfoModel]
 }
 
 ///|

@@ -7,4 +7,4 @@ pub(all) struct MetaInfoModel {
   description : String?
   module_path : String
   created_at : String?
-} derive(Show)
+}

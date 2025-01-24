@@ -34,7 +34,6 @@ pub(all) struct MetaInfoModel {
   repository : String?
   module_path : String
 }
-impl Show for MetaInfoModel
 
 type Model
 

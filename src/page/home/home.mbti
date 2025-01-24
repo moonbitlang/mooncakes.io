@@ -21,7 +21,6 @@ pub(all) struct MetaInfoModel {
   module_path : String
   created_at : String?
 }
-impl Show for MetaInfoModel
 
 pub type Model @util.Status[Map[String, MetaInfoModel]]
 

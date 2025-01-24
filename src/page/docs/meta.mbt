@@ -9,4 +9,4 @@ pub(all) struct MetaInfoModel {
   description : String?
   repository : String?
   module_path : String
-} derive(Show)
+}

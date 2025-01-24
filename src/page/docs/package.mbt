@@ -29,11 +29,11 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
   (
     @tea.batch([
       @http.get(
-        @config.URL_BASE + "/" + path + "/moon.mod.json",
+        @config.URL_BASE + "/docs/" + path + "/moon.mod.json",
         expect=Json(Msg::GotMetaInfo, parse_metadata),
       ),
       @http.get(
-        @config.URL_BASE + "/" + path + "/module_index.json",
+        @config.URL_BASE + "/docs/" + path + "/module_index.json",
         expect=Json(Msg::GotModuleIndex, parse_module_index),
       ),
     ]),
@@ -100,7 +100,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       } else {
         (
           @http.get(
-            @config.URL_BASE + "/" + path + "/package_data.json",
+            @config.URL_BASE + "/docs/" + path + "/package_data.json",
             expect=Json(Msg::GotPackageInfo, process_package_info),
           ),
           { ..model, now_path: path, detail_cards: [] },

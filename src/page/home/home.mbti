@@ -2,7 +2,6 @@ package moonbitlang/mooncakes/page/home
 
 alias @Yoorkin/rabbit-tea/browser as @browser
 alias @Yoorkin/rabbit-tea/html as @html
-alias @moonbitlang/mooncakes/page/meta as @meta
 alias @moonbitlang/mooncakes/util as @util
 
 // Values
@@ -13,10 +12,20 @@ fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 fn view(Model) -> @html.T[Msg]
 
 // Types and methods
-pub type Model @util.Status[Map[String, @meta.MetaInfoModel]]
+pub(all) struct MetaInfoModel {
+  author : String
+  name : String
+  version : String
+  keywords : Array[String]
+  description : String?
+  module_path : String
+  created_at : String?
+}
+
+pub type Model @util.Status[Map[String, MetaInfoModel]]
 
 pub enum Msg {
-  GotMenuInfo(Result[Map[String, @meta.MetaInfoModel], String])
+  GotMenuInfo(Result[Map[String, MetaInfoModel], String])
   ClickModuleCard(String)
 }
 

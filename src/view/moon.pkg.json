@@ -3,19 +3,9 @@
     {
       "path": "Yoorkin/rabbit-tea/html",
       "alias": "html",
-      "value": [
-        "div",
-        "text",
-        "h4",
-        "h5",
-        "h6",
-        "p",
-        "hr",
-        "h1",
-        "a"
-      ]
+      "value": ["div", "text", "h4", "h5", "h6", "p", "hr", "h1", "a"]
     },
     "rami3l/cmark/cmark",
-    "moonbitlang/mooncakes/util/highlight",
+    "moonbitlang/mooncakes/util/highlight"
   ]
 }

@@ -1,16 +1,13 @@
 ///|
 fn parse_metadata(
   modules_json : Json
-) -> Result[Map[String, @meta.MetaInfoModel], String] {
-  fn parse_package(json : Json) -> Result[@meta.MetaInfoModel, String] {
+) -> Result[Map[String, MetaInfoModel], String] {
+  fn parse_package(json : Json) -> Result[MetaInfoModel, String] {
     guard let {
       "name"? : name,
-      "repository"? : repository,
       "version"? : version,
-      "license"? : license,
       "description"? : description,
       "keywords"? : keywords,
-      "readme"? : readme,
       "created_at"? : created_at,
     } = json else {
       _ => Err("Error when parsing metadata.")
@@ -23,13 +20,11 @@ fn parse_metadata(
     }) else {
       _ => Err("Error when parsing name and version.")
     }
-    guard let [repository, license, description, readme] = [
-      repository, license, description, readme,
-    ].map(fn {
-      Some(x) => Some(x.as_string().unwrap())
+    guard let [description, created_at] = [description, created_at].map(fn {
+      Some(x) => x.as_string()
       None => None
     }) else {
-      _ => Err("Error when parsing repository, license, description, readme.")
+      _ => Err("Error when parsing description.")
     }
     let keywords = match keywords {
       Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
@@ -43,19 +38,12 @@ fn parse_metadata(
     let package_name = String::from_array(
       iter.drop_while(fn(x) { x != '/' }).drop(1).collect(),
     )
-    let created_at = match created_at {
-      Some(json) => Some(as_string(json))
-      None => None
-    }
     Ok({
       author,
-      readme,
       name: package_name,
       module_path: name,
       description,
       version,
-      license,
-      repository,
       keywords,
       created_at,
     })
@@ -70,9 +58,4 @@ fn parse_metadata(
     result.set(package.module_path, package)
   }
   Ok(result)
-}
-
-///|
-fn as_string(json : Json) -> String {
-  json.as_string().unwrap()
 }

@@ -1,5 +1,5 @@
 ///|
-fn view_menu(meta : Map[String, MetaInfoModel]) -> @html.Html[Msg] {
+fn view_menu(meta : Map[String, ModuleIndex]) -> @html.Html[Msg] {
   div(class="flex min-h-screen flex-col", [
     @view.navbar(),
     div(class="flex flex-grow flex-col items-center justify-center", [
@@ -88,50 +88,62 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|}
 
 ///|
-fn view_module_card(meta : MetaInfoModel) -> @html.Html[Msg] {
-  let tags = meta.keywords.map(fn(keyword) {
-    @html.span(
-      class="inline-flex it ems-center rounded-md bg-gray-50 px-2 text-tiny h-5 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10",
-      [text(keyword)],
-    )
-  })
-  let description = div([
-    hr(class="mt-2"),
-    p(
-      class="mx-4 my-3 max-h-16 text-gray-500 text-xs text-ellipsis overflow-hidden",
-      [text(meta.description.or_default())],
-    ),
-  ])
-  let time = match meta.created_at {
-    Some(t) => get_relative_time(t)
-    None => "Unknown"
+fn view_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
+  let keywords = match mod.keywords {
+    None => @html.nothing()
+    Some(keywords) =>
+      div(
+        class="mx-3 pb-3 flex gap-2 overflow-hidden",
+        keywords.map(fn {
+          keyword =>
+            @html.span(
+              class="text-tiny/5 bg-gray-50 text-gray-600 px-2 py-0 border-gray-200  border rounded",
+              [text(keyword)],
+            )
+        }),
+      )
+  }
+  let description = match mod.description {
+    None => @html.nothing()
+    Some(description) =>
+      div([
+        hr(class="mt-2"),
+        p(
+          class="mx-4 my-3 max-h-16 text-gray-500 text-xs text-ellipsis overflow-hidden",
+          [text(description)],
+        ),
+      ])
+  }
+  let time = match mod.created_at {
+    Some(t) => p([text(get_relative_time(t))])
+    None => @html.nothing()
   }
   div(
     class="flex select-none bg-white shadow-sm hover:outline-moonbit hover:outline outline-1 outline-transparent hover:shadow-lg border transition-all border-gray-200 rounded-lg flex w-80 flex-col",
-    click=ClickModuleCard(meta.module_path),
+    click=ClickModuleCard(mod.path),
     [
       div(class="px-5 pt-4", [
         div(class="flex flex-wrap justify-between items-center", [
-          h2(class="font-semibold text-gray-800", [text(meta.name)]),
+          h2(class="font-semibold text-gray-800 text-xl", [text(mod.name)]),
           div(class="text-gray-500 text-tiny flex gap-x-1", [
-            @html.span(class="text-gray-500 text-tiny", [
-              text("v\{meta.version}"),
-              text("| \{time}"),
+            @html.span(class="text-gray-500 text-tiny flex flex-row gap-2", [
+              text("v\{mod.version}"),
+              time,
             ]),
           ]),
         ]),
         @html.span(class="text-gray-500 text-xs overflow-hidden", [
-          text(meta.author),
+          text(mod.author),
         ]),
       ]),
       div(class="min-h-10 flex-grow", [description]),
-      div(class="mx-3 pb-3 flex gap-2 overflow-hidden", tags),
+      keywords,
     ],
   )
 }
 
 ///|
-fn view_packages_info(meta : Map[String, MetaInfoModel]) -> @html.Html[Msg] {
+fn view_packages_info(meta : Map[String, ModuleIndex]) -> @html.Html[Msg] {
   div(class="w-full", [
     div(class="bg-[#fbfaf5] flex justify-center", [
       div(class="p-10", [
@@ -145,10 +157,8 @@ fn view_packages_info(meta : Map[String, MetaInfoModel]) -> @html.Html[Msg] {
 }
 
 ///|
-fn view_all_package(
-  meta : Map[String, MetaInfoModel]
-) -> Array[@html.Html[Msg]] {
-  let index_map : Map[Char, Array[MetaInfoModel]] = {}
+fn view_all_package(meta : Map[String, ModuleIndex]) -> Array[@html.Html[Msg]] {
+  let index_map : Map[Char, Array[ModuleIndex]] = {}
   @config.INDICES.iter().each(fn(c) { index_map.set(c, []) })
   meta
   .iter()

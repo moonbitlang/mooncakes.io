@@ -12,20 +12,20 @@ fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 fn view(Model) -> @html.T[Msg]
 
 // Types and methods
-pub(all) struct MetaInfoModel {
+pub type Model @util.Status[Map[String, ModuleIndex]]
+
+pub(all) struct ModuleIndex {
   author : String
   name : String
+  path : String
   version : String
-  keywords : Array[String]
+  keywords : Array[String]?
   description : String?
-  module_path : String
   created_at : String?
 }
 
-pub type Model @util.Status[Map[String, MetaInfoModel]]
-
 pub enum Msg {
-  GotMenuInfo(Result[Map[String, MetaInfoModel], String])
+  GotModuleIndices(Result[Map[String, ModuleIndex], String])
   ClickModuleCard(String)
 }
 

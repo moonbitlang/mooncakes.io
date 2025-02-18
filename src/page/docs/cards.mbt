@@ -1,4 +1,5 @@
 ///|
+/// Todo: remove the mutability of folded
 enum DetailCardModel {
   ValueCard(
     mut folded~ : Bool,
@@ -27,6 +28,7 @@ enum DetailCardModel {
     description~ : String,
     impls~ : Array[DetailCardModel]
   )
+  FailureCard(mut folded~ : Bool, info~ : String)
   ReadmeCard(mut folded~ : Bool, String)
 } derive(Show)
 
@@ -75,6 +77,10 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
       p(id="README", class="text-sm font-bold py-2 text-gray-600 self-center", [
         text("README"),
       ])
+    FailureCard(_) =>
+      p(class="text-sm font-bold py-2 text-red-500 self-center", [
+        text("Package Info Parser Failed"),
+      ])
     ValueCard(signature~, name~, ..)
     | ImplCard(signature~, name~, ..)
     | TypeCard(signature~, name~, ..)
@@ -102,6 +108,13 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
           div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
         )
       }
+    FailureCard(info~, ..) =>
+      (
+        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
+          div(class="mr-4 mb-6 text-red-500", [text(info)]),
+        ]),
+        div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
+      )
     ReadmeCard(description, ..) =>
       (
         div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
@@ -165,6 +178,7 @@ fn is_folded(self : DetailCardModel) -> Bool {
     | ImplCard(folded~, ..)
     | TypeCard(folded~, ..)
     | TraitCard(folded~, ..)
+    | FailureCard(folded~, ..)
     | ReadmeCard(folded~, _) => folded
   }
 }
@@ -189,6 +203,7 @@ fn toggle_folded(self : DetailCardModel) -> Unit {
         x.toggle_folded()
       }
     }
+    FailureCard(_) as card => card.folded = not(card.folded)
     ReadmeCard(_, ..) as card => card.folded = not(card.folded)
   }
 }

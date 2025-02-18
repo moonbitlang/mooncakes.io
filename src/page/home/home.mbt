@@ -65,6 +65,7 @@ fn decode_module_indices(
       "description"? : description,
       "keywords"? : keywords,
       "created_at"? : created_at,
+      ..
     } : Json) => {
       let keywords = match keywords {
         Some(Array(keywords)) =>
@@ -84,7 +85,7 @@ fn decode_module_indices(
   }
 
   let result = {}
-  guard let { "modules": Array(modules) } = modules_json
+  guard let { "modules": Array(modules), .. } = modules_json
   for mod in modules {
     match parse_index(mod) {
       Ok(index) => result.set(index.path, index)

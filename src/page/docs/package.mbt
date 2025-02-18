@@ -70,8 +70,8 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         match result {
           Ok(package_info) => // FIXME: clean up detail_cards
             { ..model, detail_cards: [..model.detail_cards, ..package_info] }
-          Err(_) => // FIXME: handle error correctly
-            { ..model, detail_cards: [..model.detail_cards] }
+          Err(info) =>
+            { ..model, detail_cards: [FailureCard(folded=false, info~)] }
         },
       )
     ToggleCardDetail(detail_card) => {

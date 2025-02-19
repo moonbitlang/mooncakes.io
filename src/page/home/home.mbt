@@ -67,6 +67,16 @@ pub fn view(model : Model) -> @html.Html[Msg] {
 }
 
 ///|
+extern "js" fn compare_date(date1 : String, date2 : String) -> Int =
+  #|function compareDate(date1_str, date2_str) {
+  #|  const date1 = new Date(date1_str);
+  #|  const date2 = new Date(date2_str);
+  #|  if (date1 > date2) return -1;
+  #|  if (date1 < date2) return 1;
+  #|  return 0;
+  #|}
+
+///|
 fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
   fn decode_index {
     ({
@@ -118,10 +128,20 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
       Some(indices) => indices.push(index)
     }
   }
-
-  // FIXME: sort indices by time
   let recently_updated = indices
-    ..sort_by(fn(a, b) { a.name.compare(b.name) })
+    ..sort_by(fn(a, b) {
+      match (a, b) {
+        ({ created_at: Some(v1), .. }, { created_at: Some(v2), .. }) =>
+          match compare_date(v1, v2) {
+            0 => -a.name.compare(b.name)
+            order => order
+          }
+        ({ created_at: None, .. }, { created_at: Some(_), .. }) => 1
+        ({ created_at: Some(_), .. }, { created_at: None, .. }) => -1
+        ({ created_at: None, .. }, { created_at: None, .. }) =>
+          -a.name.compare(b.name)
+      }
+    })
     .iter()
     .take(6)
     .collect()

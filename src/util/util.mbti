@@ -3,7 +3,7 @@ package moonbitlang/mooncakes/util
 // Values
 
 // Types and methods
-pub(all) enum Status {
+pub(all) enum Status[T] {
   Loading
   Failed
   Success(T)

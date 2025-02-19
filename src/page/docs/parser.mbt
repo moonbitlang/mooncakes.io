@@ -9,6 +9,7 @@ fn parse_metadata(modules_json : Json) -> Result[MetaInfoModel, String] {
       "description"? : description,
       "keywords"? : keywords,
       "readme"? : readme,
+      ..
     } = json else {
       _ => Err("Error when parsing metadata.")
     }
@@ -115,7 +116,7 @@ struct ModuleIndex {
 ///|
 fn parse_module_index_inner(json : Json) -> ModuleIndex {
   match json {
-    { "name": String(name), "package": package, "childs": Array(childs) } => {
+    { "name": String(name), "package": package, "childs": Array(childs),.. } => {
       let childs = childs.map(parse_module_index_inner)
       {
         name,
@@ -142,7 +143,7 @@ fn as_string(json : Json) -> String {
 
 ///|
 fn parse_impl(json : Json) -> Impl {
-  guard let { "methods": Array(methods) } = json
+  guard let { "methods": Array(methods),.. } = json
   { methods: methods.map(as_string) }
 }
 
@@ -151,7 +152,7 @@ fn parse_traits(json : Json) -> Array[Traits] {
   let result : Array[Traits] = []
   guard let Array(traits_list) = json
   for trait_ in traits_list {
-    guard let { "name": String(name), "impls": Array(impls) } = trait_
+    guard let { "name": String(name), "impls": Array(impls),.. } = trait_
     result.push({ name, impls: impls.map(parse_impl) })
   }
   result
@@ -163,6 +164,7 @@ fn parse_type(json : Json) -> Type {
     "name": String(name),
     "impls": Array(impls),
     "methods": Array(method_),
+    ..
   } = json
   { name, impls: impls.map(parse_impl), methods: method_.map(as_string) }
 }
@@ -178,6 +180,7 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
     "typealias": Array(typealais_),
     "values": Array(values),
     "misc": Array(miscs),
+    ..
   } = json
   {
     body: Some({

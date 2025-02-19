@@ -7,12 +7,13 @@ fn process_package_info(
       "name": String(name),
       "docstring": String(description),
       "signature": String(signature),
+      ..
     } : Json) => ValueCard(folded=false, name~, signature~, description~)
     _ => panic() // FIXME
   }
 
   fn process_impl {
-    ({ "docstring": String(description), "signature": String(signature) } : Json) =>
+    ({ "docstring": String(description), "signature": String(signature), .. } : Json) =>
       ImplCard(folded=false, name=signature, signature~, description~)
     _ => panic() // FIXME
   }
@@ -24,6 +25,7 @@ fn process_package_info(
       "signature": String(signature),
       "methods": Array(methods),
       "impls": Array(impls),
+      ..
     } : Json) => {
       let methods = methods.map(process_value)
       let impls = impls.map(process_impl)
@@ -37,13 +39,19 @@ fn process_package_info(
       "name": String(name),
       "docstring": String(description),
       "signature": String(signature),
+      ..
     } : Json) =>
       TypeCard(folded=false, name~, description~, signature~, methods=[], impls=[])
     _ => panic() // FIXME
   }
 
   fn process_miscs {
-    ({ "name": String(name), "impls": Array(impls), "methods": Array(methods) } : Json) => {
+    ({
+      "name": String(name),
+      "impls": Array(impls),
+      "methods": Array(methods),
+      ..
+    } : Json) => {
       let methods = methods.map(process_value)
       let impls = impls.map(process_impl)
       TypeCard(
@@ -64,6 +72,7 @@ fn process_package_info(
       "docstring": String(description),
       "signature": String(signature),
       "impls": Array(impls),
+      ..
     } : Json) => {
       let impls = impls.map(process_impl)
       TraitCard(folded=false, name~, description~, signature~, impls~)
@@ -79,6 +88,7 @@ fn process_package_info(
       "traits": Array(traits),
       "readme": String(readme),
       "misc": Array(misc),
+      ..
     } : Json) =>
       (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
       [

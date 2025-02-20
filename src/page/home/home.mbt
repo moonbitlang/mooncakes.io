@@ -58,7 +58,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     Failed => @html.text("Load Failed")
     Success(indices) => module_list(indices)
   }
-  div(class="flex min-h-screen flex-col", [
+  div(class="relative", [
     @view.navbar(),
     div(class="flex flex-grow flex-col items-center justify-center", [welcome()]),
     module_list,

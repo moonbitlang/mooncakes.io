@@ -1,45 +1,24 @@
 ///|
-fn welcome() -> @html.Html[Msg] {
+fn search_bar() -> @html.Html[Msg] {
   div(
-    class="font-title flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
+    class="text-center pt-14 pb-8  bg-cover bg-bottom bg-mooncake border-b mb-10",
     [
-      div(
-        class="flex flex-1 flex-col justify-center gap-4 px-4 lg:max-w-[50%] lg:gap-8",
-        [
-          section(
-            class="flex flex-col items-center gap-2 px-4 lg:items-start lg:gap-4",
-            [
-              p(class="text-xl font-semibold text-gray-600 lg:text-3xl", [
-                text("Hi This is"),
-              ]),
-              h1(class="text-2xl font-semibold lg:text-7xl", [
-                text("mooncakes."),
-              ]),
-              p(
-                class="text-center text-gray-600 lg:text-start lg:text-3xl lg:leading-tight",
-                [text("The centralized MoonBit package management platform.")],
-              ),
-            ],
-          ),
-          div(
-            class="flex flex-grow-0 items-center justify-center gap-4 lg:justify-start lg:gap-8",
-            [
-              @html.a(
-                href="https://www.moonbitlang.com/download/",
-                class="rounded-full border-[#cf4f89] border-2 bg-[#cf4f89] text-white transition-all lg:px-10 px-4 py-2 text-center font-semibold lg:py-2 lg:text-lg",
-                [text("Install Moon")],
-              ),
-              @html.a(
-                href="https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
-                class="rounded-full border-[#cf4f89] border-2 hover:bg-[#cf4f89] hover:text-white transition-all lg:px-10 px-4 py-2 text-center font-semibold text-[#cf4f89] lg:py-2 lg:text-lg",
-                [text("Getting Started")],
-              ),
-            ],
-          ),
-        ],
-      ),
-      div(class="flex justify-center px-4", [
-        @html.img(src=@config.LOGO, alt="logo", class="h-80 lg:h-96", []),
+      div(class="flex items-center justify-center", [
+        @html.img(
+          src="favicon.svg",
+          class="inline-block h-12 w-12",
+          alt="Logo",
+          [],
+        ),
+        h1(class="font-bold text-5xl p-4 text-gray-800", [text("mooncakes.io")]),
+      ]),
+      div(class="flex justify-center mt-4 relative", [
+        @html.input(
+          input_type=Text,
+          placeholder="Search...",
+          class="border rounded px-4 py-2 w-screen lg:w-1/2 focus:border-mooncake2 border-2 outline-none",
+          input=Msg::FilterChanged,
+        ),
       ]),
     ],
   )
@@ -67,6 +46,25 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|}
 
 ///|
+fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
+  div(
+    class="p-4 h-50 flex flex-col border-b bg-white lg:hover:outline-mooncake2 lg:border lg:rounded-md lg:outline outline-transparent transition-all",
+    click=ClickModuleCard(mod.path),
+    [
+      div(class="flex flex-row text-lg font-semibold", [
+        h2(class="text-gray-500", [text(mod.author)]),
+        h2(class="px-1 text-gray-300", [text("/")]),
+        h2(class="", [text(mod.name)]),
+      ]),
+      div(
+        class="pt-2 flex justify-between items-center text-gray-600 text-sm",
+        [text(mod.description.or(""))],
+      ),
+    ],
+  )
+}
+
+///|
 fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   let keywords = match mod.keywords {
     None => @html.nothing()
@@ -85,7 +83,7 @@ fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   let description = match mod.description {
     None => div(class="flex-grow", [])
     Some(description) =>
-      p(class="text-gray-700 overflow-ellipsis grow text-sm", [
+      p(class="text-gray-700 py-3 overflow-ellipsis grow text-sm", [
         text(description),
       ])
   }
@@ -94,62 +92,47 @@ fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
     None => @html.nothing()
   }
   div(
-    class="p-4 h-50 flex flex-col border-b bg-white lg:hover:outline-moonbit lg:border lg:rounded-md lg:outline outline-transparent transition-all",
+    class="p-4 min-h-32 flex flex-col border-t bg-white hover:bg-gray-100 transition-all",
     click=ClickModuleCard(mod.path),
     [
-      h2(class="text-xl font-semibold", [text(mod.name)]),
+      div(class="flex flex-row text-lg font-semibold", [
+        h2(class="text-gray-500", [text(mod.author)]),
+        h2(class="px-1 text-gray-300", [text("/")]),
+        h2(class="", [text(mod.name)]),
+      ]),
       description,
       div(class="flex justify-between items-center text-gray-600 text-sm", [
-        p([text(mod.author)]),
-        time,
+        keywords, time,
       ]),
-      keywords,
     ],
   )
 }
 
 ///|
-fn module_list(indices : Indices) -> @html.Html[Msg] {
-  fn card_list(xs) {
-    div(
-      class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4",
-      xs,
-    )
-  }
+fn recently_updated(recently : Array[ModuleIndex]) -> @html.Html[Msg] {
+  let recently_updated = recently.map(simple_module_card)
+  div([
+    div(class="container lg:w-2/3 px-4", [
+      h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
+        text("RECENTLY UPDATED"),
+      ]),
+      div(
+        class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4",
+        recently_updated,
+      ),
+    ]),
+  ])
+}
 
-  let recently_updated = indices.recently_updated
-    .iter()
-    .map(module_card)
-    .collect()
-  let all_modules = indices.all_modules
-    .iter()
-    .map(fn(couple) {
-      let (letter, indices) = couple
-      div([
-        div([
-          h2(
-            class="sticky top-0 px-4 py-2 border-b text-sm bg-mooncake text-gray-900 font-semibold lg:bg-transparent lg:border-0",
-            [text(letter.to_string())],
-          ),
-          card_list(indices.map(module_card)),
-        ]),
-      ])
-    })
-    .collect()
-  div(class="lg:bg-mooncake", [
-    div(
-      class="container",
-      [
-        h1(class="border-b p-4 text-xl font-bold text-gray-900 lg:border-0", [
-          text("Recently Updated"),
-        ]),
-        card_list(recently_updated),
-        h1(
-          class="border-b pt-10 p-4 text-xl font-bold text-gray-900 lg:border-0",
-          [text("All mooncakes")],
-        ),
-        ..all_modules,
-      ],
-    ),
+///|
+fn search_result(mods : Array[ModuleIndex]) -> @html.Html[Msg] {
+  let module_cards = mods.map(module_card)
+  div([
+    div(class="container lg:w-3/5 px-4", [
+      h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
+        text("SEARCH RESULT"),
+      ]),
+      div(class="grid grid-cols-1 grid-cols-1", module_cards),
+    ]),
   ])
 }

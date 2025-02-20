@@ -2,10 +2,15 @@
 pub enum Msg {
   GotModuleIndices(Result[Indices, String])
   ClickModuleCard(String)
+  FilterChanged(String)
 }
 
 ///|
-pub type Model @util.Status[Indices]
+pub struct Model {
+  indices : @util.Status[Indices]
+  filter : String
+  filtered_modules : Array[ModuleIndex]
+}
 
 ///|
 struct Indices {
@@ -31,7 +36,7 @@ pub fn load() -> (@tea.Command[Msg], Model) {
       @config.URL_BASE + "/docs/modules.json",
       expect=Json(Msg::GotModuleIndices, decode_module_indices),
     ),
-    Loading,
+    { indices: Loading, filter: "", filtered_modules: [] },
   )
 }
 
@@ -42,27 +47,57 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       (
         @tea.none(),
         match result {
-          Ok(modules) => Success(modules)
-          Err(_) => Failed
+          Ok(modules) => { ..model, indices: Success(modules) }
+          Err(_) => { ..model, indices: Failed }
         },
       )
+    FilterChanged(filter) => {
+      let filtered_modules = match model.indices {
+        Success(indices) => filter_indices(filter, indices)
+        _ => []
+      }
+      (@tea.none(), { ..model, filter, filtered_modules })
+    }
     ClickModuleCard(module_name) =>
       (@browser.push_url("/docs/" + module_name), model)
   }
 }
 
 ///|
+pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] {
+  indices.all_modules
+  .values()
+  .flat_map(fn(x) { x.iter() })
+  .filter(fn(x) {
+    fn is_matched(s1 : String) {
+      s1.to_upper().contains(filter.to_upper())
+    }
+
+    is_matched(x.path) ||
+    x.keywords.map_or(false, fn(keywords) { keywords.iter().any(is_matched) }) ||
+    x.description.map_or(false, is_matched)
+  })
+  .collect()
+}
+
+///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  let module_list = match model._ {
+  let module_list = match model.indices {
     Loading => @html.text("Loading...")
     Failed => @html.text("Load Failed")
-    Success(indices) => module_list(indices)
+    Success(indices) =>
+      if model.filter == "" {
+        recently_updated(indices.recently_updated)
+      } else {
+        search_result(model.filtered_modules)
+      }
   }
-  div(class="relative", [
-    @view.navbar(),
-    div(class="flex flex-grow flex-col items-center justify-center", [welcome()]),
+  div(class="flex flex-col min-h-screen", [
+    // @view.navbar(),
+    search_bar(),
+    // banner(),
     module_list,
-    @view.footer(),
+    div(class="mt-auto", [@view.footer()]),
   ])
 }
 
@@ -144,7 +179,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
       }
     })
     .iter()
-    .take(6)
+    .take(12)
     .collect()
   Ok({ recently_updated, all_modules })
 }

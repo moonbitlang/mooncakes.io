@@ -1,3 +1,4 @@
+///|
 test "parse_signature1" {
   let signature = "fn parse_signature(signature : String) -> Array[CodeSpan]"
   let spans = @highlight.parse(signature)
@@ -9,6 +10,7 @@ test "parse_signature1" {
   )
 }
 
+///|
 test "parse_signature with link" {
   let signature = "fn <a href=\"list#T\">T</a>::concat[A](self : <a href=\"list#T\">Tasdfasdf</a>[A], other : <a href=\"list#T\">T</a>[A]) -> <a href=\"list#T\">T</a>[A]"
   let spans = @highlight.parse(signature)

@@ -12,7 +12,9 @@ fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 fn view(Model) -> @html.T[Msg]
 
 // Types and methods
-pub type Model @util.Status[Map[String, ModuleIndex]]
+type Indices
+
+pub type Model @util.Status[Indices]
 
 pub(all) struct ModuleIndex {
   author : String
@@ -25,7 +27,7 @@ pub(all) struct ModuleIndex {
 }
 
 pub enum Msg {
-  GotModuleIndices(Result[Map[String, ModuleIndex], String])
+  GotModuleIndices(Result[Indices, String])
   ClickModuleCard(String)
 }
 

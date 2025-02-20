@@ -1,17 +1,5 @@
 ///|
-fn view_menu(meta : Map[String, ModuleIndex]) -> @html.Html[Msg] {
-  div(class="flex min-h-screen flex-col", [
-    @view.navbar(),
-    div(class="flex flex-grow flex-col items-center justify-center", [
-      view_welcome(),
-      view_packages_info(meta),
-    ]),
-    @view.footer(),
-  ])
-}
-
-///|
-fn view_welcome() -> @html.Html[Msg] {
+fn welcome() -> @html.Html[Msg] {
   div(
     class="font-title flex py-10 w-full flex-col-reverse justify-center lg:max-w-6xl lg:flex-row lg:justify-between",
     [
@@ -58,15 +46,6 @@ fn view_welcome() -> @html.Html[Msg] {
 }
 
 ///|
-fn to_upper(c : Char) -> Char {
-  if c >= 'a' && c <= 'z' {
-    Char::from_int(c.to_int() - 'a'.to_int() + 'A'.to_int())
-  } else {
-    c
-  }
-}
-
-///|
 extern "js" fn get_relative_time(date : String) -> String =
   #|function getRelativeTime(dateString) {
   #|  const date = new Date(dateString);
@@ -88,30 +67,26 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|}
 
 ///|
-fn view_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
+fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   let keywords = match mod.keywords {
     None => @html.nothing()
     Some(keywords) =>
       div(
-        class="mx-3 pb-3 flex gap-2 overflow-hidden",
+        class="flex gap-2 h-8 flex-wrap overflow-y-hidden shrink-0",
         keywords.map(fn {
           keyword =>
             @html.span(
-              class="text-tiny/5 bg-gray-50 text-gray-600 px-2 py-0 border-gray-200  border rounded",
+              class="text-sm/4 h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
               [text(keyword)],
             )
         }),
       )
   }
   let description = match mod.description {
-    None => @html.nothing()
+    None => div(class="flex-grow", [])
     Some(description) =>
-      div([
-        hr(class="mt-2"),
-        p(
-          class="mx-4 my-3 max-h-16 text-gray-500 text-xs text-ellipsis overflow-hidden",
-          [text(description)],
-        ),
+      p(class="text-gray-700 overflow-ellipsis grow text-sm", [
+        text(description),
       ])
   }
   let time = match mod.created_at {
@@ -119,81 +94,62 @@ fn view_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
     None => @html.nothing()
   }
   div(
-    class="flex select-none bg-white shadow-sm hover:outline-moonbit hover:outline outline-1 outline-transparent hover:shadow-lg border transition-all border-gray-200 rounded-lg flex w-80 flex-col",
+    class="p-4 h-50 flex flex-col border-b bg-white lg:hover:outline-moonbit lg:border lg:rounded-md lg:outline outline-transparent transition-all",
     click=ClickModuleCard(mod.path),
     [
-      div(class="px-5 pt-4", [
-        div(class="flex flex-wrap justify-between items-center", [
-          h2(class="font-semibold text-gray-800 text-xl", [text(mod.name)]),
-          div(class="text-gray-500 text-tiny flex gap-x-1", [
-            @html.span(class="text-gray-500 text-tiny flex flex-row gap-2", [
-              text("v\{mod.version}"),
-              time,
-            ]),
-          ]),
-        ]),
-        @html.span(class="text-gray-500 text-xs overflow-hidden", [
-          text(mod.author),
-        ]),
+      h2(class="text-xl font-semibold", [text(mod.name)]),
+      description,
+      div(class="flex justify-between items-center text-gray-600 text-sm", [
+        p([text(mod.author)]),
+        time,
       ]),
-      div(class="min-h-10 flex-grow", [description]),
       keywords,
     ],
   )
 }
 
 ///|
-fn view_packages_info(meta : Map[String, ModuleIndex]) -> @html.Html[Msg] {
-  div(class="w-full", [
-    div(class="bg-[#fbfaf5] flex justify-center", [
-      div(class="p-10", [
-        h1(
-          class="py-5 text-2xl text-gray-800 font-semibold",
-          [text("All Mooncakes"), ..view_all_package(meta)],
-        ),
-      ]),
-    ]),
-  ])
-}
-
-///|
-fn view_all_package(meta : Map[String, ModuleIndex]) -> Array[@html.Html[Msg]] {
-  let index_map : Map[Char, Array[ModuleIndex]] = {}
-  @config.INDICES.iter().each(fn(c) { index_map.set(c, []) })
-  meta
-  .iter()
-  .map(fn(p) {
-    (
-      String::from_array(
-        p.0.iter().drop_while(fn(x) { x != '/' }).drop(1).collect(),
-      ),
-      p.1,
+fn module_list(indices : Indices) -> @html.Html[Msg] {
+  fn card_list(xs) {
+    div(
+      class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4",
+      xs,
     )
-  })
-  .each(fn(p) {
-    let letter = to_upper(p.0[0])
-    index_map.get(letter).unwrap().push(p.1)
-  })
-  index_map
-  .iter()
-  .map(fn(couple) {
-    let (letter, packages) = couple
-    if couple.1.length() > 0 {
+  }
+
+  let recently_updated = indices.recently_updated
+    .iter()
+    .map(module_card)
+    .collect()
+  let all_modules = indices.all_modules
+    .iter()
+    .map(fn(couple) {
+      let (letter, indices) = couple
       div([
         div([
-          h2(class="px-1 py-4 text-xl text-gray-900 font-semibold", [
-            text(letter.to_string()),
-          ]),
-          div(
-            class="grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 gird-flow-row auto-rows-max gap-y-4 gap-x-4",
-            packages.map(view_module_card),
+          h2(
+            class="sticky top-0 px-4 py-2 border-b text-sm bg-mooncake text-gray-900 font-semibold lg:bg-transparent lg:border-0",
+            [text(letter.to_string())],
           ),
-          hr(class="mt-8 mb-4"),
+          card_list(indices.map(module_card)),
         ]),
       ])
-    } else {
-      @html.nothing()
-    }
-  })
-  .collect()
+    })
+    .collect()
+  div(class="lg:bg-mooncake", [
+    div(
+      class="container",
+      [
+        h1(class="border-b p-4 text-xl font-bold text-gray-900 lg:border-0", [
+          text("Recently Updated"),
+        ]),
+        card_list(recently_updated),
+        h1(
+          class="border-b pt-10 p-4 text-xl font-bold text-gray-900 lg:border-0",
+          [text("All mooncakes")],
+        ),
+        ..all_modules,
+      ],
+    ),
+  ])
 }

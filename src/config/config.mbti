@@ -9,8 +9,6 @@ const FOLDER_CLOSE : String = "/folder-close.svg"
 
 const FOLDER_OPEN : String = "/folder-open.svg"
 
-const INDICES : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 const LOGO : String = "/mooncake-pic.png"
 
 const README_ICON : String = "/readme.svg"

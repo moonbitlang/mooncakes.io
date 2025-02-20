@@ -25,15 +25,6 @@ fn search_bar() -> @html.Html[Msg] {
 }
 
 ///|
-fn banner() -> @html.Html[Msg] {
-  div(
-    class="bg-cover bg-center bg-no-repeat bg-fixed h-24 mb-10 bg-mooncake border-b",
-    // style=["background-image: url('cover.jpg')"],
-    [],
-  )
-}
-
-///|
 extern "js" fn get_relative_time(date : String) -> String =
   #|function getRelativeTime(dateString) {
   #|  const date = new Date(dateString);
@@ -135,13 +126,6 @@ fn recently_updated(recently : Array[ModuleIndex]) -> @html.Html[Msg] {
 
 ///|
 fn search_result(mods : Array[ModuleIndex]) -> @html.Html[Msg] {
-  fn card_list(xs) {
-    div(
-      class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4",
-      xs,
-    )
-  }
-
   let module_cards = mods.map(module_card)
   div([
     div(class="container lg:w-3/5 px-4", [

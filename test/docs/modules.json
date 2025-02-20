@@ -55,6 +55,30 @@
       "created_at": "2024-12-19T02:10:44.122188+00:00"
     },
     {
+      "name": "moonbitlang/x2",
+      "version": "0.4.16",
+      "readme": "README.md",
+      "repository": "https://github.com/moonbitlang/x",
+      "license": "Apache-2.0",
+      "keywords": ["experimental", "moonbitlang", "json", "time", "crypto"],
+      "description": "experimental packages for moonbitlang/core",
+      "warn-list": "-29",
+      "checksum": "2c02703d4ca43083a67a505bdee4a2616da73950c5f474477091375069d780c7",
+      "created_at": "2024-12-19T02:10:44.122188+00:00"
+    },
+    {
+      "name": "moonbitlang/x3",
+      "version": "0.4.16",
+      "readme": "README.md",
+      "repository": "https://github.com/moonbitlang/x",
+      "license": "Apache-2.0",
+      "keywords": ["experimental", "moonbitlang", "json", "time", "crypto"],
+      "description": "experimental packages for moonbitlang/core",
+      "warn-list": "-29",
+      "checksum": "2c02703d4ca43083a67a505bdee4a2616da73950c5f474477091375069d780c7",
+      "created_at": "2024-12-19T02:10:44.122188+00:00"
+    },
+    {
       "name": "xunyoyo/linalg",
       "version": "0.2.7",
       "readme": "README.md",

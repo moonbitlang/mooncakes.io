@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "deps": {
     "rami3l/cmark": "0.2.3",
-    "Yoorkin/rabbit-tea": "0.6.4"
+    "Yoorkin/rabbit-tea": "0.6.6"
   },
   "readme": "README.md",
   "repository": "",

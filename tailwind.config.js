@@ -23,6 +23,7 @@ module.exports = {
       colors: {
         moonbit: "#cf4f89",
         mooncake: "#fbfaf5",
+        mooncake2: "#a9803499",
       },
     },
   },

@@ -5,6 +5,8 @@ alias @Yoorkin/rabbit-tea/html as @html
 alias @moonbitlang/mooncakes/util as @util
 
 // Values
+fn filter_indices(String, Indices) -> Array[ModuleIndex]
+
 fn load() -> (@browser.Command[Msg], Model)
 
 fn update(Msg, Model) -> (@browser.Command[Msg], Model)
@@ -14,7 +16,11 @@ fn view(Model) -> @html.T[Msg]
 // Types and methods
 type Indices
 
-pub type Model @util.Status[Indices]
+pub struct Model {
+  indices : @util.Status[Indices]
+  filter : String
+  filtered_modules : Array[ModuleIndex]
+}
 
 pub(all) struct ModuleIndex {
   author : String
@@ -29,6 +35,7 @@ pub(all) struct ModuleIndex {
 pub enum Msg {
   GotModuleIndices(Result[Indices, String])
   ClickModuleCard(String)
+  FilterChanged(String)
 }
 
 // Type aliases

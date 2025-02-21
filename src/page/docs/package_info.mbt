@@ -2,20 +2,29 @@
 fn process_package_info(
   package : Json
 ) -> Result[Array[DetailCardModel], String] {
+  let fold_id_allocator : Id = Id::new()
   fn process_value {
     ({
       "name": String(name),
       "docstring": String(description),
       "signature": String(signature),
       ..
-    } : Json) => ValueCard(folded=false, name~, signature~, description~)
-    _ => FailureCard(folded=false, info="Value Card parsing failed")
+    } : Json) =>
+      ValueCard(name~, signature~, description~, id=fold_id_allocator.next())
+    _ =>
+      FailureCard(info="Value Card parsing failed", id=fold_id_allocator.next())
   }
 
   fn process_impl {
     ({ "docstring": String(description), "signature": String(signature), .. } : Json) =>
-      ImplCard(folded=false, name=signature, signature~, description~)
-    _ => FailureCard(folded=false, info="Impl Card parsing failed")
+      ImplCard(
+        name=signature,
+        signature~,
+        description~,
+        id=fold_id_allocator.next(),
+      )
+    _ =>
+      FailureCard(info="Impl Card parsing failed", id=fold_id_allocator.next())
   }
 
   fn process_type {
@@ -29,9 +38,17 @@ fn process_package_info(
     } : Json) => {
       let methods = methods.map(process_value)
       let impls = impls.map(process_impl)
-      TypeCard(folded=false, name~, description~, signature~, methods~, impls~)
+      TypeCard(
+        name~,
+        description~,
+        signature~,
+        methods~,
+        impls~,
+        id=fold_id_allocator.next(),
+      )
     }
-    _ => FailureCard(folded=false, info="Type Card parsing failed")
+    _ =>
+      FailureCard(info="Type Card parsing failed", id=fold_id_allocator.next())
   }
 
   fn process_typealias {
@@ -41,8 +58,19 @@ fn process_package_info(
       "signature": String(signature),
       ..
     } : Json) =>
-      TypeCard(folded=false, name~, description~, signature~, methods=[], impls=[])
-    _ => FailureCard(folded=false, info="Typealias Card parsing failed")
+      TypeCard(
+        name~,
+        description~,
+        signature~,
+        methods=[],
+        impls=[],
+        id=fold_id_allocator.next(),
+      )
+    _ =>
+      FailureCard(
+        info="Typealias Card parsing failed",
+        id=fold_id_allocator.next(),
+      )
   }
 
   fn process_miscs {
@@ -55,15 +83,16 @@ fn process_package_info(
       let methods = methods.map(process_value)
       let impls = impls.map(process_impl)
       TypeCard(
-        folded=false,
         name~,
         description="",
         signature=name,
         methods~,
         impls~,
+        id=fold_id_allocator.next(),
       )
     }
-    _ => FailureCard(folded=false, info="Misc Card parsing failed")
+    _ =>
+      FailureCard(info="Misc Card parsing failed", id=fold_id_allocator.next())
   }
 
   fn process_traits {
@@ -75,9 +104,19 @@ fn process_package_info(
       ..
     } : Json) => {
       let impls = impls.map(process_impl)
-      TraitCard(folded=false, name~, description~, signature~, impls~)
+      TraitCard(
+        name~,
+        description~,
+        signature~,
+        impls~,
+        id=fold_id_allocator.next(),
+      )
     }
-    _ => FailureCard(folded=false, info="Traits Card parsing failed")
+    _ =>
+      FailureCard(
+        info="Traits Card parsing failed",
+        id=fold_id_allocator.next(),
+      )
   }
 
   fn process_package {
@@ -91,7 +130,11 @@ fn process_package_info(
       ..
     } : Json) =>
       Ok(
-        (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
+        (if readme != "" {
+          [ReadmeCard(readme, id=fold_id_allocator.next())]
+        } else {
+          []
+        }) +
         [
           ..types.map(process_type),
           ..alias_.map(process_typealias),
@@ -104,4 +147,20 @@ fn process_package_info(
   }
 
   process_package(package)
+}
+
+///|
+struct Id {
+  mut id : Int
+}
+
+///|
+fn Id::new() -> Id {
+  { id: 0 }
+}
+
+///|
+fn Id::next(self : Id) -> Int {
+  self.id += 1
+  self.id
 }

@@ -2,44 +2,47 @@
 /// Todo: remove the mutability of folded
 enum DetailCardModel {
   ValueCard(
-    mut folded~ : Bool,
     name~ : String,
     signature~ : String,
-    description~ : String
+    description~ : String,
+    id~ : Int
   )
   ImplCard(
-    mut folded~ : Bool,
     name~ : String,
     signature~ : String,
-    description~ : String
+    description~ : String,
+    id~ : Int
   )
   TypeCard(
-    mut folded~ : Bool,
     name~ : String,
     signature~ : String,
     description~ : String,
     methods~ : Array[DetailCardModel],
-    impls~ : Array[DetailCardModel]
+    impls~ : Array[DetailCardModel],
+    id~ : Int
   )
   TraitCard(
-    mut folded~ : Bool,
     name~ : String,
     signature~ : String,
     description~ : String,
-    impls~ : Array[DetailCardModel]
+    impls~ : Array[DetailCardModel],
+    id~ : Int
   )
-  FailureCard(mut folded~ : Bool, info~ : String)
-  ReadmeCard(mut folded~ : Bool, String)
+  FailureCard(info~ : String, id~ : Int)
+  ReadmeCard(String, id~ : Int)
 } derive(Show)
 
 ///|
-fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
+fn card_section_view(
+  card : DetailCardModel,
+  fold_set : @immut/hashset.T[Int]
+) -> @html.Html[Msg] {
   let fold_button = div(
     click=ToggleCardDetail(card),
     class="w-full h-full flex",
     [
       @html.img(
-        src=if card.is_folded() {
+        src=if card.is_folded(fold_set) {
           @config.SECTION_CLOSE
         } else {
           @config.SECTION_OPEN
@@ -51,7 +54,7 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   )
 
   // visibility of the detail section
-  let detail_visibility = if card.is_folded() {
+  let detail_visibility = if card.is_folded(fold_set) {
     "h-0 overflow-hidden opacity-0"
   } else {
     "visible"
@@ -127,11 +130,11 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   // methods or impls
   let subsections = match card {
     TypeCard(methods~, impls~, ..) => {
-      let methods = methods.map(card_section_view)
-      let impls = impls.map(card_section_view)
+      let methods = methods.map(fn(x) { card_section_view(x, fold_set) })
+      let impls = impls.map(fn(x) { card_section_view(x, fold_set) })
       [..methods, ..impls]
     }
-    TraitCard(impls~, ..) => impls.map(card_section_view)
+    TraitCard(impls~, ..) => impls.map(fn(x) { card_section_view(x, fold_set) })
     _ => []
   }
 
@@ -161,59 +164,72 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
 }
 
 ///|
-fn card_view(card : DetailCardModel) -> @html.Html[Msg] {
+fn card_view(
+  card : DetailCardModel,
+  fold_set : @immut/hashset.T[Int]
+) -> @html.Html[Msg] {
   match card {
-    ReadmeCard(_, ..) => div([card_section_view(card)])
+    ReadmeCard(_, ..) => div([card_section_view(card, fold_set)])
     _ =>
       div(class="border rounded overflow-clip bg-white", [
-        card_section_view(card),
+        card_section_view(card, fold_set),
       ])
   }
 }
 
 ///|
-fn is_folded(self : DetailCardModel) -> Bool {
+fn get_id(self : DetailCardModel) -> Int {
   match self {
-    ValueCard(folded~, ..)
-    | ImplCard(folded~, ..)
-    | TypeCard(folded~, ..)
-    | TraitCard(folded~, ..)
-    | FailureCard(folded~, ..)
-    | ReadmeCard(folded~, _) => folded
+    ValueCard(id~, ..) => id
+    ImplCard(id~, ..) => id
+    TypeCard(id~, ..) => id
+    TraitCard(id~, ..) => id
+    FailureCard(id~, ..) => id
+    ReadmeCard(id~, _) => id
   }
 }
 
 ///|
-fn toggle_folded(self : DetailCardModel) -> Unit {
+fn is_folded(self : DetailCardModel, fold_set : @immut/hashset.T[Int]) -> Bool {
+  fold_set.contains(get_id(self))
+}
+
+///|
+fn toggle_folded(self : DetailCardModel) -> Array[Int] {
+  let result = []
   match self {
-    ValueCard(..) as card => card.folded = not(card.folded)
-    ImplCard(..) as card => card.folded = not(card.folded)
-    TypeCard(impls~, methods~, ..) as card => {
-      card.folded = not(card.folded)
+    ValueCard(id~, ..) => result.push(id)
+    ImplCard(id~, ..) => result.push(id)
+    TypeCard(id~, impls~, methods~, ..) => {
+      result.push(id)
       for x in impls {
-        x.toggle_folded()
+        result.push_iter(x.toggle_folded().iter())
       }
       for x in methods {
-        x.toggle_folded()
+        result.push_iter(x.toggle_folded().iter())
       }
     }
-    TraitCard(impls~, ..) as card => {
-      card.folded = not(card.folded)
+    TraitCard(id~, impls~, ..) => {
+      result.push(id)
       for x in impls {
-        x.toggle_folded()
+        result.push_iter(x.toggle_folded().iter())
       }
     }
-    FailureCard(_) as card => card.folded = not(card.folded)
-    ReadmeCard(_, ..) as card => card.folded = not(card.folded)
+    FailureCard(id~, ..) => result.push(id)
+    ReadmeCard(id~, _) => result.push(id)
   }
+  result
 }
 
 ///|
-fn detail_cards_view(cards : Array[DetailCardModel]) -> @html.Html[Msg] {
+fn detail_cards_view(
+  cards : Array[DetailCardModel],
+  fold_set : @immut/hashset.T[Int]
+) -> @html.Html[Msg] {
   div(class="", [
     div(
       class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2",
-      cards.map(card_view),
+      cards.map(fn(card) { card_view(card, fold_set) }),
     ),
     div(class="h-60", []),
   ])

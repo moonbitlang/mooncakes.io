@@ -1,9 +1,5 @@
 ///|
-fn floating_view(sidebar : @util.Status[SidebarModel]) -> @html.Html[Msg] {
-  let cards_expanded = match sidebar {
-    Success(sidebar) => sidebar.cards_expanded
-    _ => false
-  }
+fn floating_view(cards_expanded : Bool) -> @html.Html[Msg] {
   let button = if cards_expanded {
     @view.icon_button(@config.EXPANSION, text="Fold cards", click=FoldAllCards)
   } else {

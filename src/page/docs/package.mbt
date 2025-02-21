@@ -16,12 +16,21 @@ struct Model {
   now_path : String
   sidebar : @util.Status[SidebarModel]
   detail_cards : Array[DetailCardModel]
+  fold_set : @immut/hashset.T[Int]
   meta_info : @util.Status[MetaInfoModel]
+  cards_expanded : Bool
 }
 
 ///|
 fn Model::empty() -> Model {
-  { now_path: "", sidebar: Loading, detail_cards: [], meta_info: Loading }
+  {
+    now_path: "",
+    sidebar: Loading,
+    detail_cards: [],
+    fold_set: @immut/hashset.new(),
+    meta_info: Loading,
+    cards_expanded: true,
+  }
 }
 
 ///|
@@ -70,26 +79,37 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         match result {
           Ok(package_info) => // FIXME: clean up detail_cards
             { ..model, detail_cards: [..model.detail_cards, ..package_info] }
-          Err(info) =>
-            { ..model, detail_cards: [FailureCard(folded=false, info~)] }
+          Err(info) => { ..model, detail_cards: [FailureCard(info~, id=0)] }
         },
       )
-    ToggleCardDetail(detail_card) => {
-      detail_card.toggle_folded() // FIXME: fix this bug
-      (@tea.none(), model)
-    }
-    FoldAllCards => {
-      for card in model.detail_cards {
-        card.toggle_folded()
-      }
-      (@tea.none(), model)
-    }
-    ExpandAllCards => {
-      for card in model.detail_cards {
-        card.toggle_folded()
-      }
-      (@tea.none(), model)
-    }
+    ToggleCardDetail(detail_card) =>
+      (
+        @tea.none(),
+        {
+          ..model,
+          fold_set: if detail_card.is_folded(model.fold_set) {
+            model.fold_set.remove(get_id(detail_card))
+          } else {
+            model.fold_set.add(get_id(detail_card))
+          },
+        },
+      )
+    FoldAllCards =>
+      (
+        @tea.none(),
+        {
+          ..model,
+          fold_set: @immut/hashset.from_array(
+            model.detail_cards.map(toggle_folded).flatten(),
+          ),
+          cards_expanded: false,
+        },
+      )
+    ExpandAllCards =>
+      (
+        @tea.none(),
+        { ..model, fold_set: @immut/hashset.new(), cards_expanded: true },
+      )
     PackageClick(pkg_model) => {
       pkg_model.folded = not(pkg_model.folded)
       (@tea.none(), model)
@@ -103,7 +123,13 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             @config.URL_BASE + "/docs/" + path + "/package_data.json",
             expect=Json(Msg::GotPackageInfo, process_package_info),
           ),
-          { ..model, now_path: path, detail_cards: [] },
+          {
+            ..model,
+            now_path: path,
+            detail_cards: [],
+            fold_set: @immut/hashset.new(),
+            cards_expanded: true,
+          },
         )
       }
     FilterChange(value) => {
@@ -120,7 +146,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
       div([@view.navbar()]),
-      div([floating_view(model.sidebar)]),
+      div([floating_view(model.cards_expanded)]),
       div(class="flex w-full flex-1", [
         div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
           meta_info_view(model.meta_info),
@@ -130,7 +156,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
           ),
         ]),
         div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
-          detail_cards_view(model.detail_cards),
+          detail_cards_view(model.detail_cards, model.fold_set),
         ]),
       ]),
       @view.footer(),

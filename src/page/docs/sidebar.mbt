@@ -29,12 +29,11 @@ struct SidebarModel {
   items : Array[ItemModel]
   // dependencies : Array[ModuleModel] // FIXME
   mut filter : String
-  cards_expanded : Bool
 }
 
 ///|
 fn SidebarModel::empty() -> SidebarModel {
-  { hide: false, items: [], filter: "", cards_expanded: false }
+  { hide: false, items: [], filter: "" }
 }
 
 ///|

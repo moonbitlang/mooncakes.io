@@ -59,14 +59,9 @@ fn route(url : @url.Url, model : Model) -> (@tea.Command[Message], Model) {
         target: url.fragment,
       }
       match model {
-        Docs(model, path=path_current) =>
-          if path_current.module_path == "" {
-            @docs.init_(path)
-            |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
-          } else {
-            @docs.go(path, model)
-            |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
-          }
+        Docs(model, ..) =>
+          @docs.go(path, model)
+          |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
         _ =>
           @docs.init_(path)
           |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)

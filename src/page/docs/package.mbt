@@ -4,11 +4,12 @@ enum Msg {
   FoldAllCards
   ExpandAllCards
   ItemClick(String, String)
+  ToTarget(String, String)
   PackageClick(PackageModel)
   FilterChange(String)
   GotMetaInfo(Result[MetaInfoModel, String])
   GotModuleIndex(Result[ModuleIndex, String])
-  GotPackageInfo(Result[Array[DetailCardModel], String])
+  GotPackageInfo(String, Result[Array[DetailCardModel], String])
 }
 
 ///|
@@ -25,19 +26,51 @@ fn Model::empty() -> Model {
 }
 
 ///|
-pub fn load(path : String) -> (@tea.Command[Msg], Model) {
+pub fn init_(path : @util.Path) -> (@tea.Command[Msg], Model) {
   (
-    @tea.batch([
-      @http.get(
-        @config.URL_BASE + "/docs/" + path + "/moon.mod.json",
-        expect=Json(Msg::GotMetaInfo, parse_metadata),
-      ),
-      @http.get(
-        @config.URL_BASE + "/docs/" + path + "/module_index.json",
-        expect=Json(Msg::GotModuleIndex, parse_module_index),
-      ),
-    ]),
+    @tea.batch(
+      [
+        @http.get(
+          @config.URL_BASE +
+          "/docs/" +
+          path.author +
+          "/" +
+          path.name +
+          "/moon.mod.json",
+          expect=Json(Msg::GotMetaInfo, parse_metadata),
+        ),
+        @http.get(
+          @config.URL_BASE +
+          "/docs/" +
+          path.author +
+          "/" +
+          path.name +
+          "/module_index.json",
+          expect=Json(Msg::GotModuleIndex, parse_module_index),
+        ),
+      ] +
+      (if path.target is Some(target) {
+        [
+          @tea.task(
+            ToTarget(path.author + "/" + path.name + path.module_path, target),
+          ),
+        ]
+      } else {
+        []
+      }),
+    ),
     Model::empty(),
+  )
+}
+
+///|
+pub fn go(path : @util.Path, model : Model) -> (@tea.Command[Msg], Model) {
+  guard let Some(target) = path.target
+  (
+    @tea.task(
+      ToTarget(path.author + "/" + path.name + path.module_path, target),
+    ),
+    model,
   )
 }
 
@@ -64,9 +97,9 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           Err(_) => { ..model, sidebar: Failed }
         },
       )
-    GotPackageInfo(result) =>
+    GotPackageInfo(target, result) =>
       (
-        @tea.none(),
+        @browser.scroll_to(target),
         match result {
           Ok(package_info) => // FIXME: clean up detail_cards
             { ..model, detail_cards: [..model.detail_cards, ..package_info] }
@@ -94,15 +127,24 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       pkg_model.folded = not(pkg_model.folded)
       (@tea.none(), model)
     }
-    ItemClick(path, target) =>
+    ItemClick(path, target) => {
+      println("ItemClick: " + path + "#" + target)
+      (@browser.push_url("/docs/" + path + "#" + target), model)
+    }
+    ToTarget(path, target) =>
       if path == model.now_path {
         (@browser.scroll_to(target), model)
       } else {
         (
-          @http.get(
-            @config.URL_BASE + "/docs/" + path + "/package_data.json",
-            expect=Json(Msg::GotPackageInfo, process_package_info),
-          ),
+          @tea.batch([
+            @http.get(
+              @config.URL_BASE + "/docs/" + path + "/package_data.json",
+              expect=Json(
+                fn(x) { GotPackageInfo(target, x) },
+                process_package_info,
+              ),
+            ),
+          ]),
           { ..model, now_path: path, detail_cards: [] },
         )
       }

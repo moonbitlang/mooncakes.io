@@ -2,9 +2,12 @@ package moonbitlang/mooncakes/page/docs
 
 alias @Yoorkin/rabbit-tea/browser as @browser
 alias @Yoorkin/rabbit-tea/html as @html
+alias @moonbitlang/mooncakes/util as @util
 
 // Values
-fn load(String) -> (@browser.Command[Msg], Model)
+fn go(@util.Path, Model) -> (@browser.Command[Msg], Model)
+
+fn init_(@util.Path) -> (@browser.Command[Msg], Model)
 
 fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 

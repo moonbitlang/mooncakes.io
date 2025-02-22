@@ -3,6 +3,13 @@ package moonbitlang/mooncakes/util
 // Values
 
 // Types and methods
+pub(all) struct Path {
+  author : String
+  name : String
+  module_path : String
+  target : String?
+}
+
 pub(all) enum Status[T] {
   Loading
   Failed

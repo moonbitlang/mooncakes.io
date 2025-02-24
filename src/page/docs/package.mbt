@@ -26,7 +26,7 @@ fn Model::empty() -> Model {
 }
 
 ///|
-pub fn init_(path : @util.Path) -> (@tea.Command[Msg], Model) {
+pub fn load(path : @util.Path) -> (@tea.Command[Msg], Model) {
   (
     @tea.batch(
       [
@@ -52,7 +52,10 @@ pub fn init_(path : @util.Path) -> (@tea.Command[Msg], Model) {
       (if path.target is Some(target) {
         [
           @tea.task(
-            ToTarget(path.author + "/" + path.name + path.module_path, target),
+            ToTarget(
+              path.author + "/" + path.name + "/" + path.module_path,
+              target,
+            ),
           ),
         ]
       } else {
@@ -64,11 +67,14 @@ pub fn init_(path : @util.Path) -> (@tea.Command[Msg], Model) {
 }
 
 ///|
-pub fn go(path : @util.Path, model : Model) -> (@tea.Command[Msg], Model) {
+pub fn update_sub_page(
+  path : @util.Path,
+  model : Model
+) -> (@tea.Command[Msg], Model) {
   guard let Some(target) = path.target
   (
     @tea.task(
-      ToTarget(path.author + "/" + path.name + path.module_path, target),
+      ToTarget(path.author + "/" + path.name + "/" + path.module_path, target),
     ),
     model,
   )

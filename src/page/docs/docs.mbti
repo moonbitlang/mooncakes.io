@@ -5,11 +5,11 @@ alias @Yoorkin/rabbit-tea/html as @html
 alias @moonbitlang/mooncakes/util as @util
 
 // Values
-fn go(@util.Path, Model) -> (@browser.Command[Msg], Model)
-
-fn init_(@util.Path) -> (@browser.Command[Msg], Model)
+fn load(@util.Path) -> (@browser.Command[Msg], Model)
 
 fn update(Msg, Model) -> (@browser.Command[Msg], Model)
+
+fn update_sub_page(@util.Path, Model) -> (@browser.Command[Msg], Model)
 
 fn view(Model) -> @html.T[Msg]
 

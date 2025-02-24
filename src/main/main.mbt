@@ -7,10 +7,19 @@ enum Message {
 }
 
 ///|
-enum Model {
+enum Page {
   Home(@home.Model)
-  Docs(@docs.Model, path~ : @util.Path)
+  Docs(@docs.Model)
   NotFound
+}
+
+///|
+/// notice that the url is not useful for Docs page
+/// because doc will cache current module path in its inner model
+/// But when we navigate to a module(when we have inline code navigation), the url will be useful
+struct Model {
+  page : Page
+  url : @url.Url
 }
 
 ///|
@@ -26,11 +35,12 @@ fn update_with[SubModel, SubMsg](
 ///|
 fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
   match (msg, model) {
-    (GotHomeMsg(msg), Home(model)) =>
-      @home.update(msg, model) |> update_with(Model::Home, Message::GotHomeMsg)
-    (GotDocsMsg(msg), Docs(model, path~)) =>
+    (GotHomeMsg(msg), { page: Home(model), url }) =>
+      @home.update(msg, model)
+      |> update_with(fn(m) { { page: Home(m), url } }, Message::GotHomeMsg)
+    (GotDocsMsg(msg), { page: Docs(model), url }) =>
       @docs.update(msg, model)
-      |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
+      |> update_with(fn(m) { { page: Docs(m), url } }, Message::GotDocsMsg)
     (LinkClicked(request), _) =>
       match request {
         Internal(url) => (@browser.push_url(url.to_string()), model)
@@ -45,45 +55,44 @@ fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
 fn route(url : @url.Url, model : Model) -> (@tea.Command[Message], Model) {
   let paths = url.path.split("/").collect()
   match paths {
-    [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
+    [] =>
+      @home.load()
+      |> update_with(fn(m) { { page: Home(m), url } }, Message::GotHomeMsg)
     ["docs", author, name] => {
       let path : @util.Path = { author, name, module_path: "", target: None }
-      @docs.init_(path)
-      |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
+      @docs.load(path)
+      |> update_with(fn(m) { { page: Docs(m), url } }, Message::GotDocsMsg)
     }
     ["docs", author, name, .. module_path] => {
       let path : @util.Path = {
         author,
         name,
-        module_path: module_path.fold(fn(x, y) { x + "/" + y }, init=""),
+        module_path: module_path.iter().join("/"),
         target: url.fragment,
       }
-      match model {
-        Docs(model, ..) =>
-          @docs.go(path, model)
-          |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
-        _ =>
-          @docs.init_(path)
-          |> update_with(fn(m) { Docs(m, path~) }, Message::GotDocsMsg)
-      }
+      (match model {
+        { page: Docs(model), .. } => @docs.update_sub_page(path, model)
+        _ => @docs.load(path)
+      })
+      |> update_with(fn(m) { { page: Docs(m), url } }, Message::GotDocsMsg)
     }
-    _ => (@tea.none(), NotFound)
+    _ => (@tea.none(), { page: NotFound, url })
   }
 }
 
 ///|
 fn view(model : Model) -> @html.Html[Message] {
   match model {
-    Home(model) => @home.view(model).map(Message::GotHomeMsg)
-    Docs(model, ..) => @docs.view(model).map(Message::GotDocsMsg)
-    NotFound => @view.not_found()
+    { page: Home(model), .. } => @home.view(model).map(Message::GotHomeMsg)
+    { page: Docs(model), .. } => @docs.view(model).map(Message::GotDocsMsg)
+    { page: NotFound, .. } => @view.not_found()
   }
 }
 
 ///|
 fn main {
   @tea.application(
-    initialize=fn(url) { route(url, NotFound) },
+    initialize=fn(url) { route(url, { page: NotFound, url }) },
     update~,
     view~,
     url_changed=Message::UrlChanged,

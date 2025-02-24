@@ -88,9 +88,15 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         {
           ..model,
           fold_set: if detail_card.is_folded(model.fold_set) {
-            model.fold_set.remove(get_id(detail_card))
+            @util.difference(
+              model.fold_set,
+              @immut/hashset.from_array(detail_card.sum_up_folded()),
+            )
           } else {
-            model.fold_set.add(get_id(detail_card))
+            @util.union(
+              model.fold_set,
+              @immut/hashset.from_array(detail_card.sum_up_folded()),
+            )
           },
         },
       )
@@ -100,7 +106,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         {
           ..model,
           fold_set: @immut/hashset.from_array(
-            model.detail_cards.map(toggle_folded).flatten(),
+            model.detail_cards.map(sum_up_folded).flatten(),
           ),
           cards_expanded: false,
         },

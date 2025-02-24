@@ -195,7 +195,7 @@ fn is_folded(self : DetailCardModel, fold_set : @immut/hashset.T[Int]) -> Bool {
 }
 
 ///|
-fn toggle_folded(self : DetailCardModel) -> Array[Int] {
+fn sum_up_folded(self : DetailCardModel) -> Array[Int] {
   let result = []
   match self {
     ValueCard(id~, ..) => result.push(id)
@@ -203,16 +203,16 @@ fn toggle_folded(self : DetailCardModel) -> Array[Int] {
     TypeCard(id~, impls~, methods~, ..) => {
       result.push(id)
       for x in impls {
-        result.push_iter(x.toggle_folded().iter())
+        result.push_iter(sum_up_folded(x).iter())
       }
       for x in methods {
-        result.push_iter(x.toggle_folded().iter())
+        result.push_iter(sum_up_folded(x).iter())
       }
     }
     TraitCard(id~, impls~, ..) => {
       result.push(id)
       for x in impls {
-        result.push_iter(x.toggle_folded().iter())
+        result.push_iter(sum_up_folded(x).iter())
       }
     }
     FailureCard(id~, ..) => result.push(id)

@@ -1,6 +1,11 @@
 package moonbitlang/mooncakes/util
 
+alias @moonbitlang/core/immut/hashset as @hashset
+
 // Values
+fn difference[T : Hash + Eq](@hashset.T[T], @hashset.T[T]) -> @hashset.T[T]
+
+fn union[T : Hash + Eq](@hashset.T[T], @hashset.T[T]) -> @hashset.T[T]
 
 // Types and methods
 pub(all) enum Status[T] {

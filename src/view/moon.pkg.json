@@ -6,6 +6,7 @@
       "value": ["div", "text", "h4", "h5", "h6", "p", "hr", "h1", "a"]
     },
     "rami3l/cmark/cmark",
+    "rami3l/cmark/cmark_base",
     "moonbitlang/mooncakes/util/highlight"
   ]
 }

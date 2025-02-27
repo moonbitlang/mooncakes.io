@@ -1,11 +1,16 @@
 ///|
+fn inline_text[M](str : String) -> @html.Html[M] {
+  div(class="inline leading-loose", [text(str)])
+}
+
+///|
 pub fn markdown[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
       text: Text({ v: txt, .. }),
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [@html.a(class=" text-blue-400", href=link, [text(txt)])]
+      [@html.a(class=" text-blue-400", href=link, [inline_text(txt)])]
     ({
       text: Image(
         {
@@ -49,7 +54,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       let inline = inline2html(inline)
       [@html.strong(inline)]
     }
-    Text({ v: str, .. }) => [text(str)]
+    Text({ v: str, .. }) => [inline_text(str)]
     RawHtml(_) | ExtMathSpan(_) | ExtStrikethrough({ v: _, .. }) => panic() // FIXME
   }
 
@@ -86,7 +91,8 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       match ordered {
         @cmark_base.Unordered(_) =>
           @html.ul(
-            class="ml-4 list-inside  "+(if tight { "space-y-0.5" } else { "space-y-1" }),
+            class="ml-4 list-inside  " +
+              (if tight { "space-y-0.5" } else { "space-y-1" }),
             [
               ..items
               .map(fn {

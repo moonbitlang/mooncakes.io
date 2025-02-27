@@ -34,7 +34,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
   fn inline2html {
     @cmark.Inline::Autolink({ v: { link: { v, .. }, .. }, .. }) =>
       [@html.a(href=v, [text(v)])]
-    Break(_) => [@html.br()]
+    Break(_) => []
     CodeSpan({ v: { code_layout: tight, .. }, .. }) => {
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
@@ -86,36 +86,30 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         4..<_ => div(class="text-gray-900", inline)
       }
     }
-    List({ v: { ty: ordered, tight, items, .. }, .. } as x) => {
-      println(x)
+    List({ v: { ty: ordered, tight, items, .. }, .. }) => {
+      let items = items
+        .map(fn {
+          { v: { block, ext_task_marker, .. }, .. } =>
+            if ext_task_marker is Some({ v: char, .. }) {
+              @html.li(class="list-inside flex items-center gap-2", [
+                @html.input(
+                  input_type=Checkbox,
+                  read_only=true,
+                  checked=char == 'x' || char == 'X',
+                  childrens=[block2html(block)],
+                ),
+                block2html(block),
+              ])
+            } else {
+              @html.li(class="list-inside list-decimal", [block2html(block)])
+            }
+        })
+        .to_array()
+      let class = "ml-4 list-inside  " +
+        (if tight { "space-y-0.5" } else { "space-y-1" })
       match ordered {
-        @cmark_base.Unordered(_) =>
-          @html.ul(
-            class="ml-4 list-inside  " +
-              (if tight { "space-y-0.5" } else { "space-y-1" }),
-            [
-              ..items
-              .map(fn {
-                { v: { block, ext_task_marker, .. }, .. } =>
-                  if ext_task_marker is Some({ v: char, .. }) {
-                    @html.li(class="list-inside flex items-center gap-2", [
-                      @html.input(
-                        input_type=Checkbox,
-                        read_only=true,
-                        checked=char == 'x' || char == 'X',
-                        childrens=[block2html(block)],
-                      ),
-                      block2html(block),
-                    ])
-                  } else {
-                    @html.li(class="list-inside list-disc", [block2html(block)])
-                  }
-              })
-              .to_array(),
-            ],
-          )
-        @cmark_base.Ordered(_) =>
-          div(class="list-decimal", [text("markdown List")])
+        @cmark_base.Unordered(_) => @html.ul(class~, items)
+        @cmark_base.Ordered(start, _) => @html.ol(start~, class~, items)
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))

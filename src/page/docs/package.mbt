@@ -13,24 +13,13 @@ enum Msg {
 
 ///|
 struct Model {
-  now_path : String
+  module_path : String
+  path : String
   sidebar : @util.Status[SidebarModel]
   detail_cards : Array[DetailCardModel]
   meta_info : @util.Status[MetaInfo]
   readme_content : @util.Status[String]
   source_files : @util.Status[Array[String]]
-}
-
-///|
-fn Model::empty() -> Model {
-  {
-    now_path: "",
-    sidebar: Loading,
-    detail_cards: [],
-    meta_info: Loading,
-    readme_content: Loading,
-    source_files: Loading,
-  }
 }
 
 ///|
@@ -40,7 +29,15 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
       @config.URL_BASE + "/docs/" + path + "/resource.json",
       expect=Json(Msg::GotResource, decode_resource),
     ),
-    Model::empty(),
+    {
+      module_path: "",
+      path,
+      sidebar: Loading,
+      detail_cards: [],
+      meta_info: Loading,
+      readme_content: Loading,
+      source_files: Loading,
+    },
   )
 }
 
@@ -145,7 +142,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       (@tea.none(), model)
     }
     ItemClick(path, target) =>
-      if path == model.now_path {
+      if path == model.path {
         (@browser.scroll_to(target), model)
       } else {
         (
@@ -153,7 +150,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             @config.URL_BASE + "/docs/" + path + "/resource.json",
             expect=Json(Msg::GotResource, decode_resource),
           ),
-          { ..model, now_path: path, detail_cards: [] },
+          { ..model, path, detail_cards: [] },
         )
       }
     FilterChange(value) => {
@@ -162,6 +159,27 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       (@tea.none(), model)
     }
   }
+}
+
+///|
+fn breadcrumbs(path : String, module_path : String) -> @html.Html[Msg] {
+  let paths = path.trim_start("/").split("/").collect()
+  let mut acc_path = ""
+  let elems = []
+  for path in paths {
+    acc_path += "/" + path
+    let elem = if acc_path.starts_with(module_path) {
+      @html.a(class="hover:underline", href="/docs" + acc_path, [text(path)])
+    } else {
+      div(class="text-gray-700 font-normal", [text(path)])
+    }
+    elems.push(elem)
+  }
+  let separator = div(class="text-gray-300 text-base", [text(" / ")])
+  div(
+    class="text-base text-gray-800 font-semibold flex gap-2",
+    elems.iter().intersperse(separator).collect(),
+  )
 }
 
 ///|
@@ -188,17 +206,31 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   div(
     class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
-      div([@view.navbar()]),
+      div(
+        class="bg-white w-full py-3 border-b select-none flex gap-4 sticky top-0 z-10",
+        [
+          // logo
+          @html.a(class="border-r w-[400px] border-gray-300", href="/", [
+            h1(class="font-title text-gray-700 font-semibold ", [
+              text("🥮 mooncakes.io"),
+            ]),
+          ]),
+          breadcrumbs(model.path, model.module_path),
+          // version
+          tag_view("0.1.0"),
+          // div(class="text-gray-600 border px-2 text-base rounded bg-slate-100", [text("0.1.0")]),
+        ],
+      ),
       div([floating_view(model.sidebar)]),
-      div(class="flex w-full flex-1", [
-        div(class="w-1/4 p-3 min-w-[300px] max-w-[400px] border-r", [
-          meta_info_view(model.meta_info),
+      div(class="flex w-full", [
+        div(class="px-3 w-[400px] border-r", [
           div(
-            class="sticky top-[-1px] overflow-y-scroll max-h-screen scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+            class="sticky top-14 overflow-y-scroll max-h-screen scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
             [sidebar_view(model.sidebar)],
           ),
         ]),
         div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
+          div(class="w-full", [meta_info(model.meta_info)]),
           readme,
           detail_cards_view(model.detail_cards),
           source_files,

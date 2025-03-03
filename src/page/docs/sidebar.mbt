@@ -107,7 +107,7 @@ fn item_list_view(
   items : Array[ItemModel],
   filter~ : String
 ) -> @html.Html[Msg] {
-  @html.ul(items.map(fn(x) { item_view(x, filter~) }))
+  @html.ul(class="select-none", items.map(fn(x) { item_view(x, filter~) }))
 }
 
 ///|
@@ -138,7 +138,7 @@ fn sidebar_view(model : @util.Status[SidebarModel]) -> @html.Html[Msg] {
       let hide = if model.hide { "hidden" } else { "" }
       let items = item_list_view(model.items, filter=model.filter)
       div([
-        div(class="pt-1 border-t \{hide}", [
+        div(class="\{hide}", [
           filter_input_view(model.filter),
           div(class="text-gray-700", [items]),
         ]),

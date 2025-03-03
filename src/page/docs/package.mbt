@@ -245,7 +245,6 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       source_files,
     ]),
   ])
-  let footer = @view.footer()
   // TODO: fix floating view
   let _floating_view = div([floating_view(model.sidebar)])
   div(

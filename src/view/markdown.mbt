@@ -80,9 +80,9 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       let inline = inline2html(inline)
       match level {
         _..<1 => abort("Heading level <1")
-        1 => h4(class="text-gray-900 font-semibold mt-4 mb-2", inline)
-        2 => h5(class="text-gray-900 mt-4 mb-2 pb-2 border-b", inline)
-        3 => h6(class="text-gray-900", inline)
+        1 => h3(class="text-gray-900 font-semibold mt-4 mb-2 text-2xl", inline)
+        2 => h4(class="text-gray-900 mt-4 mb-2 pb-2 border-b text-xl", inline)
+        3 => h5(class="text-gray-900 text-lg", inline)
         4..<_ => div(class="text-gray-900", inline)
       }
     }

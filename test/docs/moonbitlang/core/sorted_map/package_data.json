@@ -1,5 +1,4 @@
 {
-  "readme": "",
   "name": "moonbitlang/core/sorted_map",
   "traits": [],
   "types": [
@@ -7,115 +6,221 @@
       "name": "T",
       "docstring": "",
       "signature": "type T",
-      "loc": { "line": 25, "column": 8 },
+      "loc": {
+        "path": "moonbitlang/core/sorted_map",
+        "file": "types.mbt",
+        "line": 25,
+        "column": 8
+      },
       "methods": [
         {
           "name": "add",
           "docstring": "\n Inserts a key-value pair.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::add[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], key : K, value : V) -> Unit",
-          "loc": { "line": 46, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 53,
+            "column": 8
+          }
         },
         {
           "name": "clear",
           "docstring": "\n Clears the map.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::clear[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> Unit",
-          "loc": { "line": 114, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 121,
+            "column": 8
+          }
         },
         {
           "name": "contains",
           "docstring": "\n Checks if map contains a key-value pair.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::contains[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], key : K) -> Bool",
-          "loc": { "line": 93, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 100,
+            "column": 8
+          }
         },
         {
           "name": "each",
           "docstring": "\n Iterates the map.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::each[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], f : (K, V) -> Unit) -> Unit",
-          "loc": { "line": 121, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 128,
+            "column": 8
+          }
         },
         {
           "name": "eachi",
           "docstring": "\n Iterates the map with index.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::eachi[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], f : (Int, K, V) -> Unit) -> Unit",
-          "loc": { "line": 139, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 146,
+            "column": 8
+          }
         },
         {
           "name": "from_iter",
-          "docstring": "",
+          "docstring": "\n @alert deprecated \"use `@sorted_map.from_iter` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::from_iter[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]) -> <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
-          "loc": { "line": 230, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "deprecated.mbt",
+            "line": 18,
+            "column": 11
+          }
         },
         {
           "name": "get",
           "docstring": "\n Gets a value by a key.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::get[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], key : K) -> V?",
-          "loc": { "line": 75, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 82,
+            "column": 8
+          }
         },
         {
           "name": "is_empty",
           "docstring": "\n Returns true if map is empty.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::is_empty[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> Bool",
-          "loc": { "line": 102, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 109,
+            "column": 8
+          }
         },
         {
           "name": "iter",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::iter[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]",
-          "loc": { "line": 182, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 189,
+            "column": 8
+          }
         },
         {
           "name": "iter2",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::iter2[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[K, V]",
-          "loc": { "line": 206, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 213,
+            "column": 8
+          }
         },
         {
           "name": "keys",
           "docstring": "\n Returns all keys in the map.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::keys[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[K]",
-          "loc": { "line": 159, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 166,
+            "column": 8
+          }
         },
         {
           "name": "op_equal",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::op_equal[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], other : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> Bool",
-          "loc": { "line": 26, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 26,
+            "column": 8
+          }
         },
         {
           "name": "op_get",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::op_get[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], key : K) -> V?",
-          "loc": { "line": 21, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 21,
+            "column": 8
+          }
         },
         {
           "name": "op_set",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::op_set[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], key : K, value : V) -> Unit",
-          "loc": { "line": 16, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 16,
+            "column": 8
+          }
+        },
+        {
+          "name": "range",
+          "docstring": "Returns a new array of key-value pairs that are within the specified range [low, high).",
+          "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::range[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], low : K, high : K) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[K, V]",
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 252,
+            "column": 8
+          }
         },
         {
           "name": "remove",
           "docstring": "\n Removes a key-value pair.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::remove[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], key : K) -> Unit",
-          "loc": { "line": 58, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 65,
+            "column": 8
+          }
         },
         {
           "name": "size",
           "docstring": "\n Returns the count of key-value pairs in the map.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::size[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> Int",
-          "loc": { "line": 108, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 115,
+            "column": 8
+          }
         },
         {
           "name": "to_array",
           "docstring": "\n Converts the map to an array.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::to_array[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]",
-          "loc": { "line": 175, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 182,
+            "column": 8
+          }
         },
         {
           "name": "values",
           "docstring": "\n Returns all values in the map.",
           "signature": "fn <a href=\"moonbitlang/core/sorted_map#T\">T</a>::values[K, V](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[V]",
-          "loc": { "line": 167, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 174,
+            "column": 8
+          }
         }
       ],
       "impls": [
@@ -127,10 +232,20 @@
               "name": "output",
               "docstring": "",
               "signature": "fn output[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 64, "column": 52 }
+              "loc": {
+                "path": "moonbitlang/core/sorted_map",
+                "file": "utils.mbt",
+                "line": 64,
+                "column": 52
+              }
             }
           ],
-          "loc": { "line": 64, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "utils.mbt",
+            "line": 64,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -140,10 +255,20 @@
               "name": "arbitrary",
               "docstring": "",
               "signature": "fn arbitrary[K : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
-              "loc": { "line": 240, "column": 8 }
+              "loc": {
+                "path": "moonbitlang/core/sorted_map",
+                "file": "map.mbt",
+                "line": 247,
+                "column": 8
+              }
             }
           ],
-          "loc": { "line": 237, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/sorted_map",
+            "file": "map.mbt",
+            "line": 244,
+            "column": 1
+          }
         }
       ]
     }
@@ -151,16 +276,48 @@
   "typealias": [],
   "values": [
     {
+      "name": "from_array",
+      "docstring": " Creates a sorted map from a array of key-value pairs.",
+      "signature": "fn from_array[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](entries : <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]) -> <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
+      "loc": {
+        "path": "moonbitlang/core/sorted_map",
+        "file": "map.mbt",
+        "line": 45,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_iter",
+      "docstring": "",
+      "signature": "fn from_iter[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]) -> <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
+      "loc": {
+        "path": "moonbitlang/core/sorted_map",
+        "file": "map.mbt",
+        "line": 237,
+        "column": 8
+      }
+    },
+    {
       "name": "new",
       "docstring": "\n Returns a new sorted map.",
       "signature": "fn new[K, V]() -> <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
-      "loc": { "line": 32, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/sorted_map",
+        "file": "map.mbt",
+        "line": 32,
+        "column": 8
+      }
     },
     {
       "name": "of",
-      "docstring": "\n Creates a sorted map from given entries.",
+      "docstring": "\n @alert deprecated \"Use @sorted_map.from_array instead\"",
       "signature": "fn of[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](entries : <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]) -> <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
-      "loc": { "line": 38, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/sorted_map",
+        "file": "map.mbt",
+        "line": 38,
+        "column": 8
+      }
     }
   ],
   "misc": []

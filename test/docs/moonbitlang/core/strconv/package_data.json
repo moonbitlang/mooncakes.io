@@ -1,12 +1,16 @@
 {
-  "readme": "# Strconv\n\nThis package implements conversions to and from string representations of basic data types.\n\n# Usage\n\n## Parse\n\nUse `parse_bool`, `parse_double`, `parse_int`, and `parse_int64` convert strings to values.\n\n```moonbit\nlet b = @strconv.parse_bool(\"true\")?         // true\nlet i1 = @strconv.parse_int(\"1234567\")?      // 1234567\nlet i2 = @strconv.parse_int(\"101\", 2)?       // 5\nlet d = @strconv.parse_double(\"123.4567\")?   // 123.4567\n```\n\nFor types that implement the `FromStr` trait, you can also use helper function `parse` to convert a string to a value.\n\n```moonbit\nlet a : Int = @strconv.parse?(\"123\").unwrap()   // 123 \nlet b : Bool = @strconv.parse?(\"true\").unwrap() // true\n```\n",
   "name": "moonbitlang/core/strconv",
   "traits": [
     {
       "name": "@moonbitlang/core/strconv.FromStr",
       "docstring": "",
       "signature": "pub(open) trait @moonbitlang/core/strconv.FromStr {\n  from_string(String) -> Self!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>\n}",
-      "loc": { "line": 22, "column": 1 },
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "traits.mbt",
+        "line": 22,
+        "column": 1
+      },
       "default_impls": [],
       "impls": [
         {
@@ -17,10 +21,20 @@
               "name": "from_string",
               "docstring": "",
               "signature": "fn from_string(str : String) -> Bool!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-              "loc": { "line": 27, "column": 32 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "traits.mbt",
+                "line": 27,
+                "column": 32
+              }
             }
           ],
-          "loc": { "line": 27, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "traits.mbt",
+            "line": 27,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -30,10 +44,20 @@
               "name": "from_string",
               "docstring": "",
               "signature": "fn from_string(str : String) -> Int!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-              "loc": { "line": 30, "column": 31 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "traits.mbt",
+                "line": 32,
+                "column": 31
+              }
             }
           ],
-          "loc": { "line": 30, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "traits.mbt",
+            "line": 32,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -43,10 +67,20 @@
               "name": "from_string",
               "docstring": "",
               "signature": "fn from_string(str : String) -> Int64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-              "loc": { "line": 33, "column": 33 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "traits.mbt",
+                "line": 37,
+                "column": 33
+              }
             }
           ],
-          "loc": { "line": 33, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "traits.mbt",
+            "line": 37,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -56,10 +90,20 @@
               "name": "from_string",
               "docstring": "",
               "signature": "fn from_string(str : String) -> UInt!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-              "loc": { "line": 36, "column": 32 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "traits.mbt",
+                "line": 42,
+                "column": 32
+              }
             }
           ],
-          "loc": { "line": 36, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "traits.mbt",
+            "line": 42,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -69,10 +113,20 @@
               "name": "from_string",
               "docstring": "",
               "signature": "fn from_string(str : String) -> UInt64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-              "loc": { "line": 39, "column": 34 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "traits.mbt",
+                "line": 47,
+                "column": 34
+              }
             }
           ],
-          "loc": { "line": 39, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "traits.mbt",
+            "line": 47,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -82,10 +136,20 @@
               "name": "from_string",
               "docstring": "",
               "signature": "fn from_string(str : String) -> Double!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-              "loc": { "line": 42, "column": 34 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "traits.mbt",
+                "line": 52,
+                "column": 34
+              }
             }
           ],
-          "loc": { "line": 42, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "traits.mbt",
+            "line": 52,
+            "column": 1
+          }
         }
       ]
     }
@@ -93,48 +157,107 @@
   "types": [
     {
       "name": "Decimal",
-      "docstring": "\n High Precision Decimal structure for \"Simple Decimal Conversion\" algorithm.\n Developed by Ken. Thompson, Russ Cox, Robert Griesemer, Nigel Tao.\n \n reference:\n - <https://nigeltao.github.io/blog/2020/parse-number-f64-simple.html>\n - <https://nigeltao.github.io/blog/2020/eisel-lemire.html>",
+      "docstring": "\n High Precision Decimal structure for \"Simple Decimal Conversion\" algorithm.\n Developed by Ken. Thompson, Russ Cox, Robert Griesemer, Nigel Tao.\n \n reference:\n - <https://nigeltao.github.io/blog/2020/parse-number-f64-simple.html>\n - <https://nigeltao.github.io/blog/2020/eisel-lemire.html>\n @alert deprecated \"Decimal will be changed to private. Use `@strconv.parse_double` instead\"",
       "signature": "type Decimal",
-      "loc": { "line": 22, "column": 8 },
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "decimal.mbt",
+        "line": 23,
+        "column": 8
+      },
       "methods": [
         {
           "name": "from_int64",
-          "docstring": "\n Create a decimal with an Int64 value.",
+          "docstring": "\n Create a decimal with an Int64 value.\n @alert deprecated \"Decimal will be changed to private. Use `@strconv.parse_double` instead\"",
           "signature": "fn <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>::from_int64(v : Int64) -> <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>",
-          "loc": { "line": 56, "column": 17 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "decimal.mbt",
+            "line": 64,
+            "column": 17
+          }
         },
         {
           "name": "new",
-          "docstring": "\n Create a zero decimal.",
+          "docstring": "\n Create a zero decimal.\n @alert deprecated \"Decimal will be changed to private. Use `@strconv.parse_double` instead\"",
           "signature": "fn <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>::new() -> <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>",
-          "loc": { "line": 44, "column": 17 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "decimal.mbt",
+            "line": 46,
+            "column": 17
+          }
         },
         {
           "name": "parse_decimal",
-          "docstring": "\n Create a decimal from number string.",
+          "docstring": " @alert deprecated \"use `@strconv.parse_double` instead\"",
           "signature": "fn <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>::parse_decimal(str : String) -> <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-          "loc": { "line": 62, "column": 17 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "decimal.mbt",
+            "line": 181,
+            "column": 17
+          }
         },
         {
           "name": "shift",
-          "docstring": "\n Binary shift left (s > 0) or right (s < 0).\n The shift count must not larger than the max_shift to avoid overflow.",
+          "docstring": "\n Binary shift left (s > 0) or right (s < 0).\n The shift count must not larger than the max_shift to avoid overflow.\n @alert deprecated \"use `@strconv.parse_double` instead to avoid using this method.\"",
           "signature": "fn <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>::shift(self : <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>, s : Int) -> Unit",
-          "loc": { "line": 234, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "decimal.mbt",
+            "line": 280,
+            "column": 8
+          }
         },
         {
           "name": "to_double",
-          "docstring": "\n Convert the decimal to Double.",
+          "docstring": " @alert deprecated \"use `@strconv.parse_double` instead to avoid using this method.\"",
           "signature": "fn <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>::to_double(self : <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>) -> Double!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-          "loc": { "line": 148, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "decimal.mbt",
+            "line": 188,
+            "column": 8
+          }
         }
       ],
-      "impls": []
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "decimal.mbt",
+                "line": 597,
+                "column": 32
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "decimal.mbt",
+            "line": 597,
+            "column": 1
+          }
+        }
+      ]
     },
     {
       "name": "StrConvError",
       "docstring": "",
       "signature": "pub(all) type! StrConvError String\n",
-      "loc": { "line": 16, "column": 16 },
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "errors.mbt",
+        "line": 16,
+        "column": 16
+      },
       "methods": [],
       "impls": [
         {
@@ -145,10 +268,20 @@
               "name": "output",
               "docstring": "",
               "signature": "fn output(self : <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 19, "column": 37 }
+              "loc": {
+                "path": "moonbitlang/core/strconv",
+                "file": "errors.mbt",
+                "line": 19,
+                "column": 37
+              }
             }
           ],
-          "loc": { "line": 19, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/strconv",
+            "file": "errors.mbt",
+            "line": 19,
+            "column": 1
+          }
         }
       ]
     }
@@ -159,43 +292,89 @@
       "name": "parse",
       "docstring": "",
       "signature": "fn parse[A : <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a>](str : String) -> A!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 45, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "traits.mbt",
+        "line": 57,
+        "column": 8
+      }
     },
     {
       "name": "parse_bool",
       "docstring": "\n Parse a string and return the represented boolean value or an error.",
       "signature": "fn parse_bool(str : String) -> Bool!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 17, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "bool.mbt",
+        "line": 17,
+        "column": 8
+      }
+    },
+    {
+      "name": "parse_decimal",
+      "docstring": "\n Parse a string into a decimal number. The string must contain at least one of:\n - An integer part (decimal digits)\n - A decimal point followed by a fractional part (decimal digits)\n - An exponent part ('e' or 'E' followed by an optional sign and decimal digits)\n\n The string may optionally start with a sign ('+' or '-').\n For readability, underscores may appear between digits.\n\n Examples:\n ```\n inspect!(parse_decimal!(\"123\"), content=\"123\")\n inspect!(parse_decimal!(\"12.34\"), content=\"12.34\")\n inspect!(parse_decimal!(\".123\"), content=\"0.123\")\n inspect!(parse_decimal!(\"1e5\"), content=\"100000\")\n inspect!(parse_decimal!(\"1.2e-3\"), content=\"0.0012\")\n inspect!(parse_decimal!(\"1_234.5\"), content=\"1234.5\")\n ```\n\n An exponent value exp scales the mantissa (significand) by 10^exp.\n For example, \"1.23e2\" represents 1.23 × 10² = 123.\n @alert deprecated \"use `@strconv.parse_double` instead\"",
+      "signature": "fn parse_decimal(str : String) -> <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "decimal.mbt",
+        "line": 95,
+        "column": 8
+      }
     },
     {
       "name": "parse_double",
-      "docstring": "",
+      "docstring": "\n Parse a string into a double precision floating point number. The string\n must contain at least one of:\n - An integer part (decimal digits)\n - A decimal point followed by a fractional part (decimal digits)\n - An exponent part ('e' or 'E' followed by an optional sign and decimal digits)\n\n The string may optionally start with a sign ('+' or '-').\n For readability, underscores may appear between digits.\n\n Examples:\n ```\n inspect!(parse_double!(\"123\"), content=\"123\")\n inspect!(parse_double!(\"12.34\"), content=\"12.34\")\n inspect!(parse_double!(\".123\"), content=\"0.123\")\n inspect!(parse_double!(\"1e5\"), content=\"100000\")\n inspect!(parse_double!(\"1.2e-3\"), content=\"0.0012\")\n inspect!(parse_double!(\"1_234.5\"), content=\"1234.5\")\n ```\n\n An exponent value exp scales the mantissa (significand) by 10^exp.\n For example, \"1.23e2\" represents 1.23 × 10² = 123.",
       "signature": "fn parse_double(str : String) -> Double!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 49, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "double.mbt",
+        "line": 70,
+        "column": 8
+      }
     },
     {
       "name": "parse_int",
       "docstring": "\n Parse a string in the given base (0, 2 to 36), return a Int number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
       "signature": "fn parse_int(str : String, base~ : Int = ..) -> Int!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 103, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "int.mbt",
+        "line": 139,
+        "column": 8
+      }
     },
     {
       "name": "parse_int64",
-      "docstring": "\n Parse a string in the given base (0, 2 to 36), return a Int64 number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
+      "docstring": "\n Parses a string into an Int64 number using the specified base, or returns an error.\n The base must be 0 or between 2 and 36 (inclusive). If base is 0, it will be \n inferred from the string prefix:\n   - \"0x\" or \"0X\" for base 16 (hex)\n   - \"0o\" or \"0O\" for base 8 (octal) \n   - \"0b\" or \"0B\" for base 2 (binary)\n   - Default is base 10 (decimal)\n For readability, underscores may appear after base prefixes or between digits.\n These underscores do not affect the value.\n Examples:\n ```\n inspect!(parse_int64!(\"123\"), content=\"123\")\n inspect!(parse_int64!(\"0xff\", base=0), content=\"255\") \n inspect!(parse_int64!(\"0o10\"), content=\"8\")\n inspect!(parse_int64!(\"0b1010\"), content=\"10\")\n inspect!(parse_int64!(\"1_234\"), content=\"1234\")\n inspect!(parse_int64!(\"-123\"), content=\"-123\")\n inspect!(parse_int64!(\"ff\", base=16), content=\"255\")\n inspect!(parse_int64!(\"zz\", base=36), content=\"1295\")\n ```\n ",
       "signature": "fn parse_int64(str : String, base~ : Int = ..) -> Int64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 30, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "int.mbt",
+        "line": 86,
+        "column": 8
+      }
     },
     {
       "name": "parse_uint",
       "docstring": "\n Parse a string in the given base (0, 2 to 36), return an UInt number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
       "signature": "fn parse_uint(str : String, base~ : Int = ..) -> UInt!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 87, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "uint.mbt",
+        "line": 90,
+        "column": 8
+      }
     },
     {
       "name": "parse_uint64",
-      "docstring": "\n Parse a string in the given base (0, 2 to 36), return an UInt64 number or an error.\n If the `~base` argument is 0, the base will be inferred by the prefix.",
+      "docstring": "\n Parses a string into a UInt64 number using the specified base, or returns an error.\n The base must be 0 or between 2 and 36 (inclusive). If base is 0, it will be \n inferred from the string prefix:\n   - \"0x\" or \"0X\" for base 16 (hex)\n   - \"0o\" or \"0O\" for base 8 (octal)\n   - \"0b\" or \"0B\" for base 2 (binary)\n   - Default is base 10 (decimal)\n For readability, underscores may appear after base prefixes or between digits.\n These underscores do not affect the value.\n Examples:\n ```\n inspect!(parse_uint64!(\"123\"), content=\"123\")\n inspect!(parse_uint64!(\"0xff\", base=0), content=\"255\")\n inspect!(parse_uint64!(\"0o10\"), content=\"8\")\n inspect!(parse_uint64!(\"0b1010\"), content=\"10\")\n inspect!(parse_uint64!(\"1_234\"), content=\"1234\")\n inspect!(parse_uint64!(\"ff\", base=16), content=\"255\")\n inspect!(parse_uint64!(\"zz\", base=36), content=\"1295\")\n ```\n ",
       "signature": "fn parse_uint64(str : String, base~ : Int = ..) -> UInt64!<a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
-      "loc": { "line": 24, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/core/strconv",
+        "file": "uint.mbt",
+        "line": 42,
+        "column": 8
+      }
     }
   ],
   "misc": []

@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "encoding",
+  "module_path": "moonbitlang/x",
+  "readme_content": "",
+  "package_data": "moonbitlang/x/encoding/package_data.json",
+  "source_files": [ "decoding.mbt", "encoding.mbt", "types.mbt" ]
+}

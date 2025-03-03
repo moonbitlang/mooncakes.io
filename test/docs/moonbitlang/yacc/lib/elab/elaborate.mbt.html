@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright (C) 2025 International Digital Economy Academy
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, see <https://www.gnu.org/licenses/>.
+
+///|
+pub(all) enum JsonCst {
+  No
+  Yes(TokenPayloadRewrite?)
+}
+
+///|
+pub(all) enum TokenPayloadRewrite {
+  NoPayload
+  JsonPayload
+}
+
+///|
+pub fn elaborate(
+  ast_spec : @parser.ParserSpec,
+  json_cst~ : JsonCst
+) -> ParserSpec {
+  let mut header = ast_spec.header
+  let mut trailer = ast_spec.trailer
+  let token_by_name : Map[String, Token] = {}
+  let rule_by_name : Map[String, Rule] = {}
+  let token_by_image : Map[String, Token] = {}
+  let tokens : Array[Token] = []
+  let rules : Array[Rule] = []
+  fn get_token_by_name(name : String) -> Token {
+    match token_by_name.get(name) {
+      Some(t) => t
+      None => {
+        let token : Token = {
+          num: token_by_name.size(),
+          name,
+          type_: None,
+          image: None,
+          prec: None,
+        }
+        token_by_name[name] = token
+        tokens.push(token)
+        token
+      }
+    }
+  }
+
+  // Prepare tokens
+  for ast_decl in ast_spec.decls {
+    match ast_decl {
+      Token(names, type_~, ..) =>
+        for name in names {
+          let token = get_token_by_name(name)
+          token.type_ = type_
+        }
+      Token1(name, type_~, image~) => {
+        let token = get_token_by_name(name)
+        token.type_ = type_
+        token.image = Some(image)
+        token_by_image[image] = token
+      }
+      _ => ()
+    }
+  }
+
+  // Prepare rules
+  for ast_rule in ast_spec.rules {
+    let rule : Rule = {
+      num: rule_by_name.size(),
+      inline: ast_rule.inline,
+      name: ast_rule.nonterminal,
+      type_: ast_rule.type_,
+      clauses: [],
+    }
+    rules.push(rule)
+    rule_by_name[rule.name] = rule
+  }
+  let mut curr_prec = 0
+  let prec_map = @sorted_map.new()
+  for ast_decl in ast_spec.decls {
+    match ast_decl {
+      Left(idents) | Right(idents) | Nonassoc(idents) => {
+        let assoc : Associativity = match ast_decl {
+          Left(_) => LeftAssoc
+          Right(_) => RightAssoc
+          Nonassoc(_) => NonAssoc
+          _ => panic()
+        }
+        let prec = curr_prec
+        curr_prec += 1
+        for ident in idents {
+          prec_map[ident] = (prec, assoc)
+          match token_by_name[ident] {
+            None => ()
+            Some(token) => token.prec = Some((prec, assoc))
+          }
+        }
+      }
+      Type(idents, type_~) =>
+        for ident in idents {
+          match token_by_name[ident] {
+            None =>
+              match rule_by_name[ident] {
+                None => panic()
+                Some(rule) => rule.type_ = Some(type_)
+              }
+            Some(token) => token.type_ = Some(type_)
+          }
+        }
+      _ => ()
+    }
+  }
+  let mut next_clause_num = 0
+  for ast_rule in ast_spec.rules {
+    let rule = rule_by_name[ast_rule.nonterminal].unwrap()
+    rule.type_ = match json_cst {
+      No => rule.type_
+      Yes(_) => Some("Json")
+    }
+    for ast_clause in ast_rule.clauses {
+      let items = ast_clause.items.map(fn(ast_item) {
+        Item::{
+          binder: ast_item.binder,
+          desc: match ast_item.symbol {
+            Symbol(symbol) =>
+              match token_by_name[symbol] {
+                None => RuleCall(rule_by_name[symbol].unwrap())
+                Some(token) => Token(token)
+              }
+            Image(image) => Token(token_by_image[image].unwrap())
+          },
+        }
+      })
+      let prec = match ast_clause.prec {
+        Some(prec) => {
+          // TODO: error reporting
+          let (prec, _assoc) = prec_map[prec].unwrap()
+          Some(prec)
+        }
+        None => {
+          /// FROM ocamlyacc's manual
+          // > Tokens and rules have precedences.
+          // > By default, the precedence of a rule is the precedence of its rightmost terminal.
+          // I don't what "rightmost terminal" means, but I guess it means the last terminal in the rule.
+          // So, I'll use the precedence of the last terminal in the rule.
+          let mut last_prec = None
+          for item in items.rev_iter() {
+            match item.desc {
+              Token(token) => {
+                last_prec = match token.prec {
+                  None => None
+                  Some((prec, _assoc)) => Some(prec)
+                }
+                break
+              }
+              RuleCall(_) => ()
+            }
+          }
+          last_prec
+        }
+      }
+      let clause_num = next_clause_num
+      next_clause_num += 1
+      let clause = Clause::{
+        num: clause_num,
+        items,
+        prec,
+        action: elaborate_action(
+          items,
+          ast_clause.action,
+          clause_num,
+          nonterminal_name=rule.name,
+          type_=rule.type_,
+          json_cst~,
+        ),
+      }
+      rule.clauses.push(clause)
+    }
+  }
+  let start_rules : Array[Rule] = []
+  let mut position_type : Code? = None
+  let derive_map = @array_multimap.new()
+  for ast_decl in ast_spec.decls {
+    match ast_decl {
+      Start(symbols) =>
+        for symbol in symbols {
+          start_rules.push(rule_by_name[symbol].unwrap())
+        }
+      Position(type_~) => position_type = Some(type_)
+      Derive(traits~, type_~) =>
+        for trait_ in traits.split(",").iter().map(String::trim_space) {
+          derive_map.add(type_, trait_)
+        }
+      _ => ()
+    }
+  }
+
+  // TODO: Make this non target specific
+  // JsonCst
+  match json_cst {
+    No => ()
+    Yes(rewrite) => {
+      header = None
+      trailer = None
+      position_type = Some("Int")
+      match rewrite {
+        None => ()
+        Some(_) => derive_map.add("Token", "Show")
+      }
+    }
+  }
+  match json_cst {
+    No | Yes(None) => ()
+    Yes(Some(NoPayload)) =>
+      for token in tokens {
+        token.type_ = None
+      }
+    Yes(Some(JsonPayload)) =>
+      for token in tokens {
+        token.type_ = Some("Json")
+      }
+  }
+  ParserSpec::{
+    header,
+    trailer,
+    tokens,
+    rules,
+    start_rules,
+    position_type,
+    derive_map,
+  }
+}
+
+///|
+fn elaborate_action(
+  items : Array[Item],
+  ast_action : @parser.ClauseAction,
+  clause_num : Int,
+  nonterminal_name~ : String,
+  type_~ : Code?,
+  json_cst~ : JsonCst
+) -> Action {
+  let arity = items.length()
+  let name_to_index : Map[String, Int] = {}
+  for index, item in items {
+    match item.binder {
+      None => ()
+      Some(name) => name_to_index[name] = index
+    }
+  }
+  fn item_ident_to_index(ident : @parser.ClauseItemIdent) -> Int {
+    match ident {
+      Dollar(index) => index
+      Name(name) => name_to_index[name].unwrap()
+    }
+  }
+
+  let bindings : Array[(BindingSubject, Code)] = []
+  let visited = @sorted_set.new()
+  fn add_binding(desc : @parser.SubstItemDesc) {
+    guard not(visited.contains(desc)) else { return }
+    visited.add(desc)
+    match desc {
+      Dollar(index) => {
+        let name = "_dollar\{index}"
+        bindings.push((Data(index - 1, type_=items[index - 1].type_()), name))
+      }
+      StartPos =>
+        if arity == 0 {
+          bindings.push((LastPos, "_start_pos"))
+        } else {
+          bindings.push((StartPos(0), "_start_pos"))
+        }
+      Loc => {
+        add_binding(StartPos)
+        add_binding(EndPos)
+      }
+      EndPos =>
+        if arity == 0 {
+          bindings.push((LastPos, "_end_pos"))
+        } else {
+          bindings.push((EndPos(arity - 1), "_end_pos"))
+        }
+      StartPosOf(arg) => {
+        let index = item_ident_to_index(arg)
+        bindings.push((StartPos(index), "_start_pos_of_item\{index}"))
+      }
+      EndPosOf(arg) => {
+        let index = item_ident_to_index(arg)
+        bindings.push((EndPos(index), "_end_pos_of_item\{index}"))
+      }
+      LocOf(arg) => {
+        add_binding(StartPosOf(arg))
+        add_binding(EndPosOf(arg))
+      }
+      SymbolStartPos => bindings.push((SymbolStartPos, "_symbol_start_pos"))
+      Sloc => {
+        add_binding(SymbolStartPos)
+        add_binding(EndPos)
+      }
+    }
+  }
+
+  let body : Array[(Code, (Int, Int)?)] = []
+  match json_cst {
+    No => {
+      for index, item in items {
+        match item {
+          { binder: Some(name), .. } =>
+            bindings.push((Data(index, type_=item.type_()), name))
+          _ => ()
+        }
+      }
+      match ast_action.code {
+        None => body.push(("()", None))
+        Some(code) => {
+          let mut last_index = 0
+          for item in code.subst {
+            if item.start > last_index {
+              let len = item.start - last_index
+              body.push(
+                (
+                  code.code.substring(start=last_index, end=item.start),
+                  Some((code.utf8_pos + last_index, len)),
+                ),
+              )
+            }
+            add_binding(item.desc)
+            body.push(
+              (
+                match item.desc {
+                  Dollar(index) => "_dollar\{index}"
+                  StartPos => "_start_pos"
+                  EndPos => "_end_pos"
+                  Loc => "(_start_pos, _end_pos)"
+                  StartPosOf(arg) =>
+                    "_start_pos_of_item\{item_ident_to_index(arg)}"
+                  EndPosOf(arg) => "_end_pos_of_item\{item_ident_to_index(arg)}"
+                  LocOf(arg) => {
+                    let index = item_ident_to_index(arg)
+                    "(_start_pos_of_item\{index}, _end_pos_of_item\{index})"
+                  }
+                  SymbolStartPos => "_symbol_start_pos"
+                  Sloc => "(_symbol_start_pos, _end_pos)"
+                },
+                Some((code.utf8_pos + item.start, item.end - item.start)),
+              ),
+            )
+            last_index = item.end
+          }
+          if last_index < code.code.length() {
+            let len = code.code.length() - last_index
+            body.push(
+              (
+                code.code.substring(start=last_index, end=code.code.length()),
+                Some((code.utf8_pos + last_index, len)),
+              ),
+            )
+          }
+        }
+      }
+    }
+    Yes(_) => {
+      add_binding(StartPos)
+      add_binding(EndPos)
+      body.push(
+        (
+          #|{
+          #|  "type": "NONTERMINAL",
+          $|  "name": "\{nonterminal_name}",
+          $|  "prod_num": \{clause_num},
+          $|  "children": args_to_json(_args),
+          $|  "start": _start_pos.to_json(),
+          $|  "end": _end_pos.to_json(),
+          $|}
+          $|
+          ,
+          None,
+        ),
+      )
+    }
+  }
+  Action::{ num: clause_num, arity, type_, bindings, body }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

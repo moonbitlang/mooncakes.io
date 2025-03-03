@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright (C) 2025 International Digital Economy Academy
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, see <https://www.gnu.org/licenses/>.
+
+///|
+fn main {
+  let usage =
+    #|Usage: moonyacc [options] <input-file>
+  let output_file = @ref.new("")
+  let output_map_file : Ref[String?] = @ref.new(None)
+  let input_file = @ref.new("")
+  let mode : Ref[@driver.Mode] = @ref.new(Default)
+  let input_mode : Ref[@driver.InputMode] = @ref.new(Array)
+  let external_tokens : Ref[Bool] = @ref.new(false)
+  let no_comments : Ref[Bool] = @ref.new(false)
+  let token_payload_rewrite : Ref[@driver.TokenPayloadRewrite?] = @ref.new(None)
+  @ArgParser.parse(
+    [
+      ("--output-file", "-o", Set_string(output_file), "Output file"),
+      (
+        "--output-map-file",
+        "--output-map-file",
+        String(fn(file) { output_map_file.val = Some(file) }),
+        "Output source map file, if not specified, it will be the output file with .map.json extension",
+      ),
+      (
+        "--mode",
+        "--mode",
+        String(fn(mode_sym) {
+          mode.val = match mode_sym {
+            "default" => Default
+            "json-cst" => JsonCst(token_payload_rewrite=None)
+            "only-tokens" => OnlyTokens
+            _ => {
+              println_to_stderr("Unsupported mode: \{mode_sym}")
+              exit(1)
+            }
+          }
+        }),
+        "Specify mode (default, json-cst)",
+      ),
+      (
+        "--input-mode",
+        "--input-mode",
+        String(fn(input_mode_sym) {
+          match input_mode_sym {
+            "array" => input_mode.val = Array
+            "pull" => input_mode.val = Pull
+            _ => {
+              println_to_stderr("Unsupported input mode: \{input_mode_sym}")
+              exit(1)
+            }
+          }
+        }),
+        "Specify input mode (array, pull). Default is array",
+      ),
+      (
+        "--external-tokens",
+        "--external-tokens",
+        Unit(fn() { external_tokens.val = true }),
+        "Use external tokens",
+      ),
+      (
+        "--force-token-json-payload",
+        "--force-token-json-payload",
+        Unit(fn() { token_payload_rewrite.val = Some(JsonPayload) }),
+        "Force token to use JSON payload (only for json-cst mode)",
+      ),
+      (
+        "--force-token-no-payload",
+        "--force-token-no-payload",
+        Unit(fn() { token_payload_rewrite.val = Some(NoPayload) }),
+        "Force token to not use payload (only for json-cst mode)",
+      ),
+      (
+        "--no-comments",
+        "--no-comments",
+        Unit(fn() { no_comments.val = true }),
+        "Do not include comments in the output",
+      ),
+      (
+        "--version",
+        "-v",
+        Unit(fn() {
+          println("moonyacc 0.1.0")
+          exit(0)
+        }),
+        "Show version",
+      ),
+    ],
+    fn(rest) { input_file.val = rest },
+    usage,
+    @sys.get_cli_args(),
+  )
+  guard input_file.val != "" else {
+    println_to_stderr("Input file is required")
+    exit(1)
+  }
+  let parser_spec_src = try {
+    @fs.read_file_to_string!(input_file.val)
+  } catch {
+    err => abort(Show::to_string(err))
+  }
+  let mode : @driver.Mode = match mode.val {
+    JsonCst(_) => JsonCst(token_payload_rewrite=token_payload_rewrite.val)
+    mode => mode
+  }
+  let source_map = @codegen.SourceMap::new()
+  let output = @driver.compile(
+    parser_spec_src,
+    mode~,
+    source_map_builder=source_map,
+    input_mode=input_mode.val,
+    filename=input_file.val,
+    external_tokens=external_tokens.val,
+    no_comments=no_comments.val,
+    generator=@gen_mbt.generator,
+  )
+  fn write_map_file!(file : String) {
+    @fs.write_string_to_file!(
+      file,
+      @json.stringify(source_map.to_json(), indent=2),
+    )
+  }
+
+  if output_file.val == "" {
+    println(output)
+    match output_map_file.val {
+      Some(file) => write_map_file?(file).unwrap()
+      None => ()
+    }
+  } else {
+    @fs.write_string_to_file?(output_file.val, output).unwrap()
+    write_map_file?(output_map_file.val.or("\{output_file.val}.map.json")).unwrap()
+  }
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

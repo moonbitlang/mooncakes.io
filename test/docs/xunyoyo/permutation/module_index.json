@@ -14,7 +14,6 @@
               "name": "is_permutation",
               "package": {
                 "path": "xunyoyo/permutation/lib/is_permutation",
-                "readme": true,
                 "traits": [],
                 "types": [],
                 "typealias": [],
@@ -27,7 +26,6 @@
               "name": "next_permutation",
               "package": {
                 "path": "xunyoyo/permutation/lib/next_permutation",
-                "readme": true,
                 "traits": [],
                 "types": [],
                 "typealias": [],
@@ -40,7 +38,6 @@
               "name": "prev_permutation",
               "package": {
                 "path": "xunyoyo/permutation/lib/prev_permutation",
-                "readme": true,
                 "traits": [],
                 "types": [],
                 "typealias": [],
@@ -55,7 +52,6 @@
           "name": "main",
           "package": {
             "path": "xunyoyo/permutation/main",
-            "readme": false,
             "traits": [],
             "types": [],
             "typealias": [],

@@ -1,139 +1,248 @@
 {
-  "readme": "# HashMap\n\nA mutable hash map based on a Robin Hood hash table.\n\n# Usage\n\n## Create\n\nYou can create an empty map using `new()` or construct it using `from_array()`.\n\n```moonbit\nlet map1 = @hashmap.of([1, 2, 3, 4, 5])\nlet map2 : @hashmap.T[String, Int] = @hashmap.new()\n```\n\n## Set & Get\n\nYou can use `set()` to add a key-value pair to the map, and use `get()` to get a value.\n\n```moonbit\nlet map : HashMap[String, Int] = HashMap::new()\nmap.set(\"a\", 1)\nprintln(map.get(\"a\")) // Some(1)\nprintln(map.get_or_default(\"a\", 0)) // 1\nprintln(map.get_or_default(\"b\", 0)) // 0\n```\n\n## Remove\n\nYou can use `remove()` to remove a key-value pair.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nmap.remove(\"a\")\nprintln(map) // of([(\"c\", 3), (\"b\", 2)])\n```\n\n## Contains\n\nYou can use `contains()` to check whether a key exists.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nprintln(map.contains(\"a\")) // true\nprintln(map.contains(\"d\")) // false\n```\n\n## Size & Capacity\n\nYou can use `size()` to get the number of key-value pairs in the map, or `capacity()` to get the current capacity.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nprintln(map.size()) // 3\nprintln(map.capacity()) // 8\n```\n\nSimilarly, you can use `is_empty()` to check whether the map is empty.\n\n```moonbit\nlet map = @hashmap.new()\nprintln(map.is_empty()) // true\n```\n\n## Clear\n\nYou can use `clear` to remove all key-value pairs from the map, but the allocated memory will not change.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nmap.clear()\nprintln(map.is_empty()) // true\n```\n\n## Iteration\n\nYou can use `each()` or `eachi()` to iterate through all key-value pairs.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nmap.each(fn(k, v) { println(\"key: {k}, value:\\{v}\") })\nmap.eachi(fn(i, k, v) { println(\"index:\\{i}, key:\\{k}, value:\\{v}\") })\n```\n\nOr use `iter()` to get an iterator of hashmap.\n\n```moonbit\nlet map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\nprintln(map.iter())\n```\n",
   "name": "moonbitlang/core/hashmap",
   "traits": [],
   "types": [
     {
       "name": "T",
-      "docstring": "\n Mutable hash map, not thread safe. \n  \n # Example\n \n ```\n let map = @hashmap.of([(3, \"three\"), (8, \"eight\"), (1, \"one\")])\n assert_eq!(map.get(2), None)\n assert_eq!(map.get(3), Some(\"three\"))\n map.set(3, \"updated\")\n assert_eq!(map.get(3), Some(\"updated\"))\n ```",
+      "docstring": "\n Mutable hash map, not thread safe.\n\n # Example\n\n ```\n let map = @hashmap.of([(3, \"three\"), (8, \"eight\"), (1, \"one\")])\n assert_eq!(map.get(2), None)\n assert_eq!(map.get(3), Some(\"three\"))\n map.set(3, \"updated\")\n assert_eq!(map.get(3), Some(\"updated\"))\n ```",
       "signature": "type T",
-      "loc": { "line": 41, "column": 8 },
+      "loc": {
+        "path": "moonbitlang/core/hashmap",
+        "file": "types.mbt",
+        "line": 41,
+        "column": 8
+      },
       "methods": [
         {
           "name": "capacity",
-          "docstring": "\n Get the capacity of the map.",
+          "docstring": "\n Returns the current capacity of the hash map. The capacity is the number of\n key-value pairs the hash map can hold before it needs to reallocate its\n internal storage.\n\n Parameters:\n\n * `map` : The hash map whose capacity is to be queried.\n\n Returns the number of key-value pairs that can be stored in the hash map\n before triggering a reallocation.\n\n Example:\n\n ```moonbit\n test \"capacity\" {\n   let map : @hashmap.T[Int, String] = @hashmap.new(capacity=16)\n   inspect!(map.capacity(), content=\"16\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::capacity[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Int",
-          "loc": { "line": 100, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 266,
+            "column": 8
+          }
         },
         {
           "name": "clear",
-          "docstring": "\n Clears the map, removing all key-value pairs. Keeps the allocated space.",
+          "docstring": "\n Removes all key-value pairs from the map while retaining the allocated\n capacity. After calling this method, the size of the map will be zero but the\n capacity remains unchanged.\n\n Parameters:\n\n * `self` : The hash map to be cleared.\n\n Example:\n\n ```moonbit\n test \"clear\" {\n   let map = @hashmap.of([(\"a\", 1), (\"b\", 2)])\n   map.clear()\n   inspect!(map.size(), content=\"0\")\n   inspect!(map.get(\"a\"), content=\"None\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::clear[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Unit",
-          "loc": { "line": 31, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 48,
+            "column": 8
+          }
         },
         {
           "name": "contains",
-          "docstring": "\n Check if the hash map contains a key.",
+          "docstring": "\n Checks if a key exists in the hash map.\n\n Parameters:\n\n * `self` : The hash map to search in.\n * `key` : The key to look for in the hash map.\n\n Returns `true` if the key exists in the hash map, `false` otherwise.\n\n Example:\n\n ```moonbit\n test \"contains\" {\n   let map = @hashmap.of([(\"a\", 1), (\"b\", 2)])\n   inspect!(map.contains(\"a\"), content=\"true\")\n   inspect!(map.contains(\"c\"), content=\"false\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::contains[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> Bool",
-          "loc": { "line": 187, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 344,
+            "column": 8
+          }
         },
         {
           "name": "each",
-          "docstring": "\n Iterate over all key-value pairs of the map.",
+          "docstring": "\n Iterates over all key-value pairs in the hash map and applies the given\n function to each pair.\n\n Parameters:\n\n * `map` : The hash map to iterate over.\n * `action` : A function that takes a key and a value as arguments and\n performs some action. The function should not return any value.\n\n Example:\n\n ```moonbit\n test \"each\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   let mut result = \"\"\n   map.each(fn(k, v) { result = result + \"\\{k}:\\{v},\" })\n   inspect!(result, content=\"2:two,1:one,\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::each[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], f : (K, V) -> Unit) -> Unit",
-          "loc": { "line": 112, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 314,
+            "column": 8
+          }
         },
         {
           "name": "eachi",
-          "docstring": "\n Iterate over all key-value pairs of the map, with index.",
+          "docstring": "\n Iterates over all key-value pairs in the map with their index, applying the\n given function to each element. The index starts from 0 and only counts\n non-empty entries.\n\n Parameters:\n\n * `self` : The hash map to iterate over.\n * `callback` : A function that takes three arguments:\n  * An integer representing the index of the current key-value pair\n  * The key of the current entry\n  * The value of the current entry\n\n Example:\n\n ```moonbit\n test \"eachi\" {\n   let map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\n   let mut result = 0\n   map.eachi(fn(i, k, _) { if k == \"b\" { result = i } })\n   // \"b\" is at index 1\n   inspect!(result, content=\"2\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::eachi[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], f : (Int, K, V) -> Unit) -> Unit",
-          "loc": { "line": 123, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 347,
+            "column": 8
+          }
         },
         {
           "name": "from_array",
-          "docstring": "\n Create new hash map from array.",
+          "docstring": "\n Creates a new hash map from an array of key-value pairs.\n\n Parameters:\n\n * `arr` : An array of tuples, where each tuple contains a key and its\n corresponding value.\n  * Keys must implement both `Hash` and `Eq` traits\n  * Values can be of any type\n\n Returns a new hash map containing all the key-value pairs from the array.\n\n Example:\n\n ```moonbit\n test \"T::from_array\" {\n   let map = @hashmap.from_array([(1, \"one\"), (2, \"two\")])\n   inspect!(map.get(1), content=\"Some(\\\"one\\\")\")\n   inspect!(map.get(2), content=\"Some(\\\"two\\\")\")\n }\n ```\n\n @alert deprecated \"use `@hashmap.from_array` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::from_array[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
-          "loc": { "line": 48, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "deprecated.mbt",
+            "line": 68,
+            "column": 11
+          }
         },
         {
           "name": "from_iter",
-          "docstring": "",
+          "docstring": "\n Creates a new hash map and inserts all key-value pairs from the given\n iterator.\n\n Parameters:\n\n * `iter` : An iterator of key-value pairs, where each pair consists of a\n hashable and equatable key of type `K` and a value of type `V`.\n\n Returns a new hash map containing all key-value pairs from the iterator.\n\n Example:\n\n ```moonbit\n test \"T::from_iter\" {\n   let pairs = [(1, \"one\"), (2, \"two\")]\n   let map = @hashmap.from_iter(pairs.iter())\n   inspect!(map.get(1), content=\"Some(\\\"one\\\")\")\n   inspect!(map.get(2), content=\"Some(\\\"two\\\")\")\n }\n ```\n\n @alert deprecated \"use `@hashmap.from_iter` instead\"",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::from_iter[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
-          "loc": { "line": 72, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 188,
+            "column": 11
+          }
         },
         {
           "name": "get",
-          "docstring": "\n Get the value associated with a key.",
+          "docstring": "\n Retrieves the value associated with a given key in the hash map.\n\n Parameters:\n\n * `self` : The hash map to search in.\n * `key` : The key to look up in the map.\n\n Returns `Some(value)` if the key exists in the map, `None` otherwise.\n\n Example:\n\n ```moonbit\n test \"get\" {\n   let map = @hashmap.of([(\"key\", 42)])\n   inspect!(map.get(\"key\"), content=\"Some(42)\")\n   inspect!(map.get(\"nonexistent\"), content=\"None\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::get[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> V?",
-          "loc": { "line": 103, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 203,
+            "column": 8
+          }
         },
         {
           "name": "get_or_default",
-          "docstring": "\n Get the value associated with a key, \n returns the provided default value if the key does not exist.",
+          "docstring": "\n Gets the value associated with a given key from the hash map. If the key\n doesn't exist, returns the provided default value instead.\n\n Parameters:\n\n * `map` : The hash map to retrieve the value from.\n * `key` : The key to look up in the map.\n * `default` : The value to return if the key is not found in the map.\n\n Returns the value associated with the key if it exists, otherwise returns the\n default value.\n\n Example:\n\n ```moonbit\n test \"get_or_default\" {\n   let map = @hashmap.of([(\"a\", 1), (\"b\", 2)])\n   inspect!(map.get_or_default(\"a\", 0), content=\"1\")\n   inspect!(map.get_or_default(\"c\", 0), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::get_or_default[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, default : V) -> V",
-          "loc": { "line": 174, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 314,
+            "column": 8
+          }
         },
         {
           "name": "get_or_init",
           "docstring": "\n Gets the value associated with the given key. If the key doesn't exist in the\n map, initializes it with the result of calling the provided initialization\n function.\n\n Parameters:\n\n * `self` : The hash map.\n * `key` : The key to look up in the map.\n * `init` : A function that takes no arguments and returns a value to be\n associated with the key if it doesn't exist.\n\n Returns the value associated with the key, either existing or newly\n initialized.\n\n Example:\n\n ```moonbit\n test \"get_or_init\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new()\n   let value = map.get_or_init(\"key\", fn() { 42 })\n   inspect!(value, content=\"42\")\n   inspect!(map.get(\"key\"), content=\"Some(42)\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::get_or_init[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, init : () -> V) -> V",
-          "loc": { "line": 155, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 276,
+            "column": 8
+          }
         },
         {
           "name": "is_empty",
-          "docstring": "\n Check if the hash map is empty.",
+          "docstring": "\n Returns whether the hash map contains no key-value pairs.\n\n Parameters:\n\n * `map` : The hash map to check.\n\n Returns `true` if the hash map contains no key-value pairs, `false`\n otherwise.\n\n Example:\n\n ```moonbit\n test \"is_empty\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new()\n   inspect!(map.is_empty(), content=\"true\")\n   map.set(\"key\", 42)\n   inspect!(map.is_empty(), content=\"false\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::is_empty[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Bool",
-          "loc": { "line": 106, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 290,
+            "column": 8
+          }
         },
         {
           "name": "iter",
-          "docstring": "\n Returns an iterator of the map.",
+          "docstring": "\n Returns an iterator over the key-value pairs in the map.\n\n Parameters:\n\n * `map` : The hash map to iterate over.\n\n Returns an iterator that yields tuples of `(key, value)` for each entry in\n the map, in unspecified order.\n\n Example:\n\n ```moonbit\n test \"iter\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   let pairs = map.iter().to_array()\n   inspect!(pairs.length(), content=\"2\")\n   inspect!(pairs.contains((1, \"one\")), content=\"true\")\n   inspect!(pairs.contains((2, \"two\")), content=\"true\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::iter[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]",
-          "loc": { "line": 38, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 74,
+            "column": 8
+          }
         },
         {
           "name": "iter2",
-          "docstring": "",
+          "docstring": "\n Creates an iterator over the key-value pairs in the map, where the key and\n value are passed as separate arguments to the yielding function.\n\n Parameters:\n\n * `map` : The hash map to iterate over.\n\n Returns an iterator `Iter2[K, V]` that yields each key-value pair in the map\n as separate arguments. This differs from `iter()` which yields tuples of\n key-value pairs.\n\n Example:\n\n ```moonbit\n test \"iter2\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   let mut sum = 0\n   map.iter2().each(fn(k, _) { sum = sum + k })\n   inspect!(sum, content=\"3\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::iter2[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[K, V]",
-          "loc": { "line": 55, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 112,
+            "column": 8
+          }
         },
         {
           "name": "new",
-          "docstring": "\n Create new hash map.",
+          "docstring": "\n Creates a new empty hash map with the specified capacity. This is a\n deprecated static method of type `T`.\n\n Parameters:\n\n * `capacity` : The initial capacity of the hash map. Must be a positive\n integer. The actual capacity will be rounded up to the nearest power of 2\n that is greater than or equal to this value. Defaults to 8 if not specified.\n\n Returns a new empty hash map of type `T[K, V]` where `K` is the key type and\n `V` is the value type.\n\n Example:\n\n ```moonbit\n test \"T::new\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new()\n   inspect!(map.size(), content=\"0\")\n   inspect!(map.capacity(), content=\"8\")\n }\n ```\n\n @alert deprecated \"use `@hashmap.new` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::new[K, V](capacity~ : Int = ..) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
-          "loc": { "line": 41, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "deprecated.mbt",
+            "line": 40,
+            "column": 11
+          }
         },
         {
           "name": "of",
-          "docstring": "",
+          "docstring": "\n Creates a new hash map from a fixed array of key-value pairs.\n\n Parameters:\n\n * `arr` : A fixed array of key-value pairs. Each pair contains a hashable and\n equatable key of type `K` and a value of type `V`.\n\n Returns a new hash map containing all key-value pairs from the input array.\n\n Example:\n\n ```moonbit\n test \"T::of\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   inspect!(map.get(1), content=\"Some(\\\"one\\\")\")\n   inspect!(map.get(2), content=\"Some(\\\"two\\\")\")\n }\n ```\n\n @alert deprecated \"use `@hashmap.of` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::of[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, V](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
-          "loc": { "line": 250, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "deprecated.mbt",
+            "line": 94,
+            "column": 11
+          }
         },
         {
           "name": "op_get",
-          "docstring": "",
+          "docstring": "\n Retrieves a value from the hash map using the index operator syntax. This\n method is automatically called when using the square bracket notation\n `map[key]`.\n\n Parameters:\n\n * `map` : The hash map to retrieve the value from.\n * `key` : The key to look up in the map. Must implement both `Hash` and `Eq`\n traits.\n\n Returns `Some(value)` if the key exists in the map, `None` otherwise.\n\n Example:\n\n ```moonbit\n test \"op_get\" {\n   let map = @hashmap.of([(\"key\", 42)])\n   inspect!(map[\"key\"], content=\"Some(42)\")\n   inspect!(map[\"nonexistent\"], content=\"None\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::op_get[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> V?",
-          "loc": { "line": 126, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 247,
+            "column": 8
+          }
         },
         {
           "name": "op_set",
-          "docstring": "",
+          "docstring": "\n Sets the value associated with a key in the hash map. If the key already\n exists, updates its value; otherwise, adds a new key-value pair. This\n function is automatically called when using the index assignment syntax\n `map[key] = value`.\n\n Parameters:\n\n * `map` : The hash map to modify.\n * `key` : The key to associate with the value. Must implement `Hash` and `Eq`\n traits.\n * `value` : The value to associate with the key.\n\n Example:\n\n ```moonbit\n test \"op_set\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new()\n   map[\"key\"] = 42\n   inspect!(map.get(\"key\"), content=\"Some(42)\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::op_set[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, value : V) -> Unit",
-          "loc": { "line": 97, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 180,
+            "column": 8
+          }
         },
         {
           "name": "remove",
-          "docstring": "\n Remove a key-value pair from hash map.",
+          "docstring": "\n Removes the entry for the specified key from the hash map. If the key exists\n in the map, removes its entry and adjusts the probe sequence length (PSL) of\n subsequent entries to maintain the Robin Hood hashing invariant. If the key\n does not exist, the map remains unchanged.\n\n Parameters:\n\n * `self` : The hash map to remove the entry from.\n * `key` : The key to remove from the map.\n\n Example:\n\n ```moonbit\n test \"remove\" {\n   let map = @hashmap.of([(\"a\", 1), (\"b\", 2)])\n   map.remove(\"a\")\n   inspect!(map.get(\"a\"), content=\"None\")\n   inspect!(map.size(), content=\"1\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::remove[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K) -> Unit",
-          "loc": { "line": 196, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 372,
+            "column": 8
+          }
         },
         {
           "name": "set",
-          "docstring": "\n Set a key-value pair into hash map.\n @alert unsafe \"Panic if the hash map is full.\"",
+          "docstring": "\n Sets a key-value pair into the hash map. If the key already exists, updates\n its value. If the hash map is near full capacity (>= 50%), automatically\n grows the internal storage to accommodate more entries.\n\n Parameters:\n\n * `map` : The hash map to modify.\n * `key` : The key to insert or update. Must implement `Hash` and `Eq` traits.\n * `value` : The value to associate with the key.\n\n Example:\n\n ```moonbit\n test \"set\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new()\n   map.set(\"key\", 42)\n   inspect!(map.get(\"key\"), content=\"Some(42)\")\n   map.set(\"key\", 24) // update existing key\n   inspect!(map.get(\"key\"), content=\"Some(24)\")\n }\n ```\n\n @alert unsafe \"Panic if the hash map is full.\"",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::set[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], key : K, value : V) -> Unit",
-          "loc": { "line": 57, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 119,
+            "column": 8
+          }
         },
         {
           "name": "size",
-          "docstring": "\n Get the number of key-value pairs in the map.",
+          "docstring": "\n Returns the number of key-value pairs currently stored in the hash map.\n\n Parameters:\n\n * `self` : The hash map to get the size from.\n\n Returns the number of key-value pairs in the hash map.\n\n Example:\n\n ```moonbit\n test \"size\" {\n   let map = @hashmap.of([(\"a\", 1), (\"b\", 2), (\"c\", 3)])\n   inspect!(map.size(), content=\"3\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::size[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> Int",
-          "loc": { "line": 94, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 242,
+            "column": 8
+          }
         },
         {
           "name": "to_array",
-          "docstring": "\n Converts the map to an array.",
+          "docstring": "\n Converts the hash map into an array of key-value pairs. The order of elements\n in the resulting array follows the internal storage order of the hash map.\n\n Parameters:\n\n * `self` : The hash map to be converted.\n\n Returns an array containing tuples of key-value pairs from the hash map.\n\n Example:\n\n ```moonbit\n test \"to_array\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   let arr = map.to_array()\n   inspect!(arr, content=\n   #|[(2, \"two\"), (1, \"one\")]\n )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/hashmap#T\">T</a>::to_array[K, V](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]",
-          "loc": { "line": 80, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 213,
+            "column": 8
+          }
         }
       ],
       "impls": [
@@ -143,12 +252,22 @@
           "methods": [
             {
               "name": "output",
-              "docstring": "",
+              "docstring": "\n Provides string representation for hash maps.\n\n Parameters:\n\n * `self` : The hash map to be converted to string.\n * `logger` : The buffer to write the string representation to.\n\n Example:\n\n ```moonbit\n test \"show\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   inspect!(map, content=\n   #|HashMap::of([(2, \"two\"), (1, \"one\")])\n )\n }\n ```",
               "signature": "fn output[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 136, "column": 52 }
+              "loc": {
+                "path": "moonbitlang/core/hashmap",
+                "file": "utils.mbt",
+                "line": 377,
+                "column": 52
+              }
             }
           ],
-          "loc": { "line": 136, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "utils.mbt",
+            "line": 377,
+            "column": 1
+          }
         },
         {
           "docstring": "",
@@ -156,17 +275,72 @@
           "methods": [
             {
               "name": "arbitrary",
-              "docstring": "",
+              "docstring": "\n Implements random generation of hashmaps for property-based testing through\n the `Arbitrary` trait.\n\n Parameters:\n\n * `size` : The size hint for generating random key-value pairs. Larger values\n typically result in larger hashmaps.\n * `random_state` : The random state used for generating key-value pairs.\n\n Returns a randomly generated hashmap containing arbitrary key-value pairs.\n\n Example:\n\n ```moonbit\n test \"arbitrary\" {\n   let samples : Array[@hashmap.T[Int, String]] = @quickcheck.samples(5)\n   inspect!(samples.length(), content=\"5\")\n }\n ```",
               "signature": "fn arbitrary[K : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
-              "loc": { "line": 266, "column": 8 }
+              "loc": {
+                "path": "moonbitlang/core/hashmap",
+                "file": "hashmap.mbt",
+                "line": 482,
+                "column": 8
+              }
             }
           ],
-          "loc": { "line": 263, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/hashmap",
+            "file": "hashmap.mbt",
+            "line": 479,
+            "column": 1
+          }
         }
       ]
     }
   ],
   "typealias": [],
-  "values": [],
+  "values": [
+    {
+      "name": "from_array",
+      "docstring": "\n Creates a new hash map from an array of key-value pairs. Pairs with duplicate\n keys will keep the latest value, overwriting the previous ones.\n\n Parameters:\n\n * `arr` : An array of key-value tuples. Each tuple contains a hashable and\n comparable key of type `K`, and an associated value of type `V`.\n\n Returns a new hash map containing all the key-value pairs from the input\n array.\n\n Example:\n\n ```moonbit\n test \"from_array\" {\n   let arr = [(1, \"one\"), (2, \"two\"), (1, \"ONE\")]\n   let map = @hashmap.from_array(arr)\n   inspect!(map.get(1), content=\"Some(\\\"ONE\\\")\")\n   inspect!(map.get(2), content=\"Some(\\\"two\\\")\")\n }\n ```",
+      "signature": "fn from_array[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+      "loc": {
+        "path": "moonbitlang/core/hashmap",
+        "file": "hashmap.mbt",
+        "line": 89,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_iter",
+      "docstring": "\n Creates a new hash map from an iterator of key-value pairs.\n\n Parameters:\n\n * `iter` : An iterator that yields key-value pairs. The key type must\n implement both `Hash` and `Eq` traits.\n\n Returns a new hash map containing all key-value pairs from the iterator. If\n the iterator yields multiple pairs with the same key, the later value will\n overwrite the earlier one.\n\n Example:\n\n ```moonbit\n test \"from_iter\" {\n   let arr = [(1, \"one\"), (2, \"two\")]\n   let iter = Iter::new(fn(yield_) {\n     for pair in arr {\n       if yield_(pair) == IterEnd {\n         break IterEnd\n       }\n     } else {\n       IterContinue\n     }\n   })\n   let map = @hashmap.from_iter(iter)\n   inspect!(map.get(1), content=\"Some(\\\"one\\\")\")\n   inspect!(map.get(2), content=\"Some(\\\"two\\\")\")\n }\n ```",
+      "signature": "fn from_iter[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+      "loc": {
+        "path": "moonbitlang/core/hashmap",
+        "file": "utils.mbt",
+        "line": 159,
+        "column": 8
+      }
+    },
+    {
+      "name": "new",
+      "docstring": "\n Creates a new empty hash map with the specified initial capacity. The actual\n capacity will be rounded up to the next power of 2 that is greater than or\n equal to the requested capacity, with a minimum of 8.\n\n Parameters:\n\n * `capacity` : The desired minimum capacity of the hash map. Must be a\n non-negative integer. Defaults to 8 if not specified.\n\n Returns a new empty hash map of type `T[K, V]`, where `K` is the key type and\n `V` is the value type.\n\n Example:\n\n ```moonbit\n test \"new\" {\n   let map : @hashmap.T[String, Int] = @hashmap.new(capacity=16)\n   inspect!(map.capacity(), content=\"16\")\n   inspect!(map.is_empty(), content=\"true\")\n }\n ```",
+      "signature": "fn new[K, V](capacity~ : Int = ..) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+      "loc": {
+        "path": "moonbitlang/core/hashmap",
+        "file": "hashmap.mbt",
+        "line": 62,
+        "column": 8
+      }
+    },
+    {
+      "name": "of",
+      "docstring": "\n Creates a new hash map from a fixed array of key-value pairs.\n\n Parameters:\n\n * `pairs` : A fixed array of tuples, where each tuple contains a key of type\n `K` and a value of type `V`. The key type must implement both `Eq` and `Hash`\n traits.\n\n Returns a new hash map containing all the key-value pairs from the input\n array.\n\n Example:\n\n ```moonbit\n test \"of\" {\n   let map = @hashmap.of([(1, \"one\"), (2, \"two\")])\n   inspect!(map.get(1), content=\"Some(\\\"one\\\")\")\n   inspect!(map.get(2), content=\"Some(\\\"two\\\")\")\n }\n ```",
+      "signature": "fn of[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, V](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[(K, V)]) -> <a href=\"moonbitlang/core/hashmap#T\">T</a>[K, V]",
+      "loc": {
+        "path": "moonbitlang/core/hashmap",
+        "file": "hashmap.mbt",
+        "line": 446,
+        "column": 8
+      }
+    }
+  ],
   "misc": []
 }

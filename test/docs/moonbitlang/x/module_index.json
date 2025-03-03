@@ -10,7 +10,6 @@
           "name": "benchmark",
           "package": {
             "path": "moonbitlang/x/benchmark",
-            "readme": true,
             "traits": [],
             "types": [
               {
@@ -35,7 +34,6 @@
           "name": "crypto",
           "package": {
             "path": "moonbitlang/x/crypto",
-            "readme": true,
             "traits": [],
             "types": [
               {
@@ -73,23 +71,70 @@
           "name": "encoding",
           "package": {
             "path": "moonbitlang/x/encoding",
-            "readme": false,
             "traits": [],
             "types": [
               {
                 "name": "DecodeError",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "DecodeError",
+                        "path": "moonbitlang/x/encoding"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": []
               },
               { "name": "Encoding", "impls": [], "methods": [] },
               {
                 "name": "LossyChars",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "LossyChars",
+                        "path": "moonbitlang/x/encoding"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": [ "iter", "to_string" ]
               },
               {
                 "name": "StrictChars",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "StrictChars",
+                        "path": "moonbitlang/x/encoding"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": [ "iter", "to_string" ]
               }
             ],
@@ -108,12 +153,27 @@
           "name": "fs",
           "package": {
             "path": "moonbitlang/x/fs",
-            "readme": false,
             "traits": [],
             "types": [
               {
                 "name": "IOError",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "IOError",
+                        "path": "moonbitlang/x/fs"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": []
               }
             ],
@@ -131,7 +191,6 @@
           "name": "json5",
           "package": {
             "path": "moonbitlang/x/json5",
-            "readme": true,
             "traits": [],
             "types": [
               {
@@ -141,13 +200,58 @@
               },
               {
                 "name": "ParseErrorData",
-                "impls": [ { "methods": [ "op_equal" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "ParseErrorData",
+                        "path": "moonbitlang/x/json5"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  }
+                ],
                 "methods": []
               },
               {
                 "name": "Position",
                 "impls": [
-                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Position",
+                        "path": "moonbitlang/x/json5"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Position",
+                        "path": "moonbitlang/x/json5"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": []
               }
@@ -162,7 +266,6 @@
           "name": "num",
           "package": {
             "path": "moonbitlang/x/num",
-            "readme": false,
             "traits": [ { "name": "@moonbitlang/x/num.Num", "impls": [] } ],
             "types": [],
             "typealias": [],
@@ -175,12 +278,27 @@
           "name": "stack",
           "package": {
             "path": "moonbitlang/x/stack",
-            "readme": true,
             "traits": [],
             "types": [
               {
                 "name": "Stack",
-                "impls": [ { "methods": [ "default" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Stack",
+                        "path": "moonbitlang/x/stack"
+                      },
+                      "arguments": [ { "kind": "param", "name": "T" } ]
+                    },
+                    "trait": {
+                      "name": "Default",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "default" ]
+                  }
+                ],
                 "methods": [
                   "clear", "drop", "drop_result", "each", "equal", "fold",
                   "from_array", "from_list", "from_stack", "is_empty",
@@ -201,12 +319,12 @@
           "name": "sys",
           "package": {
             "path": "moonbitlang/x/sys",
-            "readme": false,
             "traits": [],
             "types": [],
             "typealias": [],
             "values": [
-              "exit", "get_cli_args", "get_env_vars", "set_env_var"
+              "exit", "get_cli_args", "get_env_vars", "set_env_var",
+              "unset_env_var"
             ],
             "misc": []
           },
@@ -216,15 +334,56 @@
           "name": "time",
           "package": {
             "path": "moonbitlang/x/time",
-            "readme": true,
             "traits": [],
             "types": [
               {
                 "name": "Duration",
                 "impls": [
-                  { "methods": [ "compare" ] },
-                  { "methods": [ "op_equal" ] },
-                  { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Duration",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Compare",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "compare" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Duration",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Duration",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": [
                   "add_duration", "add_hours", "add_minutes",
@@ -237,9 +396,51 @@
               {
                 "name": "Period",
                 "impls": [
-                  { "methods": [ "compare" ] },
-                  { "methods": [ "op_equal" ] },
-                  { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Period",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Compare",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "compare" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Period",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Period",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": [
                   "add_days", "add_months", "add_period", "add_weeks",
@@ -251,7 +452,23 @@
               },
               {
                 "name": "PlainDate",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainDate",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": [
                   "add_days", "add_months", "add_period", "add_weeks",
                   "add_years", "compare", "day", "days_in_month",
@@ -266,9 +483,51 @@
               {
                 "name": "PlainDateTime",
                 "impls": [
-                  { "methods": [ "compare" ] },
-                  { "methods": [ "op_equal" ] },
-                  { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainDateTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Compare",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "compare" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainDateTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainDateTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": [
                   "add_days", "add_duration", "add_hours", "add_minutes",
@@ -287,9 +546,51 @@
               {
                 "name": "PlainTime",
                 "impls": [
-                  { "methods": [ "compare" ] },
-                  { "methods": [ "op_equal" ] },
-                  { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Compare",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "compare" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "PlainTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": [
                   "add_duration", "add_hours", "add_minutes",
@@ -304,28 +605,118 @@
               {
                 "name": "Weekday",
                 "impls": [
-                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Weekday",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Weekday",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": []
               },
               {
                 "name": "Zone",
                 "impls": [
-                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Zone",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Zone",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
-                "methods": [ "is_fixed", "to_string" ]
+                "methods": [ "from_tzif2", "is_fixed", "to_string" ]
               },
               {
                 "name": "ZoneOffset",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "ZoneOffset",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": [
-                  "compare", "from_seconds", "id", "is_dst", "of",
-                  "op_equal", "seconds", "to_string"
+                  "abbreviation", "compare", "from_seconds", "id", "is_dst",
+                  "of", "op_equal", "seconds", "to_string"
                 ]
               },
               {
                 "name": "ZonedDateTime",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "ZonedDateTime",
+                        "path": "moonbitlang/x/time"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": [
                   "add_days", "add_hours", "add_minutes", "add_months",
                   "add_nanoseconds", "add_seconds", "add_weeks", "add_years",
@@ -353,15 +744,56 @@
           "name": "uuid",
           "package": {
             "path": "moonbitlang/x/uuid",
-            "readme": true,
             "traits": [],
             "types": [
               {
                 "name": "UUID",
                 "impls": [
-                  { "methods": [ "compare" ] },
-                  { "methods": [ "op_equal" ] },
-                  { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "UUID",
+                        "path": "moonbitlang/x/uuid"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Compare",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "compare" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "UUID",
+                        "path": "moonbitlang/x/uuid"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Eq",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "op_equal" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "UUID",
+                        "path": "moonbitlang/x/uuid"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
                 "methods": [
                   "as_version", "hash", "to_bytes", "to_string", "variant",
@@ -370,12 +802,44 @@
               },
               {
                 "name": "Variant",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Variant",
+                        "path": "moonbitlang/x/uuid"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": []
               },
               {
                 "name": "Version",
-                "impls": [ { "methods": [ "output" ] } ],
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Version",
+                        "path": "moonbitlang/x/uuid"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
                 "methods": []
               }
             ],

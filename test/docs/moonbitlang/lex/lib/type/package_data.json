@@ -1,0 +1,273 @@
+{
+  "name": "moonbitlang/lex/lib/type",
+  "traits": [],
+  "types": [
+    {
+      "name": "Lex",
+      "docstring": "",
+      "signature": "pub(all) struct Lex {\n  header : String\n  named_regexes : <a href=\"moonbitlang/core/array#Array\">Array</a>[(String, <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>)]\n  rules : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/lex/lib/type#Rule\">Rule</a>]\n  trailer : String\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/type",
+        "file": "type.mbt",
+        "line": 98,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "eliminate_named",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/type#Lex\">Lex</a>::eliminate_named(self : <a href=\"moonbitlang/lex/lib/type#Lex\">Lex</a>) -> <a href=\"moonbitlang/lex/lib/type#Lex\">Lex</a>",
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 106,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#Lex\">Lex</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/type#Lex\">Lex</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 103,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 103,
+            "column": 10
+          }
+        }
+      ]
+    },
+    {
+      "name": "Regex",
+      "docstring": "",
+      "signature": "pub(all) enum Regex {\n  Underscore\n  EOF\n  ReStr(String)\n  ReChar(Char)\n  CharSet(<a href=\"moonbitlang/core/array#Array\">Array</a>[Char])\n  RevCharSet(<a href=\"moonbitlang/core/array#Array\">Array</a>[Char])\n  Repetition(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>)\n  Option(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>)\n  Alter(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>, <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>)\n  Concat(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>, <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>)\n  Capture(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>, String)\n  Named(String)\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/type",
+        "file": "type.mbt",
+        "line": 2,
+        "column": 15
+      },
+      "methods": [
+        {
+          "name": "check_legal",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>::check_legal(self : <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>) -> Bool",
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 18,
+            "column": 8
+          }
+        },
+        {
+          "name": "get_capture_names",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>::get_capture_names(self : <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 55,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>, <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 15,
+                "column": 16
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 15,
+            "column": 16
+          }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 15,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 15,
+            "column": 10
+          }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 15,
+                "column": 20
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 15,
+            "column": 20
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rule",
+      "docstring": "",
+      "signature": "pub(all) struct Rule {\n  name : String\n  return_type : String\n  vars : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>]\n  patterns : <a href=\"moonbitlang/core/array#Array\">Array</a>[(<a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>, String)]\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/type",
+        "file": "type.mbt",
+        "line": 90,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#Rule\">Rule</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/type#Rule\">Rule</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 95,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 95,
+            "column": 10
+          }
+        }
+      ]
+    },
+    {
+      "name": "VarDefinition",
+      "docstring": "",
+      "signature": "pub(all) struct VarDefinition {\n  identifier : String\n  ty : String\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/type",
+        "file": "type.mbt",
+        "line": 81,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>",
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>, <a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 84,
+                "column": 16
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 84,
+            "column": 16
+          }
+        },
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/type",
+                "file": "type.mbt",
+                "line": 84,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/type",
+            "file": "type.mbt",
+            "line": 84,
+            "column": 10
+          }
+        }
+      ]
+    }
+  ],
+  "typealias": [
+    {
+      "name": "CodeBlock",
+      "docstring": "",
+      "signature": "type CodeBlock = String",
+      "loc": {
+        "path": "moonbitlang/lex/lib/type",
+        "file": "type.mbt",
+        "line": 87,
+        "column": 1
+      }
+    }
+  ],
+  "values": [],
+  "misc": []
+}

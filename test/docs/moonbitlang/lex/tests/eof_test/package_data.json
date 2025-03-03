@@ -1,0 +1,96 @@
+{
+  "name": "moonbitlang/lex/tests/eof_test",
+  "traits": [],
+  "types": [
+    {
+      "name": "LexEngine",
+      "docstring": "",
+      "signature": "pub(all) struct LexEngine {\n  graph : <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int) -> (Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[Int]])]\n  end_nodes : <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[((Int, Int), (Int, Int))])?]\n  start_tags : <a href=\"moonbitlang/core/array#Array\">Array</a>[Int]\n  code_blocks_n : Int\n}",
+      "loc": {
+        "path": "moonbitlang/lex/tests/eof_test",
+        "file": "eof.mbt",
+        "line": 40,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "run",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/tests/eof_test#LexEngine\">LexEngine</a>::run(self : <a href=\"moonbitlang/lex/tests/eof_test#LexEngine\">LexEngine</a>, lexbuf : <a href=\"moonbitlang/lex/tests/eof_test#Lexbuf\">Lexbuf</a>) -> (Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int, Int)])",
+          "loc": {
+            "path": "moonbitlang/lex/tests/eof_test",
+            "file": "eof.mbt",
+            "line": 48,
+            "column": 8
+          }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Lexbuf",
+      "docstring": "",
+      "signature": "type Lexbuf",
+      "loc": {
+        "path": "moonbitlang/lex/tests/eof_test",
+        "file": "eof.mbt",
+        "line": 3,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "from_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/tests/eof_test#Lexbuf\">Lexbuf</a>::from_string(content : String) -> <a href=\"moonbitlang/lex/tests/eof_test#Lexbuf\">Lexbuf</a>",
+          "loc": {
+            "path": "moonbitlang/lex/tests/eof_test",
+            "file": "eof.mbt",
+            "line": 9,
+            "column": 16
+          }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Token",
+      "docstring": "",
+      "signature": "type Token",
+      "loc": {
+        "path": "moonbitlang/lex/tests/eof_test",
+        "file": "eof.mbt",
+        "line": 103,
+        "column": 6
+      },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/lex/tests/eof_test#Token\">Token</a>",
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/lex/tests/eof_test#Token\">Token</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/lex/tests/eof_test",
+                "file": "eof.mbt",
+                "line": 108,
+                "column": 11
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/tests/eof_test",
+            "file": "eof.mbt",
+            "line": 108,
+            "column": 11
+          }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

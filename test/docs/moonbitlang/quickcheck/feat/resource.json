@@ -1,0 +1,10 @@
+{
+  "kind": "package",
+  "relative_path": "feat",
+  "module_path": "moonbitlang/quickcheck",
+  "readme_content": "",
+  "package_data": "moonbitlang/quickcheck/feat/package_data.json",
+  "source_files": [
+    "enumerable.mbt", "enumerate.mbt", "finite.mbt", "utils.mbt"
+  ]
+}

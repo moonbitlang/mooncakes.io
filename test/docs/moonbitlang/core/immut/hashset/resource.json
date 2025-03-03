@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "immut/hashset",
+  "module_path": "moonbitlang/core",
+  "readme_content": "",
+  "package_data": "moonbitlang/core/immut/hashset/package_data.json",
+  "source_files": [ "HAMT.mbt", "bucket.mbt", "deprecated.mbt", "types.mbt" ]
+}

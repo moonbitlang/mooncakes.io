@@ -1,5 +1,4 @@
 {
-  "readme": "# Wasm4 Binding for MoonBit\n\nThis is an opinionated binding for [Wasm4](https://wasm4.org) in MoonBit.\n\n## Prerequisites\n\n- MoonBit toolchain\n- [Node.js](https://nodejs.org/en)\n\n## Usage\n\n- Add this package: `moon add moonbitlang/wasm4`\n- Develop with this package as other packages\n- Optionally export a function called `start` that will be executed once on\n  initialization and export a function called `update` that will be executed at\n  60Hz for the expected backend\n- Import a memory with the module of `env` and name of `memory`\n- Build with `moon build --target <wasm-gc or wasm>` with the respective backend\n- Execute `npx wasm4 run <target>.wasm`. The target should be located in\n  `target/wasm/release/build/<package path>/<package name>.wasm` for wasm\n  backend, or `target/wasm-gc/release/build/<package path>/<package name>.wasm`\n  for wasm-gc backend. The browser should open automatically and display the\n  game. Enjoy\n\n## Examples\n\nThe snake example (adapted from the Wasm4 documentation) demonstrates the usage. You may execute\n\n```bash\nmoon build --source-dir example/snake --target wasm\nnpx wasm4 run example/snake/target/wasm/release/build/snake.wasm\n```\n\nand enjoy the game.\n\n## References\n\n- For more information about MoonBit, visit:\n  [MoonBit official website](https://www.moonbitlang.com/docs/syntax)\n- For more information about Wasm4 and how to play, visit:\n  [WASM-4 Documentation](https://wasm4.org/docs/)\n",
   "name": "moonbitlang/wasm4",
   "traits": [],
   "types": [
@@ -7,13 +6,23 @@
       "name": "ADSR",
       "docstring": " An ADSR volume envelop\n \n The envelope starts at zero volume, \n then raises to the peak volume over the attack time, \n lowers to the sustain volume during the decay time, \n remains at the sustain volume during the sustain time, \n and finally fades to zero volume during the release time.  \n Duration of each phase is specified in frames (1/60th of a second).",
       "signature": "pub struct ADSR {\n  sustain : UInt\n  release : UInt\n  decay : UInt\n  attack : UInt\n}",
-      "loc": { "line": 135, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 138,
+        "column": 12
+      },
       "methods": [
         {
           "name": "new",
           "docstring": " An ADSR volume envelop\n \n The envelope starts at zero volume, \n then raises to the peak volume over the attack time, \n lowers to the sustain volume during the decay time, \n remains at the sustain volume during the sustain time, \n and finally fades to zero volume during the release time.  \n Duration of each phase is specified in frames (1/60th of a second).",
           "signature": "fn <a href=\"moonbitlang/wasm4#ADSR\">ADSR</a>::new(sustain : UInt, release~ : UInt = .., decay~ : UInt = .., attack~ : UInt = ..) -> <a href=\"moonbitlang/wasm4#ADSR\">ADSR</a>",
-          "loc": { "line": 150, "column": 14 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "function.mbt",
+            "line": 153,
+            "column": 14
+          }
         }
       ],
       "impls": []
@@ -22,13 +31,23 @@
       "name": "ADSRVolume",
       "docstring": " The volume of an ADSR envelope\n \n The volume used for the sustain duration, and the peak volume (default to 100 if zero) reached by the attack duration.",
       "signature": "pub struct ADSRVolume {\n  sustain : UInt\n  peak : UInt\n}",
-      "loc": { "line": 162, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 165,
+        "column": 12
+      },
       "methods": [
         {
           "name": "new",
           "docstring": " The volume of an ADSR envelope\n \n The volume used for the sustain duration, and the peak volume (default to 100 if zero) reached by the attack duration.",
           "signature": "fn <a href=\"moonbitlang/wasm4#ADSRVolume\">ADSRVolume</a>::new(sustain : UInt, peak~ : UInt = ..) -> <a href=\"moonbitlang/wasm4#ADSRVolume\">ADSRVolume</a>",
-          "loc": { "line": 170, "column": 20 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "function.mbt",
+            "line": 173,
+            "column": 20
+          }
         }
       ],
       "impls": []
@@ -37,7 +56,12 @@
       "name": "BlitFlag",
       "docstring": " one_bit_per_pixel: Sprite pixel format: 1BPP or 2BPP\n flip_x: flip the sprite horizontally\n flip_y: flip the sprite vertically\n rotate: rotate the sprite anti-clockwise 90 degrees, applied after any flipping",
       "signature": "pub(all) struct BlitFlag {\n  one_bit_per_pixel : Bool\n  flip_x : Bool\n  flip_y : Bool\n  rotate : Bool\n}",
-      "loc": { "line": 25, "column": 17 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 27,
+        "column": 17
+      },
       "methods": [],
       "impls": []
     },
@@ -45,7 +69,12 @@
       "name": "Color",
       "docstring": "",
       "signature": "type Color",
-      "loc": { "line": 15, "column": 6 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 16,
+        "column": 6
+      },
       "methods": [],
       "impls": []
     },
@@ -53,7 +82,12 @@
       "name": "GamePad",
       "docstring": "",
       "signature": "pub struct GamePad {\n  button_1 : Bool\n  button_2 : Bool\n  button_left : Bool\n  button_right : Bool\n  button_up : Bool\n  button_down : Bool\n}",
-      "loc": { "line": 74, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 77,
+        "column": 12
+      },
       "methods": [],
       "impls": [
         {
@@ -64,10 +98,20 @@
               "name": "default",
               "docstring": "automatically derived",
               "signature": "fn default() -> <a href=\"moonbitlang/wasm4#GamePad\">GamePad</a>",
-              "loc": { "line": 81, "column": 14 }
+              "loc": {
+                "path": "moonbitlang/wasm4",
+                "file": "memory.mbt",
+                "line": 84,
+                "column": 14
+              }
             }
           ],
-          "loc": { "line": 81, "column": 14 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "memory.mbt",
+            "line": 84,
+            "column": 14
+          }
         },
         {
           "docstring": "",
@@ -77,10 +121,20 @@
               "name": "op_equal",
               "docstring": "automatically derived",
               "signature": "fn op_equal(<a href=\"moonbitlang/wasm4#GamePad\">GamePad</a>, <a href=\"moonbitlang/wasm4#GamePad\">GamePad</a>) -> Bool",
-              "loc": { "line": 81, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/wasm4",
+                "file": "memory.mbt",
+                "line": 84,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 81, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "memory.mbt",
+            "line": 84,
+            "column": 10
+          }
         }
       ]
     },
@@ -88,7 +142,12 @@
       "name": "Mouse",
       "docstring": "",
       "signature": "pub struct Mouse {\n  x : Int\n  y : Int\n  left : Bool\n  middle : Bool\n  right : Bool\n}",
-      "loc": { "line": 103, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 107,
+        "column": 12
+      },
       "methods": [],
       "impls": [
         {
@@ -99,10 +158,20 @@
               "name": "default",
               "docstring": "automatically derived",
               "signature": "fn default() -> <a href=\"moonbitlang/wasm4#Mouse\">Mouse</a>",
-              "loc": { "line": 109, "column": 14 }
+              "loc": {
+                "path": "moonbitlang/wasm4",
+                "file": "memory.mbt",
+                "line": 113,
+                "column": 14
+              }
             }
           ],
-          "loc": { "line": 109, "column": 14 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "memory.mbt",
+            "line": 113,
+            "column": 14
+          }
         },
         {
           "docstring": "",
@@ -112,10 +181,20 @@
               "name": "op_equal",
               "docstring": "automatically derived",
               "signature": "fn op_equal(<a href=\"moonbitlang/wasm4#Mouse\">Mouse</a>, <a href=\"moonbitlang/wasm4#Mouse\">Mouse</a>) -> Bool",
-              "loc": { "line": 109, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/wasm4",
+                "file": "memory.mbt",
+                "line": 113,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 109, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "memory.mbt",
+            "line": 113,
+            "column": 10
+          }
         }
       ]
     },
@@ -123,7 +202,12 @@
       "name": "Netplay",
       "docstring": " Status of netplay\n \n The index is from 1 to 4 (inclusive)",
       "signature": "pub struct Netplay {\n  index : UInt\n  active : Bool\n}",
-      "loc": { "line": 170, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 173,
+        "column": 12
+      },
       "methods": [],
       "impls": []
     },
@@ -131,13 +215,23 @@
       "name": "Note",
       "docstring": " Notes with pitch bend\n \n @param note Specified in MIDI note format, e.g. 60 = C4, 69 = A4.  \n @param bend Bend note upwards. 0 = Nothing, 255 = One 256th away from the next note above",
       "signature": "pub struct Note {\n  note : UInt\n  bend : UInt\n}",
-      "loc": { "line": 178, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 181,
+        "column": 12
+      },
       "methods": [
         {
           "name": "new",
           "docstring": " Notes with pitch bend\n \n @param note Specified in MIDI note format, e.g. 60 = C4, 69 = A4.  \n @param bend Bend note upwards. 0 = Nothing, 255 = One 256th away from the next note above",
           "signature": "fn <a href=\"moonbitlang/wasm4#Note\">Note</a>::new(note : UInt, bend~ : UInt = ..) -> <a href=\"moonbitlang/wasm4#Note\">Note</a>",
-          "loc": { "line": 187, "column": 14 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "function.mbt",
+            "line": 190,
+            "column": 14
+          }
         }
       ],
       "impls": []
@@ -146,19 +240,34 @@
       "name": "Sprite",
       "docstring": "",
       "signature": "type Sprite",
-      "loc": { "line": 15, "column": 6 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 16,
+        "column": 6
+      },
       "methods": [
         {
           "name": "blit",
           "docstring": " Copies pixels to the framebuffer.\n \n @param spritePtr raw pixel data stored in either 1BPP or 2BPP format.\n @param x X position in the destination framebuffer.\n @param y Y position in the destination framebuffer.\n @param width Width of the sprite.\n @param height Height of the sprite.\n @param flags Flags that modify behavior.",
           "signature": "fn <a href=\"moonbitlang/wasm4#Sprite\">Sprite</a>::blit(self : <a href=\"moonbitlang/wasm4#Sprite\">Sprite</a>, x : Int, y : Int, width : Int, height : Int, flags : <a href=\"moonbitlang/wasm4#BlitFlag\">BlitFlag</a>) -> Unit",
-          "loc": { "line": 47, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "function.mbt",
+            "line": 50,
+            "column": 8
+          }
         },
         {
           "name": "blit_sub",
           "docstring": " Copies a subregion within a larger sprite atlas to the framebuffer. Same as blit, but with 3 additional parameters.\n \n @param srcX Source X position of the sprite region.\n @param srcY Source Y position of the sprite region.\n @param stride Total width of the overall sprite atlas. This is typically larger than width.\n For info on other parameters, see blit().",
           "signature": "fn <a href=\"moonbitlang/wasm4#Sprite\">Sprite</a>::blit_sub(self : <a href=\"moonbitlang/wasm4#Sprite\">Sprite</a>, x : Int, y : Int, width : Int, height : Int, src_x : Int, src_y : Int, stride : Int, flags : <a href=\"moonbitlang/wasm4#BlitFlag\">BlitFlag</a>) -> Unit",
-          "loc": { "line": 65, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "function.mbt",
+            "line": 68,
+            "column": 8
+          }
         }
       ],
       "impls": []
@@ -167,7 +276,12 @@
       "name": "ToneChannel",
       "docstring": "",
       "signature": "pub(all) enum ToneChannel {\n  Pulse1\n  Pulse2\n  Triangle\n  Noise\n}",
-      "loc": { "line": 207, "column": 15 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 211,
+        "column": 15
+      },
       "methods": [],
       "impls": []
     },
@@ -175,13 +289,23 @@
       "name": "ToneFlag",
       "docstring": " Flags that modify behavior of `tone`",
       "signature": "pub struct ToneFlag {\n  channel : <a href=\"moonbitlang/wasm4#ToneChannel\">ToneChannel</a>\n  mode : <a href=\"moonbitlang/wasm4#ToneMode\">ToneMode</a>\n  pan : <a href=\"moonbitlang/wasm4#TonePan\">TonePan</a>\n}",
-      "loc": { "line": 192, "column": 22 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 195,
+        "column": 12
+      },
       "methods": [
         {
           "name": "new",
           "docstring": " Flags that modify behavior of `tone`",
           "signature": "fn <a href=\"moonbitlang/wasm4#ToneFlag\">ToneFlag</a>::new(channel~ : <a href=\"moonbitlang/wasm4#ToneChannel\">ToneChannel</a> = .., mode~ : <a href=\"moonbitlang/wasm4#ToneMode\">ToneMode</a> = .., pan~ : <a href=\"moonbitlang/wasm4#TonePan\">TonePan</a> = ..) -> <a href=\"moonbitlang/wasm4#ToneFlag\">ToneFlag</a>",
-          "loc": { "line": 199, "column": 18 }
+          "loc": {
+            "path": "moonbitlang/wasm4",
+            "file": "function.mbt",
+            "line": 202,
+            "column": 18
+          }
         }
       ],
       "impls": []
@@ -190,7 +314,12 @@
       "name": "ToneMode",
       "docstring": "",
       "signature": "pub(all) enum ToneMode {\n  Duty_1_8\n  Duty_1_4\n  Duty_1_2\n  Duty_3_4\n}",
-      "loc": { "line": 214, "column": 15 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 219,
+        "column": 15
+      },
       "methods": [],
       "impls": []
     },
@@ -198,7 +327,12 @@
       "name": "TonePan",
       "docstring": "",
       "signature": "pub(all) enum TonePan {\n  Center\n  Left\n  Right\n}",
-      "loc": { "line": 221, "column": 15 },
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 227,
+        "column": 15
+      },
       "methods": [],
       "impls": []
     }
@@ -208,170 +342,310 @@
     {
       "name": "disk_read",
       "docstring": " Reads up to `size` bytes from persistent storage into `bytes`.\n \n @return the number of bytes read, which may be less than `size`",
-      "signature": "fn disk_read(bytes : Bytes, size : UInt) -> Int",
-      "loc": { "line": 327, "column": 8 }
+      "signature": "fn disk_read(bytes : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte], size : UInt) -> Int",
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 333,
+        "column": 8
+      }
     },
     {
       "name": "disk_write",
       "docstring": " Writes up to `size` bytes from `bytes` into persistent storage.\n\n Any previously saved data on the disk is replaced.\n @return the number of bytes written, which may be less than `size`.",
-      "signature": "fn disk_write(bytes : Bytes, size : UInt) -> Int",
-      "loc": { "line": 316, "column": 8 }
+      "signature": "fn disk_write(bytes : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte], size : UInt) -> Int",
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 322,
+        "column": 8
+      }
     },
     {
       "name": "get_draw_colors",
       "docstring": " Gets the draw color at the given index.\n\n @param index the index of the draw color to get, from 1 to 4 (inclusive)\n @return the index of the palette that the draw color is set to",
       "signature": "fn get_draw_colors(index : UInt) -> UInt",
-      "loc": { "line": 66, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 68,
+        "column": 8
+      }
     },
     {
       "name": "get_frame_buffer",
       "docstring": " Get the palette index of the pixel at the specified index.\n\n # Parameters\n\n - `index` : The index of the frame buffer to retrieve. Must be a `UInt` and\n should be within the valid range of the frame buffer (0 to 160 * 160 - 1).\n\n # Returns\n\n - the index of the palette.",
       "signature": "fn get_frame_buffer(index : UInt) -> UInt",
-      "loc": { "line": 158, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 161,
+        "column": 8
+      }
     },
     {
       "name": "get_gamepad",
       "docstring": " Gets the state of the gamepads.\n \n @param index the index of the gamepad to get, from 1 to 4 (inclusive)  \n @return the state of the gamepads",
       "signature": "fn get_gamepad(index~ : UInt = ..) -> <a href=\"moonbitlang/wasm4#GamePad\">GamePad</a>",
-      "loc": { "line": 87, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 90,
+        "column": 8
+      }
     },
     {
       "name": "get_mouse",
       "docstring": " Gets the state of the mouse.\n \n @return the state of the mouse",
       "signature": "fn get_mouse() -> <a href=\"moonbitlang/wasm4#Mouse\">Mouse</a>",
-      "loc": { "line": 114, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 118,
+        "column": 8
+      }
     },
     {
       "name": "get_netplay",
       "docstring": " Gets the state of the netplay.\n \n @return the state of the netplay",
       "signature": "fn get_netplay() -> <a href=\"moonbitlang/wasm4#Netplay\">Netplay</a>",
-      "loc": { "line": 178, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 181,
+        "column": 8
+      }
     },
     {
       "name": "get_palette",
       "docstring": " Gets the color of the palette at the given index.\n \n @param index the index of the palette to get, from 1 to 4 (inclusive)  \n @return the color at the given index",
       "signature": "fn get_palette(index : UInt) -> <a href=\"moonbitlang/wasm4#Color\">Color</a>",
-      "loc": { "line": 40, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 42,
+        "column": 8
+      }
     },
     {
       "name": "get_system_hide_gamepad_overlay",
       "docstring": "",
       "signature": "fn get_system_hide_gamepad_overlay() -> Bool",
-      "loc": { "line": 218, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 225,
+        "column": 8
+      }
     },
     {
       "name": "get_system_preserve_framebuffer",
       "docstring": "",
       "signature": "fn get_system_preserve_framebuffer() -> Bool",
-      "loc": { "line": 198, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 203,
+        "column": 8
+      }
     },
     {
       "name": "hline",
       "docstring": " Draws a horizontal line between `(x, y)` and `(x + len - 1, y)`\n \n `DRAW_COLORS` color 1 is used as the line color",
       "signature": "fn hline(x : Int, y : Int, len : Int) -> Unit",
-      "loc": { "line": 98, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 101,
+        "column": 8
+      }
     },
     {
       "name": "line",
       "docstring": " Draws a line between two points\n \n `DRAW_COLORS` color 1 is used as the line color",
       "signature": "fn line(x1 : Int, y1 : Int, x2 : Int, y2 : Int) -> Unit",
-      "loc": { "line": 93, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 96,
+        "column": 8
+      }
     },
     {
       "name": "oval",
       "docstring": " Draws an oval (or circle).\n \n `DRAW_COLORS` color 1 is used as the fill color, `DRAW_COLORS` color 2 is used as the outline color.",
       "signature": "fn oval(x : Int, y : Int, width : Int, height : Int) -> Unit",
-      "loc": { "line": 108, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 111,
+        "column": 8
+      }
     },
     {
       "name": "rect",
       "docstring": " Draws a rectangle.\n \n `DRAW_COLORS` color 1 is used as the fill color, `DRAW_COLORS` color 2 is used as the outline color.",
       "signature": "fn rect(x : Int, y : Int, width : Int, height : Int) -> Unit",
-      "loc": { "line": 113, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 116,
+        "column": 8
+      }
     },
     {
       "name": "rgb",
       "docstring": "",
       "signature": "fn rgb(color : UInt) -> <a href=\"moonbitlang/wasm4#Color\">Color</a>",
-      "loc": { "line": 17, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 19,
+        "column": 8
+      }
     },
     {
       "name": "screen_height",
       "docstring": "",
       "signature": "let screen_height : UInt",
-      "loc": { "line": 346, "column": 9 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 354,
+        "column": 9
+      }
     },
     {
       "name": "screen_width",
       "docstring": "",
       "signature": "let screen_width : UInt",
-      "loc": { "line": 344, "column": 9 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 351,
+        "column": 9
+      }
     },
     {
       "name": "set_draw_colors",
       "docstring": " Sets the draw color at the given index.\n\n @param index the index of the draw color to set, from 1 to 4 (inclusive)\n @param palette the index of the palette to set the draw color to, from 1 to 4 (inclusive), or 0 for transparent",
       "signature": "fn set_draw_colors(palette : UInt, index~ : UInt = ..) -> Unit",
-      "loc": { "line": 52, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 54,
+        "column": 8
+      }
     },
     {
       "name": "set_frame_buffer",
       "docstring": " Manipulate the framebuffer directly.\n \n @param index the index of the pixel to set, from 0 to 160 * 160 (exclusive)  \n @param palette the index of the palette to set the pixel to, from 1 to 4 (inclusive)",
       "signature": "fn set_frame_buffer(index : UInt, palette : UInt) -> Unit",
-      "loc": { "line": 129, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 133,
+        "column": 8
+      }
     },
     {
       "name": "set_palette",
       "docstring": " Sets the color of the palette at the given index.\n \n @param index the index of the palette to set, from 1 to 4 (inclusive)  \n @param color the color to set",
       "signature": "fn set_palette(index : UInt, color : <a href=\"moonbitlang/wasm4#Color\">Color</a>) -> Unit",
-      "loc": { "line": 25, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 27,
+        "column": 8
+      }
     },
     {
       "name": "set_system_hide_gamepad_overlay",
       "docstring": "",
       "signature": "fn set_system_hide_gamepad_overlay(b : Bool) -> Unit",
-      "loc": { "line": 203, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 209,
+        "column": 8
+      }
     },
     {
       "name": "set_system_preserve_framebuffer",
       "docstring": "",
       "signature": "fn set_system_preserve_framebuffer(b : Bool) -> Unit",
-      "loc": { "line": 183, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "memory.mbt",
+        "line": 187,
+        "column": 8
+      }
     },
     {
       "name": "sprite",
       "docstring": "",
-      "signature": "fn sprite(bytes : Bytes) -> <a href=\"moonbitlang/wasm4#Sprite\">Sprite</a>",
-      "loc": { "line": 17, "column": 8 }
+      "signature": "fn sprite(bytes : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]) -> <a href=\"moonbitlang/wasm4#Sprite\">Sprite</a>",
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 19,
+        "column": 8
+      }
     },
     {
       "name": "text",
       "docstring": " Draws text using the built-in system font. The string may contain new-line (`\\n`) characters.\n \n The font is 8x8 pixels per character  \n `DRAW_COLORS` color 1 is used as the text color, `DRAW_COLORS` color 2 is used as the background color.",
       "signature": "fn text(s : String, x : Int, y : Int) -> Unit",
-      "loc": { "line": 119, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 122,
+        "column": 8
+      }
     },
     {
       "name": "tone",
       "docstring": " Plays a sound tone\n \n @param frequency Start frequency and optional end frequency presented in hertz  \n @param duration Duration of the tone in frames (1/60th of a second), up to 255 frames for each phase  \n @param volume Volume of the sustain and attack durations, between 0 and 100  \n @param flags Flags that modify behavior",
       "signature": "fn tone(frequency : (UInt, UInt), duration : <a href=\"moonbitlang/wasm4#ADSR\">ADSR</a>, volume : <a href=\"moonbitlang/wasm4#ADSRVolume\">ADSRVolume</a>, flags : <a href=\"moonbitlang/wasm4#ToneFlag\">ToneFlag</a>) -> Unit",
-      "loc": { "line": 233, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 239,
+        "column": 8
+      }
     },
     {
       "name": "tone_note_mode",
       "docstring": " Plays a sound tone in note mode\n \n @param frequency Start frequency and optional end frequency presented in MIDI note  \n @param duration Duration of the tone in frames (1/60th of a second), up to 255 frames for each phase  \n @param volume Volume of the sustain and attack durations, between 0 and 100  \n @param flags Flags that modify behavior",
       "signature": "fn tone_note_mode(frequency : (<a href=\"moonbitlang/wasm4#Note\">Note</a>, <a href=\"moonbitlang/wasm4#Note\">Note</a>?), duration : <a href=\"moonbitlang/wasm4#ADSR\">ADSR</a>, volume : <a href=\"moonbitlang/wasm4#ADSRVolume\">ADSRVolume</a>, flags : <a href=\"moonbitlang/wasm4#ToneFlag\">ToneFlag</a>) -> Unit",
-      "loc": { "line": 274, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 280,
+        "column": 8
+      }
     },
     {
       "name": "trace",
       "docstring": " Prints a message to the debug console",
       "signature": "fn trace(s : String) -> Unit",
-      "loc": { "line": 336, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 342,
+        "column": 8
+      }
     },
     {
       "name": "vline",
       "docstring": " Draws a vertical line between `(x, y)` and `(x, y + len - 1)`\n \n `DRAW_COLORS` color 1 is used as the line color",
       "signature": "fn vline(x : Int, y : Int, len : Int) -> Unit",
-      "loc": { "line": 103, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/wasm4",
+        "file": "function.mbt",
+        "line": 106,
+        "column": 8
+      }
     }
   ],
   "misc": []

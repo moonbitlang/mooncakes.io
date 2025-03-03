@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright 2025 International Digital Economy Academy
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// ported from https://github.com/golang/go/blob/master/src/math/log.go
+
+///|
+let sqrt2 = 1.41421356237309504880168872420969807856967187537694807317667974
+
+///|
+let ln2 = 0.693147180559945309417232121458176568075500134360255254120680009
+
+///|
+let ln2_hi = 6.93147180369123816490e-01 // 3fe62e42 fee00000
+
+///|
+let ln2_lo = 1.90821492927058770002e-10 // 3dea39ef 35793c76
+
+///|
+let l1 = 6.666666666666735130e-01 // 3FE55555 55555593
+
+///|
+let l2 = 3.999999999940941908e-01 // 3FD99999 9997FA04
+
+///|
+let l3 = 2.857142874366239149e-01 // 3FD24924 94229359
+
+///|
+let l4 = 2.222219843214978396e-01 // 3FCC71C5 1D8E78AF
+
+///|
+let l5 = 1.818357216161805012e-01 // 3FC74664 96CB03DE
+
+///|
+let l6 = 1.531383769920937332e-01 // 3FC39A09 D078C69F
+
+///|
+let l7 = 1.479819860511658591e-01 // 3FC2F112 DF3E5244
+
+///|
+fn normalize(f : Double) -> (Double, Int) {
+  if f.abs() < min_positive {
+    return (f * (1L << 52).to_double(), -52)
+  }
+  (f, 0)
+}
+
+///|
+fn frexp(f : Double) -> (Double, Int) {
+  if f == 0.0 || f.is_inf() || f.is_nan() {
+    return (f, 0)
+  }
+  let (norm_f, exp) = normalize(f)
+  let u = norm_f.reinterpret_as_uint64()
+  let exp = exp + ((u >> 52) & 0x7FF).to_int() - 1022
+  let frac = ((u & (0x7FFUL << 52).lnot()) | (1022UL << 52)).reinterpret_as_double()
+  return (frac, exp)
+}
+
+///|
+/// Calculates the natural logarithm of a double-precision floating-point number.
+///
+/// Parameters:
+///
+/// * `self`: The input number.
+///
+/// Returns the natural logarithm of the input number, with the following special
+/// cases:
+///
+/// * Returns NaN if the input is NaN or negative
+/// * Returns negative infinity if the input is zero
+/// * Returns the input if it is positive infinity
+///
+/// Example:
+///
+/// ```moonbit
+/// test "ln" {
+///   inspect!(2.0.ln(), content="0.6931471805599453")
+///   inspect!(1.0.ln(), content="0")
+///   inspect!((-1.0).ln(), content="NaN")
+///   inspect!(0.0.ln(), content="-Infinity")
+/// }
+/// ```
+pub fn ln(self : Double) -> Double {
+  if self < 0.0 {
+    return not_a_number
+  } else if self.is_nan() || self.is_inf() {
+    return self
+  } else if self == 0.0 {
+    return neg_infinity
+  }
+  let (f1, ki) = frexp(self)
+  let (f, k) = if f1 < sqrt2 / 2.0 {
+    (f1 * 2.0 - 1.0, (ki - 1).to_double())
+  } else {
+    (f1 - 1.0, ki.to_double())
+  }
+  let s = f / (2.0 + f)
+  let s2 = s * s
+  let s4 = s2 * s2
+  let t1 = s2 * (l1 + s4 * (l3 + s4 * (l5 + s4 * l7)))
+  let t2 = s4 * (l2 + s4 * (l4 + s4 * l6))
+  let r = t1 + t2
+  let hfsq = 0.5 * f * f
+  k * ln2_hi - (hfsq - (s * (hfsq + r) + k * ln2_lo) - f)
+}
+
+///|
+/// Calculates the base-2 logarithm of a double-precision floating-point number.
+///
+/// Parameters:
+///
+/// * `x` : A double-precision floating-point number.
+///
+/// Returns the base-2 logarithm of the input number.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "log2" {
+///   inspect!(2.0.log2(), content="1")
+///   inspect!(0.5.log2(), content="-1")
+///   inspect!(3.0.log2(), content="1.584962500721156")
+/// }
+/// ```
+pub fn log2(self : Double) -> Double {
+  let (f, e) = frexp(self)
+  if f == 0.5 {
+    return e.to_double() - 1.0
+  }
+  ln(f) / ln2 + e.to_double()
+}
+
+///|
+/// Calculates the base-10 logarithm of a double-precision floating-point number.
+///
+/// Parameters:
+///
+/// * `self` : The double-precision floating-point number to calculate the
+/// logarithm of.
+///
+/// Returns a double-precision floating-point number representing the base-10
+/// logarithm of the input.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "log10" {
+///   inspect!(0.1.log10(), content="-1")
+///   inspect!(1.0.log10(), content="0")
+///   inspect!(10.0.log10(), content="1")
+///   inspect!(100.0.log10(), content="2")
+///   inspect!(15.0.log10(), content="1.1760912590556813")
+/// }
+/// ```
+pub fn log10(self : Double) -> Double {
+  if self < 0.0 {
+    return not_a_number
+  } else if self.is_nan() || self.is_inf() {
+    return self
+  } else if self == 0.0 {
+    return neg_infinity
+  }
+  let ivln10 = 4.34294481903251816668e-01
+  let log10_2hi = 3.01029995663611771306e-01
+  let log10_2lo = 3.69423907715893078616e-13
+  let (f, e) = frexp(self)
+  let (f, e) = if e >= 1 {
+    (f * 2.0, (e - 1).to_double())
+  } else {
+    (f, e.to_double())
+  }
+  let z = e * log10_2lo + ivln10 * f.ln()
+  z + e * log10_2hi
+}
+
+///|
+test "log2 log10" {
+  // log2
+  assert_eq!(3.0.log2(), 1.584962500721156)
+  assert_eq!(2.0.log2(), 1.0)
+  assert_eq!(1.0.log2(), 0.0)
+  assert_eq!(0.5.log2(), -1.0)
+  assert_eq!(0.25.log2(), -2.0)
+  assert_eq!(0.1.log2(), -3.321928094887362)
+
+  // log10
+  assert_eq!(0.2.log10(), -0.6989700043360187)
+  assert_eq!(0.1.log10(), -1)
+  assert_eq!(1.0.log10(), 0.0)
+  assert_eq!(10.0.log10(), 1.0)
+  assert_eq!(100.0.log10(), 2.0)
+  assert_eq!(1000.0.log10(), 3.0)
+  assert_eq!(3.0.log10(), 0.47712125471966244)
+  assert_eq!(11.0.log10(), 1.041392685158225)
+  assert_eq!(15.0.log10(), 1.1760912590556813)
+}
+
+///|
+test "ln" {
+  assert_true!(not_a_number.ln().is_nan())
+  assert_true!(infinity.ln().is_pos_inf())
+  assert_true!(neg_infinity.ln().is_nan())
+  assert_true!((-1.0).ln().is_nan())
+  assert_true!(0.0.ln().is_neg_inf())
+  assert_true!((-0.0).ln().is_neg_inf())
+  assert_eq!(50.0.ln(), 3.912023005428146)
+  assert_eq!(2.0.ln(), 0.6931471805599453)
+  assert_eq!(1.1125369292536007e-308.ln(), -709.0895657128241)
+  assert_eq!(5.562684646268003e-309.ln(), -709.782712893384)
+  assert_true!(
+    match frexp(0.0) {
+      (0.0, 0) => true
+      _ => false
+    },
+  )
+  assert_true!(
+    match frexp(infinity) {
+      (f, 0) => if f.is_pos_inf() { true } else { false }
+      _ => false
+    },
+  )
+  assert_true!(
+    match frexp(not_a_number) {
+      (f, 0) => if f.is_nan() { true } else { false }
+      _ => false
+    },
+  )
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

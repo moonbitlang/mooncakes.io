@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright 2024 International Digital Economy Academy
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+///|
+typealias Cont = (Decoder) -> Decode
+
+///|
+pub(all) enum Encoding {
+  UTF8
+  UTF16 // alias for UTF16LE
+  UTF16LE
+  UTF16BE
+}
+
+// Decoder
+
+///|
+priv struct Decoder {
+  // Input bytes
+  // Stores the input bytes that need to be decoded.
+  // The primary data source from which characters are read and decoded.
+  mut i : FixedArray[Byte]
+  // Input position
+  // Keeps track of the current position within the input bytes `i`.
+  // Indicates the next byte (starting point) to read from `i` during the decoding process
+  mut i_pos : Int
+  // Input maximum
+  // Indicates the index of the last byte of the input bytes `i`.
+  // Helps bounds checking and limits how far the decoding process should go,
+  // ensuring that decoding does not go beyond the provided input length.
+  mut i_max : Int
+  // Temporary bytes
+  // Used to temporarily store bytes that are read in parts
+  // (which might happen for multi-byte encoded characters).
+  t : FixedArray[Byte]
+  // Temporary Length
+  // Tracks how many bytes currently reside in the temporary bytes `t`.
+  mut t_len : Int
+  // Temporary Need
+  // The number of bytes still needed to complete the character code currently being processed.
+  mut t_need : Int
+  // Continuation
+  //
+  // Called with a `Decoder` state.
+  mut k : Cont
+}
+
+///|
+priv enum Decode {
+  End
+  Malformed(Bytes)
+  Uchar(Char)
+}
+
+///|
+fn slice(bytes : Bytes, offset : Int, length : Int) -> Bytes {
+  let new_bytes = FixedArray::makei(length, fn(i) { bytes[offset + i] })
+  Bytes::from_fixedarray(new_bytes)
+}
+
+///|
+fn malformed(bytes : Bytes, offset : Int, length : Int) -> Decode {
+  Malformed(slice(bytes, offset, length))
+}
+
+///|
+fn malformed_pair(
+  be : Bool,
+  hi : Int,
+  bytes : Bytes,
+  offset : Int,
+  length : Int
+) -> Decode {
+  let bs1 = bytes.to_unchecked_string(offset~, length~).to_bytes()
+  let bs0 = FixedArray::make(2, b'\x00')
+  let (j0, j1) = if be { (0, 1) } else { (1, 0) }
+  bs0[j0] = (hi >> 8).to_byte()
+  bs0[j1] = hi.land(0xFF).to_byte()
+  let bs = @buffer.new(size_hint=bs0.length() + bs1.length())
+  bs.write_bytes(Bytes::from_fixedarray(bs0))
+  bs.write_bytes(bs1)
+  Malformed(slice(bs.to_bytes(), 0, bs.length()))
+}
+
+// Chars
+
+///|
+type LossyChars Decoder
+
+///|
+pub fn iter(self : LossyChars) -> Iter[Char] {
+  Iter::new(fn(yield_) {
+    loop self._.decode() {
+      Uchar(u) => {
+        if yield_(u) == IterEnd {
+          break IterEnd
+        }
+        continue self._.decode()
+      }
+      Malformed(_) => {
+        if yield_(U_REP) == IterEnd {
+          break IterEnd
+        }
+        continue self._.decode()
+      }
+      End => break IterEnd
+    }
+  })
+}
+
+///|
+pub fn to_string(self : LossyChars) -> String {
+  let arr = self.iter().collect()
+  String::from_array(arr)
+}
+
+///|
+pub impl Show for LossyChars with output(self : LossyChars, logger : &Logger) -> Unit {
+  logger.write_string(self.to_string())
+}
+
+///|
+type StrictChars Decoder
+
+///|
+pub(all) type! DecodeError Bytes
+
+///|
+pub impl Show for DecodeError with output(self, logger) {
+  match self {
+    DecodeError(err) => err.output(logger)
+  }
+}
+
+///|
+pub fn StrictChars::iter(self : StrictChars) -> Iter[Result[Char, DecodeError]] {
+  Iter::new(fn(yield_) {
+    loop self._.decode() {
+      Uchar(u) => {
+        if yield_(Ok(u)) == IterEnd {
+          break IterEnd
+        }
+        continue self._.decode()
+      }
+      Malformed(s) => {
+        let err = DecodeError(s)
+        if yield_(Err(err)) == IterEnd {
+          break IterEnd
+        }
+        continue self._.decode()
+      }
+      End => break IterEnd
+    }
+  })
+}
+
+///|
+pub fn StrictChars::to_string(self : StrictChars) -> String! {
+  let arr = []
+  for element in self {
+    match element {
+      Ok(x) => arr.push(x)
+      Err(e) => raise e
+    }
+  }
+  String::from_array(arr)
+}
+
+///|
+pub impl Show for StrictChars with output(self : StrictChars, logger : &Logger) -> Unit {
+  logger.write_string(self.to_string?().to_string())
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

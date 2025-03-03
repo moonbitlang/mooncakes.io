@@ -1,0 +1,21 @@
+{
+  "kind": "module_and_package",
+  "meta_info": {
+    "name": "moonbitlang/arduino",
+    "version": "0.0.6",
+    "readme": "README.md",
+    "repository": "https://github.com/moonbit-community/moonbit-arduino",
+    "license": "GPL-3.0",
+    "keywords": [],
+    "description": "",
+    "source": "src"
+  },
+  "readme_content": "# MoonBit Arduino Binding\n\n🚧 under development\n\n",
+  "module_index": "moonbitlang/arduino/module_index.json",
+  "package_data": "moonbitlang/arduino/package_data.json",
+  "source_files": [
+    "advanced_io.mbt", "analog_io.mbt", "bits.mbt", "bytes.mbt",
+    "interrupts.mbt", "lib.mbt", "math.mbt", "pin.mbt", "time.mbt",
+    "traits.mbt"
+  ]
+}

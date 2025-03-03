@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Copyright (C) 2025 International Digital Economy Academy
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, see <https://www.gnu.org/licenses/>.
+
+///| Always sorted
+pub(all) struct EncodedLR0ItemSet {
+  items : Array[EncodedLR0Item]
+  mut hash : Int?
+}
+
+///|
+pub impl Eq for EncodedLR0ItemSet with op_equal(self, other) {
+  self.items == other.items
+}
+
+///|
+pub impl Hash for EncodedLR0ItemSet with hash_combine(self, _hasher) {
+  panic()
+  ignore(self)
+}
+
+///|
+pub impl Hash for EncodedLR0ItemSet with hash(self) {
+  match self.hash {
+    Some(hash) => hash
+    None => {
+      let hasher = Hasher::new()
+      for item in self.items {
+        hasher.combine_int(item._)
+      }
+      let hash = hasher.finalize()
+      self.hash = Some(hash)
+      hash
+    }
+  }
+}
+
+///|
+pub fn EncodedLR0ItemSet::empty() -> EncodedLR0ItemSet {
+  { items: [], hash: None }
+}
+
+///|
+pub impl Default for EncodedLR0ItemSet with default() {
+  EncodedLR0ItemSet::empty()
+}
+
+///|
+pub fn EncodedLR0ItemSet::from_sorted_array(
+  items : Array[EncodedLR0Item]
+) -> EncodedLR0ItemSet {
+  { items, hash: None }
+}
+
+///|
+pub fn EncodedLR0ItemSet::decode_iter(
+  self : EncodedLR0ItemSet,
+  grammar : @grm.Grammar
+) -> Iter[(Int, LR0Item)] {
+  Iter::new(fn(yield_) {
+    let mut index = 0
+    for item in self.items {
+      match yield_((index, item.decode(grammar))) {
+        IterEnd => return IterEnd
+        IterContinue => ()
+      }
+      index += 1
+    }
+    IterContinue
+  })
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

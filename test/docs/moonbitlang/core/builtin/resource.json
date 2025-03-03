@@ -1,0 +1,23 @@
+{
+  "kind": "package",
+  "relative_path": "builtin",
+  "module_path": "moonbitlang/core",
+  "readme_content": "",
+  "package_data": "moonbitlang/core/builtin/package_data.json",
+  "source_files": [
+    "array.mbt", "array_block.mbt", "arraycore_js.mbt",
+    "arraycore_nonjs.mbt", "arrayview.mbt", "assert.mbt", "autoloc.mbt",
+    "bigint_deprecated.mbt", "bigint_js.mbt", "bigint_nonjs.mbt", "byte.mbt",
+    "bytes.mbt", "char.mbt", "console.mbt", "double_to_int.mbt",
+    "double_to_int64_js.mbt", "double_to_int64_native.mbt",
+    "double_to_int64_wasm.mbt", "double_to_int_wasm.mbt", "failure.mbt",
+    "fixedarray.mbt", "fixedarray_block.mbt", "hasher.mbt", "int64_js.mbt",
+    "int64_nonjs.mbt", "intrinsics.mbt", "iter.mbt", "iter2.mbt",
+    "iter_upto.mbt", "json.mbt", "linked_hash_map.mbt",
+    "linked_hash_set.mbt", "op.mbt", "option.mbt", "result.mbt", "show.mbt",
+    "string.mbt", "stringbuilder.mbt", "stringbuilder_buffer.mbt",
+    "stringbuilder_concat.mbt", "to_string.mbt", "traits.mbt",
+    "tuple_compare.mbt", "tuple_eq.mbt", "tuple_hash.mbt", "tuple_show.mbt",
+    "tuple_to_json.mbt", "uint64.mbt", "uninitialized_array.mbt", "unit.mbt"
+  ]
+}

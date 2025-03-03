@@ -1,0 +1,11 @@
+{
+  "kind": "package",
+  "relative_path": "strconv",
+  "module_path": "moonbitlang/core",
+  "readme_content": "# Strconv\n\nThis package implements conversions to and from string representations of basic data types.\n\n# Usage\n\n## Parse\n\nUse `parse_bool`, `parse_double`, `parse_int`, and `parse_int64` convert strings to values.\n\n```moonbit\nlet b = @strconv.parse_bool(\"true\")?         // true\nlet i1 = @strconv.parse_int(\"1234567\")?      // 1234567\nlet i2 = @strconv.parse_int(\"101\", 2)?       // 5\nlet d = @strconv.parse_double(\"123.4567\")?   // 123.4567\n```\n\nFor types that implement the `FromStr` trait, you can also use helper function `parse` to convert a string to a value.\n\n```moonbit\nlet a : Int = @strconv.parse?(\"123\").unwrap()   // 123 \nlet b : Bool = @strconv.parse?(\"true\").unwrap() // true\n```\n",
+  "package_data": "moonbitlang/core/strconv/package_data.json",
+  "source_files": [
+    "bool.mbt", "decimal.mbt", "double.mbt", "errors.mbt", "int.mbt",
+    "number.mbt", "string_slice.mbt", "traits.mbt", "uint.mbt"
+  ]
+}

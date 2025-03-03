@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "spi",
+  "module_path": "moonbitlang/arduino",
+  "readme_content": "",
+  "package_data": "moonbitlang/arduino/spi/package_data.json",
+  "source_files": [ "spi.mbt" ]
+}

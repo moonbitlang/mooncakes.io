@@ -1,0 +1,114 @@
+{
+  "name": "moonbitlang/quickcheck/rose",
+  "traits": [],
+  "types": [
+    {
+      "name": "Rose",
+      "docstring": "",
+      "signature": "pub(all) struct Rose {\n  val : T\n  branch : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]]\n}",
+      "loc": {
+        "path": "moonbitlang/quickcheck/rose",
+        "file": "rose.mbt",
+        "line": 3,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "apply",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>::apply[T](self : <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T], f : (T, <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]]) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]",
+          "loc": {
+            "path": "moonbitlang/quickcheck/rose",
+            "file": "rose.mbt",
+            "line": 36,
+            "column": 8
+          }
+        },
+        {
+          "name": "bind",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>::bind[T, U](self : <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T], f : (T) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[U]) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[U]",
+          "loc": {
+            "path": "moonbitlang/quickcheck/rose",
+            "file": "rose.mbt",
+            "line": 31,
+            "column": 8
+          }
+        },
+        {
+          "name": "fmap",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>::fmap[T, U](self : <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T], f : (T) -> U) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[U]",
+          "loc": {
+            "path": "moonbitlang/quickcheck/rose",
+            "file": "rose.mbt",
+            "line": 26,
+            "column": 8
+          }
+        },
+        {
+          "name": "join",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>::join[T](self : <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[<a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]]) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]",
+          "loc": {
+            "path": "moonbitlang/quickcheck/rose",
+            "file": "rose.mbt",
+            "line": 14,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](<a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T], <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/quickcheck/rose",
+                "file": "rose.mbt",
+                "line": 6,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/quickcheck/rose",
+            "file": "rose.mbt",
+            "line": 6,
+            "column": 10
+          }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "new",
+      "docstring": "",
+      "signature": "fn new[T](val : T, branch : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]]) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]",
+      "loc": {
+        "path": "moonbitlang/quickcheck/rose",
+        "file": "rose.mbt",
+        "line": 9,
+        "column": 8
+      }
+    },
+    {
+      "name": "pure",
+      "docstring": "",
+      "signature": "fn pure[T](val : T) -> <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]",
+      "loc": {
+        "path": "moonbitlang/quickcheck/rose",
+        "file": "rose.mbt",
+        "line": 21,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

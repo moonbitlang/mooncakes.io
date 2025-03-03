@@ -1,0 +1,11 @@
+{
+  "kind": "package",
+  "relative_path": "falsify",
+  "module_path": "moonbitlang/quickcheck",
+  "readme_content": "",
+  "package_data": "moonbitlang/quickcheck/falsify/package_data.json",
+  "source_files": [
+    "driver.mbt", "gen.mbt", "property.mbt", "sample.mbt", "selective.mbt",
+    "shrinking.mbt", "utils.mbt"
+  ]
+}

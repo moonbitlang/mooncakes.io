@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "bytes",
+  "module_path": "moonbitlang/core",
+  "readme_content": "",
+  "package_data": "moonbitlang/core/bytes/package_data.json",
+  "source_files": [ "bytes.mbt", "view.mbt", "xxhash.mbt" ]
+}

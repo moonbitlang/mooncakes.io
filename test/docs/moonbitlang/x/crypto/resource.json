@@ -1,0 +1,11 @@
+{
+  "kind": "package",
+  "relative_path": "crypto",
+  "module_path": "moonbitlang/x",
+  "readme_content": "# moonbitlang/x/crypto\n\n## Overview\n\nA collection of cryptographic hash functions and utilities.\n\n## Usage\n\n> Strings in MoonBit are UTF-16 LE encoded.\n\n### SHA-1\n\n```moonbit\nlet input = \"The quick brown fox jumps over the lazy dog\"\nprintln(bytes_to_hex_string(sha1(input.to_bytes())))\n// => bd136cb58899c93173c33a90dde95ead0d0cf6df\n```\n\n### MD5\n\n```moonbit\nlet input = \"The quick brown fox jumps over the lazy dog\"\nprintln(bytes_to_hex_string(md5(input.to_bytes())))\n// => b0986ae6ee1eefee8a4a399090126837\n\n// buffered\nlet ctx = MD5Context::new()\nctx.update(b\"a\") \nctx.update(b\"b\") \nctx.update(b\"c\") \nprintln(bytes_to_hex_string(ctx.finalize())) // or `ctx.compute()`\n// => ce1473cf80c6b3fda8e3dfc006adc315\n```\n\n### SM3\n\n```moonbit\nlet input = \"The quick brown fox jumps over the lazy dog\"\nprintln(bytes_to_hex_string(sm3(input.to_bytes())))\n// => fc2b31896629e88652ca1e3be449ec7ec93f7e5e29769f273fb973bc1858c66d\n\n\n//buffered\nlet ctx = SM3Context::new()\nctx.update(b\"a\") \nctx.update(b\"b\") \nctx.update(b\"c\") \nprintln(bytes_to_hex_string(ctx.finalize()))\n// => 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0\n```\n",
+  "package_data": "moonbitlang/x/crypto/package_data.json",
+  "source_files": [
+    "chacha.mbt", "md5.mbt", "sha1.mbt", "sha224.mbt", "sha256.mbt",
+    "sm3.mbt", "utils.mbt"
+  ]
+}

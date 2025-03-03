@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "coverage",
+  "module_path": "moonbitlang/core",
+  "readme_content": "",
+  "package_data": "moonbitlang/core/coverage/package_data.json",
+  "source_files": [ "coverage.mbt" ]
+}

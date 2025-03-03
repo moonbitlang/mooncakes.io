@@ -1,5 +1,4 @@
 {
-  "readme": "# Moonbit/Core Json5\n\nThis is roughly ported from https://github.com/json5/json5\n\nCurrently, only parsing is implemented.\n",
   "name": "moonbitlang/x/json5",
   "traits": [],
   "types": [
@@ -7,19 +6,34 @@
       "name": "ParseError",
       "docstring": "",
       "signature": "pub(all) type! ParseError <a href=\"moonbitlang/x/json5#ParseErrorData\">ParseErrorData</a>\n",
-      "loc": { "line": 30, "column": 16 },
+      "loc": {
+        "path": "moonbitlang/x/json5",
+        "file": "types.mbt",
+        "line": 30,
+        "column": 16
+      },
       "methods": [
         {
           "name": "output",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/json5#ParseError\">ParseError</a>::output(self : <a href=\"moonbitlang/x/json5#ParseError\">ParseError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 51, "column": 20 }
+          "loc": {
+            "path": "moonbitlang/x/json5",
+            "file": "types.mbt",
+            "line": 51,
+            "column": 20
+          }
         },
         {
           "name": "to_string",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/json5#ParseError\">ParseError</a>::to_string(self : <a href=\"moonbitlang/x/json5#ParseError\">ParseError</a>) -> String",
-          "loc": { "line": 38, "column": 20 }
+          "loc": {
+            "path": "moonbitlang/x/json5",
+            "file": "types.mbt",
+            "line": 38,
+            "column": 20
+          }
         }
       ],
       "impls": []
@@ -28,7 +42,12 @@
       "name": "ParseErrorData",
       "docstring": "",
       "signature": "pub(all) enum ParseErrorData {\n  InvalidChar(<a href=\"moonbitlang/x/json5#Position\">Position</a>, Char)\n  InvalidEof\n  InvalidNumber(<a href=\"moonbitlang/x/json5#Position\">Position</a>, String)\n  InvalidIdentEscape(<a href=\"moonbitlang/x/json5#Position\">Position</a>)\n}",
-      "loc": { "line": 22, "column": 15 },
+      "loc": {
+        "path": "moonbitlang/x/json5",
+        "file": "types.mbt",
+        "line": 22,
+        "column": 15
+      },
       "methods": [],
       "impls": [
         {
@@ -39,10 +58,20 @@
               "name": "op_equal",
               "docstring": "automatically derived",
               "signature": "fn op_equal(<a href=\"moonbitlang/x/json5#ParseErrorData\">ParseErrorData</a>, <a href=\"moonbitlang/x/json5#ParseErrorData\">ParseErrorData</a>) -> Bool",
-              "loc": { "line": 27, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/x/json5",
+                "file": "types.mbt",
+                "line": 27,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 27, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/x/json5",
+            "file": "types.mbt",
+            "line": 27,
+            "column": 10
+          }
         }
       ]
     },
@@ -50,7 +79,12 @@
       "name": "Position",
       "docstring": "",
       "signature": "pub(all) struct Position {\n  line : Int\n  column : Int\n}",
-      "loc": { "line": 16, "column": 17 },
+      "loc": {
+        "path": "moonbitlang/x/json5",
+        "file": "types.mbt",
+        "line": 16,
+        "column": 17
+      },
       "methods": [],
       "impls": [
         {
@@ -61,10 +95,20 @@
               "name": "op_equal",
               "docstring": "automatically derived",
               "signature": "fn op_equal(<a href=\"moonbitlang/x/json5#Position\">Position</a>, <a href=\"moonbitlang/x/json5#Position\">Position</a>) -> Bool",
-              "loc": { "line": 19, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/x/json5",
+                "file": "types.mbt",
+                "line": 19,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 19, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/x/json5",
+            "file": "types.mbt",
+            "line": 19,
+            "column": 10
+          }
         },
         {
           "docstring": "",
@@ -74,10 +118,20 @@
               "name": "output",
               "docstring": "automatically derived",
               "signature": "fn output(<a href=\"moonbitlang/x/json5#Position\">Position</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 19, "column": 14 }
+              "loc": {
+                "path": "moonbitlang/x/json5",
+                "file": "types.mbt",
+                "line": 19,
+                "column": 14
+              }
             }
           ],
-          "loc": { "line": 19, "column": 14 }
+          "loc": {
+            "path": "moonbitlang/x/json5",
+            "file": "types.mbt",
+            "line": 19,
+            "column": 14
+          }
         }
       ]
     }
@@ -88,7 +142,12 @@
       "name": "parse",
       "docstring": "",
       "signature": "fn parse(input : String) -> <a href=\"moonbitlang/core/json#Json\">Json</a>!<a href=\"moonbitlang/x/json5#ParseError\">ParseError</a>",
-      "loc": { "line": 16, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/x/json5",
+        "file": "parse.mbt",
+        "line": 16,
+        "column": 8
+      }
     }
   ],
   "misc": []

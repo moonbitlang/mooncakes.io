@@ -14,7 +14,6 @@
               "name": "matrix",
               "package": {
                 "path": "xunyoyo/linalg/lib/matrix",
-                "readme": false,
                 "traits": [],
                 "types": [
                   {
@@ -45,7 +44,6 @@
           "name": "main",
           "package": {
             "path": "xunyoyo/linalg/main",
-            "readme": false,
             "traits": [],
             "types": [],
             "typealias": [],

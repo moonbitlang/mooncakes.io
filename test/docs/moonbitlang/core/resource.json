@@ -1,0 +1,13 @@
+{
+  "kind": "module",
+  "meta_info": {
+    "name": "moonbitlang/core",
+    "version": "0.1.20250224+e2253638a",
+    "readme": "README.md",
+    "repository": "https://github.com/moonbitlang/core",
+    "license": "Apache-2.0",
+    "keywords": [ "core", "standard library" ]
+  },
+  "readme_content": "# moonbitlang/core\n\n[![check](https://github.com/moonbitlang/core/actions/workflows/check.yml/badge.svg)](https://github.com/moonbitlang/core/actions/workflows/check.yml) [![Coverage Status](https://coveralls.io/repos/github/moonbitlang/core/badge.svg?branch=main)](https://coveralls.io/github/moonbitlang/core?branch=main)\n\nmoonbitlang/core is the standard library of the [MoonBit language](https://www.moonbitlang.com/). It is released alongside the compiler. You can view the documentation for the latest official release at <https://mooncakes.io/docs/#/moonbitlang/core/>. This repository serves as the development repository.\n\n## Current status\n\nIt is experimental and under active development. At this early stage, our primary focus is on enhancing the functionality of `moonbitlang/core`.\n\n⚠️**The API is subject to change.**\n\n### Timeline\n\nThe core is making large changes in the last few months, we are expected to reach beta-preview status in the Mid of August.\n\n## Contributing\n\nWe are actively developing moonbitlang/core and appreciate your help!\n\nTo contribute, please read the contribution guidelines at [CONTRIBUTING.md](./CONTRIBUTING.md).\n\n### Being a collaborator\n\nNote we regularly evaluate external contributions and invite activate contributors to join us as collaborators, thank you!\nTo keep the contributors managebable, we will revoke commit rights if external collaborators are not active for over 6 months.\n",
+  "module_index": "moonbitlang/core/module_index.json"
+}

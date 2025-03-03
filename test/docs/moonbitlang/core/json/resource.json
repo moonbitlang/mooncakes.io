@@ -1,0 +1,12 @@
+{
+  "kind": "package",
+  "relative_path": "json",
+  "module_path": "moonbitlang/core",
+  "readme_content": "",
+  "package_data": "moonbitlang/core/json/package_data.json",
+  "source_files": [
+    "from_json.mbt", "internal_types.mbt", "json.mbt", "json_path.mbt",
+    "lex_main.mbt", "lex_misc.mbt", "lex_number.mbt", "lex_string.mbt",
+    "parse.mbt", "tuple_fromjson.mbt", "types.mbt", "utils.mbt"
+  ]
+}

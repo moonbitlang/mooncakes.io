@@ -1,0 +1,78 @@
+{
+  "name": "moonbitlang/yacc/jsapi",
+  "traits": [],
+  "types": [
+    {
+      "name": "CompileResult",
+      "docstring": "",
+      "signature": "pub(all) struct CompileResult {\n  ok : Bool\n  code : String\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/jsapi",
+        "file": "jsapi.mbt",
+        "line": 16,
+        "column": 17
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "compile",
+      "docstring": "",
+      "signature": "fn compile(parser_spec_str : String, mode~ : <a href=\"moonbitlang/yacc/lib/driver#Mode\">@moonbitlang/yacc/lib/driver.Mode</a> = ..) -> <a href=\"moonbitlang/yacc/jsapi#CompileResult\">CompileResult</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/jsapi",
+        "file": "jsapi.mbt",
+        "line": 22,
+        "column": 8
+      }
+    },
+    {
+      "name": "default_mode",
+      "docstring": "",
+      "signature": "fn default_mode() -> <a href=\"moonbitlang/yacc/lib/driver#Mode\">@moonbitlang/yacc/lib/driver.Mode</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/jsapi",
+        "file": "jsapi.mbt",
+        "line": 37,
+        "column": 8
+      }
+    },
+    {
+      "name": "json_cst_json_payload_mode",
+      "docstring": "",
+      "signature": "fn json_cst_json_payload_mode() -> <a href=\"moonbitlang/yacc/lib/driver#Mode\">@moonbitlang/yacc/lib/driver.Mode</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/jsapi",
+        "file": "jsapi.mbt",
+        "line": 52,
+        "column": 8
+      }
+    },
+    {
+      "name": "json_cst_mode",
+      "docstring": "",
+      "signature": "fn json_cst_mode() -> <a href=\"moonbitlang/yacc/lib/driver#Mode\">@moonbitlang/yacc/lib/driver.Mode</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/jsapi",
+        "file": "jsapi.mbt",
+        "line": 42,
+        "column": 8
+      }
+    },
+    {
+      "name": "json_cst_no_payload_mode",
+      "docstring": "",
+      "signature": "fn json_cst_no_payload_mode() -> <a href=\"moonbitlang/yacc/lib/driver#Mode\">@moonbitlang/yacc/lib/driver.Mode</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/jsapi",
+        "file": "jsapi.mbt",
+        "line": 47,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

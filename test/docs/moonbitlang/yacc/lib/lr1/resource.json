@@ -1,0 +1,15 @@
+{
+  "kind": "package",
+  "relative_path": "lib/lr1",
+  "module_path": "moonbitlang/yacc",
+  "readme_content": "",
+  "package_data": "moonbitlang/yacc/lib/lr1/package_data.json",
+  "source_files": [
+    "abstract_lookahead_set.mbt", "automaton.mbt", "closure.mbt",
+    "encoded_lookahead_set.mbt", "encoded_lr0_item.mbt",
+    "encoded_lr0_item_set.mbt", "encoded_lr1_item_set.mbt",
+    "encoded_symbolic_lookahead_set.mbt", "epsilon_lookahead_set.mbt",
+    "first.mbt", "lookahead.mbt", "lr0_item.mbt", "lr1_item.mbt",
+    "resolve_conflicts.mbt"
+  ]
+}

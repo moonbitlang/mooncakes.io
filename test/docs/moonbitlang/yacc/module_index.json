@@ -1,0 +1,2213 @@
+{
+  "name": "moonbitlang",
+  "package": null,
+  "childs": [
+    {
+      "name": "yacc",
+      "package": null,
+      "childs": [
+        {
+          "name": "jsapi",
+          "package": {
+            "path": "moonbitlang/yacc/jsapi",
+            "traits": [],
+            "types": [
+              { "name": "CompileResult", "impls": [], "methods": [] }
+            ],
+            "typealias": [],
+            "values": [
+              "compile", "default_mode", "json_cst_json_payload_mode",
+              "json_cst_mode", "json_cst_no_payload_mode"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lib",
+          "package": null,
+          "childs": [
+            {
+              "name": "codegen",
+              "package": {
+                "path": "moonbitlang/yacc/lib/codegen",
+                "traits": [
+                  {
+                    "name": "@moonbitlang/yacc/lib/codegen.CodeGenerator",
+                    "impls": []
+                  },
+                  {
+                    "name": "@moonbitlang/yacc/lib/codegen.SourceMapBuilder",
+                    "impls": []
+                  }
+                ],
+                "types": [
+                  { "name": "InputMode", "impls": [], "methods": [] },
+                  { "name": "MetaProvider", "impls": [], "methods": [] },
+                  { "name": "Mode", "impls": [], "methods": [] },
+                  { "name": "NonTerminalMeta", "impls": [], "methods": [] },
+                  { "name": "ProductionMeta", "impls": [], "methods": [] },
+                  {
+                    "name": "SourceMap",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SourceMap",
+                            "path": "moonbitlang/yacc/lib/codegen"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SourceMap",
+                            "path": "moonbitlang/yacc/lib/codegen"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "SourceMapBuilder",
+                          "path": "moonbitlang/yacc/lib/codegen"
+                        },
+                        "methods": [ "add_mapping" ]
+                      }
+                    ],
+                    "methods": [ "new" ]
+                  },
+                  {
+                    "name": "SourceMapping",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SourceMapping",
+                            "path": "moonbitlang/yacc/lib/codegen"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  { "name": "TerminalMeta", "impls": [], "methods": [] },
+                  {
+                    "name": "TokenPayloadRewrite",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "CodeFragment" ],
+                "values": [],
+                "misc": []
+              },
+              "childs": [
+                {
+                  "name": "gen_mbt",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/codegen/gen_mbt",
+                    "traits": [],
+                    "types": [],
+                    "typealias": [],
+                    "values": [ "generator" ],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            },
+            {
+              "name": "driver",
+              "package": {
+                "path": "moonbitlang/yacc/lib/driver",
+                "traits": [],
+                "types": [
+                  { "name": "InputMode", "impls": [], "methods": [] },
+                  { "name": "Mode", "impls": [], "methods": [] },
+                  {
+                    "name": "TokenPayloadRewrite",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [ "compile" ],
+                "misc": []
+              },
+              "childs": [
+                {
+                  "name": "util",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/driver/util",
+                    "traits": [],
+                    "types": [],
+                    "typealias": [],
+                    "values": [
+                      "exit", "path_basename", "println_to_stderr"
+                    ],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            },
+            {
+              "name": "elab",
+              "package": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Action",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Action",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Associativity",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Associativity",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "BindingSubject",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "BindingSubject",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Clause",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Clause",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Item",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Item",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": [ "type_" ]
+                  },
+                  {
+                    "name": "ItemDesc",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ItemDesc",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  { "name": "JsonCst", "impls": [], "methods": [] },
+                  {
+                    "name": "ParserSpec",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ParserSpec",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Rule",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Rule",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Token",
+                            "path": "moonbitlang/yacc/lib/elab"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "TokenPayloadRewrite",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "Code", "Symbol" ],
+                "values": [ "elaborate" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "grm",
+              "package": {
+                "path": "moonbitlang/yacc/lib/grm",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Associativity",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Associativity",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "BuilderContext",
+                    "impls": [],
+                    "methods": [ "add_production", "set_prec", "set_start" ]
+                  },
+                  { "name": "Grammar", "impls": [], "methods": [] },
+                  {
+                    "name": "Nonterminal",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Nonterminal",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Nonterminal",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "compare", "op_equal" ]
+                  },
+                  {
+                    "name": "Nullability",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Nullability",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Production",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Production",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Production",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Production",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Production",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "output_with_opt_dot" ]
+                  },
+                  {
+                    "name": "Symbol",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Symbol",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Symbol",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Symbol",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Symbol",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Terminal",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Terminal",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Terminal",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Terminal",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Terminal",
+                            "path": "moonbitlang/yacc/lib/grm"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "BuilderSymbol" ],
+                "values": [ "build" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "lr1",
+              "package": {
+                "path": "moonbitlang/yacc/lib/lr1",
+                "traits": [
+                  {
+                    "name": "@moonbitlang/yacc/lib/lr1.AbstractLookaheadSet",
+                    "impls": []
+                  }
+                ],
+                "types": [
+                  {
+                    "name": "Automaton",
+                    "impls": [],
+                    "methods": [ "build" ]
+                  },
+                  {
+                    "name": "ConflictLocation",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ConflictLocation",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ConflictLocation",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Decision",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Decision",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EncodedLR0Item",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLR0Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLR0Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLR0Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      }
+                    ],
+                    "methods": [
+                      "decode", "decode_postdot", "decode_production", "new",
+                      "unsafe_shift"
+                    ]
+                  },
+                  {
+                    "name": "EncodedLR0ItemSet",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLR0ItemSet",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Default",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "default" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLR0ItemSet",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLR0ItemSet",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash", "hash_combine" ]
+                      }
+                    ],
+                    "methods": [
+                      "decode_iter", "empty", "from_sorted_array"
+                    ]
+                  },
+                  { "name": "EncodedLR1ItemSet", "impls": [], "methods": [] },
+                  {
+                    "name": "EncodedLookaheadSet",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLookaheadSet",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLookaheadSet",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "EncodedLookaheadSet",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "EncodedSymbolicLookaheadSet",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "EpsilonLookaheadSet",
+                    "impls": [],
+                    "methods": []
+                  },
+                  {
+                    "name": "LR0Item",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR0Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR0Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR0Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      }
+                    ],
+                    "methods": [ "new", "postdot", "shift" ]
+                  },
+                  { "name": "LR0Node", "impls": [], "methods": [] },
+                  {
+                    "name": "LR1Item",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1Item",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "core", "postdot", "shift" ]
+                  },
+                  {
+                    "name": "LR1ItemGroup",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1ItemGroup",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  { "name": "LR1PreState", "impls": [], "methods": [] },
+                  {
+                    "name": "LR1State",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1State",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1State",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "LR1State",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      }
+                    ],
+                    "methods": [ "iter_item_groups", "set_action" ]
+                  },
+                  {
+                    "name": "Lookahead",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Lookahead",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Lookahead",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Lookahead",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Hash",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "hash_combine" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Lookahead",
+                            "path": "moonbitlang/yacc/lib/lr1"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ResolveConflictError",
+                    "impls": [],
+                    "methods": []
+                  }
+                ],
+                "typealias": [],
+                "values": [ "build_closure_fn", "resolve_conflicts" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "parser",
+              "package": {
+                "path": "moonbitlang/yacc/lib/parser",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "Clause",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Clause",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseAction",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseAction",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseItem",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseItem",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseItemIdent",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseItemIdent",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseItemIdent",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseItemIdent",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseItemIdent",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "ClauseItemSymbol",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ClauseItemSymbol",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "CodeWithSubst",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "CodeWithSubst",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Declaration",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Declaration",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  { "name": "LexEngine", "impls": [], "methods": [ "run" ] },
+                  { "name": "LexError", "impls": [], "methods": [] },
+                  {
+                    "name": "Lexbuf",
+                    "impls": [],
+                    "methods": [ "from_string" ]
+                  },
+                  {
+                    "name": "Lexer",
+                    "impls": [],
+                    "methods": [ "next_token" ]
+                  },
+                  { "name": "ParseError", "impls": [], "methods": [] },
+                  {
+                    "name": "ParserSpec",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ParserSpec",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Rule",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Rule",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "SubstItem",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SubstItem",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SubstItem",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "SubstItemDesc",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SubstItemDesc",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Compare",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "compare" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SubstItemDesc",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Eq",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "op_equal" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SubstItemDesc",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      },
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "SubstItemDesc",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "ToJson",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "to_json" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Token",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "TokenKind",
+                            "path": "moonbitlang/yacc/lib/parser"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "Code", "Position", "Symbol" ],
+                "values": [ "new_lexer", "spec" ],
+                "misc": []
+              },
+              "childs": [
+                {
+                  "name": "test",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/parser/test",
+                    "traits": [],
+                    "types": [],
+                    "typealias": [],
+                    "values": [],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            },
+            {
+              "name": "util",
+              "package": null,
+              "childs": [
+                {
+                  "name": "array_multimap",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/util/array_multimap",
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "T",
+                        "impls": [
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "T",
+                                "path": "moonbitlang/yacc/lib/util/array_multimap"
+                              },
+                              "arguments": [
+                                { "kind": "param", "name": "K" },
+                                { "kind": "param", "name": "V" }
+                              ]
+                            },
+                            "trait": {
+                              "name": "ToJson",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "to_json" ]
+                          }
+                        ],
+                        "methods": [ "add", "copy", "get" ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "new" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "hashmap2",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/util/hashmap2",
+                    "traits": [],
+                    "types": [
+                      { "name": "Entry", "impls": [], "methods": [] },
+                      {
+                        "name": "T",
+                        "impls": [],
+                        "methods": [
+                          "get", "get_or_init", "iter", "iter2", "set",
+                          "size"
+                        ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "new" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "int128_int_set",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/util/int128_int_set",
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Int128IntSet",
+                        "impls": [
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "Int128IntSet",
+                                "path": "moonbitlang/yacc/lib/util/int128_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Compare",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "compare" ]
+                          },
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "Int128IntSet",
+                                "path": "moonbitlang/yacc/lib/util/int128_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Eq",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "op_equal" ]
+                          },
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "Int128IntSet",
+                                "path": "moonbitlang/yacc/lib/util/int128_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Hash",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "hash_combine" ]
+                          },
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "Int128IntSet",
+                                "path": "moonbitlang/yacc/lib/util/int128_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Show",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "output" ]
+                          }
+                        ],
+                        "methods": [
+                          "add", "contains", "difference", "disjoint",
+                          "intersection", "is_empty", "iter", "remove",
+                          "subset", "union"
+                        ]
+                      }
+                    ],
+                    "typealias": [ "T" ],
+                    "values": [ "empty", "from_iter", "singleton" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "logger_with_cursor",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "LoggerWithCursor",
+                        "impls": [
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "LoggerWithCursor",
+                                "path": "moonbitlang/yacc/lib/util/logger_with_cursor"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Logger",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [
+                              "write_char", "write_string", "write_substring"
+                            ]
+                          }
+                        ],
+                        "methods": [ "cursor" ]
+                      }
+                    ],
+                    "typealias": [],
+                    "values": [ "new" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "small_int_set",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/util/small_int_set",
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "SmallIntSet",
+                        "impls": [
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "SmallIntSet",
+                                "path": "moonbitlang/yacc/lib/util/small_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Compare",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "compare" ]
+                          },
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "SmallIntSet",
+                                "path": "moonbitlang/yacc/lib/util/small_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Eq",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "op_equal" ]
+                          },
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "SmallIntSet",
+                                "path": "moonbitlang/yacc/lib/util/small_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Hash",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "hash_combine" ]
+                          },
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "SmallIntSet",
+                                "path": "moonbitlang/yacc/lib/util/small_int_set"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Show",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "output" ]
+                          }
+                        ],
+                        "methods": [
+                          "add", "contains", "difference", "disjoint",
+                          "intersection", "is_empty", "iter", "remove",
+                          "subset", "union"
+                        ]
+                      }
+                    ],
+                    "typealias": [ "T" ],
+                    "values": [ "empty", "from_iter", "singleton" ],
+                    "misc": []
+                  },
+                  "childs": []
+                },
+                {
+                  "name": "stamp",
+                  "package": {
+                    "path": "moonbitlang/yacc/lib/util/stamp",
+                    "traits": [],
+                    "types": [
+                      {
+                        "name": "Stamp",
+                        "impls": [
+                          {
+                            "self": {
+                              "kind": "constr",
+                              "constructor": {
+                                "name": "Stamp",
+                                "path": "moonbitlang/yacc/lib/util/stamp"
+                              },
+                              "arguments": []
+                            },
+                            "trait": {
+                              "name": "Eq",
+                              "path": "moonbitlang/core/builtin"
+                            },
+                            "methods": [ "op_equal" ]
+                          }
+                        ],
+                        "methods": []
+                      }
+                    ],
+                    "typealias": [ "T" ],
+                    "values": [ "initial", "new" ],
+                    "misc": []
+                  },
+                  "childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "package": {
+            "path": "moonbitlang/yacc/main",
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "tests",
+          "package": null,
+          "childs": [
+            {
+              "name": "calc_array_input_mode_test",
+              "package": {
+                "path": "moonbitlang/yacc/tests/calc_array_input_mode_test",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ParseError",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ParseError",
+                            "path": "moonbitlang/yacc/tests/calc_array_input_mode_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Token",
+                            "path": "moonbitlang/yacc/tests/calc_array_input_mode_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "TokenKind",
+                            "path": "moonbitlang/yacc/tests/calc_array_input_mode_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "Position" ],
+                "values": [ "start" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "calc_external_tokens_test",
+              "package": {
+                "path": "moonbitlang/yacc/tests/calc_external_tokens_test",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ParseError",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ParseError",
+                            "path": "moonbitlang/yacc/tests/calc_external_tokens_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Token",
+                            "path": "moonbitlang/yacc/tests/calc_external_tokens_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "TokenKind",
+                            "path": "moonbitlang/yacc/tests/calc_external_tokens_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "Position" ],
+                "values": [ "start" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "calc_jsoncst_test",
+              "package": {
+                "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ParseError",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ParseError",
+                            "path": "moonbitlang/yacc/tests/calc_jsoncst_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Token",
+                            "path": "moonbitlang/yacc/tests/calc_jsoncst_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "TokenKind",
+                            "path": "moonbitlang/yacc/tests/calc_jsoncst_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  { "name": "YYObj_Json", "impls": [], "methods": [] }
+                ],
+                "typealias": [ "Position" ],
+                "values": [ "start" ],
+                "misc": []
+              },
+              "childs": []
+            },
+            {
+              "name": "calc_test",
+              "package": {
+                "path": "moonbitlang/yacc/tests/calc_test",
+                "traits": [],
+                "types": [
+                  {
+                    "name": "ParseError",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "ParseError",
+                            "path": "moonbitlang/yacc/tests/calc_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  },
+                  {
+                    "name": "Token",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "Token",
+                            "path": "moonbitlang/yacc/tests/calc_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": [ "kind" ]
+                  },
+                  {
+                    "name": "TokenKind",
+                    "impls": [
+                      {
+                        "self": {
+                          "kind": "constr",
+                          "constructor": {
+                            "name": "TokenKind",
+                            "path": "moonbitlang/yacc/tests/calc_test"
+                          },
+                          "arguments": []
+                        },
+                        "trait": {
+                          "name": "Show",
+                          "path": "moonbitlang/core/builtin"
+                        },
+                        "methods": [ "output" ]
+                      }
+                    ],
+                    "methods": []
+                  }
+                ],
+                "typealias": [ "Position" ],
+                "values": [ "start" ],
+                "misc": []
+              },
+              "childs": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

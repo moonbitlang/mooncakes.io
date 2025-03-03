@@ -1,5 +1,4 @@
 {
-  "readme": "",
   "name": "moonbitlang/core/bool",
   "traits": [],
   "types": [],
@@ -17,16 +16,31 @@
               "name": "hash",
               "docstring": "",
               "signature": "fn hash(self : Bool) -> Int",
-              "loc": { "line": 119, "column": 29 }
+              "loc": {
+                "path": "moonbitlang/core/bool",
+                "file": "bool.mbt",
+                "line": 119,
+                "column": 29
+              }
             },
             {
               "name": "hash_combine",
               "docstring": "",
               "signature": "fn hash_combine(self : Bool, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
-              "loc": { "line": 122, "column": 29 }
+              "loc": {
+                "path": "moonbitlang/core/bool",
+                "file": "bool.mbt",
+                "line": 124,
+                "column": 29
+              }
             }
           ],
-          "loc": { "line": 119, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/core/bool",
+            "file": "bool.mbt",
+            "line": 119,
+            "column": 1
+          }
         }
       ],
       "methods": [
@@ -34,25 +48,45 @@
           "name": "to_int",
           "docstring": "\n Converts a boolean value to its integer representation.\n\n Parameters:\n\n * `self` : The boolean value to convert.\n\n Returns 1 if the boolean is `true`, 0 if it is `false`.\n\n Example:\n\n ```moonbit\n test \"to_int\" {\n   inspect!(true.to_int(), content=\"1\")\n   inspect!(false.to_int(), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/bool#Bool\">Bool</a>::to_int(self : Bool) -> Int",
-          "loc": { "line": 32, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/bool",
+            "file": "bool.mbt",
+            "line": 32,
+            "column": 8
+          }
         },
         {
           "name": "to_int64",
           "docstring": "\n Converts a boolean value to a 64-bit integer. Returns 1 for `true` and 0 for\n `false`.\n\n Parameters:\n\n * `bool` : The boolean value to be converted.\n\n Returns a 64-bit integer representation of the boolean value.\n\n Example:\n\n ```moonbit\n test \"to_int64\" {\n   inspect!(true.to_int64(), content=\"1\")\n   inspect!(false.to_int64(), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/bool#Bool\">Bool</a>::to_int64(self : Bool) -> Int64",
-          "loc": { "line": 58, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/bool",
+            "file": "bool.mbt",
+            "line": 58,
+            "column": 8
+          }
         },
         {
           "name": "to_uint",
           "docstring": "\n Converts a boolean value to an unsigned integer.\n\n Parameters:\n\n * `value` : The boolean value to be converted.\n\n Returns an unsigned integer, where `true` is converted to 1 and `false` is\n converted to 0.\n\n Example:\n\n ```moonbit\n test \"to_uint\" {\n   inspect!(true.to_uint(), content=\"1\")\n   inspect!(false.to_uint(), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/bool#Bool\">Bool</a>::to_uint(self : Bool) -> UInt",
-          "loc": { "line": 84, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/bool",
+            "file": "bool.mbt",
+            "line": 84,
+            "column": 8
+          }
         },
         {
           "name": "to_uint64",
           "docstring": "\n Converts a boolean value to an unsigned 64-bit integer. Returns 1 for `true`\n and 0 for `false`.\n\n Parameters:\n\n * `bool` : The boolean value to convert.\n\n Returns an unsigned 64-bit integer representation of the boolean value.\n\n Example:\n\n ```moonbit\n test \"to_uint64\" {\n   inspect!(true.to_uint64(), content=\"1\")\n   inspect!(false.to_uint64(), content=\"0\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/bool#Bool\">Bool</a>::to_uint64(self : Bool) -> UInt64",
-          "loc": { "line": 110, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/bool",
+            "file": "bool.mbt",
+            "line": 110,
+            "column": 8
+          }
         }
       ]
     }

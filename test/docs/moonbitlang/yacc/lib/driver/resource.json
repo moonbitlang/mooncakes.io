@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "lib/driver",
+  "module_path": "moonbitlang/yacc",
+  "readme_content": "",
+  "package_data": "moonbitlang/yacc/lib/driver/package_data.json",
+  "source_files": [ "driver.mbt", "utils.mbt" ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "moonbitlang/lex/lib/parser",
+  "traits": [],
+  "types": [
+    {
+      "name": "ParserBuf",
+      "docstring": "",
+      "signature": "type ParserBuf",
+      "loc": {
+        "path": "moonbitlang/lex/lib/parser",
+        "file": "parser.mbt",
+        "line": 3,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "from_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>::from_string(content : String) -> <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>",
+          "loc": {
+            "path": "moonbitlang/lex/lib/parser",
+            "file": "parser.mbt",
+            "line": 9,
+            "column": 19
+          }
+        },
+        {
+          "name": "lex",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>::lex(self : <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>) -> (<a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>, <a href=\"moonbitlang/lex/lib/type#Lex\">@moonbitlang/lex/lib/type.Lex</a>)?",
+          "loc": {
+            "path": "moonbitlang/lex/lib/parser",
+            "file": "parser.mbt",
+            "line": 442,
+            "column": 8
+          }
+        },
+        {
+          "name": "regex",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>::regex(self : <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>) -> (<a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>, <a href=\"moonbitlang/lex/lib/type#Regex\">@moonbitlang/lex/lib/type.Regex</a>)?",
+          "loc": {
+            "path": "moonbitlang/lex/lib/parser",
+            "file": "parser.mbt",
+            "line": 289,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/parser",
+                "file": "parser.mbt",
+                "line": 6,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/lex/lib/parser",
+            "file": "parser.mbt",
+            "line": 6,
+            "column": 10
+          }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

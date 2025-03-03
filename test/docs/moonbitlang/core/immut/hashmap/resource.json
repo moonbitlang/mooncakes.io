@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "immut/hashmap",
+  "module_path": "moonbitlang/core",
+  "readme_content": "# Immutable hashmap\n\nThis package provides an immutable hash map data structure.\n\n## Basic usage\n\n```mbt\ntest {\n  let map = \n    @hashmap.new()\n      .add(\"a\", 1)\n      .add(\"b\", 2)\n      .add(\"c\", 3)\n  println(map.find(\"a\")) // Some(1)\n  println(map.find(\"d\")) // None\n}\n```\n",
+  "package_data": "moonbitlang/core/immut/hashmap/package_data.json",
+  "source_files": [ "HAMT.mbt", "bucket.mbt", "deprecated.mbt", "types.mbt" ]
+}

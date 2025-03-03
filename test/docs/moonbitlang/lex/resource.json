@@ -1,0 +1,18 @@
+{
+  "kind": "module",
+  "meta_info": {
+    "name": "moonbitlang/lex",
+    "version": "0.1.4",
+    "deps": { "Yoorkin/ArgParser": "0.1.8", "moonbitlang/x": "0.4.19" },
+    "readme": "README.md",
+    "repository": "",
+    "license": "Apache-2.0",
+    "keywords": [],
+    "description": "",
+    "source": "src",
+    "include": [ "src", "boot", "LICENSE", "README.md", "moon.mod.json" ],
+    "exclude": [ "src/tests" ]
+  },
+  "readme_content": "# moonlex\n\nSimple lexer generator for MoonBit.\n",
+  "module_index": "moonbitlang/lex/module_index.json"
+}

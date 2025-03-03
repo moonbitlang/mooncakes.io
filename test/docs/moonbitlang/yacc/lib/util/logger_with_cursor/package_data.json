@@ -1,0 +1,92 @@
+{
+  "name": "moonbitlang/yacc/lib/util/logger_with_cursor",
+  "traits": [],
+  "types": [
+    {
+      "name": "LoggerWithCursor",
+      "docstring": "",
+      "signature": "type LoggerWithCursor",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+        "file": "logger_with_cursor.mbt",
+        "line": 2,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "cursor",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>::cursor(self : <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+            "file": "logger_with_cursor.mbt",
+            "line": 13,
+            "column": 26
+          }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Logger\">Logger</a> for <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>",
+          "methods": [
+            {
+              "name": "write_char",
+              "docstring": "",
+              "signature": "fn write_char(self : <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>, char : Char) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+                "file": "logger_with_cursor.mbt",
+                "line": 18,
+                "column": 43
+              }
+            },
+            {
+              "name": "write_string",
+              "docstring": "",
+              "signature": "fn write_string(self : <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>, str : String) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+                "file": "logger_with_cursor.mbt",
+                "line": 24,
+                "column": 43
+              }
+            },
+            {
+              "name": "write_substring",
+              "docstring": "",
+              "signature": "fn write_substring(self : <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>, str : String, start : Int, len : Int) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+                "file": "logger_with_cursor.mbt",
+                "line": 30,
+                "column": 43
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+            "file": "logger_with_cursor.mbt",
+            "line": 18,
+            "column": 1
+          }
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "new",
+      "docstring": "",
+      "signature": "fn new(logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>, cursor~ : Int = ..) -> <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
+        "file": "logger_with_cursor.mbt",
+        "line": 8,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

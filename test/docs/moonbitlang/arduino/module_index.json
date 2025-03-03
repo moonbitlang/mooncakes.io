@@ -1,0 +1,236 @@
+{
+  "name": "moonbitlang",
+  "package": null,
+  "childs": [
+    {
+      "name": "arduino",
+      "package": {
+        "path": "moonbitlang/arduino",
+        "traits": [
+          { "name": "@moonbitlang/arduino.Floating", "impls": [] },
+          { "name": "@moonbitlang/arduino.FromInt", "impls": [] },
+          {
+            "name": "@moonbitlang/arduino.Integer",
+            "impls": [
+              {
+                "self": { "name": "Int", "path": "moonbitlang/core/int" },
+                "trait": { "name": "Integer", "path": "moonbitlang/arduino" },
+                "methods": [ "is_integer" ]
+              },
+              {
+                "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+                "trait": { "name": "Integer", "path": "moonbitlang/arduino" },
+                "methods": [ "is_integer" ]
+              }
+            ]
+          },
+          {
+            "name": "@moonbitlang/arduino.Number",
+            "impls": [
+              {
+                "self": { "name": "Int", "path": "moonbitlang/core/int" },
+                "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+                "methods": [ "one", "zero" ]
+              },
+              {
+                "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+                "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+                "methods": [ "one", "zero" ]
+              },
+              {
+                "self": { "name": "Float", "path": "moonbitlang/core/float" },
+                "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+                "methods": [ "one", "zero" ]
+              },
+              {
+                "self": {
+                  "name": "Double",
+                  "path": "moonbitlang/core/double"
+                },
+                "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+                "methods": [ "one", "zero" ]
+              }
+            ]
+          },
+          { "name": "@moonbitlang/arduino.ToInt", "impls": [] },
+          {
+            "name": "@moonbitlang/arduino.ToInt16",
+            "impls": [
+              {
+                "self": { "name": "Int", "path": "moonbitlang/core/int" },
+                "trait": { "name": "ToInt16", "path": "moonbitlang/arduino" },
+                "methods": [ "to_int16" ]
+              },
+              {
+                "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+                "trait": { "name": "ToInt16", "path": "moonbitlang/arduino" },
+                "methods": [ "to_int16" ]
+              }
+            ]
+          },
+          {
+            "name": "@moonbitlang/arduino.ToInt8",
+            "impls": [
+              {
+                "self": { "name": "Byte", "path": "moonbitlang/core/byte" },
+                "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
+                "methods": [ "to_int8" ]
+              },
+              {
+                "self": { "name": "Int", "path": "moonbitlang/core/int" },
+                "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
+                "methods": [ "to_int8" ]
+              },
+              {
+                "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+                "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
+                "methods": [ "to_int8" ]
+              }
+            ]
+          }
+        ],
+        "types": [
+          {
+            "name": "DigitalValue",
+            "impls": [],
+            "methods": [ "from_int", "to_int", "to_int8" ]
+          },
+          { "name": "InterruptMode", "impls": [], "methods": [ "to_int" ] },
+          {
+            "name": "Pin",
+            "impls": [],
+            "methods": [ "from_int", "to_int8" ]
+          },
+          { "name": "PinMode", "impls": [], "methods": [] }
+        ],
+        "typealias": [],
+        "values": [
+          "abs", "analogRead", "analogReadResolution", "analogWrite",
+          "analogWriteResolution", "attachInterrupt", "bit", "bitClear",
+          "bitRead", "bitSet", "bitWrite", "builtin_led", "constrain",
+          "delay", "delayMicroseconds", "detachInterrupt",
+          "digitalPinToInterrupt", "digitalRead", "digitalWrite", "highByte",
+          "interrupts", "lowByte", "map", "max", "micros", "millis", "min",
+          "noInterrupts", "pinMode", "sq", "test_bytes", "tone"
+        ],
+        "misc": []
+      },
+      "childs": [
+        {
+          "name": "serial",
+          "package": {
+            "path": "moonbitlang/arduino/serial",
+            "traits": [
+              {
+                "name": "@moonbitlang/arduino/serial.SerialPrintable",
+                "impls": [
+                  {
+                    "self": {
+                      "name": "Char",
+                      "path": "moonbitlang/core/char"
+                    },
+                    "trait": {
+                      "name": "SerialPrintable",
+                      "path": "moonbitlang/arduino/serial"
+                    },
+                    "methods": [ "serial_print", "serial_println" ]
+                  },
+                  {
+                    "self": { "name": "Int", "path": "moonbitlang/core/int" },
+                    "trait": {
+                      "name": "SerialPrintable",
+                      "path": "moonbitlang/arduino/serial"
+                    },
+                    "methods": [ "serial_print", "serial_println" ]
+                  },
+                  {
+                    "self": {
+                      "name": "Int64",
+                      "path": "moonbitlang/core/int64"
+                    },
+                    "trait": {
+                      "name": "SerialPrintable",
+                      "path": "moonbitlang/arduino/serial"
+                    },
+                    "methods": [ "serial_print", "serial_println" ]
+                  },
+                  {
+                    "self": {
+                      "name": "Double",
+                      "path": "moonbitlang/core/double"
+                    },
+                    "trait": {
+                      "name": "SerialPrintable",
+                      "path": "moonbitlang/arduino/serial"
+                    },
+                    "methods": [ "serial_print", "serial_println" ]
+                  }
+                ]
+              }
+            ],
+            "types": [
+              {
+                "name": "Serial",
+                "impls": [],
+                "methods": [ "available", "begin", "end", "is_ok" ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "serial_parse_int", "serial_peek", "serial_read",
+              "serial_read_to_buffer"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "spi",
+          "package": {
+            "path": "moonbitlang/arduino/spi",
+            "traits": [],
+            "types": [ { "name": "Settings", "impls": [], "methods": [] } ],
+            "typealias": [],
+            "values": [
+              "begin", "begin_transaction", "end_transaction", "transfer",
+              "transfer16", "transfer_bytes"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "wifi",
+          "package": {
+            "path": "moonbitlang/arduino/wifi",
+            "traits": [],
+            "types": [
+              {
+                "name": "WLStatus",
+                "impls": [],
+                "methods": [ "from_int", "to_int" ]
+              },
+              {
+                "name": "WiFiClient",
+                "impls": [],
+                "methods": [
+                  "delete", "is_available", "is_connected", "is_ok", "print",
+                  "println", "read_char", "stop"
+                ]
+              },
+              {
+                "name": "WiFiServer",
+                "impls": [],
+                "methods": [ "accept", "begin", "delete" ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "wifi_begin", "wifi_server_new", "wifi_status" ],
+            "misc": []
+          },
+          "childs": []
+        }
+      ]
+    }
+  ]
+}

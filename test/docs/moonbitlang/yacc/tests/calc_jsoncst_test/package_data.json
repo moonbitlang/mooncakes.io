@@ -1,0 +1,169 @@
+{
+  "name": "moonbitlang/yacc/tests/calc_jsoncst_test",
+  "traits": [],
+  "types": [
+    {
+      "name": "ParseError",
+      "docstring": "",
+      "signature": "pub enum ParseError {\n  UnexpectedToken(<a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#Token\">Token</a>, (Int, Int), <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#TokenKind\">TokenKind</a>])\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+        "file": "calc_jsoncst.mbt",
+        "line": 55,
+        "column": 11
+      },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#ParseError\">ParseError</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#ParseError\">ParseError</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+                "file": "calc_jsoncst.mbt",
+                "line": 57,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+            "file": "calc_jsoncst.mbt",
+            "line": 57,
+            "column": 10
+          }
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "docstring": "",
+      "signature": "pub(all) enum Token {\n  EOF\n  NUMBER\n  PLUS\n  MINUS\n  STAR\n  LPAREN\n  RPAREN\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+        "file": "calc_jsoncst.mbt",
+        "line": 5,
+        "column": 15
+      },
+      "methods": [
+        {
+          "name": "kind",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#Token\">Token</a>::kind(self : <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#Token\">Token</a>) -> <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#TokenKind\">TokenKind</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+            "file": "calc_jsoncst.mbt",
+            "line": 16,
+            "column": 15
+          }
+        }
+      ],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#Token\">Token</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#Token\">Token</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+                "file": "calc_jsoncst.mbt",
+                "line": 13,
+                "column": 10
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+            "file": "calc_jsoncst.mbt",
+            "line": 13,
+            "column": 10
+          }
+        }
+      ]
+    },
+    {
+      "name": "TokenKind",
+      "docstring": "",
+      "signature": "pub(all) enum TokenKind {\n  TK_EOF\n  TK_NUMBER\n  TK_PLUS\n  TK_MINUS\n  TK_STAR\n  TK_LPAREN\n  TK_RPAREN\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+        "file": "calc_jsoncst.mbt",
+        "line": 29,
+        "column": 15
+      },
+      "methods": [],
+      "impls": [
+        {
+          "docstring": "",
+          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#TokenKind\">TokenKind</a>",
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#TokenKind\">TokenKind</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+                "file": "calc_jsoncst.mbt",
+                "line": 40,
+                "column": 34
+              }
+            }
+          ],
+          "loc": {
+            "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+            "file": "calc_jsoncst.mbt",
+            "line": 40,
+            "column": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "YYObj_Json",
+      "docstring": "",
+      "signature": "type YYObj_Json",
+      "loc": {
+        "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+        "file": "calc_jsoncst.mbt",
+        "line": 63,
+        "column": 7
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "Position",
+      "docstring": "",
+      "signature": "type Position = Int",
+      "loc": {
+        "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+        "file": "calc_jsoncst.mbt",
+        "line": 2,
+        "column": 1
+      }
+    }
+  ],
+  "values": [
+    {
+      "name": "start",
+      "docstring": "",
+      "signature": "fn start(read_token : () -> (<a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#Token\">Token</a>, Int, Int), start_pos : Int) -> <a href=\"moonbitlang/core/json#Json\">Json</a>!<a href=\"moonbitlang/yacc/tests/calc_jsoncst_test#ParseError\">ParseError</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/tests/calc_jsoncst_test",
+        "file": "calc_jsoncst.mbt",
+        "line": 681,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

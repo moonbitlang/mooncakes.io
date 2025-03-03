@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "lib/tests",
+  "module_path": "moonbitlang/lex",
+  "readme_content": "",
+  "package_data": "moonbitlang/lex/lib/tests/package_data.json",
+  "source_files": [ "automaton.mbt", "dot.mbt" ]
+}

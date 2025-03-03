@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moonbit docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/one-light.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script
+    src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+  <pre><code class="moonbit">// Selective Applicative Functor
+///|
+enum Either[L, R] {
+  Left(L)
+  Right(R)
+}
+
+///|
+fn Either::fmap[L, R, S](self : Either[L, R], f : (R) -> S) -> Either[L, S] {
+  match self {
+    Right(r) => Right(f(r))
+    Left(l) => Left(l)
+  }
+}
+
+///|
+pub fn select[T, U](self : Gen[(T) -> U], e : Gen[Either[T, U]]) -> Gen[U] {
+  new(fn(st) {
+    let (s, l, r) = st.view()
+    let (ma, ls) = e.run_gen(l)
+    match ma {
+      Left(a) => {
+        let (f1, rs) = self.run_gen(r)
+        (f1(a), combine_shrunk(s, l, r, ls, rs))
+      }
+      Right(b) => (b, combine_shrunk(s, l, r, ls, Iter::empty()))
+    }
+  })
+}
+
+///|
+fn branch[A, B, C](
+  self : Gen[Either[A, B]],
+  l : Gen[(A) -> C],
+  r : Gen[(B) -> C]
+) -> Gen[C] {
+  let left = self.fmap(fn(x) { x.fmap(Either::Left) })
+  let right = l.fmap(fn(g) { fn(x) { Right(g(x)) } })
+  select(r, select(right, left))
+}
+
+///|
+pub fn ifS[T](self : Gen[Bool], t : Gen[T], e : Gen[T]) -> Gen[T] {
+  let const_ = fn(x) { fn(_y) { x } }
+  branch(
+    self.fmap(fn(x) { if x { Left(()) } else { Right(()) } }),
+    t.fmap(const_),
+    e.fmap(const_),
+  )
+}
+
+///|
+pub fn apS[A, B](self : Gen[(A) -> B], x : Gen[A]) -> Gen[B] {
+  x.fmap(fn(y) { fn(g) { g(y) } }).select(self.fmap(Either::Left))
+}
+</code></pre>
+  <script>
+    let moonbitLanguageFn = hljs => {
+      return {
+        case_insensitive: true,
+        keywords: {
+          keyword: 'func fn enum struct type if else match return continue break while let var interface pub priv readonly',
+          literal: 'true false',
+          type: "Int Int64 Double String Bool Char Bytes Option Array Result",
+          built_in: 'lsl lsr asr shl shr land lor lxor Show Debug Hash Eq Compare Some None'
+        },
+        contains: [
+          {
+            scope: "char",
+            begin: "'", end: "'"
+          },
+          {
+            scope: "string",
+            begin: "\"", end: "\""
+          },
+          {
+            scope: "number",
+            begin: "\\b\\d+(\\.\\d+)?\\b"
+          },
+          {
+            scope: "codelink",
+            match: /\<a href\="(?<link>[^<>]+?)"\>(?<code>[^\/<>]+?)\<\/a\>/g
+          },
+          hljs.COMMENT(
+            '//', // begin
+            '\n', // end
+          )
+        ]
+      }
+    }
+
+    hljs.registerLanguage('moonbit', moonbitLanguageFn);
+    hljs.highlightAll();
+    hljs.initLineNumbersOnLoad();
+
+    const number = window.location.href.split('#')[1];
+
+    function waitForLineNumbers() {
+      setTimeout(function () {
+        const target = document.querySelector(`.hljs-ln-line[data-line-number="${number}"]`);
+        if (target == null) waitForLineNumbers();
+        else target.scrollIntoView();
+      }, 50);
+    }
+
+    waitForLineNumbers()
+
+  </script>
+  <style>
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .hljs-ln-n {
+      color: #ccc;
+      border-right: 1px solid #dfdddd;
+      margin-right: 1em;
+      text-align: center;
+      vertical-align: top;
+      padding-right: 0.5em;
+    }
+
+    .hljs {
+      background: none;
+    }
+
+    body {
+      background-color: #fafafa;
+    }
+  </style>
+</body>
+
+</html>

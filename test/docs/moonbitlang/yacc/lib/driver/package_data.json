@@ -1,0 +1,60 @@
+{
+  "name": "moonbitlang/yacc/lib/driver",
+  "traits": [],
+  "types": [
+    {
+      "name": "InputMode",
+      "docstring": "",
+      "signature": "pub(all) enum InputMode {\n  Array\n  Pull\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/driver",
+        "file": "driver.mbt",
+        "line": 29,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Mode",
+      "docstring": "",
+      "signature": "pub(all) enum Mode {\n  Default\n  JsonCst(<a href=\"moonbitlang/yacc/lib/driver#TokenPayloadRewrite\">TokenPayloadRewrite</a>?)\n  OnlyTokens\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/driver",
+        "file": "driver.mbt",
+        "line": 16,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "TokenPayloadRewrite",
+      "docstring": "",
+      "signature": "pub(all) enum TokenPayloadRewrite {\n  NoPayload\n  JsonPayload\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/driver",
+        "file": "driver.mbt",
+        "line": 23,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "compile",
+      "docstring": "",
+      "signature": "fn compile(parser_spec_str : String, mode~ : <a href=\"moonbitlang/yacc/lib/driver#Mode\">Mode</a> = .., input_mode~ : <a href=\"moonbitlang/yacc/lib/driver#InputMode\">InputMode</a> = .., filename~ : String, external_tokens~ : Bool = .., no_comments~ : Bool = .., source_map_builder? : <a href=\"moonbitlang/yacc/lib/codegen#SourceMapBuilder\">@moonbitlang/yacc/lib/codegen.SourceMapBuilder</a>, generator~ : <a href=\"moonbitlang/yacc/lib/codegen#CodeGenerator\">@moonbitlang/yacc/lib/codegen.CodeGenerator</a>) -> String",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/driver",
+        "file": "driver.mbt",
+        "line": 35,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

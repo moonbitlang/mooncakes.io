@@ -1,5 +1,4 @@
 {
-  "readme": "# Moonbit/Core UUID\n\n## Overview\n\nThe `@uuid` package provides an implementation of the Universally Unique\nIDentifier per RFC 4122.\n\nCurrently, `@uuid` does not assume any random generation; you'll have to bring\nyour own random bytes to construct UUIDs.\n\n## Usage\n\nConstruct a version 4 UUID:\n\n```moonbit\nlet u = @uuid.from_hex(\"ddf99703-742f-7505-4c54-df36a9c243fe\").as_version(@uuid.V4)\n```\n\nYou can then use it as a key in mappings as it's immutable and implemented\nHash, Eq (and Compare for b-tree).\n",
   "name": "moonbitlang/x/uuid",
   "traits": [],
   "types": [
@@ -7,43 +6,78 @@
       "name": "UUID",
       "docstring": " UUID that complies with RFC 4122.\n\n UUID objects are immutable, hashable and usable as mapping keys.\n The Display of UUIDs is like `12345678-1234-1234-1234-123456789abc`;\n UUIDs can be constructed using such strings, or 16-bytes strings with big-\n endian byte order.\n\n # Usage\n\n ```moonbit\n let u = @uuid.from_hex(\"ddf99703-742f-7505-4c54-df36a9c243fe\")\n let u2 = @uuid.from_bytes(Bytes.of([221, 249, 151, 3, 116, 47, 117, 5, 76, 84, 223, 54, 169, 194, 67, 254]))\n // assert_eq(u, u2) should be true\n ```\n\n Construct an RFC-4122-compliant v4 UUID:\n\n ```moonbit\n let u = @uuid\n   .from_hex(\"9558cfadb48547c70f9adf1f75cdef29\")\n   .as_version(@uuid.V4)\n ```\n",
       "signature": "type UUID",
-      "loc": { "line": 38, "column": 8 },
+      "loc": {
+        "path": "moonbitlang/x/uuid",
+        "file": "uuid.mbt",
+        "line": 38,
+        "column": 8
+      },
       "methods": [
         {
           "name": "as_version",
           "docstring": " Converts this UUID to RFC-4122 with the given version number.",
           "signature": "fn <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>::as_version(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>, version : <a href=\"moonbitlang/x/uuid#Version\">Version</a>) -> <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>",
-          "loc": { "line": 92, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "variant.mbt",
+            "line": 92,
+            "column": 8
+          }
         },
         {
           "name": "hash",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>::hash(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> Int",
-          "loc": { "line": 16, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "ops.mbt",
+            "line": 16,
+            "column": 8
+          }
         },
         {
           "name": "to_bytes",
           "docstring": " The UUID as a 16-byte string.",
           "signature": "fn <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>::to_bytes(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> Bytes",
-          "loc": { "line": 68, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "uuid.mbt",
+            "line": 68,
+            "column": 8
+          }
         },
         {
           "name": "to_string",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>::to_string(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> String",
-          "loc": { "line": 178, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "uuid.mbt",
+            "line": 173,
+            "column": 8
+          }
         },
         {
           "name": "variant",
           "docstring": " Retrieves the variant of the UUID.",
           "signature": "fn <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>::variant(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> <a href=\"moonbitlang/x/uuid#Variant\">Variant</a>",
-          "loc": { "line": 64, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "variant.mbt",
+            "line": 64,
+            "column": 8
+          }
         },
         {
           "name": "version",
           "docstring": " Retrieves the version number of the UUID.\n\n If the variant of the UUID is not `RFC4122`, returns `None`.\n",
           "signature": "fn <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>::version(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> <a href=\"moonbitlang/x/uuid#Version\">Version</a>?",
-          "loc": { "line": 84, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "variant.mbt",
+            "line": 84,
+            "column": 8
+          }
         }
       ],
       "impls": [
@@ -55,10 +89,20 @@
               "name": "compare",
               "docstring": "automatically derived",
               "signature": "fn compare(<a href=\"moonbitlang/x/uuid#UUID\">UUID</a>, <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> Int",
-              "loc": { "line": 43, "column": 14 }
+              "loc": {
+                "path": "moonbitlang/x/uuid",
+                "file": "uuid.mbt",
+                "line": 43,
+                "column": 14
+              }
             }
           ],
-          "loc": { "line": 43, "column": 14 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "uuid.mbt",
+            "line": 43,
+            "column": 14
+          }
         },
         {
           "docstring": "",
@@ -68,10 +112,20 @@
               "name": "op_equal",
               "docstring": "automatically derived",
               "signature": "fn op_equal(<a href=\"moonbitlang/x/uuid#UUID\">UUID</a>, <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>) -> Bool",
-              "loc": { "line": 43, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/x/uuid",
+                "file": "uuid.mbt",
+                "line": 43,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 43, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "uuid.mbt",
+            "line": 43,
+            "column": 10
+          }
         },
         {
           "docstring": "",
@@ -81,10 +135,20 @@
               "name": "output",
               "docstring": "",
               "signature": "fn output(self : <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 201, "column": 29 }
+              "loc": {
+                "path": "moonbitlang/x/uuid",
+                "file": "uuid.mbt",
+                "line": 196,
+                "column": 29
+              }
             }
           ],
-          "loc": { "line": 201, "column": 1 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "uuid.mbt",
+            "line": 196,
+            "column": 1
+          }
         }
       ]
     },
@@ -92,7 +156,12 @@
       "name": "Variant",
       "docstring": " The UUID variant.",
       "signature": "pub(all) enum Variant {\n  ReservedNCS\n  RFC4122(<a href=\"moonbitlang/x/uuid#Version\">Version</a>)\n  ReservedMicrosoft\n  ReservedFuture\n}",
-      "loc": { "line": 19, "column": 15 },
+      "loc": {
+        "path": "moonbitlang/x/uuid",
+        "file": "variant.mbt",
+        "line": 19,
+        "column": 15
+      },
       "methods": [],
       "impls": [
         {
@@ -103,10 +172,20 @@
               "name": "output",
               "docstring": "automatically derived",
               "signature": "fn output(<a href=\"moonbitlang/x/uuid#Variant\">Variant</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 24, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/x/uuid",
+                "file": "variant.mbt",
+                "line": 24,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 24, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "variant.mbt",
+            "line": 24,
+            "column": 10
+          }
         }
       ]
     },
@@ -114,7 +193,12 @@
       "name": "Version",
       "docstring": " The UUID version number.\n\n This is only used when the variant is `RFC4122`.\n",
       "signature": "pub(all) enum Version {\n  V1\n  V2\n  V3\n  V4\n  V5\n  Unknown(Int)\n}",
-      "loc": { "line": 30, "column": 15 },
+      "loc": {
+        "path": "moonbitlang/x/uuid",
+        "file": "variant.mbt",
+        "line": 30,
+        "column": 15
+      },
       "methods": [],
       "impls": [
         {
@@ -125,10 +209,20 @@
               "name": "output",
               "docstring": "automatically derived",
               "signature": "fn output(<a href=\"moonbitlang/x/uuid#Version\">Version</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 37, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/x/uuid",
+                "file": "variant.mbt",
+                "line": 37,
+                "column": 10
+              }
             }
           ],
-          "loc": { "line": 37, "column": 10 }
+          "loc": {
+            "path": "moonbitlang/x/uuid",
+            "file": "variant.mbt",
+            "line": 37,
+            "column": 10
+          }
         }
       ]
     }
@@ -139,13 +233,23 @@
       "name": "from_bytes",
       "docstring": " Constructs a UUID with the given big-endian bytes.\n\n The produced UUID is not RFC-4122 compliant; see also `as_version()`.\n",
       "signature": "fn from_bytes(bytes : Bytes) -> <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
-      "loc": { "line": 49, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/x/uuid",
+        "file": "uuid.mbt",
+        "line": 49,
+        "column": 8
+      }
     },
     {
       "name": "from_hex",
       "docstring": " Constructs a UUID with the given hexadecimal string.\n\n This function ignores dashes (`-`) in the given string. The remaining\n letters must be exactly 32 hexadecimals, or an error will be raised.\n",
       "signature": "fn from_hex(hex : String) -> <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>!<a href=\"moonbitlang/core/error#Error\">Error</a>",
-      "loc": { "line": 121, "column": 8 }
+      "loc": {
+        "path": "moonbitlang/x/uuid",
+        "file": "uuid.mbt",
+        "line": 116,
+        "column": 8
+      }
     }
   ],
   "misc": []

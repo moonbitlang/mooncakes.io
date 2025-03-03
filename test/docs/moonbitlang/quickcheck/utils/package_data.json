@@ -1,0 +1,108 @@
+{
+  "name": "moonbitlang/quickcheck/utils",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "apply_while_array",
+      "docstring": "",
+      "signature": "fn apply_while_array[T](x : T, f : (T) -> T, cond : (T) -> Bool) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 64,
+        "column": 8
+      }
+    },
+    {
+      "name": "apply_while_list",
+      "docstring": "",
+      "signature": "fn apply_while_list[T](x : T, f : (T) -> T, cond : (T) -> Bool) -> <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 46,
+        "column": 8
+      }
+    },
+    {
+      "name": "const_",
+      "docstring": "",
+      "signature": "fn const_[T, U](t : T) -> ((U) -> T)",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 85,
+        "column": 8
+      }
+    },
+    {
+      "name": "flip",
+      "docstring": "",
+      "signature": "fn flip[M, N, Z](f : (M, N) -> Z) -> ((N, M) -> Z)",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 95,
+        "column": 8
+      }
+    },
+    {
+      "name": "fresh_name",
+      "docstring": "",
+      "signature": "fn fresh_name() -> String",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 6,
+        "column": 8
+      }
+    },
+    {
+      "name": "id",
+      "docstring": "",
+      "signature": "fn id[T](x : T) -> T",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 82,
+        "column": 8
+      }
+    },
+    {
+      "name": "pair_function",
+      "docstring": "",
+      "signature": "fn pair_function[A, B, C](f : (A, B) -> C) -> (((A, B)) -> C)",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 90,
+        "column": 8
+      }
+    },
+    {
+      "name": "removes_array",
+      "docstring": "",
+      "signature": "fn removes_array[T](k : Int, n : Int, xs : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[T]]",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 32,
+        "column": 8
+      }
+    },
+    {
+      "name": "removes_list",
+      "docstring": "",
+      "signature": "fn removes_list[T](k : Int, n : Int, xs : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]) -> <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[<a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]]",
+      "loc": {
+        "path": "moonbitlang/quickcheck/utils",
+        "file": "common.mbt",
+        "line": 13,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

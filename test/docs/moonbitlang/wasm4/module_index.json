@@ -6,7 +6,6 @@
       "name": "wasm4",
       "package": {
         "path": "moonbitlang/wasm4",
-        "readme": true,
         "traits": [],
         "types": [
           { "name": "ADSR", "impls": [], "methods": [ "new" ] },
@@ -16,14 +15,66 @@
           {
             "name": "GamePad",
             "impls": [
-              { "methods": [ "default" ] }, { "methods": [ "op_equal" ] }
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "GamePad",
+                    "path": "moonbitlang/wasm4"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Default",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "default" ]
+              },
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "GamePad",
+                    "path": "moonbitlang/wasm4"
+                  },
+                  "arguments": []
+                },
+                "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+                "methods": [ "op_equal" ]
+              }
             ],
             "methods": []
           },
           {
             "name": "Mouse",
             "impls": [
-              { "methods": [ "default" ] }, { "methods": [ "op_equal" ] }
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Mouse",
+                    "path": "moonbitlang/wasm4"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Default",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "default" ]
+              },
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Mouse",
+                    "path": "moonbitlang/wasm4"
+                  },
+                  "arguments": []
+                },
+                "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+                "methods": [ "op_equal" ]
+              }
             ],
             "methods": []
           },

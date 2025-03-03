@@ -1,0 +1,295 @@
+{
+  "name": "moonbitlang/lex/lib/automaton",
+  "traits": [],
+  "types": [
+    {
+      "name": "DFA",
+      "docstring": "",
+      "signature": "pub(all) struct DFA {\n  graph : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/builtin#Map\">Map</a>[Char, (Int, <a href=\"moonbitlang/lex/lib/automaton#TagAction\">TagAction</a>)]]\n  end_nodes : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[Int, (Int, <a href=\"moonbitlang/core/array#Array\">Array</a>[((Int, Int), (Int, Int))])]\n  code_blocks : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  captures : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[String]]\n  start_action : <a href=\"moonbitlang/lex/lib/automaton#TagAction\">TagAction</a>\n  node_count : Int\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/automaton",
+        "file": "dfa.mbt",
+        "line": 63,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "from_rule",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/automaton#DFA\">DFA</a>::from_rule(rule : <a href=\"moonbitlang/lex/lib/type#Rule\">@moonbitlang/lex/lib/type.Rule</a>) -> <a href=\"moonbitlang/lex/lib/automaton#DFA\">DFA</a>",
+          "loc": {
+            "path": "moonbitlang/lex/lib/automaton",
+            "file": "dfa.mbt",
+            "line": 245,
+            "column": 13
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "DFA",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/automaton#DFA\">DFA</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "dfa.mbt",
+                "line": 71,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NFA",
+      "docstring": "",
+      "signature": "pub(all) struct NFA {\n  graph : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/builtin#Map\">Map</a>[<a href=\"moonbitlang/lex/lib/automaton#Symbol\">Symbol</a>, <a href=\"moonbitlang/core/array#Array\">Array</a>[(Int, Int?)]]]\n  end_nodes : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[Int, Int]\n  code_blocks : <a href=\"moonbitlang/core/array#Array\">Array</a>[String]\n  captures : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[(String, (Int, Int))]]\n  node_count : Int\n  tag_count : Int\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/automaton",
+        "file": "nfa.mbt",
+        "line": 11,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "from_rule",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/automaton#NFA\">NFA</a>::from_rule(rule : <a href=\"moonbitlang/lex/lib/type#Rule\">@moonbitlang/lex/lib/type.Rule</a>) -> <a href=\"moonbitlang/lex/lib/automaton#NFA\">NFA</a>",
+          "loc": {
+            "path": "moonbitlang/lex/lib/automaton",
+            "file": "nfa.mbt",
+            "line": 33,
+            "column": 13
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "NFA",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/automaton#NFA\">NFA</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "nfa.mbt",
+                "line": 18,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Symbol",
+      "docstring": "",
+      "signature": "pub(all) enum Symbol {\n  Eps\n  EChar(Char)\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/automaton",
+        "file": "nfa.mbt",
+        "line": 2,
+        "column": 15
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/lex/lib/automaton#Symbol\">Symbol</a>, <a href=\"moonbitlang/lex/lib/automaton#Symbol\">Symbol</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "nfa.mbt",
+                "line": 5,
+                "column": 10
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "automatically derived",
+              "signature": "fn hash_combine(<a href=\"moonbitlang/lex/lib/automaton#Symbol\">Symbol</a>, <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "nfa.mbt",
+                "line": 5,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/automaton#Symbol\">Symbol</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "nfa.mbt",
+                "line": 5,
+                "column": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TagAction",
+      "docstring": "",
+      "signature": "pub(all) type TagAction <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/core/array#Array\">Array</a>[Int]]",
+      "loc": {
+        "path": "moonbitlang/lex/lib/automaton",
+        "file": "dfa.mbt",
+        "line": 5,
+        "column": 15
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "TagAction",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/automaton#TagAction\">TagAction</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "dfa.mbt",
+                "line": 5,
+                "column": 50
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TagState",
+      "docstring": "",
+      "signature": "type TagState",
+      "loc": {
+        "path": "moonbitlang/lex/lib/automaton",
+        "file": "dfa.mbt",
+        "line": 9,
+        "column": 6
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "TagState",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/lex/lib/automaton#TagState\">TagState</a>, <a href=\"moonbitlang/lex/lib/automaton#TagState\">TagState</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "dfa.mbt",
+                "line": 9,
+                "column": 34
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "TagState",
+              "path": "moonbitlang/lex/lib/automaton"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "automatically derived",
+              "signature": "fn output(<a href=\"moonbitlang/lex/lib/automaton#TagState\">TagState</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/lex/lib/automaton",
+                "file": "dfa.mbt",
+                "line": 9,
+                "column": 38
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

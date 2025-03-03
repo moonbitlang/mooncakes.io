@@ -1,42 +1,34 @@
 ///|
 fn meta_info_item_view(
   title~ : String,
-  elem : @html.Html[Msg]
+  elem : @html.Html[Msg],
+  grow~ : Bool = false
 ) -> @html.Html[Msg] {
-  div(class="flex flex-col py-1 gap-1 text-gray-600", [
-    p(class="font-bold text-[0.7em]", [text(title)]),
-    div(
-      class="overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-      [elem],
-    ),
+  let grow = if grow { "grow" } else { "" }
+  div(class="flex items-center gap-3 text-gray-600 \{grow}", [
+    p(class="font-bold text-sm", [text(title)]),
+    div(class="grow", [elem]),
   ])
 }
 
 ///|
 fn install_view(path~ : String) -> @html.Html[Msg] {
-  div(
-    class="bg-zinc-100 mt-1 h-9 border rounded flex flex-row justify-between",
-    [
-      @html.input(
-        class="font-mono text-[0.85em] w-full ml-2 h-8 outline-none bg-transparent text-gray-600",
-        value="moon add \{path}",
-        input_type=Text,
-        read_only=true,
-      ),
-    ],
+  @html.div(
+    class="text-sm h-8 p-2 pr-10 font-roboto border rounded outline-none bg-zinc-100 flex items-center",
+    [text("moon add \{path}")],
   )
 }
 
 ///|
 fn tag_view(value : String) -> @html.Html[Msg] {
   div(
-    class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600",
+    class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600 overflow-hidden",
     [text(value)],
   )
 }
 
 ///|
-fn meta_info_view(model : @util.Status[MetaInfoModel]) -> @html.Html[Msg] {
+fn meta_info(model : @util.Status[MetaInfo]) -> @html.Html[Msg] {
   match model {
     Failed => @html.nothing()
     Loading => @html.text("Loading...")
@@ -53,35 +45,40 @@ fn meta_info_view(model : @util.Status[MetaInfoModel]) -> @html.Html[Msg] {
         Some(repo) =>
           meta_info_item_view(
             title="Repository",
-            p([@html.a(class="text-[#c7156b]", href=repo, [text(repo)])]),
+            p([@html.a(class="hover:underline", href=repo, [text(repo)])]),
           )
         None => @html.nothing()
       }
       let model_description = match model.description {
-        Some(d) => p(class="text-gray-600 mb-2 text-sm", [text(d)])
+        Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
         None => @html.nothing()
       }
-      div(class="pl-2 mb-6", [
-        div(class="flex flex-row gap-4 items-center mb-2", [
-          h1(class="text-gray-800 text-2xl", [text(model.name)]),
-          @html.h2(
-            class=" border rounded px-2 text-gray-600 text-sm self-center",
-            [text(model.version)],
-          ),
+      let meta_separator = div(class="border-l border-gray-200 my-1 mx-2", [])
+      div(class="px-12 p-6 border-b bg-white", [
+        div(class="flex gap-3 flex-wrap mb-2", [
+          model_description,
+          div(class="flex gap-2", model.keywords.map(tag_view)),
         ]),
-        model_description,
-        div(class="flex gap-2 mb-4", model.keywords.map(tag_view)),
-        div(class="flex flex-col gap-2", [
+        div(class="flex gap-3 flex-wrap", [
           meta_info_item_view(
             title="Install",
-            div([install_view(path=model.module_path)]),
+            div([install_view(path=model.name)]),
           ),
-          meta_info_item_view(
-            title="Author",
-            p(class="text-gray-600", [text(model.author)]),
+          div(class="grow", []),
+          div(
+            class="flex gap-2 flex-wrap",
+            [
+              meta_info_item_view(
+                title="Author",
+                p(class="text-gray-600", [text(model.author)]),
+              ),
+              model_license,
+              model_repo,
+            ]
+            .iter()
+            .intersperse(meta_separator)
+            .collect(),
           ),
-          model_license,
-          model_repo,
         ]),
       ])
     }

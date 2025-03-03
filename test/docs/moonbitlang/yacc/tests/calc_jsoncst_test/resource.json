@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "tests/calc_jsoncst_test",
+  "module_path": "moonbitlang/yacc",
+  "readme_content": "",
+  "package_data": "moonbitlang/yacc/tests/calc_jsoncst_test/package_data.json",
+  "source_files": [ "calc_jsoncst.mbt" ]
+}

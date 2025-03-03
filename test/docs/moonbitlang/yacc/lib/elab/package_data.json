@@ -1,0 +1,424 @@
+{
+  "name": "moonbitlang/yacc/lib/elab",
+  "traits": [],
+  "types": [
+    {
+      "name": "Action",
+      "docstring": "",
+      "signature": "pub(all) struct Action {\n  num : Int\n  arity : Int\n  type_ : String?\n  bindings : <a href=\"moonbitlang/core/array#Array\">Array</a>[(<a href=\"moonbitlang/yacc/lib/elab#BindingSubject\">BindingSubject</a>, String)]\n  body : <a href=\"moonbitlang/core/array#Array\">Array</a>[(String, (Int, Int)?)]\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 66,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Action",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#Action\">Action</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 72,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Associativity",
+      "docstring": "",
+      "signature": "pub(all) enum Associativity {\n  LeftAssoc\n  RightAssoc\n  NonAssoc\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 16,
+        "column": 15
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Associativity",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#Associativity\">Associativity</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 20,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BindingSubject",
+      "docstring": "",
+      "signature": "pub(all) enum BindingSubject {\n  Data(Int, String?)\n  LastPos\n  StartPos(Int)\n  EndPos(Int)\n  SymbolStartPos\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 75,
+        "column": 15
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "BindingSubject",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#BindingSubject\">BindingSubject</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 81,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clause",
+      "docstring": "",
+      "signature": "pub(all) struct Clause {\n  num : Int\n  items : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/elab#Item\">Item</a>]\n  prec : Int?\n  action : <a href=\"moonbitlang/yacc/lib/elab#Action\">Action</a>\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 58,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Clause",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#Clause\">Clause</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 63,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Item",
+      "docstring": "",
+      "signature": "pub(all) struct Item {\n  binder : String?\n  desc : <a href=\"moonbitlang/yacc/lib/elab#ItemDesc\">ItemDesc</a>\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 84,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "type_",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/elab#Item\">Item</a>::type_(self : <a href=\"moonbitlang/yacc/lib/elab#Item\">Item</a>) -> String?",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/elab",
+            "file": "east.mbt",
+            "line": 96,
+            "column": 14
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Item",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#Item\">Item</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 87,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ItemDesc",
+      "docstring": "",
+      "signature": "pub(all) enum ItemDesc {\n  Token(<a href=\"moonbitlang/yacc/lib/elab#Token\">Token</a>)\n  RuleCall(<a href=\"moonbitlang/yacc/lib/elab#Rule\">Rule</a>)\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 90,
+        "column": 15
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ItemDesc",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#ItemDesc\">ItemDesc</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 93,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "JsonCst",
+      "docstring": "",
+      "signature": "pub(all) enum JsonCst {\n  No\n  Yes(<a href=\"moonbitlang/yacc/lib/elab#TokenPayloadRewrite\">TokenPayloadRewrite</a>?)\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "elaborate.mbt",
+        "line": 16,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ParserSpec",
+      "docstring": "",
+      "signature": "pub(all) struct ParserSpec {\n  header : String?\n  trailer : String?\n  tokens : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/elab#Token\">Token</a>]\n  rules : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/elab#Rule\">Rule</a>]\n  start_rules : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/elab#Rule\">Rule</a>]\n  position_type : String?\n  derive_map : <a href=\"moonbitlang/yacc/lib/util/array_multimap#T\">@moonbitlang/yacc/lib/util/array_multimap.T</a>[String, String]\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 26,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParserSpec",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#ParserSpec\">ParserSpec</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 34,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rule",
+      "docstring": "",
+      "signature": "pub(all) struct Rule {\n  num : Int\n  name : String\n  inline : Bool\n  type_ : String?\n  clauses : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/elab#Clause\">Clause</a>]\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 49,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Rule",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#Rule\">Rule</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 55,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Token",
+      "docstring": "",
+      "signature": "pub(all) struct Token {\n  num : Int\n  name : String\n  prec : (Int, <a href=\"moonbitlang/yacc/lib/elab#Associativity\">Associativity</a>)?\n  type_ : String?\n  image : String?\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 37,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Token",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/elab#Token\">Token</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/elab",
+                "file": "east.mbt",
+                "line": 43,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TokenPayloadRewrite",
+      "docstring": "",
+      "signature": "pub(all) enum TokenPayloadRewrite {\n  NoPayload\n  JsonPayload\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "elaborate.mbt",
+        "line": 22,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "Code",
+      "docstring": "",
+      "signature": "type Code = String",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 23,
+        "column": 1
+      }
+    },
+    {
+      "name": "Symbol",
+      "docstring": "",
+      "signature": "type Symbol = String",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "east.mbt",
+        "line": 46,
+        "column": 1
+      }
+    }
+  ],
+  "values": [
+    {
+      "name": "elaborate",
+      "docstring": "",
+      "signature": "fn elaborate(ast_spec : <a href=\"moonbitlang/yacc/lib/parser#ParserSpec\">@moonbitlang/yacc/lib/parser.ParserSpec</a>, json_cst~ : <a href=\"moonbitlang/yacc/lib/elab#JsonCst\">JsonCst</a>) -> <a href=\"moonbitlang/yacc/lib/elab#ParserSpec\">ParserSpec</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/elab",
+        "file": "elaborate.mbt",
+        "line": 28,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

@@ -1,5 +1,4 @@
 {
-  "readme": "# Stack\n\n## Overview\n\nStack is a last in first out (LIFO) data structure, allowing to process their elements in the reverse order they come.\n\n## Usage\n\n### Create and Clear\n\nThe stack can be created with the `new` function, or by using the function with prefix `from` to create a stack from an existing collection.\nFor instance, `from_array` creates a stack from an array.\n\n```moonbit\nlet st = Stack::new()\nlet st2 = Stack::from_array([1, 2, 3]) // Stack::[1, 2, 3]\nlet st3 = Stack::of([1, 2, 3]) // Stack::[1, 2, 3]\n```\n\nTo clear the elements of the stack, use the `clear` method.\n\n```moonbit\nst.clear()\n```\n\n### Length\n\nUse `length` to get the number of elements in the stack. The `is_empty` method can be used to check if the stack is empty.\n\n```moonbit\nlet st = Stack::of([1, 2, 3])\nst.length() // 3\nst.is_empty() // false\n```\n\n### Pop and Push\n\nTo add elements to the stack, use the `push` method, and to remove them, use the `pop` method.\n\n```moonbit\nlet st = Stack::new()\nst.push(1)\nst.push(2)\nst.pop() // Some(2)\n```\n\nThe unsafe version of `pop` is `pop_exn`, which will panic if the stack is empty.\n\n```moonbit\nlet st = Stack::new()\nst.push(1)\nst.pop_exn() // 1\nst.pop_exn() // panic\n```\n\nIf you don't want to remove the element, you can use the `peek` method and the unsafe version `peek_exn`.\n\n```moonbit\nlet st = Stack::of([1, 2, 3])\nst.peek() // Some(1)\nst.peek_exn() // 1\n```\n\nIf the result of `pop` is not needed, you can use the `drop` method.\n\n```moonbit\nlet st = Stack::of([1, 2, 3])\nst.drop()\n// st = [2, 3]\n```\n\n### Traverse\n\nTo traverse the stack, use the `iter` method.\n\n```moonbit\nlet st = Stack::of([1, 2, 3])\nlet mut sum = 0\nst.each(fn(x) { sum += x }) // sum = 6\n```\n\n### Conversion\n\nYou can convert the stack to an array using the `to_array` method.\n\n```moonbit\nlet st = Stack::of([1, 2, 3])\nst.to_array() // [1, 2, 3]\n```\n",
   "name": "moonbitlang/x/stack",
   "traits": [],
   "types": [
@@ -7,184 +6,332 @@
       "name": "Stack",
       "docstring": "",
       "signature": "type Stack",
-      "loc": { "line": 16, "column": 8 },
+      "loc": {
+        "path": "moonbitlang/x/stack",
+        "file": "types.mbt",
+        "line": 16,
+        "column": 8
+      },
       "methods": [
         {
           "name": "clear",
           "docstring": " Clear all elements in Stack\n \n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n s.clear()\n println(s) // Stack::[]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::clear[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Unit",
-          "loc": { "line": 137, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 143,
+            "column": 8
+          }
         },
         {
           "name": "drop",
           "docstring": " Drop the element at the top of the stack.\n Like pop, but does not return elements and does nothing if the Stack is empty.\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n s.drop()\n println(s) // Stack::[2, 3]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::drop[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Unit",
-          "loc": { "line": 324, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 338,
+            "column": 8
+          }
         },
         {
           "name": "drop_result",
           "docstring": " Drop the element at the top of the stack.\n Like drop, but when the drop is successful, it returns `Ok(())`, and when it fails, it returns `Err(())`\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n let r = s.drop_result() // Ok(())\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::drop_result[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[Unit, Unit]",
-          "loc": { "line": 350, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 365,
+            "column": 8
+          }
         },
         {
           "name": "each",
           "docstring": " Iterates over the elements of the stack from top to bottom.\n \n # Example\n ```\n let s = Stack::of([1, 2, 3])\n s.each(fn(i) { println(i) })'\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::each[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], f : (T) -> Unit) -> Unit",
-          "loc": { "line": 451, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 470,
+            "column": 8
+          }
         },
         {
           "name": "equal",
           "docstring": " Compare two stacks.\n\n NOTE: Since the current standard library @immut/list.T lacks the equal or op_equal function, \n this function internally implements the equal function of @immut/list.T.\n\n # Example\n\n ```\n println(Stack::of([2, 4, 6]).equal(Stack::of([2, 4, 6]))) // true\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], other : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Bool",
-          "loc": { "line": 531, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 554,
+            "column": 8
+          }
         },
         {
           "name": "fold",
           "docstring": " Folds over the elements of the stack from top to bottom.\n \n # Example\n ```\n let s = Stack::of([1, 2, 3])\n let sum = s.fold(~init=0, fn(acc, i) { acc + i })\n println(sum) // 6\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::fold[T, U](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], init~ : U, f : (U, T) -> U) -> U",
-          "loc": { "line": 481, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 501,
+            "column": 8
+          }
         },
         {
           "name": "from_array",
           "docstring": " Create a stack based on all elements in array.\n\n # Example\n\n ```\n let s = Stack::from_array([1, 2, 3])\n println(s) // Stack::from_array([3, 2, 1])\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::from_array[T](array : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-          "loc": { "line": 58, "column": 15 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 60,
+            "column": 15
+          }
         },
         {
           "name": "from_list",
           "docstring": " Create a stack based on all elements in list.\n\n # Example\n\n ```\n let s = Stack::from_list(@immut/list.of([1, 2, 3]))\n println(s) // Stack::[1, 2, 3]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::from_list[T](list : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]) -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-          "loc": { "line": 40, "column": 15 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 41,
+            "column": 15
+          }
         },
         {
           "name": "from_stack",
           "docstring": " Create a stack based on another stack.\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n let s1 = Stack::from_stack(s)\n println(s1) // output: Stack::[3, 2, 1]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::from_stack[T](other : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-          "loc": { "line": 118, "column": 15 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 123,
+            "column": 15
+          }
         },
         {
           "name": "is_empty",
           "docstring": " If stack is empty, return true, otherwise return false.\n\n # Example\n\n ```\n println(Stack::of([1, 2, 3]).is_empty()) // false\n println(Stack::new().is_empty()) // true\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::is_empty[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Bool",
-          "loc": { "line": 429, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 447,
+            "column": 8
+          }
         },
         {
           "name": "length",
           "docstring": " Returns the number of elements of the Stack",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::length[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Int",
-          "loc": { "line": 440, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 459,
+            "column": 8
+          }
         },
         {
           "name": "new",
           "docstring": " Create an empty stack.\n\n # Example\n\n ```\n let s : Stack[Int] = Stack::new()\n println(s) // Stack::[]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::new[T]() -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-          "loc": { "line": 23, "column": 15 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 23,
+            "column": 15
+          }
         },
         {
           "name": "of",
           "docstring": " Create a stack based on all elements in array.\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n println(s) // Stack::of([3, 2, 1])\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::of[T](array : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-          "loc": { "line": 76, "column": 15 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 79,
+            "column": 15
+          }
         },
         {
           "name": "op_equal",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::op_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], other : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Bool",
-          "loc": { "line": 540, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 563,
+            "column": 8
+          }
         },
         {
           "name": "output",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::output[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-          "loc": { "line": 99, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 103,
+            "column": 8
+          }
         },
         {
           "name": "peek",
           "docstring": " Only the top element of the stack is returned and will not be pop or drop.\n If there are elements in the stack, return `Some (the top element of the stack)`, otherwise return `None`.\n\n # Example\n\n ```\n let s = Stack::from_array([1, 2, 3])\n println(s.peek()) // Some(1)\n println(s) // Stack::[1, 2, 3]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::peek[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> T?",
-          "loc": { "line": 380, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 396,
+            "column": 8
+          }
         },
         {
           "name": "peek_exn",
           "docstring": " Only the top element of the stack is returned and will not be pop or drop.\n If there are elements in the stack, return the top element of the stack, otherwise abort.\n\n # Example\n\n ```\n let s = Stack::from_array([1, 2, 3])\n let s1 : Stack[Int] = Stack::new()\n println(s1.peek_exn()) // abort\n println(s.peek_exn()) // 1\n println(s) // Stack::[1, 2, 3]\n ```\n @alert unsafe \"Panic if the stack is empty.\"",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::peek_exn[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> T",
-          "loc": { "line": 407, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 424,
+            "column": 8
+          }
         },
         {
           "name": "pop",
           "docstring": " Pop an element from the top of the stack.\n If there are elements in the stack, return `Some (the top element of the stack)`, otherwise return `None`.\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n let s1 : Stack[Int] = Stack::new()\n println(s.pop()) // Some(1)\n println(s) // Stack::[2, 3]\n println(s1.pop()) // None\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::pop[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> T?",
-          "loc": { "line": 261, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 273,
+            "column": 8
+          }
         },
         {
           "name": "push",
           "docstring": " Push an element into the stack.\n \n # Example\n\n ```\n let s = Stack::new()\n s.push(1)\n println(s) // Stack::[1]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::push[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], x : T) -> Unit",
-          "loc": { "line": 175, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 183,
+            "column": 8
+          }
         },
         {
           "name": "push_array",
           "docstring": " Push an array into the stack.\n \n # Example\n\n ```\n let s : Stack[Int] = Stack::new()\n s.push_array([1, 2, 3])\n println(s) // Stack::[3, 2, 1]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::push_array[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], array : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> Unit",
-          "loc": { "line": 238, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 249,
+            "column": 8
+          }
         },
         {
           "name": "push_list",
           "docstring": " Push a list into the stack.\n \n # Example\n\n ```\n let s = Stack::new()\n s.push_list(@immut/list.of[1, 2, 3])\n println(s) // Stack::[3, 2, 1]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::push_list[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], list : <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]) -> Unit",
-          "loc": { "line": 196, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 205,
+            "column": 8
+          }
         },
         {
           "name": "push_stack",
           "docstring": " Push other stack into the current stack.\n \n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n let s1 : Stack[Int] = Stack::new()\n s1.push_stack(s)\n println(s1) // Stack::[1, 2, 3]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::push_stack[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T], stack : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> Unit",
-          "loc": { "line": 217, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 227,
+            "column": 8
+          }
         },
         {
           "name": "return_with_clear",
           "docstring": " Same as the `clear()`, but returns an cleared stack\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3]).return_with_clear()\n println(s) // Stack::[]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::return_with_clear[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-          "loc": { "line": 156, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 163,
+            "column": 8
+          }
         },
         {
           "name": "to_array",
           "docstring": " Convert stack to array.\n\n # Example\n\n ```\n println(Stack::of([1, 2, 3]).to_array()) // [1, 2, 3]\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::to_array[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
-          "loc": { "line": 513, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 535,
+            "column": 8
+          }
         },
         {
           "name": "to_list",
           "docstring": " Convert stack to list.\n\n # Example\n\n ```\n println(Stack::of([1, 2, 3]).to_list()) // @immut/list.of([1, 2, 3])\n ```",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::to_list[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[T]",
-          "loc": { "line": 498, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 519,
+            "column": 8
+          }
         },
         {
           "name": "to_string",
           "docstring": "",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::to_string[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> String",
-          "loc": { "line": 87, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 91,
+            "column": 8
+          }
         },
         {
           "name": "unsafe_pop",
           "docstring": " Pop an element from the top of the stack.\n If there are elements in the stack, return the top element of the stack, otherwise abort.\n\n # Example\n\n ```\n let s = Stack::of([1, 2, 3])\n let s1 : Stack[Int] = Stack::new()\n println(s.unsafe_pop()) // 1\n println(s) // Stack::[2, 3]\n println(s1.unsafe_pop()) // abort.\n ```\n @alert unsafe \"Panic if the stack is empty.\"",
           "signature": "fn <a href=\"moonbitlang/x/stack#Stack\">Stack</a>::unsafe_pop[T](self : <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]) -> T",
-          "loc": { "line": 296, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/x/stack",
+            "file": "stack.mbt",
+            "line": 309,
+            "column": 8
+          }
         }
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Stack", "path": "moonbitlang/x/stack" },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
               "docstring": "automatically derived",
               "signature": "fn default[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>]() -> <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
-              "loc": { "line": 19, "column": 10 }
+              "loc": {
+                "path": "moonbitlang/x/stack",
+                "file": "types.mbt",
+                "line": 19,
+                "column": 10
+              }
             }
-          ],
-          "loc": { "line": 19, "column": 10 }
+          ]
         }
       ]
     }

@@ -38,6 +38,9 @@ pub const REDUCTION = "/reduction.svg"
 pub const FILTER = "/filter.svg"
 
 ///|
+pub const SEARCH = "/search.svg"
+
+///|
 pub const SHARE = "/share.svg"
 
 ///|

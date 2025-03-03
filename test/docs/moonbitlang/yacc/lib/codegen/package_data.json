@@ -1,0 +1,254 @@
+{
+  "name": "moonbitlang/yacc/lib/codegen",
+  "traits": [
+    {
+      "name": "@moonbitlang/yacc/lib/codegen.CodeGenerator",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/yacc/lib/codegen.CodeGenerator {\n  void_type(Self) -> String\n  void_action_code(Self) -> String\n  codegen_tokens(Self, <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/grm#Terminal\">@moonbitlang/yacc/lib/grm.Terminal</a>], (String) -> <a href=\"moonbitlang/yacc/lib/codegen#TerminalMeta\">TerminalMeta</a>, <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>, no_comments~ : Bool, derive_map~ : <a href=\"moonbitlang/yacc/lib/util/array_multimap#T\">@moonbitlang/yacc/lib/util/array_multimap.T</a>[String, String]) -> Unit\n  codegen(Self, <a href=\"moonbitlang/yacc/lib/grm#Grammar\">@moonbitlang/yacc/lib/grm.Grammar</a>, <a href=\"moonbitlang/yacc/lib/lr1#Automaton\">@moonbitlang/yacc/lib/lr1.Automaton</a>, <a href=\"moonbitlang/yacc/lib/codegen#MetaProvider\">MetaProvider</a>, <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">@moonbitlang/yacc/lib/util/logger_with_cursor.LoggerWithCursor</a>, source_map_builder~ : <a href=\"moonbitlang/yacc/lib/codegen#SourceMapBuilder\">SourceMapBuilder</a>?, grammar_filename~ : String, external_tokens~ : Bool, no_comments~ : Bool, mode~ : <a href=\"moonbitlang/yacc/lib/codegen#Mode\">Mode</a>, input_mode~ : <a href=\"moonbitlang/yacc/lib/codegen#InputMode\">InputMode</a>) -> Unit\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "trait.mbt",
+        "line": 2,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@moonbitlang/yacc/lib/codegen.SourceMapBuilder",
+      "docstring": "",
+      "signature": "pub trait @moonbitlang/yacc/lib/codegen.SourceMapBuilder {\n  add_mapping(Self, String, Int, Int, Int) -> Unit\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "source_map.mbt",
+        "line": 20,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": []
+    }
+  ],
+  "types": [
+    {
+      "name": "InputMode",
+      "docstring": "",
+      "signature": "pub(all) enum InputMode {\n  Array\n  Pull\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 28,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "MetaProvider",
+      "docstring": "",
+      "signature": "pub(all) struct MetaProvider {\n  header : String\n  footer : String\n  position_data_type : String\n  actions : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[Int, <a href=\"moonbitlang/yacc/lib/elab#Action\">@moonbitlang/yacc/lib/elab.Action</a>]\n  terminal_meta : (String) -> <a href=\"moonbitlang/yacc/lib/codegen#TerminalMeta\">TerminalMeta</a>\n  nonterminal_meta : (String) -> <a href=\"moonbitlang/yacc/lib/codegen#NonTerminalMeta\">NonTerminalMeta</a>\n  production_meta : (Int) -> <a href=\"moonbitlang/yacc/lib/codegen#ProductionMeta\">ProductionMeta</a>\n  derive_map : <a href=\"moonbitlang/yacc/lib/util/array_multimap#T\">@moonbitlang/yacc/lib/util/array_multimap.T</a>[String, String]\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 53,
+        "column": 17
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "Mode",
+      "docstring": "",
+      "signature": "pub(all) enum Mode {\n  Default\n  JsonCst(<a href=\"moonbitlang/yacc/lib/codegen#TokenPayloadRewrite\">TokenPayloadRewrite</a>?)\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 16,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "NonTerminalMeta",
+      "docstring": "",
+      "signature": "pub(all) struct NonTerminalMeta {\n  data_type : String\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 48,
+        "column": 17
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "ProductionMeta",
+      "docstring": "",
+      "signature": "pub(all) struct ProductionMeta {\n  action : Int\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 37,
+        "column": 17
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "SourceMap",
+      "docstring": "",
+      "signature": "pub(all) struct SourceMap {\n  mappings : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/yacc/lib/codegen#SourceMapping\">SourceMapping</a>]\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "source_map.mbt",
+        "line": 2,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/codegen#SourceMap\">SourceMap</a>::new() -> <a href=\"moonbitlang/yacc/lib/codegen#SourceMap\">SourceMap</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/codegen",
+            "file": "source_map.mbt",
+            "line": 7,
+            "column": 19
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceMap",
+              "path": "moonbitlang/yacc/lib/codegen"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/codegen#SourceMap\">SourceMap</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/codegen",
+                "file": "source_map.mbt",
+                "line": 4,
+                "column": 10
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceMap",
+              "path": "moonbitlang/yacc/lib/codegen"
+            },
+            "arguments": []
+          },
+          "trait": {
+            "name": "SourceMapBuilder",
+            "path": "moonbitlang/yacc/lib/codegen"
+          },
+          "methods": [
+            {
+              "name": "add_mapping",
+              "docstring": "",
+              "signature": "fn add_mapping(self : <a href=\"moonbitlang/yacc/lib/codegen#SourceMap\">SourceMap</a>, source : String, original_offset_in_utf8 : Int, generated_offset_in_utf8 : Int, length_in_utf8 : Int) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/codegen",
+                "file": "source_map.mbt",
+                "line": 25,
+                "column": 46
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SourceMapping",
+      "docstring": "",
+      "signature": "pub(all) struct SourceMapping {\n  source : String\n  original_offset : Int\n  generated_offset : Int\n  length : Int\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "source_map.mbt",
+        "line": 12,
+        "column": 17
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceMapping",
+              "path": "moonbitlang/yacc/lib/codegen"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "to_json",
+              "docstring": "automatically derived",
+              "signature": "fn to_json(<a href=\"moonbitlang/yacc/lib/codegen#SourceMapping\">SourceMapping</a>) -> <a href=\"moonbitlang/core/json#Json\">Json</a>",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/codegen",
+                "file": "source_map.mbt",
+                "line": 17,
+                "column": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TerminalMeta",
+      "docstring": "",
+      "signature": "pub(all) struct TerminalMeta {\n  data_type : String?\n  image : String?\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 42,
+        "column": 17
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "TokenPayloadRewrite",
+      "docstring": "",
+      "signature": "pub(all) enum TokenPayloadRewrite {\n  NoPayload\n  JsonPayload\n}",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 22,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [
+    {
+      "name": "CodeFragment",
+      "docstring": "",
+      "signature": "type CodeFragment = String",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen",
+        "file": "types.mbt",
+        "line": 34,
+        "column": 1
+      }
+    }
+  ],
+  "values": [],
+  "misc": []
+}

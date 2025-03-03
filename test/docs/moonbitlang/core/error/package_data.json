@@ -1,5 +1,4 @@
 {
-  "readme": "",
   "name": "moonbitlang/core/error",
   "traits": [],
   "types": [],
@@ -10,17 +9,28 @@
       "name": "Error",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Error",
+              "path": "moonbitlang/core/error"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
-              "docstring": "",
+              "docstring": "\n Implements `Show` trait for `Error` type by converting the error into a\n string representation.\n\n Parameters:\n\n * `self`: The error value to be converted.\n * `logger`: A buffer that accumulates the string representation.\n\n Example:\n\n ```moonbit\n test \"Error::Show/output\" {\n   let error : Error = Failure(\"test error\")\n   inspect!(error, content=\"\\\"Failure(test error)\\\"\")\n }\n ```",
               "signature": "fn output(self : <a href=\"moonbitlang/core/error#Error\">Error</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 19, "column": 30 }
+              "loc": {
+                "path": "moonbitlang/core/error",
+                "file": "error.mbt",
+                "line": 35,
+                "column": 30
+              }
             }
-          ],
-          "loc": { "line": 19, "column": 1 }
+          ]
         }
       ],
       "methods": []

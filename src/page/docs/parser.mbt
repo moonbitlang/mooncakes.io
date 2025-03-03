@@ -1,63 +1,4 @@
 ///|
-fn parse_metadata(modules_json : Json) -> Result[MetaInfoModel, String] {
-  fn parse_package(json : Json) -> Result[MetaInfoModel, String] {
-    guard let {
-      "name"? : name,
-      "repository"? : repository,
-      "version"? : version,
-      "license"? : license,
-      "description"? : description,
-      "keywords"? : keywords,
-      "readme"? : readme,
-      ..
-    } = json else {
-      _ => Err("Error when parsing metadata.")
-    }
-    guard let [name, version] = [name, version].map(fn(x) {
-      match x {
-        Some(String(str)) => str
-        _ => abort("Error when parsing name and version.")
-      }
-    }) else {
-      _ => Err("Error when parsing name and version.")
-    }
-    guard let [repository, license, description, readme] = [
-      repository, license, description, readme,
-    ].map(fn {
-      Some(x) => x.as_string()
-      None => None
-    }) else {
-      _ => Err("Error when parsing repository, license, description, readme.")
-    }
-    let keywords = match keywords {
-      Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
-      None => []
-      _ => abort("Error when parsing keywords.")
-    }
-    let iter = name.iter()
-    let author = String::from_array(
-      iter.take_while(fn(x) { x != '/' }).collect(),
-    )
-    let package_name = String::from_array(
-      iter.drop_while(fn(x) { x != '/' }).drop(1).collect(),
-    )
-    Ok({
-      author,
-      readme,
-      name: package_name,
-      module_path: name,
-      description,
-      version,
-      license,
-      repository,
-      keywords,
-    })
-  }
-
-  parse_package(modules_json)
-}
-
-///|
 trait ToItemModel {
   to_item_model(Self, String) -> ItemModel
 }
@@ -83,7 +24,6 @@ struct Type {
 ///|
 struct PackageBody {
   path : String
-  readme : Bool
   traits : Array[Traits]
   types : Array[Type]
   typealias_ : Array[String]
@@ -174,8 +114,6 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
   guard let {
     "path": String(path),
     "traits": traits,
-    "readme": True
-    | False as readme,
     "types": Array(types),
     "typealias": Array(typealais_),
     "values": Array(values),
@@ -185,7 +123,6 @@ fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
   {
     body: Some({
       path,
-      readme: readme == True,
       traits: parse_traits(traits),
       types: types.map(parse_type),
       typealias_: typealais_.map(as_string),
@@ -202,9 +139,6 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
   let mut p : PackageModel = { fullpath: "", folded: false, childrens: [] }
   match package_.body {
     Some(package) => {
-      if package.readme {
-        p.childrens.push({ name: "README", target: package.path, kind: Readme })
-      }
       p = { ..p, fullpath: package.path }
       for type_ in package.types {
         p.childrens.push(type_.to_item_model(package.path))

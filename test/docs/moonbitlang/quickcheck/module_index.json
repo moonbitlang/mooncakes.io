@@ -4,357 +4,839 @@
   "childs": [
     {
       "name": "quickcheck",
-      "package": null,
+      "package": {
+        "path": "moonbitlang/quickcheck",
+        "traits": [
+          { "name": "@moonbitlang/quickcheck.Shrink", "impls": [] },
+          {
+            "name": "@moonbitlang/quickcheck.Testable",
+            "impls": [
+              {
+                "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              },
+              {
+                "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              },
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Option",
+                    "path": "moonbitlang/core/option"
+                  },
+                  "arguments": [ { "kind": "param", "name": "P" } ]
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              },
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Rose",
+                    "path": "moonbitlang/quickcheck/rose"
+                  },
+                  "arguments": [
+                    {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "SingleResult",
+                        "path": "moonbitlang/quickcheck"
+                      },
+                      "arguments": []
+                    }
+                  ]
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              }
+            ]
+          }
+        ],
+        "types": [
+          {
+            "name": "Arrow",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Arrow",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": [
+                    { "kind": "param", "name": "A" },
+                    { "kind": "param", "name": "P" }
+                  ]
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Axiom",
+            "impls": [],
+            "methods": [
+              "new", "run", "to_property", "to_property_eq",
+              "to_property_parametric", "to_property_parametric_eq"
+            ]
+          },
+          { "name": "Callback", "impls": [], "methods": [] },
+          { "name": "Config", "impls": [], "methods": [] },
+          { "name": "Coverage", "impls": [], "methods": [] },
+          {
+            "name": "Discard",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Discard",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Default",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "default" ]
+              },
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Discard",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Equivalence",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Equivalence",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": [ { "kind": "param", "name": "T" } ]
+                },
+                "trait": {
+                  "name": "Show",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "output" ]
+              }
+            ],
+            "methods": [
+              "ap", "bind", "equal_by", "fmap", "is_equal", "new"
+            ]
+          },
+          {
+            "name": "Gen",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Gen",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": [ { "kind": "param", "name": "P" } ]
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              }
+            ],
+            "methods": [
+              "ap", "array_with_size", "bind", "feat_random", "fmap", "join",
+              "new", "resize", "run", "sample", "samples", "scale", "spawn",
+              "such_that", "such_that_maybe"
+            ]
+          },
+          { "name": "InternalError", "impls": [], "methods": [] },
+          {
+            "name": "Kind",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Kind",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Show",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "output" ]
+              }
+            ],
+            "methods": []
+          },
+          {
+            "name": "ListCompare",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "ListCompare",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": [ { "kind": "param", "name": "T" } ]
+                },
+                "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+                "methods": [ "op_equal" ]
+              },
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "ListCompare",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": [ { "kind": "param", "name": "T" } ]
+                },
+                "trait": {
+                  "name": "Show",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "output" ]
+              }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Outcome",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Outcome",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": [ { "kind": "param", "name": "T" } ]
+                },
+                "trait": {
+                  "name": "Show",
+                  "path": "moonbitlang/core/builtin"
+                },
+                "methods": [ "output" ]
+              }
+            ],
+            "methods": []
+          },
+          {
+            "name": "Printer",
+            "impls": [],
+            "methods": [
+              "format", "from_buffer", "ident", "unident", "write_string"
+            ]
+          },
+          {
+            "name": "Property",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "Property",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              }
+            ],
+            "methods": []
+          },
+          { "name": "Replay", "impls": [], "methods": [ "new" ] },
+          {
+            "name": "SingleResult",
+            "impls": [
+              {
+                "self": {
+                  "kind": "constr",
+                  "constructor": {
+                    "name": "SingleResult",
+                    "path": "moonbitlang/quickcheck"
+                  },
+                  "arguments": []
+                },
+                "trait": {
+                  "name": "Testable",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "methods": [ "property" ]
+              }
+            ],
+            "methods": []
+          },
+          {
+            "name": "State",
+            "impls": [],
+            "methods": [
+              "complete_test", "find_failure", "give_up", "local_min",
+              "run_single_test", "run_test"
+            ]
+          },
+          { "name": "TestError", "impls": [], "methods": [] },
+          { "name": "TestSuccess", "impls": [], "methods": [] }
+        ],
+        "typealias": [ "RandomState" ],
+        "values": [
+          "alphabet", "associative", "callback", "char_range", "classify",
+          "collect", "commutative", "counterexample", "distributive_left",
+          "distributive_right", "expect_fail", "expect_gave_up", "ext_equal",
+          "failed", "filter", "flatten_array", "flatten_list",
+          "flatten_option", "flatten_result", "forall", "forall_shrink",
+          "frequency", "frequency_list", "idempotent", "if_fail",
+          "int_bound", "int_range", "integer_bound", "inverse", "involutory",
+          "label", "liftA2", "liftA3", "liftA4", "liftA5", "liftA6",
+          "list_with_size", "local_min_found", "map_size",
+          "map_total_result", "mono_decrease", "mono_increase", "nat",
+          "neg_int", "numeral", "one_of", "one_of_array", "one_of_list",
+          "pure", "pure_eq", "quad", "quick_check", "quick_check_fn",
+          "quick_check_with", "quick_check_with_result", "rejected",
+          "run_prop", "shrinking", "sized", "small_int", "sorted_list",
+          "succeed", "terminate", "triple", "tuple", "with_discarded_ratio",
+          "with_max_shrinks", "with_max_size", "with_max_success"
+        ],
+        "misc": []
+      },
       "childs": [
         {
-          "name": "lib",
+          "name": "falsify",
           "package": {
-            "path": "moonbitlang/quickcheck/lib",
-            "readme": false,
-            "traits": [
-              { "name": "@moonbitlang/quickcheck/lib.Shrink", "impls": [] },
+            "path": "moonbitlang/quickcheck/falsify",
+            "traits": [],
+            "types": [
               {
-                "name": "@moonbitlang/quickcheck/lib.Testable",
+                "name": "Config",
                 "impls": [
-                  { "methods": [ "property" ] },
-                  { "methods": [ "property" ] },
-                  { "methods": [ "property" ] },
-                  { "methods": [ "property" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Config",
+                        "path": "moonbitlang/quickcheck/falsify"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
+                "methods": []
+              },
+              { "name": "DriverState", "impls": [], "methods": [] },
+              { "name": "Either", "impls": [], "methods": [] },
+              {
+                "name": "Failure",
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Failure",
+                        "path": "moonbitlang/quickcheck/falsify"
+                      },
+                      "arguments": [ { "kind": "param", "name": "E" } ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Gen",
+                "impls": [],
+                "methods": [
+                  "ap", "apS", "bind", "fmap", "ifS", "run_gen", "sample",
+                  "select", "shrink_from"
+                ]
+              },
+              { "name": "IsValidShrink", "impls": [], "methods": [] },
+              { "name": "Property", "impls": [], "methods": [ "run" ] },
+              {
+                "name": "Sample",
+                "impls": [],
+                "methods": [ "sample_value" ]
+              },
+              {
+                "name": "SampleTree",
+                "impls": [],
+                "methods": [ "map", "mod", "view" ]
+              },
+              {
+                "name": "ShrinkExplain",
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "ShrinkExplain",
+                        "path": "moonbitlang/quickcheck/falsify"
+                      },
+                      "arguments": [
+                        { "kind": "param", "name": "P" },
+                        { "kind": "param", "name": "N" }
+                      ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
+                "methods": [
+                  "limit_steps", "shrink_history", "shrink_outcome"
+                ]
+              },
+              {
+                "name": "ShrinkHistory",
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "ShrinkHistory",
+                        "path": "moonbitlang/quickcheck/falsify"
+                      },
+                      "arguments": [
+                        { "kind": "param", "name": "P" },
+                        { "kind": "param", "name": "N" }
+                      ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
+                "methods": []
+              },
+              {
+                "name": "Success",
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Success",
+                        "path": "moonbitlang/quickcheck/falsify"
+                      },
+                      "arguments": [ { "kind": "param", "name": "T" } ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
+                "methods": []
+              },
+              { "name": "TestResult", "impls": [], "methods": [] },
+              {
+                "name": "TestRun",
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "TestRun",
+                        "path": "moonbitlang/quickcheck/falsify"
+                      },
+                      "arguments": []
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
+                ],
+                "methods": []
+              }
+            ],
+            "typealias": [ "List", "RandomState" ],
+            "values": [
+              "collect", "combine_shrunk", "constant", "discard", "falsify",
+              "from_rng", "from_seed", "gen", "info", "init_state",
+              "init_test_run", "label", "mk_property", "new", "prim",
+              "prim_with", "pure", "run_property", "second",
+              "shrink_to_list", "test_gen"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "feat",
+          "package": {
+            "path": "moonbitlang/quickcheck/feat",
+            "traits": [
+              {
+                "name": "@moonbitlang/quickcheck/feat.Enumerable",
+                "impls": [
+                  {
+                    "self": {
+                      "name": "Unit",
+                      "path": "moonbitlang/core/unit"
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "name": "Bool",
+                      "path": "moonbitlang/core/bool"
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": { "name": "Int", "path": "moonbitlang/core/int" },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "name": "Int64",
+                      "path": "moonbitlang/core/int64"
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "name": "UInt",
+                      "path": "moonbitlang/core/uint"
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "name": "UInt64",
+                      "path": "moonbitlang/core/uint64"
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Option",
+                        "path": "moonbitlang/core/option"
+                      },
+                      "arguments": [ { "kind": "param", "name": "E" } ]
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Result",
+                        "path": "moonbitlang/core/result"
+                      },
+                      "arguments": [
+                        { "kind": "param", "name": "T" },
+                        { "kind": "param", "name": "E" }
+                      ]
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "T",
+                        "path": "moonbitlang/core/immut/list"
+                      },
+                      "arguments": [ { "kind": "param", "name": "E" } ]
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  },
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Tuple2",
+                        "path": "moonbitlang/core/tuple"
+                      },
+                      "arguments": [
+                        { "kind": "param", "name": "A" },
+                        { "kind": "param", "name": "B" }
+                      ]
+                    },
+                    "trait": {
+                      "name": "Enumerable",
+                      "path": "moonbitlang/quickcheck/feat"
+                    },
+                    "methods": [ "enumerate" ]
+                  }
                 ]
               }
             ],
             "types": [
               {
-                "name": "Arrow",
-                "impls": [ { "methods": [ "property" ] } ],
-                "methods": []
-              },
-              {
-                "name": "Axiom",
+                "name": "Enumerate",
                 "impls": [],
-                "methods": [
-                  "new", "run", "to_property", "to_property_eq",
-                  "to_property_parametric", "to_property_parametric_eq"
-                ]
+                "methods": [ "en_index", "eval", "fmap", "op_add" ]
               },
               {
-                "name": "Callback",
-                "impls": [ { "methods": [ "output" ] } ],
-                "methods": []
-              },
-              { "name": "Config", "impls": [], "methods": [] },
-              { "name": "Coverage", "impls": [], "methods": [] },
-              {
-                "name": "Discard",
-                "impls": [ { "methods": [ "property" ] } ],
-                "methods": []
-              },
-              {
-                "name": "Equivalence",
-                "impls": [ { "methods": [ "output" ] } ],
-                "methods": [
-                  "ap", "bind", "equal_by", "fmap", "is_equal", "new"
-                ]
-              },
-              {
-                "name": "Gen",
-                "impls": [ { "methods": [ "property" ] } ],
-                "methods": [
-                  "ap", "array_with_size", "bind", "feat_random", "fmap",
-                  "join", "new", "resize", "run", "sample", "samples",
-                  "scale", "spawn", "such_that", "such_that_maybe"
-                ]
-              },
-              { "name": "InternalError", "impls": [], "methods": [] },
-              {
-                "name": "Kind",
-                "impls": [ { "methods": [ "output" ] } ],
-                "methods": []
-              },
-              {
-                "name": "ListCompare",
+                "name": "Finite",
                 "impls": [
-                  { "methods": [ "op_equal" ] }, { "methods": [ "output" ] }
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Finite",
+                        "path": "moonbitlang/quickcheck/feat"
+                      },
+                      "arguments": [ { "kind": "param", "name": "T" } ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
-                "methods": []
-              },
-              {
-                "name": "Outcome",
-                "impls": [],
-                "methods": [ "output", "to_string" ]
-              },
-              {
-                "name": "Printer",
-                "impls": [],
-                "methods": [
-                  "format", "from_buffer", "ident", "unident", "write_string"
-                ]
-              },
-              {
-                "name": "Property",
-                "impls": [ { "methods": [ "property" ] } ],
-                "methods": [ "make", "run_prop" ]
-              },
-              { "name": "Replay", "impls": [], "methods": [ "new" ] },
-              {
-                "name": "SingleResult",
-                "impls": [
-                  { "methods": [ "output" ] }, { "methods": [ "property" ] }
-                ],
-                "methods": []
-              },
-              {
-                "name": "State",
-                "impls": [],
-                "methods": [
-                  "complete_test", "find_failure", "give_up", "local_min",
-                  "run_single_test", "run_test"
-                ]
-              },
-              { "name": "TestError", "impls": [], "methods": [] },
-              { "name": "TestSuccess", "impls": [], "methods": [] }
+                "methods": [ "op_add", "to_array" ]
+              }
             ],
-            "typealias": [ "RandomState" ],
+            "typealias": [ "LazyList" ],
             "values": [
-              "alphabet", "associative", "callback", "char_range",
-              "classify", "collect", "commutative", "counterexample",
-              "distributive_left", "distributive_right", "expect_fail",
-              "expect_gave_up", "ext_equal", "failed", "filter",
-              "flatten_array", "flatten_list", "flatten_option",
-              "flatten_result", "forall", "forall_shrink", "frequency",
-              "frequency_list", "idempotent", "if_fail", "int_bound",
-              "int_range", "integer_bound", "inverse", "involutory", "label",
-              "liftA2", "liftA3", "liftA4", "liftA5", "liftA6",
-              "list_with_size", "local_min_found", "map_prop",
-              "map_rose_result", "map_size", "map_total_result",
-              "mono_decrease", "mono_increase", "nat", "neg_int", "numeral",
-              "one_of", "one_of_array", "one_of_list", "pure", "pure_eq",
-              "quad", "quick_check", "quick_check_fn", "quick_check_with",
-              "quick_check_with_result", "rejected", "shrinking", "sized",
-              "small_int", "sorted_list", "succeed", "terminate", "triple",
-              "tuple", "with_discarded_ratio", "with_max_shrinks",
-              "with_max_size", "with_max_success"
+              "app", "consts", "default", "empty", "fin_app", "fin_bind",
+              "fin_cart", "fin_concat", "fin_empty", "fin_finite",
+              "fin_fmap", "fin_mconcat", "fin_pure", "fin_union", "pay",
+              "product", "singleton", "unary", "union"
             ],
             "misc": []
           },
-          "childs": [
-            {
-              "name": "falsify",
-              "package": {
-                "path": "moonbitlang/quickcheck/lib/falsify",
-                "readme": false,
-                "traits": [],
-                "types": [
+          "childs": []
+        },
+        {
+          "name": "internal_shrinking",
+          "package": {
+            "path": "moonbitlang/quickcheck/internal_shrinking",
+            "traits": [],
+            "types": [
+              {
+                "name": "ShrinkTree",
+                "impls": [
                   {
-                    "name": "Config",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": []
-                  },
-                  { "name": "DriverState", "impls": [], "methods": [] },
-                  { "name": "Either", "impls": [], "methods": [] },
-                  {
-                    "name": "Failure",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": []
-                  },
-                  {
-                    "name": "Gen",
-                    "impls": [],
-                    "methods": [
-                      "ap", "apS", "bind", "fmap", "ifS", "run_gen",
-                      "sample", "select", "shrink_from"
-                    ]
-                  },
-                  { "name": "IsValidShrink", "impls": [], "methods": [] },
-                  { "name": "Property", "impls": [], "methods": [ "run" ] },
-                  {
-                    "name": "Sample",
-                    "impls": [],
-                    "methods": [ "sample_value" ]
-                  },
-                  {
-                    "name": "SampleTree",
-                    "impls": [],
-                    "methods": [ "map", "mod", "view" ]
-                  },
-                  {
-                    "name": "ShrinkExplain",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": [
-                      "limit_steps", "shrink_history", "shrink_outcome"
-                    ]
-                  },
-                  {
-                    "name": "ShrinkHistroy",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": []
-                  },
-                  {
-                    "name": "Success",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": []
-                  },
-                  { "name": "TestResult", "impls": [], "methods": [] },
-                  {
-                    "name": "TestRun",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": []
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "ShrinkTree",
+                        "path": "moonbitlang/quickcheck/internal_shrinking"
+                      },
+                      "arguments": [ { "kind": "param", "name": "T" } ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
                   }
                 ],
-                "typealias": [ "LazyList", "List", "RandomState" ],
-                "values": [
-                  "collect", "combine_shrunk", "constant", "discard",
-                  "falsify", "from_rng", "from_seed", "gen", "info",
-                  "init_state", "init_test_run", "label", "mk_property",
-                  "new", "prim", "prim_with", "pure", "run_property",
-                  "second", "shrink_to_list", "test_gen"
+                "methods": [
+                  "bind", "draw", "from_shinker", "from_value", "get_value",
+                  "smap"
+                ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "join" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "lazy",
+          "package": {
+            "path": "moonbitlang/quickcheck/lazy",
+            "traits": [
+              { "name": "@moonbitlang/quickcheck/lazy.Monoid", "impls": [] }
+            ],
+            "types": [
+              {
+                "name": "LazyList",
+                "impls": [
+                  {
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "LazyList",
+                        "path": "moonbitlang/quickcheck/lazy"
+                      },
+                      "arguments": [ { "kind": "param", "name": "T" } ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
+                  }
                 ],
-                "misc": []
+                "methods": [
+                  "concat", "drop", "drop_while", "fold_left", "fold_right",
+                  "head", "index", "length", "map", "op_add", "split_at",
+                  "tail", "tails", "take", "take_while", "unfold"
+                ]
               },
-              "childs": []
-            },
-            {
-              "name": "feat",
-              "package": {
-                "path": "moonbitlang/quickcheck/lib/feat",
-                "readme": false,
-                "traits": [
+              {
+                "name": "LazyRef",
+                "impls": [],
+                "methods": [ "force", "from_thunk", "from_value" ]
+              }
+            ],
+            "typealias": [],
+            "values": [
+              "default", "from_list", "infinite_stream", "repeat", "sum",
+              "to_lazy", "zip_lazy_normal", "zip_plus", "zip_with"
+            ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "rose",
+          "package": {
+            "path": "moonbitlang/quickcheck/rose",
+            "traits": [],
+            "types": [
+              {
+                "name": "Rose",
+                "impls": [
                   {
-                    "name": "@moonbitlang/quickcheck/lib/feat.Enumerable",
-                    "impls": [
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] },
-                      { "methods": [ "enumerate" ] }
-                    ]
+                    "self": {
+                      "kind": "constr",
+                      "constructor": {
+                        "name": "Rose",
+                        "path": "moonbitlang/quickcheck/rose"
+                      },
+                      "arguments": [ { "kind": "param", "name": "T" } ]
+                    },
+                    "trait": {
+                      "name": "Show",
+                      "path": "moonbitlang/core/builtin"
+                    },
+                    "methods": [ "output" ]
                   }
                 ],
-                "types": [
-                  {
-                    "name": "Enumerate",
-                    "impls": [],
-                    "methods": [ "en_index", "eval", "fmap", "op_add" ]
-                  },
-                  {
-                    "name": "Finite",
-                    "impls": [],
-                    "methods": [
-                      "op_add", "output", "to_array", "to_string"
-                    ]
-                  }
-                ],
-                "typealias": [ "LazyList" ],
-                "values": [
-                  "app", "consts", "default", "empty", "fin_app", "fin_bind",
-                  "fin_cart", "fin_concat", "fin_empty", "fin_finite",
-                  "fin_fmap", "fin_mconcat", "fin_pure", "fin_union", "pay",
-                  "product", "singleton", "unary", "union"
-                ],
-                "misc": []
-              },
-              "childs": []
-            },
-            {
-              "name": "internal_shrinking",
-              "package": {
-                "path": "moonbitlang/quickcheck/lib/internal_shrinking",
-                "readme": false,
-                "traits": [],
-                "types": [
-                  {
-                    "name": "ShrinkTree",
-                    "impls": [],
-                    "methods": [
-                      "bind", "draw", "from_shinker", "from_value",
-                      "get_value", "output", "smap", "to_string"
-                    ]
-                  }
-                ],
-                "typealias": [],
-                "values": [ "join" ],
-                "misc": []
-              },
-              "childs": []
-            },
-            {
-              "name": "lazy",
-              "package": {
-                "path": "moonbitlang/quickcheck/lib/lazy",
-                "readme": false,
-                "traits": [
-                  {
-                    "name": "@moonbitlang/quickcheck/lib/lazy.Monoid",
-                    "impls": []
-                  }
-                ],
-                "types": [
-                  {
-                    "name": "LazyList",
-                    "impls": [],
-                    "methods": [
-                      "concat", "drop_while", "fold_left", "fold_right",
-                      "head", "index", "length", "map", "op_add", "output",
-                      "split_at", "tail", "tails", "take_while", "to_string",
-                      "unfold"
-                    ]
-                  },
-                  {
-                    "name": "LazyRef",
-                    "impls": [],
-                    "methods": [ "force", "from_thunk", "from_value" ]
-                  }
-                ],
-                "typealias": [],
-                "values": [
-                  "default", "infinite_stream", "repeat", "sum", "to_lazy",
-                  "zip_lazy_normal", "zip_plus", "zip_with"
-                ],
-                "misc": []
-              },
-              "childs": []
-            },
-            {
-              "name": "rose",
-              "package": {
-                "path": "moonbitlang/quickcheck/lib/rose",
-                "readme": false,
-                "traits": [],
-                "types": [
-                  {
-                    "name": "Rose",
-                    "impls": [ { "methods": [ "output" ] } ],
-                    "methods": [ "apply", "bind", "fmap", "join" ]
-                  }
-                ],
-                "typealias": [],
-                "values": [ "new", "pure" ],
-                "misc": []
-              },
-              "childs": []
-            },
-            {
-              "name": "utils",
-              "package": {
-                "path": "moonbitlang/quickcheck/lib/utils",
-                "readme": false,
-                "traits": [],
-                "types": [],
-                "typealias": [],
-                "values": [
-                  "apply_while", "const_", "curry3", "curry4", "flip",
-                  "fresh_name", "id", "pair_function", "removes"
-                ],
-                "misc": []
-              },
-              "childs": []
-            }
-          ]
+                "methods": [ "apply", "bind", "fmap", "join" ]
+              }
+            ],
+            "typealias": [],
+            "values": [ "new", "pure" ],
+            "misc": []
+          },
+          "childs": []
+        },
+        {
+          "name": "utils",
+          "package": {
+            "path": "moonbitlang/quickcheck/utils",
+            "traits": [],
+            "types": [],
+            "typealias": [],
+            "values": [
+              "apply_while_array", "apply_while_list", "const_", "flip",
+              "fresh_name", "id", "pair_function", "removes_array",
+              "removes_list"
+            ],
+            "misc": []
+          },
+          "childs": []
         }
       ]
     }

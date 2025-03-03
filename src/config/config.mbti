@@ -15,6 +15,8 @@ const README_ICON : String = "/readme.svg"
 
 const REDUCTION : String = "/reduction.svg"
 
+const SEARCH : String = "/search.svg"
+
 const SECTION_CLOSE : String = "/section-close.svg"
 
 const SECTION_OPEN : String = "/section-open.svg"

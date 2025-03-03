@@ -1,0 +1,251 @@
+{
+  "name": "moonbitlang/arduino/serial",
+  "traits": [
+    {
+      "name": "@moonbitlang/arduino/serial.SerialPrintable",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino/serial.SerialPrintable {\n  serial_print(Self) -> Unit\n  serial_println(Self) -> Unit\n}",
+      "loc": {
+        "path": "moonbitlang/arduino/serial",
+        "file": "serial.mbt",
+        "line": 55,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": [
+        {
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
+          "methods": [
+            {
+              "name": "serial_print",
+              "docstring": "",
+              "signature": "fn serial_print(self : Char) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 85,
+                "column": 40
+              }
+            },
+            {
+              "name": "serial_println",
+              "docstring": "",
+              "signature": "fn serial_println(self : Char) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 90,
+                "column": 40
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
+          "methods": [
+            {
+              "name": "serial_print",
+              "docstring": "",
+              "signature": "fn serial_print(self : Int) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 95,
+                "column": 39
+              }
+            },
+            {
+              "name": "serial_println",
+              "docstring": "",
+              "signature": "fn serial_println(self : Int) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 100,
+                "column": 39
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
+          "methods": [
+            {
+              "name": "serial_print",
+              "docstring": "",
+              "signature": "fn serial_print(self : Int64) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 105,
+                "column": 41
+              }
+            },
+            {
+              "name": "serial_println",
+              "docstring": "",
+              "signature": "fn serial_println(self : Int64) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 110,
+                "column": 41
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
+          "methods": [
+            {
+              "name": "serial_print",
+              "docstring": "",
+              "signature": "fn serial_print(self : Double) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 115,
+                "column": 42
+              }
+            },
+            {
+              "name": "serial_println",
+              "docstring": "",
+              "signature": "fn serial_println(self : Double) -> Unit",
+              "loc": {
+                "path": "moonbitlang/arduino/serial",
+                "file": "serial.mbt",
+                "line": 120,
+                "column": 42
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "Serial",
+      "docstring": "",
+      "signature": "pub(all) type Serial",
+      "loc": {
+        "path": "moonbitlang/arduino/serial",
+        "file": "serial.mbt",
+        "line": 20,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "available",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino/serial#Serial\">Serial</a>::available() -> Int",
+          "loc": {
+            "path": "moonbitlang/arduino/serial",
+            "file": "serial.mbt",
+            "line": 50,
+            "column": 16
+          }
+        },
+        {
+          "name": "begin",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino/serial#Serial\">Serial</a>::begin(baud : Int64) -> Unit",
+          "loc": {
+            "path": "moonbitlang/arduino/serial",
+            "file": "serial.mbt",
+            "line": 35,
+            "column": 16
+          }
+        },
+        {
+          "name": "end",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino/serial#Serial\">Serial</a>::end() -> Unit",
+          "loc": {
+            "path": "moonbitlang/arduino/serial",
+            "file": "serial.mbt",
+            "line": 40,
+            "column": 16
+          }
+        },
+        {
+          "name": "is_ok",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino/serial#Serial\">Serial</a>::is_ok() -> Bool",
+          "loc": {
+            "path": "moonbitlang/arduino/serial",
+            "file": "serial.mbt",
+            "line": 45,
+            "column": 16
+          }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "serial_parse_int",
+      "docstring": "",
+      "signature": "fn serial_parse_int() -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino/serial",
+        "file": "serial.mbt",
+        "line": 128,
+        "column": 8
+      }
+    },
+    {
+      "name": "serial_peek",
+      "docstring": "",
+      "signature": "fn serial_peek() -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino/serial",
+        "file": "serial.mbt",
+        "line": 136,
+        "column": 8
+      }
+    },
+    {
+      "name": "serial_read",
+      "docstring": "",
+      "signature": "fn serial_read() -> Char?",
+      "loc": {
+        "path": "moonbitlang/arduino/serial",
+        "file": "serial.mbt",
+        "line": 144,
+        "column": 8
+      }
+    },
+    {
+      "name": "serial_read_to_buffer",
+      "docstring": "",
+      "signature": "fn serial_read_to_buffer(buf : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>, size : Int) -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino/serial",
+        "file": "serial.mbt",
+        "line": 155,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,71 @@
+{
+  "name": "moonbitlang/lex/lib/tests",
+  "traits": [],
+  "types": [
+    {
+      "name": "DotGraph",
+      "docstring": "",
+      "signature": "pub(all) struct DotGraph {\n  edges : <a href=\"moonbitlang/core/array#Array\">Array</a>[<a href=\"moonbitlang/lex/lib/tests#Edge\">Edge</a>]\n  nodes : <a href=\"moonbitlang/core/builtin#Map\">Map</a>[Int, (<a href=\"moonbitlang/lex/lib/tests#NodeType\">NodeType</a>, String?)]\n  name : String\n}",
+      "loc": {
+        "path": "moonbitlang/lex/lib/tests",
+        "file": "dot.mbt",
+        "line": 11,
+        "column": 17
+      },
+      "methods": [
+        {
+          "name": "add_edge",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/tests#DotGraph\">DotGraph</a>::add_edge(self : <a href=\"moonbitlang/lex/lib/tests#DotGraph\">DotGraph</a>, from~ : Int, to~ : Int, edge_info? : String) -> Unit",
+          "loc": {
+            "path": "moonbitlang/lex/lib/tests",
+            "file": "dot.mbt",
+            "line": 23,
+            "column": 8
+          }
+        },
+        {
+          "name": "new",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/lex/lib/tests#DotGraph\">DotGraph</a>::new(name~ : String = ..) -> <a href=\"moonbitlang/lex/lib/tests#DotGraph\">DotGraph</a>",
+          "loc": {
+            "path": "moonbitlang/lex/lib/tests",
+            "file": "dot.mbt",
+            "line": 18,
+            "column": 18
+          }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Edge",
+      "docstring": "",
+      "signature": "type Edge",
+      "loc": {
+        "path": "moonbitlang/lex/lib/tests",
+        "file": "dot.mbt",
+        "line": 2,
+        "column": 6
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "NodeType",
+      "docstring": "",
+      "signature": "type NodeType",
+      "loc": {
+        "path": "moonbitlang/lex/lib/tests",
+        "file": "dot.mbt",
+        "line": 5,
+        "column": 6
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [],
+  "misc": []
+}

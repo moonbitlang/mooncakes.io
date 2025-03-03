@@ -1,190 +1,359 @@
 {
-  "readme": "",
   "name": "moonbitlang/core/buffer",
   "traits": [],
   "types": [
     {
       "name": "T",
-      "docstring": "\n Extensible buffer.\n\n It provides accumulative concatenation of bytes in linear time.\n The capacity of buffer will automatically expand as necessary.\n\n Note: StringBuilder is recommended for string concatenation in favor of\n Buffer, since it is optimized for all targets.\n # Usage\n\n ```\n let buf = @buffer.new(size_hint=100)\n buf.write_string(\"Tes\")\n buf.write_char('t')\n assert_eq!(buf.to_unchecked_string(), \"Test\")\n ```",
+      "docstring": "\n Extensible buffer.\n\n It provides accumulative concatenation of bytes in linear time.\n The capacity of buffer will automatically expand as necessary.\n\n Note: StringBuilder is recommended for string concatenation in favor of\n Buffer, since it is optimized for all targets.\n # Usage\n\n ```\n let buf = @buffer.new(size_hint=100)\n buf.write_string(\"Tes\")\n buf.write_char('t')\n inspect!(buf.contents(), content=\n   #|b\"\\x54\\x00\\x65\\x00\\x73\\x00\\x74\\x00\"\n )\n ```",
       "signature": "type T",
-      "loc": { "line": 35, "column": 8 },
+      "loc": {
+        "path": "moonbitlang/core/buffer",
+        "file": "buffer.mbt",
+        "line": 37,
+        "column": 8
+      },
       "methods": [
         {
           "name": "contents",
-          "docstring": " Return the contents of the buffer as a Bytes.",
+          "docstring": "\n Returns a copy of the buffer's content as a sequence of bytes.\n\n Parameters:\n\n * `buffer` : The buffer to read from.\n\n Returns a `Bytes` object containing all bytes written to the buffer.\n\n Example:\n\n ```moonbit\n test \"contents\" {\n   let buf = @buffer.new()\n   buf.write_string(\"Test\")\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\x54\\x00\\x65\\x00\\x73\\x00\\x74\\x00\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::contents(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> Bytes",
-          "loc": { "line": 76, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 134,
+            "column": 8
+          }
         },
         {
           "name": "is_empty",
-          "docstring": "\n Return whether the given buffer is empty.",
+          "docstring": "\n Returns whether the buffer is empty.\n\n Parameters:\n\n * `buffer` : The buffer to check.\n\n Returns `true` if the buffer is empty (i.e., contains no bytes), `false`\n otherwise.\n\n Example:\n\n ```moonbit\n test \"buffer::is_empty\" {\n   let buf = @buffer.new()\n   inspect!(buf.is_empty(), content=\"true\")\n   buf.write_string(\"test\")\n   inspect!(buf.is_empty(), content=\"false\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::is_empty(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> Bool",
-          "loc": { "line": 71, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 107,
+            "column": 8
+          }
         },
         {
           "name": "length",
-          "docstring": "\n Return the given buffer's length in bytes.",
+          "docstring": "\n Returns the number of bytes currently stored in the buffer.\n\n Parameters:\n\n * `buffer`: The buffer to get the length from.\n\n Returns the length of the buffer in bytes.\n\n Example:\n\n ```moonbit\n test \"length\" {\n   let buf = @buffer.new()\n   buf.write_string(\"Test\")\n   inspect!(buf.length(), content=\"8\") // each char takes 2 bytes in UTF-16\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::length(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> Int",
-          "loc": { "line": 65, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 83,
+            "column": 8
+          }
         },
         {
           "name": "new",
-          "docstring": " Create a buffer with initial capacity (in bytes).",
+          "docstring": "\n @alert deprecated \"use `@buffer.new` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::new(size_hint~ : Int = ..) -> <a href=\"moonbitlang/core/buffer#T\">T</a>",
-          "loc": { "line": 81, "column": 11 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "deprecated.mbt",
+            "line": 60,
+            "column": 11
+          }
         },
         {
           "name": "reset",
-          "docstring": "",
+          "docstring": "\n Resets the buffer to its initial state by restoring its initial capacity and\n clearing its contents.\n\n Parameters:\n\n * `self` : The buffer to be reset.\n\n Example:\n\n ```moonbit\n test \"reset\" {\n   let buf = @buffer.new(size_hint=4)\n   buf.write_string(\"Test\")\n   buf.reset()\n   inspect!(buf.length(), content=\"0\")\n   inspect!(buf.is_empty(), content=\"true\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::reset(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> Unit",
-          "loc": { "line": 218, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 724,
+            "column": 8
+          }
         },
         {
           "name": "to_bytes",
-          "docstring": "",
+          "docstring": "\n Returns a copy of the buffer's contents as a `Bytes` object. The returned\n bytes will have the same length as the buffer.\n\n Parameters:\n\n * `buffer` : The buffer whose contents will be converted to bytes.\n\n Returns a `Bytes` object containing a copy of the buffer's contents.\n\n Example:\n\n ```moonbit\n test \"to_bytes\" {\n   let buf = @buffer.new()\n   buf.write_string(\"Test\")\n   let bytes = buf.to_bytes()\n   inspect!(bytes.length(), content=\"8\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::to_bytes(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> Bytes",
-          "loc": { "line": 224, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 749,
+            "column": 8
+          }
         },
         {
           "name": "to_string",
-          "docstring": "\n Return a new string contains the data in buffer.\n \n @alert deprecated \"Use `Buffer::contents` to read the contents of the buffer\"\n @coverage.skip",
+          "docstring": "\n Return a new string contains the data in buffer.\n\n @alert deprecated \"Use `Buffer::contents` to read the contents of the buffer\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::to_string(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> String",
-          "loc": { "line": 20, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "deprecated.mbt",
+            "line": 20,
+            "column": 8
+          }
         },
         {
           "name": "to_unchecked_string",
-          "docstring": "\n Return a new unchecked string contains the data in buffer.\n Note this function does not validate the encoding of the byte sequence, \n it simply copy the bytes into a new String.\n \n @alert deprecated \"Use `Buffer::contents` to read the contents of the buffer\"\n @coverage.skip",
+          "docstring": "\n Return a new unchecked string contains the data in buffer.\n Note this function does not validate the encoding of the byte sequence,\n it simply copy the bytes into a new String.\n\n @alert deprecated \"Use `Buffer::contents` to read the contents of the buffer\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::to_unchecked_string(self : <a href=\"moonbitlang/core/buffer#T\">T</a>) -> String",
-          "loc": { "line": 31, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "deprecated.mbt",
+            "line": 31,
+            "column": 8
+          }
         },
         {
           "name": "write_byte",
-          "docstring": "\n Write a byte into buffer.",
+          "docstring": "\n Writes a single byte to the end of the buffer. The buffer will automatically\n grow if necessary to accommodate the new byte.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `byte` : The byte value to be written.\n\n Example:\n\n ```moonbit\n test \"write_byte\" {\n   let buf = @buffer.new()\n   buf.write_byte(b'\\x41')\n   inspect!(buf.contents(), content=\"b\\\"\\\\x41\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_byte(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Byte) -> Unit",
-          "loc": { "line": 211, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 673,
+            "column": 8
+          }
         },
         {
           "name": "write_bytes",
-          "docstring": "",
+          "docstring": "\n Writes a sequence of bytes into the buffer.\n\n Parameters:\n\n * `buffer` : An extensible buffer to write into.\n * `bytes` : The sequence of bytes to be written.\n\n Example:\n\n ```moonbit\n test \"write_bytes\" {\n   let buf = @buffer.new()\n   buf.write_bytes(b\"Test\")\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\x54\\x65\\x73\\x74\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_bytes(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Bytes) -> Unit",
-          "loc": { "line": 180, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 554,
+            "column": 8
+          }
+        },
+        {
+          "name": "write_bytesview",
+          "docstring": "\n Writes a sequence of bytes from a @bytes.View into the buffer.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The View containing the bytes to write.\n\n Example:\n\n ```moonbit\n test \"write_bytesview\" {\n   let buf = @buffer.new()\n   let view = b\"Test\"[1:3]\n   buf.write_bytesview(view)\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\x65\\x73\"\n     ,\n   )\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_bytesview(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : <a href=\"moonbitlang/core/bytes#View\">@moonbitlang/core/bytes.View</a>) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 584,
+            "column": 8
+          }
         },
         {
           "name": "write_char",
-          "docstring": "\n Write a char into buffer.",
+          "docstring": "\n Writes a UTF-16LE encoded character into the buffer. Automatically grows the\n buffer if necessary.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `char` : The character to be written.\n\n Example:\n\n ```moonbit\n test \"write_char\" {\n   let buf = @buffer.new()\n   buf.write_char('A')\n   inspect!(buf.contents(), content=\n   #|b\"\\x41\\x00\"\n )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_char(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Char) -> Unit",
-          "loc": { "line": 203, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 649,
+            "column": 8
+          }
         },
         {
           "name": "write_double_be",
-          "docstring": " Write a Double into buffer in big endian format.",
+          "docstring": "\n Writes an IEEE 754 double-precision floating-point number into the buffer in\n big-endian format (most significant byte first).\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The double-precision floating-point number to be written.\n\n Example:\n\n ```moonbit\n test \"write_double_be\" {\n   let buf = @buffer.new()\n   buf.write_double_be(1.0)\n   inspect!(buf.contents(), content=\"b\\\"\\\\x3f\\\\xf0\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_double_be(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Double) -> Unit",
-          "loc": { "line": 155, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 432,
+            "column": 8
+          }
         },
         {
           "name": "write_double_le",
-          "docstring": " Write a Double into buffer in little endian format.",
+          "docstring": "\n Writes a double-precision floating-point number into the buffer in\n little-endian format.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The double-precision floating-point number to write.\n\n Example:\n\n ```moonbit\n test \"write_double_le\" {\n   let buf = @buffer.new()\n   buf.write_double_le(3.14)\n   inspect!(\n     buf.contents(),\n     content=\"b\\\"\\\\x1f\\\\x85\\\\xeb\\\\x51\\\\xb8\\\\x1e\\\\x09\\\\x40\\\"\",\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_double_le(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Double) -> Unit",
-          "loc": { "line": 160, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 457,
+            "column": 8
+          }
         },
         {
           "name": "write_float_be",
-          "docstring": " Write a Float into buffer in big endian format.",
+          "docstring": "\n Writes a 32-bit floating-point number to the buffer in big-endian byte order.\n The float value is first reinterpreted as a 32-bit unsigned integer before\n writing.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The floating-point number to be written.\n\n Example:\n\n ```moonbit\n test \"write_float_be\" {\n   let buf = @buffer.new()\n   buf.write_float_be(3.14)\n   // In big-endian format, 3.14 is represented as [0x40, 0x48, 0xF5, 0xC3]\n   inspect!(buf.contents(), content=\"b\\\"\\\\x40\\\\x48\\\\xf5\\\\xc3\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_float_be(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Float) -> Unit",
-          "loc": { "line": 165, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 481,
+            "column": 8
+          }
         },
         {
           "name": "write_float_le",
-          "docstring": " Write a Float into buffer in little endian format.",
+          "docstring": "\n Writes a Float value into the buffer in little-endian format. The float value\n is converted to its binary representation and written as four bytes.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The Float value to be written.\n\n Example:\n\n ```moonbit\n test \"write_float_le\" {\n   let buf = @buffer.new()\n   buf.write_float_le(3.14)\n   // The bytes are written in little-endian format\n   inspect!(buf.contents(), content=\"b\\\"\\\\xc3\\\\xf5\\\\x48\\\\x40\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_float_le(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Float) -> Unit",
-          "loc": { "line": 170, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 504,
+            "column": 8
+          }
         },
         {
           "name": "write_int64_be",
-          "docstring": " Write an Int64 into buffer in big endian format.",
+          "docstring": "\n Writes a 64-bit integer into the buffer in big-endian format, where the most\n significant byte is written first.\n\n Parameters:\n\n * `buffer` : The buffer to write into.\n * `value` : The 64-bit integer to be written.\n\n Example:\n\n ```moonbit\n test \"write_int64_be\" {\n   let buf = @buffer.new()\n   buf.write_int64_be(0x0102030405060708L)\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_int64_be(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Int64) -> Unit",
-          "loc": { "line": 119, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 291,
+            "column": 8
+          }
         },
         {
           "name": "write_int64_le",
-          "docstring": " Write an Int64 into buffer in little endian format.",
+          "docstring": "\n Writes a 64-bit signed integer to the buffer in little-endian byte order.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The 64-bit signed integer to write.\n\n Example:\n\n ```moonbit\n test \"write_int64_le\" {\n   let buf = @buffer.new()\n   buf.write_int64_le(-1L)\n   inspect!(buf.contents(), content=\n   #|b\"\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\"\n )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_int64_le(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Int64) -> Unit",
-          "loc": { "line": 124, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 314,
+            "column": 8
+          }
         },
         {
           "name": "write_int_be",
-          "docstring": " Write an Int into buffer in big endian format.",
+          "docstring": "\n Writes a 32-bit integer to the buffer in big-endian format. Big-endian means\n the most significant byte is written first.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The 32-bit integer to be written.\n\n Example:\n\n ```moonbit\n test \"write_int_be\" {\n   let buf = @buffer.new()\n   buf.write_int_be(0x12345678)\n   inspect!(buf.contents(), content=\"b\\\"\\\\x12\\\\x34\\\\x56\\\\x78\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_int_be(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Int) -> Unit",
-          "loc": { "line": 145, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 387,
+            "column": 8
+          }
         },
         {
           "name": "write_int_le",
-          "docstring": " Write an Int into buffer in little endian format.",
+          "docstring": "\n Writes a 32-bit integer into the buffer in little-endian format. The integer\n is first reinterpreted as an unsigned integer, then written as 4 bytes where\n the least significant byte is written first.\n\n Parameters:\n\n * `buffer` : The buffer to write into.\n * `value` : The integer value to be written.\n\n Example:\n\n ```moonbit\n test \"write_int_le\" {\n   let buf = @buffer.new()\n   buf.write_int_le(-1)\n   inspect!(buf.contents(), content=\"b\\\"\\\\xff\\\\xff\\\\xff\\\\xff\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_int_le(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : Int) -> Unit",
-          "loc": { "line": 150, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 410,
+            "column": 8
+          }
+        },
+        {
+          "name": "write_iter",
+          "docstring": "\n Writes bytes from an iterator to the buffer. \n\n Parameters:\n\n * `self` : The buffer to write to.\n * `iter` : An iterator yielding bytes to write.\n\n Example:\n\n ```moonbit\n test \"write_iter\" {\n   let buf = @buffer.new()\n   let bytes = b\"Hello\"\n   buf.write_iter(bytes.iter())\n   inspect!(buf.contents(), content=\n   #|b\"\\x48\\x65\\x6c\\x6c\\x6f\"\n )\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_iter(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 699,
+            "column": 8
+          }
         },
         {
           "name": "write_object",
-          "docstring": "",
+          "docstring": "\n Writes a string representation of any value that implements the `Show` trait\n into the buffer.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : Any value that implements the `Show` trait. The value will be\n converted to a string using its `to_string` method before being written to\n the buffer.\n\n Example:\n\n ```moonbit\n test \"write_object\" {\n   let buf = @buffer.new()\n   buf.write_object(42)\n   inspect!(buf.contents().to_unchecked_string(), content=\"42\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_object(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : <a href=\"moonbitlang/core/builtin#Show\">Show</a>) -> Unit",
-          "loc": { "line": 175, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 528,
+            "column": 8
+          }
         },
         {
           "name": "write_string",
-          "docstring": " Write a string into buffer in little endian format.",
+          "docstring": "\n Writes a UTF-16LE encoded string into the buffer. The buffer will\n automatically grow if needed to accommodate the string.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `string` : The string to be written.\n\n Example:\n\n ```moonbit\n test \"write_string\" {\n   let buf = @buffer.new()\n   buf.write_string(\"Test\")\n   // Each UTF-16 char takes 2 bytes in little-endian format\n   // 'T' -> [0x54, 0x00]\n   // 'e' -> [0x65, 0x00]\n   // 's' -> [0x73, 0x00]\n   // 't' -> [0x74, 0x00]\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\x54\\x00\\x65\\x00\\x73\\x00\\x74\\x00\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_string(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : String) -> Unit",
-          "loc": { "line": 88, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 193,
+            "column": 8
+          }
         },
         {
           "name": "write_sub_string",
-          "docstring": "\n Write a sub-string into buffer.\n @alert deprecated \"Use `Buffer::write_substring` instead\"\n @coverage.skip",
+          "docstring": "\n Write a substring from a given string into the buffer. This is a deprecated\n function, use `write_substring` instead.\n\n Parameters:\n\n * `self` : The buffer to write into.\n * `string` : The source string from which to extract the substring.\n * `offset` : The starting position in the source string (inclusive).\n * `length` : The number of characters to write from the starting position.\n\n @alert deprecated \"Use `Buffer::write_substring` instead\"\n @coverage.skip",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_sub_string(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : String, start : Int, len : Int) -> Unit",
-          "loc": { "line": 39, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "deprecated.mbt",
+            "line": 48,
+            "column": 8
+          }
         },
         {
           "name": "write_substring",
-          "docstring": "\n Write a sub-string into buffer.",
+          "docstring": "\n Writes a portion of a string into the buffer in UTF-16LE encoding.\n\n Parameters:\n\n * `self` : The buffer to write to.\n * `str` : The source string from which the substring will be taken.\n * `offset` : The starting position in the source string (inclusive). Must be\n non-negative.\n * `count` : The number of characters to write. Must be non-negative and\n `offset + count` must not exceed the length of the source string.\n\n Example:\n\n ```moonbit\n test \"write_substring\" {\n   let buf = @buffer.new()\n   buf.write_substring(\"Hello, World!\", 0, 5)\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\x48\\x00\\x65\\x00\\x6c\\x00\\x6c\\x00\\x6f\\x00\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_substring(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : String, start : Int, len : Int) -> Unit",
-          "loc": { "line": 189, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 617,
+            "column": 8
+          }
         },
         {
           "name": "write_uint64_be",
-          "docstring": " Write an UInt64 into buffer in big endian format.",
+          "docstring": "\n Writes an unsigned 64-bit integer into the buffer in big-endian format (most\n significant byte first).\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The unsigned 64-bit integer to be written.\n\n Example:\n\n ```moonbit\n test \"write_uint64_be\" {\n   let buf = @buffer.new()\n   buf.write_uint64_be(0xAABBCCDD11223344)\n   // Bytes are written in big-endian order\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\xaa\\xbb\\xcc\\xdd\\x11\\x22\\x33\\x44\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_uint64_be(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : UInt64) -> Unit",
-          "loc": { "line": 95, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 223,
+            "column": 8
+          }
         },
         {
           "name": "write_uint64_le",
-          "docstring": " Write a UInt64 into buffer in little endian format.",
+          "docstring": "\n Writes an unsigned 64-bit integer to the buffer in little-endian byte order.\n Each byte is written sequentially from least significant to most significant.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The UInt64 value to be written.\n\n Example:\n\n ```moonbit\n test \"write_uint64_le\" {\n   let buf = @buffer.new()\n   buf.write_uint64_le(0x0123456789ABCDEF)\n   inspect!(\n     buf.contents(),\n     content=\n       #|b\"\\xef\\xcd\\xab\\x89\\x67\\x45\\x23\\x01\"\n     ,\n   )\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_uint64_le(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : UInt64) -> Unit",
-          "loc": { "line": 107, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 257,
+            "column": 8
+          }
         },
         {
           "name": "write_uint_be",
-          "docstring": " Write an UInt into buffer in big endian format.",
+          "docstring": "\n Writes a 32-bit unsigned integer into the buffer in big-endian format (most\n significant byte first).\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : The unsigned integer value to write.\n\n Example:\n\n ```moonbit\n test \"write_uint_be\" {\n   let buf = @buffer.new()\n   buf.write_uint_be(0x12345678)\n   inspect!(buf.contents(), content=\"b\\\"\\\\x12\\\\x34\\\\x56\\\\x78\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_uint_be(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : UInt) -> Unit",
-          "loc": { "line": 129, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 336,
+            "column": 8
+          }
         },
         {
           "name": "write_uint_le",
-          "docstring": " Write an UInt into buffer in little endian format.",
+          "docstring": "\n Writes a 32-bit unsigned integer into the buffer in little-endian format. The\n integer is split into 4 bytes and written in order from least significant to\n most significant byte.\n\n Parameters:\n\n * `buffer` : The buffer to write to.\n * `value` : A 32-bit unsigned integer to be written.\n\n Example:\n\n ```moonbit\n test \"write_uint_le\" {\n   let buf = @buffer.new()\n   buf.write_uint_le(0x12345678)\n   inspect!(buf.contents(), content=\"b\\\"\\\\x78\\\\x56\\\\x34\\\\x12\\\"\")\n }\n ```",
           "signature": "fn <a href=\"moonbitlang/core/buffer#T\">T</a>::write_uint_le(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, value : UInt) -> Unit",
-          "loc": { "line": 137, "column": 8 }
+          "loc": {
+            "path": "moonbitlang/core/buffer",
+            "file": "buffer.mbt",
+            "line": 362,
+            "column": 8
+          }
         }
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/buffer#T\">T</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "T", "path": "moonbitlang/core/buffer" },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
               "docstring": "",
               "signature": "fn output(self : <a href=\"moonbitlang/core/buffer#T\">T</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
-              "loc": { "line": 229, "column": 26 }
+              "loc": {
+                "path": "moonbitlang/core/buffer",
+                "file": "buffer.mbt",
+                "line": 754,
+                "column": 26
+              }
             }
-          ],
-          "loc": { "line": 229, "column": 1 }
+          ]
         }
       ]
     }
@@ -194,9 +363,26 @@
       "name": "Buffer",
       "docstring": " Extensible buffer.\n @alert deprecated \"Use type `T` instead\"",
       "signature": "type Buffer = <a href=\"moonbitlang/core/buffer#T\">T</a>",
-      "loc": { "line": 17, "column": 1 }
+      "loc": {
+        "path": "moonbitlang/core/buffer",
+        "file": "buffer.mbt",
+        "line": 17,
+        "column": 1
+      }
     }
   ],
-  "values": [],
+  "values": [
+    {
+      "name": "new",
+      "docstring": "\n Creates a new extensible buffer with specified initial capacity. If the\n initial capacity is less than 1, the buffer will be initialized with capacity\n 1.\n\n Parameters:\n\n * `size_hint` : Initial capacity of the buffer in bytes. Defaults to 0.\n\n Returns a new buffer of type `T`.\n\n Example:\n\n ```moonbit\n test \"new\" {\n   let buf = @buffer.new(size_hint=10)\n   inspect!(buf.length(), content=\"0\")\n   buf.write_string(\"test\")\n   inspect!(buf.length(), content=\"8\")\n }\n ```",
+      "signature": "fn new(size_hint~ : Int = ..) -> <a href=\"moonbitlang/core/buffer#T\">T</a>",
+      "loc": {
+        "path": "moonbitlang/core/buffer",
+        "file": "buffer.mbt",
+        "line": 159,
+        "column": 8
+      }
+    }
+  ],
   "misc": []
 }

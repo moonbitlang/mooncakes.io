@@ -78,8 +78,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/lex/tests/jsonlexer#Token\">Token</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Token",
+              "path": "moonbitlang/lex/tests/jsonlexer"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -92,13 +99,7 @@
                 "column": 11
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/tests/jsonlexer",
-            "file": "jsonlexer.mbt",
-            "line": 116,
-            "column": 11
-          }
+          ]
         }
       ]
     }

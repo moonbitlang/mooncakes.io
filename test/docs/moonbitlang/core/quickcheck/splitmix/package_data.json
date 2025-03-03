@@ -148,8 +148,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "RandomState",
+              "path": "moonbitlang/core/quickcheck/splitmix"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -162,17 +169,18 @@
                 "column": 16
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck/splitmix",
-            "file": "random.mbt",
-            "line": 19,
-            "column": 16
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">RandomState</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "RandomState",
+              "path": "moonbitlang/core/quickcheck/splitmix"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -185,13 +193,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck/splitmix",
-            "file": "random.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         }
       ]
     }

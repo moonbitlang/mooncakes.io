@@ -38,8 +38,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/coverage#CoverageCounter\">CoverageCounter</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "CoverageCounter",
+              "path": "moonbitlang/core/coverage"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -52,13 +59,7 @@
                 "column": 40
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/coverage",
-            "file": "coverage.mbt",
-            "line": 41,
-            "column": 1
-          }
+          ]
         }
       ]
     }

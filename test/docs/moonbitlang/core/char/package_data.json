@@ -9,8 +9,8 @@
       "name": "Char",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Char",
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -34,13 +34,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/char",
-            "file": "char.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

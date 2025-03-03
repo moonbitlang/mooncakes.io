@@ -335,8 +335,12 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/buffer#T\">T</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "T", "path": "moonbitlang/core/buffer" },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -349,13 +353,7 @@
                 "column": 26
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/buffer",
-            "file": "buffer.mbt",
-            "line": 754,
-            "column": 1
-          }
+          ]
         }
       ]
     }

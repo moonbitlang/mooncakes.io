@@ -87,8 +87,8 @@
       "name": "Double",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -112,17 +112,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/double",
-            "file": "double.mbt",
-            "line": 308,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -135,13 +129,7 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/double",
-            "file": "double.mbt",
-            "line": 345,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

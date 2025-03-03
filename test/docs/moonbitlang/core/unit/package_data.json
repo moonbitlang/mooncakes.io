@@ -21,8 +21,8 @@
       "name": "Unit",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Unit",
+          "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -46,13 +46,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/unit",
-            "file": "unit.mbt",
-            "line": 22,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/encoding#DecodeError\">DecodeError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "DecodeError",
+              "path": "moonbitlang/x/encoding"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -29,13 +36,7 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/encoding",
-            "file": "types.mbt",
-            "line": 140,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -88,8 +89,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LossyChars",
+              "path": "moonbitlang/x/encoding"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -102,13 +110,7 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/encoding",
-            "file": "types.mbt",
-            "line": 129,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -148,8 +150,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StrictChars",
+              "path": "moonbitlang/x/encoding"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -162,13 +171,7 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/encoding",
-            "file": "types.mbt",
-            "line": 181,
-            "column": 1
-          }
+          ]
         }
       ]
     }

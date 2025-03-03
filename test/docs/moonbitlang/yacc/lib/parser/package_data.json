@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#Clause\">Clause</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Clause",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -29,13 +36,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 81,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -52,8 +53,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseAction\">ClauseAction</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseAction",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -66,13 +74,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 88,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -89,8 +91,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseItem\">ClauseItem</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseItem",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -103,13 +112,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 101,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -126,8 +129,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseItemIdent",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -140,17 +150,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 43,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseItemIdent",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -163,17 +174,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 43,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseItemIdent",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -186,17 +198,18 @@
                 "column": 23
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 43,
-            "column": 23
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseItemIdent\">ClauseItemIdent</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseItemIdent",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -209,13 +222,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 43,
-            "column": 29
-          }
+          ]
         }
       ]
     },
@@ -232,8 +239,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#ClauseItemSymbol\">ClauseItemSymbol</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ClauseItemSymbol",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -246,13 +260,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 107,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -269,8 +277,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#CodeWithSubst\">CodeWithSubst</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "CodeWithSubst",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -283,13 +298,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 95,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -306,8 +315,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#Declaration\">Declaration</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Declaration",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -320,13 +336,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 66,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -444,8 +454,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#ParserSpec\">ParserSpec</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParserSpec",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -458,13 +475,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 21,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -481,8 +492,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#Rule\">Rule</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Rule",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -495,13 +513,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 74,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -518,8 +530,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/parser#SubstItem\">SubstItem</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SubstItem",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -532,17 +551,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 50,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#SubstItem\">SubstItem</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SubstItem",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -555,13 +575,7 @@
                 "column": 16
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 50,
-            "column": 16
-          }
+          ]
         }
       ]
     },
@@ -578,8 +592,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SubstItemDesc",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -592,17 +613,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 37,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SubstItemDesc",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -615,17 +637,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 37,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SubstItemDesc",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -638,17 +661,18 @@
                 "column": 23
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 37,
-            "column": 23
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/parser#SubstItemDesc\">SubstItemDesc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SubstItemDesc",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -661,13 +685,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "ast.mbt",
-            "line": 37,
-            "column": 29
-          }
+          ]
         }
       ]
     },
@@ -696,8 +714,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/parser#Token\">Token</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Token",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -710,13 +735,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "parser.mbt",
-            "line": 29,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -733,8 +752,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/parser#TokenKind\">TokenKind</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "TokenKind",
+              "path": "moonbitlang/yacc/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -747,13 +773,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/parser",
-            "file": "parser.mbt",
-            "line": 89,
-            "column": 1
-          }
+          ]
         }
       ]
     }

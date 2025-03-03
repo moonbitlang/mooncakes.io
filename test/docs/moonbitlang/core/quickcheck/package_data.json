@@ -14,8 +14,11 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Unit",
+          "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -28,17 +31,14 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 25,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -51,17 +51,14 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 30,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Byte",
+          "self": { "name": "Byte", "path": "moonbitlang/core/byte" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -74,17 +71,14 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 53,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Char",
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -97,17 +91,14 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 96,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -120,17 +111,14 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 35,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -143,17 +131,14 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 68,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for UInt",
+          "self": { "name": "UInt", "path": "moonbitlang/core/uint" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -166,17 +151,14 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 44,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for UInt64",
+          "self": { "name": "UInt64", "path": "moonbitlang/core/uint64" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -189,17 +171,14 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 77,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Float",
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -212,17 +191,14 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 86,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -235,17 +211,14 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 91,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for String",
+          "self": { "name": "String", "path": "moonbitlang/core/string" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -258,17 +231,14 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 102,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for Bytes",
+          "self": { "name": "Bytes", "path": "moonbitlang/core/bytes" },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -281,17 +251,21 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 58,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "BigInt",
+              "path": "moonbitlang/core/bigint"
+            },
+            "arguments": []
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -304,17 +278,21 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 112,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">Arbitrary</a> for <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Iter",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -327,13 +305,7 @@
                 "column": 52
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/quickcheck",
-            "file": "arbitrary.mbt",
-            "line": 121,
-            "column": 1
-          }
+          ]
         }
       ]
     }

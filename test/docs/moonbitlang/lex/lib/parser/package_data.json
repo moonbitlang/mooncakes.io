@@ -49,8 +49,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/parser#ParserBuf\">ParserBuf</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParserBuf",
+              "path": "moonbitlang/lex/lib/parser"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -63,13 +70,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/parser",
-            "file": "parser.mbt",
-            "line": 6,
-            "column": 10
-          }
+          ]
         }
       ]
     }

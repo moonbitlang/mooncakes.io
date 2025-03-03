@@ -206,8 +206,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/lazy#LazyList\">LazyList</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LazyList",
+              "path": "moonbitlang/quickcheck/lazy"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -220,13 +227,7 @@
                 "column": 46
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/lazy",
-            "file": "lazy_list.mbt",
-            "line": 18,
-            "column": 1
-          }
+          ]
         }
       ]
     },

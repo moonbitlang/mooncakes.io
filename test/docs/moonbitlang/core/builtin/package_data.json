@@ -65,8 +65,8 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Byte",
+          "self": { "name": "Byte", "path": "moonbitlang/core/byte" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -90,17 +90,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "byte.mbt",
-            "line": 186,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -124,17 +118,11 @@
                 "column": 28
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "hasher.mbt",
-            "line": 507,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for UInt",
+          "self": { "name": "UInt", "path": "moonbitlang/core/uint" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -147,17 +135,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "hasher.mbt",
-            "line": 562,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for UInt64",
+          "self": { "name": "UInt64", "path": "moonbitlang/core/uint64" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -170,17 +152,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "hasher.mbt",
-            "line": 584,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for String",
+          "self": { "name": "String", "path": "moonbitlang/core/string" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -193,17 +169,18 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "hasher.mbt",
-            "line": 479,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for X?",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Option",
+              "path": "moonbitlang/core/option"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -216,17 +193,21 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "hasher.mbt",
-            "line": 611,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, E : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Result",
+              "path": "moonbitlang/core/result"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -239,17 +220,21 @@
                 "column": 57
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "hasher.mbt",
-            "line": 641,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, B : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for (A, B)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple2",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -262,17 +247,22 @@
                 "column": 51
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_hash.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, B : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, C : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for (A, B, C)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple3",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -285,17 +275,23 @@
                 "column": 64
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_hash.mbt",
-            "line": 22,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, B : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, C : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, D : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for (A, B, C, D)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple4",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -308,17 +304,24 @@
                 "column": 77
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_hash.mbt",
-            "line": 31,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, B : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, C : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, D : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, E : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for (A, B, C, D, E)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple5",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -331,17 +334,25 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_hash.mbt",
-            "line": 40,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, B : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, C : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, D : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, E : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, F : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for (A, B, C, D, E, F)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple6",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -354,17 +365,26 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_hash.mbt",
-            "line": 52,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, B : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, C : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, D : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, E : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, F : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, G : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for (A, B, C, D, E, F, G)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple7",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -377,13 +397,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_hash.mbt",
-            "line": 65,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -437,8 +451,8 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Unit",
+          "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -451,17 +465,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -474,17 +482,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 21,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Byte",
+          "self": { "name": "Byte", "path": "moonbitlang/core/byte" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -497,17 +499,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 46,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Char",
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -531,17 +527,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 207,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -565,17 +555,11 @@
                 "column": 28
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "to_string.mbt",
-            "line": 98,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Int16",
+          "self": { "name": "Int16", "path": "moonbitlang/core/int16" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -599,17 +583,11 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "to_string.mbt",
-            "line": 169,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -633,17 +611,11 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "to_string.mbt",
-            "line": 61,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for UInt",
+          "self": { "name": "UInt", "path": "moonbitlang/core/uint" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -667,17 +639,11 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "to_string.mbt",
-            "line": 125,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for UInt16",
+          "self": { "name": "UInt16", "path": "moonbitlang/core/uint16" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -701,17 +667,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "to_string.mbt",
-            "line": 179,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for UInt64",
+          "self": { "name": "UInt64", "path": "moonbitlang/core/uint64" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -735,17 +695,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "to_string.mbt",
-            "line": 159,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for String",
+          "self": { "name": "String", "path": "moonbitlang/core/string" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -769,17 +723,18 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 83,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for X?",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Option",
+              "path": "moonbitlang/core/option"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -792,17 +747,21 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 173,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, E : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Result",
+              "path": "moonbitlang/core/result"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -815,17 +774,18 @@
                 "column": 57
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 182,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "FixedArray",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -838,17 +798,11 @@
                 "column": 48
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 195,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Bytes",
+          "self": { "name": "Bytes", "path": "moonbitlang/core/bytes" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -861,17 +815,15 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 61,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Ref", "path": "moonbitlang/core/ref" },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -884,17 +836,21 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 190,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (A, B)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple2",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -907,17 +863,22 @@
                 "column": 51
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, C : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (A, B, C)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple3",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -930,17 +891,23 @@
                 "column": 64
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 27,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, C : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, D : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (A, B, C, D)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple4",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -953,17 +920,24 @@
                 "column": 77
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 43,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, C : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, D : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, E : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (A, B, C, D, E)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple5",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -976,17 +950,25 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 61,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, C : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, D : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, E : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, F : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (A, B, C, D, E, F)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple6",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -999,17 +981,26 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 84,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, C : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, D : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, E : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, F : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, G : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (A, B, C, D, E, F, G)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple7",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1022,17 +1013,27 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 110,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple8",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1045,17 +1046,28 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 139,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple9",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1068,17 +1080,29 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 171,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple10",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1091,17 +1115,30 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 206,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T10 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple11",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1114,17 +1151,31 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 244,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T10 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T11 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple12",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1137,17 +1188,32 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 285,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T10 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T11 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T12 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple13",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1160,17 +1226,33 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 329,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T10 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T11 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T12 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T13 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple14",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" },
+              { "kind": "param", "name": "T13" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1183,17 +1265,34 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 376,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T10 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T11 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T12 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T13 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T14 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple15",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" },
+              { "kind": "param", "name": "T13" },
+              { "kind": "param", "name": "T14" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1206,17 +1305,35 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 426,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T1 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T2 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T3 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T4 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T5 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T6 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T7 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T8 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T9 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T10 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T11 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T12 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T13 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T14 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, T15 : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple16",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" },
+              { "kind": "param", "name": "T13" },
+              { "kind": "param", "name": "T14" },
+              { "kind": "param", "name": "T15" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1229,13 +1346,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_show.mbt",
-            "line": 479,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -1252,8 +1363,18 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple2",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1266,17 +1387,22 @@
                 "column": 57
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple3",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1289,17 +1415,23 @@
                 "column": 72
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 21,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple4",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1312,17 +1444,24 @@
                 "column": 87
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 28,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple5",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1335,17 +1474,25 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 35,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple6",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1358,17 +1505,26 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 52,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple7",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1381,17 +1537,27 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 71,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple8",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1404,17 +1570,28 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 92,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple9",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1427,17 +1604,29 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 115,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple10",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1450,17 +1639,30 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 140,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, K : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J, K)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple11",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" },
+              { "kind": "param", "name": "K" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1473,17 +1675,31 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 167,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, K : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, L : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J, K, L)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple12",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" },
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "L" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1496,17 +1712,32 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 196,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, K : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, L : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, M : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J, K, L, M)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple13",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" },
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "L" },
+              { "kind": "param", "name": "M" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1519,17 +1750,33 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 227,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, K : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, L : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, M : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, N : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J, K, L, M, N)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple14",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" },
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "L" },
+              { "kind": "param", "name": "M" },
+              { "kind": "param", "name": "N" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1542,17 +1789,34 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 260,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, K : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, L : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, M : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, N : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, O : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple15",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" },
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "L" },
+              { "kind": "param", "name": "M" },
+              { "kind": "param", "name": "N" },
+              { "kind": "param", "name": "O" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1565,17 +1829,35 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 295,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, B : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, C : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, D : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, E : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, F : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, G : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, H : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, I : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, J : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, K : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, L : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, M : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, N : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, O : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>, P : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple16",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" },
+              { "kind": "param", "name": "H" },
+              { "kind": "param", "name": "I" },
+              { "kind": "param", "name": "J" },
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "L" },
+              { "kind": "param", "name": "M" },
+              { "kind": "param", "name": "N" },
+              { "kind": "param", "name": "O" },
+              { "kind": "param", "name": "P" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -1588,13 +1870,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "tuple_to_json.mbt",
-            "line": 332,
-            "column": 1
-          }
+          ]
         }
       ]
     }
@@ -1625,8 +1901,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#ArgsLoc\">ArgsLoc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArgsLoc",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1639,13 +1922,7 @@
                 "column": 48
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "autoloc.mbt",
-            "line": 51,
-            "column": 48
-          }
+          ]
         }
       ]
     },
@@ -2477,8 +2754,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/array#Array\">Array</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Array",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -2491,13 +2775,7 @@
                 "column": 43
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 200,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -2980,8 +3258,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "BigInt",
+              "path": "moonbitlang/core/bigint"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -2994,13 +3279,7 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "bigint_nonjs.mbt",
-            "line": 1004,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -3017,8 +3296,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#Failure\">Failure</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Failure",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -3031,13 +3317,7 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "show.mbt",
-            "line": 158,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -3665,8 +3945,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Iter",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -3679,13 +3966,7 @@
                 "column": 42
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "iter.mbt",
-            "line": 37,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -3780,8 +4061,18 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, B : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#Iter2\">Iter2</a>[A, B]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Iter2",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -3794,13 +4085,7 @@
                 "column": 56
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "iter2.mbt",
-            "line": 35,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -3817,8 +4102,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/builtin#IterResult\">IterResult</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "IterResult",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -3831,13 +4123,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "iter.mbt",
-            "line": 34,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -3866,8 +4152,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Json",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -3880,13 +4173,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "json.mbt",
-            "line": 24,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -4190,8 +4477,18 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#Map\">Map</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Map",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -4204,13 +4501,7 @@
                 "column": 54
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "linked_hash_map.mbt",
-            "line": 399,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -4492,8 +4783,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#Set\">Set</a>[K]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Set",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": [ { "kind": "param", "name": "K" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -4506,13 +4804,7 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "linked_hash_set.mbt",
-            "line": 344,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -4554,8 +4846,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#SourceLoc\">SourceLoc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceLoc",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -4568,13 +4867,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "autoloc.mbt",
-            "line": 42,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -4691,8 +4984,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/builtin#StringBuilder\">StringBuilder</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StringBuilder",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -4705,13 +5005,7 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/builtin",
-            "file": "stringbuilder_buffer.mbt",
-            "line": 91,
-            "column": 1
-          }
+          ]
         }
       ]
     },

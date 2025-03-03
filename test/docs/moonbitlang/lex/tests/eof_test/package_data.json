@@ -65,8 +65,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/lex/tests/eof_test#Token\">Token</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Token",
+              "path": "moonbitlang/lex/tests/eof_test"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -79,13 +86,7 @@
                 "column": 11
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/tests/eof_test",
-            "file": "eof.mbt",
-            "line": 108,
-            "column": 11
-          }
+          ]
         }
       ]
     }

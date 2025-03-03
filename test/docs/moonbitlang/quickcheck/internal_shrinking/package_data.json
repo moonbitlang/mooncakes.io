@@ -82,8 +82,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/internal_shrinking#ShrinkTree\">ShrinkTree</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ShrinkTree",
+              "path": "moonbitlang/quickcheck/internal_shrinking"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -96,13 +103,7 @@
                 "column": 48
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/internal_shrinking",
-            "file": "shrink_tree.mbt",
-            "line": 8,
-            "column": 1
-          }
+          ]
         }
       ]
     }

@@ -32,8 +32,8 @@
       "name": "Int16",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Int16",
+          "self": { "name": "Int16", "path": "moonbitlang/core/int16" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -57,13 +57,7 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/int16",
-            "file": "int16.mbt",
-            "line": 52,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

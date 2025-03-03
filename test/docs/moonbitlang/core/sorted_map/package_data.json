@@ -225,8 +225,18 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -239,17 +249,24 @@
                 "column": 52
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/sorted_map",
-            "file": "utils.mbt",
-            "line": 64,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -262,13 +279,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/sorted_map",
-            "file": "map.mbt",
-            "line": 244,
-            "column": 1
-          }
+          ]
         }
       ]
     }

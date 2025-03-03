@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "RationalError",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -29,17 +36,18 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/rational",
-            "file": "rational.mbt",
-            "line": 177,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "RationalError",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -52,13 +60,7 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/rational",
-            "file": "rational.mbt",
-            "line": 170,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -263,8 +265,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -277,17 +286,21 @@
                 "column": 26
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/rational",
-            "file": "rational.mbt",
-            "line": 305,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -300,13 +313,7 @@
                 "column": 43
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/rational",
-            "file": "rational.mbt",
-            "line": 319,
-            "column": 1
-          }
+          ]
         }
       ]
     }

@@ -181,8 +181,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/priority_queue#T\">T</a>[A]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/priority_queue"
+            },
+            "arguments": [ { "kind": "param", "name": "A" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -195,17 +202,21 @@
                 "column": 49
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/priority_queue",
-            "file": "priority_queue.mbt",
-            "line": 281,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/priority_queue#T\">T</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/priority_queue"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -218,13 +229,7 @@
                 "column": 83
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/priority_queue",
-            "file": "priority_queue.mbt",
-            "line": 286,
-            "column": 1
-          }
+          ]
         }
       ]
     }

@@ -82,8 +82,12 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "UUID", "path": "moonbitlang/x/uuid" },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -96,17 +100,15 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/uuid",
-            "file": "uuid.mbt",
-            "line": 43,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "UUID", "path": "moonbitlang/x/uuid" },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -119,17 +121,15 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/uuid",
-            "file": "uuid.mbt",
-            "line": 43,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/uuid#UUID\">UUID</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "UUID", "path": "moonbitlang/x/uuid" },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -142,13 +142,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/uuid",
-            "file": "uuid.mbt",
-            "line": 196,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -165,8 +159,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/uuid#Variant\">Variant</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Variant",
+              "path": "moonbitlang/x/uuid"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -179,13 +180,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/uuid",
-            "file": "variant.mbt",
-            "line": 24,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -202,8 +197,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/uuid#Version\">Version</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Version",
+              "path": "moonbitlang/x/uuid"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -216,13 +218,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/uuid",
-            "file": "variant.mbt",
-            "line": 37,
-            "column": 10
-          }
+          ]
         }
       ]
     }

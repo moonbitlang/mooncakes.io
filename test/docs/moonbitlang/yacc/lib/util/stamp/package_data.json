@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/util/stamp#Stamp\">Stamp</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Stamp",
+              "path": "moonbitlang/yacc/lib/util/stamp"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -29,13 +36,7 @@
                 "column": 23
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/stamp",
-            "file": "stamp.mbt",
-            "line": 16,
-            "column": 23
-          }
+          ]
         }
       ]
     }

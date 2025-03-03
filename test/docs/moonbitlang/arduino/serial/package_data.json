@@ -14,8 +14,11 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino/serial#SerialPrintable\">SerialPrintable</a> for Char",
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
           "methods": [
             {
               "name": "serial_print",
@@ -39,17 +42,14 @@
                 "column": 40
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino/serial",
-            "file": "serial.mbt",
-            "line": 85,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino/serial#SerialPrintable\">SerialPrintable</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
           "methods": [
             {
               "name": "serial_print",
@@ -73,17 +73,14 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino/serial",
-            "file": "serial.mbt",
-            "line": 95,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino/serial#SerialPrintable\">SerialPrintable</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
           "methods": [
             {
               "name": "serial_print",
@@ -107,17 +104,14 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino/serial",
-            "file": "serial.mbt",
-            "line": 105,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino/serial#SerialPrintable\">SerialPrintable</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": {
+            "name": "SerialPrintable",
+            "path": "moonbitlang/arduino/serial"
+          },
           "methods": [
             {
               "name": "serial_print",
@@ -141,13 +135,7 @@
                 "column": 42
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino/serial",
-            "file": "serial.mbt",
-            "line": 115,
-            "column": 1
-          }
+          ]
         }
       ]
     }

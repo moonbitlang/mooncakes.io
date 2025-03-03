@@ -15,8 +15,12 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/fs#IOError\">IOError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "IOError", "path": "moonbitlang/x/fs" },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -29,13 +33,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/fs",
-            "file": "fs.mbt",
-            "line": 16,
-            "column": 33
-          }
+          ]
         }
       ]
     }

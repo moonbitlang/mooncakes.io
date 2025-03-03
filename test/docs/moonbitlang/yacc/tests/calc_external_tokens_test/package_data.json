@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/tests/calc_external_tokens_test#ParseError\">ParseError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParseError",
+              "path": "moonbitlang/yacc/tests/calc_external_tokens_test"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -29,13 +36,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/tests/calc_external_tokens_test",
-            "file": "calc.mbt",
-            "line": 6,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -64,8 +65,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/tests/calc_external_tokens_test#Token\">Token</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Token",
+              "path": "moonbitlang/yacc/tests/calc_external_tokens_test"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -78,13 +86,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/tests/calc_external_tokens_test",
-            "file": "calc_tokens.mbt",
-            "line": 8,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -101,8 +103,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/tests/calc_external_tokens_test#TokenKind\">TokenKind</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "TokenKind",
+              "path": "moonbitlang/yacc/tests/calc_external_tokens_test"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -115,13 +124,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/tests/calc_external_tokens_test",
-            "file": "calc_tokens.mbt",
-            "line": 30,
-            "column": 1
-          }
+          ]
         }
       ]
     }

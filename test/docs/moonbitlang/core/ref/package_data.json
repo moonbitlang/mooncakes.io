@@ -21,8 +21,15 @@
       "name": "Ref",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/ref#Ref\">Ref</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Ref", "path": "moonbitlang/core/ref" },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -35,13 +42,7 @@
                 "column": 75
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/ref",
-            "file": "ref.mbt",
-            "line": 123,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

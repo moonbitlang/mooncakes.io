@@ -14,8 +14,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for Unit",
+          "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -28,17 +28,11 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 236,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -51,17 +45,11 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 38,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for Char",
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -74,17 +62,11 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 113,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -97,17 +79,11 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 47,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -120,17 +96,11 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 55,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for UInt",
+          "self": { "name": "UInt", "path": "moonbitlang/core/uint" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -143,17 +113,11 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 72,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for UInt64",
+          "self": { "name": "UInt64", "path": "moonbitlang/core/uint64" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -166,17 +130,11 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 80,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -189,17 +147,11 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 97,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for String",
+          "self": { "name": "String", "path": "moonbitlang/core/string" },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -212,17 +164,18 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 105,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for T?",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Option",
+              "path": "moonbitlang/core/option"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -235,17 +188,21 @@
                 "column": 45
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 203,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[Ok : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, Err : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/result#Result\">Result</a>[Ok, Err]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Result",
+              "path": "moonbitlang/core/result"
+            },
+            "arguments": [
+              { "kind": "param", "name": "Ok" },
+              { "kind": "param", "name": "Err" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -258,17 +215,18 @@
                 "column": 75
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 212,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "FixedArray",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -281,17 +239,18 @@
                 "column": 56
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 153,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/array#Array\">Array</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Array",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -304,17 +263,18 @@
                 "column": 51
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 134,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/bigint#BigInt\">BigInt</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "BigInt",
+              "path": "moonbitlang/core/bigint"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -327,17 +287,18 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 126,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Json",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -350,17 +311,21 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 244,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[V : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Map",
+              "path": "moonbitlang/core/builtin"
+            },
+            "arguments": [
+              { "name": "String", "path": "moonbitlang/core/string" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -373,17 +338,21 @@
                 "column": 57
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 179,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (A, B)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple2",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -396,17 +365,22 @@
                 "column": 63
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (A, B, C)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple3",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -419,17 +393,23 @@
                 "column": 80
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 31,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (A, B, C, D)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple4",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -442,17 +422,24 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 47,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, E : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (A, B, C, D, E)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple5",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -465,17 +452,25 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 66,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, E : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, F : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (A, B, C, D, E, F)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple6",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -488,17 +483,26 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 87,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, B : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, C : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, D : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, E : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, F : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, G : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (A, B, C, D, E, F, G)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple7",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -511,17 +515,27 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 110,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple8",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -534,17 +548,28 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 135,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple9",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -557,17 +582,29 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 162,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple10",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -580,17 +617,30 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 191,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple11",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -603,17 +653,31 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 222,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple12",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -626,17 +690,32 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 255,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple13",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -649,17 +728,33 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 290,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T13 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple14",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" },
+              { "kind": "param", "name": "T13" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -672,17 +767,34 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 327,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T13 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T14 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple15",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" },
+              { "kind": "param", "name": "T13" },
+              { "kind": "param", "name": "T14" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -695,17 +807,35 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 366,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T0 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T1 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T2 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T3 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T4 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T5 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T6 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T7 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T8 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T9 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T10 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T11 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T12 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T13 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T14 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>, T15 : <a href=\"moonbitlang/core/json#FromJson\">FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">FromJson</a> for (T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple16",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T0" },
+              { "kind": "param", "name": "T1" },
+              { "kind": "param", "name": "T2" },
+              { "kind": "param", "name": "T3" },
+              { "kind": "param", "name": "T4" },
+              { "kind": "param", "name": "T5" },
+              { "kind": "param", "name": "T6" },
+              { "kind": "param", "name": "T7" },
+              { "kind": "param", "name": "T8" },
+              { "kind": "param", "name": "T9" },
+              { "kind": "param", "name": "T10" },
+              { "kind": "param", "name": "T11" },
+              { "kind": "param", "name": "T12" },
+              { "kind": "param", "name": "T13" },
+              { "kind": "param", "name": "T14" },
+              { "kind": "param", "name": "T15" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -718,13 +848,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "tuple_fromjson.mbt",
-            "line": 407,
-            "column": 1
-          }
+          ]
         }
       ]
     }
@@ -743,8 +867,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "JsonDecodeError",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -757,17 +888,18 @@
                 "column": 58
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 16,
-            "column": 58
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/json#JsonDecodeError\">JsonDecodeError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "JsonDecodeError",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -780,13 +912,7 @@
                 "column": 62
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "from_json.mbt",
-            "line": 16,
-            "column": 62
-          }
+          ]
         }
       ]
     },
@@ -837,8 +963,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#JsonPath\">JsonPath</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "JsonPath",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -851,13 +984,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "json_path.mbt",
-            "line": 20,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -886,8 +1013,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParseError",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -900,17 +1034,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "types.mbt",
-            "line": 31,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/json#ParseError\">ParseError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParseError",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -923,13 +1058,7 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "types.mbt",
-            "line": 47,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -946,8 +1075,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/json#Position\">Position</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Position",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -960,13 +1096,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "types.mbt",
-            "line": 23,
-            "column": 10
-          }
+          ]
         }
       ]
     }
@@ -1035,8 +1165,15 @@
       "name": "Json",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/json#Json\">Json</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Json",
+              "path": "moonbitlang/core/json"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1049,13 +1186,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/json",
-            "file": "types.mbt",
-            "line": 52,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

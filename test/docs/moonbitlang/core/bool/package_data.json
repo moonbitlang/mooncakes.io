@@ -9,8 +9,8 @@
       "name": "Bool",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -34,13 +34,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/bool",
-            "file": "bool.mbt",
-            "line": 119,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

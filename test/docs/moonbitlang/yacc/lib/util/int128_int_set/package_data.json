@@ -126,8 +126,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Int128IntSet",
+              "path": "moonbitlang/yacc/lib/util/int128_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -140,17 +147,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/int128_int_set",
-            "file": "int128_int_set_nonjs.mbt",
-            "line": 19,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Int128IntSet",
+              "path": "moonbitlang/yacc/lib/util/int128_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -163,17 +171,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/int128_int_set",
-            "file": "int128_int_set_nonjs.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Int128IntSet",
+              "path": "moonbitlang/yacc/lib/util/int128_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -186,17 +195,18 @@
                 "column": 23
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/int128_int_set",
-            "file": "int128_int_set_nonjs.mbt",
-            "line": 19,
-            "column": 23
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/util/int128_int_set#Int128IntSet\">Int128IntSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Int128IntSet",
+              "path": "moonbitlang/yacc/lib/util/int128_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -209,13 +219,7 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/int128_int_set",
-            "file": "int128_int_set_nonjs.mbt",
-            "line": 30,
-            "column": 1
-          }
+          ]
         }
       ]
     }

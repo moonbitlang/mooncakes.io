@@ -54,8 +54,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#ConflictLocation\">ConflictLocation</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ConflictLocation",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -68,17 +75,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 140,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#ConflictLocation\">ConflictLocation</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ConflictLocation",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -91,13 +99,7 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 140,
-            "column": 14
-          }
+          ]
         }
       ]
     },
@@ -114,8 +116,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#Decision\">Decision</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Decision",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -128,13 +137,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 56,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -207,8 +210,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLR0Item\">EncodedLR0Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLR0Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -221,17 +231,18 @@
                 "column": 45
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lr0_item.mbt",
-            "line": 16,
-            "column": 45
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLR0Item\">EncodedLR0Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLR0Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -244,17 +255,18 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lr0_item.mbt",
-            "line": 16,
-            "column": 41
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLR0Item\">EncodedLR0Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLR0Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -267,13 +279,7 @@
                 "column": 54
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lr0_item.mbt",
-            "line": 16,
-            "column": 54
-          }
+          ]
         }
       ]
     },
@@ -324,8 +330,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLR0ItemSet\">EncodedLR0ItemSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLR0ItemSet",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -338,17 +351,18 @@
                 "column": 45
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lr0_item_set.mbt",
-            "line": 54,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLR0ItemSet\">EncodedLR0ItemSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLR0ItemSet",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -361,17 +375,18 @@
                 "column": 40
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lr0_item_set.mbt",
-            "line": 22,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLR0ItemSet\">EncodedLR0ItemSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLR0ItemSet",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -395,13 +410,7 @@
                 "column": 42
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lr0_item_set.mbt",
-            "line": 27,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -431,8 +440,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLookaheadSet\">EncodedLookaheadSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLookaheadSet",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -445,17 +461,18 @@
                 "column": 54
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lookahead_set.mbt",
-            "line": 18,
-            "column": 54
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLookaheadSet\">EncodedLookaheadSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLookaheadSet",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -468,17 +485,18 @@
                 "column": 50
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lookahead_set.mbt",
-            "line": 18,
-            "column": 50
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#EncodedLookaheadSet\">EncodedLookaheadSet</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EncodedLookaheadSet",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -491,13 +509,7 @@
                 "column": 63
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "encoded_lookahead_set.mbt",
-            "line": 18,
-            "column": 63
-          }
+          ]
         }
       ]
     },
@@ -574,8 +586,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR0Item\">LR0Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR0Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -588,17 +607,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lr0_item.mbt",
-            "line": 19,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR0Item\">LR0Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR0Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -611,17 +631,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lr0_item.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR0Item\">LR0Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR0Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -634,13 +655,7 @@
                 "column": 23
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lr0_item.mbt",
-            "line": 19,
-            "column": 23
-          }
+          ]
         }
       ]
     },
@@ -704,8 +719,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1Item\">LR1Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -718,17 +740,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lr1_item.mbt",
-            "line": 20,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1Item\">LR1Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -741,17 +764,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lr1_item.mbt",
-            "line": 20,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1Item\">LR1Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1Item",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -764,13 +788,7 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lr1_item.mbt",
-            "line": 43,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -787,8 +805,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1ItemGroup\">LR1ItemGroup</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1ItemGroup",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -801,13 +826,7 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 32,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -860,8 +879,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1State\">LR1State</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1State",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -874,17 +900,18 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 103,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1State\">LR1State</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1State",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -897,17 +924,18 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 98,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#LR1State\">LR1State</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LR1State",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -920,13 +948,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "automaton.mbt",
-            "line": 108,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -943,8 +965,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/lr1#Lookahead\">Lookahead</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Lookahead",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -957,17 +986,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lookahead.mbt",
-            "line": 19,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/lr1#Lookahead\">Lookahead</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Lookahead",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -980,17 +1010,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lookahead.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/lr1#Lookahead\">Lookahead</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Lookahead",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -1003,17 +1034,18 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lookahead.mbt",
-            "line": 22,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/lr1#Lookahead\">Lookahead</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Lookahead",
+              "path": "moonbitlang/yacc/lib/lr1"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1026,13 +1058,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/lr1",
-            "file": "lookahead.mbt",
-            "line": 30,
-            "column": 1
-          }
+          ]
         }
       ]
     },

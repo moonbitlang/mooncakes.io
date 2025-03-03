@@ -478,8 +478,12 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/deque#T\">T</a>[A]",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "T", "path": "moonbitlang/core/deque" },
+            "arguments": [ { "kind": "param", "name": "A" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -492,13 +496,7 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/deque",
-            "file": "deque.mbt",
-            "line": 49,
-            "column": 1
-          }
+          ]
         }
       ]
     }

@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#Action\">Action</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Action",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -29,13 +36,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 72,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -52,8 +53,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#Associativity\">Associativity</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Associativity",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -66,13 +74,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 20,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -89,8 +91,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#BindingSubject\">BindingSubject</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "BindingSubject",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -103,13 +112,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 81,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -126,8 +129,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#Clause\">Clause</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Clause",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -140,13 +150,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 63,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -175,8 +179,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#Item\">Item</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Item",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -189,13 +200,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 87,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -212,8 +217,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#ItemDesc\">ItemDesc</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ItemDesc",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -226,13 +238,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 93,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -262,8 +268,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#ParserSpec\">ParserSpec</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParserSpec",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -276,13 +289,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 34,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -299,8 +306,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#Rule\">Rule</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Rule",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -313,13 +327,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 55,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -336,8 +344,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/elab#Token\">Token</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Token",
+              "path": "moonbitlang/yacc/lib/elab"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -350,13 +365,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/elab",
-            "file": "east.mbt",
-            "line": 43,
-            "column": 10
-          }
+          ]
         }
       ]
     },

@@ -109,8 +109,26 @@
       "name": "Tuple7",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, B : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, C : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, D : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, F : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, G : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for (A, B, C, D, E, F, G)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple7",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" },
+              { "kind": "param", "name": "G" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -123,13 +141,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/tuple",
-            "file": "tuple_arbitrary.mbt",
-            "line": 78,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []
@@ -138,8 +150,25 @@
       "name": "Tuple6",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, B : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, C : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, D : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, F : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for (A, B, C, D, E, F)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple6",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" },
+              { "kind": "param", "name": "F" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -152,13 +181,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/tuple",
-            "file": "tuple_arbitrary.mbt",
-            "line": 64,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []
@@ -167,8 +190,24 @@
       "name": "Tuple5",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, B : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, C : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, D : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for (A, B, C, D, E)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple5",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -181,13 +220,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/tuple",
-            "file": "tuple_arbitrary.mbt",
-            "line": 51,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []
@@ -196,8 +229,23 @@
       "name": "Tuple4",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, B : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, C : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, D : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for (A, B, C, D)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple4",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" },
+              { "kind": "param", "name": "D" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -210,13 +258,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/tuple",
-            "file": "tuple_arbitrary.mbt",
-            "line": 39,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []
@@ -225,8 +267,22 @@
       "name": "Tuple3",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, B : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, C : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for (A, B, C)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple3",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" },
+              { "kind": "param", "name": "C" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -239,13 +295,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/tuple",
-            "file": "tuple_arbitrary.mbt",
-            "line": 28,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []
@@ -254,8 +304,21 @@
       "name": "Tuple2",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, B : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for (A, B)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple2",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -268,13 +331,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/tuple",
-            "file": "tuple_arbitrary.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []

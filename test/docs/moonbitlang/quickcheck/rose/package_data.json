@@ -60,8 +60,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/rose#Rose\">Rose</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Rose",
+              "path": "moonbitlang/quickcheck/rose"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -74,13 +81,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/rose",
-            "file": "rose.mbt",
-            "line": 6,
-            "column": 10
-          }
+          ]
         }
       ]
     }

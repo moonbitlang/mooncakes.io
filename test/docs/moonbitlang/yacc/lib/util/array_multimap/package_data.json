@@ -49,8 +49,18 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/util/array_multimap#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/yacc/lib/util/array_multimap"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -63,13 +73,7 @@
                 "column": 68
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/array_multimap",
-            "file": "array_multimap.mbt",
-            "line": 37,
-            "column": 1
-          }
+          ]
         }
       ]
     }

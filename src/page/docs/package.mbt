@@ -229,12 +229,12 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
           @html.img(class="w-5 h-5", src=@config.SEARCH, []),
-          div(class="hidden lg:block", [text("Quick search...")]),
+          div(class="hidden lg:block text-nowrap", [text("Quick search...")]),
         ],
       ),
     ],
   )
-  let sidebar = div(class="px-3 w-full h-full", [
+  let sidebar = div(class="border-b px-3 w-full h-full", [
     div(class="overflow-y-scroll ", [sidebar_view(model.sidebar)]),
   ])
   let main = div(class="flex w-full min-h-full", [
@@ -246,24 +246,25 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     ]),
   ])
   let footer = @view.footer()
-  let floating_view = div([floating_view(model.sidebar)])
+  // TODO: fix floating view
+  let _floating_view = div([floating_view(model.sidebar)])
   div(
-    class="grid grid-rows-[3em_3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
+    class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [
       div(
-        class="col-start-1 row-start-1 lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
+        class="col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
         [logo],
       ),
       div(
-        class="col-start-1 row-start-2 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",
+        class="col-start-1 row-start-1 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",
         [navbar],
       ),
       div(
-        class="col-start-1 row-start-3 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 border-r overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 border-r overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [sidebar],
       ),
       div(
-        class="col-start-1 row-start-4 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [main],
       ),
     ],

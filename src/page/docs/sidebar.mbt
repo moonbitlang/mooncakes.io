@@ -27,13 +27,12 @@ struct SidebarModel {
   hide : Bool
   items : Array[ItemModel]
   // dependencies : Array[ModuleModel] // FIXME
-  mut filter : String
   cards_expanded : Bool
 }
 
 ///|
 fn SidebarModel::empty() -> SidebarModel {
-  { hide: false, items: [], filter: "", cards_expanded: false }
+  { hide: false, items: [], cards_expanded: false }
 }
 
 ///|
@@ -53,7 +52,7 @@ fn item_button[M](
 }
 
 ///|
-fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
+fn item_view(model : ItemModel) -> @html.Html[Msg] {
   let { name, target, kind } = model
   match kind {
     Type =>
@@ -81,15 +80,10 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
         click=ItemClick(target, name),
       )
     Package({ childrens, folded, .. } as pkg) => {
-      let childrens = if filter == "" {
-        childrens
-      } else {
-        childrens.filter(fn(x) { x.name.contains(filter) })
-      }
       let list = if folded {
         div([])
       } else {
-        div(class="pl-4", childrens.map(fn(x) { item_view(x, filter~) }))
+        div(class="pl-4", childrens.map(fn(x) { item_view(x) }))
       }
       let icon = if folded { @config.FOLDER_CLOSE } else { @config.FOLDER_OPEN }
       @html.ul([
@@ -103,30 +97,8 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn item_list_view(
-  items : Array[ItemModel],
-  filter~ : String
-) -> @html.Html[Msg] {
-  @html.ul(class="select-none", items.map(fn(x) { item_view(x, filter~) }))
-}
-
-///|
-fn filter_input_view(value : String) -> @html.Html[Msg] {
-  let icon = if value == "" {
-    @html.img(class="size-[16px] self-center mr-2", src=@config.FILTER, [])
-  } else {
-    div([])
-  }
-  div(class="p-1 px-2 my-2 rounded border flex", [
-    icon,
-    @html.input(
-      class="w-full outline-none ",
-      input_type=Text,
-      placeholder="Filter",
-      change=Msg::FilterChange,
-      value~,
-    ),
-  ])
+fn item_list_view(items : Array[ItemModel]) -> @html.Html[Msg] {
+  @html.ul(class="select-none", items.map(fn(x) { item_view(x) }))
 }
 
 ///|
@@ -136,13 +108,8 @@ fn sidebar_view(model : @util.Status[SidebarModel]) -> @html.Html[Msg] {
     Loading => @html.text("Loading...")
     Success(model) => {
       let hide = if model.hide { "hidden" } else { "" }
-      let items = item_list_view(model.items, filter=model.filter)
-      div([
-        div(class="\{hide}", [
-          filter_input_view(model.filter),
-          div(class="text-gray-700", [items]),
-        ]),
-      ])
+      let items = item_list_view(model.items)
+      div([div(class="\{hide}", [div(class="text-gray-700", [items])])])
     }
   }
 }

@@ -5,7 +5,6 @@ enum Msg {
   ExpandAllCards
   ItemClick(String, String)
   PackageClick(PackageModel)
-  FilterChange(String)
   GotResource(Result[Resource, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageInfo(Result[Array[DetailCardModel], String])
@@ -153,11 +152,6 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           { ..model, path, detail_cards: [] },
         )
       }
-    FilterChange(value) => {
-      guard let Success(sidebar) = model.sidebar
-      sidebar.filter = value
-      (@tea.none(), model)
-    }
   }
 }
 
@@ -234,7 +228,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       ),
     ],
   )
-  let sidebar = div(class="border-b px-3 w-full h-full", [
+  let sidebar = div(class="px-3 w-full h-full", [
     div(class="overflow-y-scroll ", [sidebar_view(model.sidebar)]),
   ])
   let main = div(class="flex w-full min-h-full", [

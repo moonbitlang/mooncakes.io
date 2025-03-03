@@ -173,7 +173,6 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
 fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
   {
     hide: false,
-    filter: "",
     cards_expanded: true,
     items: generate_package_model_from_package(index.package).childrens,
   }

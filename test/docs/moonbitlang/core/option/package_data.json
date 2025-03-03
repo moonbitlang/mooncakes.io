@@ -54,8 +54,18 @@
       "name": "Option",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for X?",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Option",
+              "path": "moonbitlang/core/option"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -68,13 +78,7 @@
                 "column": 71
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/option",
-            "file": "option.mbt",
-            "line": 427,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

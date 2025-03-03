@@ -269,8 +269,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/array"
+            },
+            "arguments": [ { "kind": "param", "name": "A" } ]
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -283,17 +290,18 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/array",
-            "file": "array.mbt",
-            "line": 317,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/array"
+            },
+            "arguments": [ { "kind": "param", "name": "A" } ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -306,17 +314,18 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/array",
-            "file": "array.mbt",
-            "line": 310,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a>[A]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/array"
+            },
+            "arguments": [ { "kind": "param", "name": "A" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -329,17 +338,21 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/array",
-            "file": "array.mbt",
-            "line": 322,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/array#T\">T</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -352,13 +365,7 @@
                 "column": 73
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/array",
-            "file": "array.mbt",
-            "line": 302,
-            "column": 1
-          }
+          ]
         }
       ]
     }

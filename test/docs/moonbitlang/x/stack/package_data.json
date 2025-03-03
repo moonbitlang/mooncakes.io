@@ -313,8 +313,12 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Default\">Default</a>] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/x/stack#Stack\">Stack</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Stack", "path": "moonbitlang/x/stack" },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -327,13 +331,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/stack",
-            "file": "types.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         }
       ]
     }

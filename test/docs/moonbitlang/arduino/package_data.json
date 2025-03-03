@@ -40,8 +40,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#Integer\">Integer</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "Integer", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "is_integer",
@@ -54,17 +54,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 69,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#Integer\">Integer</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Integer", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "is_integer",
@@ -77,13 +71,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 72,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -100,8 +88,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#Number\">Number</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "one",
@@ -125,17 +113,11 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 86,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#Number\">Number</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "one",
@@ -159,17 +141,11 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 89,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#Number\">Number</a> for Float",
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "one",
@@ -193,17 +169,11 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 92,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#Number\">Number</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "one",
@@ -227,13 +197,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 95,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -263,8 +227,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#ToInt16\">ToInt16</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "ToInt16", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "to_int16",
@@ -277,17 +241,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 46,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#ToInt16\">ToInt16</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "ToInt16", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "to_int16",
@@ -300,13 +258,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 49,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -323,8 +275,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#ToInt8\">ToInt8</a> for Byte",
+          "self": { "name": "Byte", "path": "moonbitlang/core/byte" },
+          "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "to_int8",
@@ -337,17 +289,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 30,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#ToInt8\">ToInt8</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "to_int8",
@@ -360,17 +306,11 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 33,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/arduino#ToInt8\">ToInt8</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
           "methods": [
             {
               "name": "to_int8",
@@ -383,13 +323,7 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/arduino",
-            "file": "traits.mbt",
-            "line": 36,
-            "column": 1
-          }
+          ]
         }
       ]
     }

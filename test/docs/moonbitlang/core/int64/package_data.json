@@ -43,8 +43,8 @@
       "name": "Int64",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -68,13 +68,7 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/int64",
-            "file": "xxhash.mbt",
-            "line": 33,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

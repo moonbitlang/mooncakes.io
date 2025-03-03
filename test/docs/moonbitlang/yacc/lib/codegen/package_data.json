@@ -119,8 +119,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/codegen#SourceMap\">SourceMap</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceMap",
+              "path": "moonbitlang/yacc/lib/codegen"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -133,17 +140,21 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/codegen",
-            "file": "source_map.mbt",
-            "line": 4,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/yacc/lib/codegen#SourceMapBuilder\">SourceMapBuilder</a> for <a href=\"moonbitlang/yacc/lib/codegen#SourceMap\">SourceMap</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceMap",
+              "path": "moonbitlang/yacc/lib/codegen"
+            },
+            "arguments": []
+          },
+          "trait": {
+            "name": "SourceMapBuilder",
+            "path": "moonbitlang/yacc/lib/codegen"
+          },
           "methods": [
             {
               "name": "add_mapping",
@@ -156,13 +167,7 @@
                 "column": 46
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/codegen",
-            "file": "source_map.mbt",
-            "line": 25,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -179,8 +184,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/yacc/lib/codegen#SourceMapping\">SourceMapping</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SourceMapping",
+              "path": "moonbitlang/yacc/lib/codegen"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -193,13 +205,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/codegen",
-            "file": "source_map.mbt",
-            "line": 17,
-            "column": 10
-          }
+          ]
         }
       ]
     },

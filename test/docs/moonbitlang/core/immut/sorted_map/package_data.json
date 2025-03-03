@@ -346,8 +346,18 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -360,17 +370,21 @@
                 "column": 61
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 35,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K, V] <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -383,17 +397,21 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 16,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -406,17 +424,21 @@
                 "column": 46
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 21,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>, V : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -429,17 +451,21 @@
                 "column": 52
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 59,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -452,17 +478,21 @@
                 "column": 52
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 66,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, V : <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a>] <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -475,17 +505,21 @@
                 "column": 56
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 71,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[V : <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a>] <a href=\"moonbitlang/core/json#FromJson\">@moonbitlang/core/json.FromJson</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[String, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "name": "String", "path": "moonbitlang/core/string" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": { "name": "FromJson", "path": "moonbitlang/core/json" },
           "methods": [
             {
               "name": "from_json",
@@ -498,17 +532,24 @@
                 "column": 67
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 80,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, V : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/immut/sorted_map#T\">T</a>[K, V]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/sorted_map"
+            },
+            "arguments": [
+              { "kind": "param", "name": "K" },
+              { "kind": "param", "name": "V" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -521,13 +562,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/immut/sorted_map",
-            "file": "traits_impl.mbt",
-            "line": 51,
-            "column": 1
-          }
+          ]
         }
       ]
     }

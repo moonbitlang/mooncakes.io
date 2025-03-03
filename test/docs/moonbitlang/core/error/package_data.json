@@ -9,8 +9,15 @@
       "name": "Error",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Error",
+              "path": "moonbitlang/core/error"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -23,13 +30,7 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/error",
-            "file": "error.mbt",
-            "line": 35,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": []

@@ -203,8 +203,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Duration",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -217,17 +224,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "duration.mbt",
-            "line": 19,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Duration",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -240,17 +248,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "duration.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Duration\">Duration</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Duration",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -263,13 +272,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "duration.mbt",
-            "line": 142,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -529,8 +532,12 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Period", "path": "moonbitlang/x/time" },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -543,17 +550,15 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "period.mbt",
-            "line": 20,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Period", "path": "moonbitlang/x/time" },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -566,17 +571,15 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "period.mbt",
-            "line": 20,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Period\">Period</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Period", "path": "moonbitlang/x/time" },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -589,13 +592,7 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "period.mbt",
-            "line": 92,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -943,8 +940,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#PlainDate\">PlainDate</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainDate",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -957,13 +961,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_date.mbt",
-            "line": 103,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -1432,8 +1430,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainDateTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -1446,17 +1451,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_date_time.mbt",
-            "line": 19,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainDateTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -1469,17 +1475,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_date_time.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#PlainDateTime\">PlainDateTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainDateTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1492,13 +1499,7 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_date_time.mbt",
-            "line": 84,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -1758,8 +1759,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -1772,17 +1780,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_time.mbt",
-            "line": 21,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -1795,17 +1804,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_time.mbt",
-            "line": 21,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#PlainTime\">PlainTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PlainTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1818,13 +1828,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "plain_time.mbt",
-            "line": 81,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -1841,8 +1845,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Weekday",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -1855,17 +1866,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "weekday.mbt",
-            "line": 24,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Weekday\">Weekday</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Weekday",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1878,13 +1890,7 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "weekday.mbt",
-            "line": 24,
-            "column": 14
-          }
+          ]
         }
       ]
     },
@@ -1935,8 +1941,12 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/time#Zone\">Zone</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Zone", "path": "moonbitlang/x/time" },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -1949,17 +1959,15 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "zone.mbt",
-            "line": 20,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#Zone\">Zone</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Zone", "path": "moonbitlang/x/time" },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -1972,13 +1980,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "zone.mbt",
-            "line": 47,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -2095,8 +2097,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#ZoneOffset\">ZoneOffset</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ZoneOffset",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -2109,13 +2118,7 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "zone_offset.mbt",
-            "line": 84,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -2595,8 +2598,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/time#ZonedDateTime\">ZonedDateTime</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ZonedDateTime",
+              "path": "moonbitlang/x/time"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -2609,13 +2619,7 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/time",
-            "file": "zoned_date_time.mbt",
-            "line": 120,
-            "column": 1
-          }
+          ]
         }
       ]
     }

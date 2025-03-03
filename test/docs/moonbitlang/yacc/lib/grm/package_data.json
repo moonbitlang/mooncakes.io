@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/grm#Associativity\">Associativity</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Associativity",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -29,13 +36,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 40,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -135,8 +136,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/grm#Nonterminal\">Nonterminal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Nonterminal",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -149,17 +157,18 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 94,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/grm#Nonterminal\">Nonterminal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Nonterminal",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -172,13 +181,7 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 99,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -195,8 +198,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/grm#Nullability\">Nullability</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Nullability",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -209,13 +219,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 74,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -244,8 +248,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/grm#Production\">Production</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Production",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -258,17 +269,18 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 131,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/grm#Production\">Production</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Production",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -281,17 +293,18 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 126,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/grm#Production\">Production</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Production",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -304,17 +317,18 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 136,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/grm#Production\">Production</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Production",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -327,13 +341,7 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 163,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -350,8 +358,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/grm#Symbol\">Symbol</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -364,17 +379,18 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 107,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/grm#Symbol\">Symbol</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -387,17 +403,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 107,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/grm#Symbol\">Symbol</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -410,17 +427,18 @@
                 "column": 23
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 107,
-            "column": 23
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/grm#Symbol\">Symbol</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Symbol",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -433,13 +451,7 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 110,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -456,8 +468,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/yacc/lib/grm#Terminal\">Terminal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Terminal",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -470,17 +489,18 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 55,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/yacc/lib/grm#Terminal\">Terminal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Terminal",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -493,17 +513,18 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 50,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/yacc/lib/grm#Terminal\">Terminal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Terminal",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -516,17 +537,18 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 60,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/yacc/lib/grm#Terminal\">Terminal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Terminal",
+              "path": "moonbitlang/yacc/lib/grm"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -539,13 +561,7 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/grm",
-            "file": "types.mbt",
-            "line": 65,
-            "column": 1
-          }
+          ]
         }
       ]
     }

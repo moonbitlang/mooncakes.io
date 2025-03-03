@@ -27,8 +27,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#Lex\">Lex</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Lex",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -41,13 +48,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 103,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -87,8 +88,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Regex",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -101,17 +109,18 @@
                 "column": 16
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 15,
-            "column": 16
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Regex",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -124,17 +133,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 15,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#ToJson\">ToJson</a> for <a href=\"moonbitlang/lex/lib/type#Regex\">Regex</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Regex",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "ToJson", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "to_json",
@@ -147,13 +157,7 @@
                 "column": 20
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 15,
-            "column": 20
-          }
+          ]
         }
       ]
     },
@@ -170,8 +174,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#Rule\">Rule</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Rule",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -184,13 +195,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 95,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -207,8 +212,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "VarDefinition",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -221,17 +233,18 @@
                 "column": 16
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 84,
-            "column": 16
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/type#VarDefinition\">VarDefinition</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "VarDefinition",
+              "path": "moonbitlang/lex/lib/type"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -244,13 +257,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/type",
-            "file": "type.mbt",
-            "line": 84,
-            "column": 10
-          }
+          ]
         }
       ]
     }

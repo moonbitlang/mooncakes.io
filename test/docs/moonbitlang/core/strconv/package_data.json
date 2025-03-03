@@ -14,8 +14,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": { "name": "FromStr", "path": "moonbitlang/core/strconv" },
           "methods": [
             {
               "name": "from_string",
@@ -28,17 +28,11 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "traits.mbt",
-            "line": 27,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "FromStr", "path": "moonbitlang/core/strconv" },
           "methods": [
             {
               "name": "from_string",
@@ -51,17 +45,11 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "traits.mbt",
-            "line": 32,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "FromStr", "path": "moonbitlang/core/strconv" },
           "methods": [
             {
               "name": "from_string",
@@ -74,17 +62,11 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "traits.mbt",
-            "line": 37,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for UInt",
+          "self": { "name": "UInt", "path": "moonbitlang/core/uint" },
+          "trait": { "name": "FromStr", "path": "moonbitlang/core/strconv" },
           "methods": [
             {
               "name": "from_string",
@@ -97,17 +79,11 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "traits.mbt",
-            "line": 42,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for UInt64",
+          "self": { "name": "UInt64", "path": "moonbitlang/core/uint64" },
+          "trait": { "name": "FromStr", "path": "moonbitlang/core/strconv" },
           "methods": [
             {
               "name": "from_string",
@@ -120,17 +96,11 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "traits.mbt",
-            "line": 47,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/strconv#FromStr\">FromStr</a> for Double",
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": { "name": "FromStr", "path": "moonbitlang/core/strconv" },
           "methods": [
             {
               "name": "from_string",
@@ -143,13 +113,7 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "traits.mbt",
-            "line": 52,
-            "column": 1
-          }
+          ]
         }
       ]
     }
@@ -224,8 +188,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/strconv#Decimal\">Decimal</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Decimal",
+              "path": "moonbitlang/core/strconv"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -238,13 +209,7 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "decimal.mbt",
-            "line": 597,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -261,8 +226,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/strconv#StrConvError\">StrConvError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StrConvError",
+              "path": "moonbitlang/core/strconv"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -275,13 +247,7 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/strconv",
-            "file": "errors.mbt",
-            "line": 19,
-            "column": 1
-          }
+          ]
         }
       ]
     }

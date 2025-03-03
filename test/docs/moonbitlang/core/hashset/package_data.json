@@ -225,8 +225,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/hashset"
+            },
+            "arguments": [ { "kind": "param", "name": "K" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -239,17 +246,21 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/hashset",
-            "file": "hashset.mbt",
-            "line": 331,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/hashset#T\">T</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/hashset"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -262,13 +273,7 @@
                 "column": 85
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/hashset",
-            "file": "hashset.mbt",
-            "line": 242,
-            "column": 1
-          }
+          ]
         }
       ]
     }

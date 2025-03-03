@@ -7,12 +7,7 @@ enum DetailCardModel {
     signature~ : String,
     description~ : String
   )
-  ImplCard(
-    mut folded~ : Bool,
-    name~ : String,
-    signature~ : String,
-    description~ : String
-  )
+  ImplCard(mut folded~ : Bool, name~ : String, signature~ : String)
   TypeCard(
     mut folded~ : Bool,
     name~ : String,
@@ -94,9 +89,9 @@ fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
   }
   // description
   let (description, foldable) = match card {
+    ImplCard(..) => (@html.nothing(), @html.nothing())
     TypeCard(description~, ..)
     | ValueCard(description~, ..)
-    | ImplCard(description~, ..)
     | TraitCard(description~, ..) =>
       if description == "" {
         (@html.nothing(), @html.nothing())

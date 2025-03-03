@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/falsify#Config\">Config</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Config",
+              "path": "moonbitlang/quickcheck/falsify"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -29,13 +36,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/falsify",
-            "file": "driver.mbt",
-            "line": 22,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -78,8 +79,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[E : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/falsify#Failure\">Failure</a>[E]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Failure",
+              "path": "moonbitlang/quickcheck/falsify"
+            },
+            "arguments": [ { "kind": "param", "name": "E" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -92,13 +100,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/falsify",
-            "file": "driver.mbt",
-            "line": 12,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -372,8 +374,18 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[P : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, N : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/falsify#ShrinkExplain\">ShrinkExplain</a>[P, N]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ShrinkExplain",
+              "path": "moonbitlang/quickcheck/falsify"
+            },
+            "arguments": [
+              { "kind": "param", "name": "P" },
+              { "kind": "param", "name": "N" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -386,13 +398,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/falsify",
-            "file": "shrinking.mbt",
-            "line": 12,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -409,8 +415,18 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[P : <a href=\"moonbitlang/core/builtin#Show\">Show</a>, N : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/falsify#ShrinkHistory\">ShrinkHistory</a>[P, N]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ShrinkHistory",
+              "path": "moonbitlang/quickcheck/falsify"
+            },
+            "arguments": [
+              { "kind": "param", "name": "P" },
+              { "kind": "param", "name": "N" }
+            ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -423,13 +439,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/falsify",
-            "file": "shrinking.mbt",
-            "line": 6,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -446,8 +456,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/falsify#Success\">Success</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Success",
+              "path": "moonbitlang/quickcheck/falsify"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -460,13 +477,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/falsify",
-            "file": "driver.mbt",
-            "line": 6,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -496,8 +507,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/falsify#TestRun\">TestRun</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "TestRun",
+              "path": "moonbitlang/quickcheck/falsify"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -510,13 +528,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/falsify",
-            "file": "property.mbt",
-            "line": 9,
-            "column": 10
-          }
+          ]
         }
       ]
     }

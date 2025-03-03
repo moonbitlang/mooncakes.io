@@ -14,8 +14,11 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for Unit",
+          "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -28,17 +31,14 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 69,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -51,17 +51,14 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 7,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for Int",
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -74,17 +71,14 @@
                 "column": 34
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 12,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for Int64",
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -97,17 +91,14 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 21,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for UInt",
+          "self": { "name": "UInt", "path": "moonbitlang/core/uint" },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -120,17 +111,14 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 30,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for UInt64",
+          "self": { "name": "UInt64", "path": "moonbitlang/core/uint64" },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -143,17 +131,21 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 35,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[E : <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for E?",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Option",
+              "path": "moonbitlang/core/option"
+            },
+            "arguments": [ { "kind": "param", "name": "E" } ]
+          },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -166,17 +158,24 @@
                 "column": 49
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 55,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a>, E : <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Result",
+              "path": "moonbitlang/core/result"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -189,17 +188,21 @@
                 "column": 75
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 60,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[E : <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for <a href=\"moonbitlang/core/immut/list#T\">@moonbitlang/core/immut/list.T</a>[E]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/immut/list"
+            },
+            "arguments": [ { "kind": "param", "name": "E" } ]
+          },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -212,17 +215,24 @@
                 "column": 63
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 40,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[A : <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a>, B : <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a>] <a href=\"moonbitlang/quickcheck/feat#Enumerable\">Enumerable</a> for (A, B)",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Tuple2",
+              "path": "moonbitlang/core/tuple"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "B" }
+            ]
+          },
+          "trait": {
+            "name": "Enumerable",
+            "path": "moonbitlang/quickcheck/feat"
+          },
           "methods": [
             {
               "name": "enumerate",
@@ -235,13 +245,7 @@
                 "column": 69
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "enumerable.mbt",
-            "line": 50,
-            "column": 1
-          }
+          ]
         }
       ]
     }
@@ -341,8 +345,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck/feat#Finite\">Finite</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Finite",
+              "path": "moonbitlang/quickcheck/feat"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -355,13 +366,7 @@
                 "column": 44
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck/feat",
-            "file": "finite.mbt",
-            "line": 113,
-            "column": 1
-          }
+          ]
         }
       ]
     }

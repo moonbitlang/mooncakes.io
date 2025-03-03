@@ -87,8 +87,8 @@
       "name": "Float",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Float",
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -112,17 +112,11 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/float",
-            "file": "float.mbt",
-            "line": 203,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for Float",
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -135,13 +129,7 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/float",
-            "file": "float.mbt",
-            "line": 147,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

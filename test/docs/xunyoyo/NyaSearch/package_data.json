@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"xunyoyo/NyaSearch#EmptyPatternError\">EmptyPatternError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "EmptyPatternError",
+              "path": "xunyoyo/NyaSearch"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -29,13 +36,7 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "xunyoyo/NyaSearch",
-            "file": "error.mbt",
-            "line": 2,
-            "column": 39
-          }
+          ]
         }
       ]
     },
@@ -52,8 +53,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"xunyoyo/NyaSearch#InvalidRangeError\">InvalidRangeError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "InvalidRangeError",
+              "path": "xunyoyo/NyaSearch"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -66,13 +74,7 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "xunyoyo/NyaSearch",
-            "file": "error.mbt",
-            "line": 11,
-            "column": 39
-          }
+          ]
         }
       ]
     },
@@ -89,8 +91,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"xunyoyo/NyaSearch#OptionChooseError\">OptionChooseError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "OptionChooseError",
+              "path": "xunyoyo/NyaSearch"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -103,13 +112,7 @@
                 "column": 39
               }
             }
-          ],
-          "loc": {
-            "path": "xunyoyo/NyaSearch",
-            "file": "error.mbt",
-            "line": 8,
-            "column": 39
-          }
+          ]
         }
       ]
     },
@@ -126,8 +129,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"xunyoyo/NyaSearch#PatternTooLongError\">PatternTooLongError</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "PatternTooLongError",
+              "path": "xunyoyo/NyaSearch"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -140,13 +150,7 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "xunyoyo/NyaSearch",
-            "file": "error.mbt",
-            "line": 5,
-            "column": 41
-          }
+          ]
         }
       ]
     },

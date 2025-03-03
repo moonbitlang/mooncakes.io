@@ -6,7 +6,7 @@ enum Msg {
   ItemClick(String, String)
   PackageClick(PackageModel)
   FilterChange(String)
-  GotMetaInfo(Result[MetaInfoModel, String])
+  GotResource(Result[Resource, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageInfo(Result[Array[DetailCardModel], String])
 }
@@ -16,27 +16,30 @@ struct Model {
   now_path : String
   sidebar : @util.Status[SidebarModel]
   detail_cards : Array[DetailCardModel]
-  meta_info : @util.Status[MetaInfoModel]
+  meta_info : @util.Status[MetaInfo]
+  readme_content : @util.Status[String]
+  source_files : @util.Status[Array[String]]
 }
 
 ///|
 fn Model::empty() -> Model {
-  { now_path: "", sidebar: Loading, detail_cards: [], meta_info: Loading }
+  {
+    now_path: "",
+    sidebar: Loading,
+    detail_cards: [],
+    meta_info: Loading,
+    readme_content: Loading,
+    source_files: Loading,
+  }
 }
 
 ///|
 pub fn load(path : String) -> (@tea.Command[Msg], Model) {
   (
-    @tea.batch([
-      @http.get(
-        @config.URL_BASE + "/docs/" + path + "/moon.mod.json",
-        expect=Json(Msg::GotMetaInfo, parse_metadata),
-      ),
-      @http.get(
-        @config.URL_BASE + "/docs/" + path + "/module_index.json",
-        expect=Json(Msg::GotModuleIndex, parse_module_index),
-      ),
-    ]),
+    @http.get(
+      @config.URL_BASE + "/docs/" + path + "/resource.json",
+      expect=Json(Msg::GotResource, decode_resource),
+    ),
     Model::empty(),
   )
 }
@@ -44,14 +47,61 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
 ///|
 pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
   match msg {
-    GotMetaInfo(result) =>
-      (
-        @tea.none(),
-        match result {
-          Ok(meta_info) => { ..model, meta_info: Success(meta_info) }
-          Err(_) => { ..model, meta_info: Failed }
-        },
-      )
+    GotResource(result) =>
+      match result {
+        Ok({ readme_content, kind }) => {
+          let model = { ..model, readme_content: Success(readme_content) }
+          match kind {
+            Module({ module_index_path, meta_info }) =>
+              (
+                @http.get(
+                  @config.URL_BASE + "/docs/" + module_index_path,
+                  expect=Json(Msg::GotModuleIndex, parse_module_index),
+                ),
+                { ..model, meta_info: Success(meta_info) },
+              )
+            Package({ package_data_path, source_files }) =>
+              (
+                @http.get(
+                  @config.URL_BASE + "/docs/" + package_data_path,
+                  expect=Json(Msg::GotPackageInfo, process_package_info),
+                ),
+                { ..model, source_files: Success(source_files) },
+              )
+            ModuleAndPackage(
+              { module_index_path, meta_info },
+              { package_data_path, source_files }
+            ) =>
+              (
+                @tea.batch([
+                  @http.get(
+                    @config.URL_BASE + "/docs/" + module_index_path,
+                    expect=Json(Msg::GotModuleIndex, parse_module_index),
+                  ),
+                  @http.get(
+                    @config.URL_BASE + "/docs/" + package_data_path,
+                    expect=Json(Msg::GotPackageInfo, process_package_info),
+                  ),
+                ]),
+                {
+                  ..model,
+                  source_files: Success(source_files),
+                  meta_info: Success(meta_info),
+                },
+              )
+          }
+        }
+        Err(_) =>
+          (
+            @tea.none(),
+            {
+              ..model,
+              meta_info: Failed,
+              source_files: Failed,
+              readme_content: Failed,
+            },
+          )
+      }
     GotModuleIndex(result) =>
       (
         @tea.none(),
@@ -100,8 +150,8 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       } else {
         (
           @http.get(
-            @config.URL_BASE + "/docs/" + path + "/package_data.json",
-            expect=Json(Msg::GotPackageInfo, process_package_info),
+            @config.URL_BASE + "/docs/" + path + "/resource.json",
+            expect=Json(Msg::GotResource, decode_resource),
           ),
           { ..model, now_path: path, detail_cards: [] },
         )
@@ -116,6 +166,25 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
+  // FIXME: improve style of readme file
+  let readme = match model.readme_content {
+    Failed => text("Failed to load README")
+    Loading => text("Loading README...")
+    Success(content) =>
+      if content == "" {
+        @html.nothing()
+      } else {
+        div(class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2", [
+          card_view(ReadmeCard(content, folded=false)),
+        ])
+      }
+  }
+  // FIXME: improve style of source file lists, add hyperlink to source file
+  let source_files = match model.source_files {
+    Failed | Loading => @html.nothing()
+    Success(files) =>
+      div(class="p-3 flex gap-3", files.map(fn(x) { div([text(x)]) }))
+  }
   div(
     class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
@@ -130,7 +199,9 @@ pub fn view(model : Model) -> @html.Html[Msg] {
           ),
         ]),
         div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
+          readme,
           detail_cards_view(model.detail_cards),
+          source_files,
         ]),
       ]),
       @view.footer(),

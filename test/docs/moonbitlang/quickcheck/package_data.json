@@ -39,8 +39,8 @@
       "default_impls": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for Unit",
+          "self": { "name": "Unit", "path": "moonbitlang/core/unit" },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -53,17 +53,11 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 50,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for Bool",
+          "self": { "name": "Bool", "path": "moonbitlang/core/bool" },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -76,17 +70,18 @@
                 "column": 33
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 63,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[P : <a href=\"moonbitlang/quickcheck#Testable\">Testable</a>] <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for P?",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Option",
+              "path": "moonbitlang/core/option"
+            },
+            "arguments": [ { "kind": "param", "name": "P" } ]
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -99,17 +94,27 @@
                 "column": 45
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 73,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck/rose#Rose\">@moonbitlang/quickcheck/rose.Rose</a>[<a href=\"moonbitlang/quickcheck#SingleResult\">SingleResult</a>]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Rose",
+              "path": "moonbitlang/quickcheck/rose"
+            },
+            "arguments": [
+              {
+                "kind": "constr",
+                "constructor": {
+                  "name": "SingleResult",
+                  "path": "moonbitlang/quickcheck"
+                },
+                "arguments": []
+              }
+            ]
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -122,13 +127,7 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 55,
-            "column": 1
-          }
+          ]
         }
       ]
     }
@@ -147,8 +146,18 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[P : <a href=\"moonbitlang/quickcheck#Testable\">Testable</a>, A : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/quickcheck#Shrink\">Shrink</a> + <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck#Arrow\">Arrow</a>[A, P]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Arrow",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": [
+              { "kind": "param", "name": "A" },
+              { "kind": "param", "name": "P" }
+            ]
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -161,13 +170,7 @@
                 "column": 8
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 76,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -303,8 +306,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/quickcheck#Discard\">Discard</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Discard",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -317,17 +327,18 @@
                 "column": 26
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 39,
-            "column": 26
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck#Discard\">Discard</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Discard",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -340,13 +351,7 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 45,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -430,8 +435,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck#Equivalence\">Equivalence</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Equivalence",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -444,13 +456,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "axiom.mbt",
-            "line": 5,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -633,8 +639,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[P : <a href=\"moonbitlang/quickcheck#Testable\">Testable</a>] <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck#Gen\">Gen</a>[P]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Gen",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": [ { "kind": "param", "name": "P" } ]
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -647,13 +660,7 @@
                 "column": 49
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 68,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -683,8 +690,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck#Kind\">Kind</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Kind",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -697,13 +711,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 23,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -720,8 +728,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/quickcheck#ListCompare\">ListCompare</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ListCompare",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -734,17 +749,18 @@
                 "column": 36
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "state.mbt",
-            "line": 210,
-            "column": 36
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck#ListCompare\">ListCompare</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ListCompare",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -757,13 +773,7 @@
                 "column": 40
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "state.mbt",
-            "line": 210,
-            "column": 40
-          }
+          ]
         }
       ]
     },
@@ -780,8 +790,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/quickcheck#Outcome\">Outcome</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Outcome",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -794,13 +811,7 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "result.mbt",
-            "line": 9,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -886,8 +897,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck#Property\">Property</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Property",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -900,13 +918,7 @@
                 "column": 37
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 42,
-            "column": 1
-          }
+          ]
         }
       ]
     },
@@ -948,8 +960,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/quickcheck#Testable\">Testable</a> for <a href=\"moonbitlang/quickcheck#SingleResult\">SingleResult</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SingleResult",
+              "path": "moonbitlang/quickcheck"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Testable", "path": "moonbitlang/quickcheck" },
           "methods": [
             {
               "name": "property",
@@ -962,13 +981,7 @@
                 "column": 41
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/quickcheck",
-            "file": "testable.mbt",
-            "line": 58,
-            "column": 1
-          }
+          ]
         }
       ]
     },

@@ -51,8 +51,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/json5#ParseErrorData\">ParseErrorData</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ParseErrorData",
+              "path": "moonbitlang/x/json5"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -65,13 +72,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/json5",
-            "file": "types.mbt",
-            "line": 27,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -88,8 +89,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/x/json5#Position\">Position</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Position",
+              "path": "moonbitlang/x/json5"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -102,17 +110,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/json5",
-            "file": "types.mbt",
-            "line": 19,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/x/json5#Position\">Position</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Position",
+              "path": "moonbitlang/x/json5"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -125,13 +134,7 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/x/json5",
-            "file": "types.mbt",
-            "line": 19,
-            "column": 14
-          }
+          ]
         }
       ]
     }

@@ -27,8 +27,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Logger\">Logger</a> for <a href=\"moonbitlang/yacc/lib/util/logger_with_cursor#LoggerWithCursor\">LoggerWithCursor</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LoggerWithCursor",
+              "path": "moonbitlang/yacc/lib/util/logger_with_cursor"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Logger", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "write_char",
@@ -63,13 +70,7 @@
                 "column": 43
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/yacc/lib/util/logger_with_cursor",
-            "file": "logger_with_cursor.mbt",
-            "line": 18,
-            "column": 1
-          }
+          ]
         }
       ]
     }

@@ -13,9 +13,10 @@ fn process_package_info(
   }
 
   fn process_impl {
-    ({ "docstring": String(description), "signature": String(signature), .. } : Json) =>
-      ImplCard(folded=false, name=signature, signature~, description~)
-    _ => FailureCard(folded=false, info="Impl Card parsing failed")
+    (_ : Json) =>
+      // TODO: fix impl card
+      ImplCard(folded=false, name="", signature="TODO: fix impls")
+    // _ => FailureCard(folded=false, info="Impl Card parsing failed")
   }
 
   fn process_type {
@@ -86,12 +87,10 @@ fn process_package_info(
       "typealias": Array(alias_),
       "values": Array(values),
       "traits": Array(traits),
-      "readme": String(readme),
       "misc": Array(misc),
       ..
     } : Json) =>
       Ok(
-        (if readme != "" { [ReadmeCard(folded=false, readme)] } else { [] }) +
         [
           ..types.map(process_type),
           ..alias_.map(process_typealias),

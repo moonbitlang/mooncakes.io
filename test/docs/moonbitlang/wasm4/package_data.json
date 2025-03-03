@@ -91,8 +91,12 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/wasm4#GamePad\">GamePad</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "GamePad", "path": "moonbitlang/wasm4" },
+            "arguments": []
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -105,17 +109,15 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/wasm4",
-            "file": "memory.mbt",
-            "line": 84,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/wasm4#GamePad\">GamePad</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "GamePad", "path": "moonbitlang/wasm4" },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -128,13 +130,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/wasm4",
-            "file": "memory.mbt",
-            "line": 84,
-            "column": 10
-          }
+          ]
         }
       ]
     },
@@ -151,8 +147,12 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Default\">Default</a> for <a href=\"moonbitlang/wasm4#Mouse\">Mouse</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Mouse", "path": "moonbitlang/wasm4" },
+            "arguments": []
+          },
+          "trait": { "name": "Default", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "default",
@@ -165,17 +165,15 @@
                 "column": 14
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/wasm4",
-            "file": "memory.mbt",
-            "line": 113,
-            "column": 14
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/wasm4#Mouse\">Mouse</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": { "name": "Mouse", "path": "moonbitlang/wasm4" },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -188,13 +186,7 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/wasm4",
-            "file": "memory.mbt",
-            "line": 113,
-            "column": 10
-          }
+          ]
         }
       ]
     },

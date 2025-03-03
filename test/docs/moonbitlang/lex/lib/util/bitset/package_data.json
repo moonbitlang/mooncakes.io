@@ -71,8 +71,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/lex/lib/util/bitset#Bitset\">Bitset</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Bitset",
+              "path": "moonbitlang/lex/lib/util/bitset"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -85,17 +92,18 @@
                 "column": 10
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/util/bitset",
-            "file": "bitset.mbt",
-            "line": 8,
-            "column": 10
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for <a href=\"moonbitlang/lex/lib/util/bitset#Bitset\">Bitset</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Bitset",
+              "path": "moonbitlang/lex/lib/util/bitset"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash_combine",
@@ -108,17 +116,18 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/util/bitset",
-            "file": "bitset.mbt",
-            "line": 51,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/lex/lib/util/bitset#Bitset\">Bitset</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Bitset",
+              "path": "moonbitlang/lex/lib/util/bitset"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -131,13 +140,7 @@
                 "column": 31
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/lex/lib/util/bitset",
-            "file": "bitset.mbt",
-            "line": 56,
-            "column": 1
-          }
+          ]
         }
       ]
     }

@@ -15,8 +15,15 @@
       "methods": [],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/string#StringIndex\">StringIndex</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StringIndex",
+              "path": "moonbitlang/core/string"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -29,17 +36,18 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/string",
-            "file": "view.mbt",
-            "line": 46,
-            "column": 35
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/string#StringIndex\">StringIndex</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StringIndex",
+              "path": "moonbitlang/core/string"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -52,13 +60,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/string",
-            "file": "view.mbt",
-            "line": 46,
-            "column": 29
-          }
+          ]
         }
       ]
     },
@@ -153,8 +155,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/string#StringView\">StringView</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StringView",
+              "path": "moonbitlang/core/string"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -178,13 +187,7 @@
                 "column": 35
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/string",
-            "file": "view.mbt",
-            "line": 399,
-            "column": 1
-          }
+          ]
         }
       ]
     }

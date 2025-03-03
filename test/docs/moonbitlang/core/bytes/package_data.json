@@ -203,8 +203,15 @@
       ],
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/core/bytes#View\">View</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "View",
+              "path": "moonbitlang/core/bytes"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -217,17 +224,18 @@
                 "column": 32
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/bytes",
-            "file": "view.mbt",
-            "line": 628,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/bytes#View\">View</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "View",
+              "path": "moonbitlang/core/bytes"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -240,17 +248,18 @@
                 "column": 27
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/bytes",
-            "file": "view.mbt",
-            "line": 593,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/bytes#View\">View</a>",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "View",
+              "path": "moonbitlang/core/bytes"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -263,13 +272,7 @@
                 "column": 29
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/bytes",
-            "file": "view.mbt",
-            "line": 554,
-            "column": 1
-          }
+          ]
         }
       ]
     }
@@ -337,8 +340,8 @@
       "name": "Bytes",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> for Bytes",
+          "self": { "name": "Bytes", "path": "moonbitlang/core/bytes" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "hash",
@@ -362,13 +365,7 @@
                 "column": 30
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/bytes",
-            "file": "xxhash.mbt",
-            "line": 45,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

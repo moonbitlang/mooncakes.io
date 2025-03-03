@@ -21,8 +21,15 @@
       "name": "ArrayView",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> for <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArrayView",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "compare",
@@ -35,17 +42,18 @@
                 "column": 48
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/array",
-            "file": "view.mbt",
-            "line": 366,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>] <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> for <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArrayView",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "op_equal",
@@ -58,17 +66,18 @@
                 "column": 38
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/array",
-            "file": "view.mbt",
-            "line": 352,
-            "column": 1
-          }
+          ]
         },
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>] <a href=\"moonbitlang/core/builtin#Show\">Show</a> for <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArrayView",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
           "methods": [
             {
               "name": "output",
@@ -81,13 +90,7 @@
                 "column": 42
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/array",
-            "file": "view.mbt",
-            "line": 347,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [
@@ -273,8 +276,18 @@
       "name": "Array",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/array#Array\">Array</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Array",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -287,13 +300,7 @@
                 "column": 77
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/array",
-            "file": "array.mbt",
-            "line": 206,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [
@@ -446,8 +453,18 @@
       "name": "FixedArray",
       "impls": [
         {
-          "docstring": "",
-          "signature": "impl[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>] <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> for <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[X]",
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "FixedArray",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
           "methods": [
             {
               "name": "arbitrary",
@@ -460,13 +477,7 @@
                 "column": 82
               }
             }
-          ],
-          "loc": {
-            "path": "moonbitlang/core/array",
-            "file": "fixedarray.mbt",
-            "line": 1218,
-            "column": 1
-          }
+          ]
         }
       ],
       "methods": [

@@ -197,46 +197,67 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         ])
       }
   }
+  let version = match model.meta_info {
+    Failed | Loading => ""
+    Success(meta_info) => meta_info.version
+  }
   // FIXME: improve style of source file lists, add hyperlink to source file
   let source_files = match model.source_files {
     Failed | Loading => @html.nothing()
     Success(files) =>
       div(class="p-3 flex gap-3", files.map(fn(x) { div([text(x)]) }))
   }
-  div(
-    class="flex flex-col overflow-scroll scrollbar-thin h-screen scrollbar-thumb-purple-300 scrollbar-track-transparent",
+  // logo
+  let logo = div(
+    class="border-b h-full container flex items-center top-0 z-20 bg-white",
     [
-      div(
-        class="bg-white w-full py-3 border-b select-none flex gap-4 sticky top-0 z-10",
-        [
-          // logo
-          @html.a(class="border-r w-[400px] border-gray-300", href="/", [
-            h1(class="font-title text-gray-700 font-semibold ", [
-              text("🥮 mooncakes.io"),
-            ]),
-          ]),
-          breadcrumbs(model.path, model.module_path),
-          // version
-          tag_view("0.1.0"),
-          // div(class="text-gray-600 border px-2 text-base rounded bg-slate-100", [text("0.1.0")]),
-        ],
-      ),
-      div([floating_view(model.sidebar)]),
-      div(class="flex w-full", [
-        div(class="px-3 w-[400px] border-r", [
-          div(
-            class="sticky top-14 overflow-y-scroll max-h-screen scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-            [sidebar_view(model.sidebar)],
-          ),
-        ]),
-        div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
-          div(class="w-full", [meta_info(model.meta_info)]),
-          readme,
-          detail_cards_view(model.detail_cards),
-          source_files,
+      @html.a(class="border-gray-300 lg:border-r w-full", href="/", [
+        h1(class="font-title text-gray-700 font-semibold mx-12", [
+          text("🥮 mooncakes.io"),
         ]),
       ]),
-      @view.footer(),
+    ],
+  )
+  let navbar = div(
+    class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
+    [
+      breadcrumbs(model.path, model.module_path),
+      // version
+      tag_view(version),
+    ],
+  )
+  let sidebar = div(class="px-3 w-full h-full", [
+    div(class="overflow-y-scroll ", [sidebar_view(model.sidebar)]),
+  ])
+  let main = div(class="flex w-full min-h-full", [
+    div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
+      div(class="w-full", [meta_info(model.meta_info)]),
+      readme,
+      detail_cards_view(model.detail_cards),
+      source_files,
+    ]),
+  ])
+  let footer = @view.footer()
+  let floating_view = div([floating_view(model.sidebar)])
+  div(
+    class="grid grid-rows-[3em_3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
+    [
+      div(
+        class="col-start-1 row-start-1 lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
+        [logo],
+      ),
+      div(
+        class="col-start-1 row-start-2 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",
+        [navbar],
+      ),
+      div(
+        class="col-start-1 row-start-3 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 border-r overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        [sidebar],
+      ),
+      div(
+        class="col-start-1 row-start-4 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        [main],
+      ),
     ],
   )
 }

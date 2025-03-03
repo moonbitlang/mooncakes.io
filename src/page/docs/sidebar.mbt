@@ -107,7 +107,7 @@ fn item_list_view(
   items : Array[ItemModel],
   filter~ : String
 ) -> @html.Html[Msg] {
-  @html.ul(items.map(fn(x) { item_view(x, filter~) }))
+  @html.ul(class="select-none", items.map(fn(x) { item_view(x, filter~) }))
 }
 
 ///|

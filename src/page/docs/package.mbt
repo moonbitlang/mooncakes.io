@@ -224,6 +224,14 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       breadcrumbs(model.path, model.module_path),
       // version
       tag_view(version),
+      div(class="flex-grow", []),
+      @html.button(
+        class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
+        [
+          @html.img(class="w-5 h-5", src=@config.SEARCH, []),
+          div(class="hidden lg:block", [text("Quick search...")]),
+        ],
+      ),
     ],
   )
   let sidebar = div(class="px-3 w-full h-full", [

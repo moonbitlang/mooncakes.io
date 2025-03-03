@@ -113,7 +113,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
-    ThematicBreak(_) => hr()
+    ThematicBreak(_) => hr(class="my-4")
     ExtTable(_) => div([text("markdown Table")]) // FIXME
     LinkRefDefinition(_) => {
       // FIXME

@@ -11,7 +11,6 @@ enum ItemKind {
   Value
   Type
   Trait
-  Readme
   TypeAlias
 } derive(Show)
 
@@ -57,12 +56,6 @@ fn item_button[M](
 fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
   let { name, target, kind } = model
   match kind {
-    Readme =>
-      item_button(
-        text(name),
-        icon=@config.README_ICON,
-        click=ItemClick(target, name),
-      )
     Type =>
       item_button(
         text(name),

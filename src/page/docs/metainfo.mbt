@@ -36,7 +36,7 @@ fn tag_view(value : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn meta_info_view(model : @util.Status[MetaInfoModel]) -> @html.Html[Msg] {
+fn meta_info_view(model : @util.Status[MetaInfo]) -> @html.Html[Msg] {
   match model {
     Failed => @html.nothing()
     Loading => @html.text("Loading...")
@@ -74,7 +74,7 @@ fn meta_info_view(model : @util.Status[MetaInfoModel]) -> @html.Html[Msg] {
         div(class="flex flex-col gap-2", [
           meta_info_item_view(
             title="Install",
-            div([install_view(path=model.module_path)]),
+            div([install_view(path=model.name)]),
           ),
           meta_info_item_view(
             title="Author",

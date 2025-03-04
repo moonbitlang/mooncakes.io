@@ -5,7 +5,7 @@ fn inline_text[M](str : String) -> @html.Html[M] {
 
 ///|
 fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
-  guard let Image(img) = img
+  guard img is Image(img)
   match img {
     {
       v: {
@@ -141,7 +141,47 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         [@cmark.TableRow::Sep(_) as sep, .. rest] => (sep, [..rest])
         _ => abort("Table has no separator")
       }
-      @html.nothing()
+      guard fmt is Sep(fmts)
+      let col_group = @html.colgroup(
+        fmts
+        .map(fn {
+          { v: (sep, _), .. } => {
+            let class = match sep {
+              Some(align) =>
+                match align {
+                  Left => "text-left"
+                  Center => "text-center"
+                  Right => "text-right"
+                }
+              None => ""
+            }
+            @html.col(class~, [])
+          }
+        })
+        .to_array(),
+      )
+      let cols = elements.map(fn {
+        Header(rows) =>
+          @html.thead(
+            rows
+            .map(fn { (inline, _) => @html.th(inline2html(inline)) })
+            .to_array(),
+          )
+        Data(rows) =>
+          @html.tbody(
+            rows
+            .map(fn { (inline, _) => @html.td(inline2html(inline)) })
+            .to_array(),
+          )
+        Sep(_) => {
+          println("Error: incorrect table format")
+          @html.nothing()
+        }
+      })
+      @html.table(
+        class="border-collapse border border-gray-300",
+        [col_group, ..cols],
+      )
     }
     LinkRefDefinition(_) => {
       println("Warning: Unsupported link reference definition")

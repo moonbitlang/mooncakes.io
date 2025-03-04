@@ -4,6 +4,34 @@ fn inline_text[M](str : String) -> @html.Html[M] {
 }
 
 ///|
+fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
+  guard let Image(img) = img
+  match img {
+    {
+      v: {
+        text: Text({ v: alt, .. }),
+        reference: Inline({ v: { dest: src, .. }, .. }),
+      },
+      ..,
+    } =>
+      match src {
+        Some({ v: src, .. }) => @html.img(src~, alt~, [])
+        None => @html.text("Loading image failed: invalid url")
+      }
+    { v: { reference: Ref(_), .. }, .. } => {
+      println("Unsupported image reference")
+      @html.nothing()
+    }
+    { v: { text: _, .. }, .. } => {
+      println(
+        "Unexpected behavior: If program reaches here, there is a cmark parse error",
+      )
+      panic()
+    }
+  }
+}
+
+///|
 pub fn markdown[M](markdown : String) -> @html.Html[M] {
   fn unwrap_inline_link {
     ({
@@ -12,22 +40,10 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     } : @cmark.InlineLink) =>
       [@html.a(class=" text-blue-400", href=link, [inline_text(txt)])]
     ({
-      text: Image(
-        {
-          v: {
-            text: Text({ v: alt, .. }),
-            reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
-          },
-          ..,
-        }
-      ),
+      text: img,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [
-        @html.a(href=link, style=["display: inline-block"], [
-          @html.img(src~, alt~, []),
-        ]),
-      ]
+      [@html.a(href=link, style=["display: inline-block"], [image_render(img)])]
     _ => abort("not an inline link")
   }
 
@@ -45,15 +61,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       ]
     }
     Emphasis({ v: { inline, .. }, .. }) => [@html.em(inline2html(inline))]
-    Image(
-      {
-        v: {
-          text: Text({ v: alt, .. }),
-          reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
-        },
-        ..,
-      }
-    ) => [@html.img(src~, alt~, [])]
+    Image(_) as img => [image_render(img)]
     Inlines({ v, .. }) => v.map(inline2html).to_array().flatten()
     Link({ v: link, .. }) => unwrap_inline_link(link)
     StrongEmphasis({ v: { inline, .. }, .. }) => {
@@ -120,7 +128,21 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     }
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
     ThematicBreak(_) => hr(class="my-4")
-    ExtTable({ v: { rows, .. }, .. }) => @html.table([])
+    ExtTable({ v: { rows, .. }, .. }) => {
+      let rows = rows
+        .map(fn { ({ v: table_row, .. }, _) => table_row })
+        .to_array()
+      let (fmt, elements) = match rows {
+        [
+          @cmark.TableRow::Header(_) as header,
+          @cmark.TableRow::Sep(_) as sep,
+          .. rest,
+        ] => (sep, [header, ..rest])
+        [@cmark.TableRow::Sep(_) as sep, .. rest] => (sep, [..rest])
+        _ => abort("Table has no separator")
+      }
+      @html.nothing()
+    }
     LinkRefDefinition(_) => {
       println("Warning: Unsupported link reference definition")
       @html.nothing()

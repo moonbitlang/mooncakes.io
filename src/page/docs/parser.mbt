@@ -170,10 +170,6 @@ fn generate_package_model_from_package(package_ : Package) -> PackageModel {
 }
 
 ///|
-fn generate_sidebar_from_module_index(index : ModuleIndex) -> SidebarModel {
-  {
-    hide: false,
-    items: generate_package_model_from_package(index.package).childrens,
-    cards_expanded: true,
-  }
+fn generate_sidebar_from_module_index(index : ModuleIndex) -> Array[ItemModel] {
+  generate_package_model_from_package(index.package).childrens
 }

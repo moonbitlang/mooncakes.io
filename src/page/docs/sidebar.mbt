@@ -22,19 +22,6 @@ struct PackageModel {
 } derive(Show)
 
 ///|
-struct SidebarModel {
-  hide : Bool
-  items : Array[ItemModel]
-  // dependencies : Array[ModuleModel] // FIXME
-  cards_expanded : Bool
-}
-
-///|
-fn SidebarModel::empty() -> SidebarModel {
-  { hide: false, items: [], cards_expanded: false }
-}
-
-///|
 fn item_button[M](
   childrens : @html.Html[M],
   icon? : String,
@@ -125,7 +112,7 @@ fn source_list(
 
 ///|
 fn sidebar(
-  model : SidebarModel,
+  document_index : Array[ItemModel],
   source_files : Array[String],
   showing : String,
   package_path~ : String
@@ -135,7 +122,7 @@ fn sidebar(
     click=Msg::SidebarCategoryClicked,
     showing,
     [
-      ("Documentation", documentation_list(model.items)),
+      ("Documentation", documentation_list(document_index)),
       ("Source files", source_list(source_files, package_path~)),
     ],
   )

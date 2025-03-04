@@ -1,8 +1,7 @@
 ///|
 enum Msg {
   ToggleCardDetail(DetailCardModel)
-  FoldAllCards
-  ExpandAllCards
+  CardModeChanged(CardMode)
   ItemClick(String, String)
   PackageClick(PackageModel)
   GotResource(Result[Resource, String])
@@ -15,13 +14,13 @@ enum Msg {
 struct Model {
   module_path : String
   path : String
-  sidebar : SidebarModel
+  document_index : Array[ItemModel]
   source_files : Array[String]
   detail_cards : Array[DetailCardModel]
   meta_info : @util.Status[MetaInfo]
   readme_content : @util.Status[String]
-  module_index : @util.Status[ModuleIndex]
   showing_category : String
+  card_mode : CardMode
 }
 
 ///|
@@ -34,13 +33,13 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
     {
       module_path: path,
       path,
-      sidebar: SidebarModel::empty(),
+      document_index: [],
       detail_cards: [],
       meta_info: Loading,
       readme_content: Loading,
       source_files: [],
       showing_category: "Documentation",
-      module_index: Loading,
+      card_mode: Expanded,
     },
   )
 }
@@ -106,11 +105,9 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           Ok(module_index) =>
             {
               ..model,
-              sidebar: generate_sidebar_from_module_index(module_index),
-              module_index: Success(module_index),
+              document_index: generate_sidebar_from_module_index(module_index),
             }
-          Err(_) =>
-            { ..model, sidebar: SidebarModel::empty(), module_index: Failed }
+          Err(_) => { ..model }
         },
       )
     GotPackageInfo(result) =>
@@ -124,20 +121,18 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         },
       )
     ToggleCardDetail(detail_card) => {
-      detail_card.toggle_folded() // FIXME: fix this bug
+      detail_card.set_folded(not(detail_card.is_folded()))
       (@tea.none(), model)
     }
-    FoldAllCards => {
-      for card in model.detail_cards {
-        card.toggle_folded()
+    CardModeChanged(card_mode) => {
+      let fold = match card_mode {
+        Expanded => false
+        Collapsed => true
       }
-      (@tea.none(), model)
-    }
-    ExpandAllCards => {
       for card in model.detail_cards {
-        card.toggle_folded()
+        card.set_folded(fold)
       }
-      (@tea.none(), model)
+      (@tea.none(), { ..model, card_mode, })
     }
     PackageClick(pkg_model) => {
       pkg_model.folded = not(pkg_model.folded)
@@ -224,6 +219,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       // version
       tag_view(version),
       div(class="flex-grow", []),
+      card_mode_toggle(mode=model.card_mode, click=Msg::CardModeChanged),
       @html.button(
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
@@ -236,7 +232,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   let sidebar = div(class="pl-6 pr-3 py-3 w-full h-full", [
     div(class="overflow-y-scroll ", [
       sidebar(
-        model.sidebar,
+        model.document_index,
         model.source_files,
         model.showing_category,
         package_path=model.path,
@@ -254,8 +250,6 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       detail_cards_view(model.detail_cards),
     ]),
   ])
-  // TODO: fix floating view
-  let _floating_view = div([floating_view(model.sidebar)])
   div(
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [

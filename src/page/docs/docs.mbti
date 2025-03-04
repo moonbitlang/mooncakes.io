@@ -11,6 +11,8 @@ fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 fn view(Model) -> @html.T[Msg]
 
 // Types and methods
+type CardMode
+
 type DetailCardModel
 impl Show for DetailCardModel
 
@@ -45,8 +47,6 @@ type PackageResources
 type Resource
 
 type ResourceKind
-
-type SidebarModel
 
 type Traits
 impl Show for Traits

@@ -179,27 +179,27 @@ fn is_folded(self : DetailCardModel) -> Bool {
 }
 
 ///|
-fn toggle_folded(self : DetailCardModel) -> Unit {
+fn set_folded(self : DetailCardModel, value : Bool) -> Unit {
   match self {
-    ValueCard(..) as card => card.folded = not(card.folded)
-    ImplCard(..) as card => card.folded = not(card.folded)
+    ValueCard(..) as card => card.folded = value
+    ImplCard(..) as card => card.folded = value
     TypeCard(impls~, methods~, ..) as card => {
-      card.folded = not(card.folded)
+      card.folded = value
       for x in impls {
-        x.toggle_folded()
+        x.set_folded(value)
       }
       for x in methods {
-        x.toggle_folded()
+        x.set_folded(value)
       }
     }
     TraitCard(impls~, ..) as card => {
-      card.folded = not(card.folded)
+      card.folded = value
       for x in impls {
-        x.toggle_folded()
+        x.set_folded(value)
       }
     }
-    FailureCard(_) as card => card.folded = not(card.folded)
-    ReadmeCard(_, ..) as card => card.folded = not(card.folded)
+    FailureCard(_) as card => card.folded = value
+    ReadmeCard(_, ..) as card => card.folded = value
   }
 }
 

@@ -3,6 +3,8 @@ package moonbitlang/mooncakes/view
 alias @Yoorkin/rabbit-tea/html as @html
 
 // Values
+fn accordion[M](class? : String, click? : (String) -> M, String, Array[(String, @html.T[M])]) -> @html.T[M]
+
 fn button[M](String, click? : M) -> @html.T[M]
 
 fn code_block[M](String) -> @html.T[M]

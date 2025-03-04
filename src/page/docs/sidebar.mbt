@@ -23,7 +23,6 @@ struct PackageModel {
 
 ///|
 struct SidebarModel {
-  // module_path : String // FIXME
   hide : Bool
   items : Array[ItemModel]
   // dependencies : Array[ModuleModel] // FIXME
@@ -97,19 +96,47 @@ fn item_view(model : ItemModel) -> @html.Html[Msg] {
 }
 
 ///|
-fn item_list_view(items : Array[ItemModel]) -> @html.Html[Msg] {
+fn documentation_list(items : Array[ItemModel]) -> @html.Html[Msg] {
   @html.ul(class="select-none", items.map(fn(x) { item_view(x) }))
 }
 
 ///|
-fn sidebar_view(model : @util.Status[SidebarModel]) -> @html.Html[Msg] {
-  match model {
-    Failed => @html.nothing()
-    Loading => @html.text("Loading...")
-    Success(model) => {
-      let hide = if model.hide { "hidden" } else { "" }
-      let items = item_list_view(model.items)
-      div([div(class="\{hide}", [div(class="text-gray-700", [items])])])
-    }
+fn source_list(
+  files : Array[String],
+  package_path~ : String
+) -> @html.Html[Msg] {
+  if files.is_empty() {
+    return text("No source files.")
   }
+  div(class="", [
+    @html.ul(
+      files.map(fn(x) {
+        item_button(
+          @html.a(
+            class="w-full",
+            href="\{@config.URL_BASE}/docs/\{package_path}/\{x}.html",
+            [text(x)],
+          ),
+        )
+      }),
+    ),
+  ])
+}
+
+///|
+fn sidebar(
+  model : SidebarModel,
+  source_files : Array[String],
+  showing : String,
+  package_path~ : String
+) -> @html.Html[Msg] {
+  @view.accordion(
+    class="text-gray-700 flex flex-col",
+    click=Msg::SidebarCategoryClicked,
+    showing,
+    [
+      ("Documentation", documentation_list(model.items)),
+      ("Source files", source_list(source_files, package_path~)),
+    ],
+  )
 }

@@ -65,18 +65,17 @@ fn item_view(model : ItemModel) -> @html.Html[Msg] {
         icon=@config.TRAIT_ICON,
         click=ItemClick(target, name),
       )
-    Package({ childrens, folded, .. } as pkg) => {
-      let list = if folded {
-        div([])
-      } else {
-        div(class="pl-4", childrens.map(fn(x) { item_view(x) }))
-      }
-      let icon = if folded { @config.FOLDER_CLOSE } else { @config.FOLDER_OPEN }
+    Package({ childrens: _, folded, .. } as pkg) => {
+      pkg.folded = false //FIXME: never used error
+      ignore(folded) //FIXME
       @html.ul([
         div(class="inline-block w-full", [
-          item_button(text(name), icon~, click=PackageClick(pkg)),
+          item_button(
+            text(name),
+            icon=@config.FOLDER_CLOSE,
+            click=PackageClick(pkg),
+          ),
         ]),
-        list,
       ])
     }
   }

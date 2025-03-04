@@ -2,7 +2,7 @@
 enum ResourceKind {
   Package(PackageResources)
   Module(ModuleResources)
-  ModuleAndPackage(ModuleResources, PackageResources)
+  RootPackage(RootPackageResources)
 }
 
 ///|
@@ -24,6 +24,15 @@ struct ModuleResources {
 
 ///|
 struct PackageResources {
+  package_data_path : String
+  source_files : Array[String]
+  module_path : String
+}
+
+///|
+struct RootPackageResources {
+  meta_info : MetaInfo
+  module_index_path : String
   package_data_path : String
   source_files : Array[String]
 }
@@ -105,6 +114,7 @@ fn decode_package_resources(json : Json) -> PackageResources!Error {
     {
       "package_data": String(package_data_path),
       "source_files": Array(source_files),
+      "module_path": String(module_path),
       ..
     } => {
       let ls : Array[String] = []
@@ -114,9 +124,37 @@ fn decode_package_resources(json : Json) -> PackageResources!Error {
           _ => fail!("invalid source_files")
         }
       }
-      { package_data_path, source_files: ls }
+      { package_data_path, source_files: ls, module_path }
     }
-    _ => fail!("missing field package_data or source_files")
+    _ => fail!("missing field package_data or source_files: \{json}")
+  }
+}
+
+///|
+fn decode_root_package_resources(json : Json) -> RootPackageResources!Error {
+  match json {
+    {
+      "package_data": String(package_data_path),
+      "source_files": Array(source_files),
+      "module_index": String(module_index_path),
+      "meta_info": meta_info,
+      ..
+    } => {
+      let ls : Array[String] = []
+      for x in source_files {
+        match x {
+          String(s) => ls.push(s)
+          _ => fail!("invalid source_files")
+        }
+      }
+      {
+        package_data_path,
+        source_files: ls,
+        module_index_path,
+        meta_info: decode_meta_info!(meta_info),
+      }
+    }
+    _ => fail!("missing field package_data or source_files: \{json}")
   }
 }
 
@@ -130,11 +168,7 @@ fn decode_resource(json : Json) -> Result[Resource, String] {
     let kind = match kind {
       "module" => Module(decode_module_resources!(json))
       "package" => Package(decode_package_resources!(json))
-      "module_and_package" =>
-        ModuleAndPackage(
-          decode_module_resources!(json),
-          decode_package_resources!(json),
-        )
+      "module_and_package" => RootPackage(decode_root_package_resources!(json))
       _ => panic()
     }
     Ok({ readme_content, kind })

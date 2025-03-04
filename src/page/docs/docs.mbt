@@ -1,12 +1,12 @@
 ///|
 enum Msg {
-  ToggleCardDetail(DetailCardModel)
+  ToggleCardDetail(String)
   CardModeChanged(CardMode)
   ItemClick(String, String)
   PackageClick(PackageModel)
   GotResource(Result[Resource, String])
   GotModuleIndex(Result[ModuleIndex, String])
-  GotPackageInfo(Result[Array[DetailCardModel], String])
+  GotPackageData(Result[PackageData, String])
   SidebarCategoryClicked(String)
 }
 
@@ -16,11 +16,11 @@ struct Model {
   path : String
   document_index : Array[ItemModel]
   source_files : Array[String]
-  detail_cards : Array[DetailCardModel]
+  package_data : @util.Status[PackageData]
   meta_info : @util.Status[MetaInfo]
-  readme_content : @util.Status[String]
+  readme_content : String?
   showing_category : String
-  card_mode : CardMode
+  folded_items : FoldedState
 }
 
 ///|
@@ -34,12 +34,12 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
       module_path: path,
       path,
       document_index: [],
-      detail_cards: [],
       meta_info: Loading,
-      readme_content: Loading,
+      readme_content: None,
       source_files: [],
       showing_category: "Documentation",
-      card_mode: Expanded,
+      package_data: Loading,
+      folded_items: FoldedState::new(),
     },
   )
 }
@@ -50,7 +50,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
     GotResource(result) =>
       match result {
         Ok({ readme_content, kind }) => {
-          let model = { ..model, readme_content: Success(readme_content) }
+          let model = { ..model, readme_content: Some(readme_content) }
           match kind {
             Module({ module_index_path, meta_info }) =>
               (
@@ -65,7 +65,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                 @tea.batch([
                   @http.get(
                     @config.URL_BASE + "/docs/" + package_data_path,
-                    expect=Json(Msg::GotPackageInfo, process_package_info),
+                    expect=Json(Msg::GotPackageData, decode_package_data),
                   ),
                   @http.get(
                     @config.URL_BASE +
@@ -88,7 +88,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                   ),
                   @http.get(
                     @config.URL_BASE + "/docs/" + package_data_path,
-                    expect=Json(Msg::GotPackageInfo, process_package_info),
+                    expect=Json(Msg::GotPackageData, decode_package_data),
                   ),
                 ]),
                 { ..model, source_files, meta_info: Success(meta_info) },
@@ -103,7 +103,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               ..model,
               meta_info: Failed,
               source_files: [],
-              readme_content: Failed,
+              readme_content: None,
             },
           )
         }
@@ -125,30 +125,27 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           }
         },
       )
-    GotPackageInfo(result) =>
+    GotPackageData(result) =>
       (
         @tea.none(),
         match result {
-          Ok(package_info) => // FIXME: clean up detail_cards
-            { ..model, detail_cards: [..model.detail_cards, ..package_info] }
-          Err(info) =>
-            { ..model, detail_cards: [FailureCard(folded=false, info~)] }
+          Ok(package_data) => { ..model, package_data: Success(package_data) }
+          Err(_) => { ..model, package_data: Failed }
         },
       )
-    ToggleCardDetail(detail_card) => {
-      detail_card.set_folded(not(detail_card.is_folded()))
-      (@tea.none(), model)
-    }
-    CardModeChanged(card_mode) => {
-      let fold = match card_mode {
-        Expanded => false
-        Collapsed => true
+    ToggleCardDetail(id) => {
+      let folded_items = if model.folded_items.contains(id) {
+        model.folded_items.remove(id)
+      } else {
+        model.folded_items.add(id)
       }
-      for card in model.detail_cards {
-        card.set_folded(fold)
-      }
-      (@tea.none(), { ..model, card_mode, })
+      (@tea.none(), { ..model, folded_items, })
     }
+    CardModeChanged(card_mode) =>
+      (
+        @tea.none(),
+        { ..model, folded_items: model.folded_items.set_mode(card_mode) },
+      )
     PackageClick(pkg_model) => {
       println(pkg_model)
       (
@@ -156,12 +153,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           @config.URL_BASE + "/docs/" + pkg_model.fullpath + "/resource.json",
           expect=Json(Msg::GotResource, decode_resource),
         ),
-        {
-          ..model,
-          document_index: [],
-          path: pkg_model.fullpath,
-          detail_cards: [],
-        },
+        { ..model, document_index: [], path: pkg_model.fullpath },
       )
     }
     ItemClick(target, name) =>
@@ -173,7 +165,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             @config.URL_BASE + "/docs/" + target + "/resource.json",
             expect=Json(Msg::GotResource, decode_resource),
           ),
-          { ..model, path: target, detail_cards: [] },
+          { ..model, path: target },
         )
       }
     SidebarCategoryClicked(showing_category) =>
@@ -204,19 +196,6 @@ fn breadcrumbs(path : String, module_path : String) -> @html.Html[Msg] {
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  // FIXME: improve style of readme file
-  let readme = match model.readme_content {
-    Failed => text("Failed to load README")
-    Loading => text("Loading README...")
-    Success(content) =>
-      if content == "" {
-        @html.nothing()
-      } else {
-        div(class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2", [
-          card_view(ReadmeCard(content, folded=false)),
-        ])
-      }
-  }
   let version = match model.meta_info {
     Failed | Loading => ""
     Success(meta_info) => meta_info.version
@@ -239,7 +218,10 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       // version
       tag_view(version),
       div(class="flex-grow", []),
-      card_mode_toggle(mode=model.card_mode, click=Msg::CardModeChanged),
+      card_mode_toggle(
+        mode=model.folded_items.card_mode,
+        click=Msg::CardModeChanged,
+      ),
       @html.button(
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
@@ -266,8 +248,11 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       } else {
         @html.nothing()
       },
-      readme,
-      detail_cards_view(model.detail_cards),
+      document(
+        readme_content?=model.readme_content,
+        package_data=model.package_data,
+        folded=model.folded_items,
+      ),
     ]),
   ])
   div(

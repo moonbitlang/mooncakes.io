@@ -1,214 +1,229 @@
 ///|
-/// Todo: remove the mutability of folded
-enum DetailCardModel {
-  ValueCard(
-    mut folded~ : Bool,
-    name~ : String,
-    signature~ : String,
-    description~ : String
-  )
-  ImplCard(mut folded~ : Bool, name~ : String, signature~ : String)
-  TypeCard(
-    mut folded~ : Bool,
-    name~ : String,
-    signature~ : String,
-    description~ : String,
-    methods~ : Array[DetailCardModel],
-    impls~ : Array[DetailCardModel]
-  )
-  TraitCard(
-    mut folded~ : Bool,
-    name~ : String,
-    signature~ : String,
-    description~ : String,
-    impls~ : Array[DetailCardModel]
-  )
-  FailureCard(mut folded~ : Bool, info~ : String)
-  ReadmeCard(mut folded~ : Bool, String)
-} derive(Show)
+struct FoldedState {
+  set : @immut/sorted_set.T[String]
+  card_mode : CardMode
+}
 
 ///|
-fn card_section_view(card : DetailCardModel) -> @html.Html[Msg] {
-  let fold_button = div(
-    click=ToggleCardDetail(card),
-    class="w-full h-full flex",
+fn FoldedState::new() -> FoldedState {
+  { set: @immut/sorted_set.new(), card_mode: Expanded }
+}
+
+///|
+fn add(self : FoldedState, id : String) -> FoldedState {
+  { ..self, set: self.set.add(id) }
+}
+
+///|
+fn remove(self : FoldedState, id : String) -> FoldedState {
+  { ..self, set: self.set.remove(id) }
+}
+
+///|
+fn contains(self : FoldedState, id : String) -> Bool {
+  self.set.contains(id)
+}
+
+///|
+fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
+  { ..self, card_mode: mode }
+}
+
+///|
+fn signature_view(code : String) -> @html.T[Msg] {
+  div(
+    class="py-1 border-t border-gray-300 flex-grow bg-gray-100 px-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
-      @html.img(
-        src=if card.is_folded() {
-          @config.SECTION_CLOSE
-        } else {
-          @config.SECTION_OPEN
-        },
-        class="group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",
-        [],
-      ),
+      @html.pre([
+        @html.code(class="font-mono text-[0.9em] text-blue-800", [
+          @view.code_block(code),
+        ]),
+      ]),
     ],
   )
+}
 
-  // visibility of the detail section
-  let detail_visibility = if card.is_folded() {
-    "h-0 overflow-hidden opacity-0"
-  } else {
-    "visible"
-  }
-
-  // signature 
-  fn signature_view(code, name) {
-    let code_view = @html.pre([
-      @html.code(id=name, class="font-mono text-[0.9em] text-blue-800", [
-        @view.code_block(code),
-      ]),
-    ])
-    div([
-      div(
-        class="my-2 flex-grow overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-        [code_view],
-      ),
-    ])
-  }
-
-  let header = match card {
-    ReadmeCard(_, ..) =>
-      p(id="README", class="text-sm font-bold py-2 text-gray-600 self-center", [
-        text("README"),
-      ])
-    FailureCard(_) =>
-      p(class="text-sm font-bold py-2 text-red-500 self-center", [
-        text("Package Info Parser Failed"),
-      ])
-    ValueCard(signature~, name~, ..)
-    | ImplCard(signature~, name~, ..)
-    | TypeCard(signature~, name~, ..)
-    | TraitCard(signature~, name~, ..) => signature_view(signature, name)
-  }
-
-  // tool buttons
-  let tool_buttons = match card {
-    ReadmeCard(_, ..) => []
-    _ => [@view.button("source"), @view.icon_button(@config.SHARE)]
-  }
-  // description
-  let (description, foldable) = match card {
-    ImplCard(..) => (@html.nothing(), @html.nothing())
-    TypeCard(description~, ..)
-    | ValueCard(description~, ..)
-    | TraitCard(description~, ..) =>
-      if description == "" {
-        (@html.nothing(), @html.nothing())
-      } else {
-        (
-          div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-            div(class="mr-4 mb-6 pt-1", [@view.markdown(description)]),
-          ]),
-          div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
-        )
+///|
+fn doc_item(
+  conetent : Array[@html.T[Msg]],
+  signature? : String,
+  id? : String,
+  folded? : FoldedState
+) -> @html.T[Msg] {
+  let folded = match (id, folded) {
+    (Some(id), Some(folded)) =>
+      match folded.card_mode {
+        Expanded => folded.contains(id)
+        Collapsed => true
       }
-    FailureCard(info~, ..) =>
-      (
-        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-          div(class="mr-4 mb-6 text-red-500", [text(info)]),
-        ]),
-        div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
-      )
-    ReadmeCard(description, ..) =>
-      (
-        div(class="col-start-2 col-span-2 row-start-3 \{detail_visibility}", [
-          div(class="mr-4 mb-6", [@view.markdown(description)]),
-        ]),
-        div(class="col-start-1 row-start-1 max-h-10", [fold_button]),
+    _ => false
+  }
+  let fold_button = match id {
+    None => @html.nothing()
+    Some(id) =>
+      div(
+        class="hover:bg-gray-200 h-6 active:bg-gray-300 transition-transform p-1 rounded text-sm select-none text-gray-800",
+        click=ToggleCardDetail(id),
+        [
+          div([
+            @html.img(
+              class="w-4",
+              src=if folded {
+                @config.SECTION_CLOSE
+              } else {
+                @config.SECTION_OPEN
+              },
+              [],
+            ),
+          ]),
+        ],
       )
   }
-
-  // methods or impls
-  let subsections = match card {
-    TypeCard(methods~, impls~, ..) => {
-      let methods = methods.map(card_section_view)
-      let impls = impls.map(card_section_view)
-      [..methods, ..impls]
-    }
-    TraitCard(impls~, ..) => impls.map(card_section_view)
-    _ => []
+  let signature = match signature {
+    None => @html.nothing()
+    Some(code) =>
+      div(
+        class="py-1 border-t flex border-gray-300 flex-grow bg-gray-100 pr-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+        [
+          fold_button,
+          @html.pre([
+            @html.code(class="font-mono text-[0.9em] text-blue-800", [
+              @view.code_block(code),
+            ]),
+          ]),
+        ],
+      )
   }
+  let content = if folded {
+    @html.nothing()
+  } else {
+    div(class="border-l pl-4 my-2 ", conetent)
+  }
+  div(id?, [signature, content])
+}
 
-  // main view
+///|
+fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> @html.T[Msg] {
+  let { self_type, trait_type, methods } = doc
   div(
     [
-      div(
-        class="grid grid-cols-[1.5em_auto_6em] grid-rows-[auto_auto] group ",
-        [
-          foldable,
-          div(
-            class="col-start-2 row-start-1 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-            [header],
-          ),
-          div(
-            class="col-start-3 row-start-1 max-h-10 flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-100 ",
-            tool_buttons,
-          ),
-          description,
-        ],
-      ),
-      ..subsections.map(fn(x) {
-        div(class="col-start-1 col-span-3 border-t", [x])
-      }),
+      text(self_type.to_string()),
+      text(trait_type.to_string()),
+      ..methods.map(fn(x) { value_doc(x, folded~) }),
     ],
   )
 }
 
 ///|
-fn card_view(card : DetailCardModel) -> @html.Html[Msg] {
-  match card {
-    ReadmeCard(_, ..) => div([card_section_view(card)])
-    _ =>
-      div(class="border rounded overflow-clip bg-white", [
-        card_section_view(card),
+fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> @html.T[Msg] {
+  let { docstring, signature, methods, impls, name, loc: _ } = doc
+  doc_item(
+    id=name,
+    signature~,
+    folded~,
+    [
+      @view.markdown(docstring),
+      ..methods.map(fn(x) { value_doc(x, folded~) }),
+      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+    ],
+  )
+}
+
+///|
+fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> @html.T[Msg] {
+  let { docstring, signature, impls, default_impls, name, loc: _ } = doc
+  doc_item(
+    id=name,
+    signature~,
+    folded~,
+    [
+      @view.markdown(docstring),
+      sub_section_title("Default Implementation", default_impls.length()),
+      ..default_impls.map(fn(x) { value_doc(x, folded~) }),
+      sub_section_title("Implementation", impls.length()),
+      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+    ],
+  )
+}
+
+///|
+fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> @html.T[Msg] {
+  let { name, docstring, signature, loc: _ } = doc
+  doc_item(id=name, signature~, folded~, [@view.markdown(docstring)])
+}
+
+///|
+fn value_doc(doc : ValueDoc, folded~ : FoldedState) -> @html.T[Msg] {
+  let { name, docstring, signature, loc: _ } = doc
+  doc_item(id=name, signature~, folded~, [@view.markdown(docstring)])
+}
+
+///|
+fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
+  let { name, methods, impls } = doc
+  doc_item(
+    id=name,
+    folded~,
+    [
+      sub_section_title("Method", methods.length()),
+      ..methods.map(fn(x) { value_doc(x, folded~) }),
+      sub_section_title("Implementation", impls.length()),
+      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+    ],
+  )
+}
+
+///|
+fn sub_section_title(title : String, item_count : Int) -> @html.T[Msg] {
+  if item_count == 0 {
+    @html.nothing()
+  } else {
+    h1(class="text-lg font-semibold py-2 text-blue-900", [text(title)])
+  }
+}
+
+///|
+fn document(
+  readme_content? : String,
+  package_data? : @util.Status[PackageData],
+  folded~ : FoldedState
+) -> @html.Html[Msg] {
+  let readme = match readme_content {
+    None => @html.nothing()
+    Some(content) =>
+      div(class="col-start-2 col-span-2 row-start-3", [
+        div(class="mr-4 mb-6", [@view.markdown(content)]),
       ])
   }
-}
-
-///|
-fn is_folded(self : DetailCardModel) -> Bool {
-  match self {
-    ValueCard(folded~, ..)
-    | ImplCard(folded~, ..)
-    | TypeCard(folded~, ..)
-    | TraitCard(folded~, ..)
-    | FailureCard(folded~, ..)
-    | ReadmeCard(folded~, _) => folded
-  }
-}
-
-///|
-fn set_folded(self : DetailCardModel, value : Bool) -> Unit {
-  match self {
-    ValueCard(..) as card => card.folded = value
-    ImplCard(..) as card => card.folded = value
-    TypeCard(impls~, methods~, ..) as card => {
-      card.folded = value
-      for x in impls {
-        x.set_folded(value)
+  let doc_list = match package_data {
+    Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {
+      fn section_title(title, item_count) {
+        if item_count == 0 {
+          @html.nothing()
+        } else {
+          h1(class="text-xl font-bold py-4 border-b text-gray-800", [
+            text(title),
+          ])
+        }
       }
-      for x in methods {
-        x.set_folded(value)
-      }
+
+      [
+        section_title("Trait", traits.length()),
+        ..traits.map(fn(x) { trait_doc(x, folded~) }),
+        section_title("Type", types.length()),
+        ..types.map(fn(x) { type_doc(x, folded~) }),
+        ..typealiases.map(fn(x) { type_alias_doc(x, folded~) }),
+        section_title("Value and Function", values.length() + misc.length()),
+        ..values.map(fn(x) { value_doc(x, folded~) }),
+        ..misc.map(fn(x) { misc_doc(x, folded~) }),
+      ]
     }
-    TraitCard(impls~, ..) as card => {
-      card.folded = value
-      for x in impls {
-        x.set_folded(value)
-      }
-    }
-    FailureCard(_) as card => card.folded = value
-    ReadmeCard(_, ..) as card => card.folded = value
+    _ => []
   }
-}
-
-///|
-fn detail_cards_view(cards : Array[DetailCardModel]) -> @html.Html[Msg] {
-  div(class="", [
+  div([
     div(
-      class="contents-center flex flex-col pl-6 p-4 pr-16 w-full gap-2",
-      cards.map(card_view),
+      class="contents-center flex flex-col pl-6 p-4 pr-16 w-full",
+      [readme, ..doc_list],
     ),
     div(class="h-60", []),
   ])

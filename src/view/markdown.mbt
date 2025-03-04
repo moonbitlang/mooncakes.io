@@ -45,9 +45,15 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       ]
     }
     Emphasis({ v: { inline, .. }, .. }) => [@html.em(inline2html(inline))]
-    Image({ v: _, .. }) =>
-      // Todo: Find out why this place is unreachable
-      abort("Unreachable")
+    Image(
+      {
+        v: {
+          text: Text({ v: alt, .. }),
+          reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
+        },
+        ..,
+      }
+    ) => [@html.img(src~, alt~, [])]
     Inlines({ v, .. }) => v.map(inline2html).to_array().flatten()
     Link({ v: link, .. }) => unwrap_inline_link(link)
     StrongEmphasis({ v: { inline, .. }, .. }) => {
@@ -114,21 +120,18 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     }
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
     ThematicBreak(_) => hr(class="my-4")
-    ExtTable(_) => div([text("markdown Table")]) // FIXME
+    ExtTable({ v: { rows, .. }, .. }) => @html.table([])
     LinkRefDefinition(_) => {
-      // FIXME
-      println(1)
-      div([text("LinkRefDefinition")])
+      println("Warning: Unsupported link reference definition")
+      @html.nothing()
     }
     ExtMathBlock(_) => {
-      // FIXME
-      println(2)
-      div([text("ExtMathBlock")])
+      println("Warning: Unsupported inline Math Block")
+      @html.nothing()
     }
     HtmlBlock(_) => {
-      // FIXME
-      println(3)
-      div([text("HTML Block")])
+      println("Warning: Unsupported inline Html block")
+      @html.nothing()
     }
     ExtFootnoteDefinition(_) => div([text("markdown Footnote")]) // FIXME
   }

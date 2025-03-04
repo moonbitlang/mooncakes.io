@@ -56,27 +56,35 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               (
                 @http.get(
                   @config.URL_BASE + "/docs/" + module_index_path,
-                  expect=Json(Msg::GotModuleIndex, parse_module_index),
+                  expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
                 { ..model, meta_info: Success(meta_info) },
               )
-            Package({ package_data_path, source_files }) =>
+            Package({ package_data_path, source_files, module_path }) =>
               (
-                @http.get(
-                  @config.URL_BASE + "/docs/" + package_data_path,
-                  expect=Json(Msg::GotPackageInfo, process_package_info),
-                ),
+                @tea.batch([
+                  @http.get(
+                    @config.URL_BASE + "/docs/" + package_data_path,
+                    expect=Json(Msg::GotPackageInfo, process_package_info),
+                  ),
+                  @http.get(
+                    @config.URL_BASE +
+                    "/docs/" +
+                    module_path +
+                    "/module_index.json",
+                    expect=Json(Msg::GotModuleIndex, decode_module_index),
+                  ),
+                ]),
                 { ..model, source_files, },
               )
-            ModuleAndPackage(
-              { module_index_path, meta_info },
-              { package_data_path, source_files }
+            RootPackage(
+              { module_index_path, meta_info, package_data_path, source_files }
             ) =>
               (
                 @tea.batch([
                   @http.get(
                     @config.URL_BASE + "/docs/" + module_index_path,
-                    expect=Json(Msg::GotModuleIndex, parse_module_index),
+                    expect=Json(Msg::GotModuleIndex, decode_module_index),
                   ),
                   @http.get(
                     @config.URL_BASE + "/docs/" + package_data_path,
@@ -87,7 +95,8 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               )
           }
         }
-        Err(_) =>
+        Err(msg) => {
+          println(msg)
           (
             @tea.none(),
             {
@@ -97,17 +106,23 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               readme_content: Failed,
             },
           )
+        }
       }
     GotModuleIndex(result) =>
       (
         @tea.none(),
         match result {
-          Ok(module_index) =>
-            {
-              ..model,
-              document_index: generate_sidebar_from_module_index(module_index),
-            }
-          Err(_) => { ..model }
+          Ok(module_index) => {
+            let document_index = module_index._
+              .find_node(model.path)
+              .unwrap()
+              .to_document_items()
+            { ..model, document_index, }
+          }
+          Err(msg) => {
+            println(msg)
+            { ..model }
+          }
         },
       )
     GotPackageInfo(result) =>
@@ -135,19 +150,30 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       (@tea.none(), { ..model, card_mode, })
     }
     PackageClick(pkg_model) => {
-      pkg_model.folded = not(pkg_model.folded)
-      (@tea.none(), model)
+      println(pkg_model)
+      (
+        @http.get(
+          @config.URL_BASE + "/docs/" + pkg_model.fullpath + "/resource.json",
+          expect=Json(Msg::GotResource, decode_resource),
+        ),
+        {
+          ..model,
+          document_index: [],
+          path: pkg_model.fullpath,
+          detail_cards: [],
+        },
+      )
     }
-    ItemClick(path, target) =>
-      if path == model.path {
-        (@browser.scroll_to(target), model)
+    ItemClick(target, name) =>
+      if target == model.path {
+        (@browser.scroll_to(name), model)
       } else {
         (
           @http.get(
-            @config.URL_BASE + "/docs/" + path + "/resource.json",
+            @config.URL_BASE + "/docs/" + target + "/resource.json",
             expect=Json(Msg::GotResource, decode_resource),
           ),
-          { ..model, path, detail_cards: [] },
+          { ..model, path: target, detail_cards: [] },
         )
       }
     SidebarCategoryClicked(showing_category) =>
@@ -195,12 +221,6 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     Failed | Loading => ""
     Success(meta_info) => meta_info.version
   }
-  // FIXME: improve style of source file lists, add hyperlink to source file
-  // let source_files = match model.source_files {
-  //   Failed | Loading => @html.nothing()
-  //   Success(files) =>
-  //     div(class="p-3 flex gap-3", files.map(fn(x) { div([text(x)]) }))
-  // }
   // logo
   let logo = div(
     class="border-b h-full container flex items-center top-0 z-20 bg-white",
@@ -251,7 +271,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     ]),
   ])
   div(
-    class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
+    class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-[20em_auto_auto_auto] h-screen",
     [
       div(
         class="col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",

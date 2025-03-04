@@ -1,25 +1,26 @@
 ///|
 enum Msg {
   ToggleCardDetail(DetailCardModel)
-  FoldAllCards
-  ExpandAllCards
+  CardModeChanged(CardMode)
   ItemClick(String, String)
   PackageClick(PackageModel)
-  FilterChange(String)
   GotResource(Result[Resource, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageInfo(Result[Array[DetailCardModel], String])
+  SidebarCategoryClicked(String)
 }
 
 ///|
 struct Model {
   module_path : String
   path : String
-  sidebar : @util.Status[SidebarModel]
+  document_index : Array[ItemModel]
+  source_files : Array[String]
   detail_cards : Array[DetailCardModel]
   meta_info : @util.Status[MetaInfo]
   readme_content : @util.Status[String]
-  source_files : @util.Status[Array[String]]
+  showing_category : String
+  card_mode : CardMode
 }
 
 ///|
@@ -30,13 +31,15 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
       expect=Json(Msg::GotResource, decode_resource),
     ),
     {
-      module_path: "",
+      module_path: path,
       path,
-      sidebar: Loading,
+      document_index: [],
       detail_cards: [],
       meta_info: Loading,
       readme_content: Loading,
-      source_files: Loading,
+      source_files: [],
+      showing_category: "Documentation",
+      card_mode: Expanded,
     },
   )
 }
@@ -63,7 +66,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                   @config.URL_BASE + "/docs/" + package_data_path,
                   expect=Json(Msg::GotPackageInfo, process_package_info),
                 ),
-                { ..model, source_files: Success(source_files) },
+                { ..model, source_files, },
               )
             ModuleAndPackage(
               { module_index_path, meta_info },
@@ -80,11 +83,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                     expect=Json(Msg::GotPackageInfo, process_package_info),
                   ),
                 ]),
-                {
-                  ..model,
-                  source_files: Success(source_files),
-                  meta_info: Success(meta_info),
-                },
+                { ..model, source_files, meta_info: Success(meta_info) },
               )
           }
         }
@@ -94,7 +93,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             {
               ..model,
               meta_info: Failed,
-              source_files: Failed,
+              source_files: [],
               readme_content: Failed,
             },
           )
@@ -106,9 +105,9 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           Ok(module_index) =>
             {
               ..model,
-              sidebar: Success(generate_sidebar_from_module_index(module_index)),
+              document_index: generate_sidebar_from_module_index(module_index),
             }
-          Err(_) => { ..model, sidebar: Failed }
+          Err(_) => { ..model }
         },
       )
     GotPackageInfo(result) =>
@@ -122,20 +121,18 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         },
       )
     ToggleCardDetail(detail_card) => {
-      detail_card.toggle_folded() // FIXME: fix this bug
+      detail_card.set_folded(not(detail_card.is_folded()))
       (@tea.none(), model)
     }
-    FoldAllCards => {
-      for card in model.detail_cards {
-        card.toggle_folded()
+    CardModeChanged(card_mode) => {
+      let fold = match card_mode {
+        Expanded => false
+        Collapsed => true
       }
-      (@tea.none(), model)
-    }
-    ExpandAllCards => {
       for card in model.detail_cards {
-        card.toggle_folded()
+        card.set_folded(fold)
       }
-      (@tea.none(), model)
+      (@tea.none(), { ..model, card_mode, })
     }
     PackageClick(pkg_model) => {
       pkg_model.folded = not(pkg_model.folded)
@@ -153,11 +150,8 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           { ..model, path, detail_cards: [] },
         )
       }
-    FilterChange(value) => {
-      guard let Success(sidebar) = model.sidebar
-      sidebar.filter = value
-      (@tea.none(), model)
-    }
+    SidebarCategoryClicked(showing_category) =>
+      (@tea.none(), { ..model, showing_category, })
   }
 }
 
@@ -202,11 +196,11 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     Success(meta_info) => meta_info.version
   }
   // FIXME: improve style of source file lists, add hyperlink to source file
-  let source_files = match model.source_files {
-    Failed | Loading => @html.nothing()
-    Success(files) =>
-      div(class="p-3 flex gap-3", files.map(fn(x) { div([text(x)]) }))
-  }
+  // let source_files = match model.source_files {
+  //   Failed | Loading => @html.nothing()
+  //   Success(files) =>
+  //     div(class="p-3 flex gap-3", files.map(fn(x) { div([text(x)]) }))
+  // }
   // logo
   let logo = div(
     class="border-b h-full container flex items-center top-0 z-20 bg-white",
@@ -225,6 +219,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       // version
       tag_view(version),
       div(class="flex-grow", []),
+      card_mode_toggle(mode=model.card_mode, click=Msg::CardModeChanged),
       @html.button(
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
@@ -234,19 +229,27 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       ),
     ],
   )
-  let sidebar = div(class="border-b px-3 w-full h-full", [
-    div(class="overflow-y-scroll ", [sidebar_view(model.sidebar)]),
+  let sidebar = div(class="pl-6 pr-3 py-3 w-full h-full", [
+    div(class="overflow-y-scroll ", [
+      sidebar(
+        model.document_index,
+        model.source_files,
+        model.showing_category,
+        package_path=model.path,
+      ),
+    ]),
   ])
   let main = div(class="flex w-full min-h-full", [
     div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
-      div(class="w-full", [meta_info(model.meta_info)]),
+      if model.module_path == model.path {
+        div(class="w-full", [meta_info(model.meta_info)])
+      } else {
+        @html.nothing()
+      },
       readme,
       detail_cards_view(model.detail_cards),
-      source_files,
     ]),
   ])
-  // TODO: fix floating view
-  let _floating_view = div([floating_view(model.sidebar)])
   div(
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [

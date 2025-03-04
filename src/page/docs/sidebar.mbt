@@ -22,21 +22,6 @@ struct PackageModel {
 } derive(Show)
 
 ///|
-struct SidebarModel {
-  // module_path : String // FIXME
-  hide : Bool
-  items : Array[ItemModel]
-  // dependencies : Array[ModuleModel] // FIXME
-  mut filter : String
-  cards_expanded : Bool
-}
-
-///|
-fn SidebarModel::empty() -> SidebarModel {
-  { hide: false, items: [], filter: "", cards_expanded: false }
-}
-
-///|
 fn item_button[M](
   childrens : @html.Html[M],
   icon? : String,
@@ -53,7 +38,7 @@ fn item_button[M](
 }
 
 ///|
-fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
+fn item_view(model : ItemModel) -> @html.Html[Msg] {
   let { name, target, kind } = model
   match kind {
     Type =>
@@ -81,15 +66,10 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
         click=ItemClick(target, name),
       )
     Package({ childrens, folded, .. } as pkg) => {
-      let childrens = if filter == "" {
-        childrens
-      } else {
-        childrens.filter(fn(x) { x.name.contains(filter) })
-      }
       let list = if folded {
         div([])
       } else {
-        div(class="pl-4", childrens.map(fn(x) { item_view(x, filter~) }))
+        div(class="pl-4", childrens.map(fn(x) { item_view(x) }))
       }
       let icon = if folded { @config.FOLDER_CLOSE } else { @config.FOLDER_OPEN }
       @html.ul([
@@ -103,46 +83,47 @@ fn item_view(model : ItemModel, filter~ : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn item_list_view(
-  items : Array[ItemModel],
-  filter~ : String
-) -> @html.Html[Msg] {
-  @html.ul(class="select-none", items.map(fn(x) { item_view(x, filter~) }))
+fn documentation_list(items : Array[ItemModel]) -> @html.Html[Msg] {
+  @html.ul(class="select-none", items.map(fn(x) { item_view(x) }))
 }
 
 ///|
-fn filter_input_view(value : String) -> @html.Html[Msg] {
-  let icon = if value == "" {
-    @html.img(class="size-[16px] self-center mr-2", src=@config.FILTER, [])
-  } else {
-    div([])
+fn source_list(
+  files : Array[String],
+  package_path~ : String
+) -> @html.Html[Msg] {
+  if files.is_empty() {
+    return text("No source files.")
   }
-  div(class="p-1 px-2 my-2 rounded border flex", [
-    icon,
-    @html.input(
-      class="w-full outline-none ",
-      input_type=Text,
-      placeholder="Filter",
-      change=Msg::FilterChange,
-      value~,
+  div(class="", [
+    @html.ul(
+      files.map(fn(x) {
+        item_button(
+          @html.a(
+            class="w-full",
+            href="\{@config.URL_BASE}/docs/\{package_path}/\{x}.html",
+            [text(x)],
+          ),
+        )
+      }),
     ),
   ])
 }
 
 ///|
-fn sidebar_view(model : @util.Status[SidebarModel]) -> @html.Html[Msg] {
-  match model {
-    Failed => @html.nothing()
-    Loading => @html.text("Loading...")
-    Success(model) => {
-      let hide = if model.hide { "hidden" } else { "" }
-      let items = item_list_view(model.items, filter=model.filter)
-      div([
-        div(class="\{hide}", [
-          filter_input_view(model.filter),
-          div(class="text-gray-700", [items]),
-        ]),
-      ])
-    }
-  }
+fn sidebar(
+  document_index : Array[ItemModel],
+  source_files : Array[String],
+  showing : String,
+  package_path~ : String
+) -> @html.Html[Msg] {
+  @view.accordion(
+    class="text-gray-700 flex flex-col",
+    click=Msg::SidebarCategoryClicked,
+    showing,
+    [
+      ("Documentation", documentation_list(document_index)),
+      ("Source files", source_list(source_files, package_path~)),
+    ],
+  )
 }

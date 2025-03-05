@@ -129,7 +129,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
       }
       let created_at = created_at.map(fn(x) { x.as_string().unwrap() })
       let description = description.map(fn(x) { x.as_string().unwrap() })
-      guard let [author, .. name] = path.split("/").collect()
+      guard path.split("/").collect() is [author, .. name]
       let name = name
         .iter()
         .intersperse("/")
@@ -147,7 +147,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
     }
   }
 
-  guard let { "modules": Array(modules), .. } = modules_json
+  guard modules_json is { "modules": Array(modules), .. }
   let indices = []
   for mod in modules {
     match decode_index(mod) {

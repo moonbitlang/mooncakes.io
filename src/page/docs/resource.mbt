@@ -46,7 +46,7 @@ struct Resource {
 ///|
 fn decode_meta_info(json : Json) -> MetaInfo!Error {
   fn parse_package(json : Json) -> MetaInfo!Error {
-    guard let {
+    guard json is {
       "name"? : name,
       "repository"? : repository,
       "version"? : version,
@@ -54,24 +54,22 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
       "description"? : description,
       "keywords"? : keywords,
       ..
-    } = json else {
-      _ => fail!("Error when parsing metadata.")
+    } else {
+      fail!("Error when parsing metadata.")
     }
-    guard let [name, version] = [name, version].map(fn(x) {
+    guard [name, version].map(fn(x) {
       match x {
         Some(String(str)) => str
         _ => abort("Error when parsing name and version.")
       }
-    }) else {
-      _ => fail!("Error when parsing name and version.")
+    }) is [name, version] else {
+      fail!("Error when parsing name and version.")
     }
-    guard let [repository, license, description] = [
-      repository, license, description,
-    ].map(fn {
+    guard [repository, license, description].map(fn {
       Some(x) => x.as_string()
       None => None
-    }) else {
-      _ => fail!("Error when parsing repository, license, description, readme.")
+    }) is [repository, license, description] else {
+      fail!("Error when parsing repository, license, description, readme.")
     }
     let keywords = match keywords {
       Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })

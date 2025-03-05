@@ -9,6 +9,8 @@ fn button[M](String, click? : M) -> @html.T[M]
 
 fn code_block[M](String) -> @html.T[M]
 
+fn collapse[M](header~ : @html.T[M], body~ : @html.T[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.T[M]
+
 fn footer[M]() -> @html.T[M]
 
 fn icon_button[M](String, text? : String, click? : M) -> @html.T[M]
@@ -20,6 +22,10 @@ fn navbar[M]() -> @html.T[M]
 fn not_found[M]() -> @html.T[M]
 
 // Types and methods
+pub(all) enum CaretConfig {
+  LeftCenter
+  LeftTop
+}
 
 // Type aliases
 

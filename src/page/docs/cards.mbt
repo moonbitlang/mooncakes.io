@@ -21,7 +21,10 @@ fn remove(self : FoldedState, id : String) -> FoldedState {
 
 ///|
 fn contains(self : FoldedState, id : String) -> Bool {
-  self.set.contains(id)
+  match self.card_mode {
+    Expanded => self.set.contains(id)
+    Collapsed => true
+  }
 }
 
 ///|
@@ -32,7 +35,7 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 ///|
 fn signature_view(code : String) -> @html.T[Msg] {
   div(
-    class="py-1 border-t border-gray-300 flex-grow bg-gray-100 px-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+    class="py-1 flex-grow px-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
       @html.pre([
         @html.code(class="font-mono text-[0.9em] text-blue-800", [
@@ -44,132 +47,252 @@ fn signature_view(code : String) -> @html.T[Msg] {
 }
 
 ///|
-fn doc_item(
-  conetent : Array[@html.T[Msg]],
-  signature? : String,
-  id? : String,
-  folded? : FoldedState
-) -> @html.T[Msg] {
-  let folded = match (id, folded) {
-    (Some(id), Some(folded)) =>
-      match folded.card_mode {
-        Expanded => folded.contains(id)
-        Collapsed => true
+fn signature(code : String) -> @html.T[Msg] {
+  div(
+    class="py-1 border-t flex border-gray-300 flex-grow bg-gray-100 pr-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+    [
+      @html.pre([
+        @html.code(class="font-mono text-[0.9em] text-blue-800", [
+          @view.code_block(code),
+        ]),
+      ]),
+    ],
+  )
+}
+
+// ///|
+// fn doc_item(
+//   conetent : Array[@html.T[Msg]],
+//   signature? : String,
+//   id? : String,
+//   folded? : FoldedState
+// ) -> @html.T[Msg] {
+//   let folded = match (id, folded) {
+//     (Some(id), Some(folded)) =>
+//       match folded.card_mode {
+//         Expanded => folded.contains(id)
+//         Collapsed => true
+//       }
+//     _ => false
+//   }
+//   let fold_button = match id {
+//     None => @html.nothing()
+//     Some(id) =>
+//       div(
+//         class="hover:bg-gray-200 h-6 active:bg-gray-300 transition-transform p-1 rounded text-sm select-none text-gray-800",
+//         click=ToggleCardDetail(id),
+//         [
+//           div([
+//             @html.img(
+//               class="w-4",
+//               src=if folded {
+//                 @config.SECTION_CLOSE
+//               } else {
+//                 @config.SECTION_OPEN
+//               },
+//               [],
+//             ),
+//           ]),
+//         ],
+//       )
+//   }
+//   let signature = match signature {
+//     None => @html.nothing()
+//     Some(code) =>
+//       div(
+//         class="py-1 border-t flex border-gray-300 flex-grow bg-gray-100 pr-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+//         [
+//           fold_button,
+//           @html.pre([
+//             @html.code(class="font-mono text-[0.9em] text-blue-800", [
+//               @view.code_block(code),
+//             ]),
+//           ]),
+//         ],
+//       )
+//   }
+//   let content = if folded {
+//     @html.nothing()
+//   } else {
+//     div(class="border-l pl-4 my-2 ", conetent)
+//   }
+//   div(id?, [signature, content])
+// }
+
+///|
+fn stype(ty : Stype) -> @html.T[Msg] {
+  match ty {
+    Param(name~) => @html.span([text(name)])
+    Arrow(parameters~, return_type~, error_type~, is_async~) => {
+      let async_indicator = if is_async {
+        text("async ")
+      } else {
+        @html.nothing()
       }
-    _ => false
-  }
-  let fold_button = match id {
-    None => @html.nothing()
-    Some(id) =>
-      div(
-        class="hover:bg-gray-200 h-6 active:bg-gray-300 transition-transform p-1 rounded text-sm select-none text-gray-800",
-        click=ToggleCardDetail(id),
+      let error_type_indicator = match error_type {
+        None => @html.nothing()
+        Some(ty) => div(class="flex", [text("!"), stype(ty)])
+      }
+      @html.div(
         [
-          div([
-            @html.img(
-              class="w-4",
-              src=if folded {
-                @config.SECTION_CLOSE
-              } else {
-                @config.SECTION_OPEN
-              },
-              [],
-            ),
-          ]),
+          async_indicator,
+          text("("),
+          ..parameters.map(stype).iter().intersperse(text(", ")),
+          text(")"),
+          text(" -> "),
+          stype(return_type),
+          error_type_indicator,
         ],
       )
-  }
-  let signature = match signature {
-    None => @html.nothing()
-    Some(code) =>
+    }
+    Constr(constr~, arguments=[]) => type_path(constr)
+    Constr(constr~, arguments~) =>
       div(
-        class="py-1 border-t flex border-gray-300 flex-grow bg-gray-100 pr-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
+        class="flex",
         [
-          fold_button,
-          @html.pre([
-            @html.code(class="font-mono text-[0.9em] text-blue-800", [
-              @view.code_block(code),
-            ]),
-          ]),
+          type_path(constr),
+          text("["),
+          ..arguments.map(stype).iter().intersperse(text(", ")),
+          text("]"),
         ],
       )
+    TypePath(path) => type_path(path)
   }
-  let content = if folded {
-    @html.nothing()
-  } else {
-    div(class="border-l pl-4 my-2 ", conetent)
-  }
-  div(id?, [signature, content])
+}
+
+///|
+fn type_path(ty : TypePath) -> @html.T[Msg] {
+  // div([text("@" + ty.path), text("."), text(ty.name)])
+  div([text(ty.name)])
 }
 
 ///|
 fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let { self_type, trait_type, methods } = doc
-  div(
-    [
-      text(self_type.to_string()),
-      text(trait_type.to_string()),
-      ..methods.map(fn(x) { value_doc(x, folded~) }),
-    ],
+  let id = self_type.to_string() + trait_type.to_string()
+  @view.collapse(
+    caret_config=LeftCenter,
+    header=@html.pre(
+      class="pl-6 py-1 bg-gray-100 xl:w-2/5 flex flex-grow pr-3 overflow-auto scrollbar-thin",
+      [
+        @html.code(class="font-mono text-[0.9em] text-blue-800 flex", [
+          @html.span(class="text-gray-700", [text("impl ")]),
+          type_path(trait_type),
+          @html.span(class="text-gray-700", [text(" for ")]),
+          stype(self_type),
+        ]),
+      ],
+    ),
+    body=div(
+      class="pl-3 ml-1 border-l my-2",
+      [
+        sub_section_title("Methods", methods.length()),
+        ..methods.map(fn(x) { value_doc(x, folded~) }),
+      ],
+    ),
+    collapsed=folded.contains(id),
+    toggle=ToggleCardDetail(id),
   )
 }
 
 ///|
 fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let { docstring, signature, methods, impls, name, loc: _ } = doc
-  doc_item(
-    id=name,
-    signature~,
-    folded~,
-    [
-      @view.markdown(docstring),
-      ..methods.map(fn(x) { value_doc(x, folded~) }),
-      ..impls.map(fn(x) { impl_doc(x, folded~) }),
-    ],
+  @view.collapse(
+    collapsed=folded.contains(name),
+    toggle=ToggleCardDetail(name),
+    header=div(
+      id=name,
+      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
+      [signature_view(signature)],
+    ),
+    body=div(
+      class="ml-3 my-2",
+      [
+        @view.markdown(docstring),
+        sub_section_title("Method", methods.length()),
+        ..methods.map(fn(x) { value_doc(x, folded~) }),
+        sub_section_title("Implementation", impls.length()),
+        ..impls.map(fn(x) { impl_doc(x, folded~) }),
+      ],
+    ),
   )
 }
 
 ///|
 fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let { docstring, signature, impls, default_impls, name, loc: _ } = doc
-  doc_item(
-    id=name,
-    signature~,
-    folded~,
-    [
-      @view.markdown(docstring),
-      sub_section_title("Default Implementation", default_impls.length()),
-      ..default_impls.map(fn(x) { value_doc(x, folded~) }),
-      sub_section_title("Implementation", impls.length()),
-      ..impls.map(fn(x) { impl_doc(x, folded~) }),
-    ],
+  @view.collapse(
+    collapsed=folded.contains(name),
+    toggle=ToggleCardDetail(name),
+    header=div(
+      id=name,
+      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
+      [signature_view(signature)],
+    ),
+    body=div(
+      class="ml-3 my-2",
+      [
+        @view.markdown(docstring),
+        sub_section_title("Default Implementation", default_impls.length()),
+        ..default_impls.map(fn(x) { value_doc(x, folded~) }),
+        sub_section_title("Implementation", impls.length()),
+        ..impls.map(fn(x) { impl_doc(x, folded~) }),
+      ],
+    ),
   )
 }
 
 ///|
 fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let { name, docstring, signature, loc: _ } = doc
-  doc_item(id=name, signature~, folded~, [@view.markdown(docstring)])
+  @view.collapse(
+    collapsed=folded.contains(name),
+    toggle=ToggleCardDetail(name),
+    header=div(
+      id=name,
+      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
+      [signature_view(signature)],
+    ),
+    body=div(class="ml-3 my-2", [@view.markdown(docstring)]),
+  )
 }
 
 ///|
 fn value_doc(doc : ValueDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let { name, docstring, signature, loc: _ } = doc
-  doc_item(id=name, signature~, folded~, [@view.markdown(docstring)])
+  @view.collapse(
+    collapsed=folded.contains(name),
+    toggle=ToggleCardDetail(name),
+    header=div(
+      id=name,
+      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
+      [signature_view(signature)],
+    ),
+    body=div(class="ml-3 my-2", [@view.markdown(docstring)]),
+  )
 }
 
 ///|
 fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let { name, methods, impls } = doc
-  doc_item(
-    id=name,
-    folded~,
-    [
-      sub_section_title("Method", methods.length()),
-      ..methods.map(fn(x) { value_doc(x, folded~) }),
-      sub_section_title("Implementation", impls.length()),
-      ..impls.map(fn(x) { impl_doc(x, folded~) }),
-    ],
+  @view.collapse(
+    caret_config=LeftCenter,
+    collapsed=folded.contains(name),
+    toggle=ToggleCardDetail(name),
+    header=div(id=name, class="pl-6 py-1 w-full", [
+      @html.h3(class="text-lg text-gray-800", [text(name)]),
+    ]),
+    body=div(
+      class="ml-3 my-2",
+      [
+        // p([text("This is a builtin type.")]),
+        sub_section_title("Method", methods.length()),
+        ..methods.map(fn(x) { value_doc(x, folded~) }),
+        sub_section_title("Implementation", impls.length()),
+        ..impls.map(fn(x) { impl_doc(x, folded~) }),
+      ],
+    ),
   )
 }
 
@@ -178,7 +301,7 @@ fn sub_section_title(title : String, item_count : Int) -> @html.T[Msg] {
   if item_count == 0 {
     @html.nothing()
   } else {
-    h1(class="text-lg font-semibold py-2 text-blue-900", [text(title)])
+    h1(class="text-xs font-bold py-2 text-blue-900", [text(title)])
   }
 }
 
@@ -189,11 +312,19 @@ fn document(
   folded~ : FoldedState
 ) -> @html.Html[Msg] {
   let readme = match readme_content {
-    None => @html.nothing()
-    Some(content) =>
-      div(class="col-start-2 col-span-2 row-start-3", [
-        div(class="mr-4 mb-6", [@view.markdown(content)]),
-      ])
+    None | Some("") => @html.nothing()
+    Some(content) => {
+      let content = @view.markdown(content)
+      @view.collapse(
+        caret_config=LeftCenter,
+        collapsed=folded.contains("readme"),
+        toggle=ToggleCardDetail("readme"),
+        header=div(class="py-2 pl-6 text-sm font-bold text-gray-700", [
+          p([text("README")]),
+        ]),
+        body=div(class="pl-6", [div(class="mr-4 mb-6", [content])]),
+      )
+    }
   }
   let doc_list = match package_data {
     Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {

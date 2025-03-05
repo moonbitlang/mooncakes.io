@@ -128,60 +128,9 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     }
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
     ThematicBreak(_) => hr(class="my-4")
-    ExtTable({ v: { rows, .. }, .. }) => {
-      let rows = rows
-        .map(fn { ({ v: table_row, .. }, _) => table_row })
-        .to_array()
-      let (fmt, elements) = match rows {
-        [
-          @cmark.TableRow::Header(_) as header,
-          @cmark.TableRow::Sep(_) as sep,
-          .. rest,
-        ] => (sep, [header, ..rest])
-        [@cmark.TableRow::Sep(_) as sep, .. rest] => (sep, [..rest])
-        _ => abort("Table has no separator")
-      }
-      guard fmt is Sep(fmts)
-      let col_group = @html.colgroup(
-        fmts
-        .map(fn {
-          { v: (sep, _), .. } => {
-            let class = match sep {
-              Some(align) =>
-                match align {
-                  Left => "text-left"
-                  Center => "text-center"
-                  Right => "text-right"
-                }
-              None => ""
-            }
-            @html.col(class~, [])
-          }
-        })
-        .to_array(),
-      )
-      let cols = elements.map(fn {
-        Header(rows) =>
-          @html.thead(
-            rows
-            .map(fn { (inline, _) => @html.th(inline2html(inline)) })
-            .to_array(),
-          )
-        Data(rows) =>
-          @html.tbody(
-            rows
-            .map(fn { (inline, _) => @html.td(inline2html(inline)) })
-            .to_array(),
-          )
-        Sep(_) => {
-          println("Error: incorrect table format")
-          @html.nothing()
-        }
-      })
-      @html.table(
-        class="border-collapse border border-gray-300",
-        [col_group, ..cols],
-      )
+    ExtTable(_) => {
+      println("Warning: Unsupported table")
+      @html.nothing()
     }
     LinkRefDefinition(_) => {
       println("Warning: Unsupported link reference definition")
@@ -195,7 +144,10 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       println("Warning: Unsupported inline Html block")
       @html.nothing()
     }
-    ExtFootnoteDefinition(_) => div([text("markdown Footnote")]) // FIXME
+    ExtFootnoteDefinition(_) => {
+      println("Warning: Unsupported footnote definition")
+      @html.nothing()
+    }
   }
 
   let folder : @cmark.Folder[Array[@html.Html[M]]] = {

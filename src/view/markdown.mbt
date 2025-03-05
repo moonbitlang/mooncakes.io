@@ -115,15 +115,16 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
                 block2html(block),
               ])
             } else {
-              @html.li(class="list-inside list-decimal", [block2html(block)])
+              @html.li([block2html(block)])
             }
         })
         .to_array()
-      let class = "ml-4 list-inside  " +
+      let class = "ml-4 list-inside " +
         (if tight { "space-y-0.5" } else { "space-y-1" })
       match ordered {
-        @cmark_base.Unordered(_) => @html.ul(class~, items)
-        @cmark_base.Ordered(start, _) => @html.ol(start~, class~, items)
+        @cmark_base.Unordered(_) => @html.ul(class=class + " list-disc", items)
+        @cmark_base.Ordered(start, _) =>
+          @html.ol(start~, class=class + " list-decimal", items)
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))

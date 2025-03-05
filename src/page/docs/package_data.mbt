@@ -1,5 +1,5 @@
 ///|
-struct PackageData {
+priv struct PackageData {
   name : String
   types : Array[TypeDoc]
   traits : Array[TraitDoc]
@@ -9,15 +9,21 @@ struct PackageData {
 }
 
 ///|
-struct Loc {
+priv struct Loc {
   path : String
   file : String
   line : Int
   column : Int
+} derive(Show)
+
+///|
+test "suppress unused warnings for Loc" {
+  let dummy = { path: "", file: "", line: 0, column: 0 }
+  println(dummy)
 }
 
 ///|
-struct TypeDoc {
+priv struct TypeDoc {
   name : String
   docstring : String
   signature : String
@@ -27,7 +33,7 @@ struct TypeDoc {
 }
 
 ///|
-struct TraitDoc {
+priv struct TraitDoc {
   name : String
   docstring : String
   signature : String
@@ -37,7 +43,7 @@ struct TraitDoc {
 }
 
 ///|
-struct TypeAliasDoc {
+priv struct TypeAliasDoc {
   name : String
   docstring : String
   signature : String
@@ -45,7 +51,7 @@ struct TypeAliasDoc {
 }
 
 ///|
-struct ValueDoc {
+priv struct ValueDoc {
   name : String
   docstring : String
   signature : String
@@ -53,14 +59,14 @@ struct ValueDoc {
 }
 
 ///|
-struct ImplDoc {
+priv struct ImplDoc {
   self_type : Stype
   trait_type : TypePath
   methods : Array[ValueDoc]
 }
 
 ///|
-struct MiscDoc {
+priv struct MiscDoc {
   name : String
   impls : Array[ImplDoc]
   methods : Array[ValueDoc]

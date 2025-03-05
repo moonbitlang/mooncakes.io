@@ -1,12 +1,12 @@
 ///|
-enum ResourceKind {
+priv enum ResourceKind {
   Package(PackageResources)
   Module(ModuleResources)
   RootPackage(RootPackageResources)
 }
 
 ///|
-struct MetaInfo {
+priv struct MetaInfo {
   name : String
   author : String
   version : String
@@ -17,20 +17,20 @@ struct MetaInfo {
 }
 
 ///|
-struct ModuleResources {
+priv struct ModuleResources {
   meta_info : MetaInfo
   module_index_path : String
 }
 
 ///|
-struct PackageResources {
+priv struct PackageResources {
   package_data_path : String
   source_files : Array[String]
   module_path : String
 }
 
 ///|
-struct RootPackageResources {
+priv struct RootPackageResources {
   meta_info : MetaInfo
   module_index_path : String
   package_data_path : String
@@ -38,7 +38,7 @@ struct RootPackageResources {
 }
 
 ///|
-struct Resource {
+priv struct Resource {
   readme_content : String
   kind : ResourceKind
 }
@@ -46,29 +46,32 @@ struct Resource {
 ///|
 fn decode_meta_info(json : Json) -> MetaInfo!Error {
   fn parse_package(json : Json) -> MetaInfo!Error {
-    guard json is {
-      "name"? : name,
-      "repository"? : repository,
-      "version"? : version,
-      "license"? : license,
-      "description"? : description,
-      "keywords"? : keywords,
-      ..
-    } else {
+    guard json
+      is {
+        "name"? : name,
+        "repository"? : repository,
+        "version"? : version,
+        "license"? : license,
+        "description"? : description,
+        "keywords"? : keywords,
+        ..
+      } else {
       fail!("Error when parsing metadata.")
     }
     guard [name, version].map(fn(x) {
-      match x {
-        Some(String(str)) => str
-        _ => abort("Error when parsing name and version.")
-      }
-    }) is [name, version] else {
+        match x {
+          Some(String(str)) => str
+          _ => abort("Error when parsing name and version.")
+        }
+      })
+      is [name, version] else {
       fail!("Error when parsing name and version.")
     }
     guard [repository, license, description].map(fn {
-      Some(x) => x.as_string()
-      None => None
-    }) is [repository, license, description] else {
+        Some(x) => x.as_string()
+        None => None
+      })
+      is [repository, license, description] else {
       fail!("Error when parsing repository, license, description, readme.")
     }
     let keywords = match keywords {

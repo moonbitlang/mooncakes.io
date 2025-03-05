@@ -1,5 +1,5 @@
 ///|
-struct FoldedState {
+priv struct FoldedState {
   set : @immut/sorted_set.T[String]
   card_mode : CardMode
 }
@@ -45,79 +45,6 @@ fn signature_view(code : String) -> @html.T[Msg] {
     ],
   )
 }
-
-///|
-fn signature(code : String) -> @html.T[Msg] {
-  div(
-    class="py-1 border-t flex border-gray-300 flex-grow bg-gray-100 pr-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-    [
-      @html.pre([
-        @html.code(class="font-mono text-[0.9em] text-blue-800", [
-          @view.code_block(code),
-        ]),
-      ]),
-    ],
-  )
-}
-
-// ///|
-// fn doc_item(
-//   conetent : Array[@html.T[Msg]],
-//   signature? : String,
-//   id? : String,
-//   folded? : FoldedState
-// ) -> @html.T[Msg] {
-//   let folded = match (id, folded) {
-//     (Some(id), Some(folded)) =>
-//       match folded.card_mode {
-//         Expanded => folded.contains(id)
-//         Collapsed => true
-//       }
-//     _ => false
-//   }
-//   let fold_button = match id {
-//     None => @html.nothing()
-//     Some(id) =>
-//       div(
-//         class="hover:bg-gray-200 h-6 active:bg-gray-300 transition-transform p-1 rounded text-sm select-none text-gray-800",
-//         click=ToggleCardDetail(id),
-//         [
-//           div([
-//             @html.img(
-//               class="w-4",
-//               src=if folded {
-//                 @config.SECTION_CLOSE
-//               } else {
-//                 @config.SECTION_OPEN
-//               },
-//               [],
-//             ),
-//           ]),
-//         ],
-//       )
-//   }
-//   let signature = match signature {
-//     None => @html.nothing()
-//     Some(code) =>
-//       div(
-//         class="py-1 border-t flex border-gray-300 flex-grow bg-gray-100 pr-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-//         [
-//           fold_button,
-//           @html.pre([
-//             @html.code(class="font-mono text-[0.9em] text-blue-800", [
-//               @view.code_block(code),
-//             ]),
-//           ]),
-//         ],
-//       )
-//   }
-//   let content = if folded {
-//     @html.nothing()
-//   } else {
-//     div(class="border-l pl-4 my-2 ", conetent)
-//   }
-//   div(id?, [signature, content])
-// }
 
 ///|
 fn stype(ty : Stype) -> @html.T[Msg] {

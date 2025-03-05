@@ -16,7 +16,7 @@ pub(all) enum CodeSpan {
 typealias List[A] = @immut/list.T[A]
 
 ///|
-enum ParseState {
+priv enum ParseState {
   ParsingStart(List[Char])
   ParsingLIdent(acc~ : List[Char], List[Char])
   ParsingUIdent(acc~ : List[Char], List[Char])

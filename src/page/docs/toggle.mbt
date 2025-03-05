@@ -1,5 +1,5 @@
 ///|
-enum CardMode {
+priv enum CardMode {
   Expanded
   Collapsed
 }

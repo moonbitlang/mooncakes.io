@@ -18,8 +18,6 @@ pub(all) enum CodeSpan {
 }
 impl Show for CodeSpan
 
-type ParseState
-
 // Type aliases
 
 // Traits

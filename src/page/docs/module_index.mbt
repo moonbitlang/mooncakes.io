@@ -74,6 +74,21 @@ priv struct MiscIndex {
   methods : Array[String]
 } derive(Show)
 
+///| Compare two strings in dictionary order
+fn compare_strings(a : String, b : String) -> Int {
+  let len_a = a.length()
+  let len_b = b.length()
+  let min_len = if len_a < len_b { len_a } else { len_b }
+  for i in 0..<min_len {
+    let char_a = a[i]
+    let char_b = b[i]
+    if char_a != char_b {
+      return char_a - char_b
+    }
+  }
+  len_a - len_b
+}
+
 ///|
 fn IndexNode::to_document_items(self : IndexNode) -> Array[ItemModel] {
   let symbols = match self.package {
@@ -93,7 +108,11 @@ fn IndexNode::to_document_items(self : IndexNode) -> Array[ItemModel] {
           })
       }
     })
-  let result = [..childrens, ..symbols]
+  fn compare_items(a : ItemModel, b : ItemModel) -> Int {
+    compare_strings(a.name, b.name)
+  }
+
+  let result = [..childrens, ..symbols]..sort_by(compare_items)
   println(result)
   result
 }

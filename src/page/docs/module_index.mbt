@@ -1,12 +1,12 @@
 ///|
-struct IndexNode {
+priv struct IndexNode {
   name : String
   package : PackageIndex?
   childs : @immut/sorted_map.T[String, IndexNode]
 } derive(Show)
 
 ///|
-struct PackageIndex {
+priv struct PackageIndex {
   path : String
   traits : Array[TraitIndex]
   types : Array[TypeIndex]
@@ -16,26 +16,26 @@ struct PackageIndex {
 } derive(Show)
 
 ///|
-type ModuleIndex IndexNode derive(Show)
+priv type ModuleIndex IndexNode derive(Show)
 
 ///|
-struct TypeAliasIndex {
+priv struct TypeAliasIndex {
   name : String
 } derive(Show)
 
 ///|
-struct ValueIndex {
+priv struct ValueIndex {
   name : String
 } derive(Show)
 
 ///|
-struct TraitIndex {
+priv struct TraitIndex {
   name : String
   impls : Array[ImplIndex]
 } derive(Show)
 
 ///|
-enum Stype {
+priv enum Stype {
   Constr(constr~ : TypePath, arguments~ : Array[Stype])
   Arrow(
     parameters~ : Array[Stype],
@@ -48,27 +48,27 @@ enum Stype {
 } derive(Show)
 
 ///|
-struct TypePath {
+priv struct TypePath {
   path : String
   name : String
 } derive(Show)
 
 ///|
-struct ImplIndex {
+priv struct ImplIndex {
   self : Stype
   trait_ : TypePath
   methods : Array[String]
 } derive(Show)
 
 ///|
-struct TypeIndex {
+priv struct TypeIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
 } derive(Show)
 
 ///|
-struct MiscIndex {
+priv struct MiscIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]

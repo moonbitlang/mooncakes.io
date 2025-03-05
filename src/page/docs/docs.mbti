@@ -11,68 +11,9 @@ fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 fn view(Model) -> @html.T[Msg]
 
 // Types and methods
-type CardMode
-
-type DetailCardModel
-impl Show for DetailCardModel
-
-type ImplIndex
-impl Show for ImplIndex
-
-type IndexNode
-impl Show for IndexNode
-
-type ItemKind
-impl Show for ItemKind
-
-type ItemModel
-impl Show for ItemModel
-
-type MetaInfo
-
-type MiscIndex
-impl Show for MiscIndex
-
 type Model
 
-type ModuleIndex
-impl Show for ModuleIndex
-
-type ModuleResources
-
 type Msg
-
-type PackageIndex
-impl Show for PackageIndex
-
-type PackageModel
-impl Show for PackageModel
-
-type PackageResources
-
-type Resource
-
-type ResourceKind
-
-type RootPackageResources
-
-type Stype
-impl Show for Stype
-
-type TraitIndex
-impl Show for TraitIndex
-
-type TypeAliasIndex
-impl Show for TypeAliasIndex
-
-type TypeIndex
-impl Show for TypeIndex
-
-type TypePath
-impl Show for TypePath
-
-type ValueIndex
-impl Show for ValueIndex
 
 // Type aliases
 

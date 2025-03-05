@@ -1,12 +1,12 @@
 ///|
-struct ItemModel {
+priv struct ItemModel {
   name : String
   target : String
   kind : ItemKind
 } derive(Show)
 
 ///|
-enum ItemKind {
+priv enum ItemKind {
   Package(PackageModel)
   Value
   Type
@@ -15,7 +15,7 @@ enum ItemKind {
 } derive(Show)
 
 ///|
-struct PackageModel {
+priv struct PackageModel {
   fullpath : String
   childrens : Array[ItemModel]
   mut folded : Bool

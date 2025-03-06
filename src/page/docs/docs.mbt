@@ -70,7 +70,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               )
             Package({ package_data_path, source_files, module_path }) =>
               (
-                @tea.batch([
+                batch([
                   @http.get(
                     @config.URL_BASE + "/docs/" + package_data_path,
                     expect=Json(Msg::GotPackageData, decode_package_data),
@@ -111,7 +111,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         Err(msg) => {
           println(msg)
           (
-            @tea.none(),
+            none(),
             {
               ..model,
               meta_info: Failed,
@@ -123,7 +123,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       }
     GotModuleIndex(result) =>
       (
-        @tea.none(),
+        none(),
         match result {
           Ok(module_index) => {
             let document_index = module_index._
@@ -140,7 +140,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       )
     GotPackageData(result) =>
       (
-        @tea.none(),
+        none(),
         match result {
           Ok(package_data) => { ..model, package_data: Success(package_data) }
           Err(_) => { ..model, package_data: Failed }
@@ -152,22 +152,22 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       } else {
         model.folded_items.add(id)
       }
-      (@tea.none(), { ..model, folded_items, })
+      (none(), { ..model, folded_items, })
     }
     CardModeChanged(card_mode) =>
       (
-        @tea.none(),
+        none(),
         { ..model, folded_items: model.folded_items.set_mode(card_mode) },
       )
     SidebarCategoryClicked(showing_category) =>
-      (@tea.none(), { ..model, showing_category, })
+      (none(), { ..model, showing_category, })
     ToggleSidebarItem(id) => {
       let folded_sidebar_items = if model.folded_sidebar_items.contains(id) {
         model.folded_sidebar_items.remove(id)
       } else {
         model.folded_sidebar_items.add(id)
       }
-      (@tea.none(), { ..model, folded_sidebar_items, })
+      (none(), { ..model, folded_sidebar_items, })
     }
     ClickSidebarItem(id) => {
       println(id)
@@ -189,7 +189,7 @@ fn breadcrumbs(
 ) -> @html.Html[Msg] {
   guard (module_path, module_index)
     is (Success(module_path), Success(module_index)) else {
-    return @html.nothing()
+    return nothing()
   }
   let module_path = module_path.trim("/")
   let path = path.trim("/")
@@ -202,7 +202,7 @@ fn breadcrumbs(
     let elem = if acc_path.starts_with(module_path) &&
       module_index._.find_node(acc_path) is Some(node) &&
       (acc_path == module_path || not(node.package.is_empty())) {
-      @html.a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
+      a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
     } else {
       div(class="text-gray-700 font-normal", [text(path)])
     }
@@ -225,7 +225,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   let logo = div(
     class="border-b h-full container flex items-center top-0 z-20 bg-white",
     [
-      @html.a(class="border-gray-300 lg:border-r w-full", href="/", [
+      a(class="border-gray-300 lg:border-r w-full", href="/", [
         h1(class="font-title text-gray-700 font-semibold mx-12", [
           text("🥮 mooncakes.io"),
         ]),
@@ -243,10 +243,10 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         mode=model.folded_items.card_mode,
         click=Msg::CardModeChanged,
       ),
-      @html.button(
+      button(
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
-          @html.img(class="w-5 h-5", src=@config.SEARCH, []),
+          img(class="w-5 h-5", src=@config.SEARCH, []),
           div(class="hidden lg:block text-nowrap", [text("Quick search...")]),
         ],
       ),
@@ -266,7 +266,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   let metainfo = match model.module_path {
     Success(path) if path == model.path =>
       div(class="w-full", [meta_info(model.meta_info)])
-    _ => @html.nothing()
+    _ => nothing()
   }
   let main = div(class="flex w-full min-h-full", [
     div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [

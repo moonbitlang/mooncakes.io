@@ -36,7 +36,7 @@ fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
         External(url) => (@browser.load(url), model)
       }
     (UrlChanged(url), _) => route(url)
-    _ => (@tea.none(), model)
+    _ => (none(), model)
   }
 }
 
@@ -49,7 +49,7 @@ fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
       module_path.fold(fn(x, y) { x + "/" + y }, init="")
       |> @docs.load()
       |> update_with(Model::Docs, Message::GotDocsMsg)
-    _ => (@tea.none(), NotFound)
+    _ => (none(), NotFound)
   }
 }
 

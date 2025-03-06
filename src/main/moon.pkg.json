@@ -3,7 +3,8 @@
   "import": [
     {
       "path": "Yoorkin/rabbit-tea",
-      "alias": "tea"
+      "alias": "tea",
+      "value": ["none"],
     },
     "Yoorkin/rabbit-tea/url",
     {

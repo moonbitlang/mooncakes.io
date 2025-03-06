@@ -5,7 +5,7 @@ pub fn accordion[M](
   showing : String,
   items : Array[(String, @html.T[M])]
 ) -> @html.T[M] {
-  @html.ul(
+  ul(
     class?,
     items.map(fn {
       (title, childs) => {
@@ -18,7 +18,7 @@ pub fn accordion[M](
             f(title)
           }
         })
-        let childs = if folded { @html.nothing() } else { childs }
+        let childs = if folded { nothing() } else { childs }
         div(class="w-full", [
           div(
             class="w-full px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",

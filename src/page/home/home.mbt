@@ -45,7 +45,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
   match msg {
     GotModuleIndices(result) =>
       (
-        @tea.none(),
+        none(),
         match result {
           Ok(modules) => { ..model, indices: Success(modules) }
           Err(_) => { ..model, indices: Failed }
@@ -56,7 +56,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         Success(indices) => filter_indices(filter, indices)
         _ => []
       }
-      (@tea.none(), { ..model, filter, filtered_modules })
+      (none(), { ..model, filter, filtered_modules })
     }
     ClickModuleCard(module_name) =>
       (@browser.push_url("/docs/" + module_name), model)
@@ -83,8 +83,8 @@ pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
   let module_list = match model.indices {
-    Loading => @html.text("Loading...")
-    Failed => @html.text("Load Failed")
+    Loading => text("Loading...")
+    Failed => text("Load Failed")
     Success(indices) =>
       if model.filter == "" {
         recently_updated(indices.recently_updated)

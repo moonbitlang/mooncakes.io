@@ -75,42 +75,6 @@ priv struct MiscIndex {
 } derive(Show)
 
 ///|
-fn IndexNode::to_document_items(self : IndexNode) -> Array[ItemModel] {
-  let symbols = match self.package {
-    None => []
-    Some(pkg) => pkg.to_document_items()
-  }
-  let childrens = self.childs
-    .elems()
-    .filter_map(fn(node) {
-      match node.package {
-        None => None
-        Some(pkg) =>
-          Some({
-            name: node.name,
-            target: pkg.path,
-            kind: Package({ fullpath: pkg.path, childrens: [], folded: false }),
-          })
-      }
-    })
-  let result = [..childrens, ..symbols]
-  println(result)
-  result
-}
-
-///|
-fn PackageIndex::to_document_items(self : PackageIndex) -> Array[ItemModel] {
-  let { traits, types, typealias_, values, misc, path } = self
-  [
-    ..misc.map(fn(x) { { name: x.name, target: path, kind: Type } }),
-    ..traits.map(fn(x) { { name: x.name, target: path, kind: Trait } }),
-    ..values.map(fn(x) { { name: x.name, target: path, kind: Value } }),
-    ..types.map(fn(x) { { name: x.name, target: path, kind: Type } }),
-    ..typealias_.map(fn(x) { { name: x.name, target: path, kind: TypeAlias } }),
-  ]
-}
-
-///|
 fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
   let paths = path.trim("/").split("/").to_array()[:]
   guard paths is [root_path, .. paths] && root_path == self.name else {

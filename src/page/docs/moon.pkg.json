@@ -13,6 +13,7 @@
     "Yoorkin/rabbit-tea/browser",
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/view",
+    "moonbitlang/mooncakes/view/tree",
     "moonbitlang/mooncakes/util"
   ]
 }

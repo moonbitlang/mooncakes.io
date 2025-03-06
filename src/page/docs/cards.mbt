@@ -138,7 +138,7 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> @html.T[Msg] {
       [
         @view.markdown(docstring),
         sub_section_title("Method", methods.length()),
-        ..methods.map(fn(x) { value_doc(x, folded~) }),
+        ..methods.map(fn(x) { value_doc(x, folded~, type_name=doc.name) }),
         sub_section_title("Implementation", impls.length()),
         ..impls.map(fn(x) { impl_doc(x, folded~) }),
       ],
@@ -158,6 +158,7 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> @html.T[Msg] {
       [signature_view(signature)],
     ),
     body=div(
+      id=doc.name,
       class="ml-3 my-2",
       [
         @view.markdown(docstring),
@@ -186,13 +187,17 @@ fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> @html.T[Msg] {
 }
 
 ///|
-fn value_doc(doc : ValueDoc, folded~ : FoldedState) -> @html.T[Msg] {
+fn value_doc(
+  doc : ValueDoc,
+  folded~ : FoldedState,
+  type_name? : String
+) -> @html.T[Msg] {
   let { name, docstring, signature, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
     toggle=ToggleCardDetail(name),
     header=div(
-      id=name,
+      id=type_name.map(fn(x) { "\{x}::\{name}" }).or(name),
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
       [signature_view(signature)],
     ),
@@ -215,7 +220,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
       [
         // p([text("This is a builtin type.")]),
         sub_section_title("Method", methods.length()),
-        ..methods.map(fn(x) { value_doc(x, folded~) }),
+        ..methods.map(fn(x) { value_doc(x, folded~, type_name=doc.name) }),
         sub_section_title("Implementation", impls.length()),
         ..impls.map(fn(x) { impl_doc(x, folded~) }),
       ],
@@ -255,23 +260,27 @@ fn document(
   }
   let doc_list = match package_data {
     Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {
-      fn section_title(title, item_count) {
+      fn section_title(id, title, item_count) {
         if item_count == 0 {
           @html.nothing()
         } else {
-          h1(class="text-xl font-bold py-4 border-b text-gray-800", [
+          h1(id~, class="text-xl font-bold py-4 border-b text-gray-800", [
             text(title),
           ])
         }
       }
 
       [
-        section_title("Trait", traits.length()),
+        section_title("trait-section", "Trait", traits.length()),
         ..traits.map(fn(x) { trait_doc(x, folded~) }),
-        section_title("Type", types.length()),
+        section_title("type-section", "Type", types.length()),
         ..types.map(fn(x) { type_doc(x, folded~) }),
         ..typealiases.map(fn(x) { type_alias_doc(x, folded~) }),
-        section_title("Value and Function", values.length() + misc.length()),
+        section_title(
+          "value-section",
+          "Value and Function",
+          values.length() + misc.length(),
+        ),
         ..values.map(fn(x) { value_doc(x, folded~) }),
         ..misc.map(fn(x) { misc_doc(x, folded~) }),
       ]

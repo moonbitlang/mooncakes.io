@@ -2,25 +2,26 @@
 enum Msg {
   ToggleCardDetail(String)
   CardModeChanged(CardMode)
-  ItemClick(String, String)
-  PackageClick(PackageModel)
   GotResource(Result[Resource, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageData(Result[PackageData, String])
   SidebarCategoryClicked(String)
+  ToggleSidebarItem(ItemTarget)
+  ClickSidebarItem(ItemTarget)
 }
 
 ///|
 struct Model {
   module_path : String
   path : String
-  document_index : Array[ItemModel]
+  document_index : Array[@tree.Tree[ItemTarget]]
   source_files : Array[String]
   package_data : @util.Status[PackageData]
   meta_info : @util.Status[MetaInfo]
   readme_content : String?
   showing_category : String
   folded_items : FoldedState
+  folded_sidebar_items : @immut/sorted_set.T[ItemTarget]
 }
 
 ///|
@@ -40,6 +41,7 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
       showing_category: "Documentation",
       package_data: Loading,
       folded_items: FoldedState::new(),
+      folded_sidebar_items: @immut/sorted_set.new(),
     },
   )
 }
@@ -146,30 +148,31 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         @tea.none(),
         { ..model, folded_items: model.folded_items.set_mode(card_mode) },
       )
-    PackageClick(pkg_model) => {
-      println(pkg_model)
-      (
-        @http.get(
-          @config.URL_BASE + "/docs/" + pkg_model.fullpath + "/resource.json",
-          expect=Json(Msg::GotResource, decode_resource),
-        ),
-        { ..model, document_index: [], path: pkg_model.fullpath },
-      )
-    }
-    ItemClick(target, name) =>
-      if target == model.path {
-        (@browser.scroll_to(name), model)
-      } else {
-        (
-          @http.get(
-            @config.URL_BASE + "/docs/" + target + "/resource.json",
-            expect=Json(Msg::GotResource, decode_resource),
-          ),
-          { ..model, path: target },
-        )
-      }
     SidebarCategoryClicked(showing_category) =>
       (@tea.none(), { ..model, showing_category, })
+    ToggleSidebarItem(id) => {
+      let folded_sidebar_items = if model.folded_sidebar_items.contains(id) {
+        model.folded_sidebar_items.remove(id)
+      } else {
+        model.folded_sidebar_items.add(id)
+      }
+      (@tea.none(), { ..model, folded_sidebar_items, })
+    }
+    ClickSidebarItem(id) => {
+      println(id)
+      match id {
+        Package(path) =>
+          (
+            @http.get(
+              @config.URL_BASE + "/docs/" + path + "/resource.json",
+              expect=Json(Msg::GotResource, decode_resource),
+            ),
+            { ..model, path, },
+          )
+        Symbol(id) => (@browser.scroll_to(id), model)
+        Section(id) => (@browser.scroll_to(id), model)
+      }
+    }
   }
 }
 
@@ -237,6 +240,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         model.document_index,
         model.source_files,
         model.showing_category,
+        model.folded_sidebar_items,
         package_path=model.path,
       ),
     ]),

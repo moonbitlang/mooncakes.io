@@ -74,61 +74,6 @@ priv struct MiscIndex {
   methods : Array[String]
 } derive(Show)
 
-///| Compare two strings in dictionary order
-fn compare_strings(a : String, b : String) -> Int {
-  let len_a = a.length()
-  let len_b = b.length()
-  let min_len = if len_a < len_b { len_a } else { len_b }
-  for i in 0..<min_len {
-    let char_a = a[i]
-    let char_b = b[i]
-    if char_a != char_b {
-      return char_a - char_b
-    }
-  }
-  len_a - len_b
-}
-
-///|
-fn IndexNode::to_document_items(self : IndexNode) -> Array[ItemModel] {
-  let symbols = match self.package {
-    None => []
-    Some(pkg) => pkg.to_document_items()
-  }
-  let childrens = self.childs
-    .elems()
-    .filter_map(fn(node) {
-      match node.package {
-        None => None
-        Some(pkg) =>
-          Some({
-            name: node.name,
-            target: pkg.path,
-            kind: Package({ fullpath: pkg.path, childrens: [], folded: false }),
-          })
-      }
-    })
-  fn compare_items(a : ItemModel, b : ItemModel) -> Int {
-    compare_strings(a.name, b.name)
-  }
-
-  let result = [..childrens, ..symbols]..sort_by(compare_items)
-  println(result)
-  result
-}
-
-///|
-fn PackageIndex::to_document_items(self : PackageIndex) -> Array[ItemModel] {
-  let { traits, types, typealias_, values, misc, path } = self
-  [
-    ..misc.map(fn(x) { { name: x.name, target: path, kind: Type } }),
-    ..traits.map(fn(x) { { name: x.name, target: path, kind: Trait } }),
-    ..values.map(fn(x) { { name: x.name, target: path, kind: Value } }),
-    ..types.map(fn(x) { { name: x.name, target: path, kind: Type } }),
-    ..typealias_.map(fn(x) { { name: x.name, target: path, kind: TypeAlias } }),
-  ]
-}
-
 ///|
 fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
   let paths = path.trim("/").split("/").to_array()[:]

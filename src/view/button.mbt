@@ -23,7 +23,7 @@ pub fn icon_button[M](
     [
       div(
         class="self-center min-w-4 flex gap-2",
-        [@html.img(class="w-4", src=icon, []), ..text],
+        [img(class="w-4", src=icon, []), ..text],
       ),
     ],
   )
@@ -42,8 +42,8 @@ pub fn footer[M]() -> @html.Html[M] {
     class="h-28 p-10 border-t bg-zinc-50 text-gray-600 flex justify-center gap-4",
     [
       p([text("© 2024 mooncakes.io")]),
-      @html.a(href="", [text("Docs")]),
-      @html.a(href="", [text("Moon")]),
+      a(href="", [text("Docs")]),
+      a(href="", [text("Moon")]),
       p([text("made by MoonBit")]),
     ],
   )

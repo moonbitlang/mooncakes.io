@@ -4,16 +4,11 @@ fn search_bar() -> @html.Html[Msg] {
     class="text-center pt-14 pb-8  bg-cover bg-bottom bg-mooncake border-b mb-10",
     [
       div(class="flex items-center justify-center", [
-        @html.img(
-          src="favicon.svg",
-          class="inline-block h-12 w-12",
-          alt="Logo",
-          [],
-        ),
+        img(src="favicon.svg", class="inline-block h-12 w-12", alt="Logo", []),
         h1(class="font-bold text-5xl p-4 text-gray-800", [text("mooncakes.io")]),
       ]),
       div(class="flex justify-center mt-4 relative", [
-        @html.input(
+        input(
           input_type=Text,
           placeholder="Search...",
           class="border rounded px-4 py-2 w-screen lg:w-1/2 focus:border-mooncake2 border-2 outline-none",
@@ -67,13 +62,13 @@ fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
 ///|
 fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   let keywords = match mod.keywords {
-    None => @html.nothing()
+    None => nothing()
     Some(keywords) =>
       div(
         class="flex gap-2 h-8 flex-wrap overflow-y-hidden shrink-0",
         keywords.map(fn {
           keyword =>
-            @html.span(
+            span(
               class="text-sm/4 h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
               [text(keyword)],
             )
@@ -89,7 +84,7 @@ fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   }
   let time = match mod.created_at {
     Some(t) => p([text(get_relative_time(t))])
-    None => @html.nothing()
+    None => nothing()
   }
   div(
     class="p-4 min-h-32 flex flex-col border-t bg-white hover:bg-gray-100 transition-all",

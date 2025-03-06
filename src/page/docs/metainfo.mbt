@@ -1,9 +1,9 @@
 ///|
 fn meta_info_item_view(
   title~ : String,
-  elem : @html.Html[Msg],
+  elem : @html.T[Msg],
   grow~ : Bool = false
-) -> @html.Html[Msg] {
+) -> @html.T[Msg] {
   let grow = if grow { "grow" } else { "" }
   div(class="flex items-center gap-3 text-gray-600 \{grow}", [
     p(class="font-bold text-sm", [text(title)]),
@@ -12,15 +12,15 @@ fn meta_info_item_view(
 }
 
 ///|
-fn install_view(path~ : String) -> @html.Html[Msg] {
-  @html.div(
+fn install_view(path~ : String) -> @html.T[Msg] {
+  div(
     class="text-sm h-8 p-2 pr-10 font-roboto border rounded outline-none bg-zinc-100 flex items-center",
     [text("moon add \{path}")],
   )
 }
 
 ///|
-fn tag_view(value : String) -> @html.Html[Msg] {
+fn tag_view(value : String) -> @html.T[Msg] {
   div(
     class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600 overflow-hidden",
     [text(value)],
@@ -28,10 +28,10 @@ fn tag_view(value : String) -> @html.Html[Msg] {
 }
 
 ///|
-fn meta_info(model : @util.Status[MetaInfo]) -> @html.Html[Msg] {
+fn meta_info(model : @util.Status[MetaInfo]) -> @html.T[Msg] {
   match model {
-    Failed => @html.nothing()
-    Loading => @html.text("Loading...")
+    Failed => nothing()
+    Loading => text("Loading...")
     Success(model) => {
       let model_license = match model.license {
         Some(l) =>
@@ -39,19 +39,19 @@ fn meta_info(model : @util.Status[MetaInfo]) -> @html.Html[Msg] {
             title="License",
             p(class="text-gray-600", [text(l)]),
           )
-        None => @html.nothing()
+        None => nothing()
       }
       let model_repo = match model.repository {
         Some(repo) =>
           meta_info_item_view(
             title="Repository",
-            p([@html.a(class="hover:underline", href=repo, [text(repo)])]),
+            p([a(class="hover:underline", href=repo, [text(repo)])]),
           )
-        None => @html.nothing()
+        None => nothing()
       }
       let model_description = match model.description {
         Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
-        None => @html.nothing()
+        None => nothing()
       }
       let meta_separator = div(class="border-l border-gray-200 my-1 mx-2", [])
       div(class="px-12 p-6 border-b bg-white", [

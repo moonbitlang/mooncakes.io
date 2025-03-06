@@ -6,8 +6,7 @@ fn item_button[M](
 ) -> @html.Html[M] {
   let icon = match icon {
     None => div([])
-    Some(src) =>
-      div(class="size-[12px] self-center mr-1", [@html.img(src~, [])])
+    Some(src) => div(class="size-[12px] self-center mr-1", [img(src~, [])])
   }
   div(class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex", click?, [
     icon, childrens,
@@ -23,10 +22,10 @@ fn source_list(
     return text("No source files.")
   }
   div(class="", [
-    @html.ul(
+    ul(
       files.map(fn(x) {
         item_button(
-          @html.a(
+          a(
             class="w-full",
             href="\{@config.URL_BASE}/docs/\{package_path}/\{x}.html",
             [text(x)],

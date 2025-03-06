@@ -33,13 +33,13 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 }
 
 ///|
-fn signature_view(code : String) -> @html.T[Msg] {
+fn signature_view(content : String) -> @html.T[Msg] {
   div(
     class="py-1 flex-grow px-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
-      @html.pre([
-        @html.code(class="font-mono text-[0.9em] text-blue-800", [
-          @view.code_block(code),
+      pre([
+        code(class="font-mono text-[0.9em] text-blue-800", [
+          @view.code_block(content),
         ]),
       ]),
     ],
@@ -49,18 +49,14 @@ fn signature_view(code : String) -> @html.T[Msg] {
 ///|
 fn stype(ty : Stype) -> @html.T[Msg] {
   match ty {
-    Param(name~) => @html.span([text(name)])
+    Param(name~) => span([text(name)])
     Arrow(parameters~, return_type~, error_type~, is_async~) => {
-      let async_indicator = if is_async {
-        text("async ")
-      } else {
-        @html.nothing()
-      }
+      let async_indicator = if is_async { text("async ") } else { nothing() }
       let error_type_indicator = match error_type {
-        None => @html.nothing()
+        None => nothing()
         Some(ty) => div(class="flex", [text("!"), stype(ty)])
       }
-      @html.div(
+      div(
         [
           async_indicator,
           text("("),
@@ -99,13 +95,13 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> @html.T[Msg] {
   let id = self_type.to_string() + trait_type.to_string()
   @view.collapse(
     caret_config=LeftCenter,
-    header=@html.pre(
+    header=pre(
       class="pl-6 py-1 bg-gray-100 xl:w-2/5 flex flex-grow pr-3 overflow-auto scrollbar-thin",
       [
-        @html.code(class="font-mono text-[0.9em] text-blue-800 flex", [
-          @html.span(class="text-gray-700", [text("impl ")]),
+        code(class="font-mono text-[0.9em] text-blue-800 flex", [
+          span(class="text-gray-700", [text("impl ")]),
           type_path(trait_type),
-          @html.span(class="text-gray-700", [text(" for ")]),
+          span(class="text-gray-700", [text(" for ")]),
           stype(self_type),
         ]),
       ],
@@ -213,7 +209,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
     collapsed=folded.contains(name),
     toggle=ToggleCardDetail(name),
     header=div(id=name, class="pl-6 py-1 w-full", [
-      @html.h3(class="text-lg text-gray-800", [text(name)]),
+      h3(class="text-lg text-gray-800", [text(name)]),
     ]),
     body=div(
       class="ml-3 my-2",
@@ -231,7 +227,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
 ///|
 fn sub_section_title(title : String, item_count : Int) -> @html.T[Msg] {
   if item_count == 0 {
-    @html.nothing()
+    nothing()
   } else {
     h1(class="text-xs font-bold py-2 text-blue-900", [text(title)])
   }
@@ -244,7 +240,7 @@ fn document(
   folded~ : FoldedState
 ) -> @html.Html[Msg] {
   let readme = match readme_content {
-    None | Some("") => @html.nothing()
+    None | Some("") => nothing()
     Some(content) => {
       let content = @view.markdown(content)
       @view.collapse(
@@ -262,7 +258,7 @@ fn document(
     Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {
       fn section_title(id, title, item_count) {
         if item_count == 0 {
-          @html.nothing()
+          nothing()
         } else {
           h1(id~, class="text-xl font-bold py-4 border-b text-gray-800", [
             text(title),

@@ -37,7 +37,7 @@ pub fn view[M, Id : Compare](
       let collapsed = "border-t-[4px] border-t-transparent border-l-[6px] border-l-gray-400 border-b-[4px] border-b-transparent"
       let expanded = collapsed + " rotate-90 "
       let (body_style, icon) = if state.contains(id) {
-        ("max-h-auto", expanded)
+        ("max-h-[9999px]", expanded)
       } else {
         ("max-h-0", collapsed)
       }
@@ -54,7 +54,7 @@ pub fn view[M, Id : Compare](
           ],
         ),
         div(
-          class="pl-2 overflow-hidden duration-150 transition-[max-height] \{body_style}",
+          class="pl-2 overflow-hidden duration-400 transition-[max-height] \{body_style}",
           [ul(children.map(aux))],
         ),
       ])

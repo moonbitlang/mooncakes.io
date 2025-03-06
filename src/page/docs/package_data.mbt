@@ -196,17 +196,26 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
       "name": String(name),
       "types": Array(types),
       "traits": Array(traits),
-      "typealias": Array(typealiases),
+      "typealias": Array(aliases),
       "values": Array(values),
       "misc": Array(misc),
       ..
     } : Json) => {
       let types = map_with_error!(types, decode_type_doc)
       let traits = map_with_error!(traits, decode_trait_doc)
-      let typealiases = map_with_error!(typealiases, decode_typealias_doc)
+      let aliases = map_with_error!(aliases, decode_typealias_doc)
       let values = map_with_error!(values, decode_value_doc)
       let misc = map_with_error!(misc, decode_misc_doc)
-      { name, types, traits, typealiases, values, misc }
+      {
+        name,
+        types: types..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
+        traits: traits..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
+        typealiases: aliases..sort_by(fn(x, y) {
+          compare_strings(x.name, y.name)
+        }),
+        values: values..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
+        misc: misc..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
+      }
     }
     _ => fail!("fail to decode package data: \{json}")
   }

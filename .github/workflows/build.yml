@@ -21,6 +21,13 @@ jobs:
       - run: |
           moon update
           moon install
+          cp -R web/* target/web/
+          rm src/config/url_base.mbt && echo "pub const URL_BASE = \"\"" > src/config/url_base.mbt
+          moon build --target js
+          cp target/js/release/build/main/main.js target/web/main.js
+          npm install npx
+          npx tailwindcss -i web/styles.css -o target/web/styles.css
+
       - name: publish
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

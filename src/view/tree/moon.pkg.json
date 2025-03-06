@@ -1,0 +1,9 @@
+{
+  "import": [
+    {
+      "path": "Yoorkin/rabbit-tea/html",
+      "alias": "html",
+      "value": ["div","text", "ul"]
+    },
+  ]
+}

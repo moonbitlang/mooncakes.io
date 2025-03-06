@@ -1,0 +1,21 @@
+package moonbitlang/mooncakes/view/tree
+
+alias @Yoorkin/rabbit-tea/html as @html
+alias @moonbitlang/core/immut/sorted_set as @sorted_set
+
+// Values
+fn view[M, Id : Compare](toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.T[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.T[M]
+
+// Types and methods
+pub(all) enum Tree[Id] {
+  Item(Id, String)
+  Node(Id, String, Array[Tree[Id]])
+}
+impl Tree {
+  get_name[Id](Self[Id]) -> String
+}
+
+// Type aliases
+
+// Traits
+

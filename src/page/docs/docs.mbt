@@ -12,8 +12,9 @@ enum Msg {
 
 ///|
 struct Model {
-  module_path : String
+  module_path : @util.Status[String]
   path : String
+  module_index : @util.Status[ModuleIndex]
   document_index : Array[@tree.Tree[ItemTarget]]
   source_files : Array[String]
   package_data : @util.Status[PackageData]
@@ -32,7 +33,8 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
       expect=Json(Msg::GotResource, decode_resource),
     ),
     {
-      module_path: path,
+      module_path: Loading,
+      module_index: Loading,
       path,
       document_index: [],
       meta_info: Loading,
@@ -60,7 +62,11 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                   @config.URL_BASE + "/docs/" + module_index_path,
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
-                { ..model, meta_info: Success(meta_info) },
+                {
+                  ..model,
+                  meta_info: Success(meta_info),
+                  module_path: Success(model.path),
+                },
               )
             Package({ package_data_path, source_files, module_path }) =>
               (
@@ -77,7 +83,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                     expect=Json(Msg::GotModuleIndex, decode_module_index),
                   ),
                 ]),
-                { ..model, source_files, },
+                { ..model, source_files, module_path: Success(module_path) },
               )
             RootPackage(
               { module_index_path, meta_info, package_data_path, source_files }
@@ -93,7 +99,12 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                     expect=Json(Msg::GotPackageData, decode_package_data),
                   ),
                 ]),
-                { ..model, source_files, meta_info: Success(meta_info) },
+                {
+                  ..model,
+                  source_files,
+                  meta_info: Success(meta_info),
+                  module_path: Success(model.path),
+                },
               )
           }
         }
@@ -119,7 +130,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               .find_node(model.path)
               .unwrap()
               .to_document_items()
-            { ..model, document_index, }
+            { ..model, document_index, module_index: Success(module_index) }
           }
           Err(msg) => {
             println(msg)
@@ -162,13 +173,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       println(id)
       match id {
         Package(path) =>
-          (
-            @http.get(
-              @config.URL_BASE + "/docs/" + path + "/resource.json",
-              expect=Json(Msg::GotResource, decode_resource),
-            ),
-            { ..model, path, },
-          )
+          (@browser.push_url("/docs/" + path), { ..model, path, })
         Symbol(id) => (@browser.scroll_to(id), model)
         Section(id) => (@browser.scroll_to(id), model)
       }
@@ -177,14 +182,27 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
 }
 
 ///|
-fn breadcrumbs(path : String, module_path : String) -> @html.Html[Msg] {
+fn breadcrumbs(
+  path : String,
+  module_path : @util.Status[String],
+  module_index : @util.Status[ModuleIndex]
+) -> @html.Html[Msg] {
+  guard (module_path, module_index)
+    is (Success(module_path), Success(module_index)) else {
+    return @html.nothing()
+  }
+  let module_path = module_path.trim("/")
+  let path = path.trim("/")
   let paths = path.trim_start("/").split("/").collect()
+  println("\{module_path}, \{path}")
   let mut acc_path = ""
   let elems = []
   for path in paths {
-    acc_path += "/" + path
-    let elem = if acc_path.starts_with(module_path) {
-      @html.a(class="hover:underline", href="/docs" + acc_path, [text(path)])
+    acc_path += if acc_path == "" { path } else { "/" + path }
+    let elem = if acc_path.starts_with(module_path) &&
+      module_index._.find_node(acc_path) is Some(node) &&
+      (acc_path == module_path || not(node.package.is_empty())) {
+      @html.a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
     } else {
       div(class="text-gray-700 font-normal", [text(path)])
     }
@@ -217,7 +235,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   let navbar = div(
     class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
     [
-      breadcrumbs(model.path, model.module_path),
+      breadcrumbs(model.path, model.module_path, model.module_index),
       // version
       tag_view(version),
       div(class="flex-grow", []),
@@ -245,13 +263,14 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       ),
     ]),
   ])
+  let metainfo = match model.module_path {
+    Success(path) if path == model.path =>
+      div(class="w-full", [meta_info(model.meta_info)])
+    _ => @html.nothing()
+  }
   let main = div(class="flex w-full min-h-full", [
     div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
-      if model.module_path == model.path {
-        div(class="w-full", [meta_info(model.meta_info)])
-      } else {
-        @html.nothing()
-      },
+      metainfo,
       document(
         readme_content?=model.readme_content,
         package_data=model.package_data,

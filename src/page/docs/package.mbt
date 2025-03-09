@@ -154,7 +154,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
         )
       }
     FilterChange(value) => {
-      guard let Success(sidebar) = model.sidebar
+      guard model.sidebar is Success(sidebar)
       sidebar.filter = value
       (@tea.none(), model)
     }

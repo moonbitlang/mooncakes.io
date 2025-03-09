@@ -83,16 +83,16 @@ fn as_string(json : Json) -> String {
 
 ///|
 fn parse_impl(json : Json) -> Impl {
-  guard let { "methods": Array(methods), .. } = json
+  guard json is { "methods": Array(methods), .. }
   { methods: methods.map(as_string) }
 }
 
 ///|
 fn parse_traits(json : Json) -> Array[Traits] {
   let result : Array[Traits] = []
-  guard let Array(traits_list) = json
+  guard json is Array(traits_list)
   for trait_ in traits_list {
-    guard let { "name": String(name), "impls": Array(impls), .. } = trait_
+    guard trait_ is { "name": String(name), "impls": Array(impls), .. }
     result.push({ name, impls: impls.map(parse_impl) })
   }
   result
@@ -100,26 +100,28 @@ fn parse_traits(json : Json) -> Array[Traits] {
 
 ///|
 fn parse_type(json : Json) -> Type {
-  guard let {
-    "name": String(name),
-    "impls": Array(impls),
-    "methods": Array(method_),
-    ..
-  } = json
+  guard json
+    is {
+      "name": String(name),
+      "impls": Array(impls),
+      "methods": Array(method_),
+      ..
+    }
   { name, impls: impls.map(parse_impl), methods: method_.map(as_string) }
 }
 
 ///|
 fn parse_package(json : Json, childs : Array[ModuleIndex]) -> Package {
-  guard let {
-    "path": String(path),
-    "traits": traits,
-    "types": Array(types),
-    "typealias": Array(typealais_),
-    "values": Array(values),
-    "misc": Array(miscs),
-    ..
-  } = json
+  guard json
+    is {
+      "path": String(path),
+      "traits": traits,
+      "types": Array(types),
+      "typealias": Array(typealais_),
+      "values": Array(values),
+      "misc": Array(miscs),
+      ..
+    }
   {
     body: Some({
       path,

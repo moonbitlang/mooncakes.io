@@ -1,6 +1,6 @@
 ///|
 fn inline_text[M](str : String) -> @html.Html[M] {
-  div(class="inline leading-loose", [text(str)])
+  @html.span(class="inline leading-loose", [text(str)])
 }
 
 ///|
@@ -15,7 +15,7 @@ fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
       ..,
     } =>
       match src {
-        Some({ v: src, .. }) => @html.img(src~, alt~, [])
+        Some({ v: src, .. }) => @html.img(class="my-2", src~, alt~, [])
         None => @html.text("Loading image failed: invalid url")
       }
     { v: { reference: Ref(_), .. }, .. } => {
@@ -49,8 +49,8 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
 
   fn inline2html {
     @cmark.Inline::Autolink({ v: { link: { v, .. }, .. }, .. }) =>
-      [@html.a(href=v, [text(v)])]
-    Break(_) => []
+      [@html.a(href=v, [inline_text(v)])]
+    Break(_) => [text("\n")]
     CodeSpan({ v: { code_layout: tight, .. }, .. }) => {
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
@@ -94,9 +94,9 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       let inline = inline2html(inline)
       match level {
         _..<1 => abort("Heading level <1")
-        1 => h3(class="text-gray-900 font-semibold mt-4 mb-2 text-2xl", inline)
-        2 => h4(class="text-gray-900 mt-4 mb-2 pb-2 border-b text-xl", inline)
-        3 => h5(class="text-gray-900 text-lg", inline)
+        1 => h3(class="text-gray-900 font-semibold mt-4 mb-2 text-3xl", inline)
+        2 => h4(class="text-gray-900 mt-4 mb-2 pb-2 border-b text-2xl", inline)
+        3 => h5(class="text-gray-900 text-xl", inline)
         4..<_ => div(class="text-gray-900", inline)
       }
     }
@@ -115,7 +115,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
                 block2html(block),
               ])
             } else {
-              @html.li([block2html(block)])
+              @html.li(class="list-inside", [block2html(block)])
             }
         })
         .to_array()
@@ -127,11 +127,73 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
           @html.ol(start~, class=class + " list-decimal", items)
       }
     }
-    Paragraph({ v: { inline, .. }, .. }) => div(inline2html(inline))
+    Paragraph({ v: { inline, .. }, .. }) => @html.span(inline2html(inline))
     ThematicBreak(_) => hr(class="my-4")
-    ExtTable(_) => {
-      println("Warning: Unsupported table")
-      @html.nothing()
+    ExtTable({ v: { rows, .. }, .. }) => {
+      let colgroup = []
+      let body = rows
+        .to_array()
+        .mapi(fn(i, row) {
+          match row {
+            ({ v: Header(cols), .. }, _) =>
+              @html.tr(
+                class=if (i - (if colgroup.length() > 0 { 1 } else { 0 })) % 2 ==
+                  0 {
+                  "bg-gray-100"
+                } else {
+                  ""
+                },
+                cols
+                .map(fn {
+                  (inline, _) =>
+                    @html.th(
+                      class="border border-gray-300 p-2 font-semibold",
+                      inline2html(inline),
+                    )
+                })
+                .to_array(),
+              )
+            ({ v: Data(cols), .. }, _) =>
+              @html.tr(
+                class=if (i - (if colgroup.length() > 0 { 1 } else { 0 })) % 2 ==
+                  0 {
+                  "bg-gray-100"
+                } else {
+                  ""
+                },
+                cols
+                .map(fn {
+                  (inline, _) =>
+                    @html.td(
+                      class="border border-gray-300 p-2",
+                      inline2html(inline),
+                    )
+                })
+                .to_array(),
+              )
+            ({ v: Sep(cols), .. }, _) => {
+              cols
+              .iter()
+              .each(fn {
+                { v: (align, _), .. } =>
+                  match align {
+                    Some(Left) =>
+                      colgroup.push(@html.col(class="text-left", []))
+                    Some(Center) =>
+                      colgroup.push(@html.col(class="text-center", []))
+                    Some(Right) =>
+                      colgroup.push(@html.col(class="text-right", []))
+                    None => colgroup.push(@html.col(class="", []))
+                  }
+              })
+              @html.nothing()
+            }
+          }
+        })
+      @html.table(
+        class="w-full table-auto my-6 border-2 border-collapse border-gray-300",
+        [@html.colgroup(colgroup), @html.tbody(body)],
+      )
     }
     LinkRefDefinition(_) => {
       println("Warning: Unsupported link reference definition")
@@ -161,7 +223,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       @cmark.FolderResult::Fold([..acc, block2html(block)])
     },
   }
-  let doc = @cmark.Doc::from_string(markdown)
+  let doc = @cmark.Doc::from_string(markdown, strict=false)
   try {
     folder.fold_doc!([], doc)
   } catch {

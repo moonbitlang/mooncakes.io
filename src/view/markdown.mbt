@@ -68,7 +68,6 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       [@html.a(href=v, [inline_text(v)])]
     Break(_) => [text("\n")]
     CodeSpan({ v: { code_layout: tight, .. }, .. }) => {
-      println(tight)
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
         @html.code(
@@ -100,7 +99,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         class="border-l-2 border-rose-600 bg-gray-50 py-2 pl-4 my-2",
         [block2html(block)],
       )
-    Blocks({ v: xs, .. }) => div(xs.map(block2html).to_array())
+    Blocks({ v: xs, .. }) => span(xs.map(block2html).to_array())
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
       let code = String::concat(
         code.map(fn(node) { node.v }).to_array(),
@@ -128,22 +127,22 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         4..<_ => div(class="text-gray-900", inline)
       }
     }
-    List({ v: { ty: ordered, tight, items, .. }, .. }) => {
+    List({ v: { ty: ordered, tight, items, .. } as x, .. }) => {
+      println(x)
       let items = items
         .map(fn {
           { v: { block, ext_task_marker, .. }, .. } =>
             if ext_task_marker is Some({ v: char, .. }) {
-              @html.li(class="list-inside flex items-center gap-2", [
+              @html.li(class="list-inside flex gap-2 pl-2", [
                 @html.input(
                   input_type=Checkbox,
                   read_only=true,
                   checked=char == 'x' || char == 'X',
-                  childrens=[block2html(block)],
                 ),
                 block2html(block),
               ])
             } else {
-              @html.li(class="list-inside", [block2html(block)])
+              @html.li(class="list-inside pl-2", [block2html(block)])
             }
         })
         .to_array()

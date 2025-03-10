@@ -127,8 +127,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         4..<_ => div(class="text-gray-900", inline)
       }
     }
-    List({ v: { ty: ordered, tight, items, .. } as x, .. }) => {
-      println(x)
+    List({ v: { ty: ordered, tight, items, .. }, .. }) => {
       let items = items
         .map(fn {
           { v: { block, ext_task_marker, .. }, .. } =>
@@ -247,6 +246,6 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
   } catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } else {
-    htmls => div(htmls)
+    htmls => div(class="w-full", htmls)
   }
 }

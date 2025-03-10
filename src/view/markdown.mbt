@@ -1,11 +1,21 @@
 ///|
+fn unsupported[M](node_type : String, message : String) -> @html.Html[M] {
+  @html.p(class="text-red-500", [
+    text("Unsupported markdown syntax: " + node_type + " " + message),
+  ])
+}
+
+///|
 fn inline_text[M](str : String) -> @html.Html[M] {
   @html.span(class="inline leading-loose", [text(str)])
 }
 
 ///|
 fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
-  guard img is Image(img)
+  guard img is Image(img) else {
+    println(img)
+    abort("not an image")
+  }
   match img {
     {
       v: {
@@ -40,10 +50,16 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     } : @cmark.InlineLink) =>
       [@html.a(class=" text-blue-400", href=link, [inline_text(txt)])]
     ({
-      text: img,
+      text: Image(_) as img,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
       [@html.a(href=link, style=["display: inline-block"], [image_render(img)])]
+    ({
+      text: inline,
+      reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
+    } : @cmark.InlineLink) => [@html.a(href=link, inline2html(inline))]
+    ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }) } : @cmark.InlineLink) =>
+      inline2html(inline)
     _ => abort("not an inline link")
   }
 
@@ -52,6 +68,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       [@html.a(href=v, [inline_text(v)])]
     Break(_) => [text("\n")]
     CodeSpan({ v: { code_layout: tight, .. }, .. }) => {
+      println(tight)
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
         @html.code(
@@ -69,7 +86,11 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       [@html.strong(inline)]
     }
     Text({ v: str, .. }) => [inline_text(str)]
-    RawHtml(_) | ExtMathSpan(_) | ExtStrikethrough({ v: _, .. }) => panic() // FIXME
+    RawHtml({ v: str, .. }) => [unsupported("RawHtml", str.to_string())]
+    ExtStrikethrough({ v: inline, .. }) =>
+      [unsupported("ExtStrikethrough", inline.to_string())]
+    ExtMathSpan({ v: math, .. }) =>
+      [unsupported("ExtMathSpan", math.to_string())]
   }
 
   fn block2html {
@@ -80,15 +101,22 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         [block2html(block)],
       )
     Blocks({ v: xs, .. }) => div(xs.map(block2html).to_array())
-    CodeBlock({ v: { code, .. }, .. }) => {
+    CodeBlock({ v: { code, info_string, .. }, .. }) => {
       let code = String::concat(
-          code.map(fn(node) { node.v }).to_array(),
-          separator="\n",
-        )
-        |> code_block()
-      @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
-        @html.code(class="font-roboto", [code]),
-      ])
+        code.map(fn(node) { node.v }).to_array(),
+        separator="\n",
+      )
+      if info_string is Some({ v: lang, .. }) &&
+        (lang == "mbt" || lang == "moonbit") {
+        let code = code |> code_block()
+        @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
+          @html.code(class="font-roboto", [code]),
+        ])
+      } else {
+        @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
+          @html.code(class="font-roboto", [div([text(code)])]),
+        ])
+      }
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)
@@ -195,22 +223,13 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         [@html.colgroup(colgroup), @html.tbody(body)],
       )
     }
-    LinkRefDefinition(_) => {
-      println("Warning: Unsupported link reference definition")
-      @html.nothing()
-    }
-    ExtMathBlock(_) => {
-      println("Warning: Unsupported inline Math Block")
-      @html.nothing()
-    }
-    HtmlBlock(_) => {
-      println("Warning: Unsupported inline Html block")
-      @html.nothing()
-    }
-    ExtFootnoteDefinition(_) => {
-      println("Warning: Unsupported footnote definition")
-      @html.nothing()
-    }
+    LinkRefDefinition({ v: link_ref, .. }) =>
+      unsupported("LinkRefDefinition", link_ref.to_string())
+    ExtMathBlock({ v: math, .. }) =>
+      unsupported("ExtMathBlock", math.to_string())
+    HtmlBlock({ v: html, .. }) => unsupported("HtmlBlock", html.to_string())
+    ExtFootnoteDefinition({ v: footnote, .. }) =>
+      unsupported("ExtFootnoteDefinition", footnote.to_string())
   }
 
   let folder : @cmark.Folder[Array[@html.Html[M]]] = {

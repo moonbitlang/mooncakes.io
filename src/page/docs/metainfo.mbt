@@ -54,7 +54,7 @@ fn meta_info(model : @util.Status[MetaInfo]) -> @html.T[Msg] {
         None => nothing()
       }
       let meta_separator = div(class="border-l border-gray-200 my-1 mx-2", [])
-      div(class="px-12 p-6 border-b bg-white", [
+      div(class="px-8 p-6 border-b mx-4", [
         div(class="flex gap-3 flex-wrap mb-2", [
           model_description,
           div(class="flex gap-2", model.keywords.map(tag_view)),

@@ -39,12 +39,7 @@ pub fn navbar[M]() -> @html.Html[M] {
 ///|
 pub fn footer[M]() -> @html.Html[M] {
   div(
-    class="h-28 p-10 border-t bg-zinc-50 text-gray-600 flex justify-center gap-4",
-    [
-      p([text("© 2025 mooncakes.io")]),
-      a(href="", [text("Docs")]),
-      a(href="", [text("Moon")]),
-      p([text("made by MoonBit")]),
-    ],
+    class="h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex justify-center gap-8",
+    [p([text("© 2025 mooncakes.io")]), p([text("Powered by MoonBit")])],
   )
 }

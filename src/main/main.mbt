@@ -45,6 +45,7 @@ fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
   let paths = url.path.split("/").collect()
   match paths {
     ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
+    ["api"] => (@browser.load(url.to_string()), NotFound)
     ["docs", .. module_path] =>
       module_path.fold(fn(x, y) { x + "/" + y }, init="")
       |> @docs.load()

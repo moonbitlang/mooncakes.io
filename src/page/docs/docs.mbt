@@ -223,11 +223,13 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   }
   // logo
   let logo = div(
-    class="border-b h-full container flex items-center top-0 z-20 bg-white",
+    class="w-full h-full flex justify-end border-b bg-white top-0 z-20",
     [
-      a(class="border-gray-300 lg:border-r w-full", href="/", [
-        h1(class="font-title text-gray-700 font-semibold mx-12", [
-          text("🥮 mooncakes.io"),
+      div(class="h-full flex items-center w-full 2xl:w-2/3", [
+        a(class="border-gray-300 lg:border-r w-full", href="/", [
+          h1(class="font-title text-gray-700 font-semibold mx-12", [
+            text("🥮 mooncakes.io"),
+          ]),
         ]),
       ]),
     ],
@@ -252,8 +254,8 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       ),
     ],
   )
-  let sidebar = div(class="pl-6 pr-3 py-3 w-full h-full", [
-    div(class="overflow-y-scroll ", [
+  let sidebar = div(class="w-full h-full flex justify-end", [
+    div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
       sidebar(
         model.document_index,
         model.source_files,
@@ -268,8 +270,8 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       div(class="w-full", [meta_info(model.meta_info)])
     _ => nothing()
   }
-  let main = div(class="flex w-full min-h-full", [
-    div(class="flex-grow overflow-y-auto w-screen bg-[#fcfcfd]", [
+  let main = div(class="flex w-full min-h-full bg-[#fcfcfd] justify-begin", [
+    div(class="overflow-y-auto 2xl:w-4/5", [
       metainfo,
       document(
         readme_content?=model.readme_content,
@@ -279,7 +281,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     ]),
   ])
   div(
-    class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-[20em_auto_auto_auto] h-screen",
+    class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [
       div(
         class="col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",

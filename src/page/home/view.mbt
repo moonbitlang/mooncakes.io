@@ -1,25 +1,4 @@
 ///|
-fn search_bar() -> @html.Html[Msg] {
-  div(
-    class="text-center pt-14 pb-8  bg-cover bg-bottom bg-mooncake border-b mb-10",
-    [
-      div(class="flex items-center justify-center", [
-        img(src="favicon.svg", class="inline-block h-12 w-12", alt="Logo", []),
-        h1(class="font-bold text-5xl p-4 text-gray-800", [text("mooncakes.io")]),
-      ]),
-      div(class="flex justify-center mt-4 relative", [
-        input(
-          input_type=Text,
-          placeholder="Search...",
-          class="border rounded px-4 py-2 w-screen lg:w-1/2 focus:border-mooncake2 border-2 outline-none",
-          input=Msg::FilterChanged,
-        ),
-      ]),
-    ],
-  )
-}
-
-///|
 extern "js" fn get_relative_time(date : String) -> String =
   #|function getRelativeTime(dateString) {
   #|  const date = new Date(dateString);
@@ -43,7 +22,7 @@ extern "js" fn get_relative_time(date : String) -> String =
 ///|
 fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   div(
-    class="p-4 h-50 flex outline-gray-50 outline outline-transparent flex-col border-gray-200 border-b bg-white lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
+    class="p-4 h-50 flex outline-gray-50 bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
     click=ClickModuleCard(mod.path),
     [
       div(class="flex flex-row text-lg font-semibold", [
@@ -52,7 +31,7 @@ fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
         h2(class="", [text(mod.name)]),
       ]),
       div(
-        class="pt-2 flex justify-between items-center text-gray-600 text-sm",
+        class="pt-2 flex justify-between items-center text-gray-500 text-sm",
         [text(mod.description.or(""))],
       ),
     ],
@@ -128,6 +107,28 @@ fn search_result(mods : Array[ModuleIndex]) -> @html.Html[Msg] {
         text("SEARCH RESULT"),
       ]),
       div(class="grid grid-cols-1 grid-cols-1", module_cards),
+    ]),
+  ])
+}
+
+///|
+fn navbar() -> @html.Html[Msg] {
+  div(class="w-full flex justify-center", [
+    div(class="h-14 w-4/5 flex justify-between items-center", [
+      div(class="font-title select-none p-4", [
+        h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
+      ]),
+      div(class="justify-center my-2 w-1/2", [
+        input(
+          input_type=Text,
+          placeholder="Search modules ...",
+          class="border rounded px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
+          input=Msg::FilterChanged,
+        ),
+      ]),
+      div(class="text-gray-700 font-semibold invisible", [
+        @html.a(href="", [text("Browse All Module")]),
+      ]),
     ]),
   ])
 }

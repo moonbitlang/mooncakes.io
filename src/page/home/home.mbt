@@ -81,6 +81,48 @@ pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] 
 }
 
 ///|
+fn banner() -> @html.Html[Msg] {
+  fn button(value, target, color) {
+    @html.a(
+      href=target,
+      class="py-2 px-6 select-none text-md rounded-full hover:opacity-80 transition-all \{color}",
+      [text(value)],
+    )
+  }
+
+  div(
+    class="container lg:w-3/5 flex flex-col-reverse lg:flex-row items-center justify-between mt-10 mb-5",
+    [
+      div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
+        div(class="text-slate-700", [
+          h1(class="font-semibold text-4xl lg:text-5xl", [
+            text("The Package Registry"),
+          ]),
+          h1(class="font-semibold text-4xl lg:text-5xl mt-2", [
+            text("for"),
+            span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
+            text("community"),
+          ]),
+          h2(class="text-lg lg:text-2xl mt-4 text-zinc-500 flex gap-1", [
+            text("Browse, search and share package and documentation"),
+          ]),
+        ]),
+        div(class="flex mt-4 gap-4 flex justify-center lg:justify-start", [
+          button(
+            "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+            "bg-yellow-600 text-white",
+          ),
+          button(
+            "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
+          ),
+        ]),
+      ]),
+      img(class="w-[340px] h-[340px]", src="mooncake-pic.png", []),
+    ],
+  )
+}
+
+///|
 pub fn view(model : Model) -> @html.Html[Msg] {
   let module_list = match model.indices {
     Loading => text("Loading...")
@@ -92,10 +134,11 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         search_result(model.filtered_modules)
       }
   }
+  let banner = if model.filter == "" { banner() } else { nothing() }
   div(class="flex flex-col min-h-screen", [
-    // @view.navbar(),
-    search_bar(),
-    // banner(),
+    navbar(),
+    banner,
+    @html.hr(class="lg:m-10 border-gray-200"),
     module_list,
     div(class="mt-auto", [@view.footer()]),
   ])

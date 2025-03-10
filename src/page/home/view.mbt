@@ -43,7 +43,7 @@ extern "js" fn get_relative_time(date : String) -> String =
 ///|
 fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
   div(
-    class="p-4 h-50 flex flex-col border-b bg-white lg:hover:outline-mooncake2 lg:border lg:rounded-md lg:outline outline-transparent transition-all",
+    class="p-4 h-50 flex outline-gray-50 outline outline-transparent flex-col border-gray-200 border-b bg-white lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
     click=ClickModuleCard(mod.path),
     [
       div(class="flex flex-row text-lg font-semibold", [
@@ -112,7 +112,7 @@ fn recently_updated(recently : Array[ModuleIndex]) -> @html.Html[Msg] {
         text("RECENTLY UPDATED"),
       ]),
       div(
-        class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4",
+        class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4",
         recently_updated,
       ),
     ]),

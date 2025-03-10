@@ -29,7 +29,7 @@ struct Model {
 pub fn load(path : String) -> (@tea.Command[Msg], Model) {
   (
     @http.get(
-      @config.URL_BASE + "/docs/" + path + "/resource.json",
+      @config.URL_BASE + "/api/" + path.trim("/") + "/resource.json",
       expect=Json(Msg::GotResource, decode_resource),
     ),
     {
@@ -59,7 +59,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             Module({ module_index_path, meta_info }) =>
               (
                 @http.get(
-                  @config.URL_BASE + "/docs/" + module_index_path,
+                  @config.URL_BASE + "/api/" + module_index_path,
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
                 {
@@ -72,12 +72,12 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               (
                 batch([
                   @http.get(
-                    @config.URL_BASE + "/docs/" + package_data_path,
+                    @config.URL_BASE + "/api/" + package_data_path,
                     expect=Json(Msg::GotPackageData, decode_package_data),
                   ),
                   @http.get(
                     @config.URL_BASE +
-                    "/docs/" +
+                    "/api/" +
                     module_path +
                     "/module_index.json",
                     expect=Json(Msg::GotModuleIndex, decode_module_index),
@@ -91,11 +91,11 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
               (
                 @tea.batch([
                   @http.get(
-                    @config.URL_BASE + "/docs/" + module_index_path,
+                    @config.URL_BASE + "/api/" + module_index_path,
                     expect=Json(Msg::GotModuleIndex, decode_module_index),
                   ),
                   @http.get(
-                    @config.URL_BASE + "/docs/" + package_data_path,
+                    @config.URL_BASE + "/api/" + package_data_path,
                     expect=Json(Msg::GotPackageData, decode_package_data),
                   ),
                 ]),

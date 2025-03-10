@@ -21,13 +21,14 @@ fn source_list(
   if files.is_empty() {
     return text("No source files.")
   }
+  let package_path = package_path.trim("/")
   div(class="", [
     ul(
       files.map(fn(x) {
         item_button(
           a(
             class="w-full",
-            href="\{@config.URL_BASE}/docs/\{package_path}/\{x}.html",
+            href="\{@config.URL_BASE}/api/\{package_path}/\{x}.html",
             [text(x)],
           ),
         )

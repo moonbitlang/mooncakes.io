@@ -71,7 +71,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
         @html.code(
-          class="font-roboto bg-gray-100 px-1 py-[1px] text-sm border border-gray-200 rounded",
+          class="font-roboto bg-gray-100 px-1 py-[1px] border border-gray-200 rounded",
           tight,
         ),
       ]

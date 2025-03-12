@@ -134,7 +134,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           }
           Err(msg) => {
             println(msg)
-            { ..model }
+            { ..model, module_index: Failed }
           }
         },
       )
@@ -169,28 +169,22 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       }
       (none(), { ..model, folded_sidebar_items, })
     }
-    ClickSidebarItem(id) => {
-      println(id)
+    ClickSidebarItem(id) =>
       match id {
         Package(path) =>
           (@browser.push_url("/docs/" + path), { ..model, path, })
         Symbol(id) => (@browser.scroll_to(id), model)
         Section(id) => (@browser.scroll_to(id), model)
       }
-    }
   }
 }
 
 ///|
 fn breadcrumbs(
   path : String,
-  module_path : @util.Status[String],
-  module_index : @util.Status[ModuleIndex]
+  module_path : String,
+  module_index : ModuleIndex
 ) -> @html.Html[Msg] {
-  guard (module_path, module_index)
-    is (Success(module_path), Success(module_index)) else {
-    return nothing()
-  }
   let module_path = module_path.trim("/")
   let path = path.trim("/")
   let paths = path.trim_start("/").split("/").collect()
@@ -216,35 +210,34 @@ fn breadcrumbs(
 }
 
 ///|
-pub fn view(model : Model) -> @html.Html[Msg] {
-  let version = match model.meta_info {
-    Failed | Loading => ""
-    Success(meta_info) => meta_info.version
-  }
-  // logo
-  let logo = div(
-    class="w-full h-full flex justify-end border-b bg-white top-0 z-20",
-    [
-      div(class="h-full flex items-center w-full 2xl:w-2/3", [
-        a(class="border-gray-300 lg:border-r w-full", href="/", [
-          h1(class="font-title text-gray-700 font-semibold mx-12", [
-            text("🥮 mooncakes.io"),
-          ]),
+fn logo() -> @html.T[Msg] {
+  div(class="w-full h-full flex justify-end border-b bg-white top-0 z-20", [
+    div(class="h-full flex items-center w-full 2xl:w-2/3", [
+      a(class="border-gray-300 lg:border-r w-full", href="/", [
+        h1(class="font-title text-gray-700 font-semibold mx-12", [
+          text("🥮 mooncakes.io"),
         ]),
       ]),
-    ],
-  )
-  let navbar = div(
+    ]),
+  ])
+}
+
+///|
+fn navbar(
+  path : String,
+  module_path : String,
+  version : String,
+  module_index : ModuleIndex,
+  card_mode : CardMode
+) -> @html.T[Msg] {
+  div(
     class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
     [
-      breadcrumbs(model.path, model.module_path, model.module_index),
+      breadcrumbs(path, module_path, module_index),
       // version
       tag_view(version),
       div(class="flex-grow", []),
-      card_mode_toggle(
-        mode=model.folded_items.card_mode,
-        click=Msg::CardModeChanged,
-      ),
+      card_mode_toggle(mode=card_mode, click=Msg::CardModeChanged),
       button(
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
@@ -253,6 +246,21 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         ],
       ),
     ],
+  )
+}
+
+///|
+pub fn view(model : Model) -> @html.Html[Msg] {
+  guard (model.module_path, model.module_index, model.meta_info)
+    is (Success(module_path), Success(module_index), Success(meta)) else {
+    @view.load_failed(model.path)
+  }
+  let navbar = navbar(
+    model.path,
+    module_path,
+    meta.version,
+    module_index,
+    model.folded_items.card_mode,
   )
   let sidebar = div(class="w-full h-full flex justify-end", [
     div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
@@ -265,11 +273,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       ),
     ]),
   ])
-  let metainfo = match model.module_path {
-    Success(path) if path == model.path =>
-      div(class="w-full", [meta_info(model.meta_info)])
-    _ => nothing()
-  }
+  let metainfo = div(class="w-full", [meta_info(meta)])
   let main = div(class="flex w-full min-h-full bg-[#fcfcfd] justify-begin", [
     div(class="overflow-y-auto 2xl:w-4/5", [
       metainfo,
@@ -285,7 +289,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
     [
       div(
         class="col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
-        [logo],
+        [logo()],
       ),
       div(
         class="col-start-1 row-start-1 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",

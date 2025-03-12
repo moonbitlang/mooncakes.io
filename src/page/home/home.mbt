@@ -125,8 +125,8 @@ fn banner() -> @html.Html[Msg] {
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
   let module_list = match model.indices {
-    Loading => text("Loading...")
-    Failed => text("Load Failed")
+    Loading => @view.loading()
+    Failed => @view.load_failed("module indices")
     Success(indices) =>
       if model.filter == "" {
         recently_updated(indices.recently_updated)

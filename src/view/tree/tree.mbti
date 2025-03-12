@@ -4,6 +4,8 @@ alias @Yoorkin/rabbit-tea/html as @html
 alias @moonbitlang/core/immut/sorted_set as @sorted_set
 
 // Values
+fn get_name[Id](Tree[Id]) -> String
+
 fn view[M, Id : Compare](toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.T[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.T[M]
 
 // Types and methods

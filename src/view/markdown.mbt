@@ -72,7 +72,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
       [
         @html.code(
-          class="font-roboto bg-gray-100 px-1 py-[1px] text-sm border border-gray-200 rounded",
+          class="font-roboto bg-gray-100 px-1 py-[1px] border border-gray-200 rounded",
           tight,
         ),
       ]
@@ -128,8 +128,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         4..<_ => div(class="text-gray-900", inline)
       }
     }
-    List({ v: { ty: ordered, tight, items, .. } as x, .. }) => {
-      println(x)
+    List({ v: { ty: ordered, tight, items, .. }, .. }) => {
       let items = items
         .map(fn {
           { v: { block, ext_task_marker, .. }, .. } =>
@@ -248,6 +247,6 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
   } catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } else {
-    htmls => div(htmls)
+    htmls => div(class="w-full", htmls)
   }
 }

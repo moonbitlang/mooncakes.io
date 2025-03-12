@@ -288,7 +288,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       )
       (navbar, sidebar, main)
     }
-    _ => {
+    (Failed, _, _) | (_, Failed, _) | (_, _, Failed) => {
       let path = model.path.trim("/")
       let load_failed = div(
         class="flex flex-col items-center justify-center h-full w-full",
@@ -315,6 +315,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       )
       (div(class="border-b h-full w-full", []), nothing(), load_failed)
     }
+    _ => (div(class="border-b h-full w-full", []), nothing(), @view.loading())
   }
   div(
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",

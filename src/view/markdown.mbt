@@ -60,7 +60,8 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     } : @cmark.InlineLink) => [@html.a(href=link, inline2html(inline))]
     ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }) } : @cmark.InlineLink) =>
       inline2html(inline)
-    _ => abort("not an inline link")
+    ({ text: inline, reference: Ref(_) } : @cmark.InlineLink) =>
+      inline2html(inline)
   }
 
   fn inline2html {

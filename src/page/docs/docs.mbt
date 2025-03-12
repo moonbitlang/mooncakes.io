@@ -18,7 +18,7 @@ struct Model {
   document_index : Array[@tree.Tree[ItemTarget]]
   source_files : Array[String]
   package_data : @util.Status[PackageData]
-  meta_info : @util.Status[MetaInfo]
+  meta_info : MetaInfo?
   readme_content : String?
   showing_category : String
   folded_items : FoldedState
@@ -37,7 +37,7 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
       module_index: Loading,
       path,
       document_index: [],
-      meta_info: Loading,
+      meta_info: None,
       readme_content: None,
       source_files: [],
       showing_category: "Documentation",
@@ -64,7 +64,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                 ),
                 {
                   ..model,
-                  meta_info: Success(meta_info),
+                  meta_info: Some(meta_info),
                   module_path: Success(model.path),
                 },
               )
@@ -102,7 +102,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                 {
                   ..model,
                   source_files,
-                  meta_info: Success(meta_info),
+                  meta_info: Some(meta_info),
                   module_path: Success(model.path),
                 },
               )
@@ -114,7 +114,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
             none(),
             {
               ..model,
-              meta_info: Failed,
+              module_path: Failed,
               source_files: [],
               readme_content: None,
             },
@@ -226,7 +226,7 @@ fn logo() -> @html.T[Msg] {
 fn navbar(
   path : String,
   module_path : String,
-  version : String,
+  version : String?,
   module_index : ModuleIndex,
   card_mode : CardMode
 ) -> @html.T[Msg] {
@@ -235,7 +235,11 @@ fn navbar(
     [
       breadcrumbs(path, module_path, module_index),
       // version
-      tag_view(version),
+      if version is Some(value) {
+        tag_view(value)
+      } else {
+        nothing()
+      },
       div(class="flex-grow", []),
       card_mode_toggle(mode=card_mode, click=Msg::CardModeChanged),
       button(
@@ -251,13 +255,15 @@ fn navbar(
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  let (navbar, sidebar, main) = match
-    (model.module_path, model.module_index, model.meta_info) {
-    (Success(module_path), Success(module_index), Success(meta)) => {
+  println(
+    "Rendering docs page \{model.module_path is Loading}, \{model.module_index is Loading}",
+  )
+  let (navbar, sidebar, main) = match (model.module_path, model.module_index) {
+    (Success(module_path), Success(module_index)) => {
       let navbar = navbar(
         model.path,
         module_path,
-        meta.version,
+        model.meta_info.map(fn(x) { x.version }),
         module_index,
         model.folded_items.card_mode,
       )
@@ -272,7 +278,10 @@ pub fn view(model : Model) -> @html.Html[Msg] {
           ),
         ]),
       ])
-      let metainfo = div(class="w-full", [meta_info(meta)])
+      let metainfo = match model.meta_info {
+        Some(meta) => div(class="w-full", [meta_info(meta)])
+        None => nothing()
+      }
       let main = div(
         class="flex w-full min-h-full bg-[#fcfcfd] justify-begin",
         [
@@ -288,7 +297,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       )
       (navbar, sidebar, main)
     }
-    (Failed, _, _) | (_, Failed, _) | (_, _, Failed) => {
+    (Failed, _) | (_, Failed) => {
       let path = model.path.trim("/")
       let load_failed = div(
         class="flex flex-col items-center justify-center h-full w-full",

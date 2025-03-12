@@ -33,6 +33,8 @@ const URL_BASE : String = "http://127.0.0.1:3000"
 
 const VALUE_ICON : String = "/code-brackets.svg"
 
+let dead_rabbit : String
+
 // Types and methods
 
 // Type aliases

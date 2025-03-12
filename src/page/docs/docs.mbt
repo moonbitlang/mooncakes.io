@@ -251,39 +251,71 @@ fn navbar(
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  guard (model.module_path, model.module_index, model.meta_info)
-    is (Success(module_path), Success(module_index), Success(meta)) else {
-    @view.load_failed(model.path)
+  let (navbar, sidebar, main) = match
+    (model.module_path, model.module_index, model.meta_info) {
+    (Success(module_path), Success(module_index), Success(meta)) => {
+      let navbar = navbar(
+        model.path,
+        module_path,
+        meta.version,
+        module_index,
+        model.folded_items.card_mode,
+      )
+      let sidebar = div(class="w-full h-full flex justify-end", [
+        div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
+          sidebar(
+            model.document_index,
+            model.source_files,
+            model.showing_category,
+            model.folded_sidebar_items,
+            package_path=model.path,
+          ),
+        ]),
+      ])
+      let metainfo = div(class="w-full", [meta_info(meta)])
+      let main = div(
+        class="flex w-full min-h-full bg-[#fcfcfd] justify-begin",
+        [
+          div(class="overflow-y-auto 2xl:w-4/5", [
+            metainfo,
+            document(
+              readme_content?=model.readme_content,
+              package_data=model.package_data,
+              folded=model.folded_items,
+            ),
+          ]),
+        ],
+      )
+      (navbar, sidebar, main)
+    }
+    _ => {
+      let path = model.path.trim("/")
+      let load_failed = div(
+        class="flex flex-col items-center justify-center h-full w-full",
+        [
+          pre([code([text(@config.dead_rabbit)])]),
+          div(class="text-gray-900 m-10", [
+            h1(class="text-base text-lg mb-2 font-semibold text-center", [
+              text("Document for \{path} not available"),
+            ]),
+            ul(class="list-disc text-gray-600", [
+              @html.li([
+                text(
+                  "The package may be outdated and we cannot build document for it.",
+                ),
+              ]),
+              @html.li([
+                text(
+                  "It also could be an error in mooncakes.io, please report it to us.",
+                ),
+              ]),
+            ]),
+          ]),
+        ],
+      )
+      (div(class="border-b h-full w-full", []), nothing(), load_failed)
+    }
   }
-  let navbar = navbar(
-    model.path,
-    module_path,
-    meta.version,
-    module_index,
-    model.folded_items.card_mode,
-  )
-  let sidebar = div(class="w-full h-full flex justify-end", [
-    div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
-      sidebar(
-        model.document_index,
-        model.source_files,
-        model.showing_category,
-        model.folded_sidebar_items,
-        package_path=model.path,
-      ),
-    ]),
-  ])
-  let metainfo = div(class="w-full", [meta_info(meta)])
-  let main = div(class="flex w-full min-h-full bg-[#fcfcfd] justify-begin", [
-    div(class="overflow-y-auto 2xl:w-4/5", [
-      metainfo,
-      document(
-        readme_content?=model.readme_content,
-        package_data=model.package_data,
-        folded=model.folded_items,
-      ),
-    ]),
-  ])
   div(
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [

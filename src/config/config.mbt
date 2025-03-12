@@ -42,3 +42,12 @@ pub const SHARE = "/share.svg"
 
 ///|
 pub const LOGO = "/mooncake-pic.png"
+
+///|
+pub let dead_rabbit =
+  #|         --  --
+  #|       /  //  / __--------_
+  #|      /  //  /_/            \
+  #|   ---      -                \ __
+  #|  / X        /        ____   /   )
+  #|  *_________/__/_____/______/ `--

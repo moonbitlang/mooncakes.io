@@ -28,59 +28,47 @@ fn tag_view(value : String) -> @html.T[Msg] {
 }
 
 ///|
-fn meta_info(model : @util.Status[MetaInfo]) -> @html.T[Msg] {
-  match model {
-    Failed => nothing()
-    Loading => text("Loading...")
-    Success(model) => {
-      let model_license = match model.license {
-        Some(l) =>
-          meta_info_item_view(
-            title="License",
-            p(class="text-gray-600", [text(l)]),
-          )
-        None => nothing()
-      }
-      let model_repo = match model.repository {
-        Some(repo) =>
-          meta_info_item_view(
-            title="Repository",
-            p([a(class="hover:underline", href=repo, [text(repo)])]),
-          )
-        None => nothing()
-      }
-      let model_description = match model.description {
-        Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
-        None => nothing()
-      }
-      let meta_separator = div(class="border-l border-gray-200 my-1 mx-2", [])
-      div(class="px-8 p-6 border-b mx-4", [
-        div(class="flex gap-3 flex-wrap mb-2", [
-          model_description,
-          div(class="flex gap-2", model.keywords.map(tag_view)),
-        ]),
-        div(class="flex gap-3 flex-wrap", [
-          meta_info_item_view(
-            title="Install",
-            div([install_view(path=model.name)]),
-          ),
-          div(class="grow", []),
-          div(
-            class="flex gap-2 flex-wrap",
-            [
-              meta_info_item_view(
-                title="Author",
-                p(class="text-gray-600", [text(model.author)]),
-              ),
-              model_license,
-              model_repo,
-            ]
-            .iter()
-            .intersperse(meta_separator)
-            .collect(),
-          ),
-        ]),
-      ])
-    }
+fn meta_info(model : MetaInfo) -> @html.T[Msg] {
+  let model_license = match model.license {
+    Some(l) =>
+      meta_info_item_view(title="License", p(class="text-gray-600", [text(l)]))
+    None => nothing()
   }
+  let model_repo = match model.repository {
+    Some(repo) =>
+      meta_info_item_view(
+        title="Repository",
+        p([a(class="hover:underline", href=repo, [text(repo)])]),
+      )
+    None => nothing()
+  }
+  let model_description = match model.description {
+    Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
+    None => nothing()
+  }
+  let meta_separator = div(class="border-l border-gray-200 my-1 mx-2", [])
+  div(class="px-8 p-6 border-b mx-4", [
+    div(class="flex gap-3 flex-wrap mb-2", [
+      model_description,
+      div(class="flex gap-2", model.keywords.map(tag_view)),
+    ]),
+    div(class="flex gap-3 flex-wrap", [
+      meta_info_item_view(title="Install", div([install_view(path=model.name)])),
+      div(class="grow", []),
+      div(
+        class="flex gap-2 flex-wrap",
+        [
+          meta_info_item_view(
+            title="Author",
+            p(class="text-gray-600", [text(model.author)]),
+          ),
+          model_license,
+          model_repo,
+        ]
+        .iter()
+        .intersperse(meta_separator)
+        .collect(),
+      ),
+    ]),
+  ])
 }

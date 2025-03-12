@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "main",
+  "module_path": "smallbearrr/pandas",
+  "readme_content": "",
+  "package_data": "smallbearrr/pandas/main/package_data.json",
+  "source_files": [ "main.mbt" ]
+}

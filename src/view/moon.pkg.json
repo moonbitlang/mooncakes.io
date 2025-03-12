@@ -17,7 +17,9 @@
         "a",
         "span",
         "ul",
-        "br"
+        "br",
+        "pre",
+        "code"
       ]
     },
     "rami3l/cmark/cmark",

@@ -8,6 +8,7 @@ pub(all) enum Status[T] {
   Failed
   Success(T)
 }
+impl[T : Eq] Eq for Status[T]
 impl[T : Show] Show for Status[T]
 
 // Type aliases

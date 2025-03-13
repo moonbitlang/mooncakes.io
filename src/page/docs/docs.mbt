@@ -13,6 +13,7 @@ enum Msg {
 ///|
 struct Model {
   module_path : @util.Status[String]
+  focus_to : String
   path : String
   module_index : @util.Status[ModuleIndex]
   document_index : Array[@tree.Tree[ItemTarget]]
@@ -26,7 +27,8 @@ struct Model {
 }
 
 ///|
-pub fn load(path : String) -> (@tea.Command[Msg], Model) {
+pub fn load(path : String, fragment : String?) -> (@tea.Command[Msg], Model) {
+  println(fragment)
   (
     @http.get(
       @config.URL_BASE + "/api/" + path.trim("/") + "/resource.json",
@@ -35,6 +37,7 @@ pub fn load(path : String) -> (@tea.Command[Msg], Model) {
     {
       module_path: Loading,
       module_index: Loading,
+      focus_to: fragment.or(""),
       path,
       document_index: [],
       meta_info: None,
@@ -140,7 +143,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       )
     GotPackageData(result) =>
       (
-        none(),
+        @browser.scroll_to(model.focus_to),
         match result {
           Ok(package_data) => { ..model, package_data: Success(package_data) }
           Err(_) => { ..model, package_data: Failed }
@@ -173,7 +176,10 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
       match id {
         Package(path) =>
           (@browser.push_url("/docs/" + path), { ..model, path, })
-        Symbol(id) => (@browser.scroll_to(id), model)
+        Symbol(id) => {
+          println("scrolling to \{id}")
+          (@browser.scroll_to(id), model)
+        }
         Section(id) => (@browser.scroll_to(id), model)
       }
   }

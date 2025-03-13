@@ -4,7 +4,7 @@ alias @Yoorkin/rabbit-tea/browser as @browser
 alias @Yoorkin/rabbit-tea/html as @html
 
 // Values
-fn load(String) -> (@browser.Command[Msg], Model)
+fn load(String, String?) -> (@browser.Command[Msg], Model)
 
 fn update(Msg, Model) -> (@browser.Command[Msg], Model)
 

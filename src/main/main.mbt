@@ -48,7 +48,7 @@ fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
     ["api"] => (@browser.load(url.to_string()), NotFound)
     ["docs", .. module_path] =>
       module_path.fold(fn(x, y) { x + "/" + y }, init="")
-      |> @docs.load()
+      |> @docs.load(url.fragment)
       |> update_with(Model::Docs, Message::GotDocsMsg)
     _ => (none(), NotFound)
   }

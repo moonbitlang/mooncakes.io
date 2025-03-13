@@ -122,7 +122,7 @@ fn navbar() -> @html.Html[Msg] {
         input(
           input_type=Text,
           placeholder="Search modules ...",
-          class="border rounded px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
+          class="border rounded-full px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
           input=Msg::FilterChanged,
         ),
       ]),

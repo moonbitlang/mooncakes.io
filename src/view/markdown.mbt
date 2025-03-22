@@ -43,6 +43,15 @@ fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
 
 ///|
 pub fn markdown[M](markdown : String) -> @html.Html[M] {
+  let doc = @cmark.Doc::from_string(markdown, strict=false)
+  let link_defs = {}
+  doc.defs
+  .iter()
+  .each(fn(x) {
+    if x is (key, LinkDef({ v: { dest: Some({ v: dest, .. }), .. }, .. })) {
+      link_defs.set(key, dest)
+    }
+  })
   fn unwrap_inline_link {
     ({
       text: Text({ v: txt, .. }),
@@ -60,8 +69,12 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     } : @cmark.InlineLink) => [@html.a(href=link, inline2html(inline))]
     ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }) } : @cmark.InlineLink) =>
       inline2html(inline)
-    ({ text: inline, reference: Ref(_) } : @cmark.InlineLink) =>
-      inline2html(inline)
+    ({ text: inline, reference: Ref(_, _, { key, .. }) } : @cmark.InlineLink) =>
+      if link_defs.get(key) is Some(url) {
+        [@html.a(class=" text-blue-400", href=url, [..inline2html(inline)])]
+      } else {
+        inline2html(inline)
+      }
   }
 
   fn inline2html {
@@ -128,7 +141,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         4..<_ => div(class="text-gray-900", inline)
       }
     }
-    List({ v: { ty: ordered, tight, items, .. }, .. }) => {
+    List({ v: { ty: ordered, tight, items }, .. }) => {
       let items = items
         .map(fn {
           { v: { block, ext_task_marker, .. }, .. } =>
@@ -222,8 +235,7 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         [@html.colgroup(colgroup), @html.tbody(body)],
       )
     }
-    LinkRefDefinition({ v: link_ref, .. }) =>
-      unsupported("LinkRefDefinition", link_ref.to_string())
+    LinkRefDefinition(_) => @html.nothing()
     ExtMathBlock({ v: math, .. }) =>
       unsupported("ExtMathBlock", math.to_string())
     HtmlBlock({ v: html, .. }) => unsupported("HtmlBlock", html.to_string())
@@ -241,7 +253,6 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
       @cmark.FolderResult::Fold([..acc, block2html(block)])
     },
   }
-  let doc = @cmark.Doc::from_string(markdown, strict=false)
   try {
     folder.fold_doc!([], doc)
   } catch {

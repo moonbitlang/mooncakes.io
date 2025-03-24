@@ -19,7 +19,7 @@ fn load_failed[M](String) -> @html.T[M]
 
 fn loading[M]() -> @html.T[M]
 
-fn markdown[M](String) -> @html.T[M]
+fn markdown[M](String, small_heading~ : Bool = ..) -> @html.T[M]
 
 fn navbar[M]() -> @html.T[M]
 

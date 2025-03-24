@@ -175,15 +175,14 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         .to_array()
         .mapi(fn(i, row) {
           match row {
-            ({ v: Header(cols), .. }, _) =>
-              @html.tr(
-                class=if (i - (if colgroup.length() > 0 { 1 } else { 0 })) % 2 ==
-                  0 {
-                  "bg-gray-100"
-                } else {
-                  ""
-                },
-                cols
+            ({ v: Header(cols), .. }, _) => {
+              let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
+              let class = if (i - colgroup) % 2 == 0 {
+                "bg-gray-100"
+              } else {
+                ""
+              }
+              let cols = cols
                 .map(fn {
                   (inline, _) =>
                     @html.th(
@@ -191,17 +190,17 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
                       inline2html(inline),
                     )
                 })
-                .to_array(),
-              )
-            ({ v: Data(cols), .. }, _) =>
-              @html.tr(
-                class=if (i - (if colgroup.length() > 0 { 1 } else { 0 })) % 2 ==
-                  0 {
-                  "bg-gray-100"
-                } else {
-                  ""
-                },
-                cols
+                .to_array()
+              @html.tr(class~, cols)
+            }
+            ({ v: Data(cols), .. }, _) => {
+              let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
+              let class = if (i - colgroup) % 2 == 0 {
+                "bg-gray-100"
+              } else {
+                ""
+              }
+              let cols = cols
                 .map(fn {
                   (inline, _) =>
                     @html.td(
@@ -209,8 +208,9 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
                       inline2html(inline),
                     )
                 })
-                .to_array(),
-              )
+                .to_array()
+              @html.tr(class~, cols)
+            }
             ({ v: Sep(cols), .. }, _) => {
               cols
               .iter()

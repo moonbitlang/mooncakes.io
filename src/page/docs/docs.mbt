@@ -12,15 +12,14 @@ enum Msg {
 
 ///|
 struct Model {
-  module_path : @util.Status[String]
   focus_to : String
   path : String
-  module_index : @util.Status[ModuleIndex]
-  document_index : Array[@tree.Tree[ItemTarget]]
-  source_files : Array[String]
-  package_data : @util.Status[PackageData]
   meta_info : MetaInfo?
+  source_files : Array[String]
   readme_content : String?
+  module_index : @util.Status[ModuleIndex]
+  package_data : @util.Status[PackageData]
+  document_index : Array[@tree.Tree[ItemTarget]]
   showing_category : String
   folded_items : FoldedState
   folded_sidebar_items : @immut/sorted_set.T[ItemTarget]
@@ -35,7 +34,6 @@ pub fn load(path : String, fragment : String?) -> (@tea.Command[Msg], Model) {
       expect=Json(Msg::GotResource, decode_resource),
     ),
     {
-      module_path: Loading,
       module_index: Loading,
       focus_to: fragment.or(""),
       path,
@@ -65,11 +63,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                   @config.URL_BASE + "/api/" + module_index_path,
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
-                {
-                  ..model,
-                  meta_info: Some(meta_info),
-                  module_path: Success(model.path),
-                },
+                { ..model, meta_info: Some(meta_info) },
               )
             Package({ package_data_path, source_files, module_path }) =>
               (
@@ -86,7 +80,7 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                     expect=Json(Msg::GotModuleIndex, decode_module_index),
                   ),
                 ]),
-                { ..model, source_files, module_path: Success(module_path) },
+                { ..model, source_files, },
               )
             RootPackage(
               { module_index_path, meta_info, package_data_path, source_files }
@@ -102,26 +96,13 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
                     expect=Json(Msg::GotPackageData, decode_package_data),
                   ),
                 ]),
-                {
-                  ..model,
-                  source_files,
-                  meta_info: Some(meta_info),
-                  module_path: Success(model.path),
-                },
+                { ..model, source_files, meta_info: Some(meta_info) },
               )
           }
         }
         Err(msg) => {
           println(msg)
-          (
-            none(),
-            {
-              ..model,
-              module_path: Failed,
-              source_files: [],
-              readme_content: None,
-            },
-          )
+          (none(), { ..model, readme_content: None })
         }
       }
     GotModuleIndex(result) =>
@@ -261,14 +242,12 @@ fn navbar(
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  println(
-    "Rendering docs page \{model.module_path is Loading}, \{model.module_index is Loading}",
-  )
-  let (navbar, sidebar, main) = match (model.module_path, model.module_index) {
-    (Success(module_path), Success(module_index)) => {
+  println(model.meta_info)
+  let (navbar, sidebar, main) = match model.module_index {
+    Success(module_index) => {
       let navbar = navbar(
         model.path,
-        module_path,
+        model.meta_info.map(fn(x) { x.name }).or(""),
         model.meta_info.map(fn(x) { x.version }),
         module_index,
         model.folded_items.card_mode,
@@ -303,7 +282,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       )
       (navbar, sidebar, main)
     }
-    (Failed, _) | (_, Failed) => {
+    Failed => {
       let path = model.path.trim("/")
       let load_failed = div(
         class="flex flex-col items-center justify-center h-full w-full",

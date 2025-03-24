@@ -14,7 +14,7 @@ priv struct MetaInfo {
   keywords : Array[String]
   description : String?
   repository : String?
-}
+} derive(Show)
 
 ///|
 priv struct ModuleResources {
@@ -83,18 +83,7 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
     let author = String::from_array(
       iter.take_while(fn(x) { x != '/' }).collect(),
     )
-    let package_name = String::from_array(
-      iter.drop_while(fn(x) { x != '/' }).drop(1).collect(),
-    )
-    {
-      author,
-      name: package_name,
-      description,
-      version,
-      license,
-      repository,
-      keywords,
-    }
+    { author, name, description, version, license, repository, keywords }
   }
 
   parse_package!(json)

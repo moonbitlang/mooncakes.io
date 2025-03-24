@@ -132,7 +132,7 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> @html.T[Msg] {
     body=div(
       class="ml-3 my-2",
       [
-        @view.markdown(docstring),
+        @view.markdown(docstring, small_heading=true),
         sub_section_title("Method", methods.length()),
         ..methods.map(fn(x) { value_doc(x, folded~, type_name=doc.name) }),
         sub_section_title("Implementation", impls.length()),
@@ -157,7 +157,7 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> @html.T[Msg] {
       id=doc.name,
       class="ml-3 my-2",
       [
-        @view.markdown(docstring),
+        @view.markdown(docstring, small_heading=true),
         sub_section_title("Default Implementation", default_impls.length()),
         ..default_impls.map(fn(x) { value_doc(x, folded~) }),
         sub_section_title("Implementation", impls.length()),
@@ -178,7 +178,7 @@ fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> @html.T[Msg] {
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
       [signature_view(signature)],
     ),
-    body=div(class="ml-3 my-2", [@view.markdown(docstring)]),
+    body=div(class="ml-3 my-2", [@view.markdown(docstring, small_heading=true)]),
   )
 }
 
@@ -197,7 +197,7 @@ fn value_doc(
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
       [signature_view(signature)],
     ),
-    body=div(class="ml-3 my-2", [@view.markdown(docstring)]),
+    body=div(class="ml-3 my-2", [@view.markdown(docstring, small_heading=true)]),
   )
 }
 

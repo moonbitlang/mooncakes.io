@@ -42,7 +42,10 @@ fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
 }
 
 ///|
-pub fn markdown[M](markdown : String) -> @html.Html[M] {
+pub fn markdown[M](
+  markdown : String,
+  small_heading~ : Bool = false
+) -> @html.Html[M] {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
   let link_defs = {}
   doc.defs
@@ -133,12 +136,22 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)
-      match level {
-        _..<1 => abort("Heading level <1")
-        1 => h3(class="text-gray-900 font-semibold mt-4 mb-2 text-3xl", inline)
-        2 => h4(class="text-gray-900 mt-4 mb-2 pb-2 border-b text-2xl", inline)
-        3 => h5(class="text-gray-900 text-xl", inline)
-        4..<_ => div(class="text-gray-900", inline)
+      if small_heading {
+        match level {
+          1 => h3(class="text-blue-900 font-semibold mt-1 text-lg", inline)
+          2 | 3 => h4(class="text-blue-900 text-lg", inline)
+          _ => div(class="text-gray-900", inline)
+        }
+      } else {
+        match level {
+          1 =>
+            h1(class="text-gray-900 font-semibold mt-4 mb-2 text-3xl", inline)
+          2 =>
+            h2(class="text-gray-900 mt-4 mb-2 pb-2 border-b text-2xl", inline)
+          3 => h3(class="text-gray-900 text-xl", inline)
+          4 => h4(class="text-gray-900", inline)
+          _ => h5(class="text-gray-900", inline)
+        }
       }
     }
     List({ v: { ty: ordered, tight, items }, .. }) => {
@@ -175,15 +188,14 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
         .to_array()
         .mapi(fn(i, row) {
           match row {
-            ({ v: Header(cols), .. }, _) =>
-              @html.tr(
-                class=if (i - (if colgroup.length() > 0 { 1 } else { 0 })) % 2 ==
-                  0 {
-                  "bg-gray-100"
-                } else {
-                  ""
-                },
-                cols
+            ({ v: Header(cols), .. }, _) => {
+              let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
+              let class = if (i - colgroup) % 2 == 0 {
+                "bg-gray-100"
+              } else {
+                ""
+              }
+              let cols = cols
                 .map(fn {
                   (inline, _) =>
                     @html.th(
@@ -191,17 +203,17 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
                       inline2html(inline),
                     )
                 })
-                .to_array(),
-              )
-            ({ v: Data(cols), .. }, _) =>
-              @html.tr(
-                class=if (i - (if colgroup.length() > 0 { 1 } else { 0 })) % 2 ==
-                  0 {
-                  "bg-gray-100"
-                } else {
-                  ""
-                },
-                cols
+                .to_array()
+              @html.tr(class~, cols)
+            }
+            ({ v: Data(cols), .. }, _) => {
+              let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
+              let class = if (i - colgroup) % 2 == 0 {
+                "bg-gray-100"
+              } else {
+                ""
+              }
+              let cols = cols
                 .map(fn {
                   (inline, _) =>
                     @html.td(
@@ -209,8 +221,9 @@ pub fn markdown[M](markdown : String) -> @html.Html[M] {
                       inline2html(inline),
                     )
                 })
-                .to_array(),
-              )
+                .to_array()
+              @html.tr(class~, cols)
+            }
             ({ v: Sep(cols), .. }, _) => {
               cols
               .iter()

@@ -151,7 +151,7 @@ pub fn markdown[M](
         .map(fn {
           { v: { block, ext_task_marker, .. }, .. } =>
             if ext_task_marker is Some({ v: char, .. }) {
-              @html.li(class="list-inside flex gap-2 pl-2", [
+              @html.li(class="list-inside flex gap-1", [
                 @html.input(
                   input_type=Checkbox,
                   read_only=true,
@@ -160,16 +160,16 @@ pub fn markdown[M](
                 block2html(block),
               ])
             } else {
-              @html.li(class="list-inside pl-2", [block2html(block)])
+              @html.li(class="list-inside", [block2html(block)])
             }
         })
         .to_array()
-      let class = "ml-4 list-inside " +
+      let class = "ml-2 list-inside " +
         (if tight { "space-y-0.5" } else { "space-y-1" })
       match ordered {
-        @cmark_base.Unordered(_) => @html.ul(class=class + " list-disc", items)
+        @cmark_base.Unordered(_) => ul(class=class + " list-disc", items)
         @cmark_base.Ordered(start, _) =>
-          @html.ol(start~, class=class + " list-decimal", items)
+          ol(start~, class=class + " list-decimal", items)
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => @html.span(inline2html(inline))

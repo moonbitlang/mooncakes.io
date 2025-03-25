@@ -118,10 +118,7 @@ pub fn markdown[M](
       )
     Blocks({ v: xs, .. }) => span(xs.map(block2html).to_array())
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
-      let code = String::concat(
-        code.map(fn(node) { node.v }).to_array(),
-        separator="\n",
-      )
+      let code = code.iter().map(fn(node) { node.v }).join("\n")
       if info_string is Some({ v: lang, .. }) &&
         (lang == "mbt" || lang == "moonbit") {
         let code = code |> code_block()

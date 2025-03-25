@@ -11,6 +11,8 @@ fn code_block[M](String) -> @html.T[M]
 
 fn collapse[M](header~ : @html.T[M], body~ : @html.T[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.T[M]
 
+fn document_not_available[M](String) -> @html.T[M]
+
 fn footer[M]() -> @html.T[M]
 
 fn icon_button[M](String, text? : String, click? : M) -> @html.T[M]

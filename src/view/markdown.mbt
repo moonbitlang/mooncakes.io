@@ -121,7 +121,7 @@ pub fn markdown[M](
       let code = code.iter().map(fn(node) { node.v }).join("\n")
       let code = if info_string is Some({ v: lang, .. }) &&
         (lang == "mbt" || lang == "moonbit") {
-        let code = code |> code_block()
+        let code = code_block(code, collapse_namespace=false)
         @html.code(class="font-roboto", [code])
       } else {
         @html.code(class="font-roboto", [div([text(code)])])

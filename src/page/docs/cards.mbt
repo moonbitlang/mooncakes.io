@@ -37,7 +37,7 @@ fn signature_view(content : String) -> Html[Msg] {
   div(class="py-1 flex-grow px-3", [
     pre(class="text-wrap", [
       code(class="font-mono text-[0.9em] text-blue-800", [
-        @view.code_block(content),
+        @view.code_block(content, collapse_namespace=true),
       ]),
     ]),
   ])

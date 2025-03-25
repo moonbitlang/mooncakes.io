@@ -14,9 +14,7 @@ enum Msg {
 struct Model {
   focus_to : String
   path : String
-  meta_info : MetaInfo?
-  source_files : Array[String]
-  readme_content : String?
+  resource : @util.Status[Resource]
   module_index : @util.Status[ModuleIndex]
   package_data : @util.Status[PackageData]
   document_index : Array[@tree.Tree[ItemTarget]]
@@ -38,13 +36,11 @@ pub fn load(path : String, fragment : String?) -> (@tea.Command[Msg], Model) {
       focus_to: fragment.or(""),
       path,
       document_index: [],
-      meta_info: None,
-      readme_content: None,
-      source_files: [],
       showing_category: "Documentation",
       package_data: Loading,
       folded_items: FoldedState::new(),
       folded_sidebar_items: @immut/sorted_set.new(),
+      resource: Loading,
     },
   )
 }
@@ -54,55 +50,44 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
   match msg {
     GotResource(result) =>
       match result {
-        Ok({ readme_content, kind }) => {
-          let model = { ..model, readme_content: Some(readme_content) }
-          match kind {
-            Module({ module_index_path, meta_info }) =>
-              (
+        Ok({ kind, .. } as resource) => {
+          let cmd = match kind {
+            Module({ module_index_path, .. }) =>
+              @http.get(
+                @config.URL_BASE + "/api/" + module_index_path,
+                expect=Json(Msg::GotModuleIndex, decode_module_index),
+              )
+            Package({ package_data_path, module_path, .. }) =>
+              batch([
+                @http.get(
+                  @config.URL_BASE + "/api/" + package_data_path,
+                  expect=Json(Msg::GotPackageData, decode_package_data),
+                ),
+                @http.get(
+                  @config.URL_BASE +
+                  "/api/" +
+                  module_path +
+                  "/module_index.json",
+                  expect=Json(Msg::GotModuleIndex, decode_module_index),
+                ),
+              ])
+            RootPackage({ module_index_path, package_data_path, .. }) =>
+              batch([
                 @http.get(
                   @config.URL_BASE + "/api/" + module_index_path,
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
-                { ..model, meta_info: Some(meta_info) },
-              )
-            Package({ package_data_path, source_files, module_path }) =>
-              (
-                batch([
-                  @http.get(
-                    @config.URL_BASE + "/api/" + package_data_path,
-                    expect=Json(Msg::GotPackageData, decode_package_data),
-                  ),
-                  @http.get(
-                    @config.URL_BASE +
-                    "/api/" +
-                    module_path +
-                    "/module_index.json",
-                    expect=Json(Msg::GotModuleIndex, decode_module_index),
-                  ),
-                ]),
-                { ..model, source_files, },
-              )
-            RootPackage(
-              { module_index_path, meta_info, package_data_path, source_files }
-            ) =>
-              (
-                @tea.batch([
-                  @http.get(
-                    @config.URL_BASE + "/api/" + module_index_path,
-                    expect=Json(Msg::GotModuleIndex, decode_module_index),
-                  ),
-                  @http.get(
-                    @config.URL_BASE + "/api/" + package_data_path,
-                    expect=Json(Msg::GotPackageData, decode_package_data),
-                  ),
-                ]),
-                { ..model, source_files, meta_info: Some(meta_info) },
-              )
+                @http.get(
+                  @config.URL_BASE + "/api/" + package_data_path,
+                  expect=Json(Msg::GotPackageData, decode_package_data),
+                ),
+              ])
           }
+          (cmd, { ..model, resource: Success(resource) })
         }
         Err(msg) => {
           println(msg)
-          (none(), { ..model, readme_content: None })
+          (none(), { ..model, resource: Failed })
         }
       }
     GotModuleIndex(result) =>
@@ -122,14 +107,13 @@ pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
           }
         },
       )
-    GotPackageData(result) =>
-      (
-        @browser.scroll_to(model.focus_to),
-        match result {
-          Ok(package_data) => { ..model, package_data: Success(package_data) }
-          Err(_) => { ..model, package_data: Failed }
-        },
-      )
+    GotPackageData(result) => {
+      let model = match result {
+        Ok(package_data) => { ..model, package_data: Success(package_data) }
+        Err(_) => { ..model, package_data: Failed }
+      }
+      (@browser.scroll_to(model.focus_to), model)
+    }
     ToggleCardDetail(id) => {
       let folded_items = if model.folded_items.contains(id) {
         model.folded_items.remove(id)
@@ -242,74 +226,65 @@ fn navbar(
 
 ///|
 pub fn view(model : Model) -> @html.Html[Msg] {
-  println(model.meta_info)
-  let (navbar, sidebar, main) = match model.module_index {
-    Success(module_index) => {
-      let navbar = navbar(
+  let navbar = match (model.module_index, model.resource) {
+    (Success(module_index), Success(resource)) => {
+      let (module_path, version) = match resource.kind {
+        Module({ meta_info, .. }) =>
+          (Some(meta_info.name), Some(meta_info.version))
+        Package({ module_path, .. }) => (Some(module_path), None)
+        _ => (None, None)
+      }
+      navbar(
         model.path,
-        model.meta_info.map(fn(x) { x.name }).or(""),
-        model.meta_info.map(fn(x) { x.version }),
+        module_path.or(""),
+        version,
         module_index,
         model.folded_items.card_mode,
       )
-      let sidebar = div(class="w-full h-full flex justify-end", [
-        div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
-          sidebar(
-            model.document_index,
-            model.source_files,
-            model.showing_category,
-            model.folded_sidebar_items,
-            package_path=model.path,
+    }
+    _ => @html.nothing()
+  }
+  let source_files = match model.resource {
+    Success(
+      {
+        kind: Package({ source_files, .. })
+        | RootPackage({ source_files, .. }),
+        ..,
+      }
+    ) => source_files
+    _ => []
+  }
+  let sidebar = div(class="w-full h-full flex justify-end", [
+    div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
+      sidebar(
+        model.document_index,
+        source_files,
+        model.showing_category,
+        model.folded_sidebar_items,
+        package_path=model.path,
+      ),
+    ]),
+  ])
+  let main = match model.resource {
+    Success({ readme_content, kind }) => {
+      let meta = match kind {
+        Module({ meta_info: meta, .. })
+        | RootPackage({ meta_info: meta, .. }) => meta_info(meta)
+        Package(_) => @html.nothing()
+      }
+      div(class="flex w-full min-h-full bg-[#fcfcfd] justify-begin", [
+        div(class="overflow-y-auto 2xl:w-4/5", [
+          meta,
+          document(
+            readme_content~,
+            package_data=model.package_data,
+            folded=model.folded_items,
           ),
         ]),
       ])
-      let metainfo = match model.meta_info {
-        Some(meta) => div(class="w-full", [meta_info(meta)])
-        None => nothing()
-      }
-      let main = div(
-        class="flex w-full min-h-full bg-[#fcfcfd] justify-begin",
-        [
-          div(class="overflow-y-auto 2xl:w-4/5", [
-            metainfo,
-            document(
-              readme_content?=model.readme_content,
-              package_data=model.package_data,
-              folded=model.folded_items,
-            ),
-          ]),
-        ],
-      )
-      (navbar, sidebar, main)
     }
-    Failed => {
-      let path = model.path.trim("/")
-      let load_failed = div(
-        class="flex flex-col items-center justify-center h-full w-full",
-        [
-          pre([code([text(@config.dead_rabbit)])]),
-          div(class="text-gray-900 m-10", [
-            h1(class="text-base text-lg mb-2 font-semibold text-center", [
-              text("Document for \{path} not available"),
-            ]),
-            ul(class="list-disc text-gray-600", [
-              @html.li([
-                text(
-                  "The package may be outdated and we cannot build document for it.",
-                ),
-              ]),
-              @html.li([
-                text(
-                  "It also could be an error in mooncakes.io, please report it to us.",
-                ),
-              ]),
-            ]),
-          ]),
-        ],
-      )
-      (div(class="border-b h-full w-full", []), nothing(), load_failed)
-    }
-    _ => (div(class="border-b h-full w-full", []), nothing(), @view.loading())
+    Failed => @view.document_not_available(model.path)
+    Loading => @view.loading()
   }
   div(
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",

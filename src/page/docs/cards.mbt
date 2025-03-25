@@ -34,11 +34,9 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 
 ///|
 fn signature_view(content : String) -> Html[Msg] {
-  div(class="py-1 flex-grow px-3", [
-    pre(class="text-wrap", [
-      code(class="font-mono text-[0.9em] text-blue-800", [
-        @view.code_block(content, collapse_namespace=true),
-      ]),
+  pre(class="text-wrap flex items-center", [
+    code(class="font-mono text-[0.9em] text-blue-800", [
+      @view.code_block(content, collapse_namespace=true),
     ]),
   ])
 }
@@ -90,92 +88,97 @@ fn type_path(ty : TypePath) -> Html[Msg] {
 fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
-  @view.collapse(
-    caret_config=LeftCenter,
-    header=pre(
-      class="pl-6 py-1 bg-gray-100 xl:w-2/5 flex flex-grow pr-3 overflow-auto scrollbar-thin",
-      [
-        code(class="font-mono text-[0.9em] text-blue-800 flex", [
-          span(class="text-gray-700", [text("impl ")]),
-          type_path(trait_type),
-          span(class="text-gray-700", [text(" for ")]),
-          stype(self_type),
-        ]),
-      ],
-    ),
-    body=div(
-      class="pl-3 ml-1 border-l my-2",
-      [
-        sub_section_title("Methods", methods.length()),
-        ..methods.map(fn(x) { value_doc(x, folded~) }),
-      ],
-    ),
-    collapsed=folded.contains(id),
-    toggle=ToggleDocDetail(id),
+  let signature = pre(
+    class="bg-gray-100 xl:w-2/5 flex flex-grow items-center pr-3 overflow-auto scrollbar-thin",
+    [
+      code(class="font-mono text-[0.9em] text-blue-800 flex", [
+        span(class="text-gray-700", [text("impl ")]),
+        type_path(trait_type),
+        span(class="text-gray-700", [text(" for ")]),
+        stype(self_type),
+      ]),
+    ],
   )
+  let content = div(
+    class="pl-4",
+    [
+      sub_section_title("Methods", methods.length()),
+      ..methods.map(fn(x) { value_doc(x, folded~) }),
+    ],
+  )
+  document_item(signature, content, collapsed=folded, id~, tight=true)
 }
 
 ///|
 fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
   let { docstring, signature, methods, impls, name: _, loc: _ } = doc
   let id = doc.get_id()
-  @view.collapse(
-    collapsed=folded.contains(id),
-    toggle=ToggleDocDetail(id),
-    header=div(id~, class="pl-4 border-gray-300 bg-gray-100 border-t w-full", [
-      signature_view(signature),
-    ]),
-    body=div(
-      class="ml-3 my-2",
-      [
-        @view.markdown(docstring, small_heading=true),
-        sub_section_title("Method", methods.length()),
-        ..methods.map(fn(x) { value_doc(x, folded~, type_id=id) }),
-        sub_section_title("Implementation", impls.length()),
-        ..impls.map(fn(x) { impl_doc(x, folded~) }),
-      ],
-    ),
+  let signature = signature_view(signature)
+  let content = div(
+    [
+      @view.markdown(docstring, small_heading=true),
+      sub_section_title("Method", methods.length()),
+      ..methods.map(fn(x) { value_doc(x, folded~, type_id=id) }),
+      sub_section_title("Implementation", impls.length()),
+      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+    ],
   )
+  document_item(signature, content, collapsed=folded, id~)
 }
 
 ///|
 fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
   let { docstring, signature, impls, default_impls, name, loc: _ } = doc
-  @view.collapse(
-    collapsed=folded.contains(name),
-    toggle=ToggleDocDetail(name),
-    header=div(
-      id=name,
-      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
-      [signature_view(signature)],
-    ),
-    body=div(
-      id=doc.name,
-      class="ml-3 my-2",
-      [
-        @view.markdown(docstring, small_heading=true),
-        sub_section_title("Default Implementation", default_impls.length()),
-        ..default_impls.map(fn(x) { value_doc(x, folded~) }),
-        sub_section_title("Implementation", impls.length()),
-        ..impls.map(fn(x) { impl_doc(x, folded~) }),
-      ],
-    ),
+  let id = doc.get_id()
+  let signature = signature_view(signature)
+  let content = div(
+    [
+      @view.markdown(docstring, small_heading=true),
+      sub_section_title("Default Implementation", default_impls.length()),
+      ..default_impls.map(fn(x) { value_doc(x, folded~) }),
+      sub_section_title("Implementation", impls.length()),
+      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+    ],
   )
+  document_item(signature, content, collapsed=folded, id~)
 }
 
 ///|
 fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> Html[Msg] {
   let { name, docstring, signature, loc: _ } = doc
-  @view.collapse(
-    collapsed=folded.contains(name),
-    toggle=ToggleDocDetail(name),
-    header=div(
-      id=name,
-      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
-      [signature_view(signature)],
-    ),
-    body=div(class="ml-3 my-2", [@view.markdown(docstring, small_heading=true)]),
+  let signature = signature_view(signature)
+  let content = @view.markdown(docstring, small_heading=true)
+  let id = doc.get_id()
+  document_item(signature, content, collapsed=folded, id~)
+}
+
+///|
+fn document_item(
+  signature : Html[Msg],
+  content : Html[Msg],
+  collapsed~ : FoldedState,
+  id~ : String,
+  tight~ : Bool = false
+) -> Html[Msg] {
+  let (content_style, icon) = if collapsed.contains(id) {
+    ("hidden", @config.SECTION_CLOSE)
+  } else {
+    ("", @config.SECTION_OPEN)
+  }
+  let header_style = if tight { "py-1" } else { "py-2" }
+  let button = div(
+    class="w-8 h-8 hover:bg-gray-200 rounded-lg select-none flex items-center justify-center group-hover:visible invisible",
+    click=ToggleDocDetail(id),
+    [img(src=icon, class="size-4", [])],
   )
+  div(class="border-t border-gray-300 py-2 group", [
+    div(
+      class="pl-4 pr-2 bg-gray-100 rounded-lg w-full flex \{header_style}",
+      id~,
+      [signature, div(class="flex-grow", []), button],
+    ),
+    div(class="pl-4 pt-2 \{content_style}", [content]),
+  ])
 }
 
 ///|
@@ -186,14 +189,9 @@ fn value_doc(
 ) -> Html[Msg] {
   let { name, docstring, signature, loc: _ } = doc
   let id = type_id.map(fn(x) { "\{x}::\{doc.get_id()}" }).or(doc.get_id())
-  @view.collapse(
-    collapsed=folded.contains(name),
-    toggle=ToggleDocDetail(name),
-    header=div(id~, class="pl-4 border-gray-300 bg-gray-100 border-t w-full", [
-      signature_view(signature),
-    ]),
-    body=div(class="ml-3 my-2", [@view.markdown(docstring, small_heading=true)]),
-  )
+  let signature = signature_view(signature)
+  let content = @view.markdown(docstring, small_heading=true)
+  document_item(signature, content, collapsed=folded, id~)
 }
 
 ///|
@@ -256,9 +254,7 @@ fn document(
         if item_count == 0 {
           nothing()
         } else {
-          h1(id~, class="text-xl font-bold py-4 border-b text-gray-800", [
-            text(title),
-          ])
+          h1(id~, class="text-xl font-bold py-4 text-gray-800", [text(title)])
         }
       }
 

@@ -222,3 +222,33 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
 
   aux?(json).map_err(Show::to_string)
 }
+
+///|
+fn TypeDoc::get_id(self : TypeDoc) -> String {
+  self.name
+}
+
+///|
+fn TraitDoc::get_id(self : TraitDoc) -> String {
+  self.name
+}
+
+///|
+fn TypeAliasDoc::get_id(self : TypeAliasDoc) -> String {
+  self.name
+}
+
+///|
+fn ValueDoc::get_id(self : ValueDoc) -> String {
+  self.name
+}
+
+///|
+fn ImplDoc::get_id(self : ImplDoc) -> String {
+  self.self_type.to_string() + "-for-" + self.trait_type.to_string()
+}
+
+///|
+fn MiscDoc::get_id(self : MiscDoc) -> String {
+  self.name
+}

@@ -29,7 +29,6 @@ struct Model {
 
 ///|
 pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
-  println(fragment)
   (
     @http.get(
       @config.URL_BASE + "/api/" + path.trim("/") + "/resource.json",
@@ -158,7 +157,6 @@ fn breadcrumbs(
   let module_path = module_path.trim("/")
   let path = path.trim("/")
   let paths = path.trim_start("/").split("/").collect()
-  println("\{module_path}, \{path}")
   let mut acc_path = ""
   let elems = []
   for path in paths {

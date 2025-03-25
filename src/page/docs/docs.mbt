@@ -31,7 +31,7 @@ struct Model {
 pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
   (
     @http.get(
-      @config.URL_BASE + "/api/" + path.trim("/") + "/resource.json",
+      "/api/" + path.trim("/") + "/resource.json",
       expect=Json(Msg::GotResource, decode_resource),
     ),
     {
@@ -57,31 +57,28 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
           let cmd = match kind {
             Module({ module_index_path, .. }) =>
               @http.get(
-                @config.URL_BASE + "/api/" + module_index_path,
+                "/api/" + module_index_path,
                 expect=Json(Msg::GotModuleIndex, decode_module_index),
               )
             Package({ package_data_path, module_path, .. }) =>
               batch([
                 @http.get(
-                  @config.URL_BASE + "/api/" + package_data_path,
+                  "/api/" + package_data_path,
                   expect=Json(Msg::GotPackageData, decode_package_data),
                 ),
                 @http.get(
-                  @config.URL_BASE +
-                  "/api/" +
-                  module_path +
-                  "/module_index.json",
+                  "/api/" + module_path + "/module_index.json",
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
               ])
             RootPackage({ module_index_path, package_data_path, .. }) =>
               batch([
                 @http.get(
-                  @config.URL_BASE + "/api/" + module_index_path,
+                  "/api/" + module_index_path,
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
                 @http.get(
-                  @config.URL_BASE + "/api/" + package_data_path,
+                  "/api/" + package_data_path,
                   expect=Json(Msg::GotPackageData, decode_package_data),
                 ),
               ])

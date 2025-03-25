@@ -29,8 +29,6 @@ const TYPE_ALIAS_ICON : String = "/code-brackets.svg"
 
 const TYPE_ICON : String = "/type.svg"
 
-const URL_BASE : String = "http://127.0.0.1:3000"
-
 const VALUE_ICON : String = "/code-brackets.svg"
 
 let dead_rabbit : String

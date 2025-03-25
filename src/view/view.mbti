@@ -7,7 +7,7 @@ fn accordion[M](class? : String, click? : (String) -> M, String, Array[(String, 
 
 fn button[M](String, click? : M) -> @html.T[M]
 
-fn code_block[M](String) -> @html.T[M]
+fn code_block[M](String, collapse_namespace~ : Bool) -> @html.T[M]
 
 fn collapse[M](header~ : @html.T[M], body~ : @html.T[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.T[M]
 

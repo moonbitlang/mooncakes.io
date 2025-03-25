@@ -17,7 +17,8 @@ fnalias @html.(
   br,
   pre,
   code,
-  li
+  li,
+  ol
 )
 
 ///|

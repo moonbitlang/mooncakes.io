@@ -46,7 +46,7 @@ let operators : Set[Char] = Set::from_iter("+-*/%&|{}()[]<>!=,.:;~".iter())
 
 ///|
 pub fn parse(signature : String) -> List[CodeSpan] {
-  loop LexStart, signature[:], @immut/list.Nil {
+  loop LexStart, signature.view(), @immut/list.Nil {
     LexStart, ['\n', .. s], acc =>
       // newline
       // TODO: fix this comment
@@ -168,7 +168,7 @@ pub fn parse(signature : String) -> List[CodeSpan] {
       if s is [.. "a href=\"", .. s] {
         continue LexLinkHref(Nil),
           s,
-          Cons(Symbol(op[:op.length() - 1].to_string()), acc)
+          Cons(Symbol(op.view(end_offset=op.length() - 1).to_string()), acc)
       } else {
         continue LexStart, s, Cons(Symbol(op), acc)
       }

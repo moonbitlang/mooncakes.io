@@ -46,7 +46,7 @@ fn compare_strings(a : String, b : String) -> Int {
     let char_a = a[i]
     let char_b = b[i]
     if char_a != char_b {
-      return char_a - char_b
+      return char_a.to_int() - char_b.to_int()
     }
   }
   len_a - len_b

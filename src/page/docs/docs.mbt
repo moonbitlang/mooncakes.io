@@ -1,26 +1,30 @@
 ///|
 enum Msg {
-  ToggleCardDetail(String)
-  CardModeChanged(CardMode)
+  ToggleDocDetail(String)
+  DocModeChanged(CardMode)
   GotResource(Result[Resource, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageData(Result[PackageData, String])
-  SidebarCategoryClicked(String)
+  SidebarTabClicked(String)
   ToggleSidebarItem(ItemTarget)
   ClickSidebarItem(ItemTarget)
 }
 
 ///|
 struct Model {
-  focus_to : String
+  fragment : String
   path : String
   resource : Status[Resource]
   module_index : Status[ModuleIndex]
   package_data : Status[PackageData]
-  document_index : Array[@tree.Tree[ItemTarget]]
-  showing_category : String
-  folded_items : FoldedState
-  folded_sidebar_items : Set[ItemTarget]
+  // The collapsed documents in the main view
+  collapsed_docs : FoldedState
+  // The sidebar items related to current package, including the sub-packages
+  sidebar_document : Array[@tree.Tree[ItemTarget]]
+  // The collapsed items in the sidebar
+  sidebar_collapsed : Set[ItemTarget]
+  // The current expanded tab in the sidebar
+  sidebar_tab : String
 }
 
 ///|
@@ -33,13 +37,13 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
     ),
     {
       module_index: Loading,
-      focus_to: fragment.or(""),
+      fragment: fragment.or(""),
       path,
-      document_index: [],
-      showing_category: "Documentation",
+      sidebar_document: [],
+      sidebar_collapsed: @immut/sorted_set.new(),
+      sidebar_tab: "Documentation",
       package_data: Loading,
-      folded_items: FoldedState::new(),
-      folded_sidebar_items: @immut/sorted_set.new(),
+      collapsed_docs: FoldedState::new(),
       resource: Loading,
     },
   )
@@ -95,11 +99,11 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
         none(),
         match result {
           Ok(module_index) => {
-            let document_index = module_index._
+            let sidebar_document = module_index._
               .find_node(model.path)
               .unwrap()
               .to_document_items()
-            { ..model, document_index, module_index: Success(module_index) }
+            { ..model, sidebar_document, module_index: Success(module_index) }
           }
           Err(msg) => {
             println(msg)
@@ -112,40 +116,35 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
         Ok(package_data) => { ..model, package_data: Success(package_data) }
         Err(_) => { ..model, package_data: Failed }
       }
-      (@browser.scroll_to(model.focus_to), model)
+      (@browser.scroll_to(model.fragment), model)
     }
-    ToggleCardDetail(id) => {
-      let folded_items = if model.folded_items.contains(id) {
-        model.folded_items.remove(id)
+    ToggleDocDetail(id) => {
+      let folded_items = if model.collapsed_docs.contains(id) {
+        model.collapsed_docs.remove(id)
       } else {
-        model.folded_items.add(id)
+        model.collapsed_docs.add(id)
       }
-      (none(), { ..model, folded_items, })
+      (none(), { ..model, collapsed_docs: folded_items })
     }
-    CardModeChanged(card_mode) =>
+    DocModeChanged(card_mode) =>
       (
         none(),
-        { ..model, folded_items: model.folded_items.set_mode(card_mode) },
+        { ..model, collapsed_docs: model.collapsed_docs.set_mode(card_mode) },
       )
-    SidebarCategoryClicked(showing_category) =>
-      (none(), { ..model, showing_category, })
+    SidebarTabClicked(sidebar_tab) => (none(), { ..model, sidebar_tab, })
     ToggleSidebarItem(id) => {
-      let folded_sidebar_items = if model.folded_sidebar_items.contains(id) {
-        model.folded_sidebar_items.remove(id)
+      let sidebar_collapsed = if model.sidebar_collapsed.contains(id) {
+        model.sidebar_collapsed.remove(id)
       } else {
-        model.folded_sidebar_items.add(id)
+        model.sidebar_collapsed.add(id)
       }
-      (none(), { ..model, folded_sidebar_items, })
+      (none(), { ..model, sidebar_collapsed, })
     }
     ClickSidebarItem(id) =>
       match id {
         Package(path) =>
           (@browser.push_url("/docs/" + path), { ..model, path, })
-        Symbol(id) => {
-          println("scrolling to \{id}")
-          (@browser.scroll_to(id), model)
-        }
-        Section(id) => (@browser.scroll_to(id), model)
+        Symbol(id) | Section(id) => (@browser.scroll_to(id), model)
       }
   }
 }
@@ -212,7 +211,7 @@ fn navbar(
         nothing()
       },
       div(class="flex-grow", []),
-      card_mode_toggle(mode=card_mode, click=Msg::CardModeChanged),
+      card_mode_toggle(mode=card_mode, click=Msg::DocModeChanged),
       button(
         class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         [
@@ -239,7 +238,7 @@ pub fn view(model : Model) -> Html[Msg] {
         module_path.or(""),
         version,
         module_index,
-        model.folded_items.card_mode,
+        model.collapsed_docs.card_mode,
       )
     }
     _ => nothing()
@@ -257,10 +256,10 @@ pub fn view(model : Model) -> Html[Msg] {
   let sidebar = div(class="w-full h-full flex justify-end", [
     div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
       sidebar(
-        model.document_index,
+        model.sidebar_document,
         source_files,
-        model.showing_category,
-        model.folded_sidebar_items,
+        model.sidebar_tab,
+        model.sidebar_collapsed,
         package_path=model.path,
       ),
     ]),
@@ -278,7 +277,7 @@ pub fn view(model : Model) -> Html[Msg] {
           document(
             readme_content~,
             package_data=model.package_data,
-            folded=model.folded_items,
+            folded=model.collapsed_docs,
           ),
         ]),
       ])

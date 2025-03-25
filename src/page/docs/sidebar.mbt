@@ -165,7 +165,7 @@ fn sidebar(
 ) -> Html[Msg] {
   @view.accordion(
     class="text-gray-700 flex flex-col",
-    click=Msg::SidebarCategoryClicked,
+    click=Msg::SidebarTabClicked,
     showing,
     [
       (

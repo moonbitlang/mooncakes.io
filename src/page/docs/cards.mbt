@@ -111,7 +111,7 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
       ],
     ),
     collapsed=folded.contains(id),
-    toggle=ToggleCardDetail(id),
+    toggle=ToggleDocDetail(id),
   )
 }
 
@@ -120,7 +120,7 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
   let { docstring, signature, methods, impls, name, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
-    toggle=ToggleCardDetail(name),
+    toggle=ToggleDocDetail(name),
     header=div(
       id=name,
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
@@ -144,7 +144,7 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
   let { docstring, signature, impls, default_impls, name, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
-    toggle=ToggleCardDetail(name),
+    toggle=ToggleDocDetail(name),
     header=div(
       id=name,
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
@@ -169,7 +169,7 @@ fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> Html[Msg] {
   let { name, docstring, signature, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
-    toggle=ToggleCardDetail(name),
+    toggle=ToggleDocDetail(name),
     header=div(
       id=name,
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
@@ -188,7 +188,7 @@ fn value_doc(
   let { name, docstring, signature, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
-    toggle=ToggleCardDetail(name),
+    toggle=ToggleDocDetail(name),
     header=div(
       id=type_name.map(fn(x) { "\{x}::\{name}" }).or(name),
       class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
@@ -204,7 +204,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
   @view.collapse(
     caret_config=LeftCenter,
     collapsed=folded.contains(name),
-    toggle=ToggleCardDetail(name),
+    toggle=ToggleDocDetail(name),
     header=div(id=name, class="pl-6 py-1 w-full", [
       h3(class="text-lg text-gray-800", [text(name)]),
     ]),
@@ -243,7 +243,7 @@ fn document(
       @view.collapse(
         caret_config=LeftCenter,
         collapsed=folded.contains("readme"),
-        toggle=ToggleCardDetail("readme"),
+        toggle=ToggleDocDetail("readme"),
         header=div(class="py-2 pl-6 text-sm font-bold text-gray-700", [
           p([text("README")]),
         ]),

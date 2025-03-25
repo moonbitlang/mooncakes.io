@@ -84,15 +84,13 @@ pub fn markdown[M](
     @cmark.Inline::Autolink({ v: { link: { v, .. }, .. }, .. }) =>
       [@html.a(href=v, [inline_text(v)])]
     Break(_) => [text("\n")]
-    CodeSpan({ v: { code_layout: tight, .. }, .. }) => {
-      let tight = tight.map(fn(x) { text(x.node.v) }).to_array()
+    CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
-        @html.code(
-          class="font-roboto bg-gray-100 px-1 py-[1px] border border-gray-200 rounded",
-          tight,
+        span(
+          class="font-roboto bg-gray-200 text-sm px-1 py-[1px] rounded",
+          tight.map(fn(x) { text(x.node.v) }).to_array(),
         ),
       ]
-    }
     Emphasis({ v: { inline, .. }, .. }) => [@html.em(inline2html(inline))]
     Image(_) as img => [image_render(img)]
     Inlines({ v, .. }) => v.map(inline2html).to_array().flatten()
@@ -113,7 +111,7 @@ pub fn markdown[M](
     @cmark.Block::BlankLine(_) => p([])
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
-        class="border-l-2 border-rose-600 bg-gray-50 py-2 pl-4 my-2",
+        class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
         [block2html(block)],
       )
     Blocks({ v: xs, .. }) => span(xs.map(block2html).to_array())
@@ -265,6 +263,6 @@ pub fn markdown[M](
   } catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } else {
-    htmls => div(class="w-full", htmls)
+    htmls => div(class="w-full text-base", htmls)
   }
 }

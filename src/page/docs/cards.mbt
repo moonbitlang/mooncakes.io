@@ -34,16 +34,13 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 
 ///|
 fn signature_view(content : String) -> Html[Msg] {
-  div(
-    class="py-1 flex-grow px-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
-    [
-      pre([
-        code(class="font-mono text-[0.9em] text-blue-800", [
-          @view.code_block(content),
-        ]),
+  div(class="py-1 flex-grow px-3", [
+    pre(class="text-wrap", [
+      code(class="font-mono text-[0.9em] text-blue-800", [
+        @view.code_block(content),
       ]),
-    ],
-  )
+    ]),
+  ])
 }
 
 ///|

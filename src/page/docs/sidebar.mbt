@@ -1,9 +1,5 @@
 ///|
-fn item_button[M](
-  childrens : @html.Html[M],
-  icon? : String,
-  click? : M
-) -> @html.Html[M] {
+fn item_button[M](childrens : Html[M], icon? : String, click? : M) -> Html[M] {
   let icon = match icon {
     None => div([])
     Some(src) => div(class="size-[12px] self-center mr-1", [img(src~, [])])
@@ -14,10 +10,7 @@ fn item_button[M](
 }
 
 ///|
-fn source_list(
-  files : Array[String],
-  package_path~ : String
-) -> @html.Html[Msg] {
+fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
   if files.is_empty() {
     return text("No source files.")
   }
@@ -168,8 +161,8 @@ fn sidebar(
   source_files : Array[String],
   showing : String,
   package_path~ : String,
-  sidebar_state : @immut/sorted_set.T[ItemTarget]
-) -> @html.T[Msg] {
+  sidebar_state : Set[ItemTarget]
+) -> Html[Msg] {
   @view.accordion(
     class="text-gray-700 flex flex-col",
     click=Msg::SidebarCategoryClicked,

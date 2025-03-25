@@ -1,6 +1,6 @@
 ///|
 priv struct FoldedState {
-  set : @immut/sorted_set.T[String]
+  set : Set[String]
   card_mode : CardMode
 }
 
@@ -33,7 +33,7 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 }
 
 ///|
-fn signature_view(content : String) -> @html.T[Msg] {
+fn signature_view(content : String) -> Html[Msg] {
   div(
     class="py-1 flex-grow px-3 overflow-auto scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent",
     [
@@ -47,7 +47,7 @@ fn signature_view(content : String) -> @html.T[Msg] {
 }
 
 ///|
-fn stype(ty : Stype) -> @html.T[Msg] {
+fn stype(ty : Stype) -> Html[Msg] {
   match ty {
     Param(name~) => span([text(name)])
     Arrow(parameters~, return_type~, error_type~, is_async~) => {
@@ -84,13 +84,13 @@ fn stype(ty : Stype) -> @html.T[Msg] {
 }
 
 ///|
-fn type_path(ty : TypePath) -> @html.T[Msg] {
+fn type_path(ty : TypePath) -> Html[Msg] {
   // div([text("@" + ty.path), text("."), text(ty.name)])
   div([text(ty.name)])
 }
 
 ///|
-fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> @html.T[Msg] {
+fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
   let { self_type, trait_type, methods } = doc
   let id = self_type.to_string() + trait_type.to_string()
   @view.collapse(
@@ -119,7 +119,7 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> @html.T[Msg] {
 }
 
 ///|
-fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> @html.T[Msg] {
+fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
   let { docstring, signature, methods, impls, name, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
@@ -143,7 +143,7 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> @html.T[Msg] {
 }
 
 ///|
-fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> @html.T[Msg] {
+fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
   let { docstring, signature, impls, default_impls, name, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
@@ -168,7 +168,7 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> @html.T[Msg] {
 }
 
 ///|
-fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> @html.T[Msg] {
+fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> Html[Msg] {
   let { name, docstring, signature, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
@@ -187,7 +187,7 @@ fn value_doc(
   doc : ValueDoc,
   folded~ : FoldedState,
   type_name? : String
-) -> @html.T[Msg] {
+) -> Html[Msg] {
   let { name, docstring, signature, loc: _ } = doc
   @view.collapse(
     collapsed=folded.contains(name),
@@ -202,7 +202,7 @@ fn value_doc(
 }
 
 ///|
-fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
+fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
   let { name, methods, impls } = doc
   @view.collapse(
     caret_config=LeftCenter,
@@ -225,7 +225,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> @html.T[Msg] {
 }
 
 ///|
-fn sub_section_title(title : String, item_count : Int) -> @html.T[Msg] {
+fn sub_section_title(title : String, item_count : Int) -> Html[Msg] {
   if item_count == 0 {
     nothing()
   } else {
@@ -236,9 +236,9 @@ fn sub_section_title(title : String, item_count : Int) -> @html.T[Msg] {
 ///|
 fn document(
   readme_content? : String,
-  package_data? : @util.Status[PackageData],
+  package_data? : Status[PackageData],
   folded~ : FoldedState
-) -> @html.Html[Msg] {
+) -> Html[Msg] {
   let readme = match readme_content {
     None | Some("") => nothing()
     Some(content) => {

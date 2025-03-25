@@ -1,4 +1,7 @@
 ///|
+typealias List[A] = @immut/list.T[A]
+
+///|
 pub(all) enum CodeSpan {
   Unknown(Char)
   Keyword(String)
@@ -14,9 +17,6 @@ pub(all) enum CodeSpan {
   Space(Int)
   Comment(String)
 } derive(Show)
-
-///|
-typealias List[A] = @immut/list.T[A]
 
 ///|
 priv enum State {

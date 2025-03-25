@@ -2,26 +2,7 @@
   "import": [
     {
       "path": "Yoorkin/rabbit-tea/html",
-      "alias": "html",
-      "value": [
-        "div",
-        "nothing",
-        "img",
-        "text",
-        "h2",
-        "h3",
-        "h4",
-        "h5",
-        "p",
-        "hr",
-        "h1",
-        "a",
-        "span",
-        "ul",
-        "br",
-        "pre",
-        "code"
-      ]
+      "alias": "html"
     },
     "rami3l/cmark/cmark",
     "rami3l/cmark/cmark_base",

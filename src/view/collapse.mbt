@@ -6,12 +6,12 @@ pub(all) enum CaretConfig {
 
 ///|
 pub fn collapse[M](
-  header~ : @html.T[M],
-  body~ : @html.T[M],
+  header~ : Html[M],
+  body~ : Html[M],
   collapsed~ : Bool,
   toggle~ : M,
   caret_config~ : CaretConfig = LeftTop
-) -> @html.T[M] {
+) -> Html[M] {
   let (body, icon) = if collapsed {
     (nothing(), @config.SECTION_CLOSE)
   } else {

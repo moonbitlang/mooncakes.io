@@ -15,16 +15,16 @@ enum Model {
 
 ///|
 fn update_with[SubModel, SubMsg](
-  pair : (@tea.Command[SubMsg], SubModel),
+  pair : (Command[SubMsg], SubModel),
   to_model : (SubModel) -> Model,
   to_msg : (SubMsg) -> Message
-) -> (@tea.Command[Message], Model) {
+) -> (Command[Message], Model) {
   let (cmd, model) = pair
   (cmd.map(to_msg), to_model(model))
 }
 
 ///|
-fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
+fn update(msg : Message, model : Model) -> (Command[Message], Model) {
   match (msg, model) {
     (GotHomeMsg(msg), Home(model)) =>
       @home.update(msg, model) |> update_with(Model::Home, Message::GotHomeMsg)
@@ -41,13 +41,13 @@ fn update(msg : Message, model : Model) -> (@tea.Command[Message], Model) {
 }
 
 ///|
-fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
+fn route(url : @url.Url) -> (Command[Message], Model) {
   let paths = url.path.split("/").collect()
   match paths {
     ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
     ["api"] => (@browser.load(url.to_string()), NotFound)
     ["docs", .. module_path] =>
-      module_path.fold(fn(x, y) { x + "/" + y }, init="")
+      module_path.iter().join("/")
       |> @docs.load(url.fragment)
       |> update_with(Model::Docs, Message::GotDocsMsg)
     _ => (none(), NotFound)
@@ -55,7 +55,7 @@ fn route(url : @url.Url) -> (@tea.Command[Message], Model) {
 }
 
 ///|
-fn view(model : Model) -> @html.Html[Message] {
+fn view(model : Model) -> Html[Message] {
   match model {
     Home(model) => @home.view(model).map(Message::GotHomeMsg)
     Docs(model) => @docs.view(model).map(Message::GotDocsMsg)

@@ -1,5 +1,5 @@
 ///|
-pub fn code_block[M](moonbit : String) -> @html.Html[M] {
+pub fn code_block[M](moonbit : String) -> Html[M] {
   let spans = @highlight.parse(moonbit)
   fn go {
     @highlight.Unknown(c) => span([text(String::from_array([c]))])

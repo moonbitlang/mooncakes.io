@@ -14,17 +14,17 @@ enum Msg {
 struct Model {
   focus_to : String
   path : String
-  resource : @util.Status[Resource]
-  module_index : @util.Status[ModuleIndex]
-  package_data : @util.Status[PackageData]
+  resource : Status[Resource]
+  module_index : Status[ModuleIndex]
+  package_data : Status[PackageData]
   document_index : Array[@tree.Tree[ItemTarget]]
   showing_category : String
   folded_items : FoldedState
-  folded_sidebar_items : @immut/sorted_set.T[ItemTarget]
+  folded_sidebar_items : Set[ItemTarget]
 }
 
 ///|
-pub fn load(path : String, fragment : String?) -> (@tea.Command[Msg], Model) {
+pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
   println(fragment)
   (
     @http.get(
@@ -46,7 +46,7 @@ pub fn load(path : String, fragment : String?) -> (@tea.Command[Msg], Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
+pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
   match msg {
     GotResource(result) =>
       match result {
@@ -155,7 +155,7 @@ fn breadcrumbs(
   path : String,
   module_path : String,
   module_index : ModuleIndex
-) -> @html.Html[Msg] {
+) -> Html[Msg] {
   let module_path = module_path.trim("/")
   let path = path.trim("/")
   let paths = path.trim_start("/").split("/").collect()
@@ -181,7 +181,7 @@ fn breadcrumbs(
 }
 
 ///|
-fn logo() -> @html.T[Msg] {
+fn logo() -> Html[Msg] {
   div(class="w-full h-full flex justify-end border-b bg-white top-0 z-20", [
     div(class="h-full flex items-center w-full 2xl:w-2/3", [
       a(class="border-gray-300 lg:border-r w-full", href="/", [
@@ -200,7 +200,7 @@ fn navbar(
   version : String?,
   module_index : ModuleIndex,
   card_mode : CardMode
-) -> @html.T[Msg] {
+) -> Html[Msg] {
   div(
     class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
     [
@@ -225,7 +225,7 @@ fn navbar(
 }
 
 ///|
-pub fn view(model : Model) -> @html.Html[Msg] {
+pub fn view(model : Model) -> Html[Msg] {
   let navbar = match (model.module_index, model.resource) {
     (Success(module_index), Success(resource)) => {
       let (module_path, version) = match resource.kind {
@@ -242,7 +242,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
         model.folded_items.card_mode,
       )
     }
-    _ => @html.nothing()
+    _ => nothing()
   }
   let source_files = match model.resource {
     Success(
@@ -270,7 +270,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
       let meta = match kind {
         Module({ meta_info: meta, .. })
         | RootPackage({ meta_info: meta, .. }) => meta_info(meta)
-        Package(_) => @html.nothing()
+        Package(_) => nothing()
       }
       div(class="flex w-full min-h-full bg-[#fcfcfd] justify-begin", [
         div(class="overflow-y-auto 2xl:w-4/5", [

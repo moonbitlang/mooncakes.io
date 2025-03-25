@@ -1,5 +1,5 @@
 ///|
-pub fn button[M](value : String, click? : M) -> @html.Html[M] {
+pub fn button[M](value : String, click? : M) -> Html[M] {
   div(
     class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
     click?,
@@ -8,11 +8,7 @@ pub fn button[M](value : String, click? : M) -> @html.Html[M] {
 }
 
 ///|
-pub fn icon_button[M](
-  icon : String,
-  text? : String,
-  click? : M
-) -> @html.Html[M] {
+pub fn icon_button[M](icon : String, text? : String, click? : M) -> Html[M] {
   let text = match text {
     None => []
     Some(value) => [@html.text(value)]
@@ -30,14 +26,14 @@ pub fn icon_button[M](
 }
 
 ///|
-pub fn navbar[M]() -> @html.Html[M] {
+pub fn navbar[M]() -> Html[M] {
   div(class="font-title h-14 w-full px-8 p-4 border-b select-none", [
     h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
   ])
 }
 
 ///|
-pub fn footer[M]() -> @html.Html[M] {
+pub fn footer[M]() -> Html[M] {
   div(
     class="h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex justify-center gap-8",
     [p([text("© 2025 mooncakes.io")]), p([text("Powered by MoonBit")])],

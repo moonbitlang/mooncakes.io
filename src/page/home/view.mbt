@@ -20,7 +20,7 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|}
 
 ///|
-fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
+fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   div(
     class="p-4 h-50 flex outline-gray-50 bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
     click=ClickModuleCard(mod.path),
@@ -39,7 +39,7 @@ fn simple_module_card(mod : ModuleIndex) -> @html.Html[Msg] {
 }
 
 ///|
-fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
+fn module_card(mod : ModuleIndex) -> Html[Msg] {
   let keywords = match mod.keywords {
     None => nothing()
     Some(keywords) =>
@@ -83,7 +83,7 @@ fn module_card(mod : ModuleIndex) -> @html.Html[Msg] {
 }
 
 ///|
-fn recently_updated(recently : Array[ModuleIndex]) -> @html.Html[Msg] {
+fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
   let recently_updated = recently.map(simple_module_card)
   div([
     div(class="container lg:w-2/3 px-4", [
@@ -99,7 +99,7 @@ fn recently_updated(recently : Array[ModuleIndex]) -> @html.Html[Msg] {
 }
 
 ///|
-fn search_result(mods : Array[ModuleIndex]) -> @html.Html[Msg] {
+fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
   let module_cards = mods.map(module_card)
   div([
     div(class="container lg:w-3/5 px-4", [
@@ -112,7 +112,7 @@ fn search_result(mods : Array[ModuleIndex]) -> @html.Html[Msg] {
 }
 
 ///|
-fn navbar() -> @html.Html[Msg] {
+fn navbar() -> Html[Msg] {
   div(class="w-full flex justify-center", [
     div(class="h-14 w-4/5 flex justify-between items-center", [
       div(class="font-title select-none p-4", [
@@ -127,7 +127,7 @@ fn navbar() -> @html.Html[Msg] {
         ),
       ]),
       div(class="text-gray-700 font-semibold invisible", [
-        @html.a(href="", [text("Browse All Module")]),
+        a(href="", [text("Browse All Module")]),
       ]),
     ]),
   ])

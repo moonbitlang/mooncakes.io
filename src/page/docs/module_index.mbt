@@ -2,7 +2,7 @@
 priv struct IndexNode {
   name : String
   package : PackageIndex?
-  childs : @immut/sorted_map.T[String, IndexNode]
+  childs : Map[String, IndexNode]
 } derive(Show)
 
 ///|

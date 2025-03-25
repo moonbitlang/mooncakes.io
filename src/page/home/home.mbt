@@ -7,7 +7,7 @@ pub enum Msg {
 
 ///|
 pub struct Model {
-  indices : @util.Status[Indices]
+  indices : Status[Indices]
   filter : String
   filtered_modules : Array[ModuleIndex]
 }
@@ -30,7 +30,7 @@ pub(all) struct ModuleIndex {
 }
 
 ///|
-pub fn load() -> (@tea.Command[Msg], Model) {
+pub fn load() -> (Command[Msg], Model) {
   (
     @http.get(
       @config.URL_BASE + "/api/modules.json",
@@ -41,7 +41,7 @@ pub fn load() -> (@tea.Command[Msg], Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (@tea.Command[Msg], Model) {
+pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
   match msg {
     GotModuleIndices(result) =>
       (
@@ -81,9 +81,9 @@ pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] 
 }
 
 ///|
-fn banner() -> @html.Html[Msg] {
+fn banner() -> Html[Msg] {
   fn button(value, target, color) {
-    @html.a(
+    a(
       href=target,
       class="py-2 px-6 select-none text-md rounded-full hover:opacity-80 transition-all \{color}",
       [text(value)],
@@ -123,7 +123,7 @@ fn banner() -> @html.Html[Msg] {
 }
 
 ///|
-pub fn view(model : Model) -> @html.Html[Msg] {
+pub fn view(model : Model) -> Html[Msg] {
   let module_list = match model.indices {
     Loading => @view.loading()
     Failed => @view.load_failed("module indices")
@@ -138,7 +138,7 @@ pub fn view(model : Model) -> @html.Html[Msg] {
   div(class="flex flex-col min-h-screen", [
     navbar(),
     banner,
-    @html.hr(class="lg:m-10 border-gray-200"),
+    hr(class="lg:m-10 border-gray-200"),
     module_list,
     div(class="mt-auto", [@view.footer()]),
   ])

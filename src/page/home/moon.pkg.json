@@ -2,15 +2,10 @@
   "import": [
     {
       "path": "Yoorkin/rabbit-tea",
-      "alias": "tea",
-      "value": ["none"],
+      "alias": "tea"
     },
     "Yoorkin/rabbit-tea/http",
-    {
-      "path": "Yoorkin/rabbit-tea/html",
-      "alias": "html",
-      "value": ["div", "h1", "h2", "p","nothing","span","img","text","input"]
-    },
+    "Yoorkin/rabbit-tea/html",
     "Yoorkin/rabbit-tea/browser",
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/view",

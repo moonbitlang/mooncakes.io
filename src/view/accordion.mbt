@@ -3,8 +3,8 @@ pub fn accordion[M](
   class? : String,
   click? : (String) -> M,
   showing : String,
-  items : Array[(String, @html.T[M])]
-) -> @html.T[M] {
+  items : Array[(String, Html[M])]
+) -> Html[M] {
   ul(
     class?,
     items.map(fn {

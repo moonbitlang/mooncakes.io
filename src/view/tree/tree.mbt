@@ -1,4 +1,13 @@
 ///|
+typealias @html.Html[Msg]
+
+///|
+typealias Set[A] = @immut/sorted_set.T[A]
+
+///|
+fnalias @html.(div, text, ul)
+
+///|
 pub(all) enum Tree[Id] {
   Item(id~ : Id, String)
   Node(id~ : Id, String, Array[Tree[Id]])
@@ -16,10 +25,10 @@ pub fn get_name[Id](self : Tree[Id]) -> String {
 pub fn view[M, Id : Compare](
   toggle~ : (Id) -> M,
   click~ : (Id) -> M,
-  state~ : @immut/sorted_set.T[Id],
+  state~ : Set[Id],
   indicator~ : Id,
   items : Array[Tree[Id]]
-) -> @html.T[M] {
+) -> Html[M] {
   fn aux {
     Tree::Item(id~, str) => {
       let indicator = if indicator == id {

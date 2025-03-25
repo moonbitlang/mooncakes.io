@@ -1,9 +1,9 @@
 ///|
 fn meta_info_item_view(
   title~ : String,
-  elem : @html.T[Msg],
+  elem : Html[Msg],
   grow~ : Bool = false
-) -> @html.T[Msg] {
+) -> Html[Msg] {
   let grow = if grow { "grow" } else { "" }
   div(class="flex items-center gap-3 text-gray-600 \{grow}", [
     p(class="font-bold text-sm", [text(title)]),
@@ -12,7 +12,7 @@ fn meta_info_item_view(
 }
 
 ///|
-fn install_view(path~ : String) -> @html.T[Msg] {
+fn install_view(path~ : String) -> Html[Msg] {
   div(
     class="text-sm h-8 p-2 pr-10 font-roboto border rounded outline-none bg-zinc-100 flex items-center",
     [text("moon add \{path}")],
@@ -20,7 +20,7 @@ fn install_view(path~ : String) -> @html.T[Msg] {
 }
 
 ///|
-fn tag_view(value : String) -> @html.T[Msg] {
+fn tag_view(value : String) -> Html[Msg] {
   div(
     class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600 overflow-hidden",
     [text(value)],
@@ -28,7 +28,7 @@ fn tag_view(value : String) -> @html.T[Msg] {
 }
 
 ///|
-fn meta_info(model : MetaInfo) -> @html.T[Msg] {
+fn meta_info(model : MetaInfo) -> Html[Msg] {
   let model_license = match model.license {
     Some(l) =>
       meta_info_item_view(title="License", p(class="text-gray-600", [text(l)]))

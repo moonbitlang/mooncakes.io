@@ -4,13 +4,9 @@
     {
       "path": "Yoorkin/rabbit-tea",
       "alias": "tea",
-      "value": ["none"],
     },
     "Yoorkin/rabbit-tea/url",
-    {
-      "path": "Yoorkin/rabbit-tea/html",
-      "alias": "html"
-    },
+    "Yoorkin/rabbit-tea/html",
     "Yoorkin/rabbit-tea/browser",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/page/home",

@@ -33,7 +33,7 @@ pub(all) struct ModuleIndex {
 pub fn load() -> (Command[Msg], Model) {
   (
     @http.get(
-      @config.URL_BASE + "/api/modules.json",
+      "/api/modules.json",
       expect=Json(Msg::GotModuleIndices, decode_module_indices),
     ),
     { indices: Loading, filter: "", filtered_modules: [] },

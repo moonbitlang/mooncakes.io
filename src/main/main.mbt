@@ -11,6 +11,7 @@ enum Model {
   Home(@home.Model)
   Docs(@docs.Model)
   NotFound
+  Redirect
 }
 
 ///|
@@ -30,11 +31,13 @@ fn update(msg : Message, model : Model) -> (Command[Message], Model) {
       @home.update(msg, model) |> update_with(Model::Home, Message::GotHomeMsg)
     (GotDocsMsg(msg), Docs(model)) =>
       @docs.update(msg, model) |> update_with(Model::Docs, Message::GotDocsMsg)
-    (LinkClicked(request), _) =>
+    (LinkClicked(request), _) => {
+      println(request)
       match request {
         Internal(url) => (@browser.push_url(url.to_string()), model)
         External(url) => (@browser.load(url), model)
       }
+    }
     (UrlChanged(url), _) => route(url)
     _ => (none(), model)
   }
@@ -42,10 +45,12 @@ fn update(msg : Message, model : Model) -> (Command[Message], Model) {
 
 ///|
 fn route(url : @url.Url) -> (Command[Message], Model) {
+  println(url)
   let paths = url.path.split("/").collect()
+  println(paths)
   match paths {
     ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
-    ["api"] => (@browser.load(url.to_string()), NotFound)
+    ["api", ..] => (@browser.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
       module_path.iter().join("/")
       |> @docs.load(url.fragment)
@@ -60,6 +65,7 @@ fn view(model : Model) -> Html[Message] {
     Home(model) => @home.view(model).map(Message::GotHomeMsg)
     Docs(model) => @docs.view(model).map(Message::GotDocsMsg)
     NotFound => @view.not_found()
+    Redirect => @view.loading()
   }
 }
 

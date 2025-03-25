@@ -21,7 +21,6 @@ jobs:
           moon install
           mkdir -p target/web
           cp -R web/* target/web/
-          rm src/config/url_base.mbt && echo "pub const URL_BASE = \"\"" > src/config/url_base.mbt
           moon build --target js
           cp target/js/release/build/main/main.js target/web/main.js
           npm install npx

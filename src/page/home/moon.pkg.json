@@ -7,7 +7,6 @@
     "Yoorkin/rabbit-tea/http",
     "Yoorkin/rabbit-tea/html",
     "Yoorkin/rabbit-tea/browser",
-    "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/util"
   ]

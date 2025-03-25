@@ -2,7 +2,7 @@
 priv struct FoldedState {
   set : Set[String]
   card_mode : CardMode
-}
+} derive(Show)
 
 ///|
 fn FoldedState::new() -> FoldedState {
@@ -89,7 +89,7 @@ fn type_path(ty : TypePath) -> Html[Msg] {
 ///|
 fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
   let { self_type, trait_type, methods } = doc
-  let id = self_type.to_string() + trait_type.to_string()
+  let id = doc.get_id()
   @view.collapse(
     caret_config=LeftCenter,
     header=pre(
@@ -117,21 +117,20 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
 
 ///|
 fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
-  let { docstring, signature, methods, impls, name, loc: _ } = doc
+  let { docstring, signature, methods, impls, name: _, loc: _ } = doc
+  let id = doc.get_id()
   @view.collapse(
-    collapsed=folded.contains(name),
-    toggle=ToggleDocDetail(name),
-    header=div(
-      id=name,
-      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
-      [signature_view(signature)],
-    ),
+    collapsed=folded.contains(id),
+    toggle=ToggleDocDetail(id),
+    header=div(id~, class="pl-4 border-gray-300 bg-gray-100 border-t w-full", [
+      signature_view(signature),
+    ]),
     body=div(
       class="ml-3 my-2",
       [
         @view.markdown(docstring, small_heading=true),
         sub_section_title("Method", methods.length()),
-        ..methods.map(fn(x) { value_doc(x, folded~, type_name=doc.name) }),
+        ..methods.map(fn(x) { value_doc(x, folded~, type_id=id) }),
         sub_section_title("Implementation", impls.length()),
         ..impls.map(fn(x) { impl_doc(x, folded~) }),
       ],
@@ -183,17 +182,16 @@ fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> Html[Msg] {
 fn value_doc(
   doc : ValueDoc,
   folded~ : FoldedState,
-  type_name? : String
+  type_id? : String
 ) -> Html[Msg] {
   let { name, docstring, signature, loc: _ } = doc
+  let id = type_id.map(fn(x) { "\{x}::\{doc.get_id()}" }).or(doc.get_id())
   @view.collapse(
     collapsed=folded.contains(name),
     toggle=ToggleDocDetail(name),
-    header=div(
-      id=type_name.map(fn(x) { "\{x}::\{name}" }).or(name),
-      class="pl-4 border-gray-300 bg-gray-100 border-t w-full",
-      [signature_view(signature)],
-    ),
+    header=div(id~, class="pl-4 border-gray-300 bg-gray-100 border-t w-full", [
+      signature_view(signature),
+    ]),
     body=div(class="ml-3 my-2", [@view.markdown(docstring, small_heading=true)]),
   )
 }
@@ -201,6 +199,7 @@ fn value_doc(
 ///|
 fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
   let { name, methods, impls } = doc
+  let id = doc.get_id()
   @view.collapse(
     caret_config=LeftCenter,
     collapsed=folded.contains(name),
@@ -213,7 +212,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
       [
         // p([text("This is a builtin type.")]),
         sub_section_title("Method", methods.length()),
-        ..methods.map(fn(x) { value_doc(x, folded~, type_name=doc.name) }),
+        ..methods.map(fn(x) { value_doc(x, folded~, type_id=id) }),
         sub_section_title("Implementation", impls.length()),
         ..impls.map(fn(x) { impl_doc(x, folded~) }),
       ],

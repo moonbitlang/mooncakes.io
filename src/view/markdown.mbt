@@ -119,17 +119,14 @@ pub fn markdown[M](
     Blocks({ v: xs, .. }) => span(xs.map(block2html).to_array())
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
       let code = code.iter().map(fn(node) { node.v }).join("\n")
-      if info_string is Some({ v: lang, .. }) &&
+      let code = if info_string is Some({ v: lang, .. }) &&
         (lang == "mbt" || lang == "moonbit") {
         let code = code |> code_block()
-        @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
-          @html.code(class="font-roboto", [code]),
-        ])
+        @html.code(class="font-roboto", [code])
       } else {
-        @html.pre(class="bg-gray-100 p-4 my-4 text-sm rounded", [
-          @html.code(class="font-roboto", [div([text(code)])]),
-        ])
+        @html.code(class="font-roboto", [div([text(code)])])
       }
+      pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-scroll", [code])
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)

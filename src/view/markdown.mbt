@@ -60,7 +60,11 @@ pub fn markdown[M](
       text: Text({ v: txt, .. }),
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [@html.a(class=" text-blue-400", href=link, [inline_text(txt)])]
+      [
+        @html.a(class="text-blue-600 underline underline-offset-2", href=link, [
+          inline_text(txt),
+        ]),
+      ]
     ({
       text: Image(_) as img,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
@@ -74,7 +78,13 @@ pub fn markdown[M](
       inline2html(inline)
     ({ text: inline, reference: Ref(_, _, { key, .. }) } : @cmark.InlineLink) =>
       if link_defs.get(key) is Some(url) {
-        [@html.a(class=" text-blue-400", href=url, [..inline2html(inline)])]
+        [
+          @html.a(
+            class=" text-blue-600 underline underline-offset-2",
+            href=url,
+            [..inline2html(inline)],
+          ),
+        ]
       } else {
         inline2html(inline)
       }

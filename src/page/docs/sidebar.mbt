@@ -19,11 +19,7 @@ fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
     ul(
       files.map(fn(x) {
         item_button(
-          a(
-            class="w-full",
-            href="/api/\{package_path}/\{x}.html",
-            [text(x)],
-          ),
+          a(class="w-full", href="/api/\{package_path}/\{x}.html", [text(x)]),
         )
       }),
     ),

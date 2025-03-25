@@ -185,9 +185,9 @@ fn breadcrumbs(
 
 ///|
 fn logo() -> Html[Msg] {
-  div(class="w-full h-full flex justify-end border-b bg-white top-0 z-20", [
+  div(class="w-full h-full flex justify-end border-b top-0 z-20", [
     div(class="h-full flex items-center w-full 2xl:w-2/3", [
-      a(class="border-gray-300 lg:border-r w-full", href="/", [
+      a(class="border-gray-300 w-full", href="/", [
         h1(class="font-title text-gray-700 font-semibold mx-12", [
           text("🥮 mooncakes.io"),
         ]),
@@ -275,7 +275,7 @@ pub fn view(model : Model) -> Html[Msg] {
         | RootPackage({ meta_info: meta, .. }) => meta_info(meta)
         Package(_) => nothing()
       }
-      div(class="flex w-full min-h-full bg-[#fcfcfd] justify-begin", [
+      div(class="flex w-full min-h-full  justify-begin", [
         div(class="overflow-y-auto 2xl:w-4/5", [
           meta,
           document(
@@ -293,7 +293,7 @@ pub fn view(model : Model) -> Html[Msg] {
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [
       div(
-        class="col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
+        class="bg-[#f7f7f7] col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
         [logo()],
       ),
       div(
@@ -301,7 +301,7 @@ pub fn view(model : Model) -> Html[Msg] {
         [navbar],
       ),
       div(
-        class="col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 border-r overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [sidebar],
       ),
       div(

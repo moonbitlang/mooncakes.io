@@ -97,7 +97,7 @@ pub fn markdown[M](
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
         span(
-          class="font-roboto bg-gray-200 text-sm px-1 py-[1px] rounded",
+          class="font-roboto bg-[#f0f0f0] text-sm px-1 py-[1px] rounded",
           tight.map(fn(x) { text(x.node.v) }).to_array(),
         ),
       ]
@@ -147,12 +147,15 @@ pub fn markdown[M](
       } else {
         match level {
           1 =>
-            h1(class="text-gray-900 font-semibold mt-4 mb-2 text-3xl", inline)
+            h1(class="text-gray-800 font-semibold mt-4 mb-2 text-3xl", inline)
           2 =>
-            h2(class="text-gray-900 mt-4 mb-2 pb-2 border-b text-2xl", inline)
-          3 => h3(class="text-gray-900 text-xl", inline)
-          4 => h4(class="text-gray-900", inline)
-          _ => h5(class="text-gray-900", inline)
+            h2(
+              class="text-gray-800 font-semibold mt-4 mb-2 border-b text-2xl",
+              inline,
+            )
+          3 => h3(class="text-gray-800 font-semibold text-xl mt-3 mb-2", inline)
+          4 => h4(class="text-gray-800", inline)
+          _ => h5(class="text-gray-800", inline)
         }
       }
     }

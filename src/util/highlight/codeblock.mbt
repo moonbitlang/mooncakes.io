@@ -38,11 +38,11 @@ priv enum State {
 let keywords : Set[String] = Set::of([
   "fn", "let", "type", "struct", "enum", "impl", "trait", "derive", "match", "if",
   "else", "typealias", "guard", "for", "in", "while", "loop", "break", "continue",
-  "return", "pub", "priv", "mut",
+  "return", "pub", "priv", "mut", "with", "test",
 ])
 
 ///|
-let operators : Set[Char] = Set::from_iter("+-*/%&|{}()[]<>!=,.:;~".iter())
+let operators : Set[Char] = Set::from_iter("+-*/%&|{}()[]<>!?=,.:;~".iter())
 
 ///|
 pub fn parse(signature : String) -> List[CodeSpan] {

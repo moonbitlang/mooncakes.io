@@ -140,8 +140,8 @@ pub fn markdown[M](
       let inline = inline2html(inline)
       if small_heading {
         match level {
-          1 => h3(class="text-blue-900 font-semibold mt-1 text-lg", inline)
-          2 | 3 => h4(class="text-blue-900 text-lg", inline)
+          1 => h3(class="text-gray-900 font-bold mt-1 text-sm", inline)
+          2 | 3 => h4(class="text-gray-900 font-semibold text-sm", inline)
           _ => div(class="text-gray-900", inline)
         }
       } else {
@@ -276,6 +276,6 @@ pub fn markdown[M](
   } catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } else {
-    htmls => div(class="w-full text-base", htmls)
+    htmls => div(class="w-full text-base text-[#3c3c43]", htmls)
   }
 }

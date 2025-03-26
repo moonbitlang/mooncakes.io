@@ -8,6 +8,8 @@ enum Msg {
   SidebarTabClicked(String)
   ToggleSidebarItem(ItemTarget)
   ClickSidebarItem(ItemTarget)
+  ToggleSearchPanel(Bool)
+  SearchFilterChanged(String)
 }
 
 ///|
@@ -25,6 +27,7 @@ struct Model {
   sidebar_collapsed : Set[ItemTarget]
   // The current expanded tab in the sidebar
   sidebar_tab : String
+  search : SearchModel?
 }
 
 ///|
@@ -44,6 +47,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
       package_data: Loading,
       collapsed_docs: FoldedState::new(),
       resource: Loading,
+      search: None,
     },
   )
 }
@@ -153,6 +157,23 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
           (@browser.push_url("/docs/" + path), { ..model, path, })
         Symbol(id) | Section(id) => (@browser.scroll_to(id), model)
       }
+    ToggleSearchPanel(open) => {
+      let search = if open {
+        Some({ filter: "", results: Success([]) })
+      } else {
+        None
+      }
+      (none(), { ..model, search, })
+    }
+    SearchFilterChanged(filter) => {
+      let results = match model.module_index {
+        Failed => @util.Failed
+        Loading => Loading
+        Success(indices) => Success(search(indices, filter))
+      }
+      let search = Some({ filter, results })
+      (none(), { ..model, search, })
+    }
   }
 }
 
@@ -219,10 +240,11 @@ fn navbar(
       div(class="flex-grow", []),
       card_mode_toggle(mode=card_mode, click=Msg::DocModeChanged),
       button(
-        class="border rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
+        class="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
+        click=ToggleSearchPanel(true),
         [
           img(class="w-5 h-5", src=@config.SEARCH, []),
-          div(class="hidden lg:block text-nowrap", [text("Quick search...")]),
+          div(class="hidden lg:block text-nowrap", [text("search")]),
         ],
       ),
     ],
@@ -277,7 +299,7 @@ pub fn view(model : Model) -> Html[Msg] {
         | RootPackage({ meta_info: meta, .. }) => meta_info(meta)
         Package(_) => nothing()
       }
-      div(class="flex w-full min-h-full  justify-begin", [
+      div(class="flex w-full min-h-full justify-begin", [
         div(class="overflow-y-auto 2xl:w-4/5", [
           meta,
           document(
@@ -290,6 +312,64 @@ pub fn view(model : Model) -> Html[Msg] {
     }
     Failed => @view.document_not_available(model.path)
     Loading => @view.loading()
+  }
+  let search_panel = match model.search {
+    None => nothing()
+    Some(search) => {
+      let input_style = match search.results {
+        Success(xs) if not(xs.is_empty()) => ""
+        _ => "rounded-b"
+      }
+      div(class="fixed inset-0 flex justify-center items-center", [
+        div(
+          class="fixed inset-0 bg-black bg-opacity-40",
+          click=ToggleSearchPanel(false),
+          [],
+        ),
+        div(class="overflow-clip w-1/2 z-20 h-[80%] rounded", [
+          @html.input(
+            input_type=Text,
+            value=search.filter,
+            placeholder="search...",
+            class="border-b h-12 px-4 p-2 outline-none text-base w-full \{input_style}",
+            input=Msg::SearchFilterChanged,
+          ),
+          match search.results {
+            Loading => text("loading ...")
+            Failed => text("load indices failed")
+            Success(results) =>
+              @html.ul(
+                class="overflow-y-auto overflow-x-hidden h-full",
+                results.map(fn(x) {
+                  let color = match x.kind {
+                    "Package" => "text-yellow-700"
+                    "Trait" => "text-blue-700"
+                    "Type" => "text-green-700"
+                    "Method" => "text-moonbit"
+                    "Value" => "text-purple-700"
+                    _ => "text-gray-700"
+                  }
+                  @html.li(
+                    class="border-t px-4 py-2 bg-white hover:bg-gray-100",
+                    [
+                      a(href=x.href, class="grid grid-cols-[6em_2fr_1fr] ", [
+                        span(class="font-thin text-base \{color}", [
+                          text(x.kind),
+                        ]),
+                        span(class="text-gray-800", [text(x.name)]),
+                        span(
+                          class="font-roboto text-sm text-gray-400 flex items-center justify-end",
+                          [text(x.package)],
+                        ),
+                      ]),
+                    ],
+                  )
+                }),
+              )
+          },
+        ]),
+      ])
+    }
   }
   div(
     class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
@@ -310,6 +390,7 @@ pub fn view(model : Model) -> Html[Msg] {
         class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [main],
       ),
+      search_panel,
     ],
   )
 }

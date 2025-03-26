@@ -19,6 +19,27 @@ priv struct PackageIndex {
 priv type ModuleIndex IndexNode derive(Show)
 
 ///|
+fn IndexNode::iter(self : IndexNode) -> Iter[IndexNode] {
+  Iter::new(fn(yield_) {
+    match self.package {
+      Some(_) => if yield_(self) == IterEnd { return IterEnd }
+      None => ()
+    }
+    for _, node in self.childs {
+      if node.iter().run(yield_) == IterEnd {
+        return IterEnd
+      }
+    }
+    IterContinue
+  })
+}
+
+///|
+fn ModuleIndex::iter(self : ModuleIndex) -> Iter[IndexNode] {
+  self._.iter()
+}
+
+///|
 priv struct TypeAliasIndex {
   name : String
 } derive(Show)

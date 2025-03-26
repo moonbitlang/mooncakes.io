@@ -31,6 +31,8 @@ const TYPE_ICON : String = "/type.svg"
 
 const VALUE_ICON : String = "/code-brackets.svg"
 
+let builtins_package_path : Map[String, String]
+
 let dead_rabbit : String
 
 // Types and methods

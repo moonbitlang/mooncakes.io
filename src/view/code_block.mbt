@@ -7,7 +7,7 @@ pub fn code_block[M](moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
     Symbol(s) => span(class="text-zinc-500 text-nowrap", [text(s)])
     Link(href~, content) =>
       a(
-        class="hover:text-gray-700 transition-colors underline underline-offset-4 active:translate-y-[3px] px-[1px] py-[1px] text-gray-300 rounded",
+        class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
         href="/docs/" + href,
         content.map(go),
       )

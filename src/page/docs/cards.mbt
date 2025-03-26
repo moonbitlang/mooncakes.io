@@ -49,9 +49,9 @@ fn stype(ty : Stype) -> Html[Msg] {
       let async_indicator = if is_async { text("async ") } else { nothing() }
       let error_type_indicator = match error_type {
         None => nothing()
-        Some(ty) => div(class="flex", [text("!"), stype(ty)])
+        Some(ty) => span(class="flex", [text("!"), stype(ty)])
       }
-      div(
+      span(
         [
           async_indicator,
           text("("),
@@ -65,8 +65,7 @@ fn stype(ty : Stype) -> Html[Msg] {
     }
     Constr(constr~, arguments=[]) => type_path(constr)
     Constr(constr~, arguments~) =>
-      div(
-        class="flex",
+      span(
         [
           type_path(constr),
           text("["),
@@ -80,25 +79,25 @@ fn stype(ty : Stype) -> Html[Msg] {
 
 ///|
 fn type_path(ty : TypePath) -> Html[Msg] {
-  // div([text("@" + ty.path), text("."), text(ty.name)])
-  div([text(ty.name)])
+  a(
+    href="/docs/\{ty.path}#\{ty.name}",
+    class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
+    [span(class="text-gray-700", [text(ty.name)])],
+  )
 }
 
 ///|
 fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
-  let signature = pre(
-    class="bg-gray-100 xl:w-2/5 flex flex-grow items-center pr-3 overflow-auto scrollbar-thin",
-    [
-      code(class="font-mono text-[0.9em] text-blue-800 flex", [
-        span(class="text-gray-700", [text("impl ")]),
-        type_path(trait_type),
-        span(class="text-gray-700", [text(" for ")]),
-        stype(self_type),
-      ]),
-    ],
-  )
+  let signature = pre(class="bg-gray-100 text-wrap pr-4", [
+    code(class="font-mono text-[0.9em] text-[#0033b3]", [
+      text("impl "),
+      type_path(trait_type),
+      text(" for "),
+      span(class="text-gray-700", [stype(self_type)]),
+    ]),
+  ])
   let content = div(class="pl-4", methods.map(fn(x) { value_doc(x, folded~) }))
   document_item(signature, content, collapsed=folded, id~, tight=true)
 }

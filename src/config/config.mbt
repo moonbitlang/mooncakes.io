@@ -51,3 +51,20 @@ pub let dead_rabbit =
   #|   ---      -                \ __
   #|  / X        /        ____   /   )
   #|  *_________/__/_____/______/ `--
+
+///|
+pub let builtins_package_path : Map[String, String] = {
+  "Bool": "core/bool",
+  "Byte": "core/byte",
+  "Bytes": "core/bytes",
+  "Char": "core/char",
+  "Double": "core/double",
+  "FixedArray": "core/array",
+  "Array": "core/array",
+  "Float": "core/float",
+  "Int": "core/int",
+  "Int16": "core/int16",
+  "Int64": "core/int64",
+  "String": "core/string",
+  "UInt": "core/uint",
+}

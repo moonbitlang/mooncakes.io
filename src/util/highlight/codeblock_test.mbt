@@ -77,7 +77,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("put")",
       #|  "Symbol("(")",
-      #|  "StringLit("key1")",
+      #|  "StringLit("\"key1\"")",
       #|  "Symbol(",")",
       #|  "Space(1)",
       #|  "Number("100")",
@@ -87,7 +87,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("put")",
       #|  "Symbol("(")",
-      #|  "StringLit("key2")",
+      #|  "StringLit("\"key2\"")",
       #|  "Symbol(",")",
       #|  "Space(1)",
       #|  "Number("200")",
@@ -106,7 +106,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("get")",
       #|  "Symbol("(")",
-      #|  "StringLit("key1")",
+      #|  "StringLit("\"key1\"")",
       #|  "Symbol(")")",
       #|  "Newline",
       #|  "Newline",
@@ -116,7 +116,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("put")",
       #|  "Symbol("(")",
-      #|  "StringLit("key3")",
+      #|  "StringLit("\"key3\"")",
       #|  "Symbol(",")",
       #|  "Space(1)",
       #|  "Number("300")",
@@ -144,7 +144,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("get")",
       #|  "Symbol("(")",
-      #|  "StringLit("key1")",
+      #|  "StringLit("\"key1\"")",
       #|  "Symbol(")")",
       #|  "Space(1)",
       #|  "Comment("// Returns Some(100)")",
@@ -159,7 +159,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("get")",
       #|  "Symbol("(")",
-      #|  "StringLit("key2")",
+      #|  "StringLit("\"key2\"")",
       #|  "Symbol(")")",
       #|  "Space(1)",
       #|  "Comment("// Returns None, as \"key2\" was evicted")",
@@ -174,7 +174,7 @@ test "complex source" {
       #|  "Symbol(".")",
       #|  "LIdent("get")",
       #|  "Symbol("(")",
-      #|  "StringLit("key3")",
+      #|  "StringLit("\"key3\"")",
       #|  "Symbol(")")",
       #|  "Space(1)",
       #|  "Comment("// Returns Some(300)  ")",
@@ -383,6 +383,7 @@ test "qualified" {
   let code =
     #| let a = @path/to/package.value
     #| let a : @path/to/package.Type = 1
+    #| let c = '\uFFFF'
   inspect!(
     run_test(code),
     content=
@@ -407,7 +408,16 @@ test "qualified" {
       #|  "Space(1)",
       #|  "Symbol("=")",
       #|  "Space(1)",
-      #|  "Number("1")"
+      #|  "Number("1")",
+      #|  "Newline",
+      #|  "Space(1)",
+      #|  "Keyword("let")",
+      #|  "Space(1)",
+      #|  "LIdent("c")",
+      #|  "Space(1)",
+      #|  "Symbol("=")",
+      #|  "Space(1)",
+      #|  "CharLit("'\\uFFFF'")"
       #|]
     ,
   )

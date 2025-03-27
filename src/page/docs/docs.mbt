@@ -19,6 +19,7 @@ struct Model {
   resource : Status[Resource]
   module_index : Status[ModuleIndex]
   package_data : Status[PackageData]
+  search_entries : Status[Lazy[Array[SearchEntry]]]
   // The collapsed documents in the main view
   collapsed_docs : FoldedState
   // The sidebar items related to current package, including the sub-packages
@@ -48,6 +49,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
       collapsed_docs: FoldedState::new(),
       resource: Loading,
       search: None,
+      search_entries: Loading,
     },
   )
 }
@@ -103,7 +105,14 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
               .find_node(model.path)
               .unwrap()
               .to_document_items()
-            { ..model, sidebar_document, module_index: Success(module_index) }
+            {
+              ..model,
+              sidebar_document,
+              module_index: Success(module_index),
+              search_entries: Success(
+                Lazy::new(load_search_entries(module_index)),
+              ),
+            }
           }
           Err(msg) => {
             println(msg)
@@ -166,9 +175,9 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       (none(), { ..model, search, })
     }
     SearchFilterChanged(filter) => {
-      let results = match model.module_index {
+      let results = match model.search_entries {
         Failed => @util.Failed
-        Loading => Loading
+        Loading => @util.Loading
         Success(indices) => Success(search(indices, filter))
       }
       let search = Some({ filter, results })

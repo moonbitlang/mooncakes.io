@@ -19,65 +19,76 @@ priv struct SearchEntry {
 }
 
 ///|
-fn search(indices : ModuleIndex, filter : String) -> Array[SearchResult] {
+fn load_search_entries(indices : ModuleIndex) -> () -> Array[SearchEntry] {
+  fn() {
+    let results = []
+    indices
+    .iter()
+    .each(fn {
+      { package: Some({ path, traits, types, typealias_, values, misc }), .. } => {
+        results.push({
+          kind: "Package",
+          fullname: "@" + path,
+          href: "/docs/" + path,
+        })
+        traits.each(fn(x) {
+          results.push({
+            kind: "Trait",
+            fullname: "@" + path + "." + x.name,
+            href: "/docs/" + path + "#" + x.name,
+          })
+        })
+        types.each(fn(x) {
+          results.push({
+            kind: "Type",
+            fullname: "@" + path + "." + x.name,
+            href: "/docs/" + path + "#" + x.name,
+          })
+          x.methods.each(fn(meth) {
+            results.push({
+              kind: "Method",
+              fullname: "@" + path + "." + x.name + "::" + meth,
+              href: "/docs/" + path + "#" + x.name + "::" + meth,
+            })
+          })
+        })
+        typealias_.each(fn(x) {
+          results.push({
+            kind: "Typealias",
+            fullname: "@" + path + "." + x.name,
+            href: "/docs/" + path + "#" + x.name,
+          })
+        })
+        values.each(fn(x) {
+          results.push({
+            kind: "Value",
+            fullname: "@" + path + "." + x.name,
+            href: "/docs/" + path + "#" + x.name,
+          })
+        })
+        misc.each(fn(x) {
+          results.push({
+            kind: "Type",
+            fullname: "@" + path + "." + x.name,
+            href: "/docs/" + path + "#" + x.name,
+          })
+        })
+      }
+      _ => ()
+    })
+    results
+  }
+}
+
+///|
+fn search(
+  entries : Lazy[Array[SearchEntry]],
+  filter : String
+) -> Array[SearchResult] {
   if filter.is_empty() {
     return []
   }
-  let results = []
-  indices
-  .iter()
-  .each(fn {
-    { package: Some({ path, traits, types, typealias_, values, misc }), .. } => {
-      results.push({
-        kind: "Package",
-        fullname: "@" + path,
-        href: "/docs/" + path,
-      })
-      traits.each(fn(x) {
-        results.push({
-          kind: "Trait",
-          fullname: "@" + path + "." + x.name,
-          href: "/docs/" + path + "#" + x.name,
-        })
-      })
-      types.each(fn(x) {
-        results.push({
-          kind: "Type",
-          fullname: "@" + path + "." + x.name,
-          href: "/docs/" + path + "#" + x.name,
-        })
-        x.methods.each(fn(meth) {
-          results.push({
-            kind: "Method",
-            fullname: "@" + path + "." + x.name + "::" + meth,
-            href: "/docs/" + path + "#" + x.name + "::" + meth,
-          })
-        })
-      })
-      typealias_.each(fn(x) {
-        results.push({
-          kind: "Typealias",
-          fullname: "@" + path + "." + x.name,
-          href: "/docs/" + path + "#" + x.name,
-        })
-      })
-      values.each(fn(x) {
-        results.push({
-          kind: "Value",
-          fullname: "@" + path + "." + x.name,
-          href: "/docs/" + path + "#" + x.name,
-        })
-      })
-      misc.each(fn(x) {
-        results.push({
-          kind: "Type",
-          fullname: "@" + path + "." + x.name,
-          href: "/docs/" + path + "#" + x.name,
-        })
-      })
-    }
-    _ => ()
-  })
+  let results = entries.force()
   let query = @fuzzy_match.Query::new(filter)
   results
   .filter_map(fn(entry) {

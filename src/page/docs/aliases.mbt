@@ -32,3 +32,6 @@ typealias Set[A] = @immut/sorted_set.T[A]
 
 ///|
 typealias Map[K, V] = @immut/sorted_map.T[K, V]
+
+///|
+typealias @lazy.Lazy[A]

@@ -5,7 +5,8 @@
     "rami3l/cmark": "0.2.6",
     "Yoorkin/rabbit-tea": "0.6.10",
     "Yoorkin/prettyprinter": "0.4.1",
-    "illusory0x0/fuzzy_match": "0.1.0"
+    "illusory0x0/fuzzy_match": "0.1.0",
+    "CAIMEOX/lazy": "0.1.0"
   },
   "readme": "README.md",
   "repository": "",

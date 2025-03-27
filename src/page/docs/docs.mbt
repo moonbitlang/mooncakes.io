@@ -341,7 +341,7 @@ pub fn view(model : Model) -> Html[Msg] {
               @html.ul(
                 class="overflow-y-auto overflow-x-hidden h-full",
                 results.map(fn(x) {
-                  let color = match x.kind {
+                  let color = match x.entry.kind {
                     "Package" => "text-yellow-700"
                     "Trait" => "text-blue-700"
                     "Type" => "text-green-700"
@@ -352,15 +352,23 @@ pub fn view(model : Model) -> Html[Msg] {
                   @html.li(
                     class="border-t px-4 py-2 bg-white hover:bg-gray-100",
                     [
-                      a(href=x.href, class="grid grid-cols-[6em_2fr_1fr] ", [
-                        span(class="font-thin text-base \{color}", [
-                          text(x.kind),
-                        ]),
-                        span(class="text-gray-800", [text(x.name)]),
+                      a(href=x.entry.href, class="grid grid-cols-[1fr_6em] ", [
                         span(
-                          class="font-roboto text-sm text-gray-400 flex items-center justify-end",
-                          [text(x.package)],
+                          class="font-sans",
+                          x.matching.map(fn {
+                            (true, str) =>
+                              span(class="text-moonbit font-semibold", [
+                                text(str.to_string()),
+                              ])
+                            (false, str) =>
+                              span(class="text-gray-600", [
+                                text(str.to_string()),
+                              ])
+                          }),
                         ),
+                        span(class="font-thin text-base \{color}", [
+                          text(x.entry.kind),
+                        ]),
                       ]),
                     ],
                   )

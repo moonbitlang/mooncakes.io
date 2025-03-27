@@ -104,7 +104,7 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
 
 ///|
 fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
-  let { docstring, signature, methods, impls, name: _, loc: _ } = doc
+  let { docstring, signature, methods, impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature)
   let content = div(
@@ -114,12 +114,12 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
       ..impls.map(fn(x) { impl_doc(x, folded~) }),
     ],
   )
-  document_item(signature, content, collapsed=folded, id~)
+  document_item(signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|
 fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
-  let { docstring, signature, impls, default_impls, name: _, loc: _ } = doc
+  let { docstring, signature, impls, default_impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature)
   let content = div(
@@ -131,16 +131,16 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
       ..impls.map(fn(x) { impl_doc(x, folded~) }),
     ],
   )
-  document_item(signature, content, collapsed=folded, id~)
+  document_item(signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|
 fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> Html[Msg] {
-  let { name: _, docstring, signature, loc: _ } = doc
+  let { name: _, docstring, signature, loc } = doc
   let signature = signature_view(signature)
   let content = @view.markdown(docstring, small_heading=true)
   let id = doc.get_id()
-  document_item(signature, content, collapsed=folded, id~)
+  document_item(signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|
@@ -149,7 +149,8 @@ fn document_item(
   content : Html[Msg],
   collapsed~ : FoldedState,
   id~ : String,
-  tight~ : Bool = false
+  tight~ : Bool = false,
+  loc? : Loc
 ) -> Html[Msg] {
   let (content_style, icon) = if collapsed.contains(id) {
     ("hidden", @config.SECTION_CLOSE)
@@ -157,16 +158,32 @@ fn document_item(
     ("", @config.SECTION_OPEN)
   }
   let header_style = if tight { "py-1" } else { "py-2" }
-  let button = div(
-    class="w-8 h-8 hover:bg-gray-200 rounded-lg absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex items-center justify-center group-hover:visible invisible",
-    click=ToggleDocDetail(id),
-    [img(src=icon, class="size-4", [])],
-  )
+  let buttons = {
+    let source_btn = match loc {
+      None => nothing()
+      Some(loc) =>
+        a(
+          href="/api/\{loc.path}/\{loc.file}.html#\{loc.line}",
+          class="text-xs text-gray-500 hover:text-gray-700 transition-colors",
+          escape=true,
+          [text("source")],
+        )
+    }
+    let collapse_btn = div(
+      class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
+      click=ToggleDocDetail(id),
+      [img(src=icon, class="size-4", [])],
+    )
+    div(
+      class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center justify-center group-hover:visible invisible",
+      [source_btn, collapse_btn],
+    )
+  }
   div(class="border-t border-gray-300 py-2 group", [
     div(
       class="pl-4 py-2 pr-2 bg-gray-100 rounded-lg relative w-full \{header_style}",
       id~,
-      [signature, button],
+      [signature, buttons],
     ),
     div(class="pl-4 pt-2 \{content_style}", [content]),
   ])
@@ -178,11 +195,11 @@ fn value_doc(
   folded~ : FoldedState,
   type_id? : String
 ) -> Html[Msg] {
-  let { name: _, docstring, signature, loc: _ } = doc
+  let { name: _, docstring, signature, loc } = doc
   let id = type_id.map(fn(x) { "\{x}::\{doc.get_id()}" }).or(doc.get_id())
   let signature = signature_view(signature)
   let content = @view.markdown(docstring, small_heading=true)
-  document_item(signature, content, collapsed=folded, id~)
+  document_item(signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|

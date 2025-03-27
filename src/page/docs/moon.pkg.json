@@ -10,6 +10,7 @@
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/view/tree",
-    "moonbitlang/mooncakes/util"
+    "moonbitlang/mooncakes/util",
+    "illusory0x0/fuzzy_match"
   ]
 }

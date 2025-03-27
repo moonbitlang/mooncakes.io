@@ -27,6 +27,7 @@ priv enum State {
   LexQualIdent(Array[String], List[Char])
   LexOp(List[Char])
   LexString(List[Char])
+  LexChar(List[Char])
   LexMultiString(List[Char])
   LexNumber(List[Char])
   LexLinkHref(List[Char])
@@ -100,10 +101,21 @@ pub fn parse(signature : String) -> List[CodeSpan] {
       continue LexString(Cons('"', Cons('\\', content))), s, acc
     LexString(content), ['"', .. s], acc => {
       let content = String::from_iter(content.rev().iter())
-      continue LexStart, s, Cons(StringLit(content), acc)
+      continue LexStart, s, Cons(StringLit("\"" + content + "\""), acc)
     }
     LexString(content), [c, .. s], acc =>
       continue LexString(Cons(c, content)), s, acc
+
+    // strings
+    LexStart, ['\'', .. s], acc => continue LexChar(Nil), s, acc
+    LexChar(content), [.. "\\\'", .. s], acc =>
+      continue LexChar(Cons('\'', Cons('\\', content))), s, acc
+    LexChar(content), ['\'', .. s], acc => {
+      let content = String::from_iter(content.rev().iter())
+      continue LexStart, s, Cons(CharLit("'" + content + "'"), acc)
+    }
+    LexChar(content), [c, .. s], acc =>
+      continue LexChar(Cons(c, content)), s, acc
 
     // multiline string
     // LexStart, [.. "#|", .. s], acc => continue LexMultiString(Nil), s, acc
@@ -115,14 +127,6 @@ pub fn parse(signature : String) -> List[CodeSpan] {
     }
     LexMultiString(content), [c, .. s], acc =>
       continue LexMultiString(Cons(c, content)), s, acc
-
-    // char
-    LexStart, ['\'', c, '\'', .. s], acc =>
-      continue LexStart, s, Cons(CharLit(c.to_string()), acc)
-    LexStart, [.. "'\\", c, '\'', .. s], acc =>
-      continue LexStart,
-        s,
-        Cons(CharLit("'\\" + String::from_array([c]) + "'"), acc)
 
     // identifiers
     LexStart, ['A'..='Z' | 'a'..='z' | '_' as c, .. s], acc =>

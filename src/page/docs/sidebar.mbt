@@ -65,7 +65,7 @@ fn IndexNode::to_document_items(
   self : IndexNode
 ) -> Array[@tree.Tree[ItemTarget]] {
   fn collect_packages(node : IndexNode) {
-    match node.package {
+    match node.pkg {
       None if not(node.childs.is_empty()) => {
         let childs = node.childs
           .elems()
@@ -86,7 +86,7 @@ fn IndexNode::to_document_items(
     [] => []
     xs => [@tree.Node(id=Section("packages-section"), "Sub Packages", xs)]
   }
-  let symbols = match self.package {
+  let symbols = match self.pkg {
     None => []
     Some(pkg) => pkg.to_document_items()
   }
@@ -106,8 +106,8 @@ priv enum ItemTarget {
 } derive(Compare, Eq, Show)
 
 ///|
-fn PackageIndex::to_document_items(
-  self : PackageIndex
+fn PkgIndex::to_document_items(
+  self : PkgIndex
 ) -> Array[@tree.Tree[ItemTarget]] {
   let { traits, types, typealias_, values, misc, path: _ } = self
   let values = values.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) }) +

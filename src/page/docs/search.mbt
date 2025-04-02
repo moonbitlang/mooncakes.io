@@ -39,7 +39,7 @@ fn load_search_entries(indices : ModuleIndex) -> () -> Array[SearchEntry] {
     indices
     .iter()
     .each(fn {
-      { package: Some({ path, traits, types, typealias_, values, misc }), .. } => {
+      { pkg: Some({ path, traits, types, typealias_, values, misc }), .. } => {
         results.push({
           kind: "Package",
           fullname: "@" + path,

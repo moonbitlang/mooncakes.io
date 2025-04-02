@@ -121,7 +121,7 @@ fn banner() -> Html[Msg] {
             text("Browse, search and share package and documentation"),
           ]),
         ]),
-        div(class="flex mt-4 gap-4 flex justify-center lg:justify-start", [
+        div(class="flex mt-4 gap-4 justify-center lg:justify-start", [
           button(
             "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
             "bg-yellow-600 text-white",

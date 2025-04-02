@@ -1,4 +1,4 @@
-package moonbitlang/mooncakes/util
+package "moonbitlang/mooncakes/util"
 
 // Values
 

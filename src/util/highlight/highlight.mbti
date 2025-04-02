@@ -1,6 +1,8 @@
-package moonbitlang/mooncakes/util/highlight
+package "moonbitlang/mooncakes/util/highlight"
 
-alias @moonbitlang/core/immut/list as @list
+import(
+  "moonbitlang/core/immut/list"
+)
 
 // Values
 fn parse(String) -> @list.T[CodeSpan]
@@ -10,7 +12,7 @@ pub(all) enum CodeSpan {
   Unknown(Char)
   Keyword(String)
   Symbol(String)
-  Link(String, Array[CodeSpan])
+  Link(href~ : String, Array[CodeSpan])
   UIdent(String)
   LIdent(String)
   QualIdent(Array[String], String)

@@ -1,8 +1,10 @@
-package moonbitlang/mooncakes/page/home
+package "moonbitlang/mooncakes/page/home"
 
-alias @Yoorkin/rabbit-tea/browser as @browser
-alias @Yoorkin/rabbit-tea/html as @html
-alias @moonbitlang/mooncakes/util as @util
+import(
+  "Yoorkin/rabbit-tea/browser"
+  "Yoorkin/rabbit-tea/html"
+  "moonbitlang/mooncakes/util"
+)
 
 // Values
 fn filter_indices(String, Indices) -> Array[ModuleIndex]

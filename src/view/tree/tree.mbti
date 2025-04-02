@@ -1,7 +1,9 @@
-package moonbitlang/mooncakes/view/tree
+package "moonbitlang/mooncakes/view/tree"
 
-alias @Yoorkin/rabbit-tea/html as @html
-alias @moonbitlang/core/immut/sorted_set as @sorted_set
+import(
+  "Yoorkin/rabbit-tea/html"
+  "moonbitlang/core/immut/sorted_set"
+)
 
 // Values
 fn get_name[Id](Tree[Id]) -> String
@@ -10,8 +12,8 @@ fn view[M, Id : Compare](toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sort
 
 // Types and methods
 pub(all) enum Tree[Id] {
-  Item(Id, String)
-  Node(Id, String, Array[Tree[Id]])
+  Item(id~ : Id, String)
+  Node(id~ : Id, String, Array[Tree[Id]])
 }
 impl Tree {
   get_name[Id](Self[Id]) -> String

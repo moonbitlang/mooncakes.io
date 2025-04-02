@@ -64,7 +64,7 @@ fn route(url : @url.Url) -> (Command[Message], Model) {
   println(paths)
   match paths {
     ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
-    ["api", ..] => (@browser.load(url.to_string()), Redirect)
+    ["assets", ..] => (@browser.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
       module_path.iter().join("/")
       |> @docs.load(url.fragment)

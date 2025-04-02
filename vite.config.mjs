@@ -43,7 +43,7 @@ const testAssetsServer = {
     name: 'static',
     configureServer(server) {
         server.middlewares.use((req, res, next) => {
-            if (req.url.startsWith('/api')) {
+            if (req.url.startsWith('/assets')) {
                 const p = path.join('test', req.url)
                 try {
                     const content = fs.readFileSync(p)

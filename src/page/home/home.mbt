@@ -47,7 +47,7 @@ pub(all) struct ModuleIndex {
 pub fn load() -> (Command[Msg], Model) {
   (
     @http.get(
-      "/api/modules.json",
+      "/assets/modules.json",
       expect=Json(Msg::GotModuleIndices, decode_module_indices),
     ),
     { indices: Loading, filter: "", filtered_modules: [] },

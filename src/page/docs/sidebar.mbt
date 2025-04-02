@@ -35,7 +35,7 @@ fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
         item_button(
           a(
             class="w-full",
-            href="/api/\{package_path}/\{x}.html",
+            href="/assets/\{package_path}/\{x}.html",
             escape=true,
             [text(x)],
           ),

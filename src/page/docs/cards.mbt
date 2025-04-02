@@ -177,7 +177,7 @@ fn document_item(
       None => nothing()
       Some(loc) =>
         a(
-          href="/api/\{loc.path}/\{loc.file}.html#\{loc.line}",
+          href="/assets/\{loc.path}/\{loc.file}.html#\{loc.line}",
           class="text-xs text-gray-500 hover:text-gray-700 transition-colors",
           escape=true,
           [text("source")],

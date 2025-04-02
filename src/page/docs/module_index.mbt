@@ -15,12 +15,12 @@
 ///|
 priv struct IndexNode {
   name : String
-  package : PackageIndex?
+  pkg : PkgIndex?
   childs : Map[String, IndexNode]
 } derive(Show)
 
 ///|
-priv struct PackageIndex {
+priv struct PkgIndex {
   path : String
   traits : Array[TraitIndex]
   types : Array[TypeIndex]
@@ -35,7 +35,7 @@ priv type ModuleIndex IndexNode derive(Show)
 ///|
 fn IndexNode::iter(self : IndexNode) -> Iter[IndexNode] {
   Iter::new(fn(yield_) {
-    match self.package {
+    match self.pkg {
       Some(_) => if yield_(self) == IterEnd { return IterEnd }
       None => ()
     }
@@ -264,7 +264,7 @@ fn map_with_error[A, B, E : Error](
 }
 
 ///|
-fn decode_package_index(json : Json) -> PackageIndex!Error {
+fn decode_package_index(json : Json) -> PkgIndex!Error {
   match json {
     {
       "traits": Array(traits),
@@ -289,16 +289,16 @@ fn decode_package_index(json : Json) -> PackageIndex!Error {
 ///|
 fn decode_index_node(json : Json) -> IndexNode!Error {
   match json {
-    { "name": String(name), "package": package, "childs": Array(childs), .. } => {
+    { "name": String(name), "package": pkg, "childs": Array(childs), .. } => {
       let childs = map_with_error!(childs, decode_index_node).map(fn(x) {
           (x.name, x)
         })
         |> @immut/sorted_map.from_array
-      let package = match package {
+      let pkg = match pkg {
         Null => None
         obj => Some(decode_package_index!(obj))
       }
-      { name, package, childs }
+      { name, pkg, childs }
     }
     _ => fail!("invalid json in index node")
   }

@@ -39,7 +39,7 @@ pub fn code_block[M](moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
             class="absolute bottom-[120%] inset-0 flex items-center justify-center ",
             [
               div(
-                class="z-10 -translate-y-2/3 inline-block group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
+                class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
                 [
                   text("@" + path.join("/") + "."),
                   span(class="text-blue-900", [text(name)]),

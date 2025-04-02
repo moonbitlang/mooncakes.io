@@ -34,7 +34,7 @@ pub fn document_not_available[M](path : String) -> Html[M] {
   div(class="flex flex-col items-center justify-center h-full w-full", [
     pre([code([text(@config.dead_rabbit)])]),
     div(class="text-gray-900 m-10", [
-      h1(class="text-base text-lg mb-2 font-semibold text-center", [
+      h1(class="text-lg mb-2 font-semibold text-center", [
         text("Document for \{path} is not available"),
       ]),
       ul(class="list-disc text-gray-600", [

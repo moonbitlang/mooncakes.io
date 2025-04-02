@@ -36,7 +36,7 @@ extern "js" fn get_relative_time(date : String) -> String =
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   div(
-    class="p-4 h-50 flex outline-gray-50 bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
+    class="p-4 h-50 flex bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
     click=ClickModuleCard(mod.path),
     [
       div(class="flex flex-row text-lg font-semibold", [
@@ -120,7 +120,7 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
       h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
         text("SEARCH RESULT"),
       ]),
-      div(class="grid grid-cols-1 grid-cols-1", module_cards),
+      div(class="grid grid-cols-1", module_cards),
     ]),
   ])
 }

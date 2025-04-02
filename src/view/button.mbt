@@ -48,8 +48,18 @@ pub fn navbar[M]() -> Html[M] {
 
 ///|
 pub fn footer[M]() -> Html[M] {
+  let class = "hover:text-mooncake2 transition-colors"
   div(
     class="h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex justify-center gap-8",
-    [p([text("© 2025 mooncakes.io")]), p([text("Powered by MoonBit")])],
+    [
+      p([text("Powered by MoonBit")]),
+      a(href="https://github.com/moonbitlang/mooncakes.io", class~, [
+        text("Site source"),
+      ]),
+      a(href="https://github.com/moonbitlang/mooncakes.io/issues/new", class~, [
+        text("Report issue"),
+      ]),
+      p([text("© 2025 mooncakes.io")]),
+    ],
   )
 }

@@ -128,11 +128,12 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
 ///|
 fn navbar() -> Html[Msg] {
   div(class="w-full flex justify-center", [
-    div(class="h-14 w-4/5 flex justify-between items-center", [
+    div(class="min-h-14 w-4/5 flex flex-col sm:flex-row justify-between items-center", [
       div(class="font-title select-none p-4", [
-        h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
+        // use whitespace-nowrap to prevent logo from wrapping
+        h1(class="whitespace-nowrap text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
       ]),
-      div(class="justify-center my-2 w-1/2", [
+      div(class="justify-center my-2 w-full max-w-72", [
         input(
           input_type=Text,
           placeholder="Search modules ...",

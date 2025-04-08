@@ -359,11 +359,12 @@ pub fn view(model : Model) -> Html[Msg] {
           [],
         ),
         div(class="overflow-clip w-4/5 max-w-96 z-20 h-[80%] rounded", [
+          div(class="fixed inset-0", click=ToggleSearchPanel(false), []),
           @html.input(
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            class="border-b h-12 px-4 p-2 outline-none text-base w-full \{input_style}",
+            class="relative border-b h-12 px-4 p-2 outline-none text-base w-full \{input_style}",
             input=Msg::SearchFilterChanged,
           ),
           match search.results {
@@ -371,7 +372,7 @@ pub fn view(model : Model) -> Html[Msg] {
             Failed => text("load indices failed")
             Success(results) =>
               @html.ul(
-                class="overflow-y-auto overflow-x-hidden h-full",
+                class="overflow-y-auto overflow-x-hidden",
                 results.map(fn(x) {
                   let color = match x.entry.kind {
                     "Package" => "text-yellow-700"

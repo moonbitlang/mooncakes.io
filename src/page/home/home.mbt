@@ -73,7 +73,7 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       (none(), { ..model, filter, filtered_modules })
     }
     ClickModuleCard(module_name) =>
-      (@browser.push_url("/docs/" + module_name), model)
+      (@nav.push_url("/docs/" + module_name), model)
   }
 }
 

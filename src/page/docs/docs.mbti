@@ -1,14 +1,14 @@
 package "moonbitlang/mooncakes/page/docs"
 
 import(
-  "Yoorkin/rabbit-tea/browser"
+  "Yoorkin/rabbit-tea/cmd"
   "Yoorkin/rabbit-tea/html"
 )
 
 // Values
-fn load(String, String?) -> (@browser.Command[Msg], Model)
+fn load(String, String?) -> (@cmd.Cmd[Msg], Model)
 
-fn update(Msg, Model) -> (@browser.Command[Msg], Model)
+fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
 fn view(Model) -> @html.T[Msg]
 

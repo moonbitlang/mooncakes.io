@@ -1,7 +1,7 @@
 package "moonbitlang/mooncakes/page/home"
 
 import(
-  "Yoorkin/rabbit-tea/browser"
+  "Yoorkin/rabbit-tea/cmd"
   "Yoorkin/rabbit-tea/html"
   "moonbitlang/mooncakes/util"
 )
@@ -9,9 +9,9 @@ import(
 // Values
 fn filter_indices(String, Indices) -> Array[ModuleIndex]
 
-fn load() -> (@browser.Command[Msg], Model)
+fn load() -> (@cmd.Cmd[Msg], Model)
 
-fn update(Msg, Model) -> (@browser.Command[Msg], Model)
+fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
 fn view(Model) -> @html.T[Msg]
 

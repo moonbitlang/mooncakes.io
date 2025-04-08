@@ -150,7 +150,7 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
         }
         Err(_) => { ..model, package_data: Failed }
       }
-      (@browser.scroll_to(model.fragment), model)
+      (@nav.scroll_to(model.fragment), model)
     }
     ToggleDocDetail(id) => {
       let folded_items = if model.collapsed_docs.contains(id) {
@@ -176,9 +176,8 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
     }
     ClickSidebarItem(id) =>
       match id {
-        Package(path) =>
-          (@browser.push_url("/docs/" + path), { ..model, path, })
-        Symbol(id) | Section(id) => (@browser.scroll_to(id), model)
+        Package(path) => (@nav.push_url("/docs/" + path), { ..model, path, })
+        Symbol(id) | Section(id) => (@nav.scroll_to(id), model)
       }
     ToggleSearchPanel(open) => {
       let search = if open {

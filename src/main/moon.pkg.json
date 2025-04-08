@@ -7,7 +7,8 @@
     },
     "Yoorkin/rabbit-tea/url",
     "Yoorkin/rabbit-tea/html",
-    "Yoorkin/rabbit-tea/browser",
+    "Yoorkin/rabbit-tea/nav",
+    "Yoorkin/rabbit-tea/cmd",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/page/home",
     "moonbitlang/mooncakes/page/docs"

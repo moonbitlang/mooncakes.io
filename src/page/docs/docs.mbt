@@ -361,7 +361,7 @@ pub fn view(model : Model) -> Html[Msg] {
           click=ToggleSearchPanel(false),
           [],
         ),
-        div(class="overflow-clip w-1/2 z-20 h-[80%] rounded", [
+        div(class="overflow-clip w-4/5 max-w-96 z-20 h-[80%] rounded", [
           @html.input(
             input_type=Text,
             value=search.filter,

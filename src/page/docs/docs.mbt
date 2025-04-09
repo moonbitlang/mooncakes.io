@@ -440,8 +440,7 @@ pub fn view(model : Model) -> Html[Msg] {
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
     click=ToggleSidebarFab,
     [
-      // TODO: icon here
-      text("="),
+      img(class="size-5", src=@config.HAMBURGER_BUTTON, []),
     ],
   )
   div(

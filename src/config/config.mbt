@@ -40,6 +40,7 @@ pub const SEARCH = "/search.svg"
 ///|
 pub const SHARE = "/share.svg"
 
+///|
 pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
 
 ///|

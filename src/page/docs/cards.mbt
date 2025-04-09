@@ -321,8 +321,8 @@ fn document(
     }
     _ => []
   }
-  div(class="contents-center flex flex-col pl-6 p-4 pr-16 pb-20 w-full", [
-    readme,
-    div(class="pl-6", doc_list),
-  ])
+  div(
+    class="contents-center flex flex-col pl-2 sm:pl-6 p-4 pr-2 sm:pr-16 pb-20 w-full",
+    [readme, div(class="pl-6", doc_list)],
+  )
 }

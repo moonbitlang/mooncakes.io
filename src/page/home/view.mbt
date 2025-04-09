@@ -128,21 +128,27 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
 ///|
 fn navbar() -> Html[Msg] {
   div(class="w-full flex justify-center", [
-    div(class="h-14 w-4/5 flex justify-between items-center", [
-      div(class="font-title select-none p-4", [
-        h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
-      ]),
-      div(class="justify-center my-2 w-1/2", [
-        input(
-          input_type=Text,
-          placeholder="Search modules ...",
-          class="border rounded-full px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
-          input=Msg::FilterChanged,
-        ),
-      ]),
-      div(class="text-gray-700 font-semibold invisible", [
-        a(href="", [text("Browse All Module")]),
-      ]),
-    ]),
+    div(
+      class="min-h-14 w-4/5 flex flex-col sm:flex-row justify-between items-center",
+      [
+        div(class="font-title select-none p-4", [
+          // use whitespace-nowrap to prevent logo from wrapping
+          h1(class="whitespace-nowrap text-gray-700 font-semibold", [
+            text("🥮 mooncakes.io"),
+          ]),
+        ]),
+        div(class="justify-center my-2 w-full max-w-72", [
+          input(
+            input_type=Text,
+            placeholder="Search modules ...",
+            class="border rounded-full px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
+            input=Msg::FilterChanged,
+          ),
+        ]),
+        div(class="text-gray-700 font-semibold invisible", [
+          a(href="", [text("Browse All Module")]),
+        ]),
+      ],
+    ),
   ])
 }

@@ -24,6 +24,7 @@ enum Msg {
   ClickSidebarItem(ItemTarget)
   ToggleSearchPanel(Bool)
   SearchFilterChanged(String)
+  ToggleSidebarFab
 }
 
 ///|
@@ -42,6 +43,8 @@ struct Model {
   sidebar_collapsed : Set[ItemTarget]
   // The current expanded tab in the sidebar
   sidebar_tab : String
+  // The sidebar fab button
+  sidebar_fab : Bool
   search : SearchModel?
 }
 
@@ -59,6 +62,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),
       sidebar_tab: "Documentation",
+      sidebar_fab: false,
       package_data: Loading,
       collapsed_docs: FoldedState::new(),
       resource: Loading,
@@ -174,11 +178,16 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       }
       (none(), { ..model, sidebar_collapsed, })
     }
-    ClickSidebarItem(id) =>
+    ClickSidebarItem(id) => {
+      let model = {
+        ..model,
+        sidebar_fab: false,
+      }
       match id {
         Package(path) => (@nav.push_url("/docs/" + path), { ..model, path, })
         Symbol(id) | Section(id) => (@nav.scroll_to(id), model)
       }
+    }
     ToggleSearchPanel(open) => {
       let search = if open {
         Some({ filter: "", results: Success([]) })
@@ -195,6 +204,10 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       }
       let search = Some({ filter, results })
       (none(), { ..model, search, })
+    }
+    ToggleSidebarFab => {
+      let sidebar_fab = not(model.sidebar_fab)
+      (none(), { ..model, sidebar_fab, })
     }
   }
 }
@@ -303,7 +316,7 @@ pub fn view(model : Model) -> Html[Msg] {
     ) => source_files
     _ => []
   }
-  let sidebar = div(class="w-full h-full flex justify-end", [
+  let sidebar_ele = div(class="w-full h-full flex justify-end", [
     div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
       sidebar(
         model.sidebar_document,
@@ -348,7 +361,7 @@ pub fn view(model : Model) -> Html[Msg] {
           click=ToggleSearchPanel(false),
           [],
         ),
-        div(class="overflow-clip w-1/2 z-20 h-[80%] rounded", [
+        div(class="overflow-clip w-4/5 max-w-96 z-20 h-[80%] rounded", [
           @html.input(
             input_type=Text,
             value=search.filter,
@@ -401,8 +414,38 @@ pub fn view(model : Model) -> Html[Msg] {
       ])
     }
   }
+  let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
+  let sidebar_dialog = div(
+    class="fixed inset-0 justify-center items-center",
+    style=["display: " + show_sidebar_dialog],
+    [
+      div(
+        class="fixed inset-0 bg-black bg-opacity-40 z-10",
+        style=["display: " + show_sidebar_dialog],
+        click=ToggleSidebarFab,
+        [],
+      ),
+      div(class="bg-white w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20", [
+        sidebar(
+          model.sidebar_document,
+          source_files,
+          model.sidebar_tab,
+          model.sidebar_collapsed,
+          package_path=model.path,
+        ),
+      ]),
+    ],
+  )
+  let fab = @html.button(
+    class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
+    click=ToggleSidebarFab,
+    [
+      // TODO: icon here
+      text("="),
+    ],
+  )
   div(
-    class="grid grid-rows-[3em_3em_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
+    class="grid grid-rows-[3em_0_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [
       div(
         class="bg-[#f7f7f7] col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
@@ -414,13 +457,15 @@ pub fn view(model : Model) -> Html[Msg] {
       ),
       div(
         class="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
-        [sidebar],
+        [sidebar_ele],
       ),
       div(
         class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [main],
       ),
       search_panel,
+      sidebar_dialog,
+      fab,
     ],
   )
 }

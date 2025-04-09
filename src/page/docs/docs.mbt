@@ -439,9 +439,7 @@ pub fn view(model : Model) -> Html[Msg] {
   let fab = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
     click=ToggleSidebarFab,
-    [
-      img(class="size-5", src=@config.HAMBURGER_BUTTON, []),
-    ],
+    [img(class="size-5", src=@config.HAMBURGER_BUTTON, [])],
   )
   div(
     class="grid grid-rows-[3em_0_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",

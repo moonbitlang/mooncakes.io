@@ -372,7 +372,7 @@ pub fn view(model : Model) -> Html[Msg] {
             Failed => text("load indices failed")
             Success(results) =>
               @html.ul(
-                class="overflow-y-auto overflow-x-hidden",
+                class="relative overflow-y-auto overflow-x-hidden",
                 results.map(fn(x) {
                   let color = match x.entry.kind {
                     "Package" => "text-yellow-700"

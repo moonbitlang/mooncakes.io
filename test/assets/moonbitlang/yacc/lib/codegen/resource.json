@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/codegen",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/lib/codegen/package_data.json",
-  "source_files": [ "source_map.mbt", "trait.mbt", "types.mbt" ]
-}

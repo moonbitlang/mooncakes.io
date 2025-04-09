@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "tests/calc_external_tokens_test",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/tests/calc_external_tokens_test/package_data.json",
-  "source_files": [ "calc.mbt", "calc_tokens.mbt" ]
-}

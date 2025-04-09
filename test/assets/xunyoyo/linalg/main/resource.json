@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "main",
-  "module_path": "xunyoyo/linalg",
-  "readme_content": "",
-  "package_data": "xunyoyo/linalg/main/package_data.json",
-  "source_files": [ "main.mbt" ]
-}

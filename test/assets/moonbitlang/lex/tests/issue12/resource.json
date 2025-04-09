@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "tests/issue12",
-  "module_path": "moonbitlang/lex",
-  "readme_content": "",
-  "package_data": "moonbitlang/lex/tests/issue12/package_data.json",
-  "source_files": [ "issue12.mbt" ]
-}

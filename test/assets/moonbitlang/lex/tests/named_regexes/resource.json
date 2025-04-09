@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "tests/named_regexes",
-  "module_path": "moonbitlang/lex",
-  "readme_content": "",
-  "package_data": "moonbitlang/lex/tests/named_regexes/package_data.json",
-  "source_files": [ "named_regexes.mbt" ]
-}

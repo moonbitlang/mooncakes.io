@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/util/bitset",
-  "module_path": "moonbitlang/lex",
-  "readme_content": "",
-  "package_data": "moonbitlang/lex/lib/util/bitset/package_data.json",
-  "source_files": [ "bitset.mbt" ]
-}

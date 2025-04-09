@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "main",
-  "module_path": "xunyoyo/permutation",
-  "readme_content": "",
-  "package_data": "xunyoyo/permutation/main/package_data.json",
-  "source_files": [ "main.mbt" ]
-}

@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "int16",
-  "module_path": "moonbitlang/core",
-  "readme_content": "",
-  "package_data": "moonbitlang/core/int16/package_data.json",
-  "source_files": [ "int16.mbt" ]
-}

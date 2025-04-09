@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/codegen",
-  "module_path": "moonbitlang/lex",
-  "readme_content": "",
-  "package_data": "moonbitlang/lex/lib/codegen/package_data.json",
-  "source_files": [ "codegen.mbt", "runtime.mbt", "typealias.mbt" ]
-}

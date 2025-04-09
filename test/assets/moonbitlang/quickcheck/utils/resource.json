@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "utils",
-  "module_path": "moonbitlang/quickcheck",
-  "readme_content": "",
-  "package_data": "moonbitlang/quickcheck/utils/package_data.json",
-  "source_files": [ "common.mbt" ]
-}

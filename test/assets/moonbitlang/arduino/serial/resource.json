@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "serial",
-  "module_path": "moonbitlang/arduino",
-  "readme_content": "",
-  "package_data": "moonbitlang/arduino/serial/package_data.json",
-  "source_files": [ "serial.mbt" ]
-}

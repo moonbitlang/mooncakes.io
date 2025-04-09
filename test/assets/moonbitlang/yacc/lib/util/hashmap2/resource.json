@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/util/hashmap2",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/lib/util/hashmap2/package_data.json",
-  "source_files": [ "hashmap2.mbt" ]
-}

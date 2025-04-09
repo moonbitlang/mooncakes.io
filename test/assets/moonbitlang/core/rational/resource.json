@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "rational",
-  "module_path": "moonbitlang/core",
-  "readme_content": "# Rational\n\nThe `Rational` type represents a rational number, which is a number that can be expressed as a fraction `a/b` where `a` and `b` are integers and `b` is not zero.\n\n# Usage\n\n## Arithmetic Operations\n\nThe `Rational` type supports the following arithmetic operations:\n\n```moonbit\nlet a = @rational.new(1L, 2L)\nlet b = @rational.new(1L, 3L)\nlet c = a + b // 5/6\nlet d = a - b // 1/6\nlet e = a * b // 1/6\nlet f = a / b // 3/2\nlet g = -a // -1/2\nlet h = a.reciprocal() // 2/1\nlet i = g.abs() // 1/2\n```\n\n## Comparison Operations\n\nThe `Rational` type supports the following comparison operations:\n\n```moonbit\nlet a = @rational.new(1L, 2L)\nlet b = @raitonal.new(1L, 3L)\nlet c = a == b // false\nlet d = a != b // true\nlet e = a < b // false\nlet f = a <= b // false\nlet g = a > b // true\nlet h = a >= b // true\nlet i = a.compare(b) // -1\n```\n\n## Integer Operations\n\nThe `Rational` type supports the following integer operations:\n\n```moonbit\nlet a = @rational.new(1L, 2L)\nlet c = a.floor() // 0\nlet d = a.ceil() // 1\nlet b = a.fract() // 1\nlet e = a.trunc() // 0\nlet h = a.is_integer() // false\n```\n\n## Double Operations\n\nThe `Rational` type supports the following double operations:\n\n```moonbit\nlet a = @rational.new(1L, 2L)\nlet b = a.to_double() // 0.5\nlet c = @rational.from_double(0.5) // 1/2\n```\n\n## String Operations\n\nThe `Rational` type supports the following string operations:\n\n```moonbit\nlet a = @rational.new(1L, 2L)\nlet b = a.to_string() // \"1/2\"\n```\n\n",
-  "package_data": "moonbitlang/core/rational/package_data.json",
-  "source_files": [ "deprecated.mbt", "rational.mbt" ]
-}

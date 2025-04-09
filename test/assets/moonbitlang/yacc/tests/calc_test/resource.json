@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "tests/calc_test",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/tests/calc_test/package_data.json",
-  "source_files": [ "calc.mbt" ]
-}

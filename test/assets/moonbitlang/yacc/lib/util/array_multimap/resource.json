@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/util/array_multimap",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/lib/util/array_multimap/package_data.json",
-  "source_files": [ "array_multimap.mbt" ]
-}

@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/parser/test",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/lib/parser/test/package_data.json",
-  "source_files": [ "parser_spec_src.mbt", "test.mbt" ]
-}

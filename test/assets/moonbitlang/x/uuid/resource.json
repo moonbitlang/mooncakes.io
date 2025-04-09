@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "uuid",
-  "module_path": "moonbitlang/x",
-  "readme_content": "# Moonbit/Core UUID\n\n## Overview\n\nThe `@uuid` package provides an implementation of the Universally Unique\nIDentifier per RFC 4122.\n\nCurrently, `@uuid` does not assume any random generation; you'll have to bring\nyour own random bytes to construct UUIDs.\n\n## Usage\n\nConstruct a version 4 UUID:\n\n```moonbit\nlet u = @uuid.from_hex(\"ddf99703-742f-7505-4c54-df36a9c243fe\").as_version(@uuid.V4)\n```\n\nYou can then use it as a key in mappings as it's immutable and implemented\nHash, Eq (and Compare for b-tree).\n",
-  "package_data": "moonbitlang/x/uuid/package_data.json",
-  "source_files": [ "ops.mbt", "uuid.mbt", "variant.mbt" ]
-}

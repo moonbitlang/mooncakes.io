@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/prev_permutation",
-  "module_path": "xunyoyo/permutation",
-  "readme_content": "# Prev Permutation\n\n这是一个用Moonbit语言实现的`prev_permutation`函数，用于生成数组的上一个字典序排列。\n\n## 功能\n\n`prev_permutation`函数生成给定数组的上一个字典序排列。如果当前排列是第一个排列，则返回`false`并将数组重新排列为最后一个排列（降序）。\n\n## 示例\n\n```moonbit\nfn main {\n  let a = [1, 2, 3]\n  let has_prev = prev_permutation(a)\n  println(a) // 输出: [1, 2, 3]\n  println(has_prev) // 输出: false\n}\n```",
-  "package_data": "xunyoyo/permutation/lib/prev_permutation/package_data.json",
-  "source_files": [ "prev_permutaion.mbt" ]
-}

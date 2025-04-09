@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lazy",
-  "module_path": "moonbitlang/quickcheck",
-  "readme_content": "",
-  "package_data": "moonbitlang/quickcheck/lazy/package_data.json",
-  "source_files": [ "lazy.mbt", "lazy_list.mbt" ]
-}

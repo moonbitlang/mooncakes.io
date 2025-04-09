@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "fs",
-  "module_path": "moonbitlang/x",
-  "readme_content": "",
-  "package_data": "moonbitlang/x/fs/package_data.json",
-  "source_files": [ "fs.mbt", "fs_js.mbt", "fs_native.mbt", "fs_wasm.mbt" ]
-}

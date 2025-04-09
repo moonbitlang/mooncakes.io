@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "quickcheck/splitmix",
-  "module_path": "moonbitlang/core",
-  "readme_content": "",
-  "package_data": "moonbitlang/core/quickcheck/splitmix/package_data.json",
-  "source_files": [ "random.mbt" ]
-}

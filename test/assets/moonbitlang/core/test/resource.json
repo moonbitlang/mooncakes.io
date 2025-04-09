@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "test",
-  "module_path": "moonbitlang/core",
-  "readme_content": "",
-  "package_data": "moonbitlang/core/test/package_data.json",
-  "source_files": [ "test.mbt", "types.mbt" ]
-}

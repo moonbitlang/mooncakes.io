@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "lib/util/small_int_set",
-  "module_path": "moonbitlang/yacc",
-  "readme_content": "",
-  "package_data": "moonbitlang/yacc/lib/util/small_int_set/package_data.json",
-  "source_files": [ "small_int_set.mbt", "utils.mbt" ]
-}

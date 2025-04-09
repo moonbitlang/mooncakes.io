@@ -1,8 +1,0 @@
-{
-  "kind": "package",
-  "relative_path": "num",
-  "module_path": "moonbitlang/x",
-  "readme_content": "",
-  "package_data": "moonbitlang/x/num/package_data.json",
-  "source_files": [ "num.mbt" ]
-}

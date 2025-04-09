@@ -179,10 +179,7 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       (none(), { ..model, sidebar_collapsed, })
     }
     ClickSidebarItem(id) => {
-      let model = {
-        ..model,
-        sidebar_fab: false,
-      }
+      let model = { ..model, sidebar_fab: false }
       match id {
         Package(path) => (@nav.push_url("/docs/" + path), { ..model, path, })
         Symbol(id) | Section(id) => (@nav.scroll_to(id), model)
@@ -425,15 +422,18 @@ pub fn view(model : Model) -> Html[Msg] {
         click=ToggleSidebarFab,
         [],
       ),
-      div(class="bg-white w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20", [
-        sidebar(
-          model.sidebar_document,
-          source_files,
-          model.sidebar_tab,
-          model.sidebar_collapsed,
-          package_path=model.path,
-        ),
-      ]),
+      div(
+        class="bg-white w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
+        [
+          sidebar(
+            model.sidebar_document,
+            source_files,
+            model.sidebar_tab,
+            model.sidebar_collapsed,
+            package_path=model.path,
+          ),
+        ],
+      ),
     ],
   )
   let fab = @html.button(

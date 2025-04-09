@@ -1,0 +1,347 @@
+{
+  "name": "moonbitlang/core/rational",
+  "traits": [],
+  "types": [
+    {
+      "name": "RationalError",
+      "docstring": "",
+      "signature": "pub(all) type! RationalError String\n",
+      "loc": {
+        "path": "moonbitlang/core/rational",
+        "file": "rational.mbt",
+        "line": 167,
+        "column": 16
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "RationalError",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, other : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/core/rational",
+                "file": "rational.mbt",
+                "line": 177,
+                "column": 36
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "RationalError",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/rational",
+                "file": "rational.mbt",
+                "line": 170,
+                "column": 38
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "T",
+      "docstring": "\n Rational number type.\n\n Invariants:\n - The denominator is always positive.\n - The numerator and denominator are always coprime.",
+      "signature": "type T",
+      "loc": {
+        "path": "moonbitlang/core/rational",
+        "file": "rational.mbt",
+        "line": 25,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "abs",
+          "docstring": "\n Returns the absolute value of a rational number.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::abs(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 125,
+            "column": 8
+          }
+        },
+        {
+          "name": "ceil",
+          "docstring": "\n Ceils a rational number towards positive infinity.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::ceil(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 265,
+            "column": 8
+          }
+        },
+        {
+          "name": "compare",
+          "docstring": "\n Compares two rational numbers.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::compare(self : <a href=\"moonbitlang/core/rational#T\">T</a>, other : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 137,
+            "column": 8
+          }
+        },
+        {
+          "name": "floor",
+          "docstring": "\n Floors a rational number towards negative infinity.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::floor(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 277,
+            "column": 8
+          }
+        },
+        {
+          "name": "fract",
+          "docstring": "\n Fractional part of a rational number.\n Same as `self - self.trunc()`.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::fract(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 300,
+            "column": 8
+          }
+        },
+        {
+          "name": "from_double",
+          "docstring": "\n @alert deprecated \"use `@rational.from_double` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::from_double(value : Double) -> <a href=\"moonbitlang/core/rational#T\">T</a>!<a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "deprecated.mbt",
+            "line": 25,
+            "column": 11
+          }
+        },
+        {
+          "name": "is_integer",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::is_integer(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 333,
+            "column": 8
+          }
+        },
+        {
+          "name": "neg",
+          "docstring": "\n Returns the negation of a rational number.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::neg(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 119,
+            "column": 8
+          }
+        },
+        {
+          "name": "new",
+          "docstring": "\n @alert deprecated \"use `@rational.new` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::new(numerator : Int64, denominator : Int64) -> <a href=\"moonbitlang/core/rational#T\">T</a>?",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "deprecated.mbt",
+            "line": 18,
+            "column": 11
+          }
+        },
+        {
+          "name": "op_add",
+          "docstring": "\n NOTE: we don't check overflow here, to align with the `op_add` of `Int64`.\n TODO: add a `checked_add` method.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::op_add(self : <a href=\"moonbitlang/core/rational#T\">T</a>, other : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 69,
+            "column": 8
+          }
+        },
+        {
+          "name": "op_div",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::op_div(self : <a href=\"moonbitlang/core/rational#T\">T</a>, other : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 93,
+            "column": 8
+          }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "\n Equal to operator for rational numbers.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::op_equal(self : <a href=\"moonbitlang/core/rational#T\">T</a>, other : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 131,
+            "column": 8
+          }
+        },
+        {
+          "name": "op_mul",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::op_mul(self : <a href=\"moonbitlang/core/rational#T\">T</a>, other : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 85,
+            "column": 8
+          }
+        },
+        {
+          "name": "op_sub",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::op_sub(self : <a href=\"moonbitlang/core/rational#T\">T</a>, other : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 77,
+            "column": 8
+          }
+        },
+        {
+          "name": "reciprocal",
+          "docstring": "\n Returns the reciprocal of a rational number.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::reciprocal(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 109,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_double",
+          "docstring": "\n Returns the approximate double value of a rational number.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::to_double(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Double",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 151,
+            "column": 8
+          }
+        },
+        {
+          "name": "trunc",
+          "docstring": "\n Rounds a rational number towards zero.",
+          "signature": "fn <a href=\"moonbitlang/core/rational#T\">T</a>::trunc(self : <a href=\"moonbitlang/core/rational#T\">T</a>) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/rational",
+            "file": "rational.mbt",
+            "line": 289,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/rational#T\">T</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/rational",
+                "file": "rational.mbt",
+                "line": 305,
+                "column": 26
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/rational"
+            },
+            "arguments": []
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary(size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/rational#T\">T</a>",
+              "loc": {
+                "path": "moonbitlang/core/rational",
+                "file": "rational.mbt",
+                "line": 319,
+                "column": 43
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "from_double",
+      "docstring": "\n Returns the approximate rational value of a double.",
+      "signature": "fn from_double(value : Double) -> <a href=\"moonbitlang/core/rational#T\">T</a>!<a href=\"moonbitlang/core/rational#RationalError\">RationalError</a>",
+      "loc": {
+        "path": "moonbitlang/core/rational",
+        "file": "rational.mbt",
+        "line": 188,
+        "column": 8
+      }
+    },
+    {
+      "name": "new",
+      "docstring": "\n Creates a rational number.",
+      "signature": "fn new(numerator : Int64, denominator : Int64) -> <a href=\"moonbitlang/core/rational#T\">T</a>?",
+      "loc": {
+        "path": "moonbitlang/core/rational",
+        "file": "rational.mbt",
+        "line": 42,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

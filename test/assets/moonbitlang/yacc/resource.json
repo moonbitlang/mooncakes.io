@@ -1,0 +1,16 @@
+{
+  "kind": "module",
+  "meta_info": {
+    "name": "moonbitlang/yacc",
+    "version": "0.2.8",
+    "deps": { "moonbitlang/x": "0.4.19", "Yoorkin/ArgParser": "0.1.8" },
+    "readme": "README.md",
+    "repository": "",
+    "license": "GPL-2.0-only",
+    "keywords": [],
+    "description": "",
+    "source": "src"
+  },
+  "readme_content": "# MoonYacc\n\nhttps://moonyacc-playground.netlify.app/\n\nMoonYacc is a LR(1) parser generator for MoonBit programming language.\n\nSee [calc.mbty](https://github.com/moonbitlang/moonyacc/blob/master/src/tests/calc_test/calc.mbty) for an example of grammar.\n\nSee [MANUAL.md](https://github.com/moonbitlang/moonyacc/blob/master/doc/MANUAL.md) for more details.\n\n## Features\n\n- Compatible with ocamlyacc's syntax\n\n## Status\n\nThis software is in alpha stage. Though it may have some issues, it is already usable for most purposes.\n\n## Acknowledgements\n\nThis project, moonyacc, incorporates and adapts two key algorithms from Menhir, a powerful parser generator:\n\n### LR(0) Closure Algorithm:\n\nThe LR(0) closure algorithm is used to compute the closure of a set of LR(0) items, which is a fundamental step in constructing the LR(0) automaton. This algorithm has been adapted and implemented in moonyacc to support the generation of LR(0) automaton.\n\n### LR(1) Pager's Algorithm:\n\nThe LR(1) Pager's algorithm is used to efficiently compute the LR(1) states and their transitions. It is a critical component for building LR(1) parsers with reduced state space. This algorithm has been adapted to enhance the parsing capabilities of moonyacc.\n\nBoth algorithms have been reimplemented and integrated into moonyacc to provide robust and efficient parsing functionality. While the core ideas are inspired by Menhir, the implementation has been tailored to fit the architecture and goals of this project.\n",
+  "module_index": "moonbitlang/yacc/module_index.json"
+}

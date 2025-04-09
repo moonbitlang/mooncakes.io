@@ -1,0 +1,31 @@
+package "moonbitlang/mooncakes/util/highlight"
+
+import(
+  "moonbitlang/core/immut/list"
+)
+
+// Values
+fn parse(String) -> @list.T[CodeSpan]
+
+// Types and methods
+pub(all) enum CodeSpan {
+  Unknown(Char)
+  Keyword(String)
+  Symbol(String)
+  Link(href~ : String, Array[CodeSpan])
+  UIdent(String)
+  LIdent(String)
+  QualIdent(Array[String], String)
+  StringLit(String)
+  CharLit(String)
+  Number(String)
+  Newline
+  Space(Int)
+  Comment(String)
+}
+impl Show for CodeSpan
+
+// Type aliases
+
+// Traits
+

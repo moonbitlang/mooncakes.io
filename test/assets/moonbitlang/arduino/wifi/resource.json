@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "wifi",
+  "module_path": "moonbitlang/arduino",
+  "readme_content": "",
+  "package_data": "moonbitlang/arduino/wifi/package_data.json",
+  "source_files": [ "lib.mbt" ]
+}

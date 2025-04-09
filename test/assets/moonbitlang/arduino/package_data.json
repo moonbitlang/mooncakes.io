@@ -1,0 +1,810 @@
+{
+  "name": "moonbitlang/arduino",
+  "traits": [
+    {
+      "name": "@moonbitlang/arduino.Floating",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.Floating : <a href=\"moonbitlang/arduino#Number\">Number</a> {\n  is_nan(Self) -> Bool\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 59,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@moonbitlang/arduino.FromInt",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.FromInt {\n  from_int(Int) -> Self\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 54,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@moonbitlang/arduino.Integer",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.Integer : <a href=\"moonbitlang/arduino#Number\">Number</a> {\n  is_integer(Self) -> Bool\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 64,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": [
+        {
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "Integer", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "is_integer",
+              "docstring": "",
+              "signature": "fn is_integer(_x : Int) -> Bool",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 69,
+                "column": 31
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Integer", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "is_integer",
+              "docstring": "",
+              "signature": "fn is_integer(_x : Int64) -> Bool",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 72,
+                "column": 33
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "@moonbitlang/arduino.Number",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.Number : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> {\n  op_add(Self, Self) -> Self\n  op_sub(Self, Self) -> Self\n  op_mul(Self, Self) -> Self\n  op_div(Self, Self) -> Self\n  abs(Self) -> Self\n  zero() -> Self\n  one() -> Self\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 75,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": [
+        {
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "one",
+              "docstring": "",
+              "signature": "fn one() -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 98,
+                "column": 30
+              }
+            },
+            {
+              "name": "zero",
+              "docstring": "",
+              "signature": "fn zero() -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 86,
+                "column": 30
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "one",
+              "docstring": "",
+              "signature": "fn one() -> Int64",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 101,
+                "column": 32
+              }
+            },
+            {
+              "name": "zero",
+              "docstring": "",
+              "signature": "fn zero() -> Int64",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 89,
+                "column": 32
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "one",
+              "docstring": "",
+              "signature": "fn one() -> Float",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 104,
+                "column": 32
+              }
+            },
+            {
+              "name": "zero",
+              "docstring": "",
+              "signature": "fn zero() -> Float",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 92,
+                "column": 32
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Double", "path": "moonbitlang/core/double" },
+          "trait": { "name": "Number", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "one",
+              "docstring": "",
+              "signature": "fn one() -> Double",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 107,
+                "column": 33
+              }
+            },
+            {
+              "name": "zero",
+              "docstring": "",
+              "signature": "fn zero() -> Double",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 95,
+                "column": 33
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "@moonbitlang/arduino.ToInt",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.ToInt {\n  to_int(Self) -> Int\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 20,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": []
+    },
+    {
+      "name": "@moonbitlang/arduino.ToInt16",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.ToInt16 {\n  to_int16(Self) -> Int\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 41,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": [
+        {
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "ToInt16", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "to_int16",
+              "docstring": "",
+              "signature": "fn to_int16(self : Int) -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 46,
+                "column": 31
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "ToInt16", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "to_int16",
+              "docstring": "",
+              "signature": "fn to_int16(self : Int64) -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 49,
+                "column": 33
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "@moonbitlang/arduino.ToInt8",
+      "docstring": "",
+      "signature": "pub(open) trait @moonbitlang/arduino.ToInt8 {\n  to_int8(Self) -> Int\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "traits.mbt",
+        "line": 25,
+        "column": 1
+      },
+      "default_impls": [],
+      "impls": [
+        {
+          "self": { "name": "Byte", "path": "moonbitlang/core/byte" },
+          "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "to_int8",
+              "docstring": "",
+              "signature": "fn to_int8(self : Byte) -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 30,
+                "column": 31
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int", "path": "moonbitlang/core/int" },
+          "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "to_int8",
+              "docstring": "",
+              "signature": "fn to_int8(self : Int) -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 33,
+                "column": 30
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "ToInt8", "path": "moonbitlang/arduino" },
+          "methods": [
+            {
+              "name": "to_int8",
+              "docstring": "",
+              "signature": "fn to_int8(self : Int64) -> Int",
+              "loc": {
+                "path": "moonbitlang/arduino",
+                "file": "traits.mbt",
+                "line": 36,
+                "column": 32
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "DigitalValue",
+      "docstring": "",
+      "signature": "pub(all) enum DigitalValue {\n  LOW\n  HIGH\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 33,
+        "column": 15
+      },
+      "methods": [
+        {
+          "name": "from_int",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>::from_int(val : Int) -> <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>",
+          "loc": {
+            "path": "moonbitlang/arduino",
+            "file": "lib.mbt",
+            "line": 39,
+            "column": 22
+          }
+        },
+        {
+          "name": "to_int",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>::to_int(self : <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/arduino",
+            "file": "lib.mbt",
+            "line": 48,
+            "column": 22
+          }
+        },
+        {
+          "name": "to_int8",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>::to_int8(self : <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/arduino",
+            "file": "lib.mbt",
+            "line": 56,
+            "column": 22
+          }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "InterruptMode",
+      "docstring": "",
+      "signature": "pub(all) enum InterruptMode {\n  RISING\n  FALLING\n  CHANGE\n  ONLOW\n  ONHIGH\n  ONLOW_WE\n  ONHIGH_WE\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "interrupts.mbt",
+        "line": 26,
+        "column": 15
+      },
+      "methods": [
+        {
+          "name": "to_int",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino#InterruptMode\">InterruptMode</a>::to_int(self : <a href=\"moonbitlang/arduino#InterruptMode\">InterruptMode</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/arduino",
+            "file": "interrupts.mbt",
+            "line": 37,
+            "column": 23
+          }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "Pin",
+      "docstring": "",
+      "signature": "pub(all) enum Pin {\n  GPIO_0\n  GPIO_1\n  GPIO_2\n  GPIO_3\n  GPIO_4\n  GPIO_5\n  GPIO_6\n  GPIO_7\n  GPIO_8\n  GPIO_9\n  GPIO_10\n  GPIO_11\n  GPIO_12\n  GPIO_13\n  GPIO_14\n  GPIO_15\n  GPIO_16\n  GPIO_17\n  GPIO_18\n  GPIO_19\n  GPIO_20\n  GPIO_21\n  GPIO_22\n  GPIO_23\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "pin.mbt",
+        "line": 20,
+        "column": 15
+      },
+      "methods": [
+        {
+          "name": "from_int",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino#Pin\">Pin</a>::from_int(x : Int) -> <a href=\"moonbitlang/arduino#Pin\">Pin</a>",
+          "loc": {
+            "path": "moonbitlang/arduino",
+            "file": "pin.mbt",
+            "line": 78,
+            "column": 13
+          }
+        },
+        {
+          "name": "to_int8",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/arduino#Pin\">Pin</a>::to_int8(x : <a href=\"moonbitlang/arduino#Pin\">Pin</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/arduino",
+            "file": "pin.mbt",
+            "line": 48,
+            "column": 13
+          }
+        }
+      ],
+      "impls": []
+    },
+    {
+      "name": "PinMode",
+      "docstring": "",
+      "signature": "pub(all) enum PinMode {\n  INPUT\n  OUTPUT\n  PULLUP\n  INPUT_PULLUP\n  PULLDOWN\n  INPUT_PULLDOWN\n  OPEN_DRAIN\n  OUTPUT_OPEN_DRIN\n  ANALOG\n}",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 20,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "abs",
+      "docstring": "",
+      "signature": "fn abs[T : <a href=\"moonbitlang/arduino#Number\">Number</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](x : T) -> T",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "math.mbt",
+        "line": 20,
+        "column": 8
+      }
+    },
+    {
+      "name": "analogRead",
+      "docstring": "",
+      "signature": "fn analogRead(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>) -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "analog_io.mbt",
+        "line": 24,
+        "column": 8
+      }
+    },
+    {
+      "name": "analogReadResolution",
+      "docstring": "",
+      "signature": "fn analogReadResolution[T : <a href=\"moonbitlang/arduino#ToInt8\">ToInt8</a>](bits : T) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "analog_io.mbt",
+        "line": 33,
+        "column": 8
+      }
+    },
+    {
+      "name": "analogWrite",
+      "docstring": "",
+      "signature": "fn analogWrite(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>, value : Int) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "analog_io.mbt",
+        "line": 42,
+        "column": 8
+      }
+    },
+    {
+      "name": "analogWriteResolution",
+      "docstring": "",
+      "signature": "fn analogWriteResolution[T : <a href=\"moonbitlang/arduino#ToInt8\">ToInt8</a>](pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>, resolution : T) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "analog_io.mbt",
+        "line": 51,
+        "column": 8
+      }
+    },
+    {
+      "name": "attachInterrupt",
+      "docstring": "",
+      "signature": "fn attachInterrupt(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>, intRoutine : () -> Unit, mode : <a href=\"moonbitlang/arduino#InterruptMode\">InterruptMode</a>) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "interrupts.mbt",
+        "line": 58,
+        "column": 8
+      }
+    },
+    {
+      "name": "bit",
+      "docstring": "",
+      "signature": "fn bit(n : Int) -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bits.mbt",
+        "line": 20,
+        "column": 19
+      }
+    },
+    {
+      "name": "bitClear",
+      "docstring": "",
+      "signature": "fn bitClear(x : Int, n : Int) -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bits.mbt",
+        "line": 23,
+        "column": 19
+      }
+    },
+    {
+      "name": "bitRead",
+      "docstring": "",
+      "signature": "fn bitRead(x : Int, n : Int) -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bits.mbt",
+        "line": 26,
+        "column": 19
+      }
+    },
+    {
+      "name": "bitSet",
+      "docstring": "",
+      "signature": "fn bitSet(x : Int, n : Int) -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bits.mbt",
+        "line": 29,
+        "column": 19
+      }
+    },
+    {
+      "name": "bitWrite",
+      "docstring": "",
+      "signature": "fn bitWrite(x : Int, n : Int, b : Bool) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bits.mbt",
+        "line": 32,
+        "column": 19
+      }
+    },
+    {
+      "name": "builtin_led",
+      "docstring": "",
+      "signature": "fn builtin_led() -> Int",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 64,
+        "column": 19
+      }
+    },
+    {
+      "name": "constrain",
+      "docstring": "",
+      "signature": "fn constrain[T : <a href=\"moonbitlang/arduino#Number\">Number</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](amt : T, low : T, high : T) -> T",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "math.mbt",
+        "line": 25,
+        "column": 8
+      }
+    },
+    {
+      "name": "delay",
+      "docstring": "",
+      "signature": "fn delay(ms : UInt) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "time.mbt",
+        "line": 21,
+        "column": 19
+      }
+    },
+    {
+      "name": "delayMicroseconds",
+      "docstring": "",
+      "signature": "fn delayMicroseconds(us : Int) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "time.mbt",
+        "line": 24,
+        "column": 19
+      }
+    },
+    {
+      "name": "detachInterrupt",
+      "docstring": "",
+      "signature": "fn detachInterrupt(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "interrupts.mbt",
+        "line": 71,
+        "column": 8
+      }
+    },
+    {
+      "name": "digitalPinToInterrupt",
+      "docstring": "",
+      "signature": "fn digitalPinToInterrupt(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>) -> <a href=\"moonbitlang/arduino#Pin\">Pin</a>",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "interrupts.mbt",
+        "line": 79,
+        "column": 8
+      }
+    },
+    {
+      "name": "digitalRead",
+      "docstring": "",
+      "signature": "fn digitalRead(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>) -> <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 86,
+        "column": 8
+      }
+    },
+    {
+      "name": "digitalWrite",
+      "docstring": "",
+      "signature": "fn digitalWrite(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>, val : <a href=\"moonbitlang/arduino#DigitalValue\">DigitalValue</a>) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 95,
+        "column": 8
+      }
+    },
+    {
+      "name": "highByte",
+      "docstring": "",
+      "signature": "fn highByte(x : Int) -> Byte",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bytes.mbt",
+        "line": 20,
+        "column": 19
+      }
+    },
+    {
+      "name": "interrupts",
+      "docstring": "",
+      "signature": "fn interrupts() -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "interrupts.mbt",
+        "line": 20,
+        "column": 19
+      }
+    },
+    {
+      "name": "lowByte",
+      "docstring": "",
+      "signature": "fn lowByte(x : Int) -> Byte",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "bytes.mbt",
+        "line": 23,
+        "column": 19
+      }
+    },
+    {
+      "name": "map",
+      "docstring": "",
+      "signature": "fn map[T : <a href=\"moonbitlang/arduino#Number\">Number</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](x : T, in_min : T, in_max : T, out_min : T, out_max : T) -> T",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "math.mbt",
+        "line": 36,
+        "column": 8
+      }
+    },
+    {
+      "name": "max",
+      "docstring": "",
+      "signature": "fn max[T : <a href=\"moonbitlang/arduino#Number\">Number</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](a : T, b : T) -> T",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "math.mbt",
+        "line": 53,
+        "column": 8
+      }
+    },
+    {
+      "name": "micros",
+      "docstring": "",
+      "signature": "fn micros() -> UInt64",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "time.mbt",
+        "line": 27,
+        "column": 19
+      }
+    },
+    {
+      "name": "millis",
+      "docstring": "",
+      "signature": "fn millis() -> UInt64",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "time.mbt",
+        "line": 30,
+        "column": 19
+      }
+    },
+    {
+      "name": "min",
+      "docstring": "",
+      "signature": "fn min[T : <a href=\"moonbitlang/arduino#Number\">Number</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](a : T, b : T) -> T",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "math.mbt",
+        "line": 62,
+        "column": 8
+      }
+    },
+    {
+      "name": "noInterrupts",
+      "docstring": "",
+      "signature": "fn noInterrupts() -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "interrupts.mbt",
+        "line": 23,
+        "column": 19
+      }
+    },
+    {
+      "name": "pinMode",
+      "docstring": "",
+      "signature": "fn pinMode(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>, mode : <a href=\"moonbitlang/arduino#PinMode\">PinMode</a>) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 104,
+        "column": 8
+      }
+    },
+    {
+      "name": "sq",
+      "docstring": "",
+      "signature": "fn sq[T : <a href=\"moonbitlang/arduino#Number\">Number</a> + <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](x : T) -> T",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "math.mbt",
+        "line": 71,
+        "column": 8
+      }
+    },
+    {
+      "name": "test_bytes",
+      "docstring": "",
+      "signature": "fn test_bytes(data : Bytes) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "lib.mbt",
+        "line": 109,
+        "column": 8
+      }
+    },
+    {
+      "name": "tone",
+      "docstring": "",
+      "signature": "fn tone(pin : <a href=\"moonbitlang/arduino#Pin\">Pin</a>, frequency : Int, duration~ : Int64 = ..) -> Unit",
+      "loc": {
+        "path": "moonbitlang/arduino",
+        "file": "advanced_io.mbt",
+        "line": 23,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

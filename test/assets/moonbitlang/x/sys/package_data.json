@@ -1,0 +1,64 @@
+{
+  "name": "moonbitlang/x/sys",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "exit",
+      "docstring": "",
+      "signature": "fn exit(code : Int) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/sys",
+        "file": "sys.mbt",
+        "line": 36,
+        "column": 8
+      }
+    },
+    {
+      "name": "get_cli_args",
+      "docstring": "",
+      "signature": "fn get_cli_args() -> <a href=\"moonbitlang/core/array#Array\">Array</a>[String]",
+      "loc": {
+        "path": "moonbitlang/x/sys",
+        "file": "sys.mbt",
+        "line": 16,
+        "column": 8
+      }
+    },
+    {
+      "name": "get_env_vars",
+      "docstring": "",
+      "signature": "fn get_env_vars() -> <a href=\"moonbitlang/core/builtin#Map\">Map</a>[String, String]",
+      "loc": {
+        "path": "moonbitlang/x/sys",
+        "file": "sys.mbt",
+        "line": 21,
+        "column": 8
+      }
+    },
+    {
+      "name": "set_env_var",
+      "docstring": "",
+      "signature": "fn set_env_var(key : String, value : String) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/sys",
+        "file": "sys.mbt",
+        "line": 26,
+        "column": 8
+      }
+    },
+    {
+      "name": "unset_env_var",
+      "docstring": "",
+      "signature": "fn unset_env_var(key : String) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/sys",
+        "file": "sys.mbt",
+        "line": 31,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

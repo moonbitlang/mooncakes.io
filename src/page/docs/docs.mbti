@@ -1,0 +1,23 @@
+package "moonbitlang/mooncakes/page/docs"
+
+import(
+  "Yoorkin/rabbit-tea/browser"
+  "Yoorkin/rabbit-tea/html"
+)
+
+// Values
+fn load(String, String?) -> (@browser.Command[Msg], Model)
+
+fn update(Msg, Model) -> (@browser.Command[Msg], Model)
+
+fn view(Model) -> @html.T[Msg]
+
+// Types and methods
+type Model
+
+type Msg
+
+// Type aliases
+
+// Traits
+

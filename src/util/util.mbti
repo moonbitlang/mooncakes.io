@@ -1,0 +1,17 @@
+package "moonbitlang/mooncakes/util"
+
+// Values
+
+// Types and methods
+pub(all) enum Status[T] {
+  Loading
+  Failed
+  Success(T)
+}
+impl[T : Eq] Eq for Status[T]
+impl[T : Show] Show for Status[T]
+
+// Type aliases
+
+// Traits
+

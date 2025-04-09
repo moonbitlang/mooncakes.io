@@ -1,0 +1,218 @@
+{
+  "name": "moonbitlang/core/math",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "PI",
+      "docstring": "",
+      "signature": "let PI : Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 16,
+        "column": 11
+      }
+    },
+    {
+      "name": "acos",
+      "docstring": "",
+      "signature": "fn acos(x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 48,
+        "column": 8
+      }
+    },
+    {
+      "name": "asin",
+      "docstring": "",
+      "signature": "fn asin(x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 43,
+        "column": 8
+      }
+    },
+    {
+      "name": "atan",
+      "docstring": "",
+      "signature": "fn atan(x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 38,
+        "column": 8
+      }
+    },
+    {
+      "name": "atan2",
+      "docstring": "",
+      "signature": "fn atan2(y : Double, x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 53,
+        "column": 8
+      }
+    },
+    {
+      "name": "ceil",
+      "docstring": "",
+      "signature": "fn ceil(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "round.mbt",
+        "line": 27,
+        "column": 8
+      }
+    },
+    {
+      "name": "cos",
+      "docstring": "",
+      "signature": "fn cos(x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 28,
+        "column": 8
+      }
+    },
+    {
+      "name": "exp",
+      "docstring": "",
+      "signature": "fn exp(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "exp.mbt",
+        "line": 16,
+        "column": 8
+      }
+    },
+    {
+      "name": "floor",
+      "docstring": "",
+      "signature": "fn floor(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "round.mbt",
+        "line": 41,
+        "column": 8
+      }
+    },
+    {
+      "name": "ln",
+      "docstring": "\n Calculates the natural logarithm (base e) of the input.\n\n Parameters:\n\n - `input` : The floating-point number for which to calculate the natural\n   logarithm.\n\n Returns the natural logarithm of the input.\n\n Examples:\n\n ```\n assert_eq!(ln(1.0), 0.0)\n assert_eq!(ln(0.5), -0.6931471805599453)\n ```",
+      "signature": "fn ln(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "log.mbt",
+        "line": 31,
+        "column": 8
+      }
+    },
+    {
+      "name": "log10",
+      "docstring": "\n Calculates the base-10 logarithm of the input number.\n\n Parameters:\n\n - `input` : The floating-point number for which to calculate the logarithm.\n\n Returns the base-10 logarithm of the input number.\n\n Example:\n\n ```\n assert_eq!(log10(100.0), 2.0)\n ```",
+      "signature": "fn log10(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "log.mbt",
+        "line": 68,
+        "column": 8
+      }
+    },
+    {
+      "name": "log2",
+      "docstring": "\n Calculates the base-2 logarithm of the input number.\n\n Parameters:\n\n - `input` : The floating-point number for which the logarithm is to be\n   calculated.\n\n Returns the base-2 logarithm of the input number.\n\n Example:\n\n ```\n assert_eq!(log2(8.0), 3.0)\n ```",
+      "signature": "fn log2(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "log.mbt",
+        "line": 50,
+        "column": 8
+      }
+    },
+    {
+      "name": "maximum",
+      "docstring": "\n Compares and returns the maximum of two values.\n\n Returns the second argument if the comparison determines them to be equal.\n\n # Examples\n\n ```\n assert_eq!(@math.maximum(1, 2), 2)\n assert_eq!(@math.maximum(2, 2), 2)\n ```",
+      "signature": "fn maximum[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](x : T, y : T) -> T",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "algebraic.mbt",
+        "line": 26,
+        "column": 8
+      }
+    },
+    {
+      "name": "minimum",
+      "docstring": "\n Compares and returns the minimum of two values.\n\n Returns the first argument if the comparison determines them to be equal.\n\n # Examples\n\n ```\n assert_eq!(@math.minimum(1, 2), 1)\n assert_eq!(@math.minimum(2, 2), 2)\n ```",
+      "signature": "fn minimum[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](x : T, y : T) -> T",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "algebraic.mbt",
+        "line": 45,
+        "column": 8
+      }
+    },
+    {
+      "name": "pi",
+      "docstring": "\n@alert deprecated \"Use `PI` instead\"",
+      "signature": "let pi : Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 20,
+        "column": 9
+      }
+    },
+    {
+      "name": "round",
+      "docstring": "",
+      "signature": "fn round(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "round.mbt",
+        "line": 16,
+        "column": 8
+      }
+    },
+    {
+      "name": "sin",
+      "docstring": "",
+      "signature": "fn sin(x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 23,
+        "column": 8
+      }
+    },
+    {
+      "name": "tan",
+      "docstring": "",
+      "signature": "fn tan(x : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "trigonometric.mbt",
+        "line": 33,
+        "column": 8
+      }
+    },
+    {
+      "name": "trunc",
+      "docstring": "",
+      "signature": "fn trunc(input : Double) -> Double",
+      "loc": {
+        "path": "moonbitlang/core/math",
+        "file": "round.mbt",
+        "line": 55,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

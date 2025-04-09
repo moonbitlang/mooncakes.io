@@ -1,0 +1,905 @@
+{
+  "name": "moonbitlang/core/array",
+  "traits": [],
+  "types": [],
+  "typealias": [
+    {
+      "name": "View",
+      "docstring": "\n\n A `@array.View` represents a view into a section of an array without copying the data.\n\n # Example\n\n ```moonbit\n let arr = [1, 2, 3, 4, 5]\n let view = arr[1:4]  // Creates a view of elements at indices 1,2,3\n assert_eq!(view[0], 2)\n assert_eq!(view.length(), 3)\n ```",
+      "signature": "type View = <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]",
+      "loc": {
+        "path": "moonbitlang/core/array",
+        "file": "view.mbt",
+        "line": 27,
+        "column": 1
+      }
+    }
+  ],
+  "values": [],
+  "misc": [
+    {
+      "name": "ArrayView",
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArrayView",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "",
+              "signature": "fn compare[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], other : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]) -> Int",
+              "loc": {
+                "path": "moonbitlang/core/array",
+                "file": "view.mbt",
+                "line": 366,
+                "column": 48
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArrayView",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "T" } ]
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "",
+              "signature": "fn op_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], other : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]) -> Bool",
+              "loc": {
+                "path": "moonbitlang/core/array",
+                "file": "view.mbt",
+                "line": 352,
+                "column": 38
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "ArrayView",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[X : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[X], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/array",
+                "file": "view.mbt",
+                "line": 347,
+                "column": 42
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "all",
+          "docstring": "\n Checks if all elements in the array view match the condition.\n \n # Example\n \n ```\n let v = [1, 4, 6, 8, 9]\n assert_false!(v[:].all(fn(elem) { elem % 2 == 0 }))\n assert_true!(v[1:4].all(fn(elem) { elem % 2 == 0 }))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::all[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (T) -> Bool) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 105,
+            "column": 14
+          }
+        },
+        {
+          "name": "any",
+          "docstring": "\n Check if any of the elements in the array view match the condition.\n\n # Example\n\n ```\n let v = [1, 2, 3, 4, 5][:]\n assert_true!(v.any(fn(ele) { ele < 6 }))\n assert_false!(v.any(fn(ele) { ele < 1 }))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::any[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (T) -> Bool) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 124,
+            "column": 14
+          }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Checks whether the array view contains a specific element by comparing each\n element with the target value using the equality operator.\n\n Parameters:\n\n * `view` : The array view to search in.\n * `target` : The value to search for in the array view.\n\n Returns a boolean value indicating whether the target value exists in the\n array view.\n\n Example:\n\n ```moonbit\n test \"array_view/contains\" {\n   let arr = [1, 2, 3, 4, 5][:]\n   inspect!(arr.contains(3), content=\"true\")\n   inspect!(arr.contains(6), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::contains[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], value : T) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 154,
+            "column": 14
+          }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterates over each element in the array view and applies a function to it.\n\n Parameters:\n\n * `self` : The array view to iterate over.\n * `function` : A function that takes an element of type `T` and returns\n nothing. This function will be applied to each element in the array view.\n\n Example:\n\n ```moonbit\n test \"array_view/each\" {\n   let arr = [1, 2, 3][:]\n   let mut sum = 0\n   arr.each(fn(x) { sum = sum + x })\n   inspect!(sum, content=\"6\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::each[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (T) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 72,
+            "column": 14
+          }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterates over the elements of the array view with index.\n\n # Example\n \n ```\n let v = [3, 4, 5][:]\n let mut sum = 0\n v.eachi(fn (i, x) { sum = sum + x + i })\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::eachi[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (Int, T) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 89,
+            "column": 14
+          }
+        },
+        {
+          "name": "filter",
+          "docstring": "\n Filters the array view with a predicate function.\n\n # Example\n ```\n let arr = [1, 2, 3, 4, 5, 6]\n let v = arr[2:].filter(fn (x) { x % 2 == 0 })\n assert_eq!(v, [4, 6])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::filter[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (T) -> Bool) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 336,
+            "column": 14
+          }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n Fold out values from an View according to certain rules.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].fold(init=0, fn { sum, elem => sum + elem })\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::fold[A, B](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 204,
+            "column": 14
+          }
+        },
+        {
+          "name": "foldi",
+          "docstring": "\n Fold out values from an View according to certain rules with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].foldi(init=0, fn { index, sum, _elem => sum + index })\n assert_eq!(sum, 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::foldi[A, B](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 236,
+            "column": 14
+          }
+        },
+        {
+          "name": "iter",
+          "docstring": "\n Returns an iterator that yields each element of the array view in sequence\n from start to end.\n\n Parameters:\n\n * `array_view` : The array view to iterate over.\n\n Returns an iterator that yields elements of type `A` from the array view.\n\n Example:\n\n ```moonbit\n test \"View::iter\" {\n   let arr = [1, 2, 3]\n   let view = arr[1:]\n   let mut sum = 0\n   view.iter().each(fn(x) { sum = sum + x })\n   inspect!(sum, content=\"5\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::iter[A](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[A]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[A]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 185,
+            "column": 14
+          }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Maps a function over the elements of the array view.\n\n # Example\n ```\n let v = [3, 4, 5]\n let v2 = v[1:].map(fn (x) {x + 1})\n assert_eq!(v2, [5, 6])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::map[T, U](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (T) -> U) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[U]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 274,
+            "column": 14
+          }
+        },
+        {
+          "name": "map_inplace",
+          "docstring": "\n Maps a function over the elements of the array view in place.\n\n # Example\n ```\n let v = [3, 4, 5]\n v[1:].map_inplace(fn (x) {x + 1})\n assert_eq!(v, [3, 5, 6])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::map_inplace[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (T) -> T) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 290,
+            "column": 14
+          }
+        },
+        {
+          "name": "mapi",
+          "docstring": "\n Maps a function over the elements of the array view with index.\n\n # Example\n ```\n let v = [3, 4, 5]\n let v2 = v[1:].mapi(fn (i, x) {x + i})\n assert_eq!(v2, [4, 6])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::mapi[T, U](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (Int, T) -> U) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[U]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 305,
+            "column": 14
+          }
+        },
+        {
+          "name": "mapi_inplace",
+          "docstring": "\n Maps a function over the elements of the array view with index in place.\n\n # Example\n ```\n let v = [3, 4, 5]\n v[1:].mapi_inplace(fn (i, x) {x + i})\n assert_eq!(v, [3, 4, 6])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::mapi_inplace[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T], f : (Int, T) -> T) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 321,
+            "column": 14
+          }
+        },
+        {
+          "name": "rev_fold",
+          "docstring": "\n Fold out values from an View according to certain rules in reversed turn.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].rev_fold(init=0, fn { sum, elem => sum + elem })\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::rev_fold[A, B](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 220,
+            "column": 14
+          }
+        },
+        {
+          "name": "rev_foldi",
+          "docstring": "\n Fold out values from an View according to certain rules in reversed turn with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5][:].rev_foldi(init=0, fn { index, sum, _elem => sum + index })\n assert_eq!(sum, 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::rev_foldi[A, B](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 252,
+            "column": 14
+          }
+        },
+        {
+          "name": "rev_inplace",
+          "docstring": "\n Reverses the elements in the array view in place.\n\n Parameters:\n\n * `self` : The array view whose elements are to be reversed.\n\n Example:\n\n ```moonbit\n test \"rev_inplace\" {\n   let arr = [1, 2, 3, 4, 5]\n   arr[:].rev_inplace()\n   inspect!(arr, content=\"[5, 4, 3, 2, 1]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>::rev_inplace[T](self : <a href=\"moonbitlang/core/array#ArrayView\">ArrayView</a>[T]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "view.mbt",
+            "line": 45,
+            "column": 14
+          }
+        }
+      ]
+    },
+    {
+      "name": "Array",
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Array",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[X]",
+              "loc": {
+                "path": "moonbitlang/core/array",
+                "file": "array.mbt",
+                "line": 206,
+                "column": 77
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "copy",
+          "docstring": "\n Creates and returns a new array with a copy of all elements from the input\n array.\n\n Parameters:\n\n * `array` : The array to be copied.\n\n Returns a new array containing all elements from the original array.\n\n Example:\n\n ```moonbit\n test \"copy\" {\n   let original = [1, 2, 3]\n   let copied = original.copy()\n   inspect!(copied, content=\"[1, 2, 3]\")\n   inspect!(physical_equal(original, copied), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::copy[T](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array_nonjs.mbt",
+            "line": 35,
+            "column": 8
+          }
+        },
+        {
+          "name": "filter_map",
+          "docstring": "\n Returns a new array containing the elements of the original array that satisfy the given predicate.\n \n # Arguments\n \n * `self` - The array to filter.\n * `f` - The predicate function.\n \n # Returns\n ",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::filter_map[A, B](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[A], f : (A) -> B?) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[B]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 150,
+            "column": 8
+          }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "\n Creates a new array containing all elements from an iterator.\n\n Parameters:\n\n * `iterator` : An iterator containing elements of type `T`.\n\n Returns a new array containing all elements from the iterator in the same\n order.\n\n Example:\n\n ```moonbit\n test \"Array::from_iter\" {\n   let iter = Iter::singleton(42)\n   let arr = Array::from_iter(iter)\n   inspect!(arr, content=\"[42]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::from_iter[T](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 34,
+            "column": 15
+          }
+        },
+        {
+          "name": "join",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::join(self : <a href=\"moonbitlang/core/array#Array\">Array</a>[String], separator : String) -> String",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 215,
+            "column": 8
+          }
+        },
+        {
+          "name": "last",
+          "docstring": "\n Returns the last element of the array, or `None` if the array is empty.\n\n Parameters:\n\n * `array` : The array to get the last element from.\n\n Returns an optional value containing the last element of the array. The\n result is `None` if the array is empty, or `Some(x)` where `x` is the last\n element of the array.\n\n Example:\n\n ```moonbit\n test \"last\" {\n   let arr = [1, 2, 3]\n   inspect!(arr.last(), content=\"Some(3)\")\n   let empty : Array[Int] = []\n   inspect!(empty.last(), content=\"None\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::last[A](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[A]) -> A?",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 198,
+            "column": 8
+          }
+        },
+        {
+          "name": "makei",
+          "docstring": "\n Creates a new array of the specified length, where each element is\n initialized using an index-based initialization function.\n\n Parameters:\n\n * `length` : The length of the new array. If `length` is less than or equal\n to 0, returns an empty array.\n * `initializer` : A function that takes an index (starting from 0) and\n returns a value of type `T`. This function is called for each index to\n initialize the corresponding element.\n\n Returns a new array of type `Array[T]` with the specified length, where each\n element is initialized using the provided function.\n\n Example:\n\n ```moonbit\n test \"Array::makei\" {\n   let arr = Array::makei(3, fn(i) { i * 2 })\n   inspect!(arr, content=\"[0, 2, 4]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::makei[T](length : Int, value : (Int) -> T) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 80,
+            "column": 15
+          }
+        },
+        {
+          "name": "map_option",
+          "docstring": "\n Returns a new array containing the elements of the original array that satisfy the given predicate.\n \n # Arguments\n \n * `self` - The array to filter.\n * `f` - The predicate function.\n \n # Returns\n \n @alert deprecated \"Use `Array::filter_map` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::map_option[A, B](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[A], f : (A) -> B?) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[B]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 173,
+            "column": 8
+          }
+        },
+        {
+          "name": "push_iter",
+          "docstring": "\n Adds all elements from an iterator to the end of the array.\n\n This function iterates over each element in the provided iterator\n and adds them to the array using the `push` method.\n\n # Example\n ```\n let u = [1, 2, 3]\n let v = [4, 5, 6]\n u.push_iter(v.iter())\n assert_eq!(u, [1, 2, 3, 4, 5, 6])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::push_iter[T](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 51,
+            "column": 8
+          }
+        },
+        {
+          "name": "shuffle",
+          "docstring": "\n Shuffle the array using Knuth shuffle\n \n To use this function, you need to provide a rand function, which takes an integer as it upper bound\n and returns an integer.\n *rand n* is expected to returns a uniformly distribution integer between 0 and n - 1\n # Example\n \n ```\n let arr = [1, 2, 3, 4, 5]\n fn rand(upper : Int) -> Int {\n   let rng = @random.new()\n   rng.int(limit=upper)\n }\n let _shuffled = Array::shuffle(arr, rand=rand)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::shuffle[T](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], rand~ : (Int) -> Int) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 134,
+            "column": 8
+          }
+        },
+        {
+          "name": "shuffle_in_place",
+          "docstring": "\n Shuffle the array using Knuth shuffle\n \n To use this function, you need to provide a rand function, which takes an integer as it upper bound\n and returns an integer.\n *rand n* is expected to returns a uniformly distribution integer between 0 and n - 1\n # Example\n \n ```\n let arr = [1, 2, 3, 4, 5]\n fn rand(upper : Int) -> Int {\n   let rng = @random.new()\n   rng.int(limit=upper)\n }\n Array::shuffle_in_place(arr, rand=rand)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::shuffle_in_place[T](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], rand~ : (Int) -> Int) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "array.mbt",
+            "line": 108,
+            "column": 8
+          }
+        },
+        {
+          "name": "sort",
+          "docstring": "\n Sorts the array in place.\n\n It's an in-place, unstable sort(it will reorder equal elements). The time complexity is O(n log n) in the worst case.\n\n # Example\n\n ```\n let arr = [5, 4, 3, 2, 1]\n arr.sort()\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::sort[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "sort.mbt",
+            "line": 27,
+            "column": 8
+          }
+        },
+        {
+          "name": "sort_by",
+          "docstring": "\n Sorts the array with a custom comparison function.\n\n It's an in-place, unstable sort(it will reorder equal elements). The time complexity is O(n log n) in the worst case.\n\n # Example\n\n ```\n let arr = [5, 3, 2, 4, 1]\n arr.sort_by(fn (a, b) { a - b })\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::sort_by[T](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], cmp : (T, T) -> Int) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "sort_by.mbt",
+            "line": 48,
+            "column": 8
+          }
+        },
+        {
+          "name": "sort_by_key",
+          "docstring": "\n Sorts the array with a key extraction function.\n\n It's an in-place, unstable sort(it will reorder equal elements). The time complexity is O(n log n) in the worst case.\n\n # Example\n\n ```\n let arr = [5, 3, 2, 4, 1]\n arr.sort_by_key(fn (x) {-x})\n assert_eq!(arr, [5, 4, 3, 2, 1])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#Array\">Array</a>::sort_by_key[T, K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], map : (T) -> K) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "sort_by.mbt",
+            "line": 27,
+            "column": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "FixedArray",
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "FixedArray",
+              "path": "moonbitlang/core/array"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[X]",
+              "loc": {
+                "path": "moonbitlang/core/array",
+                "file": "fixedarray.mbt",
+                "line": 1218,
+                "column": 82
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "all",
+          "docstring": "\n Check if all the elements in the array match the condition.\n\n # Example\n\n ```\n let arr: FixedArray[Int] = [1, 2, 3, 4, 5]\n assert_true!(arr.all(fn(ele) { ele < 6 }))\n assert_false!(arr.all(fn(ele) { ele < 5 }))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::all[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (T) -> Bool) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 685,
+            "column": 20
+          }
+        },
+        {
+          "name": "any",
+          "docstring": "\n Check if any of the elements in the array match the condition.\n\n # Example\n\n ```\n let arr: FixedArray[Int] = [1, 2, 3, 4, 5]\n assert_true!(arr.any(fn(ele) { ele < 6 }))\n assert_true!(arr.any(fn(ele) { ele < 5 }))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::any[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (T) -> Bool) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 721,
+            "column": 20
+          }
+        },
+        {
+          "name": "blit_from_bytesview",
+          "docstring": "\n Copy bytes from a @bytes.View into a fixed array of bytes.\n\n Parameters:\n\n * `self` : The destination fixed array of bytes.\n * `bytes_offset` : The starting position in the destination array where bytes will be copied.\n * `src` : The source View to copy from.\n\n Throws a panic if:\n * `bytes_offset` is negative\n * The destination array is too small to hold all bytes from the source View\n\n Example:\n\n ```moonbit\n  let arr = FixedArray::make(4, b'\\x00')\n  let view = b\"\\x01\\x02\\x03\"[1:]\n  arr.blit_from_bytesview(1, view)\n  inspect!(arr, content=\"[b'\\\\x00', b'\\\\x02', b'\\\\x03', b'\\\\x00']\")\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::blit_from_bytesview(self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte], bytes_offset : Int, src : <a href=\"moonbitlang/core/bytes#View\">@moonbitlang/core/bytes.View</a>) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "blit.mbt",
+            "line": 82,
+            "column": 20
+          }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Checks if the array contains an element.\n\n # Example\n ```\n let arr: FixedArray[Int] = [3, 4, 5]\n assert_true!(arr.contains(3))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::contains[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], value : T) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 808,
+            "column": 20
+          }
+        },
+        {
+          "name": "copy",
+          "docstring": "\n Creates a new array that is a copy of the original array.\n\n Parameters:\n\n * `self` : The array to be copied. The type of elements in the array must be\n `T`.\n\n Returns a new array containing all elements from the original array in the\n same order.\n\n Example:\n\n ```moonbit\n test \"copy\" {\n   let original = [1, 2, 3]\n   let copied = original.copy()\n   inspect!(copied, content=\"[1, 2, 3]\")\n   inspect!(physical_equal(original, copied), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::copy[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "blit.mbt",
+            "line": 36,
+            "column": 20
+          }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterates over each element.\n\n # Arguments\n\n - `self`: The array to iterate over.\n - `f`: The function to apply to each element.\n\n # Example\n\n ```\n let arr = []\n [1, 2, 3, 4, 5].each(fn(x){ arr.push(x) })\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```\n TODO: change the intrinsic to match the function name\n @intrinsic %fixedarray.iter",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::each[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (T) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 32,
+            "column": 20
+          }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterates over the array with index.\n\n # Arguments\n\n - `self`: The array to iterate over.\n - `f`: A function that takes an `Int` representing the index and a `T` representing the element of the array, and returns `Unit`.\n\n # Example\n\n ```\n let arr = []\n [1, 2, 3, 4, 5].eachi(fn(index, elem){\n   arr.push((index, elem))\n })\n assert_eq!(arr, [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5)])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::eachi[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (Int, T) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 83,
+            "column": 20
+          }
+        },
+        {
+          "name": "ends_with",
+          "docstring": "\n Check if the array ends with a given suffix.\n\n # Example\n ```\n let v: FixedArray[Int] = [3, 4, 5]\n assert_true!(v.ends_with([5]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::ends_with[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], suffix : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 892,
+            "column": 20
+          }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n Fold out values from an array according to certain rules.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].fold(init=0, fn { sum, elem => sum + elem })\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::fold[A, B](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 399,
+            "column": 20
+          }
+        },
+        {
+          "name": "fold_left",
+          "docstring": "\n Fold out values from an array according to certain rules.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].fold(init=0, fn { sum, elem => sum + elem })\n assert_eq!(sum, 15)\n ```\n @alert deprecated \"Use `fold` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::fold_left[T, U](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (U, T) -> U, init~ : U) -> U",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "deprecated.mbt",
+            "line": 97,
+            "column": 20
+          }
+        },
+        {
+          "name": "fold_lefti",
+          "docstring": "\n Fold out values from an array according to certain rules with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].foldi(init=0, fn { index, sum, _elem => sum + index })\n assert_eq!(sum, 10)\n ```\n @alert deprecated \"Use `foldi` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::fold_lefti[T, U](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (Int, U, T) -> U, init~ : U) -> U",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "deprecated.mbt",
+            "line": 133,
+            "column": 20
+          }
+        },
+        {
+          "name": "fold_right",
+          "docstring": "\n Fold out values from an array according to certain rules in reversed turn.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].rev_fold(init=0, fn { sum, elem => sum + elem })\n assert_eq!(sum, 15)\n ```\n @alert deprecated \"Use `rev_fold` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::fold_right[T, U](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (U, T) -> U, init~ : U) -> U",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "deprecated.mbt",
+            "line": 115,
+            "column": 20
+          }
+        },
+        {
+          "name": "fold_righti",
+          "docstring": "\n Fold out values from an array according to certain rules in reversed turn with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].rev_foldi(init=0, fn { index, sum, _elem => sum + index })\n assert_eq!(sum, 10)\n ```\n @alert deprecated \"Use `rev_foldi` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::fold_righti[T, U](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (Int, U, T) -> U, init~ : U) -> U",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "deprecated.mbt",
+            "line": 151,
+            "column": 20
+          }
+        },
+        {
+          "name": "foldi",
+          "docstring": "\n Fold out values from an array according to certain rules with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].foldi(init=0, fn { index, sum, _elem => sum + index })\n assert_eq!(sum, 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::foldi[A, B](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 465,
+            "column": 20
+          }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Creates a new fixed-size array from a dynamic array. The resulting fixed\n array will have the same length and elements as the input array.\n\n Parameters:\n\n * `array` : A dynamic array containing elements of type `T` that will be\n converted to a fixed array.\n\n Returns a new fixed array containing the same elements as the input array.\n\n Example:\n\n ```moonbit\n test \"FixedArray::from_array\" {\n   let dynamic_array = [1, 2, 3, 4, 5]\n   let fixed_array = FixedArray::from_array(dynamic_array)\n   inspect!(fixed_array, content=\"[1, 2, 3, 4, 5]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::from_array[T](array : <a href=\"moonbitlang/core/array#Array\">Array</a>[T]) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 381,
+            "column": 20
+          }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "\n Creates a new fixed array from an iterator.\n\n Parameters:\n\n * `iterator` : An iterator of type `Iter[T]` from which elements will be\n collected into a fixed array.\n\n Returns a new fixed array containing all elements from the iterator.\n\n Example:\n\n ```moonbit\n test \"FixedArray::from_iter\" {\n   let arr = [1, 2, 3]\n   let fixed_arr = FixedArray::from_iter(arr.iter())\n   inspect!(fixed_arr, content=\"[1, 2, 3]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::from_iter[T](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[T]) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 1154,
+            "column": 20
+          }
+        },
+        {
+          "name": "is_sorted",
+          "docstring": "\n Checks if the elements in the array are sorted in ascending order according\n to their natural ordering.\n\n Parameters:\n\n * `array` : A fixed array of type `T`, where `T` must implement the `Compare`\n trait.\n\n Returns `true` if the array is sorted in ascending order, `false` otherwise.\n An empty array or an array with a single element is considered sorted.\n\n Example:\n\n ```moonbit\n test \"FixedArray::is_sorted\" {\n   let sorted : FixedArray[Int] = [1, 2, 3, 4, 5]\n   let unsorted : FixedArray[Int] = [5, 4, 3, 2, 1]\n   inspect!(FixedArray::is_sorted(sorted), content=\"true\")\n   inspect!(FixedArray::is_sorted(unsorted), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::is_sorted[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray_sort.mbt",
+            "line": 531,
+            "column": 20
+          }
+        },
+        {
+          "name": "last",
+          "docstring": "\n Returns the last element of a fixed array if it exists.\n\n Parameters:\n\n * `self` : The fixed array to get the last element from.\n\n Returns `Some(element)` containing the last element if the array is not\n empty, or `None` if the array is empty.\n\n Example:\n\n ```moonbit\n test \"FixedArray::last\" {\n   let array : FixedArray[Int] = [1, 2, 3]\n   inspect!(array.last(), content=\"Some(3)\")\n   let empty : FixedArray[Int] = []\n   inspect!(empty.last(), content=\"None\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::last[A](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A]) -> A?",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 1178,
+            "column": 20
+          }
+        },
+        {
+          "name": "makei",
+          "docstring": "\n Creates a new fixed-size array of the specified length, where each element is\n initialized using a function that maps indices to values.\n\n Parameters:\n\n * `length` : The length of the array to create. If `length` is less than or\n equal to 0, returns an empty array.\n * `initializer` : A function that takes an index (from 0 to `length - 1`) and\n returns a value of type `T` for that position.\n\n Returns a new fixed array containing the values produced by applying the\n initializer function to each index.\n\n Example:\n\n ```moonbit\n test \"FixedArray::makei\" {\n   let arr = FixedArray::makei(3, fn(i) { i * 2 })\n   inspect!(arr, content=\"[0, 2, 4]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::makei[T](length : Int, value : (Int) -> T) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 336,
+            "column": 20
+          }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Applies a function to each element of the array and returns a new array with the results.\n\n # Example\n\n ```\n let arr = [1, 2, 3, 4, 5]\n let doubled = arr.map(fn(x){ x * 2 })\n assert_eq!(doubled, [2, 4, 6, 8, 10])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::map[T, U](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (T) -> U) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[U]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 239,
+            "column": 20
+          }
+        },
+        {
+          "name": "mapi",
+          "docstring": "\n Maps a function over the elements of the arr with index.\n\n # Example\n ```\n let arr = [3, 4, 5]\n let added = arr.mapi(fn (i, x) { x + i })\n assert_eq!(added, [3, 5, 7])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::mapi[T, U](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (Int, T) -> U) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[U]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 274,
+            "column": 20
+          }
+        },
+        {
+          "name": "new",
+          "docstring": "\n Creates a new fixed array of specified length where each element is generated\n lazily by calling the given function.\n\n Parameters:\n\n * `length` : The size of the array to create. If negative or zero, returns an\n empty array.\n * `generator` : A function that takes no parameters and returns a value of\n type `T`. This function is called once for each element in the array.\n\n Returns a new fixed array of type `T` with the specified length, where each\n element is generated by calling the `generator` function.\n\n Example:\n\n ```moonbit\n test \"FixedArray::new\" {\n   let mut i = 0\n   let arr = FixedArray::makei(3, fn(_) {\n     i = i + 1\n     i\n   })\n   inspect!(arr, content=\"[1, 2, 3]\")\n }\n ```\n\n @alert deprecated \"Use `FixedArray::makei` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::new[T](length : Int, value : () -> T) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "deprecated.mbt",
+            "line": 44,
+            "column": 20
+          }
+        },
+        {
+          "name": "new_with_index",
+          "docstring": "\n Creates a new array with values built from indices. Each value in the array\n is computed by applying a function to its index.\n\n Parameters:\n\n * `length` : The length of the new array.\n * `function` : A function that takes an index as input and returns a value of\n type `T`. This function is called for each index from 0 to `length - 1` to\n generate the array elements.\n\n Returns a new array of type `FixedArray[T]` containing the computed values.\n\n Example:\n\n ```moonbit\n test \"FixedArray::makei\" {\n   let arr = FixedArray::makei(3, fn(i) { i * 2 })\n   inspect!(arr, content=\"[0, 2, 4]\")\n }\n ```\n\n @alert deprecated \"Use `FixedArray::makei` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::new_with_index[T](length : Int, value : (Int) -> T) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "deprecated.mbt",
+            "line": 80,
+            "column": 20
+          }
+        },
+        {
+          "name": "op_add",
+          "docstring": "\n Concatenates two arrays and returns a new array containing all elements from\n both arrays in order.\n\n Parameters:\n\n * `self` : The first array to concatenate.\n * `other` : The second array to concatenate.\n\n Returns a new array that contains all elements from the first array followed\n by all elements from the second array. The returned array is independent of\n both input arrays.\n\n Example:\n\n ```moonbit\n test \"op_add\" {\n   let arr1 : FixedArray[Int] = [1, 2, 3]\n   let arr2 : FixedArray[Int] = [4, 5, 6]\n   inspect!(arr1 + arr2, content=\"[1, 2, 3, 4, 5, 6]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::op_add[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], other : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 1064,
+            "column": 20
+          }
+        },
+        {
+          "name": "op_equal",
+          "docstring": "\n Checks if two fixed arrays are equal.\n\n Two arrays are considered equal if they have the same length and all\n corresponding elements are equal. The elements in the arrays must implement\n the `Eq` trait.\n\n Parameters:\n\n * `self` : The first fixed array to compare.\n * `other` : The second fixed array to compare.\n\n Returns `true` if the arrays are equal, `false` otherwise.\n\n Example:\n\n ```moonbit\n test \"FixedArray::op_equal\" {\n   let arr1 : FixedArray[Int] = [1, 2, 3]\n   let arr2 : FixedArray[Int] = [1, 2, 3]\n   let arr3 : FixedArray[Int] = [1, 2, 4]\n   inspect!(arr1 == arr2, content=\"true\")\n   inspect!(arr1 == arr3, content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::op_equal[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], that : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 963,
+            "column": 20
+          }
+        },
+        {
+          "name": "rev",
+          "docstring": "\n Returns a new array containing all elements in reverse order. The original\n array remains unchanged.\n\n Parameters:\n\n * `self` : The array to be reversed.\n\n Returns a new array with the same elements but in reverse order.\n\n Example:\n\n ```moonbit\n test \"FixedArray::rev\" {\n   let arr : FixedArray[Int] = [1, 2, 3, 4, 5]\n   inspect!(arr.rev(), content=\"[5, 4, 3, 2, 1]\")\n   // Original array remains unchanged\n   inspect!(arr, content=\"[1, 2, 3, 4, 5]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::rev[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 575,
+            "column": 20
+          }
+        },
+        {
+          "name": "rev_each",
+          "docstring": "\n Iterates over each element in reversed turn.\n\n # Arguments\n\n - `self`: The array to iterate over.\n - `f`: The function to apply to each element.\n\n # Example\n\n ```\n let arr = []\n [1, 2, 3, 4, 5].rev_each(fn(x){ arr.push(x) })\n assert_eq!(arr, [5, 4, 3, 2, 1])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::rev_each[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (T) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 132,
+            "column": 20
+          }
+        },
+        {
+          "name": "rev_eachi",
+          "docstring": "\n Iterates over the array with index in reversed turn.\n\n # Arguments\n\n - `self`: The array to iterate over.\n - `f`: A function that takes an `Int` representing the index and a `T` representing the element of the array, and returns `Unit`.\n\n # Example\n\n ```\n let arr = []\n [1, 2, 3, 4, 5].rev_eachi(fn(index, elem){\n   arr.push((index, elem))\n })\n assert_eq!(arr, [(0, 5), (1, 4), (2, 3), (3, 2), (4, 1)])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::rev_eachi[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], f : (Int, T) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 183,
+            "column": 20
+          }
+        },
+        {
+          "name": "rev_fold",
+          "docstring": "\n Fold out values from an array according to certain rules in reversed turn.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].rev_fold(init=0, fn { sum, elem => sum + elem })\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::rev_fold[A, B](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A], init~ : B, f : (B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 431,
+            "column": 20
+          }
+        },
+        {
+          "name": "rev_foldi",
+          "docstring": "\n Fold out values from an array according to certain rules in reversed turn with index.\n\n # Example\n ```\n let sum = [1, 2, 3, 4, 5].rev_foldi(init=0, fn { index, sum, _elem => sum + index })\n assert_eq!(sum, 10)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::rev_foldi[A, B](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[A], init~ : B, f : (Int, B, A) -> B) -> B",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 500,
+            "column": 20
+          }
+        },
+        {
+          "name": "rev_inplace",
+          "docstring": "\n Reverses the array in place by swapping elements from both ends until\n reaching the middle.\n\n Parameters:\n\n * `array` : The array to be reversed. The array will be modified in place.\n\n Example:\n\n ```moonbit\n test \"rev_inplace\" {\n   let arr : FixedArray[_] = [1, 2, 3, 4, 5]\n   arr.rev_inplace()\n   inspect!(arr, content=\"[5, 4, 3, 2, 1]\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::rev_inplace[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 545,
+            "column": 20
+          }
+        },
+        {
+          "name": "search",
+          "docstring": "\n Search the array index for a given element.\n\n # Example\n ```\n let arr: FixedArray[Int] = [3, 4, 5]\n assert_eq!(arr.search(3), Some(0))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::search[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], value : T) -> Int?",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 772,
+            "column": 20
+          }
+        },
+        {
+          "name": "sort",
+          "docstring": "\n Sorts the array\n \n It's an in-place, unstable sort(it will reorder equal elements). The time complexity is O(n log n) in the worst case.\n \n # Example\n \n ```\n let arr = [5, 4, 3, 2, 1]\n arr.sort()\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::sort[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray_sort.mbt",
+            "line": 216,
+            "column": 20
+          }
+        },
+        {
+          "name": "sort_by",
+          "docstring": "\n Sorts the array with a custom comparison function.\n\n It's an in-place, unstable sort(it will reorder equal elements). The time complexity is O(n log n) in the worst case.\n\n # Example\n\n ```\n let arr = [5, 3, 2, 4, 1]\n arr.sort_by(fn (a, b) { a - b })\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::sort_by[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], cmp : (T, T) -> Int) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray_sort_by.mbt",
+            "line": 61,
+            "column": 20
+          }
+        },
+        {
+          "name": "sort_by_key",
+          "docstring": "\n Sorts the array with a key extraction function.\n\n It's an in-place, unstable sort(it will reorder equal elements). The time complexity is O(n log n) in the worst case.\n\n # Example\n\n ```\n let arr = [5, 3, 2, 4, 1]\n arr.sort_by_key(fn (x) {-x})\n assert_eq!(arr, [5, 4, 3, 2, 1])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::sort_by_key[T, K : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], map : (T) -> K) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray_sort_by.mbt",
+            "line": 27,
+            "column": 20
+          }
+        },
+        {
+          "name": "stable_sort",
+          "docstring": "\n Sorts the array\n \n It's an stable sort(it will not reorder equal elements). The time complexity is *O*(*n* \\* log(*n*)) in the worst case.\n \n # Example\n \n ```\n let arr: FixedArray[Int] = [5, 4, 3, 2, 1]\n arr.stable_sort()\n assert_eq!(arr, [1, 2, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::stable_sort[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray_sort.mbt",
+            "line": 27,
+            "column": 20
+          }
+        },
+        {
+          "name": "starts_with",
+          "docstring": "\n Check if the array starts with a given prefix.\n\n # Example\n ```\n let arr: FixedArray[Int] = [3, 4, 5]\n assert_true!(arr.starts_with([3, 4]))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::starts_with[T : <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], prefix : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 844,
+            "column": 20
+          }
+        },
+        {
+          "name": "swap",
+          "docstring": "\n Swap two elements in the array.\n\n # Example\n\n ```\n let arr = [1, 2, 3, 4, 5]\n arr.swap(0, 1)\n assert_eq!(arr, [2, 1, 3, 4, 5])\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>::swap[T](self : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[T], i : Int, j : Int) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/array",
+            "file": "fixedarray.mbt",
+            "line": 648,
+            "column": 20
+          }
+        }
+      ]
+    }
+  ]
+}

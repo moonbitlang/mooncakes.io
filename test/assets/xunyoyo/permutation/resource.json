@@ -1,0 +1,15 @@
+{
+  "kind": "module",
+  "meta_info": {
+    "name": "xunyoyo/permutation",
+    "version": "0.1.3",
+    "readme": "README.md",
+    "repository": "https://github.com/xunyoyo/permutation",
+    "license": "Apache-2.0",
+    "keywords": [],
+    "description": "Array permutation.",
+    "source": "src"
+  },
+  "readme_content": "# xunyoyo/permutation\n\n这是一个用Moonbit语言实现的项目，包含以下主要功能：\n1. 生成数组的下一个字典序排列。\n2. 生成数组的上一个字典序排列。\n3. 检查两个数组是否为排列。\n\n## 功能\n\n### next_permutation\n\n生成给定数组的下一个字典序排列。如果当前排列是最后一个排列，则返回`false`并将数组重新排列为第一个排列（升序）。\n\n#### 示例\n\n```moonbit\nfn main {\n  let a = [1, 2, 3]\n  let has_next = next_permutation(a)\n  println(a) // 输出: [1, 3, 2]\n  println(has_next) // 输出: true\n}\n```\n\n### prev_permutation\n\n生成给定数组的上一个字典序排列。如果当前排列是第一个排列，则返回`false`并将数组重新排列为最后一个排列（降序）。\n\n#### 示例\n\n```moonbit\nfn main {\n  let a = [1, 2, 3]\n  let has_prev = prev_permutation(a)\n  println(a) // 输出: [3, 2, 1]\n  println(has_prev) // 输出: true\n}\n```\n\n### is_permutation\n\n检查两个数组是否互为排列。\n\n#### 示例\n\n```moonbit\nfn main {\n  let a = [1, 2, 3, 4]\n  let b = [3, 1, 4, 2]\n  let result = is_permutation(a, b)\n  println(result) // 输出: true\n}\n```",
+  "module_index": "xunyoyo/permutation/module_index.json"
+}

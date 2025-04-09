@@ -1,0 +1,403 @@
+{
+  "name": "moonbitlang/core/float",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "default",
+      "docstring": "\n Returns the default value for `Float` type, which is `0.0`.\n\n Returns a float value of `0.0`.\n\n Example:\n\n ```moonbit\n test \"default\" {\n   inspect!(@float.default(), content=\"0\")\n }\n ```",
+      "signature": "fn default() -> Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 179,
+        "column": 8
+      }
+    },
+    {
+      "name": "infinity",
+      "docstring": "\n Represents positive infinity as a floating-point value.\n\n Returns a constant value representing positive infinity in IEEE 754\n single-precision floating-point format (0x7F800000).\n\n Example:\n\n ```moonbit\n test \"infinity\" {\n   inspect!(@float.infinity.is_pos_inf(), content=\"true\")\n   inspect!(@float.infinity > 1.0, content=\"true\")\n }\n ```",
+      "signature": "let infinity : Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 46,
+        "column": 9
+      }
+    },
+    {
+      "name": "max_value",
+      "docstring": "\n Represents the maximum finite value of a 32-bit floating-point number, which\n is approximately 3.4028235e+38.\n\n Example:\n\n ```moonbit\n test \"max_value\" {\n   inspect!(@float.max_value < @float.infinity, content=\"true\")\n   inspect!(@float.max_value > 0.0, content=\"true\")\n }\n ```",
+      "signature": "let max_value : Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 77,
+        "column": 9
+      }
+    },
+    {
+      "name": "min_positive",
+      "docstring": "\n Represents the smallest positive normalized floating-point number that can be\n represented by the Float type (approximately 1.17549435e-38).\n\n Example:\n\n ```moonbit\n test \"min_positive\" {\n   inspect!(@float.min_positive > 0.0, content=\"true\")\n   inspect!(@float.min_positive < 1.2e-38, content=\"true\")\n }\n ```",
+      "signature": "let min_positive : Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 104,
+        "column": 9
+      }
+    },
+    {
+      "name": "min_value",
+      "docstring": "\n Represents the smallest finite negative Float value (-3.4028235e+38).\n\n Example:\n\n ```moonbit\n test \"min_value\" {\n   inspect!(@float.min_value < -1.0, content=\"true\")\n   inspect!(@float.min_value > @float.neg_infinity, content=\"true\")\n }\n ```",
+      "signature": "let min_value : Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 90,
+        "column": 9
+      }
+    },
+    {
+      "name": "neg_infinity",
+      "docstring": "\n Represents negative infinity for 32-bit floating-point numbers. This constant\n has a mathematical value of -∞ and follows the IEEE 754 standard for\n floating-point arithmetic.\n\n Returns a `Float` value representing negative infinity.\n\n Example:\n\n ```moonbit\n test \"neg_infinity\" {\n   inspect!(@float.neg_infinity.is_neg_inf(), content=\"true\")\n   inspect!(@float.neg_infinity < (-1.0 : Float), content=\"true\")\n }\n ```",
+      "signature": "let neg_infinity : Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 63,
+        "column": 9
+      }
+    },
+    {
+      "name": "not_a_number",
+      "docstring": "\n Represents the Not a Number (NaN) value in floating-point arithmetic. NaN is\n used to represent undefined or unrepresentable values, such as the result of\n 0.0/0.0.\n\n Returns a special floating-point value that represents NaN.\n\n Example:\n\n ```moonbit\n test \"not_a_number\" {\n   inspect!(@float.not_a_number.is_nan(), content=\"true\")\n   inspect!(@float.not_a_number + 1.0, content=\"NaN\")\n }\n ```",
+      "signature": "let not_a_number : Float",
+      "loc": {
+        "path": "moonbitlang/core/float",
+        "file": "float.mbt",
+        "line": 30,
+        "column": 9
+      }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Float",
+      "impls": [
+        {
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "\n Computes a hash value for a floating-point number by first converting it to\n its integer representation and then applying the standard integer hashing\n function.\n\n Parameters:\n\n * `value` : The floating-point number to be hashed.\n\n Returns an integer hash value for the given floating-point number.\n\n Example:\n\n ```moonbit\n test \"Float::hash\" {\n   let f : Float = 3.14\n   let h = Hash::hash(f)\n   inspect!(h != 0, content=\"true\")\n }\n ```",
+              "signature": "fn hash(self : Float) -> Int",
+              "loc": {
+                "path": "moonbitlang/core/float",
+                "file": "float.mbt",
+                "line": 203,
+                "column": 30
+              }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "\n Combines the hash value of a floating-point number with an existing hasher.\n\n Parameters:\n\n * `self` : The floating-point number to be hashed.\n * `hasher` : The hasher object to combine the hash value with.\n\n Example:\n\n ```moonbit\n test \"Float::hash_combine\" {\n   let x : Float = 3.14\n   let y : Float = 3.14\n   // Same values should produce same hash combinations\n   inspect!(Hash::hash(x) == Hash::hash(y), content=\"true\")\n }\n ```",
+              "signature": "fn hash_combine(self : Float, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/float",
+                "file": "float.mbt",
+                "line": 225,
+                "column": 30
+              }
+            }
+          ]
+        },
+        {
+          "self": { "name": "Float", "path": "moonbitlang/core/float" },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "\n Converts a floating-point number to its string representation.\n\n Parameters:\n\n * `self` : The floating-point number to be converted.\n * `logger` : The logger to write the string representation to.\n\n Example:\n\n ```moonbit\n test \"Float::output\" {\n   let f : Float = 3.14\n   let s = f.to_double().to_string()\n   inspect!(s, content=\"3.140000104904175\")\n }\n ```",
+              "signature": "fn output(self : Float, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/float",
+                "file": "float.mbt",
+                "line": 147,
+                "column": 30
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "abs",
+          "docstring": "\n Returns the absolute value of a floating-point number.\n\n Parameters:\n\n * `self` : A floating-point number.\n\n Returns the absolute value of the input number. For positive numbers and\n zero, returns the number unchanged. For negative numbers, returns the\n negation of the number. For NaN, returns NaN.\n\n Example:\n\n ```moonbit\n test \"Float::abs\" {\n   inspect!((1.5 : Float).abs(), content=\"1.5\")\n   inspect!((-1.5 : Float).abs(), content=\"1.5\")\n   inspect!((0.0 : Float).abs(), content=\"0\")\n   inspect!((-0.0 : Float).abs(), content=\"0\")\n   inspect!(@float.not_a_number.abs().is_nan(), content=\"true\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::abs(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 128,
+            "column": 8
+          }
+        },
+        {
+          "name": "acos",
+          "docstring": "\n Calculates the arccosine of a floating-point number.\n\n Parameters:\n\n * `x` : The number for which to calculate the arccosine.\n\n Returns the arccosine of the number `x`.\n\n * Returns NaN if the input is NaN.\n * Returns NaN if the input is less than -1 or greater than 1.\n\n Example:\n\n ```moonbit\n test \"acos\" {\n   inspect!((0.0 : Float).acos(), content=\"1.5707963705062866\")\n   inspect!((1.0 : Float).acos(), content=\"0\")\n   inspect!((-1.0 : Float).acos(), content=\"3.1415927410125732\")\n   inspect!(@float.not_a_number.acos(), content=\"NaN\")\n   inspect!(@float.infinity.acos(), content=\"NaN\")\n   inspect!(@float.neg_infinity.acos(), content=\"NaN\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::acos(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 142,
+            "column": 8
+          }
+        },
+        {
+          "name": "asin",
+          "docstring": "\n Calculates the arcsine of a floating-point number.\n\n Parameters:\n\n * `x` : The number for which to calculate the arcsine.\n\n Returns the arcsine of the number `x`.\n\n * Returns NaN if the input is NaN.\n * Returns NaN if the input is less than -1 or greater than 1.\n\n Example:\n\n ```moonbit\n test \"asin\" {\n   inspect!((0.0 : Float).asin(), content=\"0\")\n   inspect!((1.0 : Float).asin(), content=\"1.5707963705062866\")\n   inspect!((-1.0 : Float).asin(), content=\"-1.5707963705062866\")\n   inspect!(@float.not_a_number.asin(), content=\"NaN\")\n   inspect!(@float.infinity.asin(), content=\"NaN\")\n   inspect!(@float.neg_infinity.asin(), content=\"NaN\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::asin(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 114,
+            "column": 8
+          }
+        },
+        {
+          "name": "atan",
+          "docstring": "\n Calculates the arctangent of a floating-point number.\n\n Parameters:\n\n * `x` : The number for which to calculate the arctangent.\n\n Returns the arctangent of the number `x`.\n\n Example:\n\n * Returns NaN if the input is NaN.\n\n ```moonbit\n test \"atan\" {\n   inspect!((0.0 : Float).atan(), content=\"0\")\n   inspect!((1.0 : Float).atan(), content=\"0.7853981852531433\")\n   inspect!((-1.0 : Float).atan(), content=\"-0.7853981852531433\")\n   inspect!(@float.not_a_number.atan(), content=\"NaN\")\n   inspect!(@float.infinity.atan(), content=\"1.5707963705062866\")\n   inspect!(@float.neg_infinity.atan(), content=\"-1.5707963705062866\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::atan(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 169,
+            "column": 8
+          }
+        },
+        {
+          "name": "atan2",
+          "docstring": "\n Calculates the arctangent of the quotient of two floating-point numbers.\n\n Parameters:\n\n * `self` : The numerator of the quotient.\n * `x` : The denominator of the quotient.\n\n Returns the arctangent of the quotient `self / x`.\n\n * Returns NaN if self or x is NaN.\n\n Example:\n\n ```moonbit\n test \"atan2\" {\n   inspect!((0.0 : Float).atan2(-1.0), content=\"3.1415927410125732\")\n   inspect!((1.0 : Float).atan2(0.0), content=\"1.5707963705062866\")\n   inspect!((1.0 : Float).atan2(1.0), content=\"0.7853981852531433\")\n   inspect!(@float.not_a_number.atan2(1.0), content=\"NaN\")\n   inspect!((1.0 : Float).atan2(not_a_number), content=\"NaN\")\n   inspect!(@float.infinity.atan2(1.0), content=\"1.5707963705062866\")\n   inspect!((1.0 : Float).atan2(infinity), content=\"0\")\n   inspect!(@float.neg_infinity.atan2(1.0), content=\"-1.5707963705062866\")\n   inspect!((1.0 : Float).atan2(@float.neg_infinity), content=\"3.1415927410125732\")\n   inspect!(@float.infinity.atan2(@float.infinity), content=\"0.7853981852531433\")\n   inspect!(@float.neg_infinity.atan2(@float.neg_infinity), content=\"-2.356194496154785\")\n   inspect!(@float.infinity.atan2(@float.neg_infinity), content=\"2.356194496154785\")\n   inspect!(@float.neg_infinity.atan2(@float.infinity), content=\"-0.7853981852531433\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::atan2(self : Float, other : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 204,
+            "column": 8
+          }
+        },
+        {
+          "name": "ceil",
+          "docstring": "\n Returns the smallest integer greater than or equal to the given\n floating-point number.\n\n Parameters:\n\n * `self` : The floating-point number to round up.\n\n Returns the ceiling value of the input as a `Float`.\n\n Example:\n\n ```moonbit\n test \"ceil\" {\n   inspect!((1.4 : Float).ceil(), content=\"2\")\n   inspect!((1.0 : Float).ceil(), content=\"1\")\n   inspect!((-1.4 : Float).ceil(), content=\"-1\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::ceil(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "round_wasm.mbt",
+            "line": 59,
+            "column": 8
+          }
+        },
+        {
+          "name": "cos",
+          "docstring": "\n Calculates the cosine of a floating-point number in radians.\n\n Parameters:\n\n * `x` : The angle in radians for which to calculate the cosine.\n\n Returns the cosine of the angle `x`.\n\n Example:\n\n ```moonbit\n test \"cos\" {\n   inspect!((0.0 : Float).cos(), content=\"1\")\n   inspect!((2.0 : Float).cos(), content=\"-0.416146844625473\")\n   inspect!((-5.0 : Float).cos(), content=\"0.28366219997406006\")\n   inspect!(@float.not_a_number.cos(), content=\"NaN\")\n   inspect!(@float.infinity.cos(), content=\"NaN\")\n   inspect!(@float.neg_infinity.cos(), content=\"NaN\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::cos(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 61,
+            "column": 8
+          }
+        },
+        {
+          "name": "default",
+          "docstring": "\n Returns a default value for the `Float` type, which is `0.0`.\n\n Returns a `Float` value initialized to zero.\n\n Example:\n\n ```moonbit\n test \"Float::default\" {\n   inspect!(Float::default(), content=\"0\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::default() -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 163,
+            "column": 15
+          }
+        },
+        {
+          "name": "exp",
+          "docstring": "\n Calculates the exponential function e^x for a given floating-point number.\n\n Parameters:\n\n * `x` : A floating-point number for which to calculate e^x.\n\n Returns the value of e raised to the power of x (e^x).\n\n Example:\n\n ```moonbit\n test \"exp\" {\n   inspect!((0.0 : Float).exp(), content=\"1\")\n   inspect!((1.0 : Float).exp(), content=\"2.7182817459106445\")\n   inspect!(@float.neg_infinity.exp(), content=\"0\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::exp(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "exp.mbt",
+            "line": 91,
+            "column": 8
+          }
+        },
+        {
+          "name": "floor",
+          "docstring": "\n Returns the largest integer less than or equal to the given floating-point\n number.\n\n Parameters:\n\n * `number` : The floating-point number to be rounded down.\n\n Returns a floating-point number representing the largest integer less than or\n equal to the input.\n\n Example:\n\n ```moonbit\n test \"floor\" {\n   inspect!((3.7 : Float).floor(), content=\"3\")\n   inspect!((-3.7 : Float).floor(), content=\"-4\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::floor(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "round_wasm.mbt",
+            "line": 80,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_inf",
+          "docstring": "\n Determines if the floating-point number is positive or negative infinity.\n\n Parameters:\n\n * `self` : The floating-point number to be checked.\n\n Returns a boolean value indicating whether the number is positive or negative\n infinity.\n\n Example:\n\n ```moonbit\n test \"Float::is_inf\" {\n   inspect!(@float.infinity.is_inf(), content=\"true\")\n   inspect!(@float.neg_infinity.is_inf(), content=\"true\")\n   inspect!((1.0 : Float).is_inf(), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::is_inf(self : Float) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 298,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_nan",
+          "docstring": "\n Determines if the floating-point number is NaN (Not a Number).\n\n Parameters:\n\n * `self` : The floating-point number to be checked.\n\n Returns a boolean value indicating whether the number is NaN.\n\n Example:\n\n ```moonbit\n test \"Float::is_nan\" {\n   inspect!(@float.not_a_number.is_nan(), content=\"true\")\n   inspect!((1.0 : Float).is_nan(), content=\"false\")\n   inspect!(@float.infinity.is_nan(), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::is_nan(self : Float) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 364,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_neg_inf",
+          "docstring": "\n Determines if the floating-point number is negative infinity.\n\n Parameters:\n\n * `self` : The floating-point number to be checked.\n\n Returns a boolean value indicating whether the number is negative infinity.\n\n Example:\n\n ```moonbit\n test \"Float::is_neg_inf\" {\n   inspect!(@float.neg_infinity.is_neg_inf(), content=\"true\")\n   inspect!((1.0 : Float).is_neg_inf(), content=\"false\")\n   inspect!(@float.infinity.is_neg_inf(), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::is_neg_inf(self : Float) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 342,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_pos_inf",
+          "docstring": "\n Determines if the floating-point number is positive infinity.\n\n Parameters:\n\n * `self` : The floating-point number to be checked.\n\n Returns a boolean value indicating whether the number is positive infinity.\n\n Example:\n\n ```moonbit\n test \"Float::is_pos_inf\" {\n   inspect!(@float.infinity.is_pos_inf(), content=\"true\")\n   inspect!((1.0 : Float).is_pos_inf(), content=\"false\")\n   inspect!(@float.neg_infinity.is_pos_inf(), content=\"false\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::is_pos_inf(self : Float) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 320,
+            "column": 8
+          }
+        },
+        {
+          "name": "ln",
+          "docstring": "\n Calculates the natural logarithm of a floating-point number.\n\n Parameters:\n\n * `value` : The floating-point number to calculate the natural logarithm of.\n\n Returns the natural logarithm of the input value. Special cases are handled\n as follows:\n\n * Returns `0.0` when the input is `1.0`\n * Returns `neg_infinity` when the input is `0.0`\n * Returns `not_a_number` when the input is negative\n * Returns `infinity` when the input is `infinity`\n * Returns `not_a_number` when the input is `not_a_number`\n\n Example:\n\n ```moonbit\n test \"ln\" {\n   inspect!((1.0 : Float).ln(), content=\"0\")\n   inspect!((2.718281828459045 : Float).ln(), content=\"0.9999999403953552\")\n   inspect!((0.0 : Float).ln(), content=\"-Infinity\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::ln(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "log.mbt",
+            "line": 75,
+            "column": 8
+          }
+        },
+        {
+          "name": "op_mod",
+          "docstring": "\n Calculates the modulo operation between two floating-point numbers.\n\n Parameters:\n\n * `self` : The dividend floating-point number.\n * `other` : The divisor floating-point number.\n\n Returns the remainder of the division of `self` by `other`.\n\n Example:\n\n ```moonbit\n test \"op_mod\" {\n   inspect!((5.7 : Float).op_mod(2.0), content=\"1.6999998092651367\")\n   inspect!((-5.7 : Float).op_mod(2.0), content=\"-1.6999998092651367\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::op_mod(self : Float, other : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "mod.mbt",
+            "line": 33,
+            "column": 8
+          }
+        },
+        {
+          "name": "pow",
+          "docstring": "\n Calculates the power of a floating-point number raised to another\n floating-point number.\n\n Parameters:\n\n * `base` : The base number to be raised to a power.\n * `exponent` : The power to which the base number is raised.\n\n Returns the result of raising `base` to the power of `exponent`.\n\n Example:\n\n ```moonbit\n test \"pow\" {\n   inspect!((2.0 : Float).pow(3.0), content=\"8\")\n   inspect!((4.0 : Float).pow(0.5), content=\"2\")\n   inspect!((1.0 : Float).pow(-1.0), content=\"1\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::pow(self : Float, other : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "pow.mbt",
+            "line": 35,
+            "column": 8
+          }
+        },
+        {
+          "name": "round",
+          "docstring": "\n Rounds a floating-point number to the nearest integer value. If the\n fractional part is exactly 0.5, rounds up to the nearest integer (ties to\n ceiling).\n\n Parameters:\n\n * `self` : The floating-point number to be rounded.\n\n Returns the rounded value as a float.\n\n Example:\n\n ```moonbit\n test \"round\" {\n   inspect!((1.4 : Float).round(), content=\"1\")\n   inspect!((1.5 : Float).round(), content=\"2\")\n   inspect!((1.6 : Float).round(), content=\"2\")\n   inspect!((-1.5 : Float).round(), content=\"-1\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::round(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "round_wasm.mbt",
+            "line": 103,
+            "column": 8
+          }
+        },
+        {
+          "name": "sin",
+          "docstring": "\n Calculates the sine of a floating-point number in radians.\n\n Parameters:\n\n * `x` : The angle in radians for which to calculate the sine.\n\n Returns the sine of the angle `x`.\n\n Example:\n\n ```moonbit\n test \"sin\" {\n   inspect!((0.0 : Float).sin(), content=\"0\")\n   inspect!((2.0 : Float).sin(), content=\"0.9092974066734314\")\n   inspect!((-5.0 : Float).sin(), content=\"0.9589242935180664\")\n   inspect!(@float.not_a_number.sin(), content=\"NaN\")\n   inspect!(@float.infinity.sin(), content=\"NaN\")\n   inspect!(@float.neg_infinity.sin(), content=\"NaN\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::sin(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 36,
+            "column": 8
+          }
+        },
+        {
+          "name": "tan",
+          "docstring": "\n Calculates the tangent of a floating-point number in radians.\n\n Parameters:\n\n * `x` : The angle in radians for which to calculate the tangent.\n\n Returns the tangent of the angle `x`.\n\n Example:\n\n ```moonbit\n test \"tan\" {\n   inspect!((0.0 : Float).tan(), content=\"0\")\n   inspect!((2.0 : Float).tan(), content=\"-2.185039758682251\")\n   inspect!((-5.0 : Float).tan(), content=\"3.3805150985717773\")\n   inspect!(@float.not_a_number.tan(), content=\"NaN\")\n   inspect!(@float.infinity.tan(), content=\"NaN\")\n   inspect!(@float.neg_infinity.tan(), content=\"NaN\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::tan(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "trig.mbt",
+            "line": 86,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_be_bytes",
+          "docstring": "\n Converts a floating-point number to a sequence of bytes in big-endian byte\n order. In big-endian order, the most significant byte is stored at the lowest\n memory address.\n\n Parameters:\n\n * `float` : The floating-point number to be converted.\n\n Returns a sequence of 4 bytes representing the floating-point number in IEEE\n 754 single-precision format with big-endian byte order.\n\n Example:\n\n ```moonbit\n test \"Float::to_be_bytes\" {\n   let x : Float = 1.0\n   inspect!(x.to_be_bytes(), content=\n   #|b\"\\x3f\\x80\\x00\\x00\"\n )\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::to_be_bytes(self : Float) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 251,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_int",
+          "docstring": "\n Converts a floating-point number to an integer, with proper handling of\n special cases such as NaN and values outside the range of 32-bit integers.\n\n Parameters:\n\n * `self` : The floating-point number to be converted.\n\n Returns an integer representation of the float value. Specifically:\n * `0` for `@float.not_a_number` (NaN),\n * `@int.max_value` (2147483647) for values greater than `@int.max_value`,\n * `@int.min_value` (-2147483648) for values less than `@int.min_value`.\n * truncated (towards zero) integer value for other cases.\n\n Examples:\n\n ```moonbit\n test \"Float::to_int/normal\" {\n   inspect!((1.5 : Float).to_int(), content=\"1\")\n   inspect!((-1.5 : Float).to_int(), content=\"-1\")\n   inspect!(@float.not_a_number.to_int(), content=\"0\")\n   inspect!(@float.infinity.to_int(), content=\"2147483647\")\n   inspect!(@float.neg_infinity.to_int(), content=\"-2147483648\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::to_int(self : Float) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "to_int_wasm.mbt",
+            "line": 40,
+            "column": 15
+          }
+        },
+        {
+          "name": "to_le_bytes",
+          "docstring": "\n Converts a floating-point number to its binary representation in\n little-endian byte order.\n\n Parameters:\n\n * `float` : The floating-point number to be converted.\n\n Returns a sequence of bytes representing the float value in little-endian\n order (least significant byte first).\n\n Example:\n\n ```moonbit\n test \"to_le_bytes\" {\n   let f : Float = 1.0\n   let bytes = f.to_le_bytes()\n   inspect!(bytes.length(), content=\"4\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::to_le_bytes(self : Float) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "float.mbt",
+            "line": 275,
+            "column": 8
+          }
+        },
+        {
+          "name": "trunc",
+          "docstring": "\n Returns the nearest integer value not greater in magnitude than the given\n floating-point number.\n\n Removes the fractional part of the floating-point number, effectively\n truncating towards zero. For example, `1.9` becomes `1.0`, and `-1.9` becomes\n `-1.0`.\n\n Parameters:\n\n * `self` : The floating-point number to truncate.\n\n Returns the truncated floating-point number.\n\n Example:\n\n ```moonbit\n test \"Float::trunc\" {\n   inspect!((1.9 : Float).trunc(), content=\"1\")\n   inspect!((-1.9 : Float).trunc(), content=\"-1\")\n   inspect!((0.1 : Float).trunc(), content=\"0\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/float#Float\">Float</a>::trunc(self : Float) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/float",
+            "file": "round_wasm.mbt",
+            "line": 38,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "import": [
+    {
+      "path": "Yoorkin/rabbit-tea",
+      "alias": "tea"
+    },
+    "Yoorkin/rabbit-tea/http",
+    "Yoorkin/rabbit-tea/html",
+    "Yoorkin/rabbit-tea/browser",
+    "moonbitlang/mooncakes/config",
+    "moonbitlang/mooncakes/view",
+    "moonbitlang/mooncakes/view/tree",
+    "moonbitlang/mooncakes/util",
+    "illusory0x0/fuzzy_match",
+    "CAIMEOX/lazy"
+  ]
+}

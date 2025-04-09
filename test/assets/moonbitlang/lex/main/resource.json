@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "main",
+  "module_path": "moonbitlang/lex",
+  "readme_content": "",
+  "package_data": "moonbitlang/lex/main/package_data.json",
+  "source_files": [ "main.mbt" ]
+}

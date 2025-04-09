@@ -1,0 +1,49 @@
+{
+  "name": "moonbitlang/core/byte",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "max_value",
+      "docstring": "",
+      "signature": "let max_value : Byte",
+      "loc": {
+        "path": "moonbitlang/core/byte",
+        "file": "byte.mbt",
+        "line": 16,
+        "column": 9
+      }
+    },
+    {
+      "name": "min_value",
+      "docstring": "",
+      "signature": "let min_value : Byte",
+      "loc": {
+        "path": "moonbitlang/core/byte",
+        "file": "byte.mbt",
+        "line": 19,
+        "column": 9
+      }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Byte",
+      "impls": [],
+      "methods": [
+        {
+          "name": "to_uint64",
+          "docstring": "\n Converts a byte value to an unsigned 64-bit integer.\n\n Parameters:\n\n * `byte` : The byte value to be converted.\n\n Returns an unsigned 64-bit integer representation of the byte value.\n\n Example:\n\n ```moonbit\n test \"to_uint64\" {\n   let b = b'\\xFF'\n   inspect!(b.to_uint64(), content=\"255\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/byte#Byte\">Byte</a>::to_uint64(self : Byte) -> UInt64",
+          "loc": {
+            "path": "moonbitlang/core/byte",
+            "file": "byte.mbt",
+            "line": 38,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

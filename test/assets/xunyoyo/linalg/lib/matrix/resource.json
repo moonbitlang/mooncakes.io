@@ -1,0 +1,11 @@
+{
+  "kind": "package",
+  "relative_path": "lib/matrix",
+  "module_path": "xunyoyo/linalg",
+  "readme_content": "",
+  "package_data": "xunyoyo/linalg/lib/matrix/package_data.json",
+  "source_files": [
+    "cholesky.mbt", "det.mbt", "diagonal.mbt", "eigen.mbt", "inv.mbt",
+    "lstsq.mbt", "matrix.mbt", "norm.mbt", "qr.mbt", "svd.mbt"
+  ]
+}

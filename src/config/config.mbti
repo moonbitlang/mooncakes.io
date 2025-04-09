@@ -1,0 +1,43 @@
+package "moonbitlang/mooncakes/config"
+
+// Values
+const EXPANSION : String = "/expansion.svg"
+
+const FILTER : String = "/filter.svg"
+
+const FOLDER_CLOSE : String = "/folder-close.svg"
+
+const FOLDER_OPEN : String = "/folder-open.svg"
+
+const LOGO : String = "/mooncake-pic.png"
+
+const README_ICON : String = "/readme.svg"
+
+const REDUCTION : String = "/reduction.svg"
+
+const SEARCH : String = "/search.svg"
+
+const SECTION_CLOSE : String = "/section-close.svg"
+
+const SECTION_OPEN : String = "/section-open.svg"
+
+const SHARE : String = "/share.svg"
+
+const TRAIT_ICON : String = "/components.svg"
+
+const TYPE_ALIAS_ICON : String = "/code-brackets.svg"
+
+const TYPE_ICON : String = "/type.svg"
+
+const VALUE_ICON : String = "/code-brackets.svg"
+
+let builtins_package_path : Map[String, String]
+
+let dead_rabbit : String
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

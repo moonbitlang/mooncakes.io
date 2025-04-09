@@ -1,0 +1,122 @@
+{
+  "name": "moonbitlang/core/int64",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "from_int",
+      "docstring": "\n same as `Int64::from_int`",
+      "signature": "fn from_int(i : Int) -> Int64",
+      "loc": {
+        "path": "moonbitlang/core/int64",
+        "file": "int64.mbt",
+        "line": 43,
+        "column": 8
+      }
+    },
+    {
+      "name": "max_value",
+      "docstring": "",
+      "signature": "let max_value : Int64",
+      "loc": {
+        "path": "moonbitlang/core/int64",
+        "file": "int64.mbt",
+        "line": 16,
+        "column": 9
+      }
+    },
+    {
+      "name": "min_value",
+      "docstring": "",
+      "signature": "let min_value : Int64",
+      "loc": {
+        "path": "moonbitlang/core/int64",
+        "file": "int64.mbt",
+        "line": 19,
+        "column": 9
+      }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Int64",
+      "impls": [
+        {
+          "self": { "name": "Int64", "path": "moonbitlang/core/int64" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Int64) -> Int",
+              "loc": {
+                "path": "moonbitlang/core/int64",
+                "file": "xxhash.mbt",
+                "line": 33,
+                "column": 30
+              }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Int64, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/int64",
+                "file": "xxhash.mbt",
+                "line": 53,
+                "column": 30
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "abs",
+          "docstring": "\n Computes the absolute value of a 64-bit integer.\n\n Parameters:\n\n * `self` : The 64-bit integer whose absolute value is to be computed.\n\n Returns the absolute value of the input integer.\n\n Example:\n\n ```moonbit\n test \"abs\" {\n   inspect!(42L.abs(), content=\"42\")\n   inspect!((-42L).abs(), content=\"42\")\n   inspect!(0L.abs(), content=\"0\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::abs(self : Int64) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/int64",
+            "file": "int64.mbt",
+            "line": 65,
+            "column": 8
+          }
+        },
+        {
+          "name": "from_int",
+          "docstring": "\n Converts a 32-bit integer (`Int`) to a 64-bit integer (`Int64`).\n\n Parameters:\n\n * `i` : The integer value to be converted.\n\n Returns the converted 64-bit integer (`Int64`) value.\n\n Example:\n\n ```moonbit\n test \"Int64::from_int\" {\n   inspect!(@int64.from_int(42), content=\"42\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::from_int(i : Int) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/int64",
+            "file": "int64.mbt",
+            "line": 37,
+            "column": 15
+          }
+        },
+        {
+          "name": "to_be_bytes",
+          "docstring": " Converts the Int64 to a Bytes in big-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::to_be_bytes(self : Int64) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/int64",
+            "file": "int64.mbt",
+            "line": 74,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_le_bytes",
+          "docstring": " Converts the Int64 to a Bytes in little-endian byte order.",
+          "signature": "fn <a href=\"moonbitlang/core/int64#Int64\">Int64</a>::to_le_bytes(self : Int64) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/int64",
+            "file": "int64.mbt",
+            "line": 79,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

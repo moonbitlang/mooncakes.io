@@ -1,0 +1,304 @@
+{
+  "name": "moonbitlang/x/encoding",
+  "traits": [],
+  "types": [
+    {
+      "name": "DecodeError",
+      "docstring": "",
+      "signature": "pub(all) type! DecodeError Bytes\n",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "types.mbt",
+        "line": 137,
+        "column": 16
+      },
+      "methods": [],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "DecodeError",
+              "path": "moonbitlang/x/encoding"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/encoding#DecodeError\">DecodeError</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/x/encoding",
+                "file": "types.mbt",
+                "line": 140,
+                "column": 36
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Encoding",
+      "docstring": "",
+      "signature": "pub(all) enum Encoding {\n  UTF8\n  UTF16\n  UTF16LE\n  UTF16BE\n}",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "types.mbt",
+        "line": 19,
+        "column": 15
+      },
+      "methods": [],
+      "impls": []
+    },
+    {
+      "name": "LossyChars",
+      "docstring": "",
+      "signature": "type LossyChars",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "types.mbt",
+        "line": 99,
+        "column": 6
+      },
+      "methods": [
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>::iter(self : <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Char]",
+          "loc": {
+            "path": "moonbitlang/x/encoding",
+            "file": "types.mbt",
+            "line": 102,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>::to_string(self : <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>) -> String",
+          "loc": {
+            "path": "moonbitlang/x/encoding",
+            "file": "types.mbt",
+            "line": 123,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "LossyChars",
+              "path": "moonbitlang/x/encoding"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/x/encoding",
+                "file": "types.mbt",
+                "line": 129,
+                "column": 35
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "StrictChars",
+      "docstring": "",
+      "signature": "type StrictChars",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "types.mbt",
+        "line": 134,
+        "column": 6
+      },
+      "methods": [
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>::iter(self : <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[<a href=\"moonbitlang/core/result#Result\">Result</a>[Char, <a href=\"moonbitlang/x/encoding#DecodeError\">DecodeError</a>]]",
+          "loc": {
+            "path": "moonbitlang/x/encoding",
+            "file": "types.mbt",
+            "line": 147,
+            "column": 21
+          }
+        },
+        {
+          "name": "to_string",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>::to_string(self : <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>) -> String!<a href=\"moonbitlang/core/error#Error\">Error</a>",
+          "loc": {
+            "path": "moonbitlang/x/encoding",
+            "file": "types.mbt",
+            "line": 169,
+            "column": 21
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "StrictChars",
+              "path": "moonbitlang/x/encoding"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/x/encoding",
+                "file": "types.mbt",
+                "line": 181,
+                "column": 36
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "decode_lossy",
+      "docstring": "\n Decodes bytes from a specified encoding into lossily decoded characters.\n\n # Parameters\n - `encoding`: The character encoding of the input `bytes`.\n - `src`: A `bytes` representing the encoded string in the specified format.\n\n # Returns\n\n A `LossyChars` iterator representing the decoded characters, with invalid byte sequences replaced by a replacement character.\n\n # Behavior\n\n - Any invalid sequences in the `bytes` are replaced with a replacement character (`\\u{FFFD}`), preventing decoding errors.\n\n # Examples\n\n ```moonbit\n let buf = @buffer.new(size_hint=10)\n buf.write_bytes(b\"\\xe4\\xbd\\xa0\") // \"你\" in UTF8\n buf.write_bytes(b\"\\xe5\\xa5\\xbd\") // \"好\" in UTF8\n buf.write_bytes(b\"\\xf0\\x9f\\x91\\x80\") // \"👀\" in UTF8\n let chars = @encoding.decode_lossy(UTF8, buf.to_bytes())\n let arr = chars.iter().collect() // Array of unicode point code: `['你', '好', '👀']`\n let str = String::from_array(arr) // MoonBit String, representing as UTF16LE: `\"你好👀\"`\n // or\n let str = chars.to_string()\n ```",
+      "signature": "fn decode_lossy(encoding : <a href=\"moonbitlang/x/encoding#Encoding\">Encoding</a>, src : Bytes) -> <a href=\"moonbitlang/x/encoding#LossyChars\">LossyChars</a>",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "decoding.mbt",
+        "line": 60,
+        "column": 8
+      }
+    },
+    {
+      "name": "decode_strict",
+      "docstring": "\n Decodes bytes from a specified encoding into strictly decoded characters.\n\n # Parameters\n\n - `encoding`: The character encoding of the input `bytes`.\n - `src`: A `bytes` representing the encoded string in the specified format.\n\n # Returns\n\n A `StrictChars` iterator representing the decoded characters.\n\n # Behavior\n\n - Assumes all sequences in the `bytes` are valid and will raise errors if invalid sequences are encountered.\n\n # Examples\n\n ```moonbit\n let buf = @buffer.new(size_hint=10)\n buf.write_bytes(b\"\\xe4\\xbd\\xa0\") // \"你\" in UTF8\n buf.write_bytes(b\"\\xe5\\xa5\\xbd\") // \"好\" in UTF8\n buf.write_bytes(b\"\\xf0\\x9f\\x91\\x80\") // \"👀\" in UTF8\n let chars = @encoding.decode_strict(UTF8, buf.to_bytes())\n let arr = chars.iter().collect() // Array of unicode point code: `[Ok('你'), Ok('好'), Ok('👀')]`\n let str = chars.to_string() // MoonBit String, representing as UTF16LE: `\"你好👀\"`\n ```",
+      "signature": "fn decode_strict(encoding : <a href=\"moonbitlang/x/encoding#Encoding\">Encoding</a>, src : Bytes) -> <a href=\"moonbitlang/x/encoding#StrictChars\">StrictChars</a>",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "decoding.mbt",
+        "line": 92,
+        "column": 8
+      }
+    },
+    {
+      "name": "encode",
+      "docstring": "\n Encode a given string to the specified character encoding and returns the resulting bytes.\n\n # Parameters\n\n - `encoding` : The target encoding format.\n - `src`: The input string to be encoded.\n\n # Returns\n\n A `bytes` representing the encoded string in the selected format.\n\n # Examples\n\n ```moonbit\n let src = \"Hello, World!\"\n let encoded_bytes = encode(UTF8, src)\n ```",
+      "signature": "fn encode(encoding : <a href=\"moonbitlang/x/encoding#Encoding\">Encoding</a>, src : String) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 33,
+        "column": 8
+      }
+    },
+    {
+      "name": "to_utf16_bytes",
+      "docstring": "\n Converts a Char to UTF-16LE bytes.\n\n Alias for `to_utf16le_bytes`.\n\n Note that this function incurs allocation overhead\n due to the intermediate creation of new buffers.",
+      "signature": "fn to_utf16_bytes(value : Char) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 70,
+        "column": 8
+      }
+    },
+    {
+      "name": "to_utf16be_bytes",
+      "docstring": "\n Converts a Char to UTF-16BE bytes.\n\n Note that this function incurs allocation overhead\n due to the intermediate creation of new buffers.",
+      "signature": "fn to_utf16be_bytes(value : Char) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 90,
+        "column": 8
+      }
+    },
+    {
+      "name": "to_utf16le_bytes",
+      "docstring": "\n Converts a Char to UTF-16LE bytes.\n\n Note that this function incurs allocation overhead\n due to the intermediate creation of new buffers.",
+      "signature": "fn to_utf16le_bytes(value : Char) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 79,
+        "column": 8
+      }
+    },
+    {
+      "name": "to_utf8_bytes",
+      "docstring": "\n Converts a Char to UTF-8 bytes.\n\n Note that this function incurs allocation overhead\n due to the intermediate creation of new buffers.",
+      "signature": "fn to_utf8_bytes(value : Char) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 57,
+        "column": 8
+      }
+    },
+    {
+      "name": "write_utf16_char",
+      "docstring": "\n Write a char into buffer as UTF16LE.\n Alias for `write_utf16le_char`",
+      "signature": "fn write_utf16_char(buf : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>, value : Char) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 136,
+        "column": 8
+      }
+    },
+    {
+      "name": "write_utf16be_char",
+      "docstring": "\n Write a char into buffer as UTF16BE.",
+      "signature": "fn write_utf16be_char(buf : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>, value : Char) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 168,
+        "column": 8
+      }
+    },
+    {
+      "name": "write_utf16le_char",
+      "docstring": "\n Write a char into buffer as UTF16LE.",
+      "signature": "fn write_utf16le_char(buf : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>, value : Char) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 142,
+        "column": 8
+      }
+    },
+    {
+      "name": "write_utf8_char",
+      "docstring": "\n Write a char into buffer as UTF8.",
+      "signature": "fn write_utf8_char(buf : <a href=\"moonbitlang/core/buffer#T\">@moonbitlang/core/buffer.T</a>, value : Char) -> Unit",
+      "loc": {
+        "path": "moonbitlang/x/encoding",
+        "file": "encoding.mbt",
+        "line": 98,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

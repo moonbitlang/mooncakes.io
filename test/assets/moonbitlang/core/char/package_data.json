@@ -1,0 +1,209 @@
+{
+  "name": "moonbitlang/core/char",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [],
+  "misc": [
+    {
+      "name": "Char",
+      "impls": [
+        {
+          "self": { "name": "Char", "path": "moonbitlang/core/char" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Char) -> Int",
+              "loc": {
+                "path": "moonbitlang/core/char",
+                "file": "char.mbt",
+                "line": 16,
+                "column": 29
+              }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Char, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/char",
+                "file": "char.mbt",
+                "line": 21,
+                "column": 29
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "is_ascii",
+          "docstring": " Checks if the value is within the ASCII range.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 26,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_alphabetic",
+          "docstring": " Checks if the value is an ASCII alphabetic  character:\n - U+0041 ‘A’ ..= U+005A ‘Z’\n - U+0061 ‘a’ ..= U+007A ‘z’",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_alphabetic(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 33,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_control",
+          "docstring": " Checks if the value is an ASCII control character:\n U+0000 NUL ..= U+001F UNIT SEPARATOR, or U+007F DELETE.\n Note that most ASCII whitespace characters are control characters, but SPACE is not.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_control(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 40,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_digit",
+          "docstring": " Checks if the value is an ASCII decimal digit:\n U+0030 ‘0’ ..= U+0039 ‘9’",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_digit(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 46,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_graphic",
+          "docstring": " Checks if the value is an ASCII graphic character:\n U+0021 ‘!’ ..= U+007E ‘~’",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_graphic(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 52,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_hexdigit",
+          "docstring": " Checks if the value is an ASCII hexadecimal digit:\n - U+0030 ‘0’ ..= U+0039 ‘9’\n - U+0041 ‘A’ ..= U+0046 ‘F’\n - U+0061 ‘a’ ..= U+0066 ‘f’",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_hexdigit(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 60,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_lowercase",
+          "docstring": " Checks if the value is an ASCII lowercase character:\n U+0061 ‘a’ ..= U+007A ‘z’.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_lowercase(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 66,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_octdigit",
+          "docstring": " Checks if the value is an ASCII octal digit:\n U+0030 ‘0’ ..= U+0037 ‘7’",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_octdigit(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 72,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_punctuation",
+          "docstring": " Checks if the value is an ASCII punctuation character:\n - U+0021 ..= U+002F ! \" # $ % & ' ( ) * + , - . /\n - U+003A ..= U+0040 : ; < = > ? @\n - U+005B ..= U+0060 [ \\ ] ^ _ `\n - U+007B ..= U+007E { | } ~",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_punctuation(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 81,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_uppercase",
+          "docstring": " Checks if the value is an ASCII uppercase character:\n U+0041 ‘A’ ..= U+005A ‘Z’",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_uppercase(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 88,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ascii_whitespace",
+          "docstring": " Checks if the value is an ASCII whitespace character:\n U+0020 SPACE, U+0009 HORIZONTAL TAB, U+000A LINE FEED, U+000C FORM FEED, or U+000D CARRIAGE RETURN.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_ascii_whitespace(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 94,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_control",
+          "docstring": " Returns true if this char has the general category for control codes.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_control(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 99,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_digit",
+          "docstring": " \n Checks if a char is a digit in the given radix (range from 2 to 36).\n \n panic if the radix is invalid.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_digit(self : Char, radix : UInt) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 107,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_numeric",
+          "docstring": " Returns true if this char has one of the general categories for numbers.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_numeric(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 136,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_whitespace",
+          "docstring": " Returns true if this char has the White_Space property.",
+          "signature": "fn <a href=\"moonbitlang/core/char#Char\">Char</a>::is_whitespace(self : Char) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/char",
+            "file": "char.mbt",
+            "line": 120,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

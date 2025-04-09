@@ -1,0 +1,41 @@
+package "moonbitlang/mooncakes/view"
+
+import(
+  "Yoorkin/rabbit-tea/html"
+)
+
+// Values
+fn accordion[M](class? : String, click? : (String) -> M, String, Array[(String, @html.T[M])]) -> @html.T[M]
+
+fn button[M](String, click? : M) -> @html.T[M]
+
+fn code_block[M](String, collapse_namespace~ : Bool) -> @html.T[M]
+
+fn collapse[M](header~ : @html.T[M], body~ : @html.T[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.T[M]
+
+fn document_not_available[M](String) -> @html.T[M]
+
+fn footer[M]() -> @html.T[M]
+
+fn icon_button[M](String, text? : String, click? : M) -> @html.T[M]
+
+fn load_failed[M](String) -> @html.T[M]
+
+fn loading[M]() -> @html.T[M]
+
+fn markdown[M](String, small_heading~ : Bool = ..) -> @html.T[M]
+
+fn navbar[M]() -> @html.T[M]
+
+fn not_found[M]() -> @html.T[M]
+
+// Types and methods
+pub(all) enum CaretConfig {
+  LeftCenter
+  LeftTop
+}
+
+// Type aliases
+
+// Traits
+

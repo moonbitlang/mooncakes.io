@@ -1,0 +1,329 @@
+{
+  "name": "moonbitlang/core/hashset",
+  "traits": [],
+  "types": [
+    {
+      "name": "T",
+      "docstring": "\n Mutable hash set, not thread safe.\n\n # Example\n\n ```\n let set = @hashset.of([(3, \"three\"), (8, \"eight\"), (1, \"one\")])\n set.add((4, \"four\"))\n assert_eq!(set.contains((4, \"four\")), true)\n ```",
+      "signature": "type T",
+      "loc": {
+        "path": "moonbitlang/core/hashset",
+        "file": "types.mbt",
+        "line": 38,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "\n Insert a key into hash set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::add[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 56,
+            "column": 8
+          }
+        },
+        {
+          "name": "capacity",
+          "docstring": "\n Get the capacity of the set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::capacity[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 145,
+            "column": 8
+          }
+        },
+        {
+          "name": "clear",
+          "docstring": "\n Clears the set, removing all keys. Keeps the allocated space.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::clear[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 178,
+            "column": 8
+          }
+        },
+        {
+          "name": "contains",
+          "docstring": "\n Check if the hash set contains a key.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::contains[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 93,
+            "column": 8
+          }
+        },
+        {
+          "name": "difference",
+          "docstring": "\n Difference of two hash sets.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::difference[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 205,
+            "column": 8
+          }
+        },
+        {
+          "name": "each",
+          "docstring": "\n Iterate over all keys of the set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::each[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], f : (K) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 157,
+            "column": 8
+          }
+        },
+        {
+          "name": "eachi",
+          "docstring": "\n Iterate over all keys of the set, with index.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::eachi[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], f : (Int, K) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 163,
+            "column": 8
+          }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n @alert deprecated \"use `@hashset.from_array` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::from_array[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "deprecated.mbt",
+            "line": 25,
+            "column": 11
+          }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "\n @alert deprecated \"use `@hashset.from_iter` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::from_iter[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "deprecated.mbt",
+            "line": 39,
+            "column": 11
+          }
+        },
+        {
+          "name": "insert",
+          "docstring": "\n Insert a key into hash set.\n @alert unsafe \"Panic if the hash set is full.\"\n @alert deprecated \"Use `add` instead.\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::insert[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 50,
+            "column": 8
+          }
+        },
+        {
+          "name": "intersection",
+          "docstring": "\n Intersection of two hash sets.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::intersection[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 197,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "\n Check if the hash set is empty.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::is_empty[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 151,
+            "column": 8
+          }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::iter[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 221,
+            "column": 8
+          }
+        },
+        {
+          "name": "new",
+          "docstring": "\n @alert deprecated \"use `@hashset.new` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::new[K](capacity~ : Int = ..) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "deprecated.mbt",
+            "line": 18,
+            "column": 11
+          }
+        },
+        {
+          "name": "of",
+          "docstring": "\n @alert deprecated \"use `@hashset.of` instead\"\n @coverage.skip",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::of[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "deprecated.mbt",
+            "line": 32,
+            "column": 11
+          }
+        },
+        {
+          "name": "remove",
+          "docstring": "\n Remove a key from hash set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::remove[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], key : K) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 115,
+            "column": 8
+          }
+        },
+        {
+          "name": "size",
+          "docstring": "\n Get the number of keys in the set.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::size[K](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 139,
+            "column": 8
+          }
+        },
+        {
+          "name": "symmetric_difference",
+          "docstring": "\n Symmetric difference of two hash sets.",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::symmetric_difference[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 213,
+            "column": 8
+          }
+        },
+        {
+          "name": "union",
+          "docstring": "\n Union of two hash sets.\n @alert unsafe \"Panic if the hash set is full.\"",
+          "signature": "fn <a href=\"moonbitlang/core/hashset#T\">T</a>::union[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], other : <a href=\"moonbitlang/core/hashset#T\">T</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+          "loc": {
+            "path": "moonbitlang/core/hashset",
+            "file": "hashset.mbt",
+            "line": 188,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/hashset"
+            },
+            "arguments": [ { "kind": "param", "name": "K" } ]
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output[K : <a href=\"moonbitlang/core/builtin#Show\">Show</a>](self : <a href=\"moonbitlang/core/hashset#T\">T</a>[K], logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/hashset",
+                "file": "hashset.mbt",
+                "line": 331,
+                "column": 39
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "T",
+              "path": "moonbitlang/core/hashset"
+            },
+            "arguments": [ { "kind": "param", "name": "X" } ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[X : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a> + <a href=\"moonbitlang/core/builtin#Hash\">Hash</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[X]",
+              "loc": {
+                "path": "moonbitlang/core/hashset",
+                "file": "hashset.mbt",
+                "line": 242,
+                "column": 85
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "from_array",
+      "docstring": "\n Create new hash set from array.",
+      "signature": "fn from_array[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+      "loc": {
+        "path": "moonbitlang/core/hashset",
+        "file": "hashset.mbt",
+        "line": 32,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_iter",
+      "docstring": "",
+      "signature": "fn from_iter[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+      "loc": {
+        "path": "moonbitlang/core/hashset",
+        "file": "hashset.mbt",
+        "line": 235,
+        "column": 8
+      }
+    },
+    {
+      "name": "new",
+      "docstring": "\n Create new hash set.",
+      "signature": "fn new[K](capacity~ : Int = ..) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+      "loc": {
+        "path": "moonbitlang/core/hashset",
+        "file": "hashset.mbt",
+        "line": 21,
+        "column": 8
+      }
+    },
+    {
+      "name": "of",
+      "docstring": "",
+      "signature": "fn of[K : <a href=\"moonbitlang/core/builtin#Hash\">Hash</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[K]) -> <a href=\"moonbitlang/core/hashset#T\">T</a>[K]",
+      "loc": {
+        "path": "moonbitlang/core/hashset",
+        "file": "hashset.mbt",
+        "line": 39,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

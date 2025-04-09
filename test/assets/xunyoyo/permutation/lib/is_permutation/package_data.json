@@ -1,0 +1,20 @@
+{
+  "name": "xunyoyo/permutation/lib/is_permutation",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "is_permutation",
+      "docstring": " |\n 检查两个数组是否为排列。\n\n # Example\n ```\n let a = [1, 2, 3, 4]\n let b = [3, 1, 4, 2]\n let result = is_permutation(a, b)\n println(result) // 输出: true\n ```\n @alert unsafe \"如果数组长度不一致，将返回 false。\"",
+      "signature": "fn is_permutation[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](arr1 : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], arr2 : <a href=\"moonbitlang/core/array#Array\">Array</a>[T], start1~ : Int = .., end1~ : Int = .., start2~ : Int = ..) -> Bool",
+      "loc": {
+        "path": "xunyoyo/permutation/lib/is_permutation",
+        "file": "is_permutation.mbt",
+        "line": 31,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

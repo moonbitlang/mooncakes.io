@@ -1,0 +1,474 @@
+{
+  "name": "moonbitlang/core/bytes",
+  "traits": [],
+  "types": [
+    {
+      "name": "View",
+      "docstring": "\n A `@bytes.View` represents a view into a section of a `Bytes` without copying the data.\n\n # Example\n \n ```\n let bs = b\"\\x00\\x01\\x02\\x03\\x04\\x05\"\n let bv = bs[1:4]\n assert_eq!(bv.length(), 3)\n assert_eq!(bv[0], b'\\x01')\n assert_eq!(bv[1], b'\\x02')\n assert_eq!(bv[2], b'\\x03')\n ```",
+      "signature": "type View",
+      "loc": {
+        "path": "moonbitlang/core/bytes",
+        "file": "view.mbt",
+        "line": 28,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "iter",
+          "docstring": "\n Returns an iterator over the `View`.\n \n # Example\n \n ```\n let bv = b\"\\x00\\x01\\x02\\x03\\x04\\x05\"[:]\n let mut sum = 0\n bv.iter().each(fn(x) { sum = sum + x.to_int() })\n assert_eq!(sum, 15)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::iter(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 188,
+            "column": 14
+          }
+        },
+        {
+          "name": "length",
+          "docstring": "\n Returns the number of bytes in the view.\n\n Parameters:\n\n * `bytes_view` : The view of a byte sequence.\n\n Returns an integer representing the length of the view.\n\n Example:\n\n ```moonbit\n test \"View::length\" {\n   let bytes = b\"\\x00\\x01\\x02\\x03\\x04\"\n   let view = bytes[2:4]\n   inspect!(view.length(), content=\"2\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::length(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 52,
+            "column": 14
+          }
+        },
+        {
+          "name": "op_as_view",
+          "docstring": "\n Creates a new `View` from the given `View`.\n \n # Example\n \n ```\n let bv = b\"\\x00\\x01\\x02\\x03\\x04\\x05\"[:]\n let bv2 = bv[1:4]\n assert_eq!(bv2.length(), 3)\n assert_eq!(bv2[1], b'\\x02')\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::op_as_view(self : <a href=\"moonbitlang/core/bytes#View\">View</a>, start~ : Int = .., end? : Int) -> <a href=\"moonbitlang/core/bytes#View\">View</a>",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 164,
+            "column": 14
+          }
+        },
+        {
+          "name": "op_get",
+          "docstring": "\n Retrieves a byte from the view at the specified index.\n\n Parameters:\n\n * `self` : The bytes view to retrieve the byte from.\n * `index` : The position in the view from which to retrieve the byte.\n\n Returns the byte at the specified index.\n\n Throws a runtime error if the index is out of bounds (negative or greater\n than or equal to the length of the view).\n\n Example:\n\n ```moonbit\n test \"View::op_get\" {\n   let bytes = b\"\\x01\\x02\\x03\\x04\\x05\"\n   let view = bytes[1:4] // view contains [0x02, 0x03, 0x04]\n   inspect!(view[1], content=\"b'\\\\x03'\")\n }\n \n test \"panic View::op_get/out_of_bounds\" {\n   let view = b\"\\x01\\x02\\x03\"[:]\n   ignore(view[3]) // Index out of bounds\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::op_get(self : <a href=\"moonbitlang/core/bytes#View\">View</a>, index : Int) -> Byte",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 83,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_double_be",
+          "docstring": "\n Converts the bytes in a byte view to a double-precision floating-point number\n using big-endian byte order. The byte view must contain exactly 8 bytes,\n which represent the IEEE 754 double-precision format.\n\n Parameters:\n\n * `byte_view` : The byte view containing exactly 8 bytes to be interpreted as\n a double-precision floating-point number in big-endian order.\n\n Returns a double-precision floating-point number reconstructed from the\n bytes.\n\n Example:\n\n ```moonbit\n test \"View::to_double_be\" {\n   // Bytes representing 1.0 in IEEE 754 double-precision format (big-endian)\n   let bytes = b\"\\x3F\\xF0\\x00\\x00\\x00\\x00\\x00\\x00\"\n   let view = bytes[:]\n   inspect!(view.to_double_be(), content=\"1\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_double_be(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Double",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 524,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_double_le",
+          "docstring": "\n Converts the bytes in the view to a double-precision floating-point number\n using little-endian byte order. Interprets the first 8 bytes as a IEEE 754\n double-precision binary floating-point format (binary64) value.\n\n Parameters:\n\n * `bytes` : The byte view to be converted. Must contain at least 8 bytes.\n\n Returns a `Double` value representing the bytes interpreted in little-endian\n order.\n\n Example:\n\n ```moonbit\n test \"View::to_double_le\" {\n   let bytes = b\"\\x00\\x00\\x00\\x00\\x00\\x00\\xF0\\x3F\" // represents 1.0 in little-endian\n   let view = bytes[:]\n   inspect!(view.to_double_le(), content=\"1\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_double_le(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Double",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 549,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_float_be",
+          "docstring": "\n Converts a 4-byte sequence to a 32-bit floating-point number using big-endian\n byte order.\n\n Parameters:\n\n * `bytes_view` : A view into a byte sequence that must be exactly 4 bytes\n long. The bytes are interpreted in big-endian order (most significant byte\n first).\n\n Returns a 32-bit floating-point number obtained by interpreting the 4 bytes\n as an IEEE 754 single-precision value.\n\n Example:\n\n ```moonbit\n test \"View::to_float_be\" {\n   let bytes = b\"\\x40\\x48\\xF5\\xC3\" // Represents 3.14 in IEEE 754 format\n   let view = bytes[:]\n   let float = view.to_float_be()\n   // Convert to double for comparison since Float doesn't implement Show\n   inspect!(float.to_double(), content=\"3.140000104904175\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_float_be(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 473,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_float_le",
+          "docstring": "\n Converts 4 bytes from a bytes view to a 32-bit floating-point number,\n interpreting the bytes in little-endian order (least significant byte first).\n\n Parameters:\n\n * `self` : A bytes view containing at least 4 bytes to be interpreted as a\n floating-point number.\n\n Returns a 32-bit floating-point value constructed from the bytes.\n\n Example:\n\n ```moonbit\n test \"View::to_float_le\" {\n   let bytes = b\"\\x00\\x00\\x80\\x3F\" // Represents 1.0 in little-endian IEEE-754\n   let f = bytes[:].to_float_le()\n   inspect!(f.to_double(), content=\"1\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_float_le(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 497,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_int64_be",
+          "docstring": "\n Interprets an 8-byte view as a signed 64-bit integer in big-endian byte\n order. The highest byte (index 0) is treated as the most significant byte.\n\n Parameters:\n\n * `bytes_view` : A view containing exactly 8 bytes to be interpreted as a\n big-endian signed 64-bit integer.\n\n Returns a 64-bit signed integer (`Int64`) value constructed by interpreting\n the bytes in big-endian order.\n\n Example:\n\n ```moonbit\n test \"View::to_int64_be\" {\n   let bytes = b\"\\x80\\x00\\x00\\x00\\x00\\x00\\x00\\x00\"[:] // Most negative 64-bit integer\n   inspect!(bytes.to_int64_be(), content=\"-9223372036854775808\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_int64_be(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 419,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_int64_le",
+          "docstring": "\n Converts a sequence of 8 bytes into a signed 64-bit integer using\n little-endian byte order. In little-endian order, the least significant byte\n is stored at the lowest address (first byte).\n\n Parameters:\n\n * `bytes_view` : A view into a sequence of exactly 8 bytes. The first byte\n represents the least significant byte of the resulting integer.\n\n Returns a 64-bit signed integer (`Int64`) constructed from the bytes in\n little-endian order.\n\n Example:\n\n ```moonbit\n test \"View::to_int64_le\" {\n   let bytes = b\"\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\"\n   let view = bytes[:]\n   inspect!(view.to_int64_le(), content=\"578437695752307201\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_int64_le(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 445,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_int_be",
+          "docstring": "\n Converts a 4-byte view of bytes to a 32-bit signed integer by interpreting\n the bytes in big-endian order (most significant byte first). Interprets the\n resulting unsigned integer as a signed integer using two's complement\n representation.\n\n Parameters:\n\n * `View` : A view into a byte sequence that must be exactly 4 bytes\n long. The bytes are interpreted in big-endian order, where the first byte is\n the most significant byte and the last byte is the least significant byte.\n\n Returns a 32-bit signed integer constructed from the bytes in big-endian\n order.\n\n Example:\n\n ```moonbit\n test \"View::to_int_be\" {\n   let bytes = b\"\\x80\\x00\\x00\\x00\"[:] // Represents -2147483648 in two's complement\n   inspect!(bytes.to_int_be(), content=\"-2147483648\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_int_be(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 367,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_int_le",
+          "docstring": "\n Converts 4 bytes from a byte sequence into a 32-bit signed integer using\n little-endian byte order. The bytes are interpreted as follows: the least\n significant byte is at the lowest address (first position), and the most\n significant byte is at the highest address (last position).\n\n Parameters:\n\n * `bytes_view` : A view into a byte sequence that must be exactly 4 bytes\n long. The bytes are interpreted as a little-endian representation of a 32-bit\n integer.\n\n Returns a 32-bit signed integer (`Int`) constructed from the 4 bytes in\n little-endian order.\n\n Example:\n\n ```moonbit\n test \"View::to_int_le\" {\n   let bytes = b\"\\x78\\x56\\x34\\x12\"\n   let view = bytes[:]\n   inspect!(view.to_int_le(), content=\"305419896\") // 0x12345678 in decimal\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_int_le(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 395,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_uint64_be",
+          "docstring": "\n Converts a sequence of 8 bytes into a 64-bit unsigned integer using\n big-endian byte order. The most significant byte is at index 0, and the least\n significant byte is at index 7.\n\n Parameters:\n\n * `bytes` : A view into a byte sequence that must be at least 8 bytes long.\n The bytes are interpreted in big-endian order, where the first byte is the\n most significant byte.\n\n Returns a 64-bit unsigned integer constructed by concatenating the bytes in\n big-endian order.\n\n Throws a runtime error if the byte sequence view is less than 8 bytes long or\n if attempting to access an index beyond the view's bounds.\n\n Example:\n\n ```moonbit\n test \"View::to_uint64_be\" {\n   let bytes = b\"\\x01\\x23\\x45\\x67\\x89\\xAB\\xCD\\xEF\"[:]\n   inspect!(bytes.to_uint64_be(), content=\"81985529216486895\")\n }\n \n test \"panic View::to_uint64_be/short_input\" {\n   let bytes = b\"\\x01\\x02\\x03\"[:]\n   ignore(bytes.to_uint64_be()) // Throws error: index out of bounds\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_uint64_be(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> UInt64",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 291,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_uint64_le",
+          "docstring": "\n Converts an 8-byte sequence to an unsigned 64-bit integer using little-endian\n byte order. Each byte in the view is treated as an 8-bit unsigned integer and\n combined to form the final 64-bit value, with the least significant byte\n first.\n\n Parameters:\n\n * `bytes_view` : A view into a byte sequence that must be exactly 8 bytes\n long. Each byte represents one byte of the resulting 64-bit integer, with the\n first byte being the least significant.\n\n Returns an unsigned 64-bit integer assembled from the bytes in little-endian\n order.\n\n Throws a panic if the View is less than 8 bytes long or if trying to\n access a byte beyond the view's bounds.\n\n Example:\n\n ```moonbit\n test \"View::to_uint64_le\" {\n   let bytes = b\"\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\"[:]\n   inspect!(bytes.to_uint64_le(), content=\"578437695752307201\")\n }\n \n test \"panic View::to_uint64_le/short_view\" {\n   let bytes = b\"\\x01\\x02\\x03\"[:]\n   ignore(bytes.to_uint64_le()) // Panics: view is too short\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_uint64_le(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> UInt64",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 333,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_uint_be",
+          "docstring": "\n Converts a 4-byte sequence to an unsigned 32-bit integer using big-endian\n byte order. The first byte is treated as the most significant byte, and the\n last byte as the least significant byte.\n\n Parameters:\n\n * `self` : A byte view containing exactly 4 bytes to be converted.\n\n Returns an unsigned 32-bit integer representing the byte sequence.\n\n Example:\n\n ```moonbit\n test \"View::to_uint_be\" {\n   let bytes = b\"\\x12\\x34\\x56\\x78\"[:]\n   inspect!(bytes.to_uint_be(), content=\"305419896\") // 0x12345678\n }\n \n test \"panic View::to_uint_be/out_of_bounds\" {\n   let bytes = b\"\\x12\\x34\\x56\"[:] // Less than 4 bytes\n   ignore(bytes.to_uint_be()) // Panics with index out of bounds\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_uint_be(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> UInt",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 223,
+            "column": 14
+          }
+        },
+        {
+          "name": "to_uint_le",
+          "docstring": "\n Converts a sequence of 4 bytes into an unsigned 32-bit integer using\n little-endian byte order. Each byte in the view contributes 8 bits to the\n final integer, with the least significant byte at index 0.\n\n Parameters:\n\n * `view` : A `View` containing exactly 4 bytes to be interpreted as a\n little-endian unsigned integer.\n\n Returns an unsigned 32-bit integer (`UInt`) formed by interpreting the bytes\n in little-endian order.\n\n Throws a panic if the view does not contain exactly 4 bytes.\n\n Example:\n\n ```moonbit\n test \"View::to_uint_le\" {\n   let bytes = b\"\\x01\\x02\\x03\\x04\"\n   let view = bytes[:]\n   inspect!(view.to_uint_le(), content=\"67305985\") // 0x04030201\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::to_uint_le(self : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> UInt",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 254,
+            "column": 14
+          }
+        },
+        {
+          "name": "unsafe_get",
+          "docstring": "\n Retrieves a byte at the specified index from a bytes view without performing\n bounds checking.\n\n Parameters:\n\n * `self` : The bytes view to retrieve the byte from.\n * `index` : The position in the view from which to retrieve the byte. The\n index is relative to the start of the view, not the underlying bytes.\n\n Returns a single byte from the specified position in the view.\n\n Throws a panic if the index is out of bounds (less than 0 or greater than or\n equal to the length of the view).\n\n Example:\n\n ```moonbit\n test \"View::unsafe_get\" {\n   let bytes = b\"\\x01\\x02\\x03\\x04\\x05\"\n   let view = bytes[2:4] // view contains [0x03, 0x04]\n   inspect!(view.unsafe_get(0), content=\"b'\\\\x03'\")\n }\n \n test \"panic View::unsafe_get/out_of_bounds\" {\n   let view = b\"\\x01\\x02\\x03\"[:]\n   ignore(view.unsafe_get(3)) // Panic: index out of bounds\n }\n ```\n\n @alert unsafe \"Panic if index is out of bounds\"",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#View\">View</a>::unsafe_get(self : <a href=\"moonbitlang/core/bytes#View\">View</a>, index : Int) -> Byte",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 123,
+            "column": 14
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "View",
+              "path": "moonbitlang/core/bytes"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "\n Compares two views lexicographically. First compares the lengths of\n the views, then compares bytes pairwise until a difference is found or\n all bytes have been compared.\n\n Parameters:\n\n * `self` : The first view to compare.\n * `other` : The second byte sequence to compare.\n\n Returns an integer indicating the relative order:\n\n * A negative value if `self` is less than `other`\n * Zero if `self` equals `other`\n * A positive value if `self` is greater than `other`\n\n Example:\n\n ```moonbit\n let bytes = b\"abcabc\"\n inspect!(bytes[0:3].compare(bytes[3:6]), content=\"0\")  // abc = abc\n inspect!(bytes[0:3].compare(bytes[2:5]), content=\"-1\") // abc < cab\n inspect!(bytes[1:4].compare(bytes[3:6]), content=\"1\")  // bca > abc\n inspect!(bytes[0:3].compare(bytes[0:4]), content=\"-1\") // abc < abca\n inspect!(bytes[1:5].compare(bytes[2:5]), content=\"1\")  // bcab > cab\n ```",
+              "signature": "fn compare(self : <a href=\"moonbitlang/core/bytes#View\">View</a>, other : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Int",
+              "loc": {
+                "path": "moonbitlang/core/bytes",
+                "file": "view.mbt",
+                "line": 628,
+                "column": 32
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "View",
+              "path": "moonbitlang/core/bytes"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "\n Compares two views for equality. Returns true only if both views\n have the same length and contain identical bytes in the same order.\n\n Parameters:\n\n * `self` : The first view to compare.\n * `other` : The second view to compare.\n\n Returns `true` if the byte sequences are equal, `false` otherwise.\n\n Example:\n ```moonbit\n let bytes = b\"abcabc\"\n inspect!(bytes[0:3] == bytes[3:6], content=\"true\")\n inspect!(bytes[0:3] == bytes[2:5], content=\"false\")\n inspect!(bytes[0:4] == bytes[3:6], content=\"false\")\n ```",
+              "signature": "fn op_equal(self : <a href=\"moonbitlang/core/bytes#View\">View</a>, other : <a href=\"moonbitlang/core/bytes#View\">View</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/core/bytes",
+                "file": "view.mbt",
+                "line": 593,
+                "column": 27
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "View",
+              "path": "moonbitlang/core/bytes"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/core/bytes#View\">View</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/bytes",
+                "file": "view.mbt",
+                "line": 554,
+                "column": 29
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "default",
+      "docstring": "\n same as `Bytes::default`",
+      "signature": "fn default() -> Bytes",
+      "loc": {
+        "path": "moonbitlang/core/bytes",
+        "file": "bytes.mbt",
+        "line": 260,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_array",
+      "docstring": "\n same as `Bytes::from_array`",
+      "signature": "fn from_array(arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/core/bytes",
+        "file": "bytes.mbt",
+        "line": 41,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_fixedarray",
+      "docstring": "\n same as `Bytes::from_fixedarray`",
+      "signature": "fn from_fixedarray(arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte], len? : Int) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/core/bytes",
+        "file": "bytes.mbt",
+        "line": 80,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_iter",
+      "docstring": "\n same as `Bytes::from_iter`",
+      "signature": "fn from_iter(iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/core/bytes",
+        "file": "bytes.mbt",
+        "line": 147,
+        "column": 8
+      }
+    },
+    {
+      "name": "of",
+      "docstring": "\n same as `Bytes::of`",
+      "signature": "fn of(arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]) -> Bytes",
+      "loc": {
+        "path": "moonbitlang/core/bytes",
+        "file": "bytes.mbt",
+        "line": 179,
+        "column": 8
+      }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Bytes",
+      "impls": [
+        {
+          "self": { "name": "Bytes", "path": "moonbitlang/core/bytes" },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "hash",
+              "docstring": "",
+              "signature": "fn hash(self : Bytes) -> Int",
+              "loc": {
+                "path": "moonbitlang/core/bytes",
+                "file": "xxhash.mbt",
+                "line": 45,
+                "column": 30
+              }
+            },
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : Bytes, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/core/bytes",
+                "file": "xxhash.mbt",
+                "line": 50,
+                "column": 30
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "default",
+          "docstring": "\n Creates a new empty bytes sequence.\n\n Returns an empty bytes sequence.\n\n Example:\n\n ```moonbit\n test \"default\" {\n   let bytes = @bytes.default()\n   inspect!(bytes, content=\"b\\\"\\\"\")\n   inspect!(bytes.length(), content=\"0\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::default() -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 254,
+            "column": 15
+          }
+        },
+        {
+          "name": "from_array",
+          "docstring": "\n Creates a new bytes sequence from a byte array.\n\n Parameters:\n\n * `array` : An array of bytes to be converted.\n\n Returns a new bytes sequence containing the same bytes as the input array.\n\n Example:\n\n ```moonbit\n test \"Bytes::from_array\" {\n   let arr = [b'h', b'i']\n   let bytes = @bytes.from_array(arr)\n   inspect!(bytes, content=\n     #|b\"\\x68\\x69\"\n   )\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::from_array(arr : <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 35,
+            "column": 15
+          }
+        },
+        {
+          "name": "from_fixedarray",
+          "docstring": "\n Creates a new bytes sequence from a fixed-size array of bytes with an\n optional length parameter.\n\n Parameters:\n\n * `array` : A fixed-size array of bytes to be converted into a bytes\n sequence.\n * `length` : (Optional) The length of the resulting bytes sequence. If not\n provided, uses the full length of the input array.\n\n Returns a new bytes sequence containing the bytes from the input array. If a\n length is specified, only includes up to that many bytes.\n\n Example:\n\n ```moonbit\n test \"Bytes::from_fixedarray\" {\n   let arr : FixedArray[Byte] = [b'h', b'e', b'l', b'l', b'o']\n   let bytes = @bytes.from_fixedarray(arr, len=3)\n   inspect!(bytes, content=\n     #|b\"\\x68\\x65\\x6c\"\n   )\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::from_fixedarray(arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte], len? : Int) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 70,
+            "column": 15
+          }
+        },
+        {
+          "name": "from_iter",
+          "docstring": "\n Creates a new bytes sequence from an iterator of bytes.\n\n Parameters:\n\n * `iterator` : An iterator that yields bytes.\n\n Returns a new bytes sequence containing all the bytes from the iterator.\n\n Example:\n\n ```moonbit\n test \"from_iter\" {\n   let iter = Iter::singleton(b'h')\n   let bytes = @bytes.from_iter(iter)\n   inspect!(bytes, content=\n     #|b\"\\x68\"\n   )\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::from_iter(iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 141,
+            "column": 15
+          }
+        },
+        {
+          "name": "iter",
+          "docstring": "\n Creates an iterator over the bytes in the sequence.\n\n Parameters:\n\n * `bytes` : A byte sequence to iterate over.\n\n Returns an iterator that yields each byte in the sequence in order.\n\n Example:\n\n ```moonbit\n test \"Bytes::iter\" {\n   let bytes = Bytes::from_array([b'h', b'i'])\n   let mut sum = 0\n   bytes.iter().each(fn(b) { sum = sum + b.to_int() })\n   inspect!(sum, content=\"209\") // ASCII values: 'h'(104) + 'i'(105) = 209\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::iter(self : Bytes) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Byte]",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 228,
+            "column": 8
+          }
+        },
+        {
+          "name": "of",
+          "docstring": "\n Creates a new bytes sequence from a fixed-size byte array.\n\n Parameters:\n\n * `array` : A fixed-size array of bytes to be converted into a bytes\n sequence. Elements in the array should be of type `Byte`.\n\n Returns a new bytes sequence containing the same bytes as the input array.\n\n Example:\n\n ```moonbit\n test \"of\" {\n   let arr : FixedArray[Byte] = [b'h', b'e', b'l', b'l', b'o']\n   let bytes = @bytes.of(arr)\n   inspect!(bytes, content=\n     #|b\"\\x68\\x65\\x6c\\x6c\\x6f\"\n   )\n }\n ```\n TODO: marked as intrinsic, inline if it is constant",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::of(arr : <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]) -> Bytes",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 173,
+            "column": 15
+          }
+        },
+        {
+          "name": "op_as_view",
+          "docstring": "\n Creates a new `View` from the given `Bytes`.\n \n # Example\n \n ```\n let bs = b\"\\x00\\x01\\x02\\x03\\x04\\x05\"\n let bv = bs[1:4]\n assert_eq!(bv.length(), 3)\n assert_eq!(bv[0], b'\\x01')\n assert_eq!(bv[1], b'\\x02')\n assert_eq!(bv[2], b'\\x03')\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::op_as_view(self : Bytes, start~ : Int = .., end? : Int) -> <a href=\"moonbitlang/core/bytes#View\">View</a>",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "view.mbt",
+            "line": 140,
+            "column": 15
+          }
+        },
+        {
+          "name": "to_array",
+          "docstring": "\n Converts a bytes sequence into an array of bytes.\n\n Parameters:\n\n * `bytes` : A sequence of bytes to be converted into an array.\n\n Returns an array containing the same bytes as the input sequence.\n\n Example:\n\n ```moonbit\n test \"Bytes::to_array\" {\n   let bytes = b\"hello\"\n   let arr = bytes.to_array()\n   inspect!(arr, content=\"[b'\\\\x68', b'\\\\x65', b'\\\\x6C', b'\\\\x6C', b'\\\\x6F']\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::to_array(self : Bytes) -> <a href=\"moonbitlang/core/array#Array\">Array</a>[Byte]",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 201,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_fixedarray",
+          "docstring": "\n Converts a bytes sequence into a fixed-size array of bytes. If an optional\n length is provided, the resulting array will have exactly that length,\n otherwise it will match the length of the input bytes.\n\n Parameters:\n\n * `self` : The bytes sequence to convert.\n * `len` : Optional. The desired length of the output array. If specified, the\n resulting array will have this length. If not specified, the length of the\n input bytes sequence will be used.\n\n Returns a fixed-size array containing the bytes from the input sequence.\n\n Example:\n\n ```moonbit\n test \"Bytes::to_fixedarray\" {\n   let bytes = b\"hello\"\n   let arr = bytes.to_fixedarray()\n   inspect!(arr, content=\"[b'\\\\x68', b'\\\\x65', b'\\\\x6C', b'\\\\x6C', b'\\\\x6F']\")\n   let arr2 = bytes.to_fixedarray(len=3)\n   inspect!(arr2, content=\"[b'\\\\x68', b'\\\\x65', b'\\\\x6C']\")\n }\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/bytes#Bytes\">Bytes</a>::to_fixedarray(self : Bytes, len? : Int) -> <a href=\"moonbitlang/core/array#FixedArray\">FixedArray</a>[Byte]",
+          "loc": {
+            "path": "moonbitlang/core/bytes",
+            "file": "bytes.mbt",
+            "line": 109,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

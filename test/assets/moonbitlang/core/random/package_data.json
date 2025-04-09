@@ -1,0 +1,123 @@
+{
+  "name": "moonbitlang/core/random",
+  "traits": [],
+  "types": [
+    {
+      "name": "Rand",
+      "docstring": "\n Currently we only support [chacha8] as the source of randomness.",
+      "signature": "type Rand",
+      "loc": {
+        "path": "moonbitlang/core/random",
+        "file": "random.mbt",
+        "line": 17,
+        "column": 8
+      },
+      "methods": [
+        {
+          "name": "double",
+          "docstring": "\n [double] returns a pseudo-random 64-bit Double in the range [0.0, 1.0)",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::double(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>) -> Double",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 158,
+            "column": 8
+          }
+        },
+        {
+          "name": "float",
+          "docstring": "\n [float] returns a pseudo-random 32-bit Float in the range [0.0, 1.0)",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::float(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>) -> Float",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 172,
+            "column": 8
+          }
+        },
+        {
+          "name": "int",
+          "docstring": "\n [int] Return a non-negative pseudo-random 31-bit integer as an Int in the range [0, 2^31) or [0, limit) if limit is provided.\n\n # Arguments\n\n * `limit` - The upper bound (exclusive) of the random number to be generated (Optional).\n             When limit is 0, the range is [0, 2^31).",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::int(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>, limit~ : Int = ..) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 63,
+            "column": 8
+          }
+        },
+        {
+          "name": "int64",
+          "docstring": "\n [int64] returns a non-negative pseudo-random 63-bit integer as an Int64 in the range [0, 2^63)\n\n # Arguments\n\n * `limit` - The upper bound (exclusive) of the random number to be generated (Optional).\n            When limit is 0, the range is [0, 2^63).",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::int64(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>, limit~ : Int64 = ..) -> Int64",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 79,
+            "column": 8
+          }
+        },
+        {
+          "name": "new",
+          "docstring": " @alert deprecated \"use `@random.new` instead\"",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::new(seed~ : Bytes = ..) -> <a href=\"moonbitlang/core/random#Rand\">Rand</a>",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 33,
+            "column": 14
+          }
+        },
+        {
+          "name": "shuffle",
+          "docstring": "\n [shuffle] shuffles the first n elements of an array using the Fisher-Yates shuffle algorithm.\n @alert unsafe \"Panics if limit is negative\"\n\n # Example\n ```\n let r = @random.new()\n let a = [1, 2, 3, 4, 5]\n r.shuffle(\n   a.length(),\n   fn(i : Int, j : Int) {\n     let t = a[i]\n     a[i] = a[j]\n     a[j] = t\n   },\n )\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::shuffle(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>, limit : Int, swap : (Int, Int) -> Unit) -> Unit",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 249,
+            "column": 8
+          }
+        },
+        {
+          "name": "uint",
+          "docstring": "\n [uint] returns a non-negative pseudo-random 32-bit integer as a Uint in the range [0, 2^32) or [0, limit) if limit is provided.\n\n # Arguments\n\n * `limit` - The upper bound (exclusive) of the random number to be generated (Optional).\n            When limit is 0, the range is [0, 2^32).",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::uint(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>, limit~ : UInt = ..) -> UInt",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 97,
+            "column": 8
+          }
+        },
+        {
+          "name": "uint64",
+          "docstring": "\n [uint64] returns a non-negative pseudo-random 64-bit integer as a Uint64 in the range [0, 2^64) or [0, limit) if limit is provided.\n\n # Arguments\n\n * `limit` - The upper bound (exclusive) of the random number to be generated (Optional).\n           When limit is 0, the range is [0, 2^64).",
+          "signature": "fn <a href=\"moonbitlang/core/random#Rand\">Rand</a>::uint64(self : <a href=\"moonbitlang/core/random#Rand\">Rand</a>, limit~ : UInt64 = ..) -> UInt64",
+          "loc": {
+            "path": "moonbitlang/core/random",
+            "file": "random.mbt",
+            "line": 123,
+            "column": 8
+          }
+        }
+      ],
+      "impls": []
+    }
+  ],
+  "typealias": [],
+  "values": [
+    {
+      "name": "new",
+      "docstring": "\n Create a new random number generator with [seed].\n @alert unsafe \"Panic if seed is not 32 bytes long\"",
+      "signature": "fn new(seed~ : Bytes = ..) -> <a href=\"moonbitlang/core/random#Rand\">Rand</a>",
+      "loc": {
+        "path": "moonbitlang/core/random",
+        "file": "random.mbt",
+        "line": 24,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

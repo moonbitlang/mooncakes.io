@@ -1,0 +1,8 @@
+{
+  "kind": "package",
+  "relative_path": "random",
+  "module_path": "moonbitlang/core",
+  "readme_content": "# Random\n\nThis is an efficient random number generation function based on the paper [Fast Random Integer Generation in an Interval](https://arxiv.org/abs/1805.10941) by Daniel Lemire, as well as the Golang's `rand/v2` package.\n\nInternally, it uses the `Chacha8` cipher to generate random numbers. It is a cryptographically secure pseudo-random number generator (CSPRNG) that is also very fast.\n\n# Usage\n\n```moonbit\n  let r = @random.new()\n  assert_eq!(r.uint(limit=10), 7)\n  assert_eq!(r.uint(limit=10), 0)\n  assert_eq!(r.uint(limit=10), 5)\n  assert_eq!(r.int(), 1064320769)\n  assert_eq!(r.double(), 0.3318940049218405)\n  assert_eq!(r.int(limit=10), 0)\n  assert_eq!(r.uint(), 311122750)\n  assert_eq!(r.int64(), -9223372036854775808)\n  assert_eq!(r.int64(limit=10), 8)\n  assert_eq!(r.uint64(), 3951155890335085418)\n  let a = [1, 2, 3, 4, 5]\n  r.shuffle(\n    a.length(),\n    fn(i : Int, j : Int) {\n      let t = a[i]\n      a[i] = a[j]\n      a[j] = t\n    },\n  )\n  assert_eq!(a, [2, 1, 4, 3, 5])\n```\n",
+  "package_data": "moonbitlang/core/random/package_data.json",
+  "source_files": [ "random.mbt" ]
+}

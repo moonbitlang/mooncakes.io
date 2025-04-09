@@ -1,0 +1,245 @@
+{
+  "name": "moonbitlang/core/result",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "err",
+      "docstring": "\n Create an `Err` of type `E`.\n\n # Example\n\n ```\n let x: Result[Int, String] = Err(\"error\")\n assert_eq!(x, Err(\"error\"))\n ```",
+      "signature": "fn err[T, E](value : E) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+      "loc": {
+        "path": "moonbitlang/core/result",
+        "file": "result.mbt",
+        "line": 78,
+        "column": 8
+      }
+    },
+    {
+      "name": "ok",
+      "docstring": "\n Create an `Ok` of type `T`.\n\n # Example\n\n ```\n let x: Result[String, Unit] = Ok(\"yes\")\n assert_true!(x.is_ok())\n ```",
+      "signature": "fn ok[T, E](value : T) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+      "loc": {
+        "path": "moonbitlang/core/result",
+        "file": "result.mbt",
+        "line": 97,
+        "column": 8
+      }
+    },
+    {
+      "name": "wrap0",
+      "docstring": "",
+      "signature": "fn wrap0[T, E : <a href=\"moonbitlang/core/error#Error\">Error</a>](f~ : () -> T!E) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+      "loc": {
+        "path": "moonbitlang/core/result",
+        "file": "result.mbt",
+        "line": 388,
+        "column": 8
+      }
+    },
+    {
+      "name": "wrap1",
+      "docstring": "",
+      "signature": "fn wrap1[T, A, E : <a href=\"moonbitlang/core/error#Error\">Error</a>](f~ : (A) -> T!E, a : A) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+      "loc": {
+        "path": "moonbitlang/core/result",
+        "file": "result.mbt",
+        "line": 397,
+        "column": 8
+      }
+    },
+    {
+      "name": "wrap2",
+      "docstring": "",
+      "signature": "fn wrap2[T, A, B, E : <a href=\"moonbitlang/core/error#Error\">Error</a>](f~ : (A, B) -> T!E, a : A, b : B) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+      "loc": {
+        "path": "moonbitlang/core/result",
+        "file": "result.mbt",
+        "line": 406,
+        "column": 8
+      }
+    }
+  ],
+  "misc": [
+    {
+      "name": "Result",
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "Result",
+              "path": "moonbitlang/core/result"
+            },
+            "arguments": [
+              { "kind": "param", "name": "T" },
+              { "kind": "param", "name": "E" }
+            ]
+          },
+          "trait": {
+            "name": "Arbitrary",
+            "path": "moonbitlang/core/quickcheck"
+          },
+          "methods": [
+            {
+              "name": "arbitrary",
+              "docstring": "",
+              "signature": "fn arbitrary[T : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>, E : <a href=\"moonbitlang/core/quickcheck#Arbitrary\">@moonbitlang/core/quickcheck.Arbitrary</a>](size : Int, rs : <a href=\"moonbitlang/core/quickcheck/splitmix#RandomState\">@moonbitlang/core/quickcheck/splitmix.RandomState</a>) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+              "loc": {
+                "path": "moonbitlang/core/result",
+                "file": "result.mbt",
+                "line": 422,
+                "column": 8
+              }
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "name": "bind",
+          "docstring": "\n Binds a result to a function that returns another result.\n\n # Example\n\n ```\n let x: Result[Int, String] = Ok(6)\n let y = x.bind(fn(v : Int) { Ok(v * 7) })\n assert_eq!(y, Ok(42))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::bind[T, E, U](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], g : (T) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[U, E]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[U, E]",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 235,
+            "column": 8
+          }
+        },
+        {
+          "name": "compare",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::compare[T : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>, E : <a href=\"moonbitlang/core/builtin#Compare\">Compare</a> + <a href=\"moonbitlang/core/builtin#Eq\">Eq</a>](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], other : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]) -> Int",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 310,
+            "column": 8
+          }
+        },
+        {
+          "name": "flatten",
+          "docstring": "\n Flatten a `Result` of `Result` into a single `Result`.\n\n If the outer `Result` is an `Ok`, the inner `Result` is returned. If the outer `Result` is an `Err`, the inner `Result` is ignored and the `Err` is returned.\n\n # Example\n\n ```\n let x: Result[Result[Int, String], String] = Ok(Ok(6))\n let y = x.flatten()\n assert_eq!(y, Ok(6))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::flatten[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[<a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], E]) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 208,
+            "column": 8
+          }
+        },
+        {
+          "name": "fold",
+          "docstring": "\n Folds a `Result` into a single value.\n\n If the `Result` is an `Ok`, the `ok` function is applied to the value. If the `Result` is an `Err`, the `err` function is applied to the value.\n # Example\n\n ```\n let x = Ok(6)\n let y = x.fold(fn(v : Int) -> Int { v * 7 }, fn(_e : String) -> Int { 0 })\n assert_eq!(y, 42)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::fold[T, E, V](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], ok : (T) -> V, err : (E) -> V) -> V",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 263,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_err",
+          "docstring": "\n Check if a `Result` is an `Err`.",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::is_err[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 126,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_ok",
+          "docstring": "\n Check if a `Result` is an `Ok`.",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::is_ok[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]) -> Bool",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 109,
+            "column": 8
+          }
+        },
+        {
+          "name": "map",
+          "docstring": "\n Maps the value of a Result if it is `Ok` into another, otherwise returns the `Err` value unchanged.\n\n # Example\n\n ```\n let x: Result[Int, Unit] = Ok(6)\n let y = x.map(fn (v : Int) { v * 7 })\n assert_eq!(y, Ok(42))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::map[T, E, U](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], f : (T) -> U) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[U, E]",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 25,
+            "column": 8
+          }
+        },
+        {
+          "name": "map_err",
+          "docstring": "\n Maps the value of a Result if it is `Err` into another, otherwise returns the `Ok` value unchanged.\n\n # Example\n\n ```\n let x: Result[Int, String] = Err(\"error\")\n let y = x.map_err(fn (v : String) { v + \"!\" })\n assert_eq!(y, Err(\"error!\"))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::map_err[T, E, F](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], f : (E) -> F) -> <a href=\"moonbitlang/core/result#Result\">Result</a>[T, F]",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 52,
+            "column": 8
+          }
+        },
+        {
+          "name": "or",
+          "docstring": "\n Return the inner `Ok` value, if it exists, otherwise return the provided default.\n\n # Example\n\n ```\n let x: Result[Int, String] = Ok(6)\n let y = x.or(0)\n assert_eq!(y, 6)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::or[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], default : T) -> T",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 151,
+            "column": 8
+          }
+        },
+        {
+          "name": "or_else",
+          "docstring": "\n Return the inner `Ok` value, if it exists, otherwise return the provided default.\n\n Default is lazily evaluated.\n # Example\n\n ```\n let x: Result[Int, String] = Ok(6)\n let y = x.or_else(fn() { 0 })\n assert_eq!(y, 6)\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::or_else[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E], default : () -> T) -> T",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 179,
+            "column": 8
+          }
+        },
+        {
+          "name": "to_option",
+          "docstring": "\n Converts a `Result` to an `Option`.\n\n Converts `Ok` to `Some` and `Err` to `None`.\n\n # Example\n\n ```\n let x: Result[Int, String] = Ok(6)\n let y = x.to_option()\n assert_eq!(y, Some(6))\n ```",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::to_option[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]) -> T?",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 292,
+            "column": 8
+          }
+        },
+        {
+          "name": "unwrap",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::unwrap[T, E](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]) -> T",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 339,
+            "column": 8
+          }
+        },
+        {
+          "name": "unwrap_or_error",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/core/result#Result\">Result</a>::unwrap_or_error[T, E : <a href=\"moonbitlang/core/error#Error\">Error</a>](self : <a href=\"moonbitlang/core/result#Result\">Result</a>[T, E]) -> T!E",
+          "loc": {
+            "path": "moonbitlang/core/result",
+            "file": "result.mbt",
+            "line": 365,
+            "column": 8
+          }
+        }
+      ]
+    }
+  ]
+}

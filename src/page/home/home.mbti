@@ -1,0 +1,46 @@
+package "moonbitlang/mooncakes/page/home"
+
+import(
+  "Yoorkin/rabbit-tea/browser"
+  "Yoorkin/rabbit-tea/html"
+  "moonbitlang/mooncakes/util"
+)
+
+// Values
+fn filter_indices(String, Indices) -> Array[ModuleIndex]
+
+fn load() -> (@browser.Command[Msg], Model)
+
+fn update(Msg, Model) -> (@browser.Command[Msg], Model)
+
+fn view(Model) -> @html.T[Msg]
+
+// Types and methods
+type Indices
+
+pub struct Model {
+  indices : @util.Status[Indices]
+  filter : String
+  filtered_modules : Array[ModuleIndex]
+}
+
+pub(all) struct ModuleIndex {
+  author : String
+  name : String
+  path : String
+  version : String
+  keywords : Array[String]?
+  description : String?
+  created_at : String?
+}
+
+pub enum Msg {
+  GotModuleIndices(Result[Indices, String])
+  ClickModuleCard(String)
+  FilterChanged(String)
+}
+
+// Type aliases
+
+// Traits
+

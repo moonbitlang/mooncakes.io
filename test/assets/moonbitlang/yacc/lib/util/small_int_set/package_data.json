@@ -1,0 +1,276 @@
+{
+  "name": "moonbitlang/yacc/lib/util/small_int_set",
+  "traits": [],
+  "types": [
+    {
+      "name": "SmallIntSet",
+      "docstring": "",
+      "signature": "type SmallIntSet",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/small_int_set",
+        "file": "small_int_set.mbt",
+        "line": 16,
+        "column": 6
+      },
+      "methods": [
+        {
+          "name": "add",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::add(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, key : Int) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 123,
+            "column": 8
+          }
+        },
+        {
+          "name": "contains",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::contains(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, key : Int) -> Bool",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 112,
+            "column": 8
+          }
+        },
+        {
+          "name": "difference",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::difference(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, other : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 295,
+            "column": 8
+          }
+        },
+        {
+          "name": "disjoint",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::disjoint(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, other : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> Bool",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 342,
+            "column": 8
+          }
+        },
+        {
+          "name": "intersection",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::intersection(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, other : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 250,
+            "column": 8
+          }
+        },
+        {
+          "name": "is_empty",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::is_empty(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> Bool",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 39,
+            "column": 8
+          }
+        },
+        {
+          "name": "iter",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::iter(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Int]",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 66,
+            "column": 8
+          }
+        },
+        {
+          "name": "remove",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::remove(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, key : Int) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 151,
+            "column": 8
+          }
+        },
+        {
+          "name": "subset",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::subset(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, other : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> Bool",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 378,
+            "column": 8
+          }
+        },
+        {
+          "name": "union",
+          "docstring": "",
+          "signature": "fn <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>::union(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, other : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+          "loc": {
+            "path": "moonbitlang/yacc/lib/util/small_int_set",
+            "file": "small_int_set.mbt",
+            "line": 168,
+            "column": 8
+          }
+        }
+      ],
+      "impls": [
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SmallIntSet",
+              "path": "moonbitlang/yacc/lib/util/small_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Compare", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "compare",
+              "docstring": "automatically derived",
+              "signature": "fn compare(<a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> Int",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/small_int_set",
+                "file": "small_int_set.mbt",
+                "line": 16,
+                "column": 40
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SmallIntSet",
+              "path": "moonbitlang/yacc/lib/util/small_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Eq", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "op_equal",
+              "docstring": "automatically derived",
+              "signature": "fn op_equal(<a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>) -> Bool",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/small_int_set",
+                "file": "small_int_set.mbt",
+                "line": 16,
+                "column": 36
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SmallIntSet",
+              "path": "moonbitlang/yacc/lib/util/small_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Hash", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "hash_combine",
+              "docstring": "",
+              "signature": "fn hash_combine(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, hasher : <a href=\"moonbitlang/core/builtin#Hasher\">Hasher</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/small_int_set",
+                "file": "small_int_set.mbt",
+                "line": 44,
+                "column": 36
+              }
+            }
+          ]
+        },
+        {
+          "self": {
+            "kind": "constr",
+            "constructor": {
+              "name": "SmallIntSet",
+              "path": "moonbitlang/yacc/lib/util/small_int_set"
+            },
+            "arguments": []
+          },
+          "trait": { "name": "Show", "path": "moonbitlang/core/builtin" },
+          "methods": [
+            {
+              "name": "output",
+              "docstring": "",
+              "signature": "fn output(self : <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>, logger : <a href=\"moonbitlang/core/builtin#Logger\">Logger</a>) -> Unit",
+              "loc": {
+                "path": "moonbitlang/yacc/lib/util/small_int_set",
+                "file": "small_int_set.mbt",
+                "line": 51,
+                "column": 36
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "typealias": [
+    {
+      "name": "T",
+      "docstring": "",
+      "signature": "type T = <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/small_int_set",
+        "file": "small_int_set.mbt",
+        "line": 19,
+        "column": 1
+      }
+    }
+  ],
+  "values": [
+    {
+      "name": "empty",
+      "docstring": "",
+      "signature": "fn empty() -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/small_int_set",
+        "file": "small_int_set.mbt",
+        "line": 25,
+        "column": 8
+      }
+    },
+    {
+      "name": "from_iter",
+      "docstring": "",
+      "signature": "fn from_iter(iter : <a href=\"moonbitlang/core/builtin#Iter\">Iter</a>[Int]) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/small_int_set",
+        "file": "small_int_set.mbt",
+        "line": 95,
+        "column": 8
+      }
+    },
+    {
+      "name": "singleton",
+      "docstring": "",
+      "signature": "fn singleton(key : Int) -> <a href=\"moonbitlang/yacc/lib/util/small_int_set#SmallIntSet\">SmallIntSet</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/util/small_int_set",
+        "file": "small_int_set.mbt",
+        "line": 30,
+        "column": 8
+      }
+    }
+  ],
+  "misc": []
+}

@@ -1,0 +1,6 @@
+{
+    "tailwindCSS.includeLanguages": {
+        "moonbit": "html"
+    },
+    "editor.inlayHints.enabled": "off"
+}

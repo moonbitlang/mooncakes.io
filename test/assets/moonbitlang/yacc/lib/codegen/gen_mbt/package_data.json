@@ -1,0 +1,20 @@
+{
+  "name": "moonbitlang/yacc/lib/codegen/gen_mbt",
+  "traits": [],
+  "types": [],
+  "typealias": [],
+  "values": [
+    {
+      "name": "generator",
+      "docstring": "",
+      "signature": "let generator : <a href=\"moonbitlang/yacc/lib/codegen#CodeGenerator\">@moonbitlang/yacc/lib/codegen.CodeGenerator</a>",
+      "loc": {
+        "path": "moonbitlang/yacc/lib/codegen/gen_mbt",
+        "file": "gen_mbt.mbt",
+        "line": 1060,
+        "column": 9
+      }
+    }
+  ],
+  "misc": []
+}

@@ -15,7 +15,6 @@
 ///|
 pub enum Msg {
   GotModuleIndices(Result[Indices, String])
-  ClickModuleCard(String)
   FilterChanged(String)
 }
 
@@ -37,7 +36,8 @@ pub(all) struct ModuleIndex {
   author : String
   name : String
   path : String
-  version : String
+  latest_version : String
+  backends : Array[String]
   keywords : Array[String]?
   description : String?
   created_at : String?
@@ -72,8 +72,6 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       }
       (none(), { ..model, filter, filtered_modules })
     }
-    ClickModuleCard(module_name) =>
-      (@nav.push_url("/docs/" + module_name), model)
   }
 }
 
@@ -173,10 +171,11 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
   fn decode_index {
     ({
       "name": String(path),
-      "version": String(version),
+      "version": String(latest_version),
       "description"? : description,
       "keywords"? : keywords,
       "created_at"? : created_at,
+      "backends": Array(backends),
       ..
     } : Json) => {
       let keywords = match keywords {
@@ -186,12 +185,13 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
       }
       let created_at = created_at.map(fn(x) { x.as_string().unwrap() })
       let description = description.map(fn(x) { x.as_string().unwrap() })
+      let backends = backends.map(fn(x) { x.as_string().unwrap() })
       guard path.split("/").collect() is [author, .. name]
       let name = name
         .iter()
         .intersperse("/")
         .fold(fn(acc, x) { acc + x }, init="")
-      Ok({ path, name, author, version, description, keywords, created_at })
+      Ok({ path, name, author, latest_version, description, keywords, created_at, backends })
     }
     _ => Err("Error when parsing metadata.")
   }

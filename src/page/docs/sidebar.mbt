@@ -28,14 +28,13 @@ fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
   if files.is_empty() {
     return text("No source files.")
   }
-  let package_path = package_path.trim("/")
   div(class="", [
     ul(
       files.map(fn(x) {
         item_button(
           a(
             class="w-full",
-            href="/assets/\{package_path}/\{x}.html",
+            href="/assets/"+ package_path.trim("/") + "/" + x + ".html",
             escape=true,
             [text(x)],
           ),

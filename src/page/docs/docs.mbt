@@ -30,7 +30,8 @@ enum Msg {
 ///|
 struct Model {
   fragment : String
-  path : String
+  mod_path : String
+  rel_path : String
   resource : Status[Resource]
   module_index : Status[ModuleIndex]
   package_data : Status[PackageData]
@@ -46,19 +47,76 @@ struct Model {
   // The sidebar fab button
   sidebar_fab : Bool
   search : SearchModel?
+  selected_version : String
+  selected_backend : String
+}
+
+///| return the url of current module. 
+/// Including the backend and version.
+fn get_module_url(self : Model) -> String {
+  self.mod_path.trim("/") +
+  "/@" +
+  self.selected_version +
+  "/" +
+  self.selected_backend
+}
+
+///| return the real url of current package.
+/// Including the backend and version.
+fn get_package_url(self : Model) -> String {
+  self.get_module_url() + "/" + self.rel_path.trim("/")
+}
+
+///| return the namespace path of current module
+fn get_module_path(self : Model) -> String {
+  self.mod_path
+}
+
+///| return the namespace path of current package
+fn get_package_path(self : Model) -> String {
+  (self.mod_path + "/" + self.rel_path).trim("/")
 }
 
 ///|
-pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
+pub fn load(
+  mod_path : String,
+  version : String,
+  backend : String,
+  rel_path : String,
+  fragment : String?
+) -> (Command[Msg], Model) {
+  let module_url = "/assets/" + mod_path.trim("/ ")
+  let publish_url = module_url + "/@" + version.trim("/ ").trim_start("@")
+  let backend_url = publish_url + "/" + backend.trim("/ ")
+  let package_url = backend_url + "/" + rel_path.trim("/ ")
+  let mooncake_path = mod_path + "/" + rel_path
+  println("module_url: " + module_url)
+  println("publish_url: " + publish_url)
+  println("backend_url: " + backend_url)
+  println("package_url: " + package_url)
   (
-    @http.get(
-      "/assets/" + path.trim("/") + "/resource.json",
-      expect=Json(Msg::GotResource, decode_resource),
-    ),
+    @cmd.batch([
+      // get the publish list
+      @http.get(
+        module_url + "/resource.json",
+        expect=Json(Msg::GotResource, decode_resource),
+      ),
+      // get the backend list
+      @http.get(
+        publish_url + "/resource.json",
+        expect=Json(Msg::GotResource, decode_resource),
+      ),
+      // get the package info
+      @http.get(
+        package_url + "/resource.json",
+        expect=Json(Msg::GotResource, decode_resource),
+      ),
+    ]),
     {
       module_index: Loading,
       fragment: fragment.or(""),
-      path,
+      mod_path,
+      rel_path,
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),
       sidebar_tab: "Documentation",
@@ -68,6 +126,8 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
       resource: Loading,
       search: None,
       search_entries: Loading,
+      selected_backend: backend,
+      selected_version: version,
     },
   )
 }
@@ -77,35 +137,43 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
   match msg {
     GotResource(result) =>
       match result {
-        Ok({ kind, .. } as resource) => {
-          let cmd = match kind {
+        Ok(resource) => {
+          let cmd = match resource {
             Module({ module_index_path, .. }) =>
               @http.get(
-                "/assets/" + module_index_path,
+                "/assets/\{model.get_module_url()}/module_index.json",
                 expect=Json(Msg::GotModuleIndex, decode_module_index),
               )
             Package({ package_data_path, module_path, .. }) =>
               batch([
                 @http.get(
-                  "/assets/" + package_data_path,
+                  "/assets/\{model.get_package_url()}/package_data.json",
                   expect=Json(Msg::GotPackageData, decode_package_data),
                 ),
                 @http.get(
-                  "/assets/" + module_path + "/module_index.json",
+                  "/assets/\{model.get_module_url()}/module_index.json",
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
               ])
             RootPackage({ module_index_path, package_data_path, .. }) =>
               batch([
                 @http.get(
-                  "/assets/" + module_index_path,
+                  "/assets/\{model.get_module_url()}/module_index.json",
                   expect=Json(Msg::GotModuleIndex, decode_module_index),
                 ),
                 @http.get(
-                  "/assets/" + package_data_path,
+                  "/assets/\{model.get_package_url()}/package_data.json",
                   expect=Json(Msg::GotPackageData, decode_package_data),
                 ),
               ])
+            BackendList({ backend }) => {
+              println(backend)
+              none()
+            }
+            PublishList({ publish }) => {
+              println(publish)
+              none()
+            }
           }
           (cmd, { ..model, resource: Success(resource) })
         }
@@ -120,7 +188,7 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
         match result {
           Ok(module_index) => {
             let sidebar_document = module_index._
-              .find_node(model.path)
+              .find_node(model.get_package_path())
               .unwrap()
               .to_document_items()
             {
@@ -181,7 +249,17 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
     ClickSidebarItem(id) => {
       let model = { ..model, sidebar_fab: false }
       match id {
-        Package(path) => (@nav.push_url("/docs/" + path), { ..model, path, })
+        Package(mooncake_path) => {
+          let rel_path = if mooncake_path.starts_with(model.mod_path) {
+            mooncake_path.substring(start=model.mod_path.length()).trim("/ ")
+          } else {
+            ""
+          }
+          (
+            @nav.push_url("/docs/\{model.get_module_url()}/\{rel_path}"),
+            { ..model, rel_path, },
+          )
+        }
         Symbol(id) | Section(id) => (@nav.scroll_to(id), model)
       }
     }
@@ -211,26 +289,49 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
 
 ///|
 fn breadcrumbs(
-  path : String,
-  module_path : String,
+  model : Model,
+  mod_path : String,
+  rel_path : String,
   module_index : ModuleIndex
 ) -> Html[Msg] {
-  let module_path = module_path.trim("/")
-  let path = path.trim("/")
-  let paths = path.trim_start("/").split("/").collect()
-  let mut acc_path = ""
+  // let module_path = module_path.trim("/")
+  // let path = path.trim("/")
+  // let paths = path.trim_start("/").split("/").collect()
+  // let mut acc_path = ""
   let elems = []
-  for path in paths {
-    acc_path += if acc_path == "" { path } else { "/" + path }
-    let elem = if acc_path.starts_with(module_path) &&
-      module_index._.find_node(acc_path) is Some(node) &&
-      (acc_path == module_path || not(node.pkg.is_empty())) {
-      a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
+  let mod_paths = mod_path.split("/").collect()
+  for i, path in mod_paths {
+    if i == mod_paths.length() - 1 {
+      elems.push(
+        a(class="hover:underline", href="/docs/\{model.get_module_url()}", [
+          text(path),
+        ]),
+      )
     } else {
-      div(class="text-gray-700 font-normal", [text(path)])
+      elems.push(div(class="text-gray-700 font-normal", [text(path)]))
     }
-    elems.push(elem)
   }
+  let mut acc_path = "/docs/\{model.get_module_url()}"
+  for path in rel_path.split("/") {
+    acc_path += "/" + path
+    if module_index._.find_node(acc_path) is Some(node) &&
+      not(node.pkg.is_empty()) {
+      elems.push(a(class="hover:underline", href=acc_path, [text(path)]))
+    } else {
+      elems.push(div(class="text-gray-700 font-normal", [text(path)]))
+    }
+  }
+  // for path in paths {
+  //   acc_path += if acc_path == "" { path } else { "/" + path }
+  //   let elem = if acc_path.starts_with(module_path) &&
+  //     module_index._.find_node(acc_path) is Some(node) &&
+  //     (acc_path == module_path || not(node.pkg.is_empty())) {
+  //     a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
+  //   } else {
+  //     div(class="text-gray-700 font-normal", [text(path)])
+  //   }
+  //   elems.push(elem)
+  // }
   let separator = div(class="text-gray-300 text-base", [text(" / ")])
   div(
     class="text-base text-gray-800 font-semibold flex gap-2",
@@ -253,8 +354,7 @@ fn logo() -> Html[Msg] {
 
 ///|
 fn navbar(
-  path : String,
-  module_path : String,
+  model : Model,
   version : String?,
   module_index : ModuleIndex,
   card_mode : CardMode
@@ -262,7 +362,7 @@ fn navbar(
   div(
     class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
     [
-      breadcrumbs(path, module_path, module_index),
+      breadcrumbs(model, model.mod_path, model.rel_path, module_index),
       // version
       if version is Some(value) {
         tag_view(value)
@@ -287,30 +387,19 @@ fn navbar(
 pub fn view(model : Model) -> Html[Msg] {
   let navbar = match (model.module_index, model.resource) {
     (Success(module_index), Success(resource)) => {
-      let (module_path, version) = match resource.kind {
+      let (module_path, version) = match resource {
         Module({ meta_info, .. }) =>
           (Some(meta_info.name), Some(meta_info.version))
         Package({ module_path, .. }) => (Some(module_path), None)
         _ => (None, None)
       }
-      navbar(
-        model.path,
-        module_path.or(""),
-        version,
-        module_index,
-        model.collapsed_docs.card_mode,
-      )
+      navbar(model, version, module_index, model.collapsed_docs.card_mode)
     }
     _ => nothing()
   }
   let source_files = match model.resource {
-    Success(
-      {
-        kind: Package({ source_files, .. })
-        | RootPackage({ source_files, .. }),
-        ..,
-      }
-    ) => source_files
+    Success(Package({ source_files, .. }) | RootPackage({ source_files, .. })) =>
+      source_files
     _ => []
   }
   let sidebar_ele = div(class="w-full h-full flex justify-end", [
@@ -320,16 +409,22 @@ pub fn view(model : Model) -> Html[Msg] {
         source_files,
         model.sidebar_tab,
         model.sidebar_collapsed,
-        package_path=model.path,
+        package_path=model.get_package_url(),
       ),
     ]),
   ])
   let main = match model.resource {
-    Success({ readme_content, kind }) => {
-      let meta = match kind {
+    Success(resource) => {
+      let meta = match resource {
         Module({ meta_info: meta, .. })
         | RootPackage({ meta_info: meta, .. }) => meta_info(meta)
-        Package(_) => nothing()
+        Package(_) | PublishList(_) | BackendList(_) => nothing()
+      }
+      let readme_content = match resource {
+        Module({ readme_content, .. })
+        | RootPackage({ readme_content, .. })
+        | Package({ readme_content, .. }) => readme_content
+        _ => ""
       }
       div(class="flex w-full min-h-full justify-begin", [
         div(class="overflow-y-auto 2xl:w-4/5", [
@@ -342,7 +437,10 @@ pub fn view(model : Model) -> Html[Msg] {
         ]),
       ])
     }
-    Failed => @view.document_not_available(model.path)
+    Failed =>
+      @view.document_not_available(
+        (model.mod_path + "/" + model.rel_path).trim("/"),
+      )
     Loading => @view.loading()
   }
   let search_panel = match model.search {
@@ -430,7 +528,7 @@ pub fn view(model : Model) -> Html[Msg] {
             source_files,
             model.sidebar_tab,
             model.sidebar_collapsed,
-            package_path=model.path,
+            package_path=model.get_package_url(),
           ),
         ],
       ),

@@ -61,10 +61,25 @@ fn route(url : @url.Url) -> (Command[Message], Model) {
   match paths {
     ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
     ["assets", ..] => (@nav.load(url.to_string()), Redirect)
-    ["docs", .. module_path] =>
-      module_path.iter().join("/")
-      |> @docs.load(url.fragment)
-      |> update_with(Model::Docs, Message::GotDocsMsg)
+    ["docs", .. paths] => {
+      let mod_path = paths
+        .iter()
+        .take_while(fn(x) { not(x.starts_with("@")) })
+        .join("/")
+      match paths.iter().drop_while(fn(x) { not(x.starts_with("@")) }).collect() {
+        [['@', .. version], backend, .. rel_path] => {
+          let rel_path = rel_path.iter().join("/")
+          let version = version.to_string()
+          println("mod_path: " + mod_path)
+          println("version: " + version)
+          println("backend: " + backend)
+          println("rel_path:" + rel_path)
+          @docs.load(mod_path, version, backend, rel_path, url.fragment)
+          |> update_with(Model::Docs, Message::GotDocsMsg)
+        }
+        _ => (none(), NotFound)
+      }
+    }
     _ => (none(), NotFound)
   }
 }

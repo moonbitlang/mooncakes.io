@@ -13,10 +13,12 @@
 // limitations under the License.
 
 ///|
-priv enum ResourceKind {
+priv enum Resource {
   Package(PackageResources)
   Module(ModuleResources)
   RootPackage(RootPackageResources)
+  PublishList(PublishResources)
+  BackendList(BackendResources)
 }
 
 ///|
@@ -34,6 +36,7 @@ priv struct MetaInfo {
 priv struct ModuleResources {
   meta_info : MetaInfo
   module_index_path : String
+  readme_content : String
 }
 
 ///|
@@ -41,6 +44,17 @@ priv struct PackageResources {
   package_data_path : String
   source_files : Array[String]
   module_path : String
+  readme_content : String
+}
+
+///|
+priv struct PublishResources {
+  publish : Array[(String, String)]
+}
+
+///|
+priv struct BackendResources {
+  backend : Array[String]
 }
 
 ///|
@@ -49,12 +63,7 @@ priv struct RootPackageResources {
   module_index_path : String
   package_data_path : String
   source_files : Array[String]
-}
-
-///|
-priv struct Resource {
   readme_content : String
-  kind : ResourceKind
 }
 
 ///|
@@ -106,8 +115,17 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
 ///|
 fn decode_module_resources(json : Json) -> ModuleResources!Error {
   match json {
-    { "module_index": String(module_index_path), "meta_info": meta_info, .. } =>
-      { module_index_path, meta_info: decode_meta_info!(meta_info) }
+    {
+      "readme_content": String(readme_content),
+      "module_index": String(module_index_path),
+      "meta_info": meta_info,
+      ..
+    } =>
+      {
+        module_index_path,
+        meta_info: decode_meta_info!(meta_info),
+        readme_content,
+      }
     _ => fail!("missing field module_index or source_files")
   }
 }
@@ -119,6 +137,7 @@ fn decode_package_resources(json : Json) -> PackageResources!Error {
       "package_data": String(package_data_path),
       "source_files": Array(source_files),
       "module_path": String(module_path),
+      "readme_content": String(readme_content),
       ..
     } => {
       let ls : Array[String] = []
@@ -128,7 +147,7 @@ fn decode_package_resources(json : Json) -> PackageResources!Error {
           _ => fail!("invalid source_files")
         }
       }
-      { package_data_path, source_files: ls, module_path }
+      { package_data_path, source_files: ls, module_path, readme_content }
     }
     _ => fail!("missing field package_data or source_files: \{json}")
   }
@@ -142,6 +161,7 @@ fn decode_root_package_resources(json : Json) -> RootPackageResources!Error {
       "source_files": Array(source_files),
       "module_index": String(module_index_path),
       "meta_info": meta_info,
+      "readme_content": String(readme_content),
       ..
     } => {
       let ls : Array[String] = []
@@ -156,6 +176,7 @@ fn decode_root_package_resources(json : Json) -> RootPackageResources!Error {
         source_files: ls,
         module_index_path,
         meta_info: decode_meta_info!(meta_info),
+        readme_content,
       }
     }
     _ => fail!("missing field package_data or source_files: \{json}")
@@ -163,9 +184,37 @@ fn decode_root_package_resources(json : Json) -> RootPackageResources!Error {
 }
 
 ///|
+fn decode_backend_resources(json : Json) -> BackendResources!Error {
+  match json {
+    { "backends": Array(xs), .. } => {
+      let xs = map_with_error!(xs, fn {
+        String(x) => x
+        _ => fail!("invalid json in backend list")
+      })
+      { backend: xs }
+    }
+    _ => fail!("missing field backends")
+  }
+}
+
+///|
+fn decode_publish_resources(json : Json) -> PublishResources!Error {
+  match json {
+    { "publish": Array(xs), .. } => {
+      let xs = map_with_error!(xs, fn {
+        { "version": String(version), "created_at": String(created_at), .. } =>
+          (version, created_at)
+        _ => fail!("invalid json in publish list")
+      })
+      { publish: xs }
+    }
+    _ => fail!("missing field publish")
+  }
+}
+
+///|
 fn decode_resource(json : Json) -> Result[Resource, String] {
-  guard json
-    is { "kind": String(kind), "readme_content": String(readme_content), .. } else {
+  guard json is { "kind": String(kind), .. } else {
     Err("invalid resource.json")
   }
   try {
@@ -173,9 +222,11 @@ fn decode_resource(json : Json) -> Result[Resource, String] {
       "module" => Module(decode_module_resources!(json))
       "package" => Package(decode_package_resources!(json))
       "module_and_package" => RootPackage(decode_root_package_resources!(json))
-      _ => panic()
+      "publish_list" => PublishList(decode_publish_resources!(json))
+      "backend_list" => BackendList(decode_backend_resources!(json))
+      _ => fail!("invalid kind: \{kind}")
     }
-    Ok({ readme_content, kind })
+    Ok(kind)
   } catch {
     err => Err(err.to_string())
   }

@@ -141,6 +141,7 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
     GotPackageData(result) => {
       let model = match result {
         Ok({ types, traits, misc, .. } as package_data) => {
+          println("got package data")
           // collapse all implementations by default
           let types_impls = types.iter().flat_map(fn(x) { x.impls.iter() })
           let traits_impls = traits.iter().flat_map(fn(x) { x.impls.iter() })
@@ -152,7 +153,10 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
             .fold(init=model.collapsed_docs, FoldedState::add)
           { ..model, collapsed_docs, package_data: Success(package_data) }
         }
-        Err(_) => { ..model, package_data: Failed }
+        Err(msg) => {
+          println(msg)
+          { ..model, package_data: Failed }
+        }
       }
       (@nav.scroll_to(model.fragment), model)
     }

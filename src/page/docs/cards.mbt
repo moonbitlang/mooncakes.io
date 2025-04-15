@@ -133,14 +133,12 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
 
 ///|
 fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
-  let { docstring, signature, impls, default_impls, name: _, loc } = doc
+  let { docstring, signature, impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature)
   let content = div(
     [
       @view.markdown(docstring, small_heading=true),
-      sub_section_title("Default Implementation", default_impls.length()),
-      ..default_impls.map(fn(x) { value_doc(x, folded~) }),
       sub_section_title("Implementation", impls.length()),
       ..impls.map(fn(x) { impl_doc(x, folded~) }),
     ],

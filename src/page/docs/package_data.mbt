@@ -52,7 +52,6 @@ priv struct TraitDoc {
   docstring : String
   signature : String
   loc : Loc
-  default_impls : Array[ValueDoc]
   impls : Array[ImplDoc]
 }
 
@@ -142,14 +141,12 @@ fn decode_trait_doc(json : Json) -> TraitDoc!Error {
       "docstring": String(docstring),
       "signature": String(signature),
       "impls": Array(impls),
-      "default_impls": Array(default_impls),
       "loc": loc,
       ..
     } => {
       let impls = map_with_error!(impls, decode_impl_doc)
-      let default_impls = map_with_error!(default_impls, decode_value_doc)
       let loc = decode_loc!(loc)
-      { name, docstring, signature, impls, default_impls, loc }
+      { name, docstring, signature, impls, loc }
     }
     _ => fail!("fail to decode trait doc: \{json}")
   }

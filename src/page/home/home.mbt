@@ -205,7 +205,12 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
   let indices = []
   for mod in modules {
     match decode_index(mod) {
-      Ok(index) => indices.push(index)
+      Ok(index) =>
+        // Filter out the test modules
+        match index.keywords {
+          Some(keywords) if keywords.contains("mooncakes-test") => ()
+          _ => indices.push(index)
+        }
       Err(msg) => return Err(msg)
     }
   }

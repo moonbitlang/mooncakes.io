@@ -15,7 +15,6 @@
 ///|
 pub enum Msg {
   GotModuleIndices(Result[Indices, String])
-  ClickModuleCard(String)
   FilterChanged(String)
 }
 
@@ -72,8 +71,6 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       }
       (none(), { ..model, filter, filtered_modules })
     }
-    ClickModuleCard(module_name) =>
-      (@nav.push_url("/docs/" + module_name), model)
   }
 }
 

@@ -36,7 +36,6 @@ pub(all) struct ModuleIndex {
 
 pub enum Msg {
   GotModuleIndices(Result[Indices, String])
-  ClickModuleCard(String)
   FilterChanged(String)
 }
 

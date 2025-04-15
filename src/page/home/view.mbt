@@ -35,9 +35,9 @@ extern "js" fn get_relative_time(date : String) -> String =
 
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
-  div(
-    class="p-4 h-50 flex bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
-    click=ClickModuleCard(mod.path),
+  a(
+    class="select-none p-4 h-50 flex bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
+    href="/docs/\{mod.path}",
     [
       div(class="flex flex-row text-lg font-semibold", [
         h2(class="text-gray-500", [text(mod.author)]),
@@ -79,9 +79,9 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
     Some(t) => p([text(get_relative_time(t))])
     None => nothing()
   }
-  div(
-    class="p-4 min-h-32 flex flex-col border-t bg-white hover:bg-gray-100 transition-all",
-    click=ClickModuleCard(mod.path),
+  a(
+    class="select-none p-4 min-h-32 flex flex-col border-t bg-white hover:bg-gray-100 transition-all",
+    href="/docs/\{mod.path}",
     [
       div(class="flex flex-row text-lg font-semibold", [
         h2(class="text-gray-500", [text(mod.author)]),

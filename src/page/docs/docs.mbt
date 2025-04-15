@@ -152,7 +152,10 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
             .fold(init=model.collapsed_docs, FoldedState::add)
           { ..model, collapsed_docs, package_data: Success(package_data) }
         }
-        Err(_) => { ..model, package_data: Failed }
+        Err(msg) => {
+          println(msg)
+          { ..model, package_data: Failed }
+        }
       }
       (@nav.scroll_to(model.fragment), model)
     }

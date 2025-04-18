@@ -18,7 +18,7 @@ extern "js" fn get_relative_time(date : String) -> String =
   #|  const date = new Date(dateString);
   #|  const now = new Date();
   #|  const diff = now - date;
-  #|  const rtf = new Intl.RelativeTimeFormat("zh-CN", { numeric: "auto" });
+  #|  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
   #|  const seconds = Math.floor(diff / 1000);
   #|  const minutes = Math.floor(seconds / 60);
   #|  const hours = Math.floor(minutes / 60);
@@ -40,13 +40,18 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
     href="/docs/\{mod.path}",
     [
       div(class="flex flex-row text-lg font-semibold", [
-        h2(class="text-gray-500", [text(mod.author)]),
-        h2(class="px-1 text-gray-300", [text("/")]),
-        h2(class="", [text(mod.name)]),
+        span(class="text-gray-500", [text(mod.author)]),
+        span(class="px-1 text-gray-300", [text("/")]),
+        span([text(mod.name)]),
       ]),
       div(
-        class="pt-2 flex justify-between items-center text-gray-500 text-sm",
-        [text(mod.description.or(""))],
+        class="pt-2 text-gray-500 flex-grow flex flex-col justify-between gap-2",
+        [
+          p(class="text-sm", [text(mod.description.or(""))]),
+          p(class="text-[0.8rem] w-full text-right", [
+            text(mod.created_at.map(get_relative_time).or("")),
+          ]),
+        ],
       ),
     ],
   )

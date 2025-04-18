@@ -225,7 +225,7 @@ fn breadcrumbs(
   let elems = []
   for path in paths {
     acc_path += if acc_path == "" { path } else { "/" + path }
-    let elem = if acc_path.starts_with(module_path) &&
+    let elem = if acc_path.has_prefix(module_path) &&
       module_index._.find_node(acc_path) is Some(node) &&
       (acc_path == module_path || not(node.pkg.is_empty())) {
       a(class="hover:underline", href="/docs/" + acc_path, [text(path)])

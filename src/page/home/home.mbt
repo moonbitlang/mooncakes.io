@@ -140,7 +140,10 @@ pub fn view(model : Model) -> Html[Msg] {
     Failed => @view.load_failed("module indices")
     Success(indices) =>
       if model.filter == "" {
-        recently_updated(indices.recently_updated)
+        div([
+          recently_updated(indices.recently_updated),
+          all_modules(indices.all_modules),
+        ])
       } else {
         search_result(model.filtered_modules)
       }

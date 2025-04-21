@@ -118,6 +118,37 @@ fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
 }
 
 ///|
+fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
+  let all_modules = modules
+    .iter2()
+    .to_array()
+    ..sort_by(fn(a, b) { a.0.to_int() - b.0.to_int() })
+    .map(fn(x) {
+      let (key, value) = x
+      let modules = value.map(simple_module_card)
+      div(class="pt-2", [
+        div(class="container lg:w-2/3 px-4", [
+          h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
+            text(key.to_string()),
+          ]),
+          div(
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4",
+            modules,
+          ),
+        ]),
+      ])
+    })
+  div(class="pt-10", [
+    div(class="container lg:w-2/3 px-4", [
+      h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
+        text("ALL MODULES"),
+      ]),
+    ]),
+    div(all_modules),
+  ])
+}
+
+///|
 fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
   let module_cards = mods.map(module_card)
   div([

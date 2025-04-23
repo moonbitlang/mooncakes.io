@@ -45,16 +45,19 @@ struct Model {
   sidebar_tab : String
   // The sidebar fab button
   sidebar_fab : Bool
-  search : SearchModel?
+  search : SearchModel
 }
 
 ///|
 pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
   (
-    @http.get(
-      "/assets/" + path.trim("/") + "/resource.json",
-      expect=Json(Msg::GotResource, decode_resource),
-    ),
+    batch([
+      @http.get(
+        "/assets/" + path.trim("/") + "/resource.json",
+        expect=Json(Msg::GotResource, decode_resource),
+      ),
+      @dialog.close("search-panel"),
+    ]),
     {
       module_index: Loading,
       fragment: fragment.or(""),
@@ -66,7 +69,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
       package_data: Loading,
       collapsed_docs: FoldedState::new(),
       resource: Loading,
-      search: None,
+      search: { filter: "", results: Loading },
       search_entries: Loading,
     },
   )
@@ -189,12 +192,12 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       }
     }
     ToggleSearchPanel(open) => {
-      let search = if open {
-        Some({ filter: "", results: Success([]) })
+      let cmd = if open {
+        @dialog.show("search-panel")
       } else {
-        None
+        @dialog.close("search-panel")
       }
-      (none(), { ..model, search, })
+      (cmd, model)
     }
     SearchFilterChanged(filter) => {
       let results = match model.search_entries {
@@ -202,7 +205,7 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
         Loading => @util.Loading
         Success(indices) => Success(search(indices, filter))
       }
-      let search = Some({ filter, results })
+      let search = { filter, results }
       (none(), { ..model, search, })
     }
     ToggleSidebarFab => {
@@ -348,72 +351,66 @@ pub fn view(model : Model) -> Html[Msg] {
     Failed => @view.document_not_available(model.path)
     Loading => @view.loading()
   }
-  let search_panel = match model.search {
-    None => nothing()
-    Some(search) => {
-      let input_style = match search.results {
-        Success(xs) if not(xs.is_empty()) => ""
-        _ => "rounded-b"
-      }
-      div(class="fixed inset-0 flex justify-center items-center", [
-        div(
-          class="fixed inset-0 bg-black bg-opacity-40",
-          click=ToggleSearchPanel(false),
-          [],
-        ),
-        div(class="overflow-clip w-4/5 max-w-96 z-20 h-[80%] rounded", [
+  let search = model.search
+  let search_panel = @html.dialog(
+    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-screen h-screen lg:w-2/5 lg:h-[80%]",
+    id="search-panel",
+    [
+      div(
+        class="h-12 border-b rounded-none sticky top-0 text-base w-full flex",
+        [
           @html.input(
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            class="border-b h-12 px-4 p-2 outline-none text-base w-full \{input_style}",
             input=Msg::SearchFilterChanged,
+            class="outline-none m-0 flex-grow px-4 p-2",
           ),
-          match search.results {
-            Loading => text("loading ...")
-            Failed => text("load indices failed")
-            Success(results) =>
-              @html.ul(
-                class="overflow-y-auto overflow-x-hidden h-full",
-                results.map(fn(x) {
-                  let color = match x.entry.kind {
-                    "Package" => "text-yellow-700"
-                    "Trait" => "text-blue-700"
-                    "Type" => "text-green-700"
-                    "Method" => "text-moonbit"
-                    "Value" => "text-purple-700"
-                    _ => "text-gray-700"
-                  }
-                  @html.li(
-                    class="border-t px-4 py-2 bg-white hover:bg-gray-100",
-                    [
-                      a(href=x.entry.href, class="grid grid-cols-[1fr_6em] ", [
-                        span(
-                          class="font-sans",
-                          x.matching.map(fn {
-                            (true, str) =>
-                              span(class="text-moonbit font-semibold", [
-                                text(str.to_string()),
-                              ])
-                            (false, str) =>
-                              span(class="text-gray-600", [
-                                text(str.to_string()),
-                              ])
-                          }),
-                        ),
-                        span(class="font-thin text-base \{color}", [
-                          text(x.entry.kind),
-                        ]),
-                      ]),
-                    ],
-                  )
-                }),
-              )
-          },
-        ]),
-      ])
-    }
-  }
+          div(
+            class="size-12 container hover:bg-gray-200 flex justify-center items-center",
+            click=ToggleSearchPanel(false),
+            [img(src=@config.icon_close, [])],
+          ),
+        ],
+      ),
+      match search.results {
+        Loading => nothing()
+        Failed => text("load indices failed")
+        Success(results) =>
+          @html.ul(
+            class="overflow-y-scroll flex-grow",
+            results.map(fn(x) {
+              let color = match x.entry.kind {
+                "Package" => "text-yellow-700"
+                "Trait" => "text-blue-700"
+                "Type" => "text-green-700"
+                "Method" => "text-moonbit"
+                "Value" => "text-purple-700"
+                _ => "text-gray-700"
+              }
+              @html.li(class="border-b px-4 py-2 bg-white hover:bg-gray-100", [
+                a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
+                  span(
+                    class="",
+                    x.matching.map(fn {
+                      (true, str) =>
+                        span(class="text-moonbit font-semibold", [
+                          text(str.to_string()),
+                        ])
+                      (false, str) =>
+                        span(class="text-gray-600", [text(str.to_string())])
+                    }),
+                  ),
+                  span(class="font-thin text-tiny lg:text-base \{color}", [
+                    text(x.entry.kind),
+                  ]),
+                ]),
+              ])
+            }),
+          )
+      },
+    ],
+  )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
   let sidebar_dialog = div(
     class="fixed inset-0 justify-center items-center",

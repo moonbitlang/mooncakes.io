@@ -37,6 +37,8 @@ let builtins_package_path : Map[String, String]
 
 let dead_rabbit : String
 
+let icon_close : String
+
 // Types and methods
 
 // Type aliases

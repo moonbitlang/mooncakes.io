@@ -20,6 +20,9 @@ pub const FOLDER_OPEN = "/folder-open.svg"
 pub const FOLDER_CLOSE = "/folder-close.svg"
 
 ///|
+pub let icon_close = "/close.svg"
+
+///|
 pub const SECTION_OPEN = "/section-open.svg"
 
 ///|

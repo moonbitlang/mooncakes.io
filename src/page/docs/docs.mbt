@@ -357,7 +357,7 @@ pub fn view(model : Model) -> Html[Msg] {
     id="search-panel",
     [
       div(
-        class="h-12 border-b rounded-none sticky top-0 text-base w-full flex",
+        class="h-12 border-b bg-white rounded-none sticky top-0 text-base w-full flex",
         [
           @html.input(
             input_type=Text,

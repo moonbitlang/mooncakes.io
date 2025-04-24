@@ -353,7 +353,7 @@ pub fn view(model : Model) -> Html[Msg] {
   }
   let search = model.search
   let search_panel = @html.dialog(
-    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-screen h-screen lg:w-2/5 lg:h-[80%]",
+    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
     id="search-panel",
     [
       div(

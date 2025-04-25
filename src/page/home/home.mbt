@@ -187,11 +187,16 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
       let created_at = created_at.map(fn(x) { x.as_string().unwrap() })
       let description = description.map(fn(x) { x.as_string().unwrap() })
       guard path.split("/").collect() is [author, .. name]
-      let name = name
-        .iter()
-        .intersperse("/")
-        .fold(fn(acc, x) { acc + x }, init="")
-      Ok({ path, name, author, version, description, keywords, created_at })
+      let name = name.iter().map(@string.View::to_string).join("/")
+      Ok({
+        path,
+        name,
+        author: author.to_string(),
+        version,
+        description,
+        keywords,
+        created_at,
+      })
     }
     _ => Err("Error when parsing metadata.")
   }

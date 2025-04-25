@@ -164,7 +164,10 @@ pub fn parse(signature : String) -> List[CodeSpan] {
     // qualified ident
     LexStart, ['@', .. s], acc => continue LexQual(Nil), s, acc
     LexQual(path), ['.', .. s], acc => {
-      let path = String::from_iter(path.rev().iter()).split("/").collect()
+      let path = String::from_iter(path.rev().iter())
+        .split("/")
+        .map(@string.View::to_string)
+        .collect()
       continue LexQualIdent(path, Nil), s, acc
     }
     LexQual(path), [c, .. s], acc => continue LexQual(Cons(c, path)), s, acc

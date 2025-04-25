@@ -116,7 +116,7 @@ fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
     return None
   }
   loop Some(self), paths {
-    Some(node), [path, .. rest] => continue node.childs[path], rest
+    Some(node), [path, .. rest] => continue node.childs[path.to_string()], rest
     node, _ => node
   }
 }

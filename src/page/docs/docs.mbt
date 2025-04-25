@@ -53,7 +53,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
   (
     batch([
       @http.get(
-        "/assets/" + path.trim("/") + "/resource.json",
+        "/assets/" + path.trim("/").to_string() + "/resource.json",
         expect=Json(Msg::GotResource, decode_resource),
       ),
       @dialog.close("search-panel"),
@@ -221,13 +221,14 @@ fn breadcrumbs(
   module_path : String,
   module_index : ModuleIndex
 ) -> Html[Msg] {
-  let module_path = module_path.trim("/")
+  let module_path = module_path.trim("/").to_string()
   let path = path.trim("/")
   let paths = path.trim_start("/").split("/").collect()
   let mut acc_path = ""
   let elems = []
   for path in paths {
-    acc_path += if acc_path == "" { path } else { "/" + path }
+    let path = path.to_string()
+    acc_path += if acc_path == "" { path } else { "/" + path.to_string() }
     let elem = if acc_path.has_prefix(module_path) &&
       module_index._.find_node(acc_path) is Some(node) &&
       (acc_path == module_path || not(node.pkg.is_empty())) {

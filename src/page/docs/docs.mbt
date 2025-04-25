@@ -25,6 +25,8 @@ enum Msg {
   ToggleSearchPanel(Bool)
   SearchFilterChanged(String)
   ToggleSidebarFab
+  CopyInstallCommand(String)
+  CopyInstallSuccess
 }
 
 ///|
@@ -46,6 +48,7 @@ struct Model {
   // The sidebar fab button
   sidebar_fab : Bool
   search : SearchModel
+  install_copied : Bool
 }
 
 ///|
@@ -71,6 +74,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
       resource: Loading,
       search: { filter: "", results: Loading },
       search_entries: Loading,
+      install_copied: false,
     },
   )
 }
@@ -212,6 +216,9 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
       let sidebar_fab = not(model.sidebar_fab)
       (none(), { ..model, sidebar_fab, })
     }
+    CopyInstallCommand(command) =>
+      (@clipboard.copy(Text(command), copied=Msg::CopyInstallSuccess), model)
+    CopyInstallSuccess => (none(), { ..model, install_copied: true })
   }
 }
 
@@ -335,7 +342,8 @@ pub fn view(model : Model) -> Html[Msg] {
     Success({ readme_content, kind }) => {
       let meta = match kind {
         Module({ meta_info: meta, .. })
-        | RootPackage({ meta_info: meta, .. }) => meta_info(meta)
+        | RootPackage({ meta_info: meta, .. }) =>
+          meta_info(meta, install_copied=model.install_copied)
         Package(_) => nothing()
       }
       div(class="flex w-full min-h-full justify-begin", [

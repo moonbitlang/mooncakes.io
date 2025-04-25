@@ -14,6 +14,7 @@
     "moonbitlang/mooncakes/view/tree",
     "moonbitlang/mooncakes/util",
     "illusory0x0/fuzzy_match",
-    "CAIMEOX/lazy"
+    "CAIMEOX/lazy",
+    "Yoorkin/rabbit-tea/clipboard"
   ]
 }

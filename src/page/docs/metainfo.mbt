@@ -26,10 +26,13 @@ fn meta_info_item_view(
 }
 
 ///|
-fn install_view(path~ : String) -> Html[Msg] {
+fn install_view(path~ : String, version~ : String, copied~ : Bool) -> Html[Msg] {
+  let command = "moon add \{path}@\{version}"
+  let icon = if copied { @config.ok } else { @config.clipboard }
   div(
-    class="text-sm h-8 p-2 pr-10 font-roboto border rounded outline-none bg-zinc-100 flex items-center",
-    [text("moon add \{path}")],
+    class="hover:bg-gray-100 active:bg-gray-200 transition-colors text-gray-900 text-sm px-3 p-2 font-roboto border rounded outline-none flex items-center gap-2",
+    click=Msg::CopyInstallCommand(command),
+    [text(command), img(class="size-4", src=icon, [])],
   )
 }
 
@@ -42,7 +45,7 @@ fn tag_view(value : String) -> Html[Msg] {
 }
 
 ///|
-fn meta_info(model : MetaInfo) -> Html[Msg] {
+fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
   let model_license = match model.license {
     Some(l) =>
       meta_info_item_view(title="License", p(class="text-gray-600", [text(l)]))
@@ -67,8 +70,6 @@ fn meta_info(model : MetaInfo) -> Html[Msg] {
       div(class="flex gap-2", model.keywords.map(tag_view)),
     ]),
     div(class="flex gap-3 flex-wrap", [
-      meta_info_item_view(title="Install", div([install_view(path=model.name)])),
-      div(class="grow", []),
       div(
         class="flex gap-2 flex-wrap",
         [
@@ -83,6 +84,23 @@ fn meta_info(model : MetaInfo) -> Html[Msg] {
         .intersperse(meta_separator)
         .collect(),
       ),
+      div(class="grow", []),
+      if model.name == "moonbitlang/core" {
+        div(class="text-gray-600", [
+          text("This module is installed by default."),
+        ])
+      } else {
+        meta_info_item_view(
+          title="Install",
+          div([
+            install_view(
+              path=model.name,
+              version=model.version,
+              copied=install_copied,
+            ),
+          ]),
+        )
+      },
     ]),
   ])
 }

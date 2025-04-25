@@ -44,6 +44,12 @@ pub const SEARCH = "/search.svg"
 pub const SHARE = "/share.svg"
 
 ///|
+pub let ok = "/ok.svg"
+
+///|
+pub let clipboard = "/clipboard.svg"
+
+///|
 pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
 
 ///|

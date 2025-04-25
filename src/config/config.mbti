@@ -35,9 +35,13 @@ const VALUE_ICON : String = "/code-brackets.svg"
 
 let builtins_package_path : Map[String, String]
 
+let clipboard : String
+
 let dead_rabbit : String
 
 let icon_close : String
+
+let ok : String
 
 // Types and methods
 

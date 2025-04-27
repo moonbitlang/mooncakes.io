@@ -50,6 +50,30 @@ pub let ok = "/ok.svg"
 pub let clipboard = "/clipboard.svg"
 
 ///|
+pub let tag = "/tag.svg"
+
+///|
+pub let user = "/user.svg"
+
+///|
+pub let install = "/install.svg"
+
+///|
+pub let license = "/license.svg"
+
+///|
+pub let repo = "/repo.svg"
+
+///|
+pub let code = "/code.svg"
+
+///|
+pub let terminal = "/terminal.svg"
+
+///|
+pub let deps = "/deps.svg"
+
+///|
 pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
 
 ///|

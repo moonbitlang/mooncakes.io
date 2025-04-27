@@ -102,7 +102,7 @@ fn banner() -> Html[Msg] {
   }
 
   div(
-    class="container lg:w-3/5 flex flex-col-reverse lg:flex-row items-center justify-between mt-10 mb-5",
+    class="container lg:w-3/5 flex flex-col-reverse lg:flex-row items-center justify-between",
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
         div(class="text-slate-700", [
@@ -152,7 +152,7 @@ pub fn view(model : Model) -> Html[Msg] {
   div(class="flex flex-col min-h-screen", [
     navbar(),
     banner,
-    hr(class="lg:m-10 border-gray-200"),
+    hr(class="m-4 border-gray-200"),
     module_list,
     div(class="mt-auto", [@view.footer()]),
   ])

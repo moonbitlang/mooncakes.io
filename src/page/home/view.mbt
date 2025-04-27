@@ -173,7 +173,7 @@ fn navbar() -> Html[Msg] {
             text("🥮 mooncakes.io"),
           ]),
         ]),
-        div(class="justify-center my-2 w-full max-w-72", [
+        div(class="justify-center my-2 w-full max-w-72 shadow-sm", [
           input(
             input_type=Text,
             placeholder="Search modules ...",

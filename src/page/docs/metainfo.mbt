@@ -16,23 +16,32 @@
 fn meta_info_item_view(
   title~ : String,
   elem : Html[Msg],
-  grow~ : Bool = false
+  icon? : String
 ) -> Html[Msg] {
-  let grow = if grow { "grow" } else { "" }
-  div(class="flex items-center gap-3 text-gray-600 \{grow}", [
-    p(class="font-bold text-sm", [text(title)]),
+  let title_content = match icon {
+    Some(icon_src) =>
+      div(class="flex items-center gap-2", [
+        img(class="w-[14px] h-[14px]", src=icon_src, []),
+        span(class="text-gray-700", [text(title)]),
+      ])
+    None => text(title)
+  }
+  div(class="flex border-t flex-col gap-2 text-gray-800 px-8 py-4 grow", [
+    p(class="font-bold text-sm", [title_content]),
     div(class="grow", [elem]),
   ])
 }
 
 ///|
-fn install_view(path~ : String, version~ : String, copied~ : Bool) -> Html[Msg] {
-  let command = "moon add \{path}@\{version}"
+fn install_view(command : String, copied~ : Bool) -> Html[Msg] {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
-    class="hover:bg-gray-100 active:bg-gray-200 transition-colors text-gray-900 text-sm px-3 p-2 font-roboto border rounded outline-none flex items-center gap-2",
+    class="hover:bg-gray-100 active:bg-gray-200 bg-white shadow-sm transition-colors text-black text-sm px-3 p-2 font-roboto border rounded outline-none flex justify-between items-center gap-2",
     click=Msg::CopyInstallCommand(command),
-    [text(command), img(class="size-4", src=icon, [])],
+    [
+      span(class="overflow-x-auto text-nowrap", [text(command)]),
+      img(class="size-4", src=icon, []),
+    ],
   )
 }
 
@@ -48,59 +57,83 @@ fn tag_view(value : String) -> Html[Msg] {
 fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
   let model_license = match model.license {
     Some(l) =>
-      meta_info_item_view(title="License", p(class="text-gray-600", [text(l)]))
+      meta_info_item_view(icon=@config.license, title="License", p([text(l)]))
     None => nothing()
   }
   let model_repo = match model.repository {
     Some(repo) =>
       meta_info_item_view(
+        icon=@config.repo,
         title="Repository",
         p([a(class="hover:underline", href=repo, [text(repo)])]),
       )
     None => nothing()
   }
-  let model_description = match model.description {
-    Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
-    None => nothing()
-  }
-  let meta_separator = div(class="border-l border-gray-200 my-1 mx-2", [])
-  div(class="px-4 sm:px-8 p-6 border-b mx-4", [
-    div(class="flex gap-3 flex-wrap mb-2", [
-      model_description,
-      div(class="flex gap-2", model.keywords.map(tag_view)),
+  let model_description = div(class="pl-7 py-4", [
+    h1(class="text-2xl font-bold mb-4", [
+      text(model.name.split("/").last().unwrap().to_string()),
     ]),
-    div(class="flex gap-3 flex-wrap", [
-      div(
-        class="flex gap-2 flex-wrap",
-        [
-          meta_info_item_view(
-            title="Author",
-            p(class="text-gray-600", [text(model.author)]),
-          ),
-          model_license,
-          model_repo,
-        ]
-        .iter()
-        .intersperse(meta_separator)
-        .collect(),
-      ),
-      div(class="grow", []),
+    match model.description {
+      Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
+      None => nothing()
+    },
+    div(class="flex gap-2 my-2", model.keywords.map(tag_view)),
+  ])
+  div(class="mx-7 my-4 py-2 bg-gray-50 rounded overflow-clip", [
+    model_description,
+    div(
+      class="flex flex-wrap content-stretch",
+      [
+        meta_info_item_view(
+          icon=@config.user,
+          title="Author",
+          p([text(model.author)]),
+        ),
+        meta_info_item_view(
+          icon=@config.tag,
+          title="Version",
+          p([text(model.version)]),
+        ),
+        model_license,
+        model_repo,
+      ]
+      .iter()
+      .intersperse(div(class="", []))
+      .collect(),
+    ),
+    if model.deps.is_empty() {
+      nothing()
+    } else {
+      meta_info_item_view(
+        icon=@config.deps,
+        title="Dependencies",
+        ul(
+          class="",
+          model.deps.map(fn {
+            (name, version) =>
+              @html.li(class="font-roboto text-sm text-gray-300", [
+                a(class="hover:underline text-gray-900", href="/docs/\{name}", [
+                  text(name),
+                ]),
+                span(class="text-gray-500", [text(" " + version)]),
+              ])
+          }),
+        ),
+      )
+    },
+    meta_info_item_view(
+      icon=@config.terminal,
+      title="Install",
       if model.name == "moonbitlang/core" {
         div(class="text-gray-600", [
           text("This module is installed by default."),
         ])
       } else {
-        meta_info_item_view(
-          title="Install",
-          div([
-            install_view(
-              path=model.name,
-              version=model.version,
-              copied=install_copied,
-            ),
-          ]),
+        install_view(
+          "moon add \{model.name}@\{model.version}",
+          copied=install_copied,
         )
       },
-    ]),
+    ),
   ])
 }

@@ -37,11 +37,27 @@ let builtins_package_path : Map[String, String]
 
 let clipboard : String
 
+let code : String
+
 let dead_rabbit : String
+
+let deps : String
 
 let icon_close : String
 
+let install : String
+
+let license : String
+
 let ok : String
+
+let repo : String
+
+let tag : String
+
+let terminal : String
+
+let user : String
 
 // Types and methods
 

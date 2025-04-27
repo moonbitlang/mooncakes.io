@@ -28,6 +28,7 @@ priv struct MetaInfo {
   keywords : Array[String]
   description : String?
   repository : String?
+  deps : Array[(String, String)]
 } derive(Show)
 
 ///|
@@ -68,6 +69,7 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
         "license"? : license,
         "description"? : description,
         "keywords"? : keywords,
+        "deps"? : deps,
         ..
       } else {
       fail!("Error when parsing metadata.")
@@ -97,7 +99,16 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
     let author = String::from_array(
       iter.take_while(fn(x) { x != '/' }).collect(),
     )
-    { author, name, description, version, license, repository, keywords }
+    let deps = match deps {
+      Some(Object(xs)) =>
+        map_with_error!(xs.iter2().to_array(), fn {
+          (name, String(version)) => (name, version)
+          _ => fail!("Error when parsing deps.")
+        })
+      None => []
+      _ => abort("Error when parsing deps.")
+    }
+    { author, name, description, version, license, repository, keywords, deps }
   }
 
   parse_package!(json)

@@ -269,19 +269,16 @@ fn logo() -> Html[Msg] {
 fn navbar(
   path : String,
   module_path : String,
-  version : String?,
   module_index : ModuleIndex,
   card_mode : CardMode
 ) -> Html[Msg] {
   div(
     class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
     [
-      breadcrumbs(path, module_path, module_index),
-      // version
-      if version is Some(value) {
-        tag_view(value)
-      } else {
+      if module_path == path {
         nothing()
+      } else {
+        breadcrumbs(path, module_path, module_index)
       },
       div(class="flex-grow", []),
       card_mode_toggle(mode=card_mode, click=Msg::DocModeChanged),
@@ -301,16 +298,14 @@ fn navbar(
 pub fn view(model : Model) -> Html[Msg] {
   let navbar = match (model.module_index, model.resource) {
     (Success(module_index), Success(resource)) => {
-      let (module_path, version) = match resource.kind {
-        Module({ meta_info, .. }) =>
-          (Some(meta_info.name), Some(meta_info.version))
-        Package({ module_path, .. }) => (Some(module_path), None)
-        _ => (None, None)
+      let module_path = match resource.kind {
+        Module({ meta_info, .. }) => Some(meta_info.name)
+        Package({ module_path, .. }) => Some(module_path)
+        RootPackage(_) => Some(model.path)
       }
       navbar(
         model.path,
         module_path.or(""),
-        version,
         module_index,
         model.collapsed_docs.card_mode,
       )

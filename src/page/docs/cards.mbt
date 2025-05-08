@@ -112,7 +112,7 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
       span(class="text-gray-700", [stype(self_type)]),
     ]),
   ])
-  let content = div(class="pl-4", methods.map(fn(x) { value_doc(x, folded~) }))
+  let content = div(class="pl-4", methods.map(value_doc(_, folded~)))
   document_item(signature, content, collapsed=folded, id~, tight=true)
 }
 
@@ -124,8 +124,8 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
   let content = div(
     [
       @view.markdown(docstring, small_heading=true),
-      ..methods.map(fn(x) { value_doc(x, folded~, type_id=id) }),
-      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+      ..methods.map(value_doc(_, folded~, type_id=id)),
+      ..impls.map(impl_doc(_, folded~)),
     ],
   )
   document_item(signature, content, collapsed=folded, id~, loc~)
@@ -140,7 +140,7 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
     [
       @view.markdown(docstring, small_heading=true),
       sub_section_title("Implementation", impls.length()),
-      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+      ..impls.map(impl_doc(_, folded~)),
     ],
   )
   document_item(signature, content, collapsed=folded, id~, loc~)
@@ -253,8 +253,8 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
     class="ml-3 my-2",
     [
       tips,
-      ..methods.map(fn(x) { value_doc(x, folded~, type_id=id) }),
-      ..impls.map(fn(x) { impl_doc(x, folded~) }),
+      ..methods.map(value_doc(_, folded~, type_id=id)),
+      ..impls.map(impl_doc(_, folded~)),
     ],
   )
   document_item(signature, content, collapsed=folded, id~)
@@ -304,17 +304,17 @@ fn document(
 
       [
         section_title("trait-section", "Traits", traits.length()),
-        ..traits.map(fn(x) { trait_doc(x, folded~) }),
+        ..traits.map(trait_doc(_, folded~)),
         section_title("type-section", "Types", types.length()),
-        ..types.map(fn(x) { type_doc(x, folded~) }),
-        ..typealiases.map(fn(x) { type_alias_doc(x, folded~) }),
+        ..types.map(type_doc(_, folded~)),
+        ..typealiases.map(type_alias_doc(_, folded~)),
         section_title(
           "value-section",
           "Values & Functions",
           values.length() + misc.length(),
         ),
-        ..values.map(fn(x) { value_doc(x, folded~) }),
-        ..misc.map(fn(x) { misc_doc(x, folded~) }),
+        ..values.map(value_doc(_, folded~)),
+        ..misc.map(misc_doc(_, folded~)),
       ]
     }
     _ => []

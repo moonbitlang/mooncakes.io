@@ -43,7 +43,7 @@ pub(all) struct ModuleIndex {
 }
 
 ///|
-pub fn load() -> (Command[Msg], Model) {
+pub fn load() -> (Cmd[Msg], Model) {
   (
     @http.get(
       "/assets/modules.json",
@@ -54,7 +54,7 @@ pub fn load() -> (Command[Msg], Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
+pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
   match msg {
     GotModuleIndices(result) =>
       (

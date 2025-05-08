@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-enum Message {
+enum Msg {
   GotHomeMsg(@home.Msg)
   GotDocsMsg(@docs.Msg)
   LinkClicked(@url.UrlRequest)
@@ -30,16 +30,16 @@ enum Model {
 
 ///|
 fn update_with[SubModel, SubMsg](
-  pair : (Command[SubMsg], SubModel),
+  pair : (Cmd[SubMsg], SubModel),
   to_model : (SubModel) -> Model,
-  to_msg : (SubMsg) -> Message
-) -> (Command[Message], Model) {
+  to_msg : (SubMsg) -> Msg
+) -> (Cmd[Msg], Model) {
   let (cmd, model) = pair
   (cmd.map(to_msg), to_model(model))
 }
 
 ///|
-fn update(msg : Message, model : Model) -> (Command[Message], Model) {
+fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
   match (msg, model) {
     (GotHomeMsg(msg), Home(model)) =>
       @home.update(msg, model) |> update_with(Home(_), GotHomeMsg(_))
@@ -56,7 +56,7 @@ fn update(msg : Message, model : Model) -> (Command[Message], Model) {
 }
 
 ///|
-fn route(url : @url.Url) -> (Command[Message], Model) {
+fn route(url : @url.Url) -> (Cmd[Msg], Model) {
   let paths = url.path.split("/").collect()
   match paths {
     ["/"] | [] => @home.load() |> update_with(Home(_), GotHomeMsg(_))
@@ -70,7 +70,7 @@ fn route(url : @url.Url) -> (Command[Message], Model) {
 }
 
 ///|
-fn view(model : Model) -> Html[Message] {
+fn view(model : Model) -> Html[Msg] {
   match model {
     Home(model) => @home.view(model).map(GotHomeMsg(_))
     Docs(model) => @docs.view(model).map(GotDocsMsg(_))

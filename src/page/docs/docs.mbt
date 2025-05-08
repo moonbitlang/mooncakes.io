@@ -52,7 +52,7 @@ struct Model {
 }
 
 ///|
-pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
+pub fn load(path : String, fragment : String?) -> (Cmd[Msg], Model) {
   (
     batch([
       @http.get(
@@ -80,7 +80,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
+pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
   match msg {
     GotResource(result) =>
       match result {

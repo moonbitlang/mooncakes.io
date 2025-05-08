@@ -3,9 +3,9 @@ package "moonbitlang/mooncakes/main"
 // Values
 
 // Types and methods
-type Message
-
 type Model
+
+type Msg
 
 // Type aliases
 

@@ -36,7 +36,7 @@ fnalias @tea.(batch, none)
 typealias @html.Html
 
 ///|
-typealias @tea.Command
+typealias @tea.Cmd
 
 ///|
 typealias @util.Status

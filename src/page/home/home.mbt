@@ -78,7 +78,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
 pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] {
   indices.all_modules
   .values()
-  .flat_map(fn(x) { x.iter() })
+  .flat_map(Array::iter)
   .filter(fn(x) {
     fn is_matched(s1 : String) {
       s1.to_upper().contains(filter.to_upper())
@@ -232,18 +232,17 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
     }
   }
   let recently_updated = indices
-    ..sort_by(fn(a, b) {
-      match (a, b) {
-        ({ created_at: Some(v1), .. }, { created_at: Some(v2), .. }) =>
-          match compare_date(v1, v2) {
-            0 => -a.name.compare(b.name)
-            order => order
-          }
-        ({ created_at: None, .. }, { created_at: Some(_), .. }) => 1
-        ({ created_at: Some(_), .. }, { created_at: None, .. }) => -1
-        ({ created_at: None, .. }, { created_at: None, .. }) =>
-          -a.name.compare(b.name)
-      }
+    ..sort_by(fn {
+      { created_at: Some(v1), name: n1, .. },
+      { created_at: Some(v2), name: n2, .. } =>
+        match compare_date(v1, v2) {
+          0 => -n1.compare(n2)
+          order => order
+        }
+      { created_at: None, .. }, { created_at: Some(_), .. } => 1
+      { created_at: Some(_), .. }, { created_at: None, .. } => -1
+      { created_at: None, name: n1, .. }, { created_at: None, name: n2, .. } =>
+        -n1.compare(n2)
     })
     .iter()
     .take(12)

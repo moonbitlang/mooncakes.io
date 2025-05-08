@@ -59,7 +59,7 @@ fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
 fn route(url : @url.Url) -> (Cmd[Msg], Model) {
   let paths = url.path.split("/").collect()
   match paths {
-    ["/"] | [] => @home.load() |> update_with(Home(_), GotHomeMsg(_))
+    ["/"] | [""] => @home.load() |> update_with(Home(_), GotHomeMsg(_))
     ["assets", ..] => (@nav.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
       module_path.iter().map(@string.View::to_string).join("/")

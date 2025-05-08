@@ -74,11 +74,9 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
       } else {
       fail!("Error when parsing metadata.")
     }
-    guard [name, version].map(fn(x) {
-        match x {
-          Some(String(str)) => str
-          _ => abort("Error when parsing name and version.")
-        }
+    guard [name, version].map(fn {
+        Some(String(str)) => str
+        _ => abort("Error when parsing name and version.")
       })
       is [name, version] else {
       fail!("Error when parsing name and version.")
@@ -97,7 +95,7 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
     }
     let iter = name.iter()
     let author = String::from_array(
-      iter.take_while(fn(x) { x != '/' }).collect(),
+      iter.take_while(@builtin.op_notequal('/', _)).collect(),
     )
     let deps = match deps {
       Some(Object(xs)) =>

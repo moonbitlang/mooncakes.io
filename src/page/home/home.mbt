@@ -47,7 +47,7 @@ pub fn load() -> (Command[Msg], Model) {
   (
     @http.get(
       "/assets/modules.json",
-      expect=Json(Msg::GotModuleIndices, decode_module_indices),
+      expect=Json(GotModuleIndices(_), decode_module_indices),
     ),
     { indices: Loading, filter: "", filtered_modules: [] },
   )

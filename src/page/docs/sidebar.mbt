@@ -180,14 +180,14 @@ fn sidebar(
 ) -> Html[Msg] {
   @view.accordion(
     class="text-gray-700 flex flex-col",
-    click=Msg::SidebarTabClicked,
+    click=SidebarTabClicked(_),
     showing,
     [
       (
         "Documentation",
         @tree.view(
-          toggle=Msg::ToggleSidebarItem,
-          click=Msg::ClickSidebarItem,
+          toggle=ToggleSidebarItem(_),
+          click=ClickSidebarItem(_),
           state=sidebar_state,
           indicator=Symbol(""),
           document_index,

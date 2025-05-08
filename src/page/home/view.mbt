@@ -178,7 +178,7 @@ fn navbar() -> Html[Msg] {
             input_type=Text,
             placeholder="Search modules ...",
             class="border rounded-full px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
-            input=Msg::FilterChanged,
+            input=FilterChanged(_),
           ),
         ]),
         div(class="text-gray-700 font-semibold invisible", [

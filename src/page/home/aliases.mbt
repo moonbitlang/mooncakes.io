@@ -19,10 +19,10 @@ fnalias @html.(hr, a, div, nothing, text, input, img, h1, h2, span, p)
 fnalias @tea.none
 
 ///|
-typealias @html.Html[Msg]
+typealias @html.Html
 
 ///|
-typealias @tea.Command[Msg]
+typealias @tea.Command
 
 ///|
-typealias @util.Status[A]
+typealias @util.Status

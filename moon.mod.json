@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "deps": {
     "rami3l/cmark": "0.2.7",
-    "Yoorkin/rabbit-tea": "0.7.7",
+    "Yoorkin/rabbit-tea": "0.7.8",
     "Yoorkin/prettyprinter": "0.4.1",
     "illusory0x0/fuzzy_match": "0.2.1",
     "CAIMEOX/lazy": "0.1.0"

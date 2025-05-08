@@ -42,9 +42,9 @@ fn update_with[SubModel, SubMsg](
 fn update(msg : Message, model : Model) -> (Command[Message], Model) {
   match (msg, model) {
     (GotHomeMsg(msg), Home(model)) =>
-      @home.update(msg, model) |> update_with(Model::Home, Message::GotHomeMsg)
+      @home.update(msg, model) |> update_with(Home(_), GotHomeMsg(_))
     (GotDocsMsg(msg), Docs(model)) =>
-      @docs.update(msg, model) |> update_with(Model::Docs, Message::GotDocsMsg)
+      @docs.update(msg, model) |> update_with(Docs(_), GotDocsMsg(_))
     (LinkClicked(request), _) =>
       match request {
         Internal(url) => (@nav.push_url(url.to_string()), model)
@@ -59,12 +59,12 @@ fn update(msg : Message, model : Model) -> (Command[Message], Model) {
 fn route(url : @url.Url) -> (Command[Message], Model) {
   let paths = url.path.split("/").collect()
   match paths {
-    ["/"] | [] => @home.load() |> update_with(Model::Home, Message::GotHomeMsg)
+    ["/"] | [] => @home.load() |> update_with(Home(_), GotHomeMsg(_))
     ["assets", ..] => (@nav.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
       module_path.iter().map(@string.View::to_string).join("/")
       |> @docs.load(url.fragment)
-      |> update_with(Model::Docs, Message::GotDocsMsg)
+      |> update_with(Docs(_), GotDocsMsg(_))
     _ => (none(), NotFound)
   }
 }
@@ -72,8 +72,8 @@ fn route(url : @url.Url) -> (Command[Message], Model) {
 ///|
 fn view(model : Model) -> Html[Message] {
   match model {
-    Home(model) => @home.view(model).map(Message::GotHomeMsg)
-    Docs(model) => @docs.view(model).map(Message::GotDocsMsg)
+    Home(model) => @home.view(model).map(GotHomeMsg(_))
+    Docs(model) => @docs.view(model).map(GotDocsMsg(_))
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }
@@ -85,7 +85,7 @@ fn main {
     initialize=route,
     update~,
     view~,
-    url_changed=Message::UrlChanged,
-    url_request=Message::LinkClicked,
+    url_changed=UrlChanged(_),
+    url_request=LinkClicked(_),
   )
 }

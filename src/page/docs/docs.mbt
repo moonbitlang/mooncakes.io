@@ -57,7 +57,7 @@ pub fn load(path : String, fragment : String?) -> (Command[Msg], Model) {
     batch([
       @http.get(
         "/assets/" + path.trim("/").to_string() + "/resource.json",
-        expect=Json(Msg::GotResource, decode_resource),
+        expect=Json(GotResource(_), decode_resource),
       ),
       @dialog.close("search-panel"),
     ]),
@@ -89,28 +89,28 @@ pub fn update(msg : Msg, model : Model) -> (Command[Msg], Model) {
             Module({ module_index_path, .. }) =>
               @http.get(
                 "/assets/" + module_index_path,
-                expect=Json(Msg::GotModuleIndex, decode_module_index),
+                expect=Json(GotModuleIndex(_), decode_module_index),
               )
             Package({ package_data_path, module_path, .. }) =>
               batch([
                 @http.get(
                   "/assets/" + package_data_path,
-                  expect=Json(Msg::GotPackageData, decode_package_data),
+                  expect=Json(GotPackageData(_), decode_package_data),
                 ),
                 @http.get(
                   "/assets/" + module_path + "/module_index.json",
-                  expect=Json(Msg::GotModuleIndex, decode_module_index),
+                  expect=Json(GotModuleIndex(_), decode_module_index),
                 ),
               ])
             RootPackage({ module_index_path, package_data_path, .. }) =>
               batch([
                 @http.get(
                   "/assets/" + module_index_path,
-                  expect=Json(Msg::GotModuleIndex, decode_module_index),
+                  expect=Json(GotModuleIndex(_), decode_module_index),
                 ),
                 @http.get(
                   "/assets/" + package_data_path,
-                  expect=Json(Msg::GotPackageData, decode_package_data),
+                  expect=Json(GotPackageData(_), decode_package_data),
                 ),
               ])
           }
@@ -281,7 +281,7 @@ fn navbar(
         breadcrumbs(path, module_path, module_index)
       },
       div(class="flex-grow", []),
-      card_mode_toggle(mode=card_mode, click=Msg::DocModeChanged),
+      card_mode_toggle(mode=card_mode, click=DocModeChanged(_)),
       button(
         class="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
         click=ToggleSearchPanel(true),
@@ -367,7 +367,7 @@ pub fn view(model : Model) -> Html[Msg] {
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            input=Msg::SearchFilterChanged,
+            input=SearchFilterChanged(_),
             class="outline-none m-0 flex-grow px-4 p-2",
           ),
           div(

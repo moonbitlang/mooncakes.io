@@ -33,13 +33,13 @@ fnalias @html.(
 fnalias @tea.(batch, none)
 
 ///|
-typealias @html.Html[Msg]
+typealias @html.Html
 
 ///|
-typealias @tea.Command[Msg]
+typealias @tea.Command
 
 ///|
-typealias @util.Status[A]
+typealias @util.Status
 
 ///|
 typealias Set[A] = @immut/sorted_set.T[A]
@@ -48,4 +48,4 @@ typealias Set[A] = @immut/sorted_set.T[A]
 typealias Map[K, V] = @immut/sorted_map.T[K, V]
 
 ///|
-typealias @lazy.Lazy[A]
+typealias @lazy.Lazy

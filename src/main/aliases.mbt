@@ -13,10 +13,10 @@
 // limitations under the License.
 
 ///|
-typealias @html.Html[Msg]
+typealias @html.Html
 
 ///|
-typealias @tea.Command[Msg]
+typealias @tea.Command
 
 ///|
 fnalias @tea.none

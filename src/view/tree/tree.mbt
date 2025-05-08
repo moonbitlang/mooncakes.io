@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-typealias @html.Html[Msg]
+typealias @html.Html
 
 ///|
 typealias Set[A] = @immut/sorted_set.T[A]

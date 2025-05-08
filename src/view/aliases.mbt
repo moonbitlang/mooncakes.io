@@ -36,4 +36,4 @@ fnalias @html.(
 )
 
 ///|
-typealias @html.Html[Msg]
+typealias @html.Html

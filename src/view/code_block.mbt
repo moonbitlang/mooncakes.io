@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-pub fn code_block[M](moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
+pub fn[M] code_block(moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
   let spans = @highlight.parse(moonbit)
   fn go {
     @highlight.Unknown(c) => span([text(String::from_array([c]))])

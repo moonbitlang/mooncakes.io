@@ -13,19 +13,19 @@
 // limitations under the License.
 
 ///|
-fn unsupported[M](node_type : String, message : String) -> @html.Html[M] {
+fn[M] unsupported(node_type : String, message : String) -> @html.Html[M] {
   @html.p(class="text-red-500", [
     text("Unsupported markdown syntax: " + node_type + " " + message),
   ])
 }
 
 ///|
-fn inline_text[M](str : String) -> @html.Html[M] {
+fn[M] inline_text(str : String) -> @html.Html[M] {
   @html.span(class="inline leading-loose", [text(str)])
 }
 
 ///|
-fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
+fn[M] image_render(img : @cmark.Inline) -> @html.Html[M] {
   guard img is Image(img) else {
     println(img)
     abort("not an image")
@@ -56,7 +56,7 @@ fn image_render[M](img : @cmark.Inline) -> @html.Html[M] {
 }
 
 ///|
-pub fn markdown[M](
+pub fn[M] markdown(
   markdown : String,
   small_heading~ : Bool = false
 ) -> @html.Html[M] {
@@ -285,9 +285,7 @@ pub fn markdown[M](
       @cmark.FolderResult::Fold([..acc, block2html(block)])
     },
   }
-  try {
-    folder.fold_doc!([], doc)
-  } catch {
+  try folder.fold_doc!([], doc) catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } else {
     htmls => div(class="w-full text-base text-[#3c3c43]", htmls)

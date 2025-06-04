@@ -28,7 +28,7 @@ pub(all) enum Tree[Id] {
 }
 
 ///|
-pub fn get_name[Id](self : Tree[Id]) -> String {
+pub fn[Id] get_name(self : Tree[Id]) -> String {
   match self {
     Tree::Item(name, ..) => name
     Tree::Node(name, _, ..) => name
@@ -36,7 +36,7 @@ pub fn get_name[Id](self : Tree[Id]) -> String {
 }
 
 ///|
-pub fn view[M, Id : Compare](
+pub fn[M, Id : Compare] view(
   toggle~ : (Id) -> M,
   click~ : (Id) -> M,
   state~ : Set[Id],

@@ -19,7 +19,7 @@ pub(all) enum CaretConfig {
 }
 
 ///|
-pub fn collapse[M](
+pub fn[M] collapse(
   header~ : Html[M],
   body~ : Html[M],
   collapsed~ : Bool,

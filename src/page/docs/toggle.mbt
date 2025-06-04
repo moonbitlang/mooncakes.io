@@ -19,7 +19,7 @@ priv enum CardMode {
 } derive(Show)
 
 ///|
-fn card_mode_toggle[M](mode~ : CardMode, click~ : (CardMode) -> M) -> Html[M] {
+fn[M] card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> M) -> Html[M] {
   let img_class = "w-[15px] h-[15px]"
   let btn_focused = "border border-mooncake2 bg-opacity-10 bg-yellow-500"
   let lbtn_normal = "border-y border-l hover:border-mooncake2"

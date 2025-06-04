@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-pub fn button[M](value : String, click? : M) -> Html[M] {
+pub fn[M] button(value : String, click? : M) -> Html[M] {
   div(
     class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
     click?,
@@ -22,7 +22,7 @@ pub fn button[M](value : String, click? : M) -> Html[M] {
 }
 
 ///|
-pub fn icon_button[M](icon : String, text? : String, click? : M) -> Html[M] {
+pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
   let text = match text {
     None => []
     Some(value) => [@html.text(value)]
@@ -40,14 +40,14 @@ pub fn icon_button[M](icon : String, text? : String, click? : M) -> Html[M] {
 }
 
 ///|
-pub fn navbar[M]() -> Html[M] {
+pub fn[M] navbar() -> Html[M] {
   div(class="font-title h-14 w-full px-8 p-4 border-b select-none", [
     h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
   ])
 }
 
 ///|
-pub fn footer[M]() -> Html[M] {
+pub fn[M] footer() -> Html[M] {
   let class = "hover:text-mooncake2 transition-colors"
   div(
     class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex flex-col md:flex-row justify-center gap-4 md:gap-8",

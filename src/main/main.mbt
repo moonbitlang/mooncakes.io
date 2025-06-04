@@ -29,7 +29,7 @@ enum Model {
 }
 
 ///|
-fn update_with[SubModel, SubMsg](
+fn[SubModel, SubMsg] update_with(
   pair : (Cmd[SubMsg], SubModel),
   to_model : (SubModel) -> Model,
   to_msg : (SubMsg) -> Msg

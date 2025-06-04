@@ -253,7 +253,7 @@ fn decode_impl_index(json : Json) -> ImplIndex!Error {
 }
 
 ///| map with error. We need error polymorphism!
-fn map_with_error[A, B, E : Error](
+fn[A, B, E : Error] map_with_error(
   arr : Array[A],
   f : (A) -> B!E
 ) -> Array[B]!E {
@@ -307,9 +307,7 @@ fn decode_index_node(json : Json) -> IndexNode!Error {
 
 ///|
 fn decode_module_index(json : Json) -> Result[ModuleIndex, String] {
-  try {
-    decode_index_node!(json)
-  } catch {
+  try decode_index_node!(json) catch {
     err => Err(err.to_string())
   } else {
     res => Ok(res)

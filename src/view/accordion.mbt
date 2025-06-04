@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-pub fn accordion[M](
+pub fn[M] accordion(
   class? : String,
   click? : (String) -> M,
   showing : String,

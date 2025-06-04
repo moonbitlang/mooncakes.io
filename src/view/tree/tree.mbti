@@ -6,18 +6,16 @@ import(
 )
 
 // Values
-fn get_name[Id](Tree[Id]) -> String
+fn[Id] get_name(Tree[Id]) -> String
 
-fn view[M, Id : Compare](toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.T[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.T[M]
+fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.T[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.T[M]
 
 // Types and methods
 pub(all) enum Tree[Id] {
   Item(id~ : Id, String)
   Node(id~ : Id, String, Array[Tree[Id]])
 }
-impl Tree {
-  get_name[Id](Self[Id]) -> String
-}
+fn[Id] Tree::get_name(Self[Id]) -> String
 
 // Type aliases
 

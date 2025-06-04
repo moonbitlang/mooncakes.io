@@ -20,7 +20,7 @@ priv struct SearchModel {
 
 ///|
 priv struct SearchResult {
-  matching : Array[(Bool, @string.StringView)]
+  matching : Array[(Bool, @string.View)]
   score : Int
   entry : SearchEntry
 }
@@ -104,13 +104,13 @@ fn search(
   }
   let results = entries.force()
   let query = @fuzzy_match.Query::new(filter)
-  results
-  .filter_map(fn(entry) {
+  let results = results.filter_map(fn(entry) {
     let score = query.score(item=entry.fullname)
     match query.split_by_matching_sections(item=entry.fullname) {
       None => None
       Some(matching) => Some({ matching, score, entry })
     }
   })
-  ..sort_by(fn(a, b) { a.score - b.score })
+  results.sort_by(fn(a, b) { a.score - b.score })
+  results
 }

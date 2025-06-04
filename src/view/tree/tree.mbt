@@ -16,7 +16,7 @@
 typealias @html.Html
 
 ///|
-typealias Set[A] = @immut/sorted_set.T[A]
+typealias @immut/sorted_set.T as Set
 
 ///|
 fnalias @html.(div, text, ul)

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-typealias List[A] = @immut/list.T[A]
+typealias @immut/list.T as List
 
 ///|
 pub(all) enum CodeSpan {
@@ -149,7 +149,7 @@ pub fn parse(signature : String) -> List[CodeSpan] {
       continue LexIdent(Cons(c, id)), s, acc
     LexIdent(id), s, acc => {
       let id = String::from_iter(id.rev().iter())
-      let span = match id[0] {
+      let span = match id.char_at(0) {
         'a'..='z' =>
           if keywords.contains(id) {
             Keyword(id)

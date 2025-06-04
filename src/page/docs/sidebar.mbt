@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-fn item_button[M](childrens : Html[M], icon? : String, click? : M) -> Html[M] {
+fn[M] item_button(childrens : Html[M], icon? : String, click? : M) -> Html[M] {
   let icon = match icon {
     None => div([])
     Some(src) => div(class="size-[12px] self-center mr-1", [img(src~, [])])
@@ -51,10 +51,10 @@ fn compare_strings(a : String, b : String) -> Int {
   let len_b = b.length()
   let min_len = if len_a < len_b { len_a } else { len_b }
   for i in 0..<min_len {
-    let char_a = a[i]
-    let char_b = b[i]
+    let char_a = a.charcode_at(i)
+    let char_b = b.charcode_at(i)
     if char_a != char_b {
-      return char_a.to_int() - char_b.to_int()
+      return char_a - char_b
     }
   }
   len_a - len_b
@@ -67,10 +67,8 @@ fn IndexNode::to_document_items(
   fn collect_packages(node : IndexNode) {
     match node.pkg {
       None if not(node.childs.is_empty()) => {
-        let childs = node.childs
-          .elems()
-          .filter_map(collect_packages)
-          ..sort_by(compare_items)
+        let childs = node.childs.elems().filter_map(collect_packages)
+        childs.sort_by(compare_items)
         Some(@tree.Node(id=ItemTarget::Package(node.name), node.name, childs))
       }
       Some(pkg) => Some(@tree.Item(id=Package(pkg.path), node.name))
@@ -78,10 +76,8 @@ fn IndexNode::to_document_items(
     }
   }
 
-  let packages = self.childs
-    .elems()
-    .filter_map(collect_packages)
-    ..sort_by(compare_items)
+  let packages = self.childs.elems().filter_map(collect_packages)
+  packages.sort_by(compare_items)
   let package_section = match packages {
     [] => []
     xs => [@tree.Node(id=Section("packages-section"), "Sub Packages", xs)]
@@ -94,7 +90,7 @@ fn IndexNode::to_document_items(
 }
 
 ///|
-fn compare_items[Id](a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int {
+fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int {
   compare_strings(a.get_name(), b.get_name())
 }
 
@@ -141,31 +137,16 @@ fn PkgIndex::to_document_items(
     typealias_.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) })
   let result = []
   if not(traits.is_empty()) {
-    result.push(
-      @tree.Node(
-        id=Section("trait-section"),
-        "Traits",
-        traits..sort_by(compare_items),
-      ),
-    )
+    traits.sort_by(compare_items)
+    result.push(@tree.Node(id=Section("trait-section"), "Traits", traits))
   }
   if not(types.is_empty()) {
-    result.push(
-      @tree.Node(
-        id=Section("type-section"),
-        "Types",
-        types..sort_by(compare_items),
-      ),
-    )
+    types.sort_by(compare_items)
+    result.push(@tree.Node(id=Section("type-section"), "Types", types))
   }
   if not(values.is_empty()) {
-    result.push(
-      Node(
-        id=Section("value-section"),
-        "Values",
-        values..sort_by(compare_items),
-      ),
-    )
+    values.sort_by(compare_items)
+    result.push(Node(id=Section("value-section"), "Values", values))
   }
   result
 }

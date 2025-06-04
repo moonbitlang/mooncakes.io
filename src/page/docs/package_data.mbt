@@ -212,21 +212,17 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
       "misc": Array(misc),
       ..
     } : Json) => {
-      let types = map_with_error!(types, decode_type_doc)
-      let traits = map_with_error!(traits, decode_trait_doc)
-      let aliases = map_with_error!(aliases, decode_typealias_doc)
-      let values = map_with_error!(values, decode_value_doc)
-      let misc = map_with_error!(misc, decode_misc_doc)
-      {
-        name,
-        types: types..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
-        traits: traits..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
-        typealiases: aliases..sort_by(fn(x, y) {
-          compare_strings(x.name, y.name)
-        }),
-        values: values..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
-        misc: misc..sort_by(fn(x, y) { compare_strings(x.name, y.name) }),
-      }
+      let types = map_with_error(types, decode_type_doc)
+      let traits = map_with_error(traits, decode_trait_doc)
+      let aliases = map_with_error(aliases, decode_typealias_doc)
+      let values = map_with_error(values, decode_value_doc)
+      let misc = map_with_error(misc, decode_misc_doc)
+      misc.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+      values.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+      aliases.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+      traits.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+      types.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+      { name, types, traits, typealiases: aliases, values, misc }
     }
     _ => fail!("fail to decode package data: \{json}")
   }

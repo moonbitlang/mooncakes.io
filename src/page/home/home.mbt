@@ -203,7 +203,8 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
 
   fn to_upper(c : Char) -> Char {
     if c >= 'a' && c <= 'z' {
-      Char::from_int(c.to_int() - 'a'.to_int() + 'A'.to_int())
+      guard (c.to_int() - 'a'.to_int() + 'A'.to_int()).to_char() is Some(c)
+      c
     } else {
       c
     }
@@ -225,7 +226,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
   indices.sort_by(fn(a, b) { a.name.compare(b.name) })
   let all_modules = {}
   for index in indices {
-    let first_letter = to_upper(index.name[0])
+    let first_letter = to_upper(index.name.char_at(0))
     match all_modules.get(first_letter) {
       None => all_modules[first_letter] = [index]
       Some(indices) => indices.push(index)

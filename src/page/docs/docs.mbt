@@ -323,7 +323,7 @@ pub fn view(model : Model) -> Html[Msg] {
     _ => []
   }
   let sidebar_ele = div(class="w-full h-full flex justify-end", [
-    div(class="pl-6 pr-3 py-3 overflow-y-scroll w-full 2xl:w-2/3", [
+    div(class="pl-6 pr-3 py-3 overflow-y-auto w-full 2xl:w-2/3", [
       sidebar(
         model.sidebar_document,
         source_files,
@@ -382,7 +382,7 @@ pub fn view(model : Model) -> Html[Msg] {
         Failed => text("load indices failed")
         Success(results) =>
           @html.ul(
-            class="overflow-y-scroll flex-grow",
+            class="overflow-y-auto flex-grow",
             results.map(fn(x) {
               let color = match x.entry.kind {
                 "Package" => "text-yellow-700"
@@ -457,11 +457,11 @@ pub fn view(model : Model) -> Html[Msg] {
         [navbar],
       ),
       div(
-        class="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [sidebar_ele],
       ),
       div(
-        class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [main],
       ),
       search_panel,

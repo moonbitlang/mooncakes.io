@@ -148,7 +148,7 @@ pub fn[M] markdown(
       } else {
         @html.code(class="font-roboto", [div([text(code)])])
       }
-      pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-scroll", [code])
+      pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", [code])
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline)

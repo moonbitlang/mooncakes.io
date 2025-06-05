@@ -111,7 +111,7 @@ pub fn[M] markdown(
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
         span(
-          class="font-roboto bg-[#f0f0f0] text-sm px-1 py-[1px] rounded",
+          class="font-mono bg-[#f0f0f0] text-sm px-1 py-[1px] rounded",
           tight.map(fn(x) { text(x.node.v) }).to_array(),
         ),
       ]
@@ -144,9 +144,9 @@ pub fn[M] markdown(
       let code = if info_string is Some({ v: lang, .. }) &&
         (lang == "mbt" || lang == "moonbit") {
         let code = code_block(code, collapse_namespace=false)
-        @html.code(class="font-roboto", [code])
+        @html.code(class="font-mono", [code])
       } else {
-        @html.code(class="font-roboto", [div([text(code)])])
+        @html.code(class="font-mono", [div([text(code)])])
       }
       pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", [code])
     }

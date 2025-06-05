@@ -221,7 +221,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
   let signature = div(id=name, class="py-1 w-full", [
     h3(class="text-lg text-gray-800", [text(name)]),
   ])
-  let package_link_class = "font-roboto text-sm px-1 py-[1px] bg-yellow-600 bg-opacity-20 hover:bg-opacity-30 rounded"
+  let package_link_class = "font-mono text-sm px-1 py-[1px] bg-yellow-600 bg-opacity-20 hover:bg-opacity-30 rounded"
   let tips = match @config.builtins_package_path.get(name) {
     None => nothing()
     Some(pkg_path) =>

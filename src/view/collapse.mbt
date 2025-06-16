@@ -40,9 +40,9 @@ pub fn[M] collapse(
     LeftTop => "h-6 w-6 top-0 m-1"
   }
   let button = div(
-    class="absolute \{button_style} p-1 hover:bg-gray-200 active:bg-gray-300",
+    klass="absolute \{button_style} p-1 hover:bg-gray-200 active:bg-gray-300",
     click=toggle,
-    [img(src=icon, class="size-4 \{caret_style}", [])],
+    [img(src=icon, klass="size-4 \{caret_style}", [])],
   )
-  div([div(class="relative flex items-center", [button, header]), body])
+  div([div(klass="relative flex items-center", [button, header]), body])
 }

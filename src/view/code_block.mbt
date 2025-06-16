@@ -17,42 +17,42 @@ pub fn[M] code_block(moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
   let spans = @highlight.parse(moonbit)
   fn go {
     @highlight.Unknown(c) => span([text(String::from_array([c]))])
-    Keyword(s) => span(class="text-[#0033b3]", [text(s)])
-    Symbol(s) => span(class="text-zinc-500 text-nowrap", [text(s)])
+    Keyword(s) => span(klass="text-[#0033b3]", [text(s)])
+    Symbol(s) => span(klass="text-zinc-500 text-nowrap", [text(s)])
     Link(href~, content) =>
       a(
-        class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
+        klass="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
         href="/docs/" + href,
         content.map(go),
       )
-    UIdent(s) => span(class="text-gray-800", [text(s)])
-    LIdent(s) => span(class="text-[#00627a]", [text(s)])
+    UIdent(s) => span(klass="text-gray-800", [text(s)])
+    LIdent(s) => span(klass="text-[#00627a]", [text(s)])
     Newline => br()
     Space(n) => span([text(" ".repeat(n))])
     CharLit(s) | StringLit(s) | Number(s) =>
-      span(class="text-orange-800", [text(s)])
-    Comment(s) => span(class="text-green-800", [text(s)])
+      span(klass="text-orange-800", [text(s)])
+    Comment(s) => span(klass="text-green-800", [text(s)])
     QualIdent(path, name) =>
       if collapse_namespace {
-        span(class="group/ident relative", [
+        span(klass="group/ident relative", [
           div(
-            class="absolute bottom-[120%] inset-0 flex items-center justify-center ",
+            klass="absolute bottom-[120%] inset-0 flex items-center justify-center ",
             [
               div(
-                class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
+                klass="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
                 [
                   text("@" + path.join("/") + "."),
-                  span(class="text-blue-900", [text(name)]),
+                  span(klass="text-blue-900", [text(name)]),
                 ],
               ),
             ],
           ),
-          span(class="text-blue-900", [text(name)]),
+          span(klass="text-blue-900", [text(name)]),
         ])
       } else {
         span([
-          span(class="text-gray-600", [text("@" + path.join("/") + ".")]),
-          span(class="text-blue-900", [text(name)]),
+          span(klass="text-gray-600", [text("@" + path.join("/") + ".")]),
+          span(klass="text-blue-900", [text(name)]),
         ])
       }
   }

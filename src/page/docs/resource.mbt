@@ -59,8 +59,8 @@ priv struct Resource {
 }
 
 ///|
-fn decode_meta_info(json : Json) -> MetaInfo!Error {
-  fn parse_package(json : Json) -> MetaInfo!Error {
+fn decode_meta_info(json : Json) -> MetaInfo raise Error {
+  fn parse_package(json : Json) -> MetaInfo raise Error {
     guard json
       is {
         "name"? : name,
@@ -72,21 +72,21 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
         "deps"? : deps,
         ..
       } else {
-      fail!("Error when parsing metadata.")
+      fail("Error when parsing metadata.")
     }
     guard [name, version].map(fn {
         Some(String(str)) => str
         _ => abort("Error when parsing name and version.")
       })
       is [name, version] else {
-      fail!("Error when parsing name and version.")
+      fail("Error when parsing name and version.")
     }
     guard [repository, license, description].map(fn {
         Some(x) => x.as_string()
         None => None
       })
       is [repository, license, description] else {
-      fail!("Error when parsing repository, license, description, readme.")
+      fail("Error when parsing repository, license, description, readme.")
     }
     let keywords = match keywords {
       Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
@@ -99,9 +99,9 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
     )
     let deps = match deps {
       Some(Object(xs)) =>
-        map_with_error!(xs.iter2().to_array(), fn {
+        map_with_error(xs.iter2().to_array(), fn {
           (name, String(version)) => (name, version)
-          _ => fail!("Error when parsing deps.")
+          _ => fail("Error when parsing deps.")
         })
       None => []
       _ => abort("Error when parsing deps.")
@@ -109,20 +109,20 @@ fn decode_meta_info(json : Json) -> MetaInfo!Error {
     { author, name, description, version, license, repository, keywords, deps }
   }
 
-  parse_package!(json)
+  parse_package(json)
 }
 
 ///|
-fn decode_module_resources(json : Json) -> ModuleResources!Error {
+fn decode_module_resources(json : Json) -> ModuleResources raise Error {
   match json {
     { "module_index": String(module_index_path), "meta_info": meta_info, .. } =>
-      { module_index_path, meta_info: decode_meta_info!(meta_info) }
-    _ => fail!("missing field module_index or source_files")
+      { module_index_path, meta_info: decode_meta_info(meta_info) }
+    _ => fail("missing field module_index or source_files")
   }
 }
 
 ///|
-fn decode_package_resources(json : Json) -> PackageResources!Error {
+fn decode_package_resources(json : Json) -> PackageResources raise Error {
   match json {
     {
       "package_data": String(package_data_path),
@@ -134,17 +134,19 @@ fn decode_package_resources(json : Json) -> PackageResources!Error {
       for x in source_files {
         match x {
           String(s) => ls.push(s)
-          _ => fail!("invalid source_files")
+          _ => fail("invalid source_files")
         }
       }
       { package_data_path, source_files: ls, module_path }
     }
-    _ => fail!("missing field package_data or source_files: \{json}")
+    _ => fail("missing field package_data or source_files: \{json}")
   }
 }
 
 ///|
-fn decode_root_package_resources(json : Json) -> RootPackageResources!Error {
+fn decode_root_package_resources(
+  json : Json
+) -> RootPackageResources raise Error {
   match json {
     {
       "package_data": String(package_data_path),
@@ -157,17 +159,17 @@ fn decode_root_package_resources(json : Json) -> RootPackageResources!Error {
       for x in source_files {
         match x {
           String(s) => ls.push(s)
-          _ => fail!("invalid source_files")
+          _ => fail("invalid source_files")
         }
       }
       {
         package_data_path,
         source_files: ls,
         module_index_path,
-        meta_info: decode_meta_info!(meta_info),
+        meta_info: decode_meta_info(meta_info),
       }
     }
-    _ => fail!("missing field package_data or source_files: \{json}")
+    _ => fail("missing field package_data or source_files: \{json}")
   }
 }
 
@@ -179,9 +181,9 @@ fn decode_resource(json : Json) -> Result[Resource, String] {
   }
   try {
     let kind = match kind {
-      "module" => Module(decode_module_resources!(json))
-      "package" => Package(decode_package_resources!(json))
-      "module_and_package" => RootPackage(decode_root_package_resources!(json))
+      "module" => Module(decode_module_resources(json))
+      "package" => Package(decode_package_resources(json))
+      "module_and_package" => RootPackage(decode_root_package_resources(json))
       _ => panic()
     }
     Ok({ readme_content, kind })

@@ -16,7 +16,7 @@
 test "parse_signature1" {
   let signature = "fn parse_signature(signature : String) -> Array[CodeSpan]"
   let spans = @highlight.parse(signature)
-  inspect!(
+  inspect(
     spans,
     content=
       #|@list.of([Keyword("fn"), Space(1), LIdent("parse_signature"), Symbol("("), LIdent("signature"), Space(1), Symbol(":"), Space(1), UIdent("String"), Symbol(")"), Space(1), Symbol("->"), Space(1), UIdent("Array"), Symbol("["), UIdent("CodeSpan"), Symbol("]")])
@@ -28,7 +28,7 @@ test "parse_signature1" {
 test "parse_signature with link" {
   let signature = "fn <a href=\"list#T\">T</a>::concat[A](self : <a href=\"list#T\">Tasdfasdf</a>[A], other : <a href=\"list#T\">T</a>[A]) -> <a href=\"list#T\">T</a>[A]"
   let spans = @highlight.parse(signature)
-  inspect!(
+  inspect(
     spans,
     content=
       #|@list.of([Keyword("fn"), Space(1), Link(href="list#T", [UIdent("T")]), Symbol("::"), LIdent("concat"), Symbol("["), UIdent("A"), Symbol("]("), LIdent("self"), Space(1), Symbol(":"), Space(1), Link(href="list#T", [UIdent("Tasdfasdf")]), Symbol("["), UIdent("A"), Symbol("],"), Space(1), LIdent("other"), Space(1), Symbol(":"), Space(1), Link(href="list#T", [UIdent("T")]), Symbol("["), UIdent("A"), Symbol("])"), Space(1), Symbol("->"), Space(1), Link(href="list#T", [UIdent("T")]), Symbol("["), UIdent("A"), Symbol("]")])
@@ -60,7 +60,7 @@ test "complex source" {
     #|let val2 = cache.get("key2") // Returns None, as "key2" was evicted
     #|let val3 = cache.get("key3") // Returns Some(300)  
     |> run_test
-  inspect!(
+  inspect(
     spans,
     content=
       #|[
@@ -202,7 +202,7 @@ test "complex source" {
 test "lru_cache" {
   let code1 =
     #| fn <a href="ShellWen/lru_cache#LruCache">LruCache</a>::new[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](capacity : UInt) -> <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V]
-  inspect!(
+  inspect(
     run_test(code1),
     content=
       #|[
@@ -247,7 +247,7 @@ test "lru_cache" {
   )
   let code2 =
     #| fn <a href="ShellWen/lru_cache#LruCache">LruCache</a>::put[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](self : <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V], key : K, value : V) -> Unit
-  inspect!(
+  inspect(
     run_test(code2),
     content=
       #|[
@@ -305,7 +305,7 @@ test "lru_cache" {
   )
   let code3 =
     #| fn new_lru_cache[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](capacity : UInt) -> <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V]
-  inspect!(
+  inspect(
     run_test(code3),
     content=
       #|[
@@ -348,7 +348,7 @@ test "lru_cache" {
   )
   let code4 =
     #| fn <a href="ShellWen/lru_cache#LruCache">LruCache</a>::capacity[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](self : <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V]) -> UInt
-  inspect!(
+  inspect(
     run_test(code4),
     content=
       #|[
@@ -398,7 +398,7 @@ test "qualified" {
     #| let a = @path/to/package.value
     #| let a : @path/to/package.Type = 1
     #| let c = '\uFFFF'
-  inspect!(
+  inspect(
     run_test(code),
     content=
       #|[

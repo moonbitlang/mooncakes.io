@@ -283,7 +283,7 @@ fn navbar(
       div(klass="flex-grow", []),
       card_mode_toggle(mode=card_mode, click=DocModeChanged(_)),
       button(
-        klass="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 lg:shadow-sm text-gray-500 flex items-center gap-2",
+        klass="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 text-gray-500 flex items-center gap-2",
         click=ToggleSearchPanel(true),
         [
           img(klass="w-5 h-5", src=@config.SEARCH, []),

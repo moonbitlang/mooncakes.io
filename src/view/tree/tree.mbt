@@ -43,44 +43,46 @@ pub fn[M, Id : Compare] view(
   indicator~ : Id,
   items : Array[Tree[Id]]
 ) -> Html[M] {
-  fn aux {
-    Tree::Item(id~, str) => {
-      let indicator = if indicator == id {
-        div(klass="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", [])
-      } else {
-        div(klass="w-1 h-5 mr-2", [])
-      }
-      div(
-        klass="hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
-        click=click(id),
-        [indicator, text(str)],
-      )
-    }
-    Tree::Node(id~, str, children) => {
-      let collapsed = "border-t-[4px] border-t-transparent border-l-[6px] border-l-gray-400 border-b-[4px] border-b-transparent"
-      let expanded = collapsed + " rotate-90 "
-      let (body_style, icon) = if state.contains(id) {
-        ("max-h-[9999px]", expanded)
-      } else {
-        ("max-h-0", collapsed)
-      }
-      div([
+  fn aux(x) {
+    match x {
+      Tree::Item(id~, str) => {
+        let indicator = if indicator == id {
+          div(klass="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", [])
+        } else {
+          div(klass="w-1 h-5 mr-2", [])
+        }
         div(
-          klass="relative transition hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
-          click=toggle(id),
-          [
-            div(
-              klass="absolute w-0 h-0 self-center mr-1 transition-transform \{icon}",
-              [],
-            ),
-            div(klass="pl-3", [text(str)]),
-          ],
-        ),
-        div(
-          klass="pl-2 overflow-hidden duration-400 transition-[max-height] \{body_style}",
-          [ul(children.map(aux))],
-        ),
-      ])
+          klass="hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
+          click=click(id),
+          [indicator, text(str)],
+        )
+      }
+      Tree::Node(id~, str, children) => {
+        let collapsed = "border-t-[4px] border-t-transparent border-l-[6px] border-l-gray-400 border-b-[4px] border-b-transparent"
+        let expanded = collapsed + " rotate-90 "
+        let (body_style, icon) = if state.contains(id) {
+          ("max-h-[9999px]", expanded)
+        } else {
+          ("max-h-0", collapsed)
+        }
+        div([
+          div(
+            klass="relative transition hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
+            click=toggle(id),
+            [
+              div(
+                klass="absolute w-0 h-0 self-center mr-1 transition-transform \{icon}",
+                [],
+              ),
+              div(klass="pl-3", [text(str)]),
+            ],
+          ),
+          div(
+            klass="pl-2 overflow-hidden duration-400 transition-[max-height] \{body_style}",
+            [ul(children.map(aux))],
+          ),
+        ])
+      }
     }
   }
 

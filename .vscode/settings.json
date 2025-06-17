@@ -2,5 +2,17 @@
     "tailwindCSS.includeLanguages": {
         "moonbit": "html"
     },
-    "editor.inlayHints.enabled": "off"
+    "tailwindCSS.classAttributes": [
+        "klass",
+    ],
+    // You can comment out the following lines if the TailwindCSS 
+    // completion encounters issues in your project.
+    "tailwindCSS.experimental.classRegex": [
+        // enable completion for "..."
+        "\\\"([^\\\"\n\r]+)\\\"",
+        // enable completion for #| ...
+        "#\\|([^\n\r]+)",
+        // enable completion for $| ...
+        "\\$\\|([^\n\r]+)"
+    ]
 }

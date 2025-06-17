@@ -36,7 +36,7 @@ extern "js" fn get_relative_time(date : String) -> String =
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   a(
-    klass="select-none p-4 h-50 flex bg-white outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:min-h-28 lg:overflow-ellipsis transition-all",
+    klass="select-none p-4 h-40 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:overflow-ellipsis transition-all",
     href="/docs/\{mod.path}",
     [
       div(klass="flex flex-row text-lg font-semibold", [
@@ -173,7 +173,7 @@ fn navbar() -> Html[Msg] {
             text("🥮 mooncakes.io"),
           ]),
         ]),
-        div(klass="justify-center my-2 w-full max-w-72 shadow-sm", [
+        div(klass="justify-center my-2 w-full max-w-72", [
           input(
             input_type=Text,
             placeholder="Search modules ...",

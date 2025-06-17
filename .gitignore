@@ -4,3 +4,5 @@ node_modules/
 package-lock.json
 pnpm-lock.yaml
 .DS_Store
+src/main.js
+src/main.js.map

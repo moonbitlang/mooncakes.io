@@ -5,29 +5,29 @@ import(
 )
 
 // Values
-fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.T[M])]) -> @html.T[M]
+fn[M] accordion(klass? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
 
-fn[M] button(String, click? : M) -> @html.T[M]
+fn[M] button(String, click? : M) -> @html.Html[M]
 
-fn[M] code_block(String, collapse_namespace~ : Bool) -> @html.T[M]
+fn[M] code_block(String, collapse_namespace~ : Bool) -> @html.Html[M]
 
-fn[M] collapse(header~ : @html.T[M], body~ : @html.T[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.T[M]
+fn[M] collapse(header~ : @html.Html[M], body~ : @html.Html[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.Html[M]
 
-fn[M] document_not_available(String) -> @html.T[M]
+fn[M] document_not_available(String) -> @html.Html[M]
 
-fn[M] footer() -> @html.T[M]
+fn[M] footer() -> @html.Html[M]
 
-fn[M] icon_button(String, text? : String, click? : M) -> @html.T[M]
+fn[M] icon_button(String, text? : String, click? : M) -> @html.Html[M]
 
-fn[M] load_failed(String) -> @html.T[M]
+fn[M] load_failed(String) -> @html.Html[M]
 
-fn[M] loading() -> @html.T[M]
+fn[M] loading() -> @html.Html[M]
 
-fn[M] markdown(String, small_heading~ : Bool = ..) -> @html.T[M]
+fn[M] markdown(String, small_heading~ : Bool = ..) -> @html.Html[M]
 
-fn[M] navbar() -> @html.T[M]
+fn[M] navbar() -> @html.Html[M]
 
-fn[M] not_found() -> @html.T[M]
+fn[M] not_found() -> @html.Html[M]
 
 // Types and methods
 pub(all) enum CaretConfig {

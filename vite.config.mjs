@@ -29,6 +29,10 @@ const testAssetsServer = {
 export default defineConfig({
     root: 'src',
     publicDir: '../public',
+    build: {
+        outDir: '../dist',
+        assetsDir: ''
+    },
     plugins: [
         rabbitTEA(),
         tailwindcss(),

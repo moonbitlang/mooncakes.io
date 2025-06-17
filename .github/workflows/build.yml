@@ -19,12 +19,7 @@ jobs:
       - run: |
           moon update
           moon install
-          mkdir -p target/web
-          cp -R web/* target/web/
-          moon build --target js
-          cp target/js/release/build/main/main.js target/web/main.js
-          npm install npx
-          npx tailwindcss -i web/styles.css -o target/web/styles.css
+          npm run build
 
       - name: publish
         env:
@@ -32,4 +27,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
-          aws s3 sync ./target/web/ ${{ secrets.AWS_S3_MOONCAKES }}
+          aws s3 sync ./dist/ ${{ secrets.AWS_S3_MOONCAKES }}

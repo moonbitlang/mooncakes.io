@@ -67,7 +67,7 @@ fn IndexNode::to_document_items(
   fn collect_packages(node : IndexNode) {
     match node.pkg {
       None if not(node.childs.is_empty()) => {
-        let childs = node.childs.elems().filter_map(collect_packages)
+        let childs = node.childs.values().filter_map(collect_packages).collect()
         childs.sort_by(compare_items)
         Some(@tree.Node(id=ItemTarget::Package(node.name), node.name, childs))
       }
@@ -76,7 +76,7 @@ fn IndexNode::to_document_items(
     }
   }
 
-  let packages = self.childs.elems().filter_map(collect_packages)
+  let packages = self.childs.values().filter_map(collect_packages).collect()
   packages.sort_by(compare_items)
   let package_section = match packages {
     [] => []

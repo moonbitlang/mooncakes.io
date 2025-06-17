@@ -170,35 +170,37 @@ extern "js" fn compare_date(date1 : String, date2 : String) -> Int =
 
 ///|
 fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
-  fn decode_index {
-    ({
-      "name": String(path),
-      "version": String(version),
-      "description"? : description,
-      "keywords"? : keywords,
-      "created_at"? : created_at,
-      ..
-    } : Json) => {
-      let keywords = match keywords {
-        Some(Array(keywords)) =>
-          Some(keywords.map(fn(x) { x.as_string().unwrap() }))
-        _ => None
+  fn decode_index(json) {
+    match json {
+      ({
+        "name": String(path),
+        "version": String(version),
+        "description"? : description,
+        "keywords"? : keywords,
+        "created_at"? : created_at,
+        ..
+      } : Json) => {
+        let keywords = match keywords {
+          Some(Array(keywords)) =>
+            Some(keywords.map(fn(x) { x.as_string().unwrap() }))
+          _ => None
+        }
+        let created_at = created_at.map(fn(x) { x.as_string().unwrap() })
+        let description = description.map(fn(x) { x.as_string().unwrap() })
+        guard path.split("/").collect() is [author, .. name]
+        let name = name.iter().map(@string.View::to_string).join("/")
+        Ok({
+          path,
+          name,
+          author: author.to_string(),
+          version,
+          description,
+          keywords,
+          created_at,
+        })
       }
-      let created_at = created_at.map(fn(x) { x.as_string().unwrap() })
-      let description = description.map(fn(x) { x.as_string().unwrap() })
-      guard path.split("/").collect() is [author, .. name]
-      let name = name.iter().map(@string.View::to_string).join("/")
-      Ok({
-        path,
-        name,
-        author: author.to_string(),
-        version,
-        description,
-        keywords,
-        created_at,
-      })
+      _ => Err("Error when parsing metadata.")
     }
-    _ => Err("Error when parsing metadata.")
   }
 
   fn to_upper(c : Char) -> Char {

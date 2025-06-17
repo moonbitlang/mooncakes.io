@@ -202,7 +202,7 @@ fn decode_misc_doc(json : Json) -> MiscDoc raise Error {
 
 ///|
 fn decode_package_data(json : Json) -> Result[PackageData, String] {
-  fn aux! {
+  match json {
     ({
       "name": String(name),
       "types": Array(types),
@@ -211,23 +211,24 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
       "values": Array(values),
       "misc": Array(misc),
       ..
-    } : Json) => {
-      let types = map_with_error(types, decode_type_doc)
-      let traits = map_with_error(traits, decode_trait_doc)
-      let aliases = map_with_error(aliases, decode_typealias_doc)
-      let values = map_with_error(values, decode_value_doc)
-      let misc = map_with_error(misc, decode_misc_doc)
-      misc.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-      values.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-      aliases.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-      traits.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-      types.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-      { name, types, traits, typealiases: aliases, values, misc }
-    }
-    _ => fail("fail to decode package data: \{json}")
+    } : Json) =>
+      try {
+        let types = types.map(decode_type_doc)
+        let traits = traits.map(decode_trait_doc)
+        let aliases = aliases.map(decode_typealias_doc)
+        let values = values.map(decode_value_doc)
+        let misc = misc.map(decode_misc_doc)
+        misc.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+        values.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+        aliases.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+        traits.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+        types.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+        Ok({ name, types, traits, typealiases: aliases, values, misc })
+      } catch {
+        e => Err("fail to decode package data: \{e}")
+      }
+    _ => Err("fail to decode package data: \{json}")
   }
-
-  aux?(json).map_err(Show::to_string)
 }
 
 ///|

@@ -421,7 +421,7 @@ pub fn view(model : Model) -> Html[Msg] {
     style=["display: " + show_sidebar_dialog],
     [
       div(
-        klass="fixed inset-0 bg-black bg-opacity-40 z-10",
+        klass="fixed inset-0 bg-black/40 z-10",
         style=["display: " + show_sidebar_dialog],
         click=ToggleSidebarFab,
         [],

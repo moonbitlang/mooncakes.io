@@ -13,7 +13,7 @@ fn load() -> (@cmd.Cmd[Msg], Model)
 
 fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
-fn view(Model) -> @html.T[Msg]
+fn view(Model) -> @html.Html[Msg]
 
 // Types and methods
 type Indices

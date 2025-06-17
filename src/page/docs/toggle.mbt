@@ -21,7 +21,7 @@ priv enum CardMode {
 ///|
 fn[M] card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> M) -> Html[M] {
   let img_class = "w-[15px] h-[15px]"
-  let btn_focused = "border border-slate-300 bg-opacity-10 bg-slate-100"
+  let btn_focused = "border border-slate-300 bg-slate-100"
   let lbtn_normal = "border-y border-l hover:z-30 hover:outline hover:outline-mooncake2"
   let rbtn_normal = "border-y border-r hover:z-30 hover:outline hover:outline-mooncake2"
   let (l, r) = match mode {

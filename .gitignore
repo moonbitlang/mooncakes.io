@@ -6,3 +6,4 @@ pnpm-lock.yaml
 .DS_Store
 src/main.js
 src/main.js.map
+dist

@@ -14,13 +14,13 @@
 
 ///|
 pub fn[M] accordion(
-  klass? : String,
+  class? : String,
   click? : (String) -> M,
   showing : String,
   items : Array[(String, Html[M])]
 ) -> Html[M] {
   ul(
-    klass?,
+    class?,
     items.map(fn {
       (title, childs) => {
         let folded = title != showing
@@ -33,13 +33,13 @@ pub fn[M] accordion(
           }
         })
         let childs = if folded { nothing() } else { childs }
-        div(klass="w-full", [
+        div(class="w-full", [
           div(
-            klass="w-full px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
+            class="w-full px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
             click?,
             [text(title)],
           ),
-          div(klass="ml-2", [childs]),
+          div(class="ml-2", [childs]),
         ])
       }
     }),

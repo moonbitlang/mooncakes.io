@@ -3,7 +3,7 @@
         "moonbit": "html"
     },
     "tailwindCSS.classAttributes": [
-        "klass",
+        "class",
     ],
     // You can comment out the following lines if the TailwindCSS 
     // completion encounters issues in your project.

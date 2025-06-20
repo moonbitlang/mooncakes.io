@@ -6,8 +6,6 @@ import(
 )
 
 // Values
-fn[Id] get_name(Tree[Id]) -> String
-
 fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.T[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html[M]
 
 // Types and methods

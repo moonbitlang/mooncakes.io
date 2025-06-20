@@ -74,14 +74,15 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
       } else {
       fail("Error when parsing metadata.")
     }
-    guard [name, version].map(fn {
+    guard [name, version].map(x => match x {
         Some(String(str)) => str
         _ => abort("Error when parsing name and version.")
       })
       is [name, version] else {
       fail("Error when parsing name and version.")
     }
-    guard [repository, license, description].map(fn {
+    // TODO: fix this check
+    guard [repository, license, description].map(x => match x {
         Some(x) => x.as_string()
         None => None
       })
@@ -99,7 +100,7 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
     )
     let deps = match deps {
       Some(Object(xs)) =>
-        map_with_error(xs.iter2().to_array(), fn {
+        map_with_error(xs.iter2().to_array(), x => match x {
           (name, String(version)) => (name, version)
           _ => fail("Error when parsing deps.")
         })

@@ -109,14 +109,14 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
         title="Dependencies",
         ul(
           class="",
-          model.deps.map(fn {
-            (name, version) =>
-              @html.li(class="font-mono text-sm text-gray-300", [
-                a(class="hover:underline text-gray-900", href="/docs/\{name}", [
-                  text(name),
-                ]),
-                span(class="text-gray-500", [text(" " + version)]),
-              ])
+          model.deps.map(pair => {
+            let (name, version) = pair
+            @html.li(class="font-mono text-sm text-gray-300", [
+              a(class="hover:underline text-gray-900", href="/docs/\{name}", [
+                text(name),
+              ]),
+              span(class="text-gray-500", [text(" " + version)]),
+            ])
           }),
         ),
       )

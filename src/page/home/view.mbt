@@ -64,13 +64,10 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
     Some(keywords) =>
       div(
         class="flex gap-2 h-8 flex-wrap overflow-y-hidden shrink-0",
-        keywords.map(fn {
-          keyword =>
-            span(
-              class="text-sm/4 h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
-              [text(keyword)],
-            )
-        }),
+        keywords.map(keyword => span(
+          class="text-sm/4 h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
+          [text(keyword)],
+        )),
       )
   }
   let description = match mod.description {

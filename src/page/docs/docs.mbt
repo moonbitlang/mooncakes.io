@@ -126,7 +126,8 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
         none(),
         match result {
           Ok(module_index) => {
-            let sidebar_document = module_index._
+            let sidebar_document = module_index
+              .inner()
               .find_node(model.path)
               .unwrap()
               .to_document_items()
@@ -237,7 +238,7 @@ fn breadcrumbs(
     let path = path.to_string()
     acc_path += if acc_path == "" { path } else { "/" + path.to_string() }
     let elem = if acc_path.has_prefix(module_path) &&
-      module_index._.find_node(acc_path) is Some(node) &&
+      module_index.inner().find_node(acc_path) is Some(node) &&
       (acc_path == module_path || not(node.pkg.is_empty())) {
       a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
     } else {
@@ -396,7 +397,7 @@ pub fn view(model : Model) -> Html[Msg] {
                 a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
                   span(
                     class="",
-                    x.matching.map(fn {
+                    x.matching.map(x => match x {
                       (true, str) =>
                         span(class="text-moonbit font-semibold", [
                           text(str.to_string()),

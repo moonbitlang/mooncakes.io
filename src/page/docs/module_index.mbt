@@ -50,7 +50,7 @@ fn IndexNode::iter(self : IndexNode) -> Iter[IndexNode] {
 
 ///|
 fn ModuleIndex::iter(self : ModuleIndex) -> Iter[IndexNode] {
-  self._.iter()
+  self.inner().iter()
 }
 
 ///|
@@ -190,7 +190,7 @@ fn decode_type_index(json : Json) -> TypeIndex raise Error {
       ..
     } => {
       let impls = map_with_error(impls, decode_impl_index)
-      let methods = map_with_error(methods, fn {
+      let methods = map_with_error(methods, x => match x {
         String(x) => x
         _ => fail("invalid json in type index")
       })
@@ -226,7 +226,7 @@ fn decode_misc_index(json : Json) -> MiscIndex raise Error {
       ..
     } => {
       let impls = map_with_error(impls, decode_impl_index)
-      let methods = map_with_error(methods, fn {
+      let methods = map_with_error(methods, x => match x {
         String(x) => x
         _ => fail("invalid json in misc index")
       })
@@ -242,7 +242,7 @@ fn decode_impl_index(json : Json) -> ImplIndex raise Error {
     { "self": self_type, "trait": trait_type, "methods": Array(methods), .. } => {
       let self_type = decode_stype(self_type)
       let trait_type = decode_type_path(trait_type)
-      let methods = map_with_error(methods, fn {
+      let methods = map_with_error(methods, x => match x {
         String(x) => x
         _ => fail("invalid methods in impl index")
       })

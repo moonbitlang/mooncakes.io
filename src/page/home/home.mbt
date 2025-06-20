@@ -235,16 +235,18 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
     }
   }
   let recently_updated = indices
-    ..sort_by(fn {
-      { created_at: Some(v1), name: n1, .. },
-      { created_at: Some(v2), name: n2, .. } =>
+    ..sort_by((x, y) => match (x, y) {
+      (
+        { created_at: Some(v1), name: n1, .. },
+        { created_at: Some(v2), name: n2, .. },
+      ) =>
         match compare_date(v1, v2) {
           0 => -n1.compare(n2)
           order => order
         }
-      { created_at: None, .. }, { created_at: Some(_), .. } => 1
-      { created_at: Some(_), .. }, { created_at: None, .. } => -1
-      { created_at: None, name: n1, .. }, { created_at: None, name: n2, .. } =>
+      ({ created_at: None, .. }, { created_at: Some(_), .. }) => 1
+      ({ created_at: Some(_), .. }, { created_at: None, .. }) => -1
+      ({ created_at: None, name: n1, .. }, { created_at: None, name: n2, .. }) =>
         -n1.compare(n2)
     })
     .iter()

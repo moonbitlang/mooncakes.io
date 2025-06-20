@@ -38,7 +38,7 @@ fn load_search_entries(indices : ModuleIndex) -> () -> Array[SearchEntry] {
     let results = []
     indices
     .iter()
-    .each(fn {
+    .each(x => match x {
       { pkg: Some({ path, traits, types, typealias_, values, misc }), .. } => {
         results.push({
           kind: "Package",

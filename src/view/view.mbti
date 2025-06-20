@@ -5,7 +5,7 @@ import(
 )
 
 // Values
-fn[M] accordion(klass? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
+fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
 
 fn[M] button(String, click? : M) -> @html.Html[M]
 

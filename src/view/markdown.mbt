@@ -14,14 +14,14 @@
 
 ///|
 fn[M] unsupported(node_type : String, message : String) -> @html.Html[M] {
-  @html.p(klass="text-red-500", [
+  @html.p(class="text-red-500", [
     text("Unsupported markdown syntax: " + node_type + " " + message),
   ])
 }
 
 ///|
 fn[M] inline_text(str : String) -> @html.Html[M] {
-  @html.span(klass="inline leading-loose", [text(str)])
+  @html.span(class="inline leading-loose", [text(str)])
 }
 
 ///|
@@ -39,7 +39,7 @@ fn[M] image_render(img : @cmark.Inline) -> @html.Html[M] {
       ..,
     } =>
       match src {
-        Some({ v: src, .. }) => @html.img(klass="my-2", src~, alt~, [])
+        Some({ v: src, .. }) => @html.img(class="my-2", src~, alt~, [])
         None => @html.text("Loading image failed: invalid url")
       }
     { v: { reference: Ref(_), .. }, .. } => {
@@ -77,7 +77,7 @@ pub fn[M] markdown(
       } : @cmark.InlineLink) =>
         [
           @html.a(
-            klass="text-blue-600 underline underline-offset-2",
+            class="text-blue-600 underline underline-offset-2",
             href=link,
             [inline_text(txt)],
           ),
@@ -101,7 +101,7 @@ pub fn[M] markdown(
         if link_defs.get(key) is Some(url) {
           [
             @html.a(
-              klass=" text-blue-600 underline underline-offset-2",
+              class=" text-blue-600 underline underline-offset-2",
               href=url,
               [..inline2html(inline)],
             ),
@@ -120,7 +120,7 @@ pub fn[M] markdown(
       CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
         [
           span(
-            klass="font-mono bg-[#f0f0f0] text-sm px-1 py-[1px] rounded",
+            class="font-mono bg-[#f0f0f0] text-sm px-1 py-[1px] rounded",
             tight.map(fn(x) { text(x.node.v) }).to_array(),
           ),
         ]
@@ -146,7 +146,7 @@ pub fn[M] markdown(
       @cmark.Block::BlankLine(_) => p([])
       BlockQuote({ v: { block, .. }, .. }) =>
         @html.blockquote(
-          klass="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
+          class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
           [block2html(block)],
         )
       Blocks({ v: xs, .. }) => span(xs.map(block2html).to_array())
@@ -155,33 +155,33 @@ pub fn[M] markdown(
         let code = if info_string is Some({ v: lang, .. }) &&
           (lang == "mbt" || lang == "moonbit") {
           let code = code_block(code, collapse_namespace=false)
-          @html.code(klass="font-mono", [code])
+          @html.code(class="font-mono", [code])
         } else {
-          @html.code(klass="font-mono", [div([text(code)])])
+          @html.code(class="font-mono", [div([text(code)])])
         }
-        pre(klass="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", [code])
+        pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", [code])
       }
       Heading({ v: { level, inline, .. }, .. }) => {
         let inline = inline2html(inline)
         if small_heading {
           match level {
-            1 => h3(klass="text-gray-900 font-bold mt-1 text-sm", inline)
-            2 | 3 => h4(klass="text-gray-900 font-semibold text-sm", inline)
-            _ => div(klass="text-gray-900", inline)
+            1 => h3(class="text-gray-900 font-bold mt-1 text-sm", inline)
+            2 | 3 => h4(class="text-gray-900 font-semibold text-sm", inline)
+            _ => div(class="text-gray-900", inline)
           }
         } else {
           match level {
             1 =>
-              h1(klass="text-gray-800 font-semibold mt-4 mb-2 text-3xl", inline)
+              h1(class="text-gray-800 font-semibold mt-4 mb-2 text-3xl", inline)
             2 =>
               h2(
-                klass="text-gray-800 font-semibold mt-4 mb-2 border-b text-2xl",
+                class="text-gray-800 font-semibold mt-4 mb-2 border-b text-2xl",
                 inline,
               )
             3 =>
-              h3(klass="text-gray-800 font-semibold text-xl mt-3 mb-2", inline)
-            4 => h4(klass="text-gray-800", inline)
-            _ => h5(klass="text-gray-800", inline)
+              h3(class="text-gray-800 font-semibold text-xl mt-3 mb-2", inline)
+            4 => h4(class="text-gray-800", inline)
+            _ => h5(class="text-gray-800", inline)
           }
         }
       }
@@ -190,7 +190,7 @@ pub fn[M] markdown(
           .map(fn {
             { v: { block, ext_task_marker, .. }, .. } =>
               if ext_task_marker is Some({ v: char, .. }) {
-                @html.li(klass="list-inside flex gap-1", [
+                @html.li(class="list-inside flex gap-1", [
                   @html.input(
                     input_type=Checkbox,
                     read_only=true,
@@ -199,20 +199,20 @@ pub fn[M] markdown(
                   block2html(block),
                 ])
               } else {
-                @html.li(klass="list-inside", [block2html(block)])
+                @html.li(class="list-inside", [block2html(block)])
               }
           })
           .to_array()
-        let klass = "ml-2 list-inside " +
+        let class = "ml-2 list-inside " +
           (if tight { "space-y-0.5" } else { "space-y-1" })
         match ordered {
-          @cmark_base.Unordered(_) => ul(klass=klass + " list-disc", items)
+          @cmark_base.Unordered(_) => ul(class=class + " list-disc", items)
           @cmark_base.Ordered(start, _) =>
-            ol(start~, klass=klass + " list-decimal", items)
+            ol(start~, class=class + " list-decimal", items)
         }
       }
       Paragraph({ v: { inline, .. }, .. }) => @html.span(inline2html(inline))
-      ThematicBreak(_) => hr(klass="my-4")
+      ThematicBreak(_) => hr(class="my-4")
       ExtTable({ v: { rows, .. }, .. }) => {
         let colgroup = []
         let body = rows
@@ -221,7 +221,7 @@ pub fn[M] markdown(
             match row {
               ({ v: Header(cols), .. }, _) => {
                 let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
-                let klass = if (i - colgroup) % 2 == 0 {
+                let class = if (i - colgroup) % 2 == 0 {
                   "bg-gray-100"
                 } else {
                   ""
@@ -230,16 +230,16 @@ pub fn[M] markdown(
                   .map(fn {
                     (inline, _) =>
                       @html.th(
-                        klass="border border-gray-300 p-2 font-semibold",
+                        class="border border-gray-300 p-2 font-semibold",
                         inline2html(inline),
                       )
                   })
                   .to_array()
-                @html.tr(klass~, cols)
+                @html.tr(class~, cols)
               }
               ({ v: Data(cols), .. }, _) => {
                 let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
-                let klass = if (i - colgroup) % 2 == 0 {
+                let class = if (i - colgroup) % 2 == 0 {
                   "bg-gray-100"
                 } else {
                   ""
@@ -248,12 +248,12 @@ pub fn[M] markdown(
                   .map(fn {
                     (inline, _) =>
                       @html.td(
-                        klass="border border-gray-300 p-2",
+                        class="border border-gray-300 p-2",
                         inline2html(inline),
                       )
                   })
                   .to_array()
-                @html.tr(klass~, cols)
+                @html.tr(class~, cols)
               }
               ({ v: Sep(cols), .. }, _) => {
                 cols
@@ -262,12 +262,12 @@ pub fn[M] markdown(
                   { v: (align, _), .. } =>
                     match align {
                       Some(Left) =>
-                        colgroup.push(@html.col(klass="text-left", []))
+                        colgroup.push(@html.col(class="text-left", []))
                       Some(Center) =>
-                        colgroup.push(@html.col(klass="text-center", []))
+                        colgroup.push(@html.col(class="text-center", []))
                       Some(Right) =>
-                        colgroup.push(@html.col(klass="text-right", []))
-                      None => colgroup.push(@html.col(klass="", []))
+                        colgroup.push(@html.col(class="text-right", []))
+                      None => colgroup.push(@html.col(class="", []))
                     }
                 })
                 @html.nothing()
@@ -275,7 +275,7 @@ pub fn[M] markdown(
             }
           })
         @html.table(
-          klass="w-full table-auto my-6 border-2 border-collapse border-gray-300",
+          class="w-full table-auto my-6 border-2 border-collapse border-gray-300",
           [@html.colgroup(colgroup), @html.tbody(body)],
         )
       }
@@ -301,6 +301,6 @@ pub fn[M] markdown(
   try folder.fold_doc([], doc) catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } else {
-    htmls => div(klass="w-full text-base text-[#3c3c43]", htmls)
+    htmls => div(class="w-full text-base text-[#3c3c43]", htmls)
   }
 }

@@ -16,9 +16,9 @@
 fn[M] item_button(childrens : Html[M], icon? : String, click? : M) -> Html[M] {
   let icon = match icon {
     None => div([])
-    Some(src) => div(klass="size-[12px] self-center mr-1", [img(src~, [])])
+    Some(src) => div(class="size-[12px] self-center mr-1", [img(src~, [])])
   }
-  div(klass="hover:bg-gray-100 px-2 py-1 rounded text-sm flex", click?, [
+  div(class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex", click?, [
     icon, childrens,
   ])
 }
@@ -29,12 +29,12 @@ fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
     return text("No source files.")
   }
   let package_path = package_path.trim("/")
-  div(klass="", [
+  div(class="", [
     ul(
       files.map(fn(x) {
         item_button(
           a(
-            klass="w-full",
+            class="w-full",
             href="/assets/\{package_path}/\{x}.html",
             escape=true,
             [text(x)],
@@ -160,7 +160,7 @@ fn sidebar(
   sidebar_state : Set[ItemTarget]
 ) -> Html[Msg] {
   @view.accordion(
-    klass="text-gray-700 flex flex-col",
+    class="text-gray-700 flex flex-col",
     click=SidebarTabClicked(_),
     showing,
     [

@@ -48,8 +48,8 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 
 ///|
 fn signature_view(content : String) -> Html[Msg] {
-  pre(klass="text-wrap flex items-center", [
-    code(klass="font-mono text-[0.95em] text-blue-800", [
+  pre(class="text-wrap flex items-center", [
+    code(class="font-mono text-[0.95em] text-blue-800", [
       @view.code_block(content, collapse_namespace=true),
     ]),
   ])
@@ -63,7 +63,7 @@ fn stype(ty : Stype) -> Html[Msg] {
       let async_indicator = if is_async { text("async ") } else { nothing() }
       let error_type_indicator = match error_type {
         None => nothing()
-        Some(ty) => span(klass="flex", [text("!"), stype(ty)])
+        Some(ty) => span(class="flex", [text("!"), stype(ty)])
       }
       span(
         [
@@ -95,8 +95,8 @@ fn stype(ty : Stype) -> Html[Msg] {
 fn type_path(ty : TypePath) -> Html[Msg] {
   a(
     href="/docs/\{ty.path}#\{ty.name}",
-    klass="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
-    [span(klass="text-gray-700", [text(ty.name)])],
+    class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
+    [span(class="text-gray-700", [text(ty.name)])],
   )
 }
 
@@ -104,15 +104,15 @@ fn type_path(ty : TypePath) -> Html[Msg] {
 fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
-  let signature = pre(klass="bg-gray-100 text-wrap pr-4", [
-    code(klass="font-mono text-[0.9em] text-[#0033b3]", [
+  let signature = pre(class="bg-gray-100 text-wrap pr-4", [
+    code(class="font-mono text-[0.9em] text-[#0033b3]", [
       text("impl "),
       type_path(trait_type),
       text(" for "),
-      span(klass="text-gray-700", [stype(self_type)]),
+      span(class="text-gray-700", [stype(self_type)]),
     ]),
   ])
-  let content = div(klass="pl-4", methods.map(value_doc(_, folded~)))
+  let content = div(class="pl-4", methods.map(value_doc(_, folded~)))
   document_item(signature, content, collapsed=folded, id~, tight=true)
 }
 
@@ -176,28 +176,28 @@ fn document_item(
       Some(loc) =>
         a(
           href="/assets/\{loc.path}/\{loc.file}.html#\{loc.line}",
-          klass="text-xs text-gray-500 hover:text-gray-700 transition-colors",
+          class="text-xs text-gray-500 hover:text-gray-700 transition-colors",
           escape=true,
           [text("source")],
         )
     }
     let collapse_btn = div(
-      klass="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
+      class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
       click=ToggleDocDetail(id),
-      [img(src=icon, klass="size-4", [])],
+      [img(src=icon, class="size-4", [])],
     )
     div(
-      klass="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center justify-center group-hover:visible invisible",
+      class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center justify-center group-hover:visible invisible",
       [source_btn, collapse_btn],
     )
   }
-  div(klass="border-t border-gray-300 py-2 group", [
+  div(class="border-t border-gray-300 py-2 group", [
     div(
-      klass="pl-4 py-2 pr-2 bg-gray-100 rounded-lg relative w-full \{header_style}",
+      class="pl-4 py-2 pr-2 bg-gray-100 rounded-lg relative w-full \{header_style}",
       id~,
       [signature, buttons],
     ),
-    div(klass="pl-4 pt-2 \{content_style}", [content]),
+    div(class="pl-4 pt-2 \{content_style}", [content]),
   ])
 }
 
@@ -218,30 +218,30 @@ fn value_doc(
 fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
   let { name, methods, impls } = doc
   let id = doc.get_id()
-  let signature = div(id=name, klass="py-1 w-full", [
-    h3(klass="text-lg text-gray-800", [text(name)]),
+  let signature = div(id=name, class="py-1 w-full", [
+    h3(class="text-lg text-gray-800", [text(name)]),
   ])
   let package_link_class = "font-mono text-sm px-1 py-[1px] bg-yellow-600/20 hover:bg-yellow-600/20 rounded"
   let tips = match @config.builtins_package_path.get(name) {
     None => nothing()
     Some(pkg_path) =>
       div(
-        klass="bg-mooncake border-mooncake2 border-opacity-50 text-yellow-800 border rounded px-6 py-4 my-2",
+        class="bg-mooncake border-mooncake2 border-opacity-50 text-yellow-800 border rounded px-6 py-4 my-2",
         [
-          h3(klass="text-base font-semibold", [text("Note")]),
-          p(klass="mt-2", [
+          h3(class="text-base font-semibold", [text("Note")]),
+          p(class="mt-2", [
             text(
               "\{name} is a built-in type. The documentation may not be complete here. You can find all methods and implementations in the ",
             ),
             a(
               href="/docs/moonbitlang/core/builtin#\{name}",
-              klass=package_link_class,
+              class=package_link_class,
               [text("core/builtin")],
             ),
             text(" and "),
             a(
               href="/docs/moonbitlang/\{pkg_path}#\{name}",
-              klass=package_link_class,
+              class=package_link_class,
               [text("core/\{name.to_lower()}")],
             ),
             text(" package."),
@@ -250,7 +250,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
       )
   }
   let content = div(
-    klass="ml-3 my-2",
+    class="ml-3 my-2",
     [
       tips,
       ..methods.map(value_doc(_, folded~, type_id=id)),
@@ -265,7 +265,7 @@ fn sub_section_title(title : String, item_count : Int) -> Html[Msg] {
   if item_count == 0 {
     nothing()
   } else {
-    h1(klass="text-xs font-bold py-2 text-blue-900", [text(title)])
+    h1(class="text-xs font-bold py-2 text-blue-900", [text(title)])
   }
 }
 
@@ -283,10 +283,10 @@ fn document(
         caret_config=LeftCenter,
         collapsed=folded.contains("readme"),
         toggle=ToggleDocDetail("readme"),
-        header=div(klass="py-2 pl-6 text-sm font-bold text-gray-700", [
+        header=div(class="py-2 pl-6 text-sm font-bold text-gray-700", [
           p([text("README")]),
         ]),
-        body=div(klass="pl-6", [div(klass="mr-4 mb-6", [content])]),
+        body=div(class="pl-6", [div(class="mr-4 mb-6", [content])]),
       )
     }
   }
@@ -296,7 +296,7 @@ fn document(
         if item_count == 0 {
           nothing()
         } else {
-          h1(id~, klass="text-sm font-semibold pb-2 pt-4 text-gray-800", [
+          h1(id~, class="text-sm font-semibold pb-2 pt-4 text-gray-800", [
             text(title),
           ])
         }
@@ -320,7 +320,7 @@ fn document(
     _ => []
   }
   div(
-    klass="contents-center flex flex-col pl-2 sm:pl-6 p-4 pr-2 sm:pr-16 pb-20 w-full",
-    [readme, div(klass="pl-6", doc_list)],
+    class="contents-center flex flex-col pl-2 sm:pl-6 p-4 pr-2 sm:pr-16 pb-20 w-full",
+    [readme, div(class="pl-6", doc_list)],
   )
 }

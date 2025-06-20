@@ -239,25 +239,25 @@ fn breadcrumbs(
     let elem = if acc_path.has_prefix(module_path) &&
       module_index._.find_node(acc_path) is Some(node) &&
       (acc_path == module_path || not(node.pkg.is_empty())) {
-      a(klass="hover:underline", href="/docs/" + acc_path, [text(path)])
+      a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
     } else {
-      div(klass="text-gray-700 font-normal", [text(path)])
+      div(class="text-gray-700 font-normal", [text(path)])
     }
     elems.push(elem)
   }
-  let separator = div(klass="text-gray-300 text-base", [text(" / ")])
+  let separator = div(class="text-gray-300 text-base", [text(" / ")])
   div(
-    klass="text-base text-gray-800 font-semibold flex gap-2",
+    class="text-base text-gray-800 font-semibold flex gap-2",
     elems.iter().intersperse(separator).collect(),
   )
 }
 
 ///|
 fn logo() -> Html[Msg] {
-  div(klass="w-full h-full flex justify-end border-b top-0 z-20", [
-    div(klass="h-full flex items-center w-full 2xl:w-2/3", [
-      a(klass="border-gray-300 w-full", href="/", [
-        h1(klass="font-title text-gray-700 font-semibold mx-12", [
+  div(class="w-full h-full flex justify-end border-b top-0 z-20", [
+    div(class="h-full flex items-center w-full 2xl:w-2/3", [
+      a(class="border-gray-300 w-full", href="/", [
+        h1(class="font-title text-gray-700 font-semibold mx-12", [
           text("🥮 mooncakes.io"),
         ]),
       ]),
@@ -273,21 +273,21 @@ fn navbar(
   card_mode : CardMode
 ) -> Html[Msg] {
   div(
-    klass="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
+    class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
     [
       if module_path == path {
         nothing()
       } else {
         breadcrumbs(path, module_path, module_index)
       },
-      div(klass="flex-grow", []),
+      div(class="flex-grow", []),
       card_mode_toggle(mode=card_mode, click=DocModeChanged(_)),
       button(
-        klass="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 text-gray-500 flex items-center gap-2",
+        class="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 text-gray-500 flex items-center gap-2",
         click=ToggleSearchPanel(true),
         [
-          img(klass="w-5 h-5", src=@config.SEARCH, []),
-          div(klass="hidden lg:block text-nowrap", [text("search")]),
+          img(class="w-5 h-5", src=@config.SEARCH, []),
+          div(class="hidden lg:block text-nowrap", [text("search")]),
         ],
       ),
     ],
@@ -322,8 +322,8 @@ pub fn view(model : Model) -> Html[Msg] {
     ) => source_files
     _ => []
   }
-  let sidebar_ele = div(klass="w-full h-full flex justify-end", [
-    div(klass="pl-6 pr-3 py-3 overflow-y-auto w-full 2xl:w-2/3", [
+  let sidebar_ele = div(class="w-full h-full flex justify-end", [
+    div(class="pl-6 pr-3 py-3 overflow-y-auto w-full 2xl:w-2/3", [
       sidebar(
         model.sidebar_document,
         source_files,
@@ -341,8 +341,8 @@ pub fn view(model : Model) -> Html[Msg] {
           meta_info(meta, install_copied=model.install_copied)
         Package(_) => nothing()
       }
-      div(klass="flex w-full min-h-full justify-begin", [
-        div(klass="overflow-y-auto 2xl:w-4/5", [
+      div(class="flex w-full min-h-full justify-begin", [
+        div(class="overflow-y-auto 2xl:w-4/5", [
           meta,
           document(
             readme_content~,
@@ -357,21 +357,21 @@ pub fn view(model : Model) -> Html[Msg] {
   }
   let search = model.search
   let search_panel = @html.dialog(
-    klass="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
+    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
     id="search-panel",
     [
       div(
-        klass="h-12 border-b bg-white rounded-none sticky top-0 text-base w-full flex",
+        class="h-12 border-b bg-white rounded-none sticky top-0 text-base w-full flex",
         [
           @html.input(
             input_type=Text,
             value=search.filter,
             placeholder="search...",
             input=SearchFilterChanged(_),
-            klass="outline-none m-0 flex-grow px-4 p-2",
+            class="outline-none m-0 flex-grow px-4 p-2",
           ),
           div(
-            klass="size-12 container hover:bg-gray-200 flex justify-center items-center",
+            class="size-12 container hover:bg-gray-200 flex justify-center items-center",
             click=ToggleSearchPanel(false),
             [img(src=@config.icon_close, [])],
           ),
@@ -382,7 +382,7 @@ pub fn view(model : Model) -> Html[Msg] {
         Failed => text("load indices failed")
         Success(results) =>
           @html.ul(
-            klass="overflow-y-auto flex-grow",
+            class="overflow-y-auto flex-grow",
             results.map(fn(x) {
               let color = match x.entry.kind {
                 "Package" => "text-yellow-700"
@@ -392,20 +392,20 @@ pub fn view(model : Model) -> Html[Msg] {
                 "Value" => "text-purple-700"
                 _ => "text-gray-700"
               }
-              @html.li(klass="border-b px-4 py-2 bg-white hover:bg-gray-100", [
-                a(href=x.entry.href, klass="grid grid-cols-[1fr_auto] ", [
+              @html.li(class="border-b px-4 py-2 bg-white hover:bg-gray-100", [
+                a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
                   span(
-                    klass="",
+                    class="",
                     x.matching.map(fn {
                       (true, str) =>
-                        span(klass="text-moonbit font-semibold", [
+                        span(class="text-moonbit font-semibold", [
                           text(str.to_string()),
                         ])
                       (false, str) =>
-                        span(klass="text-gray-600", [text(str.to_string())])
+                        span(class="text-gray-600", [text(str.to_string())])
                     }),
                   ),
-                  span(klass="font-thin text-tiny lg:text-base \{color}", [
+                  span(class="font-thin text-tiny lg:text-base \{color}", [
                     text(x.entry.kind),
                   ]),
                 ]),
@@ -417,17 +417,17 @@ pub fn view(model : Model) -> Html[Msg] {
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
   let sidebar_dialog = div(
-    klass="fixed inset-0 justify-center items-center",
+    class="fixed inset-0 justify-center items-center",
     style=["display: " + show_sidebar_dialog],
     [
       div(
-        klass="fixed inset-0 bg-black/40 z-10",
+        class="fixed inset-0 bg-black/40 z-10",
         style=["display: " + show_sidebar_dialog],
         click=ToggleSidebarFab,
         [],
       ),
       div(
-        klass="bg-white w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
+        class="bg-white w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
         [
           sidebar(
             model.sidebar_document,
@@ -441,27 +441,27 @@ pub fn view(model : Model) -> Html[Msg] {
     ],
   )
   let fab = @html.button(
-    klass="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
+    class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
     click=ToggleSidebarFab,
-    [img(klass="size-5", src=@config.HAMBURGER_BUTTON, [])],
+    [img(class="size-5", src=@config.HAMBURGER_BUTTON, [])],
   )
   div(
-    klass="grid grid-rows-[3em_0_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
+    class="grid grid-rows-[3em_0_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
     [
       div(
-        klass="bg-[#f7f7f7] col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
+        class="bg-[#f7f7f7] col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
         [logo()],
       ),
       div(
-        klass="col-start-1 row-start-1 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",
+        class="col-start-1 row-start-1 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",
         [navbar],
       ),
       div(
-        klass="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [sidebar_ele],
       ),
       div(
-        klass="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
+        class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
         [main],
       ),
       search_panel,

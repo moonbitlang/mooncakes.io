@@ -47,12 +47,12 @@ pub fn[M, Id : Compare] view(
     match x {
       Tree::Item(id~, str) => {
         let indicator = if indicator == id {
-          div(klass="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", [])
+          div(class="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", [])
         } else {
-          div(klass="w-1 h-5 mr-2", [])
+          div(class="w-1 h-5 mr-2", [])
         }
         div(
-          klass="hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
+          class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
           click=click(id),
           [indicator, text(str)],
         )
@@ -67,18 +67,18 @@ pub fn[M, Id : Compare] view(
         }
         div([
           div(
-            klass="relative transition hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
+            class="relative transition hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
             click=toggle(id),
             [
               div(
-                klass="absolute w-0 h-0 self-center mr-1 transition-transform \{icon}",
+                class="absolute w-0 h-0 self-center mr-1 transition-transform \{icon}",
                 [],
               ),
-              div(klass="pl-3", [text(str)]),
+              div(class="pl-3", [text(str)]),
             ],
           ),
           div(
-            klass="pl-2 overflow-hidden duration-400 transition-[max-height] \{body_style}",
+            class="pl-2 overflow-hidden duration-400 transition-[max-height] \{body_style}",
             [ul(children.map(aux))],
           ),
         ])
@@ -86,5 +86,5 @@ pub fn[M, Id : Compare] view(
     }
   }
 
-  ul(klass="select-none", items.map(aux))
+  ul(class="select-none", items.map(aux))
 }

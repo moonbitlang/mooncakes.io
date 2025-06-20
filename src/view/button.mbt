@@ -15,7 +15,7 @@
 ///|
 pub fn[M] button(value : String, click? : M) -> Html[M] {
   div(
-    klass="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
+    class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
     click?,
     [text(value)],
   )
@@ -28,12 +28,12 @@ pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
     Some(value) => [@html.text(value)]
   }
   div(
-    klass="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800",
+    class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800",
     click?,
     [
       div(
-        klass="self-center min-w-4 flex gap-2",
-        [img(klass="w-4", src=icon, []), ..text],
+        class="self-center min-w-4 flex gap-2",
+        [img(class="w-4", src=icon, []), ..text],
       ),
     ],
   )
@@ -41,22 +41,22 @@ pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
 
 ///|
 pub fn[M] navbar() -> Html[M] {
-  div(klass="font-title h-14 w-full px-8 p-4 border-b select-none", [
-    h1(klass="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
+  div(class="font-title h-14 w-full px-8 p-4 border-b select-none", [
+    h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
   ])
 }
 
 ///|
 pub fn[M] footer() -> Html[M] {
-  let klass = "hover:text-mooncake2 transition-colors"
+  let class = "hover:text-mooncake2 transition-colors"
   div(
-    klass="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex flex-col md:flex-row justify-center gap-4 md:gap-8",
+    class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex flex-col md:flex-row justify-center gap-4 md:gap-8",
     [
       p([text("Powered by MoonBit")]),
-      a(href="https://github.com/moonbitlang/mooncakes.io", klass~, [
+      a(href="https://github.com/moonbitlang/mooncakes.io", class~, [
         text("Site source"),
       ]),
-      a(href="https://github.com/moonbitlang/mooncakes.io/issues/new", klass~, [
+      a(href="https://github.com/moonbitlang/mooncakes.io/issues/new", class~, [
         text("Report issue"),
       ]),
       p([text("© 2025 mooncakes.io")]),

@@ -129,7 +129,7 @@ fn banner() -> Html[Msg] {
         ]),
       ]),
       img(
-        class="hidden lg:block w-[35%] lg:w-[340px] lg:h-[340px]",
+        class="hidden lg:block w-[35%] lg:w-[300px] lg:h-[300px]",
         src="mooncake-pic.png",
         [],
       ),
@@ -156,7 +156,7 @@ pub fn view(model : Model) -> Html[Msg] {
   div(class="flex flex-col min-h-screen", [
     navbar(),
     banner,
-    hr(class="m-4 border-gray-200"),
+    hr(class="lg:hidden mx-4 mt-6 border-gray-200"),
     module_list,
     div(class="mt-auto", [@view.footer()]),
   ])

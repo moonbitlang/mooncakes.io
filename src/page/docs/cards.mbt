@@ -277,15 +277,6 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
 }
 
 ///|
-fn sub_section_title(title : String, item_count : Int) -> Html[Msg] {
-  if item_count == 0 {
-    nothing()
-  } else {
-    h1(class="text-xs font-bold py-2 text-blue-900", [text(title)])
-  }
-}
-
-///|
 fn document(
   readme_content? : String,
   package_data? : Status[PackageData],

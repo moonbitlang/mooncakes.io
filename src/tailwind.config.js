@@ -2,9 +2,6 @@
 module.exports = {
   content: ["./src/**/*.{html,js,mbt}"],
   theme: {
-    container: {
-      center: true
-    },
     fontFamily: {
       title: ['"Poppins"'],
       sans: [
@@ -22,12 +19,12 @@ module.exports = {
       ],
       serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: [
-        'Menlo',
+        'monospace',
         'Monaco',
         'Consolas',
+        'Menlo',
         '"Liberation Mono"',
-        '"Courier New"',
-        'monospace'
+        '"Courier New"'
       ],
     },
     extend: {

@@ -114,7 +114,7 @@ fn banner() -> Html[Msg] {
             span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
             text("community"),
           ]),
-          h2(class="hidden lg:block text-xl mt-4 text-zinc-500 flex gap-1", [
+          h2(class="hidden lg:block text-xl mt-4 text-zinc-500 gap-1", [
             text("Browse, search and share package and documentation"),
           ]),
         ]),
@@ -153,13 +153,16 @@ pub fn view(model : Model) -> Html[Msg] {
       }
   }
   let banner = if model.filter == "" { banner() } else { nothing() }
-  div(class="flex flex-col min-h-screen", [
-    navbar(),
-    banner,
-    hr(class="lg:hidden mx-4 mt-6 border-gray-200"),
-    module_list,
-    div(class="mt-auto", [@view.footer()]),
-  ])
+  div(
+    class="flex flex-col min-h-screen bg-gradient-to-b from-white to-transparent to-[35em] bg-zinc-50",
+    [
+      navbar(),
+      banner,
+      hr(class="lg:hidden mx-4 mt-6 border-gray-200"),
+      module_list,
+      div(class="mt-auto", [@view.footer()]),
+    ],
+  )
 }
 
 ///|

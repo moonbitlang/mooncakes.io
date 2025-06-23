@@ -49,7 +49,7 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 ///|
 fn signature_view(content : String) -> Html[Msg] {
   pre(class="text-wrap flex items-center", [
-    code(class="font-mono text-[0.95em] text-blue-800", [
+    code(class="font-mono text-sm text-blue-800", [
       @view.code_block(content, collapse_namespace=true),
     ]),
   ])
@@ -123,12 +123,12 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
   let signature = signature_view(signature)
   let content = div(
     [
-      @view.markdown(docstring, small_heading=true),
-      ..methods.map(value_doc(_, folded~, type_id=id)),
+      div(class="pl-5", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(impl_doc(_, folded~)),
+      ..methods.map(value_doc(_, folded~, type_id=id)),
     ],
   )
-  document_item(signature, content, collapsed=folded, id~, loc~)
+  document_item(title=id, signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|
@@ -138,12 +138,11 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
   let signature = signature_view(signature)
   let content = div(
     [
-      @view.markdown(docstring, small_heading=true),
-      sub_section_title("Implementation", impls.length()),
+      div(class="pl-5", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(impl_doc(_, folded~)),
     ],
   )
-  document_item(signature, content, collapsed=folded, id~, loc~)
+  document_item(title=id, signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|
@@ -157,6 +156,7 @@ fn type_alias_doc(doc : TypeAliasDoc, folded~ : FoldedState) -> Html[Msg] {
 
 ///|
 fn document_item(
+  title? : String,
   signature : Html[Msg],
   content : Html[Msg],
   collapsed~ : FoldedState,
@@ -191,13 +191,27 @@ fn document_item(
       [source_btn, collapse_btn],
     )
   }
-  div(class="border-t border-gray-300 py-2 group", [
+  let top_rule = match title {
+    None => "border-t pt-2 border-gray-200"
+    Some(_) => ""
+  }
+  let title = match title {
+    None => nothing()
+    Some(title) =>
+      @html.h2(
+        class="text-gray-800 text-2xl font-semibold py-2 mb-4 border-b",
+        id~,
+        [text(title)],
+      )
+  }
+  div(class="my-2 group \{top_rule}", [
+    title,
     div(
-      class="pl-4 py-2 pr-2 bg-gray-100 rounded-lg relative w-full \{header_style}",
+      class="px-4 py-2 bg-gray-100 rounded-lg relative w-full \{header_style}",
       id~,
       [signature, buttons],
     ),
-    div(class="pl-4 pt-2 \{content_style}", [content]),
+    div(class=content_style, [content]),
   ])
 }
 
@@ -210,7 +224,9 @@ fn value_doc(
   let { name: _, docstring, signature, loc } = doc
   let id = type_id.map(fn(x) { "\{x}::\{doc.get_id()}" }).or(doc.get_id())
   let signature = signature_view(signature)
-  let content = @view.markdown(docstring, small_heading=true)
+  let content = div(class="pl-5", [
+    @view.markdown(docstring, small_heading=true),
+  ])
   document_item(signature, content, collapsed=folded, id~, loc~)
 }
 
@@ -286,41 +302,20 @@ fn document(
         header=div(class="py-2 pl-6 text-sm font-bold text-gray-700", [
           p([text("README")]),
         ]),
-        body=div(class="pl-6", [div(class="mr-4 mb-6", [content])]),
+        body=div(class="", [div(class="mr-4 mb-6", [content])]),
       )
     }
   }
   let doc_list = match package_data {
-    Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {
-      fn section_title(id, title, item_count) {
-        if item_count == 0 {
-          nothing()
-        } else {
-          h1(id~, class="text-sm font-semibold pb-2 pt-4 text-gray-800", [
-            text(title),
-          ])
-        }
-      }
-
+    Some(Success({ traits, types, typealiases, values, misc, name: _ })) =>
       [
-        section_title("trait-section", "Traits", traits.length()),
         ..traits.map(trait_doc(_, folded~)),
-        section_title("type-section", "Types", types.length()),
         ..types.map(type_doc(_, folded~)),
         ..typealiases.map(type_alias_doc(_, folded~)),
-        section_title(
-          "value-section",
-          "Values & Functions",
-          values.length() + misc.length(),
-        ),
         ..values.map(value_doc(_, folded~)),
         ..misc.map(misc_doc(_, folded~)),
       ]
-    }
     _ => []
   }
-  div(
-    class="contents-center flex flex-col pl-2 sm:pl-6 p-4 pr-2 sm:pr-16 pb-20 w-full",
-    [readme, div(class="pl-6", doc_list)],
-  )
+  div(class="contents-center flex flex-col p-2 w-full", [readme, div(doc_list)])
 }

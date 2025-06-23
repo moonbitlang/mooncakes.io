@@ -11,3 +11,8 @@
     border-color: theme('colors.gray.200', 'currentColor');
   }
 }
+
+@utility container {
+  max-width: 1400px;
+  margin-inline: auto;
+}

@@ -35,7 +35,7 @@ pub fn[M] accordion(
       let childs = if folded { nothing() } else { childs }
       div(class="w-full", [
         div(
-          class="w-full px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
+          class="w-full rounded px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
           click?,
           [text(title)],
         ),

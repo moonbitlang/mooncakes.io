@@ -36,23 +36,25 @@ extern "js" fn get_relative_time(date : String) -> String =
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   a(
-    class="select-none p-4 h-40 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md lg:border lg:rounded-md lg:overflow-ellipsis transition-all",
+    class="h-24 lg:h-30 flex-nowrap text-gray-500 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
     href="/docs/\{mod.path}",
     [
-      div(class="flex flex-row text-lg font-semibold", [
-        span(class="text-gray-500", [text(mod.author)]),
-        span(class="px-1 text-gray-300", [text("/")]),
-        span([text(mod.name)]),
-      ]),
       div(
-        class="pt-2 text-gray-500 flex-grow flex flex-col justify-between gap-2",
+        class="shrink-0 whitespace-nowrap flex flex-row text-base font-semibold",
         [
-          p(class="text-sm", [text(mod.description.or(""))]),
-          p(class="text-[0.8rem] w-full text-right", [
-            text(mod.created_at.map(get_relative_time).or("")),
-          ]),
+          span([text(mod.author)]),
+          span(class="px-1 text-gray-300", [text("/")]),
+          span(class="text-black", [text(mod.name)]),
         ],
       ),
+      div(class="overflow-hidden flex-1 py1", [
+        p(class="line-clamp-1 lg:line-clamp-2 py-1 text-gray-500 text-sm", [
+          text(mod.description.or("")),
+        ]),
+      ]),
+      p(class="text-sm w-full text-right pt-1", [
+        text(mod.created_at.map(get_relative_time).or("")),
+      ]),
     ],
   )
 }
@@ -65,7 +67,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
       div(
         class="flex gap-2 h-8 flex-wrap overflow-y-hidden shrink-0",
         keywords.map(keyword => span(
-          class="text-sm/4 h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
+          class="text-xs h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
           [text(keyword)],
         )),
       )
@@ -82,10 +84,10 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
     None => nothing()
   }
   a(
-    class="select-none p-4 min-h-32 flex flex-col border-t bg-white hover:bg-gray-100 transition-all",
+    class="select-none p-4 min-h-32 rounded flex flex-col border bg-white hover:bg-gray-100 transition-all",
     href="/docs/\{mod.path}",
     [
-      div(class="flex flex-row text-lg font-semibold", [
+      div(class="flex flex-row text-base font-semibold", [
         h2(class="text-gray-500", [text(mod.author)]),
         h2(class="px-1 text-gray-300", [text("/")]),
         h2(class="", [text(mod.name)]),
@@ -101,16 +103,14 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
 ///|
 fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
   let recently_updated = recently.map(simple_module_card)
-  div([
-    div(class="container lg:w-2/3 px-4", [
-      h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
-        text("RECENTLY UPDATED"),
-      ]),
-      div(
-        class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4",
-        recently_updated,
-      ),
+  div(class="container lg:w-2/3 px-4", [
+    h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
+      text("RECENTLY UPDATED"),
     ]),
+    div(
+      class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
+      recently_updated,
+    ),
   ])
 }
 
@@ -125,11 +125,11 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
       let modules = value.map(simple_module_card)
       div(class="pt-2", [
         div(class="container lg:w-2/3 px-4", [
-          h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
+          h1(class="p-3 text-sm font-bold text-gray-400", [
             text(key.to_string()),
           ]),
           div(
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4",
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
             modules,
           ),
         ]),
@@ -153,7 +153,7 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
       h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
         text("SEARCH RESULT"),
       ]),
-      div(class="grid grid-cols-1", module_cards),
+      div(class="grid grid-cols-1 gap-2", module_cards),
     ]),
   ])
 }
@@ -166,15 +166,15 @@ fn navbar() -> Html[Msg] {
       [
         div(class="font-title select-none p-4", [
           // use whitespace-nowrap to prevent logo from wrapping
-          h1(class="whitespace-nowrap text-gray-700 font-semibold", [
+          a(href="/", class="whitespace-nowrap text-gray-700 font-semibold", [
             text("🥮 mooncakes.io"),
           ]),
         ]),
-        div(class="justify-center my-2 w-full max-w-72", [
+        div(class="justify-center lg:my-2 w-full max-w-72", [
           input(
             input_type=Text,
             placeholder="Search modules ...",
-            class="border rounded-full px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
+            class="border rounded-full text-sm lg:text-base px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
             input=FilterChanged(_),
           ),
         ]),

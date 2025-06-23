@@ -96,7 +96,7 @@ fn banner() -> Html[Msg] {
   fn button(value, target, color) {
     a(
       href=target,
-      class="py-2 px-6 select-none text-md rounded-full hover:opacity-80 transition-all \{color}",
+      class="py-1.5 px-4 lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
       [text(value)],
     )
   }
@@ -106,15 +106,15 @@ fn banner() -> Html[Msg] {
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
         div(class="text-slate-700", [
-          h1(class="font-semibold text-4xl lg:text-5xl", [
+          h1(class="text-2xl font-semibold lg:text-4xl", [
             text("The Package Registry"),
           ]),
-          h1(class="font-semibold text-4xl lg:text-5xl mt-2", [
+          h1(class="text-3xl font-semibold lg:text-4xl lg:mt-2", [
             text("for"),
             span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
             text("community"),
           ]),
-          h2(class="text-lg lg:text-2xl mt-4 text-zinc-500 flex gap-1", [
+          h2(class="hidden lg:block text-xl mt-4 text-zinc-500 flex gap-1", [
             text("Browse, search and share package and documentation"),
           ]),
         ]),
@@ -128,7 +128,11 @@ fn banner() -> Html[Msg] {
           ),
         ]),
       ]),
-      img(class="w-[340px] h-[340px]", src="mooncake-pic.png", []),
+      img(
+        class="hidden lg:block w-[35%] lg:w-[340px] lg:h-[340px]",
+        src="mooncake-pic.png",
+        [],
+      ),
     ],
   )
 }
@@ -250,7 +254,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
         -n1.compare(n2)
     })
     .iter()
-    .take(12)
+    .take(15)
     .collect()
   Ok({ recently_updated, all_modules })
 }

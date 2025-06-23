@@ -36,7 +36,7 @@ fn meta_info_item_view(
 fn install_view(command : String, copied~ : Bool) -> Html[Msg] {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
-    class="hover:bg-gray-100 active:bg-gray-200 bg-white shadow-sm transition-colors text-black text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
+    class="hover:bg-gray-100 active:bg-gray-200 bg-white md:shadow-xs transition-colors text-black text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
     click=Msg::CopyInstallCommand(command),
     [
       span(class="overflow-x-auto text-nowrap", [text(command)]),
@@ -79,7 +79,7 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
     },
     div(class="flex gap-2 my-2", model.keywords.map(tag_view)),
   ])
-  div(class="mx-7 my-4 py-2 bg-gray-50 rounded overflow-clip", [
+  div(class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip", [
     model_description,
     div(
       class="flex flex-wrap content-stretch",

@@ -36,7 +36,7 @@ extern "js" fn get_relative_time(date : String) -> String =
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   a(
-    class="h-24 lg:h-30 flex-nowrap text-gray-500 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
+    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-500 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
     href="/docs/\{mod.path}",
     [
       div(
@@ -160,9 +160,9 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
 
 ///|
 fn navbar() -> Html[Msg] {
-  div(class="w-full flex justify-center", [
+  div(class="w-full flex", [
     div(
-      class="min-h-14 w-4/5 flex flex-col sm:flex-row justify-between items-center",
+      class="container flex flex-col sm:flex-row justify-between items-center",
       [
         div(class="font-title select-none p-4", [
           // use whitespace-nowrap to prevent logo from wrapping
@@ -174,7 +174,7 @@ fn navbar() -> Html[Msg] {
           input(
             input_type=Text,
             placeholder="Search modules ...",
-            class="border rounded-full text-sm lg:text-base px-4 w-full py-2 bg-zinc-50 focus:border-mooncake2 outline-none transition-colors",
+            class="border rounded-full text-sm lg:text-base px-4 w-full py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
             input=FilterChanged(_),
           ),
         ]),

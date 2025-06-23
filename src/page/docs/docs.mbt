@@ -255,15 +255,11 @@ fn breadcrumbs(
 
 ///|
 fn logo() -> Html[Msg] {
-  div(class="w-full h-full flex justify-end border-b top-0 z-20", [
-    div(class="h-full flex items-center w-full 2xl:w-2/3", [
-      a(class="border-gray-300 w-full", href="/", [
-        h1(class="font-title text-gray-700 font-semibold mx-12", [
-          text("🥮 mooncakes.io"),
-        ]),
-      ]),
-    ]),
-  ])
+  a(
+    class="border-gray-300 font-title mx-2 font-semibold flex items-center text-nowrap",
+    href="/",
+    [text("🥮 mooncakes.io")],
+  )
 }
 
 ///|
@@ -273,26 +269,26 @@ fn navbar(
   module_index : ModuleIndex,
   card_mode : CardMode
 ) -> Html[Msg] {
-  div(
-    class="bg-white w-full h-full border-b select-none flex items-center gap-4 pl-12 top-0 z-10",
-    [
-      if module_path == path {
-        nothing()
-      } else {
-        breadcrumbs(path, module_path, module_index)
-      },
-      div(class="flex-grow", []),
-      card_mode_toggle(mode=card_mode, click=DocModeChanged(_)),
-      button(
-        class="bg-gray-100 border hover:border-mooncake2 border-opacity-0 transition-all rounded mx-2 py-1 px-2 lg:w-1/5 text-gray-500 flex items-center gap-2",
-        click=ToggleSearchPanel(true),
-        [
-          img(class="w-5 h-5", src=@config.SEARCH, []),
-          div(class="hidden lg:block text-nowrap", [text("search")]),
-        ],
-      ),
-    ],
-  )
+  div(class="select-none flex items-center gap-4 py-2.5", [
+    logo(),
+    if module_path == path {
+      nothing()
+    } else {
+      div(class="hidden lg:block border-l pl-4", [
+        breadcrumbs(path, module_path, module_index),
+      ])
+    },
+    div(class="flex-1", []),
+    button(
+      class="bg-gray-200/50 border outline-2 text-sm h-8.5 outline-transparent hover:outline-mooncake2 hover:border-transparent transition-all rounded mx-2 py-1 px-2 lg:w-35 text-gray-500 flex items-center gap-2",
+      click=ToggleSearchPanel(true),
+      [
+        img(class="w-5 h-5", src=@config.SEARCH, []),
+        div(class="hidden lg:block text-nowrap", [text("Search")]),
+      ],
+    ),
+    card_mode_toggle(mode=card_mode, click=DocModeChanged(_)),
+  ])
 }
 
 ///|
@@ -323,17 +319,6 @@ pub fn view(model : Model) -> Html[Msg] {
     ) => source_files
     _ => []
   }
-  let sidebar_ele = div(class="w-full h-full flex justify-end", [
-    div(class="pl-6 pr-3 py-3 overflow-y-auto w-full 2xl:w-2/3", [
-      sidebar(
-        model.sidebar_document,
-        source_files,
-        model.sidebar_tab,
-        model.sidebar_collapsed,
-        package_path=model.path,
-      ),
-    ]),
-  ])
   let main = match model.resource {
     Success({ readme_content, kind }) => {
       let meta = match kind {
@@ -342,15 +327,13 @@ pub fn view(model : Model) -> Html[Msg] {
           meta_info(meta, install_copied=model.install_copied)
         Package(_) => nothing()
       }
-      div(class="flex w-full min-h-full justify-begin", [
-        div(class="overflow-y-auto 2xl:w-4/5", [
-          meta,
-          document(
-            readme_content~,
-            package_data=model.package_data,
-            folded=model.collapsed_docs,
-          ),
-        ]),
+      div([
+        meta,
+        document(
+          readme_content~,
+          package_data=model.package_data,
+          folded=model.collapsed_docs,
+        ),
       ])
     }
     Failed => @view.document_not_available(model.path)
@@ -418,7 +401,7 @@ pub fn view(model : Model) -> Html[Msg] {
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
   let sidebar_dialog = div(
-    class="fixed inset-0 justify-center items-center",
+    class="fixed inset-0 justify-center items-center z-100",
     style=["display: " + show_sidebar_dialog],
     [
       div(
@@ -428,7 +411,7 @@ pub fn view(model : Model) -> Html[Msg] {
         [],
       ),
       div(
-        class="bg-white w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
+        class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
         [
           sidebar(
             model.sidebar_document,
@@ -446,28 +429,33 @@ pub fn view(model : Model) -> Html[Msg] {
     click=ToggleSidebarFab,
     [img(class="size-5", src=@config.HAMBURGER_BUTTON, [])],
   )
-  div(
-    class="grid grid-rows-[3em_0_auto] grid-cols-1 lg:grid-rows-[3em_auto] lg:grid-cols-4 h-screen",
-    [
+  div(class="min-h-screen w-full flex-col", [
+    div(
+      class="top-0 z-30 border-b sticky bg-white md:bg-white/60 md:backdrop-blur-md",
+      [div(class="container px-2 lg:px-4", [search_panel, navbar])],
+    ),
+    div(class="flex-1", [
       div(
-        class="bg-[#f7f7f7] col-start-1 row-start-1 hidden lg:block lg:col-start-1 col-span-1 lg:row-start-1 row-span-1",
-        [logo()],
+        class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4",
+        [
+          div(
+            class="overflow-y-auto hidden md:block md:sticky md:top-15 md:min-w-64 md:h-[calc(100vh-3.75em)]",
+            [
+              div(class="overflow-y-scroll w-full", [
+                sidebar(
+                  model.sidebar_document,
+                  source_files,
+                  model.sidebar_tab,
+                  model.sidebar_collapsed,
+                  package_path=model.path,
+                ),
+              ]),
+            ],
+          ),
+          div(class="flex-1", [main, fab, sidebar_dialog]),
+          div(class="md:w-40", []),
+        ],
       ),
-      div(
-        class="col-start-1 row-start-1 lg:col-start-2 col-span-3 lg:row-start-1 row-span-1",
-        [navbar],
-      ),
-      div(
-        class="bg-[#f7f7f7] col-start-1 row-start-2 lg:col-start-1 col-span-1 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
-        [sidebar_ele],
-      ),
-      div(
-        class="col-start-1 row-start-3 lg:col-start-2 lg:col-span-3 lg:row-start-2 lg:row-span-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent",
-        [main],
-      ),
-      search_panel,
-      sidebar_dialog,
-      fab,
-    ],
-  )
+    ]),
+  ])
 }

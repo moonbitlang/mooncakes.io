@@ -40,6 +40,7 @@ pub(all) struct ModuleIndex {
   keywords : Array[String]?
   description : String?
   created_at : String?
+  is_new : Bool
 }
 
 ///|
@@ -176,6 +177,15 @@ extern "js" fn compare_date(date1 : String, date2 : String) -> Int =
   #|}
 
 ///|
+extern "js" fn is_within_one_week(date : String) -> Bool =
+  #|created_at_str => {
+  #|  const created_at = new Date(created_at_str);
+  #|  const now = new Date();
+  #|  const oneWeekAgo = new Date(now.setDate(now.getDate() - 7));
+  #|  return created_at > oneWeekAgo;
+  #|}
+
+///|
 fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
   fn decode_index(json) {
     match json {
@@ -196,6 +206,11 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
         let description = description.map(fn(x) { x.as_string().unwrap() })
         guard path.split("/").collect() is [author, .. name]
         let name = name.iter().map(@string.View::to_string).join("/")
+        // assuming the first version is "0.1.0" or "0.0.1". 
+        // We need the backend to provide more accurate data in the future.
+        let is_new = created_at is Some(date) &&
+          is_within_one_week(date) &&
+          (version.has_prefix("0.1.0") || version.has_prefix("0.0.1"))
         Ok({
           path,
           name,
@@ -204,6 +219,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
           description,
           keywords,
           created_at,
+          is_new,
         })
       }
       _ => Err("Error when parsing metadata.")

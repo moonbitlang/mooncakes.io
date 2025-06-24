@@ -7,6 +7,8 @@ import(
 // Values
 fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
 
+fn[M] badge(Array[@html.Html[M]], class~ : String = ..) -> @html.Html[M]
+
 fn[M] button(String, click? : M) -> @html.Html[M]
 
 fn[M] code_block(String, collapse_namespace~ : Bool) -> @html.Html[M]

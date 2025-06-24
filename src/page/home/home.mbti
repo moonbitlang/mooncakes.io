@@ -32,6 +32,7 @@ pub(all) struct ModuleIndex {
   keywords : Array[String]?
   description : String?
   created_at : String?
+  is_new : Bool
 }
 
 pub enum Msg {

@@ -192,3 +192,77 @@ fn navbar() -> Html[Msg] {
     ),
   ])
 }
+
+///|
+fn banner() -> Html[Msg] {
+  fn button(value, target, color) {
+    a(
+      href=target,
+      class="py-1.5 px-4 lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
+      [text(value)],
+    )
+  }
+
+  div(
+    class="container lg:w-3/5 flex flex-col-reverse lg:flex-row items-center justify-between",
+    [
+      div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
+        div(class="text-slate-700", [
+          h1(class="text-2xl font-semibold lg:text-4xl", [
+            text("The Package Registry"),
+          ]),
+          h1(class="text-3xl font-semibold lg:text-4xl lg:mt-2", [
+            text("for"),
+            span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
+            text("community"),
+          ]),
+          h2(class="hidden lg:block text-xl mt-4 text-zinc-500 gap-1", [
+            text("Browse, search and share package and documentation"),
+          ]),
+        ]),
+        div(class="flex mt-4 gap-4 justify-center lg:justify-start", [
+          button(
+            "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+            "bg-yellow-600 text-white",
+          ),
+          button(
+            "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
+          ),
+        ]),
+      ]),
+      img(
+        class="hidden lg:block w-[35%] lg:w-[300px] lg:h-[300px]",
+        src="mooncake-pic.png",
+        [],
+      ),
+    ],
+  )
+}
+
+///|
+pub fn view(model : Model) -> Html[Msg] {
+  let module_list = match model.indices {
+    Loading => @view.loading()
+    Failed => @view.load_failed("module indices")
+    Success(indices) =>
+      if model.filter == "" {
+        div([
+          recently_updated(indices.recently_updated),
+          all_modules(indices.all_modules),
+        ])
+      } else {
+        search_result(model.filtered_modules)
+      }
+  }
+  let banner = if model.filter == "" { banner() } else { nothing() }
+  div(
+    class="flex flex-col min-h-screen bg-gradient-to-b from-white to-transparent to-[35em] bg-zinc-50",
+    [
+      navbar(),
+      banner,
+      hr(class="lg:hidden mx-4 mt-6 border-gray-200"),
+      module_list,
+      div(class="mt-auto", [@view.footer()]),
+    ],
+  )
+}

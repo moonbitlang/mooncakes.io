@@ -52,8 +52,15 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
           text(mod.description.or("")),
         ]),
       ]),
-      p(class="text-sm w-full text-right pt-1", [
-        text(mod.created_at.map(get_relative_time).or("")),
+      div(class="flex items-end", [
+        if mod.is_new {
+          @view.badge(class="bg-gray-700 text-white", [text("NEW")])
+        } else {
+          nothing()
+        },
+        p(class="text-sm w-full text-right pt-1", [
+          text(mod.created_at.map(get_relative_time).or("")),
+        ]),
       ]),
     ],
   )

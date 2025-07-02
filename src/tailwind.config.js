@@ -37,6 +37,9 @@ module.exports = {
       fontSize: {
         tiny: "0.7rem",
       },
+      spacing: {
+        header: "4rem", /* 64px - the navbar height */
+      },
       colors: {
         moonbit: "#cf4f89",
         mooncake: "#fbfaf5",

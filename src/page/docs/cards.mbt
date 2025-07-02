@@ -207,7 +207,7 @@ fn document_item(
   div(class="my-2 group \{top_rule}", [
     title,
     div(
-      class="px-4 py-2 bg-gray-100 rounded-lg relative w-full \{header_style}",
+      class="px-4 py-2 bg-gray-100 rounded-lg relative w-full scroll-mt-16 \{header_style}",
       id~,
       [signature, buttons],
     ),

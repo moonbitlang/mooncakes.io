@@ -121,8 +121,14 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
         "description"? : description,
         "keywords"? : keywords,
         "created_at"? : created_at,
+        "is_first_version"? : is_first_version,
         ..
       } : Json) => {
+        // TODO: Option::map should be an error-polymorphic function
+        let is_first_version = (is_first_version.or(Json::boolean(false))
+        |> @json.from_json) catch {
+          JsonDecodeError(e) => return Err(e.to_string())
+        }
         let keywords = match keywords {
           Some(Array(keywords)) =>
             Some(keywords.map(fn(x) { x.as_string().unwrap() }))
@@ -136,7 +142,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
         // We need the backend to provide more accurate data in the future.
         let is_new = created_at is Some(date) &&
           is_within_one_week(date) &&
-          (version.has_prefix("0.1.0") || version.has_prefix("0.0.1"))
+          is_first_version
         Ok({
           path,
           name,

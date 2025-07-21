@@ -17,15 +17,7 @@ module.exports = {
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
       ],
-      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-      mono: [
-        'monospace',
-        'Monaco',
-        'Consolas',
-        'Menlo',
-        '"Liberation Mono"',
-        '"Courier New"'
-      ],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif']
     },
     extend: {
       animation: {

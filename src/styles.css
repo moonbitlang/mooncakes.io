@@ -16,3 +16,7 @@
   max-width: 1400px;
   margin-inline: auto;
 }
+
+@theme {
+  --font-mono: Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace
+}

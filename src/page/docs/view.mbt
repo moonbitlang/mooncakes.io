@@ -9,7 +9,7 @@ pub fn view(model : Model) -> Html[Msg] {
       }
       navbar(
         model.path,
-        module_path.or(""),
+        module_path.unwrap_or(""),
         module_index,
         model.collapsed_docs.card_mode,
       )

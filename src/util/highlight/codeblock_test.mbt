@@ -18,9 +18,9 @@ test "parse_signature1" {
   let spans = @highlight.parse(signature)
   inspect(
     spans,
-    content=
+    content=(
       #|@list.of([Keyword("fn"), Space(1), LIdent("parse_signature"), Symbol("("), LIdent("signature"), Space(1), Symbol(":"), Space(1), UIdent("String"), Symbol(")"), Space(1), Symbol("->"), Space(1), UIdent("Array"), Symbol("["), UIdent("CodeSpan"), Symbol("]")])
-    ,
+    ),
   )
 }
 
@@ -30,9 +30,9 @@ test "parse_signature with link" {
   let spans = @highlight.parse(signature)
   inspect(
     spans,
-    content=
+    content=(
       #|@list.of([Keyword("fn"), Space(1), Link(href="list#T", [UIdent("T")]), Symbol("::"), LIdent("concat"), Symbol("["), UIdent("A"), Symbol("]("), LIdent("self"), Space(1), Symbol(":"), Space(1), Link(href="list#T", [UIdent("Tasdfasdf")]), Symbol("["), UIdent("A"), Symbol("],"), Space(1), LIdent("other"), Space(1), Symbol(":"), Space(1), Link(href="list#T", [UIdent("T")]), Symbol("["), UIdent("A"), Symbol("])"), Space(1), Symbol("->"), Space(1), Link(href="list#T", [UIdent("T")]), Symbol("["), UIdent("A"), Symbol("]")])
-    ,
+    ),
   )
 }
 
@@ -44,25 +44,27 @@ fn run_test(source : String) -> String {
 
 ///|
 test "complex source" {
-  let spans = #|let cache : LruCache[String, Int] = LruCache::new(2)
-    #|cache.put("key1", 100)
-    #|cache.put("key2", 200)
-    #|
-    #|// Accessing "key1" makes it the most recently used
-    #|let _ = cache.get("key1")
-    #|
-    #|// Adding a new item will now evict "key2" instead of "key1"
-    #|cache.put("key3", 300)
-    #|let str = #| asdfadfadsf
-    #|          $| dafasdf \{as} asdfadfdf
-    #|
-    #|let val1 = cache.get("key1") // Returns Some(100)
-    #|let val2 = cache.get("key2") // Returns None, as "key2" was evicted
-    #|let val3 = cache.get("key3") // Returns Some(300)  
+  let spans = (
+      #|let cache : LruCache[String, Int] = LruCache::new(2)
+      #|cache.put("key1", 100)
+      #|cache.put("key2", 200)
+      #|
+      #|// Accessing "key1" makes it the most recently used
+      #|let _ = cache.get("key1")
+      #|
+      #|// Adding a new item will now evict "key2" instead of "key1"
+      #|cache.put("key3", 300)
+      #|let str = #| asdfadfadsf
+      #|          $| dafasdf \{as} asdfadfdf
+      #|
+      #|let val1 = cache.get("key1") // Returns Some(100)
+      #|let val2 = cache.get("key2") // Returns None, as "key2" was evicted
+      #|let val3 = cache.get("key3") // Returns Some(300)  
+    )
     |> run_test
   inspect(
     spans,
-    content=
+    content=(
       #|[
       #|  "Keyword("let")",
       #|  "Space(1)",
@@ -194,7 +196,7 @@ test "complex source" {
       #|  "Comment("// Returns Some(300)  ")",
       #|  "Newline"
       #|]
-    ,
+    ),
   )
 }
 
@@ -204,7 +206,7 @@ test "lru_cache" {
     #| fn <a href="ShellWen/lru_cache#LruCache">LruCache</a>::new[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](capacity : UInt) -> <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V]
   inspect(
     run_test(code1),
-    content=
+    content=(
       #|[
       #|  "Space(1)",
       #|  "Keyword("fn")",
@@ -243,13 +245,13 @@ test "lru_cache" {
       #|  "UIdent("V")",
       #|  "Symbol("]")"
       #|]
-    ,
+    ),
   )
   let code2 =
     #| fn <a href="ShellWen/lru_cache#LruCache">LruCache</a>::put[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](self : <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V], key : K, value : V) -> Unit
   inspect(
     run_test(code2),
-    content=
+    content=(
       #|[
       #|  "Space(1)",
       #|  "Keyword("fn")",
@@ -301,13 +303,13 @@ test "lru_cache" {
       #|  "Space(1)",
       #|  "UIdent("Unit")"
       #|]
-    ,
+    ),
   )
   let code3 =
     #| fn new_lru_cache[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](capacity : UInt) -> <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V]
   inspect(
     run_test(code3),
-    content=
+    content=(
       #|[
       #|  "Space(1)",
       #|  "Keyword("fn")",
@@ -344,13 +346,13 @@ test "lru_cache" {
       #|  "UIdent("V")",
       #|  "Symbol("]")"
       #|]
-    ,
+    ),
   )
   let code4 =
     #| fn <a href="ShellWen/lru_cache#LruCache">LruCache</a>::capacity[K : <a href="moonbitlang/core/builtin#Eq">Eq</a> + <a href="moonbitlang/core/builtin#Hash">Hash</a>, V](self : <a href="ShellWen/lru_cache#LruCache">LruCache</a>[K, V]) -> UInt
   inspect(
     run_test(code4),
-    content=
+    content=(
       #|[
       #|  "Space(1)",
       #|  "Keyword("fn")",
@@ -388,7 +390,7 @@ test "lru_cache" {
       #|  "Space(1)",
       #|  "UIdent("UInt")"
       #|]
-    ,
+    ),
   )
 }
 
@@ -400,7 +402,7 @@ test "qualified" {
     #| let c = '\uFFFF'
   inspect(
     run_test(code),
-    content=
+    content=(
       #|[
       #|  "Space(1)",
       #|  "Keyword("let")",
@@ -433,6 +435,6 @@ test "qualified" {
       #|  "Space(1)",
       #|  "CharLit("'\\uFFFF'")"
       #|]
-    ,
+    ),
   )
 }

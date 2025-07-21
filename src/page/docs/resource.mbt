@@ -29,7 +29,7 @@ priv struct MetaInfo {
   description : String?
   repository : String?
   deps : Array[(String, String)]
-} derive(Show)
+}
 
 ///|
 priv struct ModuleResources {

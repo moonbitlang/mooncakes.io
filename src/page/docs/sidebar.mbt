@@ -99,7 +99,7 @@ priv enum ItemTarget {
   Package(String)
   Symbol(String)
   Section(String)
-} derive(Compare, Eq, Show)
+} derive(Compare, Eq)
 
 ///|
 fn PkgIndex::to_document_items(

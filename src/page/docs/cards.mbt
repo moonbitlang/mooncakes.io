@@ -16,7 +16,7 @@
 priv struct FoldedState {
   set : Set[String]
   card_mode : CardMode
-} derive(Show)
+}
 
 ///|
 fn FoldedState::new() -> FoldedState {
@@ -222,7 +222,9 @@ fn value_doc(
   type_id? : String
 ) -> Html[Msg] {
   let { name: _, docstring, signature, loc } = doc
-  let id = type_id.map(fn(x) { "\{x}::\{doc.get_id()}" }).or(doc.get_id())
+  let id = type_id
+    .map(fn(x) { "\{x}::\{doc.get_id()}" })
+    .unwrap_or(doc.get_id())
   let signature = signature_view(signature)
   let content = div(class="pl-5", [
     @view.markdown(docstring, small_heading=true),

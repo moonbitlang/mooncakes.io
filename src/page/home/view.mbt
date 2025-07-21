@@ -49,7 +49,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
       ),
       div(class="overflow-hidden flex-1 py1", [
         p(class="line-clamp-1 lg:line-clamp-2 py-1 text-gray-500 text-sm", [
-          text(mod.description.or("")),
+          text(mod.description.unwrap_or("")),
         ]),
       ]),
       div(class="flex items-end", [
@@ -59,7 +59,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
           nothing()
         },
         p(class="text-sm w-full text-right pt-1", [
-          text(mod.created_at.map(get_relative_time).or("")),
+          text(mod.created_at.map(get_relative_time).unwrap_or("")),
         ]),
       ]),
     ],

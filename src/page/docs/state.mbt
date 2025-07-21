@@ -63,7 +63,7 @@ pub fn load(path : String, fragment : String?) -> (Cmd[Msg], Model) {
     ]),
     {
       module_index: Loading,
-      fragment: fragment.or(""),
+      fragment: fragment.unwrap_or(""),
       path,
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),

@@ -309,7 +309,7 @@ pub fn[M] markdown(
   }
   try folder.fold_doc([], doc) catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
-  } else {
+  } noraise {
     htmls => div(class="w-full text-base text-[#3c3c43]", htmls)
   }
 }

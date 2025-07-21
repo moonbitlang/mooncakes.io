@@ -125,7 +125,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
         ..
       } : Json) => {
         // TODO: Option::map should be an error-polymorphic function
-        let is_first_version = (is_first_version.or(Json::boolean(false))
+        let is_first_version = (is_first_version.unwrap_or(Json::boolean(false))
         |> @json.from_json) catch {
           JsonDecodeError(e) => return Err(e.to_string())
         }

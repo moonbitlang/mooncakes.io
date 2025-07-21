@@ -33,6 +33,23 @@ priv struct PkgIndex {
 priv type ModuleIndex IndexNode derive(Show)
 
 ///|
+test "dummy test to suppress unused trait implementation warning" {
+  let moduleIndex : ModuleIndex = {
+    name: "root",
+    pkg: Some({
+      path: "root",
+      traits: [],
+      types: [],
+      typealias_: [],
+      values: [],
+      misc: [],
+    }),
+    childs: @immut/sorted_map.new(),
+  }
+  println(moduleIndex)
+}
+
+///|
 fn IndexNode::iter(self : IndexNode) -> Iter[IndexNode] {
   Iter::new(fn(yield_) {
     match self.pkg {
@@ -309,7 +326,7 @@ fn decode_index_node(json : Json) -> IndexNode raise Error {
 fn decode_module_index(json : Json) -> Result[ModuleIndex, String] {
   try decode_index_node(json) catch {
     err => Err(err.to_string())
-  } else {
+  } noraise {
     res => Ok(res)
   }
 }

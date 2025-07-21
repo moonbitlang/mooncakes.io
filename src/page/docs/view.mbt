@@ -148,7 +148,7 @@ pub fn view(model : Model) -> Html[Msg] {
           div(
             class="overflow-y-auto hidden md:block md:sticky md:top-15 md:min-w-64 md:h-[calc(100vh-3.75em)]",
             [
-              div(class="overflow-y-scroll w-full", [
+              div(class="w-full", [
                 sidebar(
                   model.sidebar_document,
                   source_files,

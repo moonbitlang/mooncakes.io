@@ -6,7 +6,7 @@
     "rabbit-tea-vite": "^1.0.0"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build"
   },
   "type": "module",

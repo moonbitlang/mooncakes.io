@@ -2,7 +2,7 @@
 fn breadcrumbs(
   path : String,
   module_path : String,
-  module_index : ModuleIndex
+  module_index : ModuleIndex,
 ) -> Html[Msg] {
   let module_path = module_path.trim("/").to_string()
   let path = path.trim("/")

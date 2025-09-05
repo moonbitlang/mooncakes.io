@@ -16,7 +16,7 @@
 fn meta_info_item_view(
   title~ : String,
   elem : Html[Msg],
-  icon? : String
+  icon? : String,
 ) -> Html[Msg] {
   let title_content = match icon {
     Some(icon_src) =>

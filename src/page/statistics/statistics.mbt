@@ -104,7 +104,9 @@ fn item(stat : StatisticsDetail, expanded : Set[String]) -> Html[Msg] {
     p([text("Line changes: \{line_changes}")]),
     p([text("Total packages: \{stat.package_count}")]),
     @view.collapse(
-      header=p(class="pl-8 py-1",[text("Added packages (\{stat.added_packages.length()})")]),
+      header=p(class="pl-8 py-1", [
+        text("Added packages (\{stat.added_packages.length()})"),
+      ]),
       body=ul(
         class="pl-8",
         stat.added_packages.map(x => li(class="list-disc", [text(x)])),
@@ -114,7 +116,9 @@ fn item(stat : StatisticsDetail, expanded : Set[String]) -> Html[Msg] {
       caret_config=@view.CaretConfig::LeftCenter,
     ),
     @view.collapse(
-      header=p(class="pl-8 py-1",[text("Deleted packages (\{stat.deleted_pacakges.length()})")]),
+      header=p(class="pl-8 py-1", [
+        text("Deleted packages (\{stat.deleted_pacakges.length()})"),
+      ]),
       body=ul(
         class="pl-8",
         stat.deleted_pacakges.map(x => li(class="list-disc", [text(x)])),

@@ -58,7 +58,7 @@ fn[M] image_render(img : @cmark.Inline) -> @html.Html[M] {
 ///|
 fn[M] inline2html(
   x : @cmark.Inline,
-  link_defs~ : Map[String, String]
+  link_defs~ : Map[String, String],
 ) -> Array[@html.Html[M]] {
   match x {
     @cmark.Inline::Autolink({ v: { link: { v, .. }, .. }, .. }) =>
@@ -94,7 +94,7 @@ fn[M] inline2html(
 fn[M] block2html(
   x : @cmark.Block,
   small_heading~ : Bool,
-  link_defs~ : Map[String, String]
+  link_defs~ : Map[String, String],
 ) -> @html.Html[M] {
   match x {
     @cmark.Block::BlankLine(_) => p([])
@@ -242,7 +242,7 @@ fn[M] block2html(
 ///|
 fn[M] unwrap_inline_link(
   x : @cmark.InlineLink,
-  link_defs~ : Map[String, String]
+  link_defs~ : Map[String, String],
 ) -> Array[@html.Html[M]] {
   match x {
     ({
@@ -284,7 +284,7 @@ fn[M] unwrap_inline_link(
 ///|
 pub fn[M] markdown(
   markdown : String,
-  small_heading~ : Bool = false
+  small_heading? : Bool = false,
 ) -> @html.Html[M] {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
   let link_defs = {}

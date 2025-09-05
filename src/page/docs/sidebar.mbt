@@ -45,7 +45,8 @@ fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
   ])
 }
 
-///| Compare two strings in dictionary order
+///|
+/// Compare two strings in dictionary order
 fn compare_strings(a : String, b : String) -> Int {
   let len_a = a.length()
   let len_b = b.length()
@@ -62,7 +63,7 @@ fn compare_strings(a : String, b : String) -> Int {
 
 ///|
 fn IndexNode::to_document_items(
-  self : IndexNode
+  self : IndexNode,
 ) -> Array[@tree.Tree[ItemTarget]] {
   fn collect_packages(node : IndexNode) {
     match node.pkg {
@@ -103,7 +104,7 @@ priv enum ItemTarget {
 
 ///|
 fn PkgIndex::to_document_items(
-  self : PkgIndex
+  self : PkgIndex,
 ) -> Array[@tree.Tree[ItemTarget]] {
   let { traits, types, typealias_, values, misc, path: _ } = self
   let values = values.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) }) +
@@ -157,7 +158,7 @@ fn sidebar(
   source_files : Array[String],
   showing : String,
   package_path~ : String,
-  sidebar_state : Set[ItemTarget]
+  sidebar_state : Set[ItemTarget],
 ) -> Html[Msg] {
   @view.accordion(
     class="text-gray-700 flex flex-col",

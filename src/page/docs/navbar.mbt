@@ -3,7 +3,7 @@ fn navbar(
   path : String,
   module_path : String,
   module_index : ModuleIndex,
-  card_mode : CardMode
+  card_mode : CardMode,
 ) -> Html[Msg] {
   div(class="select-none flex items-center gap-4 py-2.5", [
     logo(),

@@ -2,11 +2,11 @@
 package "moonbitlang/mooncakes/util/highlight"
 
 import(
-  "moonbitlang/core/immut/list"
+  "moonbitlang/core/list"
 )
 
 // Values
-fn parse(String) -> @list.T[CodeSpan]
+fn parse(String) -> @list.List[CodeSpan]
 
 // Errors
 

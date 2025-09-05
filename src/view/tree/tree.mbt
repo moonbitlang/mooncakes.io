@@ -16,7 +16,7 @@
 typealias @html.Html
 
 ///|
-typealias @immut/sorted_set.T as Set
+typealias @immut/sorted_set.SortedSet as Set
 
 ///|
 fnalias @html.(div, text, ul)

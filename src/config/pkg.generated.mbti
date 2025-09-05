@@ -1,3 +1,4 @@
+// Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/config"
 
 // Values
@@ -58,6 +59,8 @@ let tag : String
 let terminal : String
 
 let user : String
+
+// Errors
 
 // Types and methods
 

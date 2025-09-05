@@ -1,4 +1,5 @@
-package "moonbitlang/mooncakes/page/docs"
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/page/statistics"
 
 import(
   "Yoorkin/rabbit-tea/cmd"
@@ -6,11 +7,13 @@ import(
 )
 
 // Values
-fn load(String, String?) -> (@cmd.Cmd[Msg], Model)
+fn load() -> (@cmd.Cmd[Msg], Model)
 
 fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
 fn view(Model) -> @html.Html[Msg]
+
+// Errors
 
 // Types and methods
 type Model

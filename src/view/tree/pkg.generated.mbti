@@ -1,3 +1,4 @@
+// Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/view/tree"
 
 import(
@@ -6,7 +7,9 @@ import(
 )
 
 // Values
-fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.T[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html[M]
+fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html[M]
+
+// Errors
 
 // Types and methods
 pub(all) enum Tree[Id] {

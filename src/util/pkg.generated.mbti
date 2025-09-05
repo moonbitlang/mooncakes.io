@@ -1,6 +1,9 @@
+// Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/util"
 
 // Values
+
+// Errors
 
 // Types and methods
 pub(all) enum Status[T] {

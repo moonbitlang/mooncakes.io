@@ -30,7 +30,7 @@ priv struct PkgIndex {
 } derive(Show)
 
 ///|
-priv type ModuleIndex IndexNode derive(Show)
+priv struct ModuleIndex(IndexNode) derive(Show)
 
 ///|
 test "dummy test to suppress unused trait implementation warning" {
@@ -269,10 +269,11 @@ fn decode_impl_index(json : Json) -> ImplIndex raise Error {
   }
 }
 
-///| map with error. We need error polymorphism!
+///|
+/// map with error. We need error polymorphism!
 fn[A, B, E : Error] map_with_error(
   arr : Array[A],
-  f : (A) -> B raise E
+  f : (A) -> B raise E,
 ) -> Array[B] raise E {
   let xs = []
   for x in arr {

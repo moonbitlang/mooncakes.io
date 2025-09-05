@@ -11,6 +11,7 @@
     "Yoorkin/rabbit-tea/cmd",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/page/home",
-    "moonbitlang/mooncakes/page/docs"
+    "moonbitlang/mooncakes/page/docs",
+    "moonbitlang/mooncakes/page/statistics"
   ]
 }

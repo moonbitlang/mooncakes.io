@@ -13,27 +13,6 @@
 // limitations under the License.
 
 ///|
-extern "js" fn get_relative_time(date : String) -> String =
-  #|function getRelativeTime(dateString) {
-  #|  const date = new Date(dateString);
-  #|  const now = new Date();
-  #|  const diff = now - date;
-  #|  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-  #|  const seconds = Math.floor(diff / 1000);
-  #|  const minutes = Math.floor(seconds / 60);
-  #|  const hours = Math.floor(minutes / 60);
-  #|  const days = Math.floor(hours / 24);
-  #|  const months = Math.floor(days / 30);
-  #|  const years = Math.floor(days / 365);
-  #|  if (years > 0) return rtf.format(-years, "year");
-  #|  if (months > 0) return rtf.format(-months, "month");
-  #|  if (days > 0) return rtf.format(-days, "day");
-  #|  if (hours > 0) return rtf.format(-hours, "hour");
-  #|  if (minutes > 0) return rtf.format(-minutes, "minute");
-  #|  return rtf.format(-seconds, "second");
-  #|}
-
-///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   a(
     class="h-24 lg:h-30 flex-nowrap bg-white text-gray-500 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
@@ -194,17 +173,37 @@ fn navbar() -> Html[Msg] {
 }
 
 ///|
-fn banner() -> Html[Msg] {
+fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
   fn button(value, target, color) {
     a(
       href=target,
-      class="py-1.5 px-4 lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
+      class="lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
       [text(value)],
     )
   }
 
+  fn stat_card(label, value : Int, child : Html[Msg]?) {
+    let bottom = match child {
+      None => "pb-6"
+      Some(_) => "pb-2"
+    }
+    div(
+      class="border rounded-xl pl-6 pr-2 pt-6 \{bottom} flex-col gap-2 items-end grow-1 border-b-gray-300/50 bg-white/50 backdrop-blur",
+      [
+        p(class="text-2xl lg:text-3xl font-extralight", [
+          text(value.to_string()),
+          text("+"),
+        ]),
+        div(class="flex items-center justify-between", [
+          p(class="text-base text-gray-700 font-light", [text(label)]),
+        ]),
+        div(class="w-full flex flex-col-reverse", [child.unwrap_or(nothing())]),
+      ],
+    )
+  }
+
   div(
-    class="container lg:w-3/5 flex flex-col-reverse lg:flex-row items-center justify-between",
+    class="container lg:w-3/5 flex flex-col lg:flex-row items-center justify-between py-8",
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
         div(class="text-slate-700", [
@@ -220,7 +219,7 @@ fn banner() -> Html[Msg] {
             text("Browse, search and share package and documentation"),
           ]),
         ]),
-        div(class="flex mt-4 gap-4 justify-center lg:justify-start", [
+        div(class="flex mt-8 gap-4 justify-center lg:justify-start", [
           button(
             "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
             "bg-yellow-600 text-white",
@@ -230,10 +229,29 @@ fn banner() -> Html[Msg] {
           ),
         ]),
       ]),
-      img(
-        class="hidden lg:block w-[35%] lg:w-[300px] lg:h-[300px]",
-        src="mooncake-pic.png",
-        [],
+      div(
+        class="flex relative flex-row-reverse w-2/5 bg-contain bg-no-repeat bg-center",
+        [
+          img(
+            class="absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
+            src="mooncake-pic-small.png",
+            [],
+          ),
+          div(class="text-xl flex flex-col gap-2 z-10 w-3/5 select-none", [
+            stat_card("Lines of code", total_lines, None),
+            stat_card(
+              "Packages",
+              total_packages,
+              Some(
+                a(
+                  class="text-sm text-right pr-2 hover:underline text-gray-600",
+                  href="/statistics",
+                  [text("More detail")],
+                ),
+              ),
+            ),
+          ]),
+        ],
       ),
     ],
   )
@@ -254,7 +272,14 @@ pub fn view(model : Model) -> Html[Msg] {
         search_result(model.filtered_modules)
       }
   }
-  let banner = if model.filter == "" { banner() } else { nothing() }
+  let banner = if model.filter == "" {
+    banner(
+      total_lines=model.showing_lines,
+      total_packages=model.showing_packages,
+    )
+  } else {
+    nothing()
+  }
   div(
     class="flex flex-col min-h-screen bg-gradient-to-b from-white to-transparent to-[35em] bg-zinc-50",
     [

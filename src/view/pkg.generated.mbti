@@ -1,3 +1,4 @@
+// Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/view"
 
 import(
@@ -7,13 +8,13 @@ import(
 // Values
 fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
 
-fn[M] badge(Array[@html.Html[M]], class~ : String = ..) -> @html.Html[M]
+fn[M] badge(Array[@html.Html[M]], class? : String) -> @html.Html[M]
 
 fn[M] button(String, click? : M) -> @html.Html[M]
 
 fn[M] code_block(String, collapse_namespace~ : Bool) -> @html.Html[M]
 
-fn[M] collapse(header~ : @html.Html[M], body~ : @html.Html[M], collapsed~ : Bool, toggle~ : M, caret_config~ : CaretConfig = ..) -> @html.Html[M]
+fn[M] collapse(header~ : @html.Html[M], body~ : @html.Html[M], collapsed~ : Bool, toggle~ : M, caret_config? : CaretConfig) -> @html.Html[M]
 
 fn[M] document_not_available(String) -> @html.Html[M]
 
@@ -25,11 +26,13 @@ fn[M] load_failed(String) -> @html.Html[M]
 
 fn[M] loading() -> @html.Html[M]
 
-fn[M] markdown(String, small_heading~ : Bool = ..) -> @html.Html[M]
+fn[M] markdown(String, small_heading? : Bool) -> @html.Html[M]
 
 fn[M] navbar() -> @html.Html[M]
 
 fn[M] not_found() -> @html.Html[M]
+
+// Errors
 
 // Types and methods
 pub(all) enum CaretConfig {

@@ -1,6 +1,9 @@
+// Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/main"
 
 // Values
+
+// Errors
 
 // Types and methods
 type Model

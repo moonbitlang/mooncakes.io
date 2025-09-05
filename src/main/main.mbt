@@ -16,6 +16,7 @@
 enum Msg {
   GotHomeMsg(@home.Msg)
   GotDocsMsg(@docs.Msg)
+  GotStatisticsMsg(@statistics.Msg)
   LinkClicked(@url.UrlRequest)
   UrlChanged(@url.Url)
 }
@@ -24,6 +25,7 @@ enum Msg {
 enum Model {
   Home(@home.Model)
   Docs(@docs.Model)
+  Statistics(@statistics.Model)
   NotFound
   Redirect
 }
@@ -32,7 +34,7 @@ enum Model {
 fn[SubModel, SubMsg] update_with(
   pair : (Cmd[SubMsg], SubModel),
   to_model : (SubModel) -> Model,
-  to_msg : (SubMsg) -> Msg
+  to_msg : (SubMsg) -> Msg,
 ) -> (Cmd[Msg], Model) {
   let (cmd, model) = pair
   (cmd.map(to_msg), to_model(model))
@@ -45,6 +47,9 @@ fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       @home.update(msg, model) |> update_with(Home(_), GotHomeMsg(_))
     (GotDocsMsg(msg), Docs(model)) =>
       @docs.update(msg, model) |> update_with(Docs(_), GotDocsMsg(_))
+    (GotStatisticsMsg(msg), Statistics(model)) =>
+      @statistics.update(msg, model)
+      |> update_with(Statistics(_), GotStatisticsMsg(_))
     (LinkClicked(request), _) =>
       match request {
         Internal(url) => (@nav.push_url(url.to_string()), model)
@@ -60,6 +65,8 @@ fn route(url : @url.Url) -> (Cmd[Msg], Model) {
   let paths = url.path.split("/").collect()
   match paths {
     ["/"] | [""] | [] => @home.load() |> update_with(Home(_), GotHomeMsg(_))
+    ["statistics", ..] =>
+      @statistics.load() |> update_with(Statistics(_), GotStatisticsMsg(_))
     ["assets", ..] => (@nav.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
       module_path.iter().map(@string.View::to_string).join("/")
@@ -74,6 +81,7 @@ fn view(model : Model) -> Html[Msg] {
   match model {
     Home(model) => @home.view(model).map(GotHomeMsg(_))
     Docs(model) => @docs.view(model).map(GotDocsMsg(_))
+    Statistics(model) => @statistics.view(model).map(GotStatisticsMsg(_))
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }

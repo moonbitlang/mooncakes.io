@@ -15,6 +15,13 @@
 ///|
 pub enum Msg {
   GotModuleIndices(Result[Indices, String])
+  GotCount(Result[PackageCount, String])
+  IncreaseAnimation(
+    PackageCount,
+    lines_inc_step~ : Int,
+    packages_inc_step~ : Int,
+    repeat_times~ : Int
+  )
   FilterChanged(String)
 }
 
@@ -23,6 +30,14 @@ pub struct Model {
   indices : Status[Indices]
   filter : String
   filtered_modules : Array[ModuleIndex]
+  showing_lines : Int
+  showing_packages : Int
+}
+
+///|
+struct PackageCount {
+  total_packages : Int
+  total_lines : Int
 }
 
 ///|
@@ -46,11 +61,23 @@ pub(all) struct ModuleIndex {
 ///|
 pub fn load() -> (Cmd[Msg], Model) {
   (
-    @http.get(
-      "/assets/modules.json",
-      expect=Json(GotModuleIndices(_), decode_module_indices),
-    ),
-    { indices: Loading, filter: "", filtered_modules: [] },
+    @cmd.batch([
+      @http.get(
+        "/assets/modules.json",
+        expect=Json(GotModuleIndices(_), decode_module_indices),
+      ),
+      @http.get(
+        "/assets/count.json",
+        expect=Json(GotCount(_), decode_statistics),
+      ),
+    ]),
+    {
+      indices: Loading,
+      filter: "",
+      filtered_modules: [],
+      showing_lines: 5000000,
+      showing_packages: 2100,
+    },
   )
 }
 
@@ -65,6 +92,57 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
           Err(_) => { ..model, indices: Failed }
         },
       )
+    GotCount(result) =>
+      match result {
+        Ok(stat) => {
+          let repeat_times = 50
+          let lines_inc_step = stat.total_lines / repeat_times
+          let packages_inc_step = stat.total_packages / repeat_times
+          (
+            @cmd.task(
+              IncreaseAnimation(
+                stat,
+                lines_inc_step~,
+                packages_inc_step~,
+                repeat_times~,
+              ),
+            ),
+            { ..model, showing_lines: 0, showing_packages: 0 },
+          )
+        }
+        Err(msg) => {
+          println(msg)
+          (none(), model)
+        }
+      }
+    IncreaseAnimation(stat, lines_inc_step~, packages_inc_step~, repeat_times~) =>
+      if repeat_times == 0 {
+        (
+          none(),
+          {
+            ..model,
+            showing_lines: stat.total_lines,
+            showing_packages: stat.total_packages,
+          },
+        )
+      } else {
+        (
+          delay(
+            IncreaseAnimation(
+              stat,
+              lines_inc_step~,
+              packages_inc_step~,
+              repeat_times=repeat_times - 1,
+            ),
+            10,
+          ),
+          {
+            ..model,
+            showing_lines: model.showing_lines + lines_inc_step,
+            showing_packages: model.showing_packages + packages_inc_step,
+          },
+        )
+      }
     FilterChanged(filter) => {
       let filtered_modules = match model.indices {
         Success(indices) => filter_indices(filter, indices)
@@ -110,6 +188,22 @@ extern "js" fn is_within_one_week(date : String) -> Bool =
   #|  const oneWeekAgo = new Date(now.setDate(now.getDate() - 7));
   #|  return created_at > oneWeekAgo;
   #|}
+
+///|
+fn decode_statistics(json : Json) -> Result[PackageCount, String] {
+  match json {
+    {
+      "totalPackages": Number(total_packages, ..),
+      "totalLines": Number(total_lines, ..),
+      ..
+    } =>
+      Ok({
+        total_lines: total_lines.to_int(),
+        total_packages: total_packages.to_int(),
+      })
+    _ => Err("failed to parse json: \{json}")
+  }
+}
 
 ///|
 fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
@@ -183,7 +277,7 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
   indices.sort_by(fn(a, b) { a.name.compare(b.name) })
   let all_modules = {}
   for index in indices {
-    let first_letter = to_upper(index.name.char_at(0))
+    let first_letter = to_upper(index.name.get_char(0).unwrap())
     match all_modules.get(first_letter) {
       None => all_modules[first_letter] = [index]
       Some(indices) => indices.push(index)

@@ -41,7 +41,7 @@ pub fn[M, Id : Compare] view(
   click~ : (Id) -> M,
   state~ : Set[Id],
   indicator~ : Id,
-  items : Array[Tree[Id]]
+  items : Array[Tree[Id]],
 ) -> Html[M] {
   fn aux(x) {
     match x {

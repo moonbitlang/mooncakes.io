@@ -97,7 +97,7 @@ fn load_search_entries(indices : ModuleIndex) -> () -> Array[SearchEntry] {
 ///|
 fn search(
   entries : Lazy[Array[SearchEntry]],
-  filter : String
+  filter : String,
 ) -> Array[SearchResult] {
   if filter.is_empty() {
     return []

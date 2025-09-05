@@ -146,7 +146,7 @@ fn decode_package_resources(json : Json) -> PackageResources raise Error {
 
 ///|
 fn decode_root_package_resources(
-  json : Json
+  json : Json,
 ) -> RootPackageResources raise Error {
   match json {
     {

@@ -17,7 +17,7 @@ pub fn[M] accordion(
   class? : String,
   click? : (String) -> M,
   showing : String,
-  items : Array[(String, Html[M])]
+  items : Array[(String, Html[M])],
 ) -> Html[M] {
   ul(
     class?,

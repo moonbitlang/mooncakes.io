@@ -90,7 +90,7 @@ fn decode_loc(json : Json) -> Loc raise Error {
   match json {
     {
       "path": String(path),
-      "file": String(file), 
+      "file": String(file),
       "line": Number(line, ..),
       "column": Number(column, ..),
       ..

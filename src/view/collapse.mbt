@@ -24,7 +24,7 @@ pub fn[M] collapse(
   body~ : Html[M],
   collapsed~ : Bool,
   toggle~ : M,
-  caret_config~ : CaretConfig = LeftTop
+  caret_config? : CaretConfig = LeftTop,
 ) -> Html[M] {
   let (body, icon) = if collapsed {
     (nothing(), @config.SECTION_CLOSE)

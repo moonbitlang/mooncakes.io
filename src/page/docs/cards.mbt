@@ -161,8 +161,8 @@ fn document_item(
   content : Html[Msg],
   collapsed~ : FoldedState,
   id~ : String,
-  tight~ : Bool = false,
-  loc? : Loc
+  tight? : Bool = false,
+  loc? : Loc,
 ) -> Html[Msg] {
   let (content_style, icon) = if collapsed.contains(id) {
     ("hidden", @config.SECTION_CLOSE)
@@ -219,7 +219,7 @@ fn document_item(
 fn value_doc(
   doc : ValueDoc,
   folded~ : FoldedState,
-  type_id? : String
+  type_id? : String,
 ) -> Html[Msg] {
   let { name: _, docstring, signature, loc } = doc
   let id = type_id
@@ -282,7 +282,7 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
 fn document(
   readme_content? : String,
   package_data? : Status[PackageData],
-  folded~ : FoldedState
+  folded~ : FoldedState,
 ) -> Html[Msg] {
   let readme = match readme_content {
     None | Some("") => nothing()

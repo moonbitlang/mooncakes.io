@@ -42,10 +42,10 @@ typealias @tea.Cmd
 typealias @util.Status
 
 ///|
-typealias @immut/sorted_set.T as Set
+typealias @immut/sorted_set.SortedSet as Set
 
 ///|
-typealias @immut/sorted_map.T as Map
+typealias @immut/sorted_map.SortedMap as Map
 
 ///|
 typealias @lazy.Lazy

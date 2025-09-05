@@ -26,7 +26,7 @@ priv struct StatisticsDetail {
   package_count : Int
   added_lines : Int
   added_packages : Array[String]
-  deleted_pacakges : Array[String]
+  deleted_packages : Array[String]
   previous : String?
 }
 
@@ -44,7 +44,7 @@ fn decode_statistics_detail(json : Json) -> Result[StatisticsDetail, String] {
       ..
     } => {
       let added_packages = added.filter_map(x => x.as_string())
-      let deleted_pacakges = deleted.filter_map(x => x.as_string())
+      let deleted_packages = deleted.filter_map(x => x.as_string())
       let previous = match previous {
         Some(String(x)) => Some(x)
         _ => None
@@ -54,7 +54,7 @@ fn decode_statistics_detail(json : Json) -> Result[StatisticsDetail, String] {
         total_lines: total_lines.to_int(),
         package_count: total_packages.to_int(),
         added_packages,
-        deleted_pacakges,
+        deleted_packages,
         added_lines: line_changes.to_int(),
         previous,
       })
@@ -81,7 +81,7 @@ pub fn load() -> (Cmd[Msg], Model) {
 }
 
 ///|
-fnalias @html.(div, h1, h2, p, text, ul, li, hr, nothing)
+fnalias @html.(div, h1, h2, p, text, ul, li, nothing)
 
 ///|
 fnalias @cmd.none
@@ -117,11 +117,11 @@ fn item(stat : StatisticsDetail, expanded : Set[String]) -> Html[Msg] {
     ),
     @view.collapse(
       header=p(class="pl-8 py-1", [
-        text("Deleted packages (\{stat.deleted_pacakges.length()})"),
+        text("Deleted packages (\{stat.deleted_packages.length()})"),
       ]),
       body=ul(
         class="pl-8",
-        stat.deleted_pacakges.map(x => li(class="list-disc", [text(x)])),
+        stat.deleted_packages.map(x => li(class="list-disc", [text(x)])),
       ),
       caret_config=@view.CaretConfig::LeftCenter,
       toggle=ToggleCollapsed(removed_key),

@@ -3,7 +3,6 @@
         "Yoorkin/rabbit-tea/cmd",
         "Yoorkin/rabbit-tea/experimental/html",
         "Yoorkin/rabbit-tea/http",
-        "moonbitlang/mooncakes/util",
         "moonbitlang/mooncakes/view"
     ]
 }

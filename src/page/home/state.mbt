@@ -134,7 +134,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
               packages_inc_step~,
               repeat_times=repeat_times - 1,
             ),
-            10,
+            5,
           ),
           {
             ..model,

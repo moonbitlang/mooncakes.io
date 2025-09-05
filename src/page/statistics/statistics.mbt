@@ -141,7 +141,7 @@ pub fn view(model : Model) -> Html[Msg] {
   div(class="min-h-screen w-full flex-col", [
     div(class="flex-1", [
       div(class="container lg:px-4 h-full w-full", [
-        h1(class="text-4xl py-4 my-4 font-semibold", [
+        h1(class="text-4xl ml-4 py-4 my-4 font-semibold", [
           text("Statistics of mooncakes.io"),
         ]),
         div(items),

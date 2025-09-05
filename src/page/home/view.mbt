@@ -177,7 +177,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
   fn button(value, target, color) {
     a(
       href=target,
-      class="lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
+      class="py-1 px-3 text-nowrap lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
       [text(value)],
     )
   }
@@ -188,29 +188,31 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
       Some(_) => "pb-2"
     }
     div(
-      class="border rounded-xl pl-6 pr-2 pt-6 \{bottom} flex-col gap-2 items-end grow-1 border-b-gray-300/50 bg-white/50 backdrop-blur",
+      class="border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
       [
-        p(class="text-2xl lg:text-3xl font-extralight", [
+        p(class="text-xl lg:text-3xl font-extralight", [
           text(value.to_string()),
           text("+"),
         ]),
         div(class="flex items-center justify-between", [
-          p(class="text-base text-gray-700 font-light", [text(label)]),
+          p(class="text-sm lg:text-base text-gray-700 font-light", [text(label)]),
         ]),
-        div(class="w-full flex flex-col-reverse", [child.unwrap_or(nothing())]),
+        div(class="hidden md:flex w-full flex-col-reverse", [
+          child.unwrap_or(nothing()),
+        ]),
       ],
     )
   }
 
   div(
-    class="container lg:w-3/5 flex flex-col lg:flex-row items-center justify-between py-8",
+    class="container lg:w-3/5 flex flex-col lg:flex-row items-center justify-between lg:py-8",
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
         div(class="text-slate-700", [
           h1(class="text-2xl font-semibold lg:text-4xl", [
             text("The Package Registry"),
           ]),
-          h1(class="text-3xl font-semibold lg:text-4xl lg:mt-2", [
+          h1(class="text-3xl font-semibold lg:text-4xl lg:mt-0", [
             text("for"),
             span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
             text("community"),
@@ -219,7 +221,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
             text("Browse, search and share package and documentation"),
           ]),
         ]),
-        div(class="flex mt-8 gap-4 justify-center lg:justify-start", [
+        div(class="flex mt-2 lg:mt-8 gap-4 justify-center lg:justify-start", [
           button(
             "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
             "bg-yellow-600 text-white",
@@ -229,30 +231,30 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           ),
         ]),
       ]),
-      div(
-        class="flex relative flex-row-reverse w-2/5 bg-contain bg-no-repeat bg-center",
-        [
-          img(
-            class="absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
-            src="mooncake-pic-small.png",
-            [],
-          ),
-          div(class="text-xl flex flex-col gap-2 z-10 w-3/5 select-none", [
+      div(class="flex relative w-4/5 lg:flex-row-reverse lg:w-2/5", [
+        img(
+          class="hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
+          src="mooncake-pic-small.png",
+          [],
+        ),
+        div(
+          class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
+          [
             stat_card("Lines of code", total_lines, None),
             stat_card(
               "Packages",
               total_packages,
               Some(
                 a(
-                  class="text-sm text-right pr-2 hover:underline text-gray-600",
+                  class="text-sm text-right lg:pr-2 hover:underline text-gray-600",
                   href="/statistics",
                   [text("More detail")],
                 ),
               ),
             ),
-          ]),
-        ],
-      ),
+          ],
+        ),
+      ]),
     ],
   )
 }

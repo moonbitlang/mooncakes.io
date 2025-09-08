@@ -21,7 +21,7 @@ fn[M] unsupported(node_type : String, message : String) -> @html.Html[M] {
 
 ///|
 fn[M] inline_text(str : String) -> @html.Html[M] {
-  @html.span(class="inline leading-loose", [text(str)])
+  @html.span(class="inline", [text(str)])
 }
 
 ///|
@@ -67,7 +67,7 @@ fn[M] inline2html(
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
         span(
-          class="font-mono bg-[#f0f0f0] text-sm px-1 py-[1px] rounded",
+          class="font-mono bg-[#eeeeee] text-[rgb(31, 35, 40)] text-sm px-[5px] py-[2px] rounded",
           tight.map(fn(x) { text(x.node.v) }).to_array(),
         ),
       ]
@@ -95,6 +95,7 @@ fn[M] block2html(
   x : @cmark.Block,
   small_heading~ : Bool,
   link_defs~ : Map[String, String],
+  paragraph_margin? : Bool = false,
 ) -> @html.Html[M] {
   match x {
     @cmark.Block::BlankLine(_) => p([])
@@ -104,7 +105,16 @@ fn[M] block2html(
         [block2html(block, small_heading~, link_defs~)],
       )
     Blocks({ v: xs, .. }) =>
-      span(xs.map(x => block2html(x, small_heading~, link_defs~)).to_array())
+      span(
+        xs
+        .map(x => block2html(
+          x,
+          small_heading~,
+          link_defs~,
+          paragraph_margin=true,
+        ))
+        .to_array(),
+      )
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
       let code = code.iter().map(fn(node) { node.v }).join("\n")
       let code = if info_string is Some({ v: lang, .. }) &&
@@ -127,13 +137,13 @@ fn[M] block2html(
       } else {
         match level {
           1 =>
-            h1(class="text-gray-800 font-semibold mt-4 mb-2 text-3xl", inline)
+            h1(class="text-gray-800 font-semibold mb-4 pb-2 text-4xl", inline)
           2 =>
             h2(
-              class="text-gray-800 font-semibold mt-4 mb-2 border-b text-2xl",
+              class="text-gray-800 font-semibold mt-6 mb-4 pb-2 border-b text-2xl",
               inline,
             )
-          3 => h3(class="text-gray-800 font-semibold text-xl mt-3 mb-2", inline)
+          3 => h3(class="text-gray-800 font-semibold text-xl mt-6 mb-4", inline)
           4 => h4(class="text-gray-800", inline)
           _ => h5(class="text-gray-800", inline)
         }
@@ -144,7 +154,7 @@ fn[M] block2html(
         .map(x => {
           let { v: { block, ext_task_marker, .. }, .. } = x
           if ext_task_marker is Some({ v: char, .. }) {
-            @html.li(class="list-inside flex gap-1", [
+            @html.li(class="flex gap-1 mt-1", [
               @html.input(
                 input_type=Checkbox,
                 read_only=true,
@@ -153,23 +163,29 @@ fn[M] block2html(
               block2html(block, small_heading~, link_defs~),
             ])
           } else {
-            @html.li(class="list-inside", [
+            @html.li(class="mt-1", [
               block2html(block, small_heading~, link_defs~),
             ])
           }
         })
         .to_array()
-      let class = "ml-2 list-inside " +
+      let class = "pl-8 mb-4 " +
         (if tight { "space-y-0.5" } else { "space-y-1" })
       match ordered {
-        @cmark_base.Unordered(_) => ul(class=class + " list-disc", items)
+        @cmark_base.Unordered(_) => ul(class="list-disc " + class, items)
         @cmark_base.Ordered(start, _) =>
-          ol(start~, class=class + " list-decimal", items)
+          ol(start~, class="list-decimal " + class, items)
       }
     }
-    Paragraph({ v: { inline, .. }, .. }) =>
-      @html.span(inline2html(inline, link_defs~))
-    ThematicBreak(_) => hr(class="my-4")
+    Paragraph({ v: { inline, .. }, .. }) => {
+      let child = @html.span(inline2html(inline, link_defs~))
+      if paragraph_margin {
+        div(class="mb-3", [child])
+      } else {
+        child
+      }
+    }
+    ThematicBreak(_) => hr(class="my-6 border-2")
     ExtTable({ v: { rows, .. }, .. }) => {
       let colgroup = []
       let body = rows
@@ -303,7 +319,10 @@ pub fn[M] markdown(
     },
     block: fn(_, acc, block) {
       @cmark.FolderResult::Fold(
-        [..acc, block2html(block, link_defs~, small_heading~)],
+        [
+          ..acc,
+          block2html(block, link_defs~, small_heading~, paragraph_margin=true),
+        ],
       )
     },
   }

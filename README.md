@@ -11,3 +11,8 @@ moon install
 moon build --target js
 npm run dev
 ```
+
+## Contribution
+
+We welcome contributions! Please review our [contributing guidelines](CONTRIBUTING.md) before submitting.
+

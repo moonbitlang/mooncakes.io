@@ -112,7 +112,7 @@ fn impl_doc(doc : ImplDoc, folded~ : FoldedState) -> Html[Msg] {
       span(class="text-gray-700", [stype(self_type)]),
     ]),
   ])
-  let content = div(class="pl-4", methods.map(value_doc(_, folded~)))
+  let content = div(class="pl-4 my-3", methods.map(value_doc(_, folded~)))
   document_item(signature, content, collapsed=folded, id~, tight=true)
 }
 
@@ -123,7 +123,7 @@ fn type_doc(doc : TypeDoc, folded~ : FoldedState) -> Html[Msg] {
   let signature = signature_view(signature)
   let content = div(
     [
-      div(class="pl-5", [@view.markdown(docstring, small_heading=true)]),
+      div(class="pl-4 my-3", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(impl_doc(_, folded~)),
       ..methods.map(value_doc(_, folded~, type_id=id)),
     ],
@@ -138,7 +138,7 @@ fn trait_doc(doc : TraitDoc, folded~ : FoldedState) -> Html[Msg] {
   let signature = signature_view(signature)
   let content = div(
     [
-      div(class="pl-5", [@view.markdown(docstring, small_heading=true)]),
+      div(class="pl-4 my-3", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(impl_doc(_, folded~)),
     ],
   )
@@ -220,16 +220,18 @@ fn value_doc(
   doc : ValueDoc,
   folded~ : FoldedState,
   type_id? : String,
+  enable_title? : Bool = false,
 ) -> Html[Msg] {
   let { name: _, docstring, signature, loc } = doc
   let id = type_id
     .map(fn(x) { "\{x}::\{doc.get_id()}" })
     .unwrap_or(doc.get_id())
   let signature = signature_view(signature)
-  let content = div(class="pl-5", [
+  let content = div(class="pl-4 my-3", [
     @view.markdown(docstring, small_heading=true),
   ])
-  document_item(signature, content, collapsed=folded, id~, loc~)
+  let title = if enable_title { Some(id) } else { None }
+  document_item(title?, signature, content, collapsed=folded, id~, loc~)
 }
 
 ///|
@@ -305,7 +307,7 @@ fn document(
         ..traits.map(trait_doc(_, folded~)),
         ..types.map(type_doc(_, folded~)),
         ..typealiases.map(type_alias_doc(_, folded~)),
-        ..values.map(value_doc(_, folded~)),
+        ..values.map(value_doc(_, folded~, enable_title=true)),
         ..misc.map(misc_doc(_, folded~)),
       ]
     _ => []

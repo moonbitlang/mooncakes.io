@@ -90,7 +90,7 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
         meta_info_item_view(
           icon=@config.user,
           title="Author",
-          p([text(model.author)]),
+          a(href="/user/\{model.author}", [text(model.author)]),
         ),
         meta_info_item_view(
           icon=@config.tag,

@@ -17,6 +17,7 @@ enum Msg {
   GotHomeMsg(@home.Msg)
   GotDocsMsg(@docs.Msg)
   GotStatisticsMsg(@statistics.Msg)
+  GotUserMsg(@user.Msg)
   LinkClicked(@url.UrlRequest)
   UrlChanged(@url.Url)
 }
@@ -26,6 +27,7 @@ enum Model {
   Home(@home.Model)
   Docs(@docs.Model)
   Statistics(@statistics.Model)
+  User(@user.Model)
   NotFound
   Redirect
 }
@@ -50,6 +52,8 @@ fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
     (GotStatisticsMsg(msg), Statistics(model)) =>
       @statistics.update(msg, model)
       |> update_with(Statistics(_), GotStatisticsMsg(_))
+    (GotUserMsg(msg), User(model)) =>
+      @user.update(msg, model) |> update_with(User(_), GotUserMsg(_))
     (LinkClicked(request), _) =>
       match request {
         Internal(url) => (@nav.push_url(url.to_string()), model)
@@ -67,6 +71,8 @@ fn route(url : @url.Url) -> (Cmd[Msg], Model) {
     ["/"] | [""] | [] => @home.load() |> update_with(Home(_), GotHomeMsg(_))
     ["statistics", ..] =>
       @statistics.load() |> update_with(Statistics(_), GotStatisticsMsg(_))
+    ["user", name] =>
+      @user.load(name.to_string()) |> update_with(User(_), GotUserMsg(_))
     ["assets", ..] => (@nav.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
       module_path.iter().map(@string.View::to_string).join("/")
@@ -82,6 +88,7 @@ fn view(model : Model) -> Html[Msg] {
     Home(model) => @home.view(model).map(GotHomeMsg(_))
     Docs(model) => @docs.view(model).map(GotDocsMsg(_))
     Statistics(model) => @statistics.view(model).map(GotStatisticsMsg(_))
+    User(model) => @user.view(model).map(GotUserMsg(_))
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }

@@ -74,6 +74,9 @@ pub let terminal = "/terminal.svg"
 pub let deps = "/deps.svg"
 
 ///|
+pub let book_open = "/book-open.svg"
+
+///|
 pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
 
 ///|

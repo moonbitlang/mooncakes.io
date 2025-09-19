@@ -281,26 +281,37 @@ fn misc_doc(doc : MiscDoc, folded~ : FoldedState) -> Html[Msg] {
 }
 
 ///|
+fn readme(content : String?, folded~ : FoldedState) -> Html[Msg] {
+  match content {
+    None | Some("") => nothing()
+    Some(content) => {
+      let content = @view.markdown(content)
+      div(class="border md:rounded mb-4", [
+        @view.collapse(
+          caret_config=LeftCenter,
+          collapsed=folded.contains("readme"),
+          toggle=ToggleDocDetail("readme"),
+          header=div(
+            class="py-2 pl-7 border-b w-full text-sm font-bold text-gray-700 text-base flex items-center gap-1",
+            [
+              img(src=@config.book_open, class="w-4 h-4", []),
+              p([text("README")]),
+            ],
+          ),
+          body=div(class="m-8", [div(class="mr-4 mb-6", [content])]),
+        ),
+      ])
+    }
+  }
+}
+
+///|
 fn document(
   readme_content? : String,
   package_data? : Status[PackageData],
   folded~ : FoldedState,
 ) -> Html[Msg] {
-  let readme = match readme_content {
-    None | Some("") => nothing()
-    Some(content) => {
-      let content = @view.markdown(content)
-      @view.collapse(
-        caret_config=LeftCenter,
-        collapsed=folded.contains("readme"),
-        toggle=ToggleDocDetail("readme"),
-        header=div(class="py-2 pl-6 text-sm font-bold text-gray-700", [
-          p([text("README")]),
-        ]),
-        body=div(class="", [div(class="mr-4 mb-6", [content])]),
-      )
-    }
-  }
+  let readme = readme(readme_content, folded~)
   let doc_list = match package_data {
     Some(Success({ traits, types, typealiases, values, misc, name: _ })) =>
       [
@@ -312,5 +323,5 @@ fn document(
       ]
     _ => []
   }
-  div(class="contents-center flex flex-col p-2 w-full", [readme, div(doc_list)])
+  div(class="contents-center flex flex-col w-full", [readme, div(doc_list)])
 }

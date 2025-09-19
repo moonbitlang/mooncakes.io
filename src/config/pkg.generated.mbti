@@ -34,6 +34,8 @@ const TYPE_ICON : String = "/type.svg"
 
 const VALUE_ICON : String = "/code-brackets.svg"
 
+let book_open : String
+
 let builtins_package_path : Map[String, String]
 
 let clipboard : String

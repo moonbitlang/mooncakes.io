@@ -8,7 +8,7 @@ import(
 )
 
 // Values
-fn filter_indices(String, Indices) -> Array[ModuleIndex]
+fn filter_indices(String, Map[Char, Array[ModuleIndex]]) -> Array[ModuleIndex]
 
 fn load() -> (@cmd.Cmd[Msg], Model)
 
@@ -22,7 +22,8 @@ fn view(Model) -> @html.Html[Msg]
 type Indices
 
 pub struct Model {
-  indices : @util.Status[Indices]
+  recent_modules : @util.Status[Array[ModuleIndex]]
+  all_modules : @util.Status[Map[Char, Array[ModuleIndex]]]
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
@@ -41,7 +42,8 @@ pub(all) struct ModuleIndex {
 }
 
 pub enum Msg {
-  GotModuleIndices(Result[Indices, String])
+  GotAllModule(Result[Array[ModuleIndex], String])
+  GotRecentModule(Result[Array[ModuleIndex], String])
   GotCount(Result[PackageCount, String])
   IncreaseAnimation(PackageCount, lines_inc_step~ : Int, packages_inc_step~ : Int, repeat_times~ : Int)
   FilterChanged(String)

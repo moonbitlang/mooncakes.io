@@ -14,7 +14,8 @@
 
 ///|
 pub enum Msg {
-  GotModuleIndices(Result[Indices, String])
+  GotAllModule(Result[Array[ModuleIndex], String])
+  GotRecentModule(Result[Array[ModuleIndex], String])
   GotCount(Result[PackageCount, String])
   IncreaseAnimation(
     PackageCount,
@@ -27,7 +28,8 @@ pub enum Msg {
 
 ///|
 pub struct Model {
-  indices : Status[Indices]
+  recent_modules : Status[Array[ModuleIndex]]
+  all_modules : Status[Map[Char, Array[ModuleIndex]]]
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
@@ -63,8 +65,12 @@ pub fn load() -> (Cmd[Msg], Model) {
   (
     @cmd.batch([
       @http.get(
-        "/assets/modules.json",
-        expect=Json(GotModuleIndices(_), decode_module_indices),
+        "/api/v0/modules/all",
+        expect=Json(GotAllModule(_), decode_modules),
+      ),
+      @http.get(
+        "/api/v0/modules/recent?limit=15",
+        expect=Json(GotRecentModule(_), decode_modules),
       ),
       @http.get(
         "/assets/count.json",
@@ -72,7 +78,8 @@ pub fn load() -> (Cmd[Msg], Model) {
       ),
     ]),
     {
-      indices: Loading,
+      recent_modules: Loading,
+      all_modules: Loading,
       filter: "",
       filtered_modules: [],
       showing_lines: 5000000,
@@ -84,37 +91,30 @@ pub fn load() -> (Cmd[Msg], Model) {
 ///|
 pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
   match msg {
-    GotModuleIndices(result) =>
+    GotAllModule(Ok(modules)) =>
+      (none(), { ..model, all_modules: Success(sort_modules_by_name(modules)) })
+    GotRecentModule(Ok(recent)) =>
+      (none(), { ..model, recent_modules: Success(recent) })
+    GotCount(Ok(stat)) => {
+      let repeat_times = 50
+      let lines_inc_step = stat.total_lines / repeat_times
+      let packages_inc_step = stat.total_packages / repeat_times
       (
-        none(),
-        match result {
-          Ok(modules) => { ..model, indices: Success(modules) }
-          Err(_) => { ..model, indices: Failed }
-        },
+        @cmd.task(
+          IncreaseAnimation(
+            stat,
+            lines_inc_step~,
+            packages_inc_step~,
+            repeat_times~,
+          ),
+        ),
+        { ..model, showing_lines: 0, showing_packages: 0 },
       )
-    GotCount(result) =>
-      match result {
-        Ok(stat) => {
-          let repeat_times = 50
-          let lines_inc_step = stat.total_lines / repeat_times
-          let packages_inc_step = stat.total_packages / repeat_times
-          (
-            @cmd.task(
-              IncreaseAnimation(
-                stat,
-                lines_inc_step~,
-                packages_inc_step~,
-                repeat_times~,
-              ),
-            ),
-            { ..model, showing_lines: 0, showing_packages: 0 },
-          )
-        }
-        Err(msg) => {
-          println(msg)
-          (none(), model)
-        }
-      }
+    }
+    GotAllModule(Err(msg)) | GotRecentModule(Err(msg)) | GotCount(Err(msg)) => {
+      println(msg)
+      (none(), model)
+    }
     IncreaseAnimation(stat, lines_inc_step~, packages_inc_step~, repeat_times~) =>
       if repeat_times == 0 {
         (
@@ -144,7 +144,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
         )
       }
     FilterChanged(filter) => {
-      let filtered_modules = match model.indices {
+      let filtered_modules = match model.all_modules {
         Success(indices) => filter_indices(filter, indices)
         _ => []
       }
@@ -154,8 +154,11 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
 }
 
 ///|
-pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] {
-  indices.all_modules
+pub fn filter_indices(
+  filter : String,
+  indices : Map[Char, Array[ModuleIndex]],
+) -> Array[ModuleIndex] {
+  indices
   .values()
   .flat_map(Array::iter)
   .filter(fn(x) {
@@ -169,25 +172,6 @@ pub fn filter_indices(filter : String, indices : Indices) -> Array[ModuleIndex] 
   })
   .collect()
 }
-
-///|
-extern "js" fn compare_date(date1 : String, date2 : String) -> Int =
-  #|function compareDate(date1_str, date2_str) {
-  #|  const date1 = new Date(date1_str);
-  #|  const date2 = new Date(date2_str);
-  #|  if (date1 > date2) return -1;
-  #|  if (date1 < date2) return 1;
-  #|  return 0;
-  #|}
-
-///|
-extern "js" fn is_within_one_week(date : String) -> Bool =
-  #|created_at_str => {
-  #|  const created_at = new Date(created_at_str);
-  #|  const now = new Date();
-  #|  const oneWeekAgo = new Date(now.setDate(now.getDate() - 7));
-  #|  return created_at > oneWeekAgo;
-  #|}
 
 ///|
 fn decode_statistics(json : Json) -> Result[PackageCount, String] {
@@ -206,52 +190,59 @@ fn decode_statistics(json : Json) -> Result[PackageCount, String] {
 }
 
 ///|
-fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
-  fn decode_index(json) {
-    match json {
-      ({
-        "name": String(path),
-        "version": String(version),
-        "description"? : description,
-        "keywords"? : keywords,
-        "created_at"? : created_at,
-        "is_first_version"? : is_first_version,
-        ..
-      } : Json) => {
-        // TODO: Option::map should be an error-polymorphic function
-        let is_first_version = (is_first_version.unwrap_or(Json::boolean(false))
-        |> @json.from_json) catch {
-          JsonDecodeError(e) => return Err(e.to_string())
-        }
-        let keywords = match keywords {
-          Some(Array(keywords)) =>
-            Some(keywords.map(fn(x) { x.as_string().unwrap() }))
-          _ => None
-        }
-        let created_at = created_at.map(fn(x) { x.as_string().unwrap() })
-        let description = description.map(fn(x) { x.as_string().unwrap() })
-        guard path.split("/").collect() is [author, .. name]
-        let name = name.iter().map(@string.View::to_string).join("/")
-        // assuming the first version is "0.1.0" or "0.0.1". 
-        // We need the backend to provide more accurate data in the future.
-        let is_new = created_at is Some(date) &&
-          is_within_one_week(date) &&
-          is_first_version
-        Ok({
-          path,
-          name,
-          author: author.to_string(),
-          version,
-          description,
-          keywords,
-          created_at,
-          is_new,
-        })
+fn decode_module_index(item : Json) -> ModuleIndex raise {
+  match item {
+    {
+      "name": String(path),
+      "version": String(version),
+      "keywords": Array(keywords),
+      "description": String(description),
+      "is_new": True
+      | False as bool,
+      "created_at": String(time),
+      ..
+    } => {
+      let keywords = Some(keywords.filter_map(x => x.as_string()))
+      let description = Some(description)
+      let created_at = Some(time)
+      // we need Json::Boolean(x), not Json::True and Json::False
+      let is_new = match bool {
+        True => true
+        False => false
+        _ => panic()
       }
-      _ => Err("Error when parsing metadata.")
+      guard path.split("/").collect() is [author, .. name]
+      let name = name.iter().map(@string.View::to_string).join("/")
+      {
+        path,
+        name,
+        author: author.to_string(),
+        version,
+        description,
+        keywords,
+        created_at,
+        is_new,
+      }
     }
+    _ => fail("unexpected item in json: \{item}")
   }
+}
 
+///|
+fn decode_modules(json : Json) -> Result[Array[ModuleIndex], String] {
+  match json {
+    Array(items) =>
+      Ok(items.map(decode_module_index)) catch {
+        e => Err(e.to_string())
+      }
+    _ => Err("expecting an array")
+  }
+}
+
+///|
+fn sort_modules_by_name(
+  modules : Array[ModuleIndex],
+) -> Map[Char, Array[ModuleIndex]] {
   fn to_upper(c : Char) -> Char {
     if c >= 'a' && c <= 'z' {
       guard (c.to_int() - 'a'.to_int() + 'A'.to_int()).to_char() is Some(c)
@@ -261,17 +252,12 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
     }
   }
 
-  guard modules_json is { "modules": Array(modules), .. }
   let indices = []
   for mod in modules {
-    match decode_index(mod) {
-      Ok(index) =>
-        // Filter out the test modules
-        match index.keywords {
-          Some(keywords) if keywords.contains("mooncakes-test") => ()
-          _ => indices.push(index)
-        }
-      Err(msg) => return Err(msg)
+    // Filter out the test modules
+    match mod.keywords {
+      Some(keywords) if keywords.contains("mooncakes-test") => ()
+      _ => indices.push(mod)
     }
   }
   indices.sort_by(fn(a, b) { a.name.compare(b.name) })
@@ -283,23 +269,5 @@ fn decode_module_indices(modules_json : Json) -> Result[Indices, String] {
       Some(indices) => indices.push(index)
     }
   }
-  let recently_updated = indices
-    ..sort_by((x, y) => match (x, y) {
-      (
-        { created_at: Some(v1), name: n1, .. },
-        { created_at: Some(v2), name: n2, .. },
-      ) =>
-        match compare_date(v1, v2) {
-          0 => -n1.compare(n2)
-          order => order
-        }
-      ({ created_at: None, .. }, { created_at: Some(_), .. }) => 1
-      ({ created_at: Some(_), .. }, { created_at: None, .. }) => -1
-      ({ created_at: None, name: n1, .. }, { created_at: None, name: n2, .. }) =>
-        -n1.compare(n2)
-    })
-    .iter()
-    .take(15)
-    .collect()
-  Ok({ recently_updated, all_modules })
+  all_modules
 }

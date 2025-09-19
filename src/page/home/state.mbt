@@ -43,12 +43,6 @@ struct PackageCount {
 }
 
 ///|
-struct Indices {
-  recently_updated : Array[ModuleIndex]
-  all_modules : Map[Char, Array[ModuleIndex]]
-}
-
-///|
 pub(all) struct ModuleIndex {
   author : String
   name : String

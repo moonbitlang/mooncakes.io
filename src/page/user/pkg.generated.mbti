@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/mooncakes/page/statistics"
+package "moonbitlang/mooncakes/page/user"
 
 import(
   "Yoorkin/rabbit-tea/cmd"
@@ -7,7 +7,7 @@ import(
 )
 
 // Values
-fn load() -> (@cmd.Cmd[Msg], Model)
+fn load(String) -> (@cmd.Cmd[Msg], Model)
 
 fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 

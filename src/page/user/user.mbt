@@ -54,7 +54,7 @@ pub fn load(username : String) -> (Cmd[Msg], Model) {
 }
 
 ///|
-fnalias @html.(div, h1, h2, p, text, ul, li, nothing, a, span)
+fnalias @html.(div, h1, h2, text, ul, li, a, span)
 
 ///|
 fnalias @cmd.none

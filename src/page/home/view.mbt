@@ -261,18 +261,24 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
 
 ///|
 pub fn view(model : Model) -> Html[Msg] {
-  let module_list = match model.indices {
-    Loading => @view.loading()
-    Failed => @view.load_failed("module indices")
-    Success(indices) =>
-      if model.filter == "" {
-        div([
-          recently_updated(indices.recently_updated),
-          all_modules(indices.all_modules),
-        ])
-      } else {
-        search_result(model.filtered_modules)
-      }
+  let module_list = if model.filter == "" {
+    let recently_updated = match model.recent_modules {
+      Loading => @view.loading()
+      Failed => @view.load_failed("recently updated modules")
+      Success(xs) => recently_updated(xs)
+    }
+    let all_modules = match model.all_modules {
+      Loading => @view.loading()
+      Failed => @view.load_failed("module indices")
+      Success(xs) => all_modules(xs)
+    }
+    div([recently_updated, all_modules])
+  } else {
+    match model.all_modules {
+      Loading => @view.loading()
+      Failed => @view.load_failed("module indices")
+      Success(_) => search_result(model.filtered_modules)
+    }
   }
   let banner = if model.filter == "" {
     banner(

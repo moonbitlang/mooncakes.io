@@ -226,7 +226,7 @@ fn[M] block2html(
               cols
               .iter()
               .each(x => match x {
-                { v: (align, _), .. } =>
+                { v: TableSep((align, _)), .. } =>
                   match align {
                     Some(Left) =>
                       colgroup.push(@html.col(class="text-left", []))

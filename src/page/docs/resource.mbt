@@ -89,6 +89,7 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
       is [repository, license, description] else {
       fail("Error when parsing repository, license, description, readme.")
     }
+    let repository = repository.map(normalize_repo_url)
     let keywords = match keywords {
       Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
       None => []
@@ -111,6 +112,18 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
   }
 
   parse_package(json)
+}
+
+///|
+/// Normalizes the repository URL.
+/// If the user omits the `https://` prefix, it will be added automatically.
+fn normalize_repo_url(url : String) -> String {
+  match url {
+    [.. "https://", ..] | [.. "http://", ..] => url
+    [.. "git@", .. remain] if remain.contains_char(':') &&
+      remain.split(":").collect().length() == 2 => url
+    _ => "https://" + url
+  }
 }
 
 ///|

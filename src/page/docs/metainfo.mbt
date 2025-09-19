@@ -65,7 +65,7 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
       meta_info_item_view(
         icon=@config.repo,
         title="Repository",
-        p([a(class="hover:underline", href=repo, [text(repo)])]),
+        p([a(class="hover:underline", escape=true, href=repo, [text(repo)])]),
       )
     None => nothing()
   }

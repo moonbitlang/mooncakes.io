@@ -69,15 +69,18 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
       )
     None => nothing()
   }
-  let model_description = div(class="pl-7 py-4", [
-    h1(class="text-2xl font-bold mb-4", [
+  let model_description = div(class="pl-7 py-2 mb-2", [
+    h1(class="text-2xl font-bold mb-2", [
       text(model.name.split("/").last().unwrap().to_string()),
     ]),
     match model.description {
       Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
       None => nothing()
     },
-    div(class="flex gap-2 my-2", model.keywords.map(tag_view)),
+    match model.keywords {
+      [] => nothing()
+      keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
+    },
   ])
   div(class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip", [
     model_description,

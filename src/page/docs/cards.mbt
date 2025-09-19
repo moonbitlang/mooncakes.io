@@ -323,5 +323,9 @@ fn document(
       ]
     _ => []
   }
-  div(class="contents-center flex flex-col w-full", [readme, div(doc_list)])
+  div(class="contents-center flex flex-col w-full", [
+    readme,
+    // Ensure left and right spacing on mobile devices
+    div(class="mx-4 md:mx-0", doc_list),
+  ])
 }

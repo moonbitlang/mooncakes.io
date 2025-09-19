@@ -19,8 +19,6 @@ fn view(Model) -> @html.Html[Msg]
 // Errors
 
 // Types and methods
-type Indices
-
 pub struct Model {
   recent_modules : @util.Status[Array[ModuleIndex]]
   all_modules : @util.Status[Map[Char, Array[ModuleIndex]]]

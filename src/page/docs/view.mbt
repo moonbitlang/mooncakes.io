@@ -159,7 +159,7 @@ pub fn view(model : Model) -> Html[Msg] {
               ]),
             ],
           ),
-          div(class="flex-1", [main, fab, sidebar_dialog]),
+          div(class="flex-1 min-w-0", [main, fab, sidebar_dialog]),
           div(class="md:w-40", []),
         ],
       ),

@@ -89,7 +89,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
 ///|
 fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
   let recently_updated = recently.map(simple_module_card)
-  div(class="container lg:w-2/3 px-4", [
+  div(class="container lg:w-4/5 px-4", [
     h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
       text("RECENTLY UPDATED"),
     ]),
@@ -110,7 +110,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
       let (key, value) = x
       let modules = value.map(simple_module_card)
       div(class="pt-2", [
-        div(class="container lg:w-2/3 px-4", [
+        div(class="container lg:w-4/5 px-4", [
           h1(class="p-3 text-sm font-bold text-gray-400", [
             text(key.to_string()),
           ]),
@@ -122,7 +122,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
       ])
     })
   div(class="pt-10", [
-    div(class="container lg:w-2/3 px-4", [
+    div(class="container lg:w-4/5 px-4", [
       h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
         text("ALL MODULES"),
       ]),
@@ -135,40 +135,12 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
 fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
   let module_cards = mods.map(module_card)
   div([
-    div(class="container lg:w-3/5 px-4", [
+    div(class="container lg:w-4/5 px-4", [
       h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
         text("SEARCH RESULT"),
       ]),
       div(class="grid grid-cols-1 gap-2", module_cards),
     ]),
-  ])
-}
-
-///|
-fn navbar() -> Html[Msg] {
-  div(class="w-full flex", [
-    div(
-      class="container flex flex-col sm:flex-row justify-between items-center",
-      [
-        div(class="font-title select-none p-4", [
-          // use whitespace-nowrap to prevent logo from wrapping
-          a(href="/", class="whitespace-nowrap text-gray-700 font-semibold", [
-            text("🥮 mooncakes.io"),
-          ]),
-        ]),
-        div(class="justify-center lg:my-2 w-full max-w-72", [
-          input(
-            input_type=Text,
-            placeholder="Search modules ...",
-            class="border rounded-full text-sm lg:text-base px-4 w-full py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
-            input=FilterChanged(_),
-          ),
-        ]),
-        div(class="text-gray-700 font-semibold invisible", [
-          a(href="", [text("Browse All Module")]),
-        ]),
-      ],
-    ),
   ])
 }
 
@@ -205,7 +177,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
   }
 
   div(
-    class="container lg:w-3/5 flex flex-col lg:flex-row items-center justify-between lg:py-8",
+    class="container lg:w-3/4 flex flex-col lg:flex-row items-center justify-between lg:py-8",
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
         div(class="text-slate-700", [
@@ -288,14 +260,16 @@ pub fn view(model : Model) -> Html[Msg] {
   } else {
     nothing()
   }
-  div(
-    class="flex flex-col min-h-screen bg-gradient-to-b from-white to-transparent to-[35em] bg-zinc-50",
-    [
-      navbar(),
-      banner,
-      hr(class="lg:hidden mx-4 mt-6 border-gray-200"),
-      module_list,
-      div(class="mt-auto", [@view.footer()]),
-    ],
+  @view.page(
+    header=@view.navbar(
+      style=Fusion,
+      middle=input(
+        input_type=Text,
+        placeholder="Search modules ...",
+        class="border rounded-full my-2 lg:my-0 max-w-1/3 text-sm lg:text-base px-4 w-full py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
+        input=FilterChanged(_),
+      ),
+    ),
+    main=div(class="w-full", [banner, module_list]),
   )
 }

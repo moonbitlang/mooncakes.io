@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-fnalias @html.(hr, a, div, nothing, text, input, img, h1, h2, span, p)
+fnalias @html.(a, div, nothing, text, input, img, h1, h2, span, p)
 
 ///|
 fnalias @tea.none

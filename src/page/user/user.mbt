@@ -67,26 +67,23 @@ typealias @util.Status
 
 ///|
 pub fn view(model : Model) -> Html[Msg] {
-  div(class="min-h-screen w-full flex-col", [
-    div(class="flex-1", [
-      div(class="container h-full w-full", [
-        h1(class="text-4xl py-4 my-4 font-semibold", [text(model.username)]),
-        h2(class="text-2xl my-2", [text("Published Modules")]),
-        match model.modules {
-          Loading => @view.loading()
-          Failed => @view.load_failed("modules")
-          Success(modules) =>
-            ul(
-              modules.map(x => li(class="font-mono my-1 flex gap-4", [
-                a(href="/docs/\{x.0}", class="text-blue-500", [text(x.0)]),
-                span(class="text-gray-600", [text(x.1)]),
-              ])),
-            )
-        },
-        div(class="h-50", []),
-      ]),
-    ]),
+  let main = div(class="container h-full w-full mx-6 lg:mx-0", [
+    h1(class="text-4xl py-4 my-4 font-semibold", [text(model.username)]),
+    h2(class="text-2xl my-2", [text("Published Modules")]),
+    match model.modules {
+      Loading => @view.loading()
+      Failed => @view.load_failed("modules")
+      Success(modules) =>
+        ul(
+          modules.map(x => li(class="font-mono my-1 flex gap-4", [
+            a(href="/docs/\{x.0}", class="text-blue-500", [text(x.0)]),
+            span(class="text-gray-600", [text(x.1)]),
+          ])),
+        )
+    },
+    div(class="h-50", []),
   ])
+  @view.page(main~, footer=@view.footer())
 }
 
 ///|

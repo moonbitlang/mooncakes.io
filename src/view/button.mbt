@@ -38,28 +38,3 @@ pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
     ],
   )
 }
-
-///|
-pub fn[M] navbar() -> Html[M] {
-  div(class="font-title h-14 w-full px-8 p-4 border-b select-none", [
-    h1(class="text-gray-700 font-semibold", [text("🥮 mooncakes.io")]),
-  ])
-}
-
-///|
-pub fn[M] footer() -> Html[M] {
-  let class = "hover:text-mooncake2 transition-colors"
-  div(
-    class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex flex-col md:flex-row justify-center gap-4 md:gap-8",
-    [
-      p([text("Powered by MoonBit")]),
-      a(href="https://github.com/moonbitlang/mooncakes.io", class~, [
-        text("Site source"),
-      ]),
-      a(href="https://github.com/moonbitlang/mooncakes.io/issues/new", class~, [
-        text("Report issue"),
-      ]),
-      p([text("© 2025 mooncakes.io")]),
-    ],
-  )
-}

@@ -26,11 +26,15 @@ fn[M] load_failed(String) -> @html.Html[M]
 
 fn[M] loading() -> @html.Html[M]
 
+fn[M] logo() -> @html.Html[M]
+
 fn[M] markdown(String, small_heading? : Bool) -> @html.Html[M]
 
-fn[M] navbar() -> @html.Html[M]
+fn[M] navbar(left? : @html.Html[M], middle? : @html.Html[M], right? : @html.Html[M], style? : NavbarStyle) -> @html.Html[M]
 
 fn[M] not_found() -> @html.Html[M]
+
+fn[M] page(header? : @html.Html[M], main? : @html.Html[M], footer? : @html.Html[M]) -> @html.Html[M]
 
 // Errors
 
@@ -38,6 +42,11 @@ fn[M] not_found() -> @html.Html[M]
 pub(all) enum CaretConfig {
   LeftCenter
   LeftTop
+}
+
+pub(all) enum NavbarStyle {
+  Sticky
+  Fusion
 }
 
 // Type aliases

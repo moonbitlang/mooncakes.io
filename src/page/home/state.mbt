@@ -67,7 +67,7 @@ pub fn load() -> (Cmd[Msg], Model) {
         expect=Json(GotRecentModule(_), decode_modules),
       ),
       @http.get(
-        "/assets/count.json",
+        "/api/v0/modules/statistics",
         expect=Json(GotCount(_), decode_statistics),
       ),
     ]),
@@ -171,8 +171,8 @@ pub fn filter_indices(
 fn decode_statistics(json : Json) -> Result[PackageCount, String] {
   match json {
     {
-      "totalPackages": Number(total_packages, ..),
-      "totalLines": Number(total_lines, ..),
+      "total_packages": Number(total_packages, ..),
+      "total_lines": Number(total_lines, ..),
       ..
     } =>
       Ok({

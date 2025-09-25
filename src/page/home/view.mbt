@@ -14,33 +14,44 @@
 
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
-  a(
-    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-500 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
-    href="/docs/\{mod.path}",
+  div(
+    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
     [
       div(
         class="shrink-0 whitespace-nowrap flex flex-row text-base font-semibold",
         [
-          span([text(mod.author)]),
-          span(class="px-1 text-gray-300", [text("/")]),
-          span(class="text-black", [text(mod.name)]),
+          a(
+            href="/user/\{mod.author}",
+            class="hover:bg-gray-200 text-gray-600 font-medium transition-colors rounded px-1 -mx-1",
+            [span([text(mod.author)])],
+          ),
+          a(href="/docs/\{mod.path}", class="flex", [
+            span(class="px-1 text-gray-300", [text("/")]),
+            span(class="text-black", [text(mod.name)]),
+          ]),
         ],
       ),
-      div(class="overflow-hidden flex-1 py1", [
-        p(class="line-clamp-1 lg:line-clamp-2 py-1 text-gray-500 text-sm", [
-          text(mod.description.unwrap_or("")),
-        ]),
-      ]),
-      div(class="flex items-end", [
-        if mod.is_new {
-          @view.badge(class="bg-gray-700 text-white", [text("NEW")])
-        } else {
-          nothing()
-        },
-        p(class="text-sm w-full text-right pt-1", [
-          text(mod.created_at.map(get_relative_time).unwrap_or("")),
-        ]),
-      ]),
+      a(
+        href="/docs/\{mod.path}",
+        class="overflow-hidden flex-1 py1 flex flex-col",
+        [
+          div(class="overflow-hidden flex-1 py1", [
+            p(class="line-clamp-1 lg:line-clamp-2 py-1 text-gray-500 text-sm", [
+              text(mod.description.unwrap_or("")),
+            ]),
+          ]),
+          div(class="flex items-end", [
+            if mod.is_new {
+              @view.badge(class="bg-gray-700 text-white", [text("NEW")])
+            } else {
+              nothing()
+            },
+            p(class="text-sm w-full text-right pt-1", [
+              text(mod.created_at.map(get_relative_time).unwrap_or("")),
+            ]),
+          ]),
+        ],
+      ),
     ],
   )
 }
@@ -69,18 +80,25 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
     Some(t) => p([text(get_relative_time(t))])
     None => nothing()
   }
-  a(
+  div(
     class="select-none p-4 min-h-32 rounded flex flex-col border bg-white hover:bg-gray-100 transition-all",
-    href="/docs/\{mod.path}",
     [
       div(class="flex flex-row text-base font-semibold", [
-        h2(class="text-gray-500", [text(mod.author)]),
-        h2(class="px-1 text-gray-300", [text("/")]),
-        h2(class="", [text(mod.name)]),
+        a(
+          href="/user/\{mod.author}",
+          class="hover:bg-gray-200 transition-colors rounded px-1 -mx-1",
+          [h2(class="text-gray-500", [text(mod.author)])],
+        ),
+        a(href="/docs/\{mod.path}", class="flex", [
+          h2(class="px-1 text-gray-300", [text("/")]),
+          h2(class="", [text(mod.name)]),
+        ]),
       ]),
-      description,
-      div(class="flex justify-between items-center text-gray-600 text-sm", [
-        keywords, time,
+      a(href="/docs/\{mod.path}", class="flex-1 flex flex-col", [
+        description,
+        div(class="flex justify-between items-center text-gray-600 text-sm", [
+          keywords, time,
+        ]),
       ]),
     ],
   )

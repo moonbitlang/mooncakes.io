@@ -119,7 +119,7 @@ extern "js" fn get_date_days_ago(days : Int) -> String =
 ///|
 pub fn load(username : String) -> (Cmd[Msg], Model) {
   let today = get_today_iso()
-  let start_date = get_date_days_ago(21)
+  let start_date = get_date_days_ago(29)
   (
     batch([
       @http.get(
@@ -298,7 +298,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
             ]),
             // value
             span(class="text-[8px] sm:text-[10px] mt-1 font-mono \{class}", [
-              text(if value >= 0 { "+\{value}" } else { "-\{value}" }),
+              text(if value > 0 { "+\{value}" } else { value.to_string() }),
             ]),
             // date
             span(class="text-[8px] sm:text-[10px] mt-0.5 text-gray-700", [
@@ -326,11 +326,11 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
                 ],
               ),
               div(
-                class="flex items-end overflow-x-auto gap-1 sm:gap-2 lg:gap-3 pb-2 dir-rtl",
+                class="flex items-end overflow-x-auto gap-1 sm:gap-2 lg:gap-3 pb-2",
                 [
                   div(
-                    class="flex items-end gap-1 sm:gap-2 lg:gap-3 dir-ltr",
-                    bars,
+                    class="flex items-end gap-1 sm:gap-2 lg:gap-3",
+                    [..bars, div(id="right", [])],
                   ),
                 ],
               ),
@@ -386,7 +386,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
     GotUserProfile(Ok(profile)) =>
       (none(), { ..model, profile: Success(profile) })
     GotCodeFrequency(Ok(data)) =>
-      (none(), { ..model, code_frequency: Success(data) })
+      (@nav.scroll_to("right"), { ..model, code_frequency: Success(data) })
     GotCodeFrequency(Err(msg)) => {
       println(msg)
       (none(), { ..model, code_frequency: Failed })

@@ -1,9 +1,10 @@
 {
     "import": [
-        "Yoorkin/rabbit-tea/cmd",
-        "Yoorkin/rabbit-tea/html",
-        "Yoorkin/rabbit-tea/http",
-        "moonbitlang/mooncakes/util",
-        "moonbitlang/mooncakes/view"
+      "Yoorkin/rabbit-tea/cmd",
+      "Yoorkin/rabbit-tea/html",
+      "Yoorkin/rabbit-tea/http",
+      "moonbitlang/mooncakes/util",
+      "moonbitlang/mooncakes/view",
+      "Yoorkin/rabbit-tea/nav"
     ]
 }

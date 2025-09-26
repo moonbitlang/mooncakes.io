@@ -15,9 +15,11 @@
 ///|
 extern "js" fn get_relative_time(date : String) -> String =
   #|function getRelativeTime(dateString) {
-  #|  const date = new Date(dateString);
+  #|  const utcDate = new Date(dateString);
+  #|  const timezoneOffset = new Date().getTimezoneOffset();
+  #|  const localDate = new Date(utcDate.getTime() - (timezoneOffset * 60 * 1000));
   #|  const now = new Date();
-  #|  const diff = now - date;
+  #|  const diff = now - localDate;
   #|  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
   #|  const seconds = Math.floor(diff / 1000);
   #|  const minutes = Math.floor(seconds / 60);

@@ -15,17 +15,11 @@
 ///|
 fn decode_user_profile(json : Json) -> Result[Profile, String] {
   match json {
-    // fix: typo
+    // TODO: fix typo *avatar_url*
     {
       "modules": Array(modules),
       "username": String(username),
       "avater_url"? : avatar_url,
-      ..
-    }
-    | {
-      "modules": Array(modules),
-      "username": String(username),
-      "avatar_url"? : avatar_url,
       ..
     } =>
       try {

@@ -105,11 +105,60 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
 }
 
 ///|
+fn pinned() -> Html[Msg] {
+  let pinned = [
+    {
+      author: "moonbitlang",
+      name: "core",
+      path: "moonbitlang/core",
+      version: "",
+      keywords: None,
+      description: Some(
+        "Always up-to-date documentation for the MoonBit standard library API.",
+      ),
+      created_at: None,
+      is_new: false,
+    },
+    {
+      author: "moonbitlang",
+      name: "async",
+      path: "moonbitlang/async",
+      version: "",
+      keywords: None,
+      description: Some(
+        "Asynchronous programming library for MoonBit. Including fs, http, io, and more.",
+      ),
+      created_at: None,
+      is_new: false,
+    },
+    {
+      author: "moonbitlang",
+      name: "x",
+      path: "moonbitlang/x",
+      version: "",
+      keywords: None,
+      description: Some("Experimental and extended libraries for MoonBit."),
+      created_at: None,
+      is_new: false,
+    },
+  ]
+  div(class="container lg:w-4/5 px-4", [
+    h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
+      text("Pinned modules"),
+    ]),
+    div(
+      class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
+      pinned.map(simple_module_card),
+    ),
+  ])
+}
+
+///|
 fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
   let recently_updated = recently.map(simple_module_card)
   div(class="container lg:w-4/5 px-4", [
     h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
-      text("RECENTLY UPDATED"),
+      text("Recently updated"),
     ]),
     div(
       class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
@@ -142,7 +191,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
   div(class="pt-10", [
     div(class="container lg:w-4/5 px-4", [
       h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
-        text("ALL MODULES"),
+        text("All modules"),
       ]),
     ]),
     div(all_modules),
@@ -252,6 +301,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
 ///|
 pub fn view(model : Model) -> Html[Msg] {
   let module_list = if model.filter == "" {
+    let pinned_modules = pinned()
     let recently_updated = match model.recent_modules {
       Loading => @view.loading()
       Failed => @view.load_failed("recently updated modules")
@@ -262,7 +312,7 @@ pub fn view(model : Model) -> Html[Msg] {
       Failed => @view.load_failed("module indices")
       Success(xs) => all_modules(xs)
     }
-    div([recently_updated, all_modules])
+    div([pinned_modules, recently_updated, all_modules])
   } else {
     match model.all_modules {
       Loading => @view.loading()

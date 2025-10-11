@@ -280,17 +280,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
           [
             stat_card("Lines of code", total_lines, None),
-            stat_card(
-              "Packages",
-              total_packages,
-              Some(
-                a(
-                  class="text-sm text-right lg:pr-2 hover:underline text-gray-600",
-                  href="/statistics",
-                  [text("More detail")],
-                ),
-              ),
-            ),
+            stat_card("Packages", total_packages, None),
           ],
         ),
       ]),

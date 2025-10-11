@@ -15,11 +15,10 @@
 ///|
 fn decode_user_profile(json : Json) -> Result[Profile, String] {
   match json {
-    // TODO: fix typo *avatar_url*
     {
       "modules": Array(modules),
       "username": String(username),
-      "avater_url"? : avatar_url,
+      "avatar_url"? : avatar_url,
       ..
     } =>
       try {
@@ -113,7 +112,7 @@ extern "js" fn get_date_days_ago(days : Int) -> String =
 ///|
 pub fn load(username : String) -> (Cmd[Msg], Model) {
   let today = get_today_iso()
-  let start_date = get_date_days_ago(29)
+  let start_date = get_date_days_ago(120)
   (
     batch([
       @http.get(
@@ -323,7 +322,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
                 class="flex items-end overflow-x-auto gap-1 sm:gap-2 lg:gap-3 pb-2",
                 [
                   div(
-                    class="flex items-end gap-1 sm:gap-2 lg:gap-3",
+                    class="flex items-end gap-2",
                     [..bars, div(id="right", [])],
                   ),
                 ],

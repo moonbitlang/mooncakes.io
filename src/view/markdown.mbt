@@ -14,9 +14,8 @@
 
 ///|
 fn[M] unsupported(node_type : String, message : String) -> @html.Html[M] {
-  @html.p(class="text-red-500", [
-    text("Unsupported markdown syntax: " + node_type + " " + message),
-  ])
+  println("Unsupported markdown syntax: " + node_type + " " + message)
+  nothing()
 }
 
 ///|

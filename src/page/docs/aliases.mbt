@@ -48,4 +48,4 @@ typealias @immut/sorted_set.SortedSet as Set
 typealias @immut/sorted_map.SortedMap as Map
 
 ///|
-typealias @lazy.Lazy
+using @util {type Lazy}

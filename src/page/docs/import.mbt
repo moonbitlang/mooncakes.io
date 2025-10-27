@@ -13,7 +13,8 @@
 // limitations under the License.
 
 ///|
-fnalias @html.(
+using @html {
+  type Html,
   div,
   text,
   h1,
@@ -27,25 +28,16 @@ fnalias @html.(
   ul,
   img,
   button
-)
+}
 
 ///|
-fnalias @tea.(batch, none)
+using @tea {type Cmd, batch, none}
 
 ///|
-typealias @html.Html
+using @immut/sorted_map {type SortedMap}
 
 ///|
-typealias @tea.Cmd
+using @immut/sorted_set {type SortedSet}
 
 ///|
-typealias @util.Status
-
-///|
-typealias @immut/sorted_set.SortedSet as Set
-
-///|
-typealias @immut/sorted_map.SortedMap as Map
-
-///|
-using @util {type Lazy}
+using @util {type Lazy, type Status}

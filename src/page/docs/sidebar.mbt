@@ -158,7 +158,7 @@ fn sidebar(
   source_files : Array[String],
   showing : String,
   package_path~ : String,
-  sidebar_state : Set[ItemTarget],
+  sidebar_state : SortedSet[ItemTarget],
 ) -> Html[Msg] {
   @view.accordion(
     class="text-gray-700 flex flex-col",

@@ -16,7 +16,7 @@
 priv struct IndexNode {
   name : String
   pkg : PkgIndex?
-  childs : Map[String, IndexNode]
+  childs : SortedMap[String, IndexNode]
 } derive(Show)
 
 ///|

@@ -14,7 +14,7 @@
 
 ///|
 priv struct FoldedState {
-  set : Set[String]
+  set : SortedSet[String]
   card_mode : CardMode
 }
 

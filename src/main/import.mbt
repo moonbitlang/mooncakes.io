@@ -13,4 +13,7 @@
 // limitations under the License.
 
 ///|
-typealias @html.Html
+using @html {type Html}
+
+///|
+using @tea {type Cmd, none}

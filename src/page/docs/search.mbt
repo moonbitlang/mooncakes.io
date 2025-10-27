@@ -20,7 +20,7 @@ priv struct SearchModel {
 
 ///|
 priv struct SearchResult {
-  matching : Array[(Bool, @string.View)]
+  matching : Array[(Bool, StringView)]
   score : Int
   entry : SearchEntry
 }

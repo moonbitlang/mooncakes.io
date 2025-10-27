@@ -223,7 +223,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
     Failed => @view.load_failed("code frequency")
     Loading => @view.loading()
     Success(data) => {
-      if data.size() == 0 {
+      if data.length() == 0 {
         return div(class="my-6 text-sm text-gray-500", [
           text("No code frequency data"),
         ])

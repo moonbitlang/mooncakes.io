@@ -128,7 +128,7 @@ priv struct MiscIndex {
 
 ///|
 fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
-  let paths = path.trim("/").split("/").to_array()[:]
+  let paths = path.trim(char_set="/").split("/").to_array()[:]
   guard paths is [root_path, .. paths] && root_path == self.name else {
     return None
   }

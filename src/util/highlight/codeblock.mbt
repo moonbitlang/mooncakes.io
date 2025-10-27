@@ -180,7 +180,7 @@ pub fn parse(signature : String) -> List[CodeSpan] {
     (LexQual(path), ['.', .. s], acc) => {
       let path = String::from_iter(path.rev().iter())
         .split("/")
-        .map(@string.View::to_string)
+        .map(StringView::to_string)
         .collect()
       continue (LexQualIdent(path, @list.empty()), s, acc)
     }

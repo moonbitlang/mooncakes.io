@@ -28,7 +28,7 @@ fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
   if files.is_empty() {
     return text("No source files.")
   }
-  let package_path = package_path.trim("/")
+  let package_path = package_path.trim(char_set="/")
   div(class="", [
     ul(
       files.map(fn(x) {

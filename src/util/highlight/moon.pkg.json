@@ -1,5 +1,10 @@
 {
-    "test-import": {
-        "Yoorkin/prettyprinter": "prettyprinter"
-    }
+  "test-import": {
+    "Yoorkin/prettyprinter": "prettyprinter"
+  },
+  "import": [
+    "moonbitlang/parser/lexer",
+    "moonbitlang/parser/tokens",
+    "moonbitlang/parser/basic"
+  ]
 }

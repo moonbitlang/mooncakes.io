@@ -438,3 +438,60 @@
 //     ),
 //   )
 // }
+
+///|
+test "parse_inline_link" {
+  let source =
+    #| f(<a href="moonbitlang/core/rational#T">Type</a>::method)
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.of([Space(1), LIdent("f"), Symbol("("), Link(href="moonbitlang/core/rational#T", [UIdent("Type")]), Symbol("::"), LIdent("method"), Symbol(")")])
+    ),
+  )
+  let source =
+    #| f(<a href="moonbitlang/core/rational#T">@path/to/pkg.Type</a>::method)
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.of([Space(1), LIdent("f"), Symbol("("), Link(href="moonbitlang/core/rational#T", [QualIdent("path/to/pkg", "Type")]), Symbol("::"), LIdent("method"), Symbol(")")])
+    ),
+  )
+}
+
+///|
+test "parse_package_name_with_dot_ulident" {
+  let source =
+    #| f(@path/to/pkg.Ctor)
+    #| g(@path/to/pkg.value)
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.of([Space(1), LIdent("f"), Symbol("("), QualIdent("path/to/pkg", "Ctor"), Symbol(")"), Newline, Space(1), LIdent("g"), Symbol("("), QualIdent("path/to/pkg", "value"), Symbol(")")])
+    ),
+  )
+}
+
+///|
+test "invalid_package_name" {
+  let source =
+    #| fn startup[Model, Message](model~ : Model, update~ : (Message, Model) -> (<a href="Yoorkin/rabbit-tea/cmd#Cmd">@Yoorkin/rabbit-tea/cmd.Cmd</a>[Message], Model), view~ : (Model) -> <a href="Yoorkin/rabbit-tea/html#T">@Yoorkin/rabbit-tea/html.T</a>[Message], mount~ : String = ..) -> Unit
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.of([Space(1), Keyword("fn"), Space(1), LIdent("startup"), Symbol("["), UIdent("Model"), Symbol(","), Space(1), UIdent("Message"), Symbol("]("), LIdent("model"), Symbol("~"), Space(1), Symbol(":"), Space(1), UIdent("Model"), Symbol(","), Space(1), LIdent("update"), Symbol("~"), Space(1), Symbol(":"), Space(1), Symbol("("), UIdent("Message"), Symbol(","), Space(1), UIdent("Model"), Symbol(")"), Space(1), Symbol("->"), Space(1), Symbol("("), Link(href="Yoorkin/rabbit-tea/cmd#Cmd", [QualIdent("Yoorkin/rabbit-tea/cmd", "Cmd")]), Symbol("["), UIdent("Message"), Symbol("],"), Space(1), UIdent("Model"), Symbol("),"), Space(1), LIdent("view"), Symbol("~"), Space(1), Symbol(":"), Space(1), Symbol("("), UIdent("Model"), Symbol(")"), Space(1), Symbol("->"), Space(1), Link(href="Yoorkin/rabbit-tea/html#T", [QualIdent("Yoorkin/rabbit-tea/html", "T")]), Symbol("["), UIdent("Message"), Symbol("],"), Space(1), LIdent("mount"), Symbol("~"), Space(1), Symbol(":"), Space(1), UIdent("String"), Space(1), Symbol("="), Space(1), Symbol("..)"), Space(1), Symbol("->"), Space(1), UIdent("Unit")])
+    ),
+  )
+}
+
+///|
+test "valid_source_code" {
+  let source =
+    #| fn main { println("hello, \{object}!") }
+  inspect(
+    parse_code(source),
+    content=(
+      #|@list.of([Space(1), Keyword("fn"), Space(1), LIdent("main"), Space(1), Symbol("{"), Space(1), LIdent("println"), Symbol("("), StringLit("\""), StringLit("hello, "), Symbol("\\{"), LIdent("object"), Space(0), Symbol("}"), StringLit("!"), StringLit("\""), Symbol(")"), Space(1), Symbol("}"), Space(0)])
+    ),
+  )
+}

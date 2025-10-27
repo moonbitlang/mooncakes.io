@@ -6,25 +6,28 @@ import(
 )
 
 // Values
-fn parse(String) -> @list.List[CodeSpan]
+fn parse_code(String) -> @list.List[CodeSpan]
+
+fn parse_signature(String) -> @list.List[CodeSpan]
 
 // Errors
 
 // Types and methods
 pub(all) enum CodeSpan {
-  Unknown(Char)
+  Unknown(String)
   Keyword(String)
   Symbol(String)
   Link(href~ : String, Array[CodeSpan])
   UIdent(String)
   LIdent(String)
-  QualIdent(Array[String], String)
+  QualIdent(String, String)
   StringLit(String)
   CharLit(String)
   Number(String)
   Newline
   Space(Int)
   Comment(String)
+  Meta(String)
 }
 fn CodeSpan::output(Self, &Logger) -> Unit // from trait `Show`
 fn CodeSpan::to_string(Self) -> String // from trait `Show`

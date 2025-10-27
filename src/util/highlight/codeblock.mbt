@@ -13,206 +13,236 @@
 // limitations under the License.
 
 ///|
-using @list {type List}
+using @list {type List, cons}
 
 ///|
 pub(all) enum CodeSpan {
-  Unknown(Char)
+  Unknown(String)
   Keyword(String)
   Symbol(String)
   Link(href~ : String, Array[CodeSpan])
   UIdent(String)
   LIdent(String)
-  QualIdent(Array[String], String)
+  QualIdent(String, String)
   StringLit(String)
   CharLit(String)
   Number(String)
   Newline
   Space(Int)
   Comment(String)
+  Meta(String)
 } derive(Show)
 
 ///|
-priv enum State {
-  LexStart
-  LexSpace(Int)
-  LexIdent(List[Char])
-  LexQual(List[Char])
-  LexQualIdent(Array[String], List[Char])
-  LexOp(List[Char])
-  LexString(List[Char])
-  LexChar(List[Char])
-  LexMultiString(List[Char])
-  LexNumber(List[Char])
-  LexLinkHref(List[Char])
-  LexLinkContent(href~ : String, List[Char])
-  LexComment(List[Char])
+fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
+  match token {
+    NEWLINE => dst.push(Newline)
+    TRY_QUESTION => dst.push(Keyword("try!"))
+    NORAISE => dst.push(Keyword("noraise"))
+    ENUMVIEW => dst.push(Keyword("enumview"))
+    LETREC => dst.push(Keyword("letrec"))
+    AND => dst.push(Keyword("and"))
+    SUBERROR => dst.push(Keyword("suberror"))
+    IS => dst.push(Keyword("is"))
+    IN => dst.push(Keyword("in"))
+    FOR => dst.push(Keyword("for"))
+    DEFER => dst.push(Keyword("defer"))
+    GUARD => dst.push(Keyword("guard"))
+    LOOP => dst.push(Keyword("loop"))
+    TEST => dst.push(Keyword("test"))
+    ELLIPSIS => dst.push(Symbol("..."))
+    RANGE_EXCLUSIVE => dst.push(Symbol("..<"))
+    RANGE_INCLUSIVE => dst.push(Symbol("...="))
+    DOTDOT => dst.push(Symbol(".."))
+    RETURN => dst.push(Keyword("return"))
+    WHILE => dst.push(Keyword("while"))
+    THIN_ARROW => dst.push(Symbol("->"))
+    FAT_ARROW => dst.push(Symbol("=>"))
+    TYPE => dst.push(Keyword("type"))
+    MUTABLE => dst.push(Keyword("mut"))
+    USING => dst.push(Keyword("using"))
+    MATCH => dst.push(Keyword("match"))
+    CONST => dst.push(Keyword("const"))
+    LET => dst.push(Keyword("let"))
+    IF => dst.push(Keyword("if"))
+    FN => dst.push(Keyword("fn"))
+    ELSE => dst.push(Keyword("else"))
+    PIPE => dst.push(Symbol("|>"))
+    AS => dst.push(Keyword("as"))
+    PACKAGE_NAME(n) => dst.push(LIdent("@\{n}"))
+    BARBAR => dst.push(Symbol("||"))
+    CARET => dst.push(Symbol("^"))
+    AMPER => dst.push(Symbol("&"))
+    AMPERAMPER => dst.push(Symbol("&&"))
+    RBRACE => dst.push(Symbol("}"))
+    LBRACE => dst.push(Symbol("{"))
+    BAR => dst.push(Symbol("|"))
+    UNDERSCORE => dst.push(Symbol("_"))
+    RBRACKET => dst.push(Symbol("]"))
+    PLUS => dst.push(Symbol("+"))
+    LBRACKET => dst.push(Symbol("["))
+    SEMI(faked) => dst.push(if faked { Space(0) } else { Symbol(";") })
+    COLON => dst.push(Symbol(":"))
+    COLONCOLON => dst.push(Symbol("::"))
+    DOT_LPAREN => dst.push(Symbol(".("))
+    DOT_INT(n) => dst.push(Number(".\{n}"))
+    DOT_UIDENT(n) => dst.push(UIdent(".\{n}"))
+    DOT_LIDENT(n) => dst.push(LIdent(".\{n}"))
+    EXCLAMATION => dst.push(Symbol("!"))
+    QUESTION => dst.push(Symbol("?"))
+    MINUS => dst.push(Symbol("-"))
+    COMMA => dst.push(Symbol(","))
+    RPAREN => dst.push(Symbol(")"))
+    LPAREN => dst.push(Symbol("("))
+    EQUAL => dst.push(Symbol("="))
+    FNALIAS => dst.push(Keyword("fnalias"))
+    TRAITALIAS => dst.push(Keyword("traitalias"))
+    TYPEALIAS => dst.push(Keyword("typealias"))
+    ASYNC => dst.push(Keyword("async"))
+    CATCH => dst.push(Keyword("catch"))
+    TRY => dst.push(Keyword("try"))
+    THROW => dst.push(Keyword("throw"))
+    RAISE => dst.push(Keyword("raise"))
+    WITH => dst.push(Keyword("with"))
+    IMPL => dst.push(Keyword("impl"))
+    DERIVE => dst.push(Keyword("derive"))
+    TRAIT => dst.push(Keyword("trait"))
+    ENUM => dst.push(Keyword("enum"))
+    STRUCT => dst.push(Keyword("struct"))
+    CONTINUE => dst.push(Keyword("continue"))
+    BREAK => dst.push(Keyword("break"))
+    EXTERN => dst.push(Keyword("extern"))
+    IMPORT => dst.push(Keyword("import"))
+    READONLY => dst.push(Keyword("readonly"))
+    PRIV => dst.push(Keyword("priv"))
+    PUB => dst.push(Keyword("pub"))
+    TRUE => dst.push(Keyword("true"))
+    FALSE => dst.push(Keyword("false"))
+    EOF => dst.push(Space(0))
+    AUGMENTED_ASSIGNMENT(op) => dst.push(Symbol(op))
+    INFIX4(op) | INFIX3(op) | INFIX2(op) | INFIX1(op) => dst.push(Symbol(op))
+    COMMENT(s) => dst.push(Comment(s.content))
+    POST_LABEL(label) => dst.push(LIdent(label + "~"))
+    UIDENT(s) => dst.push(UIdent(s))
+    LIDENT(s) => dst.push(LIdent(s))
+    MULTILINE_STRING(s) => dst.push(StringLit("#|\{s}"))
+    STRING(s) => dst.push(StringLit("\"\{s}\""))
+    DOUBLE(s) => dst.push(Number(s))
+    FLOAT(s) => dst.push(Number(s))
+    BYTES(s) => dst.push(StringLit("b\"\{s}\""))
+    BYTE(s) => dst.push(CharLit("b'\{s}'"))
+    INT(s) => dst.push(Number(s))
+    CHAR(s) => dst.push(CharLit("'\{s}'"))
+    TRY_EXCLAMATION => dst.push(Symbol("try!"))
+    ATTRIBUTE((id1, id2, str)) => {
+      dst.push(
+        match id2 {
+          None => Meta("#\{id1}")
+          Some(id2) => Meta("#\{id1}\{id2}")
+        },
+      )
+      push_code_to_span(str, dst)
+    }
+    INTERP(xs) => {
+      dst.push(StringLit("\""))
+      interp_to_string(xs, dst)
+      dst.push(StringLit("\""))
+    }
+    MULTILINE_INTERP(xs) => {
+      dst.push(StringLit("$|"))
+      interp_to_string(xs, dst)
+    }
+  }
 }
 
 ///|
-let keywords : Set[String] = Set::of([
-  "fn", "let", "type", "struct", "enum", "impl", "trait", "derive", "match", "if",
-  "else", "typealias", "guard", "for", "in", "while", "loop", "break", "continue",
-  "return", "pub", "priv", "mut", "with", "test",
-])
+fn interp_to_string(
+  xs : Array[@tokens.InterpElem],
+  dst : Array[CodeSpan],
+) -> Unit {
+  xs.each(x => match x {
+    InterpLit(repr~, ..) => dst.push(StringLit(repr))
+    InterpSource({ source, .. }) => {
+      dst.push(Symbol("\\{"))
+      push_code_to_span(source, dst)
+      dst.push(Symbol("}"))
+    }
+  })
+}
 
 ///|
-let operators : Set[Char] = Set::from_iter("+-*/%&|{}()[]<>!?=,.:;~".iter())
-
-///|
-pub fn parse(signature : String) -> List[CodeSpan] {
-  loop (LexStart, signature.view(), @list.empty()) {
-    (LexStart, ['\n', .. s], acc) =>
-      // newline
-      // TODO: fix this comment
-      continue (LexStart, s, acc.add(Newline))
-
-    // spaces
-    (LexStart, [' ', .. s], acc) => continue (LexSpace(1), s, acc)
-    (LexSpace(n), [' ', .. s], acc) => continue (LexSpace(n + 1), s, acc)
-    (LexSpace(n), s, acc) => continue (LexStart, s, acc.add(Space(n)))
-
-    // comment
-    (LexStart, [.. "//", .. s], acc) =>
-      continue (LexComment(@list.empty()), s, acc)
-    (LexComment(content), ['\n', .. s] | ([] as s), acc) => {
-      let content = String::from_iter(content.rev().iter())
-      continue (LexStart, s, acc.add(Comment("//" + content)).add(Newline))
-    }
-    (LexComment(content), [c, .. s], acc) =>
-      continue (LexComment(content.add(c)), s, acc)
-
-    // link
-    (LexStart, [.. "<a href=\"", .. s], acc) =>
-      continue (LexLinkHref(@list.empty()), s, acc)
-    (LexLinkHref(href), [.. "\">", .. s], acc) => {
-      let href = String::from_iter(href.rev().iter())
-      continue (LexLinkContent(href~, @list.empty()), s, acc)
-    }
-    (LexLinkHref(href), [c, .. s], acc) =>
-      continue (LexLinkHref(href.add(c)), s, acc)
-    (LexLinkContent(href~, content), [.. "</a>", .. s], acc) => {
-      let content = content.rev().iter() |> String::from_iter
-      let spans = parse(content)
-      continue (LexStart, s, acc.add(Link(href~, spans.to_array())))
-    }
-    (LexLinkContent(href~, content), [c, .. s], acc) =>
-      continue (LexLinkContent(href~, content.add(c)), s, acc)
-
-    // numbers
-    (LexStart, ['0'..='9' as c, .. s], acc) =>
-      continue (LexNumber(@list.of([c])), s, acc)
-    // TODO: fix this bad formatting
-    (
-      LexNumber(nums),
-      [
-        '0'..='9'
-        | '_'
-        | 'x'
-        | 'b'
-        | 'o'
-        | '.'
-        | 'a'..='f'
-        | 'A'..='F' as c,
-        .. s,
-      ],
-      acc,
-    ) => continue (LexNumber(nums.add(c)), s, acc)
-    (LexNumber(nums), s, acc) => {
-      let nums = nums.rev().iter() |> String::from_iter
-      continue (LexStart, s, acc.add(Number(nums)))
-    }
-
-    // strings
-    (LexStart, ['"', .. s], acc) => continue (LexString(@list.empty()), s, acc)
-    (LexString(content), [.. "\\\"", .. s], acc) =>
-      continue (LexString(content.add('\\').add('"')), s, acc)
-    (LexString(content), ['"', .. s], acc) => {
-      let content = String::from_iter(content.rev().iter())
-      continue (LexStart, s, acc.add(StringLit("\"" + content + "\"")))
-    }
-    (LexString(content), [c, .. s], acc) =>
-      continue (LexString(content.add(c)), s, acc)
-
-    // strings
-    (LexStart, ['\'', .. s], acc) => continue (LexChar(@list.empty()), s, acc)
-    (LexChar(content), [.. "\\\'", .. s], acc) =>
-      continue (LexChar(content.add('\\').add('\'')), s, acc)
-    (LexChar(content), ['\'', .. s], acc) => {
-      let content = String::from_iter(content.rev().iter())
-      continue (LexStart, s, acc.add(CharLit("'" + content + "'")))
-    }
-    (LexChar(content), [c, .. s], acc) =>
-      continue (LexChar(content.add(c)), s, acc)
-
-    // multiline string
-    // LexStart, [.. "#|", .. s], acc => continue LexMultiString(Nil), s, acc
-    (LexStart, ['#' | '$' as c, '|', .. s], acc) =>
-      continue (LexMultiString(@list.empty().add(c).add('|')), s, acc)
-    (LexMultiString(content), ['\n', .. s] | ([] as s), acc) => {
-      let content = content.rev().iter() |> String::from_iter
-      continue (LexStart, s, acc.add(StringLit(content)).add(Newline))
-    }
-    (LexMultiString(content), [c, .. s], acc) =>
-      continue (LexMultiString(content.add(c)), s, acc)
-
-    // identifiers
-    (LexStart, ['A'..='Z' | 'a'..='z' | '_' as c, .. s], acc) =>
-      continue (LexIdent(@list.of([c])), s, acc)
-    (LexIdent(id), ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s], acc) =>
-      continue (LexIdent(id.add(c)), s, acc)
-    (LexIdent(id), s, acc) => {
-      let id = String::from_iter(id.rev().iter())
-      let span = match id[0] {
-        'a'..='z' =>
-          if keywords.contains(id) {
-            Keyword(id)
-          } else {
-            LIdent(id)
-          }
-        _ => UIdent(id)
-      }
-      continue (LexStart, s, acc.add(span))
-    }
-
-    // qualified ident
-    (LexStart, ['@', .. s], acc) => continue (LexQual(@list.empty()), s, acc)
-    (LexQual(path), ['.', .. s], acc) => {
-      let path = String::from_iter(path.rev().iter())
-        .split("/")
-        .map(StringView::to_string)
-        .collect()
-      continue (LexQualIdent(path, @list.empty()), s, acc)
-    }
-    (LexQual(path), [c, .. s], acc) => continue (LexQual(path.add(c)), s, acc)
-    (
-      LexQualIdent(path, id),
-      ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s],
-      acc,
-    ) => continue (LexQualIdent(path, id.add(c)), s, acc)
-    (LexQualIdent(path, id), s, acc) => {
-      let id = String::from_iter(id.rev().iter())
-      continue (LexStart, s, acc.add(QualIdent(path, id)))
-    }
-
-    // operators
-    (LexStart, [c, .. s], acc) if operators.contains(c) =>
-      continue (LexOp(@list.of([c])), s, acc)
-    (LexOp(op), [c, .. s], acc) if operators.contains(c) =>
-      continue (LexOp(op.add(c)), s, acc)
-    (LexOp(op), s, acc) => {
-      let op = String::from_iter(op.rev().iter())
-      if s is [.. "a href=\"", .. s] {
-        continue (
-            LexLinkHref(@list.empty()),
-            s,
-            acc.add(Symbol(op.view(end_offset=op.length() - 1).to_string())),
-          )
-      } else {
-        continue (LexStart, s, acc.add(Symbol(op)))
-      }
-    }
-    (_, [c, .. s], acc) => continue (LexStart, s, acc.add(Unknown(c)))
-    (_, [], acc) => acc.rev()
+/// see https://github.com/moonbitlang/parser/issues/77
+fn token_to_real_column(triple : @tokens.Triple) -> Int {
+  let column = triple.1.column()
+  match triple.0 {
+    DOT_INT(_) | DOT_LIDENT(_) | DOT_UIDENT(_) => column - 1
+    _ => column
   }
+}
+
+///|
+fn token_to_real_column_end(triple : @tokens.Triple) -> Int {
+  triple.2.column()
+}
+
+///|
+/// A more elegant approach might be to use a `(Source, IntervalTree[Link|Highlight])` 
+/// to store the signature, and then merge this pair into HTML during rendering.
+/// But currently it's annoying to maintain an IntervalTree module because the 
+/// languages breaking change (even the community already have one). 
+/// 
+/// Using a JavaScript library to insert HTML directly into the DOM is also impossible now,
+/// because the implementation of the VDOM behind rabbit-tea relies on the node index.
+/// 
+/// Another issue is that package paths in Moonbit source code can sometimes be invalid,
+/// for example, `@peter-jerry-ye/async` and `@Yoorkin/rabbit-tea`. Such paths may appear 
+/// in the generated signature block. The signature block may also contain link information 
+/// like `<a href="document">code</a>`, which cannot be rendered directly, nor processed 
+/// by moonbitlang/parser/lexer or shiki with existing Moonbit tmLanguage definitions.
+/// This issue should be solved by changing the behavior of moondoc.
+/// 
+fn push_code_to_span(code : String, dst : Array[CodeSpan]) -> Unit {
+  let { tokens, errors, .. } = @lexer.tokens_from_string(comment=true, code)
+  guard errors is [] else {
+    dst.push(Unknown(code))
+    return
+  }
+  let mut previous_column = 1
+  loop tokens[:] {
+    [(NEWLINE, _, _), .. rest] => {
+      previous_column = 1
+      dst.push(Newline)
+      continue rest
+    }
+    [
+      (PACKAGE_NAME(pkg), _, _) as first,
+      (DOT_LIDENT(s) | DOT_UIDENT(s), _, _) as second,
+      .. rest,
+    ] => {
+      let column = token_to_real_column(first)
+      if previous_column < column {
+        dst.push(Space(column - previous_column))
+      }
+      dst.push(QualIdent(pkg, s))
+      previous_column = token_to_real_column_end(second)
+      continue rest
+    }
+    [triple, .. rest] => {
+      let column = token_to_real_column(triple)
+      if previous_column < column {
+        dst.push(Space(column - previous_column))
+      }
+      push_token_spans(triple.0, dst)
+      previous_column = token_to_real_column_end(triple)
+      continue rest
+    }
+    [] => ()
+  }
+}
+
+///|
+pub fn parse_code(code : String) -> List[CodeSpan] {
+  let results = []
+  push_code_to_span(code, results)
+  @list.from_array(results)
 }

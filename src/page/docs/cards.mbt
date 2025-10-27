@@ -50,7 +50,7 @@ fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 fn signature_view(content : String) -> Html[Msg] {
   pre(class="text-wrap flex items-center", [
     code(class="font-mono text-sm text-blue-800", [
-      @view.code_block(content, collapse_namespace=true),
+      @view.code_block(content, kind=Signature),
     ]),
   ])
 }

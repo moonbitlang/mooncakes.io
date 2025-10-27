@@ -4,9 +4,9 @@ fn breadcrumbs(
   module_path : String,
   module_index : ModuleIndex,
 ) -> Html[Msg] {
-  let module_path = module_path.trim("/").to_string()
-  let path = path.trim("/")
-  let paths = path.trim_start("/").split("/").collect()
+  let module_path = module_path.trim(char_set="/").to_string()
+  let path = path.trim(char_set="/")
+  let paths = path.trim_start(char_set="/").split("/").collect()
   let mut acc_path = ""
   let elems = []
   for path in paths {

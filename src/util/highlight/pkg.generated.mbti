@@ -26,6 +26,8 @@ pub(all) enum CodeSpan {
   Space(Int)
   Comment(String)
 }
+fn CodeSpan::output(Self, &Logger) -> Unit // from trait `Show`
+fn CodeSpan::to_string(Self) -> String // from trait `Show`
 impl Show for CodeSpan
 
 // Type aliases

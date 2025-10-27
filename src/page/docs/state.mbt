@@ -56,7 +56,7 @@ pub fn load(path : String, fragment : String?) -> (Cmd[Msg], Model) {
   (
     batch([
       @http.get(
-        "/assets/" + path.trim("/").to_string() + "/resource.json",
+        "/assets/" + path.trim(char_set="/").to_string() + "/resource.json",
         expect=Json(GotResource(_), decode_resource),
       ),
       @dialog.close("search-panel"),

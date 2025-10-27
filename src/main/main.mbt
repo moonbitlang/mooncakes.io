@@ -68,7 +68,7 @@ fn route(url : @url.Url) -> (Cmd[Msg], Model) {
       @user.load(name.to_string()) |> update_with(User(_), GotUserMsg(_))
     ["assets", ..] => (@nav.load(url.to_string()), Redirect)
     ["docs", .. module_path] =>
-      module_path.iter().map(@string.View::to_string).join("/")
+      module_path.iter().map(StringView::to_string).join("/")
       |> @docs.load(url.fragment)
       |> update_with(Docs(_), GotDocsMsg(_))
     _ => (none(), NotFound)

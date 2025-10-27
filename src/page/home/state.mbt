@@ -206,7 +206,7 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
         _ => panic()
       }
       guard path.split("/").collect() is [author, .. name]
-      let name = name.iter().map(@string.View::to_string).join("/")
+      let name = name.iter().map(StringView::to_string).join("/")
       {
         path,
         name,

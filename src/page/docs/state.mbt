@@ -42,7 +42,7 @@ struct Model {
   // The sidebar items related to current package, including the sub-packages
   sidebar_document : Array[@tree.Tree[ItemTarget]]
   // The collapsed items in the sidebar
-  sidebar_collapsed : Set[ItemTarget]
+  sidebar_collapsed : SortedSet[ItemTarget]
   // The current expanded tab in the sidebar
   sidebar_tab : String
   // The sidebar fab button

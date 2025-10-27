@@ -13,16 +13,10 @@
 // limitations under the License.
 
 ///|
-fnalias @html.(a, div, nothing, text, input, img, h1, h2, span, p)
+using @html {type Html, a, div, nothing, text, input, img, h1, h2, span, p}
 
 ///|
-fnalias @tea.none
+using @tea {type Cmd, none}
 
 ///|
-typealias @html.Html
-
-///|
-typealias @tea.Cmd
-
-///|
-typealias @util.Status
+using @util {type Status}

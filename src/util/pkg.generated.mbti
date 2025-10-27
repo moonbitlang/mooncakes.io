@@ -6,6 +6,10 @@ package "moonbitlang/mooncakes/util"
 // Errors
 
 // Types and methods
+type Lazy[T]
+fn[T] Lazy::force(Self[T]) -> T
+fn[T] Lazy::new(() -> T) -> Self[T]
+
 pub(all) enum Status[T] {
   Loading
   Failed

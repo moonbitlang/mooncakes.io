@@ -13,13 +13,10 @@
 // limitations under the License.
 
 ///|
-typealias @html.Html
+using @immut/sorted_set {type SortedSet}
 
 ///|
-typealias @immut/sorted_set.SortedSet as Set
-
-///|
-fnalias @html.(div, text, ul)
+using @html {type Html, div, text, ul}
 
 ///|
 pub(all) enum Tree[Id] {
@@ -39,7 +36,7 @@ pub fn[Id] get_name(self : Tree[Id]) -> String {
 pub fn[M, Id : Compare] view(
   toggle~ : (Id) -> M,
   click~ : (Id) -> M,
-  state~ : Set[Id],
+  state~ : SortedSet[Id],
   indicator~ : Id,
   items : Array[Tree[Id]],
 ) -> Html[M] {

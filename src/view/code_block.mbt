@@ -13,11 +13,20 @@
 // limitations under the License.
 
 ///|
-pub fn[M] code_block(moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
-  let spans = @highlight.parse(moonbit)
+pub(all) enum CodeBlockKind {
+  Signature
+  Code
+}
+
+///|
+pub fn[M] code_block(moonbit : String, kind~ : CodeBlockKind) -> Html[M] {
+  let spans = match kind {
+    Code => @highlight.parse_code(moonbit)
+    Signature => @highlight.parse_signature(moonbit)
+  }
   fn go(x) {
     match x {
-      @highlight.Unknown(c) => span([text(String::from_array([c]))])
+      @highlight.Unknown(c) => span([text(c)])
       Keyword(s) => span(class="text-[#0033b3]", [text(s)])
       Symbol(s) => span(class="text-zinc-500 text-nowrap", [text(s)])
       Link(href~, content) =>
@@ -33,8 +42,9 @@ pub fn[M] code_block(moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
       CharLit(s) | StringLit(s) | Number(s) =>
         span(class="text-orange-800", [text(s)])
       Comment(s) => span(class="text-green-800", [text(s)])
+      Meta(s) => span(class="text-[#AF00DB]", [text(s)])
       QualIdent(path, name) =>
-        if collapse_namespace {
+        if kind is Signature {
           span(class="group/ident relative", [
             div(
               class="absolute bottom-[120%] inset-0 flex items-center justify-center ",
@@ -42,7 +52,7 @@ pub fn[M] code_block(moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
                 div(
                   class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
                   [
-                    text("@" + path.join("/") + "."),
+                    text("@" + path + "."),
                     span(class="text-blue-900", [text(name)]),
                   ],
                 ),
@@ -52,7 +62,7 @@ pub fn[M] code_block(moonbit : String, collapse_namespace~ : Bool) -> Html[M] {
           ])
         } else {
           span([
-            span(class="text-gray-600", [text("@" + path.join("/") + ".")]),
+            span(class="text-gray-600", [text("@" + path + ".")]),
             span(class="text-blue-900", [text(name)]),
           ])
         }

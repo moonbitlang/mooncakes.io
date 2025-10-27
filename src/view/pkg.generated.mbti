@@ -12,7 +12,7 @@ fn[M] badge(Array[@html.Html[M]], class? : String) -> @html.Html[M]
 
 fn[M] button(String, click? : M) -> @html.Html[M]
 
-fn[M] code_block(String, collapse_namespace~ : Bool) -> @html.Html[M]
+fn[M] code_block(String, kind~ : CodeBlockKind) -> @html.Html[M]
 
 fn[M] collapse(header~ : @html.Html[M], body~ : @html.Html[M], collapsed~ : Bool, toggle~ : M, caret_config? : CaretConfig) -> @html.Html[M]
 
@@ -42,6 +42,11 @@ fn[M] page(header? : @html.Html[M], main? : @html.Html[M], footer? : @html.Html[
 pub(all) enum CaretConfig {
   LeftCenter
   LeftTop
+}
+
+pub(all) enum CodeBlockKind {
+  Signature
+  Code
 }
 
 pub(all) enum NavbarStyle {

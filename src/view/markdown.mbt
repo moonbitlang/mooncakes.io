@@ -118,7 +118,7 @@ fn[M] block2html(
       let code = code.iter().map(fn(node) { node.v }).join("\n")
       let code = if info_string is Some({ v: lang, .. }) &&
         (lang == "mbt" || lang == "moonbit") {
-        let code = code_block(code, collapse_namespace=false)
+        let code = code_block(code, kind=Code)
         @html.code(class="font-mono", [code])
       } else {
         @html.code(class="font-mono", [div([text(code)])])

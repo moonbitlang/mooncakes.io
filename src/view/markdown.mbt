@@ -90,6 +90,11 @@ fn[M] inline2html(
 }
 
 ///|
+fn is_moonbit(lang : String) -> Bool {
+  lang.to_lower() is ("mbt" | "moonbit")
+}
+
+///|
 fn[M] block2html(
   x : @cmark.Block,
   small_heading~ : Bool,
@@ -116,8 +121,7 @@ fn[M] block2html(
       )
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
       let code = code.iter().map(fn(node) { node.v }).join("\n")
-      let code = if info_string is Some({ v: lang, .. }) &&
-        (lang == "mbt" || lang == "moonbit") {
+      let code = if info_string is Some({ v: lang, .. }) && is_moonbit(lang) {
         let code = code_block(code, kind=Code)
         @html.code(class="font-mono", [code])
       } else {

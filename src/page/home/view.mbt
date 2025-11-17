@@ -221,13 +221,14 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     )
   }
 
-  fn stat_card(label, value : Int, child : Html[Msg]?) {
+  fn stat_card(label, value : Int, invisible : Bool, child : Html[Msg]?) {
     let bottom = match child {
       None => "pb-6"
       Some(_) => "pb-2"
     }
+    let invisible = if invisible { " invisible " } else { " " }
     div(
-      class="border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
+      class="border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
       [
         p(class="text-xl lg:text-3xl font-extralight", [
           text(value.to_string()),
@@ -279,8 +280,8 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
         div(
           class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
           [
-            stat_card("Lines of code", total_lines, None),
-            stat_card("Packages", total_packages, None),
+            stat_card("Lines of code", total_lines, true, None),
+            stat_card("Packages", total_packages, false, None),
           ],
         ),
       ]),

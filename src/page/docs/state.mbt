@@ -126,8 +126,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
         none(),
         match result {
           Ok(module_index) => {
-            let sidebar_document = module_index
-              .inner()
+            let sidebar_document = module_index.0
               .find_node(model.path)
               .unwrap()
               .to_document_items()

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-using @list {type List, cons}
+using @list {type List}
 
 ///|
 pub(all) enum CodeSpan {

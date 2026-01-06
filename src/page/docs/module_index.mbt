@@ -51,23 +51,27 @@ test "dummy test to suppress unused trait implementation warning" {
 
 ///|
 fn IndexNode::iter(self : IndexNode) -> Iter[IndexNode] {
-  Iter::new(fn(yield_) {
-    match self.pkg {
-      Some(_) => if yield_(self) == IterEnd { return IterEnd }
-      None => ()
+  // Construct an iterator by recursively traversing the tree
+  fn traverse(node : IndexNode) -> Iter[IndexNode] {
+    let pkg_iter = match node.pkg {
+      Some(_) => Iter::singleton(node)
+      None => Iter::empty()
     }
-    for _, node in self.childs {
-      if node.iter().run(yield_) == IterEnd {
-        return IterEnd
-      }
-    }
-    IterContinue
-  })
+    let childs_iter = node.childs
+      .iter()
+      .flat_map(fn(pair) {
+        let (_, child) = pair
+        traverse(child)
+      })
+    pkg_iter.concat(childs_iter)
+  }
+
+  traverse(self)
 }
 
 ///|
 fn ModuleIndex::iter(self : ModuleIndex) -> Iter[IndexNode] {
-  self.inner().iter()
+  self.0.iter()
 }
 
 ///|

@@ -196,7 +196,14 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
       "created_at": String(time),
       ..
     } => {
-      let keywords = Some(keywords.filter_map(x => x.as_string()))
+      let keywords = Some(
+        keywords.filter_map(fn(x) {
+          match x {
+            String(s) => Some(s)
+            _ => None
+          }
+        }),
+      )
       let description = Some(description)
       let created_at = Some(time)
       // we need Json::Boolean(x), not Json::True and Json::False

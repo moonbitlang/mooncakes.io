@@ -13,11 +13,11 @@
 // limitations under the License.
 
 ///|
-fn meta_info_item_view(
+fn[T] meta_info_item_view(
   title~ : String,
-  elem : Html[Msg],
+  elem : Html[T],
   icon? : String,
-) -> Html[Msg] {
+) -> Html[T] {
   let title_content = match icon {
     Some(icon_src) =>
       div(class="flex items-center gap-2", [
@@ -33,11 +33,15 @@ fn meta_info_item_view(
 }
 
 ///|
-fn install_view(command : String, copied~ : Bool) -> Html[Msg] {
+fn[T] install_view(
+  command : String,
+  copied~ : Bool,
+  to_msg : (Msg) -> T,
+) -> Html[T] {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
     class="hover:bg-gray-100 active:bg-gray-200 bg-white md:shadow-xs transition-colors text-black text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
-    click=Msg::CopyInstallCommand(command),
+    click=to_msg(Msg::CopyInstallCommand(command)),
     [
       span(class="overflow-x-auto text-nowrap", [text(command)]),
       img(class="size-4", src=icon, []),
@@ -46,7 +50,7 @@ fn install_view(command : String, copied~ : Bool) -> Html[Msg] {
 }
 
 ///|
-fn tag_view(value : String) -> Html[Msg] {
+fn[T] tag_view(value : String) -> Html[T] {
   div(
     class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600 overflow-hidden",
     [text(value)],
@@ -54,7 +58,11 @@ fn tag_view(value : String) -> Html[Msg] {
 }
 
 ///|
-fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
+fn[T] meta_info(
+  model : MetaInfo,
+  install_copied~ : Bool,
+  to_msg : (Msg) -> T,
+) -> Html[T] {
   let model_license = match model.license {
     Some(l) =>
       meta_info_item_view(icon=@config.license, title="License", p([text(l)]))
@@ -69,7 +77,7 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
       )
     None => nothing()
   }
-  let model_description = div(class="pl-7 py-2 mb-2", [
+  let model_description : Html[T] = div(class="pl-7 py-2 mb-2", [
     h1(class="text-2xl font-bold mb-2", [
       text(model.name.split("/").last().unwrap().to_string()),
     ]),
@@ -139,6 +147,7 @@ fn meta_info(model : MetaInfo, install_copied~ : Bool) -> Html[Msg] {
         install_view(
           "moon add \{model.name}@\{model.version}",
           copied=install_copied,
+          to_msg,
         )
       },
     ),

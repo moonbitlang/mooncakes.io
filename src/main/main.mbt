@@ -79,7 +79,7 @@ fn route(url : @url.Url) -> (Cmd[Msg], Model) {
 fn view(model : Model) -> Html[Msg] {
   match model {
     Home(model) => @home.view(model).map(GotHomeMsg(_))
-    Docs(model) => @docs.view(model).map(GotDocsMsg(_))
+    Docs(model) => @docs.view(model, x => GotDocsMsg(x))
     User(model) => @user.view(model).map(GotUserMsg(_))
     NotFound => @view.not_found()
     Redirect => @view.loading()

@@ -38,6 +38,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
       div([
         meta,
         document(
+          hide_large_package=model.hide_large_package,
           readme_content~,
           package_data=model.package_data,
           folded=model.collapsed_docs,

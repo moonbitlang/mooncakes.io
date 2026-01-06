@@ -2,65 +2,65 @@
 package "moonbitlang/mooncakes/config"
 
 // Values
-const EXPANSION : String = "/expansion.svg"
+pub const EXPANSION : String = "/expansion.svg"
 
-const FILTER : String = "/filter.svg"
+pub const FILTER : String = "/filter.svg"
 
-const FOLDER_CLOSE : String = "/folder-close.svg"
+pub const FOLDER_CLOSE : String = "/folder-close.svg"
 
-const FOLDER_OPEN : String = "/folder-open.svg"
+pub const FOLDER_OPEN : String = "/folder-open.svg"
 
-const HAMBURGER_BUTTON : String = "/hamburger-button.svg"
+pub const HAMBURGER_BUTTON : String = "/hamburger-button.svg"
 
-const LOGO : String = "/mooncake-pic.png"
+pub const LOGO : String = "/mooncake-pic.png"
 
-const README_ICON : String = "/readme.svg"
+pub const README_ICON : String = "/readme.svg"
 
-const REDUCTION : String = "/reduction.svg"
+pub const REDUCTION : String = "/reduction.svg"
 
-const SEARCH : String = "/search.svg"
+pub const SEARCH : String = "/search.svg"
 
-const SECTION_CLOSE : String = "/section-close.svg"
+pub const SECTION_CLOSE : String = "/section-close.svg"
 
-const SECTION_OPEN : String = "/section-open.svg"
+pub const SECTION_OPEN : String = "/section-open.svg"
 
-const SHARE : String = "/share.svg"
+pub const SHARE : String = "/share.svg"
 
-const TRAIT_ICON : String = "/components.svg"
+pub const TRAIT_ICON : String = "/components.svg"
 
-const TYPE_ALIAS_ICON : String = "/code-brackets.svg"
+pub const TYPE_ALIAS_ICON : String = "/code-brackets.svg"
 
-const TYPE_ICON : String = "/type.svg"
+pub const TYPE_ICON : String = "/type.svg"
 
-const VALUE_ICON : String = "/code-brackets.svg"
+pub const VALUE_ICON : String = "/code-brackets.svg"
 
-let book_open : String
+pub let book_open : String
 
-let builtins_package_path : Map[String, String]
+pub let builtins_package_path : Map[String, String]
 
-let clipboard : String
+pub let clipboard : String
 
-let code : String
+pub let code : String
 
-let dead_rabbit : String
+pub let dead_rabbit : String
 
-let deps : String
+pub let deps : String
 
-let icon_close : String
+pub let icon_close : String
 
-let install : String
+pub let install : String
 
-let license : String
+pub let license : String
 
-let ok : String
+pub let ok : String
 
-let repo : String
+pub let repo : String
 
-let tag : String
+pub let tag : String
 
-let terminal : String
+pub let terminal : String
 
-let user : String
+pub let user : String
 
 // Errors
 

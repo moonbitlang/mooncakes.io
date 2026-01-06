@@ -6,9 +6,9 @@ import(
 )
 
 // Values
-fn parse_code(String) -> @list.List[CodeSpan]
+pub fn parse_code(String) -> @list.List[CodeSpan]
 
-fn parse_signature(String) -> @list.List[CodeSpan]
+pub fn parse_signature(String) -> @list.List[CodeSpan]
 
 // Errors
 
@@ -29,9 +29,7 @@ pub(all) enum CodeSpan {
   Comment(String)
   Meta(String)
 }
-fn CodeSpan::output(Self, &Logger) -> Unit // from trait `Show`
-fn CodeSpan::to_string(Self) -> String // from trait `Show`
-impl Show for CodeSpan
+pub impl Show for CodeSpan
 
 // Type aliases
 

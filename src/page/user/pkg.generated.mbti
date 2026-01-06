@@ -8,17 +8,17 @@ import(
 )
 
 // Values
-fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html[Msg]
+pub fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html[Msg]
 
-fn load(String) -> (@cmd.Cmd[Msg], Model)
+pub fn load(String) -> (@cmd.Cmd[Msg], Model)
 
-fn profile(@util.Status[Profile]) -> @html.Html[Msg]
+pub fn profile(@util.Status[Profile]) -> @html.Html[Msg]
 
-fn published_modules(@util.Status[Array[(String, String)]]) -> @html.Html[Msg]
+pub fn published_modules(@util.Status[Array[(String, String)]]) -> @html.Html[Msg]
 
-fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
+pub fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
-fn view(Model) -> @html.Html[Msg]
+pub fn view(Model) -> @html.Html[Msg]
 
 // Errors
 

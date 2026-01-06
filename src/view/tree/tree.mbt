@@ -25,7 +25,7 @@ pub(all) enum Tree[Id] {
 }
 
 ///|
-pub fn[Id] get_name(self : Tree[Id]) -> String {
+pub fn[Id] Tree::get_name(self : Tree[Id]) -> String {
   match self {
     Tree::Item(name, ..) => name
     Tree::Node(name, _, ..) => name

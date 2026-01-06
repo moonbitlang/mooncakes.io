@@ -7,11 +7,11 @@ import(
 )
 
 // Values
-fn load(String, String?) -> (@cmd.Cmd[Msg], Model)
+pub fn load(String, String?) -> (@cmd.Cmd[Msg], Model)
 
-fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
+pub fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
-fn view(Model) -> @html.Html[Msg]
+pub fn view(Model) -> @html.Html[Msg]
 
 // Errors
 

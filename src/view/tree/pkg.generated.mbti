@@ -7,7 +7,7 @@ import(
 )
 
 // Values
-fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html[M]
+pub fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html[M]
 
 // Errors
 
@@ -16,7 +16,7 @@ pub(all) enum Tree[Id] {
   Item(id~ : Id, String)
   Node(id~ : Id, String, Array[Tree[Id]])
 }
-fn[Id] Tree::get_name(Self[Id]) -> String
+pub fn[Id] Tree::get_name(Self[Id]) -> String
 
 // Type aliases
 

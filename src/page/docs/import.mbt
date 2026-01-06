@@ -27,7 +27,7 @@ using @html {
   h3,
   ul,
   img,
-  button
+  button,
 }
 
 ///|

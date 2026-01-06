@@ -75,10 +75,10 @@ struct Model {
 }
 
 ///|
-typealias Map[String, Int] as CodeFrequency
+type CodeFrequency = Map[String, Int]
 
 ///|
-typealias Array[(String, String)] as PublishedModules
+type PublishedModules = Array[(String, String)]
 
 ///|
 struct Profile {
@@ -129,16 +129,16 @@ pub fn load(username : String) -> (Cmd[Msg], Model) {
 }
 
 ///|
-fnalias @html.(div, h1, h2, text, a, span, img)
+using @html {div, h1, h2, text, a, span, img}
 
 ///|
-fnalias @cmd.(none, batch)
+using @cmd {none, batch}
 
 ///|
-typealias @cmd.Cmd
+using @cmd {type Cmd}
 
 ///|
-typealias @util.Status
+using @util {type Status}
 
 ///|
 pub fn profile(profile : Status[Profile]) -> Html[Msg] {
@@ -150,8 +150,8 @@ pub fn profile(profile : Status[Profile]) -> Html[Msg] {
         if avatar_url == "" {
           // Default avatar placeholder
           let initial = username.sub(start=0, end=1).to_string().to_upper() catch {
-            _ => "U"
-          }
+              _ => "U"
+            }
           div(
             class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mb-4 border-4 border-white shadow-lg",
             [span(class="text-white text-4xl font-bold", [text(initial)])],
@@ -242,8 +242,8 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
         .map(fn(entry) {
           let (date_raw, value) = entry
           let date_label = date_raw.sub(start=5).to_string() catch {
-            _ => date_raw
-          }
+              _ => date_raw
+            }
           let abs_v = if value < 0 { -value } else { value }
           // target max bar segment height (one side) = 70px (leave padding)
           let h = if value == 0 { 2 } else { (abs_v * 70 / max_abs).max(3) }

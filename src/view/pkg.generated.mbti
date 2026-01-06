@@ -6,35 +6,35 @@ import(
 )
 
 // Values
-fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
+pub fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]
 
-fn[M] badge(Array[@html.Html[M]], class? : String) -> @html.Html[M]
+pub fn[M] badge(Array[@html.Html[M]], class? : String) -> @html.Html[M]
 
-fn[M] button(String, click? : M) -> @html.Html[M]
+pub fn[M] button(String, click? : M) -> @html.Html[M]
 
-fn[M] code_block(String, kind~ : CodeBlockKind) -> @html.Html[M]
+pub fn[M] code_block(String, kind~ : CodeBlockKind) -> @html.Html[M]
 
-fn[M] collapse(header~ : @html.Html[M], body~ : @html.Html[M], collapsed~ : Bool, toggle~ : M, caret_config? : CaretConfig) -> @html.Html[M]
+pub fn[M] collapse(header~ : @html.Html[M], body~ : @html.Html[M], collapsed~ : Bool, toggle~ : M, caret_config? : CaretConfig) -> @html.Html[M]
 
-fn[M] document_not_available(String) -> @html.Html[M]
+pub fn[M] document_not_available(String) -> @html.Html[M]
 
-fn[M] footer() -> @html.Html[M]
+pub fn[M] footer() -> @html.Html[M]
 
-fn[M] icon_button(String, text? : String, click? : M) -> @html.Html[M]
+pub fn[M] icon_button(String, text? : String, click? : M) -> @html.Html[M]
 
-fn[M] load_failed(String) -> @html.Html[M]
+pub fn[M] load_failed(String) -> @html.Html[M]
 
-fn[M] loading() -> @html.Html[M]
+pub fn[M] loading() -> @html.Html[M]
 
-fn[M] logo() -> @html.Html[M]
+pub fn[M] logo() -> @html.Html[M]
 
-fn[M] markdown(String, small_heading? : Bool) -> @html.Html[M]
+pub fn[M] markdown(String, small_heading? : Bool) -> @html.Html[M]
 
-fn[M] navbar(left? : @html.Html[M], middle? : @html.Html[M], right? : @html.Html[M], style? : NavbarStyle) -> @html.Html[M]
+pub fn[M] navbar(left? : @html.Html[M], middle? : @html.Html[M], right? : @html.Html[M], style? : NavbarStyle) -> @html.Html[M]
 
-fn[M] not_found() -> @html.Html[M]
+pub fn[M] not_found() -> @html.Html[M]
 
-fn[M] page(header? : @html.Html[M], main? : @html.Html[M], footer? : @html.Html[M]) -> @html.Html[M]
+pub fn[M] page(header? : @html.Html[M], main? : @html.Html[M], footer? : @html.Html[M]) -> @html.Html[M]
 
 // Errors
 

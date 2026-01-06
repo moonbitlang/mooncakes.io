@@ -24,17 +24,17 @@ fn FoldedState::new() -> FoldedState {
 }
 
 ///|
-fn add(self : FoldedState, id : String) -> FoldedState {
+fn FoldedState::add(self : FoldedState, id : String) -> FoldedState {
   { ..self, set: self.set.add(id) }
 }
 
 ///|
-fn remove(self : FoldedState, id : String) -> FoldedState {
+fn FoldedState::remove(self : FoldedState, id : String) -> FoldedState {
   { ..self, set: self.set.remove(id) }
 }
 
 ///|
-fn contains(self : FoldedState, id : String) -> Bool {
+fn FoldedState::contains(self : FoldedState, id : String) -> Bool {
   match self.card_mode {
     Expanded => self.set.contains(id)
     Collapsed => true
@@ -42,7 +42,7 @@ fn contains(self : FoldedState, id : String) -> Bool {
 }
 
 ///|
-fn set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
+fn FoldedState::set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
   { ..self, card_mode: mode }
 }
 

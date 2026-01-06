@@ -27,6 +27,7 @@ enum Msg {
   ToggleSidebarFab
   CopyInstallCommand(String)
   CopyInstallSuccess
+  ShowLargePackage
 }
 
 ///|
@@ -49,6 +50,7 @@ struct Model {
   sidebar_fab : Bool
   search : SearchModel
   install_copied : Bool
+  hide_large_package : Bool
 }
 
 ///|
@@ -75,6 +77,7 @@ pub fn load(path : String, fragment : String?) -> (Cmd[Msg], Model) {
       search: { filter: "", results: Loading },
       search_entries: Loading,
       install_copied: false,
+      hide_large_package: true,
     },
   )
 }
@@ -219,5 +222,6 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
     CopyInstallCommand(command) =>
       (@clipboard.copy(Text(command), copied=Msg::CopyInstallSuccess), model)
     CopyInstallSuccess => (none(), { ..model, install_copied: true })
+    ShowLargePackage => (none(), { ..model, hide_large_package: false })
   }
 }

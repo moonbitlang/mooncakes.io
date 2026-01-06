@@ -352,6 +352,7 @@ fn[T] readme(
 
 ///|
 fn[T] document(
+  hide_large_package~ : Bool,
   readme_content? : String,
   package_data? : Status[PackageData],
   folded~ : FoldedState,
@@ -359,19 +360,51 @@ fn[T] document(
 ) -> Html[T] {
   let readme = readme(readme_content, folded~, to_msg)
   let doc_list = match package_data {
-    Some(Success({ traits, types, typealiases, values, misc, name: _ })) =>
-      [
-        ..traits.map(trait_doc(_, folded~, to_msg)),
-        ..types.map(type_doc(_, folded~, to_msg)),
-        ..typealiases.map(type_alias_doc(_, folded~, to_msg)),
-        ..values.map(value_doc(_, folded~, enable_title=true, to_msg)),
-        ..misc.map(misc_doc(_, folded~, to_msg)),
-      ]
+    Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {
+      let count = traits.length() +
+        types.length() +
+        typealiases.length() +
+        values.length() +
+        misc.length()
+      if hide_large_package && count > 1000 {
+        [hidden_large_package(count, to_msg)]
+      } else {
+        [
+          ..traits.map(trait_doc(_, folded~, to_msg)),
+          ..types.map(type_doc(_, folded~, to_msg)),
+          ..typealiases.map(type_alias_doc(_, folded~, to_msg)),
+          ..values.map(value_doc(_, folded~, enable_title=true, to_msg)),
+          ..misc.map(misc_doc(_, folded~, to_msg)),
+        ]
+      }
+    }
     _ => []
   }
   div(class="contents-center flex flex-col w-full", [
     readme,
     // Ensure left and right spacing on mobile devices
     div(class="mx-4 md:mx-0", doc_list),
+  ])
+}
+
+///|
+fn[T] hidden_large_package(count : Int, to_msg : (Msg) -> T) -> Html[T] {
+  div(class="flex flex-col items-center justify-center py-12 w-full", [
+    div(
+      class="bg-mooncake border border-mooncake2 rounded-lg p-8 w-full text-center",
+      [
+        h3(class="text-xl font-semibold text-yellow-800 mb-4", [
+          text("⚠️ Package is too large to be displayed"),
+        ]),
+        p(class="text-yellow-700 mb-6", [
+          text("This package contains over \{count} items."),
+        ]),
+        button(
+          class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
+          click=to_msg(ShowLargePackage),
+          [text("Show All Items")],
+        ),
+      ],
+    ),
   ])
 }

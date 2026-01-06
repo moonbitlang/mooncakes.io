@@ -4,8 +4,8 @@
       "path": "Yoorkin/rabbit-tea/html",
       "alias": "html"
     },
-    "rami3l/cmark/cmark",
-    "rami3l/cmark/cmark_base",
+    "moonbit-community/cmark/cmark",
+    "moonbit-community/cmark/cmark_base",
     "moonbitlang/mooncakes/util/highlight",
     "moonbitlang/mooncakes/config"
   ]

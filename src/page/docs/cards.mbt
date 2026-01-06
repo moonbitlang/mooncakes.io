@@ -394,7 +394,7 @@ fn[T] hidden_large_package(count : Int, to_msg : (Msg) -> T) -> Html[T] {
       class="bg-mooncake border border-mooncake2 rounded-lg p-8 w-full text-center",
       [
         h3(class="text-xl font-semibold text-yellow-800 mb-4", [
-          text(" ⚠️ Package are too large to be shown"),
+          text("⚠️ Package is too large to be displayed"),
         ]),
         p(class="text-yellow-700 mb-6", [
           text("This package contains over \{count} items."),

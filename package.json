@@ -9,7 +9,6 @@
     "dev": "vite --host",
     "build": "vite build"
   },
-  "type": "module",
   "dependencies": {
     "tailwindcss": "^4.1.10"
   },

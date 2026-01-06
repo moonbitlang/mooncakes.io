@@ -7,21 +7,16 @@ package "moonbitlang/mooncakes/util"
 
 // Types and methods
 type Lazy[T]
-fn[T] Lazy::force(Self[T]) -> T
-fn[T] Lazy::new(() -> T) -> Self[T]
+pub fn[T] Lazy::force(Self[T]) -> T
+pub fn[T] Lazy::new(() -> T) -> Self[T]
 
 pub(all) enum Status[T] {
   Loading
   Failed
   Success(T)
 }
-fn[T : Eq] Status::equal(Self[T], Self[T]) -> Bool // from trait `Eq`
-#deprecated
-fn[T : Eq] Status::op_equal(Self[T], Self[T]) -> Bool // from trait `Eq`
-fn[T : Show] Status::output(Self[T], &Logger) -> Unit // from trait `Show`
-fn[T : Show] Status::to_string(Self[T]) -> String // from trait `Show`
-impl[T : Eq] Eq for Status[T]
-impl[T : Show] Show for Status[T]
+pub impl[T : Eq] Eq for Status[T]
+pub impl[T : Show] Show for Status[T]
 
 // Type aliases
 

@@ -33,5 +33,5 @@ using @html {
   pre,
   code,
   li,
-  ol
+  ol,
 }

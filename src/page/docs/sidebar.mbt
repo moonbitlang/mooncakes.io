@@ -52,10 +52,10 @@ fn compare_strings(a : String, b : String) -> Int {
   let len_b = b.length()
   let min_len = if len_a < len_b { len_a } else { len_b }
   for i in 0..<min_len {
-    let char_a = a[i]
-    let char_b = b[i]
+    let char_a = a[i].to_int()
+    let char_b = b[i].to_int()
     if char_a != char_b {
-      return (char_a - char_b).to_int()
+      return char_a - char_b
     }
   }
   len_a - len_b

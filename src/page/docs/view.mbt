@@ -1,6 +1,6 @@
 ///|
-pub fn view(model : Model) -> Html[Msg] {
-  let navbar = match (model.module_index, model.resource) {
+pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
+  let navbar : Html[T] = match (model.module_index, model.resource) {
     (Success(module_index), Success(resource)) => {
       let module_path = match resource.kind {
         Module({ meta_info, .. }) => Some(meta_info.name)
@@ -12,6 +12,7 @@ pub fn view(model : Model) -> Html[Msg] {
         module_path.unwrap_or(""),
         module_index,
         model.collapsed_docs.card_mode,
+        to_msg,
       )
     }
     _ => nothing()
@@ -28,10 +29,10 @@ pub fn view(model : Model) -> Html[Msg] {
   }
   let main = match model.resource {
     Success({ readme_content, kind }) => {
-      let meta = match kind {
+      let meta : Html[T] = match kind {
         Module({ meta_info: meta, .. })
         | RootPackage({ meta_info: meta, .. }) =>
-          meta_info(meta, install_copied=model.install_copied)
+          meta_info(meta, install_copied=model.install_copied, to_msg)
         Package(_) => nothing()
       }
       div([
@@ -40,6 +41,7 @@ pub fn view(model : Model) -> Html[Msg] {
           readme_content~,
           package_data=model.package_data,
           folded=model.collapsed_docs,
+          to_msg,
         ),
       ])
     }
@@ -47,7 +49,7 @@ pub fn view(model : Model) -> Html[Msg] {
     Loading => @view.loading()
   }
   let search = model.search
-  let search_panel = @html.dialog(
+  let search_panel : Html[T] = @html.dialog(
     class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
     id="search-panel",
     [
@@ -58,12 +60,12 @@ pub fn view(model : Model) -> Html[Msg] {
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            input=SearchFilterChanged(_),
+            input=x => to_msg(SearchFilterChanged(x)),
             class="outline-none m-0 flex-grow px-4 p-2",
           ),
           div(
             class="size-12 container hover:bg-gray-200 flex justify-center items-center",
-            click=ToggleSearchPanel(false),
+            click=to_msg(ToggleSearchPanel(false)),
             [img(src=@config.icon_close, [])],
           ),
         ],
@@ -107,14 +109,14 @@ pub fn view(model : Model) -> Html[Msg] {
     ],
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
-  let sidebar_dialog = div(
+  let sidebar_dialog : Html[T] = div(
     class="fixed inset-0 justify-center items-center z-100",
     style=["display: " + show_sidebar_dialog],
     [
       div(
         class="fixed inset-0 bg-black/40 z-10",
         style=["display: " + show_sidebar_dialog],
-        click=ToggleSidebarFab,
+        click=to_msg(ToggleSidebarFab),
         [],
       ),
       div(
@@ -126,14 +128,15 @@ pub fn view(model : Model) -> Html[Msg] {
             model.sidebar_tab,
             model.sidebar_collapsed,
             package_path=model.path,
+            to_msg,
           ),
         ],
       ),
     ],
   )
-  let fab = @html.button(
+  let fab : Html[T] = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
-    click=ToggleSidebarFab,
+    click=to_msg(ToggleSidebarFab),
     [img(class="size-5", src=@config.HAMBURGER_BUTTON, [])],
   )
   div(class="min-h-screen w-full flex-col", [
@@ -146,7 +149,7 @@ pub fn view(model : Model) -> Html[Msg] {
         class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4",
         [
           div(
-            class="overflow-y-auto hidden md:block md:sticky md:top-15 md:min-w-64 md:h-[calc(100vh-3.75em)]",
+            class="overflow-y-auto hidden md:block md:sticky md:top-15 md:min-w-64 md:h-[calc(100vh-3.75em)] lg:max-w-[300px]",
             [
               div(class="w-full", [
                 sidebar(
@@ -155,6 +158,7 @@ pub fn view(model : Model) -> Html[Msg] {
                   model.sidebar_tab,
                   model.sidebar_collapsed,
                   package_path=model.path,
+                  to_msg,
                 ),
               ]),
             ],

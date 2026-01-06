@@ -1,9 +1,9 @@
 ///|
-fn breadcrumbs(
+fn[T] breadcrumbs(
   path : String,
   module_path : String,
   module_index : ModuleIndex,
-) -> Html[Msg] {
+) -> Html[T] {
   let module_path = module_path.trim(char_set="/").to_string()
   let path = path.trim(char_set="/")
   let paths = path.trim_start(char_set="/").split("/").collect()

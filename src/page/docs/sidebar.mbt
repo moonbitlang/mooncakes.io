@@ -24,7 +24,7 @@ fn[M] item_button(childrens : Html[M], icon? : String, click? : M) -> Html[M] {
 }
 
 ///|
-fn source_list(files : Array[String], package_path~ : String) -> Html[Msg] {
+fn[T] source_list(files : Array[String], package_path~ : String) -> Html[T] {
   if files.is_empty() {
     return text("No source files.")
   }
@@ -153,23 +153,24 @@ fn PkgIndex::to_document_items(
 }
 
 ///|
-fn sidebar(
+fn[T] sidebar(
   document_index : Array[@tree.Tree[ItemTarget]],
   source_files : Array[String],
   showing : String,
   package_path~ : String,
   sidebar_state : SortedSet[ItemTarget],
-) -> Html[Msg] {
+  to_msg : (Msg) -> T,
+) -> Html[T] {
   @view.accordion(
     class="text-gray-700 flex flex-col",
-    click=SidebarTabClicked(_),
+    click=x => to_msg(SidebarTabClicked(x)),
     showing,
     [
       (
         "Documentation",
         @tree.view(
-          toggle=ToggleSidebarItem(_),
-          click=ClickSidebarItem(_),
+          toggle=x => to_msg(ToggleSidebarItem(x)),
+          click=x => to_msg(ClickSidebarItem(x)),
           state=sidebar_state,
           indicator=Symbol(""),
           document_index,

@@ -11,7 +11,7 @@ pub fn load(String, String?) -> (@cmd.Cmd[Msg], Model)
 
 pub fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
 
-pub fn view(Model) -> @html.Html[Msg]
+pub fn[T] view(Model, (Msg) -> T) -> @html.Html[T]
 
 // Errors
 

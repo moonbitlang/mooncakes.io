@@ -13,8 +13,8 @@ fn breadcrumbs(
     let path = path.to_string()
     acc_path += if acc_path == "" { path } else { "/" + path.to_string() }
     let elem = if acc_path.has_prefix(module_path) &&
-      module_index.inner().find_node(acc_path) is Some(node) &&
-      (acc_path == module_path || not(node.pkg.is_empty())) {
+      module_index.0.find_node(acc_path) is Some(node) &&
+      (acc_path == module_path || node.pkg is Some(_)) {
       a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
     } else {
       div(class="text-gray-700 font-normal", [text(path)])

@@ -292,7 +292,7 @@ fn readme(content : String?, folded~ : FoldedState) -> Html[Msg] {
           collapsed=folded.contains("readme"),
           toggle=ToggleDocDetail("readme"),
           header=div(
-            class="py-2 pl-7 border-b w-full text-sm font-bold text-gray-700 text-base flex items-center gap-1",
+            class="py-2 pl-7 border-b w-full font-bold text-gray-700 text-base flex items-center gap-1",
             [
               img(src=@config.book_open, class="w-4 h-4", []),
               p([text("README")]),

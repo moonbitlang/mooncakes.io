@@ -83,15 +83,21 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
     }
     // TODO: fix this check
     guard [repository, license, description].map(x => match x {
-        Some(x) => x.as_string()
-        None => None
+        Some(String(s)) => Some(s)
+        _ => None
       })
       is [repository, license, description] else {
       fail("Error when parsing repository, license, description, readme.")
     }
     let repository = repository.map(normalize_repo_url)
     let keywords = match keywords {
-      Some(Array(keywords)) => keywords.map(fn(x) { x.as_string().unwrap() })
+      Some(Array(keywords)) =>
+        keywords.filter_map(fn(x) {
+          match x {
+            String(s) => Some(s)
+            _ => None
+          }
+        })
       None => []
       _ => abort("Error when parsing keywords.")
     }

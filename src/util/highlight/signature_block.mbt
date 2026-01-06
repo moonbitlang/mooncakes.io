@@ -30,7 +30,7 @@ priv enum State {
 }
 
 ///|
-let keywords : Set[String] = Set::of([
+let keywords : Set[String] = Set::from_array([
   "fn", "let", "type", "struct", "enum", "impl", "trait", "derive", "match", "if",
   "else", "typealias", "guard", "for", "in", "while", "loop", "break", "continue",
   "return", "pub", "priv", "mut", "with", "test",
@@ -83,7 +83,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
     // numbers
     (LexStart, ['0'..='9' as c, .. s], acc) =>
-      continue (LexNumber(@list.of([c])), s, acc)
+      continue (LexNumber(@list.from_array([c])), s, acc)
     // TODO: fix this bad formatting
     (
       LexNumber(nums),
@@ -140,7 +140,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
     // identifiers
     (LexStart, ['A'..='Z' | 'a'..='z' | '_' as c, .. s], acc) =>
-      continue (LexIdent(@list.of([c])), s, acc)
+      continue (LexIdent(@list.from_array([c])), s, acc)
     (LexIdent(id), ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s], acc) =>
       continue (LexIdent(id.add(c)), s, acc)
     (LexIdent(id), s, acc) => {
@@ -179,7 +179,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
     // operators
     (LexStart, [c, .. s], acc) if operators.contains(c) =>
-      continue (LexOp(@list.of([c])), s, acc)
+      continue (LexOp(@list.from_array([c])), s, acc)
     (LexOp(op), [c, .. s], acc) if operators.contains(c) =>
       continue (LexOp(op.add(c)), s, acc)
     (LexOp(op), s, acc) => {

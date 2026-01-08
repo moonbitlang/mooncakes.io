@@ -3,7 +3,8 @@
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/vite": "4.0.17",
     "autoprefixer": "^10.4.21",
-    "rabbit-tea-vite": "^1.0.0"
+    "rabbit-tea-vite": "^1.0.0",
+    "vite-plugin-compression": "^0.5.1"
   },
   "scripts": {
     "dev": "vite --host",

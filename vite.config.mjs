@@ -3,6 +3,7 @@ import rabbitTEA from 'rabbit-tea-vite'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import fs from 'fs'
+import viteCompression from 'vite-plugin-compression'
 
 const testAssetsServer = {
   name: 'static',
@@ -31,7 +32,9 @@ export default defineConfig({
   publicDir: '../public',
   build: {
     outDir: '../dist',
-    assetsDir: ''
+    assetsDir: '',
+    // Use esbuild minify (default, faster than terser)
+    minify: 'esbuild',
   },
   server: {
     proxy: {
@@ -53,6 +56,20 @@ export default defineConfig({
   plugins: [
     rabbitTEA(),
     tailwindcss(),
-    testAssetsServer
+    testAssetsServer,
+    // Gzip compression
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 10240, // Only compress files > 10KB
+      deleteOriginFile: false
+    }),
+    // Brotli compression (higher compression ratio)
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240,
+      deleteOriginFile: false
+    })
   ],
 })

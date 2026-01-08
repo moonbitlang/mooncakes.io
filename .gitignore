@@ -1,3 +1,4 @@
+target
 target/
 .mooncakes/
 node_modules/
@@ -6,4 +7,5 @@ pnpm-lock.yaml
 .DS_Store
 src/main.js
 src/main.js.map
+_build/
 dist

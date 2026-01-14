@@ -153,6 +153,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
       dst.push(StringLit("$|"))
       interp_to_string(xs, dst)
     }
+    _ => () //FIXME
   }
 }
 

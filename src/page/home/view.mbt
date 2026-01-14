@@ -15,7 +15,7 @@
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
   div(
-    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-all",
+    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-colors",
     [
       div(
         class="shrink-0 whitespace-nowrap flex flex-row text-base font-semibold",
@@ -81,7 +81,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
     None => nothing()
   }
   div(
-    class="select-none p-4 min-h-32 rounded flex flex-col border bg-white hover:bg-gray-100 transition-all",
+    class="select-none p-4 min-h-32 rounded flex flex-col border bg-white hover:bg-gray-100 transition-colors",
     [
       div(class="flex flex-row text-base font-semibold", [
         a(
@@ -216,7 +216,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
   fn button(value, target, color) {
     a(
       href=target,
-      class="py-1 px-3 text-nowrap lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-all \{color}",
+      class="py-1 px-3 text-nowrap lg:py-2 lg:px-6 select-none text-sm lg:text-base rounded-full hover:opacity-80 transition-opacity \{color}",
       [text(value)],
     )
   }
@@ -228,7 +228,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     }
     let invisible = if invisible { " invisible " } else { " " }
     div(
-      class="border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
+      class="home-stat-card border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
       [
         p(class="text-xl lg:text-3xl font-extralight", [
           text(value.to_string()),
@@ -248,7 +248,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     class="container lg:w-3/4 flex flex-col lg:flex-row items-center justify-between lg:py-8",
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
-        div(class="text-slate-700", [
+        div(class="text-slate-700 home-hero-copy", [
           h1(class="text-2xl font-semibold lg:text-4xl", [
             text("The Package Registry"),
           ]),
@@ -271,9 +271,9 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           ),
         ]),
       ]),
-      div(class="flex relative w-4/5 lg:flex-row-reverse lg:w-2/5", [
+      div(class="home-hero-media flex relative w-4/5 lg:flex-row-reverse lg:w-2/5", [
         img(
-          class="hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
+          class="home-hero-image hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
           src="mooncake-pic-small.png",
           [],
         ),
@@ -319,6 +319,7 @@ pub fn view(model : Model) -> Html[Msg] {
   } else {
     nothing()
   }
+  let theme_toggle = @view.theme_toggle(click=ToggleTheme)
   @view.page(
     header=@view.navbar(
       style=Fusion,
@@ -328,6 +329,7 @@ pub fn view(model : Model) -> Html[Msg] {
         class="border rounded-full my-2 lg:my-0 max-w-1/3 text-sm lg:text-base px-4 w-full py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
         input=FilterChanged(_),
       ),
+      right=theme_toggle,
     ),
     main=div(class="w-full", [banner, module_list]),
   )

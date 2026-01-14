@@ -24,6 +24,7 @@ pub enum Msg {
     repeat_times~ : Int
   )
   FilterChanged(String)
+  ToggleTheme
 }
 
 ///|
@@ -144,6 +145,15 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       }
       (none(), { ..model, filter, filtered_modules })
     }
+    ToggleTheme => (none(), model)
+  }
+}
+
+///|
+pub fn is_theme_toggle(msg : Msg) -> Bool {
+  match msg {
+    ToggleTheme => true
+    _ => false
   }
 }
 

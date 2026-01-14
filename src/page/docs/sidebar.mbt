@@ -16,7 +16,10 @@
 fn[M] item_button(childrens : Html[M], icon? : String, click? : M) -> Html[M] {
   let icon = match icon {
     None => div([])
-    Some(src) => div(class="size-[12px] self-center mr-1", [img(src~, [])])
+    Some(src) =>
+      div(class="size-[12px] self-center mr-1", [
+        img(class="ui-icon", src~, []),
+      ])
   }
   div(class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex", click?, [
     icon, childrens,

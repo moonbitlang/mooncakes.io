@@ -66,6 +66,7 @@ fn decode_code_frequency(json : Json) -> Result[CodeFrequency, String] {
 enum Msg {
   GotUserProfile(Result[Profile, String])
   GotCodeFrequency(Result[CodeFrequency, String])
+  ToggleTheme
 }
 
 ///|
@@ -351,7 +352,9 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
 
 ///|
 pub fn view(model : Model) -> Html[Msg] {
+  let theme_toggle = @view.theme_toggle(click=ToggleTheme)
   @view.page(
+    header=@view.navbar(right=theme_toggle),
     main=div(class="container lg:px-40 px-4 py-6", [
       // Top: User profile (centered)
       div(class="flex justify-center mb-8", [profile(model.profile)]),
@@ -388,5 +391,14 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       println(msg)
       (none(), { ..model, profile: Failed })
     }
+    ToggleTheme => (none(), model)
+  }
+}
+
+///|
+pub fn is_theme_toggle(msg : Msg) -> Bool {
+  match msg {
+    ToggleTheme => true
+    _ => false
   }
 }

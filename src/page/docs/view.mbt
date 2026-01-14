@@ -1,5 +1,6 @@
 ///|
 pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
+  let theme_toggle = @view.theme_toggle(click=to_msg(ToggleTheme))
   let navbar : Html[T] = match (model.module_index, model.resource) {
     (Success(module_index), Success(resource)) => {
       let module_path = match resource.kind {
@@ -13,6 +14,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
         module_index,
         model.collapsed_docs.card_mode,
         to_msg,
+        theme_toggle=theme_toggle,
       )
     }
     _ => nothing()
@@ -67,7 +69,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
           div(
             class="size-12 container hover:bg-gray-200 flex justify-center items-center",
             click=to_msg(ToggleSearchPanel(false)),
-            [img(src=@config.icon_close, [])],
+            [img(class="ui-icon", src=@config.icon_close, [])],
           ),
         ],
       ),

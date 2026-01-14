@@ -30,10 +30,10 @@ fn[M] card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> M) -> Html[M] {
   }
   div(class="flex", [
     div(class="py-2 px-3 rounded-l \{l}", click=click(Expanded), [
-      img(class=img_class, src=@config.EXPANSION, []),
+      img(class=img_class + " ui-icon", src=@config.EXPANSION, []),
     ]),
     div(class="py-2 px-3 rounded-r \{r}", click=click(Collapsed), [
-      img(class=img_class, src=@config.REDUCTION, []),
+      img(class=img_class + " ui-icon", src=@config.REDUCTION, []),
     ]),
   ])
 }

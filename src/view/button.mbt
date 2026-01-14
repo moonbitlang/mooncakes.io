@@ -33,8 +33,34 @@ pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
     [
       div(
         class="self-center min-w-4 flex gap-2",
-        [img(class="w-4", src=icon, []), ..text],
+        [img(class="w-4 ui-icon", src=icon, []), ..text],
       ),
+    ],
+  )
+}
+
+///|
+pub fn[M] theme_toggle(click? : M) -> Html[M] {
+  @html.button(
+    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+    click?,
+    [
+      img(
+        class="theme-toggle-icon theme-toggle-icon-moon",
+        src=@config.MOON_ICON,
+        [],
+      ),
+      img(
+        class="theme-toggle-icon theme-toggle-icon-sun",
+        src=@config.SUN_ICON,
+        [],
+      ),
+      span(class="sr-only theme-toggle-label theme-toggle-label-light", [
+        text("Enable night mode"),
+      ]),
+      span(class="sr-only theme-toggle-label theme-toggle-label-dark", [
+        text("Enable day mode"),
+      ]),
     ],
   )
 }

@@ -21,7 +21,7 @@ fn[T] meta_info_item_view(
   let title_content = match icon {
     Some(icon_src) =>
       div(class="flex items-center gap-2", [
-        img(class="w-[14px] h-[14px]", src=icon_src, []),
+        img(class="w-[14px] h-[14px] ui-icon", src=icon_src, []),
         span(class="text-gray-700", [text(title)]),
       ])
     None => text(title)
@@ -44,7 +44,7 @@ fn[T] install_view(
     click=to_msg(Msg::CopyInstallCommand(command)),
     [
       span(class="overflow-x-auto text-nowrap", [text(command)]),
-      img(class="size-4", src=icon, []),
+      img(class="size-4 ui-icon", src=icon, []),
     ],
   )
 }

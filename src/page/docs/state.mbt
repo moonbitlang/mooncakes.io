@@ -28,6 +28,7 @@ enum Msg {
   CopyInstallCommand(String)
   CopyInstallSuccess
   ShowLargePackage
+  ToggleTheme
 }
 
 ///|
@@ -223,5 +224,14 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       (@clipboard.copy(Text(command), copied=Msg::CopyInstallSuccess), model)
     CopyInstallSuccess => (none(), { ..model, install_copied: true })
     ShowLargePackage => (none(), { ..model, hide_large_package: false })
+    ToggleTheme => (none(), model)
+  }
+}
+
+///|
+pub fn is_theme_toggle(msg : Msg) -> Bool {
+  match msg {
+    ToggleTheme => true
+    _ => false
   }
 }

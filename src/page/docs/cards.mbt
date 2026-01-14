@@ -220,7 +220,7 @@ fn[T] document_item(
     let collapse_btn : Html[T] = div(
       class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
       click=to_msg(ToggleDocDetail(id)),
-      [img(src=icon, class="size-4", [])],
+      [img(src=icon, class="size-4 ui-icon", [])],
     )
     div(
       class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center justify-center group-hover:visible invisible",
@@ -339,7 +339,7 @@ fn[T] readme(
           header=div(
             class="py-2 pl-7 border-b w-full font-bold text-gray-700 text-base flex items-center gap-1",
             [
-              img(src=@config.book_open, class="w-4 h-4", []),
+              img(src=@config.book_open, class="w-4 h-4 ui-icon", []),
               p([text("README")]),
             ],
           ),

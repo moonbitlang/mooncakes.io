@@ -24,7 +24,7 @@ pub fn[M] navbar(
         div(class="w-full lg:flex-1 flex items-center justify-center", [
           middle.unwrap_or_else(nothing),
         ]),
-        div(class="w-40", [right.unwrap_or_else(nothing)]),
+        div(class="w-40 flex justify-end", [right.unwrap_or_else(nothing)]),
       ],
     ),
   ])

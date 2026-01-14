@@ -77,6 +77,12 @@ pub let deps = "/deps.svg"
 pub let book_open = "/book-open.svg"
 
 ///|
+pub const SUN_ICON = "/sun.svg"
+
+///|
+pub const MOON_ICON = "/moon.svg"
+
+///|
 pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
 
 ///|

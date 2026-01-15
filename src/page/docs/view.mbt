@@ -14,7 +14,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
         module_index,
         model.collapsed_docs.card_mode,
         to_msg,
-        theme_toggle=theme_toggle,
+        theme_toggle~,
       )
     }
     _ => nothing()

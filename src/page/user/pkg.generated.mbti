@@ -10,6 +10,8 @@ import(
 // Values
 pub fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html[Msg]
 
+pub fn is_theme_toggle(Msg) -> Bool
+
 pub fn load(String) -> (@cmd.Cmd[Msg], Model)
 
 pub fn profile(@util.Status[Profile]) -> @html.Html[Msg]

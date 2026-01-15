@@ -271,20 +271,23 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           ),
         ]),
       ]),
-      div(class="home-hero-media flex relative w-4/5 lg:flex-row-reverse lg:w-2/5", [
-        img(
-          class="home-hero-image hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
-          src="mooncake-pic-small.png",
-          [],
-        ),
-        div(
-          class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
-          [
-            stat_card("Lines of code", total_lines, true, None),
-            stat_card("Packages", total_packages, false, None),
-          ],
-        ),
-      ]),
+      div(
+        class="home-hero-media flex relative w-4/5 lg:flex-row-reverse lg:w-2/5",
+        [
+          img(
+            class="home-hero-image hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
+            src="mooncake-pic-small.png",
+            [],
+          ),
+          div(
+            class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
+            [
+              stat_card("Lines of code", total_lines, true, None),
+              stat_card("Packages", total_packages, false, None),
+            ],
+          ),
+        ],
+      ),
     ],
   )
 }

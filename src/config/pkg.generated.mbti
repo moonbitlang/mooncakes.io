@@ -14,6 +14,8 @@ pub const HAMBURGER_BUTTON : String = "/hamburger-button.svg"
 
 pub const LOGO : String = "/mooncake-pic.png"
 
+pub const MOON_ICON : String = "/moon.svg"
+
 pub const README_ICON : String = "/readme.svg"
 
 pub const REDUCTION : String = "/reduction.svg"
@@ -25,6 +27,8 @@ pub const SECTION_CLOSE : String = "/section-close.svg"
 pub const SECTION_OPEN : String = "/section-open.svg"
 
 pub const SHARE : String = "/share.svg"
+
+pub const SUN_ICON : String = "/sun.svg"
 
 pub const TRAIT_ICON : String = "/components.svg"
 

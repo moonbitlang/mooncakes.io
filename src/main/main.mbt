@@ -53,8 +53,7 @@ fn toggle_theme(theme : Theme) -> Theme {
 }
 
 ///|
-extern "js" fn set_timeout(f : () -> Unit, ms : Int) =
-  "(f,ms) => setTimeout(f, ms)"
+extern "js" fn set_timeout(f : () -> Unit, ms : Int) = "(f,ms) => setTimeout(f, ms)"
 
 ///|
 fn delay(msg : Msg, ms : Int) -> Cmd[Msg] {
@@ -64,10 +63,7 @@ fn delay(msg : Msg, ms : Int) -> Cmd[Msg] {
 ///|
 fn start_theme_switch(model : Model) -> (Cmd[Msg], Model) {
   let theme = toggle_theme(model.theme)
-  (
-    delay(ThemeSwitchDone, 120),
-    { ..model, theme, theme_switching: true },
-  )
+  (delay(ThemeSwitchDone, 120), { ..model, theme, theme_switching: true })
 }
 
 ///|
@@ -121,7 +117,10 @@ fn route_with_theme(url : @url.Url, theme : Theme) -> (Cmd[Msg], Model) {
       @user.load(name.to_string())
       |> update_with(User(_), GotUserMsg(_), theme, false)
     ["assets", ..] =>
-      (@nav.load(url.to_string()), { theme, page: Redirect, theme_switching: false })
+      (
+        @nav.load(url.to_string()),
+        { theme, page: Redirect, theme_switching: false },
+      )
     ["docs", .. module_path] =>
       module_path.iter().map(StringView::to_string).join("/")
       |> @docs.load(url.fragment)
@@ -148,7 +147,9 @@ fn view(model : Model) -> Html[Msg] {
     Light => "theme-light"
     Dark => "theme-dark"
   }
-  let switching_class = if model.theme_switching { "theme-switching" } else {
+  let switching_class = if model.theme_switching {
+    "theme-switching"
+  } else {
     ""
   }
   @html.div(

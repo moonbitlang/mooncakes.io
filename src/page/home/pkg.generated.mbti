@@ -10,6 +10,8 @@ import(
 // Values
 pub fn filter_indices(String, Map[Char, Array[ModuleIndex]]) -> Array[ModuleIndex]
 
+pub fn is_theme_toggle(Msg) -> Bool
+
 pub fn load() -> (@cmd.Cmd[Msg], Model)
 
 pub fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
@@ -45,6 +47,7 @@ pub enum Msg {
   GotCount(Result[PackageCount, String])
   IncreaseAnimation(PackageCount, lines_inc_step~ : Int, packages_inc_step~ : Int, repeat_times~ : Int)
   FilterChanged(String)
+  ToggleTheme
 }
 
 type PackageCount

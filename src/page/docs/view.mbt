@@ -155,7 +155,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
         class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4",
         [
           div(
-            class="overflow-y-auto hidden md:block md:sticky md:top-15 md:min-w-64 md:h-[calc(100vh-3.75em)] lg:max-w-[300px]",
+            class="overflow-y-auto hidden md:block md:sticky md:top-15 md:pt-3 md:min-w-64 md:h-[calc(100vh-3.75em)] lg:max-w-[300px]",
             [
               div(class="w-full", [
                 sidebar(

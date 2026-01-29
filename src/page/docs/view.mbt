@@ -171,5 +171,6 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
         ],
       ),
     ]),
+    @view.footer(),
   ])
 }

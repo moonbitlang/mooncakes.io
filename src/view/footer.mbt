@@ -17,7 +17,7 @@ pub fn[M] footer() -> Html[M] {
         escape=true,
         [text("Statistics")],
       ),
-      p([text("© 2025 mooncakes.io")]),
+      p([text("© 2026 mooncakes.io")]),
     ],
   )
 }

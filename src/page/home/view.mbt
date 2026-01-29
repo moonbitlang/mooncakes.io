@@ -226,14 +226,16 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
       None => "pb-6"
       Some(_) => "pb-2"
     }
+    let value = if value == 0 {
+      [text("----")]
+    } else {
+      [text(value.to_string()), text("+")]
+    }
     let invisible = if invisible { " invisible " } else { " " }
     div(
       class="home-stat-card border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
       [
-        p(class="text-xl lg:text-3xl font-extralight", [
-          text(value.to_string()),
-          text("+"),
-        ]),
+        p(class="text-xl lg:text-3xl font-extralight", value),
         div(class="flex items-center justify-between", [
           p(class="text-sm lg:text-base text-gray-700 font-light", [text(label)]),
         ]),

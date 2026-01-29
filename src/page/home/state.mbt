@@ -17,12 +17,6 @@ pub enum Msg {
   GotAllModule(Result[Array[ModuleIndex], String])
   GotRecentModule(Result[Array[ModuleIndex], String])
   GotCount(Result[PackageCount, String])
-  IncreaseAnimation(
-    PackageCount,
-    lines_inc_step~ : Int,
-    packages_inc_step~ : Int,
-    repeat_times~ : Int
-  )
   FilterChanged(String)
   ToggleTheme
 }
@@ -77,8 +71,8 @@ pub fn load() -> (Cmd[Msg], Model) {
       all_modules: Loading,
       filter: "",
       filtered_modules: [],
-      showing_lines: 5000000,
-      showing_packages: 2100,
+      showing_lines: 0,
+      showing_packages: 0,
     },
   )
 }
@@ -90,54 +84,19 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       (none(), { ..model, all_modules: Success(sort_modules_by_name(modules)) })
     GotRecentModule(Ok(recent)) =>
       (none(), { ..model, recent_modules: Success(recent) })
-    GotCount(Ok(stat)) => {
-      let repeat_times = 50
-      let lines_inc_step = stat.total_lines / repeat_times
-      let packages_inc_step = stat.total_packages / repeat_times
+    GotCount(Ok(stat)) =>
       (
-        @cmd.task(
-          IncreaseAnimation(
-            stat,
-            lines_inc_step~,
-            packages_inc_step~,
-            repeat_times~,
-          ),
-        ),
-        { ..model, showing_lines: 0, showing_packages: 0 },
+        none(),
+        {
+          ..model,
+          showing_lines: stat.total_lines,
+          showing_packages: stat.total_packages,
+        },
       )
-    }
     GotAllModule(Err(msg)) | GotRecentModule(Err(msg)) | GotCount(Err(msg)) => {
       println(msg)
       (none(), model)
     }
-    IncreaseAnimation(stat, lines_inc_step~, packages_inc_step~, repeat_times~) =>
-      if repeat_times == 0 {
-        (
-          none(),
-          {
-            ..model,
-            showing_lines: stat.total_lines,
-            showing_packages: stat.total_packages,
-          },
-        )
-      } else {
-        (
-          delay(
-            IncreaseAnimation(
-              stat,
-              lines_inc_step~,
-              packages_inc_step~,
-              repeat_times=repeat_times - 1,
-            ),
-            5,
-          ),
-          {
-            ..model,
-            showing_lines: model.showing_lines + lines_inc_step,
-            showing_packages: model.showing_packages + packages_inc_step,
-          },
-        )
-      }
     FilterChanged(filter) => {
       let filtered_modules = match model.all_modules {
         Success(indices) => filter_indices(filter, indices)

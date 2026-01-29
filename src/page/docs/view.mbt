@@ -1,24 +1,27 @@
 ///|
 pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
   let theme_toggle = @view.theme_toggle(click=to_msg(ToggleTheme))
-  let navbar : Html[T] = match (model.module_index, model.resource) {
-    (Success(module_index), Success(resource)) => {
-      let module_path = match resource.kind {
-        Module({ meta_info, .. }) => Some(meta_info.name)
-        Package({ module_path, .. }) => Some(module_path)
-        RootPackage(_) => Some(model.path)
-      }
-      navbar(
-        model.path,
-        module_path.unwrap_or(""),
-        module_index,
-        model.collapsed_docs.card_mode,
-        to_msg,
-        theme_toggle~,
-      )
-    }
-    _ => nothing()
+  let module_index = match model.module_index {
+    Success(module_index) => Some(module_index)
+    _ => None
   }
+  let module_path = match model.resource {
+    Success(resource) =>
+      match resource.kind {
+        Module({ meta_info, .. }) => meta_info.name
+        Package({ module_path, .. }) => module_path
+        RootPackage(_) => model.path
+      }
+    _ => model.path
+  }
+  let navbar : Html[T] = navbar(
+    model.path,
+    module_path,
+    module_index,
+    model.collapsed_docs.card_mode,
+    to_msg,
+    theme_toggle~,
+  )
   let source_files = match model.resource {
     Success(
       {

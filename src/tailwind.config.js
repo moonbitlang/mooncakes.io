@@ -3,7 +3,7 @@ module.exports = {
   content: ["./src/**/*.{html,js,mbt}"],
   theme: {
     fontFamily: {
-      title: ['"Poppins"'],
+      title: ['"Fira Sans"', 'system-ui', '-apple-system', '"Segoe UI"', '"Noto Sans"', 'sans-serif'],
       sans: [
         '-apple-system',
         'BlinkMacSystemFont',

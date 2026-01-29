@@ -19,7 +19,7 @@ pub(all) enum CodeBlockKind {
 }
 
 ///|
-pub fn[M] code_block(moonbit : String, kind~ : CodeBlockKind) -> Html[M] {
+pub fn code_block(moonbit : String, kind~ : CodeBlockKind) -> Html {
   let spans = match kind {
     Code => @highlight.parse_code(moonbit)
     Signature => @highlight.parse_signature(moonbit)

@@ -19,13 +19,13 @@ pub(all) enum CaretConfig {
 }
 
 ///|
-pub fn[M] collapse(
-  header~ : Html[M],
-  body~ : Html[M],
+pub fn collapse(
+  header~ : Html,
+  body~ : Html,
   collapsed~ : Bool,
-  toggle~ : M,
+  toggle~ : Cmd,
   caret_config? : CaretConfig = LeftTop,
-) -> Html[M] {
+) -> Html {
   let (body, icon) = if collapsed {
     (nothing(), @config.SECTION_CLOSE)
   } else {
@@ -42,7 +42,7 @@ pub fn[M] collapse(
   let button = div(
     class="absolute \{button_style} p-1 hover:bg-gray-200 active:bg-gray-300",
     click=toggle,
-    [img(src=icon, class="size-4 ui-icon \{caret_style}", [])],
+    [img(src=icon, class="size-4 ui-icon \{caret_style}", nothing())],
   )
   div([div(class="relative flex items-center", [button, header]), body])
 }

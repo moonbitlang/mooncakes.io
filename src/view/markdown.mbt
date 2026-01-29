@@ -13,18 +13,18 @@
 // limitations under the License.
 
 ///|
-fn[M] unsupported(node_type : String, message : String) -> @html.Html[M] {
+fn unsupported(node_type : String, message : String) -> @html.Html {
   println("Unsupported markdown syntax: " + node_type + " " + message)
   nothing()
 }
 
 ///|
-fn[M] inline_text(str : String) -> @html.Html[M] {
+fn inline_text(str : String) -> @html.Html {
   @html.span(class="inline", [text(str)])
 }
 
 ///|
-fn[M] image_render(img : @cmark.Inline) -> @html.Html[M] {
+fn image_render(img : @cmark.Inline) -> @html.Html {
   guard img is Image(img) else {
     println(img)
     abort("not an image")
@@ -38,7 +38,12 @@ fn[M] image_render(img : @cmark.Inline) -> @html.Html[M] {
       ..,
     } =>
       match src {
-        Some({ v: src, .. }) => @html.img(class="my-2", src~, alt~, [])
+        Some({ v: src, .. }) => @html.img(
+          class="my-2",
+          src~,
+          alt~,
+          @html.nothing(),
+        )
         None => @html.text("Loading image failed: invalid url")
       }
     { v: { reference: Ref(_), .. }, .. } => {
@@ -55,10 +60,10 @@ fn[M] image_render(img : @cmark.Inline) -> @html.Html[M] {
 }
 
 ///|
-fn[M] inline2html(
+fn inline2html(
   x : @cmark.Inline,
   link_defs~ : Map[String, String],
-) -> Array[@html.Html[M]] {
+) -> Array[@html.Html] {
   match x {
     @cmark.Inline::Autolink({ v: { link: { v, .. }, .. }, .. }) =>
       [@html.a(href=v, [inline_text(v)])]
@@ -95,14 +100,14 @@ fn is_moonbit(lang : String) -> Bool {
 }
 
 ///|
-fn[M] block2html(
+fn block2html(
   x : @cmark.Block,
   small_heading~ : Bool,
   link_defs~ : Map[String, String],
   paragraph_margin? : Bool = false,
-) -> @html.Html[M] {
+) -> @html.Html {
   match x {
-    @cmark.Block::BlankLine(_) => p([])
+    @cmark.Block::BlankLine(_) => p(nothing())
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
         class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
@@ -162,6 +167,7 @@ fn[M] block2html(
                 input_type=Checkbox,
                 read_only=true,
                 checked=char == 'x' || char == 'X',
+                @html.nothing(),
               ),
               block2html(block, small_heading~, link_defs~),
             ])
@@ -188,7 +194,7 @@ fn[M] block2html(
         child
       }
     }
-    ThematicBreak(_) => hr(class="my-6 border-2")
+    ThematicBreak(_) => hr(class="my-6 border-2", nothing())
     ExtTable({ v: { rows, .. }, .. }) => {
       let colgroup = []
       let body = rows
@@ -232,12 +238,12 @@ fn[M] block2html(
                 { v: TableSep((align, _)), .. } =>
                   match align {
                     Some(Left) =>
-                      colgroup.push(@html.col(class="text-left", []))
+                      colgroup.push(@html.col(class="text-left", @html.nothing()))
                     Some(Center) =>
-                      colgroup.push(@html.col(class="text-center", []))
+                      colgroup.push(@html.col(class="text-center", @html.nothing()))
                     Some(Right) =>
-                      colgroup.push(@html.col(class="text-right", []))
-                    None => colgroup.push(@html.col(class="", []))
+                      colgroup.push(@html.col(class="text-right", @html.nothing()))
+                    None => colgroup.push(@html.col(class="", @html.nothing()))
                   }
               })
               @html.nothing()
@@ -259,10 +265,10 @@ fn[M] block2html(
 }
 
 ///|
-fn[M] unwrap_inline_link(
+fn unwrap_inline_link(
   x : @cmark.InlineLink,
   link_defs~ : Map[String, String],
-) -> Array[@html.Html[M]] {
+) -> Array[@html.Html] {
   match x {
     ({
       text: Text({ v: txt, .. }),
@@ -301,10 +307,10 @@ fn[M] unwrap_inline_link(
 }
 
 ///|
-pub fn[M] markdown(
+pub fn markdown(
   markdown : String,
   small_heading? : Bool = false,
-) -> @html.Html[M] {
+) -> @html.Html {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
   let link_defs = {}
   doc.defs
@@ -314,7 +320,7 @@ pub fn[M] markdown(
       link_defs.set(key, dest)
     }
   })
-  let folder : @cmark.Folder[Array[@html.Html[M]]] = {
+  let folder : @cmark.Folder[Array[@html.Html]] = {
     inline_ext_default: fn(_, acc, _) { acc },
     block_ext_default: fn(_, acc, _) { acc },
     inline: fn(_, acc, inline) {

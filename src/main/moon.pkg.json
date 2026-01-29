@@ -2,13 +2,12 @@
   "is-main": true,
   "import": [
     {
-      "path": "Yoorkin/rabbit-tea",
+      "path": "Yoorkin/rabbita",
       "alias": "tea"
     },
-    "Yoorkin/rabbit-tea/url",
-    "Yoorkin/rabbit-tea/html",
-    "Yoorkin/rabbit-tea/nav",
-    "Yoorkin/rabbit-tea/cmd",
+    "Yoorkin/rabbita/url",
+    "Yoorkin/rabbita/html",
+    "Yoorkin/rabbita/nav",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/page/home",
     "moonbitlang/mooncakes/page/docs",

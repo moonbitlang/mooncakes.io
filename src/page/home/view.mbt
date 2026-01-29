@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
+fn simple_module_card(mod : ModuleIndex) -> Html {
   div(
     class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-colors",
     [
@@ -57,7 +57,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
 }
 
 ///|
-fn module_card(mod : ModuleIndex) -> Html[Msg] {
+fn module_card(mod : ModuleIndex) -> Html {
   let keywords = match mod.keywords {
     None => nothing()
     Some(keywords) =>
@@ -70,7 +70,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
       )
   }
   let description = match mod.description {
-    None => div(class="flex-grow", [])
+    None => div(class="flex-grow", nothing())
     Some(description) =>
       p(class="text-gray-700 py-3 overflow-ellipsis grow text-sm", [
         text(description),
@@ -105,7 +105,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
 }
 
 ///|
-fn pinned() -> Html[Msg] {
+fn pinned() -> Html {
   let pinned = [
     {
       author: "moonbitlang",
@@ -154,7 +154,7 @@ fn pinned() -> Html[Msg] {
 }
 
 ///|
-fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
+fn recently_updated(recently : Array[ModuleIndex]) -> Html {
   let recently_updated = recently.map(simple_module_card)
   div(class="container lg:w-4/5 px-4", [
     h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
@@ -168,7 +168,7 @@ fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
 }
 
 ///|
-fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
+fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
   let all_modules = modules
     .iter2()
     .to_array()
@@ -199,7 +199,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
 }
 
 ///|
-fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
+fn search_result(mods : Array[ModuleIndex]) -> Html {
   let module_cards = mods.map(module_card)
   div([
     div(class="container lg:w-4/5 px-4", [
@@ -212,7 +212,7 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
 }
 
 ///|
-fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
+fn banner(total_lines~ : Int, total_packages~ : Int) -> Html {
   fn button(value, target, color) {
     a(
       href=target,
@@ -221,7 +221,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     )
   }
 
-  fn stat_card(label, value : Int, invisible : Bool, child : Html[Msg]?) {
+  fn stat_card(label, value : Int, invisible : Bool, child : Html?) {
     let bottom = match child {
       None => "pb-6"
       Some(_) => "pb-2"
@@ -277,7 +277,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           img(
             class="home-hero-image hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
             src="mooncake-pic-small.png",
-            [],
+            nothing(),
           ),
           div(
             class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
@@ -293,7 +293,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
 }
 
 ///|
-pub fn view(model : Model) -> Html[Msg] {
+pub fn view(model : Model, to_cmd : (Msg) -> Cmd) -> Html {
   let module_list = if model.filter == "" {
     let pinned_modules = pinned()
     let recently_updated = match model.recent_modules {
@@ -322,7 +322,7 @@ pub fn view(model : Model) -> Html[Msg] {
   } else {
     nothing()
   }
-  let theme_toggle = @view.theme_toggle(click=ToggleTheme)
+  let theme_toggle = @view.theme_toggle(click=to_cmd(ToggleTheme))
   @view.page(
     header=@view.navbar(
       style=Fusion,
@@ -330,7 +330,8 @@ pub fn view(model : Model) -> Html[Msg] {
         input_type=Text,
         placeholder="Search modules ...",
         class="border rounded-full my-2 lg:my-0 max-w-1/3 text-sm lg:text-base px-4 w-full py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
-        input=FilterChanged(_),
+        input=x => to_cmd(FilterChanged(x)),
+        nothing(),
       ),
       right=theme_toggle,
     ),

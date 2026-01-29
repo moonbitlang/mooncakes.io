@@ -16,7 +16,10 @@
 using @immut/sorted_set {type SortedSet}
 
 ///|
-using @html {type Html, div, text, ul}
+using @html {type Html, div, text, ul, nothing}
+
+///|
+using @cmd {type Cmd}
 
 ///|
 pub(all) enum Tree[Id] {
@@ -33,20 +36,20 @@ pub fn[Id] Tree::get_name(self : Tree[Id]) -> String {
 }
 
 ///|
-pub fn[M, Id : Compare] view(
-  toggle~ : (Id) -> M,
-  click~ : (Id) -> M,
+pub fn[Id : Compare] view(
+  toggle~ : (Id) -> Cmd,
+  click~ : (Id) -> Cmd,
   state~ : SortedSet[Id],
   indicator~ : Id,
   items : Array[Tree[Id]],
-) -> Html[M] {
+) -> Html {
   fn aux(x) {
     match x {
       Tree::Item(id~, str) => {
         let indicator = if indicator == id {
-          div(class="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", [])
+          div(class="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", nothing())
         } else {
-          div(class="w-1 h-5 mr-2", [])
+          div(class="w-1 h-5 mr-2", nothing())
         }
         div(
           class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
@@ -69,7 +72,7 @@ pub fn[M, Id : Compare] view(
             [
               div(
                 class="absolute w-0 h-0 self-center mr-1 transition-transform \{icon}",
-                [],
+                nothing(),
               ),
               div(class="pl-3", [text(str)]),
             ],

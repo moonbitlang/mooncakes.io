@@ -13,12 +13,12 @@
 // limitations under the License.
 
 ///|
-pub fn[M] accordion(
+pub fn accordion(
   class? : String,
-  click? : (String) -> M,
+  click? : (String) -> Cmd,
   showing : String,
-  items : Array[(String, Html[M])],
-) -> Html[M] {
+  items : Array[(String, Html)],
+) -> Html {
   ul(
     class?,
     items.map(x => {

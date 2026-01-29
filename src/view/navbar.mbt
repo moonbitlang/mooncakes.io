@@ -5,12 +5,12 @@ pub(all) enum NavbarStyle {
 }
 
 ///|
-pub fn[M] navbar(
-  left? : Html[M] = logo(),
-  middle? : Html[M],
-  right? : Html[M],
+pub fn navbar(
+  left? : Html = logo(),
+  middle? : Html,
+  right? : Html,
   style? : NavbarStyle = Sticky,
-) -> Html[M] {
+) -> Html {
   let class = match style {
     Sticky =>
       "top-0 z-30 border-b sticky bg-white/60 backdrop-blur-md select-none"
@@ -31,7 +31,7 @@ pub fn[M] navbar(
 }
 
 ///|
-pub fn[M] logo() -> Html[M] {
+pub fn logo() -> Html {
   a(
     class="border-gray-300 font-title mx-2 font-semibold flex items-center text-nowrap",
     href="/",

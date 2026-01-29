@@ -53,69 +53,80 @@ fn toggle_theme(theme : Theme) -> Theme {
 }
 
 ///|
-extern "js" fn set_timeout(f : () -> Unit, ms : Int) = "(f,ms) => setTimeout(f, ms)"
-
-///|
-fn delay(msg : Msg, ms : Int) -> Cmd[Msg] {
-  @cmd.Cmd(fn(events) { set_timeout(fn() { events.trigger_update(msg) }, ms) })
-}
-
-///|
-fn start_theme_switch(model : Model) -> (Cmd[Msg], Model) {
+fn start_theme_switch(
+  dispatcher : @tea.Dispatcher[Msg],
+  model : Model,
+) -> (Cmd, Model) {
   let theme = toggle_theme(model.theme)
-  (delay(ThemeSwitchDone, 120), { ..model, theme, theme_switching: true })
+  (
+    dispatcher.message(ThemeSwitchDone),
+    { ..model, theme, theme_switching: true },
+  )
 }
 
 ///|
-fn[SubModel, SubMsg] update_with(
-  pair : (Cmd[SubMsg], SubModel),
+fn[SubModel] update_with(
+  pair : (Cmd, SubModel),
   to_page : (SubModel) -> Page,
-  to_msg : (SubMsg) -> Msg,
   theme : Theme,
   theme_switching : Bool,
-) -> (Cmd[Msg], Model) {
+) -> (Cmd, Model) {
   let (cmd, model) = pair
-  (cmd.map(to_msg), { theme, page: to_page(model), theme_switching })
+  (cmd, { theme, page: to_page(model), theme_switching })
 }
 
 ///|
-fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
+fn update(
+  dispatcher : @tea.Dispatcher[Msg],
+  msg : Msg,
+  model : Model,
+) -> (Cmd, Model) {
+  let to_home_cmd = dispatcher.message1(GotHomeMsg(_))
+  let to_docs_cmd = dispatcher.message1(GotDocsMsg(_))
+  let to_user_cmd = dispatcher.message1(GotUserMsg(_))
   match (msg, model.page) {
     (ThemeSwitchDone, _) => (none(), { ..model, theme_switching: false })
     (GotHomeMsg(msg), _) if @home.is_theme_toggle(msg) =>
-      start_theme_switch(model)
+      start_theme_switch(dispatcher, model)
     (GotDocsMsg(msg), _) if @docs.is_theme_toggle(msg) =>
-      start_theme_switch(model)
+      start_theme_switch(dispatcher, model)
     (GotUserMsg(msg), _) if @user.is_theme_toggle(msg) =>
-      start_theme_switch(model)
+      start_theme_switch(dispatcher, model)
     (GotHomeMsg(msg), Home(page_model)) =>
-      @home.update(msg, page_model)
-      |> update_with(Home(_), GotHomeMsg(_), model.theme, model.theme_switching)
+      @home.update(msg, page_model, to_home_cmd)
+      |> update_with(Home(_), model.theme, model.theme_switching)
     (GotDocsMsg(msg), Docs(page_model)) =>
-      @docs.update(msg, page_model)
-      |> update_with(Docs(_), GotDocsMsg(_), model.theme, model.theme_switching)
+      @docs.update(msg, page_model, to_docs_cmd)
+      |> update_with(Docs(_), model.theme, model.theme_switching)
     (GotUserMsg(msg), User(page_model)) =>
-      @user.update(msg, page_model)
-      |> update_with(User(_), GotUserMsg(_), model.theme, model.theme_switching)
+      @user.update(msg, page_model, to_user_cmd)
+      |> update_with(User(_), model.theme, model.theme_switching)
     (LinkClicked(request), _) =>
       match request {
         Internal(url) => (@nav.push_url(url.to_string()), model)
         External(url) => (@nav.load(url), model)
       }
-    (UrlChanged(url), _) => route_with_theme(url, model.theme)
+    (UrlChanged(url), _) =>
+      route_with_theme(url, model.theme, to_home_cmd, to_docs_cmd, to_user_cmd)
     _ => (none(), model)
   }
 }
 
 ///|
-fn route_with_theme(url : @url.Url, theme : Theme) -> (Cmd[Msg], Model) {
+fn route_with_theme(
+  url : @url.Url,
+  theme : Theme,
+  to_home_cmd : (@home.Msg) -> Cmd,
+  to_docs_cmd : (@docs.Msg) -> Cmd,
+  to_user_cmd : (@user.Msg) -> Cmd,
+) -> (Cmd, Model) {
   let paths = url.path.split("/").collect()
   match paths {
     ["/"] | [""] | [] =>
-      @home.load() |> update_with(Home(_), GotHomeMsg(_), theme, false)
+      @home.load(to_home_cmd) |> update_with(Home(_), theme, false)
     ["user", name] =>
-      @user.load(name.to_string())
-      |> update_with(User(_), GotUserMsg(_), theme, false)
+      @user.load(name.to_string(), to_user_cmd)
+      |> update_with(User(_), theme, false)
     ["assets", ..] =>
       (
         @nav.load(url.to_string()),
@@ -123,23 +134,21 @@ fn route_with_theme(url : @url.Url, theme : Theme) -> (Cmd[Msg], Model) {
       )
     ["docs", .. module_path] =>
       module_path.iter().map(StringView::to_string).join("/")
-      |> @docs.load(url.fragment)
-      |> update_with(Docs(_), GotDocsMsg(_), theme, false)
+      |> @docs.load(url.fragment, to_docs_cmd)
+      |> update_with(Docs(_), theme, false)
     _ => (none(), { theme, page: NotFound, theme_switching: false })
   }
 }
 
 ///|
-fn route(url : @url.Url) -> (Cmd[Msg], Model) {
-  route_with_theme(url, Light)
-}
-
-///|
-fn view(model : Model) -> Html[Msg] {
+fn view(dispatcher : @tea.Dispatcher[Msg], model : Model) -> Html {
+  let to_home_cmd = dispatcher.message1(GotHomeMsg(_))
+  let to_docs_cmd = dispatcher.message1(GotDocsMsg(_))
+  let to_user_cmd = dispatcher.message1(GotUserMsg(_))
   let page_view = match model.page {
-    Home(page_model) => @home.view(page_model).map(GotHomeMsg(_))
-    Docs(page_model) => @docs.view(page_model, x => GotDocsMsg(x))
-    User(page_model) => @user.view(page_model).map(GotUserMsg(_))
+    Home(page_model) => @home.view(page_model, to_home_cmd)
+    Docs(page_model) => @docs.view(page_model, to_docs_cmd)
+    User(page_model) => @user.view(page_model, to_user_cmd)
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }
@@ -158,13 +167,16 @@ fn view(model : Model) -> Html[Msg] {
   )
 }
 
+
 ///|
 fn main {
-  @tea.application(
-    initialize=route,
-    update~,
-    view~,
-    url_changed=UrlChanged(_),
-    url_request=LinkClicked(_),
+  let initial_model = { theme: Light, page: Redirect, theme_switching: false }
+  let tea = @tea.TEA::new(model=initial_model, update=update, view=view)
+  let dispatcher = tea.dispatcher()
+  let app = @tea.new(tea)
+  app.with_route(
+    url_changed=dispatcher.message1(UrlChanged(_)),
+    url_request=dispatcher.message1(LinkClicked(_)),
   )
+  app.mount("app")
 }

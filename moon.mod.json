@@ -3,7 +3,9 @@
   "version": "0.1.1",
   "deps": {
     "illusory0x0/fuzzy_match": "0.2.4",
-    "Yoorkin/rabbit-tea": "0.10.10",
+    "Yoorkin/rabbita": {
+      "path": "../rabbit-tea"
+    },
     "moonbit-community/cmark": "0.4.3",
     "Yoorkin/prettyprinter": "0.4.8",
     "moonbitlang/parser": "0.1.13"

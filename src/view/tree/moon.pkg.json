@@ -1,5 +1,6 @@
 {
   "import": [
-    "Yoorkin/rabbit-tea/html"
+    "Yoorkin/rabbita/html",
+    "Yoorkin/rabbita/cmd"
   ]
 }

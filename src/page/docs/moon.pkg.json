@@ -1,19 +1,18 @@
 {
   "import": [
     {
-      "path": "Yoorkin/rabbit-tea",
+      "path": "Yoorkin/rabbita",
       "alias": "tea"
     },
-    "Yoorkin/rabbit-tea/http",
-    "Yoorkin/rabbit-tea/html",
-    "Yoorkin/rabbit-tea/nav",
-    "Yoorkin/rabbit-tea/cmd",
-    "Yoorkin/rabbit-tea/dialog",
+    "Yoorkin/rabbita/http",
+    "Yoorkin/rabbita/html",
+    "Yoorkin/rabbita/nav",
+    "Yoorkin/rabbita/dialog",
     "moonbitlang/mooncakes/config",
     "moonbitlang/mooncakes/view",
     "moonbitlang/mooncakes/view/tree",
     "moonbitlang/mooncakes/util",
     "illusory0x0/fuzzy_match",
-    "Yoorkin/rabbit-tea/clipboard"
+    "Yoorkin/rabbita/clipboard"
   ]
 }

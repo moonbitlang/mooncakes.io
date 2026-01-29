@@ -13,14 +13,14 @@
 // limitations under the License.
 
 ///|
-pub fn[M] loading() -> Html[M] {
+pub fn loading() -> Html {
   div(class="flex flex-col items-center justify-center h-full w-full", [
     h1(class="text-2xl font-bold m-10", [text("Loading...")]),
   ])
 }
 
 ///|
-pub fn[M] load_failed(resource : String) -> Html[M] {
+pub fn load_failed(resource : String) -> Html {
   div(class="flex flex-col items-center justify-center h-full w-full", [
     pre([code([text(@config.dead_rabbit)])]),
     h1(class="text-2xl font-bold text-gray-700 m-10", [
@@ -30,7 +30,7 @@ pub fn[M] load_failed(resource : String) -> Html[M] {
 }
 
 ///|
-pub fn[M] document_not_available(path : String) -> Html[M] {
+pub fn document_not_available(path : String) -> Html {
   div(class="flex flex-col items-center justify-center h-full w-full", [
     pre([code([text(@config.dead_rabbit)])]),
     div(class="text-gray-900 m-10", [

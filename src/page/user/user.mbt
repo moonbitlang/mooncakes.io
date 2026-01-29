@@ -111,18 +111,24 @@ extern "js" fn get_date_days_ago(days : Int) -> String =
   #|}
 
 ///|
-pub fn load(username : String) -> (Cmd[Msg], Model) {
+pub fn load(username : String, to_cmd : (Msg) -> Cmd) -> (Cmd, Model) {
   let today = get_today_iso()
   let start_date = get_date_days_ago(120)
   (
     batch([
       @http.get(
         "/api/v0/user/\{username}",
-        expect=Json(GotUserProfile(_), decode_user_profile),
+        expect=Json(
+          result => to_cmd(GotUserProfile(result)),
+          decode_user_profile,
+        ),
       ),
       @http.get(
         "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
-        expect=Json(GotCodeFrequency(_), decode_code_frequency),
+        expect=Json(
+          result => to_cmd(GotCodeFrequency(result)),
+          decode_code_frequency,
+        ),
       ),
     ]),
     { profile: Loading, code_frequency: Loading },
@@ -130,7 +136,7 @@ pub fn load(username : String) -> (Cmd[Msg], Model) {
 }
 
 ///|
-using @html {div, h1, h2, text, a, span, img}
+using @html {div, h1, h2, text, a, span, img, nothing}
 
 ///|
 using @cmd {none, batch}
@@ -142,7 +148,7 @@ using @cmd {type Cmd}
 using @util {type Status}
 
 ///|
-pub fn profile(profile : Status[Profile]) -> Html[Msg] {
+pub fn profile(profile : Status[Profile]) -> Html {
   match profile {
     Failed => @view.load_failed("user")
     Loading => @view.loading()
@@ -161,7 +167,7 @@ pub fn profile(profile : Status[Profile]) -> Html[Msg] {
           img(
             class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white shadow-lg",
             src=avatar_url,
-            [],
+            nothing(),
           )
         },
         h1(class="text-3xl font-bold text-gray-800", [text(username)]),
@@ -170,7 +176,7 @@ pub fn profile(profile : Status[Profile]) -> Html[Msg] {
 }
 
 ///|
-pub fn published_modules(modules : Status[PublishedModules]) -> Html[Msg] {
+pub fn published_modules(modules : Status[PublishedModules]) -> Html {
   match modules {
     Failed => @view.load_failed("published modules")
     Loading => @view.loading()
@@ -219,7 +225,7 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html[Msg] {
 }
 
 ///|
-pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
+pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
   match code_frequency {
     Failed => @view.load_failed("code frequency")
     Loading => @view.loading()
@@ -259,21 +265,21 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
             // small line on baseline
             div(
               class="absolute left-0 right-0 h-[2px] -translate-y-1/2 top-1/2 bg-gray-400 rounded",
-              [],
+              nothing(),
             )
           } else if value > 0 {
             // grow upward from baseline
             div(
               class="\{color} absolute w-4 sm:w-6",
               style=["height:\{h}px;", "bottom:50%;"],
-              [],
+              nothing(),
             )
           } else {
             // grow downward from baseline
             div(
               class="\{color} absolute w-4 sm:w-6",
               style=["height:\{h}px;", "top:50%;"],
-              [],
+              nothing(),
             )
           }
           let class = if value > 0 {
@@ -287,7 +293,10 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
             // graph area
             div(class="relative h-40 w-4 sm:w-6", [
               // baseline
-              div(class="absolute left-0 right-0 top-1/2 h-px bg-gray-300", []),
+              div(
+                class="absolute left-0 right-0 top-1/2 h-px bg-gray-300",
+                nothing(),
+              ),
               bar,
             ]),
             // value
@@ -312,11 +321,11 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
               div(
                 class="absolute inset-0 flex flex-col justify-between h-40 pointer-events-none",
                 [
-                  div(class="border-t border-dashed border-gray-200", []),
-                  div(class="border-t border-dashed border-gray-200", []),
-                  div(class="border-t border-dashed border-gray-300", []), // center line slightly darker
-                  div(class="border-t border-dashed border-gray-200", []),
-                  div(class="border-t border-dashed border-gray-200", []),
+                  div(class="border-t border-dashed border-gray-200", nothing()),
+                  div(class="border-t border-dashed border-gray-200", nothing()),
+                  div(class="border-t border-dashed border-gray-300", nothing()), // center line slightly darker
+                  div(class="border-t border-dashed border-gray-200", nothing()),
+                  div(class="border-t border-dashed border-gray-200", nothing()),
                 ],
               ),
               div(
@@ -324,22 +333,22 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
                 [
                   div(
                     class="flex items-end gap-2",
-                    [..bars, div(id="right", [])],
+                    [..bars, div(id="right", nothing())],
                   ),
                 ],
               ),
             ]),
             div(class="flex flex-wrap gap-2 sm:gap-4 mt-4 text-xs", [
               div(class="flex items-center", [
-                div(class="bg-green-500 w-4 h-2 rounded-sm mr-1", []),
+                div(class="bg-green-500 w-4 h-2 rounded-sm mr-1", nothing()),
                 text("Added"),
               ]),
               div(class="flex items-center", [
-                div(class="bg-red-500 w-4 h-2 rounded-sm mr-1", []),
+                div(class="bg-red-500 w-4 h-2 rounded-sm mr-1", nothing()),
                 text("Removed"),
               ]),
               div(class="flex items-center", [
-                div(class="bg-gray-400 w-4 h-[2px] mr-1", []),
+                div(class="bg-gray-400 w-4 h-[2px] mr-1", nothing()),
                 text("No Change"),
               ]),
             ]),
@@ -351,8 +360,8 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html[Msg] {
 }
 
 ///|
-pub fn view(model : Model) -> Html[Msg] {
-  let theme_toggle = @view.theme_toggle(click=ToggleTheme)
+pub fn view(model : Model, to_cmd : (Msg) -> Cmd) -> Html {
+  let theme_toggle = @view.theme_toggle(click=to_cmd(ToggleTheme))
   @view.page(
     header=@view.navbar(right=theme_toggle),
     main=div(class="container lg:px-40 px-4 py-6", [
@@ -377,7 +386,7 @@ pub fn view(model : Model) -> Html[Msg] {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
+pub fn update(msg : Msg, model : Model, _to_cmd : (Msg) -> Cmd) -> (Cmd, Model) {
   match msg {
     GotUserProfile(Ok(profile)) =>
       (none(), { ..model, profile: Success(profile) })

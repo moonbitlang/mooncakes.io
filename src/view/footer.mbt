@@ -1,5 +1,5 @@
 ///|
-pub fn[M] footer() -> Html[M] {
+pub fn footer() -> Html {
   let class = "hover:text-mooncake2 transition-colors"
   div(
     class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex flex-col md:flex-row justify-center gap-4 md:gap-8",

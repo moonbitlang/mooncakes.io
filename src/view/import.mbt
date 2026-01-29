@@ -35,3 +35,6 @@ using @html {
   li,
   ol,
 }
+
+///|
+using @cmd {type Cmd}

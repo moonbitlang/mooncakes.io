@@ -13,11 +13,13 @@
 // limitations under the License.
 
 ///|
-fn[M] item_button(childrens : Html[M], icon? : String, click? : M) -> Html[M] {
+fn item_button(childrens : Html, icon? : String, click? : Cmd) -> Html {
   let icon = match icon {
-    None => div([])
-    Some(src) =>
-      div(class="size-[12px] self-center mr-1", [img(class="ui-icon", src~, [])])
+    None => div(nothing())
+    Some(src) => div(
+      class="size-[12px] self-center mr-1",
+      [img(class="ui-icon", src~, nothing())],
+    )
   }
   div(class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex", click?, [
     icon, childrens,
@@ -25,7 +27,7 @@ fn[M] item_button(childrens : Html[M], icon? : String, click? : M) -> Html[M] {
 }
 
 ///|
-fn[T] source_list(files : Array[String], package_path~ : String) -> Html[T] {
+fn source_list(files : Array[String], package_path~ : String) -> Html {
   if files.is_empty() {
     return text("No source files.")
   }
@@ -154,24 +156,24 @@ fn PkgIndex::to_document_items(
 }
 
 ///|
-fn[T] sidebar(
+fn sidebar(
   document_index : Array[@tree.Tree[ItemTarget]],
   source_files : Array[String],
   showing : String,
   package_path~ : String,
   sidebar_state : SortedSet[ItemTarget],
-  to_msg : (Msg) -> T,
-) -> Html[T] {
+  to_cmd : (Msg) -> Cmd,
+) -> Html {
   @view.accordion(
     class="text-gray-700 flex flex-col",
-    click=x => to_msg(SidebarTabClicked(x)),
+    click=x => to_cmd(SidebarTabClicked(x)),
     showing,
     [
       (
         "Documentation",
         @tree.view(
-          toggle=x => to_msg(ToggleSidebarItem(x)),
-          click=x => to_msg(ClickSidebarItem(x)),
+          toggle=x => to_cmd(ToggleSidebarItem(x)),
+          click=x => to_cmd(ClickSidebarItem(x)),
           state=sidebar_state,
           indicator=Symbol(""),
           document_index,

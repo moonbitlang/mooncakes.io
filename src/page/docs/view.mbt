@@ -1,7 +1,7 @@
 ///|
-pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
-  let theme_toggle = @view.theme_toggle(click=to_msg(ToggleTheme))
-  let navbar : Html[T] = match (model.module_index, model.resource) {
+pub fn view(model : Model, to_cmd : (Msg) -> Cmd) -> Html {
+  let theme_toggle = @view.theme_toggle(click=to_cmd(ToggleTheme))
+  let navbar : Html = match (model.module_index, model.resource) {
     (Success(module_index), Success(resource)) => {
       let module_path = match resource.kind {
         Module({ meta_info, .. }) => Some(meta_info.name)
@@ -13,7 +13,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
         module_path.unwrap_or(""),
         module_index,
         model.collapsed_docs.card_mode,
-        to_msg,
+        to_cmd,
         theme_toggle~,
       )
     }
@@ -31,10 +31,10 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
   }
   let main = match model.resource {
     Success({ readme_content, kind }) => {
-      let meta : Html[T] = match kind {
+      let meta : Html = match kind {
         Module({ meta_info: meta, .. })
         | RootPackage({ meta_info: meta, .. }) =>
-          meta_info(meta, install_copied=model.install_copied, to_msg)
+          meta_info(meta, install_copied=model.install_copied, to_cmd)
         Package(_) => nothing()
       }
       div([
@@ -44,7 +44,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
           readme_content~,
           package_data=model.package_data,
           folded=model.collapsed_docs,
-          to_msg,
+          to_cmd,
         ),
       ])
     }
@@ -52,7 +52,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
     Loading => @view.loading()
   }
   let search = model.search
-  let search_panel : Html[T] = @html.dialog(
+  let search_panel : Html = @html.dialog(
     class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
     id="search-panel",
     [
@@ -63,13 +63,14 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            input=x => to_msg(SearchFilterChanged(x)),
+            input=x => to_cmd(SearchFilterChanged(x)),
             class="outline-none m-0 flex-grow px-4 p-2",
+            nothing(),
           ),
           div(
             class="size-12 container hover:bg-gray-200 flex justify-center items-center",
-            click=to_msg(ToggleSearchPanel(false)),
-            [img(class="ui-icon", src=@config.icon_close, [])],
+            click=to_cmd(ToggleSearchPanel(false)),
+            [img(class="ui-icon", src=@config.icon_close, nothing())],
           ),
         ],
       ),
@@ -112,15 +113,15 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
     ],
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
-  let sidebar_dialog : Html[T] = div(
+  let sidebar_dialog : Html = div(
     class="fixed inset-0 justify-center items-center z-100",
     style=["display: " + show_sidebar_dialog],
     [
       div(
         class="fixed inset-0 bg-black/40 z-10",
         style=["display: " + show_sidebar_dialog],
-        click=to_msg(ToggleSidebarFab),
-        [],
+        click=to_cmd(ToggleSidebarFab),
+        nothing(),
       ),
       div(
         class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
@@ -131,16 +132,16 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
             model.sidebar_tab,
             model.sidebar_collapsed,
             package_path=model.path,
-            to_msg,
+            to_cmd,
           ),
         ],
       ),
     ],
   )
-  let fab : Html[T] = @html.button(
+  let fab : Html = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
-    click=to_msg(ToggleSidebarFab),
-    [img(class="size-5", src=@config.HAMBURGER_BUTTON, [])],
+    click=to_cmd(ToggleSidebarFab),
+    [img(class="size-5", src=@config.HAMBURGER_BUTTON, nothing())],
   )
   div(class="min-h-screen w-full flex-col", [
     div(
@@ -161,13 +162,13 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
                   model.sidebar_tab,
                   model.sidebar_collapsed,
                   package_path=model.path,
-                  to_msg,
+                  to_cmd,
                 ),
               ]),
             ],
           ),
           div(class="flex-1 min-w-0", [main, fab, sidebar_dialog]),
-          div(class="md:w-40", []),
+          div(class="md:w-40", nothing()),
         ],
       ),
     ]),

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-pub fn[M] button(value : String, click? : M) -> Html[M] {
+pub fn button(value : String, click? : Cmd) -> Html {
   div(
     class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
     click?,
@@ -22,7 +22,7 @@ pub fn[M] button(value : String, click? : M) -> Html[M] {
 }
 
 ///|
-pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
+pub fn icon_button(icon : String, text? : String, click? : Cmd) -> Html {
   let text = match text {
     None => []
     Some(value) => [@html.text(value)]
@@ -33,14 +33,14 @@ pub fn[M] icon_button(icon : String, text? : String, click? : M) -> Html[M] {
     [
       div(
         class="self-center min-w-4 flex gap-2",
-        [img(class="w-4 ui-icon", src=icon, []), ..text],
+        [img(class="w-4 ui-icon", src=icon, nothing()), ..text],
       ),
     ],
   )
 }
 
 ///|
-pub fn[M] theme_toggle(click? : M) -> Html[M] {
+pub fn theme_toggle(click? : Cmd) -> Html {
   @html.button(
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
     click?,
@@ -48,12 +48,12 @@ pub fn[M] theme_toggle(click? : M) -> Html[M] {
       img(
         class="theme-toggle-icon theme-toggle-icon-moon",
         src=@config.MOON_ICON,
-        [],
+        nothing(),
       ),
       img(
         class="theme-toggle-icon theme-toggle-icon-sun",
         src=@config.SUN_ICON,
-        [],
+        nothing(),
       ),
       span(class="sr-only theme-toggle-label theme-toggle-label-light", [
         text("Enable night mode"),

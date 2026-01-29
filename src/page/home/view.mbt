@@ -231,7 +231,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     } else {
       [text(value.to_string()), text("+")]
     }
-    let invisible = if invisible { " invisible " } else { " " }
+    let invisible = if invisible { " invisible hidden lg:block " } else { " " }
     div(
       class="home-stat-card border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
       [
@@ -247,7 +247,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
   }
 
   div(
-    class="container lg:w-3/4 flex flex-col lg:flex-row items-center justify-between lg:py-8",
+    class="container lg:w-3/4 px-5 sm:px-6 mt-4 lg:mt-0 flex flex-col gap-3 lg:gap-0 lg:flex-row items-center justify-start lg:justify-between lg:py-8",
     [
       div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
         div(class="text-slate-700 home-hero-copy", [
@@ -274,7 +274,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
         ]),
       ]),
       div(
-        class="home-hero-media flex relative w-4/5 lg:flex-row-reverse lg:w-2/5",
+        class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5 lg:flex-row-reverse lg:w-2/5",
         [
           img(
             class="home-hero-image hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
@@ -282,7 +282,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
             [],
           ),
           div(
-            class="text-xl flex w-full lg:flex-col gap-2 z-10 lg:w-3/5 select-none",
+            class="flex w-full flex-col sm:flex-row lg:flex-col gap-3 z-10 lg:w-3/5 select-none",
             [
               stat_card("Lines of code", total_lines, true, None),
               stat_card("Packages", total_packages, false, None),
@@ -331,7 +331,7 @@ pub fn view(model : Model) -> Html[Msg] {
       middle=input(
         input_type=Text,
         placeholder="Search modules ...",
-        class="border rounded-full my-2 lg:my-0 max-w-1/3 text-sm lg:text-base px-4 w-full py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
+        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
         input=FilterChanged(_),
       ),
       right=theme_toggle,

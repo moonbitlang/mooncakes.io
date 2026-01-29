@@ -18,13 +18,18 @@ pub fn[M] navbar(
   }
   div(class~, [
     div(
-      class="container flex flex-col items-center justify-center py-2 lg:gap-2 min-h-15 lg:flex-row lg:justify-between",
+      class="container px-5 sm:px-6 flex flex-col gap-2 py-3 min-h-15 lg:flex-row lg:items-center lg:justify-between",
       [
-        div(class="w-40", [left]),
+        div(class="w-full flex items-center justify-between lg:w-40", [
+          left,
+          div(class="lg:hidden", [right.unwrap_or_else(nothing)]),
+        ]),
         div(class="w-full lg:flex-1 flex items-center justify-center", [
           middle.unwrap_or_else(nothing),
         ]),
-        div(class="w-40 flex justify-end", [right.unwrap_or_else(nothing)]),
+        div(class="hidden lg:flex w-40 justify-end", [
+          right.unwrap_or_else(nothing),
+        ]),
       ],
     ),
   ])

@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/view"
 
-import(
-  "Yoorkin/rabbit-tea/html"
-)
+import {
+  "Yoorkin/rabbit-tea/html",
+}
 
 // Values
 pub fn[M] accordion(class? : String, click? : (String) -> M, String, Array[(String, @html.Html[M])]) -> @html.Html[M]

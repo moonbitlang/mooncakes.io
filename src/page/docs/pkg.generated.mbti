@@ -1,10 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/page/docs"
 
-import(
-  "Yoorkin/rabbit-tea/cmd"
-  "Yoorkin/rabbit-tea/html"
-)
+import {
+  "Yoorkin/rabbit-tea/cmd",
+  "Yoorkin/rabbit-tea/html",
+}
 
 // Values
 pub fn is_theme_toggle(Msg) -> Bool

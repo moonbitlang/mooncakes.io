@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/page/user"
 
-import(
-  "Yoorkin/rabbit-tea/cmd"
-  "Yoorkin/rabbit-tea/html"
-  "moonbitlang/mooncakes/util"
-)
+import {
+  "Yoorkin/rabbit-tea/cmd",
+  "Yoorkin/rabbit-tea/html",
+  "moonbitlang/mooncakes/util",
+}
 
 // Values
 pub fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html[Msg]

@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/util/highlight"
 
-import(
-  "moonbitlang/core/list"
-)
+import {
+  "moonbitlang/core/list",
+}
 
 // Values
 pub fn parse_code(String) -> @list.List[CodeSpan]

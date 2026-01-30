@@ -14,7 +14,7 @@ pub fn[M] navbar(
   let class = match style {
     Sticky =>
       "top-0 z-30 border-b sticky bg-white/60 backdrop-blur-md select-none"
-    Fusion => ""
+    Fusion => "select-none"
   }
   div(class~, [
     div(

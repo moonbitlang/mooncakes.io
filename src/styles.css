@@ -38,7 +38,58 @@
 
 .theme-root {
   background-color: #fafafa;
+  overflow-x: clip;
 }
+
+.hero-banner:empty {
+  display: none;
+}
+
+.home-hero-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-hero-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background:
+    repeating-radial-gradient(
+      circle at 82% 18%,
+      rgba(175, 168, 152, 0.06) 0 2px,
+      transparent 2px 36px
+    ),
+    repeating-radial-gradient(
+      circle at 10% -10%,
+      rgba(175, 168, 152, 0.05) 0 2px,
+      transparent 2px 44px
+    ),
+    radial-gradient(
+      60% 80% at 78% 18%,
+      rgba(242, 245, 248, 0.55) 0%,
+      rgba(252, 253, 254, 0) 60%
+    ),
+    radial-gradient(
+      70% 90% at 18% 0%,
+      rgba(238, 241, 245, 0.55) 0%,
+      rgba(252, 253, 254, 0) 65%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(251, 252, 253, 0.98) 0%,
+      rgba(255, 255, 255, 0.98) 100%
+    );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top center;
+  border-bottom: 1px solid rgba(224, 228, 234, 0.6);
+  z-index: -1;
+}
+
 
 .theme-switching,
 .theme-switching *,
@@ -83,6 +134,40 @@
   background-color: #0b0b0c;
   color: #e5e7eb;
 }
+
+.theme-dark .home-hero-shell::before {
+  background:
+    repeating-radial-gradient(
+      circle at 82% 18%,
+      rgba(170, 150, 130, 0.1) 0 2px,
+      transparent 2px 36px
+    ),
+    repeating-radial-gradient(
+      circle at 10% -10%,
+      rgba(170, 150, 130, 0.07) 0 2px,
+      transparent 2px 44px
+    ),
+    radial-gradient(
+      60% 80% at 78% 18%,
+      rgba(36, 32, 28, 0.92) 0%,
+      rgba(11, 11, 12, 0) 60%
+    ),
+    radial-gradient(
+      70% 90% at 18% 0%,
+      rgba(34, 30, 26, 0.92) 0%,
+      rgba(11, 11, 12, 0) 65%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(12, 14, 18, 0.97) 0%,
+      rgba(11, 11, 12, 0.97) 100%
+    );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top center;
+  border-bottom: 1px solid rgba(47, 54, 64, 0.9);
+}
+
 
 .theme-dark .theme-toggle {
   background: rgba(20, 23, 28, 0.9);

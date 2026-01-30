@@ -233,7 +233,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     }
     let invisible = if invisible { " invisible hidden lg:block " } else { " " }
     div(
-      class="home-stat-card border overflow-clip rounded-xl min-w-27 pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
+      class="home-stat-card bg-white/90 shadow-sm border overflow-clip rounded-xl min-w-27 w-full lg:max-w-[240px] pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
       [
         p(class="text-xl lg:text-3xl font-extralight", value),
         div(class="flex items-center justify-between", [
@@ -247,37 +247,40 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
   }
 
   div(
-    class="container lg:w-3/4 px-5 sm:px-6 mt-4 lg:mt-0 flex flex-col gap-3 lg:gap-0 lg:flex-row items-center justify-start lg:justify-between lg:py-8",
+    class="container lg:w-3/4 px-5 sm:px-6 flex flex-col gap-3 lg:flex-row items-center justify-start lg:justify-center lg:gap-12 lg:py-8",
     [
-      div(class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col", [
-        div(class="text-slate-700 home-hero-copy", [
-          h1(class="text-2xl font-semibold lg:text-4xl", [
-            text("The Package Registry"),
-          ]),
-          h1(class="text-3xl font-semibold lg:text-4xl lg:mt-0", [
-            text("for"),
-            span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
-            text("community"),
-          ]),
-          h2(class="hidden lg:block text-xl mt-4 text-zinc-500 gap-1", [
-            text("Browse, search and share package and documentation"),
-          ]),
-        ]),
-        div(class="flex mt-2 lg:mt-8 gap-4 justify-center lg:justify-start", [
-          button(
-            "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
-            "bg-yellow-600 text-white",
-          ),
-          button(
-            "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
-          ),
-        ]),
-      ]),
       div(
-        class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5 lg:flex-row-reverse lg:w-2/5",
+        class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[520px]",
+        [
+          div(class="text-slate-700 home-hero-copy", [
+            h1(class="text-2xl font-semibold lg:text-4xl", [
+              text("The Package Registry"),
+            ]),
+            h1(class="text-3xl font-semibold lg:text-4xl lg:mt-0", [
+              text("for"),
+              span(class="text-moonbit font-extrabold", [text(" MoonBit ")]),
+              text("community"),
+            ]),
+            h2(class="hidden lg:block text-xl mt-4 text-zinc-500 gap-1", [
+              text("Browse, search and share package and documentation"),
+            ]),
+          ]),
+          div(class="flex mt-2 lg:mt-8 gap-4 justify-center lg:justify-start", [
+            button(
+              "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+              "bg-yellow-600 text-white",
+            ),
+            button(
+              "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
+            ),
+          ]),
+        ],
+      ),
+      div(
+        class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5 lg:flex-row-reverse lg:w-2/5 lg:translate-x-9",
         [
           img(
-            class="home-hero-image hidden lg:block lg:absolute left-0 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
+            class="home-hero-image hidden lg:block lg:absolute lg:left-0 lg:translate-x-6 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
             src="mooncake-pic-small.png",
             [],
           ),
@@ -325,17 +328,19 @@ pub fn view(model : Model) -> Html[Msg] {
     nothing()
   }
   let theme_toggle = @view.theme_toggle(click=ToggleTheme)
-  @view.page(
-    header=@view.navbar(
+  let hero = div(class="home-hero-shell pb-6 sm:pb-8", [
+    @view.navbar(
       style=Fusion,
       middle=input(
         input_type=Text,
+        value=model.filter,
         placeholder="Search modules ...",
-        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white focus:border-mooncake2 focus:shadow-2xl shadow-yellow-200/10 outline-none transition-colors",
+        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
         input=FilterChanged(_),
       ),
       right=theme_toggle,
     ),
-    main=div(class="w-full", [banner, module_list]),
-  )
+    div(class="hero-banner", [banner]),
+  ])
+  @view.page(header=hero, main=div(class="w-full", [module_list]))
 }

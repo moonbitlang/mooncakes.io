@@ -309,7 +309,7 @@ pub fn view(model : Model) -> Html[Msg] {
     let all_modules = match model.all_modules {
       Loading => @view.loading()
       Failed => @view.load_failed("module indices")
-      Success(xs) => all_modules(xs)
+      Success(xs) => all_modules(xs.indices)
     }
     div([pinned_modules, recently_updated, all_modules])
   } else {

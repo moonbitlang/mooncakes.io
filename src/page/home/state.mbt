@@ -24,7 +24,7 @@ pub enum Msg {
 ///|
 pub struct Model {
   recent_modules : Status[Array[ModuleIndex]]
-  all_modules : Status[Map[Char, Array[ModuleIndex]]]
+  all_modules : Status[AllModules]
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
@@ -47,6 +47,49 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
+}
+
+///|
+struct SearchIndex {
+  entry : ModuleIndex
+  path : String
+  name : String
+  author : String
+  keywords : Array[String]
+  recency_penalty : Int
+}
+
+///|
+struct AllModules {
+  indices : Map[Char, Array[ModuleIndex]]
+  search_index : Lazy[Array[SearchIndex]]
+}
+
+///|
+extern "js" fn recency_penalty(date : String) -> Int =
+  #|function recencyPenalty(dateString) {
+  #|  const t = Date.parse(dateString);
+  #|  if (!Number.isFinite(t)) return 200;
+  #|  const diffDays = Math.max(0, (Date.now() - t) / 86400000);
+  #|  return Math.min(200, Math.floor(diffDays * 3));
+  #|}
+
+///|
+fn sanitize_for_fuzzy(text : String) -> String {
+  let sb = StringBuilder::new()
+  let mut changed = false
+  for c in text {
+    if c.to_int() <= 0xFFFF {
+      sb.write_char(c)
+    } else {
+      changed = true
+    }
+  }
+  if changed {
+    sb.to_string()
+  } else {
+    text
+  }
 }
 
 ///|
@@ -80,8 +123,11 @@ pub fn load() -> (Cmd[Msg], Model) {
 ///|
 pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
   match msg {
-    GotAllModule(Ok(modules)) =>
-      (none(), { ..model, all_modules: Success(sort_modules_by_name(modules)) })
+    GotAllModule(Ok(modules)) => {
+      let indices = sort_modules_by_name(modules)
+      let search_index = Lazy::new(fn() { build_search_index(indices) })
+      (none(), { ..model, all_modules: Success({ indices, search_index }) })
+    }
     GotRecentModule(Ok(recent)) =>
       (none(), { ..model, recent_modules: Success(recent) })
     GotCount(Ok(stat)) =>
@@ -99,7 +145,12 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
     }
     FilterChanged(filter) => {
       let filtered_modules = match model.all_modules {
-        Success(indices) => filter_indices(filter, indices)
+        Success(all) =>
+          if filter.is_empty() {
+            []
+          } else {
+            filter_indices(filter, all.search_index.force())
+          }
         _ => []
       }
       (none(), { ..model, filter, filtered_modules })
@@ -119,19 +170,174 @@ pub fn is_theme_toggle(msg : Msg) -> Bool {
 ///|
 pub fn filter_indices(
   filter : String,
-  indices : Map[Char, Array[ModuleIndex]],
+  index : Array[SearchIndex],
 ) -> Array[ModuleIndex] {
+  fn split_tokens(filter : String) -> Array[String] {
+    filter
+    .split(" ")
+    .filter_map(fn(part) {
+      let trimmed = part.trim()
+      if trimmed.is_empty() {
+        None
+      } else {
+        Some(trimmed.to_string())
+      }
+    })
+    .collect()
+  }
+
+  fn matches_primary(
+    tokens : Array[String],
+    path_lower : String,
+    name_lower : String,
+    author_lower : String,
+    keywords_lower : Array[String],
+  ) -> Bool {
+    fn keyword_contains(
+      token_view : StringView,
+      keywords_lower : Array[String],
+    ) -> Bool {
+      for kw in keywords_lower {
+        if kw.contains(token_view) {
+          return true
+        }
+      }
+      false
+    }
+
+    fn keyword_has_prefix(
+      token_view : StringView,
+      keywords_lower : Array[String],
+    ) -> Bool {
+      for kw in keywords_lower {
+        if kw.has_prefix(token_view) {
+          return true
+        }
+      }
+      false
+    }
+
+    for token in tokens {
+      let token_view = token[:]
+      let mut matched = false
+      if token.length() <= 1 {
+        for part in path_lower.split("/") {
+          if part.has_prefix(token_view) {
+            matched = true
+            break
+          }
+        }
+        if not(matched) {
+          matched = name_lower.has_prefix(token_view) ||
+            author_lower.has_prefix(token_view)
+        }
+        if not(matched) {
+          matched = keyword_has_prefix(token_view, keywords_lower)
+        }
+      } else {
+        matched = path_lower.contains(token_view) ||
+          name_lower.contains(token_view) ||
+          author_lower.contains(token_view) ||
+          keyword_contains(token_view, keywords_lower)
+      }
+      if not(matched) {
+        return false
+      }
+    }
+    true
+  }
+
+  let safe_filter = sanitize_for_fuzzy(filter)
+  let filter_lower = safe_filter.to_lower()
+  let tokens = split_tokens(filter_lower)
+  if safe_filter.is_empty() {
+    return []
+  }
+  let query = @fuzzy_match.Query::new(filter_lower)
+  fn update_best(best : Int?, score : Int) -> Int? {
+    match best {
+      None => Some(score)
+      Some(value) => if score < value { Some(score) } else { best }
+    }
+  }
+
+  fn consider(
+    best : Int?,
+    query : @fuzzy_match.Query,
+    text : String,
+    penalty : Int,
+  ) -> Int? {
+    if text.is_empty() {
+      best
+    } else {
+      let score = query.score(item=text)
+      if score == 0 {
+        best
+      } else {
+        update_best(best, score + penalty)
+      }
+    }
+  }
+
+  let hits = index
+    .iter()
+    .filter_map(fn(entry) {
+      if tokens.is_empty() {
+        return None
+      }
+      let path_lower = entry.path
+      let name_lower = entry.name
+      let author_lower = entry.author
+      let keywords_lower = entry.keywords
+      if not(
+          matches_primary(
+            tokens, path_lower, name_lower, author_lower, keywords_lower,
+          ),
+        ) {
+        return None
+      }
+      let keyword_penalty = 200
+      let best = consider(None, query, entry.path, 0)
+      let best = consider(best, query, entry.name, 0)
+      let best = consider(best, query, entry.author, 0)
+      let best = entry.keywords.fold(init=best, fn(acc, kw) {
+        consider(acc, query, kw, keyword_penalty)
+      })
+      match best {
+        None => None
+        Some(score) => Some((score + entry.recency_penalty, entry.entry))
+      }
+    })
+    .collect()
+  hits.sort_by(fn(a, b) { a.0 - b.0 })
+  let limit = 200
+  let count = if hits.length() < limit { hits.length() } else { limit }
+  hits[:count].map(fn(x) { x.1 })
+}
+
+///|
+fn build_search_index(
+  indices : Map[Char, Array[ModuleIndex]],
+) -> Array[SearchIndex] {
   indices
   .values()
   .flat_map(Array::iter)
-  .filter(fn(x) {
-    fn is_matched(s1 : String) {
-      s1.to_upper().contains(filter.to_upper())
+  .map(fn(mod) {
+    let path = sanitize_for_fuzzy(mod.path).to_lower()
+    let name = sanitize_for_fuzzy(mod.name).to_lower()
+    let author = sanitize_for_fuzzy(mod.author).to_lower()
+    let keywords = match mod.keywords {
+      None => []
+      Some(items) =>
+        items
+        .map(fn(kw) { sanitize_for_fuzzy(kw).to_lower() })
+        .filter(fn(kw) { not(kw.is_empty()) })
     }
-
-    is_matched(x.path) ||
-    x.keywords.map_or(false, fn(keywords) { keywords.iter().any(is_matched) }) ||
-    x.description.map_or(false, is_matched)
+    let recency_penalty = match mod.created_at {
+      None => 0
+      Some(time) => recency_penalty(time)
+    }
+    { entry: mod, path, name, author, keywords, recency_penalty }
   })
   .collect()
 }

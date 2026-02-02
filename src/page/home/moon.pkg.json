@@ -8,6 +8,7 @@
     "Yoorkin/rabbit-tea/html",
     "Yoorkin/rabbit-tea/cmd",
     "moonbitlang/mooncakes/view",
-    "moonbitlang/mooncakes/util"
+    "moonbitlang/mooncakes/util",
+    "illusory0x0/fuzzy_match"
   ]
 }

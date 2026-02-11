@@ -162,12 +162,14 @@ fn interp_to_string(
   xs : Array[@tokens.InterpElem],
   dst : Array[CodeSpan],
 ) -> Unit {
-  xs.each(x => match x {
-    InterpLit(repr~, ..) => dst.push(StringLit(repr))
-    InterpSource({ source, .. }) => {
-      dst.push(Symbol("\\{"))
-      push_code_to_span(source, dst)
-      dst.push(Symbol("}"))
+  xs.each(x => {
+    match x {
+      InterpLit(repr~, ..) => dst.push(StringLit(repr))
+      InterpSource({ source, .. }) => {
+        dst.push(Symbol("\\{"))
+        push_code_to_span(source, dst)
+        dst.push(Symbol("}"))
+      }
     }
   })
 }

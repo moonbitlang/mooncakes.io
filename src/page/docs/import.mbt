@@ -31,7 +31,7 @@ using @html {
 }
 
 ///|
-using @tea {type Cmd, batch, none}
+using @rabbita {type Cmd, batch, none}
 
 ///|
 using @immut/sorted_map {type SortedMap}

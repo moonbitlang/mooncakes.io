@@ -211,9 +211,11 @@ fn decode_type_index(json : Json) -> TypeIndex raise Error {
       ..
     } => {
       let impls = map_with_error(impls, decode_impl_index)
-      let methods = map_with_error(methods, x => match x {
-        String(x) => x
-        _ => fail("invalid json in type index")
+      let methods = map_with_error(methods, x => {
+        match x {
+          String(x) => x
+          _ => fail("invalid json in type index")
+        }
       })
       { name, impls, methods }
     }
@@ -247,9 +249,11 @@ fn decode_misc_index(json : Json) -> MiscIndex raise Error {
       ..
     } => {
       let impls = map_with_error(impls, decode_impl_index)
-      let methods = map_with_error(methods, x => match x {
-        String(x) => x
-        _ => fail("invalid json in misc index")
+      let methods = map_with_error(methods, x => {
+        match x {
+          String(x) => x
+          _ => fail("invalid json in misc index")
+        }
       })
       { name, impls, methods }
     }
@@ -263,9 +267,11 @@ fn decode_impl_index(json : Json) -> ImplIndex raise Error {
     { "self": self_type, "trait": trait_type, "methods": Array(methods), .. } => {
       let self_type = decode_stype(self_type)
       let trait_type = decode_type_path(trait_type)
-      let methods = map_with_error(methods, x => match x {
-        String(x) => x
-        _ => fail("invalid methods in impl index")
+      let methods = map_with_error(methods, x => {
+        match x {
+          String(x) => x
+          _ => fail("invalid methods in impl index")
+        }
       })
       { self: self_type, trait_: trait_type, methods }
     }

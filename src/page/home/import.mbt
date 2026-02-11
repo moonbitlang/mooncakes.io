@@ -16,7 +16,7 @@
 using @html {type Html, a, div, nothing, text, input, img, h1, h2, span, p}
 
 ///|
-using @tea {type Cmd, none}
+using @rabbita {type Cmd, batch, none}
 
 ///|
 using @util {type Lazy, type Status}

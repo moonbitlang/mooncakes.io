@@ -74,17 +74,21 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
       } else {
       fail("Error when parsing metadata.")
     }
-    guard [name, version].map(x => match x {
-        Some(String(str)) => str
-        _ => abort("Error when parsing name and version.")
+    guard [name, version].map(x => {
+        match x {
+          Some(String(str)) => str
+          _ => abort("Error when parsing name and version.")
+        }
       })
       is [name, version] else {
       fail("Error when parsing name and version.")
     }
     // TODO: fix this check
-    guard [repository, license, description].map(x => match x {
-        Some(String(s)) => Some(s)
-        _ => None
+    guard [repository, license, description].map(x => {
+        match x {
+          Some(String(s)) => Some(s)
+          _ => None
+        }
       })
       is [repository, license, description] else {
       fail("Error when parsing repository, license, description, readme.")
@@ -102,14 +106,14 @@ fn decode_meta_info(json : Json) -> MetaInfo raise Error {
       _ => abort("Error when parsing keywords.")
     }
     let iter = name.iter()
-    let author = String::from_array(
-      iter.take_while(@builtin.op_notequal('/', _)).collect(),
-    )
+    let author = String::from_array(iter.take_while(c => c != '/').collect())
     let deps = match deps {
       Some(Object(xs)) =>
-        map_with_error(xs.iter2().to_array(), x => match x {
-          (name, String(version)) => (name, version)
-          _ => fail("Error when parsing deps.")
+        map_with_error(xs.iter2().to_array(), x => {
+          match x {
+            (name, String(version)) => (name, version)
+            _ => fail("Error when parsing deps.")
+          }
         })
       None => []
       _ => abort("Error when parsing deps.")

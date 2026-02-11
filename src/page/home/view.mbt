@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
+fn simple_module_card(mod : ModuleIndex) -> Html {
   div(
     class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-colors",
     [
@@ -44,7 +44,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
             if mod.is_new {
               @view.badge(class="bg-gray-700 text-white", [text("NEW")])
             } else {
-              nothing()
+              nothing
             },
             p(class="text-sm w-full text-right pt-1", [
               text(mod.created_at.map(get_relative_time).unwrap_or("")),
@@ -57,20 +57,22 @@ fn simple_module_card(mod : ModuleIndex) -> Html[Msg] {
 }
 
 ///|
-fn module_card(mod : ModuleIndex) -> Html[Msg] {
+fn module_card(mod : ModuleIndex) -> Html {
   let keywords = match mod.keywords {
-    None => nothing()
+    None => nothing
     Some(keywords) =>
       div(
         class="flex gap-2 h-8 flex-wrap overflow-y-hidden shrink-0",
-        keywords.map(keyword => span(
-          class="text-xs h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
-          [text(keyword)],
-        )),
+        keywords.map(keyword => {
+          span(
+            class="text-xs h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
+            [text(keyword)],
+          )
+        }),
       )
   }
   let description = match mod.description {
-    None => div(class="flex-grow", [])
+    None => div(class="flex-grow", nothing)
     Some(description) =>
       p(class="text-gray-700 py-3 overflow-ellipsis grow text-sm", [
         text(description),
@@ -78,7 +80,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
   }
   let time = match mod.created_at {
     Some(t) => p([text(get_relative_time(t))])
-    None => nothing()
+    None => nothing
   }
   div(
     class="select-none p-4 min-h-32 rounded flex flex-col border bg-white hover:bg-gray-100 transition-colors",
@@ -105,7 +107,7 @@ fn module_card(mod : ModuleIndex) -> Html[Msg] {
 }
 
 ///|
-fn pinned() -> Html[Msg] {
+fn pinned() -> Html {
   let pinned = [
     {
       author: "moonbitlang",
@@ -154,7 +156,7 @@ fn pinned() -> Html[Msg] {
 }
 
 ///|
-fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
+fn recently_updated(recently : Array[ModuleIndex]) -> Html {
   let recently_updated = recently.map(simple_module_card)
   div(class="container lg:w-4/5 px-4", [
     h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
@@ -168,7 +170,7 @@ fn recently_updated(recently : Array[ModuleIndex]) -> Html[Msg] {
 }
 
 ///|
-fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
+fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
   let all_modules = modules
     .iter2()
     .to_array()
@@ -199,7 +201,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html[Msg] {
 }
 
 ///|
-fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
+fn search_result(mods : Array[ModuleIndex]) -> Html {
   let module_cards = mods.map(module_card)
   div([
     div(class="container lg:w-4/5 px-4", [
@@ -212,7 +214,7 @@ fn search_result(mods : Array[ModuleIndex]) -> Html[Msg] {
 }
 
 ///|
-fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
+fn banner(total_lines~ : Int, total_packages~ : Int) -> Html {
   fn button(value, target, color) {
     a(
       href=target,
@@ -221,7 +223,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
     )
   }
 
-  fn stat_card(label, value : Int, invisible : Bool, child : Html[Msg]?) {
+  fn stat_card(label, value : Int, invisible : Bool, child : Html?) {
     let bottom = match child {
       None => "pb-6"
       Some(_) => "pb-2"
@@ -240,7 +242,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           p(class="text-sm lg:text-base text-gray-700 font-light", [text(label)]),
         ]),
         div(class="hidden md:flex w-full flex-col-reverse", [
-          child.unwrap_or(nothing()),
+          child.unwrap_or(nothing),
         ]),
       ],
     )
@@ -282,7 +284,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
           img(
             class="home-hero-image hidden lg:block lg:absolute lg:left-0 lg:translate-x-6 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
             src="mooncake-pic-small.png",
-            [],
+            nothing,
           ),
           div(
             class="flex w-full flex-col sm:flex-row lg:flex-col gap-3 z-10 lg:w-3/5 select-none",
@@ -298,7 +300,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html[Msg] {
 }
 
 ///|
-pub fn view(model : Model) -> Html[Msg] {
+pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   let module_list = if model.filter == "" {
     let pinned_modules = pinned()
     let recently_updated = match model.recent_modules {
@@ -325,9 +327,9 @@ pub fn view(model : Model) -> Html[Msg] {
       total_packages=model.showing_packages,
     )
   } else {
-    nothing()
+    nothing
   }
-  let theme_toggle = @view.theme_toggle(click=ToggleTheme)
+  let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
   let hero = div(class="home-hero-shell pb-6 sm:pb-8", [
     @view.navbar(
       style=Fusion,
@@ -336,7 +338,8 @@ pub fn view(model : Model) -> Html[Msg] {
         value=model.filter,
         placeholder="Search modules ...",
         class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
-        input=FilterChanged(_),
+        on_input=x => dispatch(FilterChanged(x)),
+        nothing,
       ),
       right=theme_toggle,
     ),

@@ -13,15 +13,11 @@
 // limitations under the License.
 
 ///|
-fn[T] meta_info_item_view(
-  title~ : String,
-  elem : Html[T],
-  icon? : String,
-) -> Html[T] {
+fn meta_info_item_view(title~ : String, elem : Html, icon? : String) -> Html {
   let title_content = match icon {
     Some(icon_src) =>
       div(class="flex items-center gap-2", [
-        img(class="w-[14px] h-[14px] ui-icon", src=icon_src, []),
+        img(class="w-[14px] h-[14px] ui-icon", src=icon_src, nothing),
         span(class="text-gray-700", [text(title)]),
       ])
     None => text(title)
@@ -33,24 +29,24 @@ fn[T] meta_info_item_view(
 }
 
 ///|
-fn[T] install_view(
+fn install_view(
   command : String,
   copied~ : Bool,
-  to_msg : (Msg) -> T,
-) -> Html[T] {
+  dispatch : (Msg) -> Cmd,
+) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
     class="hover:bg-gray-100 active:bg-gray-200 bg-white md:shadow-xs transition-colors text-black text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
-    click=to_msg(Msg::CopyInstallCommand(command)),
+    on_click=dispatch(CopyInstallCommand(command)),
     [
       span(class="overflow-x-auto text-nowrap", [text(command)]),
-      img(class="size-4 ui-icon", src=icon, []),
+      img(class="size-4 ui-icon", src=icon, nothing),
     ],
   )
 }
 
 ///|
-fn[T] tag_view(value : String) -> Html[T] {
+fn tag_view(value : String) -> Html {
   div(
     class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600 overflow-hidden",
     [text(value)],
@@ -58,15 +54,15 @@ fn[T] tag_view(value : String) -> Html[T] {
 }
 
 ///|
-fn[T] meta_info(
+fn meta_info(
   model : MetaInfo,
   install_copied~ : Bool,
-  to_msg : (Msg) -> T,
-) -> Html[T] {
+  dispatch : (Msg) -> Cmd,
+) -> Html {
   let model_license = match model.license {
     Some(l) =>
       meta_info_item_view(icon=@config.license, title="License", p([text(l)]))
-    None => nothing()
+    None => nothing
   }
   let model_repo = match model.repository {
     Some(repo) =>
@@ -75,18 +71,18 @@ fn[T] meta_info(
         title="Repository",
         p([a(class="hover:underline", escape=true, href=repo, [text(repo)])]),
       )
-    None => nothing()
+    None => nothing
   }
-  let model_description : Html[T] = div(class="pl-7 py-2 mb-2", [
+  let model_description : Html = div(class="pl-7 py-2 mb-2", [
     h1(class="text-2xl font-bold mb-2", [
       text(model.name.split("/").last().unwrap().to_string()),
     ]),
     match model.description {
       Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
-      None => nothing()
+      None => nothing
     },
     match model.keywords {
-      [] => nothing()
+      [] => nothing
       keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
     },
   ])
@@ -113,11 +109,11 @@ fn[T] meta_info(
         model_repo,
       ]
       .iter()
-      .intersperse(div(class="", []))
+      .intersperse(div(class="", nothing))
       .collect(),
     ),
     if model.deps.is_empty() {
-      nothing()
+      nothing
     } else {
       meta_info_item_view(
         icon=@config.deps,
@@ -147,7 +143,7 @@ fn[T] meta_info(
         install_view(
           "moon add \{model.name}@\{model.version}",
           copied=install_copied,
-          to_msg,
+          dispatch,
         )
       },
     ),

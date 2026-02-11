@@ -38,57 +38,59 @@ fn load_search_entries(indices : ModuleIndex) -> () -> Array[SearchEntry] {
     let results = []
     indices
     .iter()
-    .each(x => match x {
-      { pkg: Some({ path, traits, types, typealias_, values, misc }), .. } => {
-        results.push({
-          kind: "Package",
-          fullname: "@" + path,
-          href: "/docs/" + path,
-        })
-        traits.each(fn(x) {
+    .each(x => {
+      match x {
+        { pkg: Some({ path, traits, types, typealias_, values, misc }), .. } => {
           results.push({
-            kind: "Trait",
-            fullname: "@" + path + "." + x.name,
-            href: "/docs/" + path + "#" + x.name,
+            kind: "Package",
+            fullname: "@" + path,
+            href: "/docs/" + path,
           })
-        })
-        types.each(fn(x) {
-          results.push({
-            kind: "Type",
-            fullname: "@" + path + "." + x.name,
-            href: "/docs/" + path + "#" + x.name,
-          })
-          x.methods.each(fn(meth) {
+          traits.each(fn(x) {
             results.push({
-              kind: "Method",
-              fullname: "@" + path + "." + x.name + "::" + meth,
-              href: "/docs/" + path + "#" + x.name + "::" + meth,
+              kind: "Trait",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + path + "#" + x.name,
             })
           })
-        })
-        typealias_.each(fn(x) {
-          results.push({
-            kind: "Typealias",
-            fullname: "@" + path + "." + x.name,
-            href: "/docs/" + path + "#" + x.name,
+          types.each(fn(x) {
+            results.push({
+              kind: "Type",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + path + "#" + x.name,
+            })
+            x.methods.each(fn(meth) {
+              results.push({
+                kind: "Method",
+                fullname: "@" + path + "." + x.name + "::" + meth,
+                href: "/docs/" + path + "#" + x.name + "::" + meth,
+              })
+            })
           })
-        })
-        values.each(fn(x) {
-          results.push({
-            kind: "Value",
-            fullname: "@" + path + "." + x.name,
-            href: "/docs/" + path + "#" + x.name,
+          typealias_.each(fn(x) {
+            results.push({
+              kind: "Typealias",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + path + "#" + x.name,
+            })
           })
-        })
-        misc.each(fn(x) {
-          results.push({
-            kind: "Type",
-            fullname: "@" + path + "." + x.name,
-            href: "/docs/" + path + "#" + x.name,
+          values.each(fn(x) {
+            results.push({
+              kind: "Value",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + path + "#" + x.name,
+            })
           })
-        })
+          misc.each(fn(x) {
+            results.push({
+              kind: "Type",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + path + "#" + x.name,
+            })
+          })
+        }
+        _ => ()
       }
-      _ => ()
     })
     results
   }

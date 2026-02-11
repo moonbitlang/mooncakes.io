@@ -16,4 +16,4 @@
 using @html {type Html}
 
 ///|
-using @tea {type Cmd, none}
+using @rabbita {type Cmd, none}

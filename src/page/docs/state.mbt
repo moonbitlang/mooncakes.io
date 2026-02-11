@@ -55,12 +55,16 @@ struct Model {
 }
 
 ///|
-pub fn load(path : String, fragment : String?) -> (Cmd[Msg], Model) {
+pub fn load(
+  path : String,
+  fragment : String?,
+  dispatch~ : (Msg) -> Cmd,
+) -> (Cmd, Model) {
   (
     batch([
       @http.get(
         "/assets/" + path.trim(char_set="/").to_string() + "/resource.json",
-        expect=Json(GotResource(_), decode_resource),
+        expect=Json(result => dispatch(GotResource(result)), decode_resource),
       ),
       @dialog.close("search-panel"),
     ]),
@@ -84,7 +88,11 @@ pub fn load(path : String, fragment : String?) -> (Cmd[Msg], Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
+pub fn update(
+  msg : Msg,
+  model : Model,
+  dispatch~ : (Msg) -> Cmd,
+) -> (Cmd, Model) {
   match msg {
     GotResource(result) =>
       match result {
@@ -93,28 +101,43 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
             Module({ module_index_path, .. }) =>
               @http.get(
                 "/assets/" + module_index_path,
-                expect=Json(GotModuleIndex(_), decode_module_index),
+                expect=Json(
+                  result => dispatch(GotModuleIndex(result)),
+                  decode_module_index,
+                ),
               )
             Package({ package_data_path, module_path, .. }) =>
               batch([
                 @http.get(
                   "/assets/" + package_data_path,
-                  expect=Json(GotPackageData(_), decode_package_data),
+                  expect=Json(
+                    result => dispatch(GotPackageData(result)),
+                    decode_package_data,
+                  ),
                 ),
                 @http.get(
                   "/assets/" + module_path + "/module_index.json",
-                  expect=Json(GotModuleIndex(_), decode_module_index),
+                  expect=Json(
+                    result => dispatch(GotModuleIndex(result)),
+                    decode_module_index,
+                  ),
                 ),
               ])
             RootPackage({ module_index_path, package_data_path, .. }) =>
               batch([
                 @http.get(
                   "/assets/" + module_index_path,
-                  expect=Json(GotModuleIndex(_), decode_module_index),
+                  expect=Json(
+                    result => dispatch(GotModuleIndex(result)),
+                    decode_module_index,
+                  ),
                 ),
                 @http.get(
                   "/assets/" + package_data_path,
-                  expect=Json(GotPackageData(_), decode_package_data),
+                  expect=Json(
+                    result => dispatch(GotPackageData(result)),
+                    decode_package_data,
+                  ),
                 ),
               ])
           }
@@ -122,12 +145,12 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
         }
         Err(msg) => {
           println(msg)
-          (none(), { ..model, resource: Failed })
+          (none, { ..model, resource: Failed })
         }
       }
     GotModuleIndex(result) =>
       (
-        none(),
+        none,
         match result {
           Ok(module_index) => {
             let sidebar_document = module_index.0
@@ -176,21 +199,21 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       } else {
         model.collapsed_docs.add(id)
       }
-      (none(), { ..model, collapsed_docs: folded_items })
+      (none, { ..model, collapsed_docs: folded_items })
     }
     DocModeChanged(card_mode) =>
       (
-        none(),
+        none,
         { ..model, collapsed_docs: model.collapsed_docs.set_mode(card_mode) },
       )
-    SidebarTabClicked(sidebar_tab) => (none(), { ..model, sidebar_tab, })
+    SidebarTabClicked(sidebar_tab) => (none, { ..model, sidebar_tab, })
     ToggleSidebarItem(id) => {
       let sidebar_collapsed = if model.sidebar_collapsed.contains(id) {
         model.sidebar_collapsed.remove(id)
       } else {
         model.sidebar_collapsed.add(id)
       }
-      (none(), { ..model, sidebar_collapsed, })
+      (none, { ..model, sidebar_collapsed, })
     }
     ClickSidebarItem(id) => {
       let model = { ..model, sidebar_fab: false }
@@ -214,17 +237,20 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
         Success(indices) => Success(search(indices, filter))
       }
       let search = { filter, results }
-      (none(), { ..model, search, })
+      (none, { ..model, search, })
     }
     ToggleSidebarFab => {
       let sidebar_fab = not(model.sidebar_fab)
-      (none(), { ..model, sidebar_fab, })
+      (none, { ..model, sidebar_fab, })
     }
     CopyInstallCommand(command) =>
-      (@clipboard.copy(Text(command), copied=Msg::CopyInstallSuccess), model)
-    CopyInstallSuccess => (none(), { ..model, install_copied: true })
-    ShowLargePackage => (none(), { ..model, hide_large_package: false })
-    ToggleTheme => (none(), model)
+      (
+        @clipboard.copy(Text(command), copied=dispatch(CopyInstallSuccess)),
+        model,
+      )
+    CopyInstallSuccess => (none, { ..model, install_copied: true })
+    ShowLargePackage => (none, { ..model, hide_large_package: false })
+    ToggleTheme => (none, model)
   }
 }
 

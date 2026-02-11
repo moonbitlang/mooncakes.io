@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/parser/lexer",
+  "moonbitlang/parser/tokens",
+  "moonbitlang/parser/basic",
+}
+
+import  for "test"

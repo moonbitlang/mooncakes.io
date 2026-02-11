@@ -93,20 +93,20 @@ fn sanitize_for_fuzzy(text : String) -> String {
 }
 
 ///|
-pub fn load() -> (Cmd[Msg], Model) {
+pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
-    @cmd.batch([
+    batch([
       @http.get(
         "/api/v0/modules/all",
-        expect=Json(GotAllModule(_), decode_modules),
+        expect=Json(result => dispatch(GotAllModule(result)), decode_modules),
       ),
       @http.get(
         "/api/v0/modules/recent?limit=15",
-        expect=Json(GotRecentModule(_), decode_modules),
+        expect=Json(result => dispatch(GotRecentModule(result)), decode_modules),
       ),
       @http.get(
         "/api/v0/modules/statistics",
-        expect=Json(GotCount(_), decode_statistics),
+        expect=Json(result => dispatch(GotCount(result)), decode_statistics),
       ),
     ]),
     {
@@ -121,18 +121,18 @@ pub fn load() -> (Cmd[Msg], Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
+pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
   match msg {
     GotAllModule(Ok(modules)) => {
       let indices = sort_modules_by_name(modules)
       let search_index = Lazy::new(fn() { build_search_index(indices) })
-      (none(), { ..model, all_modules: Success({ indices, search_index }) })
+      (none, { ..model, all_modules: Success({ indices, search_index }) })
     }
     GotRecentModule(Ok(recent)) =>
-      (none(), { ..model, recent_modules: Success(recent) })
+      (none, { ..model, recent_modules: Success(recent) })
     GotCount(Ok(stat)) =>
       (
-        none(),
+        none,
         {
           ..model,
           showing_lines: stat.total_lines,
@@ -141,7 +141,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
       )
     GotAllModule(Err(msg)) | GotRecentModule(Err(msg)) | GotCount(Err(msg)) => {
       println(msg)
-      (none(), model)
+      (none, model)
     }
     FilterChanged(filter) => {
       let filtered_modules = match model.all_modules {
@@ -153,9 +153,9 @@ pub fn update(msg : Msg, model : Model) -> (Cmd[Msg], Model) {
           }
         _ => []
       }
-      (none(), { ..model, filter, filtered_modules })
+      (none, { ..model, filter, filtered_modules })
     }
-    ToggleTheme => (none(), model)
+    ToggleTheme => (none, model)
   }
 }
 

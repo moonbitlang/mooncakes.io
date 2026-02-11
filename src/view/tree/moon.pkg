@@ -1,0 +1,5 @@
+import {
+  "moonbit-community/rabbita",
+  "moonbitlang/core/immut/sorted_set" @immut/sorted_set,
+  "moonbit-community/rabbita/html",
+}

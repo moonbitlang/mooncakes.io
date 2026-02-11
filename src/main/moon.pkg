@@ -1,0 +1,14 @@
+import {
+  "moonbit-community/rabbita" @rabbita,
+  "moonbit-community/rabbita/url",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/nav",
+  "moonbitlang/mooncakes/view",
+  "moonbitlang/mooncakes/page/home",
+  "moonbitlang/mooncakes/page/docs",
+  "moonbitlang/mooncakes/page/user",
+}
+
+options(
+  "is-main": true,
+)

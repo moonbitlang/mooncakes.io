@@ -1,6 +1,6 @@
 ///|
-pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
-  let theme_toggle = @view.theme_toggle(click=to_msg(ToggleTheme))
+pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
+  let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
   let module_index = match model.module_index {
     Success(module_index) => Some(module_index)
     _ => None
@@ -14,12 +14,12 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
       }
     _ => model.path
   }
-  let navbar : Html[T] = navbar(
+  let navbar : Html = navbar(
     model.path,
     module_path,
     module_index,
     model.collapsed_docs.card_mode,
-    to_msg,
+    dispatch,
     theme_toggle~,
   )
   let source_files = match model.resource {
@@ -34,11 +34,11 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
   }
   let main = match model.resource {
     Success({ readme_content, kind }) => {
-      let meta : Html[T] = match kind {
+      let meta : Html = match kind {
         Module({ meta_info: meta, .. })
         | RootPackage({ meta_info: meta, .. }) =>
-          meta_info(meta, install_copied=model.install_copied, to_msg)
-        Package(_) => nothing()
+          meta_info(meta, install_copied=model.install_copied, dispatch)
+        Package(_) => nothing
       }
       div([
         meta,
@@ -47,7 +47,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
           readme_content~,
           package_data=model.package_data,
           folded=model.collapsed_docs,
-          to_msg,
+          dispatch,
         ),
       ])
     }
@@ -55,7 +55,7 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
     Loading => @view.loading()
   }
   let search = model.search
-  let search_panel : Html[T] = @html.dialog(
+  let search_panel : Html = @html.dialog(
     class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
     id="search-panel",
     [
@@ -66,18 +66,19 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            input=x => to_msg(SearchFilterChanged(x)),
+            on_input=x => dispatch(SearchFilterChanged(x)),
             class="outline-none m-0 flex-grow px-4 p-2",
+            nothing,
           ),
           div(
             class="size-12 container hover:bg-gray-200 flex justify-center items-center",
-            click=to_msg(ToggleSearchPanel(false)),
-            [img(class="ui-icon", src=@config.icon_close, [])],
+            on_click=dispatch(ToggleSearchPanel(false)),
+            [img(class="ui-icon", src=@config.icon_close, nothing)],
           ),
         ],
       ),
       match search.results {
-        Loading => nothing()
+        Loading => nothing
         Failed => text("load indices failed")
         Success(results) =>
           @html.ul(
@@ -95,13 +96,15 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
                 a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
                   span(
                     class="",
-                    x.matching.map(x => match x {
-                      (true, str) =>
-                        span(class="text-moonbit font-semibold", [
-                          text(str.to_string()),
-                        ])
-                      (false, str) =>
-                        span(class="text-gray-600", [text(str.to_string())])
+                    x.matching.map(x => {
+                      match x {
+                        (true, str) =>
+                          span(class="text-moonbit font-semibold", [
+                            text(str.to_string()),
+                          ])
+                        (false, str) =>
+                          span(class="text-gray-600", [text(str.to_string())])
+                      }
                     }),
                   ),
                   span(class="font-thin text-tiny lg:text-base \{color}", [
@@ -115,15 +118,15 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
     ],
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
-  let sidebar_dialog : Html[T] = div(
+  let sidebar_dialog : Html = div(
     class="fixed inset-0 justify-center items-center z-100",
     style=["display: " + show_sidebar_dialog],
     [
       div(
         class="fixed inset-0 bg-black/40 z-10",
         style=["display: " + show_sidebar_dialog],
-        click=to_msg(ToggleSidebarFab),
-        [],
+        on_click=dispatch(ToggleSidebarFab),
+        nothing,
       ),
       div(
         class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
@@ -134,16 +137,16 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
             model.sidebar_tab,
             model.sidebar_collapsed,
             package_path=model.path,
-            to_msg,
+            dispatch,
           ),
         ],
       ),
     ],
   )
-  let fab : Html[T] = @html.button(
+  let fab : Html = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
-    click=to_msg(ToggleSidebarFab),
-    [img(class="size-5", src=@config.HAMBURGER_BUTTON, [])],
+    on_click=dispatch(ToggleSidebarFab),
+    [img(class="size-5", src=@config.HAMBURGER_BUTTON, nothing)],
   )
   div(class="min-h-screen w-full flex-col", [
     div(
@@ -164,13 +167,13 @@ pub fn[T] view(model : Model, to_msg : (Msg) -> T) -> Html[T] {
                   model.sidebar_tab,
                   model.sidebar_collapsed,
                   package_path=model.path,
-                  to_msg,
+                  dispatch,
                 ),
               ]),
             ],
           ),
           div(class="flex-1 min-w-0", [main, fab, sidebar_dialog]),
-          div(class="md:w-40", []),
+          div(class="md:w-40", nothing),
         ],
       ),
     ]),

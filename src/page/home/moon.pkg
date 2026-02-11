@@ -1,0 +1,8 @@
+import {
+  "moonbit-community/rabbita" @rabbita,
+  "moonbit-community/rabbita/http",
+  "moonbit-community/rabbita/html",
+  "moonbitlang/mooncakes/view",
+  "moonbitlang/mooncakes/util",
+  "illusory0x0/fuzzy_match",
+}

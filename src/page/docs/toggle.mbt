@@ -19,7 +19,7 @@ priv enum CardMode {
 }
 
 ///|
-fn[M] card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> M) -> Html[M] {
+fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
   let img_class = "w-[15px] h-[15px]"
   let btn_focused = "border border-slate-300 bg-slate-100"
   let lbtn_normal = "border-y border-l hover:z-30 hover:outline hover:outline-mooncake2"
@@ -29,11 +29,11 @@ fn[M] card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> M) -> Html[M] {
     Collapsed => (lbtn_normal, btn_focused)
   }
   div(class="flex", [
-    div(class="py-2 px-3 rounded-l \{l}", click=click(Expanded), [
-      img(class=img_class + " ui-icon", src=@config.EXPANSION, []),
+    div(class="py-2 px-3 rounded-l \{l}", on_click=click(Expanded), [
+      img(class=img_class + " ui-icon", src=@config.EXPANSION, nothing),
     ]),
-    div(class="py-2 px-3 rounded-r \{r}", click=click(Collapsed), [
-      img(class=img_class + " ui-icon", src=@config.REDUCTION, []),
+    div(class="py-2 px-3 rounded-r \{r}", on_click=click(Collapsed), [
+      img(class=img_class + " ui-icon", src=@config.REDUCTION, nothing),
     ]),
   ])
 }

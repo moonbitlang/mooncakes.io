@@ -5,12 +5,12 @@ pub(all) enum NavbarStyle {
 }
 
 ///|
-pub fn[M] navbar(
-  left? : Html[M] = logo(),
-  middle? : Html[M],
-  right? : Html[M],
+pub fn navbar(
+  left? : Html = logo(),
+  middle? : Html,
+  right? : Html,
   style? : NavbarStyle = Sticky,
-) -> Html[M] {
+) -> Html {
   let class = match style {
     Sticky =>
       "top-0 z-30 border-b sticky bg-white/60 backdrop-blur-md select-none"
@@ -22,21 +22,19 @@ pub fn[M] navbar(
       [
         div(class="w-full flex items-center justify-between lg:w-40", [
           left,
-          div(class="lg:hidden", [right.unwrap_or_else(nothing)]),
+          div(class="lg:hidden", [right.unwrap_or(nothing)]),
         ]),
         div(class="w-full lg:flex-1 flex items-center justify-center", [
-          middle.unwrap_or_else(nothing),
+          middle.unwrap_or(nothing),
         ]),
-        div(class="hidden lg:flex w-40 justify-end", [
-          right.unwrap_or_else(nothing),
-        ]),
+        div(class="hidden lg:flex w-40 justify-end", [right.unwrap_or(nothing)]),
       ],
     ),
   ])
 }
 
 ///|
-pub fn[M] logo() -> Html[M] {
+pub fn logo() -> Html {
   a(
     class="border-gray-300 font-title mx-2 font-semibold flex items-center text-nowrap",
     href="/",

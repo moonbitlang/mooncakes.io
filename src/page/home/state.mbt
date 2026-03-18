@@ -227,11 +227,11 @@ pub fn filter_indices(
             break
           }
         }
-        if not(matched) {
+        if !matched {
           matched = name_lower.has_prefix(token_view) ||
             author_lower.has_prefix(token_view)
         }
-        if not(matched) {
+        if !matched {
           matched = keyword_has_prefix(token_view, keywords_lower)
         }
       } else {
@@ -240,7 +240,7 @@ pub fn filter_indices(
           author_lower.contains(token_view) ||
           keyword_contains(token_view, keywords_lower)
       }
-      if not(matched) {
+      if !matched {
         return false
       }
     }
@@ -289,10 +289,8 @@ pub fn filter_indices(
       let name_lower = entry.name
       let author_lower = entry.author
       let keywords_lower = entry.keywords
-      if not(
-          matches_primary(
-            tokens, path_lower, name_lower, author_lower, keywords_lower,
-          ),
+      if !matches_primary(
+          tokens, path_lower, name_lower, author_lower, keywords_lower,
         ) {
         return None
       }
@@ -331,7 +329,7 @@ fn build_search_index(
       Some(items) =>
         items
         .map(fn(kw) { sanitize_for_fuzzy(kw).to_lower() })
-        .filter(fn(kw) { not(kw.is_empty()) })
+        .filter(fn(kw) { !kw.is_empty() })
     }
     let recency_penalty = match mod.created_at {
       None => 0

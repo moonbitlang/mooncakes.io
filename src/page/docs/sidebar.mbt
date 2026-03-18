@@ -70,7 +70,7 @@ fn IndexNode::to_document_items(
 ) -> Array[@tree.Tree[ItemTarget]] {
   fn collect_packages(node : IndexNode) {
     match node.pkg {
-      None if not(node.childs.is_empty()) => {
+      None if !node.childs.is_empty() => {
         let childs = node.childs.values().filter_map(collect_packages).collect()
         childs.sort_by(compare_items)
         Some(@tree.Node(id=ItemTarget::Package(node.name), node.name, childs))
@@ -140,15 +140,15 @@ fn PkgIndex::to_document_items(
     }) +
     typealias_.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) })
   let result = []
-  if not(traits.is_empty()) {
+  if !traits.is_empty() {
     traits.sort_by(compare_items)
     result.push(@tree.Node(id=Section("trait-section"), "Traits", traits))
   }
-  if not(types.is_empty()) {
+  if !types.is_empty() {
     types.sort_by(compare_items)
     result.push(@tree.Node(id=Section("type-section"), "Types", types))
   }
-  if not(values.is_empty()) {
+  if !values.is_empty() {
     values.sort_by(compare_items)
     result.push(Node(id=Section("value-section"), "Values", values))
   }

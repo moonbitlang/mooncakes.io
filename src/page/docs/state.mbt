@@ -241,16 +241,14 @@ pub fn update(
       (none, { ..model, search, })
     }
     ToggleSidebarFab => {
-      let sidebar_fab = not(model.sidebar_fab)
+      let sidebar_fab = !model.sidebar_fab
       (none, { ..model, sidebar_fab, })
     }
     CopyInstallCommand(command) =>
       (
-        @clipboard.copy(
-          Text(command),
-          copied=dispatch(CopyInstallSuccess),
-          failed=reason => dispatch(CopyInstallFailed(reason)),
-        ),
+        @clipboard.copy(Text(command), copied=dispatch(CopyInstallSuccess), failed=reason => {
+          dispatch(CopyInstallFailed(reason))
+        }),
         model,
       )
     CopyInstallSuccess => (none, { ..model, install_copied: true })

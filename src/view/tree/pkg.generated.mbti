@@ -2,12 +2,13 @@
 package "moonbitlang/mooncakes/view/tree"
 
 import {
-  "Yoorkin/rabbit-tea/html",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/internal/runtime",
   "moonbitlang/core/immut/sorted_set",
 }
 
 // Values
-pub fn[M, Id : Compare] view(toggle~ : (Id) -> M, click~ : (Id) -> M, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html[M]
+pub fn[Id : Compare] view(toggle~ : (Id) -> @runtime.Cmd, click~ : (Id) -> @runtime.Cmd, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html
 
 // Errors
 

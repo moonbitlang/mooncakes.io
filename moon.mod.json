@@ -3,12 +3,10 @@
   "version": "0.1.1",
   "deps": {
     "illusory0x0/fuzzy_match": "0.2.4",
-    "moonbit-community/rabbita": {
-      "path": "/Users/yorkin/source/moonbit/rabbit-tea/rabbita"
-    },
     "moonbit-community/cmark": "0.4.3",
     "Yoorkin/prettyprinter": "0.4.8",
-    "moonbitlang/parser": "0.1.13"
+    "moonbitlang/parser": "0.1.13",
+    "moonbit-community/rabbita": "0.11.5"
   },
   "readme": "README.md",
   "repository": "",

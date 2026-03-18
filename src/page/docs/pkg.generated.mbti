@@ -2,18 +2,18 @@
 package "moonbitlang/mooncakes/page/docs"
 
 import {
-  "Yoorkin/rabbit-tea/cmd",
-  "Yoorkin/rabbit-tea/html",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/internal/runtime",
 }
 
 // Values
 pub fn is_theme_toggle(Msg) -> Bool
 
-pub fn load(String, String?) -> (@cmd.Cmd[Msg], Model)
+pub fn load(String, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
-pub fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
+pub fn update(Msg, Model, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
-pub fn[T] view(Model, (Msg) -> T) -> @html.Html[T]
+pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
 
 // Errors
 

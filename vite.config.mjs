@@ -1,25 +1,54 @@
 import { defineConfig } from 'vite'
-import rabbitTEA from 'rabbit-tea-vite'
+import rabbita from '@rabbita/vite'
 import tailwindcss from '@tailwindcss/vite'
-import path from 'path'
-import fs from 'fs'
 import viteCompression from 'vite-plugin-compression'
 
 const testAssetsServer = {
   name: 'static',
   configureServer(server) {
-    server.middlewares.use((req, res, next) => {
-      if (req.url.startsWith('/assets')) {
-        const p = path.join('test', req.url)
+    server.middlewares.use(async (req, res, next) => {
+      if (req.url?.startsWith('/assets')) {
+        const target = `https://mooncakes.io${req.url}`
         try {
-          const content = fs.readFileSync(p)
-          res.write(content)
-          console.log('Request succeed:', req.url)
-        } catch {
-          res.statusCode = 404
-          console.log('Request failed:', req.url)
+          const upstream = await fetch(target, {
+            method: req.method || 'GET',
+            headers: {
+              'accept-encoding': 'identity',
+            },
+          })
+
+          res.statusCode = upstream.status
+          const hopByHopHeaders = new Set([
+            'connection',
+            'keep-alive',
+            'proxy-authenticate',
+            'proxy-authorization',
+            'te',
+            'trailers',
+            'transfer-encoding',
+            'upgrade',
+            'content-encoding',
+            'content-length',
+          ])
+          for (const [k, v] of upstream.headers.entries()) {
+            if (!hopByHopHeaders.has(k.toLowerCase())) {
+              res.setHeader(k, v)
+            }
+          }
+
+          const body = Buffer.from(await upstream.arrayBuffer())
+          res.setHeader('content-length', String(body.length))
+          if (req.method === 'HEAD') {
+            res.end()
+          } else {
+            res.end(body)
+          }
+          console.log('Request proxied:', req.url, '->', target)
+        } catch (err) {
+          res.statusCode = 502
+          res.end('Bad Gateway')
+          console.log('Request proxy failed:', req.url, err)
         }
-        res.end()
       } else {
         next()
       }
@@ -54,7 +83,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    rabbitTEA(),
+    rabbita({ main: 'main' }),
     tailwindcss(),
     testAssetsServer,
     // Gzip compression

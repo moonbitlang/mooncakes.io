@@ -2,28 +2,30 @@
 package "moonbitlang/mooncakes/page/home"
 
 import {
-  "Yoorkin/rabbit-tea/cmd",
-  "Yoorkin/rabbit-tea/html",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/internal/runtime",
   "moonbitlang/mooncakes/util",
 }
 
 // Values
-pub fn filter_indices(String, Map[Char, Array[ModuleIndex]]) -> Array[ModuleIndex]
+pub fn filter_indices(String, Array[SearchIndex]) -> Array[ModuleIndex]
 
 pub fn is_theme_toggle(Msg) -> Bool
 
-pub fn load() -> (@cmd.Cmd[Msg], Model)
+pub fn load(dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
-pub fn update(Msg, Model) -> (@cmd.Cmd[Msg], Model)
+pub fn update(Msg, Model) -> (@runtime.Cmd, Model)
 
-pub fn view(Model) -> @html.Html[Msg]
+pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
 
 // Errors
 
 // Types and methods
+type AllModules
+
 pub struct Model {
   recent_modules : @util.Status[Array[ModuleIndex]]
-  all_modules : @util.Status[Map[Char, Array[ModuleIndex]]]
+  all_modules : @util.Status[AllModules]
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
@@ -50,6 +52,8 @@ pub enum Msg {
 }
 
 type PackageCount
+
+type SearchIndex
 
 // Type aliases
 

@@ -27,6 +27,7 @@ enum Msg {
   ToggleSidebarFab
   CopyInstallCommand(String)
   CopyInstallSuccess
+  CopyInstallFailed(String)
   ShowLargePackage
   ToggleTheme
 }
@@ -245,10 +246,18 @@ pub fn update(
     }
     CopyInstallCommand(command) =>
       (
-        @clipboard.copy(Text(command), copied=dispatch(CopyInstallSuccess)),
+        @clipboard.copy(
+          Text(command),
+          copied=dispatch(CopyInstallSuccess),
+          failed=reason => dispatch(CopyInstallFailed(reason)),
+        ),
         model,
       )
     CopyInstallSuccess => (none, { ..model, install_copied: true })
+    CopyInstallFailed(reason) => {
+      println(reason)
+      (none, { ..model, install_copied: false })
+    }
     ShowLargePackage => (none, { ..model, hide_large_package: false })
     ToggleTheme => (none, model)
   }

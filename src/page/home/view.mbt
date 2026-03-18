@@ -214,6 +214,28 @@ fn search_result(mods : Array[ModuleIndex]) -> Html {
 }
 
 ///|
+fn format_stat_text(value : String) -> String {
+  let chars = value.to_array()
+  let length = chars.length()
+  let sb = StringBuilder::new(size_hint=length + length / 3)
+  for i, c in chars {
+    if i > 0 && (length - i) % 3 == 0 {
+      sb.write_char(',')
+    }
+    sb.write_char(c)
+  }
+  sb.to_string()
+}
+
+///|
+test "format_stat_text groups digits and placeholders" {
+  inspect(format_stat_text("12"), content="12")
+  inspect(format_stat_text("1000"), content="1,000")
+  inspect(format_stat_text("1234567"), content="1,234,567")
+  inspect(format_stat_text("----"), content="-,---")
+}
+
+///|
 fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
   fn button(value, target, color) {
     a(
@@ -229,9 +251,9 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
       Some(_) => "pb-2"
     }
     let value = if value == 0 {
-      [text("----")]
+      [text(format_stat_text("----"))]
     } else {
-      [text(value.to_string())]
+      [text(format_stat_text(value.to_string()))]
     }
     let invisible = if invisible { " invisible hidden lg:block " } else { " " }
     div(

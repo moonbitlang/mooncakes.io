@@ -29,12 +29,14 @@ pub struct Model {
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
   showing_packages : Int
+  showing_downloads : Int
 }
 
 ///|
 struct PackageCount {
   total_packages : Int
   total_lines : Int
+  total_downloads : Int
 }
 
 ///|
@@ -116,6 +118,7 @@ pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
       filtered_modules: [],
       showing_lines: 0,
       showing_packages: 0,
+      showing_downloads: 0,
     },
   )
 }
@@ -137,6 +140,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
           ..model,
           showing_lines: stat.total_lines,
           showing_packages: stat.total_packages,
+          showing_downloads: stat.total_downloads,
         },
       )
     GotAllModule(Err(msg)) | GotRecentModule(Err(msg)) | GotCount(Err(msg)) => {
@@ -346,11 +350,13 @@ fn decode_statistics(json : Json) -> Result[PackageCount, String] {
     {
       "total_packages": Number(total_packages, ..),
       "total_lines": Number(total_lines, ..),
+      "total_downloads": Number(total_downloads, ..),
       ..
     } =>
       Ok({
         total_lines: total_lines.to_int(),
         total_packages: total_packages.to_int(),
+        total_downloads: total_downloads.to_int(),
       })
     _ => Err("failed to parse json: \{json}")
   }

@@ -30,6 +30,7 @@ pub struct Model {
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
   showing_packages : Int
+  showing_downloads : Int
 }
 
 pub(all) struct ModuleIndex {

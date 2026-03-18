@@ -214,7 +214,7 @@ fn search_result(mods : Array[ModuleIndex]) -> Html {
 }
 
 ///|
-fn banner(total_lines~ : Int, total_packages~ : Int) -> Html {
+fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
   fn button(value, target, color) {
     a(
       href=target,
@@ -231,7 +231,7 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html {
     let value = if value == 0 {
       [text("----")]
     } else {
-      [text(value.to_string()), text("+")]
+      [text(value.to_string())]
     }
     let invisible = if invisible { " invisible hidden lg:block " } else { " " }
     div(
@@ -289,8 +289,8 @@ fn banner(total_lines~ : Int, total_packages~ : Int) -> Html {
           div(
             class="flex w-full flex-col sm:flex-row lg:flex-col gap-3 z-10 lg:w-3/5 select-none",
             [
-              stat_card("Lines of code", total_lines, true, None),
               stat_card("Packages", total_packages, false, None),
+              stat_card("Download", total_downloads, false, None),
             ],
           ),
         ],
@@ -323,7 +323,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   }
   let banner = if model.filter == "" {
     banner(
-      total_lines=model.showing_lines,
+      total_downloads=model.showing_downloads,
       total_packages=model.showing_packages,
     )
   } else {

@@ -142,6 +142,32 @@ using @html {div, h1, h2, text, a, span, img, nothing}
 using @util {type Status}
 
 ///|
+fn first_char_upper_or(value : String, fallback : String) -> String {
+  if value == "" {
+    fallback
+  } else {
+    let end = value.offset_of_nth_char(1).unwrap_or(value.length())
+    value.sub(end~).to_string().to_upper()
+  }
+}
+
+///|
+fn suffix_after_n_chars_or(
+  value : String,
+  n : Int,
+  fallback : String,
+) -> String {
+  if n <= 0 {
+    value
+  } else if value.iter().count() < n {
+    fallback
+  } else {
+    let start = value.offset_of_nth_char(n).unwrap_or(value.length())
+    value.sub(start~).to_string()
+  }
+}
+
+///|
 pub fn profile(profile : Status[Profile]) -> Html {
   match profile {
     Failed => @view.load_failed("user")
@@ -150,9 +176,7 @@ pub fn profile(profile : Status[Profile]) -> Html {
       div(class="flex flex-col items-center text-center", [
         if avatar_url == "" {
           // Default avatar placeholder
-          let initial = username.sub(start=0, end=1).to_string().to_upper() catch {
-              _ => "U"
-            }
+          let initial = first_char_upper_or(username, "U")
           div(
             class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mb-4 border-4 border-white shadow-lg",
             [span(class="text-white text-4xl font-bold", [text(initial)])],
@@ -242,9 +266,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
         .to_array()
         .map(fn(entry) {
           let (date_raw, value) = entry
-          let date_label = date_raw.sub(start=5).to_string() catch {
-              _ => date_raw
-            }
+          let date_label = suffix_after_n_chars_or(date_raw, 5, date_raw)
           let abs_v = if value < 0 { -value } else { value }
           // target max bar segment height (one side) = 70px (leave padding)
           let h = if value == 0 { 2 } else { (abs_v * 70 / max_abs).max(3) }

@@ -232,6 +232,34 @@ fn docs_apply_current_version(
 }
 
 ///|
+fn versioned_asset_path(
+  path : String,
+  module_name : String,
+  version : String,
+) -> String {
+  let lookup = docs_lookup_path(path)
+  let module_segments = split_docs_path(module_name)
+  let path_segments = split_docs_path(lookup)
+  if path_segments.length() < module_segments.length() {
+    return module_name + "@" + version
+  }
+  for i in 0..<module_segments.length() {
+    if path_segments[i] != module_segments[i] {
+      return lookup
+    }
+  }
+  let versioned = module_name + "@" + version
+  if path_segments.length() == module_segments.length() {
+    return versioned
+  }
+  let suffix = []
+  for i in module_segments.length()..<path_segments.length() {
+    suffix.push(path_segments[i])
+  }
+  versioned + "/" + suffix.join("/")
+}
+
+///|
 fn decode_manifest(json : Json) -> Result[Manifest, String] {
   let raw_json = json
   Ok(

@@ -97,14 +97,20 @@ fn load_docs_assets(
   manifest : Manifest,
   dispatch : (Msg) -> Cmd,
 ) -> Array[Cmd] {
+  let module_name = manifest.module_
+  let version = manifest.version
+  let asset_path = versioned_asset_path(path, module_name, version)
   let current_module_path = docs_current_module_path(path, manifest.module_)
+  let module_asset_path = versioned_asset_path(
+    current_module_path, module_name, version,
+  )
   [
     @http.get(
-      "/assets/" + path + "/resource.json",
+      "/assets/" + asset_path + "/resource.json",
       expect=Json(result => dispatch(GotResource(result)), decode_resource_info),
     ),
     @http.get(
-      "/assets/" + current_module_path + "/module_index.json",
+      "/assets/" + module_asset_path + "/module_index.json",
       expect=Json(
         result => dispatch(GotModuleIndex(result)),
         decode_module_index,
@@ -113,7 +119,7 @@ fn load_docs_assets(
     ..if manifest.has_package {
       [
         @http.get(
-          "/assets/" + path + "/package_data.json",
+          "/assets/" + asset_path + "/package_data.json",
           expect=Json(
             result => dispatch(GotPackageData(result)),
             decode_package_data,

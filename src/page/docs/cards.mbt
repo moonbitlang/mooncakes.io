@@ -104,6 +104,8 @@ fn type_path(ty : TypePath) -> Html {
 fn impl_doc(
   doc : ImplDoc,
   folded~ : FoldedState,
+  module_name~ : String,
+  module_version~ : String,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let { self_type, trait_type, methods } = doc
@@ -118,7 +120,9 @@ fn impl_doc(
   ])
   let content = div(
     class="pl-4 my-3",
-    methods.map(m => value_doc(m, folded~, dispatch)),
+    methods.map(m => {
+      value_doc(m, folded~, module_name~, module_version~, dispatch)
+    }),
   )
   document_item(signature, content, collapsed=folded, id~, tight=true, dispatch)
 }
@@ -127,6 +131,8 @@ fn impl_doc(
 fn type_doc(
   doc : TypeDoc,
   folded~ : FoldedState,
+  module_name~ : String,
+  module_version~ : String,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let { docstring, signature, methods, impls, name: _, loc } = doc
@@ -135,8 +141,19 @@ fn type_doc(
   let content = div(
     [
       div(class="pl-4 my-3", [@view.markdown(docstring, small_heading=true)]),
-      ..impls.map(imp => impl_doc(imp, folded~, dispatch)),
-      ..methods.map(m => value_doc(m, folded~, type_id=id, dispatch)),
+      ..impls.map(imp => {
+        impl_doc(imp, folded~, module_name~, module_version~, dispatch)
+      }),
+      ..methods.map(m => {
+        value_doc(
+          m,
+          folded~,
+          module_name~,
+          module_version~,
+          type_id=id,
+          dispatch,
+        )
+      }),
     ],
   )
   document_item(
@@ -146,6 +163,8 @@ fn type_doc(
     collapsed=folded,
     id~,
     loc~,
+    module_name~,
+    module_version~,
     dispatch,
   )
 }
@@ -154,6 +173,8 @@ fn type_doc(
 fn trait_doc(
   doc : TraitDoc,
   folded~ : FoldedState,
+  module_name~ : String,
+  module_version~ : String,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let { docstring, signature, impls, name: _, loc } = doc
@@ -162,7 +183,9 @@ fn trait_doc(
   let content = div(
     [
       div(class="pl-4 my-3", [@view.markdown(docstring, small_heading=true)]),
-      ..impls.map(imp => impl_doc(imp, folded~, dispatch)),
+      ..impls.map(imp => {
+        impl_doc(imp, folded~, module_name~, module_version~, dispatch)
+      }),
     ],
   )
   document_item(
@@ -172,6 +195,8 @@ fn trait_doc(
     collapsed=folded,
     id~,
     loc~,
+    module_name~,
+    module_version~,
     dispatch,
   )
 }
@@ -180,13 +205,24 @@ fn trait_doc(
 fn type_alias_doc(
   doc : TypeAliasDoc,
   folded~ : FoldedState,
+  module_name~ : String,
+  module_version~ : String,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
   let signature = signature_view(signature)
   let content = @view.markdown(docstring, small_heading=true)
   let id = doc.get_id()
-  document_item(signature, content, collapsed=folded, id~, loc~, dispatch)
+  document_item(
+    signature,
+    content,
+    collapsed=folded,
+    id~,
+    loc~,
+    module_name~,
+    module_version~,
+    dispatch,
+  )
 }
 
 ///|
@@ -198,6 +234,8 @@ fn document_item(
   id~ : String,
   tight? : Bool = false,
   loc? : Loc,
+  module_name? : String = "",
+  module_version? : String = "",
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let (content_style, icon) = if collapsed.contains(id) {
@@ -209,13 +247,19 @@ fn document_item(
   let buttons : Html = {
     let source_btn = match loc {
       None => nothing
-      Some(loc) =>
+      Some(loc) => {
+        let path = if module_name.is_empty() {
+          loc.path
+        } else {
+          versioned_asset_path(loc.path, module_name, module_version)
+        }
         a(
-          href="/assets/\{loc.path}/\{loc.file}.html#\{loc.line}",
+          href="/assets/\{path}/\{loc.file}.html#\{loc.line}",
           class="text-xs text-gray-500 hover:text-gray-700 transition-colors",
           escape=true,
           [text("source")],
         )
+      }
     }
     let collapse_btn : Html = div(
       class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
@@ -255,6 +299,8 @@ fn document_item(
 fn value_doc(
   doc : ValueDoc,
   folded~ : FoldedState,
+  module_name~ : String,
+  module_version~ : String,
   type_id? : String,
   enable_title? : Bool = false,
   dispatch : (Msg) -> Cmd,
@@ -275,6 +321,8 @@ fn value_doc(
     collapsed=folded,
     id~,
     loc~,
+    module_name~,
+    module_version~,
     dispatch,
   )
 }
@@ -283,6 +331,8 @@ fn value_doc(
 fn misc_doc(
   doc : MiscDoc,
   folded~ : FoldedState,
+  module_name~ : String,
+  module_version~ : String,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let { name, methods, impls } = doc
@@ -322,8 +372,19 @@ fn misc_doc(
     class="ml-3 my-2",
     [
       tips,
-      ..methods.map(m => value_doc(m, folded~, type_id=id, dispatch)),
-      ..impls.map(imp => impl_doc(imp, folded~, dispatch)),
+      ..methods.map(m => {
+        value_doc(
+          m,
+          folded~,
+          module_name~,
+          module_version~,
+          type_id=id,
+          dispatch,
+        )
+      }),
+      ..impls.map(imp => {
+        impl_doc(imp, folded~, module_name~, module_version~, dispatch)
+      }),
     ],
   )
   document_item(signature, content, collapsed=folded, id~, dispatch)
@@ -364,6 +425,8 @@ fn document(
   readme_content? : String,
   package_data? : Status[PackageData],
   folded~ : FoldedState,
+  module_name? : String = "",
+  module_version? : String = "",
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let readme = readme(readme_content, folded~, dispatch)
@@ -378,13 +441,28 @@ fn document(
         [hidden_large_package(count, dispatch)]
       } else {
         [
-          ..traits.map(tr => trait_doc(tr, folded~, dispatch)),
-          ..types.map(ty => type_doc(ty, folded~, dispatch)),
-          ..typealiases.map(ta => type_alias_doc(ta, folded~, dispatch)),
-          ..values.map(value => {
-            value_doc(value, folded~, enable_title=true, dispatch)
+          ..traits.map(tr => {
+            trait_doc(tr, folded~, module_name~, module_version~, dispatch)
           }),
-          ..misc.map(item => misc_doc(item, folded~, dispatch)),
+          ..types.map(ty => {
+            type_doc(ty, folded~, module_name~, module_version~, dispatch)
+          }),
+          ..typealiases.map(ta => {
+            type_alias_doc(ta, folded~, module_name~, module_version~, dispatch)
+          }),
+          ..values.map(value => {
+            value_doc(
+              value,
+              folded~,
+              module_name~,
+              module_version~,
+              enable_title=true,
+              dispatch,
+            )
+          }),
+          ..misc.map(item => {
+            misc_doc(item, folded~, module_name~, module_version~, dispatch)
+          }),
         ]
       }
     }

@@ -267,8 +267,13 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     _ => docs_module_path(model.path)
   }
   let package_path = match model.manifest {
-    Success(manifest) =>
-      docs_apply_current_version(manifest.name, current_module_path)
+    Success(manifest) => {
+      let applied = docs_apply_current_version(
+        manifest.name,
+        current_module_path,
+      )
+      versioned_asset_path(applied, manifest.module_, manifest.version)
+    }
     _ => model.path
   }
   let navbar : Html = navbar(
@@ -335,6 +340,10 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
       }
     _ => nothing
   }
+  let (module_name, module_version) = match model.manifest {
+    Success(manifest) => (manifest.module_, manifest.version)
+    _ => ("", "")
+  }
   let document_view = match model.readme_content {
     Success(readme_content) =>
       document(
@@ -342,6 +351,8 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
         readme_content~,
         package_data=model.package_data,
         folded=model.collapsed_docs,
+        module_name~,
+        module_version~,
         dispatch,
       )
     Failed => nothing

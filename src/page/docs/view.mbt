@@ -165,10 +165,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     dispatch,
     theme_toggle~,
   )
-  let source_files = match model.manifest {
-    Success(manifest) => manifest.source_files()
-    _ => []
-  }
+  let source_files = model.source_files
   let meta : Html = if model.path == module_path {
     match model.module_meta {
       Success(meta) => {

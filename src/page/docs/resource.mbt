@@ -34,6 +34,12 @@ priv struct MetaInfo {
 }
 
 ///|
+priv struct ResourceInfo {
+  readme_content : String
+  source_files : Array[String]
+}
+
+///|
 /// Normalizes repository URLs so links stay clickable.
 fn normalize_repo_url(url : String) -> String {
   match url {
@@ -208,9 +214,35 @@ fn decode_module_meta(
 }
 
 ///|
-fn decode_readme_content(json : Json) -> Result[String, String] {
+fn decode_source_files(json : Json?) -> Array[String] raise Error {
   match json {
-    { "readme_content": String(readme_content), .. } => Ok(readme_content)
-    _ => Err("invalid resource.json")
+    Some(Array(files)) =>
+      map_with_error(files, file => {
+        match file {
+          String(path) => path
+          _ => fail("invalid source_files field")
+        }
+      })
+    Some(Null) | None => []
+    _ => fail("invalid source_files field")
+  }
+}
+
+///|
+fn decode_resource_info(json : Json) -> Result[ResourceInfo, String] {
+  try {
+    match json {
+      {
+        "readme_content": String(readme_content),
+        "source_files"? : source_files,
+        ..
+      } => Ok({
+        readme_content,
+        source_files: decode_source_files(source_files),
+      })
+      _ => Err("invalid resource.json")
+    }
+  } catch {
+    err => Err(err.to_string())
   }
 }

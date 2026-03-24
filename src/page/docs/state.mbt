@@ -17,10 +17,9 @@ enum Msg {
   ToggleDocDetail(String)
   DocModeChanged(CardMode)
   GotManifest(Result[Manifest, String])
-  GotModuleMeta(Result[MetaInfo, String])
   ToggleBuildLog
   GotBuildLog(Result[String, String])
-  GotReadme(Result[String, String])
+  GotResource(Result[ResourceInfo, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageData(Result[PackageData, String])
   SidebarTabClicked(String)
@@ -45,6 +44,7 @@ struct Model {
   build_log_open : Bool
   build_log : BuildLogStatus
   readme_content : Status[String]
+  source_files : Array[String]
   module_index : Status[ModuleIndex]
   package_data : Status[PackageData]
   search_entries : Status[Lazy[Array[SearchEntry]]]
@@ -83,30 +83,12 @@ fn has_docs_assets(build_status : BuildStatus?) -> Bool {
 }
 
 ///|
-fn ignore_docs_result(module_meta : Status[MetaInfo]) -> Bool {
-  match module_meta {
-    Success(meta) => !has_docs_assets(meta.build_status)
-    _ => false
-  }
-}
-
-///|
 fn log_docs_error(msg : String) -> Unit {
   if msg.contains("Json parse error") {
     ()
   } else {
     println(msg)
   }
-}
-
-///|
-fn load_module_meta(manifest : Manifest, dispatch : (Msg) -> Cmd) -> Cmd {
-  @http.get(
-    "/api/v0/modules/" + manifest.module_,
-    expect=Json(result => dispatch(GotModuleMeta(result)), json => {
-      decode_module_meta(json, manifest.version)
-    }),
-  )
 }
 
 ///|
@@ -119,7 +101,7 @@ fn load_docs_assets(
   [
     @http.get(
       "/assets/" + path + "/resource.json",
-      expect=Json(result => dispatch(GotReadme(result)), decode_readme_content),
+      expect=Json(result => dispatch(GotResource(result)), decode_resource_info),
     ),
     @http.get(
       "/assets/" + current_module_path + "/module_index.json",
@@ -174,6 +156,7 @@ pub fn load(
       build_log_open: false,
       build_log: LogIdle,
       readme_content: Loading,
+      source_files: [],
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),
       sidebar_tab: "Documentation",
@@ -198,22 +181,26 @@ pub fn update(
     GotManifest(result) =>
       match result {
         Ok(manifest) => {
-          let cmd = batch(
-            [
-              load_module_meta(manifest, dispatch),
-              ..load_docs_assets(model.path, manifest, dispatch),
-            ],
-          )
+          let has_docs = has_docs_assets(manifest.module_meta.build_status)
+          let cmd = if has_docs {
+            batch(load_docs_assets(model.path, manifest, dispatch))
+          } else {
+            none
+          }
           (
             cmd,
             {
               ..model,
               manifest: Success(manifest),
-              package_data: if model.path == manifest.name &&
-                !manifest.has_package {
-                Failed
-              } else {
+              module_meta: Success(manifest.module_meta),
+              readme_content: if has_docs { Loading } else { Failed },
+              source_files: [],
+              module_index: if has_docs { Loading } else { Failed },
+              package_data: if has_docs && !(model.path == manifest.name &&
+                !manifest.has_package) {
                 Loading
+              } else {
+                Failed
               },
             },
           )
@@ -226,46 +213,7 @@ pub fn update(
               manifest: Failed,
               module_meta: Failed,
               readme_content: Failed,
-              module_index: Failed,
-              package_data: Failed,
-            },
-          )
-      }
-    GotModuleMeta(result) =>
-      match result {
-        Ok(module_meta) => {
-          let package_data = match (module_meta.build_status, model.manifest) {
-            (build_status, Success(manifest)) if has_docs_assets(build_status) &&
-              manifest.has_package => model.package_data
-            _ => Failed
-          }
-          let readme_content = match module_meta.build_status {
-            build_status if has_docs_assets(build_status) =>
-              model.readme_content
-            _ => Failed
-          }
-          let module_index = match module_meta.build_status {
-            build_status if has_docs_assets(build_status) => model.module_index
-            _ => Failed
-          }
-          (
-            none,
-            {
-              ..model,
-              module_meta: Success(module_meta),
-              readme_content,
-              module_index,
-              package_data,
-            },
-          )
-        }
-        Err(_) =>
-          (
-            none,
-            {
-              ..model,
-              module_meta: Failed,
-              readme_content: Failed,
+              source_files: [],
               module_index: Failed,
               package_data: Failed,
             },
@@ -301,55 +249,48 @@ pub fn update(
           }
         },
       )
-    GotReadme(result) =>
-      if ignore_docs_result(model.module_meta) {
-        (none, model)
-      } else {
-        (
-          none,
-          match result {
-            Ok(readme_content) =>
-              { ..model, readme_content: Success(readme_content) }
-            Err(msg) => {
-              log_docs_error(msg)
-              { ..model, readme_content: Failed }
+    GotResource(result) =>
+      (
+        none,
+        match result {
+          Ok(resource) =>
+            {
+              ..model,
+              readme_content: Success(resource.readme_content),
+              source_files: resource.source_files,
             }
-          },
-        )
-      }
+          Err(msg) => {
+            log_docs_error(msg)
+            { ..model, readme_content: Failed, source_files: [] }
+          }
+        },
+      )
     GotModuleIndex(result) =>
-      if ignore_docs_result(model.module_meta) {
-        (none, model)
-      } else {
-        (
-          none,
-          match result {
-            Ok(module_index) => {
-              let sidebar_document = match
-                module_index.0.find_node(docs_lookup_path(model.path)) {
-                Some(node) => node.to_document_items()
-                None => []
-              }
-              {
-                ..model,
-                sidebar_document,
-                module_index: Success(module_index),
-                search_entries: Success(
-                  Lazy::new(load_search_entries(module_index)),
-                ),
-              }
+      (
+        none,
+        match result {
+          Ok(module_index) => {
+            let sidebar_document = match
+              module_index.0.find_node(docs_lookup_path(model.path)) {
+              Some(node) => node.to_document_items()
+              None => []
             }
-            Err(msg) => {
-              log_docs_error(msg)
-              { ..model, module_index: Failed }
+            {
+              ..model,
+              sidebar_document,
+              module_index: Success(module_index),
+              search_entries: Success(
+                Lazy::new(load_search_entries(module_index)),
+              ),
             }
-          },
-        )
-      }
+          }
+          Err(msg) => {
+            log_docs_error(msg)
+            { ..model, module_index: Failed }
+          }
+        },
+      )
     GotPackageData(result) => {
-      if ignore_docs_result(model.module_meta) {
-        return (none, model)
-      }
       let model = match result {
         Ok({ types, traits, misc, .. } as package_data) => {
           // collapse all implementations by default

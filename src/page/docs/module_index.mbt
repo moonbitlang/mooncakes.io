@@ -35,7 +35,7 @@ priv struct Manifest {
   module_ : String
   version : String
   has_package : Bool
-  manifest : Array[String]
+  module_meta : MetaInfo
 }
 
 ///|
@@ -232,42 +232,29 @@ fn docs_apply_current_version(
 }
 
 ///|
-fn Manifest::source_files(self : Manifest) -> Array[String] {
-  if !self.has_package {
-    return []
-  }
-  self.manifest.filter_map(fn(item) {
-    if item.has_suffix(".mbt.html") {
-      Some(item.split(".mbt.html").head().unwrap().to_string())
-    } else {
-      None
-    }
-  })
-}
-
-///|
 fn decode_manifest(json : Json) -> Result[Manifest, String] {
+  let raw_json = json
   Ok(
-    match json {
+    match raw_json {
       {
         "name": String(name),
         "module": String(module_),
         "version": String(version),
         "has_package": has_package,
-        "manifest": Array(jsons),
         ..
       } =>
         {
-          name,
-          module_,
-          version,
-          has_package: @json.from_json(has_package),
-          manifest: jsons.map(json => {
-            match json {
-              String(s) => s
-              _ => fail("invalid json in manifest field for Manifest: \{json}")
-            }
-          }),
+          let module_meta = match decode_module_meta(raw_json, version) {
+            Ok(module_meta) => module_meta
+            Err(err) => fail(err)
+          }
+          {
+            name,
+            module_,
+            version,
+            has_package: @json.from_json(has_package),
+            module_meta,
+          }
         }
       json => fail("invalid json for Manifest: \{json}")
     },

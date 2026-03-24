@@ -242,20 +242,19 @@ fn decode_manifest(json : Json) -> Result[Manifest, String] {
         "version": String(version),
         "has_package": has_package,
         ..
-      } =>
-        {
-          let module_meta = match decode_module_meta(raw_json, version) {
-            Ok(module_meta) => module_meta
-            Err(err) => fail(err)
-          }
-          {
-            name,
-            module_,
-            version,
-            has_package: @json.from_json(has_package),
-            module_meta,
-          }
+      } => {
+        let module_meta = match decode_module_meta(raw_json, version) {
+          Ok(module_meta) => module_meta
+          Err(err) => fail(err)
         }
+        {
+          name,
+          module_,
+          version,
+          has_package: @json.from_json(has_package),
+          module_meta,
+        }
+      }
       json => fail("invalid json for Manifest: \{json}")
     },
   ) catch {

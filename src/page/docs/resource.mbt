@@ -236,10 +236,8 @@ fn decode_resource_info(json : Json) -> Result[ResourceInfo, String] {
         "readme_content": String(readme_content),
         "source_files"? : source_files,
         ..
-      } => Ok({
-        readme_content,
-        source_files: decode_source_files(source_files),
-      })
+      } =>
+        Ok({ readme_content, source_files: decode_source_files(source_files) })
       _ => Err("invalid resource.json")
     }
   } catch {

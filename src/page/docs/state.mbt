@@ -193,11 +193,19 @@ pub fn update(
               ..model,
               manifest: Success(manifest),
               module_meta: Success(manifest.module_meta),
-              readme_content: if has_docs { Loading } else { Failed },
+              readme_content: if has_docs {
+                Loading
+              } else {
+                Failed
+              },
               source_files: [],
-              module_index: if has_docs { Loading } else { Failed },
-              package_data: if has_docs && !(model.path == manifest.name &&
-                !manifest.has_package) {
+              module_index: if has_docs {
+                Loading
+              } else {
+                Failed
+              },
+              package_data: if has_docs &&
+                !(model.path == manifest.name && !manifest.has_package) {
                 Loading
               } else {
                 Failed

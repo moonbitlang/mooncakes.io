@@ -17,6 +17,7 @@ enum Msg {
   GotHomeMsg(@home.Msg)
   GotDocsMsg(@docs.Msg)
   GotUserMsg(@user.Msg)
+  GotBuildQueueMsg(@build_queue.Msg)
   LinkClicked(@url.UrlRequest)
   UrlChanged(@url.Url)
 }
@@ -32,6 +33,7 @@ enum Page {
   Home(@home.Model)
   Docs(@docs.Model)
   User(@user.Model)
+  BuildQueue(@build_queue.Model)
   NotFound
   Redirect
 }
@@ -66,6 +68,8 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
       start_theme_switch(model)
     (GotUserMsg(msg), _) if @user.is_theme_toggle(msg) =>
       start_theme_switch(model)
+    (GotBuildQueueMsg(msg), _) if @build_queue.is_theme_toggle(msg) =>
+      start_theme_switch(model)
     (GotHomeMsg(msg), Home(page_model)) => {
       let (cmd, page) = @home.update(msg, page_model)
       (cmd, { ..model, page: Home(page) })
@@ -79,6 +83,10 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
     (GotUserMsg(msg), User(page_model)) => {
       let (cmd, page) = @user.update(msg, page_model)
       (cmd, { ..model, page: User(page) })
+    }
+    (GotBuildQueueMsg(msg), BuildQueue(page_model)) => {
+      let (cmd, page) = @build_queue.update(msg, page_model)
+      (cmd, { ..model, page: BuildQueue(page) })
     }
     (LinkClicked(request), _) =>
       match request {
@@ -104,6 +112,15 @@ fn route_with_theme(
       (
         batch([cmd, scroll_top]),
         { theme, page: Home(page), theme_switching: false },
+      )
+    }
+    ["build-queue"] => {
+      let (cmd, page) = @build_queue.load(dispatch=x => {
+        dispatch(GotBuildQueueMsg(x))
+      })
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: BuildQueue(page), theme_switching: false },
       )
     }
     ["user", name] => {
@@ -143,6 +160,8 @@ fn view(dispatch : (Msg) -> Cmd, model : Model) -> Html {
       @docs.view(page_model, dispatch=x => dispatch(GotDocsMsg(x)))
     User(page_model) =>
       @user.view(page_model, dispatch=x => dispatch(GotUserMsg(x)))
+    BuildQueue(page_model) =>
+      @build_queue.view(page_model, dispatch=x => dispatch(GotBuildQueueMsg(x)))
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }

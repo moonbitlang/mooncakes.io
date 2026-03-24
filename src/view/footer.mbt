@@ -11,6 +11,7 @@ pub fn footer() -> Html {
       a(href="https://github.com/moonbitlang/mooncakes.io/issues/new", class~, [
         text("Report issue"),
       ]),
+      a(href="/build-queue", class~, [text("Build queue")]),
       a(
         href="https://mooncakes.io/api/v0/modules/statistics?raw=true",
         class~,

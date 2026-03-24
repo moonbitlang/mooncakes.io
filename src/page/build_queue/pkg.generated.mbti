@@ -1,0 +1,45 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/page/build_queue"
+
+import {
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/internal/runtime",
+  "moonbitlang/mooncakes/util",
+}
+
+// Values
+pub fn is_theme_toggle(Msg) -> Bool
+
+pub fn load(dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+
+pub fn update(Msg, Model) -> (@runtime.Cmd, Model)
+
+pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
+
+// Errors
+
+// Types and methods
+type BuildData
+
+pub(all) struct BuildItem {
+  module_ : String
+  version : String
+  status : String
+  created_at : String
+  finished_at : String?
+}
+
+pub struct Model {
+  queue : @util.Status[Array[BuildItem]]
+  recent : @util.Status[Array[BuildItem]]
+}
+
+pub enum Msg {
+  GotBuilds(Result[BuildData, String])
+  ToggleTheme
+}
+
+// Type aliases
+
+// Traits
+

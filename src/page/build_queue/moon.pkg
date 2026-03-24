@@ -1,0 +1,7 @@
+import {
+  "moonbit-community/rabbita" @rabbita,
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/http",
+  "moonbitlang/mooncakes/util",
+  "moonbitlang/mooncakes/view",
+}

@@ -7,6 +7,7 @@ import {
   "moonbitlang/mooncakes/page/home",
   "moonbitlang/mooncakes/page/docs",
   "moonbitlang/mooncakes/page/user",
+  "moonbitlang/mooncakes/page/build_queue",
 }
 
 options(

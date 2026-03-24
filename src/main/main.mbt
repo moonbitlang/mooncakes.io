@@ -97,16 +97,23 @@ fn route_with_theme(
   dispatch : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
   let paths = url.path.split("/").collect()
+  let scroll_top = @nav.scroll_to_top()
   match paths {
     ["/"] | [""] | [] => {
       let (cmd, page) = @home.load(dispatch=x => dispatch(GotHomeMsg(x)))
-      (cmd, { theme, page: Home(page), theme_switching: false })
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: Home(page), theme_switching: false },
+      )
     }
     ["user", name] => {
       let (cmd, page) = @user.load(name.to_string(), dispatch=x => {
         dispatch(GotUserMsg(x))
       })
-      (cmd, { theme, page: User(page), theme_switching: false })
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: User(page), theme_switching: false },
+      )
     }
     ["assets", ..] =>
       (
@@ -118,9 +125,12 @@ fn route_with_theme(
       let (cmd, page) = @docs.load(path, url.fragment, dispatch=x => {
         dispatch(GotDocsMsg(x))
       })
-      (cmd, { theme, page: Docs(page), theme_switching: false })
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: Docs(page), theme_switching: false },
+      )
     }
-    _ => (none, { theme, page: NotFound, theme_switching: false })
+    _ => (scroll_top, { theme, page: NotFound, theme_switching: false })
   }
 }
 

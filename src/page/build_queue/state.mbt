@@ -61,18 +61,28 @@ pub fn is_theme_toggle(msg : Msg) -> Bool {
 }
 
 ///|
-fn decode_build_item(json : Json) -> BuildItem raise {
+fn decode_queued_item(json : Json) -> BuildItem raise {
   match json {
     {
       "module": String(module_),
       "version": String(version),
       "created_at": String(created_at),
       ..
+    } => { module_, version, status: "QUEUED", created_at, finished_at: None }
+    _ => fail("invalid queued item: \{json}")
+  }
+}
+
+///|
+fn decode_completed_item(json : Json) -> BuildItem raise {
+  match json {
+    {
+      "module": String(module_),
+      "version": String(version),
+      "status": String(status),
+      "created_at": String(created_at),
+      ..
     } => {
-      let status = match json {
-        { "status": String(s), .. } => s
-        _ => "QUEUED"
-      }
       let finished_at = match json {
         { "finished_at": String(t), .. } => Some(t)
         _ => None
@@ -88,8 +98,8 @@ fn decode_builds(json : Json) -> Result[BuildData, String] {
   match json {
     { "queued": Array(queued), "recent_completed": Array(recent), .. } =>
       Ok({
-        queued: queued.map(decode_build_item),
-        recent_completed: recent.map(decode_build_item),
+        queued: queued.map(decode_queued_item),
+        recent_completed: recent.map(decode_completed_item),
       }) catch {
         e => Err(e.to_string())
       }

@@ -16,7 +16,9 @@
 enum Msg {
   ToggleDocDetail(String)
   DocModeChanged(CardMode)
-  GotResource(Result[Resource, String])
+  GotManifest(Result[Manifest, String])
+  GotModuleMeta(Result[MetaInfo, String])
+  GotReadme(Result[String, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageData(Result[PackageData, String])
   SidebarTabClicked(String)
@@ -36,7 +38,9 @@ enum Msg {
 struct Model {
   fragment : String
   path : String
-  resource : Status[Resource]
+  manifest : Status[Manifest]
+  module_meta : Status[MetaInfo]
+  readme_content : Status[String]
   module_index : Status[ModuleIndex]
   package_data : Status[PackageData]
   search_entries : Status[Lazy[Array[SearchEntry]]]
@@ -61,11 +65,35 @@ pub fn load(
   fragment : String?,
   dispatch~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
+  let path = path.trim(char_set="/").to_string()
+  let module_path = docs_module_path(path)
+  let module_api_path = docs_module_api_path(path)
   (
     batch([
       @http.get(
-        "/assets/" + path.trim(char_set="/").to_string() + "/resource.json",
-        expect=Json(result => dispatch(GotResource(result)), decode_resource),
+        "/api/v0/manifest/" + path,
+        expect=Json(result => dispatch(GotManifest(result)), decode_manifest),
+      ),
+      @http.get(
+        "/api/v0/modules/" + module_api_path,
+        expect=Json(
+          result => dispatch(GotModuleMeta(result)),
+          decode_module_meta,
+        ),
+      ),
+      @http.get(
+        "/assets/" + path + "/resource.json",
+        expect=Json(
+          result => dispatch(GotReadme(result)),
+          decode_readme_content,
+        ),
+      ),
+      @http.get(
+        "/assets/" + module_path + "/module_index.json",
+        expect=Json(
+          result => dispatch(GotModuleIndex(result)),
+          decode_module_index,
+        ),
       ),
       @dialog.close("search-panel"),
     ]),
@@ -73,13 +101,15 @@ pub fn load(
       module_index: Loading,
       fragment: fragment.unwrap_or(""),
       path,
+      manifest: Loading,
+      module_meta: Loading,
+      readme_content: Loading,
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),
       sidebar_tab: "Documentation",
       sidebar_fab: false,
       package_data: Loading,
       collapsed_docs: FoldedState::new(),
-      resource: Loading,
       search: { filter: "", results: Loading },
       search_entries: Loading,
       install_copied: false,
@@ -95,69 +125,59 @@ pub fn update(
   dispatch~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
   match msg {
-    GotResource(result) =>
+    GotManifest(result) =>
       match result {
-        Ok({ kind, .. } as resource) => {
-          let cmd = match kind {
-            Module({ module_index_path, .. }) =>
-              @http.get(
-                "/assets/" + module_index_path,
-                expect=Json(
-                  result => dispatch(GotModuleIndex(result)),
-                  decode_module_index,
-                ),
-              )
-            Package({ package_data_path, module_path, .. }) =>
-              batch([
-                @http.get(
-                  "/assets/" + package_data_path,
-                  expect=Json(
-                    result => dispatch(GotPackageData(result)),
-                    decode_package_data,
-                  ),
-                ),
-                @http.get(
-                  "/assets/" + module_path + "/module_index.json",
-                  expect=Json(
-                    result => dispatch(GotModuleIndex(result)),
-                    decode_module_index,
-                  ),
-                ),
-              ])
-            RootPackage({ module_index_path, package_data_path, .. }) =>
-              batch([
-                @http.get(
-                  "/assets/" + module_index_path,
-                  expect=Json(
-                    result => dispatch(GotModuleIndex(result)),
-                    decode_module_index,
-                  ),
-                ),
-                @http.get(
-                  "/assets/" + package_data_path,
-                  expect=Json(
-                    result => dispatch(GotPackageData(result)),
-                    decode_package_data,
-                  ),
-                ),
-              ])
+        Ok(manifest) => {
+          let cmd = if manifest.has_package {
+            @http.get(
+              "/assets/" + model.path + "/package_data.json",
+              expect=Json(
+                result => dispatch(GotPackageData(result)),
+                decode_package_data,
+              ),
+            )
+          } else {
+            none
           }
-          (cmd, { ..model, resource: Success(resource) })
+          let package_data = if manifest.has_package {
+            model.package_data
+          } else {
+            Failed
+          }
+          (cmd, { ..model, manifest: Success(manifest), package_data })
         }
-        Err(msg) => {
-          println(msg)
-          (none, { ..model, resource: Failed })
-        }
+        Err(_) => (none, { ..model, manifest: Failed, package_data: Failed })
       }
+    GotModuleMeta(result) =>
+      (
+        none,
+        match result {
+          Ok(module_meta) => { ..model, module_meta: Success(module_meta) }
+          Err(_) => { ..model, module_meta: Failed }
+        },
+      )
+    GotReadme(result) =>
+      (
+        none,
+        match result {
+          Ok(readme_content) =>
+            { ..model, readme_content: Success(readme_content) }
+          Err(msg) => {
+            println(msg)
+            { ..model, readme_content: Failed }
+          }
+        },
+      )
     GotModuleIndex(result) =>
       (
         none,
         match result {
           Ok(module_index) => {
-            let sidebar_document = module_index.0
-              .find_node(model.path)
-              .unwrap()
-              .to_document_items()
+            let sidebar_document = match
+              module_index.0.find_node(docs_lookup_path(model.path)) {
+              Some(node) => node.to_document_items()
+              None => []
+            }
             {
               ..model,
               sidebar_document,
@@ -187,10 +207,7 @@ pub fn update(
             .fold(init=model.collapsed_docs, FoldedState::add)
           { ..model, collapsed_docs, package_data: Success(package_data) }
         }
-        Err(msg) => {
-          println(msg)
-          { ..model, package_data: Failed }
-        }
+        Err(_) => { ..model, package_data: Failed }
       }
       (@nav.scroll_to(model.fragment), model)
     }
@@ -219,7 +236,10 @@ pub fn update(
     ClickSidebarItem(id) => {
       let model = { ..model, sidebar_fab: false }
       match id {
-        Package(path) => (@nav.push_url("/docs/" + path), { ..model, path, })
+        Package(path) => {
+          let path = docs_apply_current_version(path, model.path)
+          (@nav.push_url("/docs/" + path), { ..model, path, })
+        }
         Symbol(id) | Section(id) => (@nav.scroll_to(id), model)
       }
     }

@@ -5,17 +5,25 @@ fn breadcrumbs(
   module_index : ModuleIndex,
 ) -> Html {
   let module_path = module_path.trim(char_set="/").to_string()
-  let path = path.trim(char_set="/")
-  let paths = path.trim_start(char_set="/").split("/").collect()
-  let mut acc_path = ""
+  let raw_paths = split_docs_path(path)
+  let lookup_paths = split_docs_path(docs_lookup_path(path))
+  let lookup_module_path = docs_lookup_path(module_path)
+  let mut raw_acc_path = ""
+  let mut lookup_acc_path = ""
   let elems = []
-  for path in paths {
-    let path = path.to_string()
-    acc_path += if acc_path == "" { path } else { "/" + path.to_string() }
-    let elem = if acc_path.has_prefix(module_path) &&
-      module_index.0.find_node(acc_path) is Some(node) &&
-      (acc_path == module_path || node.pkg is Some(_)) {
-      a(class="hover:underline", href="/docs/" + acc_path, [text(path)])
+  for i in 0..<raw_paths.length() {
+    let path = raw_paths[i]
+    let lookup_path = lookup_paths[i]
+    raw_acc_path += if raw_acc_path == "" { path } else { "/" + path }
+    lookup_acc_path += if lookup_acc_path == "" {
+      lookup_path
+    } else {
+      "/" + lookup_path
+    }
+    let elem = if lookup_acc_path.has_prefix(lookup_module_path) &&
+      module_index.0.find_node(lookup_acc_path) is Some(node) &&
+      (lookup_acc_path == lookup_module_path || node.pkg is Some(_)) {
+      a(class="hover:underline", href="/docs/" + raw_acc_path, [text(path)])
     } else {
       div(class="text-gray-700 font-normal", [text(path)])
     }

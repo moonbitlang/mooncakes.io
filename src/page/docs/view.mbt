@@ -5,13 +5,13 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     Success(module_index) => Some(module_index)
     _ => None
   }
-  let module_path = match model.resource {
-    Success(resource) =>
-      match resource.kind {
-        Module({ meta_info, .. }) => meta_info.name
-        Package({ module_path, .. }) => module_path
-        RootPackage(_) => model.path
-      }
+  let module_path = match model.manifest {
+    Success(manifest) =>
+      docs_apply_current_version(manifest.module_, model.path)
+    _ => docs_module_path(model.path)
+  }
+  let package_path = match model.manifest {
+    Success(manifest) => docs_apply_current_version(manifest.name, model.path)
     _ => model.path
   }
   let navbar : Html = navbar(
@@ -22,23 +22,25 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     dispatch,
     theme_toggle~,
   )
-  let source_files = match model.resource {
-    Success(
-      {
-        kind: Package({ source_files, .. })
-        | RootPackage({ source_files, .. }),
-        ..,
-      }
-    ) => source_files
+  let source_files = match model.manifest {
+    Success(manifest) => manifest.source_files()
     _ => []
   }
-  let main = match model.resource {
-    Success({ readme_content, kind }) => {
-      let meta : Html = match kind {
-        Module({ meta_info: meta, .. })
-        | RootPackage({ meta_info: meta, .. }) =>
-          meta_info(meta, install_copied=model.install_copied, dispatch)
-        Package(_) => nothing
+  let main = match model.readme_content {
+    Success(readme_content) => {
+      let meta : Html = if model.path == module_path {
+        match model.module_meta {
+          Success(meta) => {
+            let meta = match model.manifest {
+              Success(manifest) => { ..meta, version: manifest.version }
+              _ => meta
+            }
+            meta_info(meta, install_copied=model.install_copied, dispatch)
+          }
+          _ => nothing
+        }
+      } else {
+        nothing
       }
       div([
         meta,
@@ -135,8 +137,8 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
             model.sidebar_document,
             source_files,
             model.sidebar_tab,
+            package_path~,
             model.sidebar_collapsed,
-            package_path=model.path,
             dispatch,
           ),
         ],
@@ -165,8 +167,8 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
                   model.sidebar_document,
                   source_files,
                   model.sidebar_tab,
+                  package_path~,
                   model.sidebar_collapsed,
-                  package_path=model.path,
                   dispatch,
                 ),
               ]),

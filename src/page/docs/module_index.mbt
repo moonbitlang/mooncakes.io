@@ -30,6 +30,15 @@ priv struct PkgIndex {
 } derive(Show)
 
 ///|
+priv struct Manifest {
+  name : String
+  module_ : String
+  version : String
+  has_package : Bool
+  manifest : Array[String]
+}
+
+///|
 priv struct ModuleIndex(IndexNode) derive(Show)
 
 ///|
@@ -140,6 +149,132 @@ fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
     (Some(node), [path, .. rest]) =>
       continue (node.childs.get(path.to_string()), rest)
     (node, _) => node
+  }
+}
+
+///|
+fn split_docs_path(path : String) -> Array[String] {
+  path
+  .trim(char_set="/")
+  .split("/")
+  .filter_map(fn(part) {
+    if part.is_empty() {
+      None
+    } else {
+      Some(part.to_string())
+    }
+  })
+  .collect()
+}
+
+///|
+fn strip_module_version(segment : String) -> String {
+  segment.split("@").head().unwrap().to_string()
+}
+
+///|
+fn docs_module_path(path : String) -> String {
+  match split_docs_path(path) {
+    [author, module_name, ..] => author + "/" + module_name
+    _ => path.trim(char_set="/").to_string()
+  }
+}
+
+///|
+fn docs_module_api_path(path : String) -> String {
+  match split_docs_path(path) {
+    [author, module_name, ..] =>
+      author + "/" + strip_module_version(module_name)
+    _ => docs_lookup_path(path)
+  }
+}
+
+///|
+fn docs_lookup_path(path : String) -> String {
+  match split_docs_path(path) {
+    [author, module_name, .. rest] => {
+      let normalized = [author, strip_module_version(module_name)]
+      for segment in rest {
+        normalized.push(segment)
+      }
+      normalized.join("/")
+    }
+    _ => path.trim(char_set="/").to_string()
+  }
+}
+
+///|
+fn docs_apply_current_version(
+  target_path : String,
+  current_path : String,
+) -> String {
+  let current_module_path = docs_module_path(current_path)
+  let current_module_lookup = docs_lookup_path(current_module_path)
+  if current_module_path == current_module_lookup {
+    return target_path
+  }
+  let target_segments = split_docs_path(docs_lookup_path(target_path))
+  let module_segments = split_docs_path(current_module_lookup)
+  if target_segments.length() < module_segments.length() {
+    return target_path
+  }
+  for i in 0..<module_segments.length() {
+    if target_segments[i] != module_segments[i] {
+      return target_path
+    }
+  }
+  let suffix = []
+  for i in module_segments.length()..<target_segments.length() {
+    suffix.push(target_segments[i])
+  }
+  match suffix {
+    [] => current_module_path
+    _ => current_module_path + "/" + suffix.join("/")
+  }
+}
+
+///|
+fn Manifest::source_files(self : Manifest) -> Array[String] {
+  if !self.has_package {
+    return []
+  }
+  self.manifest.filter_map(fn(item) {
+    if item.has_suffix(".mbt.html") {
+      Some(item.split(".mbt.html").head().unwrap().to_string())
+    } else {
+      None
+    }
+  })
+}
+
+///|
+fn decode_manifest(json : Json) -> Result[Manifest, String] {
+  Ok(
+    match json {
+      {
+        "name": String(name),
+        "module": String(module_),
+        "version": String(version),
+        "has_package": has_package,
+        "manifest": Array(jsons),
+        ..
+      } =>
+        {
+          name,
+          module_,
+          version,
+          has_package: @json.from_json(has_package),
+          manifest: jsons.map(json => {
+            match json {
+              String(s) => s
+              _ => fail("invalid json in manifest field for Manifest: \{json}")
+            }
+          }),
+        }
+      json => fail("invalid json for Manifest: \{json}")
+    },
+  ) catch {
+    e => Err(e.to_string())
   }
 }
 

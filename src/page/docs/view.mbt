@@ -1,17 +1,160 @@
 ///|
+fn docs_notice_item(body : Array[Html]) -> Html {
+  @html.li(class="docs-state-list-item", body)
+}
+
+///|
+fn docs_notice_card(
+  tone : String,
+  title : String,
+  path : String,
+  summary : String,
+  items : Array[Html],
+  extra? : Html,
+) -> Html {
+  div(class="docs-state-shell", [
+    div(class="docs-state-card docs-state-card-\{tone}", [
+      div(class="docs-state-header", [
+        h1(class="docs-state-title", [text(title)]),
+        p(class="docs-state-path", [text(path)]),
+        p(class="docs-state-summary", [text(summary)]),
+      ]),
+      @html.ul(class="docs-state-list", items),
+      extra.unwrap_or(nothing),
+    ]),
+  ])
+}
+
+///|
+fn build_log_view(build_log : BuildLogStatus) -> Html {
+  match build_log {
+    LogIdle | LogLoading =>
+      div(class="docs-state-log-note", [text("Loading build log...")])
+    LogFailed =>
+      div(class="docs-state-log-note docs-state-log-note-error", [
+        text("Failed to load build log."),
+      ])
+    LogSuccess(log) => pre(class="docs-state-log-pre", [code([text(log)])])
+  }
+}
+
+///|
+fn build_log_panel(
+  build_log_open : Bool,
+  build_log : BuildLogStatus,
+  dispatch : (Msg) -> Cmd,
+) -> Html {
+  let toggle_icon = if build_log_open {
+    @config.SECTION_OPEN
+  } else {
+    @config.SECTION_CLOSE
+  }
+  div(class="docs-state-log-card", [
+    button(class="docs-state-log-toggle", on_click=dispatch(ToggleBuildLog), [
+      p(class="docs-state-log-title", [text("Build log")]),
+      img(src=toggle_icon, class="size-4 ui-icon shrink-0", nothing),
+    ]),
+    if build_log_open {
+      div(class="docs-state-log-body", [build_log_view(build_log)])
+    } else {
+      nothing
+    },
+  ])
+}
+
+///|
+fn failed_docs_notice(
+  path : String,
+  build_log_open : Bool,
+  build_log : BuildLogStatus,
+  dispatch : (Msg) -> Cmd,
+) -> Html {
+  docs_notice_card(
+    "failed",
+    "Docs not ready",
+    path,
+    "This usually means the docs build failed for this version.",
+    [
+      docs_notice_item([
+        text("You can still install and use this release locally."),
+      ]),
+      docs_notice_item([text("The module itself may still fail to compile.")]),
+      docs_notice_item([
+        text("If it stays broken for a few hours, "),
+        a(
+          class="docs-state-link",
+          href="https://github.com/moonbitlang/mooncakes.io/issues/new",
+          [text("report it")],
+        ),
+        text("."),
+      ]),
+    ],
+    extra=build_log_panel(build_log_open, build_log, dispatch),
+  )
+}
+
+///|
+fn queued_docs_notice(path : String) -> Html {
+  docs_notice_card(
+    "failed",
+    "Docs not ready",
+    path,
+    "This usually means the docs build is queued or still running.",
+    [
+      docs_notice_item([text("Docs will appear after the build completes.")]),
+      docs_notice_item([
+        text("The package may still be installable before docs are ready."),
+      ]),
+      docs_notice_item([
+        text("If this state persists for a few hours, "),
+        a(
+          class="docs-state-link",
+          href="https://github.com/moonbitlang/mooncakes.io/issues/new",
+          [text("report it")],
+        ),
+        text("."),
+      ]),
+    ],
+  )
+}
+
+///|
+fn outdated_docs_notice(path : String) -> Html {
+  docs_notice_card(
+    "outdated",
+    "No docs available",
+    path,
+    "This older release does not have generated documentation.",
+    [
+      docs_notice_item([
+        text("Use the latest release if you need browsable docs."),
+      ]),
+      docs_notice_item([
+        text("This version may still be installable and usable."),
+      ]),
+      docs_notice_item([text("No build log is available for legacy releases.")]),
+    ],
+  )
+}
+
+///|
 pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
   let module_index = match model.module_index {
     Success(module_index) => Some(module_index)
     _ => None
   }
+  let current_module_path = match model.manifest {
+    Success(manifest) => docs_current_module_path(model.path, manifest.module_)
+    _ => docs_module_path(model.path)
+  }
   let module_path = match model.manifest {
-    Success(manifest) =>
-      docs_apply_current_version(manifest.module_, model.path)
+    Success(_) => current_module_path
     _ => docs_module_path(model.path)
   }
   let package_path = match model.manifest {
-    Success(manifest) => docs_apply_current_version(manifest.name, model.path)
+    Success(manifest) =>
+      docs_apply_current_version(manifest.name, current_module_path)
     _ => model.path
   }
   let navbar : Html = navbar(
@@ -26,36 +169,91 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     Success(manifest) => manifest.source_files()
     _ => []
   }
-  let main = match model.readme_content {
-    Success(readme_content) => {
-      let meta : Html = if model.path == module_path {
-        match model.module_meta {
-          Success(meta) => {
-            let meta = match model.manifest {
-              Success(manifest) => { ..meta, version: manifest.version }
-              _ => meta
-            }
-            meta_info(meta, install_copied=model.install_copied, dispatch)
-          }
-          _ => nothing
+  let meta : Html = if model.path == module_path {
+    match model.module_meta {
+      Success(meta) => {
+        let meta = match model.manifest {
+          Success(manifest) => { ..meta, version: manifest.version }
+          _ => meta
         }
-      } else {
-        nothing
+        meta_info(meta, install_copied=model.install_copied, dispatch)
       }
-      div([
-        meta,
-        document(
-          hide_large_package=model.hide_large_package,
-          readme_content~,
-          package_data=model.package_data,
-          folded=model.collapsed_docs,
-          dispatch,
-        ),
-      ])
+      _ => nothing
     }
-    Failed => @view.document_not_available(model.path)
-    Loading => @view.loading()
+  } else {
+    nothing
   }
+  let docs_loaded = match model.readme_content {
+    Success(_) => true
+    _ => false
+  }
+  let docs_notice = match (model.manifest, model.module_meta) {
+    (Failed, _) | (_, Failed) =>
+      if docs_loaded {
+        nothing
+      } else {
+        @view.document_not_available(model.path)
+      }
+    (Success(_), Success(meta)) =>
+      match meta.build_status {
+        Some(BuildQueued) =>
+          if docs_loaded {
+            nothing
+          } else {
+            queued_docs_notice(model.path)
+          }
+        Some(BuildFailed) =>
+          if docs_loaded {
+            nothing
+          } else {
+            failed_docs_notice(
+              model.path,
+              model.build_log_open,
+              model.build_log,
+              dispatch,
+            )
+          }
+        None =>
+          if docs_loaded {
+            nothing
+          } else {
+            outdated_docs_notice(model.path)
+          }
+        Some(BuildSuccess) | Some(BuildLegacy) =>
+          match (model.readme_content, model.module_index, model.package_data) {
+            (Failed, _, _) | (_, Failed, _) =>
+              @view.document_not_available(model.path)
+            (_, _, Failed) =>
+              match model.manifest {
+                Success(manifest) if manifest.has_package =>
+                  @view.document_not_available(model.path)
+                _ => nothing
+              }
+            _ => nothing
+          }
+      }
+    _ => nothing
+  }
+  let document_view = match model.readme_content {
+    Success(readme_content) =>
+      document(
+        hide_large_package=model.hide_large_package,
+        readme_content~,
+        package_data=model.package_data,
+        folded=model.collapsed_docs,
+        dispatch,
+      )
+    Failed => nothing
+    Loading =>
+      match model.module_meta {
+        Success(
+          { build_status: Some(BuildQueued) | Some(BuildFailed) | None, .. }
+        ) => nothing
+        Failed => nothing
+        _ => @view.loading()
+      }
+  }
+  let main = div([meta, docs_notice, document_view])
   let search = model.search
   let search_panel : Html = @html.dialog(
     class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",

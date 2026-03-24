@@ -18,6 +18,8 @@ enum Msg {
   DocModeChanged(CardMode)
   GotManifest(Result[Manifest, String])
   GotModuleMeta(Result[MetaInfo, String])
+  ToggleBuildLog
+  GotBuildLog(Result[String, String])
   GotReadme(Result[String, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageData(Result[PackageData, String])
@@ -40,6 +42,8 @@ struct Model {
   path : String
   manifest : Status[Manifest]
   module_meta : Status[MetaInfo]
+  build_log_open : Bool
+  build_log : BuildLogStatus
   readme_content : Status[String]
   module_index : Status[ModuleIndex]
   package_data : Status[PackageData]
@@ -60,40 +64,104 @@ struct Model {
 }
 
 ///|
+priv enum BuildLogStatus {
+  LogIdle
+  LogLoading
+  LogFailed
+  LogSuccess(String)
+}
+
+///|
+extern "js" fn encode_uri_component(value : String) -> String = "(value) => encodeURIComponent(value)"
+
+///|
+fn has_docs_assets(build_status : BuildStatus?) -> Bool {
+  match build_status {
+    Some(BuildSuccess | BuildLegacy) => true
+    _ => false
+  }
+}
+
+///|
+fn ignore_docs_result(module_meta : Status[MetaInfo]) -> Bool {
+  match module_meta {
+    Success(meta) => !has_docs_assets(meta.build_status)
+    _ => false
+  }
+}
+
+///|
+fn log_docs_error(msg : String) -> Unit {
+  if msg.contains("Json parse error") {
+    ()
+  } else {
+    println(msg)
+  }
+}
+
+///|
+fn load_module_meta(manifest : Manifest, dispatch : (Msg) -> Cmd) -> Cmd {
+  @http.get(
+    "/api/v0/modules/" + manifest.module_,
+    expect=Json(result => dispatch(GotModuleMeta(result)), json => {
+      decode_module_meta(json, manifest.version)
+    }),
+  )
+}
+
+///|
+fn load_docs_assets(
+  path : String,
+  manifest : Manifest,
+  dispatch : (Msg) -> Cmd,
+) -> Array[Cmd] {
+  let current_module_path = docs_current_module_path(path, manifest.module_)
+  [
+    @http.get(
+      "/assets/" + path + "/resource.json",
+      expect=Json(result => dispatch(GotReadme(result)), decode_readme_content),
+    ),
+    @http.get(
+      "/assets/" + current_module_path + "/module_index.json",
+      expect=Json(
+        result => dispatch(GotModuleIndex(result)),
+        decode_module_index,
+      ),
+    ),
+    ..if manifest.has_package {
+      [
+        @http.get(
+          "/assets/" + path + "/package_data.json",
+          expect=Json(
+            result => dispatch(GotPackageData(result)),
+            decode_package_data,
+          ),
+        ),
+      ]
+    } else {
+      []
+    },
+  ]
+}
+
+///|
+fn get_text(url : String, on_result : (Result[String, String]) -> Cmd) -> Cmd {
+  let expect : @http.Expecting[Cmd, String] = Text(on_result)
+  @http.get(url, expect~)
+}
+
+///|
 pub fn load(
   path : String,
   fragment : String?,
   dispatch~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
   let path = path.trim(char_set="/").to_string()
-  let module_path = docs_module_path(path)
-  let module_api_path = docs_module_api_path(path)
   (
     batch([
       @http.get(
         "/api/v0/manifest/" + path,
         expect=Json(result => dispatch(GotManifest(result)), decode_manifest),
-      ),
-      @http.get(
-        "/api/v0/modules/" + module_api_path,
-        expect=Json(
-          result => dispatch(GotModuleMeta(result)),
-          decode_module_meta,
-        ),
-      ),
-      @http.get(
-        "/assets/" + path + "/resource.json",
-        expect=Json(
-          result => dispatch(GotReadme(result)),
-          decode_readme_content,
-        ),
-      ),
-      @http.get(
-        "/assets/" + module_path + "/module_index.json",
-        expect=Json(
-          result => dispatch(GotModuleIndex(result)),
-          decode_module_index,
-        ),
       ),
       @dialog.close("search-panel"),
     ]),
@@ -103,6 +171,8 @@ pub fn load(
       path,
       manifest: Loading,
       module_meta: Loading,
+      build_log_open: false,
+      build_log: LogIdle,
       readme_content: Loading,
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),
@@ -128,72 +198,158 @@ pub fn update(
     GotManifest(result) =>
       match result {
         Ok(manifest) => {
-          let cmd = if manifest.has_package {
-            @http.get(
-              "/assets/" + model.path + "/package_data.json",
-              expect=Json(
-                result => dispatch(GotPackageData(result)),
-                decode_package_data,
-              ),
-            )
-          } else {
-            none
-          }
-          let package_data = if manifest.has_package {
-            model.package_data
-          } else {
-            Failed
-          }
-          (cmd, { ..model, manifest: Success(manifest), package_data })
+          let cmd = batch(
+            [
+              load_module_meta(manifest, dispatch),
+              ..load_docs_assets(model.path, manifest, dispatch),
+            ],
+          )
+          (
+            cmd,
+            {
+              ..model,
+              manifest: Success(manifest),
+              package_data: if model.path == manifest.name &&
+                !manifest.has_package {
+                Failed
+              } else {
+                Loading
+              },
+            },
+          )
         }
-        Err(_) => (none, { ..model, manifest: Failed, package_data: Failed })
+        Err(_) =>
+          (
+            none,
+            {
+              ..model,
+              manifest: Failed,
+              module_meta: Failed,
+              readme_content: Failed,
+              module_index: Failed,
+              package_data: Failed,
+            },
+          )
       }
     GotModuleMeta(result) =>
+      match result {
+        Ok(module_meta) => {
+          let package_data = match (module_meta.build_status, model.manifest) {
+            (build_status, Success(manifest)) if has_docs_assets(build_status) &&
+              manifest.has_package => model.package_data
+            _ => Failed
+          }
+          let readme_content = match module_meta.build_status {
+            build_status if has_docs_assets(build_status) =>
+              model.readme_content
+            _ => Failed
+          }
+          let module_index = match module_meta.build_status {
+            build_status if has_docs_assets(build_status) => model.module_index
+            _ => Failed
+          }
+          (
+            none,
+            {
+              ..model,
+              module_meta: Success(module_meta),
+              readme_content,
+              module_index,
+              package_data,
+            },
+          )
+        }
+        Err(_) =>
+          (
+            none,
+            {
+              ..model,
+              module_meta: Failed,
+              readme_content: Failed,
+              module_index: Failed,
+              package_data: Failed,
+            },
+          )
+      }
+    ToggleBuildLog => {
+      let build_log_open = !model.build_log_open
+      let cmd = match (build_log_open, model.build_log, model.manifest) {
+        (true, LogIdle | LogFailed, Success(manifest)) =>
+          get_text(
+            "/api/v0/builds/log?module=" +
+            encode_uri_component(manifest.module_) +
+            "&version=" +
+            encode_uri_component(manifest.version),
+            (result : Result[String, String]) => dispatch(GotBuildLog(result)),
+          )
+        _ => none
+      }
+      let build_log = match (build_log_open, model.build_log) {
+        (true, LogIdle | LogFailed) => LogLoading
+        _ => model.build_log
+      }
+      (cmd, { ..model, build_log_open, build_log })
+    }
+    GotBuildLog(result) =>
       (
         none,
         match result {
-          Ok(module_meta) => { ..model, module_meta: Success(module_meta) }
-          Err(_) => { ..model, module_meta: Failed }
+          Ok(log) => { ..model, build_log: LogSuccess(log) }
+          Err(msg) => {
+            println(msg)
+            { ..model, build_log: LogFailed }
+          }
         },
       )
     GotReadme(result) =>
-      (
-        none,
-        match result {
-          Ok(readme_content) =>
-            { ..model, readme_content: Success(readme_content) }
-          Err(msg) => {
-            println(msg)
-            { ..model, readme_content: Failed }
-          }
-        },
-      )
+      if ignore_docs_result(model.module_meta) {
+        (none, model)
+      } else {
+        (
+          none,
+          match result {
+            Ok(readme_content) =>
+              { ..model, readme_content: Success(readme_content) }
+            Err(msg) => {
+              log_docs_error(msg)
+              { ..model, readme_content: Failed }
+            }
+          },
+        )
+      }
     GotModuleIndex(result) =>
-      (
-        none,
-        match result {
-          Ok(module_index) => {
-            let sidebar_document = match
-              module_index.0.find_node(docs_lookup_path(model.path)) {
-              Some(node) => node.to_document_items()
-              None => []
+      if ignore_docs_result(model.module_meta) {
+        (none, model)
+      } else {
+        (
+          none,
+          match result {
+            Ok(module_index) => {
+              let sidebar_document = match
+                module_index.0.find_node(docs_lookup_path(model.path)) {
+                Some(node) => node.to_document_items()
+                None => []
+              }
+              {
+                ..model,
+                sidebar_document,
+                module_index: Success(module_index),
+                search_entries: Success(
+                  Lazy::new(load_search_entries(module_index)),
+                ),
+              }
             }
-            {
-              ..model,
-              sidebar_document,
-              module_index: Success(module_index),
-              search_entries: Success(
-                Lazy::new(load_search_entries(module_index)),
-              ),
+            Err(msg) => {
+              log_docs_error(msg)
+              { ..model, module_index: Failed }
             }
-          }
-          Err(msg) => {
-            println(msg)
-            { ..model, module_index: Failed }
-          }
-        },
-      )
+          },
+        )
+      }
     GotPackageData(result) => {
+      if ignore_docs_result(model.module_meta) {
+        return (none, model)
+      }
       let model = match result {
         Ok({ types, traits, misc, .. } as package_data) => {
           // collapse all implementations by default
@@ -237,7 +393,12 @@ pub fn update(
       let model = { ..model, sidebar_fab: false }
       match id {
         Package(path) => {
-          let path = docs_apply_current_version(path, model.path)
+          let current_module_path = match model.manifest {
+            Success(manifest) =>
+              docs_current_module_path(model.path, manifest.module_)
+            _ => docs_module_path(model.path)
+          }
+          let path = docs_apply_current_version(path, current_module_path)
           (@nav.push_url("/docs/" + path), { ..model, path, })
         }
         Symbol(id) | Section(id) => (@nav.scroll_to(id), model)

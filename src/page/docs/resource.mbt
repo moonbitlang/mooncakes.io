@@ -13,6 +13,14 @@
 // limitations under the License.
 
 ///|
+priv enum BuildStatus {
+  BuildSuccess
+  BuildLegacy
+  BuildQueued
+  BuildFailed
+}
+
+///|
 priv struct MetaInfo {
   name : String
   author : String
@@ -22,6 +30,7 @@ priv struct MetaInfo {
   description : String?
   repository : String?
   deps : Array[(String, String)]
+  build_status : BuildStatus?
 }
 
 ///|
@@ -69,6 +78,57 @@ fn decode_keywords(json : Json?) -> Array[String] raise Error {
 }
 
 ///|
+fn decode_deps(json : Json?) -> Array[(String, String)] raise Error {
+  match json {
+    Some(Object(xs)) =>
+      map_with_error(xs.iter2().to_array(), entry => {
+        match entry {
+          (name, String(version)) => (name, version)
+          _ => fail("invalid deps field")
+        }
+      })
+    Some(Null) | None => []
+    _ => fail("invalid deps field")
+  }
+}
+
+///|
+fn decode_build_status(json : Json?) -> BuildStatus? raise Error {
+  match json {
+    Some(String("success")) => Some(BuildSuccess)
+    Some(String("legacy")) => Some(BuildLegacy)
+    Some(String("queued")) => Some(BuildQueued)
+    Some(String("failed")) => Some(BuildFailed)
+    Some(Null) | None => None
+    Some(String(_)) => None
+    _ => fail("invalid build_status field")
+  }
+}
+
+///|
+fn find_version_build_status(
+  json : Json?,
+  current_version : String,
+) -> BuildStatus? raise Error {
+  match json {
+    Some(Array(versions)) => {
+      for version_entry in versions {
+        match version_entry {
+          { "version": String(version), "build_status"? : build_status, .. } if version ==
+            current_version => return decode_build_status(build_status)
+          { "version": String(version), .. } if version == current_version =>
+            return None
+          _ => ()
+        }
+      }
+      None
+    }
+    Some(Null) | None => None
+    _ => fail("invalid versions field")
+  }
+}
+
+///|
 fn build_meta_info(
   name : String,
   version : String,
@@ -76,6 +136,8 @@ fn build_meta_info(
   license : String?,
   description : String?,
   keywords : Array[String],
+  deps : Array[(String, String)],
+  build_status : BuildStatus?,
 ) -> MetaInfo {
   let author = String::from_array(
     name.iter().take_while(c => c != '/').collect(),
@@ -88,12 +150,16 @@ fn build_meta_info(
     license,
     repository: repository.map(normalize_repo_url),
     keywords,
-    deps: [],
+    deps,
+    build_status,
   }
 }
 
 ///|
-fn decode_module_meta(json : Json) -> Result[MetaInfo, String] {
+fn decode_module_meta(
+  json : Json,
+  current_version : String,
+) -> Result[MetaInfo, String] {
   try {
     match json {
       {
@@ -104,10 +170,23 @@ fn decode_module_meta(json : Json) -> Result[MetaInfo, String] {
           "license"? : license,
           "description"? : description,
           "keywords"? : keywords,
+          "deps"? : deps,
+          "build_status"? : metadata_build_status,
           ..
         },
+        "versions"? : versions,
+        "build_status"? : top_level_build_status,
         ..
-      } =>
+      } => {
+        let build_status = match
+          find_version_build_status(versions, current_version) {
+          Some(status) => Some(status)
+          None =>
+            match decode_build_status(metadata_build_status) {
+              Some(status) => Some(status)
+              None => decode_build_status(top_level_build_status)
+            }
+        }
         Ok(
           build_meta_info(
             name,
@@ -116,8 +195,11 @@ fn decode_module_meta(json : Json) -> Result[MetaInfo, String] {
             decode_optional_string(license),
             decode_optional_string(description),
             decode_keywords(keywords),
+            decode_deps(deps),
+            build_status,
           ),
         )
+      }
       _ => Err("invalid module metadata")
     }
   } catch {

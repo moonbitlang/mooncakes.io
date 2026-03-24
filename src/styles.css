@@ -455,3 +455,200 @@
 .theme-dark .border-l-gray-400 {
   border-left-color: #3f4852;
 }
+
+.docs-state-shell {
+  padding: 1rem 1rem 0;
+}
+
+@media (min-width: 768px) {
+  .docs-state-shell {
+    padding: 1.25rem 0 0;
+  }
+}
+
+.docs-state-card {
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.docs-state-card-failed {
+  background: rgba(255, 250, 242, 0.98);
+}
+
+.docs-state-card-outdated {
+  background: rgba(248, 250, 252, 0.98);
+}
+
+.docs-state-header {
+  padding: 1rem 1rem 0.6rem;
+}
+
+.docs-state-title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111827;
+}
+
+.docs-state-path {
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: #475569;
+  word-break: break-all;
+}
+
+.docs-state-summary {
+  margin-top: 0.8rem;
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+.docs-state-list {
+  padding: 0 1rem 1rem 2.35rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.docs-state-list-item {
+  margin-top: 0.45rem;
+}
+
+.docs-state-list-item::marker {
+  color: #b45309;
+}
+
+.docs-state-link {
+  color: #b45309;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  transition: color 120ms ease;
+}
+
+.docs-state-link:hover {
+  color: #92400e;
+}
+
+.docs-state-log-card {
+  border-top: 1px solid rgba(226, 232, 240, 0.95);
+}
+
+.docs-state-log-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.78rem 1rem;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.docs-state-log-toggle:hover {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.docs-state-log-title {
+  color: #111827;
+  font-weight: 700;
+}
+
+.docs-state-log-body {
+  padding: 0 1rem 1rem;
+}
+
+.docs-state-log-note {
+  padding-top: 0.1rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.docs-state-log-note-error {
+  color: #b91c1c;
+}
+
+.docs-state-log-pre {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #0d1117;
+  color: #e5e7eb;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 767px) {
+  .docs-state-header {
+    padding: 0.9rem 0.9rem 0.55rem;
+  }
+
+  .docs-state-list {
+    padding: 0 0.9rem 0.9rem 2rem;
+  }
+
+  .docs-state-log-toggle {
+    padding: 0.72rem 0.9rem;
+  }
+
+  .docs-state-log-body {
+    padding: 0 0.9rem 0.9rem;
+  }
+}
+
+.theme-dark .docs-state-card {
+  border-color: #2d3440;
+  background: rgba(15, 19, 24, 0.94);
+}
+
+.theme-dark .docs-state-card-failed {
+  background: rgba(29, 22, 16, 0.96);
+}
+
+.theme-dark .docs-state-card-outdated {
+  background: rgba(18, 23, 29, 0.96);
+}
+
+.theme-dark .docs-state-title,
+.theme-dark .docs-state-path,
+.theme-dark .docs-state-summary,
+.theme-dark .docs-state-list,
+.theme-dark .docs-state-log-note {
+  color: #b6c0cf;
+}
+
+.theme-dark .docs-state-log-card {
+  border-color: #303744;
+}
+
+.theme-dark .docs-state-link {
+  color: #fbbf24;
+}
+
+.theme-dark .docs-state-link:hover {
+  color: #fde68a;
+}
+
+.theme-dark .docs-state-log-toggle:hover {
+  background: rgba(51, 65, 85, 0.28);
+}
+
+.theme-dark .docs-state-log-title {
+  color: #f8fafc;
+}
+
+.theme-dark .docs-state-log-note-error {
+  color: #fca5a5;
+}
+
+.theme-dark .docs-state-list-item::marker {
+  color: #fbbf24;
+}

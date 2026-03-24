@@ -181,34 +181,32 @@ fn docs_module_path(path : String) -> String {
 }
 
 ///|
-fn docs_module_api_path(path : String) -> String {
-  match split_docs_path(path) {
-    [author, module_name, ..] =>
-      author + "/" + strip_module_version(module_name)
-    _ => docs_lookup_path(path)
+fn docs_current_module_path(
+  current_path : String,
+  module_lookup_path : String,
+) -> String {
+  let current_segments = split_docs_path(current_path)
+  let module_segments = split_docs_path(module_lookup_path)
+  if current_segments.length() < module_segments.length() {
+    return module_lookup_path
   }
+  let result = []
+  for i in 0..<module_segments.length() {
+    result.push(current_segments[i])
+  }
+  result.join("/")
 }
 
 ///|
 fn docs_lookup_path(path : String) -> String {
-  match split_docs_path(path) {
-    [author, module_name, .. rest] => {
-      let normalized = [author, strip_module_version(module_name)]
-      for segment in rest {
-        normalized.push(segment)
-      }
-      normalized.join("/")
-    }
-    _ => path.trim(char_set="/").to_string()
-  }
+  split_docs_path(path).map(strip_module_version).join("/")
 }
 
 ///|
 fn docs_apply_current_version(
   target_path : String,
-  current_path : String,
+  current_module_path : String,
 ) -> String {
-  let current_module_path = docs_module_path(current_path)
   let current_module_lookup = docs_lookup_path(current_module_path)
   if current_module_path == current_module_lookup {
     return target_path

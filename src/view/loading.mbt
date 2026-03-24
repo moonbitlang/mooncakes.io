@@ -31,39 +31,34 @@ pub fn load_failed(resource : String) -> Html {
 
 ///|
 pub fn document_not_available(path : String) -> Html {
-  div(class="flex flex-col items-center justify-center min-h-[60vh] w-full", [
-    div(
-      class="max-w-2xl w-[92%] sm:w-full px-4 sm:px-6 py-6 text-gray-900 translate-x-2 sm:translate-x-0",
-      [
-        div(class="flex flex-col sm:flex-row items-start gap-4", [
-          div(
-            class="mt-1 size-10 sm:size-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-lg sm:text-xl font-semibold",
-            [text("!")],
+  div(class="docs-state-shell", [
+    div(class="docs-state-card docs-state-card-failed", [
+      div(class="docs-state-header", [
+        h1(class="docs-state-title", [text("Docs not ready")]),
+        p(class="docs-state-path", [text(path)]),
+        p(class="docs-state-summary", [
+          text(
+            "This usually means the docs build is still pending or the generated assets are temporarily missing.",
           ),
-          div(class="flex-1", [
-            h1(class="text-lg sm:text-xl font-semibold", [
-              text("Docs not ready"),
-            ]),
-            p(class="text-sm text-gray-500 mt-1", [text(path)]),
-            p(class="text-sm text-gray-600 mt-3", [
-              text("This usually means the docs build is pending or failed."),
-            ]),
-            ul(class="list-disc text-sm text-gray-600 mt-3 pl-5 space-y-1", [
-              li([text("Docs will appear after the build completes.")]),
-              li([text("The module itself may fail to compile.")]),
-              li([
-                text("If this persists for a few hours, you can "),
-                a(
-                  class="hover:text-mooncake2 transition-colors underline underline-offset-4",
-                  href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-                  [text("report to us")],
-                ),
-                text("."),
-              ]),
-            ]),
-          ]),
         ]),
-      ],
-    ),
+      ]),
+      ul(class="docs-state-list", [
+        li(class="docs-state-list-item", [
+          text("Docs are still building or the generated assets are missing."),
+        ]),
+        li(class="docs-state-list-item", [
+          text("The module may have failed to compile during the docs build."),
+        ]),
+        li(class="docs-state-list-item", [
+          text("If this persists for a few hours, "),
+          a(
+            class="docs-state-link",
+            href="https://github.com/moonbitlang/mooncakes.io/issues/new",
+            [text("report it")],
+          ),
+          text("."),
+        ]),
+      ]),
+    ]),
   ])
 }

@@ -94,28 +94,19 @@ pub fn load_failed(resource : String) -> Html {
 }
 
 ///|
-pub fn document_not_available(path : String) -> Html {
+pub fn document_not_available(_path : String) -> Html {
   div(class="docs-state-shell", [
     div(class="docs-state-card docs-state-card-failed", [
       div(class="docs-state-header", [
         h1(class="docs-state-title", [text("Docs unavailable")]),
-        p(class="docs-state-path", [text(path)]),
         p(class="docs-state-summary", [
-          text("Documentation assets could not be loaded."),
-        ]),
-      ]),
-      ul(class="docs-state-list", [
-        li(class="docs-state-list-item", [
-          text("The build may still be in progress, or the assets are missing."),
-        ]),
-        li(class="docs-state-list-item", [
-          text("If this persists, "),
+          text("Documentation assets could not be loaded. "),
           a(
             class="docs-state-link",
             href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-            [text("report it")],
+            [text("Report it")],
           ),
-          text("."),
+          text(" if this persists."),
         ]),
       ]),
     ]),

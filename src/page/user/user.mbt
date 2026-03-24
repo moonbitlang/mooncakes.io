@@ -407,7 +407,7 @@ pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
     GotUserProfile(Ok(profile)) =>
       (none, { ..model, profile: Success(profile) })
     GotCodeFrequency(Ok(data)) =>
-      (@nav.scroll_to("right"), { ..model, code_frequency: Success(data) })
+      (none, { ..model, code_frequency: Success(data) })
     GotCodeFrequency(Err(msg)) => {
       println(msg)
       (none, { ..model, code_frequency: Failed })

@@ -4,5 +4,4 @@ import {
   "moonbit-community/rabbita/http",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
-  "moonbit-community/rabbita/nav",
 }

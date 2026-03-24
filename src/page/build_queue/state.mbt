@@ -66,10 +66,13 @@ fn decode_build_item(json : Json) -> BuildItem raise {
     {
       "module": String(module_),
       "version": String(version),
-      "status": String(status),
       "created_at": String(created_at),
       ..
     } => {
+      let status = match json {
+        { "status": String(s), .. } => s
+        _ => "QUEUED"
+      }
       let finished_at = match json {
         { "finished_at": String(t), .. } => Some(t)
         _ => None

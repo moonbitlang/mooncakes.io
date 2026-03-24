@@ -15,7 +15,7 @@
 ///|
 fn simple_module_card(mod : ModuleIndex) -> Html {
   div(
-    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-colors",
+    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-shadow",
     [
       div(
         class="shrink-0 whitespace-nowrap flex flex-row text-base font-semibold",
@@ -158,7 +158,7 @@ fn pinned() -> Html {
 ///|
 fn recently_updated(recently : Array[ModuleIndex]) -> Html {
   let recently_updated = recently.map(simple_module_card)
-  div(class="container lg:w-4/5 px-4", [
+  div(class="container lg:w-4/5 px-4 animate-fade-in", [
     h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
       text("Recently updated"),
     ]),
@@ -190,7 +190,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
         ]),
       ])
     })
-  div(class="pt-10", [
+  div(class="pt-10 animate-fade-in", [
     div(class="container lg:w-4/5 px-4", [
       h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
         text("All modules"),
@@ -326,12 +326,27 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   let module_list = if model.filter == "" {
     let pinned_modules = pinned()
     let recently_updated = match model.recent_modules {
-      Loading => @view.loading()
+      Loading =>
+        div(class="container lg:w-4/5 px-4", [
+          h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
+            text("Recently updated"),
+          ]),
+          @view.skeleton_module_cards(recent_modules_limit),
+        ])
       Failed => @view.load_failed("recently updated modules")
       Success(xs) => recently_updated(xs)
     }
     let all_modules = match model.all_modules {
-      Loading => @view.loading()
+      Loading =>
+        div(class="pt-10", [
+          div(class="container lg:w-4/5 px-4", [
+            h1(
+              class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0",
+              [text("All modules")],
+            ),
+            @view.skeleton_module_cards(9),
+          ]),
+        ])
       Failed => @view.load_failed("module indices")
       Success(xs) => all_modules(xs.indices)
     }

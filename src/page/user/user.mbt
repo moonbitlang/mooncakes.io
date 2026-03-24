@@ -171,9 +171,9 @@ fn suffix_after_n_chars_or(
 pub fn profile(profile : Status[Profile]) -> Html {
   match profile {
     Failed => @view.load_failed("user")
-    Loading => @view.loading()
+    Loading => @view.skeleton_profile()
     Success({ username, avatar_url, .. }) =>
-      div(class="flex flex-col items-center text-center", [
+      div(class="flex flex-col items-center text-center animate-fade-in", [
         if avatar_url == "" {
           // Default avatar placeholder
           let initial = first_char_upper_or(username, "U")
@@ -197,14 +197,14 @@ pub fn profile(profile : Status[Profile]) -> Html {
 pub fn published_modules(modules : Status[PublishedModules]) -> Html {
   match modules {
     Failed => @view.load_failed("published modules")
-    Loading => @view.loading()
+    Loading => @view.skeleton_published_modules(6)
     Success(module_list) => {
       if module_list.length() == 0 {
         return div(class="p-8 text-center text-gray-500", [
           text("No published modules yet"),
         ])
       }
-      div([
+      div(class="animate-fade-in", [
         h2(class="text-2xl font-semibold mb-6 text-gray-800", [
           text("Published Modules"),
         ]),
@@ -246,7 +246,7 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
 pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
   match code_frequency {
     Failed => @view.load_failed("code frequency")
-    Loading => @view.loading()
+    Loading => @view.skeleton_code_frequency()
     Success(data) => {
       if data.length() == 0 {
         return div(class="my-6 text-sm text-gray-500", [
@@ -325,7 +325,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
             ]),
           ])
         })
-      div([
+      div(class="animate-fade-in", [
         h2(class="text-2xl font-semibold mb-6 text-gray-800", [
           text("Code Frequency"),
         ]),

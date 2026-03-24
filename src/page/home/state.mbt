@@ -95,6 +95,9 @@ fn sanitize_for_fuzzy(text : String) -> String {
 }
 
 ///|
+let recent_modules_limit = 15
+
+///|
 pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
     batch([
@@ -103,7 +106,7 @@ pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
         expect=Json(result => dispatch(GotAllModule(result)), decode_modules),
       ),
       @http.get(
-        "/api/v0/modules/recent?limit=15",
+        "/api/v0/modules/recent?limit=\{recent_modules_limit}",
         expect=Json(result => dispatch(GotRecentModule(result)), decode_modules),
       ),
       @http.get(

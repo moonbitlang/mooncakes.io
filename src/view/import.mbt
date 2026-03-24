@@ -31,7 +31,6 @@ using @html {
   ul,
   br,
   pre,
-  code,
   li,
   ol,
 }

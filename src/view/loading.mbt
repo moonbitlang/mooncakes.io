@@ -14,18 +14,82 @@
 
 ///|
 pub fn loading() -> Html {
-  div(class="flex flex-col items-center justify-center h-full w-full", [
-    h1(class="text-2xl font-bold m-10", [text("Loading...")]),
+  div(class="flex items-center justify-center py-16 w-full", [
+    div(class="flex gap-1.5", [
+      div(class="loading-dot w-2 h-2 rounded-full bg-gray-400", nothing),
+      div(class="loading-dot w-2 h-2 rounded-full bg-gray-400", nothing),
+      div(class="loading-dot w-2 h-2 rounded-full bg-gray-400", nothing),
+    ]),
+  ])
+}
+
+///|
+pub fn skeleton_module_cards(count : Int) -> Html {
+  let cards = Array::makei(count, fn(_i) {
+    div(
+      class="h-24 lg:h-30 bg-white border border-gray-200 rounded-md py-3 px-4 flex flex-col gap-3",
+      [
+        div(class="flex gap-2", [
+          div(class="h-4 w-16 bg-gray-200 rounded", nothing),
+          div(class="h-4 w-24 bg-gray-200 rounded", nothing),
+        ]),
+        div(class="h-3 w-3/4 bg-gray-200 rounded", nothing),
+        div(class="h-3 w-16 bg-gray-200 rounded self-end", nothing),
+      ],
+    )
+  })
+  div(
+    class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4 animate-pulse",
+    cards,
+  )
+}
+
+///|
+pub fn skeleton_profile() -> Html {
+  div(class="flex flex-col items-center animate-pulse", [
+    div(class="w-32 h-32 rounded-full bg-gray-200 mb-4", nothing),
+    div(class="h-7 w-40 bg-gray-200 rounded", nothing),
+  ])
+}
+
+///|
+pub fn skeleton_published_modules(count : Int) -> Html {
+  let cards = Array::makei(count, fn(_i) {
+    div(class="border border-gray-200 rounded-lg p-4 bg-white flex flex-col", [
+      div(class="h-5 w-24 bg-gray-200 rounded mb-3", nothing),
+      div(class="mt-auto flex justify-end", [
+        div(class="h-5 w-14 bg-gray-200 rounded", nothing),
+      ]),
+    ])
+  })
+  div(class="animate-pulse", [
+    div(class="h-7 w-48 bg-gray-200 rounded mb-6", nothing),
+    div(class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4", cards),
+  ])
+}
+
+///|
+pub fn skeleton_code_frequency() -> Html {
+  div(class="animate-pulse", [
+    div(class="h-7 w-44 bg-gray-200 rounded mb-6", nothing),
+    div(
+      class="bg-white rounded-xl border px-4 sm:px-6 lg:px-10 pb-6 pt-6 sm:pt-8 lg:pt-10",
+      [
+        div(class="h-40 bg-gray-200 rounded", nothing),
+        div(class="flex gap-4 mt-4", [
+          div(class="h-3 w-16 bg-gray-200 rounded", nothing),
+          div(class="h-3 w-16 bg-gray-200 rounded", nothing),
+          div(class="h-3 w-20 bg-gray-200 rounded", nothing),
+        ]),
+      ],
+    ),
   ])
 }
 
 ///|
 pub fn load_failed(resource : String) -> Html {
-  div(class="flex flex-col items-center justify-center h-full w-full", [
-    pre([code([text(@config.dead_rabbit)])]),
-    h1(class="text-2xl font-bold text-gray-700 m-10", [
-      text("Failed to load \{resource}"),
-    ]),
+  div(class="flex flex-col items-center justify-center py-16 w-full", [
+    p(class="text-sm text-gray-400", [text("Failed to load \{resource}")]),
   ])
 }
 

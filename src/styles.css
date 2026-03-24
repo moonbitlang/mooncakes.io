@@ -469,68 +469,93 @@
 .docs-state-card {
   overflow: hidden;
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
+  border-radius: 12px;
+  background: #fff;
 }
 
-.docs-state-card-failed {
-  background: rgba(255, 250, 242, 0.98);
-}
+.docs-state-card-failed {}
 
-.docs-state-card-outdated {
-  background: rgba(248, 250, 252, 0.98);
-}
+.docs-state-card-queued {}
+
+.docs-state-card-outdated {}
 
 .docs-state-header {
-  padding: 1rem 1rem 0.6rem;
+  padding: 1.1rem 1.25rem 0.6rem;
+}
+
+.docs-state-icon {
+  margin-top: 1px;
 }
 
 .docs-state-title {
-  font-size: 1.5rem;
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  font-weight: 600;
   color: #111827;
 }
 
+.docs-state-card-failed .docs-state-title {
+  color: #dc2626;
+}
+
+.docs-state-card-queued .docs-state-title {
+  color: #2563eb;
+}
+
+.docs-state-card-outdated .docs-state-title {
+  color: #6b7280;
+}
+
 .docs-state-path {
-  margin-top: 0.3rem;
+  margin-top: 0.15rem;
   font-family: var(--font-mono);
-  font-size: 0.94rem;
-  line-height: 1.5;
-  color: #475569;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #94a3b8;
   word-break: break-all;
 }
 
 .docs-state-summary {
-  margin-top: 0.8rem;
-  color: #4b5563;
-  line-height: 1.65;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.5;
 }
 
 .docs-state-list {
-  padding: 0 1rem 1rem 2.35rem;
-  color: #4b5563;
-  line-height: 1.6;
+  padding: 0 1.25rem 0.9rem 2.5rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .docs-state-list-item {
-  margin-top: 0.45rem;
+  margin-top: 0.3rem;
 }
 
-.docs-state-list-item::marker {
-  color: #b45309;
+.docs-state-card-failed .docs-state-list-item::marker {
+  color: #f87171;
+}
+
+.docs-state-card-queued .docs-state-list-item::marker {
+  color: #60a5fa;
+}
+
+.docs-state-card-outdated .docs-state-list-item::marker {
+  color: #d1d5db;
 }
 
 .docs-state-link {
-  color: #b45309;
+  color: inherit;
   text-decoration: underline;
+  text-decoration-color: #9ca3af;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.16em;
-  transition: color 120ms ease;
+  transition: text-decoration-color 120ms ease;
 }
 
 .docs-state-link:hover {
-  color: #92400e;
+  text-decoration-color: currentColor;
 }
 
 .docs-state-log-card {
@@ -543,7 +568,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.78rem 1rem;
+  padding: 0.78rem 1.25rem;
   background: transparent;
   border: 0;
   text-align: left;
@@ -560,7 +585,7 @@
 }
 
 .docs-state-log-body {
-  padding: 0 1rem 1rem;
+  padding: 0 1.25rem 1rem;
 }
 
 .docs-state-log-note {
@@ -606,23 +631,51 @@
 
 .theme-dark .docs-state-card {
   border-color: #2d3440;
-  background: rgba(15, 19, 24, 0.94);
+  background: #14171c;
 }
 
-.theme-dark .docs-state-card-failed {
-  background: rgba(29, 22, 16, 0.96);
+.theme-dark .docs-state-card-failed {}
+
+.theme-dark .docs-state-card-queued {}
+
+.theme-dark .docs-state-card-outdated {}
+
+.theme-dark .docs-state-title {
+  color: #e2e8f0;
 }
 
-.theme-dark .docs-state-card-outdated {
-  background: rgba(18, 23, 29, 0.96);
+.theme-dark .docs-state-card-failed .docs-state-title {
+  color: #f87171;
 }
 
-.theme-dark .docs-state-title,
-.theme-dark .docs-state-path,
+.theme-dark .docs-state-card-queued .docs-state-title {
+  color: #60a5fa;
+}
+
+.theme-dark .docs-state-card-outdated .docs-state-title {
+  color: #9ca3af;
+}
+
+.theme-dark .docs-state-path {
+  color: #64748b;
+}
+
 .theme-dark .docs-state-summary,
 .theme-dark .docs-state-list,
 .theme-dark .docs-state-log-note {
-  color: #b6c0cf;
+  color: #94a3b8;
+}
+
+.theme-dark .docs-state-card-failed .docs-state-list-item::marker {
+  color: #f87171;
+}
+
+.theme-dark .docs-state-card-queued .docs-state-list-item::marker {
+  color: #60a5fa;
+}
+
+.theme-dark .docs-state-card-outdated .docs-state-list-item::marker {
+  color: #4b5563;
 }
 
 .theme-dark .docs-state-log-card {
@@ -630,11 +683,7 @@
 }
 
 .theme-dark .docs-state-link {
-  color: #fbbf24;
-}
-
-.theme-dark .docs-state-link:hover {
-  color: #fde68a;
+  text-decoration-color: #4b5563;
 }
 
 .theme-dark .docs-state-log-toggle:hover {
@@ -647,10 +696,6 @@
 
 .theme-dark .docs-state-log-note-error {
   color: #fca5a5;
-}
-
-.theme-dark .docs-state-list-item::marker {
-  color: #fbbf24;
 }
 
 @keyframes fade-in {

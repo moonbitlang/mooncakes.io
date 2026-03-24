@@ -13,4 +13,5 @@ import {
   "moonbitlang/mooncakes/util",
   "illusory0x0/fuzzy_match",
   "moonbit-community/rabbita/clipboard",
+  "moonbit-community/rabbita/svg",
 }

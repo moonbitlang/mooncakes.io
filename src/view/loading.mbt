@@ -98,23 +98,18 @@ pub fn document_not_available(path : String) -> Html {
   div(class="docs-state-shell", [
     div(class="docs-state-card docs-state-card-failed", [
       div(class="docs-state-header", [
-        h1(class="docs-state-title", [text("Docs not ready")]),
+        h1(class="docs-state-title", [text("Docs unavailable")]),
         p(class="docs-state-path", [text(path)]),
         p(class="docs-state-summary", [
-          text(
-            "This usually means the docs build is still pending or the generated assets are temporarily missing.",
-          ),
+          text("Documentation assets could not be loaded."),
         ]),
       ]),
       ul(class="docs-state-list", [
         li(class="docs-state-list-item", [
-          text("Docs are still building or the generated assets are missing."),
+          text("The build may still be in progress, or the assets are missing."),
         ]),
         li(class="docs-state-list-item", [
-          text("The module may have failed to compile during the docs build."),
-        ]),
-        li(class="docs-state-list-item", [
-          text("If this persists for a few hours, "),
+          text("If this persists, "),
           a(
             class="docs-state-link",
             href="https://github.com/moonbitlang/mooncakes.io/issues/new",

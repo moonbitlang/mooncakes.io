@@ -4,10 +4,123 @@ fn docs_notice_item(body : Array[Html]) -> Html {
 }
 
 ///|
+fn icon_failed() -> Html {
+  @svg.svg(
+    width=20,
+    height=20,
+    view_box="0 0 20 20",
+    class="docs-state-icon shrink-0",
+    [
+      @svg.circle(
+        cx=10,
+        cy=10,
+        r=9,
+        fill="none",
+        stroke="#ef4444",
+        stroke_width=2,
+      ),
+      @svg.line(
+        x1=7,
+        y1=7,
+        x2=13,
+        y2=13,
+        stroke="#ef4444",
+        stroke_width=2,
+        stroke_linecap="round",
+      ),
+      @svg.line(
+        x1=13,
+        y1=7,
+        x2=7,
+        y2=13,
+        stroke="#ef4444",
+        stroke_width=2,
+        stroke_linecap="round",
+      ),
+    ],
+  )
+}
+
+///|
+fn icon_queued() -> Html {
+  @svg.svg(
+    width=20,
+    height=20,
+    view_box="0 0 20 20",
+    class="docs-state-icon shrink-0",
+    [
+      @svg.circle(
+        cx=10,
+        cy=10,
+        r=9,
+        fill="none",
+        stroke="#3b82f6",
+        stroke_width=2,
+      ),
+      @svg.line(
+        x1=10,
+        y1=5,
+        x2=10,
+        y2=10,
+        stroke="#3b82f6",
+        stroke_width=2,
+        stroke_linecap="round",
+      ),
+      @svg.line(
+        x1=10,
+        y1=10,
+        x2=14,
+        y2=10,
+        stroke="#3b82f6",
+        stroke_width=2,
+        stroke_linecap="round",
+      ),
+    ],
+  )
+}
+
+///|
+fn icon_outdated() -> Html {
+  @svg.svg(
+    width=20,
+    height=20,
+    view_box="0 0 20 20",
+    class="docs-state-icon shrink-0",
+    [
+      @svg.circle(
+        cx=10,
+        cy=10,
+        r=9,
+        fill="none",
+        stroke="#9ca3af",
+        stroke_width=2,
+      ),
+      @svg.line(
+        x1=7,
+        y1=10,
+        x2=13,
+        y2=10,
+        stroke="#9ca3af",
+        stroke_width=2,
+        stroke_linecap="round",
+      ),
+    ],
+  )
+}
+
+///|
+fn tone_icon(tone : String) -> Html {
+  match tone {
+    "failed" => icon_failed()
+    "queued" => icon_queued()
+    _ => icon_outdated()
+  }
+}
+
+///|
 fn docs_notice_card(
   tone : String,
   title : String,
-  path : String,
   summary : String,
   items : Array[Html],
   extra? : Html,
@@ -15,8 +128,10 @@ fn docs_notice_card(
   div(class="docs-state-shell", [
     div(class="docs-state-card docs-state-card-\{tone}", [
       div(class="docs-state-header", [
-        h1(class="docs-state-title", [text(title)]),
-        p(class="docs-state-path", [text(path)]),
+        div(class="flex items-center gap-2", [
+          tone_icon(tone),
+          h1(class="docs-state-title", [text(title)]),
+        ]),
         p(class="docs-state-summary", [text(summary)]),
       ]),
       @html.ul(class="docs-state-list", items),
@@ -28,8 +143,7 @@ fn docs_notice_card(
 ///|
 fn build_log_view(build_log : BuildLogStatus) -> Html {
   match build_log {
-    LogIdle | LogLoading =>
-      div(class="docs-state-log-note", [text("Loading build log...")])
+    LogIdle | LogLoading => @view.loading()
     LogFailed =>
       div(class="docs-state-log-note docs-state-log-note-error", [
         text("Failed to load build log."),
@@ -43,6 +157,7 @@ fn build_log_panel(
   build_log_open : Bool,
   build_log : BuildLogStatus,
   dispatch : (Msg) -> Cmd,
+  footer? : Html = nothing,
 ) -> Html {
   let toggle_icon = if build_log_open {
     @config.SECTION_OPEN
@@ -55,7 +170,18 @@ fn build_log_panel(
       img(src=toggle_icon, class="size-4 ui-icon shrink-0", nothing),
     ]),
     if build_log_open {
-      div(class="docs-state-log-body", [build_log_view(build_log)])
+      let show_footer = match build_log {
+        LogIdle | LogLoading => false
+        _ => true
+      }
+      div(class="docs-state-log-body", [
+        build_log_view(build_log),
+        if show_footer {
+          footer
+        } else {
+          nothing
+        },
+      ])
     } else {
       nothing
     },
@@ -64,75 +190,63 @@ fn build_log_panel(
 
 ///|
 fn failed_docs_notice(
-  path : String,
   build_log_open : Bool,
   build_log : BuildLogStatus,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
+  let report_link = p(
+    class="docs-state-summary",
+    style=["margin-top: 0.75rem"],
+    [
+      text("If this seems wrong, "),
+      a(
+        class="docs-state-link",
+        href="https://github.com/moonbitlang/mooncakes.io/issues/new",
+        [text("report it")],
+      ),
+      text("."),
+    ],
+  )
   docs_notice_card(
     "failed",
-    "Docs not ready",
-    path,
-    "This usually means the docs build failed for this version.",
-    [
-      docs_notice_item([
-        text("You can still install and use this release locally."),
-      ]),
-      docs_notice_item([text("The module itself may still fail to compile.")]),
-      docs_notice_item([
-        text("If it stays broken for a few hours, "),
-        a(
-          class="docs-state-link",
-          href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-          [text("report it")],
-        ),
-        text("."),
-      ]),
-    ],
-    extra=build_log_panel(build_log_open, build_log, dispatch),
+    "Build failed",
+    "Documentation failed to generate for this version.",
+    [],
+    extra=build_log_panel(
+      build_log_open,
+      build_log,
+      dispatch,
+      footer=report_link,
+    ),
   )
 }
 
 ///|
-fn queued_docs_notice(path : String) -> Html {
+fn queued_docs_notice() -> Html {
   docs_notice_card(
-    "failed",
-    "Docs not ready",
-    path,
-    "This usually means the docs build is queued or still running.",
+    "queued",
+    "Building docs",
+    "Documentation is being generated. This usually takes a few minutes.",
     [
-      docs_notice_item([text("Docs will appear after the build completes.")]),
+      docs_notice_item([text("Refresh the page to check progress.")]),
       docs_notice_item([
-        text("The package may still be installable before docs are ready."),
-      ]),
-      docs_notice_item([
-        text("If this state persists for a few hours, "),
-        a(
-          class="docs-state-link",
-          href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-          [text("report it")],
-        ),
-        text("."),
+        text("The package is already available for installation."),
       ]),
     ],
   )
 }
 
 ///|
-fn outdated_docs_notice(path : String) -> Html {
+fn outdated_docs_notice() -> Html {
   docs_notice_card(
     "outdated",
     "No docs available",
-    path,
-    "This older release does not have generated documentation.",
+    "This release was published before doc generation was available.",
     [
       docs_notice_item([
-        text("Use the latest release if you need browsable docs."),
+        text("Try the latest version for browsable documentation."),
       ]),
-      docs_notice_item([
-        text("This version may still be installable and usable."),
-      ]),
-      docs_notice_item([text("No build log is available for legacy releases.")]),
+      docs_notice_item([text("The package is still installable.")]),
     ],
   )
 }
@@ -197,25 +311,15 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
           if docs_loaded {
             nothing
           } else {
-            queued_docs_notice(model.path)
+            queued_docs_notice()
           }
         Some(BuildFailed) =>
           if docs_loaded {
             nothing
           } else {
-            failed_docs_notice(
-              model.path,
-              model.build_log_open,
-              model.build_log,
-              dispatch,
-            )
+            failed_docs_notice(model.build_log_open, model.build_log, dispatch)
           }
-        None =>
-          if docs_loaded {
-            nothing
-          } else {
-            outdated_docs_notice(model.path)
-          }
+        None => if docs_loaded { nothing } else { outdated_docs_notice() }
         Some(BuildSuccess) | Some(BuildLegacy) =>
           match (model.readme_content, model.module_index, model.package_data) {
             (Failed, _, _) | (_, Failed, _) =>

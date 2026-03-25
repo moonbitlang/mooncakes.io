@@ -23,10 +23,10 @@ fn navbar(
     breadcrumbs_view,
     div(class="flex-1", nothing),
     button(
-      class="bg-gray-200/50 border outline-2 text-sm h-8.5 outline-transparent hover:outline-mooncake2 hover:border-transparent transition-all rounded mx-2 py-1 px-2 lg:w-35 text-gray-500 flex items-center gap-2",
+      class="bg-white/90 border border-gray-200 text-sm outline-transparent hover:bg-white transition-all rounded-full py-1.5 px-3 lg:w-35 text-gray-500 flex items-center gap-2",
       on_click=dispatch(ToggleSearchPanel(true)),
       [
-        img(class="w-5 h-5 ui-icon", src=@config.SEARCH, nothing),
+        img(class="w-4 h-4 ui-icon", src=@config.SEARCH, nothing),
         div(class="hidden lg:block text-nowrap", [text("Search")]),
       ],
     ),

@@ -279,7 +279,6 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     dispatch,
     theme_toggle~,
   )
-  let source_files = model.source_files
   let meta : Html = if model.path == module_path {
     match model.module_meta {
       Success(meta) => {
@@ -360,10 +359,15 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
         _ => @view.loading()
       }
   }
+  let source_files_view = source_files_section(
+    model.source_files,
+    package_path~,
+  )
   let main = div([
     meta,
     docs_notice,
     document_view,
+    source_files_view,
     div(class="h-[30vh]", nothing),
   ])
   let search = model.search
@@ -446,16 +450,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
       ),
       div(
         class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
-        [
-          sidebar(
-            model.sidebar_document,
-            source_files,
-            model.sidebar_tab,
-            package_path~,
-            model.sidebar_collapsed,
-            dispatch,
-          ),
-        ],
+        [sidebar(model.sidebar_document, model.sidebar_collapsed, dispatch)],
       ),
     ],
   )
@@ -477,9 +472,6 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
               div(class="w-full", [
                 sidebar(
                   model.sidebar_document,
-                  source_files,
-                  model.sidebar_tab,
-                  package_path~,
                   model.sidebar_collapsed,
                   dispatch,
                 ),

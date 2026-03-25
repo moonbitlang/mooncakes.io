@@ -13,42 +13,6 @@
 // limitations under the License.
 
 ///|
-fn item_button(childrens : Html, icon? : String, on_click? : Cmd) -> Html {
-  let icon = match icon {
-    None => div(nothing)
-    Some(src) =>
-      div(class="size-[12px] self-center mr-1", [
-        img(class="ui-icon", src~, nothing),
-      ])
-  }
-  div(class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex", on_click?, [
-    icon, childrens,
-  ])
-}
-
-///|
-fn source_list(files : Array[String], package_path~ : String) -> Html {
-  if files.is_empty() {
-    return text("No source files.")
-  }
-  let package_path = package_path.trim(char_set="/")
-  div(class="", [
-    ul(
-      files.map(fn(x) {
-        item_button(
-          a(
-            class="w-full",
-            href="/assets/\{package_path}/\{x}.html",
-            escape=true,
-            [text(x)],
-          ),
-        )
-      }),
-    ),
-  ])
-}
-
-///|
 /// Compare two strings in dictionary order
 fn compare_strings(a : String, b : String) -> Int {
   let len_a = a.length()
@@ -158,28 +122,42 @@ fn PkgIndex::to_document_items(
 ///|
 fn sidebar(
   document_index : Array[@tree.Tree[ItemTarget]],
-  source_files : Array[String],
-  showing : String,
-  package_path~ : String,
   sidebar_state : SortedSet[ItemTarget],
   dispatch : (Msg) -> Cmd,
 ) -> Html {
-  @view.accordion(
-    class="text-gray-700 flex flex-col",
-    on_click=x => dispatch(SidebarTabClicked(x)),
-    showing,
-    [
-      (
-        "Documentation",
-        @tree.view(
-          toggle=x => dispatch(ToggleSidebarItem(x)),
-          click=x => dispatch(ClickSidebarItem(x)),
-          state=sidebar_state,
-          indicator=Symbol(""),
-          document_index,
-        ),
-      ),
-      ("Source files", source_list(source_files, package_path~)),
-    ],
-  )
+  div(class="text-gray-700 flex flex-col", [
+    @tree.view(
+      toggle=x => dispatch(ToggleSidebarItem(x)),
+      click=x => dispatch(ClickSidebarItem(x)),
+      state=sidebar_state,
+      indicator=Symbol(""),
+      document_index,
+    ),
+  ])
+}
+
+///|
+fn source_files_section(files : Array[String], package_path~ : String) -> Html {
+  if files.is_empty() {
+    return nothing
+  }
+  let package_path = package_path.trim(char_set="/")
+  div(class="mx-4 md:mx-0 mt-8 mb-4", [
+    h3(class="text-gray-800 font-semibold text-lg mb-3 border-b pb-2", [
+      text("Source Files"),
+    ]),
+    ul(
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1",
+      files.map(fn(x) {
+        @html.li([
+          a(
+            class="block text-sm font-mono text-blue-600 hover:text-blue-800 hover:bg-gray-50 px-2 py-1 rounded transition-colors",
+            href="/assets/\{package_path}/\{x}.html",
+            escape=true,
+            [text(x)],
+          ),
+        ])
+      }),
+    ),
+  ])
 }

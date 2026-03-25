@@ -22,7 +22,6 @@ enum Msg {
   GotResource(Result[ResourceInfo, String])
   GotModuleIndex(Result[ModuleIndex, String])
   GotPackageData(Result[PackageData, String])
-  SidebarTabClicked(String)
   ToggleSidebarItem(ItemTarget)
   ClickSidebarItem(ItemTarget)
   ToggleSearchPanel(Bool)
@@ -55,8 +54,6 @@ struct Model {
   sidebar_document : Array[@tree.Tree[ItemTarget]]
   // The collapsed items in the sidebar
   sidebar_collapsed : SortedSet[ItemTarget]
-  // The current expanded tab in the sidebar
-  sidebar_tab : String
   // The sidebar fab button
   sidebar_fab : Bool
   search : SearchModel
@@ -178,7 +175,6 @@ pub fn load(
       source_files: [],
       sidebar_document: [],
       sidebar_collapsed: @immut/sorted_set.new(),
-      sidebar_tab: "Documentation",
       sidebar_fab: false,
       package_data: Loading,
       collapsed_docs: FoldedState::new(),
@@ -371,7 +367,6 @@ pub fn update(
         none,
         { ..model, collapsed_docs: model.collapsed_docs.set_mode(card_mode) },
       )
-    SidebarTabClicked(sidebar_tab) => (none, { ..model, sidebar_tab, })
     ToggleSidebarItem(id) => {
       let sidebar_collapsed = if model.sidebar_collapsed.contains(id) {
         model.sidebar_collapsed.remove(id)

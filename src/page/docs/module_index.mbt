@@ -203,31 +203,15 @@ fn docs_lookup_path(path : String) -> String {
 }
 
 ///|
-fn docs_apply_current_version(
-  target_path : String,
-  current_module_path : String,
+fn versioned_docs_path(
+  path : String,
+  module_name : String,
+  version : String,
 ) -> String {
-  let current_module_lookup = docs_lookup_path(current_module_path)
-  if current_module_path == current_module_lookup {
-    return target_path
-  }
-  let target_segments = split_docs_path(docs_lookup_path(target_path))
-  let module_segments = split_docs_path(current_module_lookup)
-  if target_segments.length() < module_segments.length() {
-    return target_path
-  }
-  for i in 0..<module_segments.length() {
-    if target_segments[i] != module_segments[i] {
-      return target_path
-    }
-  }
-  let suffix = []
-  for i in module_segments.length()..<target_segments.length() {
-    suffix.push(target_segments[i])
-  }
-  match suffix {
-    [] => current_module_path
-    _ => current_module_path + "/" + suffix.join("/")
+  if module_name == "moonbitlang/core" {
+    path
+  } else {
+    versioned_asset_path(path, module_name, version)
   }
 }
 

@@ -318,7 +318,19 @@ pub fn update(
               sidebar_collapsed,
               module_index: Success(module_index),
               search_entries: Success(
-                Lazy::new(load_search_entries(module_index)),
+                Lazy::new(
+                  {
+                    let (module_name, module_version) = match model.manifest {
+                      Success(manifest) => (manifest.module_, manifest.version)
+                      _ => ("", "")
+                    }
+                    load_search_entries(
+                      module_index,
+                      module_name~,
+                      module_version~,
+                    )
+                  },
+                ),
               ),
             }
           }
@@ -372,13 +384,12 @@ pub fn update(
       let model = { ..model, sidebar_fab: false }
       match id {
         Package(path) => {
-          let current_module_path = match model.manifest {
+          let url_path = match model.manifest {
             Success(manifest) =>
-              docs_current_module_path(model.path, manifest.module_)
-            _ => docs_module_path(model.path)
+              versioned_docs_path(path, manifest.module_, manifest.version)
+            _ => path
           }
-          let path = docs_apply_current_version(path, current_module_path)
-          (@nav.push_url("/docs/" + path), { ..model, path, })
+          (@nav.push_url("/docs/" + url_path), { ..model, path, })
         }
         Symbol(id) | Section(id) =>
           (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)

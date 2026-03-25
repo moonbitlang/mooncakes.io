@@ -267,13 +267,8 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     _ => docs_module_path(model.path)
   }
   let package_path = match model.manifest {
-    Success(manifest) => {
-      let applied = docs_apply_current_version(
-        manifest.name,
-        current_module_path,
-      )
-      versioned_asset_path(applied, manifest.module_, manifest.version)
-    }
+    Success(manifest) =>
+      versioned_docs_path(manifest.name, manifest.module_, manifest.version)
     _ => model.path
   }
   let navbar : Html = navbar(
@@ -394,7 +389,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
           ),
         ],
       ),
-      match search.results {
+      (match search.results {
         Loading => nothing
         Failed => text("load indices failed")
         Success(results) =>
@@ -409,29 +404,33 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
                 "Value" => "text-purple-700"
                 _ => "text-gray-700"
               }
-              @html.li(class="border-b px-4 py-2 bg-white hover:bg-gray-100", on_click=dispatch(ToggleSearchPanel(false)), [
-                a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
-                  span(
-                    class="",
-                    x.matching.map(x => {
-                      match x {
-                        (true, str) =>
-                          span(class="text-moonbit font-semibold", [
-                            text(str.to_string()),
-                          ])
-                        (false, str) =>
-                          span(class="text-gray-600", [text(str.to_string())])
-                      }
-                    }),
-                  ),
-                  span(class="font-thin text-tiny lg:text-base \{color}", [
-                    text(x.entry.kind),
+              @html.li(
+                class="border-b px-4 py-2 bg-white hover:bg-gray-100",
+                on_click=dispatch(ToggleSearchPanel(false)),
+                [
+                  a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
+                    span(
+                      class="",
+                      x.matching.map(x => {
+                        match x {
+                          (true, str) =>
+                            span(class="text-moonbit font-semibold", [
+                              text(str.to_string()),
+                            ])
+                          (false, str) =>
+                            span(class="text-gray-600", [text(str.to_string())])
+                        }
+                      }),
+                    ),
+                    span(class="font-thin text-tiny lg:text-base \{color}", [
+                      text(x.entry.kind),
+                    ]),
                   ]),
-                ]),
-              ])
+                ],
+              )
             }),
           )
-      },
+      }),
     ],
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }

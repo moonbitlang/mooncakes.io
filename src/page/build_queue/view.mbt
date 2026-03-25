@@ -75,7 +75,7 @@ fn build_row(item : BuildItem) -> Html {
       div(class="flex items-center gap-3 min-w-0", [
         status_icon(item.status),
         a(
-          href="/docs/\{item.module_}",
+          href="/docs/\{item.module_}@\{item.version}",
           class="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors truncate",
           [
             span(class="text-gray-500 font-normal", [text(author)]),

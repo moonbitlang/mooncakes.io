@@ -77,14 +77,14 @@ fn meta_info(
     h1(class="text-2xl font-bold mb-2", [
       text(model.name.split("/").last().unwrap().to_string()),
     ]),
-    match model.description {
+    (match model.description {
       Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
       None => nothing
-    },
-    match model.keywords {
+    }),
+    (match model.keywords {
       [] => nothing
       keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
-    },
+    }),
   ])
   div(class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip", [
     model_description,
@@ -123,9 +123,11 @@ fn meta_info(
           model.deps.map(pair => {
             let (name, version) = pair
             @html.li(class="font-mono text-sm text-gray-300", [
-              a(class="hover:underline text-gray-900", href="/docs/\{name}", [
-                text(name),
-              ]),
+              a(
+                class="hover:underline text-gray-900",
+                href="/docs/\{name}@\{version}",
+                [text(name)],
+              ),
               span(class="text-gray-500", [text(" " + version)]),
             ])
           }),

@@ -19,7 +19,11 @@ pub(all) enum CodeBlockKind {
 }
 
 ///|
-pub fn code_block(moonbit : String, kind~ : CodeBlockKind) -> Html {
+pub fn code_block(
+  moonbit : String,
+  kind~ : CodeBlockKind,
+  transform_link? : (String) -> String,
+) -> Html {
   let spans = match kind {
     Code => @highlight.parse_code(moonbit)
     Signature => @highlight.parse_signature(moonbit)
@@ -29,12 +33,17 @@ pub fn code_block(moonbit : String, kind~ : CodeBlockKind) -> Html {
       @highlight.Unknown(c) => span([text(c)])
       Keyword(s) => span(class="text-[#0033b3]", [text(s)])
       Symbol(s) => span(class="text-zinc-500 text-nowrap", [text(s)])
-      Link(href~, content) =>
+      Link(href~, content) => {
+        let href = match transform_link {
+          Some(f) => f(href)
+          None => href
+        }
         a(
           class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
           href="/docs/" + href,
           content.map(go),
         )
+      }
       UIdent(s) => span(class="text-gray-800", [text(s)])
       LIdent(s) => span(class="text-[#00627a]", [text(s)])
       Newline => br()

@@ -222,7 +222,7 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
               [
                 div(class="flex flex-col h-full", [
                   a(
-                    href="/docs/\{name}",
+                    href="/docs/\{name}@\{version}",
                     class="text-lg font-bold text-gray-900 group-hover:text-blue-600 mb-3 transition-colors",
                     [text(display_name)],
                   ),

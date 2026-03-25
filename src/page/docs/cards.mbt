@@ -47,54 +47,76 @@ fn FoldedState::set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 }
 
 ///|
-fn signature_view(content : String) -> Html {
+fn signature_view(
+  content : String,
+  module_name~ : String,
+  module_version~ : String,
+) -> Html {
   pre(class="text-wrap flex items-center", [
     code(class="font-mono text-sm text-blue-800", [
-      @view.code_block(content, kind=Signature),
+      @view.code_block(content, kind=Signature, transform_link=fn(href) {
+        versioned_docs_path(href, module_name, module_version)
+      }),
     ]),
   ])
 }
 
 ///|
-fn stype(ty : Stype) -> Html {
+fn stype(ty : Stype, module_name~ : String, module_version~ : String) -> Html {
   match ty {
     Param(name~) => span([text(name)])
     Arrow(parameters~, return_type~, error_type~, is_async~) => {
       let async_indicator = if is_async { text("async ") } else { nothing }
       let error_type_indicator = match error_type {
         None => nothing
-        Some(ty) => span(class="flex", [text("!"), stype(ty)])
+        Some(ty) =>
+          span(class="flex", [
+            text("!"),
+            stype(ty, module_name~, module_version~),
+          ])
       }
       span(
         [
           async_indicator,
           text("("),
-          ..parameters.map(stype).iter().intersperse(text(", ")),
+          ..parameters
+          .map(fn(p) { stype(p, module_name~, module_version~) })
+          .iter()
+          .intersperse(text(", ")),
           text(")"),
           text(" -> "),
-          stype(return_type),
+          stype(return_type, module_name~, module_version~),
           error_type_indicator,
         ],
       )
     }
-    Constr(constr~, arguments=[]) => type_path(constr)
+    Constr(constr~, arguments=[]) =>
+      type_path(constr, module_name~, module_version~)
     Constr(constr~, arguments~) =>
       span(
         [
-          type_path(constr),
+          type_path(constr, module_name~, module_version~),
           text("["),
-          ..arguments.map(stype).iter().intersperse(text(", ")),
+          ..arguments
+          .map(fn(a) { stype(a, module_name~, module_version~) })
+          .iter()
+          .intersperse(text(", ")),
           text("]"),
         ],
       )
-    TypePath(path) => type_path(path)
+    TypePath(path) => type_path(path, module_name~, module_version~)
   }
 }
 
 ///|
-fn type_path(ty : TypePath) -> Html {
+fn type_path(
+  ty : TypePath,
+  module_name~ : String,
+  module_version~ : String,
+) -> Html {
+  let path = versioned_docs_path(ty.path, module_name, module_version)
   a(
-    href="/docs/\{ty.path}#\{ty.name}",
+    href="/docs/\{path}#\{ty.name}",
     class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
     [span(class="text-gray-700", [text(ty.name)])],
   )
@@ -113,9 +135,11 @@ fn impl_doc(
   let signature : Html = pre(class="bg-gray-100 text-wrap pr-4", [
     code(class="font-mono text-[0.9em] text-[#0033b3]", [
       text("impl "),
-      type_path(trait_type),
+      type_path(trait_type, module_name~, module_version~),
       text(" for "),
-      span(class="text-gray-700", [stype(self_type)]),
+      span(class="text-gray-700", [
+        stype(self_type, module_name~, module_version~),
+      ]),
     ]),
   ])
   let content = div(
@@ -137,7 +161,7 @@ fn type_doc(
 ) -> Html {
   let { docstring, signature, methods, impls, name: _, loc } = doc
   let id = doc.get_id()
-  let signature = signature_view(signature)
+  let signature = signature_view(signature, module_name~, module_version~)
   let content = div(
     [
       div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
@@ -179,7 +203,7 @@ fn trait_doc(
 ) -> Html {
   let { docstring, signature, impls, name: _, loc } = doc
   let id = doc.get_id()
-  let signature = signature_view(signature)
+  let signature = signature_view(signature, module_name~, module_version~)
   let content = div(
     [
       div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
@@ -210,7 +234,7 @@ fn type_alias_doc(
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
-  let signature = signature_view(signature)
+  let signature = signature_view(signature, module_name~, module_version~)
   let content = div(class="pl-4 mb-2", [
     @view.markdown(docstring, small_heading=true),
   ])
@@ -333,7 +357,7 @@ fn value_doc(
   let id = type_id
     .map(fn(x) { "\{x}::\{doc.get_id()}" })
     .unwrap_or(doc.get_id())
-  let signature = signature_view(signature)
+  let signature = signature_view(signature, module_name~, module_version~)
   let content = div(class="pl-4 mb-2", [
     @view.markdown(docstring, small_heading=true),
   ])

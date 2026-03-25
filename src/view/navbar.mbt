@@ -22,26 +22,44 @@ pub fn navbar(
       div(class="w-full lg:flex-1 flex items-center justify-center", [m])
     None => nothing
   }
-  div(class~, [
-    div(
-      class="container px-5 sm:px-6 flex flex-col gap-2 py-2.5 lg:flex-row lg:items-center lg:justify-between",
-      [
-        div(class="w-full flex items-center justify-between lg:w-auto", [
-          div(class="flex items-center gap-4", [
+  let has_middle = not(middle is None)
+  if has_middle {
+    div(class~, [
+      div(
+        class="container px-5 sm:px-6 flex flex-col gap-2 py-2.5 lg:flex-row lg:items-center lg:justify-between",
+        [
+          div(class="w-full flex items-center justify-between lg:w-auto", [
+            div(class="flex items-center gap-4", [
+              left,
+              left_extra.unwrap_or(nothing),
+            ]),
+            div(class="flex items-center gap-2 lg:hidden", [
+              right.unwrap_or(nothing),
+            ]),
+          ]),
+          middle_view,
+          div(class="hidden lg:flex items-center gap-2 justify-end", [
+            right.unwrap_or(nothing),
+          ]),
+        ],
+      ),
+    ])
+  } else {
+    div(class~, [
+      div(
+        class="container px-5 sm:px-6 flex items-center justify-between py-2.5",
+        [
+          div(class="flex items-center gap-4 min-w-0", [
             left,
             left_extra.unwrap_or(nothing),
           ]),
-          div(class="flex items-center gap-2 lg:hidden", [
+          div(class="flex items-center gap-2 shrink-0", [
             right.unwrap_or(nothing),
           ]),
-        ]),
-        middle_view,
-        div(class="hidden lg:flex items-center gap-2 justify-end", [
-          right.unwrap_or(nothing),
-        ]),
-      ],
-    ),
-  ])
+        ],
+      ),
+    ])
+  }
 }
 
 ///|

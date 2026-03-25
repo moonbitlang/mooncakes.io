@@ -19,7 +19,7 @@ fn navbar(
     None => nothing
   }
   let search_btn = button(
-    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors text-gray-400",
+    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors text-gray-400 lg:w-36",
     on_click=dispatch(ToggleSearchPanel(true)),
     [
       img(class="w-4 h-4 ui-icon", src=@config.SEARCH, nothing),

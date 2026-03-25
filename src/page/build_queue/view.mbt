@@ -2,40 +2,26 @@
 fn status_icon(status : String) -> Html {
   match status {
     "SUCCESS" =>
-      // Green circle with checkmark
+      // Filled green circle with white checkmark
       @svg.svg(width=18, height=18, view_box="0 0 18 18", class="shrink-0", [
-        @svg.circle(
-          cx=9,
-          cy=9,
-          r=8,
-          fill="none",
-          stroke="#22c55e",
-          stroke_width=2,
-        ),
+        @svg.circle(cx=9, cy=9, r=9, fill="#22c55e"),
         @svg.path(
           d="M5.5 9.5 L7.5 11.5 L12.5 6.5",
           fill="none",
-          stroke="#22c55e",
+          stroke="white",
           stroke_width=2,
         ),
       ])
     "FAILED" =>
-      // Red circle with X
+      // Filled red circle with white X
       @svg.svg(width=18, height=18, view_box="0 0 18 18", class="shrink-0", [
-        @svg.circle(
-          cx=9,
-          cy=9,
-          r=8,
-          fill="none",
-          stroke="#ef4444",
-          stroke_width=2,
-        ),
+        @svg.circle(cx=9, cy=9, r=9, fill="#ef4444"),
         @svg.line(
           x1=6,
           y1=6,
           x2=12,
           y2=12,
-          stroke="#ef4444",
+          stroke="white",
           stroke_width=2,
           stroke_linecap="round",
         ),
@@ -44,28 +30,21 @@ fn status_icon(status : String) -> Html {
           y1=6,
           x2=6,
           y2=12,
-          stroke="#ef4444",
+          stroke="white",
           stroke_width=2,
           stroke_linecap="round",
         ),
       ])
     _ =>
-      // Blue circle with clock (QUEUED / unknown)
+      // Filled blue circle with white clock
       @svg.svg(width=18, height=18, view_box="0 0 18 18", class="shrink-0", [
-        @svg.circle(
-          cx=9,
-          cy=9,
-          r=8,
-          fill="none",
-          stroke="#3b82f6",
-          stroke_width=2,
-        ),
+        @svg.circle(cx=9, cy=9, r=9, fill="#3b82f6"),
         @svg.line(
           x1=9,
           y1=5,
           x2=9,
           y2=9,
-          stroke="#3b82f6",
+          stroke="white",
           stroke_width=2,
           stroke_linecap="round",
         ),
@@ -74,7 +53,7 @@ fn status_icon(status : String) -> Html {
           y1=9,
           x2=12,
           y2=9,
-          stroke="#3b82f6",
+          stroke="white",
           stroke_width=2,
           stroke_linecap="round",
         ),

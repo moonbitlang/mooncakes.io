@@ -21,25 +21,28 @@ fn build_row(item : BuildItem) -> Html {
     _ => ("", item.module_)
   }
   div(
-    class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors",
+    class="flex items-start gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors",
     [
-      status_badge(item.status),
+      div(class="shrink-0 pt-0.5", [status_badge(item.status)]),
       div(class="flex-1 min-w-0", [
         a(
           href="/docs/\{item.module_}",
-          class="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors truncate",
+          class="block text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors truncate",
           [
             span(class="text-gray-500 font-normal", [text(author)]),
             span(class="text-gray-300 mx-0.5", [text("/")]),
             text(name),
           ],
         ),
-      ]),
-      span(class="text-xs text-gray-500 font-mono shrink-0", [
-        text("v\{item.version}"),
-      ]),
-      span(class="text-xs text-gray-400 shrink-0", [
-        text(get_relative_time(item.finished_at.unwrap_or(item.created_at))),
+        div(class="flex items-center gap-2 mt-1", [
+          span(class="text-xs text-gray-500 font-mono", [
+            text("v\{item.version}"),
+          ]),
+          span(class="text-xs text-gray-300", [text("·")]),
+          span(class="text-xs text-gray-400", [
+            text(get_relative_time(item.finished_at.unwrap_or(item.created_at))),
+          ]),
+        ]),
       ]),
     ],
   )
@@ -49,12 +52,18 @@ fn build_row(item : BuildItem) -> Html {
 fn skeleton_build_rows(count : Int) -> Html {
   let rows = Array::makei(count, fn(_i) {
     div(
-      class="flex items-center gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg",
+      class="flex items-start gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg",
       [
-        div(class="h-5 w-16 bg-gray-200 rounded", nothing),
-        div(class="flex-1", [div(class="h-4 w-48 bg-gray-200 rounded", nothing)]),
-        div(class="h-4 w-14 bg-gray-200 rounded", nothing),
-        div(class="h-4 w-20 bg-gray-200 rounded", nothing),
+        div(class="shrink-0 pt-0.5", [
+          div(class="h-5 w-16 bg-gray-200 rounded", nothing),
+        ]),
+        div(class="flex-1 min-w-0", [
+          div(class="h-4 w-48 max-w-full bg-gray-200 rounded", nothing),
+          div(class="flex items-center gap-2 mt-1", [
+            div(class="h-3 w-14 bg-gray-200 rounded", nothing),
+            div(class="h-3 w-20 bg-gray-200 rounded", nothing),
+          ]),
+        ]),
       ],
     )
   })

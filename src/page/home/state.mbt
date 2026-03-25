@@ -446,9 +446,10 @@ fn sort_modules_by_name(
   indices.sort_by(fn(a, b) { a.name.compare(b.name) })
   let all_modules = {}
   for index in indices {
-    let first_letter = to_upper(index.name.get_char(0).unwrap())
-    match all_modules.get(first_letter) {
-      None => all_modules[first_letter] = [index]
+    let c = to_upper(index.name.get_char(0).unwrap())
+    let key = if c >= 'A' && c <= 'Z' { c } else { '#' }
+    match all_modules.get(key) {
+      None => all_modules[key] = [index]
       Some(indices) => indices.push(index)
     }
   }

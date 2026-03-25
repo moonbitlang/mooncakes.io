@@ -174,7 +174,15 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
   let all_modules = modules
     .iter2()
     .to_array()
-    ..sort_by(fn(a, b) { a.0.to_int() - b.0.to_int() })
+    ..sort_by(fn(a, b) {
+      // Put '#' (non-letter modules) at the end
+      match (a.0, b.0) {
+        ('#', '#') => 0
+        ('#', _) => 1
+        (_, '#') => -1
+        _ => a.0.to_int() - b.0.to_int()
+      }
+    })
     .map(fn(x) {
       let (key, value) = x
       let modules = value.map(simple_module_card)

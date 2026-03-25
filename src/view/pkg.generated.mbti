@@ -13,7 +13,7 @@ pub fn badge(Array[@html.Html], class? : String) -> @html.Html
 
 pub fn button(String, on_click? : @runtime.Cmd) -> @html.Html
 
-pub fn code_block(String, kind~ : CodeBlockKind) -> @html.Html
+pub fn code_block(String, kind~ : CodeBlockKind, transform_link? : (String) -> String) -> @html.Html
 
 pub fn collapse(header~ : @html.Html, body~ : @html.Html, collapsed~ : Bool, toggle~ : @runtime.Cmd, caret_config? : CaretConfig) -> @html.Html
 

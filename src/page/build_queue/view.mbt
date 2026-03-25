@@ -1,15 +1,85 @@
 ///|
-fn status_badge(status : String) -> Html {
-  let (color, label) = match status {
-    "QUEUED" => ("bg-blue-100 text-blue-700", "Queued")
-    "SUCCESS" => ("bg-green-100 text-green-700", "Success")
-    "FAILED" => ("bg-red-100 text-red-700", "Failed")
-    _ => ("bg-gray-100 text-gray-700", status)
+fn status_icon(status : String) -> Html {
+  match status {
+    "SUCCESS" =>
+      // Green circle with checkmark
+      @svg.svg(width=18, height=18, view_box="0 0 18 18", class="shrink-0", [
+        @svg.circle(
+          cx=9,
+          cy=9,
+          r=8,
+          fill="none",
+          stroke="#22c55e",
+          stroke_width=2,
+        ),
+        @svg.path(
+          d="M5.5 9.5 L7.5 11.5 L12.5 6.5",
+          fill="none",
+          stroke="#22c55e",
+          stroke_width=2,
+        ),
+      ])
+    "FAILED" =>
+      // Red circle with X
+      @svg.svg(width=18, height=18, view_box="0 0 18 18", class="shrink-0", [
+        @svg.circle(
+          cx=9,
+          cy=9,
+          r=8,
+          fill="none",
+          stroke="#ef4444",
+          stroke_width=2,
+        ),
+        @svg.line(
+          x1=6,
+          y1=6,
+          x2=12,
+          y2=12,
+          stroke="#ef4444",
+          stroke_width=2,
+          stroke_linecap="round",
+        ),
+        @svg.line(
+          x1=12,
+          y1=6,
+          x2=6,
+          y2=12,
+          stroke="#ef4444",
+          stroke_width=2,
+          stroke_linecap="round",
+        ),
+      ])
+    _ =>
+      // Blue circle with clock (QUEUED / unknown)
+      @svg.svg(width=18, height=18, view_box="0 0 18 18", class="shrink-0", [
+        @svg.circle(
+          cx=9,
+          cy=9,
+          r=8,
+          fill="none",
+          stroke="#3b82f6",
+          stroke_width=2,
+        ),
+        @svg.line(
+          x1=9,
+          y1=5,
+          x2=9,
+          y2=9,
+          stroke="#3b82f6",
+          stroke_width=2,
+          stroke_linecap="round",
+        ),
+        @svg.line(
+          x1=9,
+          y1=9,
+          x2=12,
+          y2=9,
+          stroke="#3b82f6",
+          stroke_width=2,
+          stroke_linecap="round",
+        ),
+      ])
   }
-  span(
-    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium \{color}",
-    [text(label)],
-  )
 }
 
 ///|
@@ -24,7 +94,7 @@ fn build_row(item : BuildItem) -> Html {
     class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors",
     [
       div(class="flex items-center gap-3 min-w-0", [
-        status_badge(item.status),
+        status_icon(item.status),
         a(
           href="/docs/\{item.module_}",
           class="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors truncate",
@@ -36,7 +106,7 @@ fn build_row(item : BuildItem) -> Html {
         ),
       ]),
       div(
-        class="flex items-center gap-2 ml-auto pl-[4.25rem] md:pl-0 shrink-0",
+        class="flex items-center gap-2 ml-auto pl-[1.875rem] md:pl-0 shrink-0",
         [
           span(class="text-xs text-gray-500 font-mono", [
             text("v\{item.version}"),
@@ -58,11 +128,11 @@ fn skeleton_build_rows(count : Int) -> Html {
       class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 px-4 py-3 bg-white border border-gray-200 rounded-lg",
       [
         div(class="flex items-center gap-3", [
-          div(class="h-5 w-16 bg-gray-200 rounded shrink-0", nothing),
+          div(class="size-[18px] bg-gray-200 rounded-full shrink-0", nothing),
           div(class="h-4 w-48 max-w-full bg-gray-200 rounded", nothing),
         ]),
         div(
-          class="flex items-center gap-2 ml-auto pl-[4.25rem] md:pl-0 shrink-0",
+          class="flex items-center gap-2 ml-auto pl-[1.875rem] md:pl-0 shrink-0",
           [
             div(class="h-3 w-14 bg-gray-200 rounded", nothing),
             div(class="h-3 w-20 bg-gray-200 rounded", nothing),

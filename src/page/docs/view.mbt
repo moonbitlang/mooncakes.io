@@ -461,10 +461,8 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     [img(class="size-5", src=@config.HAMBURGER_BUTTON, nothing)],
   )
   div(class="min-h-screen w-full flex-col", [
-    div(
-      class="top-0 z-30 border-b sticky bg-white md:bg-white/60 md:backdrop-blur-md",
-      [div(class="container px-2 lg:px-4", [search_panel, navbar])],
-    ),
+    search_panel,
+    navbar,
     div(class="flex-1", [
       div(
         class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4",

@@ -31,7 +31,7 @@ pub fn logo() -> @html.Html
 
 pub fn markdown(String, small_heading? : Bool) -> @html.Html
 
-pub fn navbar(left? : @html.Html, middle? : @html.Html, right? : @html.Html, style? : NavbarStyle) -> @html.Html
+pub fn navbar(left? : @html.Html, left_extra? : @html.Html, middle? : @html.Html, right? : @html.Html, style? : NavbarStyle) -> @html.Html
 
 pub fn not_found() -> @html.Html
 

@@ -718,3 +718,47 @@
 
 .loading-dot:nth-child(2) { animation-delay: 0.16s; }
 .loading-dot:nth-child(3) { animation-delay: 0.32s; }
+
+/* Search dialog animation */
+dialog#search-panel {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 150ms ease, transform 150ms ease,
+    overlay 150ms ease allow-discrete, display 150ms ease allow-discrete;
+}
+
+dialog#search-panel[open] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+dialog#search-panel::backdrop {
+  opacity: 0;
+  transition: opacity 150ms ease,
+    overlay 150ms ease allow-discrete, display 150ms ease allow-discrete;
+}
+
+dialog#search-panel[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog#search-panel[open] {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  dialog#search-panel[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  dialog#search-panel {
+    transform: translateY(16px);
+  }
+  @starting-style {
+    dialog#search-panel[open] {
+      transform: translateY(16px);
+    }
+  }
+}

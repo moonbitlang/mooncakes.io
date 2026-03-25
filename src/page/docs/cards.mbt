@@ -247,53 +247,74 @@ fn document_item(
     ("", @config.SECTION_OPEN)
   }
   let header_style = if tight { "py-1" } else { "py-2" }
-  let buttons : Html = {
-    let source_btn = match loc {
-      None => nothing
-      Some(loc) => {
-        let path = if module_name.is_empty() {
-          loc.path
-        } else {
-          versioned_asset_path(loc.path, module_name, module_version)
-        }
-        a(
-          href="/assets/\{path}/\{loc.file}.html#\{loc.line}",
-          class="text-xs text-gray-500 hover:text-gray-700 transition-colors",
-          escape=true,
-          [text("source")],
-        )
+  let source_btn = match loc {
+    None => nothing
+    Some(loc) => {
+      let path = if module_name.is_empty() {
+        loc.path
+      } else {
+        versioned_asset_path(loc.path, module_name, module_version)
       }
+      a(
+        href="/assets/\{path}/\{loc.file}.html#\{loc.line}",
+        class="text-xs font-semibold text-yellow-700 hover:text-yellow-900 transition-colors",
+        escape=true,
+        [text("source")],
+      )
     }
-    let collapse_btn : Html = div(
-      class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
-      on_click=dispatch(ToggleDocDetail(id)),
-      [img(src=icon, class="size-4 ui-icon", nothing)],
-    )
-    div(
-      class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center justify-center group-hover:visible invisible",
-      [source_btn, collapse_btn],
-    )
   }
+  let collapse_btn : Html = div(
+    class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
+    on_click=dispatch(ToggleDocDetail(id)),
+    [img(src=icon, class="size-4 ui-icon", nothing)],
+  )
+  let buttons_row : Html = div(class="select-none flex gap-1 items-center", [
+    source_btn, collapse_btn,
+  ])
   let top_rule = match title {
-    None => "border-t pt-4 border-gray-200 mt-8"
+    None =>
+      if tight {
+        "border-t pt-2 border-gray-200 mt-3"
+      } else {
+        "border-t pt-4 border-gray-200 mt-8"
+      }
     Some(_) => "mt-10"
   }
-  let title = match title {
-    None => nothing
-    Some(title) =>
-      @html.h2(
-        class="text-gray-800 text-xl font-semibold py-2 mb-4 border-b",
-        id~,
-        [text(title)],
+  let sig_buttons_abs : Html = div(
+    class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center",
+    [source_btn, collapse_btn],
+  )
+  let (title_view, sig_buttons, has_title) = match title {
+    None => (nothing, sig_buttons_abs, false)
+    Some(title) => {
+      let anchor = div(
+        class="text-gray-300 hover:text-gray-500 cursor-pointer transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
+        on_click=dispatch(ClickAnchor(id)),
+        [text("#")],
       )
+      let title_with_buttons = div(
+        class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
+        id~,
+        [
+          @html.h2(class="text-gray-800 text-xl font-semibold py-2 relative", [
+            anchor,
+            text(title),
+          ]),
+          buttons_row,
+        ],
+      )
+      (title_with_buttons, nothing, true)
+    }
   }
+  let sig_class = "px-4 py-2.5 bg-gray-100 rounded-lg relative w-full \{header_style}" +
+    (if has_title { "" } else { " scroll-mt-header" })
   div(class="mb-3 group \{top_rule}", [
-    title,
-    div(
-      class="px-4 py-2.5 bg-gray-100 rounded-lg relative w-full scroll-mt-header \{header_style}",
-      id~,
-      [signature, buttons],
-    ),
+    title_view,
+    if has_title {
+      div(class=sig_class, [signature, sig_buttons])
+    } else {
+      div(class=sig_class, id~, [signature, sig_buttons])
+    },
     div(class="\{content_style} mt-3", [content]),
   ])
 }

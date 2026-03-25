@@ -33,6 +33,7 @@ enum Msg {
   CopyInstallFailed(String)
   ShowLargePackage
   ToggleTheme
+  ClickAnchor(String)
 }
 
 ///|
@@ -73,6 +74,18 @@ priv enum BuildLogStatus {
 
 ///|
 extern "js" fn encode_uri_component(value : String) -> String = "(value) => encodeURIComponent(value)"
+
+///|
+extern "js" fn smooth_scroll_to_element(id : String) -> Unit =
+  #| (id) => {
+  #|   const el = document.getElementById(id);
+  #|   if (el) el.scrollIntoView({ behavior: 'smooth' });
+  #| }
+
+///|
+pub fn scroll_to_smooth(id : String) -> Cmd {
+  @rabbita.effect(fn() { smooth_scroll_to_element(id) })
+}
 
 ///|
 fn has_docs_assets(build_status : BuildStatus?) -> Bool {
@@ -367,7 +380,8 @@ pub fn update(
           let path = docs_apply_current_version(path, current_module_path)
           (@nav.push_url("/docs/" + path), { ..model, path, })
         }
-        Symbol(id) | Section(id) => (@nav.scroll_to(id), model)
+        Symbol(id) | Section(id) =>
+          (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
       }
     }
     ToggleSearchPanel(open) => {
@@ -405,7 +419,14 @@ pub fn update(
     }
     ShowLargePackage => (none, { ..model, hide_large_package: false })
     ToggleTheme => (none, model)
+    ClickAnchor(id) =>
+      (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
   }
+}
+
+///|
+pub fn get_path(model : Model) -> String {
+  model.path
 }
 
 ///|

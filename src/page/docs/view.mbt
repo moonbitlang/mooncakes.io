@@ -365,10 +365,15 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
         _ => @view.loading()
       }
   }
-  let main = div([meta, docs_notice, document_view])
+  let main = div([
+    meta,
+    docs_notice,
+    document_view,
+    div(class="h-[30vh]", nothing),
+  ])
   let search = model.search
   let search_panel : Html = @html.dialog(
-    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg absolute max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%]",
+    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg fixed max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%] overscroll-contain",
     id="search-panel",
     [
       div(
@@ -404,7 +409,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
                 "Value" => "text-purple-700"
                 _ => "text-gray-700"
               }
-              @html.li(class="border-b px-4 py-2 bg-white hover:bg-gray-100", [
+              @html.li(class="border-b px-4 py-2 bg-white hover:bg-gray-100", on_click=dispatch(ToggleSearchPanel(false)), [
                 a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
                   span(
                     class="",

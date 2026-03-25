@@ -7,9 +7,13 @@ import {
 }
 
 // Values
+pub fn get_path(Model) -> String
+
 pub fn is_theme_toggle(Msg) -> Bool
 
 pub fn load(String, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+
+pub fn scroll_to_smooth(String) -> @runtime.Cmd
 
 pub fn update(Msg, Model, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 

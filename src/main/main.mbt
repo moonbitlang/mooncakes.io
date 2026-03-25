@@ -93,7 +93,7 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
         Internal(url) => (@nav.push_url(url.to_string()), model)
         External(url) => (@nav.load(url), model)
       }
-    (UrlChanged(url), _) => route_with_theme(url, model.theme, dispatch)
+    (UrlChanged(url), _) => route_with_theme(url, model, dispatch)
     _ => (none, model)
   }
 }
@@ -101,9 +101,10 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
 ///|
 fn route_with_theme(
   url : @url.Url,
-  theme : Theme,
+  model : Model,
   dispatch : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
+  let theme = model.theme
   let paths = url.path.split("/").collect()
   let scroll_top = @nav.scroll_to_top()
   match paths {
@@ -139,6 +140,12 @@ fn route_with_theme(
       )
     ["docs", .. module_path] => {
       let path = module_path.iter().map(StringView::to_string).join("/")
+      // If already on this docs page and only fragment changed, just scroll
+      if model.page is Docs(page_model) &&
+        path == @docs.get_path(page_model) &&
+        url.fragment is Some(fragment) {
+        return (@docs.scroll_to_smooth(fragment), model)
+      }
       let (cmd, page) = @docs.load(path, url.fragment, dispatch=x => {
         dispatch(GotDocsMsg(x))
       })

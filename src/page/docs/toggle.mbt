@@ -20,19 +20,19 @@ priv enum CardMode {
 
 ///|
 fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
-  let img_class = "w-[15px] h-[15px]"
-  let btn_focused = "border border-slate-300 bg-slate-100"
-  let lbtn_normal = "border-y border-l hover:z-30 hover:outline hover:outline-mooncake2"
-  let rbtn_normal = "border-y border-r hover:z-30 hover:outline hover:outline-mooncake2"
+  let img_class = "w-4 h-4"
+  let btn_base = "p-1.5 rounded-full transition-colors cursor-pointer"
+  let btn_active = btn_base + " bg-gray-200"
+  let btn_normal = btn_base + " hover:bg-gray-100"
   let (l, r) = match mode {
-    Expanded => (btn_focused, rbtn_normal)
-    Collapsed => (lbtn_normal, btn_focused)
+    Expanded => (btn_active, btn_normal)
+    Collapsed => (btn_normal, btn_active)
   }
-  div(class="flex", [
-    div(class="py-2 px-3 rounded-l \{l}", on_click=click(Expanded), [
+  div(class="flex items-center gap-0.5", [
+    div(class=l, on_click=click(Expanded), [
       img(class=img_class + " ui-icon", src=@config.EXPANSION, nothing),
     ]),
-    div(class="py-2 px-3 rounded-r \{r}", on_click=click(Collapsed), [
+    div(class=r, on_click=click(Collapsed), [
       img(class=img_class + " ui-icon", src=@config.REDUCTION, nothing),
     ]),
   ])

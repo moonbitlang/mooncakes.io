@@ -66,7 +66,7 @@ fn inline2html(
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
         span(
-          class="font-mono bg-[#eeeeee] text-[rgb(31, 35, 40)] text-sm px-[5px] py-[2px] rounded",
+          class="font-mono bg-[#eeeeee] text-[rgb(31, 35, 40)] text-[0.9em] px-[5px] py-[2px] rounded",
           tight.map(fn(x) { text(x.node.v) }).to_array(),
         ),
       ]
@@ -136,40 +136,60 @@ fn block2html(
       } else {
         match level {
           1 =>
-            h1(class="text-gray-800 font-semibold mb-4 pb-2 text-4xl", inline)
-          2 =>
-            h2(
-              class="text-gray-800 font-semibold mt-6 mb-4 pb-2 border-b text-2xl",
+            h1(
+              class="text-gray-800 font-semibold mb-4 pb-2 text-2xl md:text-4xl",
               inline,
             )
-          3 => h3(class="text-gray-800 font-semibold text-xl mt-6 mb-4", inline)
+          2 =>
+            h2(
+              class="text-gray-800 font-semibold mt-6 mb-4 pb-2 border-b text-xl md:text-2xl",
+              inline,
+            )
+          3 =>
+            h3(
+              class="text-gray-800 font-semibold text-lg md:text-xl mt-6 mb-4",
+              inline,
+            )
           4 => h4(class="text-gray-800", inline)
           _ => h5(class="text-gray-800", inline)
         }
       }
     }
     List({ v: { ty: ordered, tight, items }, .. }) => {
+      let has_task = items.iter().any(fn(x) { x.v.ext_task_marker is Some(_) })
       let items = items
         .map(x => {
           let { v: { block, ext_task_marker, .. }, .. } = x
           if ext_task_marker is Some({ v: char, .. }) {
-            @html.li(class="flex gap-1", [
-              @html.input(
-                input_type=Checkbox,
-                read_only=true,
-                checked=char == 'x' || char == 'X',
-                nothing,
+            @html.li(class="list-none", [
+              @html.label(
+                class="flex items-baseline gap-2 pointer-events-none",
+                [
+                  @html.input(
+                    input_type=Checkbox,
+                    read_only=true,
+                    checked=char == 'x' || char == 'X',
+                    class="shrink-0 pointer-events-none",
+                    nothing,
+                  ),
+                  span([block2html(block, small_heading~, link_defs~)]),
+                ],
               ),
-              block2html(block, small_heading~, link_defs~),
             ])
           } else {
             @html.li([block2html(block, small_heading~, link_defs~)])
           }
         })
         .to_array()
-      let class = "pl-8 mb-4 " + (if tight { "space-y-1" } else { "space-y-2" })
+      let spacing = if tight || has_task { "space-y-1" } else { "space-y-2" }
+      let class = if has_task {
+        "pl-4 mb-4 " + spacing
+      } else {
+        "pl-8 mb-4 " + spacing
+      }
       match ordered {
-        @cmark_base.Unordered(_) => ul(class="list-disc " + class, items)
+        @cmark_base.Unordered(_) =>
+          ul(class=(if has_task { "" } else { "list-disc " }) + class, items)
         @cmark_base.Ordered(start, _) =>
           ol(start~, class="list-decimal " + class, items)
       }
@@ -177,7 +197,7 @@ fn block2html(
     Paragraph({ v: { inline, .. }, .. }) => {
       let child = @html.span(inline2html(inline, link_defs~))
       if paragraph_margin {
-        div(class="mb-4 pr-8", [child])
+        div(class="mb-4 md:pr-8", [child])
       } else {
         child
       }
@@ -329,6 +349,7 @@ pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html 
   try folder.fold_doc([], doc) catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } noraise {
-    htmls => div(class="text-base leading-relaxed text-gray-800", htmls)
+    htmls =>
+      div(class="text-sm md:text-base leading-relaxed text-gray-800", htmls)
   }
 }

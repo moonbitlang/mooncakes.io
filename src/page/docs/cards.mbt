@@ -53,7 +53,7 @@ fn signature_view(
   module_version~ : String,
 ) -> Html {
   pre(class="text-wrap flex items-center", [
-    code(class="font-mono text-sm text-blue-800", [
+    code(class="font-mono text-xs md:text-sm text-blue-800", [
       @view.code_block(content, kind=Signature, transform_link=fn(href) {
         versioned_docs_path(href, module_name, module_version)
       }),
@@ -320,10 +320,10 @@ fn document_item(
         class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
         id~,
         [
-          @html.h2(class="text-gray-800 text-xl font-semibold py-2 relative", [
-            anchor,
-            text(title),
-          ]),
+          @html.h2(
+            class="text-gray-800 text-lg md:text-xl font-semibold py-2 relative",
+            [anchor, text(title)],
+          ),
           buttons_row,
         ],
       )
@@ -386,7 +386,7 @@ fn misc_doc(
   let { name, methods, impls } = doc
   let id = doc.get_id()
   let signature = div(id=name, class="py-1 w-full", [
-    h3(class="text-lg text-gray-800", [text(name)]),
+    h3(class="text-base md:text-lg text-gray-800", [text(name)]),
   ])
   let package_link_class = "font-mono text-sm px-1 py-[1px] bg-yellow-600/20 hover:bg-yellow-600/20 rounded"
   let tips = match @config.builtins_package_path.get(name) {

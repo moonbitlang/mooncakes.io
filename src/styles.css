@@ -252,6 +252,10 @@
   background-color: #14171c;
 }
 
+.theme-dark .bg-white\/90 {
+  background-color: rgba(20, 23, 28, 0.9);
+}
+
 .theme-dark .bg-white\/50 {
   background-color: rgba(20, 23, 28, 0.5);
 }

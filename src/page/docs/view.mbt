@@ -389,7 +389,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
           ),
         ],
       ),
-      (match search.results {
+      match search.results {
         Loading => nothing
         Failed => text("load indices failed")
         Success(results) =>
@@ -430,7 +430,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
               )
             }),
           )
-      }),
+      },
     ],
   )
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }

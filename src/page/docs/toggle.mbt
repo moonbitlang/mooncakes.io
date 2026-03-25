@@ -20,24 +20,13 @@ priv enum CardMode {
 
 ///|
 fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
-  let img_class = "w-4 h-4"
-  let btn_base = "px-2.5 py-1.5 transition-colors cursor-pointer"
-  let btn_active = btn_base + " bg-gray-100"
-  let btn_normal = btn_base + " hover:bg-gray-50"
-  let (l, r) = match mode {
-    Expanded => (btn_active, btn_normal)
-    Collapsed => (btn_normal, btn_active)
+  let (icon, next_mode) = match mode {
+    Expanded => (@config.REDUCTION, Collapsed)
+    Collapsed => (@config.EXPANSION, Expanded)
   }
-  div(
-    class="inline-flex items-center rounded-full border border-gray-200 bg-white/90 overflow-hidden",
-    [
-      div(class=l, on_click=click(Expanded), [
-        img(class=img_class + " ui-icon", src=@config.EXPANSION, nothing),
-      ]),
-      div(class="w-px bg-gray-200 self-stretch", nothing),
-      div(class=r, on_click=click(Collapsed), [
-        img(class=img_class + " ui-icon", src=@config.REDUCTION, nothing),
-      ]),
-    ],
+  @html.button(
+    class="theme-toggle hidden md:inline-flex items-center rounded-full px-3 py-1.5 transition-colors",
+    on_click=click(next_mode),
+    [img(class="w-4 h-4 ui-icon", src=icon, nothing)],
   )
 }

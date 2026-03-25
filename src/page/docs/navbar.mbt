@@ -23,14 +23,14 @@ fn navbar(
     breadcrumbs_view,
     div(class="flex-1", nothing),
     button(
-      class="bg-white/90 border border-gray-200 text-sm outline-transparent hover:bg-white transition-all rounded-full py-1.5 px-3 lg:w-35 text-gray-500 flex items-center gap-2",
+      class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors text-gray-400 lg:w-40",
       on_click=dispatch(ToggleSearchPanel(true)),
       [
         img(class="w-4 h-4 ui-icon", src=@config.SEARCH, nothing),
         div(class="hidden lg:block text-nowrap", [text("Search")]),
       ],
     ),
-    theme_toggle.unwrap_or(nothing),
     card_mode_toggle(mode=card_mode, click=x => dispatch(DocModeChanged(x))),
+    theme_toggle.unwrap_or(nothing),
   ])
 }

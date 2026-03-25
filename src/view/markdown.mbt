@@ -107,14 +107,12 @@ fn block2html(
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
         class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
-        [block2html(block, small_heading~, link_defs~)],
+        [block2html(block, small_heading~, link_defs~, paragraph_margin=true)],
       )
     Blocks({ v: xs, .. }) =>
       span(
         xs
-        .map(x => {
-          block2html(x, small_heading~, link_defs~, paragraph_margin=true)
-        })
+        .map(x => block2html(x, small_heading~, link_defs~, paragraph_margin~))
         .to_array(),
       )
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
@@ -155,7 +153,7 @@ fn block2html(
         .map(x => {
           let { v: { block, ext_task_marker, .. }, .. } = x
           if ext_task_marker is Some({ v: char, .. }) {
-            @html.li(class="flex gap-1 mt-1", [
+            @html.li(class="flex gap-1", [
               @html.input(
                 input_type=Checkbox,
                 read_only=true,
@@ -165,14 +163,11 @@ fn block2html(
               block2html(block, small_heading~, link_defs~),
             ])
           } else {
-            @html.li(class="mt-1", [
-              block2html(block, small_heading~, link_defs~),
-            ])
+            @html.li([block2html(block, small_heading~, link_defs~)])
           }
         })
         .to_array()
-      let class = "pl-8 mb-4 " +
-        (if tight { "space-y-0.5" } else { "space-y-1" })
+      let class = "pl-8 mb-4 " + (if tight { "space-y-1" } else { "space-y-2" })
       match ordered {
         @cmark_base.Unordered(_) => ul(class="list-disc " + class, items)
         @cmark_base.Ordered(start, _) =>
@@ -182,7 +177,7 @@ fn block2html(
     Paragraph({ v: { inline, .. }, .. }) => {
       let child = @html.span(inline2html(inline, link_defs~))
       if paragraph_margin {
-        div(class="mb-3", [child])
+        div(class="mb-4 pr-8", [child])
       } else {
         child
       }
@@ -334,6 +329,6 @@ pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html 
   try folder.fold_doc([], doc) catch {
     @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
   } noraise {
-    htmls => div(class="text-base text-[#3c3c43]", htmls)
+    htmls => div(class="text-base leading-relaxed text-gray-800", htmls)
   }
 }

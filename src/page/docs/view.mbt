@@ -482,7 +482,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
               ]),
             ],
           ),
-          div(class="flex-1 min-w-0", [main, fab, sidebar_dialog]),
+          div(class="flex-1 min-w-0 max-w-4xl", [main, fab, sidebar_dialog]),
           div(class="md:w-40", nothing),
         ],
       ),

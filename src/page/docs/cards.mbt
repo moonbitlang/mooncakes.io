@@ -119,7 +119,7 @@ fn impl_doc(
     ]),
   ])
   let content = div(
-    class="pl-4 my-3",
+    class="pl-4 mb-2",
     methods.map(m => {
       value_doc(m, folded~, module_name~, module_version~, dispatch)
     }),
@@ -140,7 +140,7 @@ fn type_doc(
   let signature = signature_view(signature)
   let content = div(
     [
-      div(class="pl-4 my-3", [@view.markdown(docstring, small_heading=true)]),
+      div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(imp => {
         impl_doc(imp, folded~, module_name~, module_version~, dispatch)
       }),
@@ -182,7 +182,7 @@ fn trait_doc(
   let signature = signature_view(signature)
   let content = div(
     [
-      div(class="pl-4 my-3", [@view.markdown(docstring, small_heading=true)]),
+      div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(imp => {
         impl_doc(imp, folded~, module_name~, module_version~, dispatch)
       }),
@@ -211,9 +211,12 @@ fn type_alias_doc(
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
   let signature = signature_view(signature)
-  let content = @view.markdown(docstring, small_heading=true)
+  let content = div(class="pl-4 mb-2", [
+    @view.markdown(docstring, small_heading=true),
+  ])
   let id = doc.get_id()
   document_item(
+    title=id,
     signature,
     content,
     collapsed=folded,
@@ -272,26 +275,26 @@ fn document_item(
     )
   }
   let top_rule = match title {
-    None => "border-t pt-2 border-gray-200"
-    Some(_) => ""
+    None => "border-t pt-4 border-gray-200 mt-8"
+    Some(_) => "mt-10"
   }
   let title = match title {
     None => nothing
     Some(title) =>
       @html.h2(
-        class="text-gray-800 text-2xl font-semibold py-2 mb-4 border-b",
+        class="text-gray-800 text-xl font-semibold py-2 mb-4 border-b",
         id~,
         [text(title)],
       )
   }
-  div(class="my-2 group \{top_rule}", [
+  div(class="mb-3 group \{top_rule}", [
     title,
     div(
-      class="px-4 py-2 bg-gray-100 rounded-lg relative w-full scroll-mt-header \{header_style}",
+      class="px-4 py-2.5 bg-gray-100 rounded-lg relative w-full scroll-mt-header \{header_style}",
       id~,
       [signature, buttons],
     ),
-    div(class=content_style, [content]),
+    div(class="\{content_style} mt-3", [content]),
   ])
 }
 
@@ -310,10 +313,10 @@ fn value_doc(
     .map(fn(x) { "\{x}::\{doc.get_id()}" })
     .unwrap_or(doc.get_id())
   let signature = signature_view(signature)
-  let content = div(class="pl-4 my-3", [
+  let content = div(class="pl-4 mb-2", [
     @view.markdown(docstring, small_heading=true),
   ])
-  let title = if enable_title { Some(id) } else { None }
+  let title = if enable_title || type_id is Some(_) { Some(id) } else { None }
   document_item(
     title?,
     signature,
@@ -412,7 +415,9 @@ fn readme(
               p([text("README")]),
             ],
           ),
-          body=div(class="m-8", [div(class="mr-4 mb-6", [content])]),
+          body=div(class="mx-6 my-8 md:mx-8", [
+            div(class="mr-4 mb-6", [content]),
+          ]),
         ),
       ])
     }

@@ -289,9 +289,20 @@ pub fn update(
               Some(node) => node.to_document_items()
               None => []
             }
+            // Expand first-level items by default
+            let sidebar_collapsed = sidebar_document.fold(
+              init=model.sidebar_collapsed,
+              fn(set, item) {
+                match item {
+                  Node(id~, _, _) => set.add(id)
+                  _ => set
+                }
+              },
+            )
             {
               ..model,
               sidebar_document,
+              sidebar_collapsed,
               module_index: Success(module_index),
               search_entries: Success(
                 Lazy::new(load_search_entries(module_index)),

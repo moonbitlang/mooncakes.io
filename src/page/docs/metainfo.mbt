@@ -90,6 +90,30 @@ fn meta_sidebar(
         )
       },
     ]),
+    // Description & Keywords
+    match (model.description, model.keywords) {
+      (None, []) => nothing
+      _ =>
+        div(class="border-t pt-3 mb-3 text-[13px]", [
+          match model.description {
+            Some(d) => p(class="text-gray-500 line-clamp-3", [text(d)])
+            None => nothing
+          },
+          match model.keywords {
+            [] => nothing
+            keywords =>
+              div(
+                class="flex flex-wrap gap-1 mt-1.5",
+                keywords.map(fn(k) {
+                  span(
+                    class="border rounded px-1.5 py-0.5 text-[11px] text-gray-500 bg-zinc-50",
+                    [text(k)],
+                  )
+                }),
+              )
+          },
+        ])
+    },
     // Meta
     div(class="border-t pt-3 space-y-1.5 text-[13px]", [
       div(class="flex items-center gap-2", [

@@ -189,10 +189,12 @@
   opacity: 0.9;
 }
 
-.theme-dark .home-stat-card {
-  background: linear-gradient(145deg, rgba(18, 22, 28, 0.9), rgba(24, 30, 38, 0.6));
-  border-color: #323a46;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+@media (min-width: 1024px) {
+  .theme-dark .home-stat-card {
+    background: linear-gradient(145deg, rgba(18, 22, 28, 0.9), rgba(24, 30, 38, 0.6));
+    border-color: #323a46;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+  }
 }
 
 .theme-dark .home-hero-copy {

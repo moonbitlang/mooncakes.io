@@ -39,13 +39,12 @@ pub fn skeleton_module_cards(count : Int) -> Html {
       ],
     )
   }
-  let per_column = (count + 2) / 3
   let column = fn() {
     div(
       class="flex flex-col gap-2",
       [
         div(class="h-4 w-28 bg-gray-200 rounded py-2", nothing),
-        ..Array::makei(per_column, fn(_) { card() }),
+        ..Array::makei(count, fn(_) { card() }),
       ],
     )
   }

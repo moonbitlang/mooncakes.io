@@ -159,7 +159,7 @@ fn pinned() -> Html {
     },
   ]
   div(class="container lg:w-4/5 px-4 mt-4 mb-6", [
-    h1(class="py-2 text-sm font-bold text-gray-400", [text("Pinned modules")]),
+    h1(class="py-2 text-sm font-bold text-gray-600", [text("Pinned modules")]),
     div(
       class="grid grid-cols-1 lg:grid-cols-3 gap-2",
       pinned.map(fn(m) { compact_module_card(m) }),
@@ -180,12 +180,12 @@ fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
     class="block bg-white border border-gray-200 rounded-md px-4 py-3.5 hover:border-mooncake2 hover:shadow-sm transition-all",
     [
       div(class="flex items-baseline gap-1 text-sm", [
-        span(class="text-gray-400 font-normal truncate", [text(mod.author)]),
+        span(class="text-gray-500 font-normal truncate", [text(mod.author)]),
         span(class="text-gray-300", [text("/")]),
-        span(class="text-black font-semibold truncate", [text(mod.name)]),
+        span(class="text-gray-900 font-semibold truncate", [text(mod.name)]),
         span(class="text-xs text-gray-400 ml-auto shrink-0", [badge]),
       ]),
-      p(class="text-xs text-gray-500 line-clamp-2 mt-2.5 min-h-[2lh]", [
+      p(class="text-xs text-gray-600 line-clamp-2 mt-2.5 min-h-[2lh]", [
         text(mod.description.unwrap_or("")),
       ]),
     ],
@@ -201,7 +201,7 @@ fn module_list_column(
   div(
     class="flex flex-col gap-2",
     [
-      h2(class="py-2 text-sm font-bold text-gray-400", [text(title)]),
+      h2(class="py-2 text-sm font-bold text-gray-600", [text(title)]),
       ..modules
       .iter()
       .take(12)
@@ -243,7 +243,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
       let (key, value) = x
       let modules = value.map(simple_module_card)
       div(class="pt-2", [
-        h1(class="py-2 text-sm font-bold text-gray-400", [text(key.to_string())]),
+        h1(class="py-2 text-sm font-bold text-gray-600", [text(key.to_string())]),
         div(
           class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
           modules,

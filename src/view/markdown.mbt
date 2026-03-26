@@ -92,7 +92,7 @@ fn inline2html(
 ///|
 fn is_moonbit(lang : String) -> Bool {
   let lang = lang.to_lower()
-  lang.has_prefix("mbt") || lang.has_prefix("moonnbit")
+  lang.has_prefix("mbt") || lang.has_prefix("moonbit")
 }
 
 ///|

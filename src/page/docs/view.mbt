@@ -1,9 +1,4 @@
 ///|
-fn docs_notice_item(body : Array[Html]) -> Html {
-  @html.li(class="docs-state-list-item", body)
-}
-
-///|
 fn icon_failed() -> Html {
   @svg.svg(
     width=20,
@@ -106,38 +101,6 @@ fn icon_outdated() -> Html {
       ),
     ],
   )
-}
-
-///|
-fn tone_icon(tone : String) -> Html {
-  match tone {
-    "failed" => icon_failed()
-    "queued" => icon_queued()
-    _ => icon_outdated()
-  }
-}
-
-///|
-fn docs_notice_card(
-  tone : String,
-  title : String,
-  summary : String,
-  items : Array[Html],
-  extra? : Html,
-) -> Html {
-  div(class="docs-state-shell", [
-    div(class="docs-state-card docs-state-card-\{tone}", [
-      div(class="docs-state-header", [
-        div(class="flex items-center gap-2", [
-          tone_icon(tone),
-          h1(class="docs-state-title", [text(title)]),
-        ]),
-        p(class="docs-state-summary", [text(summary)]),
-      ]),
-      @html.ul(class="docs-state-list", items),
-      extra.unwrap_or(nothing),
-    ]),
-  ])
 }
 
 ///|

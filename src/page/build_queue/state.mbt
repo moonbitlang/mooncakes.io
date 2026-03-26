@@ -39,11 +39,11 @@ pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
 ///|
 pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
   match msg {
-    GotBuilds(Ok(data)) => {
-      let recent = data.recent_completed
-      recent.rev_in_place()
-      (none, { queue: Success(data.queued), recent: Success(recent) })
-    }
+    GotBuilds(Ok(data)) =>
+      (
+        none,
+        { queue: Success(data.queued), recent: Success(data.recent_completed) },
+      )
     GotBuilds(Err(e)) => {
       println(e)
       (none, { queue: Failed, recent: Failed })

@@ -87,7 +87,7 @@ pub fn[Id : Compare] view(
           ),
           if expanded {
             ul(
-              class="pl-3 ml-[9px] border-l border-gray-200",
+              class="pl-2 ml-[7px] border-l border-gray-200",
               children.map(aux),
             )
           } else {
@@ -102,13 +102,41 @@ pub fn[Id : Compare] view(
         } else {
           " text-gray-700"
         }
+        fn method_item(child : Tree[Id]) -> Html {
+          let (child_id, child_name) = match child {
+            Tree::Item(id~, name) => (id, name)
+            Tree::Node(id~, name, _) | Tree::FixedNode(id~, name, _) =>
+              (id, name)
+          }
+          let child_active = indicator == child_id
+          let child_font = if child_active {
+            " font-semibold text-gray-900"
+          } else {
+            " text-gray-700"
+          }
+          @html.li(
+            class="group/method flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{child_font}",
+            on_click=click(child_id),
+            [
+              @html.span(
+                class="size-4 shrink-0 flex items-center justify-center text-[10px] text-gray-500 leading-none",
+                [text("::")],
+              ),
+              @html.span(class="group-hover/method:hidden", [text(child_name)]),
+              @html.span(class="hidden group-hover/method:inline truncate", [
+                text(str + "::" + child_name),
+              ]),
+            ],
+          )
+        }
+
         @html.li([
           div(
             class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
             on_click=click(id),
             [icon(id, true), @html.span([text(str)])],
           ),
-          ul(class="pl-5", children.map(aux)),
+          ul(class="pl-0", children.map(method_item)),
         ])
       }
     }

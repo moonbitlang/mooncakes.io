@@ -338,13 +338,15 @@ pub fn update(
       )
     GotPackageData(result) => {
       let model = match result {
-        Ok({ types, traits, misc, .. } as package_data) => {
+        Ok({ types, traits, errors, misc, .. } as package_data) => {
           // collapse all implementations by default
           let types_impls = types.iter().flat_map(fn(x) { x.impls.iter() })
           let traits_impls = traits.iter().flat_map(fn(x) { x.impls.iter() })
+          let errors_impls = errors.iter().flat_map(fn(x) { x.impls.iter() })
           let misc_impls = misc.iter().flat_map(fn(x) { x.impls.iter() })
           let collapsed_docs = types_impls
             .concat(traits_impls)
+            .concat(errors_impls)
             .concat(misc_impls)
             .map(ImplDoc::get_id)
             .fold(init=model.collapsed_docs, FoldedState::add)

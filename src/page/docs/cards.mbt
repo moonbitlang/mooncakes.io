@@ -484,9 +484,10 @@ fn document(
 ) -> Html {
   let readme = readme(readme_content, folded~, dispatch)
   let doc_list = match package_data {
-    Some(Success({ traits, types, typealiases, values, misc, name: _ })) => {
+    Some(Success({ traits, types, errors, typealiases, values, misc, name: _ })) => {
       let count = traits.length() +
         types.length() +
+        errors.length() +
         typealiases.length() +
         values.length() +
         misc.length()
@@ -499,6 +500,9 @@ fn document(
           }),
           ..types.map(ty => {
             type_doc(ty, folded~, module_name~, module_version~, dispatch)
+          }),
+          ..errors.map(err => {
+            type_doc(err, folded~, module_name~, module_version~, dispatch)
           }),
           ..typealiases.map(ta => {
             type_alias_doc(ta, folded~, module_name~, module_version~, dispatch)

@@ -17,6 +17,7 @@ priv struct PackageData {
   name : String
   types : Array[TypeDoc]
   traits : Array[TraitDoc]
+  errors : Array[TypeDoc]
   typealiases : Array[TypeAliasDoc]
   values : Array[ValueDoc]
   misc : Array[MiscDoc]
@@ -207,6 +208,7 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
       "name": String(name),
       "types": Array(types),
       "traits": Array(traits),
+      "errors"? : errors,
       "typealias": Array(aliases),
       "values": Array(values),
       "misc": Array(misc),
@@ -215,6 +217,10 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
       try {
         let types = types.map(decode_type_doc)
         let traits = traits.map(decode_trait_doc)
+        let errors = match errors {
+          Some(Array(errors)) => errors.map(decode_type_doc)
+          _ => []
+        }
         let aliases = aliases.map(decode_typealias_doc)
         let values = values.map(decode_value_doc)
         let misc = misc.map(decode_misc_doc)
@@ -223,7 +229,8 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
         aliases.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
         traits.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
         types.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-        Ok({ name, types, traits, typealiases: aliases, values, misc })
+        errors.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
+        Ok({ name, types, traits, errors, typealiases: aliases, values, misc })
       } catch {
         e => Err("fail to decode package data: \{e}")
       }

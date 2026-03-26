@@ -50,6 +50,8 @@ pub let dead_rabbit : String
 
 pub let deps : String
 
+pub let download : String
+
 pub let icon_close : String
 
 pub let install : String

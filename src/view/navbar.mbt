@@ -14,7 +14,7 @@ pub fn navbar(
 ) -> Html {
   let class = match style {
     Sticky =>
-      "top-0 z-30 border-b sticky bg-white/60 backdrop-blur-md select-none"
+      "top-0 z-30 border-b sticky bg-white/60 backdrop-blur-md select-none h-header"
     Fusion => "select-none"
   }
   let middle_view = match middle {
@@ -47,7 +47,7 @@ pub fn navbar(
   } else {
     div(class~, [
       div(
-        class="container px-5 sm:px-6 flex items-center justify-between py-2.5",
+        class="container px-5 sm:px-6 flex items-center justify-between h-full",
         [
           div(class="flex items-center gap-4 min-w-0", [
             left,

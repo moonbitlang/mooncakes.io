@@ -71,6 +71,9 @@ pub let code = "/code.svg"
 pub let terminal = "/terminal.svg"
 
 ///|
+pub let download = "/download.svg"
+
+///|
 pub let deps = "/deps.svg"
 
 ///|

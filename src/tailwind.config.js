@@ -30,7 +30,7 @@ module.exports = {
         tiny: "0.7rem",
       },
       spacing: {
-        header: "4rem", /* 64px - the navbar height */
+        header: "3.5rem", /* 56px - the navbar height */
       },
       colors: {
         moonbit: "#cf4f89",

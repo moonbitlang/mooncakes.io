@@ -13,22 +13,6 @@
 // limitations under the License.
 
 ///|
-fn meta_info_item_view(title~ : String, elem : Html, icon? : String) -> Html {
-  let title_content = match icon {
-    Some(icon_src) =>
-      div(class="flex items-center gap-2", [
-        img(class="w-[14px] h-[14px] ui-icon", src=icon_src, nothing),
-        span(class="text-gray-700", [text(title)]),
-      ])
-    None => text(title)
-  }
-  div(class="flex border-t flex-col gap-2 text-gray-800 px-8 py-4 grow", [
-    p(class="font-bold text-sm", [title_content]),
-    div(class="grow", [elem]),
-  ])
-}
-
-///|
 fn install_view(
   command : String,
   copied~ : Bool,
@@ -54,25 +38,128 @@ fn tag_view(value : String) -> Html {
 }
 
 ///|
+fn display_url(url : String) -> String {
+  let s = if url.has_prefix("https://") {
+    url[8:].to_string()
+  } else if url.has_prefix("http://") {
+    url[7:].to_string()
+  } else {
+    url
+  }
+  if s.has_suffix("/") {
+    s[:s.length() - 1].to_string()
+  } else {
+    s
+  }
+}
+
+///|
+fn meta_sidebar(
+  model : MetaInfo,
+  install_copied~ : Bool,
+  dispatch : (Msg) -> Cmd,
+) -> Html {
+  let install_cmd = "moon add \{model.name}@\{model.version}"
+  let install_icon = if install_copied { @config.ok } else { @config.clipboard }
+  div(class="text-sm text-gray-900 font-medium", [
+    // Install
+    div(class="mb-4", [
+      p(class="font-semibold mb-1.5", [text("Install")]),
+      if model.name == "moonbitlang/core" {
+        p(class="text-gray-500", [text("Installed by default")])
+      } else {
+        div(
+          class="group/install hover:bg-gray-100 active:bg-gray-200 bg-white transition-colors text-[13px] px-2.5 py-1.5 font-mono border rounded relative cursor-pointer",
+          on_click=dispatch(CopyInstallCommand(install_cmd)),
+          [
+            span(class="break-all", [text(install_cmd)]),
+            div(
+              class="absolute right-1 top-0 bottom-0 flex items-center px-1 bg-gray-100 rounded opacity-0 group-hover/install:opacity-100 transition-opacity",
+              [img(class="size-4 ui-icon", src=install_icon, nothing)],
+            ),
+          ],
+        )
+      },
+      if model.name == "moonbitlang/core" {
+        nothing
+      } else {
+        a(
+          class="text-xs text-gray-400 hover:text-gray-600 mt-1.5 inline-block",
+          href="https://download.mooncakes.io/user/\{model.name}/\{model.version}.zip",
+          [text("Download zip")],
+        )
+      },
+    ]),
+    // Meta
+    div(class="border-t pt-3 space-y-1.5 text-[13px]", [
+      div(class="flex items-center gap-2", [
+        img(class="w-4 h-4 ui-icon shrink-0", src=@config.user, nothing),
+        a(href="/user/\{model.author}", class="hover:underline", [
+          text(model.author),
+        ]),
+      ]),
+      div(class="flex items-center gap-2", [
+        img(class="w-4 h-4 ui-icon shrink-0", src=@config.tag, nothing),
+        text(model.version),
+      ]),
+      match model.license {
+        Some(l) =>
+          div(class="flex items-center gap-2", [
+            img(class="w-4 h-4 ui-icon shrink-0", src=@config.license, nothing),
+            text(l),
+          ])
+        None => nothing
+      },
+      match model.repository {
+        Some(repo) =>
+          div(class="flex items-center gap-2 min-w-0", [
+            img(class="w-4 h-4 ui-icon shrink-0", src=@config.repo, nothing),
+            a(
+              class="hover:underline truncate",
+              escape=true,
+              href=repo,
+              title=repo,
+              [text(display_url(repo))],
+            ),
+          ])
+        None => nothing
+      },
+    ]),
+    // Dependencies
+    if model.deps.is_empty() {
+      nothing
+    } else {
+      div(class="border-t pt-3 mt-3", [
+        p(class="font-semibold text-[13px] mb-1.5", [text("Dependencies")]),
+        ul(
+          class="space-y-0.5",
+          model.deps.map(fn(pair) {
+            let (name, version) = pair
+            @html.li(
+              class="font-mono text-[13px] flex justify-between gap-2 min-w-0",
+              [
+                a(
+                  class="hover:underline text-gray-700 truncate",
+                  href="/docs/\{name}@\{version}",
+                  title=name,
+                  [text(name)],
+                ),
+                span(class="text-gray-400 shrink-0", [text(version)]),
+              ],
+            )
+          }),
+        ),
+      ])
+    },
+  ])
+}
+
+///|
 fn meta_info(
   model : MetaInfo,
   install_copied~ : Bool,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
-  let model_license = match model.license {
-    Some(l) =>
-      meta_info_item_view(icon=@config.license, title="License", p([text(l)]))
-    None => nothing
-  }
-  let model_repo = match model.repository {
-    Some(repo) =>
-      meta_info_item_view(
-        icon=@config.repo,
-        title="Repository",
-        p([a(class="hover:underline", escape=true, href=repo, [text(repo)])]),
-      )
-    None => nothing
-  }
   let model_description : Html = div(class="pl-7 py-2 mb-2", [
     h1(class="text-xl md:text-2xl font-bold mb-2", [
       text(model.name.split("/").last().unwrap().to_string()),
@@ -86,68 +173,96 @@ fn meta_info(
       keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
     },
   ])
-  div(class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip", [
-    model_description,
-    div(
-      class="flex flex-wrap content-stretch",
-      [
-        meta_info_item_view(
-          icon=@config.user,
-          title="Author",
+  div(
+    class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip border-b md:border-b-0",
+    [
+      model_description,
+      // Install
+      div(class="px-6 py-3 border-t", [
+        if model.name == "moonbitlang/core" {
+          p(class="text-sm text-gray-500", [text("Installed by default")])
+        } else {
+          install_view(
+            "moon add \{model.name}@\{model.version}",
+            copied=install_copied,
+            dispatch,
+          )
+        },
+        if model.name == "moonbitlang/core" {
+          nothing
+        } else {
           a(
-            href="/user/\{model.author}",
-            class="hover:bg-gray-300 transition-colors py-0.5 px-1 rounded",
-            [text(model.author)],
-          ),
-        ),
-        meta_info_item_view(
-          icon=@config.tag,
-          title="Version",
-          p([text(model.version)]),
-        ),
-        model_license,
-        model_repo,
-      ]
-      .iter()
-      .intersperse(div(class="", nothing))
-      .collect(),
-    ),
-    if model.deps.is_empty() {
-      nothing
-    } else {
-      meta_info_item_view(
-        icon=@config.deps,
-        title="Dependencies",
-        ul(
-          class="",
-          model.deps.map(pair => {
-            let (name, version) = pair
-            @html.li(class="font-mono text-sm text-gray-300", [
-              a(
-                class="hover:underline text-gray-900",
-                href="/docs/\{name}@\{version}",
-                [text(name)],
-              ),
-              span(class="text-gray-500", [text(" " + version)]),
+            class="text-xs text-gray-400 hover:text-gray-600 mt-1.5 inline-block",
+            href="https://download.mooncakes.io/user/\{model.name}/\{model.version}.zip",
+            [text("Download zip")],
+          )
+        },
+      ]),
+      // Meta grid
+      div(class="px-6 py-3 border-t grid grid-cols-2 gap-x-4 gap-y-2 text-sm", [
+        div([
+          span(class="text-gray-400 text-xs", [text("Author")]),
+          div([
+            a(href="/user/\{model.author}", class="hover:underline", [
+              text(model.author),
+            ]),
+          ]),
+        ]),
+        div([
+          span(class="text-gray-400 text-xs", [text("Version")]),
+          div([text(model.version)]),
+        ]),
+        match model.license {
+          Some(l) =>
+            div([
+              span(class="text-gray-400 text-xs", [text("License")]),
+              div([text(l)]),
             ])
-          }),
-        ),
-      )
-    },
-    meta_info_item_view(
-      icon=@config.terminal,
-      title="Install",
-      if model.name == "moonbitlang/core" {
-        div(class="text-gray-600", [
-          text("This module is installed by default."),
-        ])
+          None => nothing
+        },
+        match model.repository {
+          Some(repo) =>
+            div(class="min-w-0", [
+              span(class="text-gray-400 text-xs", [text("Repository")]),
+              div([
+                a(
+                  class="hover:underline truncate block",
+                  escape=true,
+                  href=repo,
+                  title=repo,
+                  [text(display_url(repo))],
+                ),
+              ]),
+            ])
+          None => nothing
+        },
+      ]),
+      // Dependencies
+      if model.deps.is_empty() {
+        nothing
       } else {
-        install_view(
-          "moon add \{model.name}@\{model.version}",
-          copied=install_copied,
-          dispatch,
-        )
+        div(class="px-6 py-3 border-t", [
+          p(class="font-semibold text-sm mb-1.5", [text("Dependencies")]),
+          ul(
+            class="space-y-0.5",
+            model.deps.map(pair => {
+              let (name, version) = pair
+              @html.li(
+                class="font-mono text-[13px] flex justify-between gap-2 min-w-0",
+                [
+                  a(
+                    class="hover:underline text-gray-700 truncate",
+                    href="/docs/\{name}@\{version}",
+                    title=name,
+                    [text(name)],
+                  ),
+                  span(class="text-gray-400 shrink-0", [text(version)]),
+                ],
+              )
+            }),
+          ),
+        ])
       },
-    ),
-  ])
+    ],
+  )
 }

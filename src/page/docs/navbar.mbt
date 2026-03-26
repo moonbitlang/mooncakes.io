@@ -7,17 +7,9 @@ fn navbar(
   dispatch : (Msg) -> Cmd,
   theme_toggle? : Html,
 ) -> Html {
-  let breadcrumbs_view = match module_index {
-    Some(module_index) =>
-      if module_path == path {
-        nothing
-      } else {
-        div(class="hidden lg:block border-l pl-4", [
-          breadcrumbs(path, module_path, module_index),
-        ])
-      }
-    None => nothing
-  }
+  let breadcrumbs_view = div(class="hidden lg:block border-l pl-4", [
+    breadcrumbs(path, module_path, module_index),
+  ])
   let search_btn = button(
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors text-gray-400 lg:w-36",
     on_click=dispatch(ToggleSearchPanel(true)),

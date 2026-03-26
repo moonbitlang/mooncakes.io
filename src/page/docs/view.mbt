@@ -194,61 +194,65 @@ fn failed_docs_notice(
   build_log : BuildLogStatus,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
-  let report_link = p(
-    class="docs-state-summary",
-    style=["margin-top: 0.75rem"],
-    [
-      text("If this seems wrong, "),
-      a(
-        class="docs-state-link",
-        href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-        [text("report it")],
+  div(class="flex flex-col items-center justify-center py-16 text-center", [
+    icon_failed(),
+    p(class="mt-3 text-base text-gray-500", [text("Build failed")]),
+    p(class="mt-1 text-sm text-gray-400", [
+      text("Documentation failed to generate for this version."),
+    ]),
+    p(class="mt-2 text-sm text-gray-400", [
+      text("The package is ready to install and use as a dependency."),
+    ]),
+    div(class="mt-8 w-full text-left", [
+      build_log_panel(
+        build_log_open,
+        build_log,
+        dispatch,
+        footer=p(class="docs-state-summary", style=["margin-top: 0.75rem"], [
+          text("If this seems wrong, "),
+          a(
+            class="text-blue-500 hover:text-blue-700 transition-colors",
+            href="https://github.com/moonbitlang/mooncakes.io/issues/new",
+            [text("report it")],
+          ),
+          text("."),
+        ]),
       ),
-      text("."),
-    ],
-  )
-  docs_notice_card(
-    "failed",
-    "Build failed",
-    "Documentation failed to generate for this version.",
-    [],
-    extra=build_log_panel(
-      build_log_open,
-      build_log,
-      dispatch,
-      footer=report_link,
-    ),
-  )
+    ]),
+  ])
 }
 
 ///|
 fn queued_docs_notice() -> Html {
-  docs_notice_card(
-    "queued",
-    "Building docs",
-    "Documentation is being generated. This usually takes a few minutes.",
-    [
-      docs_notice_item([text("Refresh the page to check progress.")]),
-      docs_notice_item([
-        text("The package is already available for installation."),
-      ]),
-    ],
-  )
+  div(class="flex flex-col items-center justify-center py-16 text-center", [
+    icon_queued(),
+    p(class="mt-3 text-base text-gray-500", [text("Building documentation...")]),
+    p(class="mt-1 text-sm text-gray-400", [
+      text("This may take a few minutes. "),
+      a(
+        href="/build-queue",
+        class="text-blue-500 hover:text-blue-700 transition-colors",
+        [text("View build queue")],
+      ),
+    ]),
+    p(class="mt-2 text-sm text-gray-400", [
+      text("The package is ready to install and use as a dependency."),
+    ]),
+  ])
 }
 
 ///|
 fn outdated_docs_notice() -> Html {
-  docs_notice_card(
-    "outdated",
-    "No docs available",
-    "This release was published before doc generation was available.",
-    [
-      docs_notice_item([
-        text("Try the latest version for browsable documentation."),
-      ]),
-      docs_notice_item([text("The package is still installable.")]),
-    ],
-  )
+  div(class="flex flex-col items-center justify-center py-16 text-center", [
+    icon_outdated(),
+    p(class="mt-3 text-base text-gray-500", [text("No documentation available")]),
+    p(class="mt-1 text-sm text-gray-400", [
+      text("This version was published before doc generation was available."),
+    ]),
+    p(class="mt-2 text-sm text-gray-400", [
+      text("The package is ready to install and use as a dependency."),
+    ]),
+  ])
 }
 
 ///|
@@ -279,19 +283,33 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     dispatch,
     theme_toggle~,
   )
-  let meta : Html = if model.path == module_path {
-    match model.module_meta {
-      Success(meta) => {
-        let meta = match model.manifest {
-          Success(manifest) => { ..meta, version: manifest.version }
-          _ => meta
-        }
-        meta_info(meta, install_copied=model.install_copied, dispatch)
+  let resolved_meta = match model.module_meta {
+    Success(meta) => {
+      let meta = match model.manifest {
+        Success(manifest) => { ..meta, version: manifest.version }
+        _ => meta
       }
-      _ => nothing
+      Some(meta)
+    }
+    _ => None
+  }
+  // Full meta info shown on mobile/tablet only (root package page)
+  let meta_mobile : Html = if model.path == module_path {
+    match resolved_meta {
+      Some(meta) =>
+        div(class="xl:hidden", [
+          meta_info(meta, install_copied=model.install_copied, dispatch),
+        ])
+      None => nothing
     }
   } else {
     nothing
+  }
+  // Compact meta sidebar shown on desktop (all pages)
+  let meta_right : Html = match resolved_meta {
+    Some(meta) =>
+      meta_sidebar(meta, install_copied=model.install_copied, dispatch)
+    None => nothing
   }
   let docs_loaded = match model.readme_content {
     Success(_) => true
@@ -363,13 +381,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     model.source_files,
     package_path~,
   )
-  let main = div([
-    meta,
-    docs_notice,
-    document_view,
-    source_files_view,
-    div(class="h-[30vh]", nothing),
-  ])
+  let main = div([meta_mobile, docs_notice, document_view, source_files_view])
   let search = model.search
   let search_panel : Html = @html.dialog(
     class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg fixed max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%] overscroll-contain",
@@ -464,10 +476,10 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     navbar,
     div(class="flex-1", [
       div(
-        class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4",
+        class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
         [
           div(
-            class="overflow-y-auto hidden md:block md:sticky md:top-15 md:pt-3 md:min-w-64 md:h-[calc(100vh-3.75em)] lg:max-w-[300px]",
+            class="overflow-y-auto hidden md:block md:sticky md:top-header md:pt-3 md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
             [
               div(class="w-full", [
                 sidebar(
@@ -479,7 +491,10 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
             ],
           ),
           div(class="flex-1 min-w-0 max-w-4xl", [main, fab, sidebar_dialog]),
-          div(class="md:w-40", nothing),
+          div(
+            class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
+            [meta_right],
+          ),
         ],
       ),
     ]),

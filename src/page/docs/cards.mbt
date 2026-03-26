@@ -448,22 +448,25 @@ fn readme(
     None | Some("") => nothing
     Some(content) => {
       let content = @view.markdown(content)
-      div(class="border md:rounded mb-4", [
-        @view.collapse(
-          caret_config=LeftCenter,
-          collapsed=folded.contains("readme"),
-          toggle=dispatch(ToggleDocDetail("readme")),
-          header=div(
-            class="py-2 pl-7 border-b w-full font-bold text-gray-700 text-base flex items-center gap-1",
-            [
-              img(src=@config.book_open, class="w-4 h-4 ui-icon", nothing),
-              p([text("README")]),
-            ],
-          ),
-          body=div(class="mx-6 my-8 md:mx-8", [
-            div(class="mr-4 mb-6", [content]),
-          ]),
+      let is_collapsed = folded.contains("readme")
+      let (body, icon) = if is_collapsed {
+        (nothing, @config.SECTION_CLOSE)
+      } else {
+        (div(class="mt-4 mb-6", [content]), @config.SECTION_OPEN)
+      }
+      div(class="mt-4 mb-8 mx-4 md:mx-0", [
+        div(
+          class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
+          on_click=dispatch(ToggleDocDetail("readme")),
+          [
+            img(src=icon, class="size-3.5 ui-icon", nothing),
+            span(class="font-medium text-gray-500 text-xs tracking-wide", [
+              text("README"),
+            ]),
+          ],
         ),
+        body,
+        div(class="border-b border-gray-200 mt-4", nothing),
       ])
     }
   }

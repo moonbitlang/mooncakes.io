@@ -269,7 +269,7 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
 
   fn stat_card(label, value : Int, invisible : Bool, child : Html?) {
     let bottom = match child {
-      None => "pb-6"
+      None => "pb-2 lg:pb-6"
       Some(_) => "pb-2"
     }
     let value = if value == 0 {
@@ -279,10 +279,10 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
     }
     let invisible = if invisible { " invisible hidden lg:block " } else { " " }
     div(
-      class="home-stat-card bg-white/90 shadow-sm border overflow-clip rounded-xl min-w-27 w-full lg:max-w-[240px] pl-6 pr-2 mt-4 lg:mt-0 pt-6 \{bottom} \{invisible} flex-col gap-2 items-end grow-1 lg:border-b-gray-300/50 lg:bg-white/50 lg:backdrop-blur",
+      class="home-stat-card lg:bg-white/50 lg:shadow-sm lg:border overflow-clip lg:rounded-xl min-w-27 w-full lg:max-w-[240px] lg:pl-6 lg:pr-2 mt-2 lg:mt-0 pt-2 lg:pt-6 \{bottom} \{invisible} flex-col gap-2 items-center lg:items-end grow-1 lg:border-b-gray-300/50 lg:backdrop-blur text-center lg:text-left",
       [
-        p(class="text-xl lg:text-3xl font-extralight", value),
-        div(class="flex items-center justify-between", [
+        p(class="text-2xl lg:text-3xl font-extralight", value),
+        div(class="flex items-center justify-center lg:justify-between", [
           p(class="text-sm lg:text-base text-gray-700 font-light", [text(label)]),
         ]),
         div(class="hidden md:flex w-full flex-col-reverse", [
@@ -296,7 +296,7 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
     class="container lg:w-3/4 px-5 sm:px-6 flex flex-col gap-3 lg:flex-row items-center justify-start lg:justify-center lg:gap-12 lg:py-8",
     [
       div(
-        class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[520px]",
+        class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[520px] mt-4 lg:mt-0",
         [
           div(class="text-slate-700 home-hero-copy", [
             h1(class="text-2xl font-semibold lg:text-4xl", [
@@ -311,15 +311,18 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
               text("Browse, search and share package and documentation"),
             ]),
           ]),
-          div(class="flex mt-2 lg:mt-8 gap-4 justify-center lg:justify-start", [
-            button(
-              "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
-              "bg-yellow-600 text-white",
-            ),
-            button(
-              "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
-            ),
-          ]),
+          div(
+            class="hidden sm:flex mt-2 lg:mt-8 gap-4 justify-center lg:justify-start",
+            [
+              button(
+                "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+                "bg-yellow-600 text-white",
+              ),
+              button(
+                "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
+              ),
+            ],
+          ),
         ],
       ),
       div(
@@ -331,7 +334,7 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
             nothing,
           ),
           div(
-            class="flex w-full flex-col sm:flex-row lg:flex-col gap-3 z-10 lg:w-3/5 select-none",
+            class="flex w-full flex-row lg:flex-col gap-3 z-10 lg:w-3/5 select-none",
             [
               stat_card("Packages", total_packages, false, None),
               stat_card("Download", total_downloads, false, None),
@@ -389,7 +392,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     nothing
   }
   let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
-  let hero = div(class="home-hero-shell pb-6 sm:pb-8", [
+  let hero = div(class="home-hero-shell pb-2 sm:pb-8", [
     @view.navbar(
       style=Fusion,
       middle=input(

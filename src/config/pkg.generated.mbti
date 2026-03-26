@@ -4,6 +4,8 @@ package "moonbitlang/mooncakes/config"
 // Values
 pub const EXPANSION : String = "/expansion.svg"
 
+pub const FILE_ICON : String = "/file.svg"
+
 pub const FILTER : String = "/filter.svg"
 
 pub const FOLDER_CLOSE : String = "/folder-close.svg"

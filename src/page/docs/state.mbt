@@ -24,6 +24,8 @@ enum Msg {
   GotPackageData(Result[PackageData, String])
   ToggleSidebarItem(ItemTarget)
   ClickSidebarItem(ItemTarget)
+  ExpandAllSidebar
+  CollapseAllSidebar
   ToggleSearchPanel(Bool)
   SearchFilterChanged(String)
   ToggleSidebarFab
@@ -293,25 +295,10 @@ pub fn update(
         none,
         match result {
           Ok(module_index) => {
-            let sidebar_document = match
-              module_index.0.find_node(docs_lookup_path(model.path)) {
-              Some(node) => node.to_document_items()
-              None => []
-            }
-            // Expand first-level items by default
-            let sidebar_collapsed = sidebar_document.fold(
-              init=model.sidebar_collapsed,
-              fn(set, item) {
-                match item {
-                  Node(id~, _, _) => set.add(id)
-                  _ => set
-                }
-              },
-            )
+            let sidebar_document = module_index.0.to_document_items()
             {
               ..model,
               sidebar_document,
-              sidebar_collapsed,
               module_index: Success(module_index),
               search_entries: Success(
                 Lazy::new(
@@ -380,18 +367,65 @@ pub fn update(
     ClickSidebarItem(id) => {
       let model = { ..model, sidebar_fab: false }
       match id {
+        Group(id) => {
+          // Group nodes have no package, just toggle expand/collapse
+          let sidebar_collapsed = if model.sidebar_collapsed.contains(Group(id)) {
+            model.sidebar_collapsed.remove(Group(id))
+          } else {
+            model.sidebar_collapsed.add(Group(id))
+          }
+          (none, { ..model, sidebar_collapsed, })
+        }
         Package(path) => {
           let url_path = match model.manifest {
             Success(manifest) =>
               versioned_docs_path(path, manifest.module_, manifest.version)
             _ => path
           }
-          (@nav.push_url("/docs/" + url_path), { ..model, path, })
+          (@nav.push_url("/docs/" + url_path), model)
         }
-        Symbol(id) | Section(id) =>
-          (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
+        Symbol(pkg_path~, id, ..) => {
+          let same_package = docs_lookup_path(pkg_path) ==
+            docs_lookup_path(model.path)
+          if same_package {
+            (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
+          } else {
+            let url_path = match model.manifest {
+              Success(manifest) =>
+                versioned_docs_path(
+                  pkg_path,
+                  manifest.module_,
+                  manifest.version,
+                )
+              _ => pkg_path
+            }
+            (@nav.push_url("/docs/" + url_path + "#" + id), model)
+          }
+        }
       }
     }
+    ExpandAllSidebar => {
+      fn collect_node_ids(
+        items : Array[@tree.Tree[ItemTarget]],
+        set : SortedSet[ItemTarget],
+      ) -> SortedSet[ItemTarget] {
+        items.fold(init=set, fn(s, item) {
+          match item {
+            @tree.Node(id~, _, children) =>
+              collect_node_ids(children, s.add(id))
+            _ => s
+          }
+        })
+      }
+
+      let sidebar_collapsed = collect_node_ids(
+        model.sidebar_document,
+        model.sidebar_collapsed,
+      )
+      (none, { ..model, sidebar_collapsed, })
+    }
+    CollapseAllSidebar =>
+      (none, { ..model, sidebar_collapsed: @immut/sorted_set.new() })
     ToggleSearchPanel(open) => {
       let cmd = if open {
         @dialog.show("search-panel")
@@ -435,6 +469,85 @@ pub fn update(
 ///|
 pub fn get_path(model : Model) -> String {
   model.path
+}
+
+///|
+pub fn is_same_path(model : Model, new_path : String) -> Bool {
+  docs_lookup_path(model.path) == docs_lookup_path(new_path)
+}
+
+///|
+pub fn is_same_module(model : Model, new_path : String) -> Bool {
+  match model.manifest {
+    Success(manifest) => {
+      let module_lookup = docs_lookup_path(manifest.module_)
+      let new_lookup = docs_lookup_path(new_path)
+      new_lookup == module_lookup || new_lookup.has_prefix(module_lookup + "/")
+    }
+    _ => false
+  }
+}
+
+///|
+pub fn navigate_package(
+  model : Model,
+  path : String,
+  fragment : String?,
+  dispatch~ : (Msg) -> Cmd,
+) -> (Cmd, Model) {
+  let path = docs_lookup_path(path)
+  match model.manifest {
+    Success(manifest) => {
+      let has_docs = has_docs_assets(manifest.module_meta.build_status)
+      if not(has_docs) {
+        return (
+          none,
+          {
+            ..model,
+            path,
+            readme_content: Failed,
+            source_files: [],
+            package_data: Failed,
+          },
+        )
+      }
+      let asset_path = versioned_asset_path(
+        path,
+        manifest.module_,
+        manifest.version,
+      )
+      let cmds : Array[Cmd] = [
+        @http.get(
+          "/assets/" + asset_path + "/resource.json",
+          expect=Json(
+            result => dispatch(GotResource(result)),
+            decode_resource_info,
+          ),
+        ),
+        @http.get(
+          "/assets/" + asset_path + "/package_data.json",
+          expect=Json(
+            result => dispatch(GotPackageData(result)),
+            decode_package_data,
+          ),
+        ),
+      ]
+      (
+        batch(cmds),
+        {
+          ..model,
+          path,
+          fragment: fragment.unwrap_or(""),
+          readme_content: Loading,
+          source_files: [],
+          package_data: Loading,
+          collapsed_docs: FoldedState::new(),
+          hide_large_package: true,
+        },
+      )
+    }
+    _ => load(path, fragment, dispatch~)
+  }
 }
 
 ///|

@@ -8,7 +8,7 @@ import {
 }
 
 // Values
-pub fn[Id : Compare] view(toggle~ : (Id) -> @runtime.Cmd, click~ : (Id) -> @runtime.Cmd, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, Array[Tree[Id]]) -> @html.Html
+pub fn[Id : Compare] view(toggle~ : (Id) -> @runtime.Cmd, click~ : (Id) -> @runtime.Cmd, state~ : @sorted_set.SortedSet[Id], indicator~ : Id, icon~ : (Id, Bool) -> @html.Html, Array[Tree[Id]]) -> @html.Html
 
 // Errors
 
@@ -16,6 +16,7 @@ pub fn[Id : Compare] view(toggle~ : (Id) -> @runtime.Cmd, click~ : (Id) -> @runt
 pub(all) enum Tree[Id] {
   Item(id~ : Id, String)
   Node(id~ : Id, String, Array[Tree[Id]])
+  FixedNode(id~ : Id, String, Array[Tree[Id]])
 }
 pub fn[Id] Tree::get_name(Self[Id]) -> String
 

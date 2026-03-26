@@ -235,7 +235,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   }
   let package_path = match model.manifest {
     Success(manifest) =>
-      versioned_docs_path(manifest.name, manifest.module_, manifest.version)
+      versioned_docs_path(model.path, manifest.module_, manifest.version)
     _ => model.path
   }
   let navbar : Html = navbar(
@@ -271,8 +271,15 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   // Compact meta sidebar shown on desktop (all pages)
   let meta_right : Html = match resolved_meta {
     Some(meta) =>
-      meta_sidebar(meta, install_copied=model.install_copied, dispatch)
-    None => nothing
+      div(class="animate-fade-in", [
+        meta_sidebar(meta, install_copied=model.install_copied, dispatch),
+      ])
+    None =>
+      if model.module_meta is Loading {
+        @view.skeleton_meta_sidebar()
+      } else {
+        nothing
+      }
   }
   let docs_loaded = match model.readme_content {
     Success(_) => true
@@ -319,31 +326,40 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     Success(manifest) => (manifest.module_, manifest.version)
     _ => ("", "")
   }
-  let document_view = match model.readme_content {
-    Success(readme_content) =>
-      document(
-        hide_large_package=model.hide_large_package,
-        readme_content~,
-        package_data=model.package_data,
-        folded=model.collapsed_docs,
-        module_name~,
-        module_version~,
-        dispatch,
-      )
-    Failed => nothing
-    Loading =>
-      match model.module_meta {
-        Success(
-          { build_status: Some(BuildQueued) | Some(BuildFailed) | None, .. }
-        ) => nothing
-        Failed => nothing
-        _ => @view.loading()
-      }
+  let content_ready = model.readme_content is Success(_) &&
+    not(model.package_data is Loading)
+  let (document_view, source_files_view) = if content_ready {
+    let doc = match model.readme_content {
+      Success(readme_content) =>
+        div(class="animate-fade-in", [
+          document(
+            hide_large_package=model.hide_large_package,
+            readme_content~,
+            package_data=model.package_data,
+            folded=model.collapsed_docs,
+            module_name~,
+            module_version~,
+            dispatch,
+          ),
+        ])
+      _ => nothing
+    }
+    let src = source_files_section(model.source_files, package_path~)
+    (doc, src)
+  } else {
+    let skeleton = match model.module_meta {
+      Success(
+        { build_status: Some(BuildQueued) | Some(BuildFailed) | None, .. }
+      ) => nothing
+      Failed => nothing
+      _ =>
+        match model.readme_content {
+          Failed => nothing
+          _ => @view.skeleton_docs_content()
+        }
+    }
+    (skeleton, nothing)
   }
-  let source_files_view = source_files_section(
-    model.source_files,
-    package_path~,
-  )
   let main = div([meta_mobile, docs_notice, document_view, source_files_view])
   let search = model.search
   let search_panel : Html = @html.dialog(
@@ -424,7 +440,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
         nothing,
       ),
       div(
-        class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded p-4 shadow-lg z-20",
+        class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
         [sidebar(model.sidebar_document, model.sidebar_collapsed, dispatch)],
       ),
     ],
@@ -442,14 +458,20 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
         class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
         [
           div(
-            class="overflow-y-auto hidden md:block md:sticky md:top-header md:pt-3 md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
+            class="overflow-y-auto hidden md:block md:sticky md:top-header md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
             [
               div(class="w-full", [
-                sidebar(
-                  model.sidebar_document,
-                  model.sidebar_collapsed,
-                  dispatch,
-                ),
+                if model.module_index is Loading {
+                  @view.skeleton_sidebar()
+                } else {
+                  div(class="animate-fade-in", [
+                    sidebar(
+                      model.sidebar_document,
+                      model.sidebar_collapsed,
+                      dispatch,
+                    ),
+                  ])
+                },
               ]),
             ],
           ),

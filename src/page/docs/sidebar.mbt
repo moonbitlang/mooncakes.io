@@ -32,29 +32,43 @@ fn compare_strings(a : String, b : String) -> Int {
 fn IndexNode::to_document_items(
   self : IndexNode,
 ) -> Array[@tree.Tree[ItemTarget]] {
-  fn collect_packages(node : IndexNode) {
-    match node.pkg {
-      None if !node.childs.is_empty() => {
-        let childs = node.childs.values().filter_map(collect_packages).collect()
-        childs.sort_by(compare_items)
-        Some(@tree.Node(id=ItemTarget::Package(node.name), node.name, childs))
-      }
-      Some(pkg) => Some(@tree.Item(id=Package(pkg.path), node.name))
-      _ => None
+  fn build_tree(
+    parent_path : String,
+    node : IndexNode,
+  ) -> @tree.Tree[ItemTarget]? {
+    let full_path = if parent_path.is_empty() {
+      node.name
+    } else {
+      parent_path + "/" + node.name
+    }
+    let sub_packages : Array[@tree.Tree[ItemTarget]] = node.childs
+      .values()
+      .filter_map(fn(child) { build_tree(full_path, child) })
+      .collect()
+    sub_packages.sort_by(compare_items)
+    let symbols = match node.pkg {
+      Some(pkg) => pkg.to_document_items()
+      None => []
+    }
+    let children = [..sub_packages, ..symbols]
+    match (node.pkg, children) {
+      (None, []) => None
+      (None, _) => Some(@tree.Node(id=Group(full_path), node.name, children))
+      (Some(pkg), []) => Some(@tree.Item(id=Package(pkg.path), node.name))
+      (Some(pkg), _) =>
+        Some(@tree.Node(id=Package(pkg.path), node.name, children))
     }
   }
 
-  let packages = self.childs.values().filter_map(collect_packages).collect()
-  packages.sort_by(compare_items)
-  let package_section = match packages {
-    [] => []
-    xs => [@tree.Node(id=Section("packages-section"), "Sub Packages", xs)]
+  let items : Array[@tree.Tree[ItemTarget]] = self.childs
+    .values()
+    .filter_map(fn(child) { build_tree(self.name, child) })
+    .collect()
+  // Flatten single top-level group nodes (e.g. "async" when viewing moonbitlang/async)
+  match items {
+    [@tree.Node(_, children, ..)] => children
+    _ => items
   }
-  let symbols = match self.pkg {
-    None => []
-    Some(pkg) => pkg.to_document_items()
-  }
-  [..symbols, ..package_section]
 }
 
 ///|
@@ -63,60 +77,121 @@ fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int {
 }
 
 ///|
+priv enum SymbolKind {
+  KReadme
+  KTrait
+  KType
+  KTypeAlias
+  KValue
+  KMethod
+} derive(Compare, Eq)
+
+///|
 priv enum ItemTarget {
   Package(String)
-  Symbol(String)
-  Section(String)
+  Group(String)
+  Symbol(pkg_path~ : String, kind~ : SymbolKind, String)
 } derive(Compare, Eq)
 
 ///|
 fn PkgIndex::to_document_items(
   self : PkgIndex,
 ) -> Array[@tree.Tree[ItemTarget]] {
-  let { traits, types, typealias_, values, misc, path: _ } = self
-  let values = values.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) }) +
-    misc.map(fn(misc) {
-      if misc.methods.is_empty() {
-        @tree.Item(id=Symbol(misc.name), misc.name)
-      } else {
-        @tree.Node(
-          id=Symbol(misc.name),
-          misc.name,
-          misc.methods.map(fn(meth) {
-            @tree.Item(id=Symbol(misc.name + "::" + meth), meth)
-          }),
-        )
-      }
-    })
-  let traits = traits.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) })
-  let types = types.map(fn(ty) {
-      if ty.methods.is_empty() {
-        @tree.Item(id=Symbol(ty.name), ty.name)
-      } else {
-        @tree.Node(
-          id=Symbol(ty.name),
+  let { traits, types, typealias_, values, misc, path } = self
+  let readme_item : @tree.Tree[ItemTarget] = @tree.Item(
+    id=Symbol(pkg_path=path, kind=KReadme, "readme"),
+    "README",
+  )
+  let result : Array[@tree.Tree[ItemTarget]] = []
+  for t in traits {
+    result.push(
+      @tree.Item(id=Symbol(pkg_path=path, kind=KTrait, t.name), t.name),
+    )
+  }
+  for ty in types {
+    if ty.methods.is_empty() {
+      result.push(
+        @tree.Item(id=Symbol(pkg_path=path, kind=KType, ty.name), ty.name),
+      )
+    } else {
+      result.push(
+        @tree.FixedNode(
+          id=Symbol(pkg_path=path, kind=KType, ty.name),
           ty.name,
           ty.methods.map(fn(meth) {
-            @tree.Item(id=Symbol(ty.name + "::" + meth), meth)
+            @tree.Item(
+              id=Symbol(pkg_path=path, kind=KMethod, ty.name + "::" + meth),
+              meth,
+            )
           }),
-        )
-      }
-    }) +
-    typealias_.map(fn(x) { @tree.Item(id=Symbol(x.name), x.name) })
-  let result = []
-  if !traits.is_empty() {
-    traits.sort_by(compare_items)
-    result.push(@tree.Node(id=Section("trait-section"), "Traits", traits))
+        ),
+      )
+    }
   }
-  if !types.is_empty() {
-    types.sort_by(compare_items)
-    result.push(@tree.Node(id=Section("type-section"), "Types", types))
+  for ta in typealias_ {
+    result.push(
+      @tree.Item(id=Symbol(pkg_path=path, kind=KTypeAlias, ta.name), ta.name),
+    )
   }
-  if !values.is_empty() {
-    values.sort_by(compare_items)
-    result.push(Node(id=Section("value-section"), "Values", values))
+  for v in values {
+    result.push(
+      @tree.Item(id=Symbol(pkg_path=path, kind=KValue, v.name), v.name),
+    )
   }
+  for m in misc {
+    if m.methods.is_empty() {
+      result.push(
+        @tree.Item(id=Symbol(pkg_path=path, kind=KType, m.name), m.name),
+      )
+    } else {
+      result.push(
+        @tree.FixedNode(
+          id=Symbol(pkg_path=path, kind=KType, m.name),
+          m.name,
+          m.methods.map(fn(meth) {
+            @tree.Item(
+              id=Symbol(pkg_path=path, kind=KMethod, m.name + "::" + meth),
+              meth,
+            )
+          }),
+        ),
+      )
+    }
+  }
+  result.sort_by(compare_items)
+  result.insert(0, readme_item)
   result
+}
+
+///|
+fn sidebar_icon(id : ItemTarget, expanded : Bool) -> Html {
+  match id {
+    Package(_) | Group(_) =>
+      if expanded {
+        img(src=@config.FOLDER_OPEN, class="size-4 shrink-0 ui-icon", nothing)
+      } else {
+        img(src=@config.FOLDER_CLOSE, class="size-4 shrink-0 ui-icon", nothing)
+      }
+    Symbol(_, kind=KReadme, ..) =>
+      img(src=@config.FILE_ICON, class="size-4 shrink-0 ui-icon", nothing)
+    Symbol(_, kind~, ..) => symbol_icon(kind)
+  }
+}
+
+///|
+fn symbol_icon(kind : SymbolKind) -> Html {
+  let (bg, label) = match kind {
+    KReadme => ("bg-gray-200 text-gray-500", "R")
+    KTrait => ("bg-blue-100 text-blue-600", "Tr")
+    KType => ("bg-emerald-100 text-emerald-600", "T")
+    KTypeAlias => ("bg-violet-100 text-violet-600", "A")
+    KValue => ("bg-amber-100 text-amber-600", "V")
+    KMethod => ("bg-orange-100 text-orange-600", "f")
+  }
+  div(
+    class="size-4 shrink-0 rounded flex items-center justify-center text-[8px] font-bold leading-none \{bg}",
+    [text(label)],
+  )
 }
 
 ///|
@@ -126,11 +201,28 @@ fn sidebar(
   dispatch : (Msg) -> Cmd,
 ) -> Html {
   div(class="text-gray-700 flex flex-col", [
+    div(
+      class="flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 mb-1",
+      style=["background-color: #fafafa"],
+      [
+        @html.button(
+          class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
+          on_click=dispatch(ExpandAllSidebar),
+          [text("Expand all")],
+        ),
+        @html.button(
+          class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
+          on_click=dispatch(CollapseAllSidebar),
+          [text("Collapse all")],
+        ),
+      ],
+    ),
     @tree.view(
       toggle=x => dispatch(ToggleSidebarItem(x)),
       click=x => dispatch(ClickSidebarItem(x)),
       state=sidebar_state,
-      indicator=Symbol(""),
+      indicator=Symbol(pkg_path="", kind=KValue, ""),
+      icon=sidebar_icon,
       document_index,
     ),
   ])

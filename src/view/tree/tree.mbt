@@ -1,11 +1,11 @@
 // Copyright 2025 International Digital Economy Academy
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 // http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,6 +25,7 @@ using @rabbita {type Cmd}
 pub(all) enum Tree[Id] {
   Item(id~ : Id, String)
   Node(id~ : Id, String, Array[Tree[Id]])
+  FixedNode(id~ : Id, String, Array[Tree[Id]])
 }
 
 ///|
@@ -32,6 +33,7 @@ pub fn[Id] Tree::get_name(self : Tree[Id]) -> String {
   match self {
     Tree::Item(name, ..) => name
     Tree::Node(name, _, ..) => name
+    Tree::FixedNode(name, _, ..) => name
   }
 }
 
@@ -41,50 +43,76 @@ pub fn[Id : Compare] view(
   click~ : (Id) -> Cmd,
   state~ : SortedSet[Id],
   indicator~ : Id,
+  icon~ : (Id, Bool) -> Html,
   items : Array[Tree[Id]],
 ) -> Html {
   fn aux(x) {
     match x {
       Tree::Item(id~, str) => {
-        let indicator = if indicator == id {
-          div(class="bg-yellow-500 w-[0.2em] h-5 rounded mr-2", nothing)
+        let active = indicator == id
+        let font = if active {
+          " font-semibold text-gray-900"
         } else {
-          div(class="w-1 h-5 mr-2", nothing)
+          " text-gray-700"
         }
-        div(
-          class="hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
+        @html.li(
+          class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
           on_click=click(id),
-          [indicator, text(str)],
+          [icon(id, false), @html.span([text(str)])],
         )
       }
       Tree::Node(id~, str, children) => {
-        let collapsed = "border-t-[4px] border-t-transparent border-l-[6px] border-l-gray-400 border-b-[4px] border-b-transparent"
-        let expanded = collapsed + " rotate-90 "
-        let (body_style, icon) = if state.contains(id) {
-          ("max-h-[9999px]", expanded)
+        let expanded = state.contains(id)
+        let active = indicator == id
+        let font = if active {
+          " font-semibold text-gray-900"
         } else {
-          ("max-h-0", collapsed)
+          " text-gray-700"
         }
-        div([
+        @html.li([
           div(
-            class="relative transition hover:bg-gray-100 px-2 py-1 rounded text-sm flex",
-            on_click=toggle(id),
+            class="group/node flex items-center gap-2 px-2 py-0.5 rounded-md hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
             [
               div(
-                class="absolute w-0 h-0 self-center mr-1 transition-transform \{icon}",
-                nothing,
+                class="shrink-0 flex-1 flex items-center gap-2 cursor-pointer",
+                on_click=toggle(id),
+                [icon(id, expanded), @html.span(class="truncate", [text(str)])],
               ),
-              div(class="pl-3", [text(str)]),
+              div(
+                class="shrink-0 size-5 flex items-center justify-center rounded opacity-0 group-hover/node:opacity-100 hover:bg-gray-300/60 transition-opacity text-gray-400 hover:text-gray-600 text-xs cursor-pointer",
+                on_click=click(id),
+                [text("\u{2192}")],
+              ),
             ],
           ),
+          if expanded {
+            ul(
+              class="pl-3 ml-[9px] border-l border-gray-200",
+              children.map(aux),
+            )
+          } else {
+            nothing
+          },
+        ])
+      }
+      Tree::FixedNode(id~, str, children) => {
+        let active = indicator == id
+        let font = if active {
+          " font-semibold text-gray-900"
+        } else {
+          " text-gray-700"
+        }
+        @html.li([
           div(
-            class="pl-2 overflow-hidden duration-400 transition-[max-height] \{body_style}",
-            [ul(children.map(aux))],
+            class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
+            on_click=click(id),
+            [icon(id, true), @html.span([text(str)])],
           ),
+          ul(class="pl-5", children.map(aux)),
         ])
       }
     }
   }
 
-  ul(class="select-none", items.map(aux))
+  ul(class="select-none space-y-[1px]", items.map(aux))
 }

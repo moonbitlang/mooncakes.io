@@ -14,6 +14,9 @@ pub const VALUE_ICON = "/code-brackets.svg"
 pub const TRAIT_ICON = "/components.svg"
 
 ///|
+pub const FILE_ICON = "/file.svg"
+
+///|
 pub const FOLDER_OPEN = "/folder-open.svg"
 
 ///|

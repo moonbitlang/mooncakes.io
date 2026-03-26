@@ -87,6 +87,127 @@ pub fn skeleton_code_frequency() -> Html {
 }
 
 ///|
+pub fn skeleton_docs_content() -> Html {
+  fn api_item(title_w : String, sig_lines : Int, content_w : String) -> Html {
+    div(class="mb-3 mt-10", [
+      // Title bar with border-bottom
+      div(class="flex items-center justify-between border-b mb-4 py-2", [
+        div(class="h-5 \{title_w} bg-gray-200 rounded", nothing),
+      ]),
+      // Signature block
+      div(
+        class="bg-gray-100 rounded-lg px-4 py-2.5",
+        Array::makei(sig_lines, fn(_) {
+          div(class="h-3.5 w-3/4 bg-gray-200 rounded my-1.5", nothing)
+        }),
+      ),
+      // Content
+      div(class="pl-4 mt-3 space-y-2", [
+        div(class="h-3.5 \{content_w} bg-gray-200 rounded", nothing),
+      ]),
+    ])
+  }
+
+  div(class="animate-pulse py-4 mx-4 md:mx-0", [
+    // README toggle label + content + divider
+    div(class="mt-4 mb-8", [
+      div(class="h-4 w-16 bg-gray-200 rounded mb-4", nothing),
+      div(class="space-y-2.5 mb-6", [
+        div(class="h-3.5 w-full bg-gray-200 rounded", nothing),
+        div(class="h-3.5 w-5/6 bg-gray-200 rounded", nothing),
+        div(class="h-3.5 w-3/5 bg-gray-200 rounded", nothing),
+      ]),
+      div(class="border-b border-gray-200 mt-4", nothing),
+    ]),
+    // API doc items
+    api_item("w-32", 1, "w-full"),
+    api_item("w-40", 2, "w-5/6"),
+    api_item("w-24", 1, "w-2/3"),
+  ])
+}
+
+///|
+pub fn skeleton_sidebar() -> Html {
+  div(class="animate-pulse space-y-1 pt-1", [
+    div(class="flex items-center gap-2 px-2 py-1", [
+      div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+      div(class="h-3.5 w-24 bg-gray-200 rounded", nothing),
+    ]),
+    div(class="pl-5 space-y-1", [
+      div(class="flex items-center gap-2 px-2 py-1", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-20 bg-gray-200 rounded", nothing),
+      ]),
+      div(class="flex items-center gap-2 px-2 py-1", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-28 bg-gray-200 rounded", nothing),
+      ]),
+      div(class="flex items-center gap-2 px-2 py-1", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-16 bg-gray-200 rounded", nothing),
+      ]),
+    ]),
+    div(class="flex items-center gap-2 px-2 py-1", [
+      div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+      div(class="h-3.5 w-20 bg-gray-200 rounded", nothing),
+    ]),
+    div(class="flex items-center gap-2 px-2 py-1", [
+      div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+      div(class="h-3.5 w-32 bg-gray-200 rounded", nothing),
+    ]),
+    div(class="pl-5 space-y-1", [
+      div(class="flex items-center gap-2 px-2 py-1", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-18 bg-gray-200 rounded", nothing),
+      ]),
+      div(class="flex items-center gap-2 px-2 py-1", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-24 bg-gray-200 rounded", nothing),
+      ]),
+    ]),
+    div(class="flex items-center gap-2 px-2 py-1", [
+      div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+      div(class="h-3.5 w-28 bg-gray-200 rounded", nothing),
+    ]),
+  ])
+}
+
+///|
+pub fn skeleton_meta_sidebar() -> Html {
+  div(class="animate-pulse text-sm", [
+    // Install
+    div(class="mb-4", [
+      div(class="h-4 w-12 bg-gray-200 rounded mb-1.5", nothing),
+      div(class="h-8 w-full bg-gray-200 rounded", nothing),
+    ]),
+    // Meta rows
+    div(class="border-t pt-3 space-y-2", [
+      div(class="flex items-center gap-2", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-20 bg-gray-200 rounded", nothing),
+      ]),
+      div(class="flex items-center gap-2", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-16 bg-gray-200 rounded", nothing),
+      ]),
+      div(class="flex items-center gap-2", [
+        div(class="size-4 bg-gray-200 rounded shrink-0", nothing),
+        div(class="h-3.5 w-12 bg-gray-200 rounded", nothing),
+      ]),
+    ]),
+    // Dependencies
+    div(class="border-t pt-3 mt-3", [
+      div(class="h-4 w-24 bg-gray-200 rounded mb-2", nothing),
+      div(class="space-y-1.5", [
+        div(class="h-3.5 w-full bg-gray-200 rounded", nothing),
+        div(class="h-3.5 w-3/4 bg-gray-200 rounded", nothing),
+        div(class="h-3.5 w-5/6 bg-gray-200 rounded", nothing),
+      ]),
+    ]),
+  ])
+}
+
+///|
 pub fn load_failed(resource : String) -> Html {
   div(class="flex flex-col items-center justify-center py-16 w-full", [
     p(class="text-sm text-gray-400", [text("Failed to load \{resource}")]),

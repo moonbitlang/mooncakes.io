@@ -454,7 +454,7 @@ fn readme(
       } else {
         (div(class="mt-4 mb-6", [content]), @config.SECTION_OPEN)
       }
-      div(class="mt-4 mb-8 mx-4 md:mx-0", [
+      div(class="mt-4 mb-8 mx-4 md:mx-0 scroll-mt-header", id="readme", [
         div(
           class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
           on_click=dispatch(ToggleDocDetail("readme")),

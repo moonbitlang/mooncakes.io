@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --app-border: #e5e7eb;
+    --sidebar-bg: #fafafa;
   }
 
   html {
@@ -462,16 +463,12 @@
   border-left-color: #3f4852;
 }
 
-.sidebar-sticky-bar {
-  background-color: #fafafa;
+.theme-dark {
+  --sidebar-bg: #0b0b0c;
 }
 
-.theme-dark .sidebar-sticky-bar {
-  background-color: #0b0b0c;
-}
-
-.theme-dark .bg-zinc-50 .sidebar-sticky-bar {
-  background-color: #0f1115;
+.theme-dark .bg-zinc-50 {
+  --sidebar-bg: #0f1115;
 }
 
 .theme-dark .border-gray-100 {

@@ -202,7 +202,7 @@ fn sidebar(
 ) -> Html {
   div(class="text-gray-700 flex flex-col", [
     div(
-      class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 mb-1",
+      class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 mb-1 bg-[var(--sidebar-bg)]",
       [
         @html.button(
           class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",

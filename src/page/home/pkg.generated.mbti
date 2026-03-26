@@ -14,7 +14,7 @@ pub fn is_theme_toggle(Msg) -> Bool
 
 pub fn load(dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
-pub fn update(Msg, Model) -> (@runtime.Cmd, Model)
+pub fn update(Msg, Model, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
 pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
 
@@ -23,15 +23,20 @@ pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
 // Types and methods
 type AllModules
 
+type LazyStatus[T]
+
 pub struct Model {
-  recent_modules : @util.Status[Array[ModuleIndex]]
-  all_modules : @util.Status[AllModules]
+  highlights : @util.Status[ModuleHighlights]
+  all_modules : LazyStatus[AllModules]
+  show_all_modules : Bool
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
   showing_packages : Int
   showing_downloads : Int
 }
+
+type ModuleHighlights
 
 pub(all) struct ModuleIndex {
   author : String
@@ -46,9 +51,10 @@ pub(all) struct ModuleIndex {
 
 pub enum Msg {
   GotAllModule(Result[Array[ModuleIndex], String])
-  GotRecentModule(Result[Array[ModuleIndex], String])
+  GotHighlights(Result[ModuleHighlights, String])
   GotCount(Result[PackageCount, String])
   FilterChanged(String)
+  ToggleAllModules
   ToggleTheme
 }
 

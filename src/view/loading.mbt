@@ -25,23 +25,35 @@ pub fn loading() -> Html {
 
 ///|
 pub fn skeleton_module_cards(count : Int) -> Html {
-  let cards = Array::makei(count, fn(_i) {
+  let card = fn() {
     div(
-      class="h-24 lg:h-30 bg-white border border-gray-200 rounded-md py-3 px-4 flex flex-col gap-3",
+      class="bg-white border border-gray-200 rounded-md px-4 py-3.5 flex flex-col gap-2.5",
       [
-        div(class="flex gap-2", [
+        div(class="flex items-baseline gap-1", [
           div(class="h-4 w-16 bg-gray-200 rounded", nothing),
           div(class="h-4 w-24 bg-gray-200 rounded", nothing),
+          div(class="h-3 w-12 bg-gray-200 rounded ml-auto", nothing),
         ]),
         div(class="h-3 w-3/4 bg-gray-200 rounded", nothing),
-        div(class="h-3 w-16 bg-gray-200 rounded self-end", nothing),
+        div(class="h-3 w-1/2 bg-gray-200 rounded", nothing),
       ],
     )
-  })
-  div(
-    class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4 animate-pulse",
-    cards,
-  )
+  }
+  let per_column = (count + 2) / 3
+  let column = fn() {
+    div(
+      class="flex flex-col gap-2",
+      [
+        div(class="h-4 w-28 bg-gray-200 rounded py-2", nothing),
+        ..Array::makei(per_column, fn(_) { card() }),
+      ],
+    )
+  }
+  div(class="grid grid-cols-1 lg:grid-cols-3 gap-4 animate-pulse", [
+    column(),
+    column(),
+    column(),
+  ])
 }
 
 ///|

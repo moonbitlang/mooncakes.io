@@ -2,6 +2,7 @@ import {
   "moonbit-community/rabbita" @rabbita,
   "moonbit-community/rabbita/http",
   "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/svg",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/util",
   "illusory0x0/fuzzy_match",

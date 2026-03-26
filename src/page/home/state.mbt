@@ -15,16 +15,35 @@
 ///|
 pub enum Msg {
   GotAllModule(Result[Array[ModuleIndex], String])
-  GotRecentModule(Result[Array[ModuleIndex], String])
+  GotHighlights(Result[ModuleHighlights, String])
   GotCount(Result[PackageCount, String])
   FilterChanged(String)
+  ToggleAllModules
   ToggleTheme
 }
 
 ///|
+
+///|
+struct ModuleHighlights {
+  recent : Array[ModuleIndex]
+  new_modules : Array[ModuleIndex]
+  popular : Array[ModuleIndex]
+}
+
+///|
+enum LazyStatus[T] {
+  Idle
+  Loading
+  Failed
+  Success(T)
+}
+
+///|
 pub struct Model {
-  recent_modules : Status[Array[ModuleIndex]]
-  all_modules : Status[AllModules]
+  highlights : Status[ModuleHighlights]
+  all_modules : LazyStatus[AllModules]
+  show_all_modules : Bool
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
@@ -95,19 +114,18 @@ fn sanitize_for_fuzzy(text : String) -> String {
 }
 
 ///|
-let recent_modules_limit = 15
+let highlights_limit = 12
 
 ///|
 pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
     batch([
       @http.get(
-        "/api/v0/modules/all",
-        expect=Json(result => dispatch(GotAllModule(result)), decode_modules),
-      ),
-      @http.get(
-        "/api/v0/modules/recent?limit=\{recent_modules_limit}",
-        expect=Json(result => dispatch(GotRecentModule(result)), decode_modules),
+        "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
+        expect=Json(
+          result => dispatch(GotHighlights(result)),
+          decode_highlights,
+        ),
       ),
       @http.get(
         "/api/v0/modules/statistics",
@@ -115,8 +133,9 @@ pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
       ),
     ]),
     {
-      recent_modules: Loading,
-      all_modules: Loading,
+      highlights: Loading,
+      all_modules: Idle,
+      show_all_modules: false,
       filter: "",
       filtered_modules: [],
       showing_lines: 0,
@@ -127,15 +146,33 @@ pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
+fn fetch_all_modules(dispatch : (Msg) -> Cmd) -> Cmd {
+  @http.get(
+    "/api/v0/modules",
+    expect=Json(result => dispatch(GotAllModule(result)), decode_modules),
+  )
+}
+
+///|
+pub fn update(
+  msg : Msg,
+  model : Model,
+  dispatch~ : (Msg) -> Cmd,
+) -> (Cmd, Model) {
   match msg {
     GotAllModule(Ok(modules)) => {
       let indices = sort_modules_by_name(modules)
       let search_index = Lazy::new(fn() { build_search_index(indices) })
-      (none, { ..model, all_modules: Success({ indices, search_index }) })
+      let model = { ..model, all_modules: Success({ indices, search_index }) }
+      let filtered_modules = if model.filter.is_empty() {
+        []
+      } else {
+        filter_indices(model.filter, search_index.force())
+      }
+      (none, { ..model, filtered_modules, })
     }
-    GotRecentModule(Ok(recent)) =>
-      (none, { ..model, recent_modules: Success(recent) })
+    GotHighlights(Ok(highlights)) =>
+      (none, { ..model, highlights: Success(highlights) })
     GotCount(Ok(stat)) =>
       (
         none,
@@ -146,21 +183,41 @@ pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
           showing_downloads: stat.total_downloads,
         },
       )
-    GotAllModule(Err(msg)) | GotRecentModule(Err(msg)) | GotCount(Err(msg)) => {
+    GotAllModule(Err(msg)) | GotHighlights(Err(msg)) | GotCount(Err(msg)) => {
       println(msg)
-      (none, model)
+      (none, { ..model, all_modules: Failed })
     }
-    FilterChanged(filter) => {
-      let filtered_modules = match model.all_modules {
-        Success(all) =>
-          if filter.is_empty() {
-            []
-          } else {
-            filter_indices(filter, all.search_index.force())
+    FilterChanged(filter) =>
+      if filter.is_empty() {
+        (none, { ..model, filter, filtered_modules: [] })
+      } else {
+        match model.all_modules {
+          Idle =>
+            (
+              fetch_all_modules(dispatch),
+              { ..model, all_modules: Loading, filter, filtered_modules: [] },
+            )
+          Loading => (none, { ..model, filter, filtered_modules: [] })
+          Success(all) => {
+            let filtered_modules = filter_indices(
+              filter,
+              all.search_index.force(),
+            )
+            (none, { ..model, filter, filtered_modules })
           }
-        _ => []
+          Failed => (none, { ..model, filter, filtered_modules: [] })
+        }
       }
-      (none, { ..model, filter, filtered_modules })
+    ToggleAllModules => {
+      let show = not(model.show_all_modules)
+      match model.all_modules {
+        Idle if show =>
+          (
+            fetch_all_modules(dispatch),
+            { ..model, all_modules: Loading, show_all_modules: show },
+          )
+        _ => (none, { ..model, show_all_modules: show })
+      }
     }
     ToggleTheme => (none, model)
   }
@@ -419,6 +476,29 @@ fn decode_modules(json : Json) -> Result[Array[ModuleIndex], String] {
         e => Err(e.to_string())
       }
     _ => Err("expecting an array")
+  }
+}
+
+///|
+fn decode_module_array(json : Json) -> Array[ModuleIndex] raise {
+  match json {
+    Array(items) => items.map(decode_module_index)
+    _ => fail("expecting an array")
+  }
+}
+
+///|
+fn decode_highlights(json : Json) -> Result[ModuleHighlights, String] {
+  match json {
+    { "recent": recent_json, "new": new_json, "popular": popular_json, .. } =>
+      Ok({
+        recent: decode_module_array(recent_json),
+        new_modules: decode_module_array(new_json),
+        popular: decode_module_array(popular_json),
+      }) catch {
+        e => Err(e.to_string())
+      }
+    _ => Err("expecting highlights object with recent, new, popular")
   }
 }
 

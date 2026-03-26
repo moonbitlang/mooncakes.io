@@ -71,7 +71,9 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
     (GotBuildQueueMsg(msg), _) if @build_queue.is_theme_toggle(msg) =>
       start_theme_switch(model)
     (GotHomeMsg(msg), Home(page_model)) => {
-      let (cmd, page) = @home.update(msg, page_model)
+      let (cmd, page) = @home.update(msg, page_model, dispatch=x => {
+        dispatch(GotHomeMsg(x))
+      })
       (cmd, { ..model, page: Home(page) })
     }
     (GotDocsMsg(msg), Docs(page_model)) => {

@@ -158,28 +158,71 @@ fn pinned() -> Html {
       is_new: false,
     },
   ]
-  div(class="container lg:w-4/5 px-4", [
-    h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
-      text("Pinned modules"),
-    ]),
+  div(class="container lg:w-4/5 px-4 mt-4 mb-6", [
+    h1(class="py-2 text-sm font-bold text-gray-400", [text("Pinned modules")]),
     div(
-      class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
-      pinned.map(simple_module_card),
+      class="grid grid-cols-1 lg:grid-cols-3 gap-2",
+      pinned.map(fn(m) { compact_module_card(m) }),
     ),
   ])
 }
 
 ///|
-fn recently_updated(recently : Array[ModuleIndex]) -> Html {
-  let recently_updated = recently.map(simple_module_card)
+fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
+  let href = "/docs/\{versioned_path(mod)}"
+  let badge = if show_time {
+    text(mod.created_at.map(get_relative_time).unwrap_or(""))
+  } else {
+    text(mod.version)
+  }
+  a(
+    href~,
+    class="block bg-white border border-gray-200 rounded-md px-4 py-3.5 hover:border-mooncake2 hover:shadow-sm transition-all",
+    [
+      div(class="flex items-baseline gap-1 text-sm", [
+        span(class="text-gray-400 font-normal truncate", [text(mod.author)]),
+        span(class="text-gray-300", [text("/")]),
+        span(class="text-black font-semibold truncate", [text(mod.name)]),
+        span(class="text-xs text-gray-400 ml-auto shrink-0", [badge]),
+      ]),
+      p(class="text-xs text-gray-500 line-clamp-2 mt-2.5 min-h-[2lh]", [
+        text(mod.description.unwrap_or("")),
+      ]),
+    ],
+  )
+}
+
+///|
+fn module_list_column(
+  title : String,
+  modules : Array[ModuleIndex],
+  show_time? : Bool = false,
+) -> Html {
+  div(
+    class="flex flex-col gap-2",
+    [
+      h2(class="py-2 text-sm font-bold text-gray-400", [text(title)]),
+      ..modules
+      .iter()
+      .take(12)
+      .map(fn(m) { compact_module_card(m, show_time~) })
+      .collect(),
+    ],
+  )
+}
+
+///|
+fn highlights_section(
+  recent : Array[ModuleIndex],
+  new_published : Array[ModuleIndex],
+  popular : Array[ModuleIndex],
+) -> Html {
   div(class="container lg:w-4/5 px-4 animate-fade-in", [
-    h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
-      text("Recently updated"),
+    div(class="grid grid-cols-1 lg:grid-cols-3 gap-4", [
+      module_list_column("Recently updated", recent, show_time=true),
+      module_list_column("Newly published", new_published, show_time=true),
+      module_list_column("Most downloaded", popular),
     ]),
-    div(
-      class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
-      recently_updated,
-    ),
   ])
 }
 
@@ -189,7 +232,6 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
     .iter2()
     .to_array()
     ..sort_by(fn(a, b) {
-      // Put '#' (non-letter modules) at the end
       match (a.0, b.0) {
         ('#', '#') => 0
         ('#', _) => 1
@@ -201,25 +243,14 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
       let (key, value) = x
       let modules = value.map(simple_module_card)
       div(class="pt-2", [
-        div(class="container lg:w-4/5 px-4", [
-          h1(class="p-3 text-sm font-bold text-gray-400", [
-            text(key.to_string()),
-          ]),
-          div(
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
-            modules,
-          ),
-        ]),
+        h1(class="py-2 text-sm font-bold text-gray-400", [text(key.to_string())]),
+        div(
+          class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
+          modules,
+        ),
       ])
     })
-  div(class="pt-10 animate-fade-in", [
-    div(class="container lg:w-4/5 px-4", [
-      h1(class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0", [
-        text("All modules"),
-      ]),
-    ]),
-    div(all_modules),
-  ])
+  div(class="animate-fade-in", all_modules)
 }
 
 ///|
@@ -350,35 +381,77 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
 pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   let module_list = if model.filter == "" {
     let pinned_modules = pinned()
-    let recently_updated = match model.recent_modules {
+    let highlights = match model.highlights {
+      Success(h) => highlights_section(h.recent, h.new_modules, h.popular)
+      Failed => @view.load_failed("recently updated modules")
       Loading =>
         div(class="container lg:w-4/5 px-4", [
-          h1(class="p-4 text-sm font-bold text-gray-400 lg:border-0", [
-            text("Recently updated"),
-          ]),
-          @view.skeleton_module_cards(recent_modules_limit),
+          @view.skeleton_module_cards(highlights_limit),
         ])
-      Failed => @view.load_failed("recently updated modules")
-      Success(xs) => recently_updated(xs)
     }
-    let all_modules = match model.all_modules {
-      Loading =>
-        div(class="pt-10", [
-          div(class="container lg:w-4/5 px-4", [
-            h1(
-              class="border-b p-4 text-sm font-bold text-gray-400 lg:border-0",
-              [text("All modules")],
+    let chevron_down : Html = @svg.svg(
+      width=16,
+      height=16,
+      view_box="0 0 16 16",
+      class="shrink-0",
+      [
+        @svg.path(
+          d="M4 6L8 10L12 6",
+          fill="none",
+          stroke="currentColor",
+          stroke_width=2,
+        ),
+      ],
+    )
+    let chevron_up : Html = @svg.svg(
+      width=16,
+      height=16,
+      view_box="0 0 16 16",
+      class="shrink-0",
+      [
+        @svg.path(
+          d="M4 10L8 6L12 10",
+          fill="none",
+          stroke="currentColor",
+          stroke_width=2,
+        ),
+      ],
+    )
+    let all_modules_section = div(class="pt-10 container lg:w-4/5 px-4", [
+      div(class="flex justify-center py-2", [
+        div(
+          class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 hover:text-yellow-900 transition-colors px-6 py-2 rounded-md hover:bg-gray-100",
+          on_click=dispatch(ToggleAllModules),
+          [
+            text(
+              if model.show_all_modules {
+                "Hide modules"
+              } else {
+                "Show more modules"
+              },
             ),
-            @view.skeleton_module_cards(9),
-          ]),
-        ])
-      Failed => @view.load_failed("module indices")
-      Success(xs) => all_modules(xs.indices)
-    }
-    div([pinned_modules, recently_updated, all_modules])
+            if model.show_all_modules {
+              chevron_up
+            } else {
+              chevron_down
+            },
+          ],
+        ),
+      ]),
+      if model.show_all_modules {
+        match model.all_modules {
+          Idle | Loading => @view.skeleton_module_cards(9)
+          Failed => @view.load_failed("module indices")
+          Success(xs) => all_modules(xs.indices)
+        }
+      } else {
+        nothing
+      },
+    ])
+    div([pinned_modules, highlights, all_modules_section])
   } else {
     match model.all_modules {
-      Loading => @view.loading()
+      Idle | Loading => @view.loading()
       Failed => @view.load_failed("module indices")
       Success(_) => search_result(model.filtered_modules)
     }

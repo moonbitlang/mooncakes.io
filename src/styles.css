@@ -462,6 +462,66 @@
   border-left-color: #3f4852;
 }
 
+.sidebar-sticky-bar {
+  background-color: inherit;
+}
+
+.theme-dark .border-gray-100 {
+  border-color: #1e2228;
+}
+
+.theme-dark .hover\:bg-gray-200\/60:hover {
+  background-color: rgba(29, 34, 41, 0.6);
+}
+
+.theme-dark .hover\:bg-gray-300\/60:hover {
+  background-color: rgba(38, 45, 54, 0.6);
+}
+
+.theme-dark .bg-blue-100 {
+  background-color: #1e3a5f;
+}
+
+.theme-dark .text-blue-600 {
+  color: #93c5fd;
+}
+
+.theme-dark .bg-emerald-100 {
+  background-color: #064e3b;
+}
+
+.theme-dark .text-emerald-600 {
+  color: #6ee7b7;
+}
+
+.theme-dark .bg-violet-100 {
+  background-color: #2e1065;
+}
+
+.theme-dark .text-violet-600 {
+  color: #c4b5fd;
+}
+
+.theme-dark .bg-amber-100 {
+  background-color: #451a03;
+}
+
+.theme-dark .text-amber-600 {
+  color: #fbbf24;
+}
+
+.theme-dark .bg-orange-100 {
+  background-color: #431407;
+}
+
+.theme-dark .text-orange-600 {
+  color: #fb923c;
+}
+
+.theme-dark .bg-gray-200 .text-gray-500 {
+  color: #9aa3b2;
+}
+
 .docs-state-shell {
   padding: 1rem 1rem 0;
 }

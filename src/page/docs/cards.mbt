@@ -133,7 +133,7 @@ fn impl_doc(
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
   let signature : Html = pre(class="bg-gray-100 text-wrap pr-4", [
-    code(class="font-mono text-[0.9em] text-[#0033b3]", [
+    code(class="font-mono text-xs md:text-sm text-[#0033b3]", [
       text("impl "),
       type_path(trait_type, module_name~, module_version~),
       text(" for "),

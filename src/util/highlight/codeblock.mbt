@@ -30,7 +30,7 @@ pub(all) enum CodeSpan {
   Newline
   Space(Int)
   Comment(String)
-  Meta(String)
+  Attr(String)
 } derive(Show)
 
 ///|
@@ -138,8 +138,8 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     ATTRIBUTE((id1, id2, str)) => {
       dst.push(
         match id2 {
-          None => Meta("#\{id1}")
-          Some(id2) => Meta("#\{id1}\{id2}")
+          None => Attr("#\{id1}")
+          Some(id2) => Attr("#\{id1}\{id2}")
         },
       )
       push_code_to_span(str, dst)

@@ -51,7 +51,7 @@ pub fn code_block(
       CharLit(s) | StringLit(s) | Number(s) =>
         span(class="text-orange-800", [text(s)])
       Comment(s) => span(class="text-green-800", [text(s)])
-      Meta(s) => span(class="text-[#AF00DB]", [text(s)])
+      Attr(s) => span(class="text-[#AF00DB]", [text(s)])
       QualIdent(path, name) =>
         if kind is Signature {
           span(class="group/ident relative", [

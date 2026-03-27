@@ -27,7 +27,7 @@ pub(all) enum CodeSpan {
   Newline
   Space(Int)
   Comment(String)
-  Meta(String)
+  Attr(String)
 }
 pub impl Show for CodeSpan
 

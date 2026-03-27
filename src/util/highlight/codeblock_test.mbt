@@ -460,6 +460,47 @@ test "parse_inline_link" {
 }
 
 ///|
+test "parse_link_with_package_path_content" {
+  // link content is @moonbitlang/core/builtin (no dot-separated ident)
+  let source =
+    #| f(<a href="moonbitlang/core/builtin">@moonbitlang/core/builtin</a>)
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.from_array([Space(1), LIdent("f"), Symbol("("), Link(href="moonbitlang/core/builtin", [LIdent("@moonbitlang/core/builtin")]), Symbol(")")])
+    ),
+  )
+}
+
+///|
+test "parse_attribute" {
+  let source =
+    #| #deprecated
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.from_array([Space(1), Attr("#deprecated")])
+    ),
+  )
+  let source =
+    #| #deprecated.name
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.from_array([Space(1), Attr("#deprecated.name")])
+    ),
+  )
+  let source =
+    #| fn f() -> Unit #deprecated #unsafe
+  inspect(
+    parse_signature(source),
+    content=(
+      #|@list.from_array([Space(1), Keyword("fn"), Space(1), LIdent("f"), Symbol("()"), Space(1), Symbol("->"), Space(1), UIdent("Unit"), Space(1), Attr("#deprecated"), Space(1), Attr("#unsafe")])
+    ),
+  )
+}
+
+///|
 test "parse_package_name_with_dot_ulident" {
   let source =
     #| f(@path/to/pkg.Ctor)

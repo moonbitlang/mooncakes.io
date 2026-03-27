@@ -27,6 +27,7 @@ priv enum State {
   LexLinkHref(List[Char])
   LexLinkContent(href~ : String, List[Char])
   LexComment(List[Char])
+  LexAttr(List[Char])
 }
 
 ///|
@@ -138,6 +139,19 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
     (LexMultiString(content), [c, .. s], acc) =>
       continue (LexMultiString(content.add(c)), s, acc)
 
+    // attributes: #attribute or #attribute.name
+    (LexStart, ['#', 'a'..='z' as c, .. s], acc) =>
+      continue (LexAttr(@list.from_array([c])), s, acc)
+    (
+      LexAttr(content),
+      ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' | '.' as c, .. s],
+      acc,
+    ) => continue (LexAttr(content.add(c)), s, acc)
+    (LexAttr(content), s, acc) => {
+      let content = String::from_iter(content.rev().iter())
+      continue (LexStart, s, acc.add(Attr("#" + content)))
+    }
+
     // identifiers
     (LexStart, ['A'..='Z' | 'a'..='z' | '_' as c, .. s], acc) =>
       continue (LexIdent(@list.from_array([c])), s, acc)
@@ -167,6 +181,10 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
       continue (LexQualIdent(path, @list.empty()), s, acc)
     }
     (LexQual(path), [c, .. s], acc) => continue (LexQual(path.add(c)), s, acc)
+    (LexQual(path), [], acc) => {
+      let path = String::from_iter(path.rev().iter())
+      acc.add(LIdent("@" + path)).rev()
+    }
     (
       LexQualIdent(path, id),
       ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s],

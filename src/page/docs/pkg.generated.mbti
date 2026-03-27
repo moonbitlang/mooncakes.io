@@ -22,6 +22,8 @@ pub fn navigate_package(Model, @util.UnsolvedMooncakePath, String?, dispatch~ : 
 
 pub fn scroll_to_smooth(String) -> @runtime.Cmd
 
+pub fn scroll_to_top() -> @runtime.Cmd
+
 pub fn update(Msg, Model, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
 pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html

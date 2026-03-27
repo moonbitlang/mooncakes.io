@@ -87,6 +87,15 @@ pub fn scroll_to_smooth(id : String) -> Cmd {
 }
 
 ///|
+extern "js" fn smooth_scroll_to_top() -> Unit =
+  #| () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+///|
+pub fn scroll_to_top() -> Cmd {
+  @rabbita.effect(fn() { smooth_scroll_to_top() })
+}
+
+///|
 fn has_docs_assets(build_status : BuildStatus?) -> Bool {
   match build_status {
     Some(BuildSuccess | BuildLegacy) => true
@@ -407,7 +416,7 @@ pub fn update(
               versioned_docs_path(pkg_path, manifest.module_, manifest.version)
             _ => pkg_path
           }
-          (@nav.push_url("/docs/" + url_path), model)
+          (batch([@nav.push_url("/docs/" + url_path), scroll_to_top()]), model)
         }
         Symbol(pkg_path~, id, ..) => {
           let same_package = match model.path {

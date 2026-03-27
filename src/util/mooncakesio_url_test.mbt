@@ -1,5 +1,5 @@
 ///|
-fn test_url(path : String, fragment~ : String? = None) -> @url.Url {
+fn test_url(path : String, fragment? : String? = None) -> @url.Url {
   {
     protocol: Https,
     host: "mooncakes.io",
@@ -53,12 +53,9 @@ test "resolve docs" {
 ///|
 test "resolve docs with package path" {
   inspect(
-    @util.MooncakesioPath::resolve(
-      test_url("docs/moonbitlang/core/builtin"),
-    ),
+    @util.MooncakesioPath::resolve(test_url("docs/moonbitlang/core/builtin")),
     content=(
       #|docs: moonbitlang/core/builtin, fragment: None
-
     ),
   )
 }
@@ -79,10 +76,7 @@ test "resolve docs with fragment" {
 test "resolve docs with package path and fragment" {
   inspect(
     @util.MooncakesioPath::resolve(
-      test_url(
-        "docs/moonbitlang/core/builtin",
-        fragment=Some("Array::map"),
-      ),
+      test_url("docs/moonbitlang/core/builtin", fragment=Some("Array::map")),
     ),
     content=(
       #|docs: moonbitlang/core/builtin, fragment: Some("Array::map")

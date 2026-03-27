@@ -4,20 +4,21 @@ package "moonbitlang/mooncakes/page/docs"
 import {
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/internal/runtime",
+  "moonbitlang/mooncakes/util",
 }
 
 // Values
 pub fn get_path(Model) -> String
 
-pub fn is_same_module(Model, String) -> Bool
+pub fn is_same_module(Model, @util.UnsolvedMooncakePath) -> Bool
 
-pub fn is_same_path(Model, String) -> Bool
+pub fn is_same_path(Model, @util.UnsolvedMooncakePath) -> Bool
 
 pub fn is_theme_toggle(Msg) -> Bool
 
-pub fn load(String, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn load(@util.UnsolvedMooncakePath, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
-pub fn navigate_package(Model, String, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn navigate_package(Model, @util.UnsolvedMooncakePath, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
 
 pub fn scroll_to_smooth(String) -> @runtime.Cmd
 

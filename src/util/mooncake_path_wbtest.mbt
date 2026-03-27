@@ -56,23 +56,23 @@ test "resolve unversioned with package path" {
 }
 
 ///|
-test "resolve mismatch returns None" {
+test "resolve mismatch returns Err" {
   let p = MooncakePath::resolve(
     UnsolvedMooncakePath("mizchi/mbt_rs@0.3.0"),
     module_path="tonyfettes/tree_sitter",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="None")
+  assert_true(p is None)
 }
 
 ///|
-test "resolve path shorter than module returns None" {
+test "resolve path shorter than module returns Err" {
   let p = MooncakePath::resolve(
     UnsolvedMooncakePath("mizchi"),
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="None")
+  assert_true(p is None)
 }
 
 ///|
@@ -115,23 +115,23 @@ test "resolve leading slash" {
 }
 
 ///|
-test "resolve double slash returns None" {
+test "resolve double slash returns Err" {
   let p = MooncakePath::resolve(
     UnsolvedMooncakePath("mizchi//mbt_rs"),
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="None")
+  assert_true(p is None)
 }
 
 ///|
-test "resolve empty path returns None" {
+test "resolve empty path returns Err" {
   let p = MooncakePath::resolve(
     UnsolvedMooncakePath(""),
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="None")
+  assert_true(p is None)
 }
 
 ///|
@@ -250,9 +250,7 @@ test "is_same_module check_version" {
   }
   assert_true(p.is_same_module(UnsolvedMooncakePath("mizchi/mbt_rs@0.5.0")))
   assert_false(p.is_same_module(UnsolvedMooncakePath("mizchi/mbt_rs@1.0.0")))
-  // @latest matches when self.version == latest_version
   assert_true(p.is_same_module(UnsolvedMooncakePath("mizchi/mbt_rs@latest")))
-  // unversioned resolves to latest_version, same as self.version
   assert_true(p.is_same_module(UnsolvedMooncakePath("mizchi/mbt_rs")))
 }
 
@@ -304,11 +302,9 @@ test "is_same_package check_version" {
   assert_false(
     p.is_same_package(UnsolvedMooncakePath("mizchi/mbt_rs@1.0.0/lib")),
   )
-  // @latest matches when self.version == latest_version
   assert_true(
     p.is_same_package(UnsolvedMooncakePath("mizchi/mbt_rs@latest/lib")),
   )
-  // unversioned resolves to latest_version, same as self.version
   assert_true(p.is_same_package(UnsolvedMooncakePath("mizchi/mbt_rs/lib")))
 }
 
@@ -338,4 +334,24 @@ test "is_same_package invalid input" {
   assert_false(p.is_same_package(UnsolvedMooncakePath("/")))
   assert_false(p.is_same_package(UnsolvedMooncakePath("mizchi//mbt_rs/lib")))
   assert_false(p.is_same_package(UnsolvedMooncakePath("mizchi")))
+}
+
+///|
+test "unsolved package_path strips version" {
+  inspect(
+    UnsolvedMooncakePath("trkbt10/osenv@latest/dirs").package_path(),
+    content="trkbt10/osenv/dirs",
+  )
+  inspect(
+    UnsolvedMooncakePath("mizchi/mbt_rs@0.3.0/lib").package_path(),
+    content="mizchi/mbt_rs/lib",
+  )
+  inspect(
+    UnsolvedMooncakePath("moonbitlang/core/builtin").package_path(),
+    content="moonbitlang/core/builtin",
+  )
+  inspect(
+    UnsolvedMooncakePath("mizchi/mbt_rs").package_path(),
+    content="mizchi/mbt_rs",
+  )
 }

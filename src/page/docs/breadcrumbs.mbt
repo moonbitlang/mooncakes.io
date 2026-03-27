@@ -1,13 +1,12 @@
 ///|
 fn breadcrumbs(
   path : String,
-  module_path : String,
+  module_path : String?,
   module_index : ModuleIndex?,
 ) -> Html {
-  let module_path = module_path.trim(char_set="/").to_string()
   let raw_paths = split_docs_path(path)
   let lookup_paths = split_docs_path(docs_lookup_path(path))
-  let lookup_module_path = docs_lookup_path(module_path)
+  let lookup_module_path = module_path.map(docs_lookup_path)
   let mut raw_acc_path = ""
   let mut lookup_acc_path = ""
   let elems = []
@@ -20,8 +19,8 @@ fn breadcrumbs(
     } else {
       "/" + lookup_path
     }
-    let elem = match module_index {
-      Some(module_index) =>
+    let elem = match (module_index, lookup_module_path) {
+      (Some(module_index), Some(lookup_module_path)) =>
         if lookup_acc_path.has_prefix(lookup_module_path) &&
           module_index.0.find_node(lookup_acc_path) is Some(node) &&
           (lookup_acc_path == lookup_module_path || node.pkg is Some(_)) {
@@ -31,7 +30,7 @@ fn breadcrumbs(
         } else {
           div(class="text-gray-700 font-normal", [text(lookup_path)])
         }
-      None => div(class="text-gray-700 font-normal", [text(lookup_path)])
+      _ => div(class="text-gray-700 font-normal", [text(lookup_path)])
     }
     elems.push(elem)
   }

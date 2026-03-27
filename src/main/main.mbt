@@ -139,33 +139,35 @@ fn route_with_theme(
         @nav.load(url.to_string()),
         { theme, page: Redirect, theme_switching: false },
       )
-    Docs(mooncakes_path) => ...
-    // let path = module_path.iter().map(StringView::to_string).join("/")
-    // // If already on this docs page and path unchanged
-    // if model.page is Docs(page_model) && @docs.is_same_path(page_model, path) {
-    //   return match url.fragment {
-    //     Some(fragment) => (@docs.scroll_to_smooth(fragment), model)
-    //     None => (none, model)
-    //   }
-    // }
-    // // Same module: only reload package content, preserve sidebar/meta
-    // if model.page is Docs(page_model) &&
-    //   @docs.is_same_module(page_model, path) {
-    //   let (cmd, page) = @docs.navigate_package(
-    //     page_model,
-    //     path,
-    //     url.fragment,
-    //     dispatch=x => dispatch(GotDocsMsg(x)),
-    //   )
-    //   return (batch([cmd, scroll_top]), { ..model, page: Docs(page) })
-    // }
-    // let (cmd, page) = @docs.load(path, url.fragment, dispatch=x => {
-    //   dispatch(GotDocsMsg(x))
-    // })
-    // (
-    //   batch([cmd, scroll_top]),
-    //   { theme, page: Docs(page), theme_switching: false },
-    // )
+    Docs(mooncakes_path, fragment~) => {
+      // If already on this docs page and path unchanged, just scroll
+      if model.page is Docs(page_model) &&
+        @docs.is_same_path(page_model, mooncakes_path) {
+        return match fragment {
+          Some(fragment) => (@docs.scroll_to_smooth(fragment), model)
+          None => (none, model)
+        }
+      }
+      // Same module: only reload package content, preserve sidebar/meta
+      if model.page is Docs(page_model) &&
+        @docs.is_same_module(page_model, mooncakes_path) {
+        let (cmd, page) = @docs.navigate_package(
+          page_model,
+          mooncakes_path,
+          fragment,
+          dispatch=x => dispatch(GotDocsMsg(x)),
+        )
+        return (batch([cmd, scroll_top]), { ..model, page: Docs(page) })
+      }
+      // Full load
+      let (cmd, page) = @docs.load(mooncakes_path, fragment, dispatch=x => {
+        dispatch(GotDocsMsg(x))
+      })
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: Docs(page), theme_switching: false },
+      )
+    }
     NotFound(_) =>
       (scroll_top, { theme, page: NotFound, theme_switching: false })
   }

@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "moonbitlang/mooncakes/util"
 
+import {
+  "moonbit-community/rabbita/url",
+}
+
 // Values
 
 // Errors
@@ -11,13 +15,24 @@ pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
 
 type MooncakePath
+pub fn MooncakePath::is_same_module(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
+pub fn MooncakePath::is_same_package(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
+pub fn MooncakePath::latest_version(Self) -> String
 pub fn MooncakePath::module_path(Self) -> String
 pub fn MooncakePath::package_path(Self) -> String
-pub fn MooncakePath::resolve(String, module_path~ : String) -> Self?
-pub fn MooncakePath::version(Self) -> String?
+pub fn MooncakePath::resolve(UnsolvedMooncakePath, module_path~ : String, latest_version~ : String) -> Self?
+pub fn MooncakePath::version(Self) -> String
 
-pub(all) struct Mooncakesio {
+pub enum MooncakesioPath {
+  Home
+  User(StringView)
+  Docs(UnsolvedMooncakePath, fragment~ : String?)
+  BuildQueue
+  NotFound(String)
+  Assets(@url.Url)
 }
+pub fn MooncakesioPath::resolve(@url.Url) -> Self
+pub impl Show for MooncakesioPath
 
 pub(all) enum Status[T] {
   Loading
@@ -26,6 +41,11 @@ pub(all) enum Status[T] {
 }
 pub impl[T : Eq] Eq for Status[T]
 pub impl[T : Show] Show for Status[T]
+
+type UnsolvedMooncakePath
+pub fn UnsolvedMooncakePath::new(String) -> Self
+pub fn UnsolvedMooncakePath::package_path(Self) -> String
+pub impl Show for UnsolvedMooncakePath
 
 // Type aliases
 

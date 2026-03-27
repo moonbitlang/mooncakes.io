@@ -173,31 +173,6 @@ fn strip_module_version(segment : String) -> String {
 }
 
 ///|
-fn docs_module_path(path : String) -> String {
-  match split_docs_path(path) {
-    [author, module_name, ..] => author + "/" + module_name
-    _ => path.trim(char_set="/").to_string()
-  }
-}
-
-///|
-fn docs_current_module_path(
-  current_path : String,
-  module_lookup_path : String,
-) -> String {
-  let current_segments = split_docs_path(current_path)
-  let module_segments = split_docs_path(module_lookup_path)
-  if current_segments.length() < module_segments.length() {
-    return module_lookup_path
-  }
-  let result = []
-  for i in 0..<module_segments.length() {
-    result.push(current_segments[i])
-  }
-  result.join("/")
-}
-
-///|
 fn docs_lookup_path(path : String) -> String {
   split_docs_path(path).map(strip_module_version).join("/")
 }
@@ -241,6 +216,25 @@ fn versioned_asset_path(
     suffix.push(path_segments[i])
   }
   versioned + "/" + suffix.join("/")
+}
+
+///|
+fn make_versioned_asset_path(mp : @util.MooncakePath) -> String {
+  let module_path = mp.module_path()
+  let package_path = mp.package_path()
+  let version = mp.version()
+  let versioned_module = module_path + "@" + version
+  let pkg_segs = split_docs_path(package_path)
+  let mod_segs = split_docs_path(module_path)
+  if pkg_segs.length() <= mod_segs.length() {
+    versioned_module
+  } else {
+    let suffix : Array[String] = []
+    for i in mod_segs.length()..<pkg_segs.length() {
+      suffix.push(pkg_segs[i])
+    }
+    versioned_module + "/" + suffix.join("/")
+  }
 }
 
 ///|

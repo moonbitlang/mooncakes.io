@@ -225,142 +225,22 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     Success(module_index) => Some(module_index)
     _ => None
   }
-  let current_module_path = match model.manifest {
-    Success(manifest) => docs_current_module_path(model.path, manifest.module_)
-    _ => docs_module_path(model.path)
+  let nav_path = match model.path {
+    Ok(resolved) => resolved.package_path()
+    Err(unsolved) => unsolved.package_path()
   }
-  let module_path = match model.manifest {
-    Success(_) => current_module_path
-    _ => docs_module_path(model.path)
-  }
-  let package_path = match model.manifest {
-    Success(manifest) =>
-      versioned_docs_path(model.path, manifest.module_, manifest.version)
-    _ => model.path
+  let nav_module_path : String? = match model.path {
+    Ok(resolved) => Some(resolved.module_path())
+    Err(_) => None
   }
   let navbar : Html = navbar(
-    model.path,
-    module_path,
+    nav_path,
+    nav_module_path,
     module_index,
     model.collapsed_docs.card_mode,
     dispatch,
     theme_toggle~,
   )
-  let resolved_meta = match model.module_meta {
-    Success(meta) => {
-      let meta = match model.manifest {
-        Success(manifest) => { ..meta, version: manifest.version }
-        _ => meta
-      }
-      Some(meta)
-    }
-    _ => None
-  }
-  // Full meta info shown on mobile/tablet only (root package page)
-  let meta_mobile : Html = if model.path == module_path {
-    match resolved_meta {
-      Some(meta) =>
-        div(class="xl:hidden", [
-          meta_info(meta, install_copied=model.install_copied, dispatch),
-        ])
-      None => nothing
-    }
-  } else {
-    nothing
-  }
-  // Compact meta sidebar shown on desktop (all pages)
-  let meta_right : Html = match resolved_meta {
-    Some(meta) =>
-      div(class="animate-fade-in", [
-        meta_sidebar(meta, install_copied=model.install_copied, dispatch),
-      ])
-    None =>
-      if model.module_meta is Loading {
-        @view.skeleton_meta_sidebar()
-      } else {
-        nothing
-      }
-  }
-  let docs_loaded = match model.readme_content {
-    Success(_) => true
-    _ => false
-  }
-  let docs_notice = match (model.manifest, model.module_meta) {
-    (Failed, _) | (_, Failed) =>
-      if docs_loaded {
-        nothing
-      } else {
-        @view.document_not_available(model.path)
-      }
-    (Success(_), Success(meta)) =>
-      match meta.build_status {
-        Some(BuildQueued) =>
-          if docs_loaded {
-            nothing
-          } else {
-            queued_docs_notice()
-          }
-        Some(BuildFailed) =>
-          if docs_loaded {
-            nothing
-          } else {
-            failed_docs_notice(model.build_log_open, model.build_log, dispatch)
-          }
-        None => if docs_loaded { nothing } else { outdated_docs_notice() }
-        Some(BuildSuccess) | Some(BuildLegacy) =>
-          match (model.readme_content, model.module_index, model.package_data) {
-            (Failed, _, _) | (_, Failed, _) =>
-              @view.document_not_available(model.path)
-            (_, _, Failed) =>
-              match model.manifest {
-                Success(manifest) if manifest.has_package =>
-                  @view.document_not_available(model.path)
-                _ => nothing
-              }
-            _ => nothing
-          }
-      }
-    _ => nothing
-  }
-  let (module_name, module_version) = match model.manifest {
-    Success(manifest) => (manifest.module_, manifest.version)
-    _ => ("", "")
-  }
-  let content_ready = model.readme_content is Success(_) &&
-    not(model.package_data is Loading)
-  let (document_view, source_files_view) = if content_ready {
-    let doc = match model.readme_content {
-      Success(readme_content) =>
-        div(class="animate-fade-in", [
-          document(
-            hide_large_package=model.hide_large_package,
-            readme_content~,
-            package_data=model.package_data,
-            folded=model.collapsed_docs,
-            module_name~,
-            module_version~,
-            dispatch,
-          ),
-        ])
-      _ => nothing
-    }
-    let src = source_files_section(model.source_files, package_path~)
-    (doc, src)
-  } else {
-    let skeleton = match model.module_meta {
-      Success(
-        { build_status: Some(BuildQueued) | Some(BuildFailed) | None, .. }
-      ) => nothing
-      Failed => nothing
-      _ =>
-        match model.readme_content {
-          Failed => nothing
-          _ => @view.skeleton_docs_content()
-        }
-    }
-    (skeleton, nothing)
-  }
-  let main = div([meta_mobile, docs_notice, document_view, source_files_view])
   let search = model.search
   let search_panel : Html = @html.dialog(
     class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg fixed max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%] overscroll-contain",
@@ -428,6 +308,150 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
       },
     ],
   )
+  guard model.path is Ok(resolved) else {
+    return div(class="min-h-screen w-full flex-col", [
+      search_panel,
+      navbar,
+      div(class="flex-1", [
+        div(
+          class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
+          [
+            div(
+              class="overflow-y-auto hidden md:block md:sticky md:top-header md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
+              [div(class="w-full", [@view.skeleton_sidebar()])],
+            ),
+            div(class="flex-1 min-w-0 max-w-4xl", [
+              @view.skeleton_docs_content(),
+            ]),
+            div(
+              class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
+              [@view.skeleton_meta_sidebar()],
+            ),
+          ],
+        ),
+      ]),
+      @view.footer(),
+    ])
+  }
+  let path_str = resolved.package_path()
+  let module_path = resolved.module_path()
+  let package_path = make_versioned_asset_path(resolved)
+  let resolved_meta = match model.module_meta {
+    Success(meta) => {
+      let meta = match model.manifest {
+        Success(manifest) => { ..meta, version: manifest.version }
+        _ => meta
+      }
+      Some(meta)
+    }
+    _ => None
+  }
+  // Full meta info shown on mobile/tablet only (root package page)
+  let is_module_root = path_str == module_path
+  let meta_mobile : Html = if is_module_root {
+    match resolved_meta {
+      Some(meta) =>
+        div(class="xl:hidden", [
+          meta_info(meta, install_copied=model.install_copied, dispatch),
+        ])
+      None => nothing
+    }
+  } else {
+    nothing
+  }
+  // Compact meta sidebar shown on desktop (all pages)
+  let meta_right : Html = match resolved_meta {
+    Some(meta) =>
+      div(class="animate-fade-in", [
+        meta_sidebar(meta, install_copied=model.install_copied, dispatch),
+      ])
+    None =>
+      if model.module_meta is Loading {
+        @view.skeleton_meta_sidebar()
+      } else {
+        nothing
+      }
+  }
+  let docs_loaded = match model.readme_content {
+    Success(_) => true
+    _ => false
+  }
+  let docs_notice = match (model.manifest, model.module_meta) {
+    (Failed, _) | (_, Failed) =>
+      if docs_loaded {
+        nothing
+      } else {
+        @view.document_not_available(path_str)
+      }
+    (Success(_), Success(meta)) =>
+      match meta.build_status {
+        Some(BuildQueued) =>
+          if docs_loaded {
+            nothing
+          } else {
+            queued_docs_notice()
+          }
+        Some(BuildFailed) =>
+          if docs_loaded {
+            nothing
+          } else {
+            failed_docs_notice(model.build_log_open, model.build_log, dispatch)
+          }
+        None => if docs_loaded { nothing } else { outdated_docs_notice() }
+        Some(BuildSuccess) | Some(BuildLegacy) =>
+          match (model.readme_content, model.module_index, model.package_data) {
+            (Failed, _, _) | (_, Failed, _) =>
+              @view.document_not_available(path_str)
+            (_, _, Failed) =>
+              match model.manifest {
+                Success(manifest) if manifest.has_package =>
+                  @view.document_not_available(path_str)
+                _ => nothing
+              }
+            _ => nothing
+          }
+      }
+    _ => nothing
+  }
+  let (module_name, module_version) = match model.manifest {
+    Success(manifest) => (manifest.module_, manifest.version)
+    _ => ("", "")
+  }
+  let content_ready = model.readme_content is Success(_) &&
+    not(model.package_data is Loading)
+  let (document_view, source_files_view) = if content_ready {
+    let doc = match model.readme_content {
+      Success(readme_content) =>
+        div(class="animate-fade-in", [
+          document(
+            hide_large_package=model.hide_large_package,
+            readme_content~,
+            package_data=model.package_data,
+            folded=model.collapsed_docs,
+            module_name~,
+            module_version~,
+            dispatch,
+          ),
+        ])
+      _ => nothing
+    }
+    let src = source_files_section(model.source_files, package_path~)
+    (doc, src)
+  } else {
+    let skeleton = match model.module_meta {
+      Success(
+        { build_status: Some(BuildQueued) | Some(BuildFailed) | None, .. }
+      ) => nothing
+      Failed => nothing
+      _ =>
+        match model.readme_content {
+          Failed => nothing
+          _ => @view.skeleton_docs_content()
+        }
+    }
+    (skeleton, nothing)
+  }
+  let main = div([meta_mobile, docs_notice, document_view, source_files_view])
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
   let sidebar_dialog : Html = div(
     class="fixed inset-0 justify-center items-center z-100",

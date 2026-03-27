@@ -1,11 +1,11 @@
 // Copyright 2025 International Digital Economy Academy
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 // http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,7 +40,7 @@ enum Msg {
 ///|
 struct Model {
   fragment : String
-  path : String
+  path : Result[@util.MooncakePath, @util.UnsolvedMooncakePath]
   manifest : Status[Manifest]
   module_meta : Status[MetaInfo]
   build_log_open : Bool
@@ -105,17 +105,12 @@ fn log_docs_error(msg : String) -> Unit {
 
 ///|
 fn load_docs_assets(
-  path : String,
+  resolved : @util.MooncakePath,
   manifest : Manifest,
   dispatch : (Msg) -> Cmd,
 ) -> Array[Cmd] {
-  let module_name = manifest.module_
-  let version = manifest.version
-  let asset_path = versioned_asset_path(path, module_name, version)
-  let current_module_path = docs_current_module_path(path, manifest.module_)
-  let module_asset_path = versioned_asset_path(
-    current_module_path, module_name, version,
-  )
+  let asset_path = make_versioned_asset_path(resolved)
+  let module_asset_path = resolved.module_path() + "@" + resolved.version()
   [
     @http.get(
       "/assets/" + asset_path + "/resource.json",
@@ -128,18 +123,16 @@ fn load_docs_assets(
         decode_module_index,
       ),
     ),
-    ..if manifest.has_package {
-      [
-        @http.get(
-          "/assets/" + asset_path + "/package_data.json",
-          expect=Json(
-            result => dispatch(GotPackageData(result)),
-            decode_package_data,
-          ),
+    if manifest.has_package {
+      @http.get(
+        "/assets/" + asset_path + "/package_data.json",
+        expect=Json(
+          result => dispatch(GotPackageData(result)),
+          decode_package_data,
         ),
-      ]
+      )
     } else {
-      []
+      none
     },
   ]
 }
@@ -152,15 +145,15 @@ fn get_text(url : String, on_result : (Result[String, String]) -> Cmd) -> Cmd {
 
 ///|
 pub fn load(
-  path : String,
+  path : @util.UnsolvedMooncakePath,
   fragment : String?,
   dispatch~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
-  let path = path.trim(char_set="/").to_string()
+  let path_str = path.package_path()
   (
     batch([
       @http.get(
-        "/api/v0/manifest/" + path,
+        "/api/v0/manifest/" + path_str,
         expect=Json(result => dispatch(GotManifest(result)), decode_manifest),
       ),
       @dialog.close("search-panel"),
@@ -168,7 +161,7 @@ pub fn load(
     {
       module_index: Loading,
       fragment: fragment.unwrap_or(""),
-      path,
+      path: Err(path),
       manifest: Loading,
       module_meta: Loading,
       build_log_open: false,
@@ -198,16 +191,40 @@ pub fn update(
     GotManifest(result) =>
       match result {
         Ok(manifest) => {
+          let unsolved = match model.path {
+            Err(u) => u
+            Ok(resolved) =>
+              @util.UnsolvedMooncakePath::new(resolved.package_path())
+          }
+          let resolved = @util.MooncakePath::resolve(
+            unsolved,
+            module_path=manifest.module_,
+            latest_version=manifest.version,
+          )
+          let path : Result[@util.MooncakePath, @util.UnsolvedMooncakePath] = match
+            resolved {
+            Some(r) => Ok(r)
+            None => Err(unsolved)
+          }
           let has_docs = has_docs_assets(manifest.module_meta.build_status)
           let cmd = if has_docs {
-            batch(load_docs_assets(model.path, manifest, dispatch))
+            match resolved {
+              Some(resolved) =>
+                batch(load_docs_assets(resolved, manifest, dispatch))
+              None => none
+            }
           } else {
             none
+          }
+          let is_root_package = match resolved {
+            Some(resolved) => resolved.package_path() == manifest.name
+            None => false
           }
           (
             cmd,
             {
               ..model,
+              path,
               manifest: Success(manifest),
               module_meta: Success(manifest.module_meta),
               readme_content: if has_docs {
@@ -222,7 +239,7 @@ pub fn update(
                 Failed
               },
               package_data: if has_docs &&
-                !(model.path == manifest.name && !manifest.has_package) {
+                !(is_root_package && !manifest.has_package) {
                 Loading
               } else {
                 Failed
@@ -385,8 +402,10 @@ pub fn update(
           (@nav.push_url("/docs/" + url_path), model)
         }
         Symbol(pkg_path~, id, ..) => {
-          let same_package = docs_lookup_path(pkg_path) ==
-            docs_lookup_path(model.path)
+          let same_package = match model.path {
+            Ok(resolved) => resolved.package_path() == pkg_path
+            Err(_) => false
+          }
           if same_package {
             (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
           } else {
@@ -468,83 +487,101 @@ pub fn update(
 
 ///|
 pub fn get_path(model : Model) -> String {
-  model.path
+  match model.path {
+    Ok(resolved) => resolved.package_path()
+    Err(unsolved) => unsolved.package_path()
+  }
 }
 
 ///|
-pub fn is_same_path(model : Model, new_path : String) -> Bool {
-  docs_lookup_path(model.path) == docs_lookup_path(new_path)
+pub fn is_same_path(
+  model : Model,
+  new_path : @util.UnsolvedMooncakePath,
+) -> Bool {
+  match model.path {
+    Ok(resolved) => resolved.is_same_package(new_path, check_version=false)
+    Err(_) => false
+  }
 }
 
 ///|
-pub fn is_same_module(model : Model, new_path : String) -> Bool {
-  match model.manifest {
-    Success(manifest) => {
-      let module_lookup = docs_lookup_path(manifest.module_)
-      let new_lookup = docs_lookup_path(new_path)
-      new_lookup == module_lookup || new_lookup.has_prefix(module_lookup + "/")
-    }
-    _ => false
+pub fn is_same_module(
+  model : Model,
+  new_path : @util.UnsolvedMooncakePath,
+) -> Bool {
+  match model.path {
+    Ok(resolved) => resolved.is_same_module(new_path, check_version=false)
+    Err(_) => false
   }
 }
 
 ///|
 pub fn navigate_package(
   model : Model,
-  path : String,
+  path : @util.UnsolvedMooncakePath,
   fragment : String?,
   dispatch~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
-  let path = docs_lookup_path(path)
   match model.manifest {
     Success(manifest) => {
+      let resolved = @util.MooncakePath::resolve(
+        path,
+        module_path=manifest.module_,
+        latest_version=manifest.version,
+      )
+      let model_path : Result[@util.MooncakePath, @util.UnsolvedMooncakePath] = match
+        resolved {
+        Some(r) => Ok(r)
+        None => Err(path)
+      }
       let has_docs = has_docs_assets(manifest.module_meta.build_status)
       if not(has_docs) {
         return (
           none,
           {
             ..model,
-            path,
+            path: model_path,
             readme_content: Failed,
             source_files: [],
             package_data: Failed,
           },
         )
       }
-      let asset_path = versioned_asset_path(
-        path,
-        manifest.module_,
-        manifest.version,
-      )
-      let cmds : Array[Cmd] = [
-        @http.get(
-          "/assets/" + asset_path + "/resource.json",
-          expect=Json(
-            result => dispatch(GotResource(result)),
-            decode_resource_info,
-          ),
-        ),
-        @http.get(
-          "/assets/" + asset_path + "/package_data.json",
-          expect=Json(
-            result => dispatch(GotPackageData(result)),
-            decode_package_data,
-          ),
-        ),
-      ]
-      (
-        batch(cmds),
-        {
-          ..model,
-          path,
-          fragment: fragment.unwrap_or(""),
-          readme_content: Loading,
-          source_files: [],
-          package_data: Loading,
-          collapsed_docs: FoldedState::new(),
-          hide_large_package: true,
-        },
-      )
+      match resolved {
+        Some(r) => {
+          let asset_path = make_versioned_asset_path(r)
+          let cmds : Array[Cmd] = [
+            @http.get(
+              "/assets/" + asset_path + "/resource.json",
+              expect=Json(
+                result => dispatch(GotResource(result)),
+                decode_resource_info,
+              ),
+            ),
+            @http.get(
+              "/assets/" + asset_path + "/package_data.json",
+              expect=Json(
+                result => dispatch(GotPackageData(result)),
+                decode_package_data,
+              ),
+            ),
+          ]
+          (
+            batch(cmds),
+            {
+              ..model,
+              path: model_path,
+              fragment: fragment.unwrap_or(""),
+              readme_content: Loading,
+              source_files: [],
+              package_data: Loading,
+              collapsed_docs: FoldedState::new(),
+              hide_large_package: true,
+            },
+          )
+        }
+        None => load(path, fragment, dispatch~)
+      }
     }
     _ => load(path, fragment, dispatch~)
   }

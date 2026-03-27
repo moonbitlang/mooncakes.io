@@ -1,7 +1,7 @@
 ///|
 fn navbar(
   path : String,
-  module_path : String,
+  module_path : String?,
   module_index : ModuleIndex?,
   card_mode : CardMode,
   dispatch : (Msg) -> Cmd,

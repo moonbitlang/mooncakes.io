@@ -401,6 +401,14 @@ pub fn update(
           }
           (@nav.push_url("/docs/" + url_path), model)
         }
+        Symbol(pkg_path~, kind=KReadme, _) => {
+          let url_path = match model.manifest {
+            Success(manifest) =>
+              versioned_docs_path(pkg_path, manifest.module_, manifest.version)
+            _ => pkg_path
+          }
+          (@nav.push_url("/docs/" + url_path), model)
+        }
         Symbol(pkg_path~, id, ..) => {
           let same_package = match model.path {
             Ok(resolved) => resolved.package_path() == pkg_path

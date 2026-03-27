@@ -441,35 +441,42 @@ fn misc_doc(
 ///|
 fn readme(
   content : String?,
+  package_path~ : String,
   folded~ : FoldedState,
   dispatch : (Msg) -> Cmd,
 ) -> Html {
-  match content {
-    None | Some("") => nothing
-    Some(content) => {
-      let content = @view.markdown(content)
-      let is_collapsed = folded.contains("readme")
-      let (body, icon) = if is_collapsed {
-        (nothing, @config.SECTION_CLOSE)
-      } else {
-        (div(class="mt-4 mb-6", [content]), @config.SECTION_OPEN)
-      }
-      div(class="mt-4 mb-8 mx-4 md:mx-0 scroll-mt-header", id="readme", [
-        div(
-          class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
-          on_click=dispatch(ToggleDocDetail("readme")),
-          [
-            img(src=icon, class="size-3.5 ui-icon", nothing),
-            span(class="font-medium text-gray-500 text-xs tracking-wide", [
-              text("README"),
-            ]),
-          ],
-        ),
-        body,
-        div(class="border-b border-gray-200 mt-4", nothing),
-      ])
-    }
+  let has_content = match content {
+    None | Some("") => false
+    _ => true
   }
+  let is_collapsed = folded.contains("readme")
+  let (body, icon) = if is_collapsed {
+    (nothing, @config.SECTION_CLOSE)
+  } else if has_content {
+    let content = @view.markdown(content.unwrap())
+    (div(class="mt-4 mb-6", [content]), @config.SECTION_OPEN)
+  } else {
+    (
+      p(class="mt-3 mb-4 text-sm text-gray-400 text-center", [
+        text("\{package_path} does not have a README file"),
+      ]),
+      @config.SECTION_OPEN,
+    )
+  }
+  div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme", [
+    div(
+      class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
+      on_click=dispatch(ToggleDocDetail("readme")),
+      [
+        img(src=icon, class="size-3.5 ui-icon", nothing),
+        span(class="font-medium text-gray-500 text-xs tracking-wide", [
+          text("README"),
+        ]),
+      ],
+    ),
+    body,
+    div(class="border-b border-gray-200 mt-4", nothing),
+  ])
 }
 
 ///|
@@ -480,9 +487,10 @@ fn document(
   folded~ : FoldedState,
   module_name? : String = "",
   module_version? : String = "",
+  package_path? : String = "",
   dispatch : (Msg) -> Cmd,
 ) -> Html {
-  let readme = readme(readme_content, folded~, dispatch)
+  let readme = readme(readme_content, package_path~, folded~, dispatch)
   let doc_list = match package_data {
     Some(Success({ traits, types, errors, typealiases, values, misc, name: _ })) => {
       let count = traits.length() +

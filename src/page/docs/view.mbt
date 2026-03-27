@@ -430,6 +430,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
             folded=model.collapsed_docs,
             module_name~,
             module_version~,
+            package_path=path_str,
             dispatch,
           ),
         ])

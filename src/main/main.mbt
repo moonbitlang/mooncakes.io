@@ -107,17 +107,16 @@ fn route_with_theme(
   dispatch : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
   let theme = model.theme
-  let paths = url.path.split("/").collect()
   let scroll_top = @nav.scroll_to_top()
-  match paths {
-    ["/"] | [""] | [] => {
+  match @util.MooncakesioPath::resolve(url) {
+    Home => {
       let (cmd, page) = @home.load(dispatch=x => dispatch(GotHomeMsg(x)))
       (
         batch([cmd, scroll_top]),
         { theme, page: Home(page), theme_switching: false },
       )
     }
-    ["build-queue"] => {
+    BuildQueue => {
       let (cmd, page) = @build_queue.load(dispatch=x => {
         dispatch(GotBuildQueueMsg(x))
       })
@@ -126,7 +125,7 @@ fn route_with_theme(
         { theme, page: BuildQueue(page), theme_switching: false },
       )
     }
-    ["user", name] => {
+    User(name) => {
       let (cmd, page) = @user.load(name.to_string(), dispatch=x => {
         dispatch(GotUserMsg(x))
       })
@@ -135,40 +134,40 @@ fn route_with_theme(
         { theme, page: User(page), theme_switching: false },
       )
     }
-    ["assets", ..] =>
+    Assets(url) =>
       (
         @nav.load(url.to_string()),
         { theme, page: Redirect, theme_switching: false },
       )
-    ["docs", .. module_path] => {
-      let path = module_path.iter().map(StringView::to_string).join("/")
-      // If already on this docs page and path unchanged
-      if model.page is Docs(page_model) && @docs.is_same_path(page_model, path) {
-        return match url.fragment {
-          Some(fragment) => (@docs.scroll_to_smooth(fragment), model)
-          None => (none, model)
-        }
-      }
-      // Same module: only reload package content, preserve sidebar/meta
-      if model.page is Docs(page_model) &&
-        @docs.is_same_module(page_model, path) {
-        let (cmd, page) = @docs.navigate_package(
-          page_model,
-          path,
-          url.fragment,
-          dispatch=x => dispatch(GotDocsMsg(x)),
-        )
-        return (batch([cmd, scroll_top]), { ..model, page: Docs(page) })
-      }
-      let (cmd, page) = @docs.load(path, url.fragment, dispatch=x => {
-        dispatch(GotDocsMsg(x))
-      })
-      (
-        batch([cmd, scroll_top]),
-        { theme, page: Docs(page), theme_switching: false },
-      )
-    }
-    _ => (scroll_top, { theme, page: NotFound, theme_switching: false })
+    Docs(mooncakes_path) => ...
+    // let path = module_path.iter().map(StringView::to_string).join("/")
+    // // If already on this docs page and path unchanged
+    // if model.page is Docs(page_model) && @docs.is_same_path(page_model, path) {
+    //   return match url.fragment {
+    //     Some(fragment) => (@docs.scroll_to_smooth(fragment), model)
+    //     None => (none, model)
+    //   }
+    // }
+    // // Same module: only reload package content, preserve sidebar/meta
+    // if model.page is Docs(page_model) &&
+    //   @docs.is_same_module(page_model, path) {
+    //   let (cmd, page) = @docs.navigate_package(
+    //     page_model,
+    //     path,
+    //     url.fragment,
+    //     dispatch=x => dispatch(GotDocsMsg(x)),
+    //   )
+    //   return (batch([cmd, scroll_top]), { ..model, page: Docs(page) })
+    // }
+    // let (cmd, page) = @docs.load(path, url.fragment, dispatch=x => {
+    //   dispatch(GotDocsMsg(x))
+    // })
+    // (
+    //   batch([cmd, scroll_top]),
+    //   { theme, page: Docs(page), theme_switching: false },
+    // )
+    NotFound(_) =>
+      (scroll_top, { theme, page: NotFound, theme_switching: false })
   }
 }
 

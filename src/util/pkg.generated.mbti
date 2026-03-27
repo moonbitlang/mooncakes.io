@@ -10,6 +10,15 @@ type Lazy[T]
 pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
 
+type MooncakePath
+pub fn MooncakePath::module_path(Self) -> String
+pub fn MooncakePath::package_path(Self) -> String
+pub fn MooncakePath::resolve(String, module_path~ : String) -> Self?
+pub fn MooncakePath::version(Self) -> String?
+
+pub(all) struct Mooncakesio {
+}
+
 pub(all) enum Status[T] {
   Loading
   Failed

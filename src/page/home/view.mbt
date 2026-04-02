@@ -134,6 +134,7 @@ fn pinned() -> Html {
       ),
       created_at: None,
       is_new: false,
+      downloads: 0,
     },
     {
       author: "moonbitlang",
@@ -146,6 +147,7 @@ fn pinned() -> Html {
       ),
       created_at: None,
       is_new: false,
+      downloads: 0,
     },
     {
       author: "moonbitlang",
@@ -156,6 +158,7 @@ fn pinned() -> Html {
       description: Some("Experimental and extended libraries for MoonBit."),
       created_at: None,
       is_new: false,
+      downloads: 0,
     },
   ]
   div(class="container lg:w-4/5 px-4 mt-4 mb-6", [
@@ -168,10 +171,16 @@ fn pinned() -> Html {
 }
 
 ///|
-fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
+fn compact_module_card(
+  mod : ModuleIndex,
+  show_time? : Bool = false,
+  show_downloads? : Bool = false,
+) -> Html {
   let href = "/docs/\{versioned_path(mod)}"
   let badge = if show_time {
     text(mod.created_at.map(get_relative_time).unwrap_or(""))
+  } else if show_downloads {
+    text(@util.format_downloads(mod.downloads))
   } else {
     text(mod.version)
   }
@@ -197,6 +206,7 @@ fn module_list_column(
   title : String,
   modules : Array[ModuleIndex],
   show_time? : Bool = false,
+  show_downloads? : Bool = false,
 ) -> Html {
   div(
     class="flex flex-col gap-2",
@@ -205,7 +215,7 @@ fn module_list_column(
       ..modules
       .iter()
       .take(12)
-      .map(fn(m) { compact_module_card(m, show_time~) })
+      .map(fn(m) { compact_module_card(m, show_time~, show_downloads~) })
       .collect(),
     ],
   )
@@ -221,7 +231,7 @@ fn highlights_section(
     div(class="grid grid-cols-1 lg:grid-cols-3 gap-4", [
       module_list_column("Recently updated", recent, show_time=true),
       module_list_column("Newly published", new_published, show_time=true),
-      module_list_column("Most downloaded", popular),
+      module_list_column("Most downloaded", popular, show_downloads=true),
     ]),
   ])
 }

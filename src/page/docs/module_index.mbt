@@ -23,6 +23,7 @@ priv struct IndexNode {
 priv struct PkgIndex {
   path : String
   traits : Array[TraitIndex]
+  errors : Array[TypeIndex]
   types : Array[TypeIndex]
   typealias_ : Array[TypeAliasIndex]
   values : Array[ValueIndex]
@@ -48,6 +49,7 @@ test "dummy test to suppress unused trait implementation warning" {
     pkg: Some({
       path: "root",
       traits: [],
+      errors: [],
       types: [],
       typealias_: [],
       values: [],
@@ -422,6 +424,7 @@ fn decode_package_index(json : Json) -> PkgIndex raise Error {
   match json {
     {
       "traits": Array(traits),
+      "errors"? : errors_json,
       "types": Array(types),
       "typealias": Array(typealias_),
       "values": Array(values),
@@ -430,11 +433,15 @@ fn decode_package_index(json : Json) -> PkgIndex raise Error {
       ..
     } => {
       let traits = map_with_error(traits, decode_trait_index)
+      let errors = match errors_json {
+        Some(Array(errors)) => map_with_error(errors, decode_type_index)
+        _ => []
+      }
       let types = map_with_error(types, decode_type_index)
       let typealias_ = map_with_error(typealias_, decode_typealias_index)
       let values = map_with_error(values, decode_value_index)
       let misc = map_with_error(miscs, decode_misc_index)
-      { traits, types, typealias_, values, misc, path }
+      { traits, errors, types, typealias_, values, misc, path }
     }
     _ => fail("invalid json in package index")
   }

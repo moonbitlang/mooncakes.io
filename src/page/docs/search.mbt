@@ -44,7 +44,10 @@ fn load_search_entries(
     .iter()
     .each(x => {
       match x {
-        { pkg: Some({ path, traits, types, typealias_, values, misc }), .. } => {
+        {
+          pkg: Some({ path, traits, errors, types, typealias_, values, misc }),
+          ..,
+        } => {
           let vpath = versioned_docs_path(path, module_name, module_version)
           results.push({
             kind: "Package",
@@ -61,6 +64,20 @@ fn load_search_entries(
           types.each(fn(x) {
             results.push({
               kind: "Type",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + vpath + "#" + x.name,
+            })
+            x.methods.each(fn(meth) {
+              results.push({
+                kind: "Method",
+                fullname: "@" + path + "." + x.name + "::" + meth,
+                href: "/docs/" + vpath + "#" + x.name + "::" + meth,
+              })
+            })
+          })
+          errors.each(fn(x) {
+            results.push({
+              kind: "Error",
               fullname: "@" + path + "." + x.name,
               href: "/docs/" + vpath + "#" + x.name,
             })

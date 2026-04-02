@@ -80,6 +80,7 @@ fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int {
 priv enum SymbolKind {
   KReadme
   KTrait
+  KError
   KType
   KTypeAlias
   KValue
@@ -97,7 +98,7 @@ priv enum ItemTarget {
 fn PkgIndex::to_document_items(
   self : PkgIndex,
 ) -> Array[@tree.Tree[ItemTarget]] {
-  let { traits, types, typealias_, values, misc, path } = self
+  let { traits, errors, types, typealias_, values, misc, path } = self
   let readme_item : @tree.Tree[ItemTarget] = @tree.Item(
     id=Symbol(pkg_path=path, kind=KReadme, "readme"),
     "README",
@@ -107,6 +108,26 @@ fn PkgIndex::to_document_items(
     result.push(
       @tree.Item(id=Symbol(pkg_path=path, kind=KTrait, t.name), t.name),
     )
+  }
+  for e in errors {
+    if e.methods.is_empty() {
+      result.push(
+        @tree.Item(id=Symbol(pkg_path=path, kind=KError, e.name), e.name),
+      )
+    } else {
+      result.push(
+        @tree.FixedNode(
+          id=Symbol(pkg_path=path, kind=KError, e.name),
+          e.name,
+          e.methods.map(fn(meth) {
+            @tree.Item(
+              id=Symbol(pkg_path=path, kind=KMethod, e.name + "::" + meth),
+              meth,
+            )
+          }),
+        ),
+      )
+    }
   }
   for ty in types {
     if ty.methods.is_empty() {
@@ -183,6 +204,7 @@ fn symbol_icon(kind : SymbolKind) -> Html {
   let (bg, label) = match kind {
     KReadme => ("bg-gray-200 text-gray-500", "R")
     KTrait => ("bg-blue-100 text-blue-600", "Tr")
+    KError => ("bg-red-100 text-red-600", "E")
     KType => ("bg-emerald-100 text-emerald-600", "T")
     KTypeAlias => ("bg-violet-100 text-violet-600", "A")
     KValue => ("bg-amber-100 text-amber-600", "V")

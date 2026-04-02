@@ -6,7 +6,6 @@ import {
 }
 
 // Values
-pub fn format_downloads(Int) -> String
 
 // Errors
 

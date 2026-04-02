@@ -47,7 +47,6 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
-  downloads : Int
 }
 
 pub enum Msg {

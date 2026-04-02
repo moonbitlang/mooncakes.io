@@ -38,6 +38,17 @@ fn tag_view(value : String) -> Html {
 }
 
 ///|
+fn format_downloads(n : Int) -> String {
+  if n >= 1000000 {
+    "\{n / 1000000}M"
+  } else if n >= 1000 {
+    "\{n / 1000}K"
+  } else {
+    n.to_string()
+  }
+}
+
+///|
 fn display_url(url : String) -> String {
   let s = if url.has_prefix("https://") {
     url[8:].to_string()
@@ -91,15 +102,15 @@ fn meta_sidebar(
       },
     ]),
     // Description & Keywords
-    (match (model.description, model.keywords) {
+    match (model.description, model.keywords) {
       (None, []) => nothing
       _ =>
         div(class="border-t pt-3 mb-3 text-[13px]", [
-          (match model.description {
+          match model.description {
             Some(d) => p(class="text-gray-500 line-clamp-3", [text(d)])
             None => nothing
-          }),
-          (match model.keywords {
+          },
+          match model.keywords {
             [] => nothing
             keywords =>
               div(
@@ -111,9 +122,9 @@ fn meta_sidebar(
                   )
                 }),
               )
-          }),
+          },
         ])
-    }),
+    },
     // Meta
     div(class="border-t pt-3 space-y-2.5 text-[13px]", [
       div(class="flex items-center gap-2", [
@@ -126,15 +137,15 @@ fn meta_sidebar(
         img(class="w-4 h-4 ui-icon shrink-0", src=@config.tag, nothing),
         text(model.version),
       ]),
-      (match model.license {
+      match model.license {
         Some(l) =>
           div(class="flex items-center gap-2", [
             img(class="w-4 h-4 ui-icon shrink-0", src=@config.license, nothing),
             text(l),
           ])
         None => nothing
-      }),
-      (match model.repository {
+      },
+      match model.repository {
         Some(repo) =>
           div(class="flex items-center gap-2 min-w-0", [
             img(class="w-4 h-4 ui-icon shrink-0", src=@config.repo, nothing),
@@ -147,11 +158,11 @@ fn meta_sidebar(
             ),
           ])
         None => nothing
-      }),
+      },
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div(class="flex items-center gap-2", [
           img(class="w-4 h-4 ui-icon shrink-0", src=@config.download, nothing),
-          text(@util.format_downloads(model.downloads) + " downloads"),
+          text(format_downloads(model.downloads) + " downloads"),
         ])
       } else {
         nothing
@@ -196,14 +207,14 @@ fn meta_info(
     h1(class="text-xl md:text-2xl font-bold mb-2", [
       text(model.name.split("/").last().unwrap().to_string()),
     ]),
-    (match model.description {
+    match model.description {
       Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])
       None => nothing
-    }),
-    (match model.keywords {
+    },
+    match model.keywords {
       [] => nothing
       keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
-    }),
+    },
   ])
   div(
     class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip border-b md:border-b-0",
@@ -244,15 +255,15 @@ fn meta_info(
           span(class="text-gray-400 text-xs", [text("Version")]),
           div([text(model.version)]),
         ]),
-        (match model.license {
+        match model.license {
           Some(l) =>
             div([
               span(class="text-gray-400 text-xs", [text("License")]),
               div([text(l)]),
             ])
           None => nothing
-        }),
-        (match model.repository {
+        },
+        match model.repository {
           Some(repo) =>
             div(class="min-w-0", [
               span(class="text-gray-400 text-xs", [text("Repository")]),
@@ -267,11 +278,11 @@ fn meta_info(
               ]),
             ])
           None => nothing
-        }),
+        },
         if model.downloads > 0 && model.name != "moonbitlang/core" {
           div([
             span(class="text-gray-400 text-xs", [text("Downloads")]),
-            div([text(@util.format_downloads(model.downloads))]),
+            div([text(format_downloads(model.downloads))]),
           ])
         } else {
           nothing

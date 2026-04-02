@@ -68,7 +68,6 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
-  downloads : Int
 }
 
 ///|
@@ -434,13 +433,8 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
       "is_new": True
       | False as bool,
       "created_at": String(time),
-      "downloads"? : downloads_json,
       ..
     } => {
-      let downloads = match downloads_json {
-        Some(Number(n, ..)) => n.to_int()
-        _ => 0
-      }
       let keywords = Some(
         keywords.filter_map(fn(x) {
           match x {
@@ -468,7 +462,6 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
         keywords,
         created_at,
         is_new,
-        downloads,
       }
     }
     _ => fail("unexpected item in json: \{item}")

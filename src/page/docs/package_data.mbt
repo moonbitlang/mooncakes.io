@@ -15,12 +15,12 @@
 ///|
 priv struct PackageData {
   name : String
-  types : Array[TypeDoc]
+  typealiases : Array[TypeAliasDoc]
   traits : Array[TraitDoc]
   errors : Array[TypeDoc]
-  typealiases : Array[TypeAliasDoc]
-  values : Array[ValueDoc]
+  types : Array[TypeDoc]
   misc : Array[MiscDoc]
+  values : Array[ValueDoc]
 }
 
 ///|

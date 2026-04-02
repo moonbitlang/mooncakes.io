@@ -22,12 +22,12 @@ priv struct IndexNode {
 ///|
 priv struct PkgIndex {
   path : String
+  typealias_ : Array[TypeAliasIndex]
   traits : Array[TraitIndex]
   errors : Array[TypeIndex]
   types : Array[TypeIndex]
-  typealias_ : Array[TypeAliasIndex]
-  values : Array[ValueIndex]
   misc : Array[MiscIndex]
+  values : Array[ValueIndex]
 } derive(Show)
 
 ///|

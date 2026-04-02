@@ -503,17 +503,20 @@ fn document(
         [hidden_large_package(count, dispatch)]
       } else {
         [
+          ..typealiases.map(ta => {
+            type_alias_doc(ta, folded~, module_name~, module_version~, dispatch)
+          }),
           ..traits.map(tr => {
             trait_doc(tr, folded~, module_name~, module_version~, dispatch)
-          }),
-          ..types.map(ty => {
-            type_doc(ty, folded~, module_name~, module_version~, dispatch)
           }),
           ..errors.map(err => {
             type_doc(err, folded~, module_name~, module_version~, dispatch)
           }),
-          ..typealiases.map(ta => {
-            type_alias_doc(ta, folded~, module_name~, module_version~, dispatch)
+          ..types.map(ty => {
+            type_doc(ty, folded~, module_name~, module_version~, dispatch)
+          }),
+          ..misc.map(item => {
+            misc_doc(item, folded~, module_name~, module_version~, dispatch)
           }),
           ..values.map(value => {
             value_doc(
@@ -524,9 +527,6 @@ fn document(
               enable_title=true,
               dispatch,
             )
-          }),
-          ..misc.map(item => {
-            misc_doc(item, folded~, module_name~, module_version~, dispatch)
           }),
         ]
       }

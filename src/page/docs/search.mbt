@@ -54,25 +54,18 @@ fn load_search_entries(
             fullname: "@" + path,
             href: "/docs/" + vpath,
           })
+          typealias_.each(fn(x) {
+            results.push({
+              kind: "Typealias",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + vpath + "#" + x.name,
+            })
+          })
           traits.each(fn(x) {
             results.push({
               kind: "Trait",
               fullname: "@" + path + "." + x.name,
               href: "/docs/" + vpath + "#" + x.name,
-            })
-          })
-          types.each(fn(x) {
-            results.push({
-              kind: "Type",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
-            })
-            x.methods.each(fn(meth) {
-              results.push({
-                kind: "Method",
-                fullname: "@" + path + "." + x.name + "::" + meth,
-                href: "/docs/" + vpath + "#" + x.name + "::" + meth,
-              })
             })
           })
           errors.each(fn(x) {
@@ -89,9 +82,23 @@ fn load_search_entries(
               })
             })
           })
-          typealias_.each(fn(x) {
+          types.each(fn(x) {
             results.push({
-              kind: "Typealias",
+              kind: "Type",
+              fullname: "@" + path + "." + x.name,
+              href: "/docs/" + vpath + "#" + x.name,
+            })
+            x.methods.each(fn(meth) {
+              results.push({
+                kind: "Method",
+                fullname: "@" + path + "." + x.name + "::" + meth,
+                href: "/docs/" + vpath + "#" + x.name + "::" + meth,
+              })
+            })
+          })
+          misc.each(fn(x) {
+            results.push({
+              kind: "Type",
               fullname: "@" + path + "." + x.name,
               href: "/docs/" + vpath + "#" + x.name,
             })
@@ -99,13 +106,6 @@ fn load_search_entries(
           values.each(fn(x) {
             results.push({
               kind: "Value",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
-            })
-          })
-          misc.each(fn(x) {
-            results.push({
-              kind: "Type",
               fullname: "@" + path + "." + x.name,
               href: "/docs/" + vpath + "#" + x.name,
             })

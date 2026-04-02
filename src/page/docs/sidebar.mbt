@@ -79,12 +79,12 @@ fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int {
 ///|
 priv enum SymbolKind {
   KReadme
+  KTypeAlias
   KTrait
   KError
   KType
-  KTypeAlias
-  KValue
   KMethod
+  KValue
 } derive(Compare, Eq)
 
 ///|
@@ -103,69 +103,57 @@ fn PkgIndex::to_document_items(
     id=Symbol(pkg_path=path, kind=KReadme, "readme"),
     "README",
   )
-  let result : Array[@tree.Tree[ItemTarget]] = []
-  for t in traits {
-    result.push(
-      @tree.Item(id=Symbol(pkg_path=path, kind=KTrait, t.name), t.name),
-    )
-  }
-  for e in errors {
-    if e.methods.is_empty() {
-      result.push(
-        @tree.Item(id=Symbol(pkg_path=path, kind=KError, e.name), e.name),
-      )
-    } else {
-      result.push(
-        @tree.FixedNode(
-          id=Symbol(pkg_path=path, kind=KError, e.name),
-          e.name,
-          e.methods.map(fn(meth) {
-            @tree.Item(
-              id=Symbol(pkg_path=path, kind=KMethod, e.name + "::" + meth),
-              meth,
-            )
-          }),
-        ),
-      )
+  fn type_index_items(
+    items : Array[TypeIndex],
+    kind : SymbolKind,
+  ) -> Array[@tree.Tree[ItemTarget]] {
+    let result : Array[@tree.Tree[ItemTarget]] = []
+    for item in items {
+      if item.methods.is_empty() {
+        result.push(
+          @tree.Item(id=Symbol(pkg_path=path, kind~, item.name), item.name),
+        )
+      } else {
+        result.push(
+          @tree.FixedNode(
+            id=Symbol(pkg_path=path, kind~, item.name),
+            item.name,
+            item.methods.map(fn(meth) {
+              @tree.Item(
+                id=Symbol(pkg_path=path, kind=KMethod, item.name + "::" + meth),
+                meth,
+              )
+            }),
+          ),
+        )
+      }
     }
+    result.sort_by(compare_items)
+    result
   }
-  for ty in types {
-    if ty.methods.is_empty() {
-      result.push(
-        @tree.Item(id=Symbol(pkg_path=path, kind=KType, ty.name), ty.name),
-      )
-    } else {
-      result.push(
-        @tree.FixedNode(
-          id=Symbol(pkg_path=path, kind=KType, ty.name),
-          ty.name,
-          ty.methods.map(fn(meth) {
-            @tree.Item(
-              id=Symbol(pkg_path=path, kind=KMethod, ty.name + "::" + meth),
-              meth,
-            )
-          }),
-        ),
-      )
-    }
-  }
-  for ta in typealias_ {
-    result.push(
-      @tree.Item(id=Symbol(pkg_path=path, kind=KTypeAlias, ta.name), ta.name),
-    )
-  }
-  for v in values {
-    result.push(
-      @tree.Item(id=Symbol(pkg_path=path, kind=KValue, v.name), v.name),
-    )
-  }
+
+  let trait_items : Array[@tree.Tree[ItemTarget]] = traits.map(fn(t) {
+    @tree.Item(id=Symbol(pkg_path=path, kind=KTrait, t.name), t.name)
+  })
+  trait_items.sort_by(compare_items)
+  let error_items = type_index_items(errors, KError)
+  let type_items = type_index_items(types, KType)
+  let alias_items : Array[@tree.Tree[ItemTarget]] = typealias_.map(fn(ta) {
+    @tree.Item(id=Symbol(pkg_path=path, kind=KTypeAlias, ta.name), ta.name)
+  })
+  alias_items.sort_by(compare_items)
+  let value_items : Array[@tree.Tree[ItemTarget]] = values.map(fn(v) {
+    @tree.Item(id=Symbol(pkg_path=path, kind=KValue, v.name), v.name)
+  })
+  value_items.sort_by(compare_items)
+  let misc_items : Array[@tree.Tree[ItemTarget]] = []
   for m in misc {
     if m.methods.is_empty() {
-      result.push(
+      misc_items.push(
         @tree.Item(id=Symbol(pkg_path=path, kind=KType, m.name), m.name),
       )
     } else {
-      result.push(
+      misc_items.push(
         @tree.FixedNode(
           id=Symbol(pkg_path=path, kind=KType, m.name),
           m.name,
@@ -179,9 +167,11 @@ fn PkgIndex::to_document_items(
       )
     }
   }
-  result.sort_by(compare_items)
-  result.insert(0, readme_item)
-  result
+  misc_items.sort_by(compare_items)
+  [
+    readme_item, ..alias_items, ..trait_items, ..error_items, ..type_items, ..misc_items,
+    ..value_items,
+  ]
 }
 
 ///|
@@ -206,7 +196,7 @@ fn symbol_icon(kind : SymbolKind) -> Html {
     KTrait => ("bg-blue-100 text-blue-600", "Tr")
     KError => ("bg-red-100 text-red-600", "E")
     KType => ("bg-emerald-100 text-emerald-600", "T")
-    KTypeAlias => ("bg-violet-100 text-violet-600", "A")
+    KTypeAlias => ("bg-violet-100 text-violet-600", "U")
     KValue => ("bg-amber-100 text-amber-600", "V")
     KMethod => ("bg-orange-100 text-orange-600", "f")
   }

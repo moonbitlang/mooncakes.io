@@ -552,7 +552,7 @@ pub fn navigate_package(
         None => Err(path)
       }
       let has_docs = has_docs_assets(manifest.module_meta.build_status)
-      if not(has_docs) {
+      if !has_docs {
         return (
           none,
           {

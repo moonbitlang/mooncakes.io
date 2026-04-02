@@ -209,7 +209,7 @@ pub fn update(
         }
       }
     ToggleAllModules => {
-      let show = not(model.show_all_modules)
+      let show = !model.show_all_modules
       match model.all_modules {
         Idle if show =>
           (

@@ -10,7 +10,7 @@ pub fn UnsolvedMooncakePath::new(path : String) -> Self {
 pub fn UnsolvedMooncakePath::package_path(self : Self) -> String {
   let segs : Array[String] = []
   for seg in self.0.trim(chars="/").split("/") {
-    if not(seg.is_empty()) {
+    if !seg.is_empty() {
       segs.push(seg.split("@").head().unwrap().to_string())
     }
   }
@@ -38,7 +38,7 @@ pub fn MooncakePath::is_same_module(
       latest_version=self.latest_version,
     ) {
     None => false
-    Some(resolved) => not(check_version) || self.version == resolved.version
+    Some(resolved) => !check_version || self.version == resolved.version
   }
 }
 
@@ -57,7 +57,7 @@ pub fn MooncakePath::is_same_package(
     None => false
     Some(resolved) =>
       self.package_path == resolved.package_path &&
-      (not(check_version) || self.version == resolved.version)
+      (!check_version || self.version == resolved.version)
   }
 }
 

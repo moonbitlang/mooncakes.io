@@ -264,7 +264,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
           ),
         ],
       ),
-      match search.results {
+      (match search.results {
         Loading => nothing
         Failed => text("load indices failed")
         Success(results) =>
@@ -305,7 +305,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
               )
             }),
           )
-      },
+      }),
     ],
   )
   guard model.path is Ok(resolved) else {
@@ -418,7 +418,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     _ => ("", "")
   }
   let content_ready = model.readme_content is Success(_) &&
-    not(model.package_data is Loading)
+    !(model.package_data is Loading)
   let (document_view, source_files_view) = if content_ready {
     let doc = match model.readme_content {
       Success(readme_content) =>

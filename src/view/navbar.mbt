@@ -22,7 +22,7 @@ pub fn navbar(
       div(class="w-full lg:flex-1 flex items-center justify-center", [m])
     None => nothing
   }
-  let has_middle = not(middle is None)
+  let has_middle = !(middle is None)
   if has_middle {
     div(class~, [
       div(

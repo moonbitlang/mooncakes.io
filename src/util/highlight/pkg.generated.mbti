@@ -28,8 +28,7 @@ pub(all) enum CodeSpan {
   Space(Int)
   Comment(String)
   Attr(String)
-}
-pub impl Show for CodeSpan
+} derive(Show)
 
 // Type aliases
 

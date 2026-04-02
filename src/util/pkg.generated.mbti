@@ -38,14 +38,11 @@ pub(all) enum Status[T] {
   Loading
   Failed
   Success(T)
-}
-pub impl[T : Eq] Eq for Status[T]
-pub impl[T : Show] Show for Status[T]
+} derive(Eq, Show)
 
-type UnsolvedMooncakePath
+type UnsolvedMooncakePath derive(Show)
 pub fn UnsolvedMooncakePath::new(String) -> Self
 pub fn UnsolvedMooncakePath::package_path(Self) -> String
-pub impl Show for UnsolvedMooncakePath
 
 // Type aliases
 

@@ -38,6 +38,17 @@ fn tag_view(value : String) -> Html {
 }
 
 ///|
+fn format_downloads(n : Int) -> String {
+  if n >= 1000000 {
+    "\{n / 1000000}M"
+  } else if n >= 1000 {
+    "\{n / 1000}K"
+  } else {
+    n.to_string()
+  }
+}
+
+///|
 fn display_url(url : String) -> String {
   let s = if url.has_prefix("https://") {
     url[8:].to_string()
@@ -115,7 +126,7 @@ fn meta_sidebar(
         ])
     },
     // Meta
-    div(class="border-t pt-3 space-y-1.5 text-[13px]", [
+    div(class="border-t pt-3 space-y-2.5 text-[13px]", [
       div(class="flex items-center gap-2", [
         img(class="w-4 h-4 ui-icon shrink-0", src=@config.user, nothing),
         a(href="/user/\{model.author}", class="hover:underline", [
@@ -147,6 +158,14 @@ fn meta_sidebar(
             ),
           ])
         None => nothing
+      },
+      if model.downloads > 0 && model.name != "moonbitlang/core" {
+        div(class="flex items-center gap-2", [
+          img(class="w-4 h-4 ui-icon shrink-0", src=@config.download, nothing),
+          text(format_downloads(model.downloads) + " downloads"),
+        ])
+      } else {
+        nothing
       },
     ]),
     // Dependencies
@@ -259,6 +278,14 @@ fn meta_info(
               ]),
             ])
           None => nothing
+        },
+        if model.downloads > 0 && model.name != "moonbitlang/core" {
+          div([
+            span(class="text-gray-400 text-xs", [text("Downloads")]),
+            div([text(format_downloads(model.downloads))]),
+          ])
+        } else {
+          nothing
         },
       ]),
       // Dependencies

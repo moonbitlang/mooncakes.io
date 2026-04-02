@@ -31,6 +31,7 @@ priv struct MetaInfo {
   repository : String?
   deps : Array[(String, String)]
   build_status : BuildStatus?
+  downloads : Int
 }
 
 ///|
@@ -144,6 +145,7 @@ fn build_meta_info(
   keywords : Array[String],
   deps : Array[(String, String)],
   build_status : BuildStatus?,
+  downloads : Int,
 ) -> MetaInfo {
   let author = String::from_array(
     name.iter().take_while(c => c != '/').collect(),
@@ -158,6 +160,7 @@ fn build_meta_info(
     keywords,
     deps,
     build_status,
+    downloads,
   }
 }
 
@@ -182,8 +185,13 @@ fn decode_module_meta(
         },
         "versions"? : versions,
         "build_status"? : top_level_build_status,
+        "downloads"? : downloads_json,
         ..
       } => {
+        let downloads = match downloads_json {
+          Some(Number(n, ..)) => n.to_int()
+          _ => 0
+        }
         let build_status = match
           find_version_build_status(versions, current_version) {
           Some(status) => Some(status)
@@ -203,6 +211,7 @@ fn decode_module_meta(
             decode_keywords(keywords),
             decode_deps(deps),
             build_status,
+            downloads,
           ),
         )
       }

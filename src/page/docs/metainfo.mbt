@@ -13,15 +13,11 @@
 // limitations under the License.
 
 ///|
-fn install_view(
-  command : String,
-  copied~ : Bool,
-  dispatch : (Msg) -> Cmd,
-) -> Html {
+fn install_view(command : String, copied~ : Bool, emit : (Msg) -> Cmd) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
     class="hover:bg-gray-100 active:bg-gray-200 bg-white md:shadow-xs transition-colors text-black text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
-    on_click=dispatch(CopyInstallCommand(command)),
+    on_click=emit(CopyInstallCommand(command)),
     [
       span(class="overflow-x-auto text-nowrap", [text(command)]),
       img(class="size-4 ui-icon", src=icon, nothing),
@@ -68,7 +64,7 @@ fn display_url(url : String) -> String {
 fn meta_sidebar(
   model : MetaInfo,
   install_copied~ : Bool,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let install_cmd = "moon add \{model.name}@\{model.version}"
   let install_icon = if install_copied { @config.ok } else { @config.clipboard }
@@ -81,7 +77,7 @@ fn meta_sidebar(
       } else {
         div(
           class="group/install hover:bg-gray-100 active:bg-gray-200 bg-white transition-colors text-[13px] px-2.5 py-1.5 font-mono border rounded relative cursor-pointer",
-          on_click=dispatch(CopyInstallCommand(install_cmd)),
+          on_click=emit(CopyInstallCommand(install_cmd)),
           [
             span(class="break-all", [text(install_cmd)]),
             div(
@@ -201,7 +197,7 @@ fn meta_sidebar(
 fn meta_info(
   model : MetaInfo,
   install_copied~ : Bool,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let model_description : Html = div(class="pl-7 py-2 mb-2", [
     h1(class="text-xl md:text-2xl font-bold mb-2", [
@@ -228,7 +224,7 @@ fn meta_info(
           install_view(
             "moon add \{model.name}@\{model.version}",
             copied=install_copied,
-            dispatch,
+            emit,
           )
         },
         if model.name == "moonbitlang/core" {

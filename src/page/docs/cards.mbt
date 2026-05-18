@@ -128,7 +128,7 @@ fn impl_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
@@ -144,11 +144,9 @@ fn impl_doc(
   ])
   let content = div(
     class="pl-4 mb-2",
-    methods.map(m => {
-      value_doc(m, folded~, module_name~, module_version~, dispatch)
-    }),
+    methods.map(m => value_doc(m, folded~, module_name~, module_version~, emit)),
   )
-  document_item(signature, content, collapsed=folded, id~, tight=true, dispatch)
+  document_item(signature, content, collapsed=folded, id~, tight=true, emit)
 }
 
 ///|
@@ -157,7 +155,7 @@ fn type_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let { docstring, signature, methods, impls, name: _, loc } = doc
   let id = doc.get_id()
@@ -166,17 +164,10 @@ fn type_doc(
     [
       div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(imp => {
-        impl_doc(imp, folded~, module_name~, module_version~, dispatch)
+        impl_doc(imp, folded~, module_name~, module_version~, emit)
       }),
       ..methods.map(m => {
-        value_doc(
-          m,
-          folded~,
-          module_name~,
-          module_version~,
-          type_id=id,
-          dispatch,
-        )
+        value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
       }),
     ],
   )
@@ -189,7 +180,7 @@ fn type_doc(
     loc~,
     module_name~,
     module_version~,
-    dispatch,
+    emit,
   )
 }
 
@@ -199,7 +190,7 @@ fn trait_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let { docstring, signature, impls, name: _, loc } = doc
   let id = doc.get_id()
@@ -208,7 +199,7 @@ fn trait_doc(
     [
       div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
       ..impls.map(imp => {
-        impl_doc(imp, folded~, module_name~, module_version~, dispatch)
+        impl_doc(imp, folded~, module_name~, module_version~, emit)
       }),
     ],
   )
@@ -221,7 +212,7 @@ fn trait_doc(
     loc~,
     module_name~,
     module_version~,
-    dispatch,
+    emit,
   )
 }
 
@@ -231,7 +222,7 @@ fn type_alias_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
   let signature = signature_view(signature, module_name~, module_version~)
@@ -248,7 +239,7 @@ fn type_alias_doc(
     loc~,
     module_name~,
     module_version~,
-    dispatch,
+    emit,
   )
 }
 
@@ -263,7 +254,7 @@ fn document_item(
   loc? : Loc,
   module_name? : String = "",
   module_version? : String = "",
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let (content_style, icon) = if collapsed.contains(id) {
     ("hidden", @config.SECTION_CLOSE)
@@ -289,7 +280,7 @@ fn document_item(
   }
   let collapse_btn : Html = div(
     class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
-    on_click=dispatch(ToggleDocDetail(id)),
+    on_click=emit(ToggleDocDetail(id)),
     [img(src=icon, class="size-4 ui-icon", nothing)],
   )
   let buttons_row : Html = div(class="select-none flex gap-1 items-center", [
@@ -313,7 +304,7 @@ fn document_item(
     Some(title) => {
       let anchor = div(
         class="text-gray-300 hover:text-gray-500 cursor-pointer transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
-        on_click=dispatch(ClickAnchor(id)),
+        on_click=emit(ClickAnchor(id)),
         [text("#")],
       )
       let title_with_buttons = div(
@@ -351,7 +342,7 @@ fn value_doc(
   module_version~ : String,
   type_id? : String,
   enable_title? : Bool = false,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
   let id = type_id
@@ -371,7 +362,7 @@ fn value_doc(
     loc~,
     module_name~,
     module_version~,
-    dispatch,
+    emit,
   )
 }
 
@@ -381,7 +372,7 @@ fn misc_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let { name, methods, impls } = doc
   let id = doc.get_id()
@@ -421,21 +412,14 @@ fn misc_doc(
     [
       tips,
       ..methods.map(m => {
-        value_doc(
-          m,
-          folded~,
-          module_name~,
-          module_version~,
-          type_id=id,
-          dispatch,
-        )
+        value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
       }),
       ..impls.map(imp => {
-        impl_doc(imp, folded~, module_name~, module_version~, dispatch)
+        impl_doc(imp, folded~, module_name~, module_version~, emit)
       }),
     ],
   )
-  document_item(signature, content, collapsed=folded, id~, dispatch)
+  document_item(signature, content, collapsed=folded, id~, emit)
 }
 
 ///|
@@ -443,7 +427,7 @@ fn readme(
   content : String?,
   package_path~ : String,
   folded~ : FoldedState,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   let has_content = match content {
     None | Some("") => false
@@ -466,7 +450,7 @@ fn readme(
   div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme", [
     div(
       class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
-      on_click=dispatch(ToggleDocDetail("readme")),
+      on_click=emit(ToggleDocDetail("readme")),
       [
         img(src=icon, class="size-3.5 ui-icon", nothing),
         span(class="font-medium text-gray-500 text-xs tracking-wide", [
@@ -488,9 +472,9 @@ fn document(
   module_name? : String = "",
   module_version? : String = "",
   package_path? : String = "",
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
-  let readme = readme(readme_content, package_path~, folded~, dispatch)
+  let readme = readme(readme_content, package_path~, folded~, emit)
   let doc_list = match package_data {
     Some(Success({ traits, types, errors, typealiases, values, misc, name: _ })) => {
       let count = traits.length() +
@@ -500,23 +484,23 @@ fn document(
         values.length() +
         misc.length()
       if hide_large_package && count > 1000 {
-        [hidden_large_package(count, dispatch)]
+        [hidden_large_package(count, emit)]
       } else {
         [
           ..typealiases.map(ta => {
-            type_alias_doc(ta, folded~, module_name~, module_version~, dispatch)
+            type_alias_doc(ta, folded~, module_name~, module_version~, emit)
           }),
           ..traits.map(tr => {
-            trait_doc(tr, folded~, module_name~, module_version~, dispatch)
+            trait_doc(tr, folded~, module_name~, module_version~, emit)
           }),
           ..errors.map(err => {
-            type_doc(err, folded~, module_name~, module_version~, dispatch)
+            type_doc(err, folded~, module_name~, module_version~, emit)
           }),
           ..types.map(ty => {
-            type_doc(ty, folded~, module_name~, module_version~, dispatch)
+            type_doc(ty, folded~, module_name~, module_version~, emit)
           }),
           ..misc.map(item => {
-            misc_doc(item, folded~, module_name~, module_version~, dispatch)
+            misc_doc(item, folded~, module_name~, module_version~, emit)
           }),
           ..values.map(value => {
             value_doc(
@@ -525,7 +509,7 @@ fn document(
               module_name~,
               module_version~,
               enable_title=true,
-              dispatch,
+              emit,
             )
           }),
         ]
@@ -541,7 +525,7 @@ fn document(
 }
 
 ///|
-fn hidden_large_package(count : Int, dispatch : (Msg) -> Cmd) -> Html {
+fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
   div(class="flex flex-col items-center justify-center py-12 w-full", [
     div(
       class="bg-mooncake border border-mooncake2 rounded-lg p-8 w-full text-center",
@@ -554,7 +538,7 @@ fn hidden_large_package(count : Int, dispatch : (Msg) -> Cmd) -> Html {
         ]),
         button(
           class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
-          on_click=dispatch(ShowLargePackage),
+          on_click=emit(ShowLargePackage),
           [text("Show All Items")],
         ),
       ],

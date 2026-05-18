@@ -378,7 +378,7 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
 }
 
 ///|
-pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
+pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   let module_list = if model.filter == "" {
     let pinned_modules = pinned()
     let highlights = match model.highlights {
@@ -421,7 +421,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
       div(class="flex justify-center py-2", [
         div(
           class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 hover:text-yellow-900 transition-colors px-6 py-2 rounded-md hover:bg-gray-100",
-          on_click=dispatch(ToggleAllModules),
+          on_click=emit(ToggleAllModules),
           [
             text(
               if model.show_all_modules {
@@ -464,7 +464,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   } else {
     nothing
   }
-  let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
+  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   let hero = div(class="home-hero-shell pb-2 sm:pb-8", [
     @view.navbar(
       style=Fusion,
@@ -473,7 +473,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
         value=model.filter,
         placeholder="Search modules ...",
         class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
-        on_input=x => dispatch(FilterChanged(x)),
+        on_input=x => emit(FilterChanged(x)),
         nothing,
       ),
       right=theme_toggle,

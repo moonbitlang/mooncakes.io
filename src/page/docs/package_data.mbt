@@ -239,6 +239,14 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
 }
 
 ///|
+impl @json.FromJson for PackageData with from_json(json : Json, path) {
+  match decode_package_data(json) {
+    Ok(data) => data
+    Err(msg) => raise JsonDecodeError((path, msg))
+  }
+}
+
+///|
 fn TypeDoc::get_id(self : TypeDoc) -> String {
   self.name
 }

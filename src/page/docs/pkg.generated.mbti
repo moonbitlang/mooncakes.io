@@ -2,8 +2,8 @@
 package "moonbitlang/mooncakes/page/docs"
 
 import {
+  "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
-  "moonbit-community/rabbita/internal/runtime",
   "moonbitlang/mooncakes/util",
 }
 
@@ -16,17 +16,17 @@ pub fn is_same_path(Model, @util.UnsolvedMooncakePath) -> Bool
 
 pub fn is_theme_toggle(Msg) -> Bool
 
-pub fn load(@util.UnsolvedMooncakePath, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn load(@util.UnsolvedMooncakePath, String?, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn navigate_package(Model, @util.UnsolvedMooncakePath, String?, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn navigate_package(Model, @util.UnsolvedMooncakePath, String?, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn scroll_to_smooth(String) -> @runtime.Cmd
+pub fn scroll_to_smooth(String) -> @cmd.Cmd
 
-pub fn scroll_to_top() -> @runtime.Cmd
+pub fn scroll_to_top() -> @cmd.Cmd
 
-pub fn update(Msg, Model, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
+pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 

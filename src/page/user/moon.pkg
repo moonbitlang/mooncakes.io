@@ -3,6 +3,9 @@ import {
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/http",
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
 }
+
+supported_targets = "js"

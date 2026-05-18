@@ -16,12 +16,12 @@
 enum Msg {
   ToggleDocDetail(String)
   DocModeChanged(CardMode)
-  GotManifest(Result[Manifest, String])
+  GotManifest(Result[Manifest, Error])
   ToggleBuildLog
-  GotBuildLog(Result[String, String])
-  GotResource(Result[ResourceInfo, String])
-  GotModuleIndex(Result[ModuleIndex, String])
-  GotPackageData(Result[PackageData, String])
+  GotBuildLog(Result[String, Error])
+  GotResource(Result[ResourceInfo, Error])
+  GotModuleIndex(Result[ModuleIndex, Error])
+  GotPackageData(Result[PackageData, Error])
   ToggleSidebarItem(ItemTarget)
   ClickSidebarItem(ItemTarget)
   ExpandAllSidebar
@@ -116,30 +116,21 @@ fn log_docs_error(msg : String) -> Unit {
 fn load_docs_assets(
   resolved : @util.MooncakePath,
   manifest : Manifest,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Array[Cmd] {
   let asset_path = make_versioned_asset_path(resolved)
   let module_asset_path = "\{resolved.module_path()}@\{resolved.version()}"
   [
-    @http.get(
-      "/assets/\{asset_path}/resource.json",
-      expect=Json(result => dispatch(GotResource(result)), decode_resource_info),
-    ),
-    @http.get(
-      "/assets/\{module_asset_path}/module_index.json",
-      expect=Json(
-        result => dispatch(GotModuleIndex(result)),
-        decode_module_index,
-      ),
-    ),
+    @http.get("/assets/\{asset_path}/resource.json").expect_json(r => {
+      emit(GotResource(r))
+    }),
+    @http.get("/assets/\{module_asset_path}/module_index.json").expect_json(r => {
+      emit(GotModuleIndex(r))
+    }),
     if manifest.has_package {
-      @http.get(
-        "/assets/\{asset_path}/package_data.json",
-        expect=Json(
-          result => dispatch(GotPackageData(result)),
-          decode_package_data,
-        ),
-      )
+      @http.get("/assets/\{asset_path}/package_data.json").expect_json(r => {
+        emit(GotPackageData(r))
+      })
     } else {
       none
     },
@@ -147,24 +138,22 @@ fn load_docs_assets(
 }
 
 ///|
-fn get_text(url : String, on_result : (Result[String, String]) -> Cmd) -> Cmd {
-  let expect : @http.Expecting[Cmd, String] = Text(on_result)
-  @http.get(url, expect~)
+fn get_text(url : String, on_result : (Result[String, Error]) -> Cmd) -> Cmd {
+  @http.get(url).expect_text(on_result)
 }
 
 ///|
 pub fn load(
   path : @util.UnsolvedMooncakePath,
   fragment : String?,
-  dispatch~ : (Msg) -> Cmd,
+  emit~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
   let path_str = path.package_path()
   (
     batch([
-      @http.get(
-        "/api/v0/manifest/\{path_str}",
-        expect=Json(result => dispatch(GotManifest(result)), decode_manifest),
-      ),
+      @http.get("/api/v0/manifest/\{path_str}").expect_json(r => {
+        emit(GotManifest(r))
+      }),
       @dialog.close("search-panel"),
     ]),
     {
@@ -191,11 +180,7 @@ pub fn load(
 }
 
 ///|
-pub fn update(
-  msg : Msg,
-  model : Model,
-  dispatch~ : (Msg) -> Cmd,
-) -> (Cmd, Model) {
+pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   match msg {
     GotManifest(result) =>
       match result {
@@ -219,7 +204,7 @@ pub fn update(
           let cmd = if has_docs {
             match resolved {
               Some(resolved) =>
-                batch(load_docs_assets(resolved, manifest, dispatch))
+                batch(load_docs_assets(resolved, manifest, emit))
               None => none
             }
           } else {
@@ -276,7 +261,7 @@ pub fn update(
         (true, LogIdle | LogFailed, Success(manifest)) =>
           get_text(
             "/api/v0/builds/log?module=\{encode_uri_component(manifest.module_)}&version=\{encode_uri_component(manifest.version)}",
-            (result : Result[String, String]) => dispatch(GotBuildLog(result)),
+            (result : Result[String, Error]) => emit(GotBuildLog(result)),
           )
         _ => none
       }
@@ -291,8 +276,8 @@ pub fn update(
         none,
         match result {
           Ok(log) => { ..model, build_log: LogSuccess(log) }
-          Err(msg) => {
-            println(msg)
+          Err(err) => {
+            println(err.to_string())
             { ..model, build_log: LogFailed }
           }
         },
@@ -307,8 +292,8 @@ pub fn update(
               readme_content: Success(resource.readme_content),
               source_files: resource.source_files,
             }
-          Err(msg) => {
-            log_docs_error(msg)
+          Err(err) => {
+            log_docs_error(err.to_string())
             { ..model, readme_content: Failed, source_files: [] }
           }
         },
@@ -340,8 +325,8 @@ pub fn update(
               ),
             }
           }
-          Err(msg) => {
-            log_docs_error(msg)
+          Err(err) => {
+            log_docs_error(err.to_string())
             { ..model, module_index: Failed }
           }
         },
@@ -362,7 +347,10 @@ pub fn update(
             .fold(init=model.collapsed_docs, FoldedState::add)
           { ..model, collapsed_docs, package_data: Success(package_data) }
         }
-        Err(_) => { ..model, package_data: Failed }
+        Err(err) => {
+          log_docs_error(err.to_string())
+          { ..model, package_data: Failed }
+        }
       }
       (@nav.scroll_to(model.fragment), model)
     }
@@ -481,8 +469,8 @@ pub fn update(
     }
     CopyInstallCommand(command) =>
       (
-        @clipboard.copy(Text(command), copied=dispatch(CopyInstallSuccess), failed=reason => {
-          dispatch(CopyInstallFailed(reason))
+        @clipboard.copy(Text(command), copied=emit(CopyInstallSuccess), failed=e => {
+          emit(CopyInstallFailed(e))
         }),
         model,
       )
@@ -533,7 +521,7 @@ pub fn navigate_package(
   model : Model,
   path : @util.UnsolvedMooncakePath,
   fragment : String?,
-  dispatch~ : (Msg) -> Cmd,
+  emit~ : (Msg) -> Cmd,
 ) -> (Cmd, Model) {
   match model.manifest {
     Success(manifest) => {
@@ -564,20 +552,12 @@ pub fn navigate_package(
         Some(r) => {
           let asset_path = make_versioned_asset_path(r)
           let cmds : Array[Cmd] = [
-            @http.get(
-              "/assets/\{asset_path}/resource.json",
-              expect=Json(
-                result => dispatch(GotResource(result)),
-                decode_resource_info,
-              ),
-            ),
-            @http.get(
-              "/assets/\{asset_path}/package_data.json",
-              expect=Json(
-                result => dispatch(GotPackageData(result)),
-                decode_package_data,
-              ),
-            ),
+            @http.get("/assets/\{asset_path}/resource.json").expect_json(x => {
+              emit(GotResource(x))
+            }),
+            @http.get("/assets/\{asset_path}/package_data.json").expect_json(x => {
+              emit(GotPackageData(x))
+            }),
           ]
           (
             batch(cmds),
@@ -593,10 +573,10 @@ pub fn navigate_package(
             },
           )
         }
-        None => load(path, fragment, dispatch~)
+        None => load(path, fragment, emit~)
       }
     }
-    _ => load(path, fragment, dispatch~)
+    _ => load(path, fragment, emit~)
   }
 }
 

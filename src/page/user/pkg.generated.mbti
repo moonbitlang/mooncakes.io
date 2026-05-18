@@ -2,8 +2,8 @@
 package "moonbitlang/mooncakes/page/user"
 
 import {
+  "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
-  "moonbit-community/rabbita/internal/runtime",
   "moonbitlang/mooncakes/util",
 }
 
@@ -12,15 +12,15 @@ pub fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html
 
 pub fn is_theme_toggle(Msg) -> Bool
 
-pub fn load(String, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn load(String, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
 pub fn profile(@util.Status[Profile]) -> @html.Html
 
 pub fn published_modules(@util.Status[Array[(String, String)]]) -> @html.Html
 
-pub fn update(Msg, Model) -> (@runtime.Cmd, Model)
+pub fn update(Msg, Model) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
+pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 

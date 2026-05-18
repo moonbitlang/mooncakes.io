@@ -16,3 +16,5 @@ import {
   "moonbit-community/rabbita/clipboard",
   "moonbit-community/rabbita/svg",
 }
+
+supported_targets = "js"

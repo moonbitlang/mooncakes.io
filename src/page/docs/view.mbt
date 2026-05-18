@@ -119,7 +119,7 @@ fn build_log_view(build_log : BuildLogStatus) -> Html {
 fn build_log_panel(
   build_log_open : Bool,
   build_log : BuildLogStatus,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
   footer? : Html = nothing,
 ) -> Html {
   let toggle_icon = if build_log_open {
@@ -128,7 +128,7 @@ fn build_log_panel(
     @config.SECTION_CLOSE
   }
   div(class="docs-state-log-card", [
-    button(class="docs-state-log-toggle", on_click=dispatch(ToggleBuildLog), [
+    button(class="docs-state-log-toggle", on_click=emit(ToggleBuildLog), [
       p(class="docs-state-log-title", [text("Build log")]),
       img(src=toggle_icon, class="size-4 ui-icon shrink-0", nothing),
     ]),
@@ -155,7 +155,7 @@ fn build_log_panel(
 fn failed_docs_notice(
   build_log_open : Bool,
   build_log : BuildLogStatus,
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center", [
     icon_failed(),
@@ -170,7 +170,7 @@ fn failed_docs_notice(
       build_log_panel(
         build_log_open,
         build_log,
-        dispatch,
+        emit,
         footer=p(class="docs-state-summary", style=["margin-top: 0.75rem"], [
           text("If this seems wrong, "),
           a(
@@ -219,8 +219,8 @@ fn outdated_docs_notice() -> Html {
 }
 
 ///|
-pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
+pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
+  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   let module_index = match model.module_index {
     Success(module_index) => Some(module_index)
     _ => None
@@ -238,7 +238,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     nav_module_path,
     module_index,
     model.collapsed_docs.card_mode,
-    dispatch,
+    emit,
     theme_toggle~,
   )
   let search = model.search
@@ -253,13 +253,13 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
             input_type=Text,
             value=search.filter,
             placeholder="search...",
-            on_input=x => dispatch(SearchFilterChanged(x)),
+            on_input=x => emit(SearchFilterChanged(x)),
             class="outline-none m-0 flex-grow px-4 p-2",
             nothing,
           ),
           div(
             class="size-12 container hover:bg-gray-200 flex justify-center items-center",
-            on_click=dispatch(ToggleSearchPanel(false)),
+            on_click=emit(ToggleSearchPanel(false)),
             [img(class="ui-icon", src=@config.icon_close, nothing)],
           ),
         ],
@@ -281,7 +281,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
               }
               @html.li(
                 class="border-b px-4 py-2 bg-white hover:bg-gray-100",
-                on_click=dispatch(ToggleSearchPanel(false)),
+                on_click=emit(ToggleSearchPanel(false)),
                 [
                   a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ", [
                     span(
@@ -352,7 +352,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
     match resolved_meta {
       Some(meta) =>
         div(class="xl:hidden", [
-          meta_info(meta, install_copied=model.install_copied, dispatch),
+          meta_info(meta, install_copied=model.install_copied, emit),
         ])
       None => nothing
     }
@@ -363,7 +363,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   let meta_right : Html = match resolved_meta {
     Some(meta) =>
       div(class="animate-fade-in", [
-        meta_sidebar(meta, install_copied=model.install_copied, dispatch),
+        meta_sidebar(meta, install_copied=model.install_copied, emit),
       ])
     None =>
       if model.module_meta is Loading {
@@ -395,7 +395,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
           if docs_loaded {
             nothing
           } else {
-            failed_docs_notice(model.build_log_open, model.build_log, dispatch)
+            failed_docs_notice(model.build_log_open, model.build_log, emit)
           }
         None => if docs_loaded { nothing } else { outdated_docs_notice() }
         Some(BuildSuccess) | Some(BuildLegacy) =>
@@ -431,7 +431,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
             module_name~,
             module_version~,
             package_path=path_str,
-            dispatch,
+            emit,
           ),
         ])
       _ => nothing
@@ -461,18 +461,18 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
       div(
         class="fixed inset-0 bg-black/40 z-10",
         style=["display: \{show_sidebar_dialog}"],
-        on_click=dispatch(ToggleSidebarFab),
+        on_click=emit(ToggleSidebarFab),
         nothing,
       ),
       div(
         class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
-        [sidebar(model.sidebar_document, model.sidebar_collapsed, dispatch)],
+        [sidebar(model.sidebar_document, model.sidebar_collapsed, emit)],
       ),
     ],
   )
   let fab : Html = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
-    on_click=dispatch(ToggleSidebarFab),
+    on_click=emit(ToggleSidebarFab),
     [img(class="size-5", src=@config.HAMBURGER_BUTTON, nothing)],
   )
   div(class="min-h-screen w-full flex-col", [
@@ -493,7 +493,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
                     sidebar(
                       model.sidebar_document,
                       model.sidebar_collapsed,
-                      dispatch,
+                      emit,
                     ),
                   ])
                 },

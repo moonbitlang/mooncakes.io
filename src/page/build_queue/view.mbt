@@ -146,8 +146,8 @@ fn build_section(
 }
 
 ///|
-pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
+pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
+  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   @view.page(
     header=@view.navbar(right=theme_toggle),
     main=div(class="container max-w-3xl mx-auto px-4 py-8", [

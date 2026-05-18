@@ -42,7 +42,7 @@ fn decode_user_profile(json : Json) -> Result[Profile, String] {
 }
 
 ///|
-fn decode_code_frequency(json : Json) -> Result[CodeFrequency, String] {
+fn decode_code_frequency(json : Json) -> Result[CodeFrequencyResponse, String] {
   match json {
     Object(dict) => {
       let result = {}
@@ -53,7 +53,7 @@ fn decode_code_frequency(json : Json) -> Result[CodeFrequency, String] {
             _ => fail("failed to decode \{to_repr(v)}")
           }
         }
-        Ok(result)
+        Ok({ data: result })
       } catch {
         e => Err(e.to_string())
       }
@@ -63,9 +63,25 @@ fn decode_code_frequency(json : Json) -> Result[CodeFrequency, String] {
 }
 
 ///|
+impl @json.FromJson for Profile with from_json(json : Json, path) {
+  match decode_user_profile(json) {
+    Ok(profile) => profile
+    Err(msg) => raise JsonDecodeError((path, msg))
+  }
+}
+
+///|
+impl @json.FromJson for CodeFrequencyResponse with from_json(json : Json, path) {
+  match decode_code_frequency(json) {
+    Ok(data) => data
+    Err(msg) => raise JsonDecodeError((path, msg))
+  }
+}
+
+///|
 enum Msg {
-  GotUserProfile(Result[Profile, String])
-  GotCodeFrequency(Result[CodeFrequency, String])
+  GotUserProfile(Result[Profile, Error])
+  GotCodeFrequency(Result[CodeFrequencyResponse, Error])
   ToggleTheme
 }
 
@@ -77,6 +93,11 @@ struct Model {
 
 ///|
 type CodeFrequency = Map[String, Int]
+
+///|
+priv struct CodeFrequencyResponse {
+  data : CodeFrequency
+}
 
 ///|
 type PublishedModules = Array[(String, String)]
@@ -111,25 +132,17 @@ extern "js" fn get_date_days_ago(days : Int) -> String =
   #|}
 
 ///|
-pub fn load(username : String, dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
+pub fn load(username : String, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   let today = get_today_iso()
   let start_date = get_date_days_ago(120)
   (
     batch([
-      @http.get(
-        "/api/v0/user/\{username}",
-        expect=Json(
-          result => dispatch(GotUserProfile(result)),
-          decode_user_profile,
-        ),
-      ),
+      @http.get("/api/v0/user/\{username}").expect_json(r => {
+        emit(GotUserProfile(r))
+      }),
       @http.get(
         "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
-        expect=Json(
-          result => dispatch(GotCodeFrequency(result)),
-          decode_code_frequency,
-        ),
-      ),
+      ).expect_json(r => emit(GotCodeFrequency(r))),
     ]),
     { profile: Loading, code_frequency: Loading },
   )
@@ -376,8 +389,8 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
 }
 
 ///|
-pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=dispatch(ToggleTheme))
+pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
+  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   @view.page(
     header=@view.navbar(right=theme_toggle),
     main=div(class="container lg:px-40 px-4 py-6", [
@@ -406,14 +419,14 @@ pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
   match msg {
     GotUserProfile(Ok(profile)) =>
       (none, { ..model, profile: Success(profile) })
-    GotCodeFrequency(Ok(data)) =>
+    GotCodeFrequency(Ok({ data })) =>
       (none, { ..model, code_frequency: Success(data) })
-    GotCodeFrequency(Err(msg)) => {
-      println(msg)
+    GotCodeFrequency(Err(err)) => {
+      println(err.to_string())
       (none, { ..model, code_frequency: Failed })
     }
-    GotUserProfile(Err(msg)) => {
-      println(msg)
+    GotUserProfile(Err(err)) => {
+      println(err.to_string())
       (none, { ..model, profile: Failed })
     }
     ToggleTheme => (none, model)

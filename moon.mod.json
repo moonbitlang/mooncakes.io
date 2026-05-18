@@ -4,7 +4,7 @@
   "deps": {
     "moonbit-community/cmark": "0.4.3",
     "Yoorkin/prettyprinter": "0.4.8",
-    "moonbit-community/rabbita": "0.11.5",
+    "moonbit-community/rabbita": "0.12.2",
     "moonbitlang/parser": "0.3.0",
     "moonbit-community/fuzzy_match": "0.2.5"
   },

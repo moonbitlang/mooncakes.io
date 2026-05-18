@@ -17,3 +17,6 @@ using @html {type Html}
 
 ///|
 using @rabbita {type Cmd, batch, none}
+
+///|
+using @cmd {type Emit}

@@ -2,8 +2,8 @@
 package "moonbitlang/mooncakes/page/home"
 
 import {
+  "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
-  "moonbit-community/rabbita/internal/runtime",
   "moonbitlang/mooncakes/util",
 }
 
@@ -12,11 +12,11 @@ pub fn filter_indices(String, Array[SearchIndex]) -> Array[ModuleIndex]
 
 pub fn is_theme_toggle(Msg) -> Bool
 
-pub fn load(dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn load(emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn update(Msg, Model, dispatch~ : (Msg) -> @runtime.Cmd) -> (@runtime.Cmd, Model)
+pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, dispatch~ : (Msg) -> @runtime.Cmd) -> @html.Html
+pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 
@@ -50,9 +50,9 @@ pub(all) struct ModuleIndex {
 }
 
 pub enum Msg {
-  GotAllModule(Result[Array[ModuleIndex], String])
-  GotHighlights(Result[ModuleHighlights, String])
-  GotCount(Result[PackageCount, String])
+  GotAllModule(Result[Array[ModuleIndex], Error])
+  GotHighlights(Result[ModuleHighlights, Error])
+  GotCount(Result[PackageCount, Error])
   FilterChanged(String)
   ToggleAllModules
   ToggleTheme

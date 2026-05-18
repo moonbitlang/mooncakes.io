@@ -275,6 +275,14 @@ fn decode_manifest(json : Json) -> Result[Manifest, String] {
 }
 
 ///|
+impl @json.FromJson for Manifest with from_json(json : Json, path) {
+  match decode_manifest(json) {
+    Ok(manifest) => manifest
+    Err(msg) => raise JsonDecodeError((path, msg))
+  }
+}
+
+///|
 fn decode_type_path(json : Json) -> TypePath raise Error {
   match json {
     { "path": String(path), "name": String(name), .. } => { path, name }
@@ -475,5 +483,13 @@ fn decode_module_index(json : Json) -> Result[ModuleIndex, String] {
     err => Err(err.to_string())
   } noraise {
     res => Ok(res)
+  }
+}
+
+///|
+impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
+  match decode_module_index(json) {
+    Ok(index) => index
+    Err(msg) => raise JsonDecodeError((path, msg))
   }
 }

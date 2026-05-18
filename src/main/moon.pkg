@@ -3,6 +3,8 @@ import {
   "moonbit-community/rabbita/url",
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/nav",
+  "moonbit-community/rabbita/cmd",
+  "moonbit-community/rabbita/sub",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/page/home",
@@ -10,6 +12,8 @@ import {
   "moonbitlang/mooncakes/page/user",
   "moonbitlang/mooncakes/page/build_queue",
 }
+
+supported_targets = "js"
 
 options(
   "is-main": true,

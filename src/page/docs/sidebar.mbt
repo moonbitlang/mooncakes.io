@@ -207,7 +207,7 @@ fn symbol_icon(kind : SymbolKind) -> Html {
 fn sidebar(
   document_index : Array[@tree.Tree[ItemTarget]],
   sidebar_state : SortedSet[ItemTarget],
-  dispatch : (Msg) -> Cmd,
+  emit : (Msg) -> Cmd,
 ) -> Html {
   div(class="text-gray-700 flex flex-col", [
     div(
@@ -215,19 +215,19 @@ fn sidebar(
       [
         @html.button(
           class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
-          on_click=dispatch(ExpandAllSidebar),
+          on_click=emit(ExpandAllSidebar),
           [text("Expand all")],
         ),
         @html.button(
           class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
-          on_click=dispatch(CollapseAllSidebar),
+          on_click=emit(CollapseAllSidebar),
           [text("Collapse all")],
         ),
       ],
     ),
     @tree.view(
-      toggle=x => dispatch(ToggleSidebarItem(x)),
-      click=x => dispatch(ClickSidebarItem(x)),
+      toggle=x => emit(ToggleSidebarItem(x)),
+      click=x => emit(ClickSidebarItem(x)),
       state=sidebar_state,
       indicator=Symbol(pkg_path="", kind=KValue, ""),
       icon=sidebar_icon,

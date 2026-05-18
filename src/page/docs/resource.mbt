@@ -253,3 +253,11 @@ fn decode_resource_info(json : Json) -> Result[ResourceInfo, String] {
     err => Err(err.to_string())
   }
 }
+
+///|
+impl @json.FromJson for ResourceInfo with from_json(json : Json, path) {
+  match decode_resource_info(json) {
+    Ok(info) => info
+    Err(msg) => raise JsonDecodeError((path, msg))
+  }
+}

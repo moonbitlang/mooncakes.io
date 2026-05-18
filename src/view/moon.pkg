@@ -6,3 +6,5 @@ import {
   "moonbitlang/mooncakes/util/highlight",
   "moonbitlang/mooncakes/config",
 }
+
+supported_targets = "js"

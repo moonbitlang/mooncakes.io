@@ -60,7 +60,7 @@ fn start_theme_switch(model : Model) -> (Cmd, Model) {
 }
 
 ///|
-fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
+fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
   match (msg, model.page) {
     (GotHomeMsg(msg), _) if @home.is_theme_toggle(msg) =>
       start_theme_switch(model)
@@ -71,14 +71,14 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
     (GotBuildQueueMsg(msg), _) if @build_queue.is_theme_toggle(msg) =>
       start_theme_switch(model)
     (GotHomeMsg(msg), Home(page_model)) => {
-      let (cmd, page) = @home.update(msg, page_model, dispatch=x => {
-        dispatch(GotHomeMsg(x))
+      let (cmd, page) = @home.update(msg, page_model, emit=x => {
+        emit(GotHomeMsg(x))
       })
       (cmd, { ..model, page: Home(page) })
     }
     (GotDocsMsg(msg), Docs(page_model)) => {
-      let (cmd, page) = @docs.update(msg, page_model, dispatch=x => {
-        dispatch(GotDocsMsg(x))
+      let (cmd, page) = @docs.update(msg, page_model, emit=x => {
+        emit(GotDocsMsg(x))
       })
       (cmd, { ..model, page: Docs(page) })
     }
@@ -95,7 +95,7 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
         Internal(url) => (@nav.push_url(url.to_string()), model)
         External(url) => (@nav.load(url), model)
       }
-    (UrlChanged(url), _) => route_with_theme(url, model, dispatch)
+    (UrlChanged(url), _) => route_with_theme(url, model, emit)
     _ => (none, model)
   }
 }
@@ -104,30 +104,28 @@ fn update(dispatch : (Msg) -> Cmd, msg : Msg, model : Model) -> (Cmd, Model) {
 fn route_with_theme(
   url : @url.Url,
   model : Model,
-  dispatch : (Msg) -> Cmd,
+  emit : Emit[Msg],
 ) -> (Cmd, Model) {
   let theme = model.theme
   let scroll_top = @nav.scroll_to_top()
   match @util.MooncakesioPath::resolve(url) {
     Home => {
-      let (cmd, page) = @home.load(dispatch=x => dispatch(GotHomeMsg(x)))
+      let (cmd, page) = @home.load(emit=x => emit(GotHomeMsg(x)))
       (
         batch([cmd, scroll_top]),
         { theme, page: Home(page), theme_switching: false },
       )
     }
     BuildQueue => {
-      let (cmd, page) = @build_queue.load(dispatch=x => {
-        dispatch(GotBuildQueueMsg(x))
-      })
+      let (cmd, page) = @build_queue.load(emit=x => emit(GotBuildQueueMsg(x)))
       (
         batch([cmd, scroll_top]),
         { theme, page: BuildQueue(page), theme_switching: false },
       )
     }
     User(name) => {
-      let (cmd, page) = @user.load(name.to_owned(), dispatch=x => {
-        dispatch(GotUserMsg(x))
+      let (cmd, page) = @user.load(name.to_owned(), emit=x => {
+        emit(GotUserMsg(x))
       })
       (
         batch([cmd, scroll_top]),
@@ -155,13 +153,13 @@ fn route_with_theme(
           page_model,
           mooncakes_path,
           fragment,
-          dispatch=x => dispatch(GotDocsMsg(x)),
+          emit=x => emit(GotDocsMsg(x)),
         )
         return (batch([cmd, scroll_top]), { ..model, page: Docs(page) })
       }
       // Full load
-      let (cmd, page) = @docs.load(mooncakes_path, fragment, dispatch=x => {
-        dispatch(GotDocsMsg(x))
+      let (cmd, page) = @docs.load(mooncakes_path, fragment, emit=x => {
+        emit(GotDocsMsg(x))
       })
       (
         batch([cmd, scroll_top]),
@@ -174,16 +172,13 @@ fn route_with_theme(
 }
 
 ///|
-fn view(dispatch : (Msg) -> Cmd, model : Model) -> Html {
+fn view(emit : Emit[Msg], model : Model) -> Html {
   let page_view = match model.page {
-    Home(page_model) =>
-      @home.view(page_model, dispatch=x => dispatch(GotHomeMsg(x)))
-    Docs(page_model) =>
-      @docs.view(page_model, dispatch=x => dispatch(GotDocsMsg(x)))
-    User(page_model) =>
-      @user.view(page_model, dispatch=x => dispatch(GotUserMsg(x)))
+    Home(page_model) => @home.view(page_model, emit=x => emit(GotHomeMsg(x)))
+    Docs(page_model) => @docs.view(page_model, emit=x => emit(GotDocsMsg(x)))
+    User(page_model) => @user.view(page_model, emit=x => emit(GotUserMsg(x)))
     BuildQueue(page_model) =>
-      @build_queue.view(page_model, dispatch=x => dispatch(GotBuildQueueMsg(x)))
+      @build_queue.view(page_model, emit=x => emit(GotBuildQueueMsg(x)))
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }
@@ -203,12 +198,22 @@ fn view(dispatch : (Msg) -> Cmd, model : Model) -> Html {
 }
 
 ///|
+fn subscriptions(emit : Emit[Msg], _model : Model) -> @sub.Sub {
+  @sub.batch([
+    @sub.on_url_changed(u => emit(UrlChanged(u))),
+    @sub.on_url_request(r => emit(LinkClicked(r))),
+  ])
+}
+
+///|
 fn main {
   let model = { theme: Light, page: Redirect, theme_switching: false }
-  let (dispatch, cell) = @rabbita.cell_with_dispatch(model~, update~, view~)
+  let (_, cell) = @rabbita.cell_with_emit(
+    model~,
+    update~,
+    view~,
+    subscriptions~,
+  )
   let app = @rabbita.new(cell)
-  app.with_route(url_changed=url => dispatch(UrlChanged(url)), url_request=request => {
-    dispatch(LinkClicked(request))
-  })
   app.mount("app")
 }

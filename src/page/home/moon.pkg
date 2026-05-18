@@ -4,7 +4,10 @@ import {
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/svg",
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/util",
   "moonbit-community/fuzzy_match",
 }
+
+supported_targets = "js"

@@ -14,9 +14,9 @@
 
 ///|
 pub enum Msg {
-  GotAllModule(Result[Array[ModuleIndex], String])
-  GotHighlights(Result[ModuleHighlights, String])
-  GotCount(Result[PackageCount, String])
+  GotAllModule(Result[Array[ModuleIndex], Error])
+  GotHighlights(Result[ModuleHighlights, Error])
+  GotCount(Result[PackageCount, Error])
   FilterChanged(String)
   ToggleAllModules
   ToggleTheme
@@ -117,20 +117,13 @@ fn sanitize_for_fuzzy(text : String) -> String {
 let highlights_limit = 12
 
 ///|
-pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
+pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
     batch([
       @http.get(
         "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
-        expect=Json(
-          result => dispatch(GotHighlights(result)),
-          decode_highlights,
-        ),
-      ),
-      @http.get(
-        "/api/v0/modules/statistics",
-        expect=Json(result => dispatch(GotCount(result)), decode_statistics),
-      ),
+      ).expect_json(r => emit(GotHighlights(r))),
+      @http.get("/api/v0/modules/statistics").expect_json(r => emit(GotCount(r))),
     ]),
     {
       highlights: Loading,
@@ -146,19 +139,12 @@ pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
 }
 
 ///|
-fn fetch_all_modules(dispatch : (Msg) -> Cmd) -> Cmd {
-  @http.get(
-    "/api/v0/modules",
-    expect=Json(result => dispatch(GotAllModule(result)), decode_modules),
-  )
+fn fetch_all_modules(emit : (Msg) -> Cmd) -> Cmd {
+  @http.get("/api/v0/modules").expect_json(r => emit(GotAllModule(r)))
 }
 
 ///|
-pub fn update(
-  msg : Msg,
-  model : Model,
-  dispatch~ : (Msg) -> Cmd,
-) -> (Cmd, Model) {
+pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   match msg {
     GotAllModule(Ok(modules)) => {
       let indices = sort_modules_by_name(modules)
@@ -183,8 +169,8 @@ pub fn update(
           showing_downloads: stat.total_downloads,
         },
       )
-    GotAllModule(Err(msg)) | GotHighlights(Err(msg)) | GotCount(Err(msg)) => {
-      println(msg)
+    GotAllModule(Err(err)) | GotHighlights(Err(err)) | GotCount(Err(err)) => {
+      println(err.to_string())
       (none, { ..model, all_modules: Failed })
     }
     FilterChanged(filter) =>
@@ -194,7 +180,7 @@ pub fn update(
         match model.all_modules {
           Idle =>
             (
-              fetch_all_modules(dispatch),
+              fetch_all_modules(emit),
               { ..model, all_modules: Loading, filter, filtered_modules: [] },
             )
           Loading => (none, { ..model, filter, filtered_modules: [] })
@@ -213,7 +199,7 @@ pub fn update(
       match model.all_modules {
         Idle if show =>
           (
-            fetch_all_modules(dispatch),
+            fetch_all_modules(emit),
             { ..model, all_modules: Loading, show_all_modules: show },
           )
         _ => (none, { ..model, show_all_modules: show })
@@ -423,6 +409,14 @@ fn decode_statistics(json : Json) -> Result[PackageCount, String] {
 }
 
 ///|
+impl @json.FromJson for PackageCount with from_json(json : Json, path) {
+  match decode_statistics(json) {
+    Ok(count) => count
+    Err(msg) => raise JsonDecodeError((path, msg))
+  }
+}
+
+///|
 fn decode_module_index(item : Json) -> ModuleIndex raise {
   match item {
     {
@@ -469,13 +463,9 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
 }
 
 ///|
-fn decode_modules(json : Json) -> Result[Array[ModuleIndex], String] {
-  match json {
-    Array(items) =>
-      Ok(items.map(decode_module_index)) catch {
-        e => Err(e.to_string())
-      }
-    _ => Err("expecting an array")
+impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
+  decode_module_index(json) catch {
+    err => raise JsonDecodeError((path, err.to_string()))
   }
 }
 
@@ -499,6 +489,14 @@ fn decode_highlights(json : Json) -> Result[ModuleHighlights, String] {
         e => Err(e.to_string())
       }
     _ => Err("expecting highlights object with recent, new, popular")
+  }
+}
+
+///|
+impl @json.FromJson for ModuleHighlights with from_json(json : Json, path) {
+  match decode_highlights(json) {
+    Ok(highlights) => highlights
+    Err(msg) => raise JsonDecodeError((path, msg))
   }
 }
 

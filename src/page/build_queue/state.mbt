@@ -1,6 +1,6 @@
 ///|
 pub enum Msg {
-  GotBuilds(Result[BuildData, String])
+  GotBuilds(Result[BuildData, Error])
   ToggleTheme
 }
 
@@ -26,12 +26,9 @@ struct BuildData {
 }
 
 ///|
-pub fn load(dispatch~ : (Msg) -> Cmd) -> (Cmd, Model) {
+pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
-    @http.get(
-      "/api/v0/builds",
-      expect=Json(result => dispatch(GotBuilds(result)), decode_builds),
-    ),
+    @http.get("/api/v0/builds").expect_json(r => emit(GotBuilds(r))),
     { queue: Loading, recent: Loading },
   )
 }
@@ -104,5 +101,13 @@ fn decode_builds(json : Json) -> Result[BuildData, String] {
         e => Err(e.to_string())
       }
     _ => Err("invalid builds response")
+  }
+}
+
+///|
+impl @json.FromJson for BuildData with from_json(json : Json, path) {
+  match decode_builds(json) {
+    Ok(data) => data
+    Err(msg) => raise JsonDecodeError((path, msg))
   }
 }

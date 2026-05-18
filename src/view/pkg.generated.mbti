@@ -2,26 +2,26 @@
 package "moonbitlang/mooncakes/view"
 
 import {
+  "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
-  "moonbit-community/rabbita/internal/runtime",
 }
 
 // Values
-pub fn accordion(class? : String, on_click? : (String) -> @runtime.Cmd, String, Array[(String, @html.Html)]) -> @html.Html
+pub fn accordion(class? : String, on_click? : (String) -> @cmd.Cmd, String, Array[(String, @html.Html)]) -> @html.Html
 
 pub fn badge(Array[@html.Html], class? : String) -> @html.Html
 
-pub fn button(String, on_click? : @runtime.Cmd) -> @html.Html
+pub fn button(String, on_click? : @cmd.Cmd) -> @html.Html
 
 pub fn code_block(String, kind~ : CodeBlockKind, transform_link? : (String) -> String) -> @html.Html
 
-pub fn collapse(header~ : @html.Html, body~ : @html.Html, collapsed~ : Bool, toggle~ : @runtime.Cmd, caret_config? : CaretConfig) -> @html.Html
+pub fn collapse(header~ : @html.Html, body~ : @html.Html, collapsed~ : Bool, toggle~ : @cmd.Cmd, caret_config? : CaretConfig) -> @html.Html
 
 pub fn document_not_available(String) -> @html.Html
 
 pub fn footer() -> @html.Html
 
-pub fn icon_button(String, text? : String, on_click? : @runtime.Cmd) -> @html.Html
+pub fn icon_button(String, text? : String, on_click? : @cmd.Cmd) -> @html.Html
 
 pub fn load_failed(String) -> @html.Html
 
@@ -51,7 +51,7 @@ pub fn skeleton_published_modules(Int) -> @html.Html
 
 pub fn skeleton_sidebar() -> @html.Html
 
-pub fn theme_toggle(on_click? : @runtime.Cmd) -> @html.Html
+pub fn theme_toggle(on_click? : @cmd.Cmd) -> @html.Html
 
 // Errors
 

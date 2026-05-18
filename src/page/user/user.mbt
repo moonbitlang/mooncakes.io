@@ -164,13 +164,13 @@ pub fn profile(profile : Status[Profile]) -> Html {
     Failed => @view.load_failed("user")
     Loading => @view.skeleton_profile()
     Success({ username, avatar_url, .. }) =>
-      div(class="flex flex-col items-center text-center animate-fade-in", [
+      div(class="flex flex-col items-center text-center animate-fade-in") <| [
         if avatar_url == "" {
           // Default avatar placeholder
           let initial = first_char_upper_or(username, "U")
           div(
             class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mb-4 border-4 border-white shadow-lg",
-            [span(class="text-white text-4xl font-bold", [text(initial)])],
+            span(class="text-white text-4xl font-bold", initial),
           )
         } else {
           img(
@@ -179,8 +179,8 @@ pub fn profile(profile : Status[Profile]) -> Html {
             nothing,
           )
         },
-        h1(class="text-3xl font-bold text-gray-800", [text(username)]),
-      ])
+        h1(class="text-3xl font-bold text-gray-800", username),
+      ]
   }
 }
 
@@ -191,14 +191,16 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
     Loading => @view.skeleton_published_modules(6)
     Success(module_list) => {
       if module_list.length() == 0 {
-        return div(class="p-8 text-center text-gray-500", [
-          text("No published modules yet"),
-        ])
+        return div(
+          class="p-8 text-center text-gray-500",
+          "No published modules yet",
+        )
       }
-      div(class="animate-fade-in", [
-        h2(class="text-2xl font-semibold mb-6 text-gray-800", [
-          text("Published Modules"),
-        ]),
+      div(class="animate-fade-in") <| [
+        h2(
+          class="text-2xl font-semibold mb-6 text-gray-800",
+          "Published Modules",
+        ),
         div(
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4",
           module_list.map(fn(module_info) {
@@ -210,25 +212,24 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
             }
             div(
               class="group border border-gray-200 rounded-lg p-4 bg-white hover:border-blue-200 hover:shadow-md transition-all duration-200",
-              [
-                div(class="flex flex-col h-full", [
-                  a(
-                    href="/docs/\{name}@\{version}",
-                    class="text-lg font-bold text-gray-900 group-hover:text-blue-600 mb-3 transition-colors",
-                    [text(display_name)],
+            ) <| [
+              div(class="flex flex-col h-full") <| [
+                a(
+                  href="/docs/\{name}@\{version}",
+                  class="text-lg font-bold text-gray-900 group-hover:text-blue-600 mb-3 transition-colors",
+                  display_name,
+                ),
+                div(class="mt-auto flex justify-end") <| [
+                  span(
+                    class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700",
+                    "v\{version}",
                   ),
-                  div(class="mt-auto flex justify-end", [
-                    span(
-                      class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700",
-                      [text("v\{version}")],
-                    ),
-                  ]),
-                ]),
+                ],
               ],
-            )
+            ]
           }),
         ),
-      ])
+      ]
     }
   }
 }
@@ -240,9 +241,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
     Loading => @view.skeleton_code_frequency()
     Success(data) => {
       if data.length() == 0 {
-        return div(class="my-6 text-sm text-gray-500", [
-          text("No code frequency data"),
-        ])
+        return div(class="my-6 text-sm text-gray-500", "No code frequency data")
       }
 
       // find max absolute value for symmetric scaling
@@ -296,72 +295,68 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
           } else {
             "text-gray-500"
           }
-          div(class="flex flex-col items-center flex-shrink-0 w-8 sm:w-10", [
+          div(class="flex flex-col items-center flex-shrink-0 w-8 sm:w-10") <| [
             // graph area
-            div(class="relative h-40 w-4 sm:w-6", [
+            div(class="relative h-40 w-4 sm:w-6") <| [
               // baseline
               div(
                 class="absolute left-0 right-0 top-1/2 h-px bg-gray-300",
                 nothing,
               ),
               bar,
-            ]),
+            ],
             // value
-            span(class="text-[8px] sm:text-[10px] mt-1 font-mono \{class}", [
+            span(class="text-[8px] sm:text-[10px] mt-1 font-mono \{class}") <| [
               text(if value > 0 { "+\{value}" } else { value.to_string() }),
-            ]),
+            ],
             // date
-            span(class="text-[8px] sm:text-[10px] mt-0.5 text-gray-700", [
-              text(date_label),
-            ]),
-          ])
+            span(
+              class="text-[8px] sm:text-[10px] mt-0.5 text-gray-700",
+              date_label,
+            ),
+          ]
         })
-      div(class="animate-fade-in", [
-        h2(class="text-2xl font-semibold mb-6 text-gray-800", [
-          text("Code Frequency"),
-        ]),
+      div(class="animate-fade-in") <| [
+        h2(class="text-2xl font-semibold mb-6 text-gray-800", "Code Frequency"),
         div(
           class="bg-white rounded-xl border px-4 sm:px-6 lg:px-10 pb-6 pt-6 sm:pt-8 lg:pt-10",
-          [
-            // grid background
-            div(class="relative overflow-hidden", [
-              div(
-                class="absolute inset-0 flex flex-col justify-between h-40 pointer-events-none",
-                [
-                  div(class="border-t border-dashed border-gray-200", nothing),
-                  div(class="border-t border-dashed border-gray-200", nothing),
-                  div(class="border-t border-dashed border-gray-300", nothing), // center line slightly darker
-                  div(class="border-t border-dashed border-gray-200", nothing),
-                  div(class="border-t border-dashed border-gray-200", nothing),
-                ],
-              ),
-              div(
-                class="flex items-end overflow-x-auto gap-1 sm:gap-2 lg:gap-3 pb-2",
-                [
-                  div(
-                    class="flex items-end gap-2",
-                    [..bars, div(id="right", nothing)],
-                  ),
-                ],
-              ),
-            ]),
-            div(class="flex flex-wrap gap-2 sm:gap-4 mt-4 text-xs", [
-              div(class="flex items-center", [
-                div(class="bg-green-500 w-4 h-2 rounded-sm mr-1", nothing),
-                text("Added"),
-              ]),
-              div(class="flex items-center", [
-                div(class="bg-red-500 w-4 h-2 rounded-sm mr-1", nothing),
-                text("Removed"),
-              ]),
-              div(class="flex items-center", [
-                div(class="bg-gray-400 w-4 h-[2px] mr-1", nothing),
-                text("No Change"),
-              ]),
-            ]),
+        ) <| [
+          // grid background
+          div(class="relative overflow-hidden") <| [
+            div(
+              class="absolute inset-0 flex flex-col justify-between h-40 pointer-events-none",
+            ) <| [
+              div(class="border-t border-dashed border-gray-200", nothing),
+              div(class="border-t border-dashed border-gray-200", nothing),
+              div(class="border-t border-dashed border-gray-300", nothing), // center line slightly darker
+              div(class="border-t border-dashed border-gray-200", nothing),
+              div(class="border-t border-dashed border-gray-200", nothing),
+            ],
+            div(
+              class="flex items-end overflow-x-auto gap-1 sm:gap-2 lg:gap-3 pb-2",
+            ) <| [
+              div(class="flex items-end gap-2") <| [
+                ..bars,
+                div(id="right", nothing),
+              ],
+            ],
           ],
-        ),
-      ])
+          div(class="flex flex-wrap gap-2 sm:gap-4 mt-4 text-xs") <| [
+            div(class="flex items-center") <| [
+              div(class="bg-green-500 w-4 h-2 rounded-sm mr-1", nothing),
+              text("Added"),
+            ],
+            div(class="flex items-center") <| [
+              div(class="bg-red-500 w-4 h-2 rounded-sm mr-1", nothing),
+              text("Removed"),
+            ],
+            div(class="flex items-center") <| [
+              div(class="bg-gray-400 w-4 h-[2px] mr-1", nothing),
+              text("No Change"),
+            ],
+          ],
+        ],
+      ]
     }
   }
 }
@@ -371,23 +366,23 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   @view.page(
     header=@view.navbar(right=theme_toggle),
-    main=div(class="container lg:px-40 px-4 py-6", [
-      // Top: User profile (centered)
-      div(class="flex justify-center mb-8", [profile(model.profile)]),
-      // Content area: vertical layout
-      div(class="space-y-8", [
-        // Top: Code frequency
-        code_frequency(model.code_frequency),
-        // Bottom: Published modules
-        published_modules(
-          match model.profile {
-            Success({ modules, .. }) => Success(modules)
-            Loading => Loading
-            Failed => Failed
-          },
-        ),
-      ]),
-    ]),
+    main=div(class="container lg:px-40 px-4 py-6") <| [
+        // Top: User profile (centered)
+        div(class="flex justify-center mb-8", profile(model.profile)),
+        // Content area: vertical layout
+        div(class="space-y-8") <| [
+          // Top: Code frequency
+          code_frequency(model.code_frequency),
+          // Bottom: Published modules
+          published_modules(
+            match model.profile {
+              Success({ modules, .. }) => Success(modules)
+              Loading => Loading
+              Failed => Failed
+            },
+          ),
+        ],
+      ],
     footer=@view.footer(),
   )
 }

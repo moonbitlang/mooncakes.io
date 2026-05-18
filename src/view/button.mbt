@@ -17,7 +17,7 @@ pub fn button(value : String, on_click? : Cmd) -> Html {
   div(
     class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
     on_click?,
-    [text(value)],
+    value,
   )
 }
 
@@ -30,13 +30,12 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
   div(
     class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800",
     on_click?,
-    [
-      div(
-        class="self-center min-w-4 flex gap-2",
-        [img(class="w-4 ui-icon", src=icon, nothing), ..text],
-      ),
+  ) <| [
+    div(class="self-center min-w-4 flex gap-2") <| [
+      img(class="w-4 ui-icon", src=icon, nothing),
+      ..text,
     ],
-  )
+  ]
 }
 
 ///|
@@ -44,23 +43,24 @@ pub fn theme_toggle(on_click? : Cmd) -> Html {
   @html.button(
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
     on_click?,
-    [
-      img(
-        class="theme-toggle-icon theme-toggle-icon-moon",
-        src=@config.MOON_ICON,
-        nothing,
-      ),
-      img(
-        class="theme-toggle-icon theme-toggle-icon-sun",
-        src=@config.SUN_ICON,
-        nothing,
-      ),
-      span(class="sr-only theme-toggle-label theme-toggle-label-light", [
-        text("Enable night mode"),
-      ]),
-      span(class="sr-only theme-toggle-label theme-toggle-label-dark", [
-        text("Enable day mode"),
-      ]),
-    ],
-  )
+  ) <| [
+    img(
+      class="theme-toggle-icon theme-toggle-icon-moon",
+      src=@config.MOON_ICON,
+      nothing,
+    ),
+    img(
+      class="theme-toggle-icon theme-toggle-icon-sun",
+      src=@config.SUN_ICON,
+      nothing,
+    ),
+    span(
+      class="sr-only theme-toggle-label theme-toggle-label-light",
+      "Enable night mode",
+    ),
+    span(
+      class="sr-only theme-toggle-label theme-toggle-label-dark",
+      "Enable day mode",
+    ),
+  ]
 }

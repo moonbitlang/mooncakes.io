@@ -20,7 +20,7 @@ fn unsupported(node_type : String, message : String) -> @html.Html {
 
 ///|
 fn inline_text(str : String) -> @html.Html {
-  @html.span(class="inline", [text(str)])
+  @html.span(class="inline", str)
 }
 
 ///|
@@ -61,7 +61,7 @@ fn inline2html(
 ) -> Array[@html.Html] {
   match x {
     Autolink({ v: { link: { v, .. }, .. }, .. }) =>
-      [@html.a(href=v, [inline_text(v)])]
+      [@html.a(href=v, inline_text(v))]
     Break(_) => [text("\n")]
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
@@ -107,7 +107,7 @@ fn block2html(
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
         class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
-        [block2html(block, small_heading~, link_defs~, paragraph_margin=true)],
+        block2html(block, small_heading~, link_defs~, paragraph_margin=true),
       )
     Blocks({ v: xs, .. }) =>
       span(
@@ -119,11 +119,11 @@ fn block2html(
       let code = code.iter().map(fn(node) { node.v }).join("\n")
       let code = if info_string is Some({ v: lang, .. }) && is_moonbit(lang) {
         let code = code_block(code, kind=Code)
-        @html.code(class="font-mono", [code])
+        @html.code(class="font-mono", code)
       } else {
-        @html.code(class="font-mono", [div([text(code)])])
+        @html.code(class="font-mono", div(code))
       }
-      pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", [code])
+      pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", code)
     }
     Heading({ v: { level, inline, .. }, .. }) => {
       let inline = inline2html(inline, link_defs~)
@@ -161,23 +161,20 @@ fn block2html(
         .map(x => {
           let { v: { block, ext_task_marker, .. }, .. } = x
           if ext_task_marker is Some({ v: char, .. }) {
-            @html.li(class="list-none", [
-              @html.label(
-                class="flex items-baseline gap-2 pointer-events-none",
-                [
-                  @html.input(
-                    input_type=Checkbox,
-                    read_only=true,
-                    checked=char == 'x' || char == 'X',
-                    class="shrink-0 pointer-events-none",
-                    nothing,
-                  ),
-                  span([block2html(block, small_heading~, link_defs~)]),
-                ],
-              ),
-            ])
+            @html.li(class="list-none") <| [
+              @html.label(class="flex items-baseline gap-2 pointer-events-none") <| [
+                @html.input(
+                  input_type=Checkbox,
+                  read_only=true,
+                  checked=char == 'x' || char == 'X',
+                  class="shrink-0 pointer-events-none",
+                  nothing,
+                ),
+                span(block2html(block, small_heading~, link_defs~)),
+              ],
+            ]
           } else {
-            @html.li([block2html(block, small_heading~, link_defs~)])
+            @html.li(block2html(block, small_heading~, link_defs~))
           }
         })
         .to_array()
@@ -198,7 +195,7 @@ fn block2html(
     Paragraph({ v: { inline, .. }, .. }) => {
       let child = @html.span(inline2html(inline, link_defs~))
       if paragraph_margin {
-        div(class="mb-4 md:pr-8", [child])
+        div(class="mb-4 md:pr-8", child)
       } else {
         child
       }
@@ -267,8 +264,10 @@ fn block2html(
         })
       @html.table(
         class="w-full table-auto my-6 border-2 border-collapse border-gray-300",
-        [@html.colgroup(colgroup), @html.tbody(body)],
-      )
+      ) <| [
+        @html.colgroup(colgroup),
+        @html.tbody(body),
+      ]
     }
     LinkRefDefinition(_) => @html.nothing
     ExtMathBlock({ v: math, .. }) =>
@@ -290,15 +289,17 @@ fn unwrap_inline_link(
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
       [
-        @html.a(class="text-blue-600 underline underline-offset-2", href=link, [
+        @html.a(
+          class="text-blue-600 underline underline-offset-2",
+          href=link,
           inline_text(txt),
-        ]),
+        ),
       ]
     ({
       text: Image(_) as img,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [@html.a(href=link, style=["display: inline-block"], [image_render(img)])]
+      [@html.a(href=link, style=["display: inline-block"], image_render(img))]
     ({
       text: inline,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
@@ -312,7 +313,7 @@ fn unwrap_inline_link(
           @html.a(
             class=" text-blue-600 underline underline-offset-2",
             href=url,
-            [..inline2html(inline, link_defs~)],
+            inline2html(inline, link_defs~),
           ),
         ]
       } else {

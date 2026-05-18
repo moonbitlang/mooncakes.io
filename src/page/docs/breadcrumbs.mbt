@@ -24,17 +24,19 @@ fn breadcrumbs(
         if lookup_acc_path.has_prefix(lookup_module_path) &&
           module_index.0.find_node(lookup_acc_path) is Some(node) &&
           (lookup_acc_path == lookup_module_path || node.pkg is Some(_)) {
-          a(class="hover:underline font-normal", href="/docs/\{raw_acc_path}", [
-            text(lookup_path),
-          ])
+          a(
+            class="hover:underline font-normal",
+            href="/docs/\{raw_acc_path}",
+            lookup_path,
+          )
         } else {
-          div(class="text-gray-700 font-normal", [text(lookup_path)])
+          div(class="text-gray-700 font-normal", lookup_path)
         }
-      _ => div(class="text-gray-700 font-normal", [text(lookup_path)])
+      _ => div(class="text-gray-700 font-normal", lookup_path)
     }
     elems.push(elem)
   }
-  let separator = div(class="text-gray-300 text-base", [text(" / ")])
+  let separator = div(class="text-gray-300 text-base", " / ")
   div(
     class="text-base text-gray-800 font-semibold flex gap-2",
     elems.iter().intersperse(separator).collect(),

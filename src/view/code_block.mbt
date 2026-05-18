@@ -30,9 +30,9 @@ pub fn code_block(
   }
   fn go(x) {
     match x {
-      @highlight.Unknown(c) => span([text(c)])
-      Keyword(s) => span(class="text-[#0033b3]", [text(s)])
-      Symbol(s) => span(class="text-zinc-500 text-nowrap", [text(s)])
+      @highlight.Unknown(c) => span(c)
+      Keyword(s) => span(class="text-[#0033b3]", s)
+      Symbol(s) => span(class="text-zinc-500 text-nowrap", s)
       Link(href~, content) => {
         let href = match transform_link {
           Some(f) => f(href)
@@ -44,33 +44,33 @@ pub fn code_block(
           content.map(go),
         )
       }
-      UIdent(s) => span(class="text-gray-800", [text(s)])
-      LIdent(s) => span(class="text-[#00627a]", [text(s)])
+      UIdent(s) => span(class="text-gray-800", s)
+      LIdent(s) => span(class="text-[#00627a]", s)
       Newline => br()
-      Space(n) => span([text(" ".repeat(n))])
-      CharLit(s) | StringLit(s) | Number(s) =>
-        span(class="text-orange-800", [text(s)])
-      Comment(s) => span(class="text-green-800", [text(s)])
-      Attr(s) => span(class="text-[#AF00DB]", [text(s)])
+      Space(n) => span(" ".repeat(n))
+      CharLit(s) | StringLit(s) | Number(s) => span(class="text-orange-800", s)
+      Comment(s) => span(class="text-green-800", s)
+      Attr(s) => span(class="text-[#AF00DB]", s)
       QualIdent(path, name) =>
         if kind is Signature {
-          span(class="group/ident relative", [
+          span(class="group/ident relative") <| [
             div(
               class="absolute bottom-[120%] inset-0 flex items-center justify-center ",
-              [
-                div(
-                  class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
-                  [text("@\{path}."), span(class="text-blue-900", [text(name)])],
-                ),
+            ) <| [
+              div(
+                class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
+              ) <| [
+                text("@\{path}."),
+                span(class="text-blue-900", name),
               ],
-            ),
-            span(class="text-blue-900", [text(name)]),
-          ])
+            ],
+            span(class="text-blue-900", name),
+          ]
         } else {
-          span([
-            span(class="text-gray-600", [text("@\{path}.")]),
-            span(class="text-blue-900", [text(name)]),
-          ])
+          span() <| [
+            span(class="text-gray-600", "@\{path}."),
+            span(class="text-blue-900", name),
+          ]
         }
     }
   }

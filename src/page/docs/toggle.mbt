@@ -27,6 +27,6 @@ fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
   @html.button(
     class="theme-toggle hidden md:inline-flex items-center rounded-full px-3 py-1.5 transition-colors",
     on_click=click(next_mode),
-    [img(class="w-4 h-4 ui-icon", src=icon, nothing)],
+    img(class="w-4 h-4 ui-icon", src=icon, nothing),
   )
 }

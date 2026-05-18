@@ -52,58 +52,54 @@ fn signature_view(
   module_name~ : String,
   module_version~ : String,
 ) -> Html {
-  pre(class="text-wrap flex items-center", [
-    code(class="font-mono text-xs md:text-sm text-blue-800", [
+  pre(class="text-wrap flex items-center") <| [
+    code(class="font-mono text-xs md:text-sm text-blue-800") <| [
       @view.code_block(content, kind=Signature, transform_link=fn(href) {
         versioned_docs_path(href, module_name, module_version)
       }),
-    ]),
-  ])
+    ],
+  ]
 }
 
 ///|
 fn stype(ty : Stype, module_name~ : String, module_version~ : String) -> Html {
   match ty {
-    Param(name~) => span([text(name)])
+    Param(name~) => span(name)
     Arrow(parameters~, return_type~, error_type~, is_async~) => {
       let async_indicator = if is_async { text("async ") } else { nothing }
       let error_type_indicator = match error_type {
         None => nothing
         Some(ty) =>
-          span(class="flex", [
+          span(class="flex") <| [
             text("!"),
             stype(ty, module_name~, module_version~),
-          ])
+          ]
       }
-      span(
-        [
-          async_indicator,
-          text("("),
-          ..parameters
-          .map(fn(p) { stype(p, module_name~, module_version~) })
-          .iter()
-          .intersperse(text(", ")),
-          text(")"),
-          text(" -> "),
-          stype(return_type, module_name~, module_version~),
-          error_type_indicator,
-        ],
-      )
+      span() <| [
+        async_indicator,
+        text("("),
+        ..parameters
+        .map(fn(p) { stype(p, module_name~, module_version~) })
+        .iter()
+        .intersperse(text(", ")),
+        text(")"),
+        text(" -> "),
+        stype(return_type, module_name~, module_version~),
+        error_type_indicator,
+      ]
     }
     Constr(constr~, arguments=[]) =>
       type_path(constr, module_name~, module_version~)
     Constr(constr~, arguments~) =>
-      span(
-        [
-          type_path(constr, module_name~, module_version~),
-          text("["),
-          ..arguments
-          .map(fn(a) { stype(a, module_name~, module_version~) })
-          .iter()
-          .intersperse(text(", ")),
-          text("]"),
-        ],
-      )
+      span() <| [
+        type_path(constr, module_name~, module_version~),
+        text("["),
+        ..arguments
+        .map(fn(a) { stype(a, module_name~, module_version~) })
+        .iter()
+        .intersperse(text(", ")),
+        text("]"),
+      ]
     TypePath(path) => type_path(path, module_name~, module_version~)
   }
 }
@@ -118,7 +114,7 @@ fn type_path(
   a(
     href="/docs/\{path}#\{ty.name}",
     class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
-    [span(class="text-gray-700", [text(ty.name)])],
+    span(class="text-gray-700", ty.name),
   )
 }
 
@@ -132,16 +128,17 @@ fn impl_doc(
 ) -> Html {
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
-  let signature : Html = pre(class="bg-gray-100 text-wrap pr-4", [
-    code(class="font-mono text-xs md:text-sm text-[#0033b3]", [
-      text("impl "),
-      type_path(trait_type, module_name~, module_version~),
-      text(" for "),
-      span(class="text-gray-700", [
-        stype(self_type, module_name~, module_version~),
-      ]),
-    ]),
-  ])
+  let signature : Html = pre(class="bg-gray-100 text-wrap pr-4") <| [
+      code(class="font-mono text-xs md:text-sm text-[#0033b3]") <| [
+        text("impl "),
+        type_path(trait_type, module_name~, module_version~),
+        text(" for "),
+        span(
+          class="text-gray-700",
+          stype(self_type, module_name~, module_version~),
+        ),
+      ],
+    ]
   let content = div(
     class="pl-4 mb-2",
     methods.map(m => value_doc(m, folded~, module_name~, module_version~, emit)),
@@ -160,17 +157,15 @@ fn type_doc(
   let { docstring, signature, methods, impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
-  let content = div(
-    [
-      div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
+  let content = div() <| [
+      div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
       ..impls.map(imp => {
         impl_doc(imp, folded~, module_name~, module_version~, emit)
       }),
       ..methods.map(m => {
         value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
       }),
-    ],
-  )
+    ]
   document_item(
     title=id,
     signature,
@@ -195,14 +190,12 @@ fn trait_doc(
   let { docstring, signature, impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
-  let content = div(
-    [
-      div(class="pl-4 mb-2", [@view.markdown(docstring, small_heading=true)]),
+  let content = div() <| [
+      div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
       ..impls.map(imp => {
         impl_doc(imp, folded~, module_name~, module_version~, emit)
       }),
-    ],
-  )
+    ]
   document_item(
     title=id,
     signature,
@@ -226,9 +219,10 @@ fn type_alias_doc(
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
   let signature = signature_view(signature, module_name~, module_version~)
-  let content = div(class="pl-4 mb-2", [
+  let content = div(
+    class="pl-4 mb-2",
     @view.markdown(docstring, small_heading=true),
-  ])
+  )
   let id = doc.get_id()
   document_item(
     title=id,
@@ -274,18 +268,18 @@ fn document_item(
         href="/assets/\{path}/\{loc.file}.html#\{loc.line}",
         class="text-xs font-semibold text-yellow-700 hover:text-yellow-900 transition-colors",
         escape=true,
-        [text("source")],
+        "source",
       )
     }
   }
   let collapse_btn : Html = div(
     class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
     on_click=emit(ToggleDocDetail(id)),
-    [img(src=icon, class="size-4 ui-icon", nothing)],
+    img(src=icon, class="size-4 ui-icon", nothing),
   )
-  let buttons_row : Html = div(class="select-none flex gap-1 items-center", [
-    source_btn, collapse_btn,
-  ])
+  let buttons_row : Html = div(class="select-none flex gap-1 items-center") <| [
+      source_btn, collapse_btn,
+    ]
   let top_rule = match title {
     None =>
       if tight {
@@ -296,42 +290,48 @@ fn document_item(
     Some(_) => "mt-10"
   }
   let sig_buttons_abs : Html = div(
-    class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center",
-    [source_btn, collapse_btn],
-  )
+      class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center",
+    ) <| [
+      source_btn, collapse_btn,
+    ]
   let (title_view, sig_buttons, has_title) = match title {
     None => (nothing, sig_buttons_abs, false)
     Some(title) => {
       let anchor = div(
         class="text-gray-300 hover:text-gray-500 cursor-pointer transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
         on_click=emit(ClickAnchor(id)),
-        [text("#")],
+        "#",
       )
       let title_with_buttons = div(
-        class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
-        id~,
-        [
+          class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
+          id~,
+        ) <| [
           @html.h2(
             class="text-gray-800 text-lg md:text-xl font-semibold py-2 relative",
-            [anchor, text(title)],
-          ),
+          ) <| [
+            anchor,
+            text(title),
+          ],
           buttons_row,
-        ],
-      )
+        ]
       (title_with_buttons, nothing, true)
     }
   }
   let anchor_class = if has_title { "" } else { " scroll-mt-header" }
   let sig_class = "px-4 py-2.5 bg-gray-100 rounded-lg relative w-full \{header_style}\{anchor_class}"
-  div(class="mb-3 group \{top_rule}", [
+  div(class="mb-3 group \{top_rule}") <| [
     title_view,
     if has_title {
-      div(class=sig_class, [signature, sig_buttons])
+      div(class=sig_class) <| [
+        signature, sig_buttons,
+      ]
     } else {
-      div(class=sig_class, id~, [signature, sig_buttons])
+      div(class=sig_class, id~) <| [
+        signature, sig_buttons,
+      ]
     },
-    div(class="\{content_style} mt-3", [content]),
-  ])
+    div(class="\{content_style} mt-3", content),
+  ]
 }
 
 ///|
@@ -349,9 +349,10 @@ fn value_doc(
     .map(fn(x) { "\{x}::\{doc.get_id()}" })
     .unwrap_or(doc.get_id())
   let signature = signature_view(signature, module_name~, module_version~)
-  let content = div(class="pl-4 mb-2", [
+  let content = div(
+    class="pl-4 mb-2",
     @view.markdown(docstring, small_heading=true),
-  ])
+  )
   let title = if enable_title || type_id is Some(_) { Some(id) } else { None }
   document_item(
     title?,
@@ -376,40 +377,39 @@ fn misc_doc(
 ) -> Html {
   let { name, methods, impls } = doc
   let id = doc.get_id()
-  let signature = div(id=name, class="py-1 w-full", [
-    h3(class="text-base md:text-lg text-gray-800", [text(name)]),
-  ])
+  let signature = div(
+    id=name,
+    class="py-1 w-full",
+    h3(class="text-base md:text-lg text-gray-800", name),
+  )
   let package_link_class = "font-mono text-sm px-1 py-[1px] bg-yellow-600/20 hover:bg-yellow-600/20 rounded"
   let tips = match @config.builtins_package_path.get(name) {
     None => nothing
     Some(pkg_path) =>
       div(
         class="bg-mooncake border-mooncake2 border-opacity-50 text-yellow-800 border rounded px-6 py-4 my-2",
-        [
-          h3(class="text-base font-semibold", [text("Note")]),
-          p(class="mt-2", [
-            text(
-              "\{name} is a built-in type. The documentation may not be complete here. You can find all methods and implementations in the ",
-            ),
-            a(
-              href="/docs/moonbitlang/core/builtin#\{name}",
-              class=package_link_class,
-              [text("core/builtin")],
-            ),
-            text(" and "),
-            a(
-              href="/docs/moonbitlang/\{pkg_path}#\{name}",
-              class=package_link_class,
-              [text("core/\{name.to_lower()}")],
-            ),
-            text(" package."),
-          ]),
+      ) <| [
+        h3(class="text-base font-semibold", "Note"),
+        p(class="mt-2") <| [
+          text(
+            "\{name} is a built-in type. The documentation may not be complete here. You can find all methods and implementations in the ",
+          ),
+          a(
+            href="/docs/moonbitlang/core/builtin#\{name}",
+            class=package_link_class,
+            "core/builtin",
+          ),
+          text(" and "),
+          a(
+            href="/docs/moonbitlang/\{pkg_path}#\{name}",
+            class=package_link_class,
+            "core/\{name.to_lower()}",
+          ),
+          text(" package."),
         ],
-      )
+      ]
   }
-  let content = div(
-    class="ml-3 my-2",
-    [
+  let content = div(class="ml-3 my-2") <| [
       tips,
       ..methods.map(m => {
         value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
@@ -417,8 +417,7 @@ fn misc_doc(
       ..impls.map(imp => {
         impl_doc(imp, folded~, module_name~, module_version~, emit)
       }),
-    ],
-  )
+    ]
   document_item(signature, content, collapsed=folded, id~, emit)
 }
 
@@ -438,29 +437,27 @@ fn readme(
     (nothing, @config.SECTION_CLOSE)
   } else if has_content {
     let content = @view.markdown(content.unwrap())
-    (div(class="mt-4 mb-6", [content]), @config.SECTION_OPEN)
+    (div(class="mt-4 mb-6", content), @config.SECTION_OPEN)
   } else {
     (
-      p(class="mt-3 mb-4 text-sm text-gray-400 text-center", [
-        text("\{package_path} does not have a README file"),
-      ]),
+      p(
+        class="mt-3 mb-4 text-sm text-gray-400 text-center",
+        "\{package_path} does not have a README file",
+      ),
       @config.SECTION_OPEN,
     )
   }
-  div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme", [
+  div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [
     div(
       class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
       on_click=emit(ToggleDocDetail("readme")),
-      [
-        img(src=icon, class="size-3.5 ui-icon", nothing),
-        span(class="font-medium text-gray-500 text-xs tracking-wide", [
-          text("README"),
-        ]),
-      ],
-    ),
+    ) <| [
+      img(src=icon, class="size-3.5 ui-icon", nothing),
+      span(class="font-medium text-gray-500 text-xs tracking-wide", "README"),
+    ],
     body,
     div(class="border-b border-gray-200 mt-4", nothing),
-  ])
+  ]
 }
 
 ///|
@@ -517,31 +514,32 @@ fn document(
     }
     _ => []
   }
-  div(class="contents-center flex flex-col w-full", [
+  div(class="contents-center flex flex-col w-full") <| [
     readme,
     // Ensure left and right spacing on mobile devices
     div(class="mx-4 md:mx-0", doc_list),
-  ])
+  ]
 }
 
 ///|
 fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
-  div(class="flex flex-col items-center justify-center py-12 w-full", [
+  div(class="flex flex-col items-center justify-center py-12 w-full") <| [
     div(
       class="bg-mooncake border border-mooncake2 rounded-lg p-8 w-full text-center",
-      [
-        h3(class="text-xl font-semibold text-yellow-800 mb-4", [
-          text("⚠️ Package is too large to be displayed"),
-        ]),
-        p(class="text-yellow-700 mb-6", [
-          text("This package contains over \{count} items."),
-        ]),
-        button(
-          class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
-          on_click=emit(ShowLargePackage),
-          [text("Show All Items")],
-        ),
-      ],
-    ),
-  ])
+    ) <| [
+      h3(
+        class="text-xl font-semibold text-yellow-800 mb-4",
+        "⚠️ Package is too large to be displayed",
+      ),
+      p(
+        class="text-yellow-700 mb-6",
+        "This package contains over \{count} items.",
+      ),
+      button(
+        class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
+        on_click=emit(ShowLargePackage),
+        "Show All Items",
+      ),
+    ],
+  ]
 }

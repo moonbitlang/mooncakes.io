@@ -19,28 +19,25 @@ pub fn accordion(
   showing : String,
   items : Array[(String, Html)],
 ) -> Html {
-  ul(
-    class?,
-    items.map(x => {
-      let (title, childs) = x
-      let folded = title != showing
-      let folded_style = if folded { "" } else { "bg-gray-100" }
-      let on_click = on_click.map(fn(f) {
-        if title == showing {
-          f("")
-        } else {
-          f(title)
-        }
-      })
-      let childs = if folded { nothing } else { childs }
-      div(class="w-full", [
-        div(
-          class="w-full rounded px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
-          on_click?,
-          [text(title)],
-        ),
-        div(class="ml-2", [childs]),
-      ])
-    }),
-  )
+  ul(class?) <| items.map(x => {
+    let (title, childs) = x
+    let folded = title != showing
+    let folded_style = if folded { "" } else { "bg-gray-100" }
+    let on_click = on_click.map(fn(f) {
+      if title == showing {
+        f("")
+      } else {
+        f(title)
+      }
+    })
+    let childs = if folded { nothing } else { childs }
+    div(class="w-full") <| [
+      div(
+        class="w-full rounded px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
+        on_click?,
+        title,
+      ),
+      div(class="ml-2", childs),
+    ]
+  })
 }

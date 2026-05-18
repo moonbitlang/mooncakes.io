@@ -199,7 +199,7 @@ fn symbol_icon(kind : SymbolKind) -> Html {
   }
   div(
     class="size-4 shrink-0 rounded flex items-center justify-center text-[8px] font-bold leading-none \{bg}",
-    [text(label)],
+    label,
   )
 }
 
@@ -209,22 +209,21 @@ fn sidebar(
   sidebar_state : SortedSet[ItemTarget],
   emit : (Msg) -> Cmd,
 ) -> Html {
-  div(class="text-gray-700 flex flex-col", [
+  div(class="text-gray-700 flex flex-col") <| [
     div(
       class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 mb-1 bg-[var(--sidebar-bg)]",
-      [
-        @html.button(
-          class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
-          on_click=emit(ExpandAllSidebar),
-          [text("Expand all")],
-        ),
-        @html.button(
-          class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
-          on_click=emit(CollapseAllSidebar),
-          [text("Collapse all")],
-        ),
-      ],
-    ),
+    ) <| [
+      @html.button(
+        class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
+        on_click=emit(ExpandAllSidebar),
+        "Expand all",
+      ),
+      @html.button(
+        class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
+        on_click=emit(CollapseAllSidebar),
+        "Collapse all",
+      ),
+    ],
     @tree.view(
       toggle=x => emit(ToggleSidebarItem(x)),
       click=x => emit(ClickSidebarItem(x)),
@@ -233,7 +232,7 @@ fn sidebar(
       icon=sidebar_icon,
       document_index,
     ),
-  ])
+  ]
 }
 
 ///|
@@ -242,22 +241,23 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
     return nothing
   }
   let package_path = package_path.trim(char_set="/")
-  div(class="mx-4 md:mx-0 mt-8 mb-4", [
-    h3(class="text-gray-800 font-semibold text-lg mb-3 border-b pb-2", [
-      text("Source Files"),
-    ]),
+  div(class="mx-4 md:mx-0 mt-8 mb-4") <| [
+    h3(
+      class="text-gray-800 font-semibold text-lg mb-3 border-b pb-2",
+      "Source Files",
+    ),
     ul(
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1",
       files.map(fn(x) {
-        @html.li([
+        @html.li() <| [
           a(
             class="block text-sm font-mono text-blue-600 hover:text-blue-800 hover:bg-gray-50 px-2 py-1 rounded transition-colors",
             href="/assets/\{package_path}/\{x}.html",
             escape=true,
-            [text(x)],
+            x,
           ),
-        ])
+        ]
       }),
     ),
-  ])
+  ]
 }

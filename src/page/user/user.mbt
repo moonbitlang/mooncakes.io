@@ -13,68 +13,46 @@
 // limitations under the License.
 
 ///|
-fn decode_user_profile(json : Json) -> Result[Profile, String] {
+impl @json.FromJson for Profile with from_json(json : Json, path) {
   match json {
     {
       "modules": Array(modules),
       "username": String(username),
       "avatar_url"? : avatar_url,
       ..
-    } =>
-      try {
-        let modules = modules.map(x => {
-          match x {
-            { "name": String(name), "version": String(version), .. } =>
-              (name, version)
-            _ => fail("failed to decode \{to_repr(x)}")
-          }
-        })
-        let avatar_url = match avatar_url {
-          Some(String(url)) => url
-          _ => ""
+    } => {
+      let decoded_modules = []
+      for x in modules {
+        match x {
+          { "name": String(name), "version": String(version), .. } =>
+            decoded_modules.push((name, version))
+          _ => raise JsonDecodeError((path, "failed to decode \{to_repr(x)}"))
         }
-        Ok({ username, avatar_url, modules })
-      } catch {
-        e => Err(e.to_string())
       }
-    _ => Err("failed to decode json \{to_repr(json)}")
-  }
-}
-
-///|
-fn decode_code_frequency(json : Json) -> Result[CodeFrequencyResponse, String] {
-  match json {
-    Object(dict) => {
-      let result = {}
-      try {
-        for k, v in dict {
-          match v {
-            Number(i, ..) => result[k] = i.to_int()
-            _ => fail("failed to decode \{to_repr(v)}")
-          }
-        }
-        Ok({ data: result })
-      } catch {
-        e => Err(e.to_string())
+      let avatar_url = match avatar_url {
+        Some(String(url)) => url
+        _ => ""
       }
+      { username, avatar_url, modules: decoded_modules }
     }
-    _ => Err("failed to decode \{to_repr(json)}")
-  }
-}
-
-///|
-impl @json.FromJson for Profile with from_json(json : Json, path) {
-  match decode_user_profile(json) {
-    Ok(profile) => profile
-    Err(msg) => raise JsonDecodeError((path, msg))
+    _ => raise JsonDecodeError((path, "failed to decode json \{to_repr(json)}"))
   }
 }
 
 ///|
 impl @json.FromJson for CodeFrequencyResponse with from_json(json : Json, path) {
-  match decode_code_frequency(json) {
-    Ok(data) => data
-    Err(msg) => raise JsonDecodeError((path, msg))
+  match json {
+    Object(dict) => {
+      let result = {}
+      for k, v in dict {
+        match v {
+          Number(i, ..) => result[k] = i.to_int()
+          _ => raise JsonDecodeError((path, "failed to decode \{to_repr(v)}"))
+        }
+      }
+      { data: result }
+    }
+    _ => raise JsonDecodeError((path, "failed to decode \{to_repr(json)}"))
   }
 }
 

@@ -391,7 +391,7 @@ fn build_search_index(
 }
 
 ///|
-fn decode_statistics(json : Json) -> Result[PackageCount, String] {
+impl @json.FromJson for PackageCount with from_json(json : Json, path) {
   match json {
     {
       "total_packages": Number(total_packages, ..),
@@ -399,25 +399,20 @@ fn decode_statistics(json : Json) -> Result[PackageCount, String] {
       "total_downloads": Number(total_downloads, ..),
       ..
     } =>
-      Ok({
+      {
         total_lines: total_lines.to_int(),
         total_packages: total_packages.to_int(),
         total_downloads: total_downloads.to_int(),
-      })
-    _ => Err("failed to parse json: \{to_repr(json)}")
+      }
+    _ => raise JsonDecodeError((path, "failed to parse json: \{to_repr(json)}"))
   }
 }
 
 ///|
-impl @json.FromJson for PackageCount with from_json(json : Json, path) {
-  match decode_statistics(json) {
-    Ok(count) => count
-    Err(msg) => raise JsonDecodeError((path, msg))
-  }
-}
-
-///|
-fn decode_module_index(item : Json) -> ModuleIndex raise {
+fn decode_module_index(
+  item : Json,
+  json_path : @json.JsonPath,
+) -> ModuleIndex raise @json.JsonDecodeError {
   match item {
     {
       "name": String(path),
@@ -443,9 +438,13 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
       let is_new = match bool {
         True => true
         False => false
-        _ => panic()
+        _ => raise JsonDecodeError((json_path, "invalid is_new field"))
       }
-      guard path.split("/").collect() is [author, .. name]
+      let (author, name) = match path.split("/").collect() {
+        [author, .. name] => (author, name)
+        _ =>
+          raise JsonDecodeError((json_path, "unexpected module path: \{path}"))
+      }
       let name = name.iter().map(StringView::to_owned).join("/")
       {
         path,
@@ -458,45 +457,42 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
         is_new,
       }
     }
-    _ => fail("unexpected item in json: \{to_repr(item)}")
+    _ =>
+      raise JsonDecodeError(
+        (json_path, "unexpected item in json: \{to_repr(item)}"),
+      )
   }
 }
 
 ///|
 impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
-  decode_module_index(json) catch {
-    err => raise JsonDecodeError((path, err.to_string()))
-  }
+  decode_module_index(json, path)
 }
 
 ///|
-fn decode_module_array(json : Json) -> Array[ModuleIndex] raise {
+fn decode_module_array(
+  json : Json,
+  path : @json.JsonPath,
+) -> Array[ModuleIndex] raise @json.JsonDecodeError {
   match json {
-    Array(items) => items.map(decode_module_index)
-    _ => fail("expecting an array")
-  }
-}
-
-///|
-fn decode_highlights(json : Json) -> Result[ModuleHighlights, String] {
-  match json {
-    { "recent": recent_json, "new": new_json, "popular": popular_json, .. } =>
-      Ok({
-        recent: decode_module_array(recent_json),
-        new_modules: decode_module_array(new_json),
-        popular: decode_module_array(popular_json),
-      }) catch {
-        e => Err(e.to_string())
-      }
-    _ => Err("expecting highlights object with recent, new, popular")
+    Array(items) => items.map(x => decode_module_index(x, path))
+    _ => raise JsonDecodeError((path, "expecting an array"))
   }
 }
 
 ///|
 impl @json.FromJson for ModuleHighlights with from_json(json : Json, path) {
-  match decode_highlights(json) {
-    Ok(highlights) => highlights
-    Err(msg) => raise JsonDecodeError((path, msg))
+  match json {
+    { "recent": recent_json, "new": new_json, "popular": popular_json, .. } =>
+      {
+        recent: decode_module_array(recent_json, path),
+        new_modules: decode_module_array(new_json, path),
+        popular: decode_module_array(popular_json, path),
+      }
+    _ =>
+      raise JsonDecodeError(
+        (path, "expecting highlights object with recent, new, popular"),
+      )
   }
 }
 

@@ -244,54 +244,49 @@ fn make_versioned_asset_path(mp : @util.MooncakePath) -> String {
 }
 
 ///|
-fn decode_manifest(json : Json) -> Result[Manifest, String] {
-  let raw_json = json
-  Ok(
-    match raw_json {
-      {
-        "name": String(name),
-        "module": String(module_),
-        "version": String(version),
-        "has_package": has_package,
-        ..
-      } => {
-        let module_meta = match decode_module_meta(raw_json, version) {
-          Ok(module_meta) => module_meta
-          Err(err) => fail(err)
-        }
-        {
-          name,
-          module_,
-          version,
-          has_package: @json.from_json(has_package),
-          module_meta,
-        }
-      }
-      json => fail("invalid json for Manifest: \{to_repr(json)}")
-    },
-  ) catch {
-    e => Err(e.to_string())
-  }
-}
-
-///|
 impl @json.FromJson for Manifest with from_json(json : Json, path) {
-  match decode_manifest(json) {
-    Ok(manifest) => manifest
-    Err(msg) => raise JsonDecodeError((path, msg))
+  let raw_json = json
+  match raw_json {
+    {
+      "name": String(name),
+      "module": String(module_),
+      "version": String(version),
+      "has_package": has_package,
+      ..
+    } => {
+      let module_meta = decode_module_meta(raw_json, version, path)
+      {
+        name,
+        module_,
+        version,
+        has_package: @json.from_json(has_package, path~),
+        module_meta,
+      }
+    }
+    json =>
+      raise JsonDecodeError(
+        (path, "invalid json for Manifest: \{to_repr(json)}"),
+      )
   }
 }
 
 ///|
-fn decode_type_path(json : Json) -> TypePath raise Error {
+fn decode_type_path(
+  json : Json,
+  path : @json.JsonPath,
+) -> TypePath raise @json.JsonDecodeError {
   match json {
-    { "path": String(path), "name": String(name), .. } => { path, name }
-    _ => fail("invalid json in type path")
+    { "path": String(type_path), "name": String(name), .. } =>
+      { path: type_path, name }
+    _ => raise JsonDecodeError((path, "invalid json in type path"))
   }
 }
 
 ///|
-fn decode_stype(json : Json) -> Stype raise Error {
+fn decode_stype(
+  json : Json,
+  path : @json.JsonPath,
+) -> Stype raise @json.JsonDecodeError {
   match json {
     {
       "kind": "constr",
@@ -300,8 +295,8 @@ fn decode_stype(json : Json) -> Stype raise Error {
       ..
     } =>
       Constr(
-        constr=decode_type_path(type_path),
-        arguments=map_with_error(stypes, decode_stype),
+        constr=decode_type_path(type_path, path),
+        arguments=stypes.map(x => decode_stype(x, path)),
       )
     {
       "kind": "arrow",
@@ -312,36 +307,43 @@ fn decode_stype(json : Json) -> Stype raise Error {
       ..
     } => {
       let error_type = match error_type {
-        Some(x) => Some(decode_stype(x))
+        Some(x) => Some(decode_stype(x, path))
         None => None
       }
-      let is_async : Bool = @json.from_json(is_async)
+      let is_async : Bool = @json.from_json(is_async, path~)
       Arrow(
-        parameters=map_with_error(parameters, decode_stype),
-        return_type=decode_stype(return_type),
+        parameters=parameters.map(x => decode_stype(x, path)),
+        return_type=decode_stype(return_type, path),
         error_type~,
         is_async~,
       )
     }
     { "kind": "param", "name": String(name), .. } => Param(name~)
-    { "name": _, "path": _, .. } => TypePath(decode_type_path(json))
-    _ => fail("invalid json in stype: \{to_repr(json)}")
+    { "name": _, "path": _, .. } => TypePath(decode_type_path(json, path))
+    _ =>
+      raise JsonDecodeError((path, "invalid json in stype: \{to_repr(json)}"))
   }
 }
 
 ///|
-fn decode_trait_index(json : Json) -> TraitIndex raise Error {
+fn decode_trait_index(
+  json : Json,
+  path : @json.JsonPath,
+) -> TraitIndex raise @json.JsonDecodeError {
   match json {
     { "name": String(name), "impls": Array(impls), .. } => {
-      let impls = map_with_error(impls, decode_impl_index)
+      let impls = impls.map(x => decode_impl_index(x, path))
       { name, impls }
     }
-    _ => fail("invalid json in trait index")
+    _ => raise JsonDecodeError((path, "invalid json in trait index"))
   }
 }
 
 ///|
-fn decode_type_index(json : Json) -> TypeIndex raise Error {
+fn decode_type_index(
+  json : Json,
+  path : @json.JsonPath,
+) -> TypeIndex raise @json.JsonDecodeError {
   match json {
     {
       "name": String(name),
@@ -349,37 +351,47 @@ fn decode_type_index(json : Json) -> TypeIndex raise Error {
       "methods": Array(methods),
       ..
     } => {
-      let impls = map_with_error(impls, decode_impl_index)
-      let methods = map_with_error(methods, x => {
+      let impls = impls.map(x => decode_impl_index(x, path))
+      let decoded_methods = []
+      for x in methods {
         match x {
-          String(x) => x
-          _ => fail("invalid json in type index")
+          String(x) => decoded_methods.push(x)
+          _ => raise JsonDecodeError((path, "invalid json in type index"))
         }
-      })
-      { name, impls, methods }
+      }
+      { name, impls, methods: decoded_methods }
     }
-    _ => fail("invalid json in type index")
+    _ => raise JsonDecodeError((path, "invalid json in type index"))
   }
 }
 
 ///|
-fn decode_typealias_index(json : Json) -> TypeAliasIndex raise Error {
+fn decode_typealias_index(
+  json : Json,
+  path : @json.JsonPath,
+) -> TypeAliasIndex raise @json.JsonDecodeError {
   match json {
     String(x) => { name: x }
-    _ => fail("invalid json in typealias index")
+    _ => raise JsonDecodeError((path, "invalid json in typealias index"))
   }
 }
 
 ///|
-fn decode_value_index(json : Json) -> ValueIndex raise Error {
+fn decode_value_index(
+  json : Json,
+  path : @json.JsonPath,
+) -> ValueIndex raise @json.JsonDecodeError {
   match json {
     String(x) => { name: x }
-    _ => fail("invalid json in value index")
+    _ => raise JsonDecodeError((path, "invalid json in value index"))
   }
 }
 
 ///|
-fn decode_misc_index(json : Json) -> MiscIndex raise Error {
+fn decode_misc_index(
+  json : Json,
+  path : @json.JsonPath,
+) -> MiscIndex raise @json.JsonDecodeError {
   match json {
     {
       "name": String(name),
@@ -387,52 +399,47 @@ fn decode_misc_index(json : Json) -> MiscIndex raise Error {
       "methods": Array(methods),
       ..
     } => {
-      let impls = map_with_error(impls, decode_impl_index)
-      let methods = map_with_error(methods, x => {
+      let impls = impls.map(x => decode_impl_index(x, path))
+      let decoded_methods = []
+      for x in methods {
         match x {
-          String(x) => x
-          _ => fail("invalid json in misc index")
+          String(x) => decoded_methods.push(x)
+          _ => raise JsonDecodeError((path, "invalid json in misc index"))
         }
-      })
-      { name, impls, methods }
+      }
+      { name, impls, methods: decoded_methods }
     }
-    _ => fail("invalid json in misc index")
+    _ => raise JsonDecodeError((path, "invalid json in misc index"))
   }
 }
 
 ///|
-fn decode_impl_index(json : Json) -> ImplIndex raise Error {
+fn decode_impl_index(
+  json : Json,
+  path : @json.JsonPath,
+) -> ImplIndex raise @json.JsonDecodeError {
   match json {
     { "self": self_type, "trait": trait_type, "methods": Array(methods), .. } => {
-      let self_type = decode_stype(self_type)
-      let trait_type = decode_type_path(trait_type)
-      let methods = map_with_error(methods, x => {
+      let self_type = decode_stype(self_type, path)
+      let trait_type = decode_type_path(trait_type, path)
+      let decoded_methods = []
+      for x in methods {
         match x {
-          String(x) => x
-          _ => fail("invalid methods in impl index")
+          String(x) => decoded_methods.push(x)
+          _ => raise JsonDecodeError((path, "invalid methods in impl index"))
         }
-      })
-      { self: self_type, trait_: trait_type, methods }
+      }
+      { self: self_type, trait_: trait_type, methods: decoded_methods }
     }
-    _ => fail("invalid json in impl index")
+    _ => raise JsonDecodeError((path, "invalid json in impl index"))
   }
 }
 
 ///|
-/// map with error. We need error polymorphism!
-fn[A, B, E : Error] map_with_error(
-  arr : Array[A],
-  f : (A) -> B raise E,
-) -> Array[B] raise E {
-  let xs = []
-  for x in arr {
-    xs.push(f(x))
-  }
-  xs
-}
-
-///|
-fn decode_package_index(json : Json) -> PkgIndex raise Error {
+fn decode_package_index(
+  json : Json,
+  json_path : @json.JsonPath,
+) -> PkgIndex raise @json.JsonDecodeError {
   match json {
     {
       "traits": Array(traits),
@@ -441,55 +448,46 @@ fn decode_package_index(json : Json) -> PkgIndex raise Error {
       "typealias": Array(typealias_),
       "values": Array(values),
       "misc": Array(miscs),
-      "path": String(path),
+      "path": String(pkg_path),
       ..
     } => {
-      let traits = map_with_error(traits, decode_trait_index)
+      let traits = traits.map(x => decode_trait_index(x, json_path))
       let errors = match errors_json {
-        Some(Array(errors)) => map_with_error(errors, decode_type_index)
+        Some(Array(errors)) => errors.map(x => decode_type_index(x, json_path))
         _ => []
       }
-      let types = map_with_error(types, decode_type_index)
-      let typealias_ = map_with_error(typealias_, decode_typealias_index)
-      let values = map_with_error(values, decode_value_index)
-      let misc = map_with_error(miscs, decode_misc_index)
-      { traits, errors, types, typealias_, values, misc, path }
+      let types = types.map(x => decode_type_index(x, json_path))
+      let typealias_ = typealias_.map(x => decode_typealias_index(x, json_path))
+      let values = values.map(x => decode_value_index(x, json_path))
+      let misc = miscs.map(x => decode_misc_index(x, json_path))
+      { traits, errors, types, typealias_, values, misc, path: pkg_path }
     }
-    _ => fail("invalid json in package index")
+    _ => raise JsonDecodeError((json_path, "invalid json in package index"))
   }
 }
 
 ///|
-fn decode_index_node(json : Json) -> IndexNode raise Error {
+fn decode_index_node(
+  json : Json,
+  path : @json.JsonPath,
+) -> IndexNode raise @json.JsonDecodeError {
   match json {
     { "name": String(name), "package": pkg, "childs": Array(childs), .. } => {
-      let childs = map_with_error(childs, decode_index_node).map(fn(x) {
-          (x.name, x)
-        })
+      let childs = childs
+        .map(x => decode_index_node(x, path))
+        .map(fn(x) { (x.name, x) })
         |> @immut/sorted_map.from_array
       let pkg = match pkg {
         Null => None
-        obj => Some(decode_package_index(obj))
+        obj => Some(decode_package_index(obj, path))
       }
       { name, pkg, childs }
     }
-    _ => fail("invalid json in index node")
-  }
-}
-
-///|
-fn decode_module_index(json : Json) -> Result[ModuleIndex, String] {
-  try decode_index_node(json) catch {
-    err => Err(err.to_string())
-  } noraise {
-    res => Ok(res)
+    _ => raise JsonDecodeError((path, "invalid json in index node"))
   }
 }
 
 ///|
 impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
-  match decode_module_index(json) {
-    Ok(index) => index
-    Err(msg) => raise JsonDecodeError((path, msg))
-  }
+  decode_index_node(json, path)
 }

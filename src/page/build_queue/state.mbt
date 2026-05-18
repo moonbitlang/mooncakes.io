@@ -58,56 +58,57 @@ pub fn is_theme_toggle(msg : Msg) -> Bool {
 }
 
 ///|
-fn decode_queued_item(json : Json) -> BuildItem raise {
-  match json {
-    {
-      "module": String(module_),
-      "version": String(version),
-      "created_at": String(created_at),
-      ..
-    } => { module_, version, status: "QUEUED", created_at, finished_at: None }
-    _ => fail("invalid queued item: \{to_repr(json)}")
-  }
-}
-
-///|
-fn decode_completed_item(json : Json) -> BuildItem raise {
-  match json {
-    {
-      "module": String(module_),
-      "version": String(version),
-      "status": String(status),
-      "created_at": String(created_at),
-      ..
-    } => {
-      let finished_at = match json {
-        { "finished_at": String(t), .. } => Some(t)
-        _ => None
-      }
-      { module_, version, status, created_at, finished_at }
-    }
-    _ => fail("invalid build item: \{to_repr(json)}")
-  }
-}
-
-///|
-fn decode_builds(json : Json) -> Result[BuildData, String] {
-  match json {
-    { "queued": Array(queued), "recent_completed": Array(recent), .. } =>
-      Ok({
-        queued: queued.map(decode_queued_item),
-        recent_completed: recent.map(decode_completed_item),
-      }) catch {
-        e => Err(e.to_string())
-      }
-    _ => Err("invalid builds response")
-  }
-}
-
-///|
 impl @json.FromJson for BuildData with from_json(json : Json, path) {
-  match decode_builds(json) {
-    Ok(data) => data
-    Err(msg) => raise JsonDecodeError((path, msg))
+  match json {
+    { "queued": Array(queued), "recent_completed": Array(recent), .. } => {
+      let queued_items = []
+      for x in queued {
+        match x {
+          {
+            "module": String(module_),
+            "version": String(version),
+            "created_at": String(created_at),
+            ..
+          } =>
+            queued_items.push({
+              module_,
+              version,
+              status: "QUEUED",
+              created_at,
+              finished_at: None,
+            })
+          _ =>
+            raise JsonDecodeError((path, "invalid queued item: \{to_repr(x)}"))
+        }
+      }
+      let recent_completed_items = []
+      for x in recent {
+        match x {
+          {
+            "module": String(module_),
+            "version": String(version),
+            "status": String(status),
+            "created_at": String(created_at),
+            ..
+          } => {
+            let finished_at = match x {
+              { "finished_at": String(t), .. } => Some(t)
+              _ => None
+            }
+            recent_completed_items.push({
+              module_,
+              version,
+              status,
+              created_at,
+              finished_at,
+            })
+          }
+          _ =>
+            raise JsonDecodeError((path, "invalid build item: \{to_repr(x)}"))
+        }
+      }
+      { queued: queued_items, recent_completed: recent_completed_items }
+    }
+    _ => raise JsonDecodeError((path, "invalid builds response"))
   }
 }

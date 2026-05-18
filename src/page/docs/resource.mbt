@@ -61,16 +61,22 @@ fn empty_string_as_none(s : String) -> String? {
 }
 
 ///|
-fn decode_optional_string(json : Json?) -> String? raise Error {
+fn decode_optional_string(
+  json : Json?,
+  path : @json.JsonPath,
+) -> String? raise @json.JsonDecodeError {
   match json {
     Some(String(s)) => empty_string_as_none(s)
     Some(Null) | None => None
-    _ => fail("invalid optional string field")
+    _ => raise JsonDecodeError((path, "invalid optional string field"))
   }
 }
 
 ///|
-fn decode_keywords(json : Json?) -> Array[String] raise Error {
+fn decode_keywords(
+  json : Json?,
+  path : @json.JsonPath,
+) -> Array[String] raise @json.JsonDecodeError {
   match json {
     Some(Array(keywords)) =>
       keywords.filter_map(fn(x) {
@@ -80,27 +86,36 @@ fn decode_keywords(json : Json?) -> Array[String] raise Error {
         }
       })
     Some(Null) | None => []
-    _ => fail("invalid keywords field")
+    _ => raise JsonDecodeError((path, "invalid keywords field"))
   }
 }
 
 ///|
-fn decode_deps(json : Json?) -> Array[(String, String)] raise Error {
+fn decode_deps(
+  json : Json?,
+  path : @json.JsonPath,
+) -> Array[(String, String)] raise @json.JsonDecodeError {
   match json {
-    Some(Object(xs)) =>
-      map_with_error(xs.iter2().to_array(), entry => {
+    Some(Object(xs)) => {
+      let deps = []
+      for entry in xs.iter2().to_array() {
         match entry {
-          (name, String(version)) => (name, version)
-          _ => fail("invalid deps field")
+          (name, String(version)) => deps.push((name, version))
+          _ => raise JsonDecodeError((path, "invalid deps field"))
         }
-      })
+      }
+      deps
+    }
     Some(Null) | None => []
-    _ => fail("invalid deps field")
+    _ => raise JsonDecodeError((path, "invalid deps field"))
   }
 }
 
 ///|
-fn decode_build_status(json : Json?) -> BuildStatus? raise Error {
+fn decode_build_status(
+  json : Json?,
+  path : @json.JsonPath,
+) -> BuildStatus? raise @json.JsonDecodeError {
   match json {
     Some(String("success")) => Some(BuildSuccess)
     Some(String("legacy")) => Some(BuildLegacy)
@@ -108,7 +123,7 @@ fn decode_build_status(json : Json?) -> BuildStatus? raise Error {
     Some(String("failed")) => Some(BuildFailed)
     Some(Null) | None => None
     Some(String(_)) => None
-    _ => fail("invalid build_status field")
+    _ => raise JsonDecodeError((path, "invalid build_status field"))
   }
 }
 
@@ -116,13 +131,14 @@ fn decode_build_status(json : Json?) -> BuildStatus? raise Error {
 fn find_version_build_status(
   json : Json?,
   current_version : String,
-) -> BuildStatus? raise Error {
+  path : @json.JsonPath,
+) -> BuildStatus? raise @json.JsonDecodeError {
   match json {
     Some(Array(versions)) => {
       for version_entry in versions {
         match version_entry {
           { "version": String(version), "build_status"? : build_status, .. } if version ==
-            current_version => return decode_build_status(build_status)
+            current_version => return decode_build_status(build_status, path)
           { "version": String(version), .. } if version == current_version =>
             return None
           _ => ()
@@ -131,7 +147,7 @@ fn find_version_build_status(
       None
     }
     Some(Null) | None => None
-    _ => fail("invalid versions field")
+    _ => raise JsonDecodeError((path, "invalid versions field"))
   }
 }
 
@@ -168,96 +184,85 @@ fn build_meta_info(
 fn decode_module_meta(
   json : Json,
   current_version : String,
-) -> Result[MetaInfo, String] {
-  try {
-    match json {
-      {
-        "metadata": {
-          "name": String(name),
-          "version": String(version),
-          "repository"? : repository,
-          "license"? : license,
-          "description"? : description,
-          "keywords"? : keywords,
-          "deps"? : deps,
-          "build_status"? : metadata_build_status,
-          ..
-        },
-        "versions"? : versions,
-        "build_status"? : top_level_build_status,
-        "downloads"? : downloads_json,
-        ..
-      } => {
-        let downloads = match downloads_json {
-          Some(Number(n, ..)) => n.to_int()
-          _ => 0
-        }
-        let build_status = match
-          find_version_build_status(versions, current_version) {
-          Some(status) => Some(status)
-          None =>
-            match decode_build_status(metadata_build_status) {
-              Some(status) => Some(status)
-              None => decode_build_status(top_level_build_status)
-            }
-        }
-        Ok(
-          build_meta_info(
-            name,
-            version,
-            decode_optional_string(repository),
-            decode_optional_string(license),
-            decode_optional_string(description),
-            decode_keywords(keywords),
-            decode_deps(deps),
-            build_status,
-            downloads,
-          ),
-        )
-      }
-      _ => Err("invalid module metadata")
-    }
-  } catch {
-    err => Err(err.to_string())
-  }
-}
-
-///|
-fn decode_source_files(json : Json?) -> Array[String] raise Error {
+  path : @json.JsonPath,
+) -> MetaInfo raise @json.JsonDecodeError {
   match json {
-    Some(Array(files)) =>
-      map_with_error(files, file => {
-        match file {
-          String(path) => path
-          _ => fail("invalid source_files field")
-        }
-      })
-    Some(Null) | None => []
-    _ => fail("invalid source_files field")
+    {
+      "metadata": {
+        "name": String(name),
+        "version": String(version),
+        "repository"? : repository,
+        "license"? : license,
+        "description"? : description,
+        "keywords"? : keywords,
+        "deps"? : deps,
+        "build_status"? : metadata_build_status,
+        ..
+      },
+      "versions"? : versions,
+      "build_status"? : top_level_build_status,
+      "downloads"? : downloads_json,
+      ..
+    } => {
+      let downloads = match downloads_json {
+        Some(Number(n, ..)) => n.to_int()
+        _ => 0
+      }
+      let build_status = match
+        find_version_build_status(versions, current_version, path) {
+        Some(status) => Some(status)
+        None =>
+          match decode_build_status(metadata_build_status, path) {
+            Some(status) => Some(status)
+            None => decode_build_status(top_level_build_status, path)
+          }
+      }
+      build_meta_info(
+        name,
+        version,
+        decode_optional_string(repository, path),
+        decode_optional_string(license, path),
+        decode_optional_string(description, path),
+        decode_keywords(keywords, path),
+        decode_deps(deps, path),
+        build_status,
+        downloads,
+      )
+    }
+    _ => raise JsonDecodeError((path, "invalid module metadata"))
   }
 }
 
 ///|
-fn decode_resource_info(json : Json) -> Result[ResourceInfo, String] {
-  try {
-    match json {
-      {
-        "readme_content": String(readme_content),
-        "source_files"? : source_files,
-        ..
-      } =>
-        Ok({ readme_content, source_files: decode_source_files(source_files) })
-      _ => Err("invalid resource.json")
+fn decode_source_files(
+  json : Json?,
+  path : @json.JsonPath,
+) -> Array[String] raise @json.JsonDecodeError {
+  match json {
+    Some(Array(files)) => {
+      let source_files = []
+      for file in files {
+        match file {
+          String(source_path) => source_files.push(source_path)
+          _ => raise JsonDecodeError((path, "invalid source_files field"))
+        }
+      }
+      source_files
     }
-  } catch {
-    err => Err(err.to_string())
+    Some(Null) | None => []
+    _ => raise JsonDecodeError((path, "invalid source_files field"))
   }
 }
 
 ///|
 impl @json.FromJson for ResourceInfo with from_json(json : Json, path) {
-  match decode_resource_info(json) {
-    Ok(info) => info
-    Err(msg) => raise JsonDecodeError((path, msg))
+  match json {
+    {
+      "readme_content": String(readme_content),
+      "source_files"? : source_files,
+      ..
+    } =>
+      { readme_content, source_files: decode_source_files(source_files, path) }
+    _ => raise JsonDecodeError((path, "invalid resource.json"))
   }
 }

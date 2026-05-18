@@ -1,5 +1,5 @@
 ///|
-struct UnsolvedMooncakePath(String) derive(Show)
+struct UnsolvedMooncakePath(String) derive(Debug)
 
 ///|
 pub fn UnsolvedMooncakePath::new(path : String) -> Self {
@@ -11,7 +11,7 @@ pub fn UnsolvedMooncakePath::package_path(self : Self) -> String {
   let segs : Array[String] = []
   for seg in self.0.trim(chars="/").split("/") {
     if !seg.is_empty() {
-      segs.push(seg.split("@").head().unwrap().to_string())
+      segs.push(seg.split("@").head().unwrap().to_owned())
     }
   }
   segs.join("/")
@@ -67,15 +67,15 @@ pub fn MooncakePath::resolve(
   module_path~ : String,
   latest_version~ : String,
 ) -> Self? {
-  let module_path = module_path.trim(chars="/").to_string()
+  let module_path = module_path.trim(chars="/").to_owned()
   let raw = path.0.trim(chars="/")
   let path_segs : Array[String] = raw
     .split("/")
-    .map(StringView::to_string)
+    .map(StringView::to_owned)
     .collect()
   let mod_segs : Array[String] = module_path
     .split("/")
-    .map(StringView::to_string)
+    .map(StringView::to_owned)
     .collect()
   if path_segs.length() < mod_segs.length() {
     return None
@@ -85,7 +85,7 @@ pub fn MooncakePath::resolve(
     let path_seg = path_segs[i]
     let parts : Array[String] = path_seg
       .split("@")
-      .map(StringView::to_string)
+      .map(StringView::to_owned)
       .collect()
     match parts {
       [name, ver] => {

@@ -443,18 +443,39 @@
 test "parse_inline_link" {
   let source =
     #| f(<a href="moonbitlang/core/rational#T">Type</a>::method)
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), LIdent("f"), Symbol("("), Link(href="moonbitlang/core/rational#T", [UIdent("Type")]), Symbol("::"), LIdent("method"), Symbol(")")])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    LIdent("f"),
+      #|    Symbol("("),
+      #|    Link(href="moonbitlang/core/rational#T", [UIdent("Type")]),
+      #|    Symbol("::"),
+      #|    LIdent("method"),
+      #|    Symbol(")"),
+      #|  ]>
     ),
   )
   let source =
     #| f(<a href="moonbitlang/core/rational#T">@path/to/pkg.Type</a>::method)
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), LIdent("f"), Symbol("("), Link(href="moonbitlang/core/rational#T", [QualIdent("path/to/pkg", "Type")]), Symbol("::"), LIdent("method"), Symbol(")")])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    LIdent("f"),
+      #|    Symbol("("),
+      #|    Link(
+      #|      href="moonbitlang/core/rational#T",
+      #|      [QualIdent("path/to/pkg", "Type")],
+      #|    ),
+      #|    Symbol("::"),
+      #|    LIdent("method"),
+      #|    Symbol(")"),
+      #|  ]>
     ),
   )
 }
@@ -464,10 +485,20 @@ test "parse_link_with_package_path_content" {
   // link content is @moonbitlang/core/builtin (no dot-separated ident)
   let source =
     #| f(<a href="moonbitlang/core/builtin">@moonbitlang/core/builtin</a>)
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), LIdent("f"), Symbol("("), Link(href="moonbitlang/core/builtin", [LIdent("@moonbitlang/core/builtin")]), Symbol(")")])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    LIdent("f"),
+      #|    Symbol("("),
+      #|    Link(
+      #|      href="moonbitlang/core/builtin",
+      #|      [LIdent("@moonbitlang/core/builtin")],
+      #|    ),
+      #|    Symbol(")"),
+      #|  ]>
     ),
   )
 }
@@ -476,26 +507,41 @@ test "parse_link_with_package_path_content" {
 test "parse_attribute" {
   let source =
     #| #deprecated
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), Attr("#deprecated")])
+      #|<List: [Space(1), Attr("#deprecated")]>
     ),
   )
   let source =
     #| #deprecated.name
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), Attr("#deprecated.name")])
+      #|<List: [Space(1), Attr("#deprecated.name")]>
     ),
   )
   let source =
     #| fn f() -> Unit #deprecated #unsafe
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), Keyword("fn"), Space(1), LIdent("f"), Symbol("()"), Space(1), Symbol("->"), Space(1), UIdent("Unit"), Space(1), Attr("#deprecated"), Space(1), Attr("#unsafe")])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    Keyword("fn"),
+      #|    Space(1),
+      #|    LIdent("f"),
+      #|    Symbol("()"),
+      #|    Space(1),
+      #|    Symbol("->"),
+      #|    Space(1),
+      #|    UIdent("Unit"),
+      #|    Space(1),
+      #|    Attr("#deprecated"),
+      #|    Space(1),
+      #|    Attr("#unsafe"),
+      #|  ]>
     ),
   )
 }
@@ -505,10 +551,23 @@ test "parse_package_name_with_dot_ulident" {
   let source =
     #| f(@path/to/pkg.Ctor)
     #| g(@path/to/pkg.value)
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), LIdent("f"), Symbol("("), QualIdent("path/to/pkg", "Ctor"), Symbol(")"), Newline, Space(1), LIdent("g"), Symbol("("), QualIdent("path/to/pkg", "value"), Symbol(")")])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    LIdent("f"),
+      #|    Symbol("("),
+      #|    QualIdent("path/to/pkg", "Ctor"),
+      #|    Symbol(")"),
+      #|    Newline,
+      #|    Space(1),
+      #|    LIdent("g"),
+      #|    Symbol("("),
+      #|    QualIdent("path/to/pkg", "value"),
+      #|    Symbol(")"),
+      #|  ]>
     ),
   )
 }
@@ -517,10 +576,89 @@ test "parse_package_name_with_dot_ulident" {
 test "invalid_package_name" {
   let source =
     #| fn startup[Model, Message](model~ : Model, update~ : (Message, Model) -> (<a href="Yoorkin/rabbit-tea/cmd#Cmd">@Yoorkin/rabbit-tea/cmd.Cmd</a>[Message], Model), view~ : (Model) -> <a href="Yoorkin/rabbit-tea/html#T">@Yoorkin/rabbit-tea/html.T</a>[Message], mount~ : String = ..) -> Unit
-  inspect(
+  debug_inspect(
     parse_signature(source),
     content=(
-      #|@list.from_array([Space(1), Keyword("fn"), Space(1), LIdent("startup"), Symbol("["), UIdent("Model"), Symbol(","), Space(1), UIdent("Message"), Symbol("]("), LIdent("model"), Symbol("~"), Space(1), Symbol(":"), Space(1), UIdent("Model"), Symbol(","), Space(1), LIdent("update"), Symbol("~"), Space(1), Symbol(":"), Space(1), Symbol("("), UIdent("Message"), Symbol(","), Space(1), UIdent("Model"), Symbol(")"), Space(1), Symbol("->"), Space(1), Symbol("("), Link(href="Yoorkin/rabbit-tea/cmd#Cmd", [QualIdent("Yoorkin/rabbit-tea/cmd", "Cmd")]), Symbol("["), UIdent("Message"), Symbol("],"), Space(1), UIdent("Model"), Symbol("),"), Space(1), LIdent("view"), Symbol("~"), Space(1), Symbol(":"), Space(1), Symbol("("), UIdent("Model"), Symbol(")"), Space(1), Symbol("->"), Space(1), Link(href="Yoorkin/rabbit-tea/html#T", [QualIdent("Yoorkin/rabbit-tea/html", "T")]), Symbol("["), UIdent("Message"), Symbol("],"), Space(1), LIdent("mount"), Symbol("~"), Space(1), Symbol(":"), Space(1), UIdent("String"), Space(1), Symbol("="), Space(1), Symbol("..)"), Space(1), Symbol("->"), Space(1), UIdent("Unit")])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    Keyword("fn"),
+      #|    Space(1),
+      #|    LIdent("startup"),
+      #|    Symbol("["),
+      #|    UIdent("Model"),
+      #|    Symbol(","),
+      #|    Space(1),
+      #|    UIdent("Message"),
+      #|    Symbol("]("),
+      #|    LIdent("model"),
+      #|    Symbol("~"),
+      #|    Space(1),
+      #|    Symbol(":"),
+      #|    Space(1),
+      #|    UIdent("Model"),
+      #|    Symbol(","),
+      #|    Space(1),
+      #|    LIdent("update"),
+      #|    Symbol("~"),
+      #|    Space(1),
+      #|    Symbol(":"),
+      #|    Space(1),
+      #|    Symbol("("),
+      #|    UIdent("Message"),
+      #|    Symbol(","),
+      #|    Space(1),
+      #|    UIdent("Model"),
+      #|    Symbol(")"),
+      #|    Space(1),
+      #|    Symbol("->"),
+      #|    Space(1),
+      #|    Symbol("("),
+      #|    Link(
+      #|      href="Yoorkin/rabbit-tea/cmd#Cmd",
+      #|      [QualIdent("Yoorkin/rabbit-tea/cmd", "Cmd")],
+      #|    ),
+      #|    Symbol("["),
+      #|    UIdent("Message"),
+      #|    Symbol("],"),
+      #|    Space(1),
+      #|    UIdent("Model"),
+      #|    Symbol("),"),
+      #|    Space(1),
+      #|    LIdent("view"),
+      #|    Symbol("~"),
+      #|    Space(1),
+      #|    Symbol(":"),
+      #|    Space(1),
+      #|    Symbol("("),
+      #|    UIdent("Model"),
+      #|    Symbol(")"),
+      #|    Space(1),
+      #|    Symbol("->"),
+      #|    Space(1),
+      #|    Link(
+      #|      href="Yoorkin/rabbit-tea/html#T",
+      #|      [QualIdent("Yoorkin/rabbit-tea/html", "T")],
+      #|    ),
+      #|    Symbol("["),
+      #|    UIdent("Message"),
+      #|    Symbol("],"),
+      #|    Space(1),
+      #|    LIdent("mount"),
+      #|    Symbol("~"),
+      #|    Space(1),
+      #|    Symbol(":"),
+      #|    Space(1),
+      #|    UIdent("String"),
+      #|    Space(1),
+      #|    Symbol("="),
+      #|    Space(1),
+      #|    Symbol("..)"),
+      #|    Space(1),
+      #|    Symbol("->"),
+      #|    Space(1),
+      #|    UIdent("Unit"),
+      #|  ]>
     ),
   )
 }
@@ -529,10 +667,33 @@ test "invalid_package_name" {
 test "valid_source_code" {
   let source =
     #| fn main { println("hello, \{object}!") }
-  inspect(
+  debug_inspect(
     parse_code(source),
     content=(
-      #|@list.from_array([Space(1), Keyword("fn"), Space(1), LIdent("main"), Space(1), Symbol("{"), Space(1), LIdent("println"), Symbol("("), StringLit("\""), StringLit("hello, "), Symbol("\\{"), LIdent("object"), Space(0), Symbol("}"), StringLit("!"), StringLit("\""), Symbol(")"), Space(1), Symbol("}"), Space(0)])
+      #|<List:
+      #|  [
+      #|    Space(1),
+      #|    Keyword("fn"),
+      #|    Space(1),
+      #|    LIdent("main"),
+      #|    Space(1),
+      #|    Symbol("{"),
+      #|    Space(1),
+      #|    LIdent("println"),
+      #|    Symbol("("),
+      #|    StringLit("\""),
+      #|    StringLit("hello, "),
+      #|    Symbol("\\{"),
+      #|    LIdent("object"),
+      #|    Space(0),
+      #|    Symbol("}"),
+      #|    StringLit("!"),
+      #|    StringLit("\""),
+      #|    Symbol(")"),
+      #|    Space(1),
+      #|    Symbol("}"),
+      #|    Space(0),
+      #|  ]>
     ),
   )
 }

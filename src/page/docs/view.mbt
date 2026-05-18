@@ -264,7 +264,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
           ),
         ],
       ),
-      (match search.results {
+      match search.results {
         Loading => nothing
         Failed => text("load indices failed")
         Success(results) =>
@@ -290,10 +290,10 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
                         match x {
                           (true, str) =>
                             span(class="text-moonbit font-semibold", [
-                              text(str.to_string()),
+                              text(str.to_owned()),
                             ])
                           (false, str) =>
-                            span(class="text-gray-600", [text(str.to_string())])
+                            span(class="text-gray-600", [text(str.to_owned())])
                         }
                       }),
                     ),
@@ -305,7 +305,7 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
               )
             }),
           )
-      }),
+      },
     ],
   )
   guard model.path is Ok(resolved) else {
@@ -456,11 +456,11 @@ pub fn view(model : Model, dispatch~ : (Msg) -> Cmd) -> Html {
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
   let sidebar_dialog : Html = div(
     class="fixed inset-0 justify-center items-center z-100",
-    style=["display: " + show_sidebar_dialog],
+    style=["display: \{show_sidebar_dialog}"],
     [
       div(
         class="fixed inset-0 bg-black/40 z-10",
-        style=["display: " + show_sidebar_dialog],
+        style=["display: \{show_sidebar_dialog}"],
         on_click=dispatch(ToggleSidebarFab),
         nothing,
       ),

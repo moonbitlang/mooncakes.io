@@ -31,7 +31,7 @@ pub(all) enum CodeSpan {
   Space(Int)
   Comment(String)
   Attr(String)
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
@@ -123,7 +123,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     AUGMENTED_ASSIGNMENT(op) => dst.push(Symbol(op))
     INFIX4(op) | INFIX3(op) | INFIX2(op) | INFIX1(op) => dst.push(Symbol(op))
     COMMENT(s) => dst.push(Comment(s.content))
-    POST_LABEL(label) => dst.push(LIdent(label + "~"))
+    POST_LABEL(label) => dst.push(LIdent("\{label}~"))
     UIDENT(s) => dst.push(UIdent(s))
     LIDENT(s) => dst.push(LIdent(s))
     MULTILINE_STRING(s) => dst.push(StringLit("#|\{s}"))
@@ -212,35 +212,37 @@ fn push_code_to_span(code : String, dst : Array[CodeSpan]) -> Unit {
     return
   }
   let mut previous_column = 1
-  loop tokens[:] {
-    [(NEWLINE, _, _), .. rest] => {
-      previous_column = 1
-      dst.push(Newline)
-      continue rest
-    }
-    [
-      (PACKAGE_NAME(pkg), _, _) as first,
-      (DOT_LIDENT(s) | DOT_UIDENT(s), _, _) as second,
-      .. rest,
-    ] => {
-      let column = token_to_real_column(first)
-      if previous_column < column {
-        dst.push(Space(column - previous_column))
+  for rest = tokens[:] {
+    match rest {
+      [(NEWLINE, _, _), .. tail] => {
+        previous_column = 1
+        dst.push(Newline)
+        continue tail
       }
-      dst.push(QualIdent(pkg, s))
-      previous_column = token_to_real_column_end(second)
-      continue rest
-    }
-    [triple, .. rest] => {
-      let column = token_to_real_column(triple)
-      if previous_column < column {
-        dst.push(Space(column - previous_column))
+      [
+        (PACKAGE_NAME(pkg), _, _) as first,
+        (DOT_LIDENT(s) | DOT_UIDENT(s), _, _) as second,
+        .. tail,
+      ] => {
+        let column = token_to_real_column(first)
+        if previous_column < column {
+          dst.push(Space(column - previous_column))
+        }
+        dst.push(QualIdent(pkg, s))
+        previous_column = token_to_real_column_end(second)
+        continue tail
       }
-      push_token_spans(triple.0, dst)
-      previous_column = token_to_real_column_end(triple)
-      continue rest
+      [triple, .. tail] => {
+        let column = token_to_real_column(triple)
+        if previous_column < column {
+          dst.push(Space(column - previous_column))
+        }
+        push_token_spans(triple.0, dst)
+        previous_column = token_to_real_column_end(triple)
+        continue tail
+      }
+      [] => break ()
     }
-    [] => ()
   }
 }
 

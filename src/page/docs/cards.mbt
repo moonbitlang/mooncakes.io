@@ -330,8 +330,8 @@ fn document_item(
       (title_with_buttons, nothing, true)
     }
   }
-  let sig_class = "px-4 py-2.5 bg-gray-100 rounded-lg relative w-full \{header_style}" +
-    (if has_title { "" } else { " scroll-mt-header" })
+  let anchor_class = if has_title { "" } else { " scroll-mt-header" }
+  let sig_class = "px-4 py-2.5 bg-gray-100 rounded-lg relative w-full \{header_style}\{anchor_class}"
   div(class="mb-3 group \{top_rule}", [
     title_view,
     if has_title {

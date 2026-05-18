@@ -29,12 +29,12 @@ priv struct Loc {
   file : String
   line : Int
   column : Int
-} derive(Show)
+} derive(Debug)
 
 ///|
 test "suppress unused warnings for Loc" {
   let dummy = { path: "", file: "", line: 0, column: 0 }
-  println(dummy)
+  ignore(to_repr(dummy))
 }
 
 ///|
@@ -96,7 +96,7 @@ fn decode_loc(json : Json) -> Loc raise Error {
       "column": Number(column, ..),
       ..
     } => { path, file, line: line.to_int(), column: column.to_int() }
-    _ => fail("fail to decode loc: \{json}")
+    _ => fail("fail to decode loc: \{to_repr(json)}")
   }
 }
 
@@ -109,7 +109,7 @@ fn decode_impl_doc(json : Json) -> ImplDoc raise Error {
       let methods = map_with_error(methods, decode_value_doc)
       { self_type, trait_type, methods }
     }
-    _ => fail("fail to decode impl doc: \{json}")
+    _ => fail("fail to decode impl doc: \{to_repr(json)}")
   }
 }
 
@@ -130,7 +130,7 @@ fn decode_type_doc(json : Json) -> TypeDoc raise Error {
       let loc = decode_loc(loc)
       { name, docstring, signature, methods, impls, loc }
     }
-    _ => fail("fail to decode type doc: \{json}")
+    _ => fail("fail to decode type doc: \{to_repr(json)}")
   }
 }
 
@@ -149,7 +149,7 @@ fn decode_trait_doc(json : Json) -> TraitDoc raise Error {
       let loc = decode_loc(loc)
       { name, docstring, signature, impls, loc }
     }
-    _ => fail("fail to decode trait doc: \{json}")
+    _ => fail("fail to decode trait doc: \{to_repr(json)}")
   }
 }
 
@@ -166,7 +166,7 @@ fn decode_typealias_doc(json : Json) -> TypeAliasDoc raise Error {
       let loc = decode_loc(loc)
       { name, docstring, signature, loc }
     }
-    _ => fail("fail to decode type alias doc: \{json}")
+    _ => fail("fail to decode type alias doc: \{to_repr(json)}")
   }
 }
 
@@ -180,7 +180,7 @@ fn decode_value_doc(json : Json) -> ValueDoc raise Error {
       "loc": loc,
       ..
     } => { name, docstring, signature, loc: decode_loc(loc) }
-    _ => fail("fail to decode value doc: \{json}")
+    _ => fail("fail to decode value doc: \{to_repr(json)}")
   }
 }
 
@@ -197,7 +197,7 @@ fn decode_misc_doc(json : Json) -> MiscDoc raise Error {
       let impls = map_with_error(impls, decode_impl_doc)
       { name, impls, methods }
     }
-    _ => fail("fail to decode misc doc: \{json}")
+    _ => fail("fail to decode misc doc: \{to_repr(json)}")
   }
 }
 
@@ -234,7 +234,7 @@ fn decode_package_data(json : Json) -> Result[PackageData, String] {
       } catch {
         e => Err("fail to decode package data: \{e}")
       }
-    _ => Err("fail to decode package data: \{json}")
+    _ => Err("fail to decode package data: \{to_repr(json)}")
   }
 }
 
@@ -259,8 +259,41 @@ fn ValueDoc::get_id(self : ValueDoc) -> String {
 }
 
 ///|
+fn TypePath::to_string(self : TypePath) -> String {
+  if self.path.is_empty() {
+    self.name
+  } else {
+    "\{self.path}.\{self.name}"
+  }
+}
+
+///|
+fn Stype::to_string(self : Stype) -> String {
+  match self {
+    Constr(constr~, arguments~) =>
+      if arguments.is_empty() {
+        constr.to_string()
+      } else {
+        let arguments = arguments.map(Stype::to_string).join(",")
+        "\{constr.to_string()}[\{arguments}]"
+      }
+    Arrow(parameters~, return_type~, error_type~, is_async~) => {
+      let prefix = if is_async { "async " } else { "" }
+      let parameters = parameters.map(Stype::to_string).join(",")
+      let error_suffix = match error_type {
+        Some(error_type) => " raise \{error_type.to_string()}"
+        None => ""
+      }
+      "\{prefix}(\{parameters}) -> \{return_type.to_string()}\{error_suffix}"
+    }
+    Param(name~) => name
+    TypePath(path) => path.to_string()
+  }
+}
+
+///|
 fn ImplDoc::get_id(self : ImplDoc) -> String {
-  self.self_type.to_string() + "-for-" + self.trait_type.to_string()
+  "\{self.self_type.to_string()}-for-\{self.trait_type.to_string()}"
 }
 
 ///|

@@ -39,7 +39,7 @@ fn IndexNode::to_document_items(
     let full_path = if parent_path.is_empty() {
       node.name
     } else {
-      parent_path + "/" + node.name
+      "\{parent_path}/\{node.name}"
     }
     let sub_packages : Array[@tree.Tree[ItemTarget]] = node.childs
       .values()
@@ -53,10 +53,9 @@ fn IndexNode::to_document_items(
     let children = [..sub_packages, ..symbols]
     match (node.pkg, children) {
       (None, []) => None
-      (None, _) => Some(@tree.Node(id=Group(full_path), node.name, children))
-      (Some(pkg), []) => Some(@tree.Item(id=Package(pkg.path), node.name))
-      (Some(pkg), _) =>
-        Some(@tree.Node(id=Package(pkg.path), node.name, children))
+      (None, _) => Some(Node(id=Group(full_path), node.name, children))
+      (Some(pkg), []) => Some(Item(id=Package(pkg.path), node.name))
+      (Some(pkg), _) => Some(Node(id=Package(pkg.path), node.name, children))
     }
   }
 
@@ -66,7 +65,7 @@ fn IndexNode::to_document_items(
     .collect()
   // Flatten single top-level group nodes (e.g. "async" when viewing moonbitlang/async)
   match items {
-    [@tree.Node(_, children, ..)] => children
+    [Node(_, children, ..)] => children
     _ => items
   }
 }
@@ -99,7 +98,7 @@ fn PkgIndex::to_document_items(
   self : PkgIndex,
 ) -> Array[@tree.Tree[ItemTarget]] {
   let { traits, errors, types, typealias_, values, misc, path } = self
-  let readme_item : @tree.Tree[ItemTarget] = @tree.Item(
+  let readme_item : @tree.Tree[ItemTarget] = Item(
     id=Symbol(pkg_path=path, kind=KReadme, "readme"),
     "README",
   )
@@ -110,17 +109,15 @@ fn PkgIndex::to_document_items(
     let result : Array[@tree.Tree[ItemTarget]] = []
     for item in items {
       if item.methods.is_empty() {
-        result.push(
-          @tree.Item(id=Symbol(pkg_path=path, kind~, item.name), item.name),
-        )
+        result.push(Item(id=Symbol(pkg_path=path, kind~, item.name), item.name))
       } else {
         result.push(
-          @tree.FixedNode(
+          FixedNode(
             id=Symbol(pkg_path=path, kind~, item.name),
             item.name,
             item.methods.map(fn(meth) {
-              @tree.Item(
-                id=Symbol(pkg_path=path, kind=KMethod, item.name + "::" + meth),
+              Item(
+                id=Symbol(pkg_path=path, kind=KMethod, "\{item.name}::\{meth}"),
                 meth,
               )
             }),
@@ -133,33 +130,33 @@ fn PkgIndex::to_document_items(
   }
 
   let trait_items : Array[@tree.Tree[ItemTarget]] = traits.map(fn(t) {
-    @tree.Item(id=Symbol(pkg_path=path, kind=KTrait, t.name), t.name)
+    Item(id=Symbol(pkg_path=path, kind=KTrait, t.name), t.name)
   })
   trait_items.sort_by(compare_items)
   let error_items = type_index_items(errors, KError)
   let type_items = type_index_items(types, KType)
   let alias_items : Array[@tree.Tree[ItemTarget]] = typealias_.map(fn(ta) {
-    @tree.Item(id=Symbol(pkg_path=path, kind=KTypeAlias, ta.name), ta.name)
+    Item(id=Symbol(pkg_path=path, kind=KTypeAlias, ta.name), ta.name)
   })
   alias_items.sort_by(compare_items)
   let value_items : Array[@tree.Tree[ItemTarget]] = values.map(fn(v) {
-    @tree.Item(id=Symbol(pkg_path=path, kind=KValue, v.name), v.name)
+    Item(id=Symbol(pkg_path=path, kind=KValue, v.name), v.name)
   })
   value_items.sort_by(compare_items)
   let misc_items : Array[@tree.Tree[ItemTarget]] = []
   for m in misc {
     if m.methods.is_empty() {
       misc_items.push(
-        @tree.Item(id=Symbol(pkg_path=path, kind=KType, m.name), m.name),
+        Item(id=Symbol(pkg_path=path, kind=KType, m.name), m.name),
       )
     } else {
       misc_items.push(
-        @tree.FixedNode(
+        FixedNode(
           id=Symbol(pkg_path=path, kind=KType, m.name),
           m.name,
           m.methods.map(fn(meth) {
-            @tree.Item(
-              id=Symbol(pkg_path=path, kind=KMethod, m.name + "::" + meth),
+            Item(
+              id=Symbol(pkg_path=path, kind=KMethod, "\{m.name}::\{meth}"),
               meth,
             )
           }),

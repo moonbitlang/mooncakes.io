@@ -66,7 +66,7 @@ fn build_row(item : BuildItem) -> Html {
   let module_parts = item.module_.split("/").collect()
   let (author, name) = match module_parts {
     [author, .. rest] =>
-      (author.to_string(), rest.iter().map(StringView::to_string).join("/"))
+      (author.to_owned(), rest.iter().map(StringView::to_owned).join("/"))
     _ => ("", item.module_)
   }
   div(

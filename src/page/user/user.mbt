@@ -26,7 +26,7 @@ fn decode_user_profile(json : Json) -> Result[Profile, String] {
           match x {
             { "name": String(name), "version": String(version), .. } =>
               (name, version)
-            _ => fail("failed to decode \{x}")
+            _ => fail("failed to decode \{to_repr(x)}")
           }
         })
         let avatar_url = match avatar_url {
@@ -37,7 +37,7 @@ fn decode_user_profile(json : Json) -> Result[Profile, String] {
       } catch {
         e => Err(e.to_string())
       }
-    _ => Err("failed to decode json \{json}")
+    _ => Err("failed to decode json \{to_repr(json)}")
   }
 }
 
@@ -50,7 +50,7 @@ fn decode_code_frequency(json : Json) -> Result[CodeFrequency, String] {
         for k, v in dict {
           match v {
             Number(i, ..) => result[k] = i.to_int()
-            _ => fail("failed to decode \{v}")
+            _ => fail("failed to decode \{to_repr(v)}")
           }
         }
         Ok(result)
@@ -58,7 +58,7 @@ fn decode_code_frequency(json : Json) -> Result[CodeFrequency, String] {
         e => Err(e.to_string())
       }
     }
-    _ => Err("failed to decode \{json}")
+    _ => Err("failed to decode \{to_repr(json)}")
   }
 }
 
@@ -147,7 +147,7 @@ fn first_char_upper_or(value : String, fallback : String) -> String {
     fallback
   } else {
     let end = value.offset_of_nth_char(1).unwrap_or(value.length())
-    value.sub(end~).to_string().to_upper()
+    value.sub(end~).to_owned().to_upper()
   }
 }
 
@@ -163,7 +163,7 @@ fn suffix_after_n_chars_or(
     fallback
   } else {
     let start = value.offset_of_nth_char(n).unwrap_or(value.length())
-    value.sub(start~).to_string()
+    value.sub(start~).to_owned()
   }
 }
 
@@ -214,7 +214,7 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
             let (name, version) = module_info
             // Extract module name (part after '/')
             let display_name = match name.split("/").to_array() {
-              parts if parts.length() == 2 => parts[1].to_string()
+              parts if parts.length() == 2 => parts[1].to_owned()
               _ => name
             }
             div(

@@ -40,7 +40,7 @@ pub fn code_block(
         }
         a(
           class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
-          href="/docs/" + href,
+          href="/docs/\{href}",
           content.map(go),
         )
       }
@@ -60,10 +60,7 @@ pub fn code_block(
               [
                 div(
                   class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
-                  [
-                    text("@" + path + "."),
-                    span(class="text-blue-900", [text(name)]),
-                  ],
+                  [text("@\{path}."), span(class="text-blue-900", [text(name)])],
                 ),
               ],
             ),
@@ -71,7 +68,7 @@ pub fn code_block(
           ])
         } else {
           span([
-            span(class="text-gray-600", [text("@" + path + ".")]),
+            span(class="text-gray-600", [text("@\{path}.")]),
             span(class="text-blue-900", [text(name)]),
           ])
         }

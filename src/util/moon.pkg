@@ -1,3 +1,4 @@
 import {
+  "moonbitlang/core/debug",
   "moonbit-community/rabbita/url",
 }

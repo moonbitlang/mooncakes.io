@@ -126,7 +126,7 @@ fn route_with_theme(
       )
     }
     User(name) => {
-      let (cmd, page) = @user.load(name.to_string(), dispatch=x => {
+      let (cmd, page) = @user.load(name.to_owned(), dispatch=x => {
         dispatch(GotUserMsg(x))
       })
       (

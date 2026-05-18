@@ -3,6 +3,7 @@ package "moonbitlang/mooncakes/util"
 
 import {
   "moonbit-community/rabbita/url",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -38,9 +39,9 @@ pub(all) enum Status[T] {
   Loading
   Failed
   Success(T)
-} derive(Eq, Show)
+} derive(Eq, @debug.Debug)
 
-type UnsolvedMooncakePath derive(Show)
+type UnsolvedMooncakePath derive(@debug.Debug)
 pub fn UnsolvedMooncakePath::new(String) -> Self
 pub fn UnsolvedMooncakePath::package_path(Self) -> String
 

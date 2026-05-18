@@ -51,63 +51,63 @@ fn load_search_entries(
           let vpath = versioned_docs_path(path, module_name, module_version)
           results.push({
             kind: "Package",
-            fullname: "@" + path,
-            href: "/docs/" + vpath,
+            fullname: "@\{path}",
+            href: "/docs/\{vpath}",
           })
           typealias_.each(fn(x) {
             results.push({
               kind: "Typealias",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
+              fullname: "@\{path}.\{x.name}",
+              href: "/docs/\{vpath}#\{x.name}",
             })
           })
           traits.each(fn(x) {
             results.push({
               kind: "Trait",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
+              fullname: "@\{path}.\{x.name}",
+              href: "/docs/\{vpath}#\{x.name}",
             })
           })
           errors.each(fn(x) {
             results.push({
               kind: "Error",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
+              fullname: "@\{path}.\{x.name}",
+              href: "/docs/\{vpath}#\{x.name}",
             })
             x.methods.each(fn(meth) {
               results.push({
                 kind: "Method",
-                fullname: "@" + path + "." + x.name + "::" + meth,
-                href: "/docs/" + vpath + "#" + x.name + "::" + meth,
+                fullname: "@\{path}.\{x.name}::\{meth}",
+                href: "/docs/\{vpath}#\{x.name}::\{meth}",
               })
             })
           })
           types.each(fn(x) {
             results.push({
               kind: "Type",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
+              fullname: "@\{path}.\{x.name}",
+              href: "/docs/\{vpath}#\{x.name}",
             })
             x.methods.each(fn(meth) {
               results.push({
                 kind: "Method",
-                fullname: "@" + path + "." + x.name + "::" + meth,
-                href: "/docs/" + vpath + "#" + x.name + "::" + meth,
+                fullname: "@\{path}.\{x.name}::\{meth}",
+                href: "/docs/\{vpath}#\{x.name}::\{meth}",
               })
             })
           })
           misc.each(fn(x) {
             results.push({
               kind: "Type",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
+              fullname: "@\{path}.\{x.name}",
+              href: "/docs/\{vpath}#\{x.name}",
             })
           })
           values.each(fn(x) {
             results.push({
               kind: "Value",
-              fullname: "@" + path + "." + x.name,
-              href: "/docs/" + vpath + "#" + x.name,
+              fullname: "@\{path}.\{x.name}",
+              href: "/docs/\{vpath}#\{x.name}",
             })
           })
         }

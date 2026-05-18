@@ -119,14 +119,14 @@ fn load_docs_assets(
   dispatch : (Msg) -> Cmd,
 ) -> Array[Cmd] {
   let asset_path = make_versioned_asset_path(resolved)
-  let module_asset_path = resolved.module_path() + "@" + resolved.version()
+  let module_asset_path = "\{resolved.module_path()}@\{resolved.version()}"
   [
     @http.get(
-      "/assets/" + asset_path + "/resource.json",
+      "/assets/\{asset_path}/resource.json",
       expect=Json(result => dispatch(GotResource(result)), decode_resource_info),
     ),
     @http.get(
-      "/assets/" + module_asset_path + "/module_index.json",
+      "/assets/\{module_asset_path}/module_index.json",
       expect=Json(
         result => dispatch(GotModuleIndex(result)),
         decode_module_index,
@@ -134,7 +134,7 @@ fn load_docs_assets(
     ),
     if manifest.has_package {
       @http.get(
-        "/assets/" + asset_path + "/package_data.json",
+        "/assets/\{asset_path}/package_data.json",
         expect=Json(
           result => dispatch(GotPackageData(result)),
           decode_package_data,
@@ -162,7 +162,7 @@ pub fn load(
   (
     batch([
       @http.get(
-        "/api/v0/manifest/" + path_str,
+        "/api/v0/manifest/\{path_str}",
         expect=Json(result => dispatch(GotManifest(result)), decode_manifest),
       ),
       @dialog.close("search-panel"),
@@ -275,10 +275,7 @@ pub fn update(
       let cmd = match (build_log_open, model.build_log, model.manifest) {
         (true, LogIdle | LogFailed, Success(manifest)) =>
           get_text(
-            "/api/v0/builds/log?module=" +
-            encode_uri_component(manifest.module_) +
-            "&version=" +
-            encode_uri_component(manifest.version),
+            "/api/v0/builds/log?module=\{encode_uri_component(manifest.module_)}&version=\{encode_uri_component(manifest.version)}",
             (result : Result[String, String]) => dispatch(GotBuildLog(result)),
           )
         _ => none
@@ -408,7 +405,7 @@ pub fn update(
               versioned_docs_path(path, manifest.module_, manifest.version)
             _ => path
           }
-          (@nav.push_url("/docs/" + url_path), model)
+          (@nav.push_url("/docs/\{url_path}"), model)
         }
         Symbol(pkg_path~, kind=KReadme, _) => {
           let url_path = match model.manifest {
@@ -416,7 +413,7 @@ pub fn update(
               versioned_docs_path(pkg_path, manifest.module_, manifest.version)
             _ => pkg_path
           }
-          (batch([@nav.push_url("/docs/" + url_path), scroll_to_top()]), model)
+          (batch([@nav.push_url("/docs/\{url_path}"), scroll_to_top()]), model)
         }
         Symbol(pkg_path~, id, ..) => {
           let same_package = match model.path {
@@ -424,7 +421,7 @@ pub fn update(
             Err(_) => false
           }
           if same_package {
-            (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
+            (batch([@nav.push_url("#\{id}"), scroll_to_smooth(id)]), model)
           } else {
             let url_path = match model.manifest {
               Success(manifest) =>
@@ -435,7 +432,7 @@ pub fn update(
                 )
               _ => pkg_path
             }
-            (@nav.push_url("/docs/" + url_path + "#" + id), model)
+            (@nav.push_url("/docs/\{url_path}#\{id}"), model)
           }
         }
       }
@@ -447,8 +444,7 @@ pub fn update(
       ) -> SortedSet[ItemTarget] {
         items.fold(init=set, fn(s, item) {
           match item {
-            @tree.Node(id~, _, children) =>
-              collect_node_ids(children, s.add(id))
+            Node(id~, _, children) => collect_node_ids(children, s.add(id))
             _ => s
           }
         })
@@ -471,9 +467,9 @@ pub fn update(
       (cmd, model)
     }
     SearchFilterChanged(filter) => {
-      let results = match model.search_entries {
-        Failed => @util.Failed
-        Loading => @util.Loading
+      let results : Status[Array[SearchResult]] = match model.search_entries {
+        Failed => Failed
+        Loading => Loading
         Success(indices) => Success(search(indices, filter))
       }
       let search = { filter, results }
@@ -498,7 +494,7 @@ pub fn update(
     ShowLargePackage => (none, { ..model, hide_large_package: false })
     ToggleTheme => (none, model)
     ClickAnchor(id) =>
-      (batch([@nav.push_url("#" + id), scroll_to_smooth(id)]), model)
+      (batch([@nav.push_url("#\{id}"), scroll_to_smooth(id)]), model)
   }
 }
 
@@ -569,14 +565,14 @@ pub fn navigate_package(
           let asset_path = make_versioned_asset_path(r)
           let cmds : Array[Cmd] = [
             @http.get(
-              "/assets/" + asset_path + "/resource.json",
+              "/assets/\{asset_path}/resource.json",
               expect=Json(
                 result => dispatch(GotResource(result)),
                 decode_resource_info,
               ),
             ),
             @http.get(
-              "/assets/" + asset_path + "/package_data.json",
+              "/assets/\{asset_path}/package_data.json",
               expect=Json(
                 result => dispatch(GotPackageData(result)),
                 decode_package_data,

@@ -2,6 +2,7 @@
 package "moonbitlang/mooncakes/util/highlight"
 
 import {
+  "moonbitlang/core/debug",
   "moonbitlang/core/list",
 }
 
@@ -28,7 +29,7 @@ pub(all) enum CodeSpan {
   Space(Int)
   Comment(String)
   Attr(String)
-} derive(Show)
+} derive(@debug.Debug)
 
 // Type aliases
 

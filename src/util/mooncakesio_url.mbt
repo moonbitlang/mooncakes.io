@@ -12,12 +12,12 @@ pub enum MooncakesioPath {
 pub impl Show for MooncakesioPath with output(self, logger) {
   match self {
     Home => logger.write_string("home:")
-    User(name) => logger.write_string("user:" + name.to_string())
+    User(name) => logger.write_string("user:\{name.to_owned()}")
     Docs(p, fragment~) =>
-      logger.write_string("docs: \{p.0}, fragment: \{fragment}")
+      logger.write_string("docs: \{p.0}, fragment: \{to_repr(fragment)}")
     BuildQueue => logger.write_string("build-queue")
-    NotFound(p) => logger.write_string("not-found:" + p)
-    Assets(url) => logger.write_string("assets:" + url.path)
+    NotFound(p) => logger.write_string("not-found:\{p}")
+    Assets(url) => logger.write_string("assets:\{url.path}")
   }
 }
 

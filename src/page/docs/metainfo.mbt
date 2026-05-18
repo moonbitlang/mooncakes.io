@@ -51,14 +51,14 @@ fn format_downloads(n : Int) -> String {
 ///|
 fn display_url(url : String) -> String {
   let s = if url.has_prefix("https://") {
-    url[8:].to_string()
+    url[8:].to_owned()
   } else if url.has_prefix("http://") {
-    url[7:].to_string()
+    url[7:].to_owned()
   } else {
     url
   }
   if s.has_suffix("/") {
-    s[:s.length() - 1].to_string()
+    s[:s.length() - 1].to_owned()
   } else {
     s
   }
@@ -162,7 +162,7 @@ fn meta_sidebar(
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div(class="flex items-center gap-2", [
           img(class="w-4 h-4 ui-icon shrink-0", src=@config.download, nothing),
-          text(format_downloads(model.downloads) + " downloads"),
+          text("\{format_downloads(model.downloads)} downloads"),
         ])
       } else {
         nothing
@@ -205,7 +205,7 @@ fn meta_info(
 ) -> Html {
   let model_description : Html = div(class="pl-7 py-2 mb-2", [
     h1(class="text-xl md:text-2xl font-bold mb-2", [
-      text(model.name.split("/").last().unwrap().to_string()),
+      text(model.name.split("/").last().unwrap().to_owned()),
     ]),
     match model.description {
       Some(d) => p(class="text-gray-600 flex items-center text-sm", [text(d)])

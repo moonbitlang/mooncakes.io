@@ -69,7 +69,7 @@ fn decode_queued_item(json : Json) -> BuildItem raise {
       "created_at": String(created_at),
       ..
     } => { module_, version, status: "QUEUED", created_at, finished_at: None }
-    _ => fail("invalid queued item: \{json}")
+    _ => fail("invalid queued item: \{to_repr(json)}")
   }
 }
 
@@ -89,7 +89,7 @@ fn decode_completed_item(json : Json) -> BuildItem raise {
       }
       { module_, version, status, created_at, finished_at }
     }
-    _ => fail("invalid build item: \{json}")
+    _ => fail("invalid build item: \{to_repr(json)}")
   }
 }
 

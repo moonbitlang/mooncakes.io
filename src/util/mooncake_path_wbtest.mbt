@@ -5,9 +5,15 @@ test "resolve basic module path" {
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::package_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
+  debug_inspect(
+    p.map(MooncakePath::module_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(
+    p.map(MooncakePath::package_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
 }
 
 ///|
@@ -17,9 +23,15 @@ test "resolve versioned module path" {
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::package_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::version), content="Some(\"0.3.0\")")
+  debug_inspect(
+    p.map(MooncakePath::module_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(
+    p.map(MooncakePath::package_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"0.3.0\")")
 }
 
 ///|
@@ -29,12 +41,15 @@ test "resolve versioned with package path" {
     module_path="mizchi/mbt_rs",
     latest_version="0.5.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(
+  debug_inspect(
+    p.map(MooncakePath::module_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"mizchi/mbt_rs/lib/sub\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"0.3.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"0.3.0\")")
 }
 
 ///|
@@ -44,15 +59,15 @@ test "resolve unversioned with package path" {
     module_path="moonbitlang/core",
     latest_version="0.5.0",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::module_path),
     content="Some(\"moonbitlang/core\")",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"moonbitlang/core/builtin\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"0.5.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"0.5.0\")")
 }
 
 ///|
@@ -82,12 +97,15 @@ test "resolve @latest uses latest_version" {
     module_path="mizchi/mbt_rs",
     latest_version="2.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(
+  debug_inspect(
+    p.map(MooncakePath::module_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"mizchi/mbt_rs/lib\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"2.0.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"2.0.0\")")
 }
 
 ///|
@@ -97,9 +115,15 @@ test "resolve trailing slash" {
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::package_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
+  debug_inspect(
+    p.map(MooncakePath::module_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(
+    p.map(MooncakePath::package_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
 }
 
 ///|
@@ -109,9 +133,15 @@ test "resolve leading slash" {
     module_path="mizchi/mbt_rs",
     latest_version="1.0.0",
   )
-  inspect(p.map(MooncakePath::module_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::package_path), content="Some(\"mizchi/mbt_rs\")")
-  inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
+  debug_inspect(
+    p.map(MooncakePath::module_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(
+    p.map(MooncakePath::package_path),
+    content="Some(\"mizchi/mbt_rs\")",
+  )
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
 }
 
 ///|
@@ -141,15 +171,15 @@ test "resolve three-segment module" {
     module_path="org/team/project",
     latest_version="1.0.0",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::module_path),
     content="Some(\"org/team/project\")",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"org/team/project\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
 }
 
 ///|
@@ -159,15 +189,15 @@ test "resolve three-segment module with version" {
     module_path="org/team/project",
     latest_version="1.0.0",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::module_path),
     content="Some(\"org/team/project\")",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"org/team/project/sub/pkg\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"2.0.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"2.0.0\")")
 }
 
 ///|
@@ -177,15 +207,15 @@ test "resolve four-segment module" {
     module_path="org/team/project/sub",
     latest_version="1.0.0",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::module_path),
     content="Some(\"org/team/project/sub\")",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"org/team/project/sub\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"1.0.0\")")
 }
 
 ///|
@@ -195,15 +225,15 @@ test "resolve four-segment module with version and package" {
     module_path="org/team/project/sub",
     latest_version="1.0.0",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::module_path),
     content="Some(\"org/team/project/sub\")",
   )
-  inspect(
+  debug_inspect(
     p.map(MooncakePath::package_path),
     content="Some(\"org/team/project/sub/lib/core\")",
   )
-  inspect(p.map(MooncakePath::version), content="Some(\"3.0.0\")")
+  debug_inspect(p.map(MooncakePath::version), content="Some(\"3.0.0\")")
 }
 
 ///|

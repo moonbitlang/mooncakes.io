@@ -31,9 +31,9 @@ pub(all) enum Tree[Id] {
 ///|
 pub fn[Id] Tree::get_name(self : Tree[Id]) -> String {
   match self {
-    Tree::Item(name, ..) => name
-    Tree::Node(name, _, ..) => name
-    Tree::FixedNode(name, _, ..) => name
+    Item(name, ..) => name
+    Node(name, _, ..) => name
+    FixedNode(name, _, ..) => name
   }
 }
 
@@ -48,7 +48,7 @@ pub fn[Id : Compare] view(
 ) -> Html {
   fn aux(x) {
     match x {
-      Tree::Item(id~, str) => {
+      Item(id~, str) => {
         let active = indicator == id
         let font = if active {
           " font-semibold text-gray-900"
@@ -61,7 +61,7 @@ pub fn[Id : Compare] view(
           [icon(id, false), @html.span([text(str)])],
         )
       }
-      Tree::Node(id~, str, children) => {
+      Node(id~, str, children) => {
         let expanded = state.contains(id)
         let active = indicator == id
         let font = if active {
@@ -95,7 +95,7 @@ pub fn[Id : Compare] view(
           },
         ])
       }
-      Tree::FixedNode(id~, str, children) => {
+      FixedNode(id~, str, children) => {
         let active = indicator == id
         let font = if active {
           " font-semibold text-gray-900"
@@ -104,9 +104,8 @@ pub fn[Id : Compare] view(
         }
         fn method_item(child : Tree[Id]) -> Html {
           let (child_id, child_name) = match child {
-            Tree::Item(id~, name) => (id, name)
-            Tree::Node(id~, name, _) | Tree::FixedNode(id~, name, _) =>
-              (id, name)
+            Item(id~, name) => (id, name)
+            Node(id~, name, _) | FixedNode(id~, name, _) => (id, name)
           }
           let child_active = indicator == child_id
           let child_font = if child_active {
@@ -124,7 +123,7 @@ pub fn[Id : Compare] view(
               ),
               @html.span(class="group-hover/method:hidden", [text(child_name)]),
               @html.span(class="hidden group-hover/method:inline truncate", [
-                text(str + "::" + child_name),
+                text("\{str}::\{child_name}"),
               ]),
             ],
           )

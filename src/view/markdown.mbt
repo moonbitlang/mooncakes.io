@@ -14,7 +14,7 @@
 
 ///|
 fn unsupported(node_type : String, message : String) -> @html.Html {
-  println("Unsupported markdown syntax: " + node_type + " " + message)
+  println("Unsupported markdown syntax: \{node_type} \{message}")
   nothing
 }
 
@@ -60,7 +60,7 @@ fn inline2html(
   link_defs~ : Map[String, String],
 ) -> Array[@html.Html] {
   match x {
-    @cmark.Inline::Autolink({ v: { link: { v, .. }, .. }, .. }) =>
+    Autolink({ v: { link: { v, .. }, .. }, .. }) =>
       [@html.a(href=v, [inline_text(v)])]
     Break(_) => [text("\n")]
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
@@ -103,7 +103,7 @@ fn block2html(
   paragraph_margin? : Bool = false,
 ) -> @html.Html {
   match x {
-    @cmark.Block::BlankLine(_) => p(nothing)
+    BlankLine(_) => p(nothing)
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
         class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
@@ -183,15 +183,16 @@ fn block2html(
         .to_array()
       let spacing = if tight || has_task { "space-y-1" } else { "space-y-2" }
       let class = if has_task {
-        "pl-4 mb-4 " + spacing
+        "pl-4 mb-4 \{spacing}"
       } else {
-        "pl-8 mb-4 " + spacing
+        "pl-8 mb-4 \{spacing}"
       }
       match ordered {
-        @cmark_base.Unordered(_) =>
-          ul(class=(if has_task { "" } else { "list-disc " }) + class, items)
-        @cmark_base.Ordered(start, _) =>
-          ol(start~, class="list-decimal " + class, items)
+        Unordered(_) => {
+          let list_prefix = if has_task { "" } else { "list-disc " }
+          ul(class="\{list_prefix}\{class}", items)
+        }
+        Ordered(start, _) => ol(start~, class="list-decimal \{class}", items)
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => {
@@ -335,10 +336,10 @@ pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html 
     inline_ext_default: fn(_, acc, _) { acc },
     block_ext_default: fn(_, acc, _) { acc },
     inline: fn(_, acc, inline) {
-      @cmark.FolderResult::Fold([..acc, ..inline2html(inline, link_defs~)])
+      Fold([..acc, ..inline2html(inline, link_defs~)])
     },
     block: fn(_, acc, block) {
-      @cmark.FolderResult::Fold(
+      Fold(
         [
           ..acc,
           block2html(block, link_defs~, small_heading~, paragraph_margin=true),
@@ -347,7 +348,7 @@ pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html 
     },
   }
   try folder.fold_doc([], doc) catch {
-    @cmark.FolderError(msg) => text("Failed to render markdown: \{msg}")
+    FolderError(msg) => text("Failed to render markdown: \{msg}")
   } noraise {
     htmls =>
       div(class="text-sm md:text-base leading-relaxed text-gray-800", htmls)

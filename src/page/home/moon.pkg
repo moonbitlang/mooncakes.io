@@ -3,6 +3,7 @@ import {
   "moonbit-community/rabbita/http",
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/svg",
+  "moonbitlang/core/debug",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/util",
   "moonbit-community/fuzzy_match",

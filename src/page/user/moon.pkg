@@ -2,6 +2,7 @@ import {
   "moonbit-community/rabbita" @rabbita,
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/http",
+  "moonbitlang/core/debug",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
 }

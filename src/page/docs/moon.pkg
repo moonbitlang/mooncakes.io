@@ -4,6 +4,7 @@ import {
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/nav",
   "moonbit-community/rabbita/dialog",
+  "moonbitlang/core/debug",
   "moonbitlang/core/immut/sorted_map" @immut/sorted_map,
   "moonbitlang/core/immut/sorted_set" @immut/sorted_set,
   "moonbitlang/core/json",

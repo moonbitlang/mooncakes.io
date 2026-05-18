@@ -17,7 +17,7 @@ priv struct IndexNode {
   name : String
   pkg : PkgIndex?
   childs : SortedMap[String, IndexNode]
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct PkgIndex {
@@ -28,7 +28,7 @@ priv struct PkgIndex {
   types : Array[TypeIndex]
   misc : Array[MiscIndex]
   values : Array[ValueIndex]
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct Manifest {
@@ -40,7 +40,7 @@ priv struct Manifest {
 }
 
 ///|
-priv struct ModuleIndex(IndexNode) derive(Show)
+priv struct ModuleIndex(IndexNode) derive(Debug)
 
 ///|
 test "dummy test to suppress unused trait implementation warning" {
@@ -57,7 +57,7 @@ test "dummy test to suppress unused trait implementation warning" {
     }),
     childs: @immut/sorted_map.new(),
   }
-  println(moduleIndex)
+  ignore(to_repr(moduleIndex))
 }
 
 ///|
@@ -88,18 +88,18 @@ fn ModuleIndex::iter(self : ModuleIndex) -> Iter[IndexNode] {
 ///|
 priv struct TypeAliasIndex {
   name : String
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct ValueIndex {
   name : String
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct TraitIndex {
   name : String
   impls : Array[ImplIndex]
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv enum Stype {
@@ -112,34 +112,34 @@ priv enum Stype {
   )
   Param(name~ : String)
   TypePath(TypePath)
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct TypePath {
   path : String
   name : String
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct ImplIndex {
   self : Stype
   trait_ : TypePath
   methods : Array[String]
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct TypeIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
-} derive(Show)
+} derive(Debug)
 
 ///|
 priv struct MiscIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
-} derive(Show)
+} derive(Debug)
 
 ///|
 fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
@@ -147,10 +147,12 @@ fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
   guard paths is [root_path, .. paths] && root_path == self.name else {
     return None
   }
-  loop (Some(self), paths) {
-    (Some(node), [path, .. rest]) =>
-      continue (node.childs.get(path.to_string()), rest)
-    (node, _) => node
+  for node = Some(self), paths = paths {
+    match (node, paths) {
+      (Some(node), [path, .. rest]) =>
+        continue node.childs.get(path.to_owned()), rest
+      (node, _) => break node
+    }
   }
 }
 
@@ -163,7 +165,7 @@ fn split_docs_path(path : String) -> Array[String] {
     if part.is_empty() {
       None
     } else {
-      Some(part.to_string())
+      Some(part.to_owned())
     }
   })
   .collect()
@@ -171,7 +173,7 @@ fn split_docs_path(path : String) -> Array[String] {
 
 ///|
 fn strip_module_version(segment : String) -> String {
-  segment.split("@").head().unwrap().to_string()
+  segment.split("@").head().unwrap().to_owned()
 }
 
 ///|
@@ -202,14 +204,14 @@ fn versioned_asset_path(
   let module_segments = split_docs_path(module_name)
   let path_segments = split_docs_path(lookup)
   if path_segments.length() < module_segments.length() {
-    return module_name + "@" + version
+    return "\{module_name}@\{version}"
   }
   for i in 0..<module_segments.length() {
     if path_segments[i] != module_segments[i] {
       return lookup
     }
   }
-  let versioned = module_name + "@" + version
+  let versioned = "\{module_name}@\{version}"
   if path_segments.length() == module_segments.length() {
     return versioned
   }
@@ -217,7 +219,8 @@ fn versioned_asset_path(
   for i in module_segments.length()..<path_segments.length() {
     suffix.push(path_segments[i])
   }
-  versioned + "/" + suffix.join("/")
+  let suffix = suffix.join("/")
+  "\{versioned}/\{suffix}"
 }
 
 ///|
@@ -225,7 +228,7 @@ fn make_versioned_asset_path(mp : @util.MooncakePath) -> String {
   let module_path = mp.module_path()
   let package_path = mp.package_path()
   let version = mp.version()
-  let versioned_module = module_path + "@" + version
+  let versioned_module = "\{module_path}@\{version}"
   let pkg_segs = split_docs_path(package_path)
   let mod_segs = split_docs_path(module_path)
   if pkg_segs.length() <= mod_segs.length() {
@@ -235,7 +238,8 @@ fn make_versioned_asset_path(mp : @util.MooncakePath) -> String {
     for i in mod_segs.length()..<pkg_segs.length() {
       suffix.push(pkg_segs[i])
     }
-    versioned_module + "/" + suffix.join("/")
+    let suffix = suffix.join("/")
+    "\{versioned_module}/\{suffix}"
   }
 }
 
@@ -263,7 +267,7 @@ fn decode_manifest(json : Json) -> Result[Manifest, String] {
           module_meta,
         }
       }
-      json => fail("invalid json for Manifest: \{json}")
+      json => fail("invalid json for Manifest: \{to_repr(json)}")
     },
   ) catch {
     e => Err(e.to_string())
@@ -313,7 +317,7 @@ fn decode_stype(json : Json) -> Stype raise Error {
     }
     { "kind": "param", "name": String(name), .. } => Param(name~)
     { "name": _, "path": _, .. } => TypePath(decode_type_path(json))
-    _ => fail("invalid json in stype: \{json}")
+    _ => fail("invalid json in stype: \{to_repr(json)}")
   }
 }
 

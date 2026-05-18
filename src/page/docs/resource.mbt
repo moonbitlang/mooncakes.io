@@ -47,7 +47,7 @@ fn normalize_repo_url(url : String) -> String {
     [.. "https://", ..] | [.. "http://", ..] => url
     [.. "git@", .. remain] if remain.contains_char(':') &&
       remain.split(":").collect().length() == 2 => url
-    _ => "https://" + url
+    _ => "https://\{url}"
   }
 }
 

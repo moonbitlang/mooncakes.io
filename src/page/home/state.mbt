@@ -244,7 +244,7 @@ pub fn filter_indices(
       if trimmed.is_empty() {
         None
       } else {
-        Some(trimmed.to_string())
+        Some(trimmed.to_owned())
       }
     })
     .collect()
@@ -418,7 +418,7 @@ fn decode_statistics(json : Json) -> Result[PackageCount, String] {
         total_packages: total_packages.to_int(),
         total_downloads: total_downloads.to_int(),
       })
-    _ => Err("failed to parse json: \{json}")
+    _ => Err("failed to parse json: \{to_repr(json)}")
   }
 }
 
@@ -452,11 +452,11 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
         _ => panic()
       }
       guard path.split("/").collect() is [author, .. name]
-      let name = name.iter().map(StringView::to_string).join("/")
+      let name = name.iter().map(StringView::to_owned).join("/")
       {
         path,
         name,
-        author: author.to_string(),
+        author: author.to_owned(),
         version,
         description,
         keywords,
@@ -464,7 +464,7 @@ fn decode_module_index(item : Json) -> ModuleIndex raise {
         is_new,
       }
     }
-    _ => fail("unexpected item in json: \{item}")
+    _ => fail("unexpected item in json: \{to_repr(item)}")
   }
 }
 

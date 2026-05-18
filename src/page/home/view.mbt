@@ -17,7 +17,7 @@ fn versioned_path(mod : ModuleIndex) -> String {
   if mod.version.is_empty() || mod.path == "moonbitlang/core" {
     mod.path
   } else {
-    mod.path + "@" + mod.version
+    "\{mod.path}@\{mod.version}"
   }
 }
 

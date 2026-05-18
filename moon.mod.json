@@ -2,11 +2,11 @@
   "name": "moonbitlang/mooncakes",
   "version": "0.1.1",
   "deps": {
-    "illusory0x0/fuzzy_match": "0.2.4",
     "moonbit-community/cmark": "0.4.3",
     "Yoorkin/prettyprinter": "0.4.8",
-    "moonbitlang/parser": "0.1.13",
-    "moonbit-community/rabbita": "0.11.5"
+    "moonbit-community/rabbita": "0.11.5",
+    "moonbitlang/parser": "0.3.0",
+    "moonbit-community/fuzzy_match": "0.2.5"
   },
   "readme": "README.md",
   "repository": "",

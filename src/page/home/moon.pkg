@@ -5,5 +5,5 @@ import {
   "moonbit-community/rabbita/svg",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/util",
-  "illusory0x0/fuzzy_match",
+  "moonbit-community/fuzzy_match",
 }

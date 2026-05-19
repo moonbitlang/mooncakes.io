@@ -19,20 +19,28 @@ fn breadcrumbs(
     } else {
       "/\{lookup_path}"
     }
-    let elem = match (module_index, lookup_module_path) {
-      (Some(module_index), Some(lookup_module_path)) =>
-        if lookup_acc_path.has_prefix(lookup_module_path) &&
-          module_index.0.find_node(lookup_acc_path) is Some(node) &&
-          (lookup_acc_path == lookup_module_path || node.pkg is Some(_)) {
-          a(
-            class="hover:underline font-normal",
-            href="/docs/\{raw_acc_path}",
-            lookup_path,
-          )
-        } else {
-          div(class="text-gray-700 font-normal", lookup_path)
-        }
-      _ => div(class="text-gray-700 font-normal", lookup_path)
+    let elem = if i == 0 {
+      a(
+        class="hover:underline font-normal",
+        href="/user/\{raw_path}",
+        lookup_path,
+      )
+    } else {
+      match (module_index, lookup_module_path) {
+        (Some(module_index), Some(lookup_module_path)) =>
+          if lookup_acc_path.has_prefix(lookup_module_path) &&
+            module_index.0.find_node(lookup_acc_path) is Some(node) &&
+            (lookup_acc_path == lookup_module_path || node.pkg is Some(_)) {
+            a(
+              class="hover:underline font-normal",
+              href="/docs/\{raw_acc_path}",
+              lookup_path,
+            )
+          } else {
+            div(class="text-gray-700 font-normal", lookup_path)
+          }
+        _ => div(class="text-gray-700 font-normal", lookup_path)
+      }
     }
     elems.push(elem)
   }

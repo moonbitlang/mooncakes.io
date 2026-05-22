@@ -47,12 +47,14 @@ pub struct Model {
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
+  showing_modules : Int
   showing_packages : Int
   showing_downloads : Int
 }
 
 ///|
 struct PackageCount {
+  total_modules : Int
   total_packages : Int
   total_lines : Int
   total_downloads : Int
@@ -132,6 +134,7 @@ pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       filter: "",
       filtered_modules: [],
       showing_lines: 0,
+      showing_modules: 0,
       showing_packages: 0,
       showing_downloads: 0,
     },
@@ -165,6 +168,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         {
           ..model,
           showing_lines: stat.total_lines,
+          showing_modules: stat.total_modules,
           showing_packages: stat.total_packages,
           showing_downloads: stat.total_downloads,
         },
@@ -394,12 +398,14 @@ fn build_search_index(
 impl @json.FromJson for PackageCount with from_json(json : Json, path) {
   match json {
     {
+      "total_modules": Number(total_modules, ..),
       "total_packages": Number(total_packages, ..),
       "total_lines": Number(total_lines, ..),
       "total_downloads": Number(total_downloads, ..),
       ..
     } =>
       {
+        total_modules: total_modules.to_int(),
         total_lines: total_lines.to_int(),
         total_packages: total_packages.to_int(),
         total_downloads: total_downloads.to_int(),

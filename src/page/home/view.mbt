@@ -281,7 +281,11 @@ test "format_stat_text groups digits and placeholders" {
 }
 
 ///|
-fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
+fn banner(
+  total_modules~ : Int,
+  total_packages~ : Int,
+  total_downloads~ : Int,
+) -> Html {
   fn button(value, target, color) {
     a(
       href=target,
@@ -306,7 +310,7 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
     ) <| [
       p(class="text-2xl lg:text-3xl font-extralight", value),
       div(
-        class="flex items-center justify-center lg:justify-between",
+        class="flex items-center justify-center",
         p(class="text-sm lg:text-base text-gray-700 font-light", label),
       ),
       div(
@@ -316,11 +320,26 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
     ]
   }
 
+  fn stat_bubble(label, value : Int, extra_class : String) {
+    let value = if value == 0 {
+      format_stat_text("----")
+    } else {
+      format_stat_text(value.to_string())
+    }
+    div(class="home-stat-bubble \{extra_class}") <| [
+      p(class="text-2xl lg:text-3xl font-extralight", value),
+      div(
+        class="flex items-center justify-center",
+        p(class="text-sm lg:text-base text-gray-700 font-light", label),
+      ),
+    ]
+  }
+
   div(
-    class="container lg:w-3/4 px-5 sm:px-6 flex flex-col gap-3 lg:flex-row items-center justify-start lg:justify-center lg:gap-12 lg:py-8",
+    class="container lg:w-4/5 xl:w-3/4 px-5 sm:px-6 flex flex-col gap-3 lg:flex-row items-center justify-start lg:justify-center lg:gap-6 xl:gap-12 lg:py-8",
   ) <| [
     div(
-      class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[520px] mt-4 lg:mt-0",
+      class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[450px] xl:max-w-[520px] mt-4 lg:mt-0",
     ) <| [
       div(class="text-slate-700 home-hero-copy") <| [
         h1(class="text-2xl font-semibold lg:text-4xl", "The Package Registry"),
@@ -346,19 +365,25 @@ fn banner(total_downloads~ : Int, total_packages~ : Int) -> Html {
         ),
       ],
     ],
-    div(
-      class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5 lg:flex-row-reverse lg:w-2/5 lg:translate-x-9",
-    ) <| [
-      img(
-        class="home-hero-image hidden lg:block lg:absolute lg:left-0 lg:translate-x-6 w-[35%] lg:w-[240px] lg:h-[240px] object-cover object-center",
-        src="mooncake-pic-small.png",
-        nothing,
-      ),
-      div(
-        class="flex w-full flex-row lg:flex-col gap-3 z-10 lg:w-3/5 select-none",
-      ) <| [
+    div(class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5") <| [
+      div(class="flex w-full flex-row gap-3 z-10 lg:hidden select-none") <| [
         stat_card("Packages", total_packages, false, None),
-        stat_card("Download", total_downloads, false, None),
+        stat_card("Modules", total_modules, false, None),
+        stat_card("Downloads", total_downloads, false, None),
+      ],
+      div(class="home-hero-illustration hidden lg:block select-none") <| [
+        img(
+          class="home-hero-image object-cover object-center",
+          src="mooncake-pic-small.png",
+          nothing,
+        ),
+        div(class="home-stat-bubble-layer") <| [
+          stat_bubble(
+            "Downloads", total_downloads, "home-stat-bubble-downloads",
+          ),
+          stat_bubble("Modules", total_modules, "home-stat-bubble-modules"),
+          stat_bubble("Packages", total_packages, "home-stat-bubble-packages"),
+        ],
       ],
     ],
   ]
@@ -445,6 +470,7 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   }
   let banner = if model.filter == "" {
     banner(
+      total_modules=model.showing_modules,
       total_downloads=model.showing_downloads,
       total_packages=model.showing_packages,
     )

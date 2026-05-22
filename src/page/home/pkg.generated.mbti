@@ -32,6 +32,7 @@ pub struct Model {
   filter : String
   filtered_modules : Array[ModuleIndex]
   showing_lines : Int
+  showing_modules : Int
   showing_packages : Int
   showing_downloads : Int
 }

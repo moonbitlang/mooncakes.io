@@ -24,6 +24,12 @@ fn inline_text(str : String) -> @html.Html {
 }
 
 ///|
+fn inline_plain_text(inline : @cmark.Inline) -> String {
+  let lines = inline.to_plain_text(break_on_soft=false)
+  lines.iter().map(fn(line) { line.iter().join("") }).join("\n")
+}
+
+///|
 fn image_render(img : @cmark.Inline) -> @html.Html {
   guard img is Image(img) else {
     println(img)
@@ -32,24 +38,19 @@ fn image_render(img : @cmark.Inline) -> @html.Html {
   match img {
     {
       v: {
-        text: Text({ v: alt, .. }),
-        reference: Inline({ v: { dest: src, .. }, .. }),
+        text: alt,
+        reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
       },
       ..,
-    } =>
-      match src {
-        Some({ v: src, .. }) => @html.img(class="my-2", src~, alt~, nothing)
-        None => @html.text("Loading image failed: invalid url")
-      }
+    } => {
+      let alt = inline_plain_text(alt)
+      @html.img(class="my-2", src~, alt~, nothing)
+    }
+    { v: { reference: Inline({ v: { dest: None, .. }, .. }), .. }, .. } =>
+      @html.text("Loading image failed: invalid url")
     { v: { reference: Ref(_), .. }, .. } => {
       println("Unsupported image reference")
       @html.nothing
-    }
-    { v: { text: _, .. }, .. } => {
-      println(
-        "Unexpected behavior: If program reaches here, there is a cmark parse error",
-      )
-      panic()
     }
   }
 }
@@ -354,4 +355,9 @@ pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html 
     htmls =>
       div(class="text-sm md:text-base leading-relaxed text-gray-800", htmls)
   }
+}
+
+///|
+test "markdown renders empty image alt without panic" {
+  ignore(markdown("![](down-start.png)"))
 }

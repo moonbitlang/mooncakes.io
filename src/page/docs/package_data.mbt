@@ -235,7 +235,7 @@ fn decode_misc_doc(
 }
 
 ///|
-impl @json.FromJson for PackageData with from_json(json : Json, path) {
+impl @json.FromJson for PackageData with fn from_json(json : Json, path) {
   match json {
     ({
       "name": String(name),

@@ -244,7 +244,7 @@ fn make_versioned_asset_path(mp : @util.MooncakePath) -> String {
 }
 
 ///|
-impl @json.FromJson for Manifest with from_json(json : Json, path) {
+impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
   let raw_json = json
   match raw_json {
     {
@@ -488,6 +488,6 @@ fn decode_index_node(
 }
 
 ///|
-impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
+impl @json.FromJson for ModuleIndex with fn from_json(json : Json, path) {
   decode_index_node(json, path)
 }

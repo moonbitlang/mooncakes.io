@@ -172,14 +172,14 @@ fn failed_docs_notice(
         build_log,
         emit,
         footer=p(class="docs-state-summary", style=["margin-top: 0.75rem"]) <| [
-            text("If this seems wrong, "),
-            a(
-              class="text-blue-500 hover:text-blue-700 transition-colors",
-              href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-              "report it",
-            ),
-            text("."),
-          ],
+          text("If this seems wrong, "),
+          a(
+            class="text-blue-500 hover:text-blue-700 transition-colors",
+            href="https://github.com/moonbitlang/mooncakes.io/issues/new",
+            "report it",
+          ),
+          text("."),
+        ],
       ),
     ],
   ]
@@ -246,91 +246,88 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   )
   let search = model.search
   let search_panel : Html = @html.dialog(
-      class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg fixed max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%] overscroll-contain",
-      id="search-panel",
+    class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg fixed max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%] overscroll-contain",
+    id="search-panel",
+  ) <| [
+    div(
+      class="h-12 border-b bg-white rounded-none sticky top-0 text-base w-full flex",
     ) <| [
+      @html.input(
+        input_type=Text,
+        value=search.filter,
+        placeholder="search...",
+        on_input=x => emit(SearchFilterChanged(x)),
+        class="outline-none m-0 flex-grow px-4 p-2",
+        nothing,
+      ),
       div(
-        class="h-12 border-b bg-white rounded-none sticky top-0 text-base w-full flex",
-      ) <| [
-        @html.input(
-          input_type=Text,
-          value=search.filter,
-          placeholder="search...",
-          on_input=x => emit(SearchFilterChanged(x)),
-          class="outline-none m-0 flex-grow px-4 p-2",
-          nothing,
-        ),
-        div(
-          class="size-12 container hover:bg-gray-200 flex justify-center items-center",
-          on_click=emit(ToggleSearchPanel(false)),
-          img(class="ui-icon", src=@config.icon_close, nothing),
-        ),
-      ],
-      match search.results {
-        Loading => nothing
-        Failed => text("load indices failed")
-        Success(results) =>
-          @html.ul(
-            class="overflow-y-auto flex-grow",
-            results.map(fn(x) {
-              let color = match x.entry.kind {
-                "Package" => "text-yellow-700"
-                "Trait" => "text-blue-700"
-                "Type" => "text-green-700"
-                "Method" => "text-moonbit"
-                "Value" => "text-purple-700"
-                _ => "text-gray-700"
-              }
-              @html.li(
-                class="border-b px-4 py-2 bg-white hover:bg-gray-100",
-                on_click=emit(ToggleSearchPanel(false)),
-              ) <| [
-                a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ") <| [
-                  span(
-                    class="",
-                    x.matching.map(x => {
-                      match x {
-                        (true, str) =>
-                          span(
-                            class="text-moonbit font-semibold",
-                            str.to_owned(),
-                          )
-                        (false, str) =>
-                          span(class="text-gray-600", str.to_owned())
-                      }
-                    }),
-                  ),
-                  span(
-                    class="font-thin text-tiny lg:text-base \{color}",
-                    x.entry.kind,
-                  ),
-                ],
-              ]
-            }),
-          )
-      },
-    ]
+        class="size-12 container hover:bg-gray-200 flex justify-center items-center",
+        on_click=emit(ToggleSearchPanel(false)),
+        img(class="ui-icon", src=@config.icon_close, nothing),
+      ),
+    ],
+    match search.results {
+      Loading => nothing
+      Failed => text("load indices failed")
+      Success(results) =>
+        @html.ul(
+          class="overflow-y-auto flex-grow",
+          results.map(fn(x) {
+            let color = match x.entry.kind {
+              "Package" => "text-yellow-700"
+              "Trait" => "text-blue-700"
+              "Type" => "text-green-700"
+              "Method" => "text-moonbit"
+              "Value" => "text-purple-700"
+              _ => "text-gray-700"
+            }
+            @html.li(
+              class="border-b px-4 py-2 bg-white hover:bg-gray-100",
+              on_click=emit(ToggleSearchPanel(false)),
+            ) <| [
+              a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ") <| [
+                span(
+                  class="",
+                  x.matching.map(x => {
+                    match x {
+                      (true, str) =>
+                        span(class="text-moonbit font-semibold", str.to_owned())
+                      (false, str) =>
+                        span(class="text-gray-600", str.to_owned())
+                    }
+                  }),
+                ),
+                span(
+                  class="font-thin text-tiny lg:text-base \{color}",
+                  x.entry.kind,
+                ),
+              ],
+            ]
+          }),
+        )
+    },
+  ]
   guard model.path is Ok(resolved) else {
     return div(class="min-h-screen w-full flex-col") <| [
-        search_panel,
-        navbar,
-        div(class="flex-1") <| [
+      search_panel,
+      navbar,
+      div(class="flex-1") <| [
+        div(
+          class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
+        ) <| [
           div(
-            class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
-          ) <| [
-            div(
-              class="overflow-y-auto hidden md:block md:sticky md:top-header md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
-              div(class="w-full", @view.skeleton_sidebar()),
-            ),
-            div(class="flex-1 min-w-0 max-w-4xl", @view.skeleton_docs_content()),
-            div(
-              class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
-              @view.skeleton_meta_sidebar(),
-            ),
-          ],
+            class="overflow-y-auto hidden md:block md:sticky md:top-header md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
+            div(class="w-full", @view.skeleton_sidebar()),
+          ),
+          div(class="flex-1 min-w-0 max-w-4xl", @view.skeleton_docs_content()),
+          div(
+            class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
+            @view.skeleton_meta_sidebar(),
+          ),
         ],
-        @view.footer(),
-      ]
+      ],
+      @view.footer(),
+    ]
   }
   let path_str = resolved.package_path()
   let module_path = resolved.module_path()
@@ -454,24 +451,24 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
     (skeleton, nothing)
   }
   let main = div() <| [
-      meta_mobile, docs_notice, document_view, source_files_view,
-    ]
+    meta_mobile, docs_notice, document_view, source_files_view,
+  ]
   let show_sidebar_dialog = if model.sidebar_fab { "flex" } else { "none" }
   let sidebar_dialog : Html = div(
-      class="fixed inset-0 justify-center items-center z-100",
+    class="fixed inset-0 justify-center items-center z-100",
+    style=["display: \{show_sidebar_dialog}"],
+  ) <| [
+    div(
+      class="fixed inset-0 bg-black/40 z-10",
       style=["display: \{show_sidebar_dialog}"],
-    ) <| [
-      div(
-        class="fixed inset-0 bg-black/40 z-10",
-        style=["display: \{show_sidebar_dialog}"],
-        on_click=emit(ToggleSidebarFab),
-        nothing,
-      ),
-      div(
-        class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
-        sidebar(model.sidebar_document, model.sidebar_collapsed, emit),
-      ),
-    ]
+      on_click=emit(ToggleSidebarFab),
+      nothing,
+    ),
+    div(
+      class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
+      sidebar(model.sidebar_document, model.sidebar_collapsed, emit),
+    ),
+  ]
   let fab : Html = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
     on_click=emit(ToggleSidebarFab),

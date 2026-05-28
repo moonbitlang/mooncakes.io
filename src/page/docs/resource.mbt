@@ -255,7 +255,7 @@ fn decode_source_files(
 }
 
 ///|
-impl @json.FromJson for ResourceInfo with from_json(json : Json, path) {
+impl @json.FromJson for ResourceInfo with fn from_json(json : Json, path) {
   match json {
     {
       "readme_content": String(readme_content),

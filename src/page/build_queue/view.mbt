@@ -143,9 +143,9 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   @view.page(
     header=@view.navbar(right=theme_toggle),
     main=div(class="container max-w-3xl mx-auto px-4 py-8") <| [
-        h1(class="text-2xl font-bold text-gray-900 mb-6", "Build Queue"),
-        build_section("In Queue", model.queue, "No builds in queue."),
-        build_section("Recent Builds", model.recent, "No recent builds."),
-      ],
+      h1(class="text-2xl font-bold text-gray-900 mb-6", "Build Queue"),
+      build_section("In Queue", model.queue, "No builds in queue."),
+      build_section("Recent Builds", model.recent, "No recent builds."),
+    ],
   )
 }

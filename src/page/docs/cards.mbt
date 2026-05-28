@@ -129,16 +129,16 @@ fn impl_doc(
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
   let signature : Html = pre(class="bg-gray-100 text-wrap pr-4") <| [
-      code(class="font-mono text-xs md:text-sm text-[#0033b3]") <| [
-        text("impl "),
-        type_path(trait_type, module_name~, module_version~),
-        text(" for "),
-        span(
-          class="text-gray-700",
-          stype(self_type, module_name~, module_version~),
-        ),
-      ],
-    ]
+    code(class="font-mono text-xs md:text-sm text-[#0033b3]") <| [
+      text("impl "),
+      type_path(trait_type, module_name~, module_version~),
+      text(" for "),
+      span(
+        class="text-gray-700",
+        stype(self_type, module_name~, module_version~),
+      ),
+    ],
+  ]
   let content = div(
     class="pl-4 mb-2",
     methods.map(m => value_doc(m, folded~, module_name~, module_version~, emit)),
@@ -158,14 +158,14 @@ fn type_doc(
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div() <| [
-      div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
-      ..impls.map(imp => {
-        impl_doc(imp, folded~, module_name~, module_version~, emit)
-      }),
-      ..methods.map(m => {
-        value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
-      }),
-    ]
+    div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
+    ..impls.map(imp => {
+      impl_doc(imp, folded~, module_name~, module_version~, emit)
+    }),
+    ..methods.map(m => {
+      value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
+    }),
+  ]
   document_item(
     title=id,
     signature,
@@ -191,11 +191,11 @@ fn trait_doc(
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div() <| [
-      div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
-      ..impls.map(imp => {
-        impl_doc(imp, folded~, module_name~, module_version~, emit)
-      }),
-    ]
+    div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
+    ..impls.map(imp => {
+      impl_doc(imp, folded~, module_name~, module_version~, emit)
+    }),
+  ]
   document_item(
     title=id,
     signature,
@@ -278,8 +278,8 @@ fn document_item(
     img(src=icon, class="size-4 ui-icon", nothing),
   )
   let buttons_row : Html = div(class="select-none flex gap-1 items-center") <| [
-      source_btn, collapse_btn,
-    ]
+    source_btn, collapse_btn,
+  ]
   let top_rule = match title {
     None =>
       if tight {
@@ -290,10 +290,10 @@ fn document_item(
     Some(_) => "mt-10"
   }
   let sig_buttons_abs : Html = div(
-      class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center",
-    ) <| [
-      source_btn, collapse_btn,
-    ]
+    class="absolute right-1 top-1/2 transform -translate-y-1/2 select-none flex gap-1 items-center",
+  ) <| [
+    source_btn, collapse_btn,
+  ]
   let (title_view, sig_buttons, has_title) = match title {
     None => (nothing, sig_buttons_abs, false)
     Some(title) => {
@@ -303,17 +303,17 @@ fn document_item(
         "#",
       )
       let title_with_buttons = div(
-          class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
-          id~,
+        class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
+        id~,
+      ) <| [
+        @html.h2(
+          class="text-gray-800 text-lg md:text-xl font-semibold py-2 relative",
         ) <| [
-          @html.h2(
-            class="text-gray-800 text-lg md:text-xl font-semibold py-2 relative",
-          ) <| [
-            anchor,
-            text(title),
-          ],
-          buttons_row,
-        ]
+          anchor,
+          text(title),
+        ],
+        buttons_row,
+      ]
       (title_with_buttons, nothing, true)
     }
   }
@@ -410,14 +410,14 @@ fn misc_doc(
       ]
   }
   let content = div(class="ml-3 my-2") <| [
-      tips,
-      ..methods.map(m => {
-        value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
-      }),
-      ..impls.map(imp => {
-        impl_doc(imp, folded~, module_name~, module_version~, emit)
-      }),
-    ]
+    tips,
+    ..methods.map(m => {
+      value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
+    }),
+    ..impls.map(imp => {
+      impl_doc(imp, folded~, module_name~, module_version~, emit)
+    }),
+  ]
   document_item(signature, content, collapsed=folded, id~, emit)
 }
 

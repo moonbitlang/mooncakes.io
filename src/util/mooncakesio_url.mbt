@@ -9,7 +9,7 @@ pub enum MooncakesioPath {
 }
 
 ///|
-pub impl Show for MooncakesioPath with output(self, logger) {
+pub impl Show for MooncakesioPath with fn output(self, logger) {
   match self {
     Home => logger.write_string("home:")
     User(name) => logger.write_string("user:\{name.to_owned()}")

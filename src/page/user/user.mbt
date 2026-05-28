@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-impl @json.FromJson for Profile with from_json(json : Json, path) {
+impl @json.FromJson for Profile with fn from_json(json : Json, path) {
   match json {
     {
       "modules": Array(modules),
@@ -40,7 +40,10 @@ impl @json.FromJson for Profile with from_json(json : Json, path) {
 }
 
 ///|
-impl @json.FromJson for CodeFrequencyResponse with from_json(json : Json, path) {
+impl @json.FromJson for CodeFrequencyResponse with fn from_json(
+  json : Json,
+  path,
+) {
   match json {
     Object(dict) => {
       let result = {}
@@ -367,22 +370,22 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   @view.page(
     header=@view.navbar(right=theme_toggle),
     main=div(class="container lg:px-40 px-4 py-6") <| [
-        // Top: User profile (centered)
-        div(class="flex justify-center mb-8", profile(model.profile)),
-        // Content area: vertical layout
-        div(class="space-y-8") <| [
-          // Top: Code frequency
-          code_frequency(model.code_frequency),
-          // Bottom: Published modules
-          published_modules(
-            match model.profile {
-              Success({ modules, .. }) => Success(modules)
-              Loading => Loading
-              Failed => Failed
-            },
-          ),
-        ],
+      // Top: User profile (centered)
+      div(class="flex justify-center mb-8", profile(model.profile)),
+      // Content area: vertical layout
+      div(class="space-y-8") <| [
+        // Top: Code frequency
+        code_frequency(model.code_frequency),
+        // Bottom: Published modules
+        published_modules(
+          match model.profile {
+            Success({ modules, .. }) => Success(modules)
+            Loading => Loading
+            Failed => Failed
+          },
+        ),
       ],
+    ],
     footer=@view.footer(),
   )
 }

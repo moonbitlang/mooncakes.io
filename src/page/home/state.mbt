@@ -395,7 +395,7 @@ fn build_search_index(
 }
 
 ///|
-impl @json.FromJson for PackageCount with from_json(json : Json, path) {
+impl @json.FromJson for PackageCount with fn from_json(json : Json, path) {
   match json {
     {
       "total_modules": Number(total_modules, ..),
@@ -471,7 +471,7 @@ fn decode_module_index(
 }
 
 ///|
-impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
+impl @json.FromJson for ModuleIndex with fn from_json(json : Json, path) {
   decode_module_index(json, path)
 }
 
@@ -487,7 +487,7 @@ fn decode_module_array(
 }
 
 ///|
-impl @json.FromJson for ModuleHighlights with from_json(json : Json, path) {
+impl @json.FromJson for ModuleHighlights with fn from_json(json : Json, path) {
   match json {
     { "recent": recent_json, "new": new_json, "popular": popular_json, .. } =>
       {

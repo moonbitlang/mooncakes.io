@@ -58,7 +58,7 @@ pub fn is_theme_toggle(msg : Msg) -> Bool {
 }
 
 ///|
-impl @json.FromJson for BuildData with from_json(json : Json, path) {
+impl @json.FromJson for BuildData with fn from_json(json : Json, path) {
   match json {
     { "queued": Array(queued), "recent_completed": Array(recent), .. } => {
       let queued_items = []

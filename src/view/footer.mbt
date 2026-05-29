@@ -13,7 +13,7 @@ pub fn footer() -> Html {
     ),
     a(href="/build-queue", class~, "Build queue"),
     a(
-      href="https://mooncakes.io/api/v0/modules/statistics?raw=true",
+      href=@config.api_url("/api/v0/modules/statistics?raw=true"),
       class~,
       escape=true,
       "Statistics",

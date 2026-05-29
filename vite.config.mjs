@@ -1,7 +1,11 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import rabbita from '@rabbita/vite'
 import tailwindcss from '@tailwindcss/vite'
 import viteCompression from 'vite-plugin-compression'
+
+function removeTrailingSlash(value) {
+  return value.replace(/\/+$/, '')
+}
 
 const testAssetsServer = {
   name: 'static',
@@ -56,49 +60,59 @@ const testAssetsServer = {
   }
 }
 
-export default defineConfig({
-  root: 'src',
-  publicDir: '../public',
-  build: {
-    outDir: '../dist',
-    assetsDir: '',
-    // Use esbuild minify (default, faster than terser)
-    minify: 'esbuild',
-  },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://mooncakes.io',
-        changeOrigin: true,
-        secure: false,
-        configure: (proxy, options) => {
-          proxy.on('error', (err, req, res) => {
-            console.log('Proxy error:', err)
-          })
-          proxy.on('proxyReq', (proxyReq, req, res) => {
-            console.log('Proxying:', req.method, req.url)
-          })
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  const apiEndpoint = removeTrailingSlash(
+    process.env.VITE_API_ENDPOINT || env.VITE_API_ENDPOINT || "/api"
+  )
+
+  return {
+    root: 'src',
+    publicDir: '../public',
+    define: {
+      __MOONCAKES_API_ENDPOINT__: JSON.stringify(apiEndpoint),
+    },
+    build: {
+      outDir: '../dist',
+      assetsDir: '',
+      // Use esbuild minify (default, faster than terser)
+      minify: 'esbuild',
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: 'https://mooncakes.io',
+          changeOrigin: true,
+          secure: false,
+          configure: (proxy, options) => {
+            proxy.on('error', (err, req, res) => {
+              console.log('Proxy error:', err)
+            })
+            proxy.on('proxyReq', (proxyReq, req, res) => {
+              console.log('Proxying:', req.method, req.url)
+            })
+          }
         }
       }
-    }
-  },
-  plugins: [
-    rabbita({ main: 'main' }),
-    tailwindcss(),
-    testAssetsServer,
-    // Gzip compression
-    viteCompression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 10240, // Only compress files > 10KB
-      deleteOriginFile: false
-    }),
-    // Brotli compression (higher compression ratio)
-    viteCompression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 10240,
-      deleteOriginFile: false
-    })
-  ],
+    },
+    plugins: [
+      rabbita({ main: 'main' }),
+      tailwindcss(),
+      testAssetsServer,
+      // Gzip compression
+      viteCompression({
+        algorithm: 'gzip',
+        ext: '.gz',
+        threshold: 10240, // Only compress files > 10KB
+        deleteOriginFile: false
+      }),
+      // Brotli compression (higher compression ratio)
+      viteCompression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        threshold: 10240,
+        deleteOriginFile: false
+      })
+    ],
+  }
 })

@@ -40,6 +40,8 @@ pub const TYPE_ICON : String = "/type.svg"
 
 pub const VALUE_ICON : String = "/code-brackets.svg"
 
+pub fn api_url(String) -> String
+
 pub let book_open : String
 
 pub let builtins_package_path : Map[String, String]

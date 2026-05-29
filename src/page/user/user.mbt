@@ -118,11 +118,13 @@ pub fn load(username : String, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   let start_date = get_date_days_ago(120)
   (
     batch([
-      @http.get("/api/v0/user/\{username}").expect_json(r => {
+      @http.get(@config.api_url("/api/v0/user/\{username}")).expect_json(r => {
         emit(GotUserProfile(r))
       }),
       @http.get(
-        "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
+        @config.api_url(
+          "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
+        ),
       ).expect_json(r => emit(GotCodeFrequency(r))),
     ]),
     { profile: Loading, code_frequency: Loading },

@@ -5,6 +5,7 @@ import {
   "moonbit-community/rabbita/svg",
   "moonbitlang/core/debug",
   "moonbitlang/core/json",
+  "moonbitlang/mooncakes/config",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
 }

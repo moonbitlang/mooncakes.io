@@ -28,7 +28,9 @@ struct BuildData {
 ///|
 pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
-    @http.get("/api/v0/builds").expect_json(r => emit(GotBuilds(r))),
+    @http.get(@config.api_url("/api/v0/builds")).expect_json(r => {
+      emit(GotBuilds(r))
+    }),
     { queue: Loading, recent: Loading },
   )
 }

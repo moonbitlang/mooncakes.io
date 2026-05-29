@@ -1,10 +1,11 @@
 import {
-  "moonbit-community/rabbita" @rabbita,
+  "moonbit-community/rabbita",
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/http",
   "moonbit-community/rabbita/svg",
   "moonbitlang/core/debug",
   "moonbitlang/core/json",
+  "moonbitlang/mooncakes/config",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
 }

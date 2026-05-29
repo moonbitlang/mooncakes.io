@@ -119,3 +119,22 @@ pub let builtins_package_path : Map[String, String] = {
   "String": "core/string",
   "UInt": "core/uint",
 }
+
+///|
+extern "js" fn api_endpoint() -> String =
+  #|() => __MOONCAKES_API_ENDPOINT__
+
+///|
+pub fn api_url(path : String) -> String {
+  api_url_with_endpoint(api_endpoint(), path)
+}
+
+///|
+fn api_url_with_endpoint(endpoint : String, path : String) -> String {
+  match path {
+    [.. "/api/", .. path] => "\{endpoint}/\{path}"
+    [.. "/api"] => endpoint
+    [.. "/", .. path] => "\{endpoint}/\{path}"
+    path => "\{endpoint}\{path}"
+  }
+}

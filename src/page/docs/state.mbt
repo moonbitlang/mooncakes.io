@@ -151,7 +151,7 @@ pub fn load(
   let path_str = path.package_path()
   (
     batch([
-      @http.get("/api/v0/manifest/\{path_str}").expect_json(r => {
+      @http.get(@config.api_url("/api/v0/manifest/\{path_str}")).expect_json(r => {
         emit(GotManifest(r))
       }),
       @dialog.close("search-panel"),
@@ -260,7 +260,9 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       let cmd = match (build_log_open, model.build_log, model.manifest) {
         (true, LogIdle | LogFailed, Success(manifest)) =>
           get_text(
-            "/api/v0/builds/log?module=\{encode_uri_component(manifest.module_)}&version=\{encode_uri_component(manifest.version)}",
+            @config.api_url(
+              "/api/v0/builds/log?module=\{encode_uri_component(manifest.module_)}&version=\{encode_uri_component(manifest.version)}",
+            ),
             (result : Result[String, Error]) => emit(GotBuildLog(result)),
           )
         _ => none

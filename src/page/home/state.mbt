@@ -123,9 +123,13 @@ pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
     batch([
       @http.get(
-        "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
+        @config.api_url(
+          "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
+        ),
       ).expect_json(r => emit(GotHighlights(r))),
-      @http.get("/api/v0/modules/statistics").expect_json(r => emit(GotCount(r))),
+      @http.get(@config.api_url("/api/v0/modules/statistics")).expect_json(r => {
+        emit(GotCount(r))
+      }),
     ]),
     {
       highlights: Loading,
@@ -143,7 +147,9 @@ pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
 
 ///|
 fn fetch_all_modules(emit : (Msg) -> Cmd) -> Cmd {
-  @http.get("/api/v0/modules").expect_json(r => emit(GotAllModule(r)))
+  @http.get(@config.api_url("/api/v0/modules")).expect_json(r => {
+    emit(GotAllModule(r))
+  })
 }
 
 ///|
@@ -395,7 +401,7 @@ fn build_search_index(
 }
 
 ///|
-impl @json.FromJson for PackageCount with from_json(json : Json, path) {
+impl @json.FromJson for PackageCount with fn from_json(json : Json, path) {
   match json {
     {
       "total_modules": Number(total_modules, ..),
@@ -471,7 +477,7 @@ fn decode_module_index(
 }
 
 ///|
-impl @json.FromJson for ModuleIndex with from_json(json : Json, path) {
+impl @json.FromJson for ModuleIndex with fn from_json(json : Json, path) {
   decode_module_index(json, path)
 }
 
@@ -487,7 +493,7 @@ fn decode_module_array(
 }
 
 ///|
-impl @json.FromJson for ModuleHighlights with from_json(json : Json, path) {
+impl @json.FromJson for ModuleHighlights with fn from_json(json : Json, path) {
   match json {
     { "recent": recent_json, "new": new_json, "popular": popular_json, .. } =>
       {

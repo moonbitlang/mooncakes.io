@@ -195,19 +195,19 @@ fn meta_info(
   emit : (Msg) -> Cmd,
 ) -> Html {
   let model_description : Html = div(class="pl-7 py-2 mb-2") <| [
-      h1(
-        class="text-xl md:text-2xl font-bold mb-2",
-        model.name.split("/").last().unwrap().to_owned(),
-      ),
-      match model.description {
-        Some(d) => p(class="text-gray-600 flex items-center text-sm", d)
-        None => nothing
-      },
-      match model.keywords {
-        [] => nothing
-        keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
-      },
-    ]
+    h1(
+      class="text-xl md:text-2xl font-bold mb-2",
+      model.name.split("/").last().unwrap().to_owned(),
+    ),
+    match model.description {
+      Some(d) => p(class="text-gray-600 flex items-center text-sm", d)
+      None => nothing
+    },
+    match model.keywords {
+      [] => nothing
+      keywords => div(class="flex gap-2 mt-2", keywords.map(tag_view))
+    },
+  ]
   div(
     class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip border-b md:border-b-0",
   ) <| [

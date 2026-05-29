@@ -403,61 +403,61 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
         )
     }
     let chevron_down : Html = @svg.svg(
-        width=16,
-        height=16,
-        view_box="0 0 16 16",
-        class="shrink-0",
-      ) <| [
-        @svg.path(
-          d="M4 6L8 10L12 6",
-          fill="none",
-          stroke="currentColor",
-          stroke_width=2,
-        ),
-      ]
+      width=16,
+      height=16,
+      view_box="0 0 16 16",
+      class="shrink-0",
+    ) <| [
+      @svg.path(
+        d="M4 6L8 10L12 6",
+        fill="none",
+        stroke="currentColor",
+        stroke_width=2,
+      ),
+    ]
     let chevron_up : Html = @svg.svg(
-        width=16,
-        height=16,
-        view_box="0 0 16 16",
-        class="shrink-0",
-      ) <| [
-        @svg.path(
-          d="M4 10L8 6L12 10",
-          fill="none",
-          stroke="currentColor",
-          stroke_width=2,
-        ),
-      ]
+      width=16,
+      height=16,
+      view_box="0 0 16 16",
+      class="shrink-0",
+    ) <| [
+      @svg.path(
+        d="M4 10L8 6L12 10",
+        fill="none",
+        stroke="currentColor",
+        stroke_width=2,
+      ),
+    ]
     let all_modules_section = div(class="pt-10 container lg:w-4/5 px-4") <| [
-        div(class="flex justify-center py-2") <| [
-          div(
-            class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 hover:text-yellow-900 transition-colors px-6 py-2 rounded-md hover:bg-gray-100",
-            on_click=emit(ToggleAllModules),
-          ) <| [
-            text(
-              if model.show_all_modules {
-                "Hide modules"
-              } else {
-                "Show more modules"
-              },
-            ),
+      div(class="flex justify-center py-2") <| [
+        div(
+          class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 hover:text-yellow-900 transition-colors px-6 py-2 rounded-md hover:bg-gray-100",
+          on_click=emit(ToggleAllModules),
+        ) <| [
+          text(
             if model.show_all_modules {
-              chevron_up
+              "Hide modules"
             } else {
-              chevron_down
+              "Show more modules"
             },
-          ],
+          ),
+          if model.show_all_modules {
+            chevron_up
+          } else {
+            chevron_down
+          },
         ],
-        if model.show_all_modules {
-          match model.all_modules {
-            Idle | Loading => @view.skeleton_module_cards(9)
-            Failed => @view.load_failed("module indices")
-            Success(xs) => all_modules(xs.indices)
-          }
-        } else {
-          nothing
-        },
-      ]
+      ],
+      if model.show_all_modules {
+        match model.all_modules {
+          Idle | Loading => @view.skeleton_module_cards(9)
+          Failed => @view.load_failed("module indices")
+          Success(xs) => all_modules(xs.indices)
+        }
+      } else {
+        nothing
+      },
+    ]
     div() <| [
       pinned_modules, highlights, all_modules_section,
     ]
@@ -479,19 +479,19 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   }
   let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   let hero = div(class="home-hero-shell pb-2 sm:pb-8") <| [
-      @view.navbar(
-        style=Fusion,
-        middle=input(
-          input_type=Text,
-          value=model.filter,
-          placeholder="Search modules ...",
-          class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
-          on_input=x => emit(FilterChanged(x)),
-          nothing,
-        ),
-        right=theme_toggle,
+    @view.navbar(
+      style=Fusion,
+      middle=input(
+        input_type=Text,
+        value=model.filter,
+        placeholder="Search modules ...",
+        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
+        on_input=x => emit(FilterChanged(x)),
+        nothing,
       ),
-      div(class="hero-banner", banner),
-    ]
+      right=theme_toggle,
+    ),
+    div(class="hero-banner", banner),
+  ]
   @view.page(header=hero, main=div(class="w-full", module_list))
 }

@@ -57,9 +57,10 @@ const testAssetsServer = {
 }
 
 export default defineConfig({
-  publicDir: 'public',
+  root: 'src',
+  publicDir: '../public',
   build: {
-    outDir: 'dist',
+    outDir: '../dist',
     assetsDir: '',
     // Use esbuild minify (default, faster than terser)
     minify: 'esbuild',

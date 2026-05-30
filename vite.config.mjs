@@ -96,7 +96,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     plugins: [
-      rabbita({ main: 'main' }),
+      rabbita({ main: 'main', moonModDir: './' }),
       tailwindcss(),
       testAssetsServer,
       // Gzip compression

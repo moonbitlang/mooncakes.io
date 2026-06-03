@@ -79,6 +79,10 @@ export default defineConfig(({ mode }) => {
       minify: 'esbuild',
     },
     server: {
+      watch: {
+        usePolling: true,
+        interval: 100,
+      },
       proxy: {
         '/api': {
           target: 'https://mooncakes.io',

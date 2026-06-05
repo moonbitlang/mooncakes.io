@@ -717,6 +717,56 @@ fn skill_markdown_href(entry : WasmEntry, href : String) -> String {
 }
 
 ///|
+fn is_frontmatter_line(line : StringView) -> Bool {
+  let line = line.trim(chars=" \t\r")
+  line == "---" || line == "..."
+}
+
+///|
+fn looks_like_skill_frontmatter(line : StringView) -> Bool {
+  let line = line.trim(chars=" \t\r")
+  line.has_prefix("name:") || line.has_prefix("description:")
+}
+
+///|
+fn strip_skill_frontmatter(content : String) -> String {
+  let lines = content.split("\n").to_array()
+  guard lines.length() > 2 && is_frontmatter_line(lines[0]) else { content }
+  let mut close_index : Int? = None
+  let mut has_metadata = false
+  for i, line in lines {
+    if i > 0 {
+      match close_index {
+        None =>
+          if is_frontmatter_line(line) {
+            close_index = Some(i)
+          } else if looks_like_skill_frontmatter(line) {
+            has_metadata = true
+          }
+        Some(_) => ()
+      }
+    }
+  }
+  match close_index {
+    Some(close_index) if has_metadata => {
+      let body : Array[String] = []
+      let mut seen_content = false
+      for i, line in lines {
+        if i > close_index {
+          let line = line.trim_end(chars="\r").to_owned()
+          if seen_content || !line.trim().is_empty() {
+            body.push(line)
+            seen_content = true
+          }
+        }
+      }
+      body.join("\n")
+    }
+    _ => content
+  }
+}
+
+///|
 fn readme_content(entry : WasmEntry, readme : Status[String]) -> Html {
   match readme {
     Loading => @view.skeleton_docs_content()
@@ -728,7 +778,7 @@ fn readme_content(entry : WasmEntry, readme : Status[String]) -> Html {
     Success(content) =>
       div(
         class="animate-fade-in",
-        @view.markdown(content, transform_link=href => {
+        @view.markdown(strip_skill_frontmatter(content), transform_link=href => {
           skill_markdown_href(entry, href)
         }),
       )

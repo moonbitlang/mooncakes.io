@@ -132,9 +132,9 @@ pub fn api_url(path : String) -> String {
 ///|
 fn api_url_with_endpoint(endpoint : String, path : String) -> String {
   match path {
-    [.. "/api/", .. path] => "\{endpoint}/\{path}"
+    [.. "/api/", .. path] => "\{endpoint}/\{path.to_owned()}"
     [.. "/api"] => endpoint
-    [.. "/", .. path] => "\{endpoint}/\{path}"
+    [.. "/", .. path] => "\{endpoint}/\{path.to_owned()}"
     path => "\{endpoint}\{path}"
   }
 }

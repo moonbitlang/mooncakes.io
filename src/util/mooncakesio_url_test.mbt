@@ -31,6 +31,28 @@ test "resolve build-queue" {
 }
 
 ///|
+test "resolve skills list" {
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("skills")),
+    content=(
+      #|skills:
+    ),
+  )
+}
+
+///|
+test "resolve skills detail" {
+  inspect(
+    @util.MooncakesioPath::resolve(
+      test_url("skills/moonbitlang/parser@0.3.3/cmd/moonfmt"),
+    ),
+    content=(
+      #|skills:moonbitlang/parser@0.3.3/cmd/moonfmt
+    ),
+  )
+}
+
+///|
 test "resolve user" {
   inspect(
     @util.MooncakesioPath::resolve(test_url("user/mizchi")),

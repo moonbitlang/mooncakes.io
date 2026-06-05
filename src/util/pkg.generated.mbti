@@ -7,6 +7,7 @@ import {
 }
 
 // Values
+pub fn get_relative_time(String) -> String
 
 // Errors
 
@@ -28,6 +29,8 @@ pub enum MooncakesioPath {
   Home
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
+  SkillsList
+  SkillsDetail(String)
   BuildQueue
   NotFound(String)
   Assets(@url.Url)

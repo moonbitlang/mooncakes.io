@@ -30,7 +30,10 @@ fn inline_plain_text(inline : @cmark.Inline) -> String {
 }
 
 ///|
-fn image_render(img : @cmark.Inline) -> @html.Html {
+fn image_render(
+  img : @cmark.Inline,
+  transform_link? : (String) -> String,
+) -> @html.Html {
   guard img is Image(img) else {
     println(img)
     abort("not an image")
@@ -44,6 +47,10 @@ fn image_render(img : @cmark.Inline) -> @html.Html {
       ..,
     } => {
       let alt = inline_plain_text(alt)
+      let src = match transform_link {
+        Some(f) => f(src)
+        None => src
+      }
       @html.img(class="my-2", src~, alt~, nothing)
     }
     { v: { reference: Inline({ v: { dest: None, .. }, .. }), .. }, .. } =>
@@ -59,6 +66,7 @@ fn image_render(img : @cmark.Inline) -> @html.Html {
 fn inline2html(
   x : @cmark.Inline,
   link_defs~ : Map[String, String],
+  transform_link? : (String) -> String,
 ) -> Array[@html.Html] {
   match x {
     Autolink({ v: { link: { v, .. }, .. }, .. }) =>
@@ -72,13 +80,17 @@ fn inline2html(
         ),
       ]
     Emphasis({ v: { inline, .. }, .. }) =>
-      [@html.em(inline2html(inline, link_defs~))]
-    Image(_) as img => [image_render(img)]
+      [@html.em(inline2html(inline, link_defs~, transform_link?))]
+    Image(_) as img => [image_render(img, transform_link?)]
     Inlines({ v, .. }) =>
-      v.map(x => inline2html(x, link_defs~)).to_array().flatten()
-    Link({ v: link, .. }) => unwrap_inline_link(link, link_defs~)
+      v
+      .map(x => inline2html(x, link_defs~, transform_link?))
+      .to_array()
+      .flatten()
+    Link({ v: link, .. }) =>
+      unwrap_inline_link(link, link_defs~, transform_link?)
     StrongEmphasis({ v: { inline, .. }, .. }) => {
-      let inline = inline2html(inline, link_defs~)
+      let inline = inline2html(inline, link_defs~, transform_link?)
       [@html.strong(inline)]
     }
     Text({ v: str, .. }) => [inline_text(str)]
@@ -101,6 +113,7 @@ fn block2html(
   x : @cmark.Block,
   small_heading~ : Bool,
   link_defs~ : Map[String, String],
+  transform_link? : (String) -> String,
   paragraph_margin? : Bool = false,
 ) -> @html.Html {
   match x {
@@ -108,12 +121,26 @@ fn block2html(
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
         class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
-        block2html(block, small_heading~, link_defs~, paragraph_margin=true),
+        block2html(
+          block,
+          small_heading~,
+          link_defs~,
+          transform_link?,
+          paragraph_margin=true,
+        ),
       )
     Blocks({ v: xs, .. }) =>
       span(
         xs
-        .map(x => block2html(x, small_heading~, link_defs~, paragraph_margin~))
+        .map(x => {
+          block2html(
+            x,
+            small_heading~,
+            link_defs~,
+            transform_link?,
+            paragraph_margin~,
+          )
+        })
         .to_array(),
       )
     CodeBlock({ v: { code, info_string, .. }, .. }) => {
@@ -127,7 +154,7 @@ fn block2html(
       pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", code)
     }
     Heading({ v: { level, inline, .. }, .. }) => {
-      let inline = inline2html(inline, link_defs~)
+      let inline = inline2html(inline, link_defs~, transform_link?)
       if small_heading {
         match level {
           1 => h3(class="text-gray-900 font-bold mt-1 text-sm", inline)
@@ -171,11 +198,15 @@ fn block2html(
                   class="shrink-0 pointer-events-none",
                   nothing,
                 ),
-                span(block2html(block, small_heading~, link_defs~)),
+                span(
+                  block2html(block, small_heading~, link_defs~, transform_link?),
+                ),
               ],
             ]
           } else {
-            @html.li(block2html(block, small_heading~, link_defs~))
+            @html.li(
+              block2html(block, small_heading~, link_defs~, transform_link?),
+            )
           }
         })
         .to_array()
@@ -194,7 +225,7 @@ fn block2html(
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => {
-      let child = @html.span(inline2html(inline, link_defs~))
+      let child = @html.span(inline2html(inline, link_defs~, transform_link?))
       if paragraph_margin {
         div(class="mb-4 md:pr-8", child)
       } else {
@@ -219,7 +250,7 @@ fn block2html(
                 .map(x => {
                   @html.th(
                     class="border border-gray-300 p-2 font-semibold",
-                    inline2html(x.0, link_defs~),
+                    inline2html(x.0, link_defs~, transform_link?),
                   )
                 })
                 .to_array()
@@ -236,7 +267,7 @@ fn block2html(
                 .map(x => {
                   @html.td(
                     class="border border-gray-300 p-2",
-                    inline2html(x.0, link_defs~),
+                    inline2html(x.0, link_defs~, transform_link?),
                   )
                 })
                 .to_array()
@@ -283,6 +314,7 @@ fn block2html(
 fn unwrap_inline_link(
   x : @cmark.InlineLink,
   link_defs~ : Map[String, String],
+  transform_link? : (String) -> String,
 ) -> Array[@html.Html] {
   match x {
     ({
@@ -292,7 +324,10 @@ fn unwrap_inline_link(
       [
         @html.a(
           class="text-blue-600 underline underline-offset-2",
-          href=link,
+          href=match transform_link {
+            Some(f) => f(link)
+            None => link
+          },
           inline_text(txt),
         ),
       ]
@@ -300,31 +335,55 @@ fn unwrap_inline_link(
       text: Image(_) as img,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [@html.a(href=link, style=["display: inline-block"], image_render(img))]
+      [
+        @html.a(
+          href=match transform_link {
+            Some(f) => f(link)
+            None => link
+          },
+          style=["display: inline-block"],
+          image_render(img, transform_link?),
+        ),
+      ]
     ({
       text: inline,
       reference: Inline({ v: { dest: Some({ v: link, .. }), .. }, .. }),
     } : @cmark.InlineLink) =>
-      [@html.a(href=link, inline2html(inline, link_defs~))]
+      [
+        @html.a(
+          href=match transform_link {
+            Some(f) => f(link)
+            None => link
+          },
+          inline2html(inline, link_defs~, transform_link?),
+        ),
+      ]
     ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }) } : @cmark.InlineLink) =>
-      inline2html(inline, link_defs~)
+      inline2html(inline, link_defs~, transform_link?)
     ({ text: inline, reference: Ref(_, _, { key, .. }) } : @cmark.InlineLink) =>
       if link_defs.get(key) is Some(url) {
         [
           @html.a(
             class=" text-blue-600 underline underline-offset-2",
-            href=url,
-            inline2html(inline, link_defs~),
+            href=match transform_link {
+              Some(f) => f(url)
+              None => url
+            },
+            inline2html(inline, link_defs~, transform_link?),
           ),
         ]
       } else {
-        inline2html(inline, link_defs~)
+        inline2html(inline, link_defs~, transform_link?)
       }
   }
 }
 
 ///|
-pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html {
+pub fn markdown(
+  markdown : String,
+  small_heading? : Bool = false,
+  transform_link? : (String) -> String,
+) -> @html.Html {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
   let link_defs = {}
   doc.defs
@@ -338,13 +397,19 @@ pub fn markdown(markdown : String, small_heading? : Bool = false) -> @html.Html 
     inline_ext_default: fn(_, acc, _) { acc },
     block_ext_default: fn(_, acc, _) { acc },
     inline: fn(_, acc, inline) {
-      Fold([..acc, ..inline2html(inline, link_defs~)])
+      Fold([..acc, ..inline2html(inline, link_defs~, transform_link?)])
     },
     block: fn(_, acc, block) {
       Fold(
         [
           ..acc,
-          block2html(block, link_defs~, small_heading~, paragraph_margin=true),
+          block2html(
+            block,
+            link_defs~,
+            small_heading~,
+            transform_link?,
+            paragraph_margin=true,
+          ),
         ],
       )
     },

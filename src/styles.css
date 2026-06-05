@@ -185,6 +185,29 @@
   color: #7b8396;
 }
 
+.theme-dark .skills-page .text-gray-950 {
+  color: #f8fafc;
+}
+
+.theme-dark .skills-hero-word {
+  color: rgba(148, 163, 184, 0.12);
+}
+
+.skills-search-sticky {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.theme-dark .skills-search-sticky {
+  background-color: rgba(18, 21, 26, 0.86);
+  border-bottom-color: #2a2f36;
+}
+
+.theme-dark .skills-card:hover {
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(148, 163, 184, 0.06);
+}
+
 .theme-dark .home-hero-image {
   filter: brightness(0.9) saturate(0.85) contrast(0.95);
   opacity: 0.9;

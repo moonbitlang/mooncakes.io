@@ -1,0 +1,16 @@
+import {
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/clipboard",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/http",
+  "moonbit-community/rabbita/nav",
+  "moonbit-community/rabbita/sub",
+  "moonbit-community/rabbita/svg",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+  "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/util",
+  "moonbitlang/mooncakes/view",
+}
+
+supported_targets = "js"

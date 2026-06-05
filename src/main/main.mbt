@@ -18,6 +18,7 @@ enum Msg {
   GotDocsMsg(@docs.Msg)
   GotUserMsg(@user.Msg)
   GotBuildQueueMsg(@build_queue.Msg)
+  GotSkillsMsg(@skills.Msg)
   LinkClicked(@url.UrlRequest)
   UrlChanged(@url.Url)
 }
@@ -34,6 +35,7 @@ enum Page {
   Docs(@docs.Model)
   User(@user.Model)
   BuildQueue(@build_queue.Model)
+  Skills(@skills.Model)
   NotFound
   Redirect
 }
@@ -70,6 +72,8 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
       start_theme_switch(model)
     (GotBuildQueueMsg(msg), _) if @build_queue.is_theme_toggle(msg) =>
       start_theme_switch(model)
+    (GotSkillsMsg(msg), _) if @skills.is_theme_toggle(msg) =>
+      start_theme_switch(model)
     (GotHomeMsg(msg), Home(page_model)) => {
       let (cmd, page) = @home.update(msg, page_model, emit=x => {
         emit(GotHomeMsg(x))
@@ -89,6 +93,12 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
     (GotBuildQueueMsg(msg), BuildQueue(page_model)) => {
       let (cmd, page) = @build_queue.update(msg, page_model)
       (cmd, { ..model, page: BuildQueue(page) })
+    }
+    (GotSkillsMsg(msg), Skills(page_model)) => {
+      let (cmd, page) = @skills.update(msg, page_model, emit=x => {
+        emit(GotSkillsMsg(x))
+      })
+      (cmd, { ..model, page: Skills(page) })
     }
     (LinkClicked(request), _) =>
       match request {
@@ -121,6 +131,22 @@ fn route_with_theme(
       (
         batch([cmd, scroll_top]),
         { theme, page: BuildQueue(page), theme_switching: false },
+      )
+    }
+    SkillsList => {
+      let (cmd, page) = @skills.load(emit=x => emit(GotSkillsMsg(x)))
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: Skills(page), theme_switching: false },
+      )
+    }
+    SkillsDetail(entry) => {
+      let (cmd, page) = @skills.load_detail(entry, emit=x => {
+        emit(GotSkillsMsg(x))
+      })
+      (
+        batch([cmd, scroll_top]),
+        { theme, page: Skills(page), theme_switching: false },
       )
     }
     User(name) => {
@@ -179,6 +205,8 @@ fn view(emit : Emit[Msg], model : Model) -> Html {
     User(page_model) => @user.view(page_model, emit=x => emit(GotUserMsg(x)))
     BuildQueue(page_model) =>
       @build_queue.view(page_model, emit=x => emit(GotBuildQueueMsg(x)))
+    Skills(page_model) =>
+      @skills.view(page_model, emit=x => emit(GotSkillsMsg(x)))
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }
@@ -198,10 +226,16 @@ fn view(emit : Emit[Msg], model : Model) -> Html {
 }
 
 ///|
-fn subscriptions(emit : Emit[Msg], _model : Model) -> @sub.Sub {
+fn subscriptions(emit : Emit[Msg], model : Model) -> @sub.Sub {
+  let page_sub = match model.page {
+    Skills(page_model) =>
+      @skills.subscriptions(page_model, emit=x => emit(GotSkillsMsg(x)))
+    _ => @sub.none
+  }
   @sub.batch([
     @sub.on_url_changed(u => emit(UrlChanged(u))),
     @sub.on_url_request(r => emit(LinkClicked(r))),
+    page_sub,
   ])
 }
 

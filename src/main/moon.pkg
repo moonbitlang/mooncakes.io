@@ -11,6 +11,7 @@ import {
   "moonbitlang/mooncakes/page/docs",
   "moonbitlang/mooncakes/page/user",
   "moonbitlang/mooncakes/page/build_queue",
+  "moonbitlang/mooncakes/page/skills",
 }
 
 supported_targets = "js"

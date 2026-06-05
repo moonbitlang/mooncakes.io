@@ -1,0 +1,64 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/page/skills"
+
+import {
+  "moonbit-community/rabbita/cmd",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/sub",
+  "moonbitlang/mooncakes/util",
+}
+
+// Values
+pub fn is_theme_toggle(Msg) -> Bool
+
+pub fn load(emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
+
+pub fn load_detail(String, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
+
+pub fn subscriptions(Model, emit~ : (Msg) -> @cmd.Cmd) -> @sub.Sub
+
+pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
+
+pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+
+// Errors
+
+// Types and methods
+pub(all) enum Model {
+  List(@util.Status[Array[WasmEntry]], filter~ : String, copied_command~ : String, showcase_index~ : Int, showcase_chars~ : Int)
+  Detail(@util.Status[WasmEntry], readme~ : @util.Status[String], command_copied~ : Bool)
+}
+
+pub enum Msg {
+  GotEntries(Result[Array[WasmEntry], Error])
+  GotEntry(Result[WasmEntry, Error])
+  GotSkill(Result[String, Error])
+  FilterChanged(String)
+  CopyRunCommand(String)
+  CopyRunSuccess(String)
+  CopyRunFailed(String, String)
+  CopySkill(String)
+  CopySkillFailed(String)
+  ShowcaseTick
+  ScrollToSkills
+  ToggleTheme
+}
+
+pub(all) struct WasmEntry {
+  module_ : String
+  author : String
+  author_avatar : String
+  version : String
+  package_path : String
+  name : String
+  detail_url : String
+  wasm_url : String
+  checksum_url : String
+  repository : String
+  description : String
+  created_at : String
+}
+
+// Type aliases
+
+// Traits

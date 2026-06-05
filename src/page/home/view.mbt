@@ -56,7 +56,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
         span(class="text-xs text-gray-500", mod.version),
         p(
           class="text-xs flex-1 text-right text-gray-500",
-          mod.created_at.map(get_relative_time).unwrap_or(""),
+          mod.created_at.map(@util.get_relative_time).unwrap_or(""),
         ),
       ],
     ],
@@ -84,7 +84,7 @@ fn module_card(mod : ModuleIndex) -> Html {
       p(class="text-gray-700 py-3 overflow-ellipsis grow text-sm", description)
   }
   let time = match mod.created_at {
-    Some(t) => p(get_relative_time(t))
+    Some(t) => p(@util.get_relative_time(t))
     None => nothing
   }
   div(
@@ -165,7 +165,7 @@ fn pinned() -> Html {
 fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
   let href = "/docs/\{versioned_path(mod)}"
   let badge = if show_time {
-    text(mod.created_at.map(get_relative_time).unwrap_or(""))
+    text(mod.created_at.map(@util.get_relative_time).unwrap_or(""))
   } else {
     text(mod.version)
   }

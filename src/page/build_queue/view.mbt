@@ -88,7 +88,7 @@ fn build_row(item : BuildItem) -> Html {
       span(class="text-xs text-gray-300", "·"),
       span(
         class="text-xs text-gray-400",
-        get_relative_time(item.finished_at.unwrap_or(item.created_at)),
+        @util.get_relative_time(item.finished_at.unwrap_or(item.created_at)),
       ),
     ],
   ]

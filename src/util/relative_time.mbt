@@ -1,5 +1,5 @@
 ///|
-extern "js" fn get_relative_time(date : String) -> String =
+pub extern "js" fn get_relative_time(date : String) -> String =
   #|function getRelativeTime(dateString) {
   #|  const utcDate = new Date(dateString);
   #|  const timezoneOffset = new Date().getTimezoneOffset();

@@ -36,3 +36,37 @@ test "keep markdown thematic breaks without skill metadata" {
     #|
   inspect(strip_skill_frontmatter(content), content~)
 }
+
+///|
+fn sample_entry(package_path : String) -> WasmEntry {
+  {
+    module_: "alice/cowsay",
+    author: "alice",
+    author_avatar: "",
+    version: "0.1.2",
+    package_path,
+    name: if package_path.is_empty() {
+      "alice/cowsay"
+    } else {
+      "alice/cowsay/\{package_path}"
+    },
+    detail_url: "",
+    wasm_url: "",
+    checksum_url: "",
+    repository: "",
+    description: "",
+    created_at: "2026-06-10T00:00:00Z",
+  }
+}
+
+///|
+test "runwasm command includes module version" {
+  inspect(
+    runwasm_command(sample_entry("")),
+    content="moon runwasm alice/cowsay@0.1.2",
+  )
+  inspect(
+    runwasm_command(sample_entry("cmd/cow")),
+    content="moon runwasm alice/cowsay@0.1.2/cmd/cow",
+  )
+}

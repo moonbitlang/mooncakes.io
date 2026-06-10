@@ -6,7 +6,7 @@ fn command_line(
 ) -> Html {
   let path = match entries {
     Success(entries) if entries.length() > 0 =>
-      skill_path(entries[showcase_index % entries.length()])
+      versioned_skill_path(entries[showcase_index % entries.length()])
     _ => ""
   }
   let path_token = command_prefix(
@@ -448,7 +448,7 @@ fn entry_card(
   emit~ : (Msg) -> Cmd,
 ) -> Html {
   let skill_name = entry.name.split("/").last().unwrap().to_owned()
-  let run_cmd = "moon runwasm \{skill_path(entry)}"
+  let run_cmd = runwasm_command(entry)
   let copied = copied_command == run_cmd
   let failed = copied_command == "failed:\{run_cmd}"
   let copy_icon = if copied {
@@ -977,7 +977,7 @@ fn detail_content(
   emit : (Msg) -> Cmd,
 ) -> Html {
   let skill_name = entry.name.split("/").last().unwrap().to_owned()
-  let run_cmd = "moon runwasm \{skill_path(entry)}"
+  let run_cmd = runwasm_command(entry)
   div(
     class="mx-auto w-full max-w-[90rem] px-4 py-8 animate-fade-in sm:px-6 lg:px-8 lg:py-10",
   ) <| [

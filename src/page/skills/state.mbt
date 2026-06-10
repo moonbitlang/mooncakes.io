@@ -52,6 +52,21 @@ fn skill_path(entry : WasmEntry) -> String {
 }
 
 ///|
+fn versioned_skill_path(entry : WasmEntry) -> String {
+  let module_at_version = "\{entry.module_}@\{entry.version}"
+  if entry.package_path.is_empty() {
+    module_at_version
+  } else {
+    "\{module_at_version}/\{entry.package_path}"
+  }
+}
+
+///|
+fn runwasm_command(entry : WasmEntry) -> String {
+  "moon runwasm \{versioned_skill_path(entry)}"
+}
+
+///|
 pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
   (
     @http.get(@config.api_url("/api/v0/skills")).expect_json(r => {
@@ -230,7 +245,9 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
           showcase_chars~
         ) if entries.length() > 0 => {
           let current_index = showcase_index % entries.length()
-          let path_length = skill_path(entries[current_index]).iter().count()
+          let path_length = versioned_skill_path(entries[current_index])
+            .iter()
+            .count()
           let hold_frames = 30
           let delete_step = 4
           let delete_frames = (path_length + delete_step - 1) / delete_step

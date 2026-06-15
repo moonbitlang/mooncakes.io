@@ -1,5 +1,2 @@
-[files]
-extend-exclude = ["test/**"]
-
 [default.extend-words]
 childs = "childs"

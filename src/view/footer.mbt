@@ -14,7 +14,7 @@ pub fn footer() -> Html {
     ),
     a(href=packages_href(host), class~, "Packages"),
     a(href=build_queue_href(host), class~, "Build queue"),
-    a(href=skills_href(host), class~, "Skills"),
+    a(href=skills_href(), class~, "Skills"),
     a(
       href=@config.api_url("/api/v0/modules/statistics?raw=true"),
       class~,
@@ -44,14 +44,8 @@ fn build_queue_href(host : String) -> String {
 }
 
 ///|
-fn skills_href(host : String) -> String {
-  if host == "skills.mooncakes.io" {
-    "/"
-  } else if host == "mooncakes.io" {
-    "https://skills.mooncakes.io/"
-  } else {
-    "/skills"
-  }
+fn skills_href() -> String {
+  "https://skills.mooncakes.io/"
 }
 
 ///|

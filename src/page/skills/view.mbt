@@ -107,11 +107,11 @@ fn runwasm_showcase(
         div(class="min-w-0") <| [
           h2(
             class="text-2xl font-bold tracking-normal text-gray-950",
-            "Run published WASM in one command",
+            "Run a published skill in one command",
           ),
           p(
             class="mt-3 max-w-xl text-sm leading-6 text-gray-600",
-            "Install moon, pick an optimized wasm entry, and run the same sandboxed command across platforms with moon runwasm.",
+            "Install moon, pick an optimized executable entry, and run the same sandboxed command across platforms with moon runwasm.",
           ),
           a(
             href="https://www.moonbitlang.com/download/",
@@ -249,7 +249,7 @@ fn marketplace_hero(
           class="relative mx-auto inline-flex items-center gap-2 rounded-full border border-gray-300 bg-gray-50 px-3 py-1 font-mono text-xs uppercase tracking-wide text-gray-600",
         ) <| [
           span(class="size-2 rounded-full bg-mooncake2", ""),
-          span("MoonBit / Sandboxed WebAssembly commands"),
+          span("MoonBit / Sandboxed local commands"),
         ],
         h1(
           class="relative mx-auto mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-normal text-gray-950 sm:text-5xl lg:text-6xl",
@@ -257,22 +257,22 @@ fn marketplace_hero(
         ),
         p(
           class="relative mx-auto mt-4 max-w-3xl text-base leading-7 text-gray-600 sm:text-lg",
-          "Publish a MoonBit module, let mooncakes.io build and optimize its WebAssembly, then distribute the sandboxed artifact across platforms.",
+          "Push a package and mooncakes.io automatically builds optimized, cross-platform executable binaries that are easy to run in a local sandbox.",
         ),
         div(
           class="relative mt-6 flex flex-wrap items-center justify-center gap-2",
         ) <| [
           span(
             class="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-600 shadow-sm",
-            "\{skill_count(entries)} wasm entries",
+            "\{skill_count(entries)} executable entries",
           ),
           span(
             class="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-600 shadow-sm",
-            "wasm sandbox",
+            "local sandbox",
           ),
           span(
             class="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-600 shadow-sm",
-            "cross-platform artifacts",
+            "cross-platform binaries",
           ),
         ],
         div(
@@ -312,9 +312,19 @@ fn source_context_section(
         "Publish once, distribute safely across platforms",
       ),
       div(class="mt-4 max-w-3xl space-y-3 text-sm leading-6 text-gray-600") <| [
-        p(
-          "Publish a MoonBit module and mooncakes.io helps package optimized WebAssembly for distribution. The wasm sandbox keeps commands isolated, and the same artifact stays portable across platforms.",
-        ),
+        p() <| [
+          @html.text(
+            "Under the hood, mooncakes.io compiles each skill to optimized ",
+          ),
+          a(
+            href="https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Concepts",
+            class="font-medium text-gray-900 underline underline-offset-2 hover:text-[#c7856b]",
+            "WebAssembly (Wasm)",
+          ),
+          @html.text(
+            " binaries, then exposes them as executable commands through moon runwasm. The Wasm sandbox keeps commands isolated while the same artifact stays portable across platforms.",
+          ),
+        ],
         p(
           "Add SKILL.md and repository links so users can inspect what a command does before they reuse it.",
         ),
@@ -323,7 +333,7 @@ fn source_context_section(
         hero_feature_card(
           "01",
           "Fast publishing",
-          "Ship a MoonBit package with SKILL.md so its wasm is discoverable on mooncakes.io.",
+          "Ship a MoonBit package with SKILL.md so its executable entry is discoverable on mooncakes.io.",
           "Publish packages",
           @config.SEARCH,
           action_href="https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
@@ -332,9 +342,9 @@ fn source_context_section(
         ),
         hero_feature_card(
           "02",
-          "Build optimized WASM",
-          "mooncakes.io automatically builds uploaded packages into wasm, then optimizes the wasm with wasm-opt.",
-          "Browse wasm",
+          "Build optimized binaries",
+          "mooncakes.io automatically builds uploaded packages into Wasm binaries, then optimizes them with wasm-opt.",
+          "Browse binaries",
           @config.book_open,
           emit~,
         ),
@@ -352,7 +362,7 @@ fn source_context_section(
       ) <| [
         p(
           class="max-w-2xl text-sm leading-6 text-gray-600",
-          "A published module gives users optimized wasm, SKILL.md context, and a consistent cross-platform artifact.",
+          "A published module gives users optimized executable binaries, SKILL.md context, and a consistent cross-platform artifact.",
         ),
         div(class="flex flex-wrap gap-2") <| [
           span(

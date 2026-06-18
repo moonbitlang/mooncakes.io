@@ -28,7 +28,12 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
 ///|
 pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
   match url.path.split("/").collect() {
-    ["/"] | [""] | [] => Home
+    ["/"] | [""] | [] =>
+      if url.host == "skills.mooncakes.io" {
+        SkillsList
+      } else {
+        Home
+      }
     ["build-queue"] => BuildQueue
     ["user", name] => User(name)
     ["assets", ..] => Assets(url)

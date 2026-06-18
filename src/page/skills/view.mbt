@@ -618,11 +618,15 @@ fn list_content(
 ///|
 fn skills_logo() -> Html {
   a(
-    href="/skills",
+    href=if current_host() == "skills.mooncakes.io" { "/" } else { "/skills" },
     class="border-gray-300 font-title mx-2 font-semibold flex items-center text-nowrap",
     "🥮 skills.mooncakes.io",
   )
 }
+
+///|
+extern "js" fn current_host() -> String =
+  #|() => window.location.host
 
 ///|
 fn list_view(

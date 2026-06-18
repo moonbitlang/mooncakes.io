@@ -1,13 +1,15 @@
 ///|
 fn test_url(path : String, fragment? : String? = None) -> @url.Url {
-  {
-    protocol: Https,
-    host: "mooncakes.io",
-    port: None,
-    path,
-    query: None,
-    fragment,
-  }
+  test_url_with_host("mooncakes.io", path, fragment~)
+}
+
+///|
+fn test_url_with_host(
+  host : String,
+  path : String,
+  fragment? : String? = None,
+) -> @url.Url {
+  { protocol: Https, host, port: None, path, query: None, fragment }
 }
 
 ///|
@@ -16,6 +18,18 @@ test "resolve root" {
     @util.MooncakesioPath::resolve(test_url("")),
     content=(
       #|home:
+    ),
+  )
+}
+
+///|
+test "resolve skills host root" {
+  inspect(
+    @util.MooncakesioPath::resolve(
+      test_url_with_host("skills.mooncakes.io", ""),
+    ),
+    content=(
+      #|skills:
     ),
   )
 }

@@ -3,6 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!--
+      Agent note:
+      This app is a SPA. Documentation content is not available in index.html
+      or static JS bundles. Use the API/assets instead of scraping rendered pages.
+      
+      For a package path `moonbitlang/core/bool`:
+
+      `moonbitlang` is a user name
+      `moonbitlang/core` is a module path
+      `core` is the module relpath used as <mod-relpath> below
+      `bool` is the package relpath used as <pkg-relpath> below
+
+      Useful API endpoints/assets:
+
+      - All modules
+          GET /api/v0/modules
+
+      - User profiles 
+          GET /api/v0/user/<username>
+
+      - Module metadata, including versions info
+          GET /api/v0/manifest/<username>/<mod-relpath>
+
+      - Module index, including packages, types and values list
+          GET /assets/<username>/<mod-relpath>@<version>/module_index.json
+
+      - Package docs, including README and API
+          GET /assets/<username>/<mod-relpath>@<version>/<pkg-relpath>/resources.json
+          GET /assets/<username>/<mod-relpath>@<version>/<pkg-relpath>/package_data.json
+
+      - Download source manually:
+          https://download.mooncakes.io/user/<username>/<mod-relpath>/<version>.zip
+
+      
+      Prefer `moon ide` if the MoonBit toolchain is available.
+      -->
     <title>mooncakes.io</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="/styles.css" />

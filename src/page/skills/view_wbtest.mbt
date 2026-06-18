@@ -70,3 +70,17 @@ test "runwasm command includes module version" {
     content="moon runwasm alice/cowsay@0.1.2/cmd/cow",
   )
 }
+
+///|
+test "download filename falls back to link label" {
+  inspect(
+    download_filename(
+      "/assets/moonbitlang/parser@0.3.4/cmd/moonfmt/moonfmt.wasm", "Download wasm",
+    ),
+    content="moonfmt.wasm",
+  )
+  inspect(
+    download_filename("", "Download checksum"),
+    content="Download checksum",
+  )
+}

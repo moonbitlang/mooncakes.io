@@ -660,15 +660,25 @@ fn list_view(
 
 ///|
 fn action_link(href : String, label : String) -> Html {
-  let filename = href.split("/").last().unwrap_or(label).to_owned()
   a(
     href~,
-    download=filename,
+    download=download_filename(href, label),
+    escape=true,
     class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-mooncake2 hover:text-gray-900",
   ) <| [
     img(class="size-4 shrink-0 ui-icon", src=@config.download, nothing),
     span(label),
   ]
+}
+
+///|
+fn download_filename(href : String, fallback : String) -> String {
+  let filename = href.split("/").last().unwrap_or("")
+  if filename.is_empty() {
+    fallback
+  } else {
+    filename.to_owned()
+  }
 }
 
 ///|

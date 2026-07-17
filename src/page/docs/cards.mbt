@@ -265,7 +265,7 @@ fn document_item(
         versioned_asset_path(loc.path, module_name, module_version)
       }
       a(
-        href="/assets/\{path}/\{loc.file}.html#\{loc.line}",
+        href=@config.asset_url("/assets/\{path}/\{loc.file}.html#\{loc.line}"),
         class="text-xs font-semibold text-yellow-700 hover:text-yellow-900 transition-colors",
         escape=true,
         "source",

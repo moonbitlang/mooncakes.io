@@ -130,6 +130,15 @@ pub fn api_url(path : String) -> String {
 }
 
 ///|
+pub fn asset_url(path : String) -> String {
+  let base = "https://assets.mooncakes.io"
+  match path {
+    [.. "/", .. path] => "\{base}/\{path.to_owned()}"
+    path => "\{base}/\{path}"
+  }
+}
+
+///|
 fn api_url_with_endpoint(endpoint : String, path : String) -> String {
   match path {
     [.. "/api/", .. path] => "\{endpoint}/\{path.to_owned()}"

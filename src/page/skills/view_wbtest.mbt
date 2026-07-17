@@ -75,7 +75,10 @@ test "runwasm command includes module version" {
 test "download filename falls back to link label" {
   inspect(
     download_filename(
-      "/assets/moonbitlang/parser@0.3.4/cmd/moonfmt/moonfmt.wasm", "Download wasm",
+      @config.asset_url(
+        "/assets/moonbitlang/parser@0.3.4/cmd/moonfmt/moonfmt.wasm",
+      ),
+      "Download wasm",
     ),
     content="moonfmt.wasm",
   )

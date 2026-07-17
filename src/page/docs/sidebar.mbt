@@ -252,7 +252,7 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
         @html.li() <| [
           a(
             class="block text-sm font-mono text-blue-600 hover:text-blue-800 hover:bg-gray-50 px-2 py-1 rounded transition-colors",
-            href="/assets/\{package_path}/\{x}.html",
+            href=@config.asset_url("/assets/\{package_path}/\{x}.html"),
             escape=true,
             x,
           ),

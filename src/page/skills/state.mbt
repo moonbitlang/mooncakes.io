@@ -89,7 +89,9 @@ pub fn load_detail(entry : String, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       @http.get(@config.api_url("/api/v0/skills/\{entry}")).expect_json(r => {
         emit(GotEntry(r))
       }),
-      @http.get("/assets/\{entry}/SKILL.md").expect_text(r => emit(GotSkill(r))),
+      @http.get(@config.asset_url("/assets/\{entry}/SKILL.md")).expect_text(r => {
+        emit(GotSkill(r))
+      }),
     ]),
     Detail(Loading, readme=Loading, command_copied=false),
   )

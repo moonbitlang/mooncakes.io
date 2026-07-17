@@ -719,9 +719,11 @@ fn skill_markdown_href(entry : WasmEntry, href : String) -> String {
     href
   } else {
     let base = if entry.package_path.is_empty() {
-      "/assets/\{entry.module_}@\{entry.version}"
+      @config.asset_url("/assets/\{entry.module_}@\{entry.version}")
     } else {
-      "/assets/\{entry.module_}@\{entry.version}/\{entry.package_path}"
+      @config.asset_url(
+        "/assets/\{entry.module_}@\{entry.version}/\{entry.package_path}",
+      )
     }
     "\{base}/\{href}"
   }

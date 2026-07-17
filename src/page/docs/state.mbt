@@ -121,16 +121,18 @@ fn load_docs_assets(
   let asset_path = make_versioned_asset_path(resolved)
   let module_asset_path = "\{resolved.module_path()}@\{resolved.version()}"
   [
-    @http.get("/assets/\{asset_path}/resource.json").expect_json(r => {
-      emit(GotResource(r))
-    }),
-    @http.get("/assets/\{module_asset_path}/module_index.json").expect_json(r => {
-      emit(GotModuleIndex(r))
-    }),
+    @http.get(@config.asset_url("/assets/\{asset_path}/resource.json")).expect_json(r => {
+        emit(GotResource(r))
+      },
+    ),
+    @http.get(
+      @config.asset_url("/assets/\{module_asset_path}/module_index.json"),
+    ).expect_json(r => emit(GotModuleIndex(r))),
     if manifest.has_package {
-      @http.get("/assets/\{asset_path}/package_data.json").expect_json(r => {
-        emit(GotPackageData(r))
-      })
+      @http.get(@config.asset_url("/assets/\{asset_path}/package_data.json")).expect_json(r => {
+          emit(GotPackageData(r))
+        },
+      )
     } else {
       none
     },
@@ -554,12 +556,13 @@ pub fn navigate_package(
         Some(r) => {
           let asset_path = make_versioned_asset_path(r)
           let cmds : Array[Cmd] = [
-            @http.get("/assets/\{asset_path}/resource.json").expect_json(x => {
-              emit(GotResource(x))
-            }),
-            @http.get("/assets/\{asset_path}/package_data.json").expect_json(x => {
-              emit(GotPackageData(x))
-            }),
+            @http.get(@config.asset_url("/assets/\{asset_path}/resource.json")).expect_json(x => {
+                emit(GotResource(x))
+              },
+            ),
+            @http.get(
+              @config.asset_url("/assets/\{asset_path}/package_data.json"),
+            ).expect_json(x => emit(GotPackageData(x))),
           ]
           (
             batch(cmds),

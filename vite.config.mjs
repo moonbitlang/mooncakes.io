@@ -12,7 +12,7 @@ const testAssetsServer = {
   configureServer(server) {
     server.middlewares.use(async (req, res, next) => {
       if (req.url?.startsWith('/assets')) {
-        const target = `https://mooncakes.io${req.url}`
+        const target = `https://assets.mooncakes.io${req.url}`
         try {
           const upstream = await fetch(target, {
             method: req.method || 'GET',

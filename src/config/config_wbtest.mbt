@@ -29,3 +29,15 @@ test "api url supports non-api paths" {
     content="https://api.example.com/base/v0/modules",
   )
 }
+
+///|
+test "asset url joins paths at the public asset origin" {
+  inspect(
+    asset_url("assets/alice/hello@0.1.0/module_index.json"),
+    content="https://assets.mooncakes.io/assets/alice/hello@0.1.0/module_index.json",
+  )
+  inspect(
+    asset_url("/assets/alice/hello@0.1.0/module_index.json"),
+    content="https://assets.mooncakes.io/assets/alice/hello@0.1.0/module_index.json",
+  )
+}

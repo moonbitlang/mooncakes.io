@@ -26,12 +26,15 @@
       - Module metadata, including versions info
           GET /api/v0/manifest/<username>/<mod-relpath>
 
+      - Public package assets root
+          https://assets.mooncakes.io/assets
+
       - Module index, including packages, types and values list
-          GET /assets/<username>/<mod-relpath>@<version>/module_index.json
+          GET <assets-root>/<username>/<mod-relpath>@<version>/module_index.json
 
       - Package docs, including README and API
-          GET /assets/<username>/<mod-relpath>@<version>/<pkg-relpath>/resources.json
-          GET /assets/<username>/<mod-relpath>@<version>/<pkg-relpath>/package_data.json
+          GET <assets-root>/<username>/<mod-relpath>@<version>/<pkg-relpath>/resources.json
+          GET <assets-root>/<username>/<mod-relpath>@<version>/<pkg-relpath>/package_data.json
 
       - Download source manually:
           https://download.mooncakes.io/user/<username>/<mod-relpath>/<version>.zip

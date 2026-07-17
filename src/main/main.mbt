@@ -48,6 +48,15 @@ struct Model {
 }
 
 ///|
+/// Treat every root state transition as changed, matching the legacy cell.
+priv struct ReactiveModel(Model)
+
+///|
+impl Eq for ReactiveModel with fn equal(_, _) {
+  false
+}
+
+///|
 fn toggle_theme(theme : Theme) -> Theme {
   match theme {
     Light => Dark
@@ -242,12 +251,14 @@ fn subscriptions(emit : Emit[Msg], model : Model) -> @sub.Sub {
 ///|
 fn main {
   let model = { theme: Light, page: Redirect, theme_switching: false }
-  let (_, cell) = @rabbita.cell_with_emit(
-    model~,
-    update~,
-    view~,
-    subscriptions~,
+  let app = @rabbita.elmish(
+    model=ReactiveModel(model),
+    update=(emit, msg, model) => {
+      let (cmd, model) = update(emit, msg, model.0)
+      (ReactiveModel(model), cmd)
+    },
+    view=(emit, model) => view(emit, model.0),
+    subscriptions=(emit, model) => subscriptions(emit, model.0),
   )
-  let app = @rabbita.new(cell)
   app.mount("app")
 }

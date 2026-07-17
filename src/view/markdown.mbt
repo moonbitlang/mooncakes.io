@@ -383,7 +383,7 @@ pub fn markdown(
   transform_link? : (String) -> String,
 ) -> @html.Html {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
-  let link_defs = {}
+  let link_defs = Map([])
   doc.defs
   .iter()
   .each(fn(x) {

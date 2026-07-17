@@ -476,7 +476,7 @@ fn decode_index_node(
       let childs = childs
         .map(x => decode_index_node(x, path))
         .map(fn(x) { (x.name, x) })
-        |> @immut/sorted_map.from_array
+        |> @immut/sorted_map.SortedMap
       let pkg = match pkg {
         Null => None
         obj => Some(decode_package_index(obj, path))

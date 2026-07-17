@@ -46,7 +46,7 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
 ) {
   match json {
     Object(dict) => {
-      let result = {}
+      let result = Map([])
       for k, v in dict {
         match v {
           Number(i, ..) => result[k] = i.to_int()

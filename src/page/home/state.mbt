@@ -530,7 +530,7 @@ fn sort_modules_by_name(
     }
   }
   indices.sort_by(fn(a, b) { a.name.compare(b.name) })
-  let all_modules = {}
+  let all_modules = Map([])
   for index in indices {
     let c = to_upper(index.name.get_char(0).unwrap())
     let key = if c >= 'A' && c <= 'Z' { c } else { '#' }

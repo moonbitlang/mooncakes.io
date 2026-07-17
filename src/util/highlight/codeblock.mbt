@@ -250,5 +250,5 @@ fn push_code_to_span(code : String, dst : Array[CodeSpan]) -> Unit {
 pub fn parse_code(code : String) -> List[CodeSpan] {
   let results = []
   push_code_to_span(code, results)
-  @list.from_array(results)
+  List(results)
 }

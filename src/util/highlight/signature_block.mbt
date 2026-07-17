@@ -84,7 +84,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
       // numbers
       (LexStart, ['0'..='9' as c, .. s], acc) =>
-        go(LexNumber(@list.from_array([c])), s, acc)
+        go(LexNumber(List([c])), s, acc)
       // TODO: fix this bad formatting
       (
         LexNumber(nums),
@@ -140,7 +140,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
       // attributes: #attribute or #attribute.name
       (LexStart, ['#', 'a'..='z' as c, .. s], acc) =>
-        go(LexAttr(@list.from_array([c])), s, acc)
+        go(LexAttr(List([c])), s, acc)
       (
         LexAttr(content),
         ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' | '.' as c, .. s],
@@ -153,7 +153,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
       // identifiers
       (LexStart, ['A'..='Z' | 'a'..='z' | '_' as c, .. s], acc) =>
-        go(LexIdent(@list.from_array([c])), s, acc)
+        go(LexIdent(List([c])), s, acc)
       (LexIdent(id), ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s], acc) =>
         go(LexIdent(id.add(c)), s, acc)
       (LexIdent(id), s, acc) => {
@@ -196,7 +196,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
 
       // operators
       (LexStart, [c, .. s], acc) if operators.contains(c) =>
-        go(LexOp(@list.from_array([c])), s, acc)
+        go(LexOp(List([c])), s, acc)
       (LexOp(op), [c, .. s], acc) if operators.contains(c) =>
         go(LexOp(op.add(c)), s, acc)
       (LexOp(op), s, acc) => {

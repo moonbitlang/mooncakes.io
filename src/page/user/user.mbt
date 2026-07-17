@@ -181,7 +181,6 @@ pub fn profile(profile : Status[Profile]) -> Html {
           img(
             class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white shadow-lg",
             src=avatar_url,
-            nothing,
           )
         },
         h1(class="text-3xl font-bold text-gray-800", username),

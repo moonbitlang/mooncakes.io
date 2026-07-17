@@ -201,7 +201,7 @@ fn hero_feature_card(
       div(
         class="flex size-9 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-gray-50",
       ) <| [
-        img(class="size-4 ui-icon", src=icon, nothing),
+        img(class="size-4 ui-icon", src=icon),
       ],
     ],
     @html.h3(
@@ -410,18 +410,13 @@ fn sticky_search(
         div(class="flex items-center gap-2 px-4 py-4 font-mono text-sm") <| [
           span(class="shrink-0 text-emerald-600", "$"),
           span(class="shrink-0 text-gray-500", "find"),
-          img(
-            class="size-4 shrink-0 opacity-70 ui-icon",
-            src=@config.SEARCH,
-            nothing,
-          ),
+          img(class="size-4 shrink-0 opacity-70 ui-icon", src=@config.SEARCH),
           input(
             input_type=Text,
             value=filter,
             placeholder="Filter skills ...",
             class="min-w-0 flex-1 bg-transparent outline-none placeholder:text-gray-400",
             on_input=x => emit(FilterChanged(x)),
-            nothing,
           ),
         ],
       ],
@@ -443,11 +438,7 @@ fn author_avatar(author : String, avatar_url : String) -> Html {
       initial,
     )
   } else {
-    img(
-      class="size-5 shrink-0 rounded-full object-cover",
-      src=avatar_url,
-      nothing,
-    )
+    img(class="size-5 shrink-0 rounded-full object-cover", src=avatar_url)
   }
 }
 
@@ -534,11 +525,7 @@ fn entry_card(
         type_="button",
         on_click=emit(CopyRunCommand(run_cmd)),
       ) <| [
-        img(
-          class="pointer-events-none size-3.5 ui-icon",
-          src=copy_icon,
-          nothing,
-        ),
+        img(class="pointer-events-none size-3.5 ui-icon", src=copy_icon),
       ],
     ],
   ]
@@ -676,7 +663,7 @@ fn action_link(href : String, label : String) -> Html {
     escape=true,
     class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-mooncake2 hover:text-gray-900",
   ) <| [
-    img(class="size-4 shrink-0 ui-icon", src=@config.download, nothing),
+    img(class="size-4 shrink-0 ui-icon", src=@config.download),
     span(label),
   ]
 }
@@ -713,7 +700,7 @@ fn run_command_view(
         class="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 bg-white transition-colors hover:border-gray-400 hover:bg-gray-100 active:bg-gray-200",
         on_click=emit(CopyRunCommand(command)),
       ) <| [
-        img(class="pointer-events-none size-4 ui-icon", src=icon, nothing),
+        img(class="pointer-events-none size-4 ui-icon", src=icon),
       ],
     ],
   ]
@@ -953,11 +940,7 @@ fn copy_skill_button(readme : Status[String], emit : (Msg) -> Cmd) -> Html {
         type_="button",
         on_click=emit(CopySkill(content)),
       ) <| [
-        img(
-          class="pointer-events-none size-3.5 ui-icon",
-          src=@config.clipboard,
-          nothing,
-        ),
+        img(class="pointer-events-none size-3.5 ui-icon", src=@config.clipboard),
       ]
     _ => nothing
   }

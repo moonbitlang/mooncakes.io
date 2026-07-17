@@ -176,12 +176,12 @@ fn sidebar_icon(id : ItemTarget, expanded : Bool) -> Html {
   match id {
     Package(_) | Group(_) =>
       if expanded {
-        img(src=@config.FOLDER_OPEN, class="size-4 shrink-0 ui-icon", nothing)
+        img(src=@config.FOLDER_OPEN, class="size-4 shrink-0 ui-icon")
       } else {
-        img(src=@config.FOLDER_CLOSE, class="size-4 shrink-0 ui-icon", nothing)
+        img(src=@config.FOLDER_CLOSE, class="size-4 shrink-0 ui-icon")
       }
     Symbol(_, kind=KReadme, ..) =>
-      img(src=@config.FILE_ICON, class="size-4 shrink-0 ui-icon", nothing)
+      img(src=@config.FILE_ICON, class="size-4 shrink-0 ui-icon")
     Symbol(_, kind~, ..) => symbol_icon(kind)
   }
 }

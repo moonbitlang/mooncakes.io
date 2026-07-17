@@ -275,7 +275,7 @@ fn document_item(
   let collapse_btn : Html = div(
     class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
     on_click=emit(ToggleDocDetail(id)),
-    img(src=icon, class="size-4 ui-icon", nothing),
+    img(src=icon, class="size-4 ui-icon"),
   )
   let buttons_row : Html = div(class="select-none flex gap-1 items-center") <| [
     source_btn, collapse_btn,
@@ -452,7 +452,7 @@ fn readme(
       class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
       on_click=emit(ToggleDocDetail("readme")),
     ) <| [
-      img(src=icon, class="size-3.5 ui-icon", nothing),
+      img(src=icon, class="size-3.5 ui-icon"),
       span(class="font-medium text-gray-500 text-xs tracking-wide", "README"),
     ],
     body,

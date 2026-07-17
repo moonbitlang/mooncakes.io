@@ -375,7 +375,6 @@ fn banner(
         img(
           class="home-hero-image object-cover object-center",
           src="mooncake-pic-small.png",
-          nothing,
         ),
         div(class="home-stat-bubble-layer") <| [
           stat_bubble(
@@ -487,7 +486,6 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
         placeholder="Search modules ...",
         class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
         on_input=x => emit(FilterChanged(x)),
-        nothing,
       ),
       right=theme_toggle,
     ),

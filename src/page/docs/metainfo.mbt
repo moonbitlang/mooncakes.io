@@ -20,7 +20,7 @@ fn install_view(command : String, copied~ : Bool, emit : (Msg) -> Cmd) -> Html {
     on_click=emit(CopyInstallCommand(command)),
   ) <| [
     span(class="overflow-x-auto text-nowrap", command),
-    img(class="size-4 ui-icon", src=icon, nothing),
+    img(class="size-4 ui-icon", src=icon),
   ]
 }
 
@@ -81,7 +81,7 @@ fn meta_sidebar(
           span(class="break-all", install_cmd),
           div(
             class="absolute right-1 top-0 bottom-0 flex items-center px-1 bg-gray-100 rounded opacity-0 group-hover/install:opacity-100 transition-opacity",
-            img(class="size-4 ui-icon", src=install_icon, nothing),
+            img(class="size-4 ui-icon", src=install_icon),
           ),
         ]
       },
@@ -122,17 +122,17 @@ fn meta_sidebar(
     // Meta
     div(class="border-t pt-3 space-y-2.5 text-[13px]") <| [
       div(class="flex items-center gap-2") <| [
-        img(class="w-4 h-4 ui-icon shrink-0", src=@config.user, nothing),
+        img(class="w-4 h-4 ui-icon shrink-0", src=@config.user),
         a(href="/user/\{model.author}", class="hover:underline", model.author),
       ],
       div(class="flex items-center gap-2") <| [
-        img(class="w-4 h-4 ui-icon shrink-0", src=@config.tag, nothing),
+        img(class="w-4 h-4 ui-icon shrink-0", src=@config.tag),
         text(model.version),
       ],
       match model.license {
         Some(l) =>
           div(class="flex items-center gap-2") <| [
-            img(class="w-4 h-4 ui-icon shrink-0", src=@config.license, nothing),
+            img(class="w-4 h-4 ui-icon shrink-0", src=@config.license),
             text(l),
           ]
         None => nothing
@@ -140,7 +140,7 @@ fn meta_sidebar(
       match model.repository {
         Some(repo) =>
           div(class="flex items-center gap-2 min-w-0") <| [
-            img(class="w-4 h-4 ui-icon shrink-0", src=@config.repo, nothing),
+            img(class="w-4 h-4 ui-icon shrink-0", src=@config.repo),
             a(
               class="hover:underline truncate",
               escape=true,
@@ -153,7 +153,7 @@ fn meta_sidebar(
       },
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div(class="flex items-center gap-2") <| [
-          img(class="w-4 h-4 ui-icon shrink-0", src=@config.download, nothing),
+          img(class="w-4 h-4 ui-icon shrink-0", src=@config.download),
           text("\{format_downloads(model.downloads)} downloads"),
         ]
       } else {

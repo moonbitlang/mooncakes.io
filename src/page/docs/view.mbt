@@ -128,7 +128,7 @@ fn build_log_panel(
   div(class="docs-state-log-card") <| [
     button(class="docs-state-log-toggle", on_click=emit(ToggleBuildLog)) <| [
       p(class="docs-state-log-title", "Build log"),
-      img(src=toggle_icon, class="size-4 ui-icon shrink-0", nothing),
+      img(src=toggle_icon, class="size-4 ui-icon shrink-0"),
     ],
     if build_log_open {
       let show_footer = match build_log {
@@ -258,12 +258,11 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
         placeholder="search...",
         on_input=x => emit(SearchFilterChanged(x)),
         class="outline-none m-0 flex-grow px-4 p-2",
-        nothing,
       ),
       div(
         class="size-12 container hover:bg-gray-200 flex justify-center items-center",
         on_click=emit(ToggleSearchPanel(false)),
-        img(class="ui-icon", src=@config.icon_close, nothing),
+        img(class="ui-icon", src=@config.icon_close),
       ),
     ],
     match search.results {
@@ -472,7 +471,7 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   let fab : Html = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
     on_click=emit(ToggleSidebarFab),
-    img(class="size-5", src=@config.HAMBURGER_BUTTON, nothing),
+    img(class="size-5", src=@config.HAMBURGER_BUTTON),
   )
   div(class="min-h-screen w-full flex-col") <| [
     search_panel,

@@ -42,7 +42,7 @@ pub fn collapse(
   let button = div(
     class="absolute \{button_style} p-1 hover:bg-gray-200 active:bg-gray-300",
     on_click=toggle,
-    img(src=icon, class="size-4 ui-icon \{caret_style}", nothing),
+    img(src=icon, class="size-4 ui-icon \{caret_style}"),
   )
   div() <| [
     div(class="relative flex items-center") <| [

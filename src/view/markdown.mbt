@@ -51,7 +51,7 @@ fn image_render(
         Some(f) => f(src)
         None => src
       }
-      @html.img(class="my-2", src~, alt~, nothing)
+      @html.img(class="my-2", src~, alt~)
     }
     { v: { reference: Inline({ v: { dest: None, .. }, .. }), .. }, .. } =>
       @html.text("Loading image failed: invalid url")
@@ -196,7 +196,6 @@ fn block2html(
                   read_only=true,
                   checked=char == 'x' || char == 'X',
                   class="shrink-0 pointer-events-none",
-                  nothing,
                 ),
                 span(
                   block2html(block, small_heading~, link_defs~, transform_link?),
@@ -232,7 +231,7 @@ fn block2html(
         child
       }
     }
-    ThematicBreak(_) => hr(class="my-6 border-2", nothing)
+    ThematicBreak(_) => hr(class="my-6 border-2")
     ExtTable({ v: { rows, .. }, .. }) => {
       let colgroup = []
       let body = rows
@@ -280,13 +279,12 @@ fn block2html(
                 match x {
                   { v: TableSep((align, _)), .. } =>
                     match align {
-                      Some(Left) =>
-                        colgroup.push(@html.col(class="text-left", nothing))
+                      Some(Left) => colgroup.push(@html.col(class="text-left"))
                       Some(Center) =>
-                        colgroup.push(@html.col(class="text-center", nothing))
+                        colgroup.push(@html.col(class="text-center"))
                       Some(Right) =>
-                        colgroup.push(@html.col(class="text-right", nothing))
-                      None => colgroup.push(@html.col(class="", nothing))
+                        colgroup.push(@html.col(class="text-right"))
+                      None => colgroup.push(@html.col(class=""))
                     }
                 }
               })

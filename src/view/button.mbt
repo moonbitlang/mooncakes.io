@@ -32,7 +32,7 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
     on_click?,
   ) <| [
     div(class="self-center min-w-4 flex gap-2") <| [
-      img(class="w-4 ui-icon", src=icon, nothing),
+      img(class="w-4 ui-icon", src=icon),
       ..text,
     ],
   ]
@@ -44,16 +44,8 @@ pub fn theme_toggle(on_click? : Cmd) -> Html {
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
     on_click?,
   ) <| [
-    img(
-      class="theme-toggle-icon theme-toggle-icon-moon",
-      src=@config.MOON_ICON,
-      nothing,
-    ),
-    img(
-      class="theme-toggle-icon theme-toggle-icon-sun",
-      src=@config.SUN_ICON,
-      nothing,
-    ),
+    img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.MOON_ICON),
+    img(class="theme-toggle-icon theme-toggle-icon-sun", src=@config.SUN_ICON),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-light",
       "Enable night mode",

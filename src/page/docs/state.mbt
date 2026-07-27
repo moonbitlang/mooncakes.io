@@ -288,7 +288,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       )
     GotResource(result) =>
       (
-        none,
+        @nav.scroll_to(model.fragment),
         match result {
           Ok(resource) =>
             {

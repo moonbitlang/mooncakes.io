@@ -436,7 +436,7 @@ fn readme(
   let (body, icon) = if is_collapsed {
     (nothing, @config.SECTION_CLOSE)
   } else if has_content {
-    let content = @view.markdown(content.unwrap())
+    let content = @view.markdown(content.unwrap(), heading_anchors=true)
     (div(class="mt-4 mb-6", content), @config.SECTION_OPEN)
   } else {
     (

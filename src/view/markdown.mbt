@@ -109,10 +109,43 @@ fn is_moonbit(lang : String) -> Bool {
 }
 
 ///|
+fn unique_heading_id(
+  inline : @cmark.Inline,
+  used_heading_ids : Map[String, Unit],
+) -> String {
+  let generated = inline.id()
+  let base = if generated.is_empty() { "section" } else { generated }
+  let mut id = base
+  let mut suffix = 1
+  while used_heading_ids.contains(id) {
+    id = "\{base}-\{suffix}"
+    suffix += 1
+  }
+  used_heading_ids.set(id, ())
+  id
+}
+
+///|
+fn heading_content(
+  id : String,
+  inline : Array[@html.Html],
+) -> Array[@html.Html] {
+  let anchor = a(
+    href="#\{id}",
+    class="absolute -left-5 text-gray-300 hover:text-gray-500 opacity-0 group-hover/markdown-heading:opacity-100 focus:opacity-100 transition-opacity no-underline",
+    title="Link to this section",
+    "#",
+  )
+  [anchor, ..inline]
+}
+
+///|
 fn block2html(
   x : @cmark.Block,
   small_heading~ : Bool,
+  heading_anchors~ : Bool,
   link_defs~ : Map[String, String],
+  used_heading_ids~ : Map[String, Unit],
   transform_link? : (String) -> String,
   paragraph_margin? : Bool = false,
 ) -> @html.Html {
@@ -124,7 +157,9 @@ fn block2html(
         block2html(
           block,
           small_heading~,
+          heading_anchors~,
           link_defs~,
+          used_heading_ids~,
           transform_link?,
           paragraph_margin=true,
         ),
@@ -136,7 +171,9 @@ fn block2html(
           block2html(
             x,
             small_heading~,
+            heading_anchors~,
             link_defs~,
+            used_heading_ids~,
             transform_link?,
             paragraph_margin~,
           )
@@ -153,36 +190,53 @@ fn block2html(
       }
       pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", code)
     }
-    Heading({ v: { level, inline, .. }, .. }) => {
-      let inline = inline2html(inline, link_defs~, transform_link?)
+    Heading({ v: { level, inline, .. }, .. }) =>
       if small_heading {
+        let inline = inline2html(inline, link_defs~, transform_link?)
         match level {
           1 => h3(class="text-gray-900 font-bold mt-1 text-sm", inline)
           2 | 3 => h4(class="text-gray-900 font-semibold text-sm", inline)
           _ => div(class="text-gray-900", inline)
         }
       } else {
+        let id = if heading_anchors {
+          Some(unique_heading_id(inline, used_heading_ids))
+        } else {
+          None
+        }
+        let inline = if id is Some(id) {
+          heading_content(id, inline2html(inline, link_defs~, transform_link?))
+        } else {
+          inline2html(inline, link_defs~, transform_link?)
+        }
+        let anchor_class = if heading_anchors {
+          " relative scroll-mt-header group/markdown-heading"
+        } else {
+          ""
+        }
         match level {
           1 =>
             h1(
-              class="text-gray-800 font-semibold mb-4 pb-2 text-2xl md:text-4xl",
+              id?,
+              class="text-gray-800 font-semibold mb-4 pb-2 text-2xl md:text-4xl\{anchor_class}",
               inline,
             )
           2 =>
             h2(
-              class="text-gray-800 font-semibold mt-6 mb-4 pb-2 border-b text-xl md:text-2xl",
+              id?,
+              class="text-gray-800 font-semibold mt-6 mb-4 pb-2 border-b text-xl md:text-2xl\{anchor_class}",
               inline,
             )
           3 =>
             h3(
-              class="text-gray-800 font-semibold text-lg md:text-xl mt-6 mb-4",
+              id?,
+              class="text-gray-800 font-semibold text-lg md:text-xl mt-6 mb-4\{anchor_class}",
               inline,
             )
-          4 => h4(class="text-gray-800", inline)
-          _ => h5(class="text-gray-800", inline)
+          4 => h4(id?, class="text-gray-800\{anchor_class}", inline)
+          _ => h5(id?, class="text-gray-800\{anchor_class}", inline)
         }
       }
-    }
     List({ v: { ty: ordered, tight, items }, .. }) => {
       let has_task = items.iter().any(fn(x) { x.v.ext_task_marker is Some(_) })
       let items = items
@@ -198,13 +252,27 @@ fn block2html(
                   class="shrink-0 pointer-events-none",
                 ),
                 span(
-                  block2html(block, small_heading~, link_defs~, transform_link?),
+                  block2html(
+                    block,
+                    small_heading~,
+                    heading_anchors~,
+                    link_defs~,
+                    used_heading_ids~,
+                    transform_link?,
+                  ),
                 ),
               ],
             ]
           } else {
             @html.li(
-              block2html(block, small_heading~, link_defs~, transform_link?),
+              block2html(
+                block,
+                small_heading~,
+                heading_anchors~,
+                link_defs~,
+                used_heading_ids~,
+                transform_link?,
+              ),
             )
           }
         })
@@ -380,6 +448,7 @@ fn unwrap_inline_link(
 pub fn markdown(
   markdown : String,
   small_heading? : Bool = false,
+  heading_anchors? : Bool = false,
   transform_link? : (String) -> String,
 ) -> @html.Html {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
@@ -391,6 +460,7 @@ pub fn markdown(
       link_defs.set(key, dest)
     }
   })
+  let used_heading_ids : Map[String, Unit] = Map([])
   let folder : @cmark.Folder[Array[@html.Html]] = {
     inline_ext_default: fn(_, acc, _) { acc },
     block_ext_default: fn(_, acc, _) { acc },
@@ -405,6 +475,8 @@ pub fn markdown(
             block,
             link_defs~,
             small_heading~,
+            heading_anchors~,
+            used_heading_ids~,
             transform_link?,
             paragraph_margin=true,
           ),

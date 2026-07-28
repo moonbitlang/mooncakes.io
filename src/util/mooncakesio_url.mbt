@@ -16,7 +16,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
     Home => logger.write_string("home:")
     User(name) => logger.write_string("user:\{name.to_owned()}")
     Docs(p, fragment~) =>
-      logger.write_string("docs: \{p.0}, fragment: \{to_repr(fragment)}")
+      logger.write_string("docs: \{p.0}, fragment: \{Repr(fragment)}")
     SkillsList => logger.write_string("skills:")
     SkillsDetail(entry) => logger.write_string("skills:\{entry}")
     BuildQueue => logger.write_string("build-queue")

@@ -39,9 +39,6 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
 }
 
 ///|
-/// Theme toggle shows the *current preference* (status), not the next action:
-/// System → computer, Light → sun, Dark → moon. Click cycles
-/// System → Light → Dark → System.
 pub fn theme_toggle(on_click? : Cmd) -> Html {
   @html.button(
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",

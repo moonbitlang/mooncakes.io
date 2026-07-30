@@ -46,9 +46,9 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="/styles.css" />
     <!--
-      Theme FOUC guard. Protocol must match src/util/theme.mbt + theme_storage.mbt:
+      Theme FOUC guard. Keep in sync with load/save in src/main/main.mbt:
       localStorage key "mooncakes-theme", values "system" | "light" | "dark",
-      missing/invalid => system. Preference drives theme-pref-*; OS resolves colors.
+      missing/invalid => system.
     -->
     <script>
       (function () {

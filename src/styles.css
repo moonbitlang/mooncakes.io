@@ -100,7 +100,6 @@
   animation: none !important;
 }
 
-/* Icon/label follow *preference* (theme-pref-*), not resolved appearance. */
 .theme-toggle-icon {
   width: 1rem;
   height: 1rem;

@@ -12,6 +12,8 @@ type Msg
 
 type Page
 
+type Theme
+
 // Type aliases
 
 // Traits

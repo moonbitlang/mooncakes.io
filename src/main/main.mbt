@@ -92,7 +92,10 @@ extern "js" fn system_prefers_dark() -> Bool =
 
 ///|
 /// Keep class / color-scheme / backgroundColor in sync with the FOUC script.
-extern "js" fn apply_document_theme(resolved_class : String, pref_class : String) -> Unit =
+extern "js" fn apply_document_theme(
+  resolved_class : String,
+  pref_class : String,
+) -> Unit =
   #| (resolvedClass, prefClass) => {
   #|   const root = document.documentElement;
   #|   const dark = resolvedClass === 'theme-dark';
@@ -103,7 +106,9 @@ extern "js" fn apply_document_theme(resolved_class : String, pref_class : String
   #| }
 
 ///|
-extern "js" fn watch_system_color_scheme(on_change : (Bool) -> Unit) -> (() -> Unit) =
+extern "js" fn watch_system_color_scheme(
+  on_change : (Bool) -> Unit,
+) -> () -> Unit =
   #| (onChange) => {
   #|   try {
   #|     const mq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -244,7 +249,7 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
     (GotSkillsMsg(msg), _) if @skills.is_theme_toggle(msg) =>
       start_theme_switch(model)
     (SystemSchemeChanged(system_dark), _) => {
-      let model = { ..model, system_dark }
+      let model = { ..model, system_dark, }
       apply_theme(model.theme, system_dark)
       (none, model)
     }
@@ -305,12 +310,7 @@ fn route_with_theme(
       let (cmd, page) = @build_queue.load(emit=x => emit(GotBuildQueueMsg(x)))
       (
         batch([cmd, scroll_top]),
-        {
-          theme,
-          system_dark,
-          page: BuildQueue(page),
-          theme_switching: false,
-        },
+        { theme, system_dark, page: BuildQueue(page), theme_switching: false },
       )
     }
     SkillsList => {

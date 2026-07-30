@@ -290,27 +290,34 @@ fn route_with_theme(
   model : Model,
   emit : Emit[Msg],
 ) -> (Cmd, Model) {
+  let theme = model.theme
+  let system_dark = model.system_dark
   let scroll_top = @nav.scroll_to_top()
   match @util.MooncakesioPath::resolve(url) {
     Home => {
       let (cmd, page) = @home.load(emit=x => emit(GotHomeMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { ..model, page: Home(page), theme_switching: false },
+        { theme, system_dark, page: Home(page), theme_switching: false },
       )
     }
     BuildQueue => {
       let (cmd, page) = @build_queue.load(emit=x => emit(GotBuildQueueMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { ..model, page: BuildQueue(page), theme_switching: false },
+        {
+          theme,
+          system_dark,
+          page: BuildQueue(page),
+          theme_switching: false,
+        },
       )
     }
     SkillsList => {
       let (cmd, page) = @skills.load(emit=x => emit(GotSkillsMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { ..model, page: Skills(page), theme_switching: false },
+        { theme, system_dark, page: Skills(page), theme_switching: false },
       )
     }
     SkillsDetail(entry) => {
@@ -319,7 +326,7 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { ..model, page: Skills(page), theme_switching: false },
+        { theme, system_dark, page: Skills(page), theme_switching: false },
       )
     }
     User(name) => {
@@ -328,13 +335,13 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { ..model, page: User(page), theme_switching: false },
+        { theme, system_dark, page: User(page), theme_switching: false },
       )
     }
     Assets(url) =>
       (
         @nav.load(url.to_string()),
-        { ..model, page: Redirect, theme_switching: false },
+        { theme, system_dark, page: Redirect, theme_switching: false },
       )
     Docs(mooncakes_path, fragment~) => {
       // If already on this docs page and path unchanged, just scroll
@@ -362,11 +369,14 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { ..model, page: Docs(page), theme_switching: false },
+        { theme, system_dark, page: Docs(page), theme_switching: false },
       )
     }
     NotFound(_) =>
-      (scroll_top, { ..model, page: NotFound, theme_switching: false })
+      (
+        scroll_top,
+        { theme, system_dark, page: NotFound, theme_switching: false },
+      )
   }
 }
 

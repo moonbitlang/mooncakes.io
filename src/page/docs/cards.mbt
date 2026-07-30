@@ -422,8 +422,42 @@ fn misc_doc(
 }
 
 ///|
+fn readme_href(
+  href : String,
+  module_name : String,
+  module_version : String,
+  package_path : String,
+) -> String {
+  let lower = href.to_lower()
+  if module_name.is_empty() ||
+    module_version.is_empty() ||
+    package_path.is_empty() ||
+    href.has_prefix("#") ||
+    href.has_prefix("/") ||
+    href.has_prefix("//") ||
+    lower.has_prefix("http://") ||
+    lower.has_prefix("https://") ||
+    lower.has_prefix("mailto:") ||
+    lower.has_prefix("tel:") {
+    href
+  } else {
+    let source_path = versioned_asset_path(
+      package_path, module_name, module_version,
+    )
+    let base = @config.asset_url("/source/\{source_path}")
+    let relative_href = match href {
+      [.. "./", .. rest] => rest.to_owned()
+      _ => href
+    }
+    "\{base}/\{relative_href}"
+  }
+}
+
+///|
 fn readme(
   content : String?,
+  module_name~ : String,
+  module_version~ : String,
   package_path~ : String,
   folded~ : FoldedState,
   emit : (Msg) -> Cmd,
@@ -436,7 +470,9 @@ fn readme(
   let (body, icon) = if is_collapsed {
     (nothing, @config.SECTION_CLOSE)
   } else if has_content {
-    let content = @view.markdown(content.unwrap(), heading_anchors=true)
+    let content = @view.markdown(content.unwrap(), heading_anchors=true, transform_link=href => {
+      readme_href(href, module_name, module_version, package_path)
+    })
     (div(class="mt-4 mb-6", content), @config.SECTION_OPEN)
   } else {
     (
@@ -471,7 +507,14 @@ fn document(
   package_path? : String = "",
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let readme = readme(readme_content, package_path~, folded~, emit)
+  let readme = readme(
+    readme_content,
+    module_name~,
+    module_version~,
+    package_path~,
+    folded~,
+    emit,
+  )
   let doc_list = match package_data {
     Some(Success({ traits, types, errors, typealiases, values, misc, name: _ })) => {
       let count = traits.length() +

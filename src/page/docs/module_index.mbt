@@ -57,7 +57,7 @@ test "dummy test to suppress unused trait implementation warning" {
     }),
     childs: @immut/sorted_map.new(),
   }
-  ignore(repr(moduleIndex))
+  ignore(Repr(moduleIndex))
 }
 
 ///|
@@ -264,7 +264,7 @@ impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
       }
     }
     json =>
-      raise JsonDecodeError((path, "invalid json for Manifest: \{repr(json)}"))
+      raise JsonDecodeError((path, "invalid json for Manifest: \{Repr(json)}"))
   }
 }
 
@@ -318,7 +318,7 @@ fn decode_stype(
     }
     { "kind": "param", "name": String(name), .. } => Param(name~)
     { "name": _, "path": _, .. } => TypePath(decode_type_path(json, path))
-    _ => raise JsonDecodeError((path, "invalid json in stype: \{repr(json)}"))
+    _ => raise JsonDecodeError((path, "invalid json in stype: \{Repr(json)}"))
   }
 }
 

@@ -416,7 +416,7 @@ impl @json.FromJson for PackageCount with fn from_json(json : Json, path) {
         total_packages: total_packages.to_int(),
         total_downloads: total_downloads.to_int(),
       }
-    _ => raise JsonDecodeError((path, "failed to parse json: \{repr(json)}"))
+    _ => raise JsonDecodeError((path, "failed to parse json: \{Repr(json)}"))
   }
 }
 
@@ -471,7 +471,7 @@ fn decode_module_index(
     }
     _ =>
       raise JsonDecodeError(
-        (json_path, "unexpected item in json: \{repr(item)}"),
+        (json_path, "unexpected item in json: \{Repr(item)}"),
       )
   }
 }

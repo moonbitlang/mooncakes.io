@@ -26,7 +26,7 @@ impl @json.FromJson for Profile with fn from_json(json : Json, path) {
         match x {
           { "name": String(name), "version": String(version), .. } =>
             decoded_modules.push((name, version))
-          _ => raise JsonDecodeError((path, "failed to decode \{repr(x)}"))
+          _ => raise JsonDecodeError((path, "failed to decode \{Repr(x)}"))
         }
       }
       let avatar_url = match avatar_url {
@@ -35,7 +35,7 @@ impl @json.FromJson for Profile with fn from_json(json : Json, path) {
       }
       { username, avatar_url, modules: decoded_modules }
     }
-    _ => raise JsonDecodeError((path, "failed to decode json \{repr(json)}"))
+    _ => raise JsonDecodeError((path, "failed to decode json \{Repr(json)}"))
   }
 }
 
@@ -50,12 +50,12 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
       for k, v in dict {
         match v {
           Number(i, ..) => result[k] = i.to_int()
-          _ => raise JsonDecodeError((path, "failed to decode \{repr(v)}"))
+          _ => raise JsonDecodeError((path, "failed to decode \{Repr(v)}"))
         }
       }
       { data: result }
     }
-    _ => raise JsonDecodeError((path, "failed to decode \{repr(json)}"))
+    _ => raise JsonDecodeError((path, "failed to decode \{Repr(json)}"))
   }
 }
 

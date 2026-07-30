@@ -72,6 +72,8 @@ pub let tag : String
 
 pub let terminal : String
 
+pub let updated : String
+
 pub let user : String
 
 // Errors

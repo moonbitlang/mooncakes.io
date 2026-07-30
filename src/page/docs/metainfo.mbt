@@ -151,6 +151,14 @@ fn meta_sidebar(
           ]
         None => nothing
       },
+      if model.updated_at is Some(updated_at) {
+        div(class="flex items-center gap-2") <| [
+          img(class="w-4 h-4 ui-icon shrink-0", src=@config.updated),
+          text("Updated \{@util.get_relative_time(updated_at)}"),
+        ]
+      } else {
+        nothing
+      },
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div(class="flex items-center gap-2") <| [
           img(class="w-4 h-4 ui-icon shrink-0", src=@config.download),
@@ -268,6 +276,14 @@ fn meta_info(
             ],
           ]
         None => nothing
+      },
+      if model.updated_at is Some(updated_at) {
+        div() <| [
+          span(class="text-gray-400 text-xs", "Last updated"),
+          div(@util.get_relative_time(updated_at)),
+        ]
+      } else {
+        nothing
       },
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div() <| [

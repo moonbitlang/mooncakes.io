@@ -77,6 +77,9 @@ pub let terminal = "/terminal.svg"
 pub let download = "/download.svg"
 
 ///|
+pub let updated = "/updated.svg"
+
+///|
 pub let deps = "/deps.svg"
 
 ///|

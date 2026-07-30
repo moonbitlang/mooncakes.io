@@ -29,6 +29,7 @@ priv struct MetaInfo {
   keywords : Array[String]
   description : String?
   repository : String?
+  updated_at : String?
   deps : Array[(String, String)]
   build_status : BuildStatus?
   downloads : Int
@@ -158,6 +159,7 @@ fn build_meta_info(
   repository : String?,
   license : String?,
   description : String?,
+  updated_at : String?,
   keywords : Array[String],
   deps : Array[(String, String)],
   build_status : BuildStatus?,
@@ -173,6 +175,7 @@ fn build_meta_info(
     version,
     license,
     repository: repository.map(normalize_repo_url),
+    updated_at,
     keywords,
     deps,
     build_status,
@@ -194,6 +197,7 @@ fn decode_module_meta(
         "repository"? : repository,
         "license"? : license,
         "description"? : description,
+        "created_at"? : created_at,
         "keywords"? : keywords,
         "deps"? : deps,
         "build_status"? : metadata_build_status,
@@ -223,6 +227,7 @@ fn decode_module_meta(
         decode_optional_string(repository, path),
         decode_optional_string(license, path),
         decode_optional_string(description, path),
+        decode_optional_string(created_at, path),
         decode_keywords(keywords, path),
         decode_deps(deps, path),
         build_status,

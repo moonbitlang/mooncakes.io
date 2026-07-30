@@ -79,7 +79,7 @@ impl @json.FromJson for BuildData with fn from_json(json : Json, path) {
               created_at,
               finished_at: None,
             })
-          _ => raise JsonDecodeError((path, "invalid queued item: \{Repr(x)}"))
+          _ => raise JsonDecodeError((path, "invalid queued item: \{repr(x)}"))
         }
       }
       let recent_completed_items = []
@@ -104,7 +104,7 @@ impl @json.FromJson for BuildData with fn from_json(json : Json, path) {
               finished_at,
             })
           }
-          _ => raise JsonDecodeError((path, "invalid build item: \{Repr(x)}"))
+          _ => raise JsonDecodeError((path, "invalid build item: \{repr(x)}"))
         }
       }
       { queued: queued_items, recent_completed: recent_completed_items }

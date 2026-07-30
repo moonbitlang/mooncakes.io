@@ -374,6 +374,6 @@ impl @json.FromJson for WasmEntry with fn from_json(json : Json, path) {
         created_at,
       }
     }
-    _ => raise JsonDecodeError((path, "invalid wasm entry: \{Repr(json)}"))
+    _ => raise JsonDecodeError((path, "invalid wasm entry: \{repr(json)}"))
   }
 }

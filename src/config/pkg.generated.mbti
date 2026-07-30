@@ -2,6 +2,8 @@
 package "moonbitlang/mooncakes/config"
 
 // Values
+pub const COMPUTER_ICON : String = "/computer.svg"
+
 pub const EXPANSION : String = "/expansion.svg"
 
 pub const FILE_ICON : String = "/file.svg"

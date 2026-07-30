@@ -39,20 +39,31 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
 }
 
 ///|
+/// Theme toggle shows the *current preference* (status), not the next action:
+/// System → computer, Light → sun, Dark → moon. Click cycles
+/// System → Light → Dark → System.
 pub fn theme_toggle(on_click? : Cmd) -> Html {
   @html.button(
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
     on_click?,
   ) <| [
-    img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.MOON_ICON),
+    img(
+      class="theme-toggle-icon theme-toggle-icon-computer",
+      src=@config.COMPUTER_ICON,
+    ),
     img(class="theme-toggle-icon theme-toggle-icon-sun", src=@config.SUN_ICON),
+    img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.MOON_ICON),
+    span(
+      class="sr-only theme-toggle-label theme-toggle-label-system",
+      "Using system theme. Switch to light mode.",
+    ),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-light",
-      "Enable night mode",
+      "Using light mode. Switch to dark mode.",
     ),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-dark",
-      "Enable day mode",
+      "Using dark mode. Switch to system theme.",
     ),
   ]
 }

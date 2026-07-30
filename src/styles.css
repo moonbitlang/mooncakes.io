@@ -100,32 +100,40 @@
   animation: none !important;
 }
 
+/* Icon/label follow *preference* (theme-pref-*), not resolved appearance. */
 .theme-toggle-icon {
   width: 1rem;
   height: 1rem;
-}
-
-.theme-toggle-icon-sun {
   display: none;
 }
 
+.theme-toggle-label-system,
+.theme-toggle-label-light,
 .theme-toggle-label-dark {
   display: none;
 }
 
-.theme-dark .theme-toggle-icon-moon {
-  display: none;
-}
-
-.theme-dark .theme-toggle-icon-sun {
+.theme-pref-system .theme-toggle-icon-computer {
   display: inline-block;
 }
 
-.theme-dark .theme-toggle-label-light {
-  display: none;
+.theme-pref-light .theme-toggle-icon-sun {
+  display: inline-block;
 }
 
-.theme-dark .theme-toggle-label-dark {
+.theme-pref-dark .theme-toggle-icon-moon {
+  display: inline-block;
+}
+
+.theme-pref-system .theme-toggle-label-system {
+  display: inline;
+}
+
+.theme-pref-light .theme-toggle-label-light {
+  display: inline;
+}
+
+.theme-pref-dark .theme-toggle-label-dark {
   display: inline;
 }
 

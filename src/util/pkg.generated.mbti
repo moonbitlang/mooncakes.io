@@ -7,7 +7,19 @@ import {
 }
 
 // Values
+pub const THEME_STORAGE_KEY : String = "mooncakes-theme"
+
 pub fn get_relative_time(String) -> String
+
+pub fn load_theme_preference() -> ThemePreference
+
+pub fn read_system_prefers_dark() -> Bool
+
+pub fn save_theme_preference(ThemePreference) -> Unit
+
+pub fn sync_document_theme(ThemePreference, Bool) -> Unit
+
+pub fn watch_system_color_scheme((Bool) -> Unit) -> () -> Unit
 
 // Errors
 
@@ -38,11 +50,28 @@ pub enum MooncakesioPath {
 pub fn MooncakesioPath::resolve(@url.Url) -> Self
 pub impl Show for MooncakesioPath
 
+pub enum ResolvedTheme {
+  Light
+  Dark
+} derive(Eq, @debug.Debug)
+pub fn ResolvedTheme::class_name(Self) -> String
+
 pub(all) enum Status[T] {
   Loading
   Failed
   Success(T)
 } derive(Eq, @debug.Debug)
+
+pub enum ThemePreference {
+  System
+  Light
+  Dark
+} derive(Eq, @debug.Debug)
+pub fn ThemePreference::next(Self) -> Self
+pub fn ThemePreference::parse(String) -> Self
+pub fn ThemePreference::pref_class(Self) -> String
+pub fn ThemePreference::resolve(Self, Bool) -> ResolvedTheme
+pub fn ThemePreference::to_storage(Self) -> String
 
 type UnsolvedMooncakePath derive(@debug.Debug)
 pub fn UnsolvedMooncakePath::new(String) -> Self

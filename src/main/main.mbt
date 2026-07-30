@@ -21,12 +21,7 @@ enum Msg {
   GotSkillsMsg(@skills.Msg)
   LinkClicked(@url.UrlRequest)
   UrlChanged(@url.Url)
-}
-
-///|
-enum Theme {
-  Light
-  Dark
+  SystemSchemeChanged(Bool)
 }
 
 ///|
@@ -42,7 +37,8 @@ enum Page {
 
 ///|
 struct Model {
-  theme : Theme
+  theme : @util.ThemePreference
+  system_dark : Bool
   page : Page
   theme_switching : Bool
 }
@@ -57,17 +53,56 @@ impl Eq for ReactiveModel with fn equal(_, _) {
 }
 
 ///|
-fn toggle_theme(theme : Theme) -> Theme {
-  match theme {
-    Light => Dark
-    Dark => Light
+priv suberror ThemeSubscription {
+  SystemScheme(@cmd.Emit[Bool])
+}
+
+///|
+fn theme_sub_loader(
+  payload : Error,
+  scheduler : &@cmd.Scheduler,
+) -> @sub.RunningSub? {
+  match payload {
+    SystemScheme(emit) => {
+      let mut tagger = emit
+      let unwatch = @util.watch_system_color_scheme(is_dark => {
+        scheduler.add(tagger(is_dark))
+      })
+      Some({
+        unload: fn(_) { unwatch() },
+        update_tagger: fn(next) {
+          guard next is SystemScheme(new_emit) else { return }
+          tagger = new_emit
+        },
+      })
+    }
+    _ => None
   }
 }
 
 ///|
+fn on_system_scheme_changed(emit : @cmd.Emit[Bool]) -> @sub.Sub {
+  @sub.custom_sub(
+    "on_system_scheme_changed",
+    Local,
+    SystemScheme(emit),
+    @sub.SubLoader(theme_sub_loader),
+  )
+}
+
+///|
+fn apply_theme(model : Model) -> Unit {
+  @util.sync_document_theme(model.theme, model.system_dark)
+}
+
+///|
 fn start_theme_switch(model : Model) -> (Cmd, Model) {
-  let theme = toggle_theme(model.theme)
-  (none, { ..model, theme, theme_switching: false })
+  let theme = model.theme.next()
+  @util.save_theme_preference(theme)
+  let system_dark = @util.read_system_prefers_dark()
+  let model = { ..model, theme, system_dark, theme_switching: false }
+  apply_theme(model)
+  (none, model)
 }
 
 ///|
@@ -83,6 +118,14 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
       start_theme_switch(model)
     (GotSkillsMsg(msg), _) if @skills.is_theme_toggle(msg) =>
       start_theme_switch(model)
+    (SystemSchemeChanged(system_dark), _) => {
+      let model = { ..model, system_dark }
+      // Only System preference paints from OS; still keep system_dark fresh.
+      if model.theme is System {
+        apply_theme(model)
+      }
+      (none, model)
+    }
     (GotHomeMsg(msg), Home(page_model)) => {
       let (cmd, page) = @home.update(msg, page_model, emit=x => {
         emit(GotHomeMsg(x))
@@ -126,27 +169,33 @@ fn route_with_theme(
   emit : Emit[Msg],
 ) -> (Cmd, Model) {
   let theme = model.theme
+  let system_dark = model.system_dark
   let scroll_top = @nav.scroll_to_top()
   match @util.MooncakesioPath::resolve(url) {
     Home => {
       let (cmd, page) = @home.load(emit=x => emit(GotHomeMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { theme, page: Home(page), theme_switching: false },
+        { theme, system_dark, page: Home(page), theme_switching: false },
       )
     }
     BuildQueue => {
       let (cmd, page) = @build_queue.load(emit=x => emit(GotBuildQueueMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { theme, page: BuildQueue(page), theme_switching: false },
+        {
+          theme,
+          system_dark,
+          page: BuildQueue(page),
+          theme_switching: false,
+        },
       )
     }
     SkillsList => {
       let (cmd, page) = @skills.load(emit=x => emit(GotSkillsMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { theme, page: Skills(page), theme_switching: false },
+        { theme, system_dark, page: Skills(page), theme_switching: false },
       )
     }
     SkillsDetail(entry) => {
@@ -155,7 +204,7 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { theme, page: Skills(page), theme_switching: false },
+        { theme, system_dark, page: Skills(page), theme_switching: false },
       )
     }
     User(name) => {
@@ -164,13 +213,13 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { theme, page: User(page), theme_switching: false },
+        { theme, system_dark, page: User(page), theme_switching: false },
       )
     }
     Assets(url) =>
       (
         @nav.load(url.to_string()),
-        { theme, page: Redirect, theme_switching: false },
+        { theme, system_dark, page: Redirect, theme_switching: false },
       )
     Docs(mooncakes_path, fragment~) => {
       // If already on this docs page and path unchanged, just scroll
@@ -198,11 +247,14 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { theme, page: Docs(page), theme_switching: false },
+        { theme, system_dark, page: Docs(page), theme_switching: false },
       )
     }
     NotFound(_) =>
-      (scroll_top, { theme, page: NotFound, theme_switching: false })
+      (
+        scroll_top,
+        { theme, system_dark, page: NotFound, theme_switching: false },
+      )
   }
 }
 
@@ -219,17 +271,16 @@ fn view(emit : Emit[Msg], model : Model) -> Html {
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }
-  let theme_class = match model.theme {
-    Light => "theme-light"
-    Dark => "theme-dark"
-  }
+  let resolved = model.theme.resolve(model.system_dark)
+  let theme_class = resolved.class_name()
+  let pref_class = model.theme.pref_class()
   let switching_class = if model.theme_switching {
     "theme-switching"
   } else {
     ""
   }
   @html.div(
-    class="theme-root min-h-screen w-full \{theme_class} \{switching_class}",
+    class="theme-root min-h-screen w-full \{theme_class} \{pref_class} \{switching_class}",
     [page_view],
   )
 }
@@ -244,13 +295,22 @@ fn subscriptions(emit : Emit[Msg], model : Model) -> @sub.Sub {
   @sub.batch([
     @sub.on_url_changed(u => emit(UrlChanged(u))),
     @sub.on_url_request(r => emit(LinkClicked(r))),
+    on_system_scheme_changed(is_dark => emit(SystemSchemeChanged(is_dark))),
     page_sub,
   ])
 }
 
 ///|
 fn main {
-  let model = { theme: Light, page: Redirect, theme_switching: false }
+  let theme = @util.load_theme_preference()
+  let system_dark = @util.read_system_prefers_dark()
+  let model = {
+    theme,
+    system_dark,
+    page: Redirect,
+    theme_switching: false,
+  }
+  apply_theme(model)
   let app = @rabbita.elmish(
     model=ReactiveModel(model),
     update=(emit, msg, model) => {

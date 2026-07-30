@@ -46,9 +46,9 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="/styles.css" />
     <!--
-      Theme FOUC guard. Keep in sync with load/save in src/main/main.mbt:
+      Theme FOUC guard. Keep in sync with apply_document_theme in src/main/main.mbt:
       localStorage key "mooncakes-theme", values "system" | "light" | "dark",
-      missing/invalid => system.
+      missing/invalid => system; also set class, color-scheme, and backgroundColor.
     -->
     <script>
       (function () {

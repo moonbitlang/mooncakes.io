@@ -136,6 +136,11 @@
   display: inline;
 }
 
+/* Status icons use slate strokes; invert under dark chrome (sun only shows in light). */
+.theme-dark .theme-toggle-icon {
+  filter: brightness(0) invert(1);
+}
+
 .theme-dark {
   color-scheme: dark;
   --app-border: #2a2f36;

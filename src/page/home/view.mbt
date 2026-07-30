@@ -69,10 +69,10 @@ fn module_card(mod : ModuleIndex) -> Html {
     None => nothing
     Some(keywords) =>
       div(
-        class="flex gap-2 h-8 flex-wrap overflow-y-hidden shrink-0",
+        class="flex h-8 min-w-0 flex-1 flex-wrap gap-2 overflow-hidden",
         keywords.map(keyword => {
           span(
-            class="text-xs h-5 bg-gray-50 text-gray-600 px-2 my-2 border-gray-200  border rounded",
+            class="my-2 h-5 max-w-full shrink-0 truncate rounded border border-gray-200 bg-gray-50 px-2 text-xs text-gray-600",
             keyword,
           )
         }),
@@ -81,7 +81,10 @@ fn module_card(mod : ModuleIndex) -> Html {
   let description = match mod.description {
     None => div(class="flex-grow", nothing)
     Some(description) =>
-      p(class="text-gray-700 py-3 overflow-ellipsis grow text-sm", description)
+      p(
+        class="my-3 line-clamp-2 grow break-words text-sm leading-5 text-gray-700",
+        description,
+      )
   }
   let time = match mod.created_at {
     Some(t) => p(@util.get_relative_time(t))
@@ -101,11 +104,11 @@ fn module_card(mod : ModuleIndex) -> Html {
         h2(class="", mod.name),
       ],
     ],
-    a(href="/docs/\{versioned_path(mod)}", class="flex-1 flex flex-col") <| [
+    a(href="/docs/\{versioned_path(mod)}", class="min-w-0 flex-1 flex flex-col") <| [
       description,
-      div(class="flex justify-between items-center text-gray-600 text-sm gap-2") <| [
+      div(class="flex min-w-0 items-center gap-2 text-sm text-gray-600") <| [
         keywords,
-        div(class="flex items-center gap-2 shrink-0") <| [
+        div(class="ml-auto flex shrink-0 items-center gap-2") <| [
           span(class="text-xs text-gray-400", mod.version),
           time,
         ],

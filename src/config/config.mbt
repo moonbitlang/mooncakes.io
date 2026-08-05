@@ -92,6 +92,9 @@ pub const SUN_ICON = "/sun.svg"
 pub const MOON_ICON = "/moon.svg"
 
 ///|
+pub const COMPUTER_ICON = "/computer.svg"
+
+///|
 pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
 
 ///|

@@ -21,10 +21,12 @@ enum Msg {
   GotSkillsMsg(@skills.Msg)
   LinkClicked(@url.UrlRequest)
   UrlChanged(@url.Url)
+  SystemSchemeChanged(Bool)
 }
 
 ///|
 enum Theme {
+  System
   Light
   Dark
 }
@@ -43,6 +45,8 @@ enum Page {
 ///|
 struct Model {
   theme : Theme
+  /// Latest `prefers-color-scheme: dark`. Used when `theme` is System.
+  system_dark : Bool
   page : Page
   theme_switching : Bool
 }
@@ -57,17 +61,178 @@ impl Eq for ReactiveModel with fn equal(_, _) {
 }
 
 ///|
+/// localStorage key/values must match the FOUC script in `index.html`.
+extern "js" fn load_stored_theme() -> String =
+  #| () => {
+  #|   try {
+  #|     const value = window.localStorage.getItem('mooncakes-theme');
+  #|     return value == null ? '' : String(value);
+  #|   } catch (_) {
+  #|     return '';
+  #|   }
+  #| }
+
+///|
+extern "js" fn save_stored_theme(value : String) -> Unit =
+  #| (value) => {
+  #|   try {
+  #|     window.localStorage.setItem('mooncakes-theme', value);
+  #|   } catch (_) {}
+  #| }
+
+///|
+extern "js" fn system_prefers_dark() -> Bool =
+  #| () => {
+  #|   try {
+  #|     return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  #|   } catch (_) {
+  #|     return false;
+  #|   }
+  #| }
+
+///|
+/// Keep class / color-scheme / backgroundColor in sync with the FOUC script.
+extern "js" fn apply_document_theme(
+  resolved_class : String,
+  pref_class : String,
+) -> Unit =
+  #| (resolvedClass, prefClass) => {
+  #|   const root = document.documentElement;
+  #|   const dark = resolvedClass === 'theme-dark';
+  #|   root.classList.remove('theme-light', 'theme-dark', 'theme-pref-system', 'theme-pref-light', 'theme-pref-dark');
+  #|   root.classList.add(resolvedClass, prefClass);
+  #|   root.style.colorScheme = dark ? 'dark' : 'light';
+  #|   root.style.backgroundColor = dark ? '#0b0b0c' : '#fafafa';
+  #| }
+
+///|
+extern "js" fn watch_system_color_scheme(
+  on_change : (Bool) -> Unit,
+) -> () -> Unit =
+  #| (onChange) => {
+  #|   try {
+  #|     const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  #|     const handler = (event) => onChange(!!event.matches);
+  #|     if (typeof mq.addEventListener === 'function') {
+  #|       mq.addEventListener('change', handler);
+  #|       return () => mq.removeEventListener('change', handler);
+  #|     }
+  #|     if (typeof mq.addListener === 'function') {
+  #|       mq.addListener(handler);
+  #|       return () => mq.removeListener(handler);
+  #|     }
+  #|   } catch (_) {}
+  #|   return () => {};
+  #| }
+
+///|
+fn theme_from_storage(value : String) -> Theme {
+  match value {
+    "light" => Light
+    "dark" => Dark
+    _ => System
+  }
+}
+
+///|
+fn theme_to_storage(theme : Theme) -> String {
+  match theme {
+    System => "system"
+    Light => "light"
+    Dark => "dark"
+  }
+}
+
+///|
+/// System → Light → Dark → System.
 fn toggle_theme(theme : Theme) -> Theme {
   match theme {
+    System => Light
     Light => Dark
-    Dark => Light
+    Dark => System
   }
+}
+
+///|
+fn theme_is_dark(theme : Theme, system_dark : Bool) -> Bool {
+  match theme {
+    Dark => true
+    Light => false
+    System => system_dark
+  }
+}
+
+///|
+fn resolved_theme_class(theme : Theme, system_dark : Bool) -> String {
+  if theme_is_dark(theme, system_dark) {
+    "theme-dark"
+  } else {
+    "theme-light"
+  }
+}
+
+///|
+fn preference_theme_class(theme : Theme) -> String {
+  match theme {
+    System => "theme-pref-system"
+    Light => "theme-pref-light"
+    Dark => "theme-pref-dark"
+  }
+}
+
+///|
+fn apply_theme(theme : Theme, system_dark : Bool) -> Unit {
+  apply_document_theme(
+    resolved_theme_class(theme, system_dark),
+    preference_theme_class(theme),
+  )
+}
+
+///|
+priv suberror ThemeSubscription {
+  SystemScheme(@cmd.Emit[Bool])
+}
+
+///|
+fn theme_sub_loader(
+  payload : Error,
+  scheduler : &@cmd.Scheduler,
+) -> @sub.RunningSub? {
+  match payload {
+    SystemScheme(emit) => {
+      let mut tagger = emit
+      let unwatch = watch_system_color_scheme(is_dark => {
+        scheduler.add(tagger(is_dark))
+      })
+      Some({
+        unload: fn(_) { unwatch() },
+        update_tagger: fn(next) {
+          guard next is SystemScheme(new_emit) else { return }
+          tagger = new_emit
+        },
+      })
+    }
+    _ => None
+  }
+}
+
+///|
+fn on_system_scheme_changed(emit : @cmd.Emit[Bool]) -> @sub.Sub {
+  @sub.custom_sub(
+    "on_system_scheme_changed",
+    Local,
+    SystemScheme(emit),
+    @sub.SubLoader(theme_sub_loader),
+  )
 }
 
 ///|
 fn start_theme_switch(model : Model) -> (Cmd, Model) {
   let theme = toggle_theme(model.theme)
-  (none, { ..model, theme, theme_switching: false })
+  let system_dark = system_prefers_dark()
+  save_stored_theme(theme_to_storage(theme))
+  apply_theme(theme, system_dark)
+  (none, { ..model, theme, system_dark, theme_switching: false })
 }
 
 ///|
@@ -83,6 +248,11 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
       start_theme_switch(model)
     (GotSkillsMsg(msg), _) if @skills.is_theme_toggle(msg) =>
       start_theme_switch(model)
+    (SystemSchemeChanged(system_dark), _) => {
+      let model = { ..model, system_dark, }
+      apply_theme(model.theme, system_dark)
+      (none, model)
+    }
     (GotHomeMsg(msg), Home(page_model)) => {
       let (cmd, page) = @home.update(msg, page_model, emit=x => {
         emit(GotHomeMsg(x))
@@ -126,27 +296,28 @@ fn route_with_theme(
   emit : Emit[Msg],
 ) -> (Cmd, Model) {
   let theme = model.theme
+  let system_dark = model.system_dark
   let scroll_top = @nav.scroll_to_top()
   match @util.MooncakesioPath::resolve(url) {
     Home => {
       let (cmd, page) = @home.load(emit=x => emit(GotHomeMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { theme, page: Home(page), theme_switching: false },
+        { theme, system_dark, page: Home(page), theme_switching: false },
       )
     }
     BuildQueue => {
       let (cmd, page) = @build_queue.load(emit=x => emit(GotBuildQueueMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { theme, page: BuildQueue(page), theme_switching: false },
+        { theme, system_dark, page: BuildQueue(page), theme_switching: false },
       )
     }
     SkillsList => {
       let (cmd, page) = @skills.load(emit=x => emit(GotSkillsMsg(x)))
       (
         batch([cmd, scroll_top]),
-        { theme, page: Skills(page), theme_switching: false },
+        { theme, system_dark, page: Skills(page), theme_switching: false },
       )
     }
     SkillsDetail(entry) => {
@@ -155,7 +326,7 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { theme, page: Skills(page), theme_switching: false },
+        { theme, system_dark, page: Skills(page), theme_switching: false },
       )
     }
     User(name) => {
@@ -164,13 +335,13 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { theme, page: User(page), theme_switching: false },
+        { theme, system_dark, page: User(page), theme_switching: false },
       )
     }
     Assets(url) =>
       (
         @nav.load(url.to_string()),
-        { theme, page: Redirect, theme_switching: false },
+        { theme, system_dark, page: Redirect, theme_switching: false },
       )
     Docs(mooncakes_path, fragment~) => {
       // If already on this docs page and path unchanged, just scroll
@@ -198,11 +369,14 @@ fn route_with_theme(
       })
       (
         batch([cmd, scroll_top]),
-        { theme, page: Docs(page), theme_switching: false },
+        { theme, system_dark, page: Docs(page), theme_switching: false },
       )
     }
     NotFound(_) =>
-      (scroll_top, { theme, page: NotFound, theme_switching: false })
+      (
+        scroll_top,
+        { theme, system_dark, page: NotFound, theme_switching: false },
+      )
   }
 }
 
@@ -219,17 +393,15 @@ fn view(emit : Emit[Msg], model : Model) -> Html {
     NotFound => @view.not_found()
     Redirect => @view.loading()
   }
-  let theme_class = match model.theme {
-    Light => "theme-light"
-    Dark => "theme-dark"
-  }
+  let theme_class = resolved_theme_class(model.theme, model.system_dark)
+  let pref_class = preference_theme_class(model.theme)
   let switching_class = if model.theme_switching {
     "theme-switching"
   } else {
     ""
   }
   @html.div(
-    class="theme-root min-h-screen w-full \{theme_class} \{switching_class}",
+    class="theme-root min-h-screen w-full \{theme_class} \{pref_class} \{switching_class}",
     [page_view],
   )
 }
@@ -244,13 +416,17 @@ fn subscriptions(emit : Emit[Msg], model : Model) -> @sub.Sub {
   @sub.batch([
     @sub.on_url_changed(u => emit(UrlChanged(u))),
     @sub.on_url_request(r => emit(LinkClicked(r))),
+    on_system_scheme_changed(is_dark => emit(SystemSchemeChanged(is_dark))),
     page_sub,
   ])
 }
 
 ///|
 fn main {
-  let model = { theme: Light, page: Redirect, theme_switching: false }
+  let theme = theme_from_storage(load_stored_theme())
+  let system_dark = system_prefers_dark()
+  let model = { theme, system_dark, page: Redirect, theme_switching: false }
+  apply_theme(theme, system_dark)
   let app = @rabbita.elmish(
     model=ReactiveModel(model),
     update=(emit, msg, model) => {

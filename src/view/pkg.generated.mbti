@@ -74,4 +74,3 @@ pub(all) enum NavbarStyle {
 // Type aliases
 
 // Traits
-

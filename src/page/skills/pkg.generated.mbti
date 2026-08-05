@@ -62,4 +62,3 @@ pub(all) struct WasmEntry {
 // Type aliases
 
 // Traits
-

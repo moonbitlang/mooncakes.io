@@ -23,4 +23,3 @@ pub fn[Id] Tree::get_name(Self[Id]) -> String
 // Type aliases
 
 // Traits
-

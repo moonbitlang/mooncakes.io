@@ -42,4 +42,3 @@ pub enum Msg {
 // Type aliases
 
 // Traits
-

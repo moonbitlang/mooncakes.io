@@ -51,4 +51,3 @@ pub fn UnsolvedMooncakePath::package_path(Self) -> String
 // Type aliases
 
 // Traits
-

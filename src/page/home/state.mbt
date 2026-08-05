@@ -514,7 +514,7 @@ fn sort_modules_by_name(
 ) -> Map[Char, Array[ModuleIndex]] {
   fn to_upper(c : Char) -> Char {
     if c >= 'a' && c <= 'z' {
-      guard (c.to_int() - 'a'.to_int() + 'A'.to_int()).to_char() is Some(c)
+      guard! (c.to_int() - 'a'.to_int() + 'A'.to_int()).to_char() is Some(c)
       c
     } else {
       c

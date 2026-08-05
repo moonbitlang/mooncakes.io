@@ -75,7 +75,7 @@ fn inline2html(
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
         span(
-          class="font-mono bg-[#eeeeee] text-[rgb(31, 35, 40)] text-[0.9em] px-[5px] py-[2px] rounded",
+          class="font-mono bg-zinc-200 dark:bg-gray-900 text-gray-800 dark:text-slate-200 text-[0.9em] px-[5px] py-[2px] rounded",
           tight.map(fn(x) { text(x.node.v) }).to_array(),
         ),
       ]
@@ -132,7 +132,7 @@ fn heading_content(
 ) -> Array[@html.Html] {
   let anchor = a(
     href="#\{id}",
-    class="absolute -left-5 text-gray-300 hover:text-gray-500 opacity-0 group-hover/markdown-heading:opacity-100 focus:opacity-100 transition-opacity no-underline",
+    class="absolute -left-5 text-gray-300 dark:text-gray-500 hover:text-gray-500 dark:hover:text-slate-400 opacity-0 group-hover/markdown-heading:opacity-100 focus:opacity-100 transition-opacity no-underline",
     title="Link to this section",
     "#",
   )
@@ -153,7 +153,7 @@ fn block2html(
     BlankLine(_) => p(nothing)
     BlockQuote({ v: { block, .. }, .. }) =>
       @html.blockquote(
-        class="border-l-4 border-gray-400 bg-gray-50 text-gray-600 py-2 pl-4 my-2",
+        class="border-l-4 border-gray-400 dark:border-zinc-600 bg-gray-50 dark:bg-zinc-950 text-gray-600 dark:text-slate-400 py-2 pl-4 my-2",
         block2html(
           block,
           small_heading~,
@@ -188,15 +188,26 @@ fn block2html(
       } else {
         @html.code(class="font-mono", div(code))
       }
-      pre(class="bg-gray-100 p-4 my-4 text-sm rounded overflow-x-auto", code)
+      pre(
+        class="bg-gray-100 dark:bg-zinc-900 p-4 my-4 text-sm rounded overflow-x-auto",
+        code,
+      )
     }
     Heading({ v: { level, inline, .. }, .. }) =>
       if small_heading {
         let inline = inline2html(inline, link_defs~, transform_link?)
         match level {
-          1 => h3(class="text-gray-900 font-bold mt-1 text-sm", inline)
-          2 | 3 => h4(class="text-gray-900 font-semibold text-sm", inline)
-          _ => div(class="text-gray-900", inline)
+          1 =>
+            h3(
+              class="text-gray-900 dark:text-slate-50 font-bold mt-1 text-sm",
+              inline,
+            )
+          2 | 3 =>
+            h4(
+              class="text-gray-900 dark:text-slate-50 font-semibold text-sm",
+              inline,
+            )
+          _ => div(class="text-gray-900 dark:text-slate-50", inline)
         }
       } else {
         let id = if heading_anchors {
@@ -218,23 +229,33 @@ fn block2html(
           1 =>
             h1(
               id?,
-              class="text-gray-800 font-semibold mb-4 pb-2 text-2xl md:text-4xl\{anchor_class}",
+              class="text-gray-800 dark:text-slate-200 font-semibold mb-4 pb-2 text-2xl md:text-4xl\{anchor_class}",
               inline,
             )
           2 =>
             h2(
               id?,
-              class="text-gray-800 font-semibold mt-6 mb-4 pb-2 border-b text-xl md:text-2xl\{anchor_class}",
+              class="text-gray-800 dark:text-slate-200 font-semibold mt-6 mb-4 pb-2 border-b text-xl md:text-2xl\{anchor_class}",
               inline,
             )
           3 =>
             h3(
               id?,
-              class="text-gray-800 font-semibold text-lg md:text-xl mt-6 mb-4\{anchor_class}",
+              class="text-gray-800 dark:text-slate-200 font-semibold text-lg md:text-xl mt-6 mb-4\{anchor_class}",
               inline,
             )
-          4 => h4(id?, class="text-gray-800\{anchor_class}", inline)
-          _ => h5(id?, class="text-gray-800\{anchor_class}", inline)
+          4 =>
+            h4(
+              id?,
+              class="text-gray-800 dark:text-slate-200\{anchor_class}",
+              inline,
+            )
+          _ =>
+            h5(
+              id?,
+              class="text-gray-800 dark:text-slate-200\{anchor_class}",
+              inline,
+            )
         }
       }
     List({ v: { ty: ordered, tight, items }, .. }) => {
@@ -309,14 +330,14 @@ fn block2html(
             ({ v: Header(cols), .. }, _) => {
               let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
               let class = if (i - colgroup) % 2 == 0 {
-                "bg-gray-100"
+                "bg-gray-100 dark:bg-zinc-900"
               } else {
                 ""
               }
               let cols = cols
                 .map(x => {
                   @html.th(
-                    class="border border-gray-300 p-2 font-semibold",
+                    class="border border-gray-300 dark:border-zinc-700 p-2 font-semibold",
                     inline2html(x.0, link_defs~, transform_link?),
                   )
                 })
@@ -326,14 +347,14 @@ fn block2html(
             ({ v: Data(cols), .. }, _) => {
               let colgroup = if colgroup.length() > 0 { 1 } else { 0 }
               let class = if (i - colgroup) % 2 == 0 {
-                "bg-gray-100"
+                "bg-gray-100 dark:bg-zinc-900"
               } else {
                 ""
               }
               let cols = cols
                 .map(x => {
                   @html.td(
-                    class="border border-gray-300 p-2",
+                    class="border border-gray-300 dark:border-zinc-700 p-2",
                     inline2html(x.0, link_defs~, transform_link?),
                   )
                 })
@@ -361,7 +382,9 @@ fn block2html(
           }
         })
       @html.div(class="w-full overflow-x-auto") <| [
-        @html.table(class="max-width-full my-6 border-collapse border-gray-300") <| [
+        @html.table(
+          class="max-width-full my-6 border-collapse border-gray-300 dark:border-zinc-700",
+        ) <| [
           @html.colgroup(colgroup),
           @html.tbody(body),
         ],
@@ -389,7 +412,7 @@ fn unwrap_inline_link(
     } : @cmark.InlineLink) =>
       [
         @html.a(
-          class="text-blue-600 underline underline-offset-2",
+          class="text-blue-600 dark:text-blue-300 underline underline-offset-2",
           href=match transform_link {
             Some(f) => f(link)
             None => link
@@ -430,7 +453,7 @@ fn unwrap_inline_link(
       if link_defs.get(key) is Some(url) {
         [
           @html.a(
-            class=" text-blue-600 underline underline-offset-2",
+            class=" text-blue-600 dark:text-blue-300 underline underline-offset-2",
             href=match transform_link {
               Some(f) => f(url)
               None => url
@@ -488,7 +511,10 @@ pub fn markdown(
     FolderError(msg) => text("Failed to render markdown: \{msg}")
   } noraise {
     htmls =>
-      div(class="text-sm md:text-base leading-relaxed text-gray-800", htmls)
+      div(
+        class="text-sm md:text-base leading-relaxed text-gray-800 dark:text-slate-200",
+        htmls,
+      )
   }
 }
 

@@ -19,7 +19,6 @@ pub enum Msg {
   GotCount(Result[PackageCount, Error])
   FilterChanged(String)
   ToggleAllModules
-  ToggleTheme
 }
 
 ///|
@@ -215,15 +214,6 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         _ => (none, { ..model, show_all_modules: show })
       }
     }
-    ToggleTheme => (none, model)
-  }
-}
-
-///|
-pub fn is_theme_toggle(msg : Msg) -> Bool {
-  match msg {
-    ToggleTheme => true
-    _ => false
   }
 }
 

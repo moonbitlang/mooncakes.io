@@ -10,13 +10,11 @@ import {
 // Values
 pub fn filter_indices(String, Array[SearchIndex]) -> Array[ModuleIndex]
 
-pub fn is_theme_toggle(Msg) -> Bool
-
 pub fn load(emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
 pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 
@@ -56,7 +54,6 @@ pub enum Msg {
   GotCount(Result[PackageCount, Error])
   FilterChanged(String)
   ToggleAllModules
-  ToggleTheme
 }
 
 type PackageCount

@@ -11,7 +11,6 @@ pub enum Msg {
   CopySkillFailed(String)
   ShowcaseTick
   ScrollToSkills
-  ToggleTheme
 }
 
 ///|
@@ -273,7 +272,6 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         _ => (none, model)
       }
     ScrollToSkills => (@nav.scroll_to("skills"), model)
-    ToggleTheme => (none, model)
   }
 }
 
@@ -283,14 +281,6 @@ pub fn subscriptions(model : Model, emit~ : (Msg) -> Cmd) -> @sub.Sub {
     List(Success(entries), ..) if entries.length() > 0 =>
       @sub.every(80, emit(ShowcaseTick))
     _ => @sub.none
-  }
-}
-
-///|
-pub fn is_theme_toggle(msg : Msg) -> Bool {
-  match msg {
-    ToggleTheme => true
-    _ => false
   }
 }
 

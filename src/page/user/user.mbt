@@ -63,7 +63,6 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
 enum Msg {
   GotUserProfile(Result[Profile, Error])
   GotCodeFrequency(Result[CodeFrequencyResponse, Error])
-  ToggleTheme
 }
 
 ///|
@@ -174,16 +173,19 @@ pub fn profile(profile : Status[Profile]) -> Html {
           // Default avatar placeholder
           let initial = first_char_upper_or(username, "U")
           div(
-            class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mb-4 border-4 border-white shadow-lg",
+            class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mb-4 border-4 border-white dark:border-zinc-800 shadow-lg",
             span(class="text-white text-4xl font-bold", initial),
           )
         } else {
           img(
-            class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white shadow-lg",
+            class="w-32 h-32 rounded-full object-cover mb-4 border-4 border-white dark:border-zinc-800 shadow-lg",
             src=avatar_url,
           )
         },
-        h1(class="text-3xl font-bold text-gray-800", username),
+        h1(
+          class="text-3xl font-bold text-gray-800 dark:text-slate-200",
+          username,
+        ),
       ]
   }
 }
@@ -196,13 +198,13 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
     Success(module_list) => {
       if module_list.length() == 0 {
         return div(
-          class="p-8 text-center text-gray-500",
+          class="p-8 text-center text-gray-500 dark:text-gray-400",
           "No published modules yet",
         )
       }
       div(class="animate-fade-in") <| [
         h2(
-          class="text-2xl font-semibold mb-6 text-gray-800",
+          class="text-2xl font-semibold mb-6 text-gray-800 dark:text-slate-200",
           "Published Modules",
         ),
         div(
@@ -215,17 +217,17 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
               _ => name
             }
             div(
-              class="group border border-gray-200 rounded-lg p-4 bg-white hover:border-blue-200 hover:shadow-md transition-all duration-200",
+              class="group border border-gray-200 dark:border-zinc-800 rounded-lg p-4 bg-white dark:bg-zinc-900 hover:border-blue-200 dark:hover:border-blue-900 hover:shadow-md transition-all duration-200",
             ) <| [
               div(class="flex flex-col h-full") <| [
                 a(
                   href="/docs/\{name}@\{version}",
-                  class="text-lg font-bold text-gray-900 group-hover:text-blue-600 mb-3 transition-colors",
+                  class="text-lg font-bold text-gray-900 dark:text-slate-50 group-hover:text-blue-600 dark:group-hover:text-blue-300 mb-3 transition-colors",
                   display_name,
                 ),
                 div(class="mt-auto flex justify-end") <| [
                   span(
-                    class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700",
+                    class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-indigo-400",
                     "v\{version}",
                   ),
                 ],
@@ -245,7 +247,10 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
     Loading => @view.skeleton_code_frequency()
     Success(data) => {
       if data.length() == 0 {
-        return div(class="my-6 text-sm text-gray-500", "No code frequency data")
+        return div(
+          class="my-6 text-sm text-gray-500 dark:text-gray-400",
+          "No code frequency data",
+        )
       }
 
       // find max absolute value for symmetric scaling
@@ -269,12 +274,12 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
           } else if value < 0 {
             "bg-red-500"
           } else {
-            "bg-gray-400"
+            "bg-gray-400 dark:bg-gray-700"
           }
           let bar = if value == 0 {
             // small line on baseline
             div(
-              class="absolute left-0 right-0 h-[2px] -translate-y-1/2 top-1/2 bg-gray-400 rounded",
+              class="absolute left-0 right-0 h-[2px] -translate-y-1/2 top-1/2 bg-gray-400 dark:bg-gray-700 rounded",
               nothing,
             )
           } else if value > 0 {
@@ -293,18 +298,18 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
             )
           }
           let class = if value > 0 {
-            "text-green-600"
+            "text-green-600 dark:text-green-300"
           } else if value < 0 {
-            "text-red-600"
+            "text-red-600 dark:text-red-400"
           } else {
-            "text-gray-500"
+            "text-gray-500 dark:text-gray-400"
           }
           div(class="flex flex-col items-center flex-shrink-0 w-8 sm:w-10") <| [
             // graph area
             div(class="relative h-40 w-4 sm:w-6") <| [
               // baseline
               div(
-                class="absolute left-0 right-0 top-1/2 h-px bg-gray-300",
+                class="absolute left-0 right-0 top-1/2 h-px bg-gray-300 dark:bg-gray-800",
                 nothing,
               ),
               bar,
@@ -315,26 +320,44 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
             ],
             // date
             span(
-              class="text-[8px] sm:text-[10px] mt-0.5 text-gray-700",
+              class="text-[8px] sm:text-[10px] mt-0.5 text-gray-700 dark:text-slate-300",
               date_label,
             ),
           ]
         })
       div(class="animate-fade-in") <| [
-        h2(class="text-2xl font-semibold mb-6 text-gray-800", "Code Frequency"),
+        h2(
+          class="text-2xl font-semibold mb-6 text-gray-800 dark:text-slate-200",
+          "Code Frequency",
+        ),
         div(
-          class="bg-white rounded-xl border px-4 sm:px-6 lg:px-10 pb-6 pt-6 sm:pt-8 lg:pt-10",
+          class="bg-white dark:bg-zinc-900 rounded-xl border px-4 sm:px-6 lg:px-10 pb-6 pt-6 sm:pt-8 lg:pt-10",
         ) <| [
           // grid background
           div(class="relative overflow-hidden") <| [
             div(
               class="absolute inset-0 flex flex-col justify-between h-40 pointer-events-none",
             ) <| [
-              div(class="border-t border-dashed border-gray-200", nothing),
-              div(class="border-t border-dashed border-gray-200", nothing),
-              div(class="border-t border-dashed border-gray-300", nothing), // center line slightly darker
-              div(class="border-t border-dashed border-gray-200", nothing),
-              div(class="border-t border-dashed border-gray-200", nothing),
+              div(
+                class="border-t border-dashed border-gray-200 dark:border-zinc-800",
+                nothing,
+              ),
+              div(
+                class="border-t border-dashed border-gray-200 dark:border-zinc-800",
+                nothing,
+              ),
+              div(
+                class="border-t border-dashed border-gray-300 dark:border-zinc-700",
+                nothing,
+              ), // center line slightly darker
+              div(
+                class="border-t border-dashed border-gray-200 dark:border-zinc-800",
+                nothing,
+              ),
+              div(
+                class="border-t border-dashed border-gray-200 dark:border-zinc-800",
+                nothing,
+              ),
             ],
             div(
               class="flex items-end overflow-x-auto gap-1 sm:gap-2 lg:gap-3 pb-2",
@@ -355,7 +378,10 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
               text("Removed"),
             ],
             div(class="flex items-center") <| [
-              div(class="bg-gray-400 w-4 h-[2px] mr-1", nothing),
+              div(
+                class="bg-gray-400 dark:bg-gray-700 w-4 h-[2px] mr-1",
+                nothing,
+              ),
               text("No Change"),
             ],
           ],
@@ -366,10 +392,10 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
 }
 
 ///|
-pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
+pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
+  ignore(emit)
   @view.page(
-    header=@view.navbar(right=theme_toggle),
+    header=@view.navbar(right=app_actions),
     main=div(class="container lg:px-40 px-4 py-6") <| [
       // Top: User profile (centered)
       div(class="flex justify-center mb-8", profile(model.profile)),
@@ -406,14 +432,5 @@ pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
       println(err.to_string())
       (none, { ..model, profile: Failed })
     }
-    ToggleTheme => (none, model)
-  }
-}
-
-///|
-pub fn is_theme_toggle(msg : Msg) -> Bool {
-  match msg {
-    ToggleTheme => true
-    _ => false
   }
 }

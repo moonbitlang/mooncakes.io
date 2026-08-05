@@ -15,7 +15,7 @@
 ///|
 pub fn button(value : String, on_click? : Cmd) -> Html {
   div(
-    class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800",
+    class="hover:bg-gray-200 dark:hover:bg-gray-800 active:bg-gray-300 dark:active:bg-gray-700 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800 dark:text-slate-200",
     on_click?,
     value,
   )
@@ -28,7 +28,7 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
     Some(value) => [@html.text(value)]
   }
   div(
-    class="hover:bg-gray-200 active:bg-gray-300 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800",
+    class="hover:bg-gray-200 dark:hover:bg-gray-800 active:bg-gray-300 dark:active:bg-gray-700 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800 dark:text-slate-200",
     on_click?,
   ) <| [
     div(class="self-center min-w-4 flex gap-2") <| [
@@ -41,6 +41,7 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
 ///|
 pub fn theme_toggle(on_click? : Cmd) -> Html {
   @html.button(
+    type_="button",
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
     on_click?,
   ) <| [

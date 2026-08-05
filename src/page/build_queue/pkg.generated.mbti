@@ -8,13 +8,11 @@ import {
 }
 
 // Values
-pub fn is_theme_toggle(Msg) -> Bool
-
 pub fn load(emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
 pub fn update(Msg, Model) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 
@@ -36,7 +34,6 @@ pub struct Model {
 
 pub enum Msg {
   GotBuilds(Result[BuildData, Error])
-  ToggleTheme
 }
 
 // Type aliases

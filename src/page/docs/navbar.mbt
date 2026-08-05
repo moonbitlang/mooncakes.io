@@ -5,14 +5,14 @@ fn navbar(
   module_index : ModuleIndex?,
   card_mode : CardMode,
   emit : (Msg) -> Cmd,
-  theme_toggle? : Html,
+  app_actions~ : Html,
 ) -> Html {
   let breadcrumbs_view = div(
     class="hidden lg:block border-l pl-4",
     breadcrumbs(path, module_path, module_index),
   )
   let search_btn = button(
-    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors text-gray-400 lg:w-36",
+    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors text-gray-400 dark:text-slate-500 lg:w-36",
     on_click=emit(ToggleSearchPanel(true)),
   ) <| [
     img(class="w-4 h-4 ui-icon", src=@config.SEARCH),
@@ -21,7 +21,7 @@ fn navbar(
   let right = div(class="flex items-center gap-2") <| [
     search_btn,
     card_mode_toggle(mode=card_mode, click=x => emit(DocModeChanged(x))),
-    theme_toggle.unwrap_or(nothing),
+    app_actions,
   ]
   @view.navbar(left_extra=breadcrumbs_view, right~, style=Sticky)
 }

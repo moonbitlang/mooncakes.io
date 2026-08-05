@@ -51,12 +51,12 @@ pub fn[Id : Compare] view(
       Item(id~, str) => {
         let active = indicator == id
         let font = if active {
-          " font-semibold text-gray-900"
+          " font-semibold text-gray-900 dark:text-slate-50"
         } else {
-          " text-gray-700"
+          " text-gray-700 dark:text-slate-300"
         }
         @html.li(
-          class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
+          class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{font}",
           on_click=click(id),
         ) <| [
           icon(id, false),
@@ -67,13 +67,13 @@ pub fn[Id : Compare] view(
         let expanded = state.contains(id)
         let active = indicator == id
         let font = if active {
-          " font-semibold text-gray-900"
+          " font-semibold text-gray-900 dark:text-slate-50"
         } else {
-          " text-gray-700"
+          " text-gray-700 dark:text-slate-300"
         }
         @html.li() <| [
           div(
-            class="group/node flex items-center gap-2 px-2 py-0.5 rounded-md hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
+            class="group/node flex items-center gap-2 px-2 py-0.5 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{font}",
           ) <| [
             div(
               class="shrink-0 flex-1 flex items-center gap-2 cursor-pointer",
@@ -83,14 +83,14 @@ pub fn[Id : Compare] view(
               @html.span(class="truncate", str),
             ],
             div(
-              class="shrink-0 size-5 flex items-center justify-center rounded opacity-0 group-hover/node:opacity-100 hover:bg-gray-300/60 transition-opacity text-gray-400 hover:text-gray-600 text-xs cursor-pointer",
+              class="shrink-0 size-5 flex items-center justify-center rounded opacity-0 group-hover/node:opacity-100 hover:bg-gray-300/60 dark:hover:bg-gray-700/60 transition-opacity text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 text-xs cursor-pointer",
               on_click=click(id),
               "\u{2192}",
             ),
           ],
           if expanded {
             ul(
-              class="pl-2 ml-[7px] border-l border-gray-200",
+              class="pl-2 ml-[7px] border-l border-gray-200 dark:border-zinc-800",
               children.map(aux),
             )
           } else {
@@ -101,9 +101,9 @@ pub fn[Id : Compare] view(
       FixedNode(id~, str, children) => {
         let active = indicator == id
         let font = if active {
-          " font-semibold text-gray-900"
+          " font-semibold text-gray-900 dark:text-slate-50"
         } else {
-          " text-gray-700"
+          " text-gray-700 dark:text-slate-300"
         }
         fn method_item(child : Tree[Id]) -> Html {
           let (child_id, child_name) = match child {
@@ -112,16 +112,16 @@ pub fn[Id : Compare] view(
           }
           let child_active = indicator == child_id
           let child_font = if child_active {
-            " font-semibold text-gray-900"
+            " font-semibold text-gray-900 dark:text-slate-50"
           } else {
-            " text-gray-700"
+            " text-gray-700 dark:text-slate-300"
           }
           @html.li(
-            class="group/method flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{child_font}",
+            class="group/method flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{child_font}",
             on_click=click(child_id),
           ) <| [
             @html.span(
-              class="size-4 shrink-0 flex items-center justify-center text-[10px] text-gray-500 leading-none",
+              class="size-4 shrink-0 flex items-center justify-center text-[10px] text-gray-500 dark:text-gray-400 leading-none",
               "::",
             ),
             @html.span(class="group-hover/method:hidden", child_name),
@@ -134,7 +134,7 @@ pub fn[Id : Compare] view(
 
         @html.li() <| [
           div(
-            class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 active:bg-gray-200 text-[13px] transition-colors\{font}",
+            class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{font}",
             on_click=click(id),
           ) <| [
             icon(id, true),

@@ -4,7 +4,9 @@ pub fn page(
   main? : Html,
   footer? : Html = footer(),
 ) -> Html {
-  div(class="w-full flex-col bg-zinc-50") <| [
+  div(
+    class="w-full flex-col bg-zinc-50 dark:bg-zinc-950 dark:[--sidebar-bg:var(--color-zinc-950)]",
+  ) <| [
     header,
     div(class="flex-1 min-h-screen") <| [
       div(

@@ -31,26 +31,27 @@ pub fn code_block(
   fn go(x) {
     match x {
       @highlight.Unknown(c) => span(c)
-      Keyword(s) => span(class="text-[#0033b3]", s)
-      Symbol(s) => span(class="text-zinc-500 text-nowrap", s)
+      Keyword(s) => span(class="text-blue-800 dark:text-blue-300", s)
+      Symbol(s) => span(class="text-zinc-500 dark:text-gray-400 text-nowrap", s)
       Link(href~, content) => {
         let href = match transform_link {
           Some(f) => f(href)
           None => href
         }
         a(
-          class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
+          class="hover:text-gray-700 dark:hover:text-slate-200 transition-colors underline underline-offset-4 text-gray-300 dark:text-gray-500",
           href="/docs/\{href}",
           content.map(go),
         )
       }
-      UIdent(s) => span(class="text-gray-800", s)
-      LIdent(s) => span(class="text-[#00627a]", s)
+      UIdent(s) => span(class="text-gray-800 dark:text-slate-200", s)
+      LIdent(s) => span(class="text-cyan-800 dark:text-sky-300", s)
       Newline => br()
       Space(n) => span(" ".repeat(n))
-      CharLit(s) | StringLit(s) | Number(s) => span(class="text-orange-800", s)
-      Comment(s) => span(class="text-green-800", s)
-      Attr(s) => span(class="text-[#AF00DB]", s)
+      CharLit(s) | StringLit(s) | Number(s) =>
+        span(class="text-orange-800 dark:text-orange-300", s)
+      Comment(s) => span(class="text-green-800 dark:text-emerald-400", s)
+      Attr(s) => span(class="text-fuchsia-600 dark:text-fuchsia-300", s)
       QualIdent(path, name) =>
         if kind is Signature {
           span(class="group/ident relative") <| [
@@ -58,18 +59,18 @@ pub fn code_block(
               class="absolute bottom-[120%] inset-0 flex items-center justify-center ",
             ) <| [
               div(
-                class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 border-gray-300 border px-2 py-1 bg-white rounded shadow-lg",
+                class="z-10 -translate-y-2/3 group-hover/ident:inline-block hidden text-gray-700 dark:text-slate-300 border-gray-300 dark:border-zinc-700 border px-2 py-1 bg-white dark:bg-zinc-900 rounded shadow-lg",
               ) <| [
                 text("@\{path}."),
-                span(class="text-blue-900", name),
+                span(class="text-blue-900 dark:text-indigo-300", name),
               ],
             ],
-            span(class="text-blue-900", name),
+            span(class="text-blue-900 dark:text-indigo-300", name),
           ]
         } else {
           span() <| [
-            span(class="text-gray-600", "@\{path}."),
-            span(class="text-blue-900", name),
+            span(class="text-gray-600 dark:text-slate-400", "@\{path}."),
+            span(class="text-blue-900 dark:text-indigo-300", name),
           ]
         }
     }

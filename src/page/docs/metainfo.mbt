@@ -16,7 +16,7 @@
 fn install_view(command : String, copied~ : Bool, emit : (Msg) -> Cmd) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
-    class="hover:bg-gray-100 active:bg-gray-200 bg-white md:shadow-xs transition-colors text-black text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
+    class="hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800 bg-white dark:bg-zinc-900 md:shadow-xs transition-colors text-black dark:text-slate-50 text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
     on_click=emit(CopyInstallCommand(command)),
   ) <| [
     span(class="overflow-x-auto text-nowrap", command),
@@ -27,7 +27,7 @@ fn install_view(command : String, copied~ : Bool, emit : (Msg) -> Cmd) -> Html {
 ///|
 fn tag_view(value : String) -> Html {
   div(
-    class="self-center border rounded bg-zinc-50 px-2 text-[12px] text-gray-600 overflow-hidden",
+    class="self-center border rounded bg-zinc-50 dark:bg-zinc-950 px-2 text-[12px] text-gray-600 dark:text-slate-400 overflow-hidden",
     value,
   )
 }
@@ -67,20 +67,20 @@ fn meta_sidebar(
 ) -> Html {
   let install_cmd = "moon add \{model.name}@\{model.version}"
   let install_icon = if install_copied { @config.ok } else { @config.clipboard }
-  div(class="text-sm text-gray-900 font-medium") <| [
+  div(class="text-sm text-gray-900 dark:text-slate-50 font-medium") <| [
     // Install
     div(class="mb-4") <| [
       p(class="font-semibold mb-1.5", "Install"),
       if model.name == "moonbitlang/core" {
-        p(class="text-gray-500", "Installed by default")
+        p(class="text-gray-500 dark:text-gray-400", "Installed by default")
       } else {
         div(
-          class="group/install hover:bg-gray-100 active:bg-gray-200 bg-white transition-colors text-[13px] px-2.5 py-1.5 font-mono border rounded relative cursor-pointer",
+          class="group/install hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800 bg-white dark:bg-zinc-900 transition-colors text-[13px] px-2.5 py-1.5 font-mono border rounded relative cursor-pointer",
           on_click=emit(CopyInstallCommand(install_cmd)),
         ) <| [
           span(class="break-all", install_cmd),
           div(
-            class="absolute right-1 top-0 bottom-0 flex items-center px-1 bg-gray-100 rounded opacity-0 group-hover/install:opacity-100 transition-opacity",
+            class="absolute right-1 top-0 bottom-0 flex items-center px-1 bg-gray-100 dark:bg-zinc-900 rounded opacity-0 group-hover/install:opacity-100 transition-opacity",
             img(class="size-4 ui-icon", src=install_icon),
           ),
         ]
@@ -89,7 +89,7 @@ fn meta_sidebar(
         nothing
       } else {
         a(
-          class="text-xs text-gray-400 hover:text-gray-600 mt-1.5 inline-block",
+          class="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 mt-1.5 inline-block",
           href="https://download.mooncakes.io/user/\{model.name}/\{model.version}.zip",
           "Download zip",
         )
@@ -101,7 +101,8 @@ fn meta_sidebar(
       _ =>
         div(class="border-t pt-3 mb-3 text-[13px]") <| [
           match model.description {
-            Some(d) => p(class="text-gray-500 line-clamp-3", d)
+            Some(d) =>
+              p(class="text-gray-500 dark:text-gray-400 line-clamp-3", d)
             None => nothing
           },
           match model.keywords {
@@ -111,7 +112,7 @@ fn meta_sidebar(
                 class="flex flex-wrap gap-1 mt-1.5",
                 keywords.map(fn(k) {
                   span(
-                    class="border rounded px-1.5 py-0.5 text-[11px] text-gray-500 bg-zinc-50",
+                    class="border rounded px-1.5 py-0.5 text-[11px] text-gray-500 dark:text-gray-400 bg-zinc-50 dark:bg-zinc-950",
                     k,
                   )
                 }),
@@ -182,12 +183,12 @@ fn meta_sidebar(
               class="font-mono text-[13px] flex justify-between gap-2 min-w-0",
             ) <| [
               a(
-                class="hover:underline text-gray-700 truncate",
+                class="hover:underline text-gray-700 dark:text-slate-300 truncate",
                 href="/docs/\{name}@\{version}",
                 title=name,
                 name,
               ),
-              span(class="text-gray-400 shrink-0", version),
+              span(class="text-gray-400 dark:text-slate-500 shrink-0", version),
             ]
           }),
         ),
@@ -208,7 +209,11 @@ fn meta_info(
       model.name.split("/").last().unwrap().to_owned(),
     ),
     match model.description {
-      Some(d) => p(class="text-gray-600 flex items-center text-sm", d)
+      Some(d) =>
+        p(
+          class="text-gray-600 dark:text-slate-400 flex items-center text-sm",
+          d,
+        )
       None => nothing
     },
     match model.keywords {
@@ -217,13 +222,16 @@ fn meta_info(
     },
   ]
   div(
-    class="md:my-4 py-2 bg-gray-50 md:rounded overflow-clip border-b md:border-b-0",
+    class="md:my-4 py-2 bg-gray-50 dark:bg-zinc-950 md:rounded overflow-clip border-b md:border-b-0",
   ) <| [
     model_description,
     // Install
     div(class="px-6 py-3 border-t") <| [
       if model.name == "moonbitlang/core" {
-        p(class="text-sm text-gray-500", "Installed by default")
+        p(
+          class="text-sm text-gray-500 dark:text-gray-400",
+          "Installed by default",
+        )
       } else {
         install_view(
           "moon add \{model.name}@\{model.version}",
@@ -235,7 +243,7 @@ fn meta_info(
         nothing
       } else {
         a(
-          class="text-xs text-gray-400 hover:text-gray-600 mt-1.5 inline-block",
+          class="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 mt-1.5 inline-block",
           href="https://download.mooncakes.io/user/\{model.name}/\{model.version}.zip",
           "Download zip",
         )
@@ -244,19 +252,19 @@ fn meta_info(
     // Meta grid
     div(class="px-6 py-3 border-t grid grid-cols-2 gap-x-4 gap-y-2 text-sm") <| [
       div() <| [
-        span(class="text-gray-400 text-xs", "Author"),
+        span(class="text-gray-400 dark:text-slate-500 text-xs", "Author"),
         div(
           a(href="/user/\{model.author}", class="hover:underline", model.author),
         ),
       ],
       div() <| [
-        span(class="text-gray-400 text-xs", "Version"),
+        span(class="text-gray-400 dark:text-slate-500 text-xs", "Version"),
         div(model.version),
       ],
       match model.license {
         Some(l) =>
           div() <| [
-            span(class="text-gray-400 text-xs", "License"),
+            span(class="text-gray-400 dark:text-slate-500 text-xs", "License"),
             div(l),
           ]
         None => nothing
@@ -264,7 +272,10 @@ fn meta_info(
       match model.repository {
         Some(repo) =>
           div(class="min-w-0") <| [
-            span(class="text-gray-400 text-xs", "Repository"),
+            span(
+              class="text-gray-400 dark:text-slate-500 text-xs",
+              "Repository",
+            ),
             div() <| [
               a(
                 class="hover:underline truncate block",
@@ -279,7 +290,10 @@ fn meta_info(
       },
       if model.updated_at is Some(updated_at) {
         div() <| [
-          span(class="text-gray-400 text-xs", "Last updated"),
+          span(
+            class="text-gray-400 dark:text-slate-500 text-xs",
+            "Last updated",
+          ),
           div(@util.get_relative_time(updated_at)),
         ]
       } else {
@@ -287,7 +301,7 @@ fn meta_info(
       },
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div() <| [
-          span(class="text-gray-400 text-xs", "Downloads"),
+          span(class="text-gray-400 dark:text-slate-500 text-xs", "Downloads"),
           div(format_downloads(model.downloads)),
         ]
       } else {
@@ -308,12 +322,12 @@ fn meta_info(
               class="font-mono text-[13px] flex justify-between gap-2 min-w-0",
             ) <| [
               a(
-                class="hover:underline text-gray-700 truncate",
+                class="hover:underline text-gray-700 dark:text-slate-300 truncate",
                 href="/docs/\{name}@\{version}",
                 title=name,
                 name,
               ),
-              span(class="text-gray-400 shrink-0", version),
+              span(class="text-gray-400 dark:text-slate-500 shrink-0", version),
             ]
           }),
         ),

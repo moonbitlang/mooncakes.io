@@ -37,16 +37,23 @@ fn breadcrumbs(
               lookup_path,
             )
           } else {
-            div(class="text-gray-700 font-normal", lookup_path)
+            div(
+              class="text-gray-700 dark:text-slate-300 font-normal",
+              lookup_path,
+            )
           }
-        _ => div(class="text-gray-700 font-normal", lookup_path)
+        _ =>
+          div(
+            class="text-gray-700 dark:text-slate-300 font-normal",
+            lookup_path,
+          )
       }
     }
     elems.push(elem)
   }
-  let separator = div(class="text-gray-300 text-base", " / ")
+  let separator = div(class="text-gray-300 dark:text-gray-500 text-base", " / ")
   div(
-    class="text-base text-gray-800 font-semibold flex gap-2",
+    class="text-base text-gray-800 dark:text-slate-200 font-semibold flex gap-2",
     elems.iter().intersperse(separator).collect(),
   )
 }

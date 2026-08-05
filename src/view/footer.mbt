@@ -3,7 +3,7 @@ pub fn footer() -> Html {
   let class = "hover:text-mooncake2 transition-colors"
   let host = current_host()
   div(
-    class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 flex flex-col md:flex-row justify-center gap-4 md:gap-8",
+    class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 dark:text-slate-400 flex flex-col md:flex-row justify-center gap-4 md:gap-8",
   ) <| [
     p("Powered by MoonBit"),
     a(href="https://github.com/moonbitlang/mooncakes.io", class~, "Site source"),

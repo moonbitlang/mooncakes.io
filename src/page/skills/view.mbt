@@ -15,13 +15,16 @@ fn command_line(
   )
   div(class="w-full") <| [
     div(
-      class="min-h-32 overflow-hidden rounded-md border border-gray-300 bg-zinc-950 text-left",
+      class="min-h-32 overflow-hidden rounded-md border border-gray-300 dark:border-zinc-700 bg-zinc-950 text-left",
     ) <| [
       div(class="flex h-8 items-center gap-1.5 border-b border-white/10 px-3") <| [
         span(class="h-2.5 w-2.5 rounded-full bg-red-400", ""),
         span(class="h-2.5 w-2.5 rounded-full bg-yellow-400", ""),
         span(class="h-2.5 w-2.5 rounded-full bg-green-500", ""),
-        span(class="ml-2 font-mono text-xs text-zinc-500", "moon runwasm"),
+        span(
+          class="ml-2 font-mono text-xs text-zinc-500 dark:text-gray-400",
+          "moon runwasm",
+        ),
       ],
       div(
         class="flex min-w-0 items-center overflow-hidden px-4 py-4 font-mono text-xs lg:text-sm",
@@ -91,26 +94,29 @@ fn runwasm_showcase(
     class="mx-auto w-full max-w-[90rem] px-4 pb-10 pt-16 sm:px-6 lg:px-8 lg:pt-20",
   ) <| [
     div(
-      class="overflow-hidden rounded-md border border-gray-300 bg-white shadow-sm",
+      class="overflow-hidden rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm",
     ) <| [
       div(
-        class="flex h-9 items-center gap-1.5 border-b border-gray-200 bg-gray-50 px-3",
+        class="flex h-9 items-center gap-1.5 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-3",
       ) <| [
         span(class="size-2 rounded-full bg-red-400", ""),
         span(class="size-2 rounded-full bg-yellow-400", ""),
         span(class="size-2 rounded-full bg-green-500", ""),
-        span(class="ml-2 font-mono text-xs text-gray-500", "Install moon"),
+        span(
+          class="ml-2 font-mono text-xs text-gray-500 dark:text-gray-400",
+          "Install moon",
+        ),
       ],
       div(
         class="grid gap-6 px-5 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:px-6",
       ) <| [
         div(class="min-w-0") <| [
           h2(
-            class="text-2xl font-bold tracking-normal text-gray-950",
+            class="text-2xl font-bold tracking-normal text-gray-950 dark:text-slate-50",
             "Run a published skill in one command",
           ),
           p(
-            class="mt-3 max-w-xl text-sm leading-6 text-gray-600",
+            class="mt-3 max-w-xl text-sm leading-6 text-gray-600 dark:text-slate-400",
             "Install moon, pick an optimized executable entry, and run the same sandboxed command across platforms with moon runwasm.",
           ),
           a(
@@ -163,7 +169,7 @@ fn hero_arrow() -> Html {
 
 ///|
 fn skills_page(header : Html, main : Html) -> Html {
-  div(class="skills-page w-full flex-col bg-white") <| [
+  div(class="skills-page w-full flex-col bg-white dark:bg-zinc-900") <| [
     header,
     div(class="min-h-screen flex-1") <| [
       div(class="relative flex h-full w-full flex-col", main),
@@ -186,29 +192,32 @@ fn hero_feature_card(
   let border_class = if highlighted {
     "border-mooncake2/40 shadow-mooncake2/10"
   } else {
-    "border-gray-200 shadow-gray-200/60"
+    "border-gray-200 dark:border-zinc-800 shadow-gray-200/60"
   }
   let action_class = if highlighted {
     "text-[#c7856b]"
   } else {
-    "text-gray-700"
+    "text-gray-700 dark:text-slate-300"
   }
   div(
-    class="relative flex min-h-[12rem] flex-col rounded-lg border \{border_class} bg-white px-4 py-4 shadow-sm",
+    class="relative flex min-h-[12rem] flex-col rounded-lg border \{border_class} bg-white dark:bg-zinc-900 px-4 py-4 shadow-sm",
   ) <| [
     div(class="flex items-start justify-between gap-4") <| [
-      span(class="font-mono text-xs tracking-[0.12em] text-gray-400", index),
+      span(
+        class="font-mono text-xs tracking-[0.12em] text-gray-400 dark:text-slate-500",
+        index,
+      ),
       div(
-        class="flex size-9 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-gray-50",
+        class="flex size-9 shrink-0 items-center justify-center rounded-full border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950",
       ) <| [
         img(class="size-4 ui-icon", src=icon),
       ],
     ],
     @html.h3(
-      class="mt-7 text-base font-semibold leading-tight tracking-normal text-gray-950",
+      class="mt-7 text-base font-semibold leading-tight tracking-normal text-gray-950 dark:text-slate-50",
       title,
     ),
-    p(class="mt-3 text-sm leading-6 text-gray-600", body),
+    p(class="mt-3 text-sm leading-6 text-gray-600 dark:text-slate-400", body),
     if action_href.is_empty() {
       @html.button(
         type_="button",
@@ -236,42 +245,44 @@ fn marketplace_hero(
   entries : Status[Array[WasmEntry]],
   emit~ : (Msg) -> Cmd,
 ) -> Html {
-  div(class="w-full border-b border-gray-200 bg-white text-gray-950") <| [
+  div(
+    class="w-full border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-gray-950 dark:text-slate-50",
+  ) <| [
     div(
       class="mx-auto w-full max-w-[92rem] px-4 py-8 text-center sm:px-6 lg:px-8 lg:py-10",
     ) <| [
       div(class="relative mx-auto max-w-5xl overflow-visible") <| [
         div(
-          class="skills-hero-word pointer-events-none absolute inset-x-0 -top-8 select-none text-7xl font-black tracking-tight text-gray-100 sm:text-8xl lg:text-9xl",
+          class="skills-hero-word pointer-events-none absolute inset-x-0 -top-8 select-none text-7xl font-black tracking-tight text-gray-100 dark:text-slate-400/10 sm:text-8xl lg:text-9xl",
           "SKILLS",
         ),
         div(
-          class="relative mx-auto inline-flex items-center gap-2 rounded-full border border-gray-300 bg-gray-50 px-3 py-1 font-mono text-xs uppercase tracking-wide text-gray-600",
+          class="relative mx-auto inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-950 px-3 py-1 font-mono text-xs uppercase tracking-wide text-gray-600 dark:text-slate-400",
         ) <| [
           span(class="size-2 rounded-full bg-mooncake2", ""),
           span("MoonBit / Sandboxed local commands"),
         ],
         h1(
-          class="relative mx-auto mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-normal text-gray-950 sm:text-5xl lg:text-6xl",
+          class="relative mx-auto mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-5xl lg:text-6xl",
           "MoonBit Skills Marketplace",
         ),
         p(
-          class="relative mx-auto mt-4 max-w-3xl text-base leading-7 text-gray-600 sm:text-lg",
+          class="relative mx-auto mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-slate-400 sm:text-lg",
           "Push a package and mooncakes.io automatically builds optimized, cross-platform executable binaries that are easy to run in a local sandbox.",
         ),
         div(
           class="relative mt-6 flex flex-wrap items-center justify-center gap-2",
         ) <| [
           span(
-            class="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-600 shadow-sm",
+            class="rounded-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-sm text-gray-600 dark:text-slate-400 shadow-sm",
             "\{skill_count(entries)} executable entries",
           ),
           span(
-            class="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-600 shadow-sm",
+            class="rounded-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-sm text-gray-600 dark:text-slate-400 shadow-sm",
             "local sandbox",
           ),
           span(
-            class="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-600 shadow-sm",
+            class="rounded-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-sm text-gray-600 dark:text-slate-400 shadow-sm",
             "cross-platform binaries",
           ),
         ],
@@ -287,7 +298,7 @@ fn marketplace_hero(
           ],
           a(
             href="https://www.moonbitlang.com/download/",
-            class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm transition-colors hover:border-gray-400 hover:bg-gray-50",
+            class="rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-slate-50 shadow-sm transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-50 dark:hover:bg-zinc-950",
             "Install moon",
           ),
         ],
@@ -302,23 +313,25 @@ fn source_context_section(
   emit~ : (Msg) -> Cmd,
 ) -> Html {
   div(class="mx-auto w-full max-w-[90rem] px-4 py-8 sm:px-6 lg:px-8") <| [
-    div(class="border-t border-gray-200 pt-7") <| [
+    div(class="border-t border-gray-200 dark:border-zinc-800 pt-7") <| [
       span(
-        class="inline-flex rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-600",
+        class="inline-flex rounded-full border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1 text-xs font-medium text-gray-600 dark:text-slate-400",
         "MoonBit wasm",
       ),
       h2(
-        class="mt-4 max-w-2xl text-2xl font-bold leading-tight tracking-normal text-gray-950 sm:text-3xl",
+        class="mt-4 max-w-2xl text-2xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-3xl",
         "Publish once, distribute safely across platforms",
       ),
-      div(class="mt-4 max-w-3xl space-y-3 text-sm leading-6 text-gray-600") <| [
+      div(
+        class="mt-4 max-w-3xl space-y-3 text-sm leading-6 text-gray-600 dark:text-slate-400",
+      ) <| [
         p() <| [
           @html.text(
             "Under the hood, mooncakes.io compiles each skill to optimized ",
           ),
           a(
             href="https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Concepts",
-            class="font-medium text-gray-900 underline underline-offset-2 hover:text-[#c7856b]",
+            class="font-medium text-gray-900 dark:text-slate-50 underline underline-offset-2 hover:text-[#c7856b]",
             "WebAssembly (Wasm)",
           ),
           @html.text(
@@ -358,23 +371,23 @@ fn source_context_section(
         ),
       ],
       div(
-        class="mt-6 flex flex-col gap-4 border-t border-gray-200 pt-5 lg:flex-row lg:items-center lg:justify-between",
+        class="mt-6 flex flex-col gap-4 border-t border-gray-200 dark:border-zinc-800 pt-5 lg:flex-row lg:items-center lg:justify-between",
       ) <| [
         p(
-          class="max-w-2xl text-sm leading-6 text-gray-600",
+          class="max-w-2xl text-sm leading-6 text-gray-600 dark:text-slate-400",
           "A published module gives users optimized executable binaries, SKILL.md context, and a consistent cross-platform artifact.",
         ),
         div(class="flex flex-wrap gap-2") <| [
           span(
-            class="inline-flex rounded-md border border-gray-300 bg-white px-3 py-1.5 font-mono text-xs font-semibold text-gray-900",
+            class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
             "\{skill_count(entries)} wasm entries",
           ),
           span(
-            class="inline-flex rounded-md border border-gray-300 bg-white px-3 py-1.5 font-mono text-xs font-semibold text-gray-900",
+            class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
             "moon-wasm-opt",
           ),
           span(
-            class="inline-flex rounded-md border border-gray-300 bg-white px-3 py-1.5 font-mono text-xs font-semibold text-gray-900",
+            class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
             "cross-platform wasm",
           ),
         ],
@@ -390,11 +403,11 @@ fn sticky_search(
   emit~ : (Msg) -> Cmd,
 ) -> Html {
   div(
-    class="skills-search-sticky sticky top-header z-20 border-b border-gray-200 px-4 py-4 backdrop-blur-md",
+    class="skills-search-sticky sticky top-header z-20 border-b border-gray-200 dark:border-zinc-800 bg-white/85 dark:bg-zinc-950/85 px-4 py-4 backdrop-blur-md",
   ) <| [
     div(class="relative mx-auto w-full max-w-5xl") <| [
       div(
-        class="overflow-hidden rounded-lg border border-mooncake2/35 bg-white shadow-sm shadow-mooncake2/10",
+        class="overflow-hidden rounded-lg border border-mooncake2/35 bg-white dark:bg-zinc-900 shadow-sm shadow-mooncake2/10",
       ) <| [
         div(
           class="flex h-8 items-center gap-1.5 border-b border-mooncake2/20 bg-mooncake2/5 px-3",
@@ -403,19 +416,19 @@ fn sticky_search(
           span(class="size-2 rounded-full bg-yellow-400", ""),
           span(class="size-2 rounded-full bg-green-500", ""),
           span(
-            class="ml-1 font-mono text-xs text-gray-500",
+            class="ml-1 font-mono text-xs text-gray-500 dark:text-gray-400",
             "Type to search \{skill_count(entries)} skills",
           ),
         ],
         div(class="flex items-center gap-2 px-4 py-4 font-mono text-sm") <| [
-          span(class="shrink-0 text-emerald-600", "$"),
-          span(class="shrink-0 text-gray-500", "find"),
+          span(class="shrink-0 text-emerald-600 dark:text-emerald-300", "$"),
+          span(class="shrink-0 text-gray-500 dark:text-gray-400", "find"),
           img(class="size-4 shrink-0 opacity-70 ui-icon", src=@config.SEARCH),
           input(
             input_type=Text,
             value=filter,
             placeholder="Filter skills ...",
-            class="min-w-0 flex-1 bg-transparent outline-none placeholder:text-gray-400",
+            class="min-w-0 flex-1 bg-transparent outline-none placeholder:text-gray-400 dark:placeholder:text-slate-500",
             on_input=x => emit(FilterChanged(x)),
           ),
         ],
@@ -460,11 +473,11 @@ fn entry_card(
     @config.clipboard
   }
   let copy_class = if copied {
-    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-emerald-300 bg-emerald-50 transition-colors hover:border-emerald-400 hover:bg-emerald-100 active:bg-emerald-200"
+    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950 transition-colors hover:border-emerald-400 dark:hover:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900 active:bg-emerald-200 dark:active:bg-emerald-800"
   } else if failed {
-    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-red-300 bg-red-50 transition-colors hover:border-red-400 hover:bg-red-100 active:bg-red-200"
+    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950 transition-colors hover:border-red-400 dark:hover:border-red-700 hover:bg-red-100 dark:hover:bg-red-900 active:bg-red-200 dark:active:bg-red-800"
   } else {
-    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-gray-300 bg-white transition-colors hover:border-gray-400 hover:bg-gray-100 active:bg-gray-200"
+    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800"
   }
   let copy_title = if copied {
     "Copied"
@@ -474,36 +487,41 @@ fn entry_card(
     "Copy command"
   }
   div(
-    class="skills-card group flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-gray-300 bg-white text-left transition-all hover:-translate-y-0.5 hover:border-gray-500 hover:shadow-xl hover:shadow-gray-300/60",
+    class="skills-card group flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-left transition-all hover:-translate-y-0.5 hover:border-gray-500 hover:shadow-xl hover:shadow-gray-300/60",
   ) <| [
     a(href=entry.detail_url, class="flex min-w-0 flex-1 flex-col") <| [
       div(
-        class="flex h-9 items-center justify-between gap-3 border-b border-gray-200 bg-gray-50 px-3",
+        class="flex h-9 items-center justify-between gap-3 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-3",
       ) <| [
         div(class="flex min-w-0 items-center gap-1.5") <| [
           span(class="size-2 rounded-full bg-red-400", ""),
           span(class="size-2 rounded-full bg-yellow-400", ""),
           span(class="size-2 rounded-full bg-green-500", ""),
           span(
-            class="ml-1 min-w-0 truncate font-mono text-xs text-gray-500",
+            class="ml-1 min-w-0 truncate font-mono text-xs text-gray-500 dark:text-gray-400",
             "\{skill_name}.wasm",
           ),
         ],
         span(
-          class="shrink-0 font-mono text-[11px] text-gray-400",
+          class="shrink-0 font-mono text-[11px] text-gray-400 dark:text-slate-500",
           @util.get_relative_time(entry.created_at),
         ),
       ],
       div(class="min-h-32 flex-1 px-4 py-4") <| [
         div(class="flex min-w-0 items-center gap-2") <| [
           author_avatar(entry.author, entry.author_avatar),
-          div(class="min-w-0 truncate font-mono text-sm text-gray-600") <| [
-            span(class="text-sky-600", "from "),
-            span(class="text-emerald-700", "\"\{entry.module_}\""),
+          div(
+            class="min-w-0 truncate font-mono text-sm text-gray-600 dark:text-slate-400",
+          ) <| [
+            span(class="text-sky-600 dark:text-sky-300", "from "),
+            span(
+              class="text-emerald-700 dark:text-emerald-300",
+              "\"\{entry.module_}\"",
+            ),
           ],
         ],
         p(
-          class="mt-4 min-h-16 line-clamp-3 text-sm leading-6 text-gray-600",
+          class="mt-4 min-h-16 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-slate-400",
           if entry.description.is_empty() {
             "No description provided."
           } else {
@@ -513,10 +531,10 @@ fn entry_card(
       ],
     ],
     div(
-      class="relative z-10 min-w-0 border-t border-gray-200 bg-gray-50 px-3 py-0.5 pr-11",
+      class="relative z-10 min-w-0 border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-3 py-0.5 pr-11",
     ) <| [
       span(
-        class="block min-w-0 truncate font-mono text-[11px] leading-7 text-gray-500",
+        class="block min-w-0 truncate font-mono text-[11px] leading-7 text-gray-500 dark:text-gray-400",
         run_cmd,
       ),
       @html.button(
@@ -535,33 +553,48 @@ fn entry_card(
 fn skeleton_skill_cards(count : Int) -> Html {
   let card = fn() {
     div(
-      class="flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-gray-200 bg-white",
+      class="flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
     ) <| [
       div(
-        class="flex h-9 items-center justify-between gap-3 border-b border-gray-200 bg-gray-50 px-3",
+        class="flex h-9 items-center justify-between gap-3 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-3",
       ) <| [
         div(class="flex min-w-0 items-center gap-1.5") <| [
-          span(class="size-2 rounded-full bg-gray-200", ""),
-          span(class="size-2 rounded-full bg-gray-200", ""),
-          span(class="size-2 rounded-full bg-gray-200", ""),
-          div(class="ml-1 h-3 w-24 rounded bg-gray-200", nothing),
+          span(class="size-2 rounded-full bg-gray-200 dark:bg-gray-800", ""),
+          span(class="size-2 rounded-full bg-gray-200 dark:bg-gray-800", ""),
+          span(class="size-2 rounded-full bg-gray-200 dark:bg-gray-800", ""),
+          div(
+            class="ml-1 h-3 w-24 rounded bg-gray-200 dark:bg-gray-800",
+            nothing,
+          ),
         ],
-        div(class="h-3 w-14 shrink-0 rounded bg-gray-200", nothing),
+        div(
+          class="h-3 w-14 shrink-0 rounded bg-gray-200 dark:bg-gray-800",
+          nothing,
+        ),
       ],
       div(class="min-h-28 flex-1 px-4 py-4") <| [
         div(class="flex min-w-0 items-center gap-2") <| [
-          div(class="size-5 shrink-0 rounded-full bg-gray-200", nothing),
-          div(class="h-4 w-36 rounded bg-gray-200", nothing),
+          div(
+            class="size-5 shrink-0 rounded-full bg-gray-200 dark:bg-gray-800",
+            nothing,
+          ),
+          div(class="h-4 w-36 rounded bg-gray-200 dark:bg-gray-800", nothing),
         ],
-        div(class="mt-3 h-5 w-3/4 rounded bg-gray-200", nothing),
-        div(class="mt-2 h-5 w-1/2 rounded bg-gray-200", nothing),
+        div(
+          class="mt-3 h-5 w-3/4 rounded bg-gray-200 dark:bg-gray-800",
+          nothing,
+        ),
+        div(
+          class="mt-2 h-5 w-1/2 rounded bg-gray-200 dark:bg-gray-800",
+          nothing,
+        ),
       ],
       div(
-        class="flex items-center gap-2 border-t border-gray-200 bg-gray-50 px-3 py-2",
+        class="flex items-center gap-2 border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-3 py-2",
       ) <| [
-        div(class="h-3 flex-1 rounded bg-gray-200", nothing),
+        div(class="h-3 flex-1 rounded bg-gray-200 dark:bg-gray-800", nothing),
         div(
-          class="size-7 shrink-0 rounded border border-gray-200 bg-white",
+          class="size-7 shrink-0 rounded border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
           nothing,
         ),
       ],
@@ -595,7 +628,7 @@ fn list_content(
       }
       if visible_entries.is_empty() {
         div(
-          class="mx-auto w-full max-w-[90rem] px-4 py-10 text-center text-sm text-gray-400 sm:px-6 lg:px-8",
+          class="mx-auto w-full max-w-[90rem] px-4 py-10 text-center text-sm text-gray-400 dark:text-slate-500 sm:px-6 lg:px-8",
           "No skills found.",
         )
       } else {
@@ -616,7 +649,7 @@ fn list_content(
 fn skills_logo() -> Html {
   a(
     href=if current_host() == "skills.mooncakes.io" { "/" } else { "/skills" },
-    class="border-gray-300 font-title mx-2 font-semibold flex items-center text-nowrap",
+    class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
     "🥮 skills.mooncakes.io",
   )
 }
@@ -632,17 +665,17 @@ fn list_view(
   copied_command : String,
   showcase_index : Int,
   showcase_chars : Int,
+  app_actions : Html,
   emit~ : (Msg) -> Cmd,
 ) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   skills_page(
     @view.navbar(
       left=skills_logo(),
       left_extra=span(
-        class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500",
+        class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
         "experimental",
       ),
-      right=theme_toggle,
+      right=app_actions,
     ),
     div(class="w-full") <| [
       marketplace_hero(entries, emit~),
@@ -661,7 +694,7 @@ fn action_link(href : String, label : String) -> Html {
     href~,
     download=download_filename(href, label),
     escape=true,
-    class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-mooncake2 hover:text-gray-900",
+    class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-sm font-medium text-gray-700 dark:text-slate-300 transition-colors hover:border-mooncake2 hover:text-gray-900 dark:hover:text-slate-50",
   ) <| [
     img(class="size-4 shrink-0 ui-icon", src=@config.download),
     span(label),
@@ -685,19 +718,24 @@ fn run_command_view(
   emit : (Msg) -> Cmd,
 ) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
-  div(class="mt-4 overflow-hidden rounded-md border border-gray-300 bg-white") <| [
+  div(
+    class="mt-4 overflow-hidden rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900",
+  ) <| [
     div(
-      class="flex h-9 items-center gap-1.5 border-b border-gray-200 bg-gray-50 px-3",
+      class="flex h-9 items-center gap-1.5 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-3",
     ) <| [
       span(class="size-2 rounded-full bg-red-400", ""),
       span(class="size-2 rounded-full bg-yellow-400", ""),
       span(class="size-2 rounded-full bg-green-500", ""),
-      span(class="ml-1 font-mono text-xs text-gray-500", "moon runwasm"),
+      span(
+        class="ml-1 font-mono text-xs text-gray-500 dark:text-gray-400",
+        "moon runwasm",
+      ),
     ],
     div(class="flex min-w-0 items-center gap-2 px-3 py-3") <| [
       span(class="min-w-0 flex-1 break-all font-mono text-sm", command),
       @html.button(
-        class="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 bg-white transition-colors hover:border-gray-400 hover:bg-gray-100 active:bg-gray-200",
+        class="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
         on_click=emit(CopyRunCommand(command)),
       ) <| [
         img(class="pointer-events-none size-4 ui-icon", src=icon),
@@ -785,7 +823,7 @@ fn readme_content(entry : WasmEntry, readme : Status[String]) -> Html {
     Loading => @view.skeleton_docs_content()
     Failed | Success("") =>
       p(
-        class="mt-8 text-center text-sm text-gray-400",
+        class="mt-8 text-center text-sm text-gray-400 dark:text-slate-500",
         "\{skill_path(entry)} does not have a SKILL.md file",
       )
     Success(content) =>
@@ -800,11 +838,16 @@ fn readme_content(entry : WasmEntry, readme : Status[String]) -> Html {
 
 ///|
 fn sidebar_window(title : String, body : Html) -> Html {
-  div(class="overflow-hidden rounded-xl border border-gray-300 bg-white") <| [
+  div(
+    class="overflow-hidden rounded-xl border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900",
+  ) <| [
     div(
-      class="flex h-10 items-center justify-between gap-3 border-b border-gray-300 bg-gray-50 px-4",
+      class="flex h-10 items-center justify-between gap-3 border-b border-gray-300 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-950 px-4",
     ) <| [
-      span(class="min-w-0 truncate font-mono text-xs text-gray-500", title),
+      span(
+        class="min-w-0 truncate font-mono text-xs text-gray-500 dark:text-gray-400",
+        title,
+      ),
     ],
     body,
   ]
@@ -812,9 +855,11 @@ fn sidebar_window(title : String, body : Html) -> Html {
 
 ///|
 fn metadata_row(label : String, value : Html) -> Html {
-  div(class="border-b border-gray-100 py-3 last:border-b-0") <| [
+  div(
+    class="border-b border-gray-100 dark:border-zinc-800 py-3 last:border-b-0",
+  ) <| [
     div(
-      class="font-mono text-[11px] uppercase tracking-wide text-gray-400",
+      class="font-mono text-[11px] uppercase tracking-wide text-gray-400 dark:text-slate-500",
       label,
     ),
     div(class="mt-1 min-w-0", value),
@@ -825,7 +870,10 @@ fn metadata_row(label : String, value : Html) -> Html {
 fn metadata_text_row(label : String, value : String) -> Html {
   metadata_row(
     label,
-    div(class="min-w-0 break-words font-mono text-sm text-gray-800", value),
+    div(
+      class="min-w-0 break-words font-mono text-sm text-gray-800 dark:text-slate-200",
+      value,
+    ),
   )
 }
 
@@ -837,7 +885,7 @@ fn metadata_link_row(label : String, href : String, value : String) -> Html {
       href~,
       escape=true,
       title=value,
-      class="block min-w-0 break-words text-sm text-gray-800 hover:text-gray-950 hover:underline",
+      class="block min-w-0 break-words text-sm text-gray-800 dark:text-slate-200 hover:text-gray-950 dark:hover:text-slate-50 hover:underline",
       value,
     ),
   )
@@ -851,7 +899,7 @@ fn metadata_author_row(entry : WasmEntry) -> Html {
       author_avatar(entry.author, entry.author_avatar),
       a(
         href="/user/\{entry.author}",
-        class="min-w-0 break-words font-mono text-sm text-gray-800 hover:text-gray-950 hover:underline",
+        class="min-w-0 break-words font-mono text-sm text-gray-800 dark:text-slate-200 hover:text-gray-950 dark:hover:text-slate-50 hover:underline",
         entry.author,
       ),
     ],
@@ -871,7 +919,7 @@ fn skill_files_window() -> Html {
     "$ files",
     div(class="px-3 py-3") <| [
       div(
-        class="inline-flex rounded-md border border-gray-300 bg-white px-3 py-1.5 font-mono text-xs font-semibold text-gray-900",
+        class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
         "SKILL.md",
       ),
     ],
@@ -937,7 +985,7 @@ fn copy_skill_button(readme : Status[String], emit : (Msg) -> Cmd) -> Html {
   match readme {
     Success(content) if !content.trim().is_empty() =>
       @html.button(
-        class="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 bg-white transition-colors hover:border-gray-400 hover:bg-gray-100 active:bg-gray-200",
+        class="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
         title="Copy skill",
         type_="button",
         on_click=emit(CopySkill(content)),
@@ -954,21 +1002,26 @@ fn skill_markdown_window(
   readme : Status[String],
   emit : (Msg) -> Cmd,
 ) -> Html {
-  div(class="overflow-hidden rounded-xl border border-gray-300 bg-white") <| [
+  div(
+    class="overflow-hidden rounded-xl border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900",
+  ) <| [
     div(
-      class="flex h-10 items-center justify-between gap-3 border-b border-gray-300 bg-gray-50 px-3",
+      class="flex h-10 items-center justify-between gap-3 border-b border-gray-300 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-950 px-3",
     ) <| [
       div(class="flex min-w-0 items-center gap-1.5") <| [
         span(class="size-2 rounded-full bg-red-400", ""),
         span(class="size-2 rounded-full bg-yellow-400", ""),
         span(class="size-2 rounded-full bg-green-500", ""),
         span(
-          class="ml-1 min-w-0 truncate font-mono text-xs text-gray-500",
+          class="ml-1 min-w-0 truncate font-mono text-xs text-gray-500 dark:text-gray-400",
           "SKILL.md",
         ),
       ],
       div(class="flex shrink-0 items-center gap-2") <| [
-        span(class="font-mono text-[11px] text-gray-400", "readonly"),
+        span(
+          class="font-mono text-[11px] text-gray-400 dark:text-slate-500",
+          "readonly",
+        ),
         copy_skill_button(readme, emit),
       ],
     ],
@@ -995,14 +1048,16 @@ fn detail_content(
     ) <| [
       div(class="min-w-0") <| [
         h1(
-          class="break-words font-mono text-4xl font-bold leading-tight tracking-normal text-gray-950 sm:text-5xl",
+          class="break-words font-mono text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-5xl",
           skill_name,
         ),
         if entry.description.is_empty() {
           nothing
         } else {
-          p(class="mt-3 max-w-3xl font-mono text-sm leading-6 text-gray-600") <| [
-            span(class="text-emerald-600", "// "),
+          p(
+            class="mt-3 max-w-3xl font-mono text-sm leading-6 text-gray-600 dark:text-slate-400",
+          ) <| [
+            span(class="text-emerald-600 dark:text-emerald-300", "// "),
             span(entry.description),
           ]
         },
@@ -1027,39 +1082,62 @@ fn detail_loading_skeleton() -> Html {
       class="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] animate-pulse",
     ) <| [
       div(class="min-w-0") <| [
-        div(class="h-9 w-80 max-w-full rounded-md bg-gray-200", nothing),
-        div(class="mt-6 h-12 w-2/3 rounded bg-gray-200", nothing),
-        div(class="mt-4 h-5 w-4/5 rounded bg-gray-200", nothing),
         div(
-          class="mt-6 overflow-hidden rounded-md border border-gray-200 bg-white",
+          class="h-9 w-80 max-w-full rounded-md bg-gray-200 dark:bg-gray-800",
+          nothing,
+        ),
+        div(
+          class="mt-6 h-12 w-2/3 rounded bg-gray-200 dark:bg-gray-800",
+          nothing,
+        ),
+        div(
+          class="mt-4 h-5 w-4/5 rounded bg-gray-200 dark:bg-gray-800",
+          nothing,
+        ),
+        div(
+          class="mt-6 overflow-hidden rounded-md border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
         ) <| [
-          div(class="h-9 border-b border-gray-200 bg-gray-50", nothing),
+          div(
+            class="h-9 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950",
+            nothing,
+          ),
           div(class="flex gap-6 px-4 py-3") <| [
-            div(class="h-4 w-24 rounded bg-gray-200", nothing),
-            div(class="h-4 w-28 rounded bg-gray-200", nothing),
-            div(class="h-4 w-24 rounded bg-gray-200", nothing),
+            div(class="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800", nothing),
+            div(class="h-4 w-28 rounded bg-gray-200 dark:bg-gray-800", nothing),
+            div(class="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800", nothing),
           ],
         ],
         div(
-          class="mt-8 overflow-hidden rounded-md border border-gray-200 bg-white",
+          class="mt-8 overflow-hidden rounded-md border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
         ) <| [
-          div(class="h-10 border-b border-gray-200 bg-gray-50", nothing),
+          div(
+            class="h-10 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950",
+            nothing,
+          ),
           div(class="space-y-3 px-5 py-6 md:px-8") <| [
-            div(class="h-6 w-1/2 rounded bg-gray-200", nothing),
-            div(class="h-4 w-full rounded bg-gray-200", nothing),
-            div(class="h-4 w-5/6 rounded bg-gray-200", nothing),
-            div(class="h-4 w-2/3 rounded bg-gray-200", nothing),
+            div(class="h-6 w-1/2 rounded bg-gray-200 dark:bg-gray-800", nothing),
+            div(
+              class="h-4 w-full rounded bg-gray-200 dark:bg-gray-800",
+              nothing,
+            ),
+            div(class="h-4 w-5/6 rounded bg-gray-200 dark:bg-gray-800", nothing),
+            div(class="h-4 w-2/3 rounded bg-gray-200 dark:bg-gray-800", nothing),
           ],
         ],
       ],
-      div(class="overflow-hidden rounded-lg border border-gray-200 bg-white") <| [
-        div(class="h-10 border-b border-gray-200 bg-gray-50", nothing),
+      div(
+        class="overflow-hidden rounded-lg border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
+      ) <| [
+        div(
+          class="h-10 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950",
+          nothing,
+        ),
         div(class="space-y-4 px-4 py-5") <| [
-          div(class="h-6 w-36 rounded bg-gray-200", nothing),
-          div(class="h-4 w-full rounded bg-gray-200", nothing),
-          div(class="h-9 w-full rounded bg-gray-200", nothing),
-          div(class="h-12 w-full rounded bg-gray-200", nothing),
-          div(class="h-10 w-full rounded bg-gray-200", nothing),
+          div(class="h-6 w-36 rounded bg-gray-200 dark:bg-gray-800", nothing),
+          div(class="h-4 w-full rounded bg-gray-200 dark:bg-gray-800", nothing),
+          div(class="h-9 w-full rounded bg-gray-200 dark:bg-gray-800", nothing),
+          div(class="h-12 w-full rounded bg-gray-200 dark:bg-gray-800", nothing),
+          div(class="h-10 w-full rounded bg-gray-200 dark:bg-gray-800", nothing),
         ],
       ],
     ],
@@ -1071,9 +1149,9 @@ fn detail_view(
   entry_status : Status[WasmEntry],
   readme : Status[String],
   command_copied~ : Bool,
+  app_actions : Html,
   emit~ : (Msg) -> Cmd,
 ) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   let content = match entry_status {
     Loading => detail_loading_skeleton()
     Failed => @view.load_failed("skill")
@@ -1083,17 +1161,17 @@ fn detail_view(
     @view.navbar(
       left=skills_logo(),
       left_extra=span(
-        class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500",
+        class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
         "experimental",
       ),
-      right=theme_toggle,
+      right=app_actions,
     ),
     div(class="w-full", content),
   )
 }
 
 ///|
-pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
+pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
   match model {
     List(entries, filter~, copied_command~, showcase_index~, showcase_chars~) =>
       list_view(
@@ -1102,9 +1180,10 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
         copied_command,
         showcase_index,
         showcase_chars,
+        app_actions,
         emit~,
       )
     Detail(entry_status, readme~, command_copied~) =>
-      detail_view(entry_status, readme, command_copied~, emit~)
+      detail_view(entry_status, readme, command_copied~, app_actions, emit~)
   }
 }

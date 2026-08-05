@@ -189,13 +189,28 @@ fn sidebar_icon(id : ItemTarget, expanded : Bool) -> Html {
 ///|
 fn symbol_icon(kind : SymbolKind) -> Html {
   let (bg, label) = match kind {
-    KReadme => ("bg-gray-200 text-gray-500", "R")
-    KTrait => ("bg-blue-100 text-blue-600", "Tr")
-    KError => ("bg-red-100 text-red-600", "E")
-    KType => ("bg-emerald-100 text-emerald-600", "T")
-    KTypeAlias => ("bg-violet-100 text-violet-600", "U")
-    KValue => ("bg-amber-100 text-amber-600", "V")
-    KMethod => ("bg-orange-100 text-orange-600", "f")
+    KReadme =>
+      ("bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400", "R")
+    KTrait =>
+      ("bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-300", "Tr")
+    KError => ("bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400", "E")
+    KType =>
+      (
+        "bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300",
+        "T",
+      )
+    KTypeAlias =>
+      (
+        "bg-violet-100 dark:bg-violet-950 text-violet-600 dark:text-violet-300",
+        "U",
+      )
+    KValue =>
+      ("bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400", "V")
+    KMethod =>
+      (
+        "bg-orange-100 dark:bg-orange-950 text-orange-600 dark:text-orange-400",
+        "f",
+      )
   }
   div(
     class="size-4 shrink-0 rounded flex items-center justify-center text-[8px] font-bold leading-none \{bg}",
@@ -209,17 +224,17 @@ fn sidebar(
   sidebar_state : SortedSet[ItemTarget],
   emit : (Msg) -> Cmd,
 ) -> Html {
-  div(class="text-gray-700 flex flex-col") <| [
+  div(class="text-gray-700 dark:text-slate-300 flex flex-col") <| [
     div(
-      class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 mb-1 bg-[var(--sidebar-bg)]",
+      class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
     ) <| [
       @html.button(
-        class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
+        class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
         on_click=emit(ExpandAllSidebar),
         "Expand all",
       ),
       @html.button(
-        class="text-[11px] text-gray-400 hover:text-gray-600 px-1.5 py-0.5 rounded hover:bg-gray-100 transition-colors",
+        class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
         on_click=emit(CollapseAllSidebar),
         "Collapse all",
       ),
@@ -243,7 +258,7 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
   let package_path = package_path.trim(char_set="/")
   div(class="mx-4 md:mx-0 mt-8 mb-4") <| [
     h3(
-      class="text-gray-800 font-semibold text-lg mb-3 border-b pb-2",
+      class="text-gray-800 dark:text-slate-200 font-semibold text-lg mb-3 border-b pb-2",
       "Source Files",
     ),
     ul(
@@ -251,7 +266,7 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
       files.map(fn(x) {
         @html.li() <| [
           a(
-            class="block text-sm font-mono text-blue-600 hover:text-blue-800 hover:bg-gray-50 px-2 py-1 rounded transition-colors",
+            class="block text-sm font-mono text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-gray-50 dark:hover:bg-zinc-950 px-2 py-1 rounded transition-colors",
             href=@config.asset_url("/assets/\{package_path}/\{x}.html"),
             escape=true,
             x,

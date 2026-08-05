@@ -25,37 +25,39 @@ fn versioned_path(mod : ModuleIndex) -> String {
 fn simple_module_card(mod : ModuleIndex) -> Html {
   let href = "/docs/\{versioned_path(mod)}"
   div(
-    class="h-24 lg:h-30 flex-nowrap bg-white text-gray-700 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-shadow",
+    class="h-24 lg:h-30 flex-nowrap bg-white dark:bg-zinc-900 text-gray-700 dark:text-slate-300 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 dark:border-zinc-800 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-shadow",
   ) <| [
     div(
       class="shrink-0 whitespace-nowrap flex flex-row text-base font-semibold",
     ) <| [
       a(
         href="/user/\{mod.author}",
-        class="hover:bg-gray-200 text-gray-600 font-medium transition-colors rounded px-1 -mx-1",
+        class="hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-600 dark:text-slate-400 font-medium transition-colors rounded px-1 -mx-1",
         span(mod.author),
       ),
       a(href~, class="flex") <| [
-        span(class="px-1 text-gray-300", "/"),
-        span(class="text-black", mod.name),
+        span(class="px-1 text-gray-300 dark:text-gray-500", "/"),
+        span(class="text-black dark:text-slate-50", mod.name),
       ],
     ],
     a(href~, class="overflow-hidden flex-1 py1 flex flex-col") <| [
       div(class="overflow-hidden flex-1 py1") <| [
         p(
-          class="line-clamp-1 lg:line-clamp-2 py-1 text-gray-500 text-sm",
+          class="line-clamp-1 lg:line-clamp-2 py-1 text-gray-500 dark:text-gray-400 text-sm",
           mod.description.unwrap_or(""),
         ),
       ],
       div(class="flex items-baseline gap-2") <| [
         if mod.is_new {
-          @view.badge(class="bg-gray-700 text-white", [text("NEW")])
+          @view.badge(class="bg-gray-700 dark:bg-gray-700 text-white", [
+            text("NEW"),
+          ])
         } else {
           nothing
         },
-        span(class="text-xs text-gray-500", mod.version),
+        span(class="text-xs text-gray-500 dark:text-gray-400", mod.version),
         p(
-          class="text-xs flex-1 text-right text-gray-500",
+          class="text-xs flex-1 text-right text-gray-500 dark:text-gray-400",
           mod.created_at.map(@util.get_relative_time).unwrap_or(""),
         ),
       ],
@@ -72,7 +74,7 @@ fn module_card(mod : ModuleIndex) -> Html {
         class="flex h-8 min-w-0 flex-1 flex-wrap gap-2 overflow-hidden",
         keywords.map(keyword => {
           span(
-            class="my-2 h-5 max-w-full shrink-0 truncate rounded border border-gray-200 bg-gray-50 px-2 text-xs text-gray-600",
+            class="my-2 h-5 max-w-full shrink-0 truncate rounded border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-2 text-xs text-gray-600 dark:text-slate-400",
             keyword,
           )
         }),
@@ -82,7 +84,7 @@ fn module_card(mod : ModuleIndex) -> Html {
     None => div(class="flex-grow", nothing)
     Some(description) =>
       p(
-        class="my-3 line-clamp-2 grow break-words text-sm leading-5 text-gray-700",
+        class="my-3 line-clamp-2 grow break-words text-sm leading-5 text-gray-700 dark:text-slate-300",
         description,
       )
   }
@@ -91,25 +93,27 @@ fn module_card(mod : ModuleIndex) -> Html {
     None => nothing
   }
   div(
-    class="select-none p-4 min-h-32 rounded flex flex-col border bg-white hover:bg-gray-100 transition-colors",
+    class="select-none p-4 min-h-32 rounded flex flex-col border bg-white dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
   ) <| [
     div(class="flex flex-row text-base font-semibold") <| [
       a(
         href="/user/\{mod.author}",
-        class="hover:bg-gray-200 transition-colors rounded px-1 -mx-1",
-        h2(class="text-gray-500", mod.author),
+        class="hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors rounded px-1 -mx-1",
+        h2(class="text-gray-500 dark:text-gray-400", mod.author),
       ),
       a(href="/docs/\{versioned_path(mod)}", class="flex") <| [
-        h2(class="px-1 text-gray-300", "/"),
+        h2(class="px-1 text-gray-300 dark:text-gray-500", "/"),
         h2(class="", mod.name),
       ],
     ],
     a(href="/docs/\{versioned_path(mod)}", class="min-w-0 flex-1 flex flex-col") <| [
       description,
-      div(class="flex min-w-0 items-center gap-2 text-sm text-gray-600") <| [
+      div(
+        class="flex min-w-0 items-center gap-2 text-sm text-gray-600 dark:text-slate-400",
+      ) <| [
         keywords,
         div(class="ml-auto flex shrink-0 items-center gap-2") <| [
-          span(class="text-xs text-gray-400", mod.version),
+          span(class="text-xs text-gray-400 dark:text-slate-500", mod.version),
           time,
         ],
       ],
@@ -156,7 +160,10 @@ fn pinned() -> Html {
     },
   ]
   div(class="container lg:w-4/5 px-4 mt-4 mb-6") <| [
-    h1(class="py-2 text-sm font-bold text-gray-600", "Pinned modules"),
+    h1(
+      class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400",
+      "Pinned modules",
+    ),
     div(
       class="grid grid-cols-1 lg:grid-cols-3 gap-2",
       pinned.map(fn(m) { compact_module_card(m) }),
@@ -174,16 +181,25 @@ fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
   }
   a(
     href~,
-    class="block bg-white border border-gray-200 rounded-md px-4 py-3.5 hover:border-mooncake2 hover:shadow-sm transition-all",
+    class="block bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-md px-4 py-3.5 hover:border-mooncake2 hover:shadow-sm transition-all",
   ) <| [
     div(class="flex items-baseline gap-1 text-sm") <| [
-      span(class="text-gray-500 font-normal truncate", mod.author),
-      span(class="text-gray-300", "/"),
-      span(class="text-gray-900 font-semibold truncate", mod.name),
-      span(class="text-xs text-gray-400 ml-auto shrink-0", badge),
+      span(
+        class="text-gray-500 dark:text-gray-400 font-normal truncate",
+        mod.author,
+      ),
+      span(class="text-gray-300 dark:text-gray-500", "/"),
+      span(
+        class="text-gray-900 dark:text-slate-50 font-semibold truncate",
+        mod.name,
+      ),
+      span(
+        class="text-xs text-gray-400 dark:text-slate-500 ml-auto shrink-0",
+        badge,
+      ),
     ],
     p(
-      class="text-xs text-gray-600 line-clamp-2 mt-2.5 min-h-[2lh]",
+      class="text-xs text-gray-600 dark:text-slate-400 line-clamp-2 mt-2.5 min-h-[2lh]",
       mod.description.unwrap_or(""),
     ),
   ]
@@ -196,7 +212,7 @@ fn module_list_column(
   show_time? : Bool = false,
 ) -> Html {
   div(class="flex flex-col gap-2") <| [
-    h2(class="py-2 text-sm font-bold text-gray-600", title),
+    h2(class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400", title),
     ..modules
     .iter()
     .take(12)
@@ -237,7 +253,10 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
       let (key, value) = x
       let modules = value.map(simple_module_card)
       div(class="pt-2") <| [
-        h1(class="py-2 text-sm font-bold text-gray-600", key.to_string()),
+        h1(
+          class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400",
+          key.to_string(),
+        ),
         div(
           class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-4",
           modules,
@@ -253,7 +272,7 @@ fn search_result(mods : Array[ModuleIndex]) -> Html {
   div() <| [
     div(class="container lg:w-4/5 px-4") <| [
       h1(
-        class="p-4 text-sm font-bold text-gray-400 lg:border-0",
+        class="p-4 text-sm font-bold text-gray-400 dark:text-slate-500 lg:border-0",
         "SEARCH RESULT",
       ),
       div(class="grid grid-cols-1 gap-2", module_cards),
@@ -314,7 +333,10 @@ fn banner(
       p(class="text-2xl lg:text-3xl font-extralight", value),
       div(
         class="flex items-center justify-center",
-        p(class="text-sm lg:text-base text-gray-700 font-light", label),
+        p(
+          class="text-sm lg:text-base text-gray-700 dark:text-slate-300 font-light",
+          label,
+        ),
       ),
       div(
         class="hidden md:flex w-full flex-col-reverse",
@@ -333,7 +355,10 @@ fn banner(
       p(class="text-2xl lg:text-3xl font-extralight", value),
       div(
         class="flex items-center justify-center",
-        p(class="text-sm lg:text-base text-gray-700 font-light", label),
+        p(
+          class="text-sm lg:text-base text-gray-700 dark:text-slate-300 font-light",
+          label,
+        ),
       ),
     ]
   }
@@ -344,7 +369,7 @@ fn banner(
     div(
       class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[450px] xl:max-w-[520px] mt-4 lg:mt-0",
     ) <| [
-      div(class="text-slate-700 home-hero-copy") <| [
+      div(class="text-slate-700 dark:text-slate-300 home-hero-copy") <| [
         h1(class="text-2xl font-semibold lg:text-4xl", "The Package Registry"),
         h1(class="text-3xl font-semibold lg:text-4xl lg:mt-0") <| [
           text("for"),
@@ -352,7 +377,7 @@ fn banner(
           text("community"),
         ],
         h2(
-          class="hidden lg:block text-xl mt-4 text-zinc-500 gap-1",
+          class="hidden lg:block text-xl mt-4 text-zinc-500 dark:text-gray-400 gap-1",
           "Browse, search and share package and documentation",
         ),
       ],
@@ -364,7 +389,7 @@ fn banner(
           "bg-yellow-600 text-white",
         ),
         button(
-          "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 text-gray-800",
+          "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-slate-200",
         ),
       ],
     ],
@@ -392,7 +417,7 @@ fn banner(
 }
 
 ///|
-pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
+pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
   let module_list = if model.filter == "" {
     let pinned_modules = pinned()
     let highlights = match model.highlights {
@@ -433,7 +458,7 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
     let all_modules_section = div(class="pt-10 container lg:w-4/5 px-4") <| [
       div(class="flex justify-center py-2") <| [
         div(
-          class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 hover:text-yellow-900 transition-colors px-6 py-2 rounded-md hover:bg-gray-100",
+          class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors px-6 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900",
           on_click=emit(ToggleAllModules),
         ) <| [
           text(
@@ -479,7 +504,6 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
   } else {
     nothing
   }
-  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
   let hero = div(class="home-hero-shell pb-2 sm:pb-8") <| [
     @view.navbar(
       style=Fusion,
@@ -487,10 +511,10 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
         input_type=Text,
         value=model.filter,
         placeholder="Search modules ...",
-        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors",
+        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors dark:placeholder:text-slate-500",
         on_input=x => emit(FilterChanged(x)),
       ),
-      right=theme_toggle,
+      right=app_actions,
     ),
     div(class="hero-banner", banner),
   ]

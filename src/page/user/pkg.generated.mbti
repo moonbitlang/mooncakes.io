@@ -10,8 +10,6 @@ import {
 // Values
 pub fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html
 
-pub fn is_theme_toggle(Msg) -> Bool
-
 pub fn load(String, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
 pub fn profile(@util.Status[Profile]) -> @html.Html
@@ -20,7 +18,7 @@ pub fn published_modules(@util.Status[Array[(String, String)]]) -> @html.Html
 
 pub fn update(Msg, Model) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 

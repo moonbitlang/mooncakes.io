@@ -17,6 +17,6 @@ pub fn not_found() -> Html {
   div(class="flex flex-col items-center justify-center h-screen") <| [
     h1(class="text-4xl font-bold", "404"),
     p(class="text-lg", "Page not found"),
-    a(href="/", class="text-blue-500", "Go back to home"),
+    a(href="/", class="text-blue-500 dark:text-sky-300", "Go back to home"),
   ]
 }

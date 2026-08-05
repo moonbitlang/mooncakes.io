@@ -53,7 +53,9 @@ fn signature_view(
   module_version~ : String,
 ) -> Html {
   pre(class="text-wrap flex items-center") <| [
-    code(class="font-mono text-xs md:text-sm text-blue-800") <| [
+    code(
+      class="font-mono text-xs md:text-sm text-blue-800 dark:text-indigo-400",
+    ) <| [
       @view.code_block(content, kind=Signature, transform_link=fn(href) {
         versioned_docs_path(href, module_name, module_version)
       }),
@@ -113,8 +115,8 @@ fn type_path(
   let path = versioned_docs_path(ty.path, module_name, module_version)
   a(
     href="/docs/\{path}#\{ty.name}",
-    class="hover:text-gray-700 transition-colors underline underline-offset-4 text-gray-300",
-    span(class="text-gray-700", ty.name),
+    class="hover:text-gray-700 dark:hover:text-slate-200 transition-colors underline underline-offset-4 text-gray-300 dark:text-gray-500",
+    span(class="text-gray-700 dark:text-slate-300", ty.name),
   )
 }
 
@@ -128,13 +130,15 @@ fn impl_doc(
 ) -> Html {
   let { self_type, trait_type, methods } = doc
   let id = doc.get_id()
-  let signature : Html = pre(class="bg-gray-100 text-wrap pr-4") <| [
-    code(class="font-mono text-xs md:text-sm text-[#0033b3]") <| [
+  let signature : Html = pre(
+    class="bg-gray-100 dark:bg-zinc-900 text-wrap pr-4",
+  ) <| [
+    code(class="font-mono text-xs md:text-sm text-blue-800 dark:text-blue-300") <| [
       text("impl "),
       type_path(trait_type, module_name~, module_version~),
       text(" for "),
       span(
-        class="text-gray-700",
+        class="text-gray-700 dark:text-slate-300",
         stype(self_type, module_name~, module_version~),
       ),
     ],
@@ -266,14 +270,14 @@ fn document_item(
       }
       a(
         href=@config.asset_url("/assets/\{path}/\{loc.file}.html#\{loc.line}"),
-        class="text-xs font-semibold text-yellow-700 hover:text-yellow-900 transition-colors",
+        class="text-xs font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors",
         escape=true,
         "source",
       )
     }
   }
   let collapse_btn : Html = div(
-    class="w-8 h-8 hover:bg-gray-200 rounded-lg flex items-center justify-center",
+    class="w-8 h-8 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg flex items-center justify-center",
     on_click=emit(ToggleDocDetail(id)),
     img(src=icon, class="size-4 ui-icon"),
   )
@@ -283,9 +287,9 @@ fn document_item(
   let top_rule = match title {
     None =>
       if tight {
-        "border-t pt-2 border-gray-200 mt-3"
+        "border-t pt-2 border-gray-200 dark:border-zinc-800 mt-3"
       } else {
-        "border-t pt-4 border-gray-200 mt-8"
+        "border-t pt-4 border-gray-200 dark:border-zinc-800 mt-8"
       }
     Some(_) => "mt-10"
   }
@@ -298,7 +302,7 @@ fn document_item(
     None => (nothing, sig_buttons_abs, false)
     Some(title) => {
       let anchor = div(
-        class="text-gray-300 hover:text-gray-500 cursor-pointer transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
+        class="text-gray-300 dark:text-gray-500 hover:text-gray-500 dark:hover:text-slate-400 cursor-pointer transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
         on_click=emit(ClickAnchor(id)),
         "#",
       )
@@ -307,7 +311,7 @@ fn document_item(
         id~,
       ) <| [
         @html.h2(
-          class="text-gray-800 text-lg md:text-xl font-semibold py-2 relative",
+          class="text-gray-800 dark:text-slate-200 text-lg md:text-xl font-semibold py-2 relative",
         ) <| [
           anchor,
           text(title),
@@ -318,7 +322,7 @@ fn document_item(
     }
   }
   let anchor_class = if has_title { "" } else { " scroll-mt-header" }
-  let sig_class = "px-4 py-2.5 bg-gray-100 rounded-lg relative w-full \{header_style}\{anchor_class}"
+  let sig_class = "px-4 py-2.5 bg-gray-100 dark:bg-zinc-900 rounded-lg relative w-full \{header_style}\{anchor_class}"
   div(class="mb-3 group \{top_rule}") <| [
     title_view,
     if has_title {
@@ -380,14 +384,14 @@ fn misc_doc(
   let signature = div(
     id=name,
     class="py-1 w-full",
-    h3(class="text-base md:text-lg text-gray-800", name),
+    h3(class="text-base md:text-lg text-gray-800 dark:text-slate-200", name),
   )
-  let package_link_class = "font-mono text-sm px-1 py-[1px] bg-yellow-600/20 hover:bg-yellow-600/20 rounded"
+  let package_link_class = "font-mono text-sm px-1 py-[1px] bg-yellow-600/20 dark:bg-yellow-600/25 hover:bg-yellow-600/20 rounded"
   let tips = match @config.builtins_package_path.get(name) {
     None => nothing
     Some(pkg_path) =>
       div(
-        class="bg-mooncake border-mooncake2 border-opacity-50 text-yellow-800 border rounded px-6 py-4 my-2",
+        class="bg-mooncake dark:bg-stone-900 border-mooncake2 border-opacity-50 text-yellow-800 dark:text-yellow-300 border rounded px-6 py-4 my-2",
       ) <| [
         h3(class="text-base font-semibold", "Note"),
         p(class="mt-2") <| [
@@ -477,7 +481,7 @@ fn readme(
   } else {
     (
       p(
-        class="mt-3 mb-4 text-sm text-gray-400 text-center",
+        class="mt-3 mb-4 text-sm text-gray-400 dark:text-slate-500 text-center",
         "\{package_path} does not have a README file",
       ),
       @config.SECTION_OPEN,
@@ -485,14 +489,17 @@ fn readme(
   }
   div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [
     div(
-      class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 cursor-pointer select-none w-fit",
+      class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900 cursor-pointer select-none w-fit",
       on_click=emit(ToggleDocDetail("readme")),
     ) <| [
       img(src=icon, class="size-3.5 ui-icon"),
-      span(class="font-medium text-gray-500 text-xs tracking-wide", "README"),
+      span(
+        class="font-medium text-gray-500 dark:text-gray-400 text-xs tracking-wide",
+        "README",
+      ),
     ],
     body,
-    div(class="border-b border-gray-200 mt-4", nothing),
+    div(class="border-b border-gray-200 dark:border-zinc-800 mt-4", nothing),
   ]
 }
 
@@ -568,14 +575,14 @@ fn document(
 fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
   div(class="flex flex-col items-center justify-center py-12 w-full") <| [
     div(
-      class="bg-mooncake border border-mooncake2 rounded-lg p-8 w-full text-center",
+      class="bg-mooncake dark:bg-stone-900 border border-mooncake2 rounded-lg p-8 w-full text-center",
     ) <| [
       h3(
-        class="text-xl font-semibold text-yellow-800 mb-4",
+        class="text-xl font-semibold text-yellow-800 dark:text-yellow-300 mb-4",
         "⚠️ Package is too large to be displayed",
       ),
       p(
-        class="text-yellow-700 mb-6",
+        class="text-yellow-700 dark:text-yellow-400 mb-6",
         "This package contains over \{count} items.",
       ),
       button(

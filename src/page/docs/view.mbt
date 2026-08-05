@@ -11,7 +11,7 @@ fn icon_failed() -> Html {
       cy=10,
       r=9,
       fill="none",
-      stroke="#ef4444",
+      stroke="var(--color-red-500)",
       stroke_width=2,
     ),
     @svg.line(
@@ -19,7 +19,7 @@ fn icon_failed() -> Html {
       y1=7,
       x2=13,
       y2=13,
-      stroke="#ef4444",
+      stroke="var(--color-red-500)",
       stroke_width=2,
       stroke_linecap="round",
     ),
@@ -28,7 +28,7 @@ fn icon_failed() -> Html {
       y1=7,
       x2=7,
       y2=13,
-      stroke="#ef4444",
+      stroke="var(--color-red-500)",
       stroke_width=2,
       stroke_linecap="round",
     ),
@@ -48,7 +48,7 @@ fn icon_queued() -> Html {
       cy=10,
       r=9,
       fill="none",
-      stroke="#3b82f6",
+      stroke="var(--color-blue-500)",
       stroke_width=2,
     ),
     @svg.line(
@@ -56,7 +56,7 @@ fn icon_queued() -> Html {
       y1=5,
       x2=10,
       y2=10,
-      stroke="#3b82f6",
+      stroke="var(--color-blue-500)",
       stroke_width=2,
       stroke_linecap="round",
     ),
@@ -65,7 +65,7 @@ fn icon_queued() -> Html {
       y1=10,
       x2=14,
       y2=10,
-      stroke="#3b82f6",
+      stroke="var(--color-blue-500)",
       stroke_width=2,
       stroke_linecap="round",
     ),
@@ -85,7 +85,7 @@ fn icon_outdated() -> Html {
       cy=10,
       r=9,
       fill="none",
-      stroke="#9ca3af",
+      stroke="var(--color-gray-400)",
       stroke_width=2,
     ),
     @svg.line(
@@ -93,7 +93,7 @@ fn icon_outdated() -> Html {
       y1=10,
       x2=13,
       y2=10,
-      stroke="#9ca3af",
+      stroke="var(--color-gray-400)",
       stroke_width=2,
       stroke_linecap="round",
     ),
@@ -106,7 +106,7 @@ fn build_log_view(build_log : BuildLogStatus) -> Html {
     LogIdle | LogLoading => @view.loading()
     LogFailed =>
       div(
-        class="docs-state-log-note docs-state-log-note-error",
+        class="docs-state-log-note docs-state-log-note-error text-red-700 dark:text-red-300",
         "Failed to load build log.",
       )
     LogSuccess(log) => pre(class="docs-state-log-pre", code(log))
@@ -125,9 +125,17 @@ fn build_log_panel(
   } else {
     @config.SECTION_CLOSE
   }
-  div(class="docs-state-log-card") <| [
-    button(class="docs-state-log-toggle", on_click=emit(ToggleBuildLog)) <| [
-      p(class="docs-state-log-title", "Build log"),
+  div(
+    class="docs-state-log-card border-t border-slate-200/95 dark:border-gray-700",
+  ) <| [
+    button(
+      class="docs-state-log-toggle hover:bg-slate-400/10 dark:hover:bg-slate-700/30",
+      on_click=emit(ToggleBuildLog),
+    ) <| [
+      p(
+        class="docs-state-log-title text-gray-900 dark:text-slate-50",
+        "Build log",
+      ),
       img(src=toggle_icon, class="size-4 ui-icon shrink-0"),
     ],
     if build_log_open {
@@ -157,13 +165,13 @@ fn failed_docs_notice(
 ) -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center") <| [
     icon_failed(),
-    p(class="mt-3 text-base text-gray-500", "Build failed"),
+    p(class="mt-3 text-base text-gray-500 dark:text-gray-400", "Build failed"),
     p(
-      class="mt-1 text-sm text-gray-400",
+      class="mt-1 text-sm text-gray-400 dark:text-slate-500",
       "Documentation failed to generate for this version.",
     ),
     p(
-      class="mt-2 text-sm text-gray-400",
+      class="mt-2 text-sm text-gray-400 dark:text-slate-500",
       "The package is ready to install and use as a dependency.",
     ),
     div(class="mt-8 w-full text-left") <| [
@@ -171,10 +179,13 @@ fn failed_docs_notice(
         build_log_open,
         build_log,
         emit,
-        footer=p(class="docs-state-summary", style=["margin-top: 0.75rem"]) <| [
+        footer=p(
+          class="docs-state-summary text-gray-500 dark:text-slate-400",
+          style=["margin-top: 0.75rem"],
+        ) <| [
           text("If this seems wrong, "),
           a(
-            class="text-blue-500 hover:text-blue-700 transition-colors",
+            class="text-blue-500 dark:text-sky-300 hover:text-blue-700 dark:hover:text-blue-300 transition-colors",
             href="https://github.com/moonbitlang/mooncakes.io/issues/new",
             "report it",
           ),
@@ -189,17 +200,20 @@ fn failed_docs_notice(
 fn queued_docs_notice() -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center") <| [
     icon_queued(),
-    p(class="mt-3 text-base text-gray-500", "Building documentation..."),
-    p(class="mt-1 text-sm text-gray-400") <| [
+    p(
+      class="mt-3 text-base text-gray-500 dark:text-gray-400",
+      "Building documentation...",
+    ),
+    p(class="mt-1 text-sm text-gray-400 dark:text-slate-500") <| [
       text("This may take a few minutes. "),
       a(
         href="/build-queue",
-        class="text-blue-500 hover:text-blue-700 transition-colors",
+        class="text-blue-500 dark:text-sky-300 hover:text-blue-700 dark:hover:text-blue-300 transition-colors",
         "View build queue",
       ),
     ],
     p(
-      class="mt-2 text-sm text-gray-400",
+      class="mt-2 text-sm text-gray-400 dark:text-slate-500",
       "The package is ready to install and use as a dependency.",
     ),
   ]
@@ -209,21 +223,23 @@ fn queued_docs_notice() -> Html {
 fn outdated_docs_notice() -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center") <| [
     icon_outdated(),
-    p(class="mt-3 text-base text-gray-500", "No documentation available"),
     p(
-      class="mt-1 text-sm text-gray-400",
+      class="mt-3 text-base text-gray-500 dark:text-gray-400",
+      "No documentation available",
+    ),
+    p(
+      class="mt-1 text-sm text-gray-400 dark:text-slate-500",
       "This version was published before doc generation was available.",
     ),
     p(
-      class="mt-2 text-sm text-gray-400",
+      class="mt-2 text-sm text-gray-400 dark:text-slate-500",
       "The package is ready to install and use as a dependency.",
     ),
   ]
 }
 
 ///|
-pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
-  let theme_toggle = @view.theme_toggle(on_click=emit(ToggleTheme))
+pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
   let module_index = match model.module_index {
     Success(module_index) => Some(module_index)
     _ => None
@@ -242,7 +258,7 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
     module_index,
     model.collapsed_docs.card_mode,
     emit,
-    theme_toggle~,
+    app_actions~,
   )
   let search = model.search
   let search_panel : Html = @html.dialog(
@@ -250,17 +266,17 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
     id="search-panel",
   ) <| [
     div(
-      class="h-12 border-b bg-white rounded-none sticky top-0 text-base w-full flex",
+      class="h-12 border-b bg-white dark:bg-zinc-900 rounded-none sticky top-0 text-base w-full flex",
     ) <| [
       @html.input(
         input_type=Text,
         value=search.filter,
         placeholder="search...",
         on_input=x => emit(SearchFilterChanged(x)),
-        class="outline-none m-0 flex-grow px-4 p-2",
+        class="outline-none m-0 flex-grow px-4 p-2 dark:placeholder:text-slate-500",
       ),
       div(
-        class="size-12 container hover:bg-gray-200 flex justify-center items-center",
+        class="size-12 container hover:bg-gray-200 dark:hover:bg-gray-800 flex justify-center items-center",
         on_click=emit(ToggleSearchPanel(false)),
         img(class="ui-icon", src=@config.icon_close),
       ),
@@ -273,15 +289,15 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
           class="overflow-y-auto flex-grow",
           results.map(fn(x) {
             let color = match x.entry.kind {
-              "Package" => "text-yellow-700"
-              "Trait" => "text-blue-700"
-              "Type" => "text-green-700"
+              "Package" => "text-yellow-700 dark:text-yellow-400"
+              "Trait" => "text-blue-700 dark:text-indigo-400"
+              "Type" => "text-green-700 dark:text-emerald-300"
               "Method" => "text-moonbit"
-              "Value" => "text-purple-700"
-              _ => "text-gray-700"
+              "Value" => "text-purple-700 dark:text-violet-300"
+              _ => "text-gray-700 dark:text-slate-300"
             }
             @html.li(
-              class="border-b px-4 py-2 bg-white hover:bg-gray-100",
+              class="border-b px-4 py-2 bg-white dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-900",
               on_click=emit(ToggleSearchPanel(false)),
             ) <| [
               a(href=x.entry.href, class="grid grid-cols-[1fr_auto] ") <| [
@@ -292,7 +308,10 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
                       (true, str) =>
                         span(class="text-moonbit font-semibold", str.to_owned())
                       (false, str) =>
-                        span(class="text-gray-600", str.to_owned())
+                        span(
+                          class="text-gray-600 dark:text-slate-400",
+                          str.to_owned(),
+                        )
                     }
                   }),
                 ),
@@ -464,7 +483,7 @@ pub fn view(model : Model, emit~ : (Msg) -> Cmd) -> Html {
       nothing,
     ),
     div(
-      class="bg-zinc-50 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
+      class="bg-zinc-50 dark:bg-zinc-950 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
       sidebar(model.sidebar_document, model.sidebar_collapsed, emit),
     ),
   ]

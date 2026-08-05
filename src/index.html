@@ -46,9 +46,9 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="/styles.css" />
     <!--
-      Theme FOUC guard. Keep in sync with apply_document_theme in src/main/main.mbt:
+      Theme FOUC guard. Keep in sync with src/main/theme_browser.mbt:
       localStorage key "mooncakes-theme", values "system" | "light" | "dark",
-      missing/invalid => system; also set class, color-scheme, and backgroundColor.
+      missing/invalid => system. CSS owns color-scheme, background, and foreground.
     -->
     <script>
       (function () {
@@ -67,16 +67,8 @@
         var resolved =
           pref === 'dark' || (pref === 'system' && systemDark) ? 'dark' : 'light';
         var root = document.documentElement;
-        root.classList.add(
-          resolved === 'dark' ? 'theme-dark' : 'theme-light',
-          'theme-pref-' + pref
-        );
-        root.style.colorScheme = resolved;
-        if (resolved === 'dark') {
-          root.style.backgroundColor = '#0b0b0c';
-        } else {
-          root.style.backgroundColor = '#fafafa';
-        }
+        root.dataset.theme = resolved;
+        root.dataset.themePreference = pref;
       })();
     </script>
     <script src="/main.js" type="module"></script>

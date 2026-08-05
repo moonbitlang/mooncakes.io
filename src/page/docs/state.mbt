@@ -33,7 +33,6 @@ enum Msg {
   CopyInstallSuccess
   CopyInstallFailed(String)
   ShowLargePackage
-  ToggleTheme
   ClickAnchor(String)
 }
 
@@ -484,7 +483,6 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       (none, { ..model, install_copied: false })
     }
     ShowLargePackage => (none, { ..model, hide_large_package: false })
-    ToggleTheme => (none, model)
     ClickAnchor(id) =>
       (batch([@nav.push_url("#\{id}"), scroll_to_smooth(id)]), model)
   }
@@ -582,13 +580,5 @@ pub fn navigate_package(
       }
     }
     _ => load(path, fragment, emit~)
-  }
-}
-
-///|
-pub fn is_theme_toggle(msg : Msg) -> Bool {
-  match msg {
-    ToggleTheme => true
-    _ => false
   }
 }

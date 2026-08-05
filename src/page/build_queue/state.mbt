@@ -1,7 +1,6 @@
 ///|
 pub enum Msg {
   GotBuilds(Result[BuildData, Error])
-  ToggleTheme
 }
 
 ///|
@@ -36,7 +35,7 @@ pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
 }
 
 ///|
-pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
+pub fn update(msg : Msg, _model : Model) -> (Cmd, Model) {
   match msg {
     GotBuilds(Ok(data)) =>
       (
@@ -47,15 +46,6 @@ pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
       println(e)
       (none, { queue: Failed, recent: Failed })
     }
-    ToggleTheme => (none, model)
-  }
-}
-
-///|
-pub fn is_theme_toggle(msg : Msg) -> Bool {
-  match msg {
-    ToggleTheme => true
-    _ => false
   }
 }
 

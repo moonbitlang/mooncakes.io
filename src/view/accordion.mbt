@@ -22,7 +22,7 @@ pub fn accordion(
   ul(class?) <| items.map(x => {
     let (title, childs) = x
     let folded = title != showing
-    let folded_style = if folded { "" } else { "bg-gray-100" }
+    let folded_style = if folded { "" } else { "bg-gray-100 dark:bg-zinc-900" }
     let on_click = on_click.map(fn(f) {
       if title == showing {
         f("")
@@ -33,7 +33,7 @@ pub fn accordion(
     let childs = if folded { nothing } else { childs }
     div(class="w-full") <| [
       div(
-        class="w-full rounded px-2 py-1 select-none font-semibold text-gray-700 hover:bg-gray-200 \{folded_style}",
+        class="w-full rounded px-2 py-1 select-none font-semibold text-gray-700 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-gray-800 \{folded_style}",
         on_click?,
         title,
       ),

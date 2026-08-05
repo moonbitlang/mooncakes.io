@@ -14,7 +14,7 @@ pub fn navbar(
 ) -> Html {
   let class = match style {
     Sticky =>
-      "top-0 z-30 border-b sticky bg-white/60 backdrop-blur-md select-none h-header"
+      "top-0 z-30 border-b sticky bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md select-none h-header"
     Fusion => "select-none"
   }
   let middle_view = match middle {
@@ -62,7 +62,7 @@ pub fn navbar(
 ///|
 pub fn logo() -> Html {
   a(
-    class="border-gray-300 font-title mx-2 font-semibold flex items-center text-nowrap",
+    class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
     href="/",
     "🥮 mooncakes.io",
   )

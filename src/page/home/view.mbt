@@ -402,7 +402,7 @@ fn banner(
       div(class="home-hero-illustration hidden lg:block select-none") <| [
         img(
           class="home-hero-image object-cover object-center",
-          src="mooncake-pic-small.png",
+          src="mooncake-pic-small.webp",
         ),
         div(class="home-stat-bubble-layer") <| [
           stat_bubble(

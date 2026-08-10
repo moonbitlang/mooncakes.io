@@ -16,7 +16,12 @@ jobs:
           echo "$HOME/.moon/bin" >> $GITHUB_PATH
       - uses: actions/setup-node@v4
       - run: npm install
-      - run: |
+      - name: build frontend
+        env:
+          # The production Nginx exposes the new read-only API under /api-new.
+          # The frontend appends /v0/... to this endpoint at build time.
+          VITE_API_ENDPOINT: /api-new
+        run: |
           moon update
           moon install
           npm run build

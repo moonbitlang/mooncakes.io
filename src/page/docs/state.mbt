@@ -71,30 +71,6 @@ priv enum BuildLogStatus {
 }
 
 ///|
-extern "js" fn encode_uri_component(value : String) -> String = "(value) => encodeURIComponent(value)"
-
-///|
-extern "js" fn smooth_scroll_to_element(id : String) -> Unit =
-  #| (id) => {
-  #|   const el = document.getElementById(id);
-  #|   if (el) el.scrollIntoView({ behavior: 'smooth' });
-  #| }
-
-///|
-pub fn scroll_to_smooth(id : String) -> Cmd {
-  @rabbita.effect(fn() { smooth_scroll_to_element(id) })
-}
-
-///|
-extern "js" fn smooth_scroll_to_top() -> Unit =
-  #| () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-///|
-pub fn scroll_to_top() -> Cmd {
-  @rabbita.effect(fn() { smooth_scroll_to_top() })
-}
-
-///|
 fn has_docs_assets(build_status : BuildStatus?) -> Bool {
   match build_status {
     Some(BuildSuccess | BuildLegacy) => true
@@ -262,7 +238,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         (true, LogIdle | LogFailed, Success(manifest)) =>
           get_text(
             @config.api_url(
-              "/api/v0/builds/log?module=\{encode_uri_component(manifest.module_)}&version=\{encode_uri_component(manifest.version)}",
+              "/api/v0/builds/log?module=\{@util.encode_uri_component(manifest.module_)}&version=\{@util.encode_uri_component(manifest.version)}",
             ),
             (result : Result[String, Error]) => emit(GotBuildLog(result)),
           )
@@ -404,7 +380,13 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
               versioned_docs_path(pkg_path, manifest.module_, manifest.version)
             _ => pkg_path
           }
-          (batch([@nav.push_url("/docs/\{url_path}"), scroll_to_top()]), model)
+          (
+            batch([
+              @nav.push_url("/docs/\{url_path}"),
+              @nav.scroll_to_top(behavior=@nav.Smooth),
+            ]),
+            model,
+          )
         }
         Symbol(pkg_path~, id, ..) => {
           let same_package = match model.path {
@@ -412,7 +394,13 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
             Err(_) => false
           }
           if same_package {
-            (batch([@nav.push_url("#\{id}"), scroll_to_smooth(id)]), model)
+            (
+              batch([
+                @nav.push_url("#\{id}"),
+                @nav.scroll_to(id, behavior=@nav.Smooth),
+              ]),
+              model,
+            )
           } else {
             let url_path = match model.manifest {
               Success(manifest) =>
@@ -484,7 +472,13 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
     }
     ShowLargePackage => (none, { ..model, hide_large_package: false })
     ClickAnchor(id) =>
-      (batch([@nav.push_url("#\{id}"), scroll_to_smooth(id)]), model)
+      (
+        batch([
+          @nav.push_url("#\{id}"),
+          @nav.scroll_to(id, behavior=@nav.Smooth),
+        ]),
+        model,
+      )
   }
 }
 

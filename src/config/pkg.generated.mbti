@@ -2,46 +2,6 @@
 package "moonbitlang/mooncakes/config"
 
 // Values
-pub const COMPUTER_ICON : String = "/computer.svg"
-
-pub const EXPANSION : String = "/expansion.svg"
-
-pub const FILE_ICON : String = "/file.svg"
-
-pub const FILTER : String = "/filter.svg"
-
-pub const FOLDER_CLOSE : String = "/folder-close.svg"
-
-pub const FOLDER_OPEN : String = "/folder-open.svg"
-
-pub const HAMBURGER_BUTTON : String = "/hamburger-button.svg"
-
-pub const LOGO : String = "/mooncake-pic.png"
-
-pub const MOON_ICON : String = "/moon.svg"
-
-pub const README_ICON : String = "/readme.svg"
-
-pub const REDUCTION : String = "/reduction.svg"
-
-pub const SEARCH : String = "/search.svg"
-
-pub const SECTION_CLOSE : String = "/section-close.svg"
-
-pub const SECTION_OPEN : String = "/section-open.svg"
-
-pub const SHARE : String = "/share.svg"
-
-pub const SUN_ICON : String = "/sun.svg"
-
-pub const TRAIT_ICON : String = "/components.svg"
-
-pub const TYPE_ALIAS_ICON : String = "/code-brackets.svg"
-
-pub const TYPE_ICON : String = "/type.svg"
-
-pub const VALUE_ICON : String = "/code-brackets.svg"
-
 pub fn api_url(String) -> String
 
 pub fn asset_url(String) -> String
@@ -54,11 +14,27 @@ pub let clipboard : String
 
 pub let code : String
 
+pub let computer_icon : String
+
 pub let dead_rabbit : String
 
 pub let deps : String
 
 pub let download : String
+
+pub let expansion : String
+
+pub let favicon : String
+
+pub let file_icon : String
+
+pub let filter : String
+
+pub let folder_close : String
+
+pub let folder_open : String
+
+pub let hamburger_button : String
 
 pub let icon_close : String
 
@@ -66,17 +42,45 @@ pub let install : String
 
 pub let license : String
 
+pub let logo : String
+
+pub let moon_icon : String
+
+pub let mooncake_pic_small : String
+
 pub let ok : String
 
+pub let readme_icon : String
+
+pub let reduction : String
+
 pub let repo : String
+
+pub let search : String
+
+pub let section_close : String
+
+pub let section_open : String
+
+pub let share : String
+
+pub let sun_icon : String
 
 pub let tag : String
 
 pub let terminal : String
 
+pub let trait_icon : String
+
+pub let type_alias_icon : String
+
+pub let type_icon : String
+
 pub let updated : String
 
 pub let user : String
+
+pub let value_icon : String
 
 // Errors
 

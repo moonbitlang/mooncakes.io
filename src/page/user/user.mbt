@@ -90,31 +90,9 @@ struct Profile {
 }
 
 ///|
-// JavaScript FFI for date operations
-extern "js" fn get_today_iso() -> String =
-  #|function getTodayISO() {
-  #|  const date = new Date();
-  #|  const year = date.getFullYear();
-  #|  const month = String(date.getMonth() + 1).padStart(2, '0');
-  #|  const day = String(date.getDate()).padStart(2, '0');
-  #|  return `${year}-${month}-${day}`;
-  #|}
-
-///|
-extern "js" fn get_date_days_ago(days : Int) -> String =
-  #|function getDateDaysAgo(days) {
-  #|  const date = new Date();
-  #|  date.setDate(date.getDate() - days);
-  #|  const year = date.getFullYear();
-  #|  const month = String(date.getMonth() + 1).padStart(2, '0');
-  #|  const day = String(date.getDate()).padStart(2, '0');
-  #|  return `${year}-${month}-${day}`;
-  #|}
-
-///|
 pub fn load(username : String, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
-  let today = get_today_iso()
-  let start_date = get_date_days_ago(120)
+  let today = @util.utc_date_days_ago(0)
+  let start_date = @util.utc_date_days_ago(120)
   (
     batch([
       @http.get(@config.api_url("/api/v0/user/\{username}")).expect_json(r => {

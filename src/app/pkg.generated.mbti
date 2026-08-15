@@ -1,7 +1,12 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "moonbitlang/mooncakes/main"
+package "moonbitlang/mooncakes/app"
+
+import {
+  "moonbit-community/rabbita",
+}
 
 // Values
+pub fn app() -> @rabbita.App
 
 // Errors
 

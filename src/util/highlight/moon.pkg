@@ -1,6 +1,8 @@
 import {
   "moonbitlang/core/list",
-  "moonbitlang/parser/lexer",
-  "moonbitlang/parser/tokens",
-  "moonbitlang/parser/basic",
+  "moonbitlang/lexer",
+  "moonbitlang/lexer/tokens",
+  "moonbitlang/lexer/basic",
 }
+
+supported_targets = "js+native+wasm"

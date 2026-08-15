@@ -348,7 +348,7 @@ fn source_context_section(
           "Fast publishing",
           "Ship a MoonBit package with SKILL.md so its executable entry is discoverable on mooncakes.io.",
           "Publish packages",
-          @config.SEARCH,
+          @config.search,
           action_href="https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
           highlighted=true,
           emit~,
@@ -423,7 +423,7 @@ fn sticky_search(
         div(class="flex items-center gap-2 px-4 py-4 font-mono text-sm") <| [
           span(class="shrink-0 text-emerald-600 dark:text-emerald-300", "$"),
           span(class="shrink-0 text-gray-500 dark:text-gray-400", "find"),
-          img(class="size-4 shrink-0 opacity-70 ui-icon", src=@config.SEARCH),
+          img(class="size-4 shrink-0 opacity-70 ui-icon", src=@config.search),
           input(
             input_type=Text,
             value=filter,
@@ -648,15 +648,11 @@ fn list_content(
 ///|
 fn skills_logo() -> Html {
   a(
-    href=if current_host() == "skills.mooncakes.io" { "/" } else { "/skills" },
+    href="https://skills.mooncakes.io/",
     class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
     "🥮 skills.mooncakes.io",
   )
 }
-
-///|
-extern "js" fn current_host() -> String =
-  #|() => window.location.host
 
 ///|
 fn list_view(

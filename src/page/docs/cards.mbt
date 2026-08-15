@@ -255,9 +255,9 @@ fn document_item(
   emit : (Msg) -> Cmd,
 ) -> Html {
   let (content_style, icon) = if collapsed.contains(id) {
-    ("hidden", @config.SECTION_CLOSE)
+    ("hidden", @config.section_close)
   } else {
-    ("", @config.SECTION_OPEN)
+    ("", @config.section_open)
   }
   let header_style = if tight { "py-1" } else { "py-2" }
   let source_btn = match loc {
@@ -472,19 +472,19 @@ fn readme(
   }
   let is_collapsed = folded.contains("readme")
   let (body, icon) = if is_collapsed {
-    (nothing, @config.SECTION_CLOSE)
+    (nothing, @config.section_close)
   } else if has_content {
     let content = @view.markdown(content.unwrap(), heading_anchors=true, transform_link=href => {
       readme_href(href, module_name, module_version, package_path)
     })
-    (div(class="mt-4 mb-6", content), @config.SECTION_OPEN)
+    (div(class="mt-4 mb-6", content), @config.section_open)
   } else {
     (
       p(
         class="mt-3 mb-4 text-sm text-gray-400 dark:text-slate-500 text-center",
         "\{package_path} does not have a README file",
       ),
-      @config.SECTION_OPEN,
+      @config.section_open,
     )
   }
   div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [

@@ -13,6 +13,28 @@
 // limitations under the License.
 
 ///|
+const ThemeBootstrap : String =
+  #|(function () {
+  #|  var key = 'mooncakes-theme';
+  #|  var pref = 'system';
+  #|  try {
+  #|    var stored = window.localStorage.getItem(key);
+  #|    if (stored === 'light' || stored === 'dark' || stored === 'system') {
+  #|      pref = stored;
+  #|    }
+  #|  } catch (_) {}
+  #|  var systemDark = false;
+  #|  try {
+  #|    systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  #|  } catch (_) {}
+  #|  var resolved =
+  #|    pref === 'dark' || (pref === 'system' && systemDark) ? 'dark' : 'light';
+  #|  var root = document.documentElement;
+  #|  root.dataset.theme = resolved;
+  #|  root.dataset.themePreference = pref;
+  #|})();
+
+///|
 priv enum ThemePreference {
   System
   Light

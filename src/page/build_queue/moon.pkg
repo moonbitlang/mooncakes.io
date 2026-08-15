@@ -10,4 +10,4 @@ import {
   "moonbitlang/mooncakes/view",
 }
 
-supported_targets = "js"
+supported_targets = "js+native+wasm"

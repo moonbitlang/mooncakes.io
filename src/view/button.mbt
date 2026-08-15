@@ -47,10 +47,10 @@ pub fn theme_toggle(on_click? : Cmd) -> Html {
   ) <| [
     img(
       class="theme-toggle-icon theme-toggle-icon-computer",
-      src=@config.COMPUTER_ICON,
+      src=@config.computer_icon,
     ),
-    img(class="theme-toggle-icon theme-toggle-icon-sun", src=@config.SUN_ICON),
-    img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.MOON_ICON),
+    img(class="theme-toggle-icon theme-toggle-icon-sun", src=@config.sun_icon),
+    img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.moon_icon),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-system",
       "Using system theme. Switch to light mode.",

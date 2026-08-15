@@ -35,7 +35,7 @@ fn image_render(
   transform_link? : (String) -> String,
 ) -> @html.Html {
   guard img is Image(img) else {
-    println(img)
+    println(repr(img))
     abort("not an image")
   }
   match img {
@@ -94,11 +94,10 @@ fn inline2html(
       [@html.strong(inline)]
     }
     Text({ v: str, .. }) => [inline_text(str)]
-    RawHtml({ v: str, .. }) => [unsupported("RawHtml", str.to_string())]
+    RawHtml({ v: str, .. }) => [unsupported("RawHtml", repr(str))]
     ExtStrikethrough({ v: inline, .. }) =>
-      [unsupported("ExtStrikethrough", inline.to_string())]
-    ExtMathSpan({ v: math, .. }) =>
-      [unsupported("ExtMathSpan", math.to_string())]
+      [unsupported("ExtStrikethrough", repr(inline))]
+    ExtMathSpan({ v: math, .. }) => [unsupported("ExtMathSpan", repr(math))]
   }
 }
 
@@ -391,11 +390,10 @@ fn block2html(
       ]
     }
     LinkRefDefinition(_) => @html.nothing
-    ExtMathBlock({ v: math, .. }) =>
-      unsupported("ExtMathBlock", math.to_string())
-    HtmlBlock({ v: html, .. }) => unsupported("HtmlBlock", html.to_string())
+    ExtMathBlock({ v: math, .. }) => unsupported("ExtMathBlock", repr(math))
+    HtmlBlock({ v: html, .. }) => unsupported("HtmlBlock", repr(html))
     ExtFootnoteDefinition({ v: footnote, .. }) =>
-      unsupported("ExtFootnoteDefinition", footnote.to_string())
+      unsupported("ExtFootnoteDefinition", repr(footnote))
   }
 }
 

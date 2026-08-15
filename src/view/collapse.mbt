@@ -27,9 +27,9 @@ pub fn collapse(
   caret_config? : CaretConfig = LeftTop,
 ) -> Html {
   let (body, icon) = if collapsed {
-    (nothing, @config.SECTION_CLOSE)
+    (nothing, @config.section_close)
   } else {
-    (body, @config.SECTION_OPEN)
+    (body, @config.section_open)
   }
   let caret_style = match caret_config {
     LeftCenter => "self-center"

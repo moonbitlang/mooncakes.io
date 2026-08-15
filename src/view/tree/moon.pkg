@@ -4,4 +4,4 @@ import {
   "moonbit-community/rabbita/html",
 }
 
-supported_targets = "js"
+supported_targets = "js+native+wasm"

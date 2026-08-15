@@ -3,11 +3,14 @@ name = "moonbitlang/mooncakes"
 version = "0.1.1"
 
 import {
-  "moonbit-community/cmark@0.4.3",
+  "moonbit-community/cmark@0.4.6",
   "Yoorkin/prettyprinter@0.4.8",
-  "moonbit-community/rabbita@0.13.3",
-  "moonbitlang/parser@0.3.0",
+  "moonbit-community/rabbita@0.15.2",
   "moonbit-community/fuzzy_match@0.2.5",
+  "moonbitlang/lexer@0.3.14",
+  "moonbitlang/x@0.4.49",
+  "moonbitlang/async@0.20.5",
+  "hackwaly/moonback@0.8.0",
 }
 
 readme = "README.md"

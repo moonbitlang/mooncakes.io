@@ -88,15 +88,6 @@ struct AllModules {
 }
 
 ///|
-extern "js" fn recency_penalty(date : String) -> Int =
-  #|function recencyPenalty(dateString) {
-  #|  const t = Date.parse(dateString);
-  #|  if (!Number.isFinite(t)) return 200;
-  #|  const diffDays = Math.max(0, (Date.now() - t) / 86400000);
-  #|  return Math.min(200, Math.floor(diffDays * 3));
-  #|}
-
-///|
 fn sanitize_for_fuzzy(text : String) -> String {
   let sb = StringBuilder::new()
   let mut changed = false
@@ -383,7 +374,7 @@ fn build_search_index(
     }
     let recency_penalty = match mod.created_at {
       None => 0
-      Some(time) => recency_penalty(time)
+      Some(time) => @util.recency_penalty(time)
     }
     { entry: mod, path, name, author, keywords, recency_penalty }
   })

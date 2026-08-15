@@ -21,8 +21,8 @@ priv enum CardMode {
 ///|
 fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
   let (icon, next_mode) = match mode {
-    Expanded => (@config.REDUCTION, Collapsed)
-    Collapsed => (@config.EXPANSION, Expanded)
+    Expanded => (@config.reduction, Collapsed)
+    Collapsed => (@config.expansion, Expanded)
   }
   @html.button(
     class="theme-toggle hidden md:inline-flex items-center rounded-full px-3 py-1.5 transition-colors",

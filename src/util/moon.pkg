@@ -1,4 +1,10 @@
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
   "moonbit-community/rabbita/url",
+  "moonbitlang/x/time",
 }
+
+supported_targets = "js+native+wasm"

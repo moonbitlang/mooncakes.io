@@ -1,7 +1,6 @@
 ///|
 pub fn footer() -> Html {
   let class = "hover:text-mooncake2 transition-colors"
-  let host = current_host()
   div(
     class="px-6 min-h-28 lg:mx-10 mt-5 py-10 border-t text-gray-600 dark:text-slate-400 flex flex-col md:flex-row justify-center gap-4 md:gap-8",
   ) <| [
@@ -12,8 +11,8 @@ pub fn footer() -> Html {
       class~,
       "Report issue",
     ),
-    a(href=packages_href(host), class~, "Packages"),
-    a(href=build_queue_href(host), class~, "Build queue"),
+    a(href=packages_href(), class~, "Packages"),
+    a(href=build_queue_href(), class~, "Build queue"),
     a(href=skills_href(), class~, "Skills"),
     a(
       href=@config.api_url("/api/v0/modules/statistics?raw=true"),
@@ -26,28 +25,16 @@ pub fn footer() -> Html {
 }
 
 ///|
-fn packages_href(host : String) -> String {
-  if host == "skills.mooncakes.io" {
-    "https://mooncakes.io/"
-  } else {
-    "/"
-  }
+fn packages_href() -> String {
+  "https://mooncakes.io/"
 }
 
 ///|
-fn build_queue_href(host : String) -> String {
-  if host == "skills.mooncakes.io" {
-    "https://mooncakes.io/build-queue"
-  } else {
-    "/build-queue"
-  }
+fn build_queue_href() -> String {
+  "https://mooncakes.io/build-queue"
 }
 
 ///|
 fn skills_href() -> String {
   "https://skills.mooncakes.io/"
 }
-
-///|
-extern "js" fn current_host() -> String =
-  #|() => window.location.host

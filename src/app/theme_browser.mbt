@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-/// Read the preference normalized by the inline bootstrap before mount.
+#cfg(target="js")
 extern "js" fn initial_theme_preference() -> String =
   #| () => {
   #|   try {
@@ -24,6 +24,7 @@ extern "js" fn initial_theme_preference() -> String =
   #| }
 
 ///|
+#cfg(target="js")
 extern "js" fn system_prefers_dark() -> Bool =
   #| () => {
   #|   try {
@@ -34,6 +35,7 @@ extern "js" fn system_prefers_dark() -> Bool =
   #| }
 
 ///|
+#cfg(target="js")
 extern "js" fn save_stored_theme(value : String) -> Unit =
   #| (value) => {
   #|   try {
@@ -42,6 +44,7 @@ extern "js" fn save_stored_theme(value : String) -> Unit =
   #| }
 
 ///|
+#cfg(target="js")
 extern "js" fn apply_document_theme(
   resolved_theme : String,
   preference : String,
@@ -53,11 +56,13 @@ extern "js" fn apply_document_theme(
   #| }
 
 ///|
+#cfg(target="js")
 fn persist_theme_preference(preference : ThemePreference) -> Cmd {
   @cmd.custom_cmd(_ => save_stored_theme(preference.to_string()))
 }
 
 ///|
+#cfg(target="js")
 fn apply_theme(theme : Theme) -> Cmd {
   @cmd.custom_cmd(_ => {
     apply_document_theme(theme.resolved(), theme.preference.to_string())
@@ -65,12 +70,13 @@ fn apply_theme(theme : Theme) -> Cmd {
 }
 
 ///|
-/// The only pre-mount write. Updates after mount must use `apply_theme`.
+#cfg(target="js")
 fn apply_theme_now(theme : Theme) -> Unit {
   apply_document_theme(theme.resolved(), theme.preference.to_string())
 }
 
 ///|
+#cfg(target="js")
 extern "js" fn watch_system_color_scheme(
   on_change : (Bool) -> Unit,
 ) -> () -> Unit =
@@ -91,11 +97,13 @@ extern "js" fn watch_system_color_scheme(
   #| }
 
 ///|
+#cfg(target="js")
 priv suberror ThemeSubscription {
   SystemScheme(@cmd.Emit[Bool])
 }
 
 ///|
+#cfg(target="js")
 fn theme_sub_loader(
   payload : Error,
   scheduler : &@cmd.Scheduler,
@@ -119,11 +127,12 @@ fn theme_sub_loader(
 }
 
 ///|
+#cfg(target="js")
 fn on_system_scheme_changed(emit : @cmd.Emit[Bool]) -> @sub.Sub {
   @sub.custom_sub(
     "on_system_scheme_changed",
     Local,
-    SystemScheme(emit),
+    ThemeSubscription::SystemScheme(emit),
     SubLoader(theme_sub_loader),
   )
 }

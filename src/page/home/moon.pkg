@@ -11,4 +11,4 @@ import {
   "moonbit-community/fuzzy_match",
 }
 
-supported_targets = "js"
+supported_targets = "js+native+wasm"

@@ -121,9 +121,9 @@ fn build_log_panel(
   footer? : Html = nothing,
 ) -> Html {
   let toggle_icon = if build_log_open {
-    @config.SECTION_OPEN
+    @config.section_open
   } else {
-    @config.SECTION_CLOSE
+    @config.section_close
   }
   div(
     class="docs-state-log-card border-t border-slate-200/95 dark:border-gray-700",
@@ -490,7 +490,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
   let fab : Html = @html.button(
     class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
     on_click=emit(ToggleSidebarFab),
-    img(class="size-5", src=@config.HAMBURGER_BUTTON),
+    img(class="size-5", src=@config.hamburger_button),
   )
   div(class="min-h-screen w-full flex-col") <| [
     search_panel,

@@ -1,104 +1,110 @@
 ///|
-pub const README_ICON = "/readme.svg"
+pub let readme_icon : String = asset_url("/readme.svg")
 
 ///|
-pub const TYPE_ICON = "/type.svg"
+pub let type_icon : String = asset_url("/type.svg")
 
 ///|
-pub const TYPE_ALIAS_ICON = "/code-brackets.svg"
+pub let type_alias_icon : String = asset_url("/code-brackets.svg")
 
 ///|
-pub const VALUE_ICON = "/code-brackets.svg"
+pub let value_icon : String = asset_url("/code-brackets.svg")
 
 ///|
-pub const TRAIT_ICON = "/components.svg"
+pub let trait_icon : String = asset_url("/components.svg")
 
 ///|
-pub const FILE_ICON = "/file.svg"
+pub let file_icon : String = asset_url("/file.svg")
 
 ///|
-pub const FOLDER_OPEN = "/folder-open.svg"
+pub let folder_open : String = asset_url("/folder-open.svg")
 
 ///|
-pub const FOLDER_CLOSE = "/folder-close.svg"
+pub let folder_close : String = asset_url("/folder-close.svg")
 
 ///|
-pub let icon_close = "/close.svg"
+pub let icon_close : String = asset_url("/close.svg")
 
 ///|
-pub const SECTION_OPEN = "/section-open.svg"
+pub let section_open : String = asset_url("/section-open.svg")
 
 ///|
-pub const SECTION_CLOSE = "/section-close.svg"
+pub let section_close : String = asset_url("/section-close.svg")
 
 ///|
-pub const EXPANSION = "/expansion.svg"
+pub let expansion : String = asset_url("/expansion.svg")
 
 ///|
-pub const REDUCTION = "/reduction.svg"
+pub let reduction : String = asset_url("/reduction.svg")
 
 ///|
-pub const FILTER = "/filter.svg"
+pub let filter : String = asset_url("/filter.svg")
 
 ///|
-pub const SEARCH = "/search.svg"
+pub let search : String = asset_url("/search.svg")
 
 ///|
-pub const SHARE = "/share.svg"
+pub let share : String = asset_url("/share.svg")
 
 ///|
-pub let ok = "/ok.svg"
+pub let ok : String = asset_url("/ok.svg")
 
 ///|
-pub let clipboard = "/clipboard.svg"
+pub let clipboard : String = asset_url("/clipboard.svg")
 
 ///|
-pub let tag = "/tag.svg"
+pub let tag : String = asset_url("/tag.svg")
 
 ///|
-pub let user = "/user.svg"
+pub let user : String = asset_url("/user.svg")
 
 ///|
-pub let install = "/install.svg"
+pub let install : String = asset_url("/install.svg")
 
 ///|
-pub let license = "/license.svg"
+pub let license : String = asset_url("/license.svg")
 
 ///|
-pub let repo = "/repo.svg"
+pub let repo : String = asset_url("/repo.svg")
 
 ///|
-pub let code = "/code.svg"
+pub let code : String = asset_url("/code.svg")
 
 ///|
-pub let terminal = "/terminal.svg"
+pub let terminal : String = asset_url("/terminal.svg")
 
 ///|
-pub let download = "/download.svg"
+pub let download : String = asset_url("/download.svg")
 
 ///|
-pub let updated = "/updated.svg"
+pub let updated : String = asset_url("/updated.svg")
 
 ///|
-pub let deps = "/deps.svg"
+pub let deps : String = asset_url("/deps.svg")
 
 ///|
-pub let book_open = "/book-open.svg"
+pub let book_open : String = asset_url("/book-open.svg")
 
 ///|
-pub const SUN_ICON = "/sun.svg"
+pub let sun_icon : String = asset_url("/sun.svg")
 
 ///|
-pub const MOON_ICON = "/moon.svg"
+pub let moon_icon : String = asset_url("/moon.svg")
 
 ///|
-pub const COMPUTER_ICON = "/computer.svg"
+pub let computer_icon : String = asset_url("/computer.svg")
 
 ///|
-pub const HAMBURGER_BUTTON = "/hamburger-button.svg"
+pub let hamburger_button : String = asset_url("/hamburger-button.svg")
 
 ///|
-pub const LOGO = "/mooncake-pic.png"
+pub let logo : String = asset_url("/mooncake-pic.png")
+
+///|
+pub let favicon : String = asset_url("/favicon.svg")
+
+///|
+pub let mooncake_pic_small : String = asset_url("/mooncake-pic-small.webp")
 
 ///|
 pub let dead_rabbit =
@@ -127,8 +133,15 @@ pub let builtins_package_path : Map[String, String] = {
 }
 
 ///|
+#cfg(target="js")
 extern "js" fn api_endpoint() -> String =
   #|() => __MOONCAKES_API_ENDPOINT__
+
+///|
+#cfg(not(target="js"))
+fn api_endpoint() -> String {
+  @env.get_env_var("MOONCAKES_API_ENDPOINT").unwrap_or("/api")
+}
 
 ///|
 pub fn api_url(path : String) -> String {
@@ -136,8 +149,24 @@ pub fn api_url(path : String) -> String {
 }
 
 ///|
+#cfg(target="js")
+extern "js" fn assets_endpoint() -> String =
+  #|() =>
+  #|  typeof __MOONCAKES_ASSETS_ENDPOINT__ === "undefined"
+  #|    ? "https://assets.mooncakes.io"
+  #|    : __MOONCAKES_ASSETS_ENDPOINT__
+
+///|
+#cfg(not(target="js"))
+fn assets_endpoint() -> String {
+  @env.get_env_var("MOONCAKES_ASSETS_ENDPOINT").unwrap_or(
+    "https://assets.mooncakes.io",
+  )
+}
+
+///|
 pub fn asset_url(path : String) -> String {
-  let base = "https://assets.mooncakes.io"
+  let base = assets_endpoint()
   match path {
     [.. "/", .. path] => "\{base}/\{path.to_owned()}"
     path => "\{base}/\{path}"

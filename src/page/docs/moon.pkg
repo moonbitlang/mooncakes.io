@@ -17,4 +17,4 @@ import {
   "moonbit-community/rabbita/svg",
 }
 
-supported_targets = "js"
+supported_targets = "js+native+wasm"

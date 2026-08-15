@@ -65,16 +65,25 @@ export default defineConfig(({ mode }) => {
   const apiEndpoint = removeTrailingSlash(
     process.env.VITE_API_ENDPOINT || env.VITE_API_ENDPOINT || "/api"
   )
+  const assetsEndpoint = removeTrailingSlash(
+    process.env.VITE_ASSETS_ENDPOINT ||
+      env.VITE_ASSETS_ENDPOINT ||
+      'https://assets.mooncakes.io'
+  )
 
   return {
     root: 'src',
     publicDir: '../public',
+    base: assetsEndpoint ? `${assetsEndpoint}/` : '/',
     define: {
       __MOONCAKES_API_ENDPOINT__: JSON.stringify(apiEndpoint),
+      __MOONCAKES_ASSETS_ENDPOINT__: JSON.stringify(assetsEndpoint),
     },
     build: {
       outDir: '../dist',
+      emptyOutDir: true,
       assetsDir: '',
+      manifest: 'manifest.json',
       // Use esbuild minify (default, faster than terser)
       minify: 'esbuild',
     },

@@ -7,7 +7,15 @@ import {
 }
 
 // Values
+pub fn encode_uri_component(String) -> String
+
 pub fn get_relative_time(String) -> String
+
+pub fn iso8601_to_unix_seconds(String) -> Int64?
+
+pub fn recency_penalty(String) -> Int
+
+pub fn utc_date_days_ago(Int) -> String
 
 // Errors
 

@@ -32,11 +32,10 @@ pub fn accordion(
     })
     let childs = if folded { nothing } else { childs }
     div(class="w-full") <| [
-      div(
-        class="w-full rounded px-2 py-1 select-none font-semibold text-gray-700 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-gray-800 \{folded_style}",
+      button(
+        class="w-full rounded px-2 py-1 select-none text-left font-semibold text-gray-700 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-gray-800 \{folded_style}",
         on_click?,
-        title,
-      ),
+      ) <| title,
       div(class="ml-2", childs),
     ]
   })

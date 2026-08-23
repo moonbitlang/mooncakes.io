@@ -39,14 +39,14 @@ pub fn collapse(
     LeftCenter => "flex h-full w-6"
     LeftTop => "h-6 w-6 top-0 m-1"
   }
-  let button = div(
+  let toggle_button = button(
     class="absolute \{button_style} p-1 hover:bg-gray-200 dark:hover:bg-gray-800 active:bg-gray-300 dark:active:bg-gray-700",
     on_click=toggle,
     img(src=icon, class="size-4 ui-icon \{caret_style}"),
   )
   div() <| [
     div(class="relative flex items-center") <| [
-      button, header,
+      toggle_button, header,
     ],
     body,
   ]

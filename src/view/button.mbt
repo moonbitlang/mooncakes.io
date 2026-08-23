@@ -13,12 +13,24 @@
 // limitations under the License.
 
 ///|
-pub fn button(value : String, on_click? : Cmd) -> Html {
-  div(
-    class="hover:bg-gray-200 dark:hover:bg-gray-800 active:bg-gray-300 dark:active:bg-gray-700 active:translate-y-[3px] self-center transition-transform px-2 py-1 rounded text-sm flex select-none text-gray-800 dark:text-slate-200",
+/// Creates an appearance-neutral semantic button with the project-wide
+/// interaction defaults.
+pub fn[C : @html.IsChildren] button(
+  children : C,
+  on_click? : Cmd,
+  title? : String,
+  class? : String = "",
+  style? : Array[String] = [],
+  attrs? : @html.Attrs,
+) -> Html {
+  @html.button(
+    style~,
+    class="cursor-pointer \{class}",
+    title?,
+    type_="button",
     on_click?,
-    value,
-  )
+    attrs?,
+  ) <| children
 }
 
 ///|
@@ -27,7 +39,7 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
     None => []
     Some(value) => [@html.text(value)]
   }
-  div(
+  button(
     class="hover:bg-gray-200 dark:hover:bg-gray-800 active:bg-gray-300 dark:active:bg-gray-700 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800 dark:text-slate-200",
     on_click?,
   ) <| [
@@ -40,10 +52,9 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
 
 ///|
 pub fn theme_toggle(on_click? : Cmd) -> Html {
-  @html.button(
-    type_="button",
-    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+  button(
     on_click?,
+    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
   ) <| [
     img(
       class="theme-toggle-icon theme-toggle-icon-computer",

@@ -228,16 +228,14 @@ fn sidebar(
     div(
       class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
     ) <| [
-      @html.button(
+      button(
         class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
         on_click=emit(ExpandAllSidebar),
-        "Expand all",
-      ),
-      @html.button(
+      ) <| "Expand all",
+      button(
         class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
         on_click=emit(CollapseAllSidebar),
-        "Collapse all",
-      ),
+      ) <| "Collapse all",
     ],
     @tree.view(
       toggle=x => emit(ToggleSidebarItem(x)),

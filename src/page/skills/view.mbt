@@ -219,8 +219,7 @@ fn hero_feature_card(
     ),
     p(class="mt-3 text-sm leading-6 text-gray-600 dark:text-slate-400", body),
     if action_href.is_empty() {
-      @html.button(
-        type_="button",
+      button(
         class="mt-auto inline-flex w-fit items-center gap-2 pt-4 text-xs font-semibold \{action_class}",
         on_click=emit(ScrollToSkills),
       ) <| [
@@ -289,13 +288,10 @@ fn marketplace_hero(
         div(
           class="relative mt-6 flex flex-wrap items-center justify-center gap-3",
         ) <| [
-          @html.button(
-            type_="button",
+          button(
             class="rounded-md bg-[#d79a82] px-4 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition-colors hover:bg-[#e2aa94]",
             on_click=emit(ScrollToSkills),
-          ) <| [
-            span("Search Skills"),
-          ],
+          ) <| span("Search Skills"),
           a(
             href="https://www.moonbitlang.com/download/",
             class="rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-slate-50 shadow-sm transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-50 dark:hover:bg-zinc-950",
@@ -473,11 +469,11 @@ fn entry_card(
     @config.clipboard
   }
   let copy_class = if copied {
-    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950 transition-colors hover:border-emerald-400 dark:hover:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900 active:bg-emerald-200 dark:active:bg-emerald-800"
+    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950 transition-colors hover:border-emerald-400 dark:hover:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-900 active:bg-emerald-200 dark:active:bg-emerald-800"
   } else if failed {
-    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950 transition-colors hover:border-red-400 dark:hover:border-red-700 hover:bg-red-100 dark:hover:bg-red-900 active:bg-red-200 dark:active:bg-red-800"
+    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950 transition-colors hover:border-red-400 dark:hover:border-red-700 hover:bg-red-100 dark:hover:bg-red-900 active:bg-red-200 dark:active:bg-red-800"
   } else {
-    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800"
+    "absolute right-2 top-1/2 z-20 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800"
   }
   let copy_title = if copied {
     "Copied"
@@ -537,10 +533,9 @@ fn entry_card(
         class="block min-w-0 truncate font-mono text-[11px] leading-7 text-gray-500 dark:text-gray-400",
         run_cmd,
       ),
-      @html.button(
+      button(
         class=copy_class,
         title=copy_title,
-        type_="button",
         on_click=emit(CopyRunCommand(run_cmd)),
       ) <| [
         img(class="pointer-events-none size-3.5 ui-icon", src=copy_icon),
@@ -730,8 +725,8 @@ fn run_command_view(
     ],
     div(class="flex min-w-0 items-center gap-2 px-3 py-3") <| [
       span(class="min-w-0 flex-1 break-all font-mono text-sm", command),
-      @html.button(
-        class="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
+      button(
+        class="inline-flex size-8 shrink-0 items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
         on_click=emit(CopyRunCommand(command)),
       ) <| [
         img(class="pointer-events-none size-4 ui-icon", src=icon),
@@ -980,10 +975,9 @@ fn detail_sidebar(entry : WasmEntry) -> Html {
 fn copy_skill_button(readme : Status[String], emit : (Msg) -> Cmd) -> Html {
   match readme {
     Success(content) if !content.trim().is_empty() =>
-      @html.button(
-        class="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
+      button(
+        class="inline-flex size-7 shrink-0 items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
         title="Copy skill",
-        type_="button",
         on_click=emit(CopySkill(content)),
       ) <| [
         img(class="pointer-events-none size-3.5 ui-icon", src=@config.clipboard),

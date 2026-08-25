@@ -75,18 +75,17 @@ pub fn[Id : Compare] view(
           div(
             class="group/node flex items-center gap-2 px-2 py-0.5 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{font}",
           ) <| [
-            div(
-              class="shrink-0 flex-1 flex items-center gap-2 cursor-pointer",
+            button(
+              class="shrink-0 flex-1 flex items-center gap-2",
               on_click=toggle(id),
             ) <| [
               icon(id, expanded),
               @html.span(class="truncate", str),
             ],
-            div(
-              class="shrink-0 size-5 flex items-center justify-center rounded opacity-0 group-hover/node:opacity-100 hover:bg-gray-300/60 dark:hover:bg-gray-700/60 transition-opacity text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 text-xs cursor-pointer",
+            button(
+              class="shrink-0 size-5 flex items-center justify-center rounded opacity-0 group-hover/node:opacity-100 hover:bg-gray-300/60 dark:hover:bg-gray-700/60 transition-opacity text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 text-xs",
               on_click=click(id),
-              "\u{2192}",
-            ),
+            ) <| "\u{2192}",
           ],
           if expanded {
             ul(
@@ -133,8 +132,8 @@ pub fn[Id : Compare] view(
         }
 
         @html.li() <| [
-          div(
-            class="flex items-center gap-2 px-2 py-0.5 rounded-md cursor-pointer hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{font}",
+          button(
+            class="w-full flex items-center gap-2 px-2 py-0.5 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-800/60 active:bg-gray-200 dark:active:bg-gray-800 text-[13px] transition-colors\{font}",
             on_click=click(id),
           ) <| [
             icon(id, true),

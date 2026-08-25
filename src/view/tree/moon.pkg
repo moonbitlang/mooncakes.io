@@ -2,6 +2,7 @@ import {
   "moonbit-community/rabbita",
   "moonbitlang/core/immut/sorted_set" @immut/sorted_set,
   "moonbit-community/rabbita/html",
+  "moonbitlang/mooncakes/view",
 }
 
 supported_targets = "js+native+wasm"

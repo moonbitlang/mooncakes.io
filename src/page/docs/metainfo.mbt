@@ -15,7 +15,7 @@
 ///|
 fn install_view(command : String, copied~ : Bool, emit : (Msg) -> Cmd) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
-  div(
+  button(
     class="hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800 bg-white dark:bg-zinc-900 md:shadow-xs transition-colors text-black dark:text-slate-50 text-sm px-3 p-2 font-mono border rounded outline-none flex justify-between items-center gap-2",
     on_click=emit(CopyInstallCommand(command)),
   ) <| [
@@ -74,8 +74,8 @@ fn meta_sidebar(
       if model.name == "moonbitlang/core" {
         p(class="text-gray-500 dark:text-gray-400", "Installed by default")
       } else {
-        div(
-          class="group/install hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800 bg-white dark:bg-zinc-900 transition-colors text-[13px] px-2.5 py-1.5 font-mono border rounded relative cursor-pointer",
+        button(
+          class="group/install hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800 bg-white dark:bg-zinc-900 transition-colors text-[13px] text-left px-2.5 py-1.5 font-mono border rounded relative",
           on_click=emit(CopyInstallCommand(install_cmd)),
         ) <| [
           span(class="break-all", install_cmd),

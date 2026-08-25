@@ -2,6 +2,9 @@
 using @html {type Html, a, div, h1, h2, img, input, nothing, p, span}
 
 ///|
+using @view {button}
+
+///|
 using @rabbita {type Cmd, none}
 
 ///|

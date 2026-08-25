@@ -11,7 +11,7 @@ pub fn accordion(class? : String, on_click? : (String) -> @cmd.Cmd, String, Arra
 
 pub fn badge(Array[@html.Html], class? : String) -> @html.Html
 
-pub fn button(String, on_click? : @cmd.Cmd) -> @html.Html
+pub fn[C : @html.IsChildren] button(C, on_click? : @cmd.Cmd, title? : String, class? : String, style? : Array[String], attrs? : @html.Attrs) -> @html.Html
 
 pub fn code_block(String, kind~ : CodeBlockKind, transform_link? : (String) -> String) -> @html.Html
 

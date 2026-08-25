@@ -276,7 +276,7 @@ fn document_item(
       )
     }
   }
-  let collapse_btn : Html = div(
+  let collapse_btn : Html = button(
     class="w-8 h-8 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg flex items-center justify-center",
     on_click=emit(ToggleDocDetail(id)),
     img(src=icon, class="size-4 ui-icon"),
@@ -301,11 +301,10 @@ fn document_item(
   let (title_view, sig_buttons, has_title) = match title {
     None => (nothing, sig_buttons_abs, false)
     Some(title) => {
-      let anchor = div(
-        class="text-gray-300 dark:text-gray-500 hover:text-gray-500 dark:hover:text-slate-400 cursor-pointer transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
+      let anchor = button(
+        class="text-gray-300 dark:text-gray-500 hover:text-gray-500 dark:hover:text-slate-400 transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
         on_click=emit(ClickAnchor(id)),
-        "#",
-      )
+      ) <| "#"
       let title_with_buttons = div(
         class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
         id~,
@@ -488,8 +487,8 @@ fn readme(
     )
   }
   div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [
-    div(
-      class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900 cursor-pointer select-none w-fit",
+    button(
+      class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900 select-none w-fit",
       on_click=emit(ToggleDocDetail("readme")),
     ) <| [
       img(src=icon, class="size-3.5 ui-icon"),
@@ -588,8 +587,7 @@ fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
       button(
         class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
         on_click=emit(ShowLargePackage),
-        "Show All Items",
-      ),
+      ) <| "Show All Items",
     ],
   ]
 }

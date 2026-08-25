@@ -275,7 +275,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
         on_input=x => emit(SearchFilterChanged(x)),
         class="outline-none m-0 flex-grow px-4 p-2 dark:placeholder:text-slate-500",
       ),
-      div(
+      button(
         class="size-12 container hover:bg-gray-200 dark:hover:bg-gray-800 flex justify-center items-center",
         on_click=emit(ToggleSearchPanel(false)),
         img(class="ui-icon", src=@config.icon_close),
@@ -476,7 +476,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     class="fixed inset-0 justify-center items-center z-100",
     style=["display: \{show_sidebar_dialog}"],
   ) <| [
-    div(
+    button(
       class="fixed inset-0 bg-black/40 z-10",
       style=["display: \{show_sidebar_dialog}"],
       on_click=emit(ToggleSidebarFab),
@@ -487,8 +487,8 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
       sidebar(model.sidebar_document, model.sidebar_collapsed, emit),
     ),
   ]
-  let fab : Html = @html.button(
-    class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center cursor-pointer hover:bg-moonbit-dark transition-all select-none",
+  let fab : Html = button(
+    class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center hover:bg-moonbit-dark transition-all select-none",
     on_click=emit(ToggleSidebarFab),
     img(class="size-5", src=@config.hamburger_button),
   )

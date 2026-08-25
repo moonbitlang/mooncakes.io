@@ -457,8 +457,8 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     ]
     let all_modules_section = div(class="pt-10 container lg:w-4/5 px-4") <| [
       div(class="flex justify-center py-2") <| [
-        div(
-          class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors px-6 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900",
+        button(
+          class="flex items-center gap-1.5 select-none text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors px-6 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900",
           on_click=emit(ToggleAllModules),
         ) <| [
           text(

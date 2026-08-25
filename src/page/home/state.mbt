@@ -89,7 +89,7 @@ struct AllModules {
 
 ///|
 fn sanitize_for_fuzzy(text : String) -> String {
-  let sb = StringBuilder::new()
+  let sb = StringBuilder()
   let mut changed = false
   for c in text {
     if c.to_int() <= 0xFFFF {

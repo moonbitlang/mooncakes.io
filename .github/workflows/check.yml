@@ -8,22 +8,15 @@ on:
 
 jobs:
   stable-build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - name: ubuntu-latest
-            path: ubuntu_x86_64_moon_setup
-
-    runs-on: ${{ matrix.os.name }}
-    continue-on-error: true
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: install
         run: |
+          set -o pipefail
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
-          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
 
       - name: moon version
         run: |
@@ -36,9 +29,14 @@ jobs:
           moon install
           moon test --target js --serial --release
           moon test --target js --serial
+          moon test --target native --serial
+          moon test --target wasm --serial
 
       - name: moon check
-        run: moon check --target js --deny-warn
+        run: |
+          moon check --target js --deny-warn
+          moon check --target native --deny-warn
+          moon check --target wasm --deny-warn
 
       - name: moon info
         run: |
@@ -57,15 +55,16 @@ jobs:
       FORCE_COLOR: 1
       TYPOS_VERSION: v1.19.0
     steps:
-      - name: download typos
-        run: curl -LsSf https://github.com/crate-ci/typos/releases/download/$TYPOS_VERSION/typos-$TYPOS_VERSION-x86_64-unknown-linux-musl.tar.gz | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
+      - uses: actions/checkout@v4
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+      - name: download typos
+        run: |
+          set -o pipefail
+          install_dir="${CARGO_HOME:-$HOME/.cargo}/bin"
+          mkdir -p "$install_dir"
+          curl -LsSf "https://github.com/crate-ci/typos/releases/download/$TYPOS_VERSION/typos-$TYPOS_VERSION-x86_64-unknown-linux-musl.tar.gz" |
+            tar zxf - -C "$install_dir"
+          echo "$install_dir" >> "$GITHUB_PATH"
 
       - name: check typos
         run: typos
-
-

@@ -4,6 +4,7 @@ package "moonbitlang/mooncakes/page/docs"
 import {
   "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/mooncakes/util",
 }
 
@@ -20,7 +21,7 @@ pub fn navigate_package(Model, @util.UnsolvedMooncakePath, String?, emit~ : (Msg
 
 pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn view(Model, lang~ : @i18n.Lang, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 

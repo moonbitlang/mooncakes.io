@@ -6,6 +6,7 @@ import {
   "moonbitlang/core/debug",
   "moonbitlang/core/json",
   "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
 }

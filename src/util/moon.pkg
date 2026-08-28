@@ -4,6 +4,7 @@ import {
   "moonbitlang/core/env",
   "moonbitlang/core/string",
   "moonbit-community/rabbita/url",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/x/time",
 }
 

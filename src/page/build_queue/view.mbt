@@ -62,7 +62,7 @@ fn status_icon(status : String) -> Html {
 }
 
 ///|
-fn build_row(item : BuildItem) -> Html {
+fn build_row(item : BuildItem, lang : @i18n.Lang) -> Html {
   let module_parts = item.module_.split("/").collect()
   let (author, name) = match module_parts {
     [author, .. rest] =>
@@ -91,7 +91,10 @@ fn build_row(item : BuildItem) -> Html {
       span(class="text-xs text-gray-300 dark:text-gray-500", "·"),
       span(
         class="text-xs text-gray-400 dark:text-slate-500",
-        @util.get_relative_time(item.finished_at.unwrap_or(item.created_at)),
+        @util.get_relative_time(
+          item.finished_at.unwrap_or(item.created_at),
+          lang,
+        ),
       ),
     ],
   ]
@@ -129,10 +132,11 @@ fn build_section(
   title : String,
   items : Status[Array[BuildItem]],
   empty_text : String,
+  lang : @i18n.Lang,
 ) -> Html {
   let content = match items {
     Loading => skeleton_build_rows(5)
-    Failed => @view.load_failed(title)
+    Failed => @view.load_failed(title, lang)
     Success(list) =>
       if list.is_empty() {
         div(
@@ -140,7 +144,10 @@ fn build_section(
           empty_text,
         )
       } else {
-        div(class="flex flex-col gap-2 animate-fade-in", list.map(build_row))
+        div(
+          class="flex flex-col gap-2 animate-fade-in",
+          list.map(item => build_row(item, lang)),
+        )
       }
   }
   div(class="mb-8") <| [
@@ -153,17 +160,33 @@ fn build_section(
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
+pub fn view(
+  model : Model,
+  lang~ : @i18n.Lang,
+  app_actions~ : Html,
+  emit~ : (Msg) -> Cmd,
+) -> Html {
   ignore(emit)
   @view.page(
-    header=@view.navbar(right=app_actions),
+    lang~,
+    header=@view.navbar(lang~, right=app_actions),
     main=div(class="container max-w-3xl mx-auto px-4 py-8") <| [
       h1(
         class="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-6",
-        "Build Queue",
+        lang.select(en="Build Queue", zh="构建队列"),
       ),
-      build_section("In Queue", model.queue, "No builds in queue."),
-      build_section("Recent Builds", model.recent, "No recent builds."),
+      build_section(
+        lang.select(en="In Queue", zh="排队中"),
+        model.queue,
+        lang.select(en="No builds in queue.", zh="暂无排队任务。"),
+        lang,
+      ),
+      build_section(
+        lang.select(en="Recent Builds", zh="最近构建"),
+        model.recent,
+        lang.select(en="No recent builds.", zh="暂无最近构建。"),
+        lang,
+      ),
     ],
   )
 }

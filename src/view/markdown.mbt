@@ -32,6 +32,7 @@ fn inline_plain_text(inline : @cmark.Inline) -> String {
 ///|
 fn image_render(
   img : @cmark.Inline,
+  lang : @i18n.Lang,
   transform_link? : (String) -> String,
 ) -> @html.Html {
   guard img is Image(img) else {
@@ -54,7 +55,12 @@ fn image_render(
       @html.img(class="my-2", src~, alt~)
     }
     { v: { reference: Inline({ v: { dest: None, .. }, .. }), .. }, .. } =>
-      @html.text("Loading image failed: invalid url")
+      @html.select(
+        lang.select(
+          en="Loading image failed: invalid URL",
+          zh="图片加载失败：链接无效",
+        ),
+      )
     { v: { reference: Ref(_), .. }, .. } => {
       println("Unsupported image reference")
       @html.nothing
@@ -65,6 +71,7 @@ fn image_render(
 ///|
 fn inline2html(
   x : @cmark.Inline,
+  lang : @i18n.Lang,
   link_defs~ : Map[String, String],
   transform_link? : (String) -> String,
 ) -> Array[@html.Html] {
@@ -80,17 +87,17 @@ fn inline2html(
         ),
       ]
     Emphasis({ v: { inline, .. }, .. }) =>
-      [@html.em(inline2html(inline, link_defs~, transform_link?))]
-    Image(_) as img => [image_render(img, transform_link?)]
+      [@html.em(inline2html(inline, lang, link_defs~, transform_link?))]
+    Image(_) as img => [image_render(img, lang, transform_link?)]
     Inlines({ v, .. }) =>
       v
-      .map(x => inline2html(x, link_defs~, transform_link?))
+      .map(x => inline2html(x, lang, link_defs~, transform_link?))
       .to_array()
       .flatten()
     Link({ v: link, .. }) =>
-      unwrap_inline_link(link, link_defs~, transform_link?)
+      unwrap_inline_link(link, lang, link_defs~, transform_link?)
     StrongEmphasis({ v: { inline, .. }, .. }) => {
-      let inline = inline2html(inline, link_defs~, transform_link?)
+      let inline = inline2html(inline, lang, link_defs~, transform_link?)
       [@html.strong(inline)]
     }
     Text({ v: str, .. }) => [inline_text(str)]
@@ -128,11 +135,12 @@ fn unique_heading_id(
 fn heading_content(
   id : String,
   inline : Array[@html.Html],
+  lang : @i18n.Lang,
 ) -> Array[@html.Html] {
   let anchor = a(
     href="#\{id}",
     class="absolute -left-5 text-gray-300 dark:text-gray-500 hover:text-gray-500 dark:hover:text-slate-400 opacity-0 group-hover/markdown-heading:opacity-100 focus:opacity-100 transition-opacity no-underline",
-    title="Link to this section",
+    title=lang.select(en="Link to this section", zh="链接到此章节"),
     "#",
   )
   [anchor, ..inline]
@@ -141,6 +149,7 @@ fn heading_content(
 ///|
 fn block2html(
   x : @cmark.Block,
+  lang : @i18n.Lang,
   small_heading~ : Bool,
   heading_anchors~ : Bool,
   link_defs~ : Map[String, String],
@@ -155,6 +164,7 @@ fn block2html(
         class="border-l-4 border-gray-400 dark:border-zinc-600 bg-gray-50 dark:bg-zinc-950 text-gray-600 dark:text-slate-400 py-2 pl-4 my-2",
         block2html(
           block,
+          lang,
           small_heading~,
           heading_anchors~,
           link_defs~,
@@ -169,6 +179,7 @@ fn block2html(
         .map(x => {
           block2html(
             x,
+            lang,
             small_heading~,
             heading_anchors~,
             link_defs~,
@@ -194,7 +205,7 @@ fn block2html(
     }
     Heading({ v: { level, inline, .. }, .. }) =>
       if small_heading {
-        let inline = inline2html(inline, link_defs~, transform_link?)
+        let inline = inline2html(inline, lang, link_defs~, transform_link?)
         match level {
           1 =>
             h3(
@@ -215,9 +226,13 @@ fn block2html(
           None
         }
         let inline = if id is Some(id) {
-          heading_content(id, inline2html(inline, link_defs~, transform_link?))
+          heading_content(
+            id,
+            inline2html(inline, lang, link_defs~, transform_link?),
+            lang,
+          )
         } else {
-          inline2html(inline, link_defs~, transform_link?)
+          inline2html(inline, lang, link_defs~, transform_link?)
         }
         let anchor_class = if heading_anchors {
           " relative scroll-mt-header group/markdown-heading"
@@ -274,6 +289,7 @@ fn block2html(
                 span(
                   block2html(
                     block,
+                    lang,
                     small_heading~,
                     heading_anchors~,
                     link_defs~,
@@ -287,6 +303,7 @@ fn block2html(
             @html.li(
               block2html(
                 block,
+                lang,
                 small_heading~,
                 heading_anchors~,
                 link_defs~,
@@ -312,7 +329,9 @@ fn block2html(
       }
     }
     Paragraph({ v: { inline, .. }, .. }) => {
-      let child = @html.span(inline2html(inline, link_defs~, transform_link?))
+      let child = @html.span(
+        inline2html(inline, lang, link_defs~, transform_link?),
+      )
       if paragraph_margin {
         div(class="mb-4 md:pr-8", child)
       } else {
@@ -337,7 +356,7 @@ fn block2html(
                 .map(x => {
                   @html.th(
                     class="border border-gray-300 dark:border-zinc-700 p-2 font-semibold",
-                    inline2html(x.0, link_defs~, transform_link?),
+                    inline2html(x.0, lang, link_defs~, transform_link?),
                   )
                 })
                 .to_array()
@@ -354,7 +373,7 @@ fn block2html(
                 .map(x => {
                   @html.td(
                     class="border border-gray-300 dark:border-zinc-700 p-2",
-                    inline2html(x.0, link_defs~, transform_link?),
+                    inline2html(x.0, lang, link_defs~, transform_link?),
                   )
                 })
                 .to_array()
@@ -400,6 +419,7 @@ fn block2html(
 ///|
 fn unwrap_inline_link(
   x : @cmark.InlineLink,
+  lang : @i18n.Lang,
   link_defs~ : Map[String, String],
   transform_link? : (String) -> String,
 ) -> Array[@html.Html] {
@@ -429,7 +449,7 @@ fn unwrap_inline_link(
             None => link
           },
           style=["display: inline-block"],
-          image_render(img, transform_link?),
+          image_render(img, lang, transform_link?),
         ),
       ]
     ({
@@ -442,11 +462,11 @@ fn unwrap_inline_link(
             Some(f) => f(link)
             None => link
           },
-          inline2html(inline, link_defs~, transform_link?),
+          inline2html(inline, lang, link_defs~, transform_link?),
         ),
       ]
     ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }) } : @cmark.InlineLink) =>
-      inline2html(inline, link_defs~, transform_link?)
+      inline2html(inline, lang, link_defs~, transform_link?)
     ({ text: inline, reference: Ref(_, _, { key, .. }) } : @cmark.InlineLink) =>
       if link_defs.get(key) is Some(url) {
         [
@@ -456,11 +476,11 @@ fn unwrap_inline_link(
               Some(f) => f(url)
               None => url
             },
-            inline2html(inline, link_defs~, transform_link?),
+            inline2html(inline, lang, link_defs~, transform_link?),
           ),
         ]
       } else {
-        inline2html(inline, link_defs~, transform_link?)
+        inline2html(inline, lang, link_defs~, transform_link?)
       }
   }
 }
@@ -468,6 +488,7 @@ fn unwrap_inline_link(
 ///|
 pub fn markdown(
   markdown : String,
+  lang : @i18n.Lang,
   small_heading? : Bool = false,
   heading_anchors? : Bool = false,
   transform_link? : (String) -> String,
@@ -486,7 +507,7 @@ pub fn markdown(
     inline_ext_default: fn(_, acc, _) { acc },
     block_ext_default: fn(_, acc, _) { acc },
     inline: fn(_, acc, inline) {
-      Fold([..acc, ..inline2html(inline, link_defs~, transform_link?)])
+      Fold([..acc, ..inline2html(inline, lang, link_defs~, transform_link?)])
     },
     block: fn(_, acc, block) {
       Fold(
@@ -494,9 +515,10 @@ pub fn markdown(
           ..acc,
           block2html(
             block,
-            link_defs~,
+            lang,
             small_heading~,
             heading_anchors~,
+            link_defs~,
             used_heading_ids~,
             transform_link?,
             paragraph_margin=true,
@@ -506,7 +528,13 @@ pub fn markdown(
     },
   }
   try folder.fold_doc([], doc) catch {
-    FolderError(msg) => text("Failed to render markdown: \{msg}")
+    FolderError(msg) =>
+      text(
+        lang.select(
+          en="Failed to render Markdown: \{msg}",
+          zh="Markdown 渲染失败：\{msg}",
+        ),
+      )
   } noraise {
     htmls =>
       div(
@@ -518,5 +546,5 @@ pub fn markdown(
 
 ///|
 test "markdown renders empty image alt without panic" {
-  ignore(markdown("![](down-start.png)"))
+  ignore(markdown("![](down-start.png)", En))
 }

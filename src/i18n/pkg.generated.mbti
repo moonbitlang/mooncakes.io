@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/i18n"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) enum Lang {
+  En
+  Zh
+} derive(Eq, @debug.Debug)
+pub fn Lang::html_lang(Self) -> String
+pub fn[T] Lang::select(Self, en~ : T, zh~ : T) -> T
+
+// Type aliases
+
+// Traits

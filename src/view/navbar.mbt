@@ -6,7 +6,8 @@ pub(all) enum NavbarStyle {
 
 ///|
 pub fn navbar(
-  left? : Html = logo(),
+  lang~ : @i18n.Lang,
+  left? : Html = logo(lang),
   left_extra? : Html,
   middle? : Html,
   right? : Html,
@@ -60,10 +61,10 @@ pub fn navbar(
 }
 
 ///|
-pub fn logo() -> Html {
+pub fn logo(lang : @i18n.Lang) -> Html {
   a(
     class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
     href="/",
-    "🥮 mooncakes.io",
+    lang.select(en="🥮 mooncakes.io", zh="🥮 月饼中心仓"),
   )
 }

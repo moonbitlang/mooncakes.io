@@ -5,6 +5,7 @@ import {
   "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/sub",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/mooncakes/util",
 }
 
@@ -17,7 +18,7 @@ pub fn subscriptions(Model, emit~ : (Msg) -> @cmd.Cmd) -> @sub.Sub
 
 pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn view(Model, lang~ : @i18n.Lang, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 

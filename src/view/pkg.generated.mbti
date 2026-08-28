@@ -4,6 +4,7 @@ package "moonbitlang/mooncakes/view"
 import {
   "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
+  "moonbitlang/mooncakes/i18n",
 }
 
 // Values
@@ -17,25 +18,25 @@ pub fn code_block(String, kind~ : CodeBlockKind, transform_link? : (String) -> S
 
 pub fn collapse(header~ : @html.Html, body~ : @html.Html, collapsed~ : Bool, toggle~ : @cmd.Cmd, caret_config? : CaretConfig) -> @html.Html
 
-pub fn document_not_available(String) -> @html.Html
+pub fn document_not_available(String, @i18n.Lang) -> @html.Html
 
-pub fn footer() -> @html.Html
+pub fn footer(@i18n.Lang) -> @html.Html
 
 pub fn icon_button(String, text? : String, on_click? : @cmd.Cmd) -> @html.Html
 
-pub fn load_failed(String) -> @html.Html
+pub fn load_failed(String, @i18n.Lang) -> @html.Html
 
 pub fn loading() -> @html.Html
 
-pub fn logo() -> @html.Html
+pub fn logo(@i18n.Lang) -> @html.Html
 
-pub fn markdown(String, small_heading? : Bool, heading_anchors? : Bool, transform_link? : (String) -> String) -> @html.Html
+pub fn markdown(String, @i18n.Lang, small_heading? : Bool, heading_anchors? : Bool, transform_link? : (String) -> String) -> @html.Html
 
-pub fn navbar(left? : @html.Html, left_extra? : @html.Html, middle? : @html.Html, right? : @html.Html, style? : NavbarStyle) -> @html.Html
+pub fn navbar(lang~ : @i18n.Lang, left? : @html.Html, left_extra? : @html.Html, middle? : @html.Html, right? : @html.Html, style? : NavbarStyle) -> @html.Html
 
-pub fn not_found() -> @html.Html
+pub fn not_found(@i18n.Lang) -> @html.Html
 
-pub fn page(header? : @html.Html, main? : @html.Html, footer? : @html.Html) -> @html.Html
+pub fn page(lang~ : @i18n.Lang, header? : @html.Html, main? : @html.Html, footer? : @html.Html) -> @html.Html
 
 pub fn skeleton_code_frequency() -> @html.Html
 
@@ -51,7 +52,7 @@ pub fn skeleton_published_modules(Int) -> @html.Html
 
 pub fn skeleton_sidebar() -> @html.Html
 
-pub fn theme_toggle(on_click? : @cmd.Cmd) -> @html.Html
+pub fn theme_toggle(on_click? : @cmd.Cmd, lang~ : @i18n.Lang) -> @html.Html
 
 // Errors
 

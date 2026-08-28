@@ -37,7 +37,7 @@ pub fn[C : @html.IsChildren] button(
 pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
   let text = match text {
     None => []
-    Some(value) => [@html.text(value)]
+    Some(value) => [@html.select(value)]
   }
   button(
     class="hover:bg-gray-200 dark:hover:bg-gray-800 active:bg-gray-300 dark:active:bg-gray-700 active:translate-y-[3px] transition-transform px-2 py-1 rounded text-sm select-none text-gray-800 dark:text-slate-200",
@@ -51,7 +51,7 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
 }
 
 ///|
-pub fn theme_toggle(on_click? : Cmd) -> Html {
+pub fn theme_toggle(on_click? : Cmd, lang~ : @i18n.Lang) -> Html {
   button(
     on_click?,
     class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
@@ -64,15 +64,24 @@ pub fn theme_toggle(on_click? : Cmd) -> Html {
     img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.moon_icon),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-system",
-      "Using system theme. Switch to light mode.",
+      lang.select(
+        en="Using system theme. Switch to light mode.",
+        zh="当前使用系统主题。切换到浅色模式。",
+      ),
     ),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-light",
-      "Using light mode. Switch to dark mode.",
+      lang.select(
+        en="Using light mode. Switch to dark mode.",
+        zh="当前使用浅色模式。切换到深色模式。",
+      ),
     ),
     span(
       class="sr-only theme-toggle-label theme-toggle-label-dark",
-      "Using dark mode. Switch to system theme.",
+      lang.select(
+        en="Using dark mode. Switch to system theme.",
+        zh="当前使用深色模式。切换到系统主题。",
+      ),
     ),
   ]
 }

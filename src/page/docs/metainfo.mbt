@@ -62,6 +62,7 @@ fn display_url(url : String) -> String {
 ///|
 fn meta_sidebar(
   model : MetaInfo,
+  lang : @i18n.Lang,
   install_copied~ : Bool,
   emit : (Msg) -> Cmd,
 ) -> Html {
@@ -70,9 +71,12 @@ fn meta_sidebar(
   div(class="text-sm text-gray-900 dark:text-slate-50 font-medium") <| [
     // Install
     div(class="mb-4") <| [
-      p(class="font-semibold mb-1.5", "Install"),
+      p(class="font-semibold mb-1.5", lang.select(en="Install", zh="安装")),
       if model.name == "moonbitlang/core" {
-        p(class="text-gray-500 dark:text-gray-400", "Installed by default")
+        p(
+          class="text-gray-500 dark:text-gray-400",
+          lang.select(en="Installed by default", zh="默认已安装"),
+        )
       } else {
         button(
           class="group/install hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800 bg-white dark:bg-zinc-900 transition-colors text-[13px] text-left px-2.5 py-1.5 font-mono border rounded relative",
@@ -91,7 +95,7 @@ fn meta_sidebar(
         a(
           class="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 mt-1.5 inline-block",
           href="https://download.mooncakes.io/user/\{model.name}/\{model.version}.zip",
-          "Download zip",
+          lang.select(en="Download zip", zh="下载 ZIP"),
         )
       },
     ],
@@ -155,7 +159,12 @@ fn meta_sidebar(
       if model.updated_at is Some(updated_at) {
         div(class="flex items-center gap-2") <| [
           img(class="w-4 h-4 ui-icon shrink-0", src=@config.updated),
-          text("Updated \{@util.get_relative_time(updated_at)}"),
+          text(
+            lang.select(
+              en="Updated \{@util.get_relative_time(updated_at, lang)}",
+              zh="更新于 \{@util.get_relative_time(updated_at, lang)}",
+            ),
+          ),
         ]
       } else {
         nothing
@@ -163,7 +172,12 @@ fn meta_sidebar(
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div(class="flex items-center gap-2") <| [
           img(class="w-4 h-4 ui-icon shrink-0", src=@config.download),
-          text("\{format_downloads(model.downloads)} downloads"),
+          text(
+            lang.select(
+              en="\{format_downloads(model.downloads)} downloads",
+              zh="下载 \{format_downloads(model.downloads)} 次",
+            ),
+          ),
         ]
       } else {
         nothing
@@ -174,7 +188,10 @@ fn meta_sidebar(
       nothing
     } else {
       div(class="border-t pt-3 mt-3") <| [
-        p(class="font-semibold text-[13px] mb-1.5", "Dependencies"),
+        p(
+          class="font-semibold text-[13px] mb-1.5",
+          lang.select(en="Dependencies", zh="依赖"),
+        ),
         ul(
           class="space-y-0.5",
           model.deps.map(fn(pair) {
@@ -200,6 +217,7 @@ fn meta_sidebar(
 ///|
 fn meta_info(
   model : MetaInfo,
+  lang : @i18n.Lang,
   install_copied~ : Bool,
   emit : (Msg) -> Cmd,
 ) -> Html {
@@ -230,7 +248,7 @@ fn meta_info(
       if model.name == "moonbitlang/core" {
         p(
           class="text-sm text-gray-500 dark:text-gray-400",
-          "Installed by default",
+          lang.select(en="Installed by default", zh="默认已安装"),
         )
       } else {
         install_view(
@@ -245,26 +263,35 @@ fn meta_info(
         a(
           class="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 mt-1.5 inline-block",
           href="https://download.mooncakes.io/user/\{model.name}/\{model.version}.zip",
-          "Download zip",
+          lang.select(en="Download zip", zh="下载 ZIP"),
         )
       },
     ],
     // Meta grid
     div(class="px-6 py-3 border-t grid grid-cols-2 gap-x-4 gap-y-2 text-sm") <| [
       div() <| [
-        span(class="text-gray-400 dark:text-slate-500 text-xs", "Author"),
+        span(
+          class="text-gray-400 dark:text-slate-500 text-xs",
+          lang.select(en="Author", zh="作者"),
+        ),
         div(
           a(href="/user/\{model.author}", class="hover:underline", model.author),
         ),
       ],
       div() <| [
-        span(class="text-gray-400 dark:text-slate-500 text-xs", "Version"),
+        span(
+          class="text-gray-400 dark:text-slate-500 text-xs",
+          lang.select(en="Version", zh="版本"),
+        ),
         div(model.version),
       ],
       match model.license {
         Some(l) =>
           div() <| [
-            span(class="text-gray-400 dark:text-slate-500 text-xs", "License"),
+            span(
+              class="text-gray-400 dark:text-slate-500 text-xs",
+              lang.select(en="License", zh="许可证"),
+            ),
             div(l),
           ]
         None => nothing
@@ -274,7 +301,7 @@ fn meta_info(
           div(class="min-w-0") <| [
             span(
               class="text-gray-400 dark:text-slate-500 text-xs",
-              "Repository",
+              lang.select(en="Repository", zh="代码仓库"),
             ),
             div() <| [
               a(
@@ -292,16 +319,19 @@ fn meta_info(
         div() <| [
           span(
             class="text-gray-400 dark:text-slate-500 text-xs",
-            "Last updated",
+            lang.select(en="Last updated", zh="最后更新"),
           ),
-          div(@util.get_relative_time(updated_at)),
+          div(@util.get_relative_time(updated_at, lang)),
         ]
       } else {
         nothing
       },
       if model.downloads > 0 && model.name != "moonbitlang/core" {
         div() <| [
-          span(class="text-gray-400 dark:text-slate-500 text-xs", "Downloads"),
+          span(
+            class="text-gray-400 dark:text-slate-500 text-xs",
+            lang.select(en="Downloads", zh="下载量"),
+          ),
           div(format_downloads(model.downloads)),
         ]
       } else {
@@ -313,7 +343,10 @@ fn meta_info(
       nothing
     } else {
       div(class="px-6 py-3 border-t") <| [
-        p(class="font-semibold text-sm mb-1.5", "Dependencies"),
+        p(
+          class="font-semibold text-sm mb-1.5",
+          lang.select(en="Dependencies", zh="依赖"),
+        ),
         ul(
           class="space-y-0.5",
           model.deps.map(pair => {

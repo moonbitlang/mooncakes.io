@@ -9,6 +9,7 @@ import {
   "moonbitlang/core/immut/sorted_set" @immut/sorted_set,
   "moonbitlang/core/json",
   "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/view/tree",
   "moonbitlang/mooncakes/util",

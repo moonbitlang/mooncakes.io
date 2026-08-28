@@ -13,10 +13,14 @@
 // limitations under the License.
 
 ///|
-pub fn not_found() -> Html {
+pub fn not_found(lang : @i18n.Lang) -> Html {
   div(class="flex flex-col items-center justify-center h-screen") <| [
     h1(class="text-4xl font-bold", "404"),
-    p(class="text-lg", "Page not found"),
-    a(href="/", class="text-blue-500 dark:text-sky-300", "Go back to home"),
+    p(class="text-lg", lang.select(en="Page not found", zh="页面不存在")),
+    a(
+      href="/",
+      class="text-blue-500 dark:text-sky-300",
+      lang.select(en="Go back to home", zh="返回首页"),
+    ),
   ]
 }

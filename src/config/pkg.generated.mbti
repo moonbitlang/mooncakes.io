@@ -2,6 +2,8 @@
 package "moonbitlang/mooncakes/config"
 
 // Values
+pub const ZH_SITE : String = "pkg.moonbitlang.cn"
+
 pub fn api_url(String) -> String
 
 pub fn asset_url(String) -> String

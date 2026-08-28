@@ -222,6 +222,7 @@ fn symbol_icon(kind : SymbolKind) -> Html {
 fn sidebar(
   document_index : Array[@tree.Tree[ItemTarget]],
   sidebar_state : SortedSet[ItemTarget],
+  lang : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   div(class="text-gray-700 dark:text-slate-300 flex flex-col") <| [
@@ -231,11 +232,11 @@ fn sidebar(
       button(
         class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
         on_click=emit(ExpandAllSidebar),
-      ) <| "Expand all",
+      ) <| lang.select(en="Expand all", zh="全部展开"),
       button(
         class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
         on_click=emit(CollapseAllSidebar),
-      ) <| "Collapse all",
+      ) <| lang.select(en="Collapse all", zh="全部折叠"),
     ],
     @tree.view(
       toggle=x => emit(ToggleSidebarItem(x)),
@@ -249,7 +250,11 @@ fn sidebar(
 }
 
 ///|
-fn source_files_section(files : Array[String], package_path~ : String) -> Html {
+fn source_files_section(
+  files : Array[String],
+  package_path~ : String,
+  lang~ : @i18n.Lang,
+) -> Html {
   if files.is_empty() {
     return nothing
   }
@@ -257,7 +262,7 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
   div(class="mx-4 md:mx-0 mt-8 mb-4") <| [
     h3(
       class="text-gray-800 dark:text-slate-200 font-semibold text-lg mb-3 border-b pb-2",
-      "Source Files",
+      lang.select(en="Source Files", zh="源文件"),
     ),
     ul(
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1",

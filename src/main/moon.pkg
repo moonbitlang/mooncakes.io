@@ -1,5 +1,7 @@
 import {
   "moonbitlang/mooncakes/app",
+  "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/i18n",
   "moonbit-community/rabbita",
 }
 

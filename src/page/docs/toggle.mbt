@@ -19,12 +19,20 @@ priv enum CardMode {
 }
 
 ///|
-fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
+fn card_mode_toggle(
+  mode~ : CardMode,
+  lang~ : @i18n.Lang,
+  click~ : (CardMode) -> Cmd,
+) -> Html {
   let (icon, next_mode) = match mode {
     Expanded => (@config.reduction, Collapsed)
     Collapsed => (@config.expansion, Expanded)
   }
   button(
+    title=match mode {
+      Expanded => lang.select(en="Collapse documentation", zh="折叠文档")
+      Collapsed => lang.select(en="Expand documentation", zh="展开文档")
+    },
     class="theme-toggle hidden md:inline-flex items-center rounded-full px-3 py-1.5 transition-colors",
     on_click=click(next_mode),
     img(class="w-4 h-4 ui-icon", src=icon),

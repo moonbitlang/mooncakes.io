@@ -126,6 +126,7 @@ fn impl_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let { self_type, trait_type, methods } = doc
@@ -145,9 +146,19 @@ fn impl_doc(
   ]
   let content = div(
     class="pl-4 mb-2",
-    methods.map(m => value_doc(m, folded~, module_name~, module_version~, emit)),
+    methods.map(m => {
+      value_doc(m, folded~, module_name~, module_version~, lang~, emit)
+    }),
   )
-  document_item(signature, content, collapsed=folded, id~, tight=true, emit)
+  document_item(
+    signature,
+    content,
+    collapsed=folded,
+    id~,
+    tight=true,
+    lang~,
+    emit,
+  )
 }
 
 ///|
@@ -156,18 +167,27 @@ fn type_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let { docstring, signature, methods, impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div() <| [
-    div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
+    div(class="pl-4 mb-2", @view.markdown(docstring, lang, small_heading=true)),
     ..impls.map(imp => {
-      impl_doc(imp, folded~, module_name~, module_version~, emit)
+      impl_doc(imp, folded~, module_name~, module_version~, lang~, emit)
     }),
     ..methods.map(m => {
-      value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
+      value_doc(
+        m,
+        folded~,
+        module_name~,
+        module_version~,
+        type_id=id,
+        lang~,
+        emit,
+      )
     }),
   ]
   document_item(
@@ -179,6 +199,7 @@ fn type_doc(
     loc~,
     module_name~,
     module_version~,
+    lang~,
     emit,
   )
 }
@@ -189,15 +210,16 @@ fn trait_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let { docstring, signature, impls, name: _, loc } = doc
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div() <| [
-    div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
+    div(class="pl-4 mb-2", @view.markdown(docstring, lang, small_heading=true)),
     ..impls.map(imp => {
-      impl_doc(imp, folded~, module_name~, module_version~, emit)
+      impl_doc(imp, folded~, module_name~, module_version~, lang~, emit)
     }),
   ]
   document_item(
@@ -209,6 +231,7 @@ fn trait_doc(
     loc~,
     module_name~,
     module_version~,
+    lang~,
     emit,
   )
 }
@@ -219,13 +242,14 @@ fn type_alias_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div(
     class="pl-4 mb-2",
-    @view.markdown(docstring, small_heading=true),
+    @view.markdown(docstring, lang, small_heading=true),
   )
   let id = doc.get_id()
   document_item(
@@ -237,6 +261,7 @@ fn type_alias_doc(
     loc~,
     module_name~,
     module_version~,
+    lang~,
     emit,
   )
 }
@@ -252,6 +277,7 @@ fn document_item(
   loc? : Loc,
   module_name? : String = "",
   module_version? : String = "",
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let (content_style, icon) = if collapsed.contains(id) {
@@ -272,7 +298,7 @@ fn document_item(
         href=@config.asset_url("/assets/\{path}/\{loc.file}.html#\{loc.line}"),
         class="text-xs font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors",
         escape=true,
-        "source",
+        lang.select(en="source", zh="源码"),
       )
     }
   }
@@ -345,6 +371,7 @@ fn value_doc(
   module_version~ : String,
   type_id? : String,
   enable_title? : Bool = false,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc } = doc
@@ -354,7 +381,7 @@ fn value_doc(
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div(
     class="pl-4 mb-2",
-    @view.markdown(docstring, small_heading=true),
+    @view.markdown(docstring, lang, small_heading=true),
   )
   let title = if enable_title || type_id is Some(_) { Some(id) } else { None }
   document_item(
@@ -366,6 +393,7 @@ fn value_doc(
     loc~,
     module_name~,
     module_version~,
+    lang~,
     emit,
   )
 }
@@ -376,6 +404,7 @@ fn misc_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let { name, methods, impls } = doc
@@ -392,36 +421,47 @@ fn misc_doc(
       div(
         class="bg-mooncake dark:bg-stone-900 border-mooncake2 border-opacity-50 text-yellow-800 dark:text-yellow-300 border rounded px-6 py-4 my-2",
       ) <| [
-        h3(class="text-base font-semibold", "Note"),
+        h3(class="text-base font-semibold", lang.select(en="Note", zh="提示")),
         p(class="mt-2") <| [
           text(
-            "\{name} is a built-in type. The documentation may not be complete here. You can find all methods and implementations in the ",
+            lang.select(
+              en="\{name} is a built-in type. The documentation may not be complete here. You can find all methods and implementations in the ",
+              zh="\{name} 是内置类型。此处文档可能不完整，所有方法和实现可在以下软件包中找到：",
+            ),
           ),
           a(
             href="/docs/moonbitlang/core/builtin#\{name}",
             class=package_link_class,
             "core/builtin",
           ),
-          text(" and "),
+          text(lang.select(en=" and ", zh="和")),
           a(
             href="/docs/moonbitlang/\{pkg_path}#\{name}",
             class=package_link_class,
             "core/\{name.to_lower()}",
           ),
-          text(" package."),
+          text(lang.select(en=" package.", zh="。")),
         ],
       ]
   }
   let content = div(class="ml-3 my-2") <| [
     tips,
     ..methods.map(m => {
-      value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
+      value_doc(
+        m,
+        folded~,
+        module_name~,
+        module_version~,
+        type_id=id,
+        lang~,
+        emit,
+      )
     }),
     ..impls.map(imp => {
-      impl_doc(imp, folded~, module_name~, module_version~, emit)
+      impl_doc(imp, folded~, module_name~, module_version~, lang~, emit)
     }),
   ]
-  document_item(signature, content, collapsed=folded, id~, emit)
+  document_item(signature, content, collapsed=folded, id~, lang~, emit)
 }
 
 ///|
@@ -463,6 +503,7 @@ fn readme(
   module_version~ : String,
   package_path~ : String,
   folded~ : FoldedState,
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let has_content = match content {
@@ -473,7 +514,7 @@ fn readme(
   let (body, icon) = if is_collapsed {
     (nothing, @config.section_close)
   } else if has_content {
-    let content = @view.markdown(content.unwrap(), heading_anchors=true, transform_link=href => {
+    let content = @view.markdown(content.unwrap(), lang, heading_anchors=true, transform_link=href => {
       readme_href(href, module_name, module_version, package_path)
     })
     (div(class="mt-4 mb-6", content), @config.section_open)
@@ -481,7 +522,10 @@ fn readme(
     (
       p(
         class="mt-3 mb-4 text-sm text-gray-400 dark:text-slate-500 text-center",
-        "\{package_path} does not have a README file",
+        lang.select(
+          en="\{package_path} does not have a README file",
+          zh="\{package_path} 没有 README 文件",
+        ),
       ),
       @config.section_open,
     )
@@ -511,6 +555,7 @@ fn document(
   module_name? : String = "",
   module_version? : String = "",
   package_path? : String = "",
+  lang~ : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   let readme = readme(
@@ -519,6 +564,7 @@ fn document(
     module_version~,
     package_path~,
     folded~,
+    lang~,
     emit,
   )
   let doc_list = match package_data {
@@ -530,23 +576,30 @@ fn document(
         values.length() +
         misc.length()
       if hide_large_package && count > 1000 {
-        [hidden_large_package(count, emit)]
+        [hidden_large_package(count, lang, emit)]
       } else {
         [
           ..typealiases.map(ta => {
-            type_alias_doc(ta, folded~, module_name~, module_version~, emit)
+            type_alias_doc(
+              ta,
+              folded~,
+              module_name~,
+              module_version~,
+              lang~,
+              emit,
+            )
           }),
           ..traits.map(tr => {
-            trait_doc(tr, folded~, module_name~, module_version~, emit)
+            trait_doc(tr, folded~, module_name~, module_version~, lang~, emit)
           }),
           ..errors.map(err => {
-            type_doc(err, folded~, module_name~, module_version~, emit)
+            type_doc(err, folded~, module_name~, module_version~, lang~, emit)
           }),
           ..types.map(ty => {
-            type_doc(ty, folded~, module_name~, module_version~, emit)
+            type_doc(ty, folded~, module_name~, module_version~, lang~, emit)
           }),
           ..misc.map(item => {
-            misc_doc(item, folded~, module_name~, module_version~, emit)
+            misc_doc(item, folded~, module_name~, module_version~, lang~, emit)
           }),
           ..values.map(value => {
             value_doc(
@@ -555,6 +608,7 @@ fn document(
               module_name~,
               module_version~,
               enable_title=true,
+              lang~,
               emit,
             )
           }),
@@ -571,23 +625,33 @@ fn document(
 }
 
 ///|
-fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
+fn hidden_large_package(
+  count : Int,
+  lang : @i18n.Lang,
+  emit : (Msg) -> Cmd,
+) -> Html {
   div(class="flex flex-col items-center justify-center py-12 w-full") <| [
     div(
       class="bg-mooncake dark:bg-stone-900 border border-mooncake2 rounded-lg p-8 w-full text-center",
     ) <| [
       h3(
         class="text-xl font-semibold text-yellow-800 dark:text-yellow-300 mb-4",
-        "⚠️ Package is too large to be displayed",
+        lang.select(
+          en="⚠️ Package is too large to be displayed",
+          zh="⚠️ 软件包过大，无法直接显示",
+        ),
       ),
       p(
         class="text-yellow-700 dark:text-yellow-400 mb-6",
-        "This package contains over \{count} items.",
+        lang.select(
+          en="This package contains over \{count} items.",
+          zh="此软件包包含超过 \{count} 个条目。",
+        ),
       ),
       button(
         class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
         on_click=emit(ShowLargePackage),
-      ) <| "Show All Items",
+      ) <| lang.select(en="Show All Items", zh="显示全部条目"),
     ],
   ]
 }

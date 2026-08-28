@@ -101,13 +101,16 @@ fn icon_outdated() -> Html {
 }
 
 ///|
-fn build_log_view(build_log : BuildLogStatus) -> Html {
+fn build_log_view(build_log : BuildLogStatus, lang : @i18n.Lang) -> Html {
   match build_log {
     LogIdle | LogLoading => @view.loading()
     LogFailed =>
       div(
         class="docs-state-log-note docs-state-log-note-error text-red-700 dark:text-red-300",
-        "Failed to load build log.",
+        lang.select(
+          en="Failed to load build log.",
+          zh="无法加载构建日志。",
+        ),
       )
     LogSuccess(log) => pre(class="docs-state-log-pre", code(log))
   }
@@ -117,6 +120,7 @@ fn build_log_view(build_log : BuildLogStatus) -> Html {
 fn build_log_panel(
   build_log_open : Bool,
   build_log : BuildLogStatus,
+  lang : @i18n.Lang,
   emit : (Msg) -> Cmd,
   footer? : Html = nothing,
 ) -> Html {
@@ -134,7 +138,7 @@ fn build_log_panel(
     ) <| [
       p(
         class="docs-state-log-title text-gray-900 dark:text-slate-50",
-        "Build log",
+        lang.select(en="Build log", zh="构建日志"),
       ),
       img(src=toggle_icon, class="size-4 ui-icon shrink-0"),
     ],
@@ -144,7 +148,7 @@ fn build_log_panel(
         _ => true
       }
       div(class="docs-state-log-body") <| [
-        build_log_view(build_log),
+        build_log_view(build_log, lang),
         if show_footer {
           footer
         } else {
@@ -161,35 +165,51 @@ fn build_log_panel(
 fn failed_docs_notice(
   build_log_open : Bool,
   build_log : BuildLogStatus,
+  lang : @i18n.Lang,
   emit : (Msg) -> Cmd,
 ) -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center") <| [
     icon_failed(),
-    p(class="mt-3 text-base text-gray-500 dark:text-gray-400", "Build failed"),
+    p(
+      class="mt-3 text-base text-gray-500 dark:text-gray-400",
+      lang.select(en="Build failed", zh="构建失败"),
+    ),
     p(
       class="mt-1 text-sm text-gray-400 dark:text-slate-500",
-      "Documentation failed to generate for this version.",
+      lang.select(
+        en="Documentation failed to generate for this version.",
+        zh="此版本的文档生成失败。",
+      ),
     ),
     p(
       class="mt-2 text-sm text-gray-400 dark:text-slate-500",
-      "The package is ready to install and use as a dependency.",
+      lang.select(
+        en="The package is ready to install and use as a dependency.",
+        zh="该软件包仍可安装并作为依赖使用。",
+      ),
     ),
     div(class="mt-8 w-full text-left") <| [
       build_log_panel(
         build_log_open,
         build_log,
+        lang,
         emit,
         footer=p(
           class="docs-state-summary text-gray-500 dark:text-slate-400",
           style=["margin-top: 0.75rem"],
         ) <| [
-          text("If this seems wrong, "),
+          text(
+            lang.select(
+              en="If this seems wrong, ",
+              zh="如果这看起来不对，请",
+            ),
+          ),
           a(
             class="text-blue-500 dark:text-sky-300 hover:text-blue-700 dark:hover:text-blue-300 transition-colors",
             href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-            "report it",
+            lang.select(en="report it", zh="反馈问题"),
           ),
-          text("."),
+          text(lang.select(en=".", zh="。")),
         ],
       ),
     ],
@@ -197,49 +217,68 @@ fn failed_docs_notice(
 }
 
 ///|
-fn queued_docs_notice() -> Html {
+fn queued_docs_notice(lang : @i18n.Lang) -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center") <| [
     icon_queued(),
     p(
       class="mt-3 text-base text-gray-500 dark:text-gray-400",
-      "Building documentation...",
+      lang.select(en="Building documentation...", zh="正在构建文档…"),
     ),
     p(class="mt-1 text-sm text-gray-400 dark:text-slate-500") <| [
-      text("This may take a few minutes. "),
+      text(
+        lang.select(
+          en="This may take a few minutes. ",
+          zh="这可能需要几分钟。",
+        ),
+      ),
       a(
         href="/build-queue",
         class="text-blue-500 dark:text-sky-300 hover:text-blue-700 dark:hover:text-blue-300 transition-colors",
-        "View build queue",
+        lang.select(en="View build queue", zh="查看构建队列"),
       ),
     ],
     p(
       class="mt-2 text-sm text-gray-400 dark:text-slate-500",
-      "The package is ready to install and use as a dependency.",
+      lang.select(
+        en="The package is ready to install and use as a dependency.",
+        zh="该软件包仍可安装并作为依赖使用。",
+      ),
     ),
   ]
 }
 
 ///|
-fn outdated_docs_notice() -> Html {
+fn outdated_docs_notice(lang : @i18n.Lang) -> Html {
   div(class="flex flex-col items-center justify-center py-16 text-center") <| [
     icon_outdated(),
     p(
       class="mt-3 text-base text-gray-500 dark:text-gray-400",
-      "No documentation available",
+      lang.select(en="No documentation available", zh="暂无文档"),
     ),
     p(
       class="mt-1 text-sm text-gray-400 dark:text-slate-500",
-      "This version was published before doc generation was available.",
+      lang.select(
+        en="This version was published before doc generation was available.",
+        zh="此版本发布时尚未提供文档生成功能。",
+      ),
     ),
     p(
       class="mt-2 text-sm text-gray-400 dark:text-slate-500",
-      "The package is ready to install and use as a dependency.",
+      lang.select(
+        en="The package is ready to install and use as a dependency.",
+        zh="该软件包仍可安装并作为依赖使用。",
+      ),
     ),
   ]
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
+pub fn view(
+  model : Model,
+  lang~ : @i18n.Lang,
+  app_actions~ : Html,
+  emit~ : (Msg) -> Cmd,
+) -> Html {
   let module_index = match model.module_index {
     Success(module_index) => Some(module_index)
     _ => None
@@ -257,6 +296,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     nav_module_path,
     module_index,
     model.collapsed_docs.card_mode,
+    lang,
     emit,
     app_actions~,
   )
@@ -271,7 +311,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
       @html.input(
         input_type=Text,
         value=search.filter,
-        placeholder="search...",
+        placeholder=lang.select(en="search...", zh="搜索…"),
         on_input=x => emit(SearchFilterChanged(x)),
         class="outline-none m-0 flex-grow px-4 p-2 dark:placeholder:text-slate-500",
       ),
@@ -283,7 +323,8 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     ],
     match search.results {
       Loading => nothing
-      Failed => text("load indices failed")
+      Failed =>
+        text(lang.select(en="Failed to load indices", zh="加载索引失败"))
       Success(results) =>
         @html.ul(
           class="overflow-y-auto flex-grow",
@@ -317,7 +358,17 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
                 ),
                 span(
                   class="font-thin text-tiny lg:text-base \{color}",
-                  x.entry.kind,
+                  lang.select(
+                    en=x.entry.kind,
+                    zh=match x.entry.kind {
+                      "Package" => "软件包"
+                      "Trait" => "特征"
+                      "Type" => "类型"
+                      "Method" => "方法"
+                      "Value" => "值"
+                      kind => kind
+                    },
+                  ),
                 ),
               ],
             ]
@@ -344,7 +395,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
           ),
         ],
       ],
-      @view.footer(),
+      @view.footer(lang),
     ]
   }
   let path_str = resolved.package_path()
@@ -367,7 +418,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
       Some(meta) =>
         div(
           class="xl:hidden",
-          meta_info(meta, install_copied=model.install_copied, emit),
+          meta_info(meta, lang, install_copied=model.install_copied, emit),
         )
       None => nothing
     }
@@ -379,7 +430,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     Some(meta) =>
       div(
         class="animate-fade-in",
-        meta_sidebar(meta, install_copied=model.install_copied, emit),
+        meta_sidebar(meta, lang, install_copied=model.install_copied, emit),
       )
     None =>
       if model.module_meta is Loading {
@@ -397,7 +448,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
       if docs_loaded {
         nothing
       } else {
-        @view.document_not_available(path_str)
+        @view.document_not_available(path_str, lang)
       }
     (Success(_), Success(meta)) =>
       match meta.build_status {
@@ -405,23 +456,28 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
           if docs_loaded {
             nothing
           } else {
-            queued_docs_notice()
+            queued_docs_notice(lang)
           }
         Some(BuildFailed) =>
           if docs_loaded {
             nothing
           } else {
-            failed_docs_notice(model.build_log_open, model.build_log, emit)
+            failed_docs_notice(
+              model.build_log_open,
+              model.build_log,
+              lang,
+              emit,
+            )
           }
-        None => if docs_loaded { nothing } else { outdated_docs_notice() }
+        None => if docs_loaded { nothing } else { outdated_docs_notice(lang) }
         Some(BuildSuccess) | Some(BuildLegacy) =>
           match (model.readme_content, model.module_index, model.package_data) {
             (Failed, _, _) | (_, Failed, _) =>
-              @view.document_not_available(path_str)
+              @view.document_not_available(path_str, lang)
             (_, _, Failed) =>
               match model.manifest {
                 Success(manifest) if manifest.has_package =>
-                  @view.document_not_available(path_str)
+                  @view.document_not_available(path_str, lang)
                 _ => nothing
               }
             _ => nothing
@@ -447,12 +503,13 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
             module_name~,
             module_version~,
             package_path=path_str,
+            lang~,
             emit,
           ),
         ]
       _ => nothing
     }
-    let src = source_files_section(model.source_files, package_path~)
+    let src = source_files_section(model.source_files, package_path~, lang~)
     (doc, src)
   } else {
     let skeleton = match model.module_meta {
@@ -484,7 +541,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     ),
     div(
       class="bg-zinc-50 dark:bg-zinc-950 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
-      sidebar(model.sidebar_document, model.sidebar_collapsed, emit),
+      sidebar(model.sidebar_document, model.sidebar_collapsed, lang, emit),
     ),
   ]
   let fab : Html = button(
@@ -508,7 +565,12 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
             } else {
               div(
                 class="animate-fade-in",
-                sidebar(model.sidebar_document, model.sidebar_collapsed, emit),
+                sidebar(
+                  model.sidebar_document,
+                  model.sidebar_collapsed,
+                  lang,
+                  emit,
+                ),
               )
             },
           ],
@@ -522,6 +584,6 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
         ),
       ],
     ],
-    @view.footer(),
+    @view.footer(lang),
   ]
 }

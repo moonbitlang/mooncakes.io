@@ -1,4 +1,7 @@
 ///|
+pub const ZH_SITE : String = "pkg.moonbitlang.cn"
+
+///|
 pub let readme_icon : String = asset_url("/readme.svg")
 
 ///|
@@ -168,7 +171,7 @@ fn assets_endpoint() -> String {
 pub fn asset_url(path : String) -> String {
   let base = assets_endpoint()
   match path {
-    [.. "/", .. path] => "\{base}/\{path.to_owned()}"
+    [.. "/", .. path] => "\{base}/\{path}"
     path => "\{base}/\{path}"
   }
 }
@@ -176,9 +179,9 @@ pub fn asset_url(path : String) -> String {
 ///|
 fn api_url_with_endpoint(endpoint : String, path : String) -> String {
   match path {
-    [.. "/api/", .. path] => "\{endpoint}/\{path.to_owned()}"
+    [.. "/api/", .. path] => "\{endpoint}/\{path}"
     [.. "/api"] => endpoint
-    [.. "/", .. path] => "\{endpoint}/\{path.to_owned()}"
+    [.. "/", .. path] => "\{endpoint}/\{path}"
     path => "\{endpoint}\{path}"
   }
 }

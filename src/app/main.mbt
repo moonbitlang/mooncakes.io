@@ -39,6 +39,7 @@ priv enum Page {
 ///|
 priv struct Model {
   theme : Theme
+  lang : @i18n.Lang
   page : Page
 }
 
@@ -167,28 +168,36 @@ fn route(url : @url.Url, model : Model, emit : Emit[Msg]) -> (Cmd, Model) {
 ///|
 #warnings("-alert_xss_vulnerable")
 fn view(emit : Emit[Msg], model : Model) -> Html {
-  let app_actions = @view.theme_toggle(on_click=emit(ToggleTheme))
+  let app_actions = @view.theme_toggle(
+    on_click=emit(ToggleTheme),
+    lang=model.lang,
+  )
+  let lang = model.lang
   let page_view = match model.page {
     Home(page_model) =>
-      @home.view(page_model, app_actions~, emit=x => emit(GotHomeMsg(x)))
+      @home.view(page_model, lang=model.lang, app_actions~, emit=x => {
+        emit(GotHomeMsg(x))
+      })
     Docs(page_model) =>
-      @docs.view(page_model, app_actions~, emit=x => emit(GotDocsMsg(x)))
+      @docs.view(page_model, lang~, app_actions~, emit=x => emit(GotDocsMsg(x)))
     User(page_model) =>
-      @user.view(page_model, app_actions~, emit=x => emit(GotUserMsg(x)))
+      @user.view(page_model, lang~, app_actions~, emit=x => emit(GotUserMsg(x)))
     BuildQueue(page_model) =>
-      @build_queue.view(page_model, app_actions~, emit=x => {
+      @build_queue.view(page_model, lang~, app_actions~, emit=x => {
         emit(GotBuildQueueMsg(x))
       })
     Skills(page_model) =>
-      @skills.view(page_model, app_actions~, emit=x => emit(GotSkillsMsg(x)))
-    NotFound => @view.not_found()
+      @skills.view(page_model, lang~, app_actions~, emit=x => {
+        emit(GotSkillsMsg(x))
+      })
+    NotFound => @view.not_found(lang)
     Redirect => @view.loading()
   }
   let html_attrs = Attrs::build()
     .data_set("theme", model.theme.resolved())
     .data_set("theme-preference", model.theme.preference.to_string())
   let bootstrap_attrs = Attrs::build().inner_html(ThemeBootstrap)
-  html(lang="en", attrs=html_attrs, [
+  html(lang=lang.html_lang(), attrs=html_attrs, [
     head([
       meta(charset="UTF-8"),
       meta(name="viewport", content="width=device-width, initial-scale=1.0"),
@@ -216,12 +225,12 @@ fn subscriptions(emit : Emit[Msg], model : Model) -> @sub.Sub {
 }
 
 ///|
-pub fn app() -> @rabbita.App {
+pub fn app(lang : @i18n.Lang) -> @rabbita.App {
   let theme : Theme = {
     preference: theme_preference_from_string(initial_theme_preference()),
     system_dark: system_prefers_dark(),
   }
-  let model = { theme, page: Redirect }
+  let model = { theme, lang, page: Redirect }
   apply_theme_now(theme)
   @rabbita.elmish(
     model=ReactiveModel(model),

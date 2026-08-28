@@ -13,7 +13,20 @@
 // limitations under the License.
 
 ///|
-using @html {type Html, a, div, nothing, text, input, img, h1, h2, span, p}
+using @html {
+  type Attrs,
+  type Html,
+  a,
+  div,
+  nothing,
+  text,
+  input,
+  img,
+  h1,
+  h2,
+  span,
+  p,
+}
 
 ///|
 using @view {button}

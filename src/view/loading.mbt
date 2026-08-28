@@ -267,30 +267,43 @@ pub fn skeleton_meta_sidebar() -> Html {
 }
 
 ///|
-pub fn load_failed(resource : String) -> Html {
+pub fn load_failed(resource : String, lang : @i18n.Lang) -> Html {
   div(
     class="flex flex-col items-center justify-center py-16 w-full",
     p(
       class="text-sm text-gray-400 dark:text-slate-500",
-      "Failed to load \{resource}",
+      lang.select(en="Failed to load \{resource}", zh="加载\{resource}失败"),
     ),
   )
 }
 
 ///|
-pub fn document_not_available(_path : String) -> Html {
+pub fn document_not_available(_path : String, lang : @i18n.Lang) -> Html {
   div(class="docs-state-shell") <| [
     div(class="docs-state-card docs-state-card-failed") <| [
       div(class="docs-state-header") <| [
-        h1(class="docs-state-title", "Docs unavailable"),
+        h1(
+          class="docs-state-title",
+          lang.select(en="Docs unavailable", zh="文档不可用"),
+        ),
         p(class="docs-state-summary") <| [
-          text("Documentation assets could not be loaded. "),
+          text(
+            lang.select(
+              en="Documentation assets could not be loaded. ",
+              zh="无法加载文档资源。",
+            ),
+          ),
           a(
             class="docs-state-link",
             href="https://github.com/moonbitlang/mooncakes.io/issues/new",
-            "Report it",
+            lang.select(en="Report it", zh="反馈问题"),
           ),
-          text(" if this persists."),
+          text(
+            lang.select(
+              en=" if this persists.",
+              zh="（如果问题持续出现）。",
+            ),
+          ),
         ],
       ],
     ],

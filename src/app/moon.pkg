@@ -6,6 +6,7 @@ import {
   "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/sub",
   "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/mooncakes/util",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/page/home",

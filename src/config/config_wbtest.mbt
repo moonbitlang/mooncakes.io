@@ -1,4 +1,9 @@
 ///|
+test "Chinese site hostname" {
+  inspect(ZH_SITE, content="pkg.moonbitlang.cn")
+}
+
+///|
 test "api url keeps same origin api path with default endpoint" {
   inspect(
     api_url_with_endpoint("/api", "/api/v0/modules"),

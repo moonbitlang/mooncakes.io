@@ -141,9 +141,9 @@ fn suffix_after_n_chars_or(
 }
 
 ///|
-pub fn profile(profile : Status[Profile]) -> Html {
+pub fn profile(profile : Status[Profile], lang : @i18n.Lang) -> Html {
   match profile {
-    Failed => @view.load_failed("user")
+    Failed => @view.load_failed(lang.select(en="user", zh="用户信息"), lang)
     Loading => @view.skeleton_profile()
     Success({ username, avatar_url, .. }) =>
       div(class="flex flex-col items-center text-center animate-fade-in") <| [
@@ -169,21 +169,28 @@ pub fn profile(profile : Status[Profile]) -> Html {
 }
 
 ///|
-pub fn published_modules(modules : Status[PublishedModules]) -> Html {
+pub fn published_modules(
+  modules : Status[PublishedModules],
+  lang : @i18n.Lang,
+) -> Html {
   match modules {
-    Failed => @view.load_failed("published modules")
+    Failed =>
+      @view.load_failed(
+        lang.select(en="published modules", zh="已发布模块"),
+        lang,
+      )
     Loading => @view.skeleton_published_modules(6)
     Success(module_list) => {
       if module_list.length() == 0 {
         return div(
           class="p-8 text-center text-gray-500 dark:text-gray-400",
-          "No published modules yet",
+          lang.select(en="No published modules yet", zh="尚未发布模块"),
         )
       }
       div(class="animate-fade-in") <| [
         h2(
           class="text-2xl font-semibold mb-6 text-gray-800 dark:text-slate-200",
-          "Published Modules",
+          lang.select(en="Published Modules", zh="已发布模块"),
         ),
         div(
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4",
@@ -219,15 +226,25 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
 }
 
 ///|
-pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
+pub fn code_frequency(
+  code_frequency : Status[Map[String, Int]],
+  lang : @i18n.Lang,
+) -> Html {
   match code_frequency {
-    Failed => @view.load_failed("code frequency")
+    Failed =>
+      @view.load_failed(
+        lang.select(en="code frequency", zh="代码频率"),
+        lang,
+      )
     Loading => @view.skeleton_code_frequency()
     Success(data) => {
       if data.length() == 0 {
         return div(
           class="my-6 text-sm text-gray-500 dark:text-gray-400",
-          "No code frequency data",
+          lang.select(
+            en="No code frequency data",
+            zh="暂无代码频率数据",
+          ),
         )
       }
 
@@ -306,7 +323,7 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
       div(class="animate-fade-in") <| [
         h2(
           class="text-2xl font-semibold mb-6 text-gray-800 dark:text-slate-200",
-          "Code Frequency",
+          lang.select(en="Code Frequency", zh="代码频率"),
         ),
         div(
           class="bg-white dark:bg-zinc-900 rounded-xl border px-4 sm:px-6 lg:px-10 pb-6 pt-6 sm:pt-8 lg:pt-10",
@@ -349,18 +366,18 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
           div(class="flex flex-wrap gap-2 sm:gap-4 mt-4 text-xs") <| [
             div(class="flex items-center") <| [
               div(class="bg-green-500 w-4 h-2 rounded-sm mr-1", nothing),
-              text("Added"),
+              text(lang.select(en="Added", zh="新增")),
             ],
             div(class="flex items-center") <| [
               div(class="bg-red-500 w-4 h-2 rounded-sm mr-1", nothing),
-              text("Removed"),
+              text(lang.select(en="Removed", zh="删除")),
             ],
             div(class="flex items-center") <| [
               div(
                 class="bg-gray-400 dark:bg-gray-700 w-4 h-[2px] mr-1",
                 nothing,
               ),
-              text("No Change"),
+              text(lang.select(en="No Change", zh="无变化")),
             ],
           ],
         ],
@@ -370,17 +387,23 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
+pub fn view(
+  model : Model,
+  lang~ : @i18n.Lang,
+  app_actions~ : Html,
+  emit~ : (Msg) -> Cmd,
+) -> Html {
   ignore(emit)
   @view.page(
-    header=@view.navbar(right=app_actions),
+    lang~,
+    header=@view.navbar(lang~, right=app_actions),
     main=div(class="container lg:px-40 px-4 py-6") <| [
       // Top: User profile (centered)
-      div(class="flex justify-center mb-8", profile(model.profile)),
+      div(class="flex justify-center mb-8", profile(model.profile, lang)),
       // Content area: vertical layout
       div(class="space-y-8") <| [
         // Top: Code frequency
-        code_frequency(model.code_frequency),
+        code_frequency(model.code_frequency, lang),
         // Bottom: Published modules
         published_modules(
           match model.profile {
@@ -388,10 +411,10 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
             Loading => Loading
             Failed => Failed
           },
+          lang,
         ),
       ],
     ],
-    footer=@view.footer(),
   )
 }
 

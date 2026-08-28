@@ -14,10 +14,13 @@ fn parse_plain_datetime(value : StringView) -> Int64? {
   } else {
     "\{value}T00:00:00"
   }
-  try @time.PlainDateTime::from_str(value) catch {
+  try {
+    let datetime : @time.PlainDateTime = @string.from_str(value)
+    datetime.to_unix_second()
+  } catch {
     _ => None
   } noraise {
-    value => Some(value.to_unix_second())
+    value => Some(value)
   }
 }
 
@@ -139,47 +142,81 @@ fn pluralized_ago(value : Int64, unit : String) -> String {
 }
 
 ///|
-fn relative_time_from_seconds(elapsed_seconds : Int64) -> String {
+fn relative_time_from_seconds(
+  elapsed_seconds : Int64,
+  lang : @i18n.Lang,
+) -> String {
   let seconds = if elapsed_seconds < 0L { 0L } else { elapsed_seconds }
   let minutes = seconds / 60L
   let hours = minutes / 60L
   let days = hours / 24L
   let months = days / 30L
   let years = days / 365L
-  if years > 0L {
-    if years == 1L {
-      "last year"
-    } else {
-      pluralized_ago(years, "year")
-    }
-  } else if months > 0L {
-    if months == 1L {
-      "last month"
-    } else {
-      pluralized_ago(months, "month")
-    }
-  } else if days > 0L {
-    if days == 1L {
-      "yesterday"
-    } else {
-      pluralized_ago(days, "day")
-    }
-  } else if hours > 0L {
-    pluralized_ago(hours, "hour")
-  } else if minutes > 0L {
-    pluralized_ago(minutes, "minute")
-  } else if seconds == 0L {
-    "now"
-  } else {
-    pluralized_ago(seconds, "second")
+  match lang {
+    En =>
+      if years > 0L {
+        if years == 1L {
+          "last year"
+        } else {
+          pluralized_ago(years, "year")
+        }
+      } else if months > 0L {
+        if months == 1L {
+          "last month"
+        } else {
+          pluralized_ago(months, "month")
+        }
+      } else if days > 0L {
+        if days == 1L {
+          "yesterday"
+        } else {
+          pluralized_ago(days, "day")
+        }
+      } else if hours > 0L {
+        pluralized_ago(hours, "hour")
+      } else if minutes > 0L {
+        pluralized_ago(minutes, "minute")
+      } else if seconds == 0L {
+        "now"
+      } else {
+        pluralized_ago(seconds, "second")
+      }
+    Zh =>
+      if years > 0L {
+        if years == 1L {
+          "去年"
+        } else {
+          "\{years} 年前"
+        }
+      } else if months > 0L {
+        if months == 1L {
+          "上个月"
+        } else {
+          "\{months} 个月前"
+        }
+      } else if days > 0L {
+        if days == 1L {
+          "昨天"
+        } else {
+          "\{days} 天前"
+        }
+      } else if hours > 0L {
+        "\{hours} 小时前"
+      } else if minutes > 0L {
+        "\{minutes} 分钟前"
+      } else if seconds == 0L {
+        "刚刚"
+      } else {
+        "\{seconds} 秒前"
+      }
   }
 }
 
 ///|
-pub fn get_relative_time(date : String) -> String {
+pub fn get_relative_time(date : String, lang : @i18n.Lang) -> String {
   guard iso8601_to_unix_seconds(date) is Some(date_seconds) else { return date }
   let now_seconds = @env.now().reinterpret_as_int64() / 1000L
-  relative_time_from_seconds(now_seconds - date_seconds)
+  relative_time_from_seconds(now_seconds - date_seconds, lang)
 }
 
 ///|

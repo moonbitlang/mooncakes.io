@@ -1,9 +1,11 @@
 ///|
 pub fn page(
-  header? : Html = navbar(),
+  lang~ : @i18n.Lang,
+  header? : Html = navbar(lang~),
   main? : Html,
-  footer? : Html = footer(),
+  footer? : Html,
 ) -> Html {
+  let footer = footer.unwrap_or(footer_content(lang))
   div(
     class="w-full flex-col bg-zinc-50 dark:bg-zinc-950 dark:[--sidebar-bg:var(--color-zinc-950)]",
   ) <| [

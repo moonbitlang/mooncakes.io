@@ -4,21 +4,22 @@ package "moonbitlang/mooncakes/page/user"
 import {
   "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/html",
+  "moonbitlang/mooncakes/i18n",
   "moonbitlang/mooncakes/util",
 }
 
 // Values
-pub fn code_frequency(@util.Status[Map[String, Int]]) -> @html.Html
+pub fn code_frequency(@util.Status[Map[String, Int]], @i18n.Lang) -> @html.Html
 
 pub fn load(String, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
 
-pub fn profile(@util.Status[Profile]) -> @html.Html
+pub fn profile(@util.Status[Profile], @i18n.Lang) -> @html.Html
 
-pub fn published_modules(@util.Status[Array[(String, String)]]) -> @html.Html
+pub fn published_modules(@util.Status[Array[(String, String)]], @i18n.Lang) -> @html.Html
 
 pub fn update(Msg, Model) -> (@cmd.Cmd, Model)
 
-pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn view(Model, lang~ : @i18n.Lang, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
 
 // Errors
 

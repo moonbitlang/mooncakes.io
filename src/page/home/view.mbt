@@ -22,7 +22,7 @@ fn versioned_path(mod : ModuleIndex) -> String {
 }
 
 ///|
-fn simple_module_card(mod : ModuleIndex) -> Html {
+fn simple_module_card(mod : ModuleIndex, lang : @i18n.Lang) -> Html {
   let href = "/docs/\{versioned_path(mod)}"
   div(
     class="h-24 lg:h-30 flex-nowrap bg-white dark:bg-zinc-900 text-gray-700 dark:text-slate-300 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 dark:border-zinc-800 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-shadow",
@@ -50,7 +50,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
       div(class="flex items-baseline gap-2") <| [
         if mod.is_new {
           @view.badge(class="bg-gray-700 dark:bg-gray-700 text-white", [
-            text("NEW"),
+            text(lang.select(en="NEW", zh="新")),
           ])
         } else {
           nothing
@@ -58,7 +58,9 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
         span(class="text-xs text-gray-500 dark:text-gray-400", mod.version),
         p(
           class="text-xs flex-1 text-right text-gray-500 dark:text-gray-400",
-          mod.created_at.map(@util.get_relative_time).unwrap_or(""),
+          mod.created_at
+          .map(date => @util.get_relative_time(date, lang))
+          .unwrap_or(""),
         ),
       ],
     ],
@@ -66,7 +68,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
 }
 
 ///|
-fn module_card(mod : ModuleIndex) -> Html {
+fn module_card(mod : ModuleIndex, lang : @i18n.Lang) -> Html {
   let keywords = match mod.keywords {
     None => nothing
     Some(keywords) =>
@@ -89,7 +91,7 @@ fn module_card(mod : ModuleIndex) -> Html {
       )
   }
   let time = match mod.created_at {
-    Some(t) => p(@util.get_relative_time(t))
+    Some(t) => p(@util.get_relative_time(t, lang))
     None => nothing
   }
   div(
@@ -122,7 +124,7 @@ fn module_card(mod : ModuleIndex) -> Html {
 }
 
 ///|
-fn pinned() -> Html {
+fn pinned(lang : @i18n.Lang) -> Html {
   let pinned = [
     {
       author: "moonbitlang",
@@ -131,7 +133,10 @@ fn pinned() -> Html {
       version: "",
       keywords: None,
       description: Some(
-        "Always up-to-date documentation for the MoonBit standard library API.",
+        lang.select(
+          en="Always up-to-date documentation for the MoonBit standard library API.",
+          zh="始终与 MoonBit 标准库 API 保持同步的文档。",
+        ),
       ),
       created_at: None,
       is_new: false,
@@ -143,7 +148,10 @@ fn pinned() -> Html {
       version: "",
       keywords: None,
       description: Some(
-        "Asynchronous programming library for MoonBit. Including fs, http, io, and more.",
+        lang.select(
+          en="Asynchronous programming library for MoonBit. Including fs, http, io, and more.",
+          zh="MoonBit 异步编程库，包含文件系统、HTTP、I/O 等功能。",
+        ),
       ),
       created_at: None,
       is_new: false,
@@ -154,7 +162,12 @@ fn pinned() -> Html {
       path: "moonbitlang/x",
       version: "",
       keywords: None,
-      description: Some("Experimental and extended libraries for MoonBit."),
+      description: Some(
+        lang.select(
+          en="Experimental and extended libraries for MoonBit.",
+          zh="MoonBit 的实验性扩展库。",
+        ),
+      ),
       created_at: None,
       is_new: false,
     },
@@ -162,20 +175,28 @@ fn pinned() -> Html {
   div(class="container lg:w-4/5 px-4 mt-4 mb-6") <| [
     h1(
       class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400",
-      "Pinned modules",
+      lang.select(en="Pinned modules", zh="精选模块"),
     ),
     div(
       class="grid grid-cols-1 lg:grid-cols-3 gap-2",
-      pinned.map(fn(m) { compact_module_card(m) }),
+      pinned.map(fn(m) { compact_module_card(m, lang) }),
     ),
   ]
 }
 
 ///|
-fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
+fn compact_module_card(
+  mod : ModuleIndex,
+  lang : @i18n.Lang,
+  show_time? : Bool = false,
+) -> Html {
   let href = "/docs/\{versioned_path(mod)}"
   let badge = if show_time {
-    text(mod.created_at.map(@util.get_relative_time).unwrap_or(""))
+    text(
+      mod.created_at
+      .map(date => @util.get_relative_time(date, lang))
+      .unwrap_or(""),
+    )
   } else {
     text(mod.version)
   }
@@ -209,6 +230,7 @@ fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
 fn module_list_column(
   title : String,
   modules : Array[ModuleIndex],
+  lang : @i18n.Lang,
   show_time? : Bool = false,
 ) -> Html {
   div(class="flex flex-col gap-2") <| [
@@ -216,7 +238,7 @@ fn module_list_column(
     ..modules
     .iter()
     .take(12)
-    .map(fn(m) { compact_module_card(m, show_time~) })
+    .map(fn(m) { compact_module_card(m, lang, show_time~) })
     .collect(),
   ]
 }
@@ -226,18 +248,36 @@ fn highlights_section(
   recent : Array[ModuleIndex],
   new_published : Array[ModuleIndex],
   popular : Array[ModuleIndex],
+  lang : @i18n.Lang,
 ) -> Html {
   div(class="container lg:w-4/5 px-4 animate-fade-in") <| [
     div(class="grid grid-cols-1 lg:grid-cols-3 gap-4") <| [
-      module_list_column("Recently updated", recent, show_time=true),
-      module_list_column("Newly published", new_published, show_time=true),
-      module_list_column("Most downloaded", popular),
+      module_list_column(
+        lang.select(en="Recently updated", zh="最近更新"),
+        recent,
+        lang,
+        show_time=true,
+      ),
+      module_list_column(
+        lang.select(en="Newly published", zh="最新发布"),
+        new_published,
+        lang,
+        show_time=true,
+      ),
+      module_list_column(
+        lang.select(en="Most downloaded", zh="下载最多"),
+        popular,
+        lang,
+      ),
     ],
   ]
 }
 
 ///|
-fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
+fn all_modules(
+  modules : Map[Char, Array[ModuleIndex]],
+  lang : @i18n.Lang,
+) -> Html {
   let all_modules = modules
     .iter2()
     .to_array()
@@ -251,7 +291,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
     })
     .map(fn(x) {
       let (key, value) = x
-      let modules = value.map(simple_module_card)
+      let modules = value.map(mod_item => simple_module_card(mod_item, lang))
       div(class="pt-2") <| [
         h1(
           class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400",
@@ -267,13 +307,13 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
 }
 
 ///|
-fn search_result(mods : Array[ModuleIndex]) -> Html {
-  let module_cards = mods.map(module_card)
+fn search_result(mods : Array[ModuleIndex], lang : @i18n.Lang) -> Html {
+  let module_cards = mods.map(mod_item => module_card(mod_item, lang))
   div() <| [
     div(class="container lg:w-4/5 px-4") <| [
       h1(
         class="p-4 text-sm font-bold text-gray-400 dark:text-slate-500 lg:border-0",
-        "SEARCH RESULT",
+        lang.select(en="SEARCH RESULT", zh="搜索结果"),
       ),
       div(class="grid grid-cols-1 gap-2", module_cards),
     ],
@@ -307,6 +347,7 @@ fn banner(
   total_modules~ : Int,
   total_packages~ : Int,
   total_downloads~ : Int,
+  lang~ : @i18n.Lang,
 ) -> Html {
   fn button(value, target, color) {
     a(
@@ -363,6 +404,12 @@ fn banner(
     ]
   }
 
+  let community_heading_class = if lang is Zh {
+    "text-2xl font-semibold lg:text-3xl lg:mt-0"
+  } else {
+    "text-3xl font-semibold lg:text-4xl lg:mt-0"
+  }
+
   div(
     class="container lg:w-4/5 xl:w-3/4 px-5 sm:px-6 flex flex-col gap-3 lg:flex-row items-center justify-start lg:justify-center lg:gap-6 xl:gap-12 lg:py-8",
   ) <| [
@@ -370,34 +417,58 @@ fn banner(
       class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[450px] xl:max-w-[520px] mt-4 lg:mt-0",
     ) <| [
       div(class="text-slate-700 dark:text-slate-300 home-hero-copy") <| [
-        h1(class="text-2xl font-semibold lg:text-4xl", "The Package Registry"),
-        h1(class="text-3xl font-semibold lg:text-4xl lg:mt-0") <| [
-          text("for"),
+        h1(
+          class="text-2xl font-semibold lg:text-4xl",
+          lang.select(en="The Package Registry", zh="软件包仓库"),
+        ),
+        h1(class=community_heading_class) <| [
+          text(lang.select(en="for", zh="面向")),
           span(class="text-moonbit font-extrabold", " MoonBit "),
-          text("community"),
+          text(lang.select(en="community", zh="社区")),
         ],
         h2(
           class="hidden lg:block text-xl mt-4 text-zinc-500 dark:text-gray-400 gap-1",
-          "Browse, search and share package and documentation",
+          lang.select(
+            en="Browse, search and share package and documentation",
+            zh="浏览、搜索和分享软件包及其文档",
+          ),
         ),
       ],
       div(
         class="hidden sm:flex mt-2 lg:mt-8 gap-4 justify-center lg:justify-start",
       ) <| [
         button(
-          "Getting Started", "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+          lang.select(en="Getting Started", zh="快速开始"),
+          "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
           "bg-yellow-600 text-white",
         ),
         button(
-          "Install Moon", "https://www.moonbitlang.com/download/", "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-slate-200",
+          lang.select(en="Install Moon", zh="安装 Moon"),
+          "https://www.moonbitlang.com/download/",
+          "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-slate-200",
         ),
       ],
     ],
     div(class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5") <| [
       div(class="flex w-full flex-row gap-3 z-10 lg:hidden select-none") <| [
-        stat_card("Packages", total_packages, false, None),
-        stat_card("Modules", total_modules, false, None),
-        stat_card("Downloads", total_downloads, false, None),
+        stat_card(
+          lang.select(en="Packages", zh="软件包"),
+          total_packages,
+          false,
+          None,
+        ),
+        stat_card(
+          lang.select(en="Modules", zh="模块"),
+          total_modules,
+          false,
+          None,
+        ),
+        stat_card(
+          lang.select(en="Downloads", zh="下载量"),
+          total_downloads,
+          false,
+          None,
+        ),
       ],
       div(class="home-hero-illustration hidden lg:block select-none") <| [
         img(
@@ -406,10 +477,20 @@ fn banner(
         ),
         div(class="home-stat-bubble-layer") <| [
           stat_bubble(
-            "Downloads", total_downloads, "home-stat-bubble-downloads",
+            lang.select(en="Downloads", zh="下载量"),
+            total_downloads,
+            "home-stat-bubble-downloads",
           ),
-          stat_bubble("Modules", total_modules, "home-stat-bubble-modules"),
-          stat_bubble("Packages", total_packages, "home-stat-bubble-packages"),
+          stat_bubble(
+            lang.select(en="Modules", zh="模块"),
+            total_modules,
+            "home-stat-bubble-modules",
+          ),
+          stat_bubble(
+            lang.select(en="Packages", zh="软件包"),
+            total_packages,
+            "home-stat-bubble-packages",
+          ),
         ],
       ],
     ],
@@ -417,12 +498,43 @@ fn banner(
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
+fn site_switch_href(lang : @i18n.Lang) -> String {
+  match lang {
+    En => "https://\{@config.ZH_SITE}/"
+    Zh => "https://mooncakes.io/"
+  }
+}
+
+///|
+fn site_switch(lang : @i18n.Lang) -> Html {
+  let label = lang.select(en="中文站", zh="全球站")
+  a(
+    href=site_switch_href(lang),
+    escape=true,
+    "\{label} ↗",
+    class="shrink-0 px-1 py-1 text-xs sm:text-sm font-medium text-gray-500 dark:text-slate-400 hover:text-yellow-700 dark:hover:text-yellow-400 transition-colors",
+    attrs=Attrs::build().aria_label(
+      lang.select(en="Switch to Chinese site", zh="切换到全球站"),
+    ),
+  )
+}
+
+///|
+pub fn view(
+  model : Model,
+  lang~ : @i18n.Lang,
+  app_actions~ : Html,
+  emit~ : (Msg) -> Cmd,
+) -> Html {
   let module_list = if model.filter == "" {
-    let pinned_modules = pinned()
+    let pinned_modules = pinned(lang)
     let highlights = match model.highlights {
-      Success(h) => highlights_section(h.recent, h.new_modules, h.popular)
-      Failed => @view.load_failed("recently updated modules")
+      Success(h) => highlights_section(h.recent, h.new_modules, h.popular, lang)
+      Failed =>
+        @view.load_failed(
+          lang.select(en="recently updated modules", zh="最近更新的模块"),
+          lang,
+        )
       Loading =>
         div(
           class="container lg:w-4/5 px-4",
@@ -463,9 +575,9 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
         ) <| [
           text(
             if model.show_all_modules {
-              "Hide modules"
+              lang.select(en="Hide modules", zh="收起模块")
             } else {
-              "Show more modules"
+              lang.select(en="Show more modules", zh="显示更多模块")
             },
           ),
           if model.show_all_modules {
@@ -478,8 +590,12 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
       if model.show_all_modules {
         match model.all_modules {
           Idle | Loading => @view.skeleton_module_cards(9)
-          Failed => @view.load_failed("module indices")
-          Success(xs) => all_modules(xs.indices)
+          Failed =>
+            @view.load_failed(
+              lang.select(en="module indices", zh="模块索引"),
+              lang,
+            )
+          Success(xs) => all_modules(xs.indices, lang)
         }
       } else {
         nothing
@@ -491,8 +607,12 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
   } else {
     match model.all_modules {
       Idle | Loading => @view.loading()
-      Failed => @view.load_failed("module indices")
-      Success(_) => search_result(model.filtered_modules)
+      Failed =>
+        @view.load_failed(
+          lang.select(en="module indices", zh="模块索引"),
+          lang,
+        )
+      Success(_) => search_result(model.filtered_modules, lang)
     }
   }
   let banner = if model.filter == "" {
@@ -500,23 +620,28 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
       total_modules=model.showing_modules,
       total_downloads=model.showing_downloads,
       total_packages=model.showing_packages,
+      lang~,
     )
   } else {
     nothing
   }
   let hero = div(class="home-hero-shell pb-2 sm:pb-8") <| [
     @view.navbar(
+      lang~,
       style=Fusion,
       middle=input(
         input_type=Text,
         value=model.filter,
-        placeholder="Search modules ...",
+        placeholder=lang.select(en="Search modules ...", zh="搜索模块…"),
         class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors dark:placeholder:text-slate-500",
         on_input=x => emit(FilterChanged(x)),
       ),
-      right=app_actions,
+      right=div(class="flex items-center gap-2", [
+        site_switch(lang),
+        app_actions,
+      ]),
     ),
     div(class="hero-banner", banner),
   ]
-  @view.page(header=hero, main=div(class="w-full", module_list))
+  @view.page(lang~, header=hero, main=div(class="w-full", module_list))
 }

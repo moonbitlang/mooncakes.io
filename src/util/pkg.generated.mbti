@@ -4,12 +4,13 @@ package "moonbitlang/mooncakes/util"
 import {
   "moonbit-community/rabbita/url",
   "moonbitlang/core/debug",
+  "moonbitlang/mooncakes/i18n",
 }
 
 // Values
 pub fn encode_uri_component(String) -> String
 
-pub fn get_relative_time(String) -> String
+pub fn get_relative_time(String, @i18n.Lang) -> String
 
 pub fn iso8601_to_unix_seconds(String) -> Int64?
 

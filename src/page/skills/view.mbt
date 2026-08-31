@@ -644,7 +644,7 @@ fn list_content(
 fn skills_logo() -> Html {
   let host = @config.skills_host()
   a(
-    href="https://\{host}/",
+    href="//\{host}/",
     class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
     "🥮 \{host}",
   )

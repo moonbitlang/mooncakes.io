@@ -36,5 +36,5 @@ fn build_queue_href() -> String {
 
 ///|
 fn skills_href(host : String) -> String {
-  "https://\{host}/"
+  "//\{host}/"
 }

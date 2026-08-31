@@ -642,10 +642,11 @@ fn list_content(
 
 ///|
 fn skills_logo() -> Html {
+  let host = @config.skills_host()
   a(
-    href="https://skills.mooncakes.io/",
+    href="https://\{host}/",
     class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
-    "🥮 skills.mooncakes.io",
+    "🥮 \{host}",
   )
 }
 

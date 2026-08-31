@@ -107,7 +107,7 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
 
 ///|
 fn route(url : @url.Url, model : Model, emit : Emit[Msg]) -> (Cmd, Model) {
-  match @util.MooncakesioPath::resolve(url) {
+  match @util.MooncakesioPath::resolve(url, @config.skills_host()) {
     Home => {
       let (cmd, page) = @home.load(emit=x => emit(GotHomeMsg(x)))
       (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Home(page) })

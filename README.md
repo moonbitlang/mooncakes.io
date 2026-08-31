@@ -12,12 +12,15 @@ moon build --target js
 npm run dev
 ```
 
-By default API requests use the same-origin `/api` path. To build with a
-different API endpoint, set `VITE_API_ENDPOINT` to the value that should
+`VITE_SKILLS_HOST` is required and selects the host that renders the Skills
+homepage. By default API requests use the same-origin `/api` path. To build
+with a different API endpoint, set `VITE_API_ENDPOINT` to the value that should
 replace `/api`:
 
 ```bash
-VITE_API_ENDPOINT=https://api.example.com/new-api npm run build
+VITE_SKILLS_HOST=skills.mooncakes.io \
+  VITE_API_ENDPOINT=https://api.example.com/new-api \
+  npm run build
 ```
 
 ## Contribution

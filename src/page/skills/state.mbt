@@ -36,6 +36,7 @@ pub(all) struct WasmEntry {
   detail_url : String
   wasm_url : String
   checksum_url : String
+  archive_url : String
   repository : String
   description : String
   created_at : String
@@ -328,6 +329,7 @@ impl @json.FromJson for WasmEntry with fn from_json(json : Json, path) {
       "detail_url": String(detail_url),
       "wasm_url": String(wasm_url),
       "checksum_url": String(checksum_url),
+      "archive_url": String(archive_url),
       "repository"? : repository,
       "metadata"? : metadata,
       "created_at": String(created_at),
@@ -359,6 +361,7 @@ impl @json.FromJson for WasmEntry with fn from_json(json : Json, path) {
         detail_url,
         wasm_url,
         checksum_url,
+        archive_url,
         repository,
         description,
         created_at,

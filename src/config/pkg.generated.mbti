@@ -64,6 +64,8 @@ pub let section_open : String
 
 pub let share : String
 
+pub fn skills_host() -> String
+
 pub let sun_icon : String
 
 pub let tag : String

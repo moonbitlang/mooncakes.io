@@ -148,7 +148,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
     GotAllModule(Ok(modules)) => {
       let indices = sort_modules_by_name(modules)
       let search_index = Lazy::new(fn() { build_search_index(indices) })
-      let model = { ..model, all_modules: Success({ indices, search_index }) }
+      let model = { ..model, all_modules: Success({ indices, search_index, }), }
       let filtered_modules = if model.filter.is_empty() {
         []
       } else {
@@ -157,7 +157,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       (none, { ..model, filtered_modules, })
     }
     GotHighlights(Ok(highlights)) =>
-      (none, { ..model, highlights: Success(highlights) })
+      (none, { ..model, highlights: Success(highlights), })
     GotCount(Ok(stat)) =>
       (
         none,
@@ -171,27 +171,27 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       )
     GotAllModule(Err(err)) | GotHighlights(Err(err)) | GotCount(Err(err)) => {
       println(err.to_string())
-      (none, { ..model, all_modules: Failed })
+      (none, { ..model, all_modules: Failed, })
     }
     FilterChanged(filter) =>
       if filter.is_empty() {
-        (none, { ..model, filter, filtered_modules: [] })
+        (none, { ..model, filter, filtered_modules: [], })
       } else {
         match model.all_modules {
           Idle =>
             (
               fetch_all_modules(emit),
-              { ..model, all_modules: Loading, filter, filtered_modules: [] },
+              { ..model, all_modules: Loading, filter, filtered_modules: [], },
             )
-          Loading => (none, { ..model, filter, filtered_modules: [] })
+          Loading => (none, { ..model, filter, filtered_modules: [], })
           Success(all) => {
             let filtered_modules = filter_indices(
               filter,
               all.search_index.force(),
             )
-            (none, { ..model, filter, filtered_modules })
+            (none, { ..model, filter, filtered_modules, })
           }
-          Failed => (none, { ..model, filter, filtered_modules: [] })
+          Failed => (none, { ..model, filter, filtered_modules: [], })
         }
       }
     ToggleAllModules => {
@@ -200,9 +200,9 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         Idle if show =>
           (
             fetch_all_modules(emit),
-            { ..model, all_modules: Loading, show_all_modules: show },
+            { ..model, all_modules: Loading, show_all_modules: show, },
           )
-        _ => (none, { ..model, show_all_modules: show })
+        _ => (none, { ..model, show_all_modules: show, })
       }
     }
   }
@@ -376,7 +376,7 @@ fn build_search_index(
       None => 0
       Some(time) => @util.recency_penalty(time)
     }
-    { entry: mod, path, name, author, keywords, recency_penalty }
+    { entry: mod, path, name, author, keywords, recency_penalty, }
   })
   .collect()
 }

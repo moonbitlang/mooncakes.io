@@ -44,7 +44,7 @@ fn image_render(
         text: alt,
         reference: Inline({ v: { dest: Some({ v: src, .. }), .. }, .. }),
       },
-      ..,
+      ..
     } => {
       let alt = inline_plain_text(alt)
       let src = match transform_link {
@@ -257,7 +257,7 @@ fn block2html(
             )
         }
       }
-    List({ v: { ty: ordered, tight, items }, .. }) => {
+    List({ v: { ty: ordered, tight, items, }, .. }) => {
       let has_task = items.iter().any(fn(x) { x.v.ext_task_marker is Some(_) })
       let items = items
         .map(x => {
@@ -445,9 +445,9 @@ fn unwrap_inline_link(
           inline2html(inline, link_defs~, transform_link?),
         ),
       ]
-    ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }) } : @cmark.InlineLink) =>
+    ({ text: inline, reference: Inline({ v: { dest: None, .. }, .. }), } : @cmark.InlineLink) =>
       inline2html(inline, link_defs~, transform_link?)
-    ({ text: inline, reference: Ref(_, _, { key, .. }) } : @cmark.InlineLink) =>
+    ({ text: inline, reference: Ref(_, _, { key, .. }), } : @cmark.InlineLink) =>
       if link_defs.get(key) is Some(url) {
         [
           @html.a(

@@ -275,7 +275,7 @@ fn decode_type_path(
 ) -> TypePath raise @json.JsonDecodeError {
   match json {
     { "path": String(type_path), "name": String(name), .. } =>
-      { path: type_path, name }
+      { path: type_path, name, }
     _ => raise JsonDecodeError((path, "invalid json in type path"))
   }
 }
@@ -330,7 +330,7 @@ fn decode_trait_index(
   match json {
     { "name": String(name), "impls": Array(impls), .. } => {
       let impls = impls.map(x => decode_impl_index(x, path))
-      { name, impls }
+      { name, impls, }
     }
     _ => raise JsonDecodeError((path, "invalid json in trait index"))
   }
@@ -356,7 +356,7 @@ fn decode_type_index(
           _ => raise JsonDecodeError((path, "invalid json in type index"))
         }
       }
-      { name, impls, methods: decoded_methods }
+      { name, impls, methods: decoded_methods, }
     }
     _ => raise JsonDecodeError((path, "invalid json in type index"))
   }
@@ -368,7 +368,7 @@ fn decode_typealias_index(
   path : @json.JsonPath,
 ) -> TypeAliasIndex raise @json.JsonDecodeError {
   match json {
-    String(x) => { name: x }
+    String(x) => { name: x, }
     _ => raise JsonDecodeError((path, "invalid json in typealias index"))
   }
 }
@@ -379,7 +379,7 @@ fn decode_value_index(
   path : @json.JsonPath,
 ) -> ValueIndex raise @json.JsonDecodeError {
   match json {
-    String(x) => { name: x }
+    String(x) => { name: x, }
     _ => raise JsonDecodeError((path, "invalid json in value index"))
   }
 }
@@ -404,7 +404,7 @@ fn decode_misc_index(
           _ => raise JsonDecodeError((path, "invalid json in misc index"))
         }
       }
-      { name, impls, methods: decoded_methods }
+      { name, impls, methods: decoded_methods, }
     }
     _ => raise JsonDecodeError((path, "invalid json in misc index"))
   }
@@ -426,7 +426,7 @@ fn decode_impl_index(
           _ => raise JsonDecodeError((path, "invalid methods in impl index"))
         }
       }
-      { self: self_type, trait_: trait_type, methods: decoded_methods }
+      { self: self_type, trait_: trait_type, methods: decoded_methods, }
     }
     _ => raise JsonDecodeError((path, "invalid json in impl index"))
   }
@@ -457,7 +457,7 @@ fn decode_package_index(
       let typealias_ = typealias_.map(x => decode_typealias_index(x, json_path))
       let values = values.map(x => decode_value_index(x, json_path))
       let misc = miscs.map(x => decode_misc_index(x, json_path))
-      { traits, errors, types, typealias_, values, misc, path: pkg_path }
+      { traits, errors, types, typealias_, values, misc, path: pkg_path, }
     }
     _ => raise JsonDecodeError((json_path, "invalid json in package index"))
   }
@@ -478,7 +478,7 @@ fn decode_index_node(
         Null => None
         obj => Some(decode_package_index(obj, path))
       }
-      { name, pkg, childs }
+      { name, pkg, childs, }
     }
     _ => raise JsonDecodeError((path, "invalid json in index node"))
   }

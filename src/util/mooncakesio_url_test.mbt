@@ -9,7 +9,7 @@ fn test_url_with_host(
   path : String,
   fragment? : String? = None,
 ) -> @url.Url {
-  { protocol: Https, host, port: None, path, query: None, fragment }
+  { protocol: Https, host, port: None, path, query: None, fragment, }
 }
 
 ///|
@@ -26,7 +26,7 @@ test "resolve root" {
 test "resolve skills host root" {
   inspect(
     @util.MooncakesioPath::resolve(
-      test_url_with_host("skills.mooncakes.io", ""),
+      test_url_with_host(@config.skills_host(), ""),
     ),
     content=(
       #|skills:

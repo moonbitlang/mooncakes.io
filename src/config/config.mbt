@@ -174,6 +174,25 @@ pub fn asset_url(path : String) -> String {
 }
 
 ///|
+#cfg(target="js")
+extern "js" fn configured_skills_host() -> String =
+  #|() =>
+  #|  typeof __MOONCAKES_SKILLS_HOST__ === "undefined"
+  #|    ? ""
+  #|    : __MOONCAKES_SKILLS_HOST__
+
+///|
+#cfg(not(target="js"))
+fn configured_skills_host() -> String {
+  @env.get_env_var("MOONCAKES_SKILLS_HOST").unwrap_or("")
+}
+
+///|
+pub fn skills_host() -> String {
+  configured_skills_host()
+}
+
+///|
 fn api_url_with_endpoint(endpoint : String, path : String) -> String {
   match path {
     [.. "/api/", .. path] => "\{endpoint}/\{path.to_owned()}"

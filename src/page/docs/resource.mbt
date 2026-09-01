@@ -267,7 +267,7 @@ impl @json.FromJson for ResourceInfo with fn from_json(json : Json, path) {
       "source_files"? : source_files,
       ..
     } =>
-      { readme_content, source_files: decode_source_files(source_files, path) }
+      { readme_content, source_files: decode_source_files(source_files, path), }
     _ => raise JsonDecodeError((path, "invalid resource.json"))
   }
 }

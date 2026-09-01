@@ -29,7 +29,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
 pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
   match url.path.split("/").collect() {
     ["/"] | [""] | [] =>
-      if url.host == "skills.mooncakes.io" {
+      if url.host == @config.skills_host() {
         SkillsList
       } else {
         Home

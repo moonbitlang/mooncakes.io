@@ -30,7 +30,7 @@ pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
     @http.get(@config.api_url("/api/v0/builds")).expect_json(r => {
       emit(GotBuilds(r))
     }),
-    { queue: Loading, recent: Loading },
+    { queue: Loading, recent: Loading, },
   )
 }
 
@@ -40,11 +40,11 @@ pub fn update(msg : Msg, _model : Model) -> (Cmd, Model) {
     GotBuilds(Ok(data)) =>
       (
         none,
-        { queue: Success(data.queued), recent: Success(data.recent_completed) },
+        { queue: Success(data.queued), recent: Success(data.recent_completed), },
       )
     GotBuilds(Err(e)) => {
       println(e)
-      (none, { queue: Failed, recent: Failed })
+      (none, { queue: Failed, recent: Failed, })
     }
   }
 }
@@ -97,7 +97,7 @@ impl @json.FromJson for BuildData with fn from_json(json : Json, path) {
           _ => raise JsonDecodeError((path, "invalid build item: \{Repr(x)}"))
         }
       }
-      { queued: queued_items, recent_completed: recent_completed_items }
+      { queued: queued_items, recent_completed: recent_completed_items, }
     }
     _ => raise JsonDecodeError((path, "invalid builds response"))
   }

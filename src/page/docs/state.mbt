@@ -148,7 +148,7 @@ pub fn load(
       sidebar_fab: false,
       package_data: Loading,
       collapsed_docs: FoldedState::new(),
-      search: { filter: "", results: Loading },
+      search: { filter: "", results: Loading, },
       search_entries: Loading,
       install_copied: false,
       hide_large_package: true,
@@ -248,16 +248,16 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         (true, LogIdle | LogFailed) => LogLoading
         _ => model.build_log
       }
-      (cmd, { ..model, build_log_open, build_log })
+      (cmd, { ..model, build_log_open, build_log, })
     }
     GotBuildLog(result) =>
       (
         none,
         match result {
-          Ok(log) => { ..model, build_log: LogSuccess(log) }
+          Ok(log) => { ..model, build_log: LogSuccess(log), }
           Err(err) => {
             println(err.to_string())
-            { ..model, build_log: LogFailed }
+            { ..model, build_log: LogFailed, }
           }
         },
       )
@@ -273,7 +273,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
             }
           Err(err) => {
             log_docs_error(err.to_string())
-            { ..model, readme_content: Failed, source_files: [] }
+            { ..model, readme_content: Failed, source_files: [], }
           }
         },
       )
@@ -306,7 +306,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
           }
           Err(err) => {
             log_docs_error(err.to_string())
-            { ..model, module_index: Failed }
+            { ..model, module_index: Failed, }
           }
         },
       )
@@ -324,11 +324,11 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
             .concat(misc_impls)
             .map(ImplDoc::get_id)
             .fold(init=model.collapsed_docs, FoldedState::add)
-          { ..model, collapsed_docs, package_data: Success(package_data) }
+          { ..model, collapsed_docs, package_data: Success(package_data), }
         }
         Err(err) => {
           log_docs_error(err.to_string())
-          { ..model, package_data: Failed }
+          { ..model, package_data: Failed, }
         }
       }
       (@nav.scroll_to(model.fragment), model)
@@ -339,12 +339,12 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       } else {
         model.collapsed_docs.add(id)
       }
-      (none, { ..model, collapsed_docs: folded_items })
+      (none, { ..model, collapsed_docs: folded_items, })
     }
     DocModeChanged(card_mode) =>
       (
         none,
-        { ..model, collapsed_docs: model.collapsed_docs.set_mode(card_mode) },
+        { ..model, collapsed_docs: model.collapsed_docs.set_mode(card_mode), },
       )
     ToggleSidebarItem(id) => {
       let sidebar_collapsed = if model.sidebar_collapsed.contains(id) {
@@ -355,7 +355,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       (none, { ..model, sidebar_collapsed, })
     }
     ClickSidebarItem(id) => {
-      let model = { ..model, sidebar_fab: false }
+      let model = { ..model, sidebar_fab: false, }
       match id {
         Group(id) => {
           // Group nodes have no package, just toggle expand/collapse
@@ -436,7 +436,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       (none, { ..model, sidebar_collapsed, })
     }
     CollapseAllSidebar =>
-      (none, { ..model, sidebar_collapsed: @immut/sorted_set.new() })
+      (none, { ..model, sidebar_collapsed: @immut/sorted_set.new(), })
     ToggleSearchPanel(open) => {
       let cmd = if open {
         @dialog.show("search-panel")
@@ -451,7 +451,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         Loading => Loading
         Success(indices) => Success(search(indices, filter))
       }
-      let search = { filter, results }
+      let search = { filter, results, }
       (none, { ..model, search, })
     }
     ToggleSidebarFab => {
@@ -465,12 +465,12 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         }),
         model,
       )
-    CopyInstallSuccess => (none, { ..model, install_copied: true })
+    CopyInstallSuccess => (none, { ..model, install_copied: true, })
     CopyInstallFailed(reason) => {
       println(reason)
-      (none, { ..model, install_copied: false })
+      (none, { ..model, install_copied: false, })
     }
-    ShowLargePackage => (none, { ..model, hide_large_package: false })
+    ShowLargePackage => (none, { ..model, hide_large_package: false, })
     ClickAnchor(id) =>
       (
         batch([

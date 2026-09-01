@@ -45,8 +45,8 @@ fn load_search_entries(
     .each(x => {
       match x {
         {
-          pkg: Some({ path, traits, errors, types, typealias_, values, misc }),
-          ..,
+          pkg: Some({ path, traits, errors, types, typealias_, values, misc, }),
+          ..
         } => {
           let vpath = versioned_docs_path(path, module_name, module_version)
           results.push({
@@ -132,7 +132,7 @@ fn search(
     let score = query.score(item=entry.fullname)
     match query.split_by_matching_sections(item=entry.fullname) {
       None => None
-      Some(matching) => Some({ matching, score, entry })
+      Some(matching) => Some({ matching, score, entry, })
     }
   })
   results.sort_by(fn(a, b) { a.score - b.score })

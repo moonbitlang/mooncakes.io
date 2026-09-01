@@ -73,27 +73,27 @@ fn update(emit : Emit[Msg], msg : Msg, model : Model) -> (Cmd, Model) {
       let (cmd, page) = @home.update(msg, page_model, emit=x => {
         emit(GotHomeMsg(x))
       })
-      (cmd, { ..model, page: Home(page) })
+      (cmd, { ..model, page: Home(page), })
     }
     (GotDocsMsg(msg), Docs(page_model)) => {
       let (cmd, page) = @docs.update(msg, page_model, emit=x => {
         emit(GotDocsMsg(x))
       })
-      (cmd, { ..model, page: Docs(page) })
+      (cmd, { ..model, page: Docs(page), })
     }
     (GotUserMsg(msg), User(page_model)) => {
       let (cmd, page) = @user.update(msg, page_model)
-      (cmd, { ..model, page: User(page) })
+      (cmd, { ..model, page: User(page), })
     }
     (GotBuildQueueMsg(msg), BuildQueue(page_model)) => {
       let (cmd, page) = @build_queue.update(msg, page_model)
-      (cmd, { ..model, page: BuildQueue(page) })
+      (cmd, { ..model, page: BuildQueue(page), })
     }
     (GotSkillsMsg(msg), Skills(page_model)) => {
       let (cmd, page) = @skills.update(msg, page_model, emit=x => {
         emit(GotSkillsMsg(x))
       })
-      (cmd, { ..model, page: Skills(page) })
+      (cmd, { ..model, page: Skills(page), })
     }
     (LinkClicked(request), _) =>
       match request {
@@ -110,29 +110,29 @@ fn route(url : @url.Url, model : Model, emit : Emit[Msg]) -> (Cmd, Model) {
   match @util.MooncakesioPath::resolve(url) {
     Home => {
       let (cmd, page) = @home.load(emit=x => emit(GotHomeMsg(x)))
-      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Home(page) })
+      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Home(page), })
     }
     BuildQueue => {
       let (cmd, page) = @build_queue.load(emit=x => emit(GotBuildQueueMsg(x)))
-      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: BuildQueue(page) })
+      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: BuildQueue(page), })
     }
     SkillsList => {
       let (cmd, page) = @skills.load(emit=x => emit(GotSkillsMsg(x)))
-      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Skills(page) })
+      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Skills(page), })
     }
     SkillsDetail(entry) => {
       let (cmd, page) = @skills.load_detail(entry, emit=x => {
         emit(GotSkillsMsg(x))
       })
-      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Skills(page) })
+      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Skills(page), })
     }
     User(name) => {
       let (cmd, page) = @user.load(name.to_owned(), emit=x => {
         emit(GotUserMsg(x))
       })
-      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: User(page) })
+      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: User(page), })
     }
-    Assets(url) => (@nav.load(url.to_string()), { ..model, page: Redirect })
+    Assets(url) => (@nav.load(url.to_string()), { ..model, page: Redirect, })
     Docs(mooncakes_path, fragment~) => {
       if model.page is Docs(page_model) &&
         @docs.is_same_path(page_model, mooncakes_path) {
@@ -152,15 +152,15 @@ fn route(url : @url.Url, model : Model, emit : Emit[Msg]) -> (Cmd, Model) {
         )
         return (
           batch([cmd, @nav.scroll_to_top()]),
-          { ..model, page: Docs(page) },
+          { ..model, page: Docs(page), },
         )
       }
       let (cmd, page) = @docs.load(mooncakes_path, fragment, emit=x => {
         emit(GotDocsMsg(x))
       })
-      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Docs(page) })
+      (batch([cmd, @nav.scroll_to_top()]), { ..model, page: Docs(page), })
     }
-    NotFound(_) => (@nav.scroll_to_top(), { ..model, page: NotFound })
+    NotFound(_) => (@nav.scroll_to_top(), { ..model, page: NotFound, })
   }
 }
 
@@ -221,7 +221,7 @@ pub fn app() -> @rabbita.App {
     preference: theme_preference_from_string(initial_theme_preference()),
     system_dark: system_prefers_dark(),
   }
-  let model = { theme, page: Redirect }
+  let model = { theme, page: Redirect, }
   apply_theme_now(theme)
   @rabbita.elmish(
     model=ReactiveModel(model),

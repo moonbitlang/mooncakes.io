@@ -33,7 +33,7 @@ priv struct Loc {
 
 ///|
 test "suppress unused warnings for Loc" {
-  let dummy = { path: "", file: "", line: 0, column: 0 }
+  let dummy = { path: "", file: "", line: 0, column: 0, }
   ignore(Repr(dummy))
 }
 
@@ -98,7 +98,7 @@ fn decode_loc(
       "line": Number(line, ..),
       "column": Number(column, ..),
       ..
-    } => { path, file, line: line.to_int(), column: column.to_int() }
+    } => { path, file, line: line.to_int(), column: column.to_int(), }
     _ => raise JsonDecodeError((path, "fail to decode loc: \{Repr(json)}"))
   }
 }
@@ -113,7 +113,7 @@ fn decode_impl_doc(
       let self_type = decode_stype(self_type, path)
       let trait_type = decode_type_path(trait_type, path)
       let methods = methods.map(x => decode_value_doc(x, path))
-      { self_type, trait_type, methods }
+      { self_type, trait_type, methods, }
     }
     _ => raise JsonDecodeError((path, "fail to decode impl doc: \{Repr(json)}"))
   }
@@ -137,7 +137,7 @@ fn decode_type_doc(
       let methods = methods.map(x => decode_value_doc(x, path))
       let impls = impls.map(x => decode_impl_doc(x, path))
       let loc = decode_loc(loc, path)
-      { name, docstring, signature, methods, impls, loc }
+      { name, docstring, signature, methods, impls, loc, }
     }
     _ => raise JsonDecodeError((path, "fail to decode type doc: \{Repr(json)}"))
   }
@@ -159,7 +159,7 @@ fn decode_trait_doc(
     } => {
       let impls = impls.map(x => decode_impl_doc(x, path))
       let loc = decode_loc(loc, path)
-      { name, docstring, signature, impls, loc }
+      { name, docstring, signature, impls, loc, }
     }
     _ =>
       raise JsonDecodeError((path, "fail to decode trait doc: \{Repr(json)}"))
@@ -180,7 +180,7 @@ fn decode_typealias_doc(
       ..
     } => {
       let loc = decode_loc(loc, path)
-      { name, docstring, signature, loc }
+      { name, docstring, signature, loc, }
     }
     _ =>
       raise JsonDecodeError(
@@ -201,7 +201,7 @@ fn decode_value_doc(
       "signature": String(signature),
       "loc": loc,
       ..
-    } => { name, docstring, signature, loc: decode_loc(loc, path) }
+    } => { name, docstring, signature, loc: decode_loc(loc, path), }
     _ =>
       raise JsonDecodeError((path, "fail to decode value doc: \{Repr(json)}"))
   }
@@ -221,7 +221,7 @@ fn decode_misc_doc(
     } : Json) => {
       let methods = methods.map(x => decode_value_doc(x, path))
       let impls = impls.map(x => decode_impl_doc(x, path))
-      { name, impls, methods }
+      { name, impls, methods, }
     }
     _ => raise JsonDecodeError((path, "fail to decode misc doc: \{Repr(json)}"))
   }
@@ -255,7 +255,7 @@ impl @json.FromJson for PackageData with fn from_json(json : Json, path) {
       traits.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
       types.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
       errors.sort_by(fn(x, y) { compare_strings(x.name, y.name) })
-      { name, types, traits, errors, typealiases: aliases, values, misc }
+      { name, types, traits, errors, typealiases: aliases, values, misc, }
     }
     _ =>
       raise JsonDecodeError(

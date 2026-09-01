@@ -97,7 +97,7 @@ priv enum ItemTarget {
 fn PkgIndex::to_document_items(
   self : PkgIndex,
 ) -> Array[@tree.Tree[ItemTarget]] {
-  let { traits, errors, types, typealias_, values, misc, path } = self
+  let { traits, errors, types, typealias_, values, misc, path, } = self
   let readme_item : @tree.Tree[ItemTarget] = Item(
     id=Symbol(pkg_path=path, kind=KReadme, "readme"),
     "README",

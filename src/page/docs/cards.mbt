@@ -20,17 +20,17 @@ priv struct FoldedState {
 
 ///|
 fn FoldedState::new() -> FoldedState {
-  { set: @immut/sorted_set.new(), card_mode: Expanded }
+  { set: @immut/sorted_set.new(), card_mode: Expanded, }
 }
 
 ///|
 fn FoldedState::add(self : FoldedState, id : String) -> FoldedState {
-  { ..self, set: self.set.add(id) }
+  { ..self, set: self.set.add(id), }
 }
 
 ///|
 fn FoldedState::remove(self : FoldedState, id : String) -> FoldedState {
-  { ..self, set: self.set.remove(id) }
+  { ..self, set: self.set.remove(id), }
 }
 
 ///|
@@ -43,7 +43,7 @@ fn FoldedState::contains(self : FoldedState, id : String) -> Bool {
 
 ///|
 fn FoldedState::set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
-  { ..self, card_mode: mode }
+  { ..self, card_mode: mode, }
 }
 
 ///|
@@ -128,7 +128,7 @@ fn impl_doc(
   module_version~ : String,
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let { self_type, trait_type, methods } = doc
+  let { self_type, trait_type, methods, } = doc
   let id = doc.get_id()
   let signature : Html = pre(
     class="bg-gray-100 dark:bg-zinc-900 text-wrap pr-4",
@@ -158,7 +158,7 @@ fn type_doc(
   module_version~ : String,
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let { docstring, signature, methods, impls, name: _, loc } = doc
+  let { docstring, signature, methods, impls, name: _, loc, } = doc
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div() <| [
@@ -191,7 +191,7 @@ fn trait_doc(
   module_version~ : String,
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let { docstring, signature, impls, name: _, loc } = doc
+  let { docstring, signature, impls, name: _, loc, } = doc
   let id = doc.get_id()
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div() <| [
@@ -221,7 +221,7 @@ fn type_alias_doc(
   module_version~ : String,
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let { name: _, docstring, signature, loc } = doc
+  let { name: _, docstring, signature, loc, } = doc
   let signature = signature_view(signature, module_name~, module_version~)
   let content = div(
     class="pl-4 mb-2",
@@ -347,7 +347,7 @@ fn value_doc(
   enable_title? : Bool = false,
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let { name: _, docstring, signature, loc } = doc
+  let { name: _, docstring, signature, loc, } = doc
   let id = type_id
     .map(fn(x) { "\{x}::\{doc.get_id()}" })
     .unwrap_or(doc.get_id())
@@ -378,7 +378,7 @@ fn misc_doc(
   module_version~ : String,
   emit : (Msg) -> Cmd,
 ) -> Html {
-  let { name, methods, impls } = doc
+  let { name, methods, impls, } = doc
   let id = doc.get_id()
   let signature = div(
     id=name,
@@ -522,7 +522,9 @@ fn document(
     emit,
   )
   let doc_list = match package_data {
-    Some(Success({ traits, types, errors, typealiases, values, misc, name: _ })) => {
+    Some(
+      Success({ traits, types, errors, typealiases, values, misc, name: _, })
+    ) => {
       let count = traits.length() +
         types.length() +
         errors.length() +

@@ -33,7 +33,7 @@ impl @json.FromJson for Profile with fn from_json(json : Json, path) {
         Some(String(url)) => url
         _ => ""
       }
-      { username, avatar_url, modules: decoded_modules }
+      { username, avatar_url, modules: decoded_modules, }
     }
     _ => raise JsonDecodeError((path, "failed to decode json \{Repr(json)}"))
   }
@@ -53,7 +53,7 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
           _ => raise JsonDecodeError((path, "failed to decode \{Repr(v)}"))
         }
       }
-      { data: result }
+      { data: result, }
     }
     _ => raise JsonDecodeError((path, "failed to decode \{Repr(json)}"))
   }
@@ -104,7 +104,7 @@ pub fn load(username : String, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         ),
       ).expect_json(r => emit(GotCodeFrequency(r))),
     ]),
-    { profile: Loading, code_frequency: Loading },
+    { profile: Loading, code_frequency: Loading, },
   )
 }
 
@@ -399,16 +399,16 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
 pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
   match msg {
     GotUserProfile(Ok(profile)) =>
-      (none, { ..model, profile: Success(profile) })
-    GotCodeFrequency(Ok({ data })) =>
-      (none, { ..model, code_frequency: Success(data) })
+      (none, { ..model, profile: Success(profile), })
+    GotCodeFrequency(Ok({ data, })) =>
+      (none, { ..model, code_frequency: Success(data), })
     GotCodeFrequency(Err(err)) => {
       println(err.to_string())
-      (none, { ..model, code_frequency: Failed })
+      (none, { ..model, code_frequency: Failed, })
     }
     GotUserProfile(Err(err)) => {
       println(err.to_string())
-      (none, { ..model, profile: Failed })
+      (none, { ..model, profile: Failed, })
     }
   }
 }

@@ -11,7 +11,7 @@ struct Lazy[T] {
 
 ///|
 pub fn[T] Lazy::new(f : () -> T) -> Lazy[T] {
-  { thunk: Thunk(f) }
+  { thunk: Thunk(f), }
 }
 
 ///|

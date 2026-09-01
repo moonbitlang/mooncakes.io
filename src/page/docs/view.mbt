@@ -353,7 +353,7 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
   let resolved_meta = match model.module_meta {
     Success(meta) => {
       let meta = match model.manifest {
-        Success(manifest) => { ..meta, version: manifest.version }
+        Success(manifest) => { ..meta, version: manifest.version, }
         _ => meta
       }
       Some(meta)

@@ -376,7 +376,7 @@ fn source_context_section(
         div(class="flex flex-wrap gap-2") <| [
           span(
             class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
-            "\{skill_count(entries)} wasm entries",
+            "\{skill_count(entries)} skill entries",
           ),
           span(
             class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
@@ -967,6 +967,7 @@ fn detail_sidebar(entry : WasmEntry) -> Html {
       div(class="flex flex-col gap-3 p-4") <| [
         action_link(entry.wasm_url, "Download wasm"),
         action_link(entry.checksum_url, "Download checksum"),
+        action_link(entry.archive_url, "Download skills.zip"),
       ],
     ),
   ]

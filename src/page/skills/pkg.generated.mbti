@@ -51,6 +51,7 @@ pub(all) struct WasmEntry {
   detail_url : String
   wasm_url : String
   checksum_url : String
+  archive_url : String
   repository : String
   description : String
   created_at : String

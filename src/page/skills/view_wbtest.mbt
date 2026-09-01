@@ -53,6 +53,7 @@ fn sample_entry(package_path : String) -> WasmEntry {
     detail_url: "",
     wasm_url: "",
     checksum_url: "",
+    archive_url: "",
     repository: "",
     description: "",
     created_at: "2026-06-10T00:00:00Z",

@@ -43,7 +43,7 @@ pub enum MooncakesioPath {
   NotFound(String)
   Assets(@url.Url)
 }
-pub fn MooncakesioPath::resolve(@url.Url, String) -> Self
+pub fn MooncakesioPath::resolve(@url.Url) -> Self
 pub impl Show for MooncakesioPath
 
 pub(all) enum Status[T] {

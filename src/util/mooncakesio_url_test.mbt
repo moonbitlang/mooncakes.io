@@ -13,12 +13,9 @@ fn test_url_with_host(
 }
 
 ///|
-const TestSkillsHost = "skills.mooncakes.io"
-
-///|
 test "resolve root" {
   inspect(
-    @util.MooncakesioPath::resolve(test_url(""), TestSkillsHost),
+    @util.MooncakesioPath::resolve(test_url("")),
     content=(
       #|home:
     ),
@@ -29,21 +26,7 @@ test "resolve root" {
 test "resolve skills host root" {
   inspect(
     @util.MooncakesioPath::resolve(
-      test_url_with_host(TestSkillsHost, ""),
-      TestSkillsHost,
-    ),
-    content=(
-      #|skills:
-    ),
-  )
-}
-
-///|
-test "resolve externally configured skills host root" {
-  inspect(
-    @util.MooncakesioPath::resolve(
-      test_url_with_host("skills.example.test", ""),
-      "skills.example.test",
+      test_url_with_host(@config.skills_host(), ""),
     ),
     content=(
       #|skills:
@@ -54,7 +37,7 @@ test "resolve externally configured skills host root" {
 ///|
 test "resolve build-queue" {
   inspect(
-    @util.MooncakesioPath::resolve(test_url("build-queue"), TestSkillsHost),
+    @util.MooncakesioPath::resolve(test_url("build-queue")),
     content=(
       #|build-queue
     ),
@@ -64,7 +47,7 @@ test "resolve build-queue" {
 ///|
 test "resolve skills list" {
   inspect(
-    @util.MooncakesioPath::resolve(test_url("skills"), TestSkillsHost),
+    @util.MooncakesioPath::resolve(test_url("skills")),
     content=(
       #|skills:
     ),
@@ -76,7 +59,6 @@ test "resolve skills detail" {
   inspect(
     @util.MooncakesioPath::resolve(
       test_url("skills/moonbitlang/parser@0.3.3/cmd/moonfmt"),
-      TestSkillsHost,
     ),
     content=(
       #|skills:moonbitlang/parser@0.3.3/cmd/moonfmt
@@ -87,7 +69,7 @@ test "resolve skills detail" {
 ///|
 test "resolve user" {
   inspect(
-    @util.MooncakesioPath::resolve(test_url("user/mizchi"), TestSkillsHost),
+    @util.MooncakesioPath::resolve(test_url("user/mizchi")),
     content=(
       #|user:mizchi
     ),
@@ -97,10 +79,7 @@ test "resolve user" {
 ///|
 test "resolve docs" {
   inspect(
-    @util.MooncakesioPath::resolve(
-      test_url("docs/mizchi/mbt_rs@0.3.0"),
-      TestSkillsHost,
-    ),
+    @util.MooncakesioPath::resolve(test_url("docs/mizchi/mbt_rs@0.3.0")),
     content=(
       #|docs: mizchi/mbt_rs@0.3.0, fragment: None
     ),
@@ -110,10 +89,7 @@ test "resolve docs" {
 ///|
 test "resolve docs with package path" {
   inspect(
-    @util.MooncakesioPath::resolve(
-      test_url("docs/moonbitlang/core/builtin"),
-      TestSkillsHost,
-    ),
+    @util.MooncakesioPath::resolve(test_url("docs/moonbitlang/core/builtin")),
     content=(
       #|docs: moonbitlang/core/builtin, fragment: None
     ),
@@ -125,7 +101,6 @@ test "resolve docs with fragment" {
   inspect(
     @util.MooncakesioPath::resolve(
       test_url("docs/mizchi/mbt_rs@0.3.0", fragment=Some("MyType")),
-      TestSkillsHost,
     ),
     content=(
       #|docs: mizchi/mbt_rs@0.3.0, fragment: Some("MyType")
@@ -138,7 +113,6 @@ test "resolve docs with package path and fragment" {
   inspect(
     @util.MooncakesioPath::resolve(
       test_url("docs/moonbitlang/core/builtin", fragment=Some("Array::map")),
-      TestSkillsHost,
     ),
     content=(
       #|docs: moonbitlang/core/builtin, fragment: Some("Array::map")
@@ -149,7 +123,7 @@ test "resolve docs with package path and fragment" {
 ///|
 test "resolve assets" {
   inspect(
-    @util.MooncakesioPath::resolve(test_url("assets/foo/bar"), TestSkillsHost),
+    @util.MooncakesioPath::resolve(test_url("assets/foo/bar")),
     content=(
       #|assets:assets/foo/bar
     ),
@@ -159,7 +133,7 @@ test "resolve assets" {
 ///|
 test "resolve not found" {
   inspect(
-    @util.MooncakesioPath::resolve(test_url("unknown/path"), TestSkillsHost),
+    @util.MooncakesioPath::resolve(test_url("unknown/path")),
     content=(
       #|not-found:unknown/path
     ),

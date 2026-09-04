@@ -92,6 +92,56 @@ fn module_card(mod : ModuleIndex) -> Html {
     Some(t) => p(@util.get_relative_time(t))
     None => nothing
   }
+  let matched_packages = match mod.matched_packages {
+    Some(packages) if !packages.is_empty() =>
+      div(
+        class="mt-2 border-t border-gray-100 dark:border-zinc-800 pt-2 flex flex-col gap-1.5",
+      ) <| [
+        p(
+          class="text-xs font-semibold text-gray-500 dark:text-slate-400",
+          "Matching packages",
+        ),
+        ..packages.map(fn(pkg) {
+          let package_module_path = if pkg.is_summary_current {
+            versioned_path(mod)
+          } else {
+            "\{mod.path}@\{pkg.summary_version}"
+          }
+          let package_href = if pkg.package_path.is_empty() {
+            "/docs/\{package_module_path}"
+          } else {
+            "/docs/\{package_module_path}/\{pkg.package_path}"
+          }
+          let fragments = pkg.summary_fragments.map(fn(fragment) {
+            if fragment.matched {
+              @html.mark(
+                class="rounded bg-yellow-100 dark:bg-yellow-900/50 px-0.5",
+                [text(fragment.text)],
+              )
+            } else {
+              text(fragment.text)
+            }
+          })
+          a(
+            href=package_href,
+            class="text-xs text-gray-600 dark:text-slate-400 hover:text-mooncake2 truncate",
+          ) <| [
+            span(class="font-medium", pkg.package_path),
+            span(class="px-1 text-gray-300 dark:text-gray-600", "—"),
+            span(class="line-clamp-1", fragments),
+            if pkg.is_summary_current {
+              nothing
+            } else {
+              span(
+                class="ml-1 text-[10px] text-gray-400",
+                "v\{pkg.summary_version}",
+              )
+            },
+          ]
+        }),
+      ]
+    _ => nothing
+  }
   div(
     class="select-none p-4 min-h-32 rounded flex flex-col border bg-white dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
   ) <| [
@@ -118,6 +168,7 @@ fn module_card(mod : ModuleIndex) -> Html {
         ],
       ],
     ],
+    matched_packages,
   ]
 }
 
@@ -135,6 +186,9 @@ fn pinned() -> Html {
       ),
       created_at: None,
       is_new: false,
+      downloads: None,
+      matched_package_count: None,
+      matched_packages: None,
     },
     {
       author: "moonbitlang",
@@ -147,6 +201,9 @@ fn pinned() -> Html {
       ),
       created_at: None,
       is_new: false,
+      downloads: None,
+      matched_package_count: None,
+      matched_packages: None,
     },
     {
       author: "moonbitlang",
@@ -157,6 +214,9 @@ fn pinned() -> Html {
       description: Some("Experimental and extended libraries for MoonBit."),
       created_at: None,
       is_new: false,
+      downloads: None,
+      matched_package_count: None,
+      matched_packages: None,
     },
   ]
   div(class="container lg:w-4/5 px-4 mt-4 mb-6") <| [
@@ -488,11 +548,13 @@ pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
     div() <| [
       pinned_modules, highlights, all_modules_section,
     ]
+  } else if !model.filtered_modules.is_empty() {
+    search_result(model.filtered_modules)
   } else {
     match model.all_modules {
       Idle | Loading => @view.loading()
       Failed => @view.load_failed("module indices")
-      Success(_) => search_result(model.filtered_modules)
+      Success(_) => search_result([])
     }
   }
   let banner = if model.filter == "" {

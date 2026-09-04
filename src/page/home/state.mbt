@@ -17,7 +17,9 @@ pub enum Msg {
   GotAllModule(Result[Array[ModuleIndex], Error])
   GotHighlights(Result[ModuleHighlights, Error])
   GotCount(Result[PackageCount, Error])
+  GotSearch(String, Result[Array[ModuleIndex], Error])
   FilterChanged(String)
+  Search(String)
   ToggleAllModules
 }
 
@@ -69,6 +71,25 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
+  downloads : Int?
+  matched_package_count : Int?
+  matched_packages : Array[MatchedPackage]?
+}
+
+///|
+pub(all) struct SummaryFragment {
+  text : String
+  matched : Bool
+}
+
+///|
+pub(all) struct MatchedPackage {
+  package_path : String
+  name : String
+  summary : String
+  summary_version : String
+  is_summary_current : Bool
+  summary_fragments : Array[SummaryFragment]
 }
 
 ///|
@@ -149,8 +170,9 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       let indices = sort_modules_by_name(modules)
       let search_index = Lazy::new(fn() { build_search_index(indices) })
       let model = { ..model, all_modules: Success({ indices, search_index, }), }
-      let filtered_modules = if model.filter.is_empty() {
-        []
+      let filtered_modules = if model.filter.is_empty() ||
+        !model.filtered_modules.is_empty() {
+        model.filtered_modules
       } else {
         filter_indices(model.filter, search_index.force())
       }
@@ -169,6 +191,17 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
           showing_downloads: stat.total_downloads,
         },
       )
+    GotSearch(filter, Ok(modules)) if filter == model.filter =>
+      (none, { ..model, filtered_modules: modules, })
+    GotSearch(filter, Err(err)) if filter == model.filter => {
+      println(err.to_string())
+      let filtered_modules = match model.all_modules {
+        Success(all) => filter_indices(filter, all.search_index.force())
+        _ => []
+      }
+      (none, { ..model, filtered_modules, })
+    }
+    GotSearch(_, _) => (none, model)
     GotAllModule(Err(err)) | GotHighlights(Err(err)) | GotCount(Err(err)) => {
       println(err.to_string())
       (none, { ..model, all_modules: Failed, })
@@ -177,22 +210,31 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
       if filter.is_empty() {
         (none, { ..model, filter, filtered_modules: [], })
       } else {
-        match model.all_modules {
-          Idle =>
-            (
-              fetch_all_modules(emit),
-              { ..model, all_modules: Loading, filter, filtered_modules: [], },
-            )
-          Loading => (none, { ..model, filter, filtered_modules: [], })
-          Success(all) => {
-            let filtered_modules = filter_indices(
-              filter,
-              all.search_index.force(),
-            )
-            (none, { ..model, filter, filtered_modules, })
-          }
-          Failed => (none, { ..model, filter, filtered_modules: [], })
+        let fallback_cmd = match model.all_modules {
+          Idle => fetch_all_modules(emit)
+          _ => none
         }
+        (
+          batch([fallback_cmd, @rabbita.delay(emit(Search(filter)), 180)]),
+          {
+            ..model,
+            all_modules: match model.all_modules {
+              Idle => Loading
+              state => state
+            },
+            filter,
+            filtered_modules: [],
+          },
+        )
+      }
+    Search(filter) =>
+      if filter != model.filter || filter.is_empty() {
+        (none, model)
+      } else {
+        let url = @config.api_url(
+          "/api/v0/search?kw=\{@util.encode_uri_component(filter)}&limit=100",
+        )
+        (@http.get(url).expect_json(r => emit(GotSearch(filter, r))), model)
       }
     ToggleAllModules => {
       let show = !model.show_all_modules
@@ -415,6 +457,9 @@ fn decode_module_index(
       "is_new": True
       | False as bool,
       "created_at": String(time),
+      "downloads"? : downloads_json,
+      "matched_package_count"? : matched_package_count_json,
+      "matched_packages"? : matched_packages_json,
       ..
     } => {
       let keywords = Some(
@@ -448,12 +493,69 @@ fn decode_module_index(
         keywords,
         created_at,
         is_new,
+        downloads: decode_optional_int(downloads_json),
+        matched_package_count: decode_optional_int(matched_package_count_json),
+        matched_packages: decode_optional_packages(
+          matched_packages_json, json_path,
+        ),
       }
     }
     _ =>
       raise JsonDecodeError(
         (json_path, "unexpected item in json: \{Repr(item)}"),
       )
+  }
+}
+
+///|
+fn decode_optional_int(json : Json?) -> Int? {
+  match json {
+    Some(Number(value, ..)) => Some(value.to_int())
+    _ => None
+  }
+}
+
+///|
+fn decode_optional_packages(
+  json : Json?,
+  path : @json.JsonPath,
+) -> Array[MatchedPackage]? raise @json.JsonDecodeError {
+  match json {
+    Some(value) => Some(@json.from_json(value, path~))
+    None => None
+  }
+}
+
+///|
+impl @json.FromJson for SummaryFragment with fn from_json(json : Json, path) {
+  match json {
+    { "text": String(text), "matched": matched, .. } =>
+      { text, matched: @json.from_json(matched, path~), }
+    _ => raise JsonDecodeError((path, "invalid summary fragment"))
+  }
+}
+
+///|
+impl @json.FromJson for MatchedPackage with fn from_json(json : Json, path) {
+  match json {
+    {
+      "package": String(package_path),
+      "name": String(name),
+      "summary": String(summary),
+      "summary_version": String(summary_version),
+      "is_summary_current": is_summary_current,
+      "summary_fragments": summary_fragments,
+      ..
+    } =>
+      {
+        package_path,
+        name,
+        summary,
+        summary_version,
+        is_summary_current: @json.from_json(is_summary_current, path~),
+        summary_fragments: @json.from_json(summary_fragments, path~),
+      }
+    _ => raise JsonDecodeError((path, "invalid matched package"))
   }
 }
 
@@ -513,11 +615,23 @@ fn sort_modules_by_name(
   indices.sort_by(fn(a, b) { a.name.compare(b.name) })
   let all_modules = Map([])
   for index in indices {
-    let c = to_upper(index.name.get_char(0).unwrap())
-    let key = if c >= 'A' && c <= 'Z' { c } else { '#' }
+    // A legacy or partially populated registry row may have an empty display
+    // name. Keep it in the catch-all bucket instead of unwrapping the first
+    // character and crashing the entire home page.
+    let key = match index.name.get_char(0) {
+      None => '#'
+      Some(first) => {
+        let c = to_upper(first)
+        if c >= 'A' && c <= 'Z' {
+          c
+        } else {
+          '#'
+        }
+      }
+    }
     match all_modules.get(key) {
       None => all_modules[key] = [index]
-      Some(indices) => indices.push(index)
+      Some(bucket) => bucket.push(index)
     }
   }
   all_modules

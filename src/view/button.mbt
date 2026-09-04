@@ -49,30 +49,3 @@ pub fn icon_button(icon : String, text? : String, on_click? : Cmd) -> Html {
     ],
   ]
 }
-
-///|
-pub fn theme_toggle(on_click? : Cmd) -> Html {
-  button(
-    on_click?,
-    class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-  ) <| [
-    img(
-      class="theme-toggle-icon theme-toggle-icon-computer",
-      src=@config.computer_icon,
-    ),
-    img(class="theme-toggle-icon theme-toggle-icon-sun", src=@config.sun_icon),
-    img(class="theme-toggle-icon theme-toggle-icon-moon", src=@config.moon_icon),
-    span(
-      class="sr-only theme-toggle-label theme-toggle-label-system",
-      "Using system theme. Switch to light mode.",
-    ),
-    span(
-      class="sr-only theme-toggle-label theme-toggle-label-light",
-      "Using light mode. Switch to dark mode.",
-    ),
-    span(
-      class="sr-only theme-toggle-label theme-toggle-label-dark",
-      "Using dark mode. Switch to system theme.",
-    ),
-  ]
-}

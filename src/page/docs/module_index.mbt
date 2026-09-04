@@ -17,7 +17,7 @@ priv struct IndexNode {
   name : String
   pkg : PkgIndex?
   childs : SortedMap[String, IndexNode]
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct PkgIndex {
@@ -28,19 +28,20 @@ priv struct PkgIndex {
   types : Array[TypeIndex]
   misc : Array[MiscIndex]
   values : Array[ValueIndex]
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct Manifest {
   name : String
   module_ : String
   version : String
+  latest_version : String
   has_package : Bool
   module_meta : MetaInfo
-}
+} derive(Eq)
 
 ///|
-priv struct ModuleIndex(IndexNode) derive(Debug)
+priv struct ModuleIndex(IndexNode) derive(Debug, Eq)
 
 ///|
 test "dummy test to suppress unused trait implementation warning" {
@@ -86,20 +87,25 @@ fn ModuleIndex::iter(self : ModuleIndex) -> Iter[IndexNode] {
 }
 
 ///|
+fn ModuleIndex::has_package(self : ModuleIndex, path : String) -> Bool {
+  self.iter().any(node => node.pkg is Some(pkg) && pkg.path == path)
+}
+
+///|
 priv struct TypeAliasIndex {
   name : String
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct ValueIndex {
   name : String
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct TraitIndex {
   name : String
   impls : Array[ImplIndex]
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv enum Stype {
@@ -112,34 +118,34 @@ priv enum Stype {
   )
   Param(name~ : String)
   TypePath(TypePath)
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct TypePath {
   path : String
   name : String
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct ImplIndex {
   self : Stype
   trait_ : TypePath
   methods : Array[String]
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct TypeIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 priv struct MiscIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {
@@ -259,6 +265,10 @@ impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
         name,
         module_,
         version,
+        latest_version: match raw_json {
+          { "latest_version": String(latest_version), .. } => latest_version
+          _ => version
+        },
         has_package: @json.from_json(has_package, path~),
         module_meta,
       }

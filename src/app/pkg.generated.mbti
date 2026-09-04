@@ -3,10 +3,11 @@ package "moonbitlang/mooncakes/app"
 
 import {
   "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
 }
 
 // Values
-pub fn app() -> @rabbita.App
+pub fn app() -> @rabbita.Val[@html.Html]
 
 // Errors
 

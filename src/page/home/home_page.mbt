@@ -269,7 +269,7 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
 ///|
 fn search_result(mods : Array[ModuleIndex]) -> Html {
   let module_cards = mods.map(module_card)
-  div() <| [
+  div <| [
     div(class="container lg:w-4/5 px-4") <| [
       h1(
         class="p-4 text-sm font-bold text-gray-400 dark:text-slate-500 lg:border-0",
@@ -417,106 +417,217 @@ fn banner(
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
-  let module_list = if model.filter == "" {
-    let pinned_modules = pinned()
-    let highlights = match model.highlights {
-      Success(h) => highlights_section(h.recent, h.new_modules, h.popular)
-      Failed => @view.load_failed("recently updated modules")
-      Loading =>
-        div(
-          class="container lg:w-4/5 px-4",
-          @view.skeleton_module_cards(highlights_limit),
-        )
-    }
-    let chevron_down : Html = @svg.svg(
-      width=16,
-      height=16,
-      view_box="0 0 16 16",
-      class="shrink-0",
-    ) <| [
-      @svg.path(
-        d="M4 6L8 10L12 6",
-        fill="none",
-        stroke="currentColor",
-        stroke_width=2,
-      ),
-    ]
-    let chevron_up : Html = @svg.svg(
-      width=16,
-      height=16,
-      view_box="0 0 16 16",
-      class="shrink-0",
-    ) <| [
-      @svg.path(
-        d="M4 10L8 6L12 10",
-        fill="none",
-        stroke="currentColor",
-        stroke_width=2,
-      ),
-    ]
-    let all_modules_section = div(class="pt-10 container lg:w-4/5 px-4") <| [
-      div(class="flex justify-center py-2") <| [
-        button(
-          class="flex items-center gap-1.5 select-none text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors px-6 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900",
-          on_click=emit(ToggleAllModules),
-        ) <| [
-          text(
-            if model.show_all_modules {
-              "Hide modules"
-            } else {
-              "Show more modules"
-            },
-          ),
-          if model.show_all_modules {
-            chevron_up
+pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
+  let highlights : @rabbita.Resource[ModuleHighlights] = @rabbita.create_resource(inject => {
+      @http.get(
+        @config.api_url(
+          "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
+        ),
+      ).expect_json(inject)
+    },
+  )
+  let statistics : @rabbita.Resource[PackageCount] = @rabbita.create_resource(inject => {
+    @http.get(@config.api_url("/api/v0/modules/statistics")).expect_json(inject)
+  })
+  let (catalog, emit) = @rabbita.create_state(
+    {
+      all_modules: Idle,
+      show_all_modules: false,
+      filter: "",
+      filtered_modules: [],
+    },
+    update=(model, msg, emit) => {
+      match msg {
+        GotAllModule(Ok(modules)) => {
+          let indices = sort_modules_by_name(modules)
+          let search_index = Lazy::new(fn() { build_search_index(indices) })
+          let model = {
+            ..model,
+            all_modules: Success({ indices, search_index, }),
+          }
+          let filtered_modules = if model.filter.is_empty() {
+            []
           } else {
-            chevron_down
-          },
-        ],
-      ],
-      if model.show_all_modules {
-        match model.all_modules {
-          Idle | Loading => @view.skeleton_module_cards(9)
-          Failed => @view.load_failed("module indices")
-          Success(xs) => all_modules(xs.indices)
+            filter_indices(model.filter, search_index.force())
+          }
+          ({ ..model, filtered_modules, }, none)
         }
-      } else {
-        nothing
-      },
-    ]
-    div() <| [
-      pinned_modules, highlights, all_modules_section,
-    ]
-  } else {
-    match model.all_modules {
-      Idle | Loading => @view.loading()
-      Failed => @view.load_failed("module indices")
-      Success(_) => search_result(model.filtered_modules)
+        GotAllModule(Err(err)) => {
+          println(err.to_string())
+          ({ ..model, all_modules: Failed, }, none)
+        }
+        FilterChanged(filter) =>
+          if filter.is_empty() {
+            ({ ..model, filter, filtered_modules: [], }, none)
+          } else {
+            match model.all_modules {
+              Idle =>
+                (
+                  {
+                    ..model,
+                    all_modules: Loading,
+                    filter,
+                    filtered_modules: [],
+                  },
+                  @http.get(@config.api_url("/api/v0/modules")).expect_json(r => {
+                    emit(GotAllModule(r))
+                  }),
+                )
+              Loading => ({ ..model, filter, filtered_modules: [], }, none)
+              Success(all) => {
+                let filtered_modules = filter_indices(
+                  filter,
+                  all.search_index.force(),
+                )
+                ({ ..model, filter, filtered_modules, }, none)
+              }
+              Failed => ({ ..model, filter, filtered_modules: [], }, none)
+            }
+          }
+        ToggleAllModules => {
+          let show = !model.show_all_modules
+          match model.all_modules {
+            Idle if show =>
+              (
+                { ..model, all_modules: Loading, show_all_modules: show, },
+                @http.get(@config.api_url("/api/v0/modules")).expect_json(r => {
+                  emit(GotAllModule(r))
+                }),
+              )
+            _ => ({ ..model, show_all_modules: show, }, none)
+          }
+        }
+      }
+    },
+  )
+  catalog.view4(highlights, statistics, app_actions, fn(
+    catalog,
+    highlights,
+    statistics,
+    app_actions,
+  ) {
+    if highlights is Failed(error) {
+      println(error)
     }
-  }
-  let banner = if model.filter == "" {
-    banner(
-      total_modules=model.showing_modules,
-      total_downloads=model.showing_downloads,
-      total_packages=model.showing_packages,
-    )
-  } else {
-    nothing
-  }
-  let hero = div(class="home-hero-shell pb-2 sm:pb-8") <| [
-    @view.navbar(
-      style=Fusion,
-      middle=input(
-        input_type=Text,
-        value=model.filter,
-        placeholder="Search modules ...",
-        class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors dark:placeholder:text-slate-500",
-        on_input=x => emit(FilterChanged(x)),
+    let statistics = match statistics {
+      Loaded(value) => value
+      Pending =>
+        {
+          total_modules: 0,
+          total_packages: 0,
+          total_lines: 0,
+          total_downloads: 0,
+        }
+      Failed(error) => {
+        println(error)
+        {
+          total_modules: 0,
+          total_packages: 0,
+          total_lines: 0,
+          total_downloads: 0,
+        }
+      }
+    }
+    let module_list = if catalog.filter == "" {
+      let pinned_modules = pinned()
+      let highlights = match highlights {
+        Loaded(h) => highlights_section(h.recent, h.new_modules, h.popular)
+        Failed(_) => @view.load_failed("recently updated modules")
+        Pending =>
+          div(
+            class="container lg:w-4/5 px-4",
+            @view.skeleton_module_cards(highlights_limit),
+          )
+      }
+      let chevron_down : Html = @svg.svg(
+        width=16,
+        height=16,
+        view_box="0 0 16 16",
+        class="shrink-0",
+      ) <| [
+        @svg.path(
+          d="M4 6L8 10L12 6",
+          fill="none",
+          stroke="currentColor",
+          stroke_width=2,
+        ),
+      ]
+      let chevron_up : Html = @svg.svg(
+        width=16,
+        height=16,
+        view_box="0 0 16 16",
+        class="shrink-0",
+      ) <| [
+        @svg.path(
+          d="M4 10L8 6L12 10",
+          fill="none",
+          stroke="currentColor",
+          stroke_width=2,
+        ),
+      ]
+      let all_modules_section = div(class="pt-10 container lg:w-4/5 px-4") <| [
+        div(class="flex justify-center py-2") <| [
+          button(
+            class="flex items-center gap-1.5 select-none text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300 transition-colors px-6 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900",
+            on_click=emit(ToggleAllModules),
+          ) <| [
+            text(
+              if catalog.show_all_modules {
+                "Hide modules"
+              } else {
+                "Show more modules"
+              },
+            ),
+            if catalog.show_all_modules {
+              chevron_up
+            } else {
+              chevron_down
+            },
+          ],
+        ],
+        if catalog.show_all_modules {
+          match catalog.all_modules {
+            Idle | Loading => @view.skeleton_module_cards(9)
+            Failed => @view.load_failed("module indices")
+            Success(xs) => all_modules(xs.indices)
+          }
+        } else {
+          nothing
+        },
+      ]
+      div <| [
+        pinned_modules, highlights, all_modules_section,
+      ]
+    } else {
+      match catalog.all_modules {
+        Idle | Loading => @view.loading()
+        Failed => @view.load_failed("module indices")
+        Success(_) => search_result(catalog.filtered_modules)
+      }
+    }
+    let stats = if catalog.filter == "" {
+      banner(
+        total_modules=statistics.total_modules,
+        total_downloads=statistics.total_downloads,
+        total_packages=statistics.total_packages,
+      )
+    } else {
+      nothing
+    }
+    let header = div(class="home-hero-shell pb-2 sm:pb-8") <| [
+      @view.navbar(
+        style=Fusion,
+        middle=input(
+          input_type=Text,
+          value=catalog.filter,
+          placeholder="Search modules ...",
+          class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors dark:placeholder:text-slate-500",
+          on_input=filter => emit(FilterChanged(filter)),
+        ),
+        right=app_actions,
       ),
-      right=app_actions,
-    ),
-    div(class="hero-banner", banner),
-  ]
-  @view.page(header=hero, main=div(class="w-full", module_list))
+      div(class="hero-banner", stats),
+    ]
+    @view.page(header~, main=div(class="w-full", module_list))
+  })
 }

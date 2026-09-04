@@ -51,8 +51,6 @@ pub fn skeleton_published_modules(Int) -> @html.Html
 
 pub fn skeleton_sidebar() -> @html.Html
 
-pub fn theme_toggle(on_click? : @cmd.Cmd) -> @html.Html
-
 // Errors
 
 // Types and methods

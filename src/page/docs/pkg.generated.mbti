@@ -2,32 +2,17 @@
 package "moonbitlang/mooncakes/page/docs"
 
 import {
-  "moonbit-community/rabbita/cmd",
+  "moonbit-community/rabbita",
   "moonbit-community/rabbita/html",
   "moonbitlang/mooncakes/util",
 }
 
 // Values
-pub fn get_path(Model) -> String
-
-pub fn is_same_module(Model, @util.UnsolvedMooncakePath) -> Bool
-
-pub fn is_same_path(Model, @util.UnsolvedMooncakePath) -> Bool
-
-pub fn load(@util.UnsolvedMooncakePath, String?, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
-
-pub fn navigate_package(Model, @util.UnsolvedMooncakePath, String?, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
-
-pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
-
-pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn docs_page(@rabbita.Val[@util.UnsolvedMooncakePath], @rabbita.Val[String], app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
 
 // Errors
 
 // Types and methods
-type Model
-
-type Msg
 
 // Type aliases
 

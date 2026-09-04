@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ///|
-const ThemeBootstrap : String =
+let theme_bootstrap : String =
   #|(function () {
   #|  var key = 'mooncakes-theme';
   #|  var pref = 'system';
@@ -39,13 +39,13 @@ priv enum ThemePreference {
   System
   Light
   Dark
-}
+} derive(Eq)
 
 ///|
 priv struct Theme {
   preference : ThemePreference
   system_dark : Bool
-}
+} derive(Eq)
 
 ///|
 fn theme_preference_from_string(value : String) -> ThemePreference {

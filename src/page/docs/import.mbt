@@ -18,6 +18,7 @@ using @html {
   div,
   text,
   h1,
+  h2,
   p,
   pre,
   code,
@@ -25,6 +26,9 @@ using @html {
   nothing,
   a,
   h3,
+  input,
+  dialog,
+  li,
   ul,
   img,
 }
@@ -33,7 +37,7 @@ using @html {
 using @view {button}
 
 ///|
-using @rabbita {type Cmd, batch, none}
+using @rabbita {type Cmd, type Val, type Status, batch, none}
 
 ///|
 using @immut/sorted_map {type SortedMap}
@@ -42,4 +46,4 @@ using @immut/sorted_map {type SortedMap}
 using @immut/sorted_set {type SortedSet}
 
 ///|
-using @util {type Lazy, type Status}
+using @util {type Lazy}

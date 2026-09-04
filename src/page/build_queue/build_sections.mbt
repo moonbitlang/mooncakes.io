@@ -127,13 +127,15 @@ fn skeleton_build_rows(count : Int) -> Html {
 ///|
 fn build_section(
   title : String,
-  items : Status[Array[BuildItem]],
+  status : Status[BuildData],
+  items : (BuildData) -> Array[BuildItem],
   empty_text : String,
 ) -> Html {
-  let content = match items {
-    Loading => skeleton_build_rows(5)
-    Failed => @view.load_failed(title)
-    Success(list) =>
+  let content = match status {
+    Pending => skeleton_build_rows(5)
+    Failed(_) => @view.load_failed(title)
+    Loaded(data) => {
+      let list = items(data)
       if list.is_empty() {
         div(
           class="py-8 text-center text-gray-400 dark:text-slate-500 text-sm",
@@ -142,6 +144,7 @@ fn build_section(
       } else {
         div(class="flex flex-col gap-2 animate-fade-in", list.map(build_row))
       }
+    }
   }
   div(class="mb-8") <| [
     h2(
@@ -150,20 +153,4 @@ fn build_section(
     ),
     content,
   ]
-}
-
-///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
-  ignore(emit)
-  @view.page(
-    header=@view.navbar(right=app_actions),
-    main=div(class="container max-w-3xl mx-auto px-4 py-8") <| [
-      h1(
-        class="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-6",
-        "Build Queue",
-      ),
-      build_section("In Queue", model.queue, "No builds in queue."),
-      build_section("Recent Builds", model.recent, "No recent builds."),
-    ],
-  )
 }

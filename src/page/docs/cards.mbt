@@ -16,7 +16,7 @@
 priv struct FoldedState {
   set : SortedSet[String]
   card_mode : CardMode
-}
+} derive(Eq)
 
 ///|
 fn FoldedState::new() -> FoldedState {
@@ -47,7 +47,7 @@ fn FoldedState::set_mode(self : FoldedState, mode : CardMode) -> FoldedState {
 }
 
 ///|
-fn signature_view(
+fn signature_block(
   content : String,
   module_name~ : String,
   module_version~ : String,
@@ -126,7 +126,8 @@ fn impl_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  emit : (Msg) -> Cmd,
+  toggle~ : (String) -> Cmd,
+  anchor~ : (String) -> Cmd,
 ) -> Html {
   let { self_type, trait_type, methods, } = doc
   let id = doc.get_id()
@@ -145,9 +146,19 @@ fn impl_doc(
   ]
   let content = div(
     class="pl-4 mb-2",
-    methods.map(m => value_doc(m, folded~, module_name~, module_version~, emit)),
+    methods.map(m => {
+      value_doc(m, folded~, module_name~, module_version~, toggle~, anchor~)
+    }),
   )
-  document_item(signature, content, collapsed=folded, id~, tight=true, emit)
+  document_item(
+    signature,
+    content,
+    collapsed=folded,
+    id~,
+    tight=true,
+    toggle=toggle(id),
+    anchor=anchor(id),
+  )
 }
 
 ///|
@@ -156,18 +167,27 @@ fn type_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  emit : (Msg) -> Cmd,
+  toggle~ : (String) -> Cmd,
+  anchor~ : (String) -> Cmd,
 ) -> Html {
   let { docstring, signature, methods, impls, name: _, loc, } = doc
   let id = doc.get_id()
-  let signature = signature_view(signature, module_name~, module_version~)
-  let content = div() <| [
+  let signature = signature_block(signature, module_name~, module_version~)
+  let content = div <| [
     div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
     ..impls.map(imp => {
-      impl_doc(imp, folded~, module_name~, module_version~, emit)
+      impl_doc(imp, folded~, module_name~, module_version~, toggle~, anchor~)
     }),
     ..methods.map(m => {
-      value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
+      value_doc(
+        m,
+        folded~,
+        module_name~,
+        module_version~,
+        type_id=id,
+        toggle~,
+        anchor~,
+      )
     }),
   ]
   document_item(
@@ -179,7 +199,8 @@ fn type_doc(
     loc~,
     module_name~,
     module_version~,
-    emit,
+    toggle=toggle(id),
+    anchor=anchor(id),
   )
 }
 
@@ -189,15 +210,16 @@ fn trait_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  emit : (Msg) -> Cmd,
+  toggle~ : (String) -> Cmd,
+  anchor~ : (String) -> Cmd,
 ) -> Html {
   let { docstring, signature, impls, name: _, loc, } = doc
   let id = doc.get_id()
-  let signature = signature_view(signature, module_name~, module_version~)
-  let content = div() <| [
+  let signature = signature_block(signature, module_name~, module_version~)
+  let content = div <| [
     div(class="pl-4 mb-2", @view.markdown(docstring, small_heading=true)),
     ..impls.map(imp => {
-      impl_doc(imp, folded~, module_name~, module_version~, emit)
+      impl_doc(imp, folded~, module_name~, module_version~, toggle~, anchor~)
     }),
   ]
   document_item(
@@ -209,7 +231,8 @@ fn trait_doc(
     loc~,
     module_name~,
     module_version~,
-    emit,
+    toggle=toggle(id),
+    anchor=anchor(id),
   )
 }
 
@@ -219,10 +242,11 @@ fn type_alias_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  emit : (Msg) -> Cmd,
+  toggle~ : (String) -> Cmd,
+  anchor~ : (String) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc, } = doc
-  let signature = signature_view(signature, module_name~, module_version~)
+  let signature = signature_block(signature, module_name~, module_version~)
   let content = div(
     class="pl-4 mb-2",
     @view.markdown(docstring, small_heading=true),
@@ -237,7 +261,8 @@ fn type_alias_doc(
     loc~,
     module_name~,
     module_version~,
-    emit,
+    toggle=toggle(id),
+    anchor=anchor(id),
   )
 }
 
@@ -252,7 +277,8 @@ fn document_item(
   loc? : Loc,
   module_name? : String = "",
   module_version? : String = "",
-  emit : (Msg) -> Cmd,
+  toggle~ : Cmd,
+  anchor~ : Cmd,
 ) -> Html {
   let (content_style, icon) = if collapsed.contains(id) {
     ("hidden", @config.section_close)
@@ -278,7 +304,7 @@ fn document_item(
   }
   let collapse_btn : Html = button(
     class="w-8 h-8 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg flex items-center justify-center",
-    on_click=emit(ToggleDocDetail(id)),
+    on_click=toggle,
     img(src=icon, class="size-4 ui-icon"),
   )
   let buttons_row : Html = div(class="select-none flex gap-1 items-center") <| [
@@ -303,13 +329,13 @@ fn document_item(
     Some(title) => {
       let anchor = button(
         class="text-gray-300 dark:text-gray-500 hover:text-gray-500 dark:hover:text-slate-400 transition-colors opacity-0 group-hover/title:opacity-100 absolute -left-6 top-1/2 -translate-y-1/2",
-        on_click=emit(ClickAnchor(id)),
+        on_click=anchor,
       ) <| "#"
       let title_with_buttons = div(
         class="flex items-center justify-between border-b mb-4 scroll-mt-header group/title",
         id~,
       ) <| [
-        @html.h2(
+        h2(
           class="text-gray-800 dark:text-slate-200 text-lg md:text-xl font-semibold py-2 relative",
         ) <| [
           anchor,
@@ -345,13 +371,14 @@ fn value_doc(
   module_version~ : String,
   type_id? : String,
   enable_title? : Bool = false,
-  emit : (Msg) -> Cmd,
+  toggle~ : (String) -> Cmd,
+  anchor~ : (String) -> Cmd,
 ) -> Html {
   let { name: _, docstring, signature, loc, } = doc
   let id = type_id
     .map(fn(x) { "\{x}::\{doc.get_id()}" })
     .unwrap_or(doc.get_id())
-  let signature = signature_view(signature, module_name~, module_version~)
+  let signature = signature_block(signature, module_name~, module_version~)
   let content = div(
     class="pl-4 mb-2",
     @view.markdown(docstring, small_heading=true),
@@ -366,7 +393,8 @@ fn value_doc(
     loc~,
     module_name~,
     module_version~,
-    emit,
+    toggle=toggle(id),
+    anchor=anchor(id),
   )
 }
 
@@ -376,7 +404,8 @@ fn misc_doc(
   folded~ : FoldedState,
   module_name~ : String,
   module_version~ : String,
-  emit : (Msg) -> Cmd,
+  toggle~ : (String) -> Cmd,
+  anchor~ : (String) -> Cmd,
 ) -> Html {
   let { name, methods, impls, } = doc
   let id = doc.get_id()
@@ -415,13 +444,28 @@ fn misc_doc(
   let content = div(class="ml-3 my-2") <| [
     tips,
     ..methods.map(m => {
-      value_doc(m, folded~, module_name~, module_version~, type_id=id, emit)
+      value_doc(
+        m,
+        folded~,
+        module_name~,
+        module_version~,
+        type_id=id,
+        toggle~,
+        anchor~,
+      )
     }),
     ..impls.map(imp => {
-      impl_doc(imp, folded~, module_name~, module_version~, emit)
+      impl_doc(imp, folded~, module_name~, module_version~, toggle~, anchor~)
     }),
   ]
-  document_item(signature, content, collapsed=folded, id~, emit)
+  document_item(
+    signature,
+    content,
+    collapsed=folded,
+    id~,
+    toggle=toggle(id),
+    anchor=anchor(id),
+  )
 }
 
 ///|
@@ -463,7 +507,7 @@ fn readme(
   module_version~ : String,
   package_path~ : String,
   folded~ : FoldedState,
-  emit : (Msg) -> Cmd,
+  toggle~ : Cmd,
 ) -> Html {
   let has_content = match content {
     None | Some("") => false
@@ -489,7 +533,7 @@ fn readme(
   div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [
     button(
       class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900 select-none w-fit",
-      on_click=emit(ToggleDocDetail("readme")),
+      on_click=toggle,
     ) <| [
       img(src=icon, class="size-3.5 ui-icon"),
       span(
@@ -503,77 +547,7 @@ fn readme(
 }
 
 ///|
-fn document(
-  hide_large_package~ : Bool,
-  readme_content? : String,
-  package_data? : Status[PackageData],
-  folded~ : FoldedState,
-  module_name? : String = "",
-  module_version? : String = "",
-  package_path? : String = "",
-  emit : (Msg) -> Cmd,
-) -> Html {
-  let readme = readme(
-    readme_content,
-    module_name~,
-    module_version~,
-    package_path~,
-    folded~,
-    emit,
-  )
-  let doc_list = match package_data {
-    Some(
-      Success({ traits, types, errors, typealiases, values, misc, name: _, })
-    ) => {
-      let count = traits.length() +
-        types.length() +
-        errors.length() +
-        typealiases.length() +
-        values.length() +
-        misc.length()
-      if hide_large_package && count > 1000 {
-        [hidden_large_package(count, emit)]
-      } else {
-        [
-          ..typealiases.map(ta => {
-            type_alias_doc(ta, folded~, module_name~, module_version~, emit)
-          }),
-          ..traits.map(tr => {
-            trait_doc(tr, folded~, module_name~, module_version~, emit)
-          }),
-          ..errors.map(err => {
-            type_doc(err, folded~, module_name~, module_version~, emit)
-          }),
-          ..types.map(ty => {
-            type_doc(ty, folded~, module_name~, module_version~, emit)
-          }),
-          ..misc.map(item => {
-            misc_doc(item, folded~, module_name~, module_version~, emit)
-          }),
-          ..values.map(value => {
-            value_doc(
-              value,
-              folded~,
-              module_name~,
-              module_version~,
-              enable_title=true,
-              emit,
-            )
-          }),
-        ]
-      }
-    }
-    _ => []
-  }
-  div(class="contents-center flex flex-col w-full") <| [
-    readme,
-    // Ensure left and right spacing on mobile devices
-    div(class="mx-4 md:mx-0", doc_list),
-  ]
-}
-
-///|
-fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
+fn hidden_large_package(count : Int, show~ : Cmd) -> Html {
   div(class="flex flex-col items-center justify-center py-12 w-full") <| [
     div(
       class="bg-mooncake dark:bg-stone-900 border border-mooncake2 rounded-lg p-8 w-full text-center",
@@ -588,7 +562,7 @@ fn hidden_large_package(count : Int, emit : (Msg) -> Cmd) -> Html {
       ),
       button(
         class="px-6 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors shadow-sm",
-        on_click=emit(ShowLargePackage),
+        on_click=show,
       ) <| "Show All Items",
     ],
   ]

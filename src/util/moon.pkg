@@ -3,6 +3,7 @@ import {
   "moonbitlang/core/encoding/utf8",
   "moonbitlang/core/env",
   "moonbitlang/core/string",
+  "moonbit-community/rabbita/common",
   "moonbit-community/rabbita/url",
   "moonbitlang/mooncakes/config",
   "moonbitlang/x/time",

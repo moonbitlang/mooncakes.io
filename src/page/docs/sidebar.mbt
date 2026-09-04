@@ -219,36 +219,6 @@ fn symbol_icon(kind : SymbolKind) -> Html {
 }
 
 ///|
-fn sidebar(
-  document_index : Array[@tree.Tree[ItemTarget]],
-  sidebar_state : SortedSet[ItemTarget],
-  emit : (Msg) -> Cmd,
-) -> Html {
-  div(class="text-gray-700 dark:text-slate-300 flex flex-col") <| [
-    div(
-      class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
-    ) <| [
-      button(
-        class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
-        on_click=emit(ExpandAllSidebar),
-      ) <| "Expand all",
-      button(
-        class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
-        on_click=emit(CollapseAllSidebar),
-      ) <| "Collapse all",
-    ],
-    @tree.view(
-      toggle=x => emit(ToggleSidebarItem(x)),
-      click=x => emit(ClickSidebarItem(x)),
-      state=sidebar_state,
-      indicator=Symbol(pkg_path="", kind=KValue, ""),
-      icon=sidebar_icon,
-      document_index,
-    ),
-  ]
-}
-
-///|
 fn source_files_section(files : Array[String], package_path~ : String) -> Html {
   if files.is_empty() {
     return nothing
@@ -262,7 +232,7 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
     ul(
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1",
       files.map(fn(x) {
-        @html.li() <| [
+        li <| [
           a(
             class="block text-sm font-mono text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 hover:bg-gray-50 dark:hover:bg-zinc-950 px-2 py-1 rounded transition-colors",
             href=@config.asset_url("/assets/\{package_path}/\{x}.html"),
@@ -273,4 +243,191 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
       }),
     ),
   ]
+}
+
+///|
+priv struct SidebarModel {
+  sidebar_collapsed : SortedSet[ItemTarget]
+  sidebar_fab : Bool
+} derive(Eq)
+
+///|
+priv enum SidebarMsg {
+  ToggleSidebarItem(ItemTarget)
+  ClickSidebarItem(ItemTarget, @util.MooncakePath?)
+  ExpandAllSidebar(Array[@tree.Tree[ItemTarget]])
+  CollapseAllSidebar
+  ToggleSidebarFab
+}
+
+///|
+priv struct Sidebar {
+  desktop : Html
+  dialog : Html
+  fab : Html
+} derive(Eq)
+
+///|
+fn docs_sidebar(
+  module_index : Val[Status[ModuleIndex]?],
+  resolved : Val[@util.MooncakePath?],
+  manifest : Manifest,
+) -> Val[Sidebar] {
+  let (model, emit) = @rabbita.create_state(
+    { sidebar_collapsed: @immut/sorted_set.new(), sidebar_fab: false, },
+    update=(model, msg, _emit) => {
+      match msg {
+        ToggleSidebarItem(id) => {
+          let sidebar_collapsed = if model.sidebar_collapsed.contains(id) {
+            model.sidebar_collapsed.remove(id)
+          } else {
+            model.sidebar_collapsed.add(id)
+          }
+          ({ ..model, sidebar_collapsed, }, none)
+        }
+        ClickSidebarItem(id, resolved) => {
+          let model = { ..model, sidebar_fab: false, }
+          match id {
+            Group(id) => {
+              // Group nodes have no package, just toggle expand/collapse
+              let sidebar_collapsed = if model.sidebar_collapsed.contains(
+                  Group(id),
+                ) {
+                model.sidebar_collapsed.remove(Group(id))
+              } else {
+                model.sidebar_collapsed.add(Group(id))
+              }
+              ({ ..model, sidebar_collapsed, }, none)
+            }
+            Package(path) => {
+              let url_path = versioned_docs_path(
+                path,
+                manifest.module_,
+                manifest.version,
+              )
+              (model, @nav.push_url("/docs/\{url_path}"))
+            }
+            Symbol(pkg_path~, kind=KReadme, _) => {
+              let url_path = versioned_docs_path(
+                pkg_path,
+                manifest.module_,
+                manifest.version,
+              )
+              (
+                model,
+                batch([
+                  @nav.push_url("/docs/\{url_path}"),
+                  @nav.scroll_to_top(behavior=@nav.Smooth),
+                ]),
+              )
+            }
+            Symbol(pkg_path~, id, ..) => {
+              let same_package = match resolved {
+                Some(resolved) => resolved.package_path() == pkg_path
+                None => false
+              }
+              if same_package {
+                (
+                  model,
+                  batch([
+                    @nav.push_url("#\{id}"),
+                    @nav.scroll_to(id, behavior=@nav.Smooth),
+                  ]),
+                )
+              } else {
+                let url_path = versioned_docs_path(
+                  pkg_path,
+                  manifest.module_,
+                  manifest.version,
+                )
+                (model, @nav.push_url("/docs/\{url_path}#\{id}"))
+              }
+            }
+          }
+        }
+        ExpandAllSidebar(sidebar_document) => {
+          fn collect_node_ids(
+            items : Array[@tree.Tree[ItemTarget]],
+            set : SortedSet[ItemTarget],
+          ) -> SortedSet[ItemTarget] {
+            items.fold(init=set, fn(s, item) {
+              match item {
+                Node(id~, _, children) => collect_node_ids(children, s.add(id))
+                _ => s
+              }
+            })
+          }
+
+          let sidebar_collapsed = collect_node_ids(
+            sidebar_document,
+            model.sidebar_collapsed,
+          )
+          ({ ..model, sidebar_collapsed, }, none)
+        }
+        CollapseAllSidebar =>
+          ({ ..model, sidebar_collapsed: @immut/sorted_set.new(), }, none)
+        ToggleSidebarFab => {
+          let sidebar_fab = !model.sidebar_fab
+          ({ ..model, sidebar_fab, }, none)
+        }
+      }
+    },
+  )
+  model.map3(module_index, resolved, fn(model, module_index, resolved) {
+    let document_index = match module_index {
+      Some(Loaded(index)) => index.0.to_document_items()
+      _ => []
+    }
+    let sidebar_content = div(
+      class="text-gray-700 dark:text-slate-300 flex flex-col",
+    ) <| [
+      div(
+        class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
+      ) <| [
+        button(
+          class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
+          on_click=emit(ExpandAllSidebar(document_index)),
+        ) <| "Expand all",
+        button(
+          class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
+          on_click=emit(CollapseAllSidebar),
+        ) <| "Collapse all",
+      ],
+      @tree.view(
+        toggle=id => emit(ToggleSidebarItem(id)),
+        click=id => emit(ClickSidebarItem(id, resolved)),
+        state=model.sidebar_collapsed,
+        indicator=Symbol(pkg_path="", kind=KValue, ""),
+        icon=sidebar_icon,
+        document_index,
+      ),
+    ]
+    let display = if model.sidebar_fab { "flex" } else { "none" }
+    let desktop = if module_index is Some(Pending) {
+      @view.skeleton_sidebar()
+    } else {
+      div(class="animate-fade-in", sidebar_content)
+    }
+    let dialog = div(
+      class="fixed inset-0 justify-center items-center z-100",
+      style=["display: \{display}"],
+    ) <| [
+      button(
+        class="fixed inset-0 bg-black/40 z-10",
+        style=["display: \{display}"],
+        on_click=emit(ToggleSidebarFab),
+        nothing,
+      ),
+      div(
+        class="bg-zinc-50 dark:bg-zinc-950 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
+        sidebar_content,
+      ),
+    ]
+    let fab = button(
+      class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center hover:bg-moonbit-dark transition-all select-none",
+      on_click=emit(ToggleSidebarFab),
+      img(class="size-5", src=@config.hamburger_button),
+    )
+    { desktop, dialog, fab, }
+  })
 }

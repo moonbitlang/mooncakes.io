@@ -60,7 +60,7 @@ const testAssetsServer = {
   }
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const apiEndpoint = removeTrailingSlash(
     process.env.VITE_API_ENDPOINT || env.VITE_API_ENDPOINT || "/api"
@@ -70,7 +70,10 @@ export default defineConfig(({ mode }) => {
       env.VITE_ASSETS_ENDPOINT ||
       'https://assets.mooncakes.io'
   )
-  const skillsHost = process.env.VITE_SKILLS_HOST || env.VITE_SKILLS_HOST
+  const skillsHost =
+    process.env.VITE_SKILLS_HOST ||
+    env.VITE_SKILLS_HOST ||
+    (command === 'serve' ? 'skills.mooncakes.io' : '')
   if (!skillsHost) {
     throw new Error('VITE_SKILLS_HOST is required')
   }

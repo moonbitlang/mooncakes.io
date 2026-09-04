@@ -13,12 +13,6 @@
 // limitations under the License.
 
 ///|
-priv struct SearchModel {
-  filter : String
-  results : Status[Array[SearchResult]]
-}
-
-///|
 priv struct SearchResult {
   matching : Array[(Bool, StringView)]
   score : Int
@@ -137,4 +131,122 @@ fn search(
   })
   results.sort_by(fn(a, b) { a.score - b.score })
   results
+}
+
+///|
+priv struct SearchEntries {
+  module_index : Status[ModuleIndex]?
+  entries : Lazy[Array[SearchEntry]]?
+}
+
+///|
+impl Eq for SearchEntries with fn equal(self, other) {
+  // The entries are a lazy cache of the module index within this component.
+  self.module_index == other.module_index
+}
+
+///|
+priv enum SearchMsg {
+  FilterChanged(String)
+}
+
+///|
+fn docs_search(
+  module_index : Val[Status[ModuleIndex]?],
+  manifest : Manifest,
+) -> Val[Html] {
+  let search_entries = module_index.map(module_index => {
+    let entries = if module_index is Some(Loaded(index)) {
+      Some(
+        Lazy::new(
+          load_search_entries(
+            index,
+            module_name=manifest.module_,
+            module_version=manifest.version,
+          ),
+        ),
+      )
+    } else {
+      None
+    }
+    { module_index, entries, }
+  })
+  let (filter, emit) = @rabbita.create_pure_state("", update=(_filter, msg) => {
+    match msg {
+      FilterChanged(filter) => filter
+    }
+  })
+  filter.view2(search_entries, fn(filter, search_entries) {
+    let results = if search_entries.entries is Some(entries) {
+      search(entries, filter)
+    } else {
+      []
+    }
+    dialog(
+      class="lg:backdrop:bg-black/30 lg:backdrop:backdrop-blur lg:rounded lg:shadow-lg fixed max-w-none max-h-none w-full h-screen m-0 lg:m-auto lg:w-2/5 lg:h-[80%] overscroll-contain",
+      id="search-panel",
+    ) <| [
+      div(
+        class="h-12 border-b bg-white dark:bg-zinc-900 rounded-none sticky top-0 text-base w-full flex",
+      ) <| [
+        input(
+          input_type=Text,
+          value=filter,
+          placeholder="search...",
+          on_input=filter => emit(FilterChanged(filter)),
+          class="outline-none m-0 flex-grow px-4 p-2 dark:placeholder:text-slate-500",
+        ),
+        button(
+          class="size-12 container hover:bg-gray-200 dark:hover:bg-gray-800 flex justify-center items-center",
+          on_click=@dialog.close("search-panel"),
+          img(class="ui-icon", src=@config.icon_close),
+        ),
+      ],
+      match search_entries.module_index {
+        Some(Pending) => nothing
+        None | Some(Failed(_)) => text("load indices failed")
+        Some(Loaded(_)) =>
+          ul(
+            class="overflow-y-auto flex-grow",
+            results.map(result => {
+              let color = match result.entry.kind {
+                "Package" => "text-yellow-700 dark:text-yellow-400"
+                "Trait" => "text-blue-700 dark:text-indigo-400"
+                "Type" => "text-green-700 dark:text-emerald-300"
+                "Method" => "text-moonbit"
+                "Value" => "text-purple-700 dark:text-violet-300"
+                _ => "text-gray-700 dark:text-slate-300"
+              }
+              li(
+                class="border-b px-4 py-2 bg-white dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-900",
+                on_click=@dialog.close("search-panel"),
+              ) <| [
+                a(href=result.entry.href, class="grid grid-cols-[1fr_auto] ") <| [
+                  span(
+                    result.matching.map(section => {
+                      match section {
+                        (true, value) =>
+                          span(
+                            class="text-moonbit font-semibold",
+                            value.to_owned(),
+                          )
+                        (false, value) =>
+                          span(
+                            class="text-gray-600 dark:text-slate-400",
+                            value.to_owned(),
+                          )
+                      }
+                    }),
+                  ),
+                  span(
+                    class="font-thin text-tiny lg:text-base \{color}",
+                    result.entry.kind,
+                  ),
+                ],
+              ]
+            }),
+          )
+      },
+    ]
+  })
 }

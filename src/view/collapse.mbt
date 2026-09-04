@@ -44,7 +44,7 @@ pub fn collapse(
     on_click=toggle,
     img(src=icon, class="size-4 ui-icon \{caret_style}"),
   )
-  div() <| [
+  div <| [
     div(class="relative flex items-center") <| [
       toggle_button, header,
     ],

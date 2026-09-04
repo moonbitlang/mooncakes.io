@@ -1,52 +1,49 @@
 ///|
-pub enum Msg {
-  GotBuilds(Result[BuildData, Error])
-}
-
-///|
-pub struct Model {
-  queue : Status[Array[BuildItem]]
-  recent : Status[Array[BuildItem]]
-}
-
-///|
-pub(all) struct BuildItem {
+priv struct BuildItem {
   module_ : String
   version : String
   status : String
   created_at : String
   finished_at : String?
-}
+} derive(Eq)
 
 ///|
 struct BuildData {
   queued : Array[BuildItem]
   recent_completed : Array[BuildItem]
-}
+} derive(Eq)
 
 ///|
-pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
-  (
-    @http.get(@config.api_url("/api/v0/builds")).expect_json(r => {
-      emit(GotBuilds(r))
-    }),
-    { queue: Loading, recent: Loading, },
-  )
-}
-
-///|
-pub fn update(msg : Msg, _model : Model) -> (Cmd, Model) {
-  match msg {
-    GotBuilds(Ok(data)) =>
-      (
-        none,
-        { queue: Success(data.queued), recent: Success(data.recent_completed), },
-      )
-    GotBuilds(Err(e)) => {
-      println(e)
-      (none, { queue: Failed, recent: Failed, })
+pub fn build_queue_page(app_actions~ : Val[Html]) -> Val[Html] {
+  let builds : @rabbita.Resource[BuildData] = @rabbita.create_resource(inject => {
+    @http.get(@config.api_url("/api/v0/builds")).expect_json(inject)
+  })
+  builds.view2(app_actions, fn(status, app_actions) {
+    if status is Failed(error) {
+      println(error)
     }
-  }
+    @view.page(
+      header=@view.navbar(right=app_actions),
+      main=div(class="container max-w-3xl mx-auto px-4 py-8") <| [
+        h1(
+          class="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-6",
+          "Build Queue",
+        ),
+        build_section(
+          "In Queue",
+          status,
+          data => data.queued,
+          "No builds in queue.",
+        ),
+        build_section(
+          "Recent Builds",
+          status,
+          data => data.recent_completed,
+          "No recent builds.",
+        ),
+      ],
+    )
+  })
 }
 
 ///|

@@ -19,7 +19,7 @@ using @html {type Html, a, div, nothing, text, input, img, h1, h2, span, p}
 using @view {button}
 
 ///|
-using @rabbita {type Cmd, batch, none}
+using @rabbita {type Val, none}
 
 ///|
-using @util {type Lazy, type Status}
+using @util {type Lazy}

@@ -14,7 +14,7 @@ fn parse_plain_datetime(value : StringView) -> Int64? {
   } else {
     "\{value}T00:00:00"
   }
-  try @time.PlainDateTime::from_str(value) catch {
+  try (@string.FromStr::from_str(value) : @time.PlainDateTime) catch {
     _ => None
   } noraise {
     value => Some(value.to_unix_second())

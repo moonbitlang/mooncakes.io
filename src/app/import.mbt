@@ -14,21 +14,20 @@
 
 ///|
 using @html {
-  type Attrs,
   type Html,
+  type Attrs,
   body,
   div,
   head,
   html,
+  img,
   link,
   meta,
   nothing,
   script,
+  span,
   title,
 }
 
 ///|
-using @rabbita {type Cmd, batch, none}
-
-///|
-using @cmd {type Emit}
+using @rabbita {type Cmd, type Val, batch, none}

@@ -1,8 +1,10 @@
 # 🥮 mooncakes.io
 
-The distribution platform for MoonBit library, developed in collaboration with [Rabbit Tea](https://github.com/Yoorkin/rabbit-tea) and [Tailwindcss](https://tailwindcss.com/).
+The MoonBit package distribution platform, built with [Rabbita](https://github.com/moonbit-community/rabbita) and [Tailwind CSS](https://tailwindcss.com/).
 
 ## Build & Run
+
+Use Node.js 20.19+ or 22.12+ as required by Vite.
 
 ```bash
 npm i
@@ -12,10 +14,14 @@ moon build --target js
 npm run dev
 ```
 
-`VITE_SKILLS_HOST` is required and selects the host that renders the Skills
-homepage. By default API requests use the same-origin `/api` path. To build
-with a different API endpoint, set `VITE_API_ENDPOINT` to the value that should
-replace `/api`:
+`VITE_SKILLS_HOST` selects the host that renders the Skills homepage. The dev
+server defaults to `skills.mooncakes.io`; override it in the environment or
+`frontend/.env.development` to use a different host. Production builds require
+an explicit `VITE_SKILLS_HOST`.
+
+By default API requests use the same-origin `/api` path. To build with a
+different API endpoint, set `VITE_API_ENDPOINT` to the value that should replace
+`/api`:
 
 ```bash
 VITE_SKILLS_HOST=skills.mooncakes.io \

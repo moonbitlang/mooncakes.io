@@ -13,10 +13,8 @@
 // limitations under the License.
 
 ///|
-pub enum Msg {
+priv enum CatalogMsg {
   GotAllModule(Result[Array[ModuleIndex], Error])
-  GotHighlights(Result[ModuleHighlights, Error])
-  GotCount(Result[PackageCount, Error])
   FilterChanged(String)
   ToggleAllModules
 }
@@ -28,7 +26,7 @@ struct ModuleHighlights {
   recent : Array[ModuleIndex]
   new_modules : Array[ModuleIndex]
   popular : Array[ModuleIndex]
-}
+} derive(Eq)
 
 ///|
 enum LazyStatus[T] {
@@ -36,20 +34,15 @@ enum LazyStatus[T] {
   Loading
   Failed
   Success(T)
-}
+} derive(Eq)
 
 ///|
-pub struct Model {
-  highlights : Status[ModuleHighlights]
+struct CatalogModel {
   all_modules : LazyStatus[AllModules]
   show_all_modules : Bool
   filter : String
   filtered_modules : Array[ModuleIndex]
-  showing_lines : Int
-  showing_modules : Int
-  showing_packages : Int
-  showing_downloads : Int
-}
+} derive(Eq)
 
 ///|
 struct PackageCount {
@@ -57,10 +50,10 @@ struct PackageCount {
   total_packages : Int
   total_lines : Int
   total_downloads : Int
-}
+} derive(Eq)
 
 ///|
-pub(all) struct ModuleIndex {
+struct ModuleIndex {
   author : String
   name : String
   path : String
@@ -69,7 +62,7 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
-}
+} derive(Eq)
 
 ///|
 struct SearchIndex {
@@ -79,12 +72,18 @@ struct SearchIndex {
   author : String
   keywords : Array[String]
   recency_penalty : Int
+} derive(Eq)
+
+///|
+priv struct AllModules {
+  indices : Map[Char, Array[ModuleIndex]]
+  search_index : Lazy[Array[SearchIndex]]
 }
 
 ///|
-struct AllModules {
-  indices : Map[Char, Array[ModuleIndex]]
-  search_index : Lazy[Array[SearchIndex]]
+impl Eq for AllModules with fn equal(self, other) {
+  // The search index is a lazy cache derived from these indices.
+  self.indices == other.indices
 }
 
 ///|
@@ -109,107 +108,7 @@ fn sanitize_for_fuzzy(text : String) -> String {
 let highlights_limit = 12
 
 ///|
-pub fn load(emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
-  (
-    batch([
-      @http.get(
-        @config.api_url(
-          "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
-        ),
-      ).expect_json(r => emit(GotHighlights(r))),
-      @http.get(@config.api_url("/api/v0/modules/statistics")).expect_json(r => {
-        emit(GotCount(r))
-      }),
-    ]),
-    {
-      highlights: Loading,
-      all_modules: Idle,
-      show_all_modules: false,
-      filter: "",
-      filtered_modules: [],
-      showing_lines: 0,
-      showing_modules: 0,
-      showing_packages: 0,
-      showing_downloads: 0,
-    },
-  )
-}
-
-///|
-fn fetch_all_modules(emit : (Msg) -> Cmd) -> Cmd {
-  @http.get(@config.api_url("/api/v0/modules")).expect_json(r => {
-    emit(GotAllModule(r))
-  })
-}
-
-///|
-pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
-  match msg {
-    GotAllModule(Ok(modules)) => {
-      let indices = sort_modules_by_name(modules)
-      let search_index = Lazy::new(fn() { build_search_index(indices) })
-      let model = { ..model, all_modules: Success({ indices, search_index, }), }
-      let filtered_modules = if model.filter.is_empty() {
-        []
-      } else {
-        filter_indices(model.filter, search_index.force())
-      }
-      (none, { ..model, filtered_modules, })
-    }
-    GotHighlights(Ok(highlights)) =>
-      (none, { ..model, highlights: Success(highlights), })
-    GotCount(Ok(stat)) =>
-      (
-        none,
-        {
-          ..model,
-          showing_lines: stat.total_lines,
-          showing_modules: stat.total_modules,
-          showing_packages: stat.total_packages,
-          showing_downloads: stat.total_downloads,
-        },
-      )
-    GotAllModule(Err(err)) | GotHighlights(Err(err)) | GotCount(Err(err)) => {
-      println(err.to_string())
-      (none, { ..model, all_modules: Failed, })
-    }
-    FilterChanged(filter) =>
-      if filter.is_empty() {
-        (none, { ..model, filter, filtered_modules: [], })
-      } else {
-        match model.all_modules {
-          Idle =>
-            (
-              fetch_all_modules(emit),
-              { ..model, all_modules: Loading, filter, filtered_modules: [], },
-            )
-          Loading => (none, { ..model, filter, filtered_modules: [], })
-          Success(all) => {
-            let filtered_modules = filter_indices(
-              filter,
-              all.search_index.force(),
-            )
-            (none, { ..model, filter, filtered_modules, })
-          }
-          Failed => (none, { ..model, filter, filtered_modules: [], })
-        }
-      }
-    ToggleAllModules => {
-      let show = !model.show_all_modules
-      match model.all_modules {
-        Idle if show =>
-          (
-            fetch_all_modules(emit),
-            { ..model, all_modules: Loading, show_all_modules: show, },
-          )
-        _ => (none, { ..model, show_all_modules: show, })
-      }
-    }
-  }
-}
-
-///|
-pub fn filter_indices(
+fn filter_indices(
   filter : String,
   index : Array[SearchIndex],
 ) -> Array[ModuleIndex] {
@@ -295,7 +194,7 @@ pub fn filter_indices(
     return []
   }
   let query = @fuzzy_match.Query::new(filter_lower)
-  fn update_best(best : Int?, score : Int) -> Int? {
+  fn better_score(best : Int?, score : Int) -> Int? {
     match best {
       None => Some(score)
       Some(value) => if score < value { Some(score) } else { best }
@@ -315,7 +214,7 @@ pub fn filter_indices(
       if score == 0 {
         best
       } else {
-        update_best(best, score + penalty)
+        better_score(best, score + penalty)
       }
     }
   }

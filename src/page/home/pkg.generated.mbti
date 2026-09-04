@@ -2,63 +2,27 @@
 package "moonbitlang/mooncakes/page/home"
 
 import {
-  "moonbit-community/rabbita/cmd",
+  "moonbit-community/rabbita",
   "moonbit-community/rabbita/html",
-  "moonbitlang/mooncakes/util",
 }
 
 // Values
-pub fn filter_indices(String, Array[SearchIndex]) -> Array[ModuleIndex]
-
-pub fn load(emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
-
-pub fn update(Msg, Model, emit~ : (Msg) -> @cmd.Cmd) -> (@cmd.Cmd, Model)
-
-pub fn view(Model, app_actions~ : @html.Html, emit~ : (Msg) -> @cmd.Cmd) -> @html.Html
+pub fn home_page(app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
 
 // Errors
 
 // Types and methods
-type AllModules
+type CatalogModel derive(Eq)
 
-type LazyStatus[T]
+type LazyStatus[T] derive(Eq)
 
-pub struct Model {
-  highlights : @util.Status[ModuleHighlights]
-  all_modules : LazyStatus[AllModules]
-  show_all_modules : Bool
-  filter : String
-  filtered_modules : Array[ModuleIndex]
-  showing_lines : Int
-  showing_modules : Int
-  showing_packages : Int
-  showing_downloads : Int
-}
+type ModuleHighlights derive(Eq)
 
-type ModuleHighlights
+type ModuleIndex derive(Eq)
 
-pub(all) struct ModuleIndex {
-  author : String
-  name : String
-  path : String
-  version : String
-  keywords : Array[String]?
-  description : String?
-  created_at : String?
-  is_new : Bool
-}
+type PackageCount derive(Eq)
 
-pub enum Msg {
-  GotAllModule(Result[Array[ModuleIndex], Error])
-  GotHighlights(Result[ModuleHighlights, Error])
-  GotCount(Result[PackageCount, Error])
-  FilterChanged(String)
-  ToggleAllModules
-}
-
-type PackageCount
-
-type SearchIndex
+type SearchIndex derive(Eq)
 
 // Type aliases
 

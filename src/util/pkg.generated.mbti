@@ -2,6 +2,7 @@
 package "moonbitlang/mooncakes/util"
 
 import {
+  "moonbit-community/rabbita/common",
   "moonbit-community/rabbita/url",
   "moonbitlang/core/debug",
 }
@@ -24,7 +25,7 @@ type Lazy[T]
 pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
 
-type MooncakePath
+type MooncakePath derive(Eq)
 pub fn MooncakePath::is_same_module(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
 pub fn MooncakePath::is_same_package(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
 pub fn MooncakePath::latest_version(Self) -> String
@@ -46,15 +47,11 @@ pub enum MooncakesioPath {
 pub fn MooncakesioPath::resolve(@url.Url) -> Self
 pub impl Show for MooncakesioPath
 
-pub(all) enum Status[T] {
-  Loading
-  Failed
-  Success(T)
-} derive(Eq, @debug.Debug)
-
-type UnsolvedMooncakePath derive(@debug.Debug)
+type UnsolvedMooncakePath derive(Eq, @debug.Debug)
 pub fn UnsolvedMooncakePath::new(String) -> Self
 pub fn UnsolvedMooncakePath::package_path(Self) -> String
+pub impl @common.Enumerate for UnsolvedMooncakePath
+pub impl Show for UnsolvedMooncakePath
 
 // Type aliases
 

@@ -16,7 +16,7 @@
 priv enum CardMode {
   Expanded
   Collapsed
-}
+} derive(Eq)
 
 ///|
 fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {

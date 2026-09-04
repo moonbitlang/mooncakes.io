@@ -1,5 +1,15 @@
 ///|
-struct UnsolvedMooncakePath(String) derive(Debug)
+struct UnsolvedMooncakePath(String) derive(Debug, Eq)
+
+///|
+pub impl @common.Enumerate for UnsolvedMooncakePath with fn tag(self) {
+  self.0
+}
+
+///|
+pub impl Show for UnsolvedMooncakePath with fn output(self, logger) {
+  logger.write_string(self.0)
+}
 
 ///|
 pub fn UnsolvedMooncakePath::new(path : String) -> Self {
@@ -23,7 +33,7 @@ struct MooncakePath {
   package_path : String
   version : String
   latest_version : String
-}
+} derive(Eq)
 
 ///|
 pub fn MooncakePath::is_same_module(

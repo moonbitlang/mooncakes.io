@@ -21,7 +21,7 @@ priv struct PackageData {
   types : Array[TypeDoc]
   misc : Array[MiscDoc]
   values : Array[ValueDoc]
-}
+} derive(Eq)
 
 ///|
 priv struct Loc {
@@ -29,7 +29,7 @@ priv struct Loc {
   file : String
   line : Int
   column : Int
-} derive(Debug)
+} derive(Debug, Eq)
 
 ///|
 test "suppress unused warnings for Loc" {
@@ -45,7 +45,7 @@ priv struct TypeDoc {
   loc : Loc
   methods : Array[ValueDoc]
   impls : Array[ImplDoc]
-}
+} derive(Eq)
 
 ///|
 priv struct TraitDoc {
@@ -54,7 +54,7 @@ priv struct TraitDoc {
   signature : String
   loc : Loc
   impls : Array[ImplDoc]
-}
+} derive(Eq)
 
 ///|
 priv struct TypeAliasDoc {
@@ -62,7 +62,7 @@ priv struct TypeAliasDoc {
   docstring : String
   signature : String
   loc : Loc
-}
+} derive(Eq)
 
 ///|
 priv struct ValueDoc {
@@ -70,21 +70,21 @@ priv struct ValueDoc {
   docstring : String
   signature : String
   loc : Loc
-}
+} derive(Eq)
 
 ///|
 priv struct ImplDoc {
   self_type : Stype
   trait_type : TypePath
   methods : Array[ValueDoc]
-}
+} derive(Eq)
 
 ///|
 priv struct MiscDoc {
   name : String
   impls : Array[ImplDoc]
   methods : Array[ValueDoc]
-}
+} derive(Eq)
 
 ///|
 fn decode_loc(

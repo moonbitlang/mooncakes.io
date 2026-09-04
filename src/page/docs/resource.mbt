@@ -18,7 +18,7 @@ priv enum BuildStatus {
   BuildLegacy
   BuildQueued
   BuildFailed
-}
+} derive(Eq)
 
 ///|
 priv struct MetaInfo {
@@ -33,13 +33,13 @@ priv struct MetaInfo {
   deps : Array[(String, String)]
   build_status : BuildStatus?
   downloads : Int
-}
+} derive(Eq)
 
 ///|
 priv struct ResourceInfo {
   readme_content : String
   source_files : Array[String]
-}
+} derive(Eq)
 
 ///|
 /// Normalizes repository URLs so links stay clickable.

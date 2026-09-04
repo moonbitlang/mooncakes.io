@@ -5,7 +5,7 @@ fn command_line(
   showcase_chars : Int,
 ) -> Html {
   let path = match entries {
-    Success(entries) if entries.length() > 0 =>
+    Loaded(entries) if entries.length() > 0 =>
       versioned_skill_path(entries[showcase_index % entries.length()])
     _ => ""
   }
@@ -149,7 +149,7 @@ fn runwasm_showcase(
 ///|
 fn skill_count(entries : Status[Array[WasmEntry]]) -> String {
   match entries {
-    Success(entries) => entries.length().to_string()
+    Loaded(entries) => entries.length().to_string()
     _ => "..."
   }
 }
@@ -187,7 +187,7 @@ fn hero_feature_card(
   icon : String,
   action_href? : String = "",
   highlighted? : Bool = false,
-  emit~ : (Msg) -> Cmd,
+  browse~ : Cmd,
 ) -> Html {
   let border_class = if highlighted {
     "border-mooncake2/40 shadow-mooncake2/10"
@@ -213,7 +213,7 @@ fn hero_feature_card(
         img(class="size-4 ui-icon", src=icon),
       ],
     ],
-    @html.h3(
+    h3(
       class="mt-7 text-base font-semibold leading-tight tracking-normal text-gray-950 dark:text-slate-50",
       title,
     ),
@@ -221,7 +221,7 @@ fn hero_feature_card(
     if action_href.is_empty() {
       button(
         class="mt-auto inline-flex w-fit items-center gap-2 pt-4 text-xs font-semibold \{action_class}",
-        on_click=emit(ScrollToSkills),
+        on_click=browse,
       ) <| [
         span(action),
         hero_arrow(),
@@ -240,10 +240,7 @@ fn hero_feature_card(
 }
 
 ///|
-fn marketplace_hero(
-  entries : Status[Array[WasmEntry]],
-  emit~ : (Msg) -> Cmd,
-) -> Html {
+fn marketplace_hero(entries : Status[Array[WasmEntry]], browse~ : Cmd) -> Html {
   div(
     class="w-full border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-gray-950 dark:text-slate-50",
   ) <| [
@@ -290,7 +287,7 @@ fn marketplace_hero(
         ) <| [
           button(
             class="rounded-md bg-[#d79a82] px-4 py-2 text-sm font-semibold text-zinc-950 shadow-sm transition-colors hover:bg-[#e2aa94]",
-            on_click=emit(ScrollToSkills),
+            on_click=browse,
           ) <| span("Search Skills"),
           a(
             href="https://www.moonbitlang.com/download/",
@@ -306,7 +303,7 @@ fn marketplace_hero(
 ///|
 fn source_context_section(
   entries : Status[Array[WasmEntry]],
-  emit~ : (Msg) -> Cmd,
+  browse~ : Cmd,
 ) -> Html {
   div(class="mx-auto w-full max-w-[90rem] px-4 py-8 sm:px-6 lg:px-8") <| [
     div(class="border-t border-gray-200 dark:border-zinc-800 pt-7") <| [
@@ -322,15 +319,13 @@ fn source_context_section(
         class="mt-4 max-w-3xl space-y-3 text-sm leading-6 text-gray-600 dark:text-slate-400",
       ) <| [
         p() <| [
-          @html.text(
-            "Under the hood, mooncakes.io compiles each skill to optimized ",
-          ),
+          text("Under the hood, mooncakes.io compiles each skill to optimized "),
           a(
             href="https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Concepts",
             class="font-medium text-gray-900 dark:text-slate-50 underline underline-offset-2 hover:text-[#c7856b]",
             "WebAssembly (Wasm)",
           ),
-          @html.text(
+          text(
             " binaries, then exposes them as executable commands through moon runwasm. The Wasm sandbox keeps commands isolated while the same artifact stays portable across platforms.",
           ),
         ],
@@ -347,7 +342,7 @@ fn source_context_section(
           @config.search,
           action_href="https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
           highlighted=true,
-          emit~,
+          browse~,
         ),
         hero_feature_card(
           "02",
@@ -355,7 +350,7 @@ fn source_context_section(
           "mooncakes.io automatically builds uploaded packages into Wasm binaries, then optimizes them with wasm-opt.",
           "Browse binaries",
           @config.book_open,
-          emit~,
+          browse~,
         ),
         hero_feature_card(
           "03",
@@ -363,7 +358,7 @@ fn source_context_section(
           "Share your skill with others, or browse skills published by other MoonBit users.",
           "Browse skills",
           @config.download,
-          emit~,
+          browse~,
         ),
       ],
       div(
@@ -396,7 +391,7 @@ fn source_context_section(
 fn sticky_search(
   filter : String,
   entries : Status[Array[WasmEntry]],
-  emit~ : (Msg) -> Cmd,
+  on_filter~ : (String) -> Cmd,
 ) -> Html {
   div(
     class="skills-search-sticky sticky top-header z-20 border-b border-gray-200 dark:border-zinc-800 bg-white/85 dark:bg-zinc-950/85 px-4 py-4 backdrop-blur-md",
@@ -425,7 +420,7 @@ fn sticky_search(
             value=filter,
             placeholder="Filter skills ...",
             class="min-w-0 flex-1 bg-transparent outline-none placeholder:text-gray-400 dark:placeholder:text-slate-500",
-            on_input=x => emit(FilterChanged(x)),
+            on_input=on_filter,
           ),
         ],
       ],
@@ -452,11 +447,7 @@ fn author_avatar(author : String, avatar_url : String) -> Html {
 }
 
 ///|
-fn entry_card(
-  entry : WasmEntry,
-  copied_command : String,
-  emit~ : (Msg) -> Cmd,
-) -> Html {
+fn entry_card(entry : WasmEntry, copied_command : String, copy~ : Cmd) -> Html {
   let skill_name = entry.name.split("/").last().unwrap().to_owned()
   let run_cmd = runwasm_command(entry)
   let copied = copied_command == run_cmd
@@ -533,11 +524,7 @@ fn entry_card(
         class="block min-w-0 truncate font-mono text-[11px] leading-7 text-gray-500 dark:text-gray-400",
         run_cmd,
       ),
-      button(
-        class=copy_class,
-        title=copy_title,
-        on_click=emit(CopyRunCommand(run_cmd)),
-      ) <| [
+      button(class=copy_class, title=copy_title, on_click=copy) <| [
         img(class="pointer-events-none size-3.5 ui-icon", src=copy_icon),
       ],
     ],
@@ -606,77 +593,12 @@ fn skeleton_skill_cards(count : Int) -> Html {
 }
 
 ///|
-fn list_content(
-  entries : Status[Array[WasmEntry]],
-  filter : String,
-  copied_command : String,
-  emit~ : (Msg) -> Cmd,
-) -> Html {
-  match entries {
-    Loading => skeleton_skill_cards(9)
-    Failed => @view.load_failed("skills")
-    Success(entries) => {
-      let visible_entries = if filter.trim().is_empty() {
-        entries
-      } else {
-        filter_entries(filter, entries)
-      }
-      if visible_entries.is_empty() {
-        div(
-          class="mx-auto w-full max-w-[90rem] px-4 py-10 text-center text-sm text-gray-400 dark:text-slate-500 sm:px-6 lg:px-8",
-          "No skills found.",
-        )
-      } else {
-        div(
-          class="mx-auto w-full max-w-[90rem] px-4 pt-6 animate-fade-in sm:px-6 lg:px-8",
-        ) <| [
-          div(
-            class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3",
-            visible_entries.map(e => entry_card(e, copied_command, emit~)),
-          ),
-        ]
-      }
-    }
-  }
-}
-
-///|
 fn skills_logo() -> Html {
   let host = @config.skills_host()
   a(
     href="//\{host}/",
     class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
     "🥮 \{host}",
-  )
-}
-
-///|
-fn list_view(
-  entries : Status[Array[WasmEntry]],
-  filter : String,
-  copied_command : String,
-  showcase_index : Int,
-  showcase_chars : Int,
-  app_actions : Html,
-  emit~ : (Msg) -> Cmd,
-) -> Html {
-  skills_page(
-    @view.navbar(
-      left=skills_logo(),
-      left_extra=span(
-        class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
-        "experimental",
-      ),
-      right=app_actions,
-    ),
-    div(class="w-full") <| [
-      marketplace_hero(entries, emit~),
-      div(id="skills", class="h-0 scroll-mt-header", ""),
-      sticky_search(filter, entries, emit~),
-      list_content(entries, filter, copied_command, emit~),
-      source_context_section(entries, emit~),
-      runwasm_showcase(entries, showcase_index, showcase_chars),
-    ],
   )
 }
 
@@ -704,11 +626,7 @@ fn download_filename(href : String, fallback : String) -> String {
 }
 
 ///|
-fn run_command_view(
-  command : String,
-  copied~ : Bool,
-  emit : (Msg) -> Cmd,
-) -> Html {
+fn run_command(command : String, copied~ : Bool, copy~ : Cmd) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
     class="mt-4 overflow-hidden rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900",
@@ -728,7 +646,7 @@ fn run_command_view(
       span(class="min-w-0 flex-1 break-all font-mono text-sm", command),
       button(
         class="inline-flex size-8 shrink-0 items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
-        on_click=emit(CopyRunCommand(command)),
+        on_click=copy,
       ) <| [
         img(class="pointer-events-none size-4 ui-icon", src=icon),
       ],
@@ -812,13 +730,13 @@ fn strip_skill_frontmatter(content : String) -> String {
 ///|
 fn readme_content(entry : WasmEntry, readme : Status[String]) -> Html {
   match readme {
-    Loading => @view.skeleton_docs_content()
-    Failed | Success("") =>
+    Pending => @view.skeleton_docs_content()
+    Failed(_) | Loaded("") =>
       p(
         class="mt-8 text-center text-sm text-gray-400 dark:text-slate-500",
         "\{skill_path(entry)} does not have a SKILL.md file",
       )
-    Success(content) =>
+    Loaded(content) =>
       div(
         class="animate-fade-in",
         @view.markdown(strip_skill_frontmatter(content), transform_link=href => {
@@ -974,25 +892,10 @@ fn detail_sidebar(entry : WasmEntry) -> Html {
 }
 
 ///|
-fn copy_skill_button(readme : Status[String], emit : (Msg) -> Cmd) -> Html {
-  match readme {
-    Success(content) if !content.trim().is_empty() =>
-      button(
-        class="inline-flex size-7 shrink-0 items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
-        title="Copy skill",
-        on_click=emit(CopySkill(content)),
-      ) <| [
-        img(class="pointer-events-none size-3.5 ui-icon", src=@config.clipboard),
-      ]
-    _ => nothing
-  }
-}
-
-///|
 fn skill_markdown_window(
   entry : WasmEntry,
   readme : Status[String],
-  emit : (Msg) -> Cmd,
+  copy_button : Html,
 ) -> Html {
   div(
     class="overflow-hidden rounded-xl border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900",
@@ -1014,55 +917,11 @@ fn skill_markdown_window(
           class="font-mono text-[11px] text-gray-400 dark:text-slate-500",
           "readonly",
         ),
-        copy_skill_button(readme, emit),
+        copy_button,
       ],
     ],
     div(class="min-w-0 px-5 py-6 md:px-8") <| [
       readme_content(entry, readme),
-    ],
-  ]
-}
-
-///|
-fn detail_content(
-  entry : WasmEntry,
-  readme : Status[String],
-  command_copied~ : Bool,
-  emit : (Msg) -> Cmd,
-) -> Html {
-  let skill_name = entry.name.split("/").last().unwrap().to_owned()
-  let run_cmd = runwasm_command(entry)
-  div(
-    class="mx-auto w-full max-w-[90rem] px-4 py-8 animate-fade-in sm:px-6 lg:px-8 lg:py-10",
-  ) <| [
-    div(
-      class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start",
-    ) <| [
-      div(class="min-w-0") <| [
-        h1(
-          class="break-words font-mono text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-5xl",
-          skill_name,
-        ),
-        if entry.description.is_empty() {
-          nothing
-        } else {
-          p(
-            class="mt-3 max-w-3xl font-mono text-sm leading-6 text-gray-600 dark:text-slate-400",
-          ) <| [
-            span(class="text-emerald-600 dark:text-emerald-300", "// "),
-            span(entry.description),
-          ]
-        },
-        run_command_view(run_cmd, copied=command_copied, emit),
-        div(class="mt-6 space-y-3") <| [
-          skill_files_window(),
-          skill_markdown_window(entry, readme, emit),
-        ],
-      ],
-      div(
-        class="w-full lg:sticky lg:top-24 lg:self-start lg:shrink-0",
-        detail_sidebar(entry),
-      ),
     ],
   ]
 }
@@ -1137,45 +996,265 @@ fn detail_loading_skeleton() -> Html {
 }
 
 ///|
-fn detail_view(
-  entry_status : Status[WasmEntry],
-  readme : Status[String],
-  command_copied~ : Bool,
-  app_actions : Html,
-  emit~ : (Msg) -> Cmd,
-) -> Html {
-  let content = match entry_status {
-    Loading => detail_loading_skeleton()
-    Failed => @view.load_failed("skill")
-    Success(entry) => detail_content(entry, readme, command_copied~, emit)
-  }
-  skills_page(
-    @view.navbar(
-      left=skills_logo(),
-      left_extra=span(
-        class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
-        "experimental",
-      ),
-      right=app_actions,
-    ),
-    div(class="w-full", content),
+pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
+  let entries : @rabbita.Resource[Array[WasmEntry]] = @rabbita.create_resource(inject => {
+    @http.get(@config.api_url("/api/v0/skills")).expect_json(result => {
+      if result is Err(error) {
+        println(error)
+      }
+      inject(result)
+    })
+  })
+  let (ui, emit) = @rabbita.create_state_with_input(
+    input=entries,
+    init=(_emit, _entries) => {
+      (
+        {
+          filter: "",
+          copied_command: "",
+          showcase_index: 0,
+          showcase_chars: 0,
+        },
+        none,
+      )
+    },
+    update=(model, entries, msg : ListUiMsg, emit) => {
+      match msg {
+        FilterChanged(filter) =>
+          ({ ..model, filter, showcase_index: 0, showcase_chars: 0, }, none)
+        CopyRunCommand(command) =>
+          (
+            model,
+            @clipboard.copy(
+              Text(command),
+              copied=emit(CopyRunSuccess(command)),
+              failed=e => emit(CopyRunFailed(command, e)),
+            ),
+          )
+        CopyRunSuccess(command) => ({ ..model, copied_command: command, }, none)
+        CopyRunFailed(command, reason) => {
+          println(reason)
+          ({ ..model, copied_command: "failed:\{command}", }, none)
+        }
+        ShowcaseTick =>
+          match entries {
+            Loaded(entries) if entries.length() > 0 => {
+              let showcase_index = model.showcase_index
+              let showcase_chars = model.showcase_chars
+              let current_index = showcase_index % entries.length()
+              let path_length = versioned_skill_path(entries[current_index])
+                .iter()
+                .count()
+              let hold_frames = 30
+              let delete_step = 4
+              let delete_frames = (path_length + delete_step - 1) / delete_step
+              let cycle_frames = path_length + hold_frames + delete_frames
+              let (next_index, next_chars) = if showcase_chars < cycle_frames {
+                (current_index, showcase_chars + 1)
+              } else {
+                ((current_index + 1) % entries.length(), 0)
+              }
+              (
+                {
+                  ..model,
+                  showcase_index: next_index,
+                  showcase_chars: next_chars,
+                },
+                none,
+              )
+            }
+            _ => (model, none)
+          }
+        ScrollToSkills => (model, @nav.scroll_to("skills"))
+      }
+    },
+    // Resource updates do not refresh with_input subscriptions. Each tick
+    // samples the current entries in update, including while they are pending.
+    subscriptions=(_model, _entries, emit) => @sub.every(80, emit(ShowcaseTick)),
   )
+  ui.view3(entries, app_actions, fn(ui, entries, app_actions) {
+    let content = match entries {
+      Pending => skeleton_skill_cards(9)
+      Failed(_) => @view.load_failed("skills")
+      Loaded(entries) => {
+        let visible_entries = if ui.filter.trim().is_empty() {
+          entries
+        } else {
+          filter_entries(ui.filter, entries)
+        }
+        if visible_entries.is_empty() {
+          div(
+            class="mx-auto w-full max-w-[90rem] px-4 py-10 text-center text-sm text-gray-400 dark:text-slate-500 sm:px-6 lg:px-8",
+            "No skills found.",
+          )
+        } else {
+          div(
+            class="mx-auto w-full max-w-[90rem] px-4 pt-6 animate-fade-in sm:px-6 lg:px-8",
+          ) <| [
+            div(
+              class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3",
+              visible_entries.map(e => {
+                entry_card(
+                  e,
+                  ui.copied_command,
+                  copy=emit(CopyRunCommand(runwasm_command(e))),
+                )
+              }),
+            ),
+          ]
+        }
+      }
+    }
+    skills_page(
+      @view.navbar(
+        left=skills_logo(),
+        left_extra=span(
+          class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
+          "experimental",
+        ),
+        right=app_actions,
+      ),
+      div(class="w-full") <| [
+        marketplace_hero(entries, browse=emit(ScrollToSkills)),
+        div(id="skills", class="h-0 scroll-mt-header", ""),
+        sticky_search(ui.filter, entries, on_filter=filter => {
+          emit(FilterChanged(filter))
+        }),
+        content,
+        source_context_section(entries, browse=emit(ScrollToSkills)),
+        runwasm_showcase(entries, ui.showcase_index, ui.showcase_chars),
+      ],
+    )
+  })
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
-  match model {
-    List(entries, filter~, copied_command~, showcase_index~, showcase_chars~) =>
-      list_view(
-        entries,
-        filter,
-        copied_command,
-        showcase_index,
-        showcase_chars,
-        app_actions,
-        emit~,
-      )
-    Detail(entry_status, readme~, command_copied~) =>
-      detail_view(entry_status, readme, command_copied~, app_actions, emit~)
-  }
+pub fn skill_detail_page(entry : String, app_actions~ : Val[Html]) -> Val[Html] {
+  let skill : @rabbita.Resource[WasmEntry] = @rabbita.create_resource(inject => {
+    @http.get(@config.api_url("/api/v0/skills/\{entry}")).expect_json(inject)
+  })
+  let readme : @rabbita.Resource[String] = @rabbita.create_resource(inject => {
+    @http.get(@config.asset_url("/assets/\{entry}/SKILL.md")).expect_text(result => {
+      if result is Ok(content) {
+        let trimmed = content.trim()
+        if trimmed.has_prefix("<?xml") &&
+          trimmed.contains("<Code>NoSuchKey</Code>") {
+          return inject(Err(Failure("SKILL.md not found")))
+        }
+      }
+      inject(result)
+    })
+  })
+  let (command_copied, emit) = @rabbita.create_state(false, update=(
+    model,
+    msg : DetailMsg,
+    emit,
+  ) => {
+    match msg {
+      CopyRunCommand(command) =>
+        (
+          model,
+          @clipboard.copy(Text(command), copied=emit(CopyRunSuccess(command)), failed=e => {
+            emit(CopyRunFailed(command, e))
+          }),
+        )
+      CopyRunSuccess(_command) => (true, none)
+      CopyRunFailed(_command, reason) => {
+        println(reason)
+        (false, none)
+      }
+      CopySkill(content) =>
+        (
+          model,
+          @clipboard.copy(Text(content), failed=e => emit(CopySkillFailed(e))),
+        )
+      CopySkillFailed(reason) => {
+        println(reason)
+        (model, none)
+      }
+    }
+  })
+  command_copied.view4(skill, readme, app_actions, fn(
+    command_copied,
+    skill,
+    readme,
+    app_actions,
+  ) {
+    if skill is Failed(error) {
+      println(error)
+    }
+    if readme is Failed(error) {
+      println(error)
+    }
+    let content = match skill {
+      Pending => detail_loading_skeleton()
+      Failed(_) => @view.load_failed("skill")
+      Loaded(entry) => {
+        let copy_button = match readme {
+          Loaded(content) if !content.trim().is_empty() =>
+            button(
+              class="inline-flex size-7 shrink-0 items-center justify-center rounded border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-100 dark:hover:bg-zinc-900 active:bg-gray-200 dark:active:bg-gray-800",
+              title="Copy skill",
+              on_click=emit(CopySkill(content)),
+            ) <| [
+              img(
+                class="pointer-events-none size-3.5 ui-icon",
+                src=@config.clipboard,
+              ),
+            ]
+          _ => nothing
+        }
+        let skill_name = entry.name.split("/").last().unwrap().to_owned()
+        let run_cmd = runwasm_command(entry)
+        div(
+          class="mx-auto w-full max-w-[90rem] px-4 py-8 animate-fade-in sm:px-6 lg:px-8 lg:py-10",
+        ) <| [
+          div(
+            class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start",
+          ) <| [
+            div(class="min-w-0") <| [
+              h1(
+                class="break-words font-mono text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-5xl",
+                skill_name,
+              ),
+              if entry.description.is_empty() {
+                nothing
+              } else {
+                p(
+                  class="mt-3 max-w-3xl font-mono text-sm leading-6 text-gray-600 dark:text-slate-400",
+                ) <| [
+                  span(class="text-emerald-600 dark:text-emerald-300", "// "),
+                  span(entry.description),
+                ]
+              },
+              run_command(
+                run_cmd,
+                copied=command_copied,
+                copy=emit(CopyRunCommand(run_cmd)),
+              ),
+              div(class="mt-6 space-y-3") <| [
+                skill_files_window(),
+                skill_markdown_window(entry, readme, copy_button),
+              ],
+            ],
+            div(
+              class="w-full lg:sticky lg:top-24 lg:self-start lg:shrink-0",
+              detail_sidebar(entry),
+            ),
+          ],
+        ]
+      }
+    }
+    skills_page(
+      @view.navbar(
+        left=skills_logo(),
+        left_extra=span(
+          class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
+          "experimental",
+        ),
+        right=app_actions,
+      ),
+      div(class="w-full", content),
+    )
+  })
 }

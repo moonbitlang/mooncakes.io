@@ -60,59 +60,25 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
 }
 
 ///|
-enum Msg {
-  GotUserProfile(Result[Profile, Error])
-  GotCodeFrequency(Result[CodeFrequencyResponse, Error])
-}
-
-///|
-struct Model {
-  profile : Status[Profile]
-  code_frequency : Status[CodeFrequency]
-}
-
-///|
 type CodeFrequency = Map[String, Int]
 
 ///|
 priv struct CodeFrequencyResponse {
   data : CodeFrequency
-}
+} derive(Eq)
 
 ///|
 type PublishedModules = Array[(String, String)]
 
 ///|
-struct Profile {
+priv struct Profile {
   username : String
   avatar_url : String
   modules : PublishedModules
-}
-
-///|
-pub fn load(username : String, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
-  let today = @util.utc_date_days_ago(0)
-  let start_date = @util.utc_date_days_ago(120)
-  (
-    batch([
-      @http.get(@config.api_url("/api/v0/user/\{username}")).expect_json(r => {
-        emit(GotUserProfile(r))
-      }),
-      @http.get(
-        @config.api_url(
-          "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
-        ),
-      ).expect_json(r => emit(GotCodeFrequency(r))),
-    ]),
-    { profile: Loading, code_frequency: Loading, },
-  )
-}
+} derive(Eq)
 
 ///|
 using @html {div, h1, h2, text, a, span, img, nothing}
-
-///|
-using @util {type Status}
 
 ///|
 fn first_char_upper_or(value : String, fallback : String) -> String {
@@ -141,11 +107,11 @@ fn suffix_after_n_chars_or(
 }
 
 ///|
-pub fn profile(profile : Status[Profile]) -> Html {
+fn profile(profile : Status[Profile]) -> Html {
   match profile {
-    Failed => @view.load_failed("user")
-    Loading => @view.skeleton_profile()
-    Success({ username, avatar_url, .. }) =>
+    Failed(_) => @view.load_failed("user")
+    Pending => @view.skeleton_profile()
+    Loaded({ username, avatar_url, .. }) =>
       div(class="flex flex-col items-center text-center animate-fade-in") <| [
         if avatar_url == "" {
           // Default avatar placeholder
@@ -169,11 +135,11 @@ pub fn profile(profile : Status[Profile]) -> Html {
 }
 
 ///|
-pub fn published_modules(modules : Status[PublishedModules]) -> Html {
-  match modules {
-    Failed => @view.load_failed("published modules")
-    Loading => @view.skeleton_published_modules(6)
-    Success(module_list) => {
+fn published_modules(profile : Status[Profile]) -> Html {
+  match profile {
+    Failed(_) => @view.load_failed("published modules")
+    Pending => @view.skeleton_published_modules(6)
+    Loaded({ modules: module_list, .. }) => {
       if module_list.length() == 0 {
         return div(
           class="p-8 text-center text-gray-500 dark:text-gray-400",
@@ -219,11 +185,11 @@ pub fn published_modules(modules : Status[PublishedModules]) -> Html {
 }
 
 ///|
-pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
+fn code_frequency(code_frequency : Status[CodeFrequencyResponse]) -> Html {
   match code_frequency {
-    Failed => @view.load_failed("code frequency")
-    Loading => @view.skeleton_code_frequency()
-    Success(data) => {
+    Failed(_) => @view.load_failed("code frequency")
+    Pending => @view.skeleton_code_frequency()
+    Loaded({ data, }) => {
       if data.length() == 0 {
         return div(
           class="my-6 text-sm text-gray-500 dark:text-gray-400",
@@ -370,45 +336,41 @@ pub fn code_frequency(code_frequency : Status[Map[String, Int]]) -> Html {
 }
 
 ///|
-pub fn view(model : Model, app_actions~ : Html, emit~ : (Msg) -> Cmd) -> Html {
-  ignore(emit)
-  @view.page(
-    header=@view.navbar(right=app_actions),
-    main=div(class="container lg:px-40 px-4 py-6") <| [
-      // Top: User profile (centered)
-      div(class="flex justify-center mb-8", profile(model.profile)),
-      // Content area: vertical layout
-      div(class="space-y-8") <| [
-        // Top: Code frequency
-        code_frequency(model.code_frequency),
-        // Bottom: Published modules
-        published_modules(
-          match model.profile {
-            Success({ modules, .. }) => Success(modules)
-            Loading => Loading
-            Failed => Failed
-          },
+pub fn user_page(username : String, app_actions~ : Val[Html]) -> Val[Html] {
+  let profile_resource : @rabbita.Resource[Profile] = @rabbita.create_resource(inject => {
+    @http.get(@config.api_url("/api/v0/user/\{username}")).expect_json(inject)
+  })
+  let today = @util.utc_date_days_ago(0)
+  let start_date = @util.utc_date_days_ago(120)
+  let frequency_resource : @rabbita.Resource[CodeFrequencyResponse] = @rabbita.create_resource(inject => {
+      @http.get(
+        @config.api_url(
+          "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
         ),
-      ],
-    ],
-    footer=@view.footer(),
+      ).expect_json(inject)
+    },
   )
-}
-
-///|
-pub fn update(msg : Msg, model : Model) -> (Cmd, Model) {
-  match msg {
-    GotUserProfile(Ok(profile)) =>
-      (none, { ..model, profile: Success(profile), })
-    GotCodeFrequency(Ok({ data, })) =>
-      (none, { ..model, code_frequency: Success(data), })
-    GotCodeFrequency(Err(err)) => {
-      println(err.to_string())
-      (none, { ..model, code_frequency: Failed, })
+  profile_resource.view3(frequency_resource, app_actions, fn(
+    profile_result,
+    frequency_result,
+    app_actions,
+  ) {
+    if profile_result is Failed(error) {
+      println(error)
     }
-    GotUserProfile(Err(err)) => {
-      println(err.to_string())
-      (none, { ..model, profile: Failed, })
+    if frequency_result is Failed(error) {
+      println(error)
     }
-  }
+    @view.page(
+      header=@view.navbar(right=app_actions),
+      main=div(class="container lg:px-40 px-4 py-6") <| [
+        div(class="flex justify-center mb-8", profile(profile_result)),
+        div(class="space-y-8") <| [
+          code_frequency(frequency_result),
+          published_modules(profile_result),
+        ],
+      ],
+      footer=@view.footer(),
+    )
+  })
 }

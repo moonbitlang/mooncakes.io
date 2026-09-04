@@ -16,4 +16,4 @@
 using @html {type Html}
 
 ///|
-using @rabbita {type Cmd, batch, none}
+using @rabbita {type Val, type Status}

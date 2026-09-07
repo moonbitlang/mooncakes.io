@@ -232,7 +232,7 @@ pub fn update(msg : Msg, model : Model, emit~ : (Msg) -> Cmd) -> (Cmd, Model) {
         (none, model)
       } else {
         let url = @config.api_url(
-          "/api/v0/search?kw=\{@util.encode_uri_component(filter)}&limit=100",
+          "/api/v0/search_v2?kw=\{@util.encode_uri_component(filter)}&limit=100",
         )
         (@http.get(url).expect_json(r => emit(GotSearch(filter, r))), model)
       }

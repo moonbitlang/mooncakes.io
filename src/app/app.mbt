@@ -63,8 +63,7 @@ fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
       if model is Docs(current, ..) && current == mooncakes_path {
         let next = Docs(mooncakes_path, fragment=fragment.unwrap_or(""))
         match fragment {
-          Some(fragment) =>
-            (next, @nav.scroll_to(fragment, behavior=@nav.Smooth))
+          Some(fragment) => (next, @nav.scroll_to(fragment, behavior=Smooth))
           None => (next, none)
         }
       } else {

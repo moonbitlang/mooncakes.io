@@ -317,7 +317,7 @@ fn docs_sidebar(
                 model,
                 batch([
                   @nav.push_url("/docs/\{url_path}"),
-                  @nav.scroll_to_top(behavior=@nav.Smooth),
+                  @nav.scroll_to_top(behavior=Smooth),
                 ]),
               )
             }
@@ -331,7 +331,7 @@ fn docs_sidebar(
                   model,
                   batch([
                     @nav.push_url("#\{id}"),
-                    @nav.scroll_to(id, behavior=@nav.Smooth),
+                    @nav.scroll_to(id, behavior=Smooth),
                   ]),
                 )
               } else {

@@ -89,10 +89,7 @@ fn docs_ready_package(
         ClickAnchor(id) =>
           (
             model,
-            batch([
-              @nav.push_url("#\{id}"),
-              @nav.scroll_to(id, behavior=@nav.Smooth),
-            ]),
+            batch([@nav.push_url("#\{id}"), @nav.scroll_to(id, behavior=Smooth)]),
           )
       }
     },

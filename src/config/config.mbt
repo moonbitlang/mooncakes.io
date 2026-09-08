@@ -1,4 +1,8 @@
 ///|
+// Only used by non-JavaScript targets; conditional imports are not supported.
+let _get_env_var : (String) -> String? = @env.get_env_var
+
+///|
 pub let readme_icon : String = asset_url("/readme.svg")
 
 ///|
@@ -140,7 +144,7 @@ extern "js" fn api_endpoint() -> String =
 ///|
 #cfg(not(target="js"))
 fn api_endpoint() -> String {
-  @env.get_env_var("MOONCAKES_API_ENDPOINT").unwrap_or("/api")
+  _get_env_var("MOONCAKES_API_ENDPOINT").unwrap_or("/api")
 }
 
 ///|
@@ -159,7 +163,7 @@ extern "js" fn assets_endpoint() -> String =
 ///|
 #cfg(not(target="js"))
 fn assets_endpoint() -> String {
-  @env.get_env_var("MOONCAKES_ASSETS_ENDPOINT").unwrap_or(
+  _get_env_var("MOONCAKES_ASSETS_ENDPOINT").unwrap_or(
     "https://assets.mooncakes.io",
   )
 }
@@ -184,7 +188,7 @@ extern "js" fn configured_skills_host() -> String =
 ///|
 #cfg(not(target="js"))
 fn configured_skills_host() -> String {
-  @env.get_env_var("MOONCAKES_SKILLS_HOST").unwrap_or("")
+  _get_env_var("MOONCAKES_SKILLS_HOST").unwrap_or("")
 }
 
 ///|

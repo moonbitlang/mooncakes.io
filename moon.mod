@@ -8,9 +8,9 @@ import {
   "moonbit-community/rabbita@0.15.4",
   "moonbit-community/fuzzy_match@0.2.6",
   "moonbitlang/lexer@0.3.14",
-  "moonbitlang/x@0.4.50",
-  "moonbitlang/async@0.20.5",
-  "hackwaly/moonback@0.8.0",
+  "moonbitlang/x@0.5.1",
+  "moonbitlang/async@0.21.0",
+  "hackwaly/moonback@0.8.1",
 }
 
 readme = "README.md"

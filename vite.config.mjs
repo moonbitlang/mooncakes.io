@@ -65,6 +65,8 @@ export default defineConfig(({ command, mode }) => {
   const apiEndpoint = removeTrailingSlash(
     process.env.VITE_API_ENDPOINT || env.VITE_API_ENDPOINT || "/api"
   )
+  // Override only the dev proxy; production still uses its configured API path.
+  const devApiTarget = process.env.VITE_DEV_API_PROXY || env.VITE_DEV_API_PROXY || 'https://mooncakes.io'
   const assetsEndpoint = removeTrailingSlash(
     process.env.VITE_ASSETS_ENDPOINT ||
       env.VITE_ASSETS_ENDPOINT ||
@@ -102,7 +104,7 @@ export default defineConfig(({ command, mode }) => {
       },
       proxy: {
         '/api': {
-          target: 'https://mooncakes.io',
+          target: devApiTarget,
           changeOrigin: true,
           secure: false,
           configure: (proxy, options) => {

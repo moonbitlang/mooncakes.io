@@ -8,7 +8,6 @@ import {
   "moonbitlang/mooncakes/config",
   "moonbitlang/mooncakes/view",
   "moonbitlang/mooncakes/util",
-  "moonbit-community/fuzzy_match",
 }
 
 supported_targets = "js+native+wasm"

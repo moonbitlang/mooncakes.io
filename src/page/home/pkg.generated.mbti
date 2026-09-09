@@ -4,6 +4,8 @@ package "moonbitlang/mooncakes/page/home"
 import {
   "moonbit-community/rabbita",
   "moonbit-community/rabbita/html",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }
 
 // Values
@@ -18,11 +20,21 @@ type LazyStatus[T] derive(Eq)
 
 type ModuleHighlights derive(Eq)
 
-type ModuleIndex derive(Eq)
+type ModuleIndex derive(Eq, @debug.Debug)
 
 type PackageCount derive(Eq)
 
-type SearchIndex derive(Eq)
+type PackageMatch derive(Eq, @debug.Debug)
+
+type SearchAction derive(Eq, @debug.Debug)
+
+type SearchModel derive(Eq, @debug.Debug)
+
+type SearchPhase derive(Eq, @debug.Debug)
+
+type SearchResult derive(Eq, @debug.Debug)
+
+type SummaryFragment derive(Eq, @debug.Debug, @json.FromJson)
 
 // Type aliases
 

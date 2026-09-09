@@ -66,62 +66,6 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
 }
 
 ///|
-fn module_card(mod : ModuleIndex) -> Html {
-  let keywords = match mod.keywords {
-    None => nothing
-    Some(keywords) =>
-      div(
-        class="flex h-8 min-w-0 flex-1 flex-wrap gap-2 overflow-hidden",
-        keywords.map(keyword => {
-          span(
-            class="my-2 h-5 max-w-full shrink-0 truncate rounded border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-950 px-2 text-xs text-gray-600 dark:text-slate-400",
-            keyword,
-          )
-        }),
-      )
-  }
-  let description = match mod.description {
-    None => div(class="flex-grow", nothing)
-    Some(description) =>
-      p(
-        class="my-3 line-clamp-2 grow break-words text-sm leading-5 text-gray-700 dark:text-slate-300",
-        description,
-      )
-  }
-  let time = match mod.created_at {
-    Some(t) => p(@util.get_relative_time(t))
-    None => nothing
-  }
-  div(
-    class="select-none p-4 min-h-32 rounded flex flex-col border bg-white dark:bg-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
-  ) <| [
-    div(class="flex flex-row text-base font-semibold") <| [
-      a(
-        href="/user/\{mod.author}",
-        class="hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors rounded px-1 -mx-1",
-        h2(class="text-gray-500 dark:text-gray-400", mod.author),
-      ),
-      a(href="/docs/\{versioned_path(mod)}", class="flex") <| [
-        h2(class="px-1 text-gray-300 dark:text-gray-500", "/"),
-        h2(class="", mod.name),
-      ],
-    ],
-    a(href="/docs/\{versioned_path(mod)}", class="min-w-0 flex-1 flex flex-col") <| [
-      description,
-      div(
-        class="flex min-w-0 items-center gap-2 text-sm text-gray-600 dark:text-slate-400",
-      ) <| [
-        keywords,
-        div(class="ml-auto flex shrink-0 items-center gap-2") <| [
-          span(class="text-xs text-gray-400 dark:text-slate-500", mod.version),
-          time,
-        ],
-      ],
-    ],
-  ]
-}
-
-///|
 fn pinned() -> Html {
   let pinned = [
     {
@@ -264,20 +208,6 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
       ]
     })
   div(class="animate-fade-in", all_modules)
-}
-
-///|
-fn search_result(mods : Array[ModuleIndex]) -> Html {
-  let module_cards = mods.map(module_card)
-  div <| [
-    div(class="container lg:w-4/5 px-4") <| [
-      h1(
-        class="p-4 text-sm font-bold text-gray-400 dark:text-slate-500 lg:border-0",
-        "SEARCH RESULT",
-      ),
-      div(class="grid grid-cols-1 gap-2", module_cards),
-    ],
-  ]
 }
 
 ///|
@@ -430,60 +360,32 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
     @http.get(@config.api_url("/api/v0/modules/statistics")).expect_json(inject)
   })
   let (catalog, emit) = @rabbita.create_state(
-    {
-      all_modules: Idle,
-      show_all_modules: false,
-      filter: "",
-      filtered_modules: [],
-    },
+    { all_modules: Idle, show_all_modules: false, search: initial_search(), },
     update=(model, msg, emit) => {
       match msg {
         GotAllModule(Ok(modules)) => {
           let indices = sort_modules_by_name(modules)
-          let search_index = Lazy::new(fn() { build_search_index(indices) })
-          let model = {
-            ..model,
-            all_modules: Success({ indices, search_index, }),
-          }
-          let filtered_modules = if model.filter.is_empty() {
-            []
-          } else {
-            filter_indices(model.filter, search_index.force())
-          }
-          ({ ..model, filtered_modules, }, none)
+          ({ ..model, all_modules: Success({ indices, }), }, none)
         }
         GotAllModule(Err(err)) => {
           println(err.to_string())
           ({ ..model, all_modules: Failed, }, none)
         }
-        FilterChanged(filter) =>
-          if filter.is_empty() {
-            ({ ..model, filter, filtered_modules: [], }, none)
-          } else {
-            match model.all_modules {
-              Idle =>
-                (
-                  {
-                    ..model,
-                    all_modules: Loading,
-                    filter,
-                    filtered_modules: [],
-                  },
-                  @http.get(@config.api_url("/api/v0/modules")).expect_json(r => {
-                    emit(GotAllModule(r))
-                  }),
-                )
-              Loading => ({ ..model, filter, filtered_modules: [], }, none)
-              Success(all) => {
-                let filtered_modules = filter_indices(
-                  filter,
-                  all.search_index.force(),
-                )
-                ({ ..model, filter, filtered_modules, }, none)
-              }
-              Failed => ({ ..model, filter, filtered_modules: [], }, none)
-            }
+        Search(msg) => {
+          let (search, action) = update_search(model.search, msg)
+          let command = match action {
+            Nothing => none
+            Schedule(id) => @rabbita.delay(emit(Search(Debounced(id))), 250)
+            Fetch(id, query) =>
+              @rabbita.batch([
+                @http.get(search_url(query)).expect_json(result => {
+                  emit(Search(Completed(id, result)))
+                }),
+                @rabbita.delay(emit(Search(TimedOut(id))), 15000),
+              ])
           }
+          ({ ..model, search, }, command)
+        }
         ToggleAllModules => {
           let show = !model.show_all_modules
           match model.all_modules {
@@ -528,7 +430,7 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
         }
       }
     }
-    let module_list = if catalog.filter == "" {
+    let module_list = if catalog.search.input.trim().is_empty() {
       let pinned_modules = pinned()
       let highlights = match highlights {
         Loaded(h) => highlights_section(h.recent, h.new_modules, h.popular)
@@ -599,13 +501,9 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
         pinned_modules, highlights, all_modules_section,
       ]
     } else {
-      match catalog.all_modules {
-        Idle | Loading => @view.loading()
-        Failed => @view.load_failed("module indices")
-        Success(_) => search_result(catalog.filtered_modules)
-      }
+      search_results_view(catalog.search, emit(Search(Retry)))
     }
-    let stats = if catalog.filter == "" {
+    let stats = if catalog.search.input.trim().is_empty() {
       banner(
         total_modules=statistics.total_modules,
         total_downloads=statistics.total_downloads,
@@ -619,10 +517,13 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
         style=Fusion,
         middle=input(
           input_type=Text,
-          value=catalog.filter,
-          placeholder="Search modules ...",
-          class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-sm lg:text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 shadow-sm shadow-black/5 focus:border-mooncake2 focus:shadow-2xl outline-none transition-colors dark:placeholder:text-slate-500",
-          on_input=filter => emit(FilterChanged(filter)),
+          value=catalog.search.input,
+          placeholder="Search modules and packages…",
+          attrs=@html.Attrs::build()
+            .aria_label("Search modules and packages")
+            .aria_controls("search-results"),
+          class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 focus:border-mooncake2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mooncake2 transition-colors dark:placeholder:text-slate-400",
+          on_input=query => emit(Search(Changed(query))),
         ),
         right=app_actions,
       ),

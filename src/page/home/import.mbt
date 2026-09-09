@@ -20,6 +20,3 @@ using @view {button}
 
 ///|
 using @rabbita {type Val, none}
-
-///|
-using @util {type Lazy}

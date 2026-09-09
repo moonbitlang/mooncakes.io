@@ -4,6 +4,21 @@ The MoonBit package distribution platform, built with [Rabbita](https://github.c
 
 ## Build & Run
 
+Homepage search uses `GET /api/v0/search?kw=...&limit=20` with 250 ms debounce;
+the backend performs Meilisearch matching and download-first ordering. Results
+include package summaries, safe text highlights and summary-version links. Local
+fuzzy matching is no longer used for search. The full-module browse remains.
+
+To preview against a locally running backend (for example port 18001):
+
+```sh
+VITE_DEV_API_PROXY=http://127.0.0.1:18001 VITE_API_ENDPOINT=/api \
+VITE_ASSETS_ENDPOINT=http://127.0.0.1:5173 pnpm dev --host 127.0.0.1 --port 5173
+```
+
+`VITE_DEV_API_PROXY` is development-only; production continues using
+`VITE_API_ENDPOINT`. The backend's former `/api/v0/search_v2` route is removed.
+
 Use Node.js 20.19+ or 22.12+ as required by Vite.
 
 ```bash

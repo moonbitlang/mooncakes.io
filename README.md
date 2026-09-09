@@ -5,7 +5,7 @@ The MoonBit package distribution platform, built with [Rabbita](https://github.c
 ## Build & Run
 
 Homepage search uses `GET /api/v0/search?kw=...&limit=20` with 250 ms debounce;
-the backend performs Meilisearch matching and download-first ordering. Results
+the backend performs Meilisearch matching and relevance-first ordering. Results
 include package summaries, safe text highlights and summary-version links. Local
 fuzzy matching is no longer used for search. The full-module browse remains.
 

@@ -104,9 +104,9 @@ fn search_results_view(search : SearchModel, retry : @rabbita.Cmd) -> Html {
       "No results for “\{search.input.trim()}”."
     Ready =>
       if search.results.length() == 1 {
-        "1 module · Most downloaded first"
+        "1 module · Most relevant first"
       } else {
-        "\{search.results.length()} modules · Most downloaded first"
+        "\{search.results.length()} modules · Most relevant first"
       }
   }
   div(id="search-results", class="container lg:w-4/5 px-4 pb-12") <| [

@@ -25,6 +25,7 @@ priv struct MetaInfo {
   name : String
   author : String
   version : String
+  yanked : String?
   license : String?
   keywords : Array[String]
   description : String?
@@ -164,6 +165,7 @@ fn build_meta_info(
   deps : Array[(String, String)],
   build_status : BuildStatus?,
   downloads : Int,
+  yanked : String?,
 ) -> MetaInfo {
   let author = String::from_array(
     name.iter().take_while(c => c != '/').collect(),
@@ -173,6 +175,7 @@ fn build_meta_info(
     name,
     description,
     version,
+    yanked,
     license,
     repository: repository.map(normalize_repo_url),
     updated_at,
@@ -193,7 +196,6 @@ fn decode_module_meta(
     {
       "metadata": {
         "name": String(name),
-        "version": String(version),
         "repository"? : repository,
         "license"? : license,
         "description"? : description,
@@ -223,7 +225,7 @@ fn decode_module_meta(
       }
       build_meta_info(
         name,
-        version,
+        current_version,
         decode_optional_string(repository, path),
         decode_optional_string(license, path),
         decode_optional_string(description, path),
@@ -232,6 +234,7 @@ fn decode_module_meta(
         decode_deps(deps, path),
         build_status,
         downloads,
+        @util.decode_yanked(json),
       )
     }
     _ => raise JsonDecodeError((path, "invalid module metadata"))

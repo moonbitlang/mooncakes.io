@@ -3,6 +3,8 @@ fn example_search_result() -> SearchResult raise {
   let value : Json = {
     "name": "alice/tools",
     "version": "2.0.0",
+    "yanked": true,
+    "yanked_reason": "Use alice/replacement instead",
     "license": "Apache-2.0",
     "repository": "",
     "keywords": ["IO"],
@@ -32,6 +34,7 @@ fn example_search_result() -> SearchResult raise {
 test "server search keeps legacy module decoding and adds package details" {
   let hit = example_search_result()
   assert_eq(hit.module_info.path, "alice/tools")
+  assert_eq(hit.module_info.yanked, Some("Use alice/replacement instead"))
   assert_eq(hit.downloads, Some(100L))
   assert_eq(hit.matched_package_count, 7)
   assert_eq(
@@ -57,6 +60,7 @@ test "server search keeps legacy module decoding and adds package details" {
     "created_at": "2026-09-09T00:00:00",
   })
   assert_eq(legacy.downloads, None)
+  assert_eq(legacy.module_info.yanked, None)
   assert_eq(legacy.matched_packages, [])
 }
 

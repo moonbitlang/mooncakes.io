@@ -2,6 +2,7 @@
 priv struct BuildItem {
   module_ : String
   version : String
+  yanked : String?
   status : String
   created_at : String
   finished_at : String?
@@ -62,6 +63,7 @@ impl @json.FromJson for BuildData with fn from_json(json : Json, path) {
             queued_items.push({
               module_,
               version,
+              yanked: @util.decode_yanked(x),
               status: "QUEUED",
               created_at,
               finished_at: None,
@@ -86,6 +88,7 @@ impl @json.FromJson for BuildData with fn from_json(json : Json, path) {
             recent_completed_items.push({
               module_,
               version,
+              yanked: @util.decode_yanked(x),
               status,
               created_at,
               finished_at,

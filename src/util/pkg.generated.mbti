@@ -8,6 +8,8 @@ import {
 }
 
 // Values
+pub fn decode_yanked(Json) -> String?
+
 pub fn encode_uri_component(String) -> String
 
 pub fn get_relative_time(String) -> String

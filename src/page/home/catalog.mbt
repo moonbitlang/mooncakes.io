@@ -57,6 +57,7 @@ struct ModuleIndex {
   name : String
   path : String
   version : String
+  yanked : String?
   keywords : Array[String]?
   description : String?
   created_at : String?
@@ -134,6 +135,7 @@ fn decode_module_index(
         name,
         author: author.to_owned(),
         version,
+        yanked: @util.decode_yanked(item),
         description,
         keywords,
         created_at,

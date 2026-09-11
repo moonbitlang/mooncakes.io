@@ -25,7 +25,11 @@ impl @json.FromJson for Profile with fn from_json(json : Json, path) {
       for x in modules {
         match x {
           { "name": String(name), "version": String(version), .. } =>
-            decoded_modules.push((name, version))
+            decoded_modules.push({
+              name,
+              version,
+              yanked: @util.decode_yanked(x),
+            })
           _ => raise JsonDecodeError((path, "failed to decode \{Repr(x)}"))
         }
       }
@@ -68,13 +72,17 @@ priv struct CodeFrequencyResponse {
 } derive(Eq)
 
 ///|
-type PublishedModules = Array[(String, String)]
+priv struct PublishedModule {
+  name : String
+  version : String
+  yanked : String?
+} derive(Eq)
 
 ///|
 priv struct Profile {
   username : String
   avatar_url : String
-  modules : PublishedModules
+  modules : Array[PublishedModule]
 } derive(Eq)
 
 ///|
@@ -154,7 +162,7 @@ fn published_modules(profile : Status[Profile]) -> Html {
         div(
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4",
           module_list.map(fn(module_info) {
-            let (name, version) = module_info
+            let { name, version, yanked, } = module_info
             // Extract module name (part after '/')
             let display_name = match name.split("/").to_array() {
               parts if parts.length() == 2 => parts[1].to_owned()
@@ -169,6 +177,7 @@ fn published_modules(profile : Status[Profile]) -> Html {
                   class="text-lg font-bold text-gray-900 dark:text-slate-50 group-hover:text-blue-600 dark:group-hover:text-blue-300 mb-3 transition-colors",
                   display_name,
                 ),
+                @view.deprecation_notice(yanked),
                 div(class="mt-auto flex justify-end") <| [
                   span(
                     class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-indigo-400",

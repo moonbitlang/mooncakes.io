@@ -515,6 +515,7 @@ fn entry_card(entry : WasmEntry, copied_command : String, copy~ : Cmd) -> Html {
             entry.description
           },
         ),
+        @view.deprecation_notice(entry.yanked),
       ],
     ],
     div(
@@ -1217,6 +1218,7 @@ pub fn skill_detail_page(entry : String, app_actions~ : Val[Html]) -> Val[Html] 
                 class="break-words font-mono text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-5xl",
                 skill_name,
               ),
+              @view.deprecation_notice(entry.yanked),
               if entry.description.is_empty() {
                 nothing
               } else {

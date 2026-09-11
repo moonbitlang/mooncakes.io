@@ -17,6 +17,8 @@ pub fn code_block(String, kind~ : CodeBlockKind, transform_link? : (String) -> S
 
 pub fn collapse(header~ : @html.Html, body~ : @html.Html, collapsed~ : Bool, toggle~ : @cmd.Cmd, caret_config? : CaretConfig) -> @html.Html
 
+pub fn deprecation_notice(String?) -> @html.Html
+
 pub fn document_not_available(String) -> @html.Html
 
 pub fn footer() -> @html.Html

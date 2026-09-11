@@ -31,6 +31,7 @@ struct WasmEntry {
   author : String
   author_avatar : String
   version : String
+  yanked : String?
   package_path : String
   name : String
   detail_url : String
@@ -137,6 +138,7 @@ impl @json.FromJson for WasmEntry with fn from_json(json : Json, path) {
         author,
         author_avatar,
         version,
+        yanked: @util.decode_yanked(json),
         package_path,
         name,
         detail_url,

@@ -6,17 +6,25 @@ fn search_result_card(result : SearchResult) -> Html {
   ) <| [
     div(class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1") <| [
       h2(class="text-base font-semibold min-w-0 break-words") <| [
-        a(
-          href="/user/\{mod.author}",
-          class="text-gray-600 dark:text-slate-400 hover:underline",
-          mod.author,
-        ),
-        span(class="px-1 text-gray-500", "/"),
-        a(
-          href="/docs/\{versioned_path(mod)}",
-          class="hover:underline break-all",
-          mod.name,
-        ),
+        span(
+          class=if mod.yanked is Some(_) {
+            "box-decoration-clone bg-linear-to-r from-gray-400 to-gray-400 bg-size-[100%_2px] bg-position-[left_55%] bg-no-repeat dark:from-gray-500 dark:to-gray-500"
+          } else {
+            ""
+          },
+        ) <| [
+          a(
+            href="/user/\{mod.author}",
+            class="text-gray-600 dark:text-slate-400 hover:underline",
+            mod.author,
+          ),
+          span(class="px-1 text-gray-500", "/"),
+          a(
+            href="/docs/\{versioned_path(mod)}",
+            class="hover:underline break-all",
+            mod.name,
+          ),
+        ],
       ],
       div(
         class="flex items-baseline gap-3 text-sm text-gray-600 dark:text-slate-400",

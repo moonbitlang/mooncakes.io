@@ -168,6 +168,22 @@ fn docs_module(
           document_actions,
           app_actions~,
         ),
+        if manifest.module_meta.yanked is Some(reason) {
+          div(
+            class="w-full border-b border-yellow-200 bg-yellow-100 px-4 py-2 text-center text-sm font-medium leading-6 text-yellow-950 dark:border-yellow-900 dark:bg-yellow-950 dark:text-yellow-100",
+          ) <| [
+            p(
+              class="container whitespace-pre-wrap break-words [overflow-wrap:anywhere]",
+              if !reason.trim().is_empty() {
+                reason
+              } else {
+                "This module is deprecated."
+              },
+            ),
+          ]
+        } else {
+          nothing
+        },
         div(class="flex-1") <| [
           div(
             class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",

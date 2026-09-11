@@ -27,17 +27,23 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
   div(
     class="h-24 lg:h-30 flex-nowrap bg-white dark:bg-zinc-900 text-gray-700 dark:text-slate-300 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 dark:border-zinc-800 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-shadow",
   ) <| [
-    div(
-      class="shrink-0 whitespace-nowrap flex flex-row text-base font-semibold",
-    ) <| [
-      a(
-        href="/user/\{mod.author}",
-        class="hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-600 dark:text-slate-400 font-medium transition-colors rounded px-1 -mx-1",
-        span(mod.author),
-      ),
-      a(href~, class="flex") <| [
-        span(class="px-1 text-gray-300 dark:text-gray-500", "/"),
-        span(class="text-black dark:text-slate-50", mod.name),
+    div(class="shrink-0 whitespace-nowrap text-base font-semibold") <| [
+      span(
+        class=if mod.yanked is Some(_) {
+          "box-decoration-clone bg-linear-to-r from-gray-400 to-gray-400 bg-size-[100%_2px] bg-position-[left_55%] bg-no-repeat dark:from-gray-500 dark:to-gray-500"
+        } else {
+          ""
+        },
+      ) <| [
+        a(
+          href="/user/\{mod.author}",
+          class="hover:underline text-gray-600 dark:text-slate-400 font-medium",
+          span(mod.author),
+        ),
+        a(href~) <| [
+          span(class="px-1 text-gray-300 dark:text-gray-500", "/"),
+          span(class="text-black dark:text-slate-50", mod.name),
+        ],
       ],
     ],
     a(href~, class="overflow-hidden flex-1 py1 flex flex-col") <| [
@@ -73,6 +79,7 @@ fn pinned() -> Html {
       name: "core",
       path: "moonbitlang/core",
       version: "",
+      yanked: None,
       keywords: None,
       description: Some(
         "Always up-to-date documentation for the MoonBit standard library API.",
@@ -85,6 +92,7 @@ fn pinned() -> Html {
       name: "async",
       path: "moonbitlang/async",
       version: "",
+      yanked: None,
       keywords: None,
       description: Some(
         "Asynchronous programming library for MoonBit. Including fs, http, io, and more.",
@@ -97,6 +105,7 @@ fn pinned() -> Html {
       name: "x",
       path: "moonbitlang/x",
       version: "",
+      yanked: None,
       keywords: None,
       description: Some("Experimental and extended libraries for MoonBit."),
       created_at: None,
@@ -129,14 +138,12 @@ fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
   ) <| [
     div(class="flex items-baseline gap-1 text-sm") <| [
       span(
-        class="text-gray-500 dark:text-gray-400 font-normal truncate",
-        mod.author,
-      ),
-      span(class="text-gray-300 dark:text-gray-500", "/"),
-      span(
-        class="text-gray-900 dark:text-slate-50 font-semibold truncate",
-        mod.name,
-      ),
+        class="min-w-0 truncate \{if mod.yanked is Some(_) { "box-decoration-clone bg-linear-to-r from-gray-400 to-gray-400 bg-size-[100%_2px] bg-position-[left_55%] bg-no-repeat dark:from-gray-500 dark:to-gray-500" } else { "" }}",
+      ) <| [
+        span(class="text-gray-500 dark:text-gray-400 font-normal", mod.author),
+        span(class="px-1 text-gray-300 dark:text-gray-500", "/"),
+        span(class="text-gray-900 dark:text-slate-50 font-semibold", mod.name),
+      ],
       span(
         class="text-xs text-gray-400 dark:text-slate-500 ml-auto shrink-0",
         badge,

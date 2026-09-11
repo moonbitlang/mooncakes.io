@@ -70,30 +70,35 @@ fn build_row(item : BuildItem) -> Html {
     _ => ("", item.module_)
   }
   div(
-    class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg hover:border-gray-300 dark:hover:border-zinc-700 transition-colors",
+    class="px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg hover:border-gray-300 dark:hover:border-zinc-700 transition-colors",
   ) <| [
-    div(class="flex items-center gap-3 min-w-0") <| [
-      status_icon(item.status),
-      a(
-        href="/docs/\{item.module_}@\{item.version}",
-        class="text-sm font-medium text-gray-900 dark:text-slate-50 hover:text-blue-600 dark:hover:text-blue-300 transition-colors truncate",
+    div(class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3") <| [
+      div(class="flex items-center gap-3 min-w-0") <| [
+        status_icon(item.status),
+        a(
+          href="/docs/\{item.module_}@\{item.version}",
+          class="text-sm font-medium text-gray-900 dark:text-slate-50 hover:text-blue-600 dark:hover:text-blue-300 transition-colors truncate",
+        ) <| [
+          span(class="text-gray-500 dark:text-gray-400 font-normal", author),
+          span(class="text-gray-300 dark:text-gray-500 mx-0.5", "/"),
+          text(name),
+        ],
+      ],
+      div(
+        class="flex items-center gap-2 ml-auto pl-[1.875rem] md:pl-0 shrink-0",
       ) <| [
-        span(class="text-gray-500 dark:text-gray-400 font-normal", author),
-        span(class="text-gray-300 dark:text-gray-500 mx-0.5", "/"),
-        text(name),
+        span(
+          class="text-xs text-gray-500 dark:text-gray-400 font-mono",
+          "v\{item.version}",
+        ),
+        span(class="text-xs text-gray-300 dark:text-gray-500", "·"),
+        span(
+          class="text-xs text-gray-400 dark:text-slate-500",
+          @util.get_relative_time(item.finished_at.unwrap_or(item.created_at)),
+        ),
       ],
     ],
-    div(class="flex items-center gap-2 ml-auto pl-[1.875rem] md:pl-0 shrink-0") <| [
-      span(
-        class="text-xs text-gray-500 dark:text-gray-400 font-mono",
-        "v\{item.version}",
-      ),
-      span(class="text-xs text-gray-300 dark:text-gray-500", "·"),
-      span(
-        class="text-xs text-gray-400 dark:text-slate-500",
-        @util.get_relative_time(item.finished_at.unwrap_or(item.created_at)),
-      ),
-    ],
+    @view.deprecation_notice(item.yanked),
   ]
 }
 

@@ -72,6 +72,20 @@ impl @rabbita.Enumerate for DocsPage with fn tag(self) {
 }
 
 ///|
+fn yanked_banner(reason : String) -> Html {
+  div(
+    class="w-full border-b border-yellow-200 bg-yellow-100 px-4 py-2 text-center text-sm font-medium leading-6 text-yellow-950 dark:border-yellow-900 dark:bg-yellow-950 dark:text-yellow-100",
+  ) <| [
+    p(class="container whitespace-pre-wrap wrap-break-word") <| [
+      text("This version of the module is deprecated: "),
+      ..if !reason.trim().is_empty() {
+        Some(text(reason))
+      },
+    ],
+  ]
+}
+
+///|
 fn docs_module(
   manifest : Manifest,
   path : Val[@util.UnsolvedMooncakePath],
@@ -168,21 +182,8 @@ fn docs_module(
           document_actions,
           app_actions~,
         ),
-        if manifest.module_meta.yanked is Some(reason) {
-          div(
-            class="w-full border-b border-yellow-200 bg-yellow-100 px-4 py-2 text-center text-sm font-medium leading-6 text-yellow-950 dark:border-yellow-900 dark:bg-yellow-950 dark:text-yellow-100",
-          ) <| [
-            p(
-              class="container whitespace-pre-wrap break-words [overflow-wrap:anywhere]",
-              if !reason.trim().is_empty() {
-                reason
-              } else {
-                "This module is deprecated."
-              },
-            ),
-          ]
-        } else {
-          nothing
+        ..if manifest.module_meta.yanked is Some(reason) {
+          Some(yanked_banner(reason))
         },
         div(class="flex-1") <| [
           div(

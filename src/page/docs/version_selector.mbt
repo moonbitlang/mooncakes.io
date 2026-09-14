@@ -60,7 +60,7 @@ fn module_version_select(
       id="docs-version",
       options~,
       default_value=manifest.version,
-      disabled=manifest.module_ == "moonbitlang/core" || options.length() <= 1,
+      disabled=manifest.module_ == "moonbitlang/core",
       on_value_change=version => {
         if version == manifest.version {
           none

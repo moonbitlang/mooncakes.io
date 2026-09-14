@@ -158,7 +158,7 @@ fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
             ),
           ),
         ],
-        div <| [
+        div(class="md:hidden") <| [
           span(class="text-gray-400 dark:text-slate-500 text-xs", "Version"),
           div(metadata.version),
         ],
@@ -308,10 +308,6 @@ fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
             class="hover:underline",
             metadata.author,
           ),
-        ],
-        div(class="flex items-center gap-2") <| [
-          img(class="w-4 h-4 ui-icon shrink-0", src=@config.tag),
-          text(metadata.version),
         ],
         match metadata.license {
           Some(l) =>

@@ -176,7 +176,7 @@ fn docs_module(
       div(class="min-h-screen w-full flex-col") <| [
         search_panel,
         navbar(
-          path,
+          versioned_docs_path(path, manifest.module_, manifest.version),
           Some(manifest.module_),
           module_index,
           document_actions,
@@ -189,15 +189,9 @@ fn docs_module(
           div(
             class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
           ) <| [
-            div(
-              class="overflow-y-auto hidden md:block md:sticky md:top-header md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
-              div(class="w-full", sidebar.desktop),
-            ),
+            sidebar,
             div(class="flex-1 min-w-0 max-w-4xl") <| [
-              metadata_mobile,
-              content,
-              sidebar.fab,
-              sidebar.dialog,
+              metadata_mobile, content,
             ],
             div(
               class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",

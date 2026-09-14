@@ -52,6 +52,20 @@
   overflow-x: clip;
 }
 
+/* RUI's base styles are inline; theme variables stay local to this control. */
+[data-theme="dark"] .docs-version-select {
+  --rui-foreground: oklch(0.985 0 0);
+  --rui-muted-foreground: oklch(0.708 0 0);
+  --rui-input: oklch(1 0 0 / 0.15);
+  --rui-input-background: oklch(1 0 0 / 0.045);
+  --rui-border: oklch(1 0 0 / 0.1);
+  --rui-popover: oklch(0.205 0 0);
+  --rui-popover-foreground: oklch(0.985 0 0);
+  --rui-accent: oklch(0.269 0 0);
+  --rui-accent-foreground: oklch(0.985 0 0);
+  --rui-ring: oklch(0.556 0 0);
+}
+
 .hero-banner:empty {
   display: none;
 }

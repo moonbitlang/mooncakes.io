@@ -1,4 +1,5 @@
 import {
+  "Yoorkin/rui",
   "moonbit-community/rabbita",
   "moonbit-community/rabbita/http",
   "moonbit-community/rabbita/html",
@@ -17,4 +18,4 @@ import {
   "moonbit-community/rabbita/svg",
 }
 
-supported_targets = "js+native+wasm"
+supported_targets = "js+native"

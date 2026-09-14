@@ -17,7 +17,7 @@ fn unresolved_docs_layout(
         class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
       ) <| [
         div(
-          class="overflow-y-auto hidden md:block md:sticky md:top-header md:min-w-64 md:h-[calc(100vh-3.5rem)] lg:max-w-[300px]",
+          class="overflow-y-auto hidden md:block md:sticky md:top-header md:w-64 md:shrink-0 md:h-[calc(100vh-3.5rem)]",
           div(class="w-full", @view.skeleton_sidebar()),
         ),
         div(class="flex-1 min-w-0 max-w-4xl", content),

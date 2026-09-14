@@ -427,13 +427,13 @@ fn misc_doc(
             "\{name} is a built-in type. The documentation may not be complete here. You can find all methods and implementations in the ",
           ),
           a(
-            href="/docs/moonbitlang/core/builtin#\{name}",
+            href="/docs/\{versioned_docs_path("moonbitlang/core/builtin", module_name, module_version)}#\{name}",
             class=package_link_class,
             "core/builtin",
           ),
           text(" and "),
           a(
-            href="/docs/moonbitlang/\{pkg_path}#\{name}",
+            href="/docs/\{versioned_docs_path("moonbitlang/" + pkg_path, module_name, module_version)}#\{name}",
             class=package_link_class,
             "core/\{name.to_lower()}",
           ),

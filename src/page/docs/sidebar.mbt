@@ -261,18 +261,12 @@ priv enum SidebarMsg {
 }
 
 ///|
-priv struct Sidebar {
-  desktop : Html
-  dialog : Html
-  fab : Html
-} derive(Eq)
-
-///|
 fn docs_sidebar(
   module_index : Val[Status[ModuleIndex]?],
   resolved : Val[@util.MooncakePath?],
   manifest : Manifest,
-) -> Val[Sidebar] {
+) -> Val[Html] {
+  let version_selector = module_version_select(manifest, resolved)
   let (model, emit) = @rabbita.create_state(
     { sidebar_collapsed: @immut/sorted_set.new(), sidebar_fab: false, },
     update=(model, msg, _emit) => {
@@ -373,61 +367,68 @@ fn docs_sidebar(
       }
     },
   )
-  model.map3(module_index, resolved, fn(model, module_index, resolved) {
+  model.view4(module_index, resolved, version_selector, fn(
+    model,
+    module_index,
+    resolved,
+    version_selector,
+  ) {
     let document_index = match module_index {
       Some(Loaded(index)) => index.0.to_document_items()
       _ => []
     }
     let sidebar_content = div(
-      class="text-gray-700 dark:text-slate-300 flex flex-col",
+      class="text-gray-700 dark:text-slate-300 flex flex-col w-full min-w-0",
     ) <| [
       div(
-        class="sidebar-sticky-bar flex items-center gap-1 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
+        class="sidebar-sticky-bar flex flex-col gap-2 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
       ) <| [
-        button(
-          class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
-          on_click=emit(ExpandAllSidebar(document_index)),
-        ) <| "Expand all",
-        button(
-          class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
-          on_click=emit(CollapseAllSidebar),
-        ) <| "Collapse all",
+        version_selector,
+        div(class="flex items-center gap-1") <| [
+          button(
+            class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
+            on_click=emit(ExpandAllSidebar(document_index)),
+            "Expand all",
+          ),
+          button(
+            class="text-[11px] text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors",
+            on_click=emit(CollapseAllSidebar),
+            "Collapse all",
+          ),
+        ],
       ],
-      @tree.view(
-        toggle=id => emit(ToggleSidebarItem(id)),
-        click=id => emit(ClickSidebarItem(id, resolved)),
-        state=model.sidebar_collapsed,
-        indicator=Symbol(pkg_path="", kind=KValue, ""),
-        icon=sidebar_icon,
-        document_index,
-      ),
+      if module_index is Some(Pending) {
+        @view.skeleton_sidebar()
+      } else {
+        @tree.view(
+          toggle=id => emit(ToggleSidebarItem(id)),
+          click=id => emit(ClickSidebarItem(id, resolved)),
+          state=model.sidebar_collapsed,
+          indicator=Symbol(pkg_path="", kind=KValue, ""),
+          icon=sidebar_icon,
+          document_index,
+        )
+      },
     ]
-    let display = if model.sidebar_fab { "flex" } else { "none" }
-    let desktop = if module_index is Some(Pending) {
-      @view.skeleton_sidebar()
-    } else {
-      div(class="animate-fade-in", sidebar_content)
-    }
-    let dialog = div(
-      class="fixed inset-0 justify-center items-center z-100",
-      style=["display: \{display}"],
+    let display = if model.sidebar_fab { "flex" } else { "hidden" }
+    let panel = div(
+      class="\{display} md:block max-md:fixed max-md:inset-0 max-md:z-100 max-md:items-center max-md:justify-center md:sticky md:top-header md:w-64 md:shrink-0 md:h-[calc(100vh-3.5rem)]",
     ) <| [
       button(
-        class="fixed inset-0 bg-black/40 z-10",
-        style=["display: \{display}"],
+        class="fixed inset-0 bg-black/40 z-10 md:hidden",
         on_click=emit(ToggleSidebarFab),
         nothing,
       ),
       div(
-        class="bg-zinc-50 dark:bg-zinc-950 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg z-20",
+        class="relative z-20 bg-zinc-50 dark:bg-zinc-950 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg md:z-auto md:w-full md:h-full md:rounded-none md:p-0 md:shadow-none",
         sidebar_content,
       ),
     ]
     let fab = button(
-      class="flex lg:hidden fixed bottom-4 right-4 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center hover:bg-moonbit-dark transition-all select-none",
+      class="flex md:hidden fixed bottom-4 right-4 z-20 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center hover:bg-moonbit-dark transition-all select-none",
       on_click=emit(ToggleSidebarFab),
       img(class="size-5", src=@config.hamburger_button),
     )
-    { desktop, dialog, fab, }
+    @html.fragment([panel, fab])
   })
 }

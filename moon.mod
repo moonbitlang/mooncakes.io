@@ -11,6 +11,7 @@ import {
   "moonbitlang/x@0.5.1",
   "moonbitlang/async@0.21.0",
   "hackwaly/moonback@0.8.1",
+  "Yoorkin/rui@0.1.3",
 }
 
 readme = "README.md"

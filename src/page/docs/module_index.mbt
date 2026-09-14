@@ -36,6 +36,7 @@ priv struct Manifest {
   module_ : String
   version : String
   latest_version : String
+  versions : Array[ModuleVersion]
   has_package : Bool
   module_meta : MetaInfo
 } derive(Eq)
@@ -193,10 +194,11 @@ fn versioned_docs_path(
   module_name : String,
   version : String,
 ) -> String {
-  if module_name == "moonbitlang/core" {
-    path
-  } else {
+  let lookup = docs_lookup_path(path)
+  if lookup == module_name || lookup.has_prefix("\{module_name}/") {
     versioned_asset_path(path, module_name, version)
+  } else {
+    path
   }
 }
 
@@ -257,6 +259,7 @@ impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
       "name": String(name),
       "module": String(module_),
       "version": String(version),
+      "versions"? : versions,
       "has_package": has_package,
       ..
     } => {
@@ -265,6 +268,12 @@ impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
         name,
         module_,
         version,
+        versions: decode_module_versions(
+          versions,
+          version,
+          module_meta.yanked,
+          path,
+        ),
         latest_version: match raw_json {
           { "latest_version": String(latest_version), .. } => latest_version
           _ => version

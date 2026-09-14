@@ -15,4 +15,4 @@ import {
   "moonbitlang/mooncakes/page/skills",
 }
 
-supported_targets = "js+native+wasm"
+supported_targets = "js+native"

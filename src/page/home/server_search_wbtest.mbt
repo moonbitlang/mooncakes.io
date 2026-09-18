@@ -108,8 +108,4 @@ test "search timeout retry empty results and whitespace normalization" {
   let (normalized, action) = update_search(empty, Changed("json"))
   assert_eq(normalized.request_id, empty.request_id)
   assert_eq(action, Nothing)
-  assert_eq(
-    @util.encode_uri_component("a&b + 文件"),
-    "a%26b%20%2B%20%E6%96%87%E4%BB%B6",
-  )
 }

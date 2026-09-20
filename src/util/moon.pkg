@@ -1,5 +1,4 @@
 import {
-  "moonbitlang/core/debug",
   "moonbitlang/core/env",
   "moonbitlang/core/string",
   "moonbit-community/rabbita/common",

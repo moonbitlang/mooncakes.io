@@ -94,7 +94,7 @@ fn first_char_upper_or(value : String, fallback : String) -> String {
     fallback
   } else {
     let end = value.offset_of_nth_char(1).unwrap_or(value.length())
-    value.sub(end~).to_owned().to_upper()
+    value.exact_view(end~).to_owned().to_upper()
   }
 }
 
@@ -110,7 +110,7 @@ fn suffix_after_n_chars_or(
     fallback
   } else {
     let start = value.offset_of_nth_char(n).unwrap_or(value.length())
-    value.sub(start~).to_owned()
+    value.exact_view(start~).to_owned()
   }
 }
 

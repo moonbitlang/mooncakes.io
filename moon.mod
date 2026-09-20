@@ -10,7 +10,7 @@ import {
   "moonbitlang/lexer@0.3.14",
   "moonbitlang/x@0.5.5",
   "moonbitlang/async@0.21.0",
-  "Yoorkin/rui@0.1.3",
+  "Yoorkin/rui@0.1.5",
   "moonbitlang/moonback@0.8.3",
 }
 

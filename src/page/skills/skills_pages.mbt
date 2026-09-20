@@ -80,7 +80,7 @@ fn command_prefix(command : String, count : Int) -> String {
     command
   } else {
     let end = command.offset_of_nth_char(count).unwrap_or(command.length())
-    command.sub(end~).to_owned()
+    command.exact_view(end~).to_owned()
   }
 }
 
@@ -435,7 +435,7 @@ fn author_avatar(author : String, avatar_url : String) -> Html {
       "U"
     } else {
       let end = author.offset_of_nth_char(1).unwrap_or(author.length())
-      author.sub(end~).to_owned().to_upper()
+      author.exact_view(end~).to_owned().to_upper()
     }
     div(
       class="flex size-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-purple-500 text-[10px] font-bold text-white",

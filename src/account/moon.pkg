@@ -1,0 +1,20 @@
+import {
+  "Yoorkin/rui",
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/cmd",
+  "moonbit-community/rabbita/sub",
+  "moonbit-community/rabbita/dom",
+  "moonbit-community/rabbita/js",
+  "moonbit-community/rabbita/nav",
+  "moonbit-community/rabbita/clipboard",
+  "moonbit-community/rabbita/url",
+  "moonbitlang/async",
+  "moonbitlang/async/http" @async_http,
+  "moonbitlang/async/js_async",
+  "moonbitlang/core/json",
+  "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/view",
+}
+
+supported_targets = "js+native"

@@ -1,6 +1,7 @@
 ///|
 pub enum MooncakesioPath {
   Home
+  Account(String)
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
   SkillsList
@@ -14,6 +15,7 @@ pub enum MooncakesioPath {
 pub impl Show for MooncakesioPath with fn output(self, logger) {
   match self {
     Home => logger.write_string("home:")
+    Account(page) => logger.write_string("account:\{page}")
     User(name) => logger.write_string("user:\{name.to_owned()}")
     Docs(p, fragment~) =>
       logger.write_string("docs: \{p.0}, fragment: \{Repr(fragment)}")
@@ -35,6 +37,8 @@ pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
         Home
       }
     ["build-queue"] => BuildQueue
+    ["login" | "register" | "forgot-password" | "profile" as page] =>
+      Account(page.to_owned())
     ["user", name] => User(name)
     ["assets", ..] => Assets(url)
     ["skills"] => SkillsList

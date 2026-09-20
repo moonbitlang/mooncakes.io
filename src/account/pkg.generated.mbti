@@ -1,0 +1,20 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/account"
+
+import {
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
+}
+
+// Values
+pub fn navbar(Json, dark~ : @rabbita.Val[Bool]) -> @rabbita.Val[@html.Html]
+
+pub fn page(String, Json, @rabbita.Val[@html.Html], dark~ : @rabbita.Val[Bool]) -> @rabbita.Val[@html.Html]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

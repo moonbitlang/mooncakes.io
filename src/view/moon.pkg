@@ -7,4 +7,8 @@ import {
   "moonbitlang/mooncakes/config",
 }
 
+import {
+  "moonbitlang/async",
+} for "wbtest"
+
 supported_targets = "js+native+wasm"

@@ -21,6 +21,7 @@ priv enum ThemeMsg {
 ///|
 priv enum Route {
   Home
+  Account(String)
   Docs(@util.UnsolvedMooncakePath, fragment~ : String)
   User(String)
   BuildQueue
@@ -40,6 +41,7 @@ priv enum RouteMsg {
 impl @rabbita.Enumerate for Route with fn tag(self) {
   match self {
     Home => "home"
+    Account(page) => "account:\{page}"
     Docs(_, ..) => "docs"
     User(name) => "user:\{name}"
     BuildQueue => "build-queue"
@@ -54,6 +56,7 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
 fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
   match @util.MooncakesioPath::resolve(url) {
     Home => (Home, @nav.scroll_to_top())
+    Account(page) => (Account(page), @nav.scroll_to_top())
     BuildQueue => (BuildQueue, @nav.scroll_to_top())
     SkillsList => (SkillsList, @nav.scroll_to_top())
     SkillsDetail(entry) => (SkillsDetail(entry), @nav.scroll_to_top())
@@ -132,8 +135,16 @@ fn theme() -> (Val[Html], Val[Theme]) {
 
 ///|
 #warnings("-alert_xss_vulnerable")
-pub fn app() -> Val[Html] {
-  let (app_actions, theme) = theme()
+pub fn app(initial_user? : Json = browser_initial_user()) -> Val[Html] {
+  let initial_user = public_profile(initial_user)
+  let (theme_actions, theme) = theme()
+  let app_actions = theme_actions.view2(
+    @account.navbar(
+      initial_user,
+      dark=theme.map(theme => theme.resolved() == "dark"),
+    ),
+    (toggle, account) => div(class="flex items-center gap-2", [account, toggle]),
+  )
   let (route, _) = @rabbita.create_state(
     Redirect,
     update=(model, msg, _emit) => {
@@ -153,10 +164,18 @@ pub fn app() -> Val[Html] {
   let page = route.switch(current => {
     match current {
       Home => @home.home_page(app_actions~)
+      Account(kind) =>
+        @account.page(
+          kind,
+          initial_user,
+          app_actions,
+          dark=theme.map(theme => theme.resolved() == "dark"),
+        )
       User(name) => @user.user_page(name, app_actions~)
       BuildQueue => @build_queue.build_queue_page(app_actions~)
-      SkillsList => @skills.skills_list_page(app_actions~)
-      SkillsDetail(entry) => @skills.skill_detail_page(entry, app_actions~)
+      SkillsList => @skills.skills_list_page(app_actions=theme_actions)
+      SkillsDetail(entry) =>
+        @skills.skill_detail_page(entry, app_actions=theme_actions)
       NotFound => Val::constant(@view.not_found())
       Redirect => Val::constant(@view.loading())
       Docs(fallback_path, ..) => {
@@ -189,6 +208,12 @@ pub fn app() -> Val[Html] {
         title("mooncakes.io"),
         link(rel="icon", type_="image/svg+xml", href=@config.favicon),
         script(attrs=bootstrap_attrs, nothing),
+        script(
+          id="mooncakes-account",
+          type_="application/json",
+          attrs=Attrs::build().inner_html(profile_bootstrap(initial_user)),
+          nothing,
+        ),
       ],
       body <| [
         div(class="theme-root min-h-screen w-full", page),

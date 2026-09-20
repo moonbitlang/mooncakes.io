@@ -38,6 +38,7 @@ pub fn MooncakePath::version(Self) -> String
 
 pub enum MooncakesioPath {
   Home
+  Account(String)
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
   SkillsList

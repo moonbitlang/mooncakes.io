@@ -30,6 +30,7 @@ pub(all) enum CodeSpan {
   Comment(String)
   Attr(String)
 } derive(@debug.Debug)
+pub fn CodeSpan::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

@@ -2,6 +2,18 @@
 struct UnsolvedMooncakePath(String) derive(Debug, Eq)
 
 ///|
+pub extend UnsolvedMooncakePath with @debug.Debug::{to_repr}
+
+///|
+pub extend UnsolvedMooncakePath with Eq::{equal, not_equal}
+
+///|
+pub extend UnsolvedMooncakePath with @common.Enumerate::{tag}
+
+///|
+pub extend UnsolvedMooncakePath with Show::{to_string, output}
+
+///|
 pub impl @common.Enumerate for UnsolvedMooncakePath with fn tag(self) {
   self.0
 }
@@ -34,6 +46,9 @@ struct MooncakePath {
   version : String
   latest_version : String
 } derive(Eq)
+
+///|
+pub extend MooncakePath with Eq::{equal, not_equal}
 
 ///|
 pub fn MooncakePath::is_same_module(

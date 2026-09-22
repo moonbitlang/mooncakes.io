@@ -34,6 +34,9 @@ pub(all) enum CodeSpan {
 } derive(Debug)
 
 ///|
+pub extend CodeSpan with @debug.Debug::{to_repr}
+
+///|
 fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
   match token {
     NEWLINE => dst.push(Newline)

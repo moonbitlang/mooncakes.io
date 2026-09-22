@@ -11,6 +11,9 @@ pub enum MooncakesioPath {
 }
 
 ///|
+pub extend MooncakesioPath with Show::{to_string, output}
+
+///|
 pub impl Show for MooncakesioPath with fn output(self, logger) {
   match self {
     Home => logger.write_string("home:")

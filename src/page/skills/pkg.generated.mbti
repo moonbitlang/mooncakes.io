@@ -15,8 +15,12 @@ pub fn skills_list_page(app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val
 
 // Types and methods
 type ListUiModel derive(Eq)
+pub fn ListUiModel::equal(Self, Self) -> Bool
+pub fn ListUiModel::not_equal(Self, Self) -> Bool
 
 type WasmEntry derive(Eq)
+pub fn WasmEntry::equal(Self, Self) -> Bool
+pub fn WasmEntry::not_equal(Self, Self) -> Bool
 
 // Type aliases
 

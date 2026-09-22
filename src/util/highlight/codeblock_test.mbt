@@ -444,7 +444,7 @@ test "parse_inline_link" {
   let source =
     #| f(<a href="moonbitlang/core/rational#T">Type</a>::method)
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List:
       #|  [
@@ -461,7 +461,7 @@ test "parse_inline_link" {
   let source =
     #| f(<a href="moonbitlang/core/rational#T">@path/to/pkg.Type</a>::method)
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List:
       #|  [
@@ -486,7 +486,7 @@ test "parse_link_with_package_path_content" {
   let source =
     #| f(<a href="moonbitlang/core/builtin">@moonbitlang/core/builtin</a>)
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List:
       #|  [
@@ -508,7 +508,7 @@ test "parse_attribute" {
   let source =
     #| #deprecated
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List: [Space(1), Attr("#deprecated")]>
     ),
@@ -516,7 +516,7 @@ test "parse_attribute" {
   let source =
     #| #deprecated.name
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List: [Space(1), Attr("#deprecated.name")]>
     ),
@@ -524,7 +524,7 @@ test "parse_attribute" {
   let source =
     #| fn f() -> Unit #deprecated #unsafe
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List:
       #|  [
@@ -552,7 +552,7 @@ test "parse_package_name_with_dot_ulident" {
     #| f(@path/to/pkg.Ctor)
     #| g(@path/to/pkg.value)
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List:
       #|  [
@@ -577,7 +577,7 @@ test "invalid_package_name" {
   let source =
     #| fn startup[Model, Message](model~ : Model, update~ : (Message, Model) -> (<a href="Yoorkin/rabbit-tea/cmd#Cmd">@Yoorkin/rabbit-tea/cmd.Cmd</a>[Message], Model), view~ : (Model) -> <a href="Yoorkin/rabbit-tea/html#T">@Yoorkin/rabbit-tea/html.T</a>[Message], mount~ : String = ..) -> Unit
   debug_inspect(
-    parse_signature(source),
+    @highlight.parse_signature(source),
     content=(
       #|<List:
       #|  [
@@ -668,7 +668,7 @@ test "valid_source_code" {
   let source =
     #| fn main { println("hello, \{object}!") }
   debug_inspect(
-    parse_code(source),
+    @highlight.parse_code(source),
     content=(
       #|<List:
       #|  [

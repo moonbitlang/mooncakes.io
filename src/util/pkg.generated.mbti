@@ -28,10 +28,12 @@ pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
 
 type MooncakePath derive(Eq)
+pub fn MooncakePath::equal(Self, Self) -> Bool
 pub fn MooncakePath::is_same_module(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
 pub fn MooncakePath::is_same_package(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
 pub fn MooncakePath::latest_version(Self) -> String
 pub fn MooncakePath::module_path(Self) -> String
+pub fn MooncakePath::not_equal(Self, Self) -> Bool
 pub fn MooncakePath::package_path(Self) -> String
 pub fn MooncakePath::resolve(UnsolvedMooncakePath, module_path~ : String, latest_version~ : String) -> Self?
 pub fn MooncakePath::version(Self) -> String
@@ -46,12 +48,20 @@ pub enum MooncakesioPath {
   NotFound(String)
   Assets(@url.Url)
 }
+pub fn MooncakesioPath::output(Self, &Logger) -> Unit
 pub fn MooncakesioPath::resolve(@url.Url) -> Self
+pub fn MooncakesioPath::to_string(Self) -> String
 pub impl Show for MooncakesioPath
 
 type UnsolvedMooncakePath derive(Eq, @debug.Debug)
+pub fn UnsolvedMooncakePath::equal(Self, Self) -> Bool
 pub fn UnsolvedMooncakePath::new(String) -> Self
+pub fn UnsolvedMooncakePath::not_equal(Self, Self) -> Bool
+pub fn UnsolvedMooncakePath::output(Self, &Logger) -> Unit
 pub fn UnsolvedMooncakePath::package_path(Self) -> String
+pub fn UnsolvedMooncakePath::tag(Self) -> String
+pub fn UnsolvedMooncakePath::to_repr(Self) -> @debug.Repr
+pub fn UnsolvedMooncakePath::to_string(Self) -> String
 pub impl @common.Enumerate for UnsolvedMooncakePath
 pub impl Show for UnsolvedMooncakePath
 

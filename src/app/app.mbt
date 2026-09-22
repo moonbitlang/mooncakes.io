@@ -177,7 +177,18 @@ pub fn app() -> Val[Html] {
     }
   })
 
-  theme.view2(page, fn(theme, page) {
+  theme.view3(page, route, fn(theme, page, route) {
+    let page_title = match route {
+      Home => "mooncakes.io"
+      Docs(path, ..) => "\{path.package_path()} - mooncakes.io"
+      User(name) => "\{name} - mooncakes.io"
+      BuildQueue => "Build Queue - mooncakes.io"
+      SkillsList => "Skills - mooncakes.io"
+      SkillsDetail(entry) => "\{entry} - Skills - mooncakes.io"
+      NotFound => "Page not found - mooncakes.io"
+      Redirect => "mooncakes.io"
+    }
+
     let attrs = Attrs::build()
       .data_set("theme", theme.resolved())
       .data_set("theme-preference", theme.preference.to_string())
@@ -186,7 +197,7 @@ pub fn app() -> Val[Html] {
       head <| [
         meta(charset="UTF-8"),
         meta(name="viewport", content="width=device-width, initial-scale=1.0"),
-        title("mooncakes.io"),
+        title(page_title),
         link(rel="icon", type_="image/svg+xml", href=@config.favicon),
         script(attrs=bootstrap_attrs, nothing),
       ],

@@ -52,6 +52,51 @@
   overflow-x: clip;
 }
 
+.search-package-list {
+  --package-indent: 1rem;
+  margin: 0;
+  padding: 0 0 0 var(--package-indent);
+  list-style: none;
+}
+
+.search-package-item {
+  position: relative;
+  min-width: 0;
+  padding-top: 0.75rem;
+}
+
+.search-package-item::before,
+.search-package-item::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--package-indent) / -2);
+  pointer-events: none;
+  border-color: var(--app-border);
+}
+
+.search-package-item::before {
+  top: 0;
+  bottom: 0;
+  border-left-width: 1px;
+}
+
+.search-package-item::after {
+  top: 2.375rem;
+  width: calc(var(--package-indent) / 2);
+  border-top-width: 1px;
+}
+
+.search-package-item:last-child::before {
+  bottom: auto;
+  height: 2.375rem;
+}
+
+@media (min-width: 640px) {
+  .search-package-list {
+    --package-indent: 1.75rem;
+  }
+}
+
 /* RUI's base styles are inline; theme variables stay local to this control. */
 [data-theme="dark"] .docs-version-select {
   --rui-foreground: oklch(0.985 0 0);

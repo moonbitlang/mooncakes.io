@@ -34,10 +34,10 @@ impl @json.FromJson for PackageMatch with fn from_json(value, path) {
   {
     package_,
     name,
-    summary,
+    summary: clean_package_summary(summary),
     summary_version,
     is_summary_current: @json.from_json(current),
-    summary_fragments: fragments,
+    summary_fragments: clean_package_summary_fragments(fragments),
   }
 }
 

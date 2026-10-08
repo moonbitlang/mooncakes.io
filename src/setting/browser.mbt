@@ -36,6 +36,7 @@ fn decode_tokens(body : Json) -> Array[ApiToken]? {
 // FIXME: @http.expect_json drops the HTTP status and non-2xx JSON body.
 // Replace this experimental command extension when the HTTP API can preserve
 // both, so account requests can handle 401 and display backend validation errors.
+#warnings("-alert_experimental")
 extenum @cmd.Extension += {
   SettingRequest(String, Json, @async_http.RequestMethod, (Int, Json) -> Cmd)
 }
@@ -43,6 +44,7 @@ extenum @cmd.Extension += {
 ///|
 // Preserve status and validation JSON, which @http.expect_json discards on errors.
 // Private responses are never recorded in the SSR transcript.
+#warnings("-alert_experimental")
 let setting_request : @cmd.Op = @cmd.Op()
   ..on_settle((_, _) => Async(() => raise @cmd.HydrateExn::Fallback))
   ..on_invoke((extension, context) => {
@@ -82,6 +84,7 @@ let setting_request : @cmd.Op = @cmd.Op()
   })
 
 ///|
+#warnings("-alert_experimental")
 fn request(
   path : String,
   body : Json,

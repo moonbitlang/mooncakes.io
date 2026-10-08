@@ -21,6 +21,7 @@ priv enum ThemeMsg {
 ///|
 priv enum Route {
   Home
+  Setting(@util.SettingPage)
   Docs(@util.UnsolvedMooncakePath, fragment~ : String)
   User(String)
   BuildQueue
@@ -40,6 +41,14 @@ priv enum RouteMsg {
 impl @rabbita.Enumerate for Route with fn tag(self) {
   match self {
     Home => "home"
+    Setting(page) =>
+      match page {
+        Auth(Login) => "login"
+        Auth(Register) => "register"
+        Auth(ForgotPassword) => "forgot-password"
+        Settings => "settings"
+        GithubFailed => "github-failed"
+      }
     Docs(_, ..) => "docs"
     User(name) => "user:\{name}"
     BuildQueue => "build-queue"
@@ -54,6 +63,7 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
 fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
   match @util.MooncakesioPath::resolve(url) {
     Home => (Home, @nav.scroll_to_top())
+    Setting(page) => (Setting(page), @nav.scroll_to_top())
     BuildQueue => (BuildQueue, @nav.scroll_to_top())
     SkillsList => (SkillsList, @nav.scroll_to_top())
     SkillsDetail(entry) => (SkillsDetail(entry), @nav.scroll_to_top())
@@ -133,7 +143,12 @@ fn theme() -> (Val[Html], Val[Theme]) {
 ///|
 #warnings("-alert_xss_vulnerable")
 pub fn app() -> Val[Html] {
-  let (app_actions, theme) = theme()
+  let (theme_actions, theme) = theme()
+  let dark = theme.map(theme => theme.resolved() == "dark")
+  let app_actions = theme_actions.view2(@setting.navbar(dark~), (
+    toggle,
+    setting_actions,
+  ) => div(class="flex items-center gap-2", [setting_actions, toggle]))
   let (route, _) = @rabbita.create_state(
     Redirect,
     update=(model, msg, _emit) => {
@@ -153,10 +168,12 @@ pub fn app() -> Val[Html] {
   let page = route.switch(current => {
     match current {
       Home => @home.home_page(app_actions~)
+      Setting(kind) => @setting.page(kind, app_actions~, dark~)
       User(name) => @user.user_page(name, app_actions~)
       BuildQueue => @build_queue.build_queue_page(app_actions~)
-      SkillsList => @skills.skills_list_page(app_actions~)
-      SkillsDetail(entry) => @skills.skill_detail_page(entry, app_actions~)
+      SkillsList => @skills.skills_list_page(app_actions=theme_actions)
+      SkillsDetail(entry) =>
+        @skills.skill_detail_page(entry, app_actions=theme_actions)
       NotFound => Val::constant(@view.not_found())
       Redirect => Val::constant(@view.loading())
       Docs(fallback_path, ..) => {
@@ -185,6 +202,14 @@ pub fn app() -> Val[Html] {
       BuildQueue => "Build Queue - mooncakes.io"
       SkillsList => "Skills - mooncakes.io"
       SkillsDetail(entry) => "\{entry} - Skills - mooncakes.io"
+      Setting(kind) =>
+        match kind {
+          Auth(Login) => "Sign in - mooncakes.io"
+          Auth(Register) => "Create account - mooncakes.io"
+          Auth(ForgotPassword) => "Reset password - mooncakes.io"
+          Settings => "Settings - mooncakes.io"
+          GithubFailed => "GitHub authorization failed - mooncakes.io"
+        }
       NotFound => "Page not found - mooncakes.io"
       Redirect => "mooncakes.io"
     }

@@ -23,6 +23,14 @@ pub fn utc_date_days_ago(Int) -> String
 // Errors
 
 // Types and methods
+pub(all) enum AuthFormKind {
+  Login
+  Register
+  ForgotPassword
+} derive(Eq)
+pub fn AuthFormKind::equal(Self, Self) -> Bool
+pub fn AuthFormKind::not_equal(Self, Self) -> Bool
+
 type Lazy[T]
 pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
@@ -40,6 +48,7 @@ pub fn MooncakePath::version(Self) -> String
 
 pub enum MooncakesioPath {
   Home
+  Setting(SettingPage)
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
   SkillsList
@@ -52,6 +61,14 @@ pub fn MooncakesioPath::output(Self, &Logger) -> Unit
 pub fn MooncakesioPath::resolve(@url.Url) -> Self
 pub fn MooncakesioPath::to_string(Self) -> String
 pub impl Show for MooncakesioPath
+
+pub(all) enum SettingPage {
+  Auth(AuthFormKind)
+  Settings
+  GithubFailed
+} derive(Eq)
+pub fn SettingPage::equal(Self, Self) -> Bool
+pub fn SettingPage::not_equal(Self, Self) -> Bool
 
 type UnsolvedMooncakePath derive(Eq, @debug.Debug)
 pub fn UnsolvedMooncakePath::equal(Self, Self) -> Bool

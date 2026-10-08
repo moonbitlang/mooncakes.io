@@ -1,4 +1,5 @@
 import {
+  "moonbitlang/mooncakes/setting",
   "moonbit-community/rabbita",
   "moonbit-community/rabbita/url",
   "moonbit-community/rabbita/html",

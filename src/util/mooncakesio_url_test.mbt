@@ -139,3 +139,31 @@ test "resolve not found" {
     ),
   )
 }
+
+///|
+test "setting routes distinguish settings from public profiles" {
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("settings")),
+    content="setting:settings",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("login")),
+    content="setting:login",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("register")),
+    content="setting:register",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("forgot-password")),
+    content="setting:forgot-password",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("github-failed")),
+    content="setting:github-failed",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("profile")),
+    content="not-found:profile",
+  )
+}

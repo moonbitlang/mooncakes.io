@@ -1,0 +1,16 @@
+import {
+  "moonbit-community/rui",
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/cmd",
+  "moonbit-community/rabbita/nav",
+  "moonbit-community/rabbita/clipboard",
+  "moonbitlang/async",
+  "moonbitlang/async/http" @async_http,
+  "moonbitlang/core/json",
+  "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/view",
+  "moonbitlang/mooncakes/util",
+}
+
+supported_targets = "js+native+wasm"

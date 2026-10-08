@@ -11,6 +11,9 @@ using @cmd {type Cmd, type Emit, none}
 const LinkClass : String = "underline underline-offset-4"
 
 ///|
+const SettingsPanelClass : String = "divide-y divide-gray-200 overflow-hidden rounded-xl border border-gray-200 bg-white dark:divide-zinc-700 dark:border-zinc-700 dark:bg-zinc-950"
+
+///|
 priv struct ApiToken {
   name : String
   token : String
@@ -27,7 +30,7 @@ fn user_avatar(user : Json) -> Html {
   } else {
     "M"
   }
-  @rui.avatar() <| [
+  @rui.avatar(size=Sm) <| [
     @rui.avatar_fallback(initial),
     if avatar.has_prefix("https://") {
       @rui.avatar_image(src=avatar, alt="")
@@ -108,7 +111,7 @@ pub fn navbar(
         return Val::constant(
           a(
             href="/login",
-            class="theme-toggle inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+            class="theme-toggle inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm leading-4 font-medium transition-colors",
             "Sign in",
           ),
         )
@@ -118,6 +121,7 @@ pub fn navbar(
           @rui.dropdown_menu_trigger(
             scope,
             variant=Ghost,
+            style=["height:1.875rem"],
             disabled=actions.busy,
             aria_label="Account: \{username}",
           ) <| [
@@ -258,7 +262,7 @@ fn form_endpoint(kind : @util.AuthFormKind) -> String {
   match kind {
     Login => "login"
     Register => "signup_by_email"
-    ForgotPassword => "reset_password"
+    ResetPassword => "reset_password"
   }
 }
 
@@ -276,7 +280,7 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
       notice: "",
     },
     update=(model, msg : AuthFormMsg, emit) => {
-      if kind is ForgotPassword &&
+      if kind is ResetPassword &&
         model.busy != Idle &&
         msg
         is (UsernameChanged(_)
@@ -301,7 +305,7 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
           if model.busy != Idle {
             return (model, none)
           }
-          if kind is (Register | ForgotPassword) &&
+          if kind is (Register | ResetPassword) &&
             model.password != model.confirm_password {
             return ({ ..model, error: "The passwords do not match.", }, none)
           }
@@ -372,7 +376,7 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
                     { ..model, password: "", confirm_password: "", code: "", },
                     @nav.load("/settings"),
                   )
-                ForgotPassword =>
+                ResetPassword =>
                   (
                     {
                       ..model,
@@ -413,7 +417,7 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
   )
   form.view(model => {
     let login = kind is Login
-    let reset = kind is ForgotPassword
+    let reset = kind is ResetPassword
     let heading = if login {
       "Welcome back"
     } else if reset {
@@ -560,7 +564,7 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
           if login {
             div(
               class="flex justify-end text-sm",
-              a(href="/forgot-password", class=LinkClass, "Forgot password?"),
+              a(href="/reset-password", class=LinkClass, "Forgot password?"),
             )
           } else {
             nothing
@@ -604,20 +608,26 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
 }
 
 ///|
-fn profile_detail(title : String, value : String) -> Html {
-  div(class="py-3") <| [
-    @html.dt(
-      class="text-xs font-medium text-gray-500 dark:text-zinc-400",
-      title,
+fn account_row(
+  icon : Html,
+  title : String,
+  description : String,
+  action? : Html = nothing,
+) -> Html {
+  div(class="flex flex-wrap items-center gap-4 px-5 py-5 sm:px-6") <| [
+    span(
+      class="shrink-0 text-gray-900 dark:text-slate-100",
+      attrs=Attrs::build().aria_hidden("true"),
+      icon,
     ),
-    @html.dd(
-      class="mt-1 break-words text-sm text-gray-900 dark:text-slate-100",
-      if value == "" {
-        "Not set"
-      } else {
-        value
-      },
-    ),
+    div(class="min-w-0 flex-1") <| [
+      @html.h3(class="font-semibold text-gray-900 dark:text-slate-100", title),
+      p(
+        class="mt-1 break-words text-sm text-gray-600 dark:text-zinc-400",
+        description,
+      ),
+    ],
+    action,
   ]
 }
 
@@ -626,6 +636,7 @@ priv enum SettingsBusy {
   Idle
   CreatingToken
   OpeningGitHub
+  SavingPassword
 } derive(Eq)
 
 ///|
@@ -634,6 +645,7 @@ priv enum SettingsResponse {
   TokensLoaded
   TokenCreated
   GithubStarted
+  PasswordChanged
 } derive(Eq)
 
 ///|
@@ -643,13 +655,15 @@ fn token_row(
   emit : Emit[SettingsMsg],
 ) -> Html {
   let revealed = model.revealed == token.name
-  div(class="space-y-3") <| [
+  div(class="space-y-3 px-5 py-5 sm:px-6") <| [
     div(class="flex flex-wrap items-baseline justify-between gap-2") <| [
       @rui.label(class="max-w-full break-all leading-snug", token.name),
       if token.revoked {
         @rui.badge(variant=Destructive, "Revoked")
       } else if token.created_at != "" {
-        @rui.form_description("Created \{token.created_at}")
+        @rui.form_description(
+          "Created \{@util.get_relative_time(token.created_at)}",
+        )
       } else {
         nothing
       },
@@ -705,46 +719,31 @@ fn token_row(
 }
 
 ///|
-fn token_section(model : Settings, emit : Emit[SettingsMsg]) -> Html {
-  @rui.card() <| [
-    @rui.card_header() <| [
-      @rui.card_title(h2("API tokens")),
-      @rui.card_description(
-        "Use an API token with the MoonBit build system to publish your packages. Keep tokens private.",
+fn token_section(
+  model : Settings,
+  emit : Emit[SettingsMsg],
+  help : Html,
+) -> Html {
+  div(class="space-y-3") <| [
+    div(class="flex flex-wrap items-center justify-between gap-3") <| [
+      div(class="flex items-center gap-1") <| [
+        h2(
+          class="text-xl font-semibold text-gray-900 dark:text-slate-100",
+          "API tokens",
+        ),
+        help,
+      ],
+      @rui.button(
+        type_="button",
+        variant=Outline,
+        disabled=model.busy != Idle || model.tokens_loading,
+        on_click=emit(OpenToken),
+        "New token",
       ),
     ],
-    @rui.card_content(class="flex flex-col gap-6") <| [
-      @rui.form(
-        action=@config.api_url("/api/v0/api_token/create"),
-        attrs=Attrs::build().method_("post"),
-        on_submit=emit(CreateToken),
-      ) <| [
-        div(class="flex flex-col gap-3 sm:flex-row sm:items-end") <| [
-          div(
-            class="min-w-0 flex-1",
-            field(
-              "token-name",
-              "Token name",
-              model.token_name,
-              value => emit(TokenNameChanged(value)),
-              placeholder="e.g. My laptop or release workflow",
-            ),
-          ),
-          @rui.button(
-            type_="submit",
-            class="shrink-0",
-            disabled=model.busy != Idle || model.tokens_loading,
-            if model.busy == CreatingToken {
-              "Creating…"
-            } else {
-              "Create token"
-            },
-          ),
-        ],
-      ],
-      @rui.separator(),
-      div(attrs=Attrs::build().aria_live("polite")) <| [
-        if model.tokens_error != "" {
+    div(class=SettingsPanelClass, attrs=Attrs::build().aria_live("polite")) <| [
+      if model.tokens_error != "" {
+        div(class="px-5 py-5 sm:px-6") <| [
           @rui.alert(variant=Destructive) <| [
             @rui.alert_description() <| [
               p(model.tokens_error),
@@ -755,19 +754,65 @@ fn token_section(model : Settings, emit : Emit[SettingsMsg]) -> Html {
                 "Try again",
               ),
             ],
-          ]
-        } else if model.tokens_loading {
-          @rui.form_description("Loading your API tokens…")
-        } else if model.tokens.is_empty() {
-          @rui.form_description(
-            "No API tokens yet. Name your first token above to get started.",
-          )
-        } else {
-          div(
-            class="flex flex-col gap-5",
-            model.tokens.map(token => token_row(token, model, emit)),
-          )
-        },
+          ],
+        ]
+      } else if model.tokens_loading || model.tokens.is_empty() {
+        p(
+          class="px-5 py-5 text-sm text-gray-600 sm:px-6 dark:text-zinc-400",
+          if model.tokens_loading {
+            "Loading your API tokens…"
+          } else {
+            "No API tokens yet. Create one to publish your packages."
+          },
+        )
+      } else {
+        @html.fragment(model.tokens.map(token => token_row(token, model, emit)))
+      },
+    ],
+  ]
+}
+
+///|
+fn token_dialog(model : Settings, emit : Emit[SettingsMsg]) -> Html {
+  let busy = model.busy == CreatingToken
+  @rui.dialog(
+    id="token-dialog",
+    on_close=_ => emit(CloseToken),
+    attrs=Attrs::build().aria_labelledby("token-dialog-title"),
+  ) <| [
+    @rui.dialog_header() <| [
+      @rui.dialog_title(id="token-dialog-title", "Create API token"),
+    ],
+    @rui.form(
+      action=@config.api_url("/api/v0/api_token/create"),
+      attrs=Attrs::build().method_("post"),
+      on_submit=emit(CreateToken),
+    ) <| [
+      field(
+        "token-name",
+        "Token name",
+        model.token_name,
+        value => emit(TokenNameChanged(value)),
+        placeholder="e.g. My laptop or release workflow",
+        disabled=busy,
+      ),
+      feedback(model.token_error, ""),
+      @rui.dialog_footer() <| [
+        @rui.button(
+          type_="button",
+          variant=Outline,
+          on_click=emit(CloseToken),
+          "Cancel",
+        ),
+        @rui.button(
+          type_="submit",
+          disabled=busy || model.tokens_loading,
+          if busy {
+            "Creating…"
+          } else {
+            "Create token"
+          },
+        ),
       ],
     ],
   ]
@@ -777,6 +822,7 @@ fn token_section(model : Settings, emit : Emit[SettingsMsg]) -> Html {
 priv struct Settings {
   user : Json
   token_name : String
+  token_error : String
   busy : SettingsBusy
   error : String
   notice : String
@@ -785,18 +831,110 @@ priv struct Settings {
   tokens_error : String
   revealed : String
   copied : String
+  current_password : String
+  password : String
+  confirm_password : String
+  password_error : String
 } derive(Eq)
 
 ///|
 priv enum SettingsMsg {
-  GitHub
+  SetPassword
+  OpenPassword
+  ClosePassword
+  CurrentPasswordChanged(String)
+  PasswordChanged(String)
+  ConfirmPasswordChanged(String)
+  SavePassword
   LoadTokens
+  OpenToken
+  CloseToken
   CreateToken
   Reveal(String)
   Copy(ApiToken)
   Copied(String, Bool)
   Response(SettingsResponse, Int, Json)
   TokenNameChanged(String)
+}
+
+///|
+fn password_dialog(model : Settings, emit : Emit[SettingsMsg]) -> Html {
+  let has_password = model.user is { "has_password": True, .. }
+  let busy = model.busy == SavingPassword
+  @rui.dialog(
+    id="password-dialog",
+    on_close=_ => emit(ClosePassword),
+    attrs=Attrs::build()
+      .aria_labelledby("password-dialog-title")
+      .aria_describedby("password-dialog-description"),
+  ) <| [
+    @rui.dialog_header() <| [
+      @rui.dialog_title(
+        id="password-dialog-title",
+        if has_password {
+          "Change password"
+        } else {
+          "Set password"
+        },
+      ),
+      @rui.dialog_description(
+        id="password-dialog-description",
+        "You will need to sign in again after saving your password.",
+      ),
+    ],
+    @rui.form(
+      action=@config.api_url("/api/v0/change_password"),
+      attrs=Attrs::build().method_("post"),
+      on_submit=emit(SavePassword),
+    ) <| [
+      if has_password {
+        field(
+          "current-password",
+          "Current password",
+          model.current_password,
+          value => emit(CurrentPasswordChanged(value)),
+          input_type=Password,
+          disabled=busy,
+        )
+      } else {
+        nothing
+      },
+      field(
+        "new-password",
+        "New password",
+        model.password,
+        value => emit(PasswordChanged(value)),
+        input_type=Password,
+        disabled=busy,
+      ),
+      field(
+        "confirm-new-password",
+        "Confirm new password",
+        model.confirm_password,
+        value => emit(ConfirmPasswordChanged(value)),
+        input_type=Password,
+        disabled=busy,
+      ),
+      feedback(model.password_error, ""),
+      @rui.dialog_footer() <| [
+        @rui.button(
+          type_="button",
+          variant=Outline,
+          on_click=emit(ClosePassword),
+          "Cancel",
+        ),
+        @rui.button(
+          type_="submit",
+          disabled=busy,
+          if busy {
+            "Saving…"
+          } else {
+            "Save password"
+          },
+        ),
+      ],
+    ],
+  ]
 }
 
 ///|
@@ -807,6 +945,7 @@ fn settings_page() -> Val[Html] {
         Settings::{
           user: null,
           token_name: "",
+          token_error: "",
           busy: Idle,
           error: "",
           notice: "",
@@ -815,6 +954,10 @@ fn settings_page() -> Val[Html] {
           tokens_error: "",
           revealed: "",
           copied: "",
+          current_password: "",
+          password: "",
+          confirm_password: "",
+          password_error: "",
         },
         request(
           "profile",
@@ -826,15 +969,55 @@ fn settings_page() -> Val[Html] {
     },
     update=(model, msg : SettingsMsg, emit) => {
       match msg {
-        GitHub => {
+        SetPassword => {
           if model.busy != Idle {
             return (model, none)
           }
           (
             { ..model, busy: OpeningGitHub, error: "", notice: "", },
-            request("github/start", { "mode": "link" }, (status, body) => {
+            request("github/start", { "mode": "set_password" }, (status, body) => {
               emit(Response(GithubStarted, status, body))
             }),
+          )
+        }
+        OpenPassword => (model, @dialog.show("password-dialog"))
+        ClosePassword =>
+          (
+            {
+              ..model,
+              current_password: "",
+              password: "",
+              confirm_password: "",
+              password_error: "",
+            },
+            @dialog.close("password-dialog"),
+          )
+        CurrentPasswordChanged(value) =>
+          ({ ..model, current_password: value, password_error: "", }, none)
+        PasswordChanged(value) =>
+          ({ ..model, password: value, password_error: "", }, none)
+        ConfirmPasswordChanged(value) =>
+          ({ ..model, confirm_password: value, password_error: "", }, none)
+        SavePassword => {
+          if model.busy != Idle {
+            return (model, none)
+          }
+          if model.password != model.confirm_password {
+            return (
+              { ..model, password_error: "The passwords do not match.", },
+              none,
+            )
+          }
+          (
+            { ..model, busy: SavingPassword, password_error: "", },
+            request(
+              "change_password",
+              {
+                "current_password": model.current_password,
+                "password": model.password,
+              },
+              (status, body) => emit(Response(PasswordChanged, status, body)),
+            ),
           )
         }
         LoadTokens =>
@@ -844,16 +1027,29 @@ fn settings_page() -> Val[Html] {
               emit(Response(TokensLoaded, status, body))
             }),
           )
+        OpenToken => (model, @dialog.show("token-dialog"))
+        CloseToken =>
+          (
+            { ..model, token_name: "", token_error: "", },
+            @dialog.close("token-dialog"),
+          )
         CreateToken => {
           if model.busy != Idle || model.tokens_loading {
             return (model, none)
           }
           let name = model.token_name.trim().to_owned()
           if name == "" {
-            return ({ ..model, error: "Give this token a name.", }, none)
+            return ({ ..model, token_error: "Give this token a name.", }, none)
           }
           (
-            { ..model, busy: CreatingToken, error: "", notice: "", copied: "", },
+            {
+              ..model,
+              busy: CreatingToken,
+              token_error: "",
+              error: "",
+              notice: "",
+              copied: "",
+            },
             request("api_token/create", { "name": name }, (status, body) => {
               emit(Response(TokenCreated, status, body))
             }),
@@ -893,10 +1089,7 @@ fn settings_page() -> Val[Html] {
             none,
           )
         TokenNameChanged(value) =>
-          (
-            { ..model, token_name: value, error: "", notice: "", copied: "", },
-            none,
-          )
+          ({ ..model, token_name: value, token_error: "", }, none)
         Response(action, status, body) => {
           if status < 200 || status >= 300 {
             let had_user = !(model.user is Null)
@@ -912,6 +1105,12 @@ fn settings_page() -> Val[Html] {
               )
             }
             let message = error_message(status, body)
+            if action == PasswordChanged {
+              return ({ ..model, busy: Idle, password_error: message, }, none)
+            }
+            if action == TokenCreated {
+              return ({ ..model, busy: Idle, token_error: message, }, none)
+            }
             if action == TokensLoaded {
               return (
                 { ..model, tokens_loading: false, tokens_error: message, },
@@ -926,6 +1125,16 @@ fn settings_page() -> Val[Html] {
             { ..model, busy: Idle, error: "", }
           }
           match action {
+            PasswordChanged =>
+              (
+                {
+                  ..model,
+                  current_password: "",
+                  password: "",
+                  confirm_password: "",
+                },
+                @nav.load("/login"),
+              )
             GithubStarted => {
               let url = value_string(body, "url")
               if url.has_prefix("https://github.com/login/oauth/authorize?") {
@@ -943,7 +1152,17 @@ fn settings_page() -> Val[Html] {
             ProfileLoaded =>
               if body is { "data": user, .. } &&
                 value_string(user, "username") != "" {
-                ({ ..model, user, }, emit(LoadTokens))
+                (
+                  { ..model, user, },
+                  @cmd.batch([
+                    emit(LoadTokens),
+                    if user is { "can_set_password": True, .. } {
+                      emit(OpenPassword)
+                    } else {
+                      none
+                    },
+                  ]),
+                )
               } else {
                 (
                   {
@@ -976,14 +1195,31 @@ fn settings_page() -> Val[Html] {
                   token_name: "",
                   notice: "API token created. Copy it into your build system when you are ready.",
                 },
-                emit(LoadTokens),
+                @cmd.batch([emit(CloseToken), emit(LoadTokens)]),
               )
           }
         }
       }
     },
   )
-  settings.view(model => {
+  let token_help = @rui.tooltip(
+    id="api-token-help",
+    trigger_size=IconSm,
+    trigger_attrs=Attrs::build().aria_label("About API tokens"),
+    @svg.svg(class="ui-icon", width=16, height=16, view_box="0 0 24 24", [
+      @svg.path(
+        d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3 M12 17h.01",
+        fill="none",
+        stroke="#1f1f1f",
+        stroke_width=2,
+        attrs=@svg.Attrs::build()
+          .stroke_linecap("round")
+          .stroke_linejoin("round"),
+      ),
+    ]),
+    "Use an API token with the MoonBit build system to publish your packages. Keep tokens private.",
+  )
+  settings.view2(token_help, (model, token_help) => {
     let username = value_string(model.user, "username")
     if username == "" {
       return div(class="mx-auto max-w-md py-12 text-center") <| [
@@ -999,6 +1235,9 @@ fn settings_page() -> Val[Html] {
         a(href="/login", class=LinkClass, "Sign in"),
       ]
     }
+    let email = value_string(model.user, "email")
+    let has_password = model.user is { "has_password": True, .. }
+    let can_set_password = model.user is { "can_set_password": True, .. }
     let github = value_string(model.user, "gh_login")
     let github_linked = github != "" ||
       model.user is { "gh_id": Number(_, ..) | String(_), .. }
@@ -1010,44 +1249,111 @@ fn settings_page() -> Val[Html] {
         ),
         p(
           class="mt-2 text-sm text-gray-600 dark:text-zinc-400",
-          "Manage your GitHub connection and API tokens.",
+          "Manage your password and API tokens.",
         ),
       ],
       feedback(model.error, model.notice),
-      @rui.card() <| [
-        @rui.card_content() <| [
-          @html.dl() <| [
-            profile_detail("Email", value_string(model.user, "email")),
-            profile_detail(
-              "GitHub",
-              if github == "" && github_linked {
-                "Connected"
-              } else {
-                github
-              },
+      div(class="space-y-3") <| [
+        h2(
+          class="text-xl font-semibold text-gray-900 dark:text-slate-100",
+          "Account",
+        ),
+        div(class=SettingsPanelClass) <| [
+          account_row(
+            @svg.svg(
+              class="ui-icon",
+              width=16,
+              height=16,
+              view_box="0 0 24 24",
+              [
+                @svg.path(
+                  d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z M22 6l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 6",
+                  fill="none",
+                  stroke="#1f1f1f",
+                  stroke_width=2,
+                  attrs=@svg.Attrs::build()
+                    .stroke_linecap("round")
+                    .stroke_linejoin("round"),
+                ),
+              ],
             ),
-          ],
+            "Email",
+            if email == "" {
+              "Not configured"
+            } else {
+              email
+            },
+          ),
+          account_row(
+            @svg.svg(
+              class="ui-icon",
+              width=16,
+              height=16,
+              view_box="0 0 24 24",
+              [
+                @svg.path(
+                  d="M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z M7 11V7a5 5 0 0 1 10 0v4",
+                  fill="none",
+                  stroke="#1f1f1f",
+                  stroke_width=2,
+                  attrs=@svg.Attrs::build()
+                    .stroke_linecap("round")
+                    .stroke_linejoin("round"),
+                ),
+              ],
+            ),
+            "Password",
+            if has_password {
+              "Configured"
+            } else {
+              "Not configured"
+            },
+            action=if has_password || can_set_password || github_linked {
+              @rui.button(
+                type_="button",
+                variant=Outline,
+                disabled=model.busy != Idle,
+                on_click=emit(
+                  if has_password || can_set_password {
+                    OpenPassword
+                  } else {
+                    SetPassword
+                  },
+                ),
+                if model.busy == OpeningGitHub {
+                  "Opening GitHub…"
+                } else if has_password {
+                  "Change password"
+                } else {
+                  "Set password"
+                },
+              )
+            } else if email != "" {
+              a(href="/reset-password", class=LinkClass, "Set password")
+            } else {
+              nothing
+            },
+          ),
+          account_row(
+            @html.img(
+              src=@config.asset_url("/github.svg"),
+              alt="",
+              class="ui-icon h-4 w-4",
+            ),
+            "GitHub",
+            if github != "" {
+              github
+            } else if github_linked {
+              "Connected"
+            } else {
+              "Not connected"
+            },
+          ),
         ],
-        if !github_linked {
-          @rui.card_footer(
-            @rui.button(
-              type_="button",
-              variant=Outline,
-              class="w-full",
-              disabled=model.busy != Idle,
-              on_click=emit(GitHub),
-              if model.busy == OpeningGitHub {
-                "Opening GitHub…"
-              } else {
-                "Connect GitHub"
-              },
-            ),
-          )
-        } else {
-          nothing
-        },
       ],
-      token_section(model, emit),
+      password_dialog(model, emit),
+      token_section(model, emit, token_help),
+      token_dialog(model, emit),
     ]
   })
 }

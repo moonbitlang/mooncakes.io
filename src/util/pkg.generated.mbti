@@ -26,7 +26,7 @@ pub fn utc_date_days_ago(Int) -> String
 pub(all) enum AuthFormKind {
   Login
   Register
-  ForgotPassword
+  ResetPassword
 } derive(Eq)
 pub fn AuthFormKind::equal(Self, Self) -> Bool
 pub fn AuthFormKind::not_equal(Self, Self) -> Bool

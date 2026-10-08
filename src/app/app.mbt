@@ -45,7 +45,7 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
       match page {
         Auth(Login) => "login"
         Auth(Register) => "register"
-        Auth(ForgotPassword) => "forgot-password"
+        Auth(ResetPassword) => "reset-password"
         Settings => "settings"
         GithubFailed => "github-failed"
       }
@@ -206,7 +206,7 @@ pub fn app() -> Val[Html] {
         match kind {
           Auth(Login) => "Sign in - mooncakes.io"
           Auth(Register) => "Create account - mooncakes.io"
-          Auth(ForgotPassword) => "Reset password - mooncakes.io"
+          Auth(ResetPassword) => "Reset password - mooncakes.io"
           Settings => "Settings - mooncakes.io"
           GithubFailed => "GitHub authorization failed - mooncakes.io"
         }

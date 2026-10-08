@@ -5,6 +5,8 @@ import {
   "moonbit-community/rabbita/cmd",
   "moonbit-community/rabbita/nav",
   "moonbit-community/rabbita/clipboard",
+  "moonbit-community/rabbita/dialog",
+  "moonbit-community/rabbita/svg",
   "moonbitlang/async",
   "moonbitlang/async/http" @async_http,
   "moonbitlang/core/json",

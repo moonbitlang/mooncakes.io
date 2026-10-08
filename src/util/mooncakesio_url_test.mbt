@@ -155,8 +155,8 @@ test "setting routes distinguish settings from public profiles" {
     content="setting:register",
   )
   inspect(
-    @util.MooncakesioPath::resolve(test_url("forgot-password")),
-    content="setting:forgot-password",
+    @util.MooncakesioPath::resolve(test_url("reset-password")),
+    content="setting:reset-password",
   )
   inspect(
     @util.MooncakesioPath::resolve(test_url("github-failed")),

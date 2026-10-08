@@ -2,7 +2,7 @@
 pub(all) enum AuthFormKind {
   Login
   Register
-  ForgotPassword
+  ResetPassword
 } derive(Eq)
 
 ///|
@@ -43,7 +43,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
         match page {
           Auth(Login) => "setting:login"
           Auth(Register) => "setting:register"
-          Auth(ForgotPassword) => "setting:forgot-password"
+          Auth(ResetPassword) => "setting:reset-password"
           Settings => "setting:settings"
           GithubFailed => "setting:github-failed"
         },
@@ -71,7 +71,7 @@ pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
     ["build-queue"] => BuildQueue
     ["login"] => Setting(Auth(Login))
     ["register"] => Setting(Auth(Register))
-    ["forgot-password"] => Setting(Auth(ForgotPassword))
+    ["reset-password"] => Setting(Auth(ResetPassword))
     ["settings"] => Setting(Settings)
     ["github-failed"] => Setting(GithubFailed)
     ["user", name] => User(name)

@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/setting"
+
+import {
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
+  "moonbitlang/mooncakes/util",
+}
+
+// Values
+pub fn navbar(dark~ : @rabbita.Val[Bool]) -> @rabbita.Val[@html.Html]
+
+pub fn page(@util.SettingPage, app_actions~ : @rabbita.Val[@html.Html], dark~ : @rabbita.Val[Bool]) -> @rabbita.Val[@html.Html]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

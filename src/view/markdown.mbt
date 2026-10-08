@@ -47,11 +47,12 @@ fn image_render(
       ..
     } => {
       let alt = inline_plain_text(alt)
-      let src = match transform_link {
-        Some(f) => f(src)
-        None => src
+      let src = markdown_url(src, transform_link?, image=true)
+      if src == "#" {
+        @html.text(alt)
+      } else {
+        @html.img(class="my-2", src~, alt~)
       }
-      @html.img(class="my-2", src~, alt~)
     }
     { v: { reference: Inline({ v: { dest: None, .. }, .. }), .. }, .. } =>
       @html.text("Loading image failed: invalid url")
@@ -70,7 +71,7 @@ fn inline2html(
 ) -> Array[@html.Html] {
   match x {
     Autolink({ v: { link: { v, .. }, .. }, .. }) =>
-      [@html.a(href=v, inline_text(v))]
+      [@html.a(href=markdown_url(v, transform_link?), inline_text(v))]
     Break(_) => [text("\n")]
     CodeSpan({ v: { code_layout: tight, .. }, .. }) =>
       [
@@ -411,10 +412,7 @@ fn unwrap_inline_link(
       [
         @html.a(
           class="text-blue-600 dark:text-blue-300 underline underline-offset-2",
-          href=match transform_link {
-            Some(f) => f(link)
-            None => link
-          },
+          href=markdown_url(link, transform_link?),
           inline_text(txt),
         ),
       ]
@@ -424,10 +422,7 @@ fn unwrap_inline_link(
     } : @cmark.InlineLink) =>
       [
         @html.a(
-          href=match transform_link {
-            Some(f) => f(link)
-            None => link
-          },
+          href=markdown_url(link, transform_link?),
           style=["display: inline-block"],
           image_render(img, transform_link?),
         ),
@@ -438,10 +433,7 @@ fn unwrap_inline_link(
     } : @cmark.InlineLink) =>
       [
         @html.a(
-          href=match transform_link {
-            Some(f) => f(link)
-            None => link
-          },
+          href=markdown_url(link, transform_link?),
           inline2html(inline, link_defs~, transform_link?),
         ),
       ]
@@ -452,10 +444,7 @@ fn unwrap_inline_link(
         [
           @html.a(
             class=" text-blue-600 dark:text-blue-300 underline underline-offset-2",
-            href=match transform_link {
-              Some(f) => f(url)
-              None => url
-            },
+            href=markdown_url(url, transform_link?),
             inline2html(inline, link_defs~, transform_link?),
           ),
         ]
@@ -519,4 +508,36 @@ pub fn markdown(
 ///|
 test "markdown renders empty image alt without panic" {
   ignore(markdown("![](down-start.png)"))
+}
+
+///|
+/// HTML attribute escaping does not make executable URL schemes safe. Check
+/// both the source destination and any application-generated replacement.
+fn markdown_url(
+  raw : String,
+  transform_link? : (String) -> String,
+  image? : Bool = false,
+) -> String {
+  guard allowed_markdown_url(raw, image~) else { return "#" }
+  let transformed = if transform_link is Some(f) { f(raw) } else { raw }
+  if allowed_markdown_url(transformed, image~) {
+    transformed
+  } else {
+    "#"
+  }
+}
+
+///|
+fn allowed_markdown_url(value : String, image~ : Bool) -> Bool {
+  if value.iter().any(c => c.is_ascii_control() || c == '\\') {
+    return false
+  }
+  let value = value.trim().to_owned()
+  let boundary = value.find_by(c => c == ':' || c == '/' || c == '?' || c == '#')
+  if boundary is Some(pos) && value[pos] == ':' {
+    let scheme = value[:pos].to_owned().to_lower()
+    scheme == "https" || scheme == "http" || (!image && scheme == "mailto")
+  } else {
+    true
+  }
 }

@@ -7,7 +7,7 @@ import {
   "Yoorkin/prettyprinter@0.4.8",
   "moonbit-community/rabbita@0.15.7",
   "moonbit-community/fuzzy_match@0.2.6",
-  "moonbitlang/lexer@0.3.14",
+  "moonbitlang/lexer@0.4.2",
   "moonbitlang/x@0.5.5",
   "moonbitlang/async@0.21.0",
   "moonbitlang/moonback@0.8.3",

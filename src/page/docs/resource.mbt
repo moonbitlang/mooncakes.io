@@ -33,7 +33,7 @@ priv struct MetaInfo {
   updated_at : String?
   deps : Array[(String, String)]
   build_status : BuildStatus?
-  downloads : Int
+  downloads : Int32
 } derive(Eq)
 
 ///|
@@ -164,7 +164,7 @@ fn build_meta_info(
   keywords : Array[String],
   deps : Array[(String, String)],
   build_status : BuildStatus?,
-  downloads : Int,
+  downloads : Int32,
   yanked : String?,
 ) -> MetaInfo {
   let author = String::from_array(

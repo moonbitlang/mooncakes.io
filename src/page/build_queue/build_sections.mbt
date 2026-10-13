@@ -103,7 +103,7 @@ fn build_row(item : BuildItem) -> Html {
 }
 
 ///|
-fn skeleton_build_rows(count : Int) -> Html {
+fn skeleton_build_rows(count : Int32) -> Html {
   let rows = Array::makei(count, fn(_i) {
     div(
       class="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg",

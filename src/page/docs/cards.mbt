@@ -273,10 +273,10 @@ fn document_item(
   content : Html,
   collapsed~ : FoldedState,
   id~ : String,
-  tight? : Bool = false,
+  tight~ : Bool = false,
   loc? : Loc,
-  module_name? : String = "",
-  module_version? : String = "",
+  module_name~ : String = "",
+  module_version~ : String = "",
   toggle~ : Cmd,
   anchor~ : Cmd,
 ) -> Html {
@@ -370,7 +370,7 @@ fn value_doc(
   module_name~ : String,
   module_version~ : String,
   type_id? : String,
-  enable_title? : Bool = false,
+  enable_title~ : Bool = false,
   toggle~ : (String) -> Cmd,
   anchor~ : (String) -> Cmd,
 ) -> Html {
@@ -547,7 +547,7 @@ fn readme(
 }
 
 ///|
-fn hidden_large_package(count : Int, show~ : Cmd) -> Html {
+fn hidden_large_package(count : Int32, show~ : Cmd) -> Html {
   div(class="flex flex-col items-center justify-center py-12 w-full") <| [
     div(
       class="bg-mooncake dark:bg-stone-900 border border-mooncake2 rounded-lg p-8 w-full text-center",

@@ -64,7 +64,7 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
 }
 
 ///|
-type CodeFrequency = Map[String, Int]
+type CodeFrequency = Map[String, Int32]
 
 ///|
 priv struct CodeFrequencyResponse {
@@ -101,7 +101,7 @@ fn first_char_upper_or(value : String, fallback : String) -> String {
 ///|
 fn suffix_after_n_chars_or(
   value : String,
-  n : Int,
+  n : Int32,
   fallback : String,
 ) -> String {
   if n <= 0 {

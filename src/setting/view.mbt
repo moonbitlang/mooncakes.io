@@ -50,8 +50,8 @@ priv struct SettingActions {
 ///|
 priv enum NavbarMsg {
   Logout
-  LoggedOut(Int, Json)
-  ProfileLoaded(Int, Json)
+  LoggedOut(Int32, Json)
+  ProfileLoaded(Int32, Json)
 }
 
 ///|
@@ -195,9 +195,9 @@ fn field(
   title : String,
   value : String,
   on_change : (String) -> Cmd,
-  input_type? : @html.InputType = Text,
-  placeholder? : String = "",
-  disabled? : Bool = false,
+  input_type~ : @html.InputType = Text,
+  placeholder~ : String = "",
+  disabled~ : Bool = false,
 ) -> Html {
   let id = "setting-\{name}"
   @rui.form_field(name~, required=true) <| [
@@ -254,7 +254,7 @@ priv enum AuthFormMsg {
   Submit
   SendCode
   GitHub
-  Response(AuthResponse, Int, Json)
+  Response(AuthResponse, Int32, Json)
 }
 
 ///|
@@ -612,7 +612,7 @@ fn account_row(
   icon : Html,
   title : String,
   description : String,
-  action? : Html = nothing,
+  action~ : Html = nothing,
 ) -> Html {
   div(class="flex flex-wrap items-center gap-4 px-5 py-5 sm:px-6") <| [
     span(
@@ -853,7 +853,7 @@ priv enum SettingsMsg {
   Reveal(String)
   Copy(ApiToken)
   Copied(String, Bool)
-  Response(SettingsResponse, Int, Json)
+  Response(SettingsResponse, Int32, Json)
   TokenNameChanged(String)
 }
 

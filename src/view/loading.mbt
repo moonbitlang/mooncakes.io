@@ -33,7 +33,7 @@ pub fn loading() -> Html {
 }
 
 ///|
-pub fn skeleton_module_cards(count : Int) -> Html {
+pub fn skeleton_module_cards(count : Int32) -> Html {
   let card = fn() {
     div(
       class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-md px-4 py-3.5 flex flex-col gap-2.5",
@@ -75,7 +75,7 @@ pub fn skeleton_profile() -> Html {
 }
 
 ///|
-pub fn skeleton_published_modules(count : Int) -> Html {
+pub fn skeleton_published_modules(count : Int32) -> Html {
   let cards = Array::makei(count, fn(_i) {
     div(
       class="border border-gray-200 dark:border-zinc-800 rounded-lg p-4 bg-white dark:bg-zinc-900 flex flex-col",
@@ -112,7 +112,7 @@ pub fn skeleton_code_frequency() -> Html {
 
 ///|
 pub fn skeleton_docs_content() -> Html {
-  fn api_item(title_w : String, sig_lines : Int, content_w : String) -> Html {
+  fn api_item(title_w : String, sig_lines : Int32, content_w : String) -> Html {
     div(class="mb-3 mt-10") <| [
       // Title bar with border-bottom
       div(

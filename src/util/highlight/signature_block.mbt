@@ -15,7 +15,7 @@
 ///|
 priv enum State {
   LexStart
-  LexSpace(Int)
+  LexSpace(Int32)
   LexIdent(List[Char])
   LexQual(List[Char])
   LexQualIdent(Array[String], List[Char])
@@ -49,117 +49,121 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
       (LexStart, ['\n', .. s], acc) =>
         // newline
         // TODO: fix this comment
-        go(LexStart, s, acc.add(Newline))
+        go(LexStart, s, acc.prepend(Newline))
 
       // spaces
       (LexStart, [' ', .. s], acc) => go(LexSpace(1), s, acc)
       (LexSpace(n), [' ', .. s], acc) => go(LexSpace(n + 1), s, acc)
-      (LexSpace(n), s, acc) => go(LexStart, s, acc.add(Space(n)))
+      (LexSpace(n), s, acc) => go(LexStart, s, acc.prepend(Space(n)))
 
       // comment
-      (LexStart, [.. "//", .. s], acc) => go(LexComment(@list.empty()), s, acc)
+      (LexStart, [.. "//", .. s], acc) => go(LexComment(List([])), s, acc)
       (LexComment(content), ['\n', .. s] | ([] as s), acc) => {
         let content = String::from_iter(content.rev().iter())
-        go(LexStart, s, acc.add(Comment("//\{content}")).add(Newline))
+        go(LexStart, s, acc.prepend(Comment("//\{content}")).prepend(Newline))
       }
       (LexComment(content), [c, .. s], acc) =>
-        go(LexComment(content.add(c)), s, acc)
+        go(LexComment(content.prepend(c)), s, acc)
 
       // link
       (LexStart, [.. "<a href=\"", .. s], acc) =>
-        go(LexLinkHref(@list.empty()), s, acc)
+        go(LexLinkHref(List([])), s, acc)
       (LexLinkHref(href), [.. "\">", .. s], acc) => {
         let href = String::from_iter(href.rev().iter())
-        go(LexLinkContent(href~, @list.empty()), s, acc)
+        go(LexLinkContent(href~, List([])), s, acc)
       }
       (LexLinkHref(href), [c, .. s], acc) =>
-        go(LexLinkHref(href.add(c)), s, acc)
+        go(LexLinkHref(href.prepend(c)), s, acc)
       (LexLinkContent(href~, content), [.. "</a>", .. s], acc) => {
         let content = content.rev().iter() |> String::from_iter
         let spans = parse_signature(content)
-        go(LexStart, s, acc.add(Link(href~, spans.to_array())))
+        go(LexStart, s, acc.prepend(Link(href~, spans.to_array())))
       }
       (LexLinkContent(href~, content), [c, .. s], acc) =>
-        go(LexLinkContent(href~, content.add(c)), s, acc)
+        go(LexLinkContent(href~, content.prepend(c)), s, acc)
 
       // numbers
-      (LexStart, ['0'..='9' as c, .. s], acc) =>
+      (LexStart, ['0'..<='9' as c, .. s], acc) =>
         go(LexNumber(List([c])), s, acc)
       // TODO: fix this bad formatting
       (
         LexNumber(nums),
         [
-          '0'..='9'
+          '0'..<='9'
           | '_'
           | 'x'
           | 'b'
           | 'o'
           | '.'
-          | 'a'..='f'
-          | 'A'..='F' as c,
+          | 'a'..<='f'
+          | 'A'..<='F' as c,
           .. s,
         ],
         acc,
-      ) => go(LexNumber(nums.add(c)), s, acc)
+      ) => go(LexNumber(nums.prepend(c)), s, acc)
       (LexNumber(nums), s, acc) => {
         let nums = nums.rev().iter() |> String::from_iter
-        go(LexStart, s, acc.add(Number(nums)))
+        go(LexStart, s, acc.prepend(Number(nums)))
       }
 
       // strings
-      (LexStart, ['"', .. s], acc) => go(LexString(@list.empty()), s, acc)
+      (LexStart, ['"', .. s], acc) => go(LexString(List([])), s, acc)
       (LexString(content), [.. "\\\"", .. s], acc) =>
-        go(LexString(content.add('\\').add('"')), s, acc)
+        go(LexString(content.prepend('\\').prepend('"')), s, acc)
       (LexString(content), ['"', .. s], acc) => {
         let content = String::from_iter(content.rev().iter())
-        go(LexStart, s, acc.add(StringLit("\"\{content}\"")))
+        go(LexStart, s, acc.prepend(StringLit("\"\{content}\"")))
       }
       (LexString(content), [c, .. s], acc) =>
-        go(LexString(content.add(c)), s, acc)
+        go(LexString(content.prepend(c)), s, acc)
 
       // strings
-      (LexStart, ['\'', .. s], acc) => go(LexChar(@list.empty()), s, acc)
+      (LexStart, ['\'', .. s], acc) => go(LexChar(List([])), s, acc)
       (LexChar(content), [.. "\\\'", .. s], acc) =>
-        go(LexChar(content.add('\\').add('\'')), s, acc)
+        go(LexChar(content.prepend('\\').prepend('\'')), s, acc)
       (LexChar(content), ['\'', .. s], acc) => {
         let content = String::from_iter(content.rev().iter())
-        go(LexStart, s, acc.add(CharLit("'\{content}'")))
+        go(LexStart, s, acc.prepend(CharLit("'\{content}'")))
       }
-      (LexChar(content), [c, .. s], acc) => go(LexChar(content.add(c)), s, acc)
+      (LexChar(content), [c, .. s], acc) =>
+        go(LexChar(content.prepend(c)), s, acc)
 
       // multiline string
       // LexStart, [.. "#|", .. s], acc => continue LexMultiString(Nil), s, acc
       (LexStart, ['#' | '$' as c, '|', .. s], acc) =>
-        go(LexMultiString(@list.empty().add(c).add('|')), s, acc)
+        go(LexMultiString(List([]).prepend(c).prepend('|')), s, acc)
       (LexMultiString(content), ['\n', .. s] | ([] as s), acc) => {
         let content = content.rev().iter() |> String::from_iter
-        go(LexStart, s, acc.add(StringLit(content)).add(Newline))
+        go(LexStart, s, acc.prepend(StringLit(content)).prepend(Newline))
       }
       (LexMultiString(content), [c, .. s], acc) =>
-        go(LexMultiString(content.add(c)), s, acc)
+        go(LexMultiString(content.prepend(c)), s, acc)
 
       // attributes: #attribute or #attribute.name
-      (LexStart, ['#', 'a'..='z' as c, .. s], acc) =>
+      (LexStart, ['#', 'a'..<='z' as c, .. s], acc) =>
         go(LexAttr(List([c])), s, acc)
       (
         LexAttr(content),
-        ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' | '.' as c, .. s],
+        ['A'..<='Z' | 'a'..<='z' | '0'..<='9' | '_' | '.' as c, .. s],
         acc,
-      ) => go(LexAttr(content.add(c)), s, acc)
+      ) => go(LexAttr(content.prepend(c)), s, acc)
       (LexAttr(content), s, acc) => {
         let content = String::from_iter(content.rev().iter())
-        go(LexStart, s, acc.add(Attr("#\{content}")))
+        go(LexStart, s, acc.prepend(Attr("#\{content}")))
       }
 
       // identifiers
-      (LexStart, ['A'..='Z' | 'a'..='z' | '_' as c, .. s], acc) =>
+      (LexStart, ['A'..<='Z' | 'a'..<='z' | '_' as c, .. s], acc) =>
         go(LexIdent(List([c])), s, acc)
-      (LexIdent(id), ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s], acc) =>
-        go(LexIdent(id.add(c)), s, acc)
+      (
+        LexIdent(id),
+        ['A'..<='Z' | 'a'..<='z' | '0'..<='9' | '_' as c, .. s],
+        acc,
+      ) => go(LexIdent(id.prepend(c)), s, acc)
       (LexIdent(id), s, acc) => {
         let id = String::from_iter(id.rev().iter())
         let span = match id[0] {
-          'a'..='z' =>
+          'a'..<='z' =>
             if keywords.contains(id) {
               Keyword(id)
             } else {
@@ -167,53 +171,53 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
             }
           _ => UIdent(id)
         }
-        go(LexStart, s, acc.add(span))
+        go(LexStart, s, acc.prepend(span))
       }
 
       // qualified ident
-      (LexStart, ['@', .. s], acc) => go(LexQual(@list.empty()), s, acc)
+      (LexStart, ['@', .. s], acc) => go(LexQual(List([])), s, acc)
       (LexQual(path), ['.', .. s], acc) => {
         let path = String::from_iter(path.rev().iter())
           .split("/")
           .map(StringView::to_owned)
           .collect()
-        go(LexQualIdent(path, @list.empty()), s, acc)
+        go(LexQualIdent(path, List([])), s, acc)
       }
-      (LexQual(path), [c, .. s], acc) => go(LexQual(path.add(c)), s, acc)
+      (LexQual(path), [c, .. s], acc) => go(LexQual(path.prepend(c)), s, acc)
       (LexQual(path), [], acc) => {
         let path = String::from_iter(path.rev().iter())
-        acc.add(LIdent("@\{path}")).rev()
+        acc.prepend(LIdent("@\{path}")).rev()
       }
       (
         LexQualIdent(path, id),
-        ['A'..='Z' | 'a'..='z' | '0'..='9' | '_' as c, .. s],
+        ['A'..<='Z' | 'a'..<='z' | '0'..<='9' | '_' as c, .. s],
         acc,
-      ) => go(LexQualIdent(path, id.add(c)), s, acc)
+      ) => go(LexQualIdent(path, id.prepend(c)), s, acc)
       (LexQualIdent(path, id), s, acc) => {
         let id = String::from_iter(id.rev().iter())
-        go(LexStart, s, acc.add(QualIdent(path.join("/"), id)))
+        go(LexStart, s, acc.prepend(QualIdent(path.join("/"), id)))
       }
 
       // operators
       (LexStart, [c, .. s], acc) if operators.contains(c) =>
         go(LexOp(List([c])), s, acc)
       (LexOp(op), [c, .. s], acc) if operators.contains(c) =>
-        go(LexOp(op.add(c)), s, acc)
+        go(LexOp(op.prepend(c)), s, acc)
       (LexOp(op), s, acc) => {
         let op = String::from_iter(op.rev().iter())
         if s is [.. "a href=\"", .. s] {
           go(
-            LexLinkHref(@list.empty()),
+            LexLinkHref(List([])),
             s,
-            acc.add(Symbol(op.view(end_offset=op.length() - 1).to_owned())),
+            acc.prepend(Symbol(op.view(end_offset=op.length() - 1).to_owned())),
           )
         } else {
-          go(LexStart, s, acc.add(Symbol(op)))
+          go(LexStart, s, acc.prepend(Symbol(op)))
         }
       }
-      (_, [c, .. s], acc) => go(LexStart, s, acc.add(Unknown("\{c}")))
+      (_, [c, .. s], acc) => go(LexStart, s, acc.prepend(Unknown("\{c}")))
       (_, [], acc) => acc.rev()
     }
   }
-  go(LexStart, signature.view(), @list.empty())
+  go(LexStart, signature.view(), List([]))
 }

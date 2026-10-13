@@ -45,10 +45,10 @@ struct CatalogModel {
 
 ///|
 struct PackageCount {
-  total_modules : Int
-  total_packages : Int
-  total_lines : Int
-  total_downloads : Int
+  total_modules : Int32
+  total_packages : Int32
+  total_lines : Int32
+  total_downloads : Int32
 } derive(Eq)
 
 ///|

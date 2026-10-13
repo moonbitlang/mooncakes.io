@@ -14,7 +14,7 @@
 
 ///|
 /// Compare two strings in dictionary order
-fn compare_strings(a : String, b : String) -> Int {
+fn compare_strings(a : String, b : String) -> Int32 {
   let len_a = a.length()
   let len_b = b.length()
   let min_len = if len_a < len_b { len_a } else { len_b }
@@ -71,7 +71,7 @@ fn IndexNode::to_document_items(
 }
 
 ///|
-fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int {
+fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int32 {
   compare_strings(a.get_name(), b.get_name())
 }
 

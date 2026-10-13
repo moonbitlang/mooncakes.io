@@ -104,16 +104,16 @@ test "decode skill deprecation and older responses" {
     "archive_url": "/skills.zip",
     "created_at": "2026-06-10T00:00:00Z",
   }
-  let older : WasmEntry = @json.from_json(fields.to_json())
+  let older : WasmEntry = @json.from_json(Json(fields))
   assert_eq(older.yanked, None)
   fields["yanked"] = true
   fields["yanked_reason"] = "Use alice/cowsay-next."
-  let deprecated : WasmEntry = @json.from_json(fields.to_json())
+  let deprecated : WasmEntry = @json.from_json(Json(fields))
   assert_eq(deprecated.yanked, Some("Use alice/cowsay-next."))
   fields["yanked_reason"] = null
-  let without_reason : WasmEntry = @json.from_json(fields.to_json())
+  let without_reason : WasmEntry = @json.from_json(Json(fields))
   assert_eq(without_reason.yanked, Some(""))
   fields["yanked"] = false
-  let restored : WasmEntry = @json.from_json(fields.to_json())
+  let restored : WasmEntry = @json.from_json(Json(fields))
   assert_eq(restored.yanked, None)
 }

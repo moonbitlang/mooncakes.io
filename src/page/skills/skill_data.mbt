@@ -12,8 +12,8 @@ priv enum ListUiMsg {
 struct ListUiModel {
   filter : String
   copied_command : String
-  showcase_index : Int
-  showcase_chars : Int
+  showcase_index : Int32
+  showcase_chars : Int32
 } derive(Eq)
 
 ///|

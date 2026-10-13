@@ -8,7 +8,7 @@ fn value_string(value : Json, key : String) -> String {
 }
 
 ///|
-fn error_message(status : Int, body : Json) -> String {
+fn error_message(status : Int32, body : Json) -> String {
   let detail = value_string(body, "detail")
   if detail != "" {
     detail
@@ -38,7 +38,7 @@ fn decode_tokens(body : Json) -> Array[ApiToken]? {
 // both, so account requests can handle 401 and display backend validation errors.
 #warnings("-alert_experimental")
 extenum @cmd.Extension += {
-  SettingRequest(String, Json, @async_http.RequestMethod, (Int, Json) -> Cmd)
+  SettingRequest(String, Json, @async_http.RequestMethod, (Int32, Json) -> Cmd)
 }
 
 ///|
@@ -88,8 +88,8 @@ let setting_request : @cmd.Op = @cmd.Op()
 fn request(
   path : String,
   body : Json,
-  on_response : (Int, Json) -> Cmd,
-  http_method? : @async_http.RequestMethod = Post,
+  on_response : (Int32, Json) -> Cmd,
+  http_method~ : @async_http.RequestMethod = Post,
 ) -> Cmd {
   setting_request.request(SettingRequest(path, body, http_method, on_response))
 }

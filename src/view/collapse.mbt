@@ -24,7 +24,7 @@ pub fn collapse(
   body~ : Html,
   collapsed~ : Bool,
   toggle~ : Cmd,
-  caret_config? : CaretConfig = LeftTop,
+  caret_config~ : CaretConfig = LeftTop,
 ) -> Html {
   let (body, icon) = if collapsed {
     (nothing, @config.section_close)

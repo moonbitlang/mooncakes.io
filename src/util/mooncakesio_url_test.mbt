@@ -1,5 +1,5 @@
 ///|
-fn test_url(path : String, fragment? : String? = None) -> @url.Url {
+fn test_url(path : String, fragment~ : String? = None) -> @url.Url {
   test_url_with_host("mooncakes.io", path, fragment~)
 }
 
@@ -7,7 +7,7 @@ fn test_url(path : String, fragment? : String? = None) -> @url.Url {
 fn test_url_with_host(
   host : String,
   path : String,
-  fragment? : String? = None,
+  fragment~ : String? = None,
 ) -> @url.Url {
   { protocol: Https, host, port: None, path, query: None, fragment, }
 }

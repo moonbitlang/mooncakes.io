@@ -54,7 +54,7 @@ pub extend MooncakePath with Eq::{equal, not_equal}
 pub fn MooncakePath::is_same_module(
   self : Self,
   other : UnsolvedMooncakePath,
-  check_version? : Bool = true,
+  check_version~ : Bool = true,
 ) -> Bool {
   match
     MooncakePath::resolve(
@@ -71,7 +71,7 @@ pub fn MooncakePath::is_same_module(
 pub fn MooncakePath::is_same_package(
   self : Self,
   other : UnsolvedMooncakePath,
-  check_version? : Bool = true,
+  check_version~ : Bool = true,
 ) -> Bool {
   match
     MooncakePath::resolve(

@@ -1,8 +1,8 @@
 ///|
 fn command_line(
   entries : Status[Array[WasmEntry]],
-  showcase_index : Int,
-  showcase_chars : Int,
+  showcase_index : Int32,
+  showcase_chars : Int32,
 ) -> Html {
   let path = match entries {
     Loaded(entries) if entries.length() > 0 =>
@@ -54,7 +54,7 @@ fn command_line(
 }
 
 ///|
-fn visible_path_chars(path : String, frame : Int) -> Int {
+fn visible_path_chars(path : String, frame : Int32) -> Int32 {
   let path_length = path.iter().count()
   let hold_frames = 30
   let delete_step = 4
@@ -73,7 +73,7 @@ fn visible_path_chars(path : String, frame : Int) -> Int {
 }
 
 ///|
-fn command_prefix(command : String, count : Int) -> String {
+fn command_prefix(command : String, count : Int32) -> String {
   if count <= 0 {
     ""
   } else if count >= command.iter().count() {
@@ -87,8 +87,8 @@ fn command_prefix(command : String, count : Int) -> String {
 ///|
 fn runwasm_showcase(
   entries : Status[Array[WasmEntry]],
-  showcase_index : Int,
-  showcase_chars : Int,
+  showcase_index : Int32,
+  showcase_chars : Int32,
 ) -> Html {
   div(
     class="mx-auto w-full max-w-[90rem] px-4 pb-10 pt-16 sm:px-6 lg:px-8 lg:pt-20",
@@ -185,8 +185,8 @@ fn hero_feature_card(
   body : String,
   action : String,
   icon : String,
-  action_href? : String = "",
-  highlighted? : Bool = false,
+  action_href~ : String = "",
+  highlighted~ : Bool = false,
   browse~ : Cmd,
 ) -> Html {
   let border_class = if highlighted {
@@ -533,7 +533,7 @@ fn entry_card(entry : WasmEntry, copied_command : String, copy~ : Cmd) -> Html {
 }
 
 ///|
-fn skeleton_skill_cards(count : Int) -> Html {
+fn skeleton_skill_cards(count : Int32) -> Html {
   let card = fn() {
     div(
       class="flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
@@ -694,7 +694,7 @@ fn looks_like_skill_frontmatter(line : StringView) -> Bool {
 fn strip_skill_frontmatter(content : String) -> String {
   let lines = content.split("\n").to_array()
   guard lines.length() > 2 && is_frontmatter_line(lines[0]) else { content }
-  let mut close_index : Int? = None
+  let mut close_index : Int32? = None
   let mut has_metadata = false
   for i, line in lines {
     if i > 0 {

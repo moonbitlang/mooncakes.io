@@ -1,5 +1,5 @@
 ///|
-fn parse_int(value : StringView) -> Int? {
+fn parse_int(value : StringView) -> Int32? {
   try @string.parse_int(value) catch {
     _ => None
   } noraise {
@@ -22,7 +22,7 @@ fn parse_plain_datetime(value : StringView) -> Int64? {
 }
 
 ///|
-fn parse_timezone_offset(value : StringView) -> Int? {
+fn parse_timezone_offset(value : StringView) -> Int32? {
   let fields = value.split(":").to_array()
   let parts = match fields {
     [hours, minutes] => Some((hours, minutes))
@@ -58,7 +58,7 @@ pub fn iso8601_to_unix_seconds(value : String) -> Int64? {
   if value.strip_suffix("z") is Some(body) {
     return parse_plain_datetime(body)
   }
-  let mut offset_start : Int? = None
+  let mut offset_start : Int32? = None
   let mut offset_sign = '+'
   for index, char in value.iter2() {
     if index > 10 && (char == '+' || char == '-') {
@@ -87,7 +87,7 @@ pub fn iso8601_to_unix_seconds(value : String) -> Int64? {
 }
 
 ///|
-fn two_digits(value : Int) -> String {
+fn two_digits(value : Int32) -> String {
   if value < 10 {
     "0\{value}"
   } else {
@@ -96,7 +96,7 @@ fn two_digits(value : Int) -> String {
 }
 
 ///|
-fn civil_date_from_unix_day(unix_day : Int64) -> (Int, Int, Int) {
+fn civil_date_from_unix_day(unix_day : Int64) -> (Int32, Int32, Int32) {
   let shifted = unix_day + 719468L
   let era = if shifted >= 0L {
     shifted / 146097L
@@ -126,7 +126,7 @@ fn civil_date_from_unix_day(unix_day : Int64) -> (Int, Int, Int) {
 
 ///|
 /// Returns a UTC calendar date relative to today.
-pub fn utc_date_days_ago(days : Int) -> String {
+pub fn utc_date_days_ago(days : Int32) -> String {
   let unix_day = @env.now().reinterpret_as_int64() / 86400000L - days.to_int64()
   let (year, month, day) = civil_date_from_unix_day(unix_day)
   "\{year}-\{two_digits(month)}-\{two_digits(day)}"
@@ -183,7 +183,7 @@ pub fn get_relative_time(date : String) -> String {
 }
 
 ///|
-pub fn recency_penalty(date : String) -> Int {
+pub fn recency_penalty(date : String) -> Int32 {
   guard iso8601_to_unix_seconds(date) is Some(date_seconds) else { return 200 }
   let now_seconds = @env.now().reinterpret_as_int64() / 1000L
   let elapsed = if now_seconds > date_seconds {

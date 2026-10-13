@@ -6,11 +6,11 @@ pub(all) enum NavbarStyle {
 
 ///|
 pub fn navbar(
-  left? : Html = logo(),
+  left~ : Html = logo(),
   left_extra? : Html,
   middle? : Html,
   right? : Html,
-  style? : NavbarStyle = Sticky,
+  style~ : NavbarStyle = Sticky,
 ) -> Html {
   let class = match style {
     Sticky =>

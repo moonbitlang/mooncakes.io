@@ -1,8 +1,8 @@
 ///|
 pub fn page(
-  header? : Html = navbar(),
+  header~ : Html = navbar(),
   main? : Html,
-  footer? : Html = footer(),
+  footer~ : Html = footer(),
 ) -> Html {
   div(
     class="w-full flex-col bg-zinc-50 dark:bg-zinc-950 dark:[--sidebar-bg:var(--color-zinc-950)]",

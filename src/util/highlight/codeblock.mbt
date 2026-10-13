@@ -28,7 +28,7 @@ pub(all) enum CodeSpan {
   CharLit(String)
   Number(String)
   Newline
-  Space(Int)
+  Space(Int32)
   Comment(String)
   Attr(String)
 } derive(Debug)
@@ -177,7 +177,7 @@ fn interp_to_string(
 
 ///|
 /// see https://github.com/moonbitlang/parser/issues/77
-fn token_to_real_column(triple : @tokens.Triple) -> Int {
+fn token_to_real_column(triple : @tokens.Triple) -> Int32 {
   let column = triple.1.column()
   match triple.0 {
     DOT_INT(_) | DOT_LIDENT(_) | DOT_UIDENT(_) => column - 1
@@ -186,7 +186,7 @@ fn token_to_real_column(triple : @tokens.Triple) -> Int {
 }
 
 ///|
-fn token_to_real_column_end(triple : @tokens.Triple) -> Int {
+fn token_to_real_column_end(triple : @tokens.Triple) -> Int32 {
   triple.2.column()
 }
 

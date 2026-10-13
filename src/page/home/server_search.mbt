@@ -45,7 +45,7 @@ impl @json.FromJson for PackageMatch with fn from_json(value, path) {
 struct SearchResult {
   module_info : ModuleIndex
   downloads : Int64?
-  matched_package_count : Int
+  matched_package_count : Int32
   matched_packages : Array[PackageMatch]
 } derive(Eq, @debug.Debug)
 
@@ -79,7 +79,7 @@ enum SearchPhase {
 ///|
 struct SearchModel {
   input : String
-  request_id : Int
+  request_id : Int32
   phase : SearchPhase
   results : Array[SearchResult]
 } derive(Eq, @debug.Debug)
@@ -87,17 +87,17 @@ struct SearchModel {
 ///|
 priv enum SearchMsg {
   Changed(String)
-  Debounced(Int)
-  Completed(Int, Result[Array[SearchResult], Error])
-  TimedOut(Int)
+  Debounced(Int32)
+  Completed(Int32, Result[Array[SearchResult], Error])
+  TimedOut(Int32)
   Retry
 }
 
 ///|
 enum SearchAction {
   Nothing
-  Schedule(Int)
-  Fetch(Int, String)
+  Schedule(Int32)
+  Fetch(Int32, String)
 } derive(Eq, @debug.Debug)
 
 ///|

@@ -33,7 +33,7 @@ fn tag(value : String) -> Html {
 }
 
 ///|
-fn format_downloads(n : Int) -> String {
+fn format_downloads(n : Int32) -> String {
   if n >= 1000000 {
     "\{n / 1000000}M"
   } else if n >= 1000 {

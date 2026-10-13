@@ -19,8 +19,8 @@ pub fn[C : @html.IsChildren] button(
   children : C,
   on_click? : Cmd,
   title? : String,
-  class? : String = "",
-  style? : Array[String] = [],
+  class~ : String = "",
+  style~ : Array[String] = [],
   attrs? : @html.Attrs,
 ) -> Html {
   @html.button(

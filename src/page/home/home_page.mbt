@@ -125,7 +125,7 @@ fn pinned() -> Html {
 }
 
 ///|
-fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
+fn compact_module_card(mod : ModuleIndex, show_time~ : Bool = false) -> Html {
   let href = "/docs/\{versioned_path(mod)}"
   let badge = if show_time {
     text(mod.created_at.map(@util.get_relative_time).unwrap_or(""))
@@ -160,7 +160,7 @@ fn compact_module_card(mod : ModuleIndex, show_time? : Bool = false) -> Html {
 fn module_list_column(
   title : String,
   modules : Array[ModuleIndex],
-  show_time? : Bool = false,
+  show_time~ : Bool = false,
 ) -> Html {
   div(class="flex flex-col gap-2") <| [
     h2(class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400", title),
@@ -241,9 +241,9 @@ test "format_stat_text groups digits and placeholders" {
 
 ///|
 fn banner(
-  total_modules~ : Int,
-  total_packages~ : Int,
-  total_downloads~ : Int,
+  total_modules~ : Int32,
+  total_packages~ : Int32,
+  total_downloads~ : Int32,
 ) -> Html {
   fn button(value, target, color) {
     a(
@@ -253,7 +253,7 @@ fn banner(
     )
   }
 
-  fn stat_card(label, value : Int, invisible : Bool, child : Html?) {
+  fn stat_card(label, value : Int32, invisible : Bool, child : Html?) {
     let bottom = match child {
       None => "pb-2 lg:pb-6"
       Some(_) => "pb-2"
@@ -282,7 +282,7 @@ fn banner(
     ]
   }
 
-  fn stat_bubble(label, value : Int, extra_class : String) {
+  fn stat_bubble(label, value : Int32, extra_class : String) {
     let value = if value == 0 {
       format_stat_text("----")
     } else {

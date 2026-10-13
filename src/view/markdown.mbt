@@ -147,7 +147,7 @@ fn block2html(
   link_defs~ : Map[String, String],
   used_heading_ids~ : Map[String, Unit],
   transform_link? : (String) -> String,
-  paragraph_margin? : Bool = false,
+  paragraph_margin~ : Bool = false,
 ) -> @html.Html {
   match x {
     BlankLine(_) => p(nothing)
@@ -457,8 +457,8 @@ fn unwrap_inline_link(
 ///|
 pub fn markdown(
   markdown : String,
-  small_heading? : Bool = false,
-  heading_anchors? : Bool = false,
+  small_heading~ : Bool = false,
+  heading_anchors~ : Bool = false,
   transform_link? : (String) -> String,
 ) -> @html.Html {
   let doc = @cmark.Doc::from_string(markdown, strict=false)
@@ -516,7 +516,7 @@ test "markdown renders empty image alt without panic" {
 fn markdown_url(
   raw : String,
   transform_link? : (String) -> String,
-  image? : Bool = false,
+  image~ : Bool = false,
 ) -> String {
   guard allowed_markdown_url(raw, image~) else { return "#" }
   let transformed = if transform_link is Some(f) { f(raw) } else { raw }

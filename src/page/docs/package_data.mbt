@@ -27,8 +27,8 @@ priv struct PackageData {
 priv struct Loc {
   path : String
   file : String
-  line : Int
-  column : Int
+  line : Int32
+  column : Int32
 } derive(Debug, Eq)
 
 ///|

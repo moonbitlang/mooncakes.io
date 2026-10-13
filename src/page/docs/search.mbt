@@ -15,7 +15,7 @@
 ///|
 priv struct SearchResult {
   matching : Array[(Bool, StringView)]
-  score : Int
+  score : Int32
   entry : SearchEntry
 }
 

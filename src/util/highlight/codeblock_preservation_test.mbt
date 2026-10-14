@@ -69,7 +69,7 @@ test "code highlighting preserves operators ranges and transparent labels" {
     source in [
       "value += 1", "text =~ pattern", "f <| value", "output <+ value", "output <? value",
       "[|1, 2|]", "0..=9", "0..<=9", "0..<9", "9>..0", "9>=..0", "∀", "∃", "true → false",
-      "f(label~~)",
+      "label~~: { break label~~ 1 }",
     ] {
     assert_eq(highlighted_text(source), source)
   }

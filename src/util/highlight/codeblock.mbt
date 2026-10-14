@@ -168,10 +168,9 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     TRY_EXCLAMATION => dst.push(Symbol("try!"))
     ATTRIBUTE((id1, id2, str)) => {
       dst.push(
-        if id2 is Some(id2) {
-          Attr("#\{id1}.\{id2}")
-        } else {
-          Attr("#\{id1}")
+        match id2 {
+          None => Attr("#\{id1}")
+          Some(id2) => Attr("#\{id1}.\{id2}")
         },
       )
       push_code_to_span(str, dst)

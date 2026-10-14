@@ -38,24 +38,38 @@ pub extend CodeSpan with @debug.Debug::{to_repr}
 
 ///|
 fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
+  // Keep this exhaustive so new lexer tokens cannot silently disappear.
   match token {
     NEWLINE => dst.push(Newline)
-    TRY_QUESTION => dst.push(Keyword("try!"))
+    TRY_QUESTION => dst.push(Keyword("try?"))
     NORAISE => dst.push(Keyword("noraise"))
+    NOCANCEL => dst.push(Keyword("nocancel"))
+    NOBREAK => dst.push(Keyword("nobreak"))
+    WHERE => dst.push(Keyword("where"))
+    DECLARE => dst.push(Keyword("declare"))
     ENUMVIEW => dst.push(Keyword("enumview"))
+    EXTENUM => dst.push(Keyword("extenum"))
     LETREC => dst.push(Keyword("letrec"))
     AND => dst.push(Keyword("and"))
+    FORALL => dst.push(Symbol("∀"))
+    EXISTS => dst.push(Symbol("∃"))
+    IMPLIES => dst.push(Symbol("→"))
     SUBERROR => dst.push(Keyword("suberror"))
     IS => dst.push(Keyword("is"))
     IN => dst.push(Keyword("in"))
     FOR => dst.push(Keyword("for"))
     DEFER => dst.push(Keyword("defer"))
+    ERRDEFER => dst.push(Keyword("errdefer"))
     GUARD => dst.push(Keyword("guard"))
+    GUARD_EXCLAMATION => dst.push(Keyword("guard!"))
     LOOP => dst.push(Keyword("loop"))
     TEST => dst.push(Keyword("test"))
     ELLIPSIS => dst.push(Symbol("..."))
     RANGE_EXCLUSIVE => dst.push(Symbol("..<"))
-    RANGE_INCLUSIVE => dst.push(Symbol("...="))
+    RANGE_INCLUSIVE => dst.push(Symbol("..="))
+    RANGE_LT_INCLUSIVE => dst.push(Symbol("..<="))
+    RANGE_INCLUSIVE_REV => dst.push(Symbol(">=.."))
+    RANGE_EXCLUSIVE_REV => dst.push(Symbol(">.."))
     DOTDOT => dst.push(Symbol(".."))
     RETURN => dst.push(Keyword("return"))
     WHILE => dst.push(Keyword("while"))
@@ -65,12 +79,20 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     MUTABLE => dst.push(Keyword("mut"))
     USING => dst.push(Keyword("using"))
     MATCH => dst.push(Keyword("match"))
+    LEXMATCH => dst.push(Keyword("lexmatch"))
+    LEXSCAN => dst.push(Keyword("lexscan"))
     CONST => dst.push(Keyword("const"))
     LET => dst.push(Keyword("let"))
+    VAR => dst.push(Keyword("var"))
+    PROOF_ASSERT => dst.push(Keyword("proof_assert"))
+    PROOF_LET => dst.push(Keyword("proof_let"))
     IF => dst.push(Keyword("if"))
     FN => dst.push(Keyword("fn"))
     ELSE => dst.push(Keyword("else"))
     PIPE => dst.push(Symbol("|>"))
+    PIPE_LEFT => dst.push(Symbol("<|"))
+    LT_PLUS => dst.push(Symbol("<+"))
+    LT_QUESTION => dst.push(Symbol("<?"))
     AS => dst.push(Keyword("as"))
     PACKAGE_NAME(n) => dst.push(LIdent("@\{n}"))
     BARBAR => dst.push(Symbol("||"))
@@ -82,9 +104,11 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     BAR => dst.push(Symbol("|"))
     UNDERSCORE => dst.push(Symbol("_"))
     RBRACKET => dst.push(Symbol("]"))
+    BAR_RBRACKET => dst.push(Symbol("|]"))
     PLUS => dst.push(Symbol("+"))
     STAR => dst.push(Symbol("*"))
     LBRACKET => dst.push(Symbol("["))
+    LBRACKET_BAR => dst.push(Symbol("[|"))
     SEMI(true) => dst.push(Symbol(";"))
     SEMI(false) => dst.push(Space(0))
     COLON => dst.push(Symbol(":"))
@@ -100,6 +124,8 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     RPAREN => dst.push(Symbol(")"))
     LPAREN => dst.push(Symbol("("))
     EQUAL => dst.push(Symbol("="))
+    EQ_TILDE => dst.push(Symbol("=~"))
+    PLUS_EQUAL => dst.push(Symbol("+="))
     ASYNC => dst.push(Keyword("async"))
     CATCH => dst.push(Keyword("catch"))
     TRY => dst.push(Keyword("try"))
@@ -107,6 +133,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     RAISE => dst.push(Keyword("raise"))
     WITH => dst.push(Keyword("with"))
     IMPL => dst.push(Keyword("impl"))
+    EXTEND => dst.push(Keyword("extend"))
     DERIVE => dst.push(Keyword("derive"))
     TRAIT => dst.push(Keyword("trait"))
     ENUM => dst.push(Keyword("enum"))
@@ -115,6 +142,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     BREAK => dst.push(Keyword("break"))
     EXTERN => dst.push(Keyword("extern"))
     IMPORT => dst.push(Keyword("import"))
+    PACKAGE => dst.push(Keyword("package"))
     READONLY => dst.push(Keyword("readonly"))
     PRIV => dst.push(Keyword("priv"))
     PUB => dst.push(Keyword("pub"))
@@ -125,6 +153,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     INFIX4(op) | INFIX3(op) | INFIX2(op) | INFIX1(op) => dst.push(Symbol(op))
     COMMENT(s) => dst.push(Comment(s.content))
     POST_LABEL(label) => dst.push(LIdent("\{label}~"))
+    POST_LABEL_TRANSPARENT(label) => dst.push(LIdent("\{label}~~"))
     UIDENT(s) => dst.push(UIdent(s))
     LIDENT(s) => dst.push(LIdent(s))
     MULTILINE_STRING(s) => dst.push(StringLit("#|\{s}"))
@@ -132,6 +161,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
     DOUBLE(s) => dst.push(Number(s))
     FLOAT(s) => dst.push(Number(s))
     BYTES(s) => dst.push(StringLit("b\"\{s}\""))
+    REGEX_LITERAL(s) => dst.push(StringLit("re\"\{s}\""))
     BYTE(s) => dst.push(CharLit("b'\{s}'"))
     INT(s) => dst.push(Number(s))
     CHAR(s) => dst.push(CharLit("'\{s}'"))
@@ -140,7 +170,7 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
       dst.push(
         match id2 {
           None => Attr("#\{id1}")
-          Some(id2) => Attr("#\{id1}\{id2}")
+          Some(id2) => Attr("#\{id1}.\{id2}")
         },
       )
       push_code_to_span(str, dst)
@@ -150,11 +180,20 @@ fn push_token_spans(token : @tokens.Token, dst : Array[CodeSpan]) -> Unit {
       interp_to_string(xs, dst)
       dst.push(StringLit("\""))
     }
+    BYTES_INTERP(xs) => {
+      dst.push(StringLit("b\""))
+      interp_to_string(xs, dst)
+      dst.push(StringLit("\""))
+    }
+    REGEX_INTERP(xs) => {
+      dst.push(StringLit("re\""))
+      interp_to_string(xs, dst)
+      dst.push(StringLit("\""))
+    }
     MULTILINE_INTERP(xs) => {
       dst.push(StringLit("$|"))
       interp_to_string(xs, dst)
     }
-    _ => () //FIXME
   }
 }
 

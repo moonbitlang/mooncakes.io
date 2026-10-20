@@ -26,7 +26,6 @@ jobs:
       - name: moon test
         run: |
           moon update
-          moon install
           moon test --target js --serial --release
           moon test --target js --serial
           moon test --target native --serial

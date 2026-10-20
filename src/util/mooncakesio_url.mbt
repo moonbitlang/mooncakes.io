@@ -62,12 +62,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
 ///|
 pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
   match url.path.split("/").collect() {
-    ["/"] | [""] | [] =>
-      if url.host == @config.skills_host() {
-        SkillsList
-      } else {
-        Home
-      }
+    ["/"] | [""] | [] => Home
     ["build-queue"] => BuildQueue
     ["login"] => Setting(Auth(Login))
     ["register"] => Setting(Auth(Register))
@@ -76,8 +71,13 @@ pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
     ["github-failed"] => Setting(GithubFailed)
     ["user", name] => User(name)
     ["assets", ..] => Assets(url)
-    ["skills"] => SkillsList
-    ["skills", .. remain] => SkillsDetail(remain.join("/"))
+    ["skills"] | ["skills", ""] => SkillsList
+    ["skills", .. remain] => {
+      let reference = @utf8.decode(@percent.decode(remain.join("/"))) catch {
+        _ => return NotFound(url.path)
+      }
+      SkillsDetail(reference)
+    }
     ["docs", .. remain] =>
       Docs(UnsolvedMooncakePath::new(remain.join("/")), fragment=url.fragment)
     xs => NotFound(xs.join("/"))

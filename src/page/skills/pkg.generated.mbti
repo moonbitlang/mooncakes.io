@@ -11,6 +11,10 @@ pub fn skill_detail_page(String, app_actions~ : @rabbita.Val[@html.Html]) -> @ra
 
 pub fn skills_list_page(app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
 
+pub fn wasm_detail_page(String, app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
+
+pub fn wasm_list_page(app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
+
 // Errors
 
 // Types and methods

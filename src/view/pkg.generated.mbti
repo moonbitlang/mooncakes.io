@@ -45,11 +45,11 @@ pub fn skeleton_docs_content() -> @html.Html
 
 pub fn skeleton_meta_sidebar() -> @html.Html
 
-pub fn skeleton_module_cards(Int) -> @html.Html
+pub fn skeleton_module_cards(Int32) -> @html.Html
 
 pub fn skeleton_profile() -> @html.Html
 
-pub fn skeleton_published_modules(Int) -> @html.Html
+pub fn skeleton_published_modules(Int32) -> @html.Html
 
 pub fn skeleton_sidebar() -> @html.Html
 

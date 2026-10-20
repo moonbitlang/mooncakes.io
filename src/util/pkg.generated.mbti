@@ -16,9 +16,9 @@ pub fn get_relative_time(String) -> String
 
 pub fn iso8601_to_unix_seconds(String) -> Int64?
 
-pub fn recency_penalty(String) -> Int
+pub fn recency_penalty(String) -> Int32
 
-pub fn utc_date_days_ago(Int) -> String
+pub fn utc_date_days_ago(Int32) -> String
 
 // Errors
 

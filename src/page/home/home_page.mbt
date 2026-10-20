@@ -255,8 +255,8 @@ fn banner(
 
   fn stat_card(label, value : Int32, invisible : Bool, child : Html?) {
     let bottom = match child {
-      None => "pb-2 lg:pb-6"
-      Some(_) => "pb-2"
+      None => "pb-2 max-sm:pb-1 lg:pb-6"
+      Some(_) => "pb-2 max-sm:pb-1"
     }
     let value = if value == 0 {
       format_stat_text("----")
@@ -265,9 +265,12 @@ fn banner(
     }
     let invisible = if invisible { " invisible hidden lg:block " } else { " " }
     div(
-      class="home-stat-card lg:bg-white/50 lg:shadow-sm lg:border overflow-clip lg:rounded-xl min-w-27 w-full lg:max-w-[240px] lg:pl-6 lg:pr-2 mt-2 lg:mt-0 pt-2 lg:pt-6 \{bottom} \{invisible} flex-col gap-2 items-center lg:items-end grow-1 lg:border-b-gray-300/50 lg:backdrop-blur text-center lg:text-left",
+      class="home-stat-card lg:bg-white/50 lg:shadow-sm lg:border overflow-clip max-sm:overflow-visible lg:rounded-xl min-w-27 max-sm:min-w-0 w-full lg:max-w-[240px] lg:pl-6 lg:pr-2 mt-2 max-sm:mt-0 lg:mt-0 pt-2 max-sm:pt-1 lg:pt-6 \{bottom} \{invisible} flex-col gap-2 items-center lg:items-end grow-1 lg:border-b-gray-300/50 lg:backdrop-blur text-center lg:text-left",
     ) <| [
-      p(class="text-2xl lg:text-3xl font-extralight", value),
+      p(
+        class="text-2xl lg:text-3xl font-extralight max-sm:text-[22px] max-sm:leading-tight max-sm:tracking-tight",
+        value,
+      ),
       div(
         class="flex items-center justify-center",
         p(
@@ -301,7 +304,7 @@ fn banner(
   }
 
   div(
-    class="container lg:w-4/5 xl:w-3/4 px-5 sm:px-6 flex flex-col gap-3 lg:flex-row items-center justify-start lg:justify-center lg:gap-6 xl:gap-12 lg:py-8",
+    class="container lg:w-4/5 xl:w-3/4 px-5 max-sm:px-4 sm:px-6 flex flex-col gap-3 max-sm:gap-2 lg:flex-row items-center justify-start lg:justify-center lg:gap-6 xl:gap-12 lg:py-8",
   ) <| [
     div(
       class="text-center lg:text-left mx-4 bg-bottom rounded-xl flex-col lg:max-w-[450px] xl:max-w-[520px] mt-4 lg:mt-0",
@@ -330,8 +333,12 @@ fn banner(
         ),
       ],
     ],
-    div(class="home-hero-media flex relative w-full mt-2 lg:mt-0 sm:w-4/5") <| [
-      div(class="flex w-full flex-row gap-3 z-10 lg:hidden select-none") <| [
+    div(
+      class="home-hero-media flex relative w-full mt-2 max-sm:mt-0 lg:mt-0 sm:w-4/5",
+    ) <| [
+      div(
+        class="flex w-full flex-row gap-3 z-10 lg:hidden select-none max-sm:grid max-sm:grid-cols-[repeat(3,auto)] max-sm:justify-evenly max-sm:gap-1",
+      ) <| [
         stat_card("Packages", total_packages, false, None),
         stat_card("Modules", total_modules, false, None),
         stat_card("Downloads", total_downloads, false, None),

@@ -20,12 +20,23 @@ priv enum CatalogMsg {
 }
 
 ///|
+struct ModuleHighlights {
+  recent : Array[ModuleCard]
+  new_modules : Array[ModuleCard]
+  popular : Array[ModuleCard]
+} derive(Eq)
 
 ///|
-struct ModuleHighlights {
-  recent : Array[ModuleIndex]
-  new_modules : Array[ModuleIndex]
-  popular : Array[ModuleIndex]
+priv struct ModuleCard {
+  module_info : ModuleIndex
+  badge : ModuleCardBadge
+} derive(Eq)
+
+///|
+priv enum ModuleCardBadge {
+  Version
+  PublishedAt
+  Trends(Int64)
 } derive(Eq)
 
 ///|
@@ -155,24 +166,34 @@ impl @json.FromJson for ModuleIndex with fn from_json(json : Json, path) {
 }
 
 ///|
-fn decode_module_array(
-  json : Json,
-  path : @json.JsonPath,
-) -> Array[ModuleIndex] raise @json.JsonDecodeError {
-  match json {
-    Array(items) => items.map(x => decode_module_index(x, path))
-    _ => raise JsonDecodeError((path, "expecting an array"))
-  }
-}
-
-///|
 impl @json.FromJson for ModuleHighlights with fn from_json(json : Json, path) {
   match json {
-    { "recent": recent_json, "new": new_json, "popular": popular_json, .. } =>
+    {
+      "recent": Array(recent),
+      "new": Array(new_modules),
+      "popular": Array(popular),
+      ..
+    } =>
       {
-        recent: decode_module_array(recent_json, path),
-        new_modules: decode_module_array(new_json, path),
-        popular: decode_module_array(popular_json, path),
+        recent: recent.map(item => {
+          module_info: decode_module_index(item, path),
+          badge: PublishedAt,
+        }),
+        new_modules: new_modules.map(item => {
+          module_info: decode_module_index(item, path),
+          badge: PublishedAt,
+        }),
+        popular: popular.map(item => {
+          guard item is { "trends": Number(downloads, ..), .. } else {
+            raise @json.JsonDecodeError(
+              (path, "expecting trends in Trends module"),
+            )
+          }
+          {
+            module_info: decode_module_index(item, path),
+            badge: Trends(downloads.to_int64()),
+          }
+        }),
       }
     _ =>
       raise JsonDecodeError(

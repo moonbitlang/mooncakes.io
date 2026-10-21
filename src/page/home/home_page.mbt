@@ -119,18 +119,31 @@ fn pinned() -> Html {
     ),
     div(
       class="grid grid-cols-1 lg:grid-cols-3 gap-2",
-      pinned.map(fn(m) { compact_module_card(m) }),
+      pinned.map(m => compact_module_card({ module_info: m, badge: Version, })),
     ),
   ]
 }
 
 ///|
-fn compact_module_card(mod : ModuleIndex, show_time~ : Bool = false) -> Html {
+fn compact_module_card(card : ModuleCard) -> Html {
+  let mod = card.module_info
   let href = "/docs/\{versioned_path(mod)}"
-  let badge = if show_time {
-    text(mod.created_at.map(@util.get_relative_time).unwrap_or(""))
-  } else {
-    text(mod.version)
+  let badge = match card.badge {
+    Version => text(mod.version)
+    PublishedAt =>
+      text(mod.created_at.map(@util.get_relative_time).unwrap_or(""))
+    Trends(downloads) => {
+      let count = format_stat_text(downloads.to_string())
+      span(
+        class="inline-flex items-center gap-1",
+        attrs=@html.Attrs::build().aria_label(
+          "\{count} downloads over the past 7 days",
+        ),
+      ) <| [
+        text(count),
+        img(src=@config.download, alt="", class="size-3.5 ui-icon opacity-60"),
+      ]
+    }
   }
   a(
     href~,
@@ -159,32 +172,51 @@ fn compact_module_card(mod : ModuleIndex, show_time~ : Bool = false) -> Html {
 ///|
 fn module_list_column(
   title : String,
-  modules : Array[ModuleIndex],
-  show_time~ : Bool = false,
+  cards : Array[ModuleCard],
+  help? : Html,
 ) -> Html {
   div(class="flex flex-col gap-2") <| [
-    h2(class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400", title),
-    ..modules
-    .iter()
-    .take(12)
-    .map(fn(m) { compact_module_card(m, show_time~) })
-    .collect(),
+    if help is Some(help) {
+      div(class="flex h-9 items-center gap-1 text-gray-600 dark:text-slate-400") <| [
+        h2(class="text-sm font-bold", title),
+        help,
+      ]
+    } else {
+      h2(
+        class="py-2 text-sm font-bold text-gray-600 dark:text-slate-400",
+        title,
+      )
+    },
+    ..cards.iter().take(highlights_limit).map(compact_module_card).collect(),
   ]
 }
 
 ///|
 fn highlights_section(
-  recent : Array[ModuleIndex],
-  new_published : Array[ModuleIndex],
-  popular : Array[ModuleIndex],
-) -> Html {
-  div(class="container lg:w-4/5 px-4 animate-fade-in") <| [
-    div(class="grid grid-cols-1 lg:grid-cols-3 gap-4") <| [
-      module_list_column("Recently updated", recent, show_time=true),
-      module_list_column("Newly published", new_published, show_time=true),
-      module_list_column("Most downloaded", popular),
-    ],
-  ]
+  highlights : @rabbita.Resource[ModuleHighlights],
+) -> Val[Html] {
+  let help = trends_help()
+  highlights.view2(help, (highlights, help) => {
+    match highlights {
+      Loaded(h) =>
+        div(class="container lg:w-4/5 px-4 animate-fade-in") <| [
+          div(class="grid grid-cols-1 lg:grid-cols-3 gap-4") <| [
+            module_list_column("Recently updated", h.recent),
+            module_list_column("Newly published", h.new_modules),
+            module_list_column("Trends", h.popular, help~),
+          ],
+        ]
+      Failed(error) => {
+        println(error)
+        @view.load_failed("recently updated modules")
+      }
+      Pending =>
+        div(
+          class="container lg:w-4/5 px-4",
+          @view.skeleton_module_cards(highlights_limit),
+        )
+    }
+  })
 }
 
 ///|
@@ -370,6 +402,7 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
       ).expect_json(inject)
     },
   )
+  let highlights_view = highlights_section(highlights)
   let statistics : @rabbita.Resource[PackageCount] = @rabbita.create_resource(inject => {
     @http.get(@config.api_url("/api/v0/modules/statistics")).expect_json(inject)
   })
@@ -416,15 +449,12 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
       }
     },
   )
-  catalog.view4(highlights, statistics, app_actions, fn(
+  catalog.view4(highlights_view, statistics, app_actions, fn(
     catalog,
     highlights,
     statistics,
     app_actions,
   ) {
-    if highlights is Failed(error) {
-      println(error)
-    }
     let statistics = match statistics {
       Loaded(value) => value
       Pending =>
@@ -446,15 +476,6 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
     }
     let module_list = if catalog.search.input.trim().is_empty() {
       let pinned_modules = pinned()
-      let highlights = match highlights {
-        Loaded(h) => highlights_section(h.recent, h.new_modules, h.popular)
-        Failed(_) => @view.load_failed("recently updated modules")
-        Pending =>
-          div(
-            class="container lg:w-4/5 px-4",
-            @view.skeleton_module_cards(highlights_limit),
-          )
-      }
       let chevron_down : Html = @svg.svg(
         width=16,
         height=16,

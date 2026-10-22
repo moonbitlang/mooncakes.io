@@ -26,10 +26,10 @@ jobs:
       - name: moon test
         run: |
           moon update
-          moon test --target js --serial --release
-          moon test --target js --serial
-          moon test --target native --serial
-          moon test --target wasm --serial
+          moon test --target js --release
+          moon test --target js
+          moon test --target native
+          moon test --target wasm
 
       - name: moon check
         run: |

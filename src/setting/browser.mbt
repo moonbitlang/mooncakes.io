@@ -51,8 +51,18 @@ let setting_request : @cmd.Op = @cmd.Op()
     guard extension is SettingRequest(path, body, http_method, on_response) else {
       raise @cmd.Unhandled::Unhandled
     }
-    let origin = context.get_origin()
+    let base_uri = context.get_base_uri()
     Async(() => {
+      let base_url = @url.parse(base_uri)
+      let origin = @url.Url::{
+          ..base_url,
+          path: "",
+          query: None,
+          fragment: None,
+        }
+        .to_string()
+        .trim_end(chars="/")
+        .to_owned()
       let endpoint = @config.api_url("/api/v0/\{path}")
       let url = if endpoint.has_prefix("/") && !endpoint.has_prefix("//") {
         origin + endpoint
@@ -74,7 +84,6 @@ let setting_request : @cmd.Op = @cmd.Op()
         )
         on_response(response.code, body.json())
       }) catch {
-        error if @async.is_being_cancelled() => raise error
         _ =>
           on_response(0, {
             "detail": "Unable to connect. Check your connection and try again.",

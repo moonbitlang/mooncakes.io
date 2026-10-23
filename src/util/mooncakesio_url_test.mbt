@@ -23,18 +23,6 @@ test "resolve root" {
 }
 
 ///|
-test "resolve skills host root" {
-  inspect(
-    @util.MooncakesioPath::resolve(
-      test_url_with_host(@config.skills_host(), ""),
-    ),
-    content=(
-      #|skills:
-    ),
-  )
-}
-
-///|
 test "resolve build-queue" {
   inspect(
     @util.MooncakesioPath::resolve(test_url("build-queue")),
@@ -55,14 +43,27 @@ test "resolve skills list" {
 }
 
 ///|
-test "resolve skills detail" {
+test "independent skill routes keep owner and optional version" {
   inspect(
     @util.MooncakesioPath::resolve(
-      test_url("skills/moonbitlang/parser@0.3.3/cmd/moonfmt"),
+      test_url("skills/alice/writing%401.0.0%2Bbuild.1"),
     ),
-    content=(
-      #|skills:moonbitlang/parser@0.3.3/cmd/moonfmt
+    content="skills:alice/writing@1.0.0+build.1",
+  )
+  inspect(@util.MooncakesioPath::resolve(test_url("skills")), content="skills:")
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("skills/")),
+    content="skills:",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("skills/alice/writing")),
+    content="skills:alice/writing",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(
+      test_url("skills/alice/writing@1.0.0+build.1"),
     ),
+    content="skills:alice/writing@1.0.0+build.1",
   )
 }
 

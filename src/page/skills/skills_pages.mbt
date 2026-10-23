@@ -240,7 +240,11 @@ fn hero_feature_card(
 }
 
 ///|
-fn marketplace_hero(entries : Status[Array[WasmEntry]], browse~ : Cmd) -> Html {
+fn marketplace_hero(
+  count : String,
+  browse~ : Cmd,
+  agent_skills~ : Bool = false,
+) -> Html {
   div(
     class="w-full border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-gray-950 dark:text-slate-50",
   ) <| [
@@ -256,30 +260,56 @@ fn marketplace_hero(entries : Status[Array[WasmEntry]], browse~ : Cmd) -> Html {
           class="relative mx-auto inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-950 px-3 py-1 font-mono text-xs uppercase tracking-wide text-gray-600 dark:text-slate-400",
         ) <| [
           span(class="size-2 rounded-full bg-mooncake2", ""),
-          span("MoonBit / Sandboxed local commands"),
+          span(
+            if agent_skills {
+              "Agent Skills / mooncakes.io"
+            } else {
+              "MoonBit / Sandboxed local commands"
+            },
+          ),
         ],
         h1(
           class="relative mx-auto mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-5xl lg:text-6xl",
-          "MoonBit Skills Marketplace",
+          if agent_skills {
+            "Skills Marketplace"
+          } else {
+            "MoonBit Skills Marketplace"
+          },
         ),
         p(
           class="relative mx-auto mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-slate-400 sm:text-lg",
-          "Push a package and mooncakes.io automatically builds optimized, cross-platform executable binaries that are easy to run in a local sandbox.",
+          if agent_skills {
+            "Discover, publish and download skills for your agents. Explore the instructions, choose a version, and get the complete skill directory."
+          } else {
+            "Push a package and mooncakes.io automatically builds optimized, cross-platform executable binaries that are easy to run in a local sandbox."
+          },
         ),
         div(
           class="relative mt-6 flex flex-wrap items-center justify-center gap-2",
         ) <| [
           span(
             class="rounded-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-sm text-gray-600 dark:text-slate-400 shadow-sm",
-            "\{skill_count(entries)} executable entries",
+            if agent_skills {
+              "Open Agent Skills"
+            } else {
+              "\{count} executable entries"
+            },
           ),
           span(
             class="rounded-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-sm text-gray-600 dark:text-slate-400 shadow-sm",
-            "local sandbox",
+            if agent_skills {
+              "Versioned releases"
+            } else {
+              "local sandbox"
+            },
           ),
           span(
             class="rounded-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-sm text-gray-600 dark:text-slate-400 shadow-sm",
-            "cross-platform binaries",
+            if agent_skills {
+              "Complete skill archives"
+            } else {
+              "cross-platform binaries"
+            },
           ),
         ],
         div(
@@ -290,9 +320,17 @@ fn marketplace_hero(entries : Status[Array[WasmEntry]], browse~ : Cmd) -> Html {
             on_click=browse,
           ) <| span("Search Skills"),
           a(
-            href="https://www.moonbitlang.com/download/",
+            href=if agent_skills {
+              "#publish"
+            } else {
+              "https://www.moonbitlang.com/download/"
+            },
             class="rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-slate-50 shadow-sm transition-colors hover:border-gray-400 dark:hover:border-zinc-600 hover:bg-gray-50 dark:hover:bg-zinc-950",
-            "Install moon",
+            if agent_skills {
+              "Publish a skill"
+            } else {
+              "Install moon"
+            },
           ),
         ],
       ],
@@ -302,60 +340,127 @@ fn marketplace_hero(entries : Status[Array[WasmEntry]], browse~ : Cmd) -> Html {
 
 ///|
 fn source_context_section(
-  entries : Status[Array[WasmEntry]],
+  count : String,
   browse~ : Cmd,
+  agent_skills~ : Bool = false,
 ) -> Html {
   div(class="mx-auto w-full max-w-[90rem] px-4 py-8 sm:px-6 lg:px-8") <| [
     div(class="border-t border-gray-200 dark:border-zinc-800 pt-7") <| [
       span(
         class="inline-flex rounded-full border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1 text-xs font-medium text-gray-600 dark:text-slate-400",
-        "MoonBit wasm",
+        if agent_skills {
+          "Agent Skills"
+        } else {
+          "MoonBit wasm"
+        },
       ),
       h2(
         class="mt-4 max-w-2xl text-2xl font-bold leading-tight tracking-normal text-gray-950 dark:text-slate-50 sm:text-3xl",
-        "Publish once, distribute safely across platforms",
+        if agent_skills {
+          "Publish once, share skills across agents"
+        } else {
+          "Publish once, distribute safely across platforms"
+        },
       ),
       div(
         class="mt-4 max-w-3xl space-y-3 text-sm leading-6 text-gray-600 dark:text-slate-400",
       ) <| [
         p() <| [
-          text("Under the hood, mooncakes.io compiles each skill to optimized "),
+          text(
+            if agent_skills {
+              "Use skills to publish a "
+            } else {
+              "Under the hood, mooncakes.io compiles each skill to optimized "
+            },
+          ),
           a(
-            href="https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Concepts",
+            href=if agent_skills {
+              "https://github.com/moonbitlang/mooncakes.io/tree/main/cli/skills"
+            } else {
+              "https://developer.mozilla.org/en-US/docs/WebAssembly/Guides/Concepts"
+            },
             class="font-medium text-gray-900 dark:text-slate-50 underline underline-offset-2 hover:text-[#c7856b]",
-            "WebAssembly (Wasm)",
+            if agent_skills {
+              "complete skill directory"
+            } else {
+              "WebAssembly (Wasm)"
+            },
           ),
           text(
-            " binaries, then exposes them as executable commands through moon runwasm. The Wasm sandbox keeps commands isolated while the same artifact stays portable across platforms.",
+            if agent_skills {
+              " with SKILL.md, scripts and references. Every release has its own version, so others can find and download the exact skill you shared."
+            } else {
+              " binaries, then exposes them as executable commands through moon runwasm. The Wasm sandbox keeps commands isolated while the same artifact stays portable across platforms."
+            },
           ),
         ],
         p(
-          "Add SKILL.md and repository links so users can inspect what a command does before they reuse it.",
+          if agent_skills {
+            "Read the instructions, choose a version, and bring the complete skill directory to your agent."
+          } else {
+            "Add SKILL.md and repository links so users can inspect what a command does before they reuse it."
+          },
         ),
       ],
       div(class="mt-6 grid gap-3 lg:grid-cols-3") <| [
         hero_feature_card(
           "01",
-          "Fast publishing",
-          "Ship a MoonBit package with SKILL.md so its executable entry is discoverable on mooncakes.io.",
-          "Publish packages",
+          if agent_skills {
+            "Publish your skill"
+          } else {
+            "Fast publishing"
+          },
+          if agent_skills {
+            "Add a name and description to SKILL.md, then upload the directory with the CLI and your mooncakes.io API token."
+          } else {
+            "Ship a MoonBit package with SKILL.md so its executable entry is discoverable on mooncakes.io."
+          },
+          if agent_skills {
+            "Get an API token"
+          } else {
+            "Publish packages"
+          },
           @config.search,
-          action_href="https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html",
+          action_href=if agent_skills {
+            "/settings"
+          } else {
+            "https://docs.moonbitlang.com/en/latest/toolchain/moon/package-manage-tour.html"
+          },
           highlighted=true,
           browse~,
         ),
         hero_feature_card(
           "02",
-          "Build optimized binaries",
-          "mooncakes.io automatically builds uploaded packages into Wasm binaries, then optimizes them with wasm-opt.",
-          "Browse binaries",
+          if agent_skills {
+            "Find the right skill"
+          } else {
+            "Build optimized binaries"
+          },
+          if agent_skills {
+            "Search by owner, name or description. Read SKILL.md and compare versions before choosing a skill for your workflow."
+          } else {
+            "mooncakes.io automatically builds uploaded packages into Wasm binaries, then optimizes them with wasm-opt."
+          },
+          if agent_skills {
+            "Search skills"
+          } else {
+            "Browse binaries"
+          },
           @config.book_open,
           browse~,
         ),
         hero_feature_card(
           "03",
-          "Share and browse skills",
-          "Share your skill with others, or browse skills published by other MoonBit users.",
+          if agent_skills {
+            "Download and reuse"
+          } else {
+            "Share and browse skills"
+          },
+          if agent_skills {
+            "Save a ZIP or use the CLI to extract it into a directory. Get the instructions and supporting files together."
+          } else {
+            "Share your skill with others, or browse skills published by other MoonBit users."
+          },
           "Browse skills",
           @config.download,
           browse~,
@@ -366,20 +471,32 @@ fn source_context_section(
       ) <| [
         p(
           class="max-w-2xl text-sm leading-6 text-gray-600 dark:text-slate-400",
-          "A published module gives users optimized executable binaries, SKILL.md context, and a consistent cross-platform artifact.",
+          if agent_skills {
+            "Publish your first release: skills publish ./my-skill --version 1.0.0"
+          } else {
+            "A published module gives users optimized executable binaries, SKILL.md context, and a consistent cross-platform artifact."
+          },
         ),
         div(class="flex flex-wrap gap-2") <| [
           span(
             class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
-            "\{skill_count(entries)} skill entries",
+            "\{count} skill entries",
           ),
           span(
             class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
-            "moon-wasm-opt",
+            if agent_skills {
+              "versioned releases"
+            } else {
+              "moon-wasm-opt"
+            },
           ),
           span(
             class="inline-flex rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1.5 font-mono text-xs font-semibold text-gray-900 dark:text-slate-50",
-            "cross-platform wasm",
+            if agent_skills {
+              "complete directories"
+            } else {
+              "cross-platform wasm"
+            },
           ),
         ],
       ],
@@ -390,7 +507,7 @@ fn source_context_section(
 ///|
 fn sticky_search(
   filter : String,
-  entries : Status[Array[WasmEntry]],
+  count : String,
   on_filter~ : (String) -> Cmd,
 ) -> Html {
   div(
@@ -408,7 +525,11 @@ fn sticky_search(
           span(class="size-2 rounded-full bg-green-500", ""),
           span(
             class="ml-1 font-mono text-xs text-gray-500 dark:text-gray-400",
-            "Type to search \{skill_count(entries)} skills",
+            if count == "1" {
+              "Type to search 1 skill"
+            } else {
+              "Type to search \{count} skills"
+            },
           ),
         ],
         div(class="flex items-center gap-2 px-4 py-4 font-mono text-sm") <| [
@@ -447,9 +568,15 @@ fn author_avatar(author : String, avatar_url : String) -> Html {
 }
 
 ///|
-fn entry_card(entry : WasmEntry, copied_command : String, copy~ : Cmd) -> Html {
+fn entry_card(
+  entry : WasmEntry,
+  copied_command : String,
+  copy~ : Cmd,
+  command? : String,
+  file_label? : String,
+) -> Html {
   let skill_name = entry.name.split("/").last().unwrap().to_owned()
-  let run_cmd = runwasm_command(entry)
+  let run_cmd = command.unwrap_or_else(() => runwasm_command(entry))
   let copied = copied_command == run_cmd
   let failed = copied_command == "failed:\{run_cmd}"
   let copy_icon = if copied {
@@ -486,7 +613,7 @@ fn entry_card(entry : WasmEntry, copied_command : String, copy~ : Cmd) -> Html {
           span(class="size-2 rounded-full bg-green-500", ""),
           span(
             class="ml-1 min-w-0 truncate font-mono text-xs text-gray-500 dark:text-gray-400",
-            "\{skill_name}.wasm",
+            file_label.unwrap_or("\{skill_name}.wasm"),
           ),
         ],
         span(
@@ -595,11 +722,10 @@ fn skeleton_skill_cards(count : Int32) -> Html {
 
 ///|
 fn skills_logo() -> Html {
-  let host = @config.skills_host()
   a(
-    href="//\{host}/",
+    href="/skills",
     class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
-    "🥮 \{host}",
+    "🥮 mooncakes.io / skills",
   )
 }
 
@@ -627,7 +753,12 @@ fn download_filename(href : String, fallback : String) -> String {
 }
 
 ///|
-fn run_command(command : String, copied~ : Bool, copy~ : Cmd) -> Html {
+fn run_command(
+  command : String,
+  copied~ : Bool,
+  copy~ : Cmd,
+  label~ : String = "moon runwasm",
+) -> Html {
   let icon = if copied { @config.ok } else { @config.clipboard }
   div(
     class="mt-4 overflow-hidden rounded-md border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900",
@@ -640,7 +771,7 @@ fn run_command(command : String, copied~ : Bool, copy~ : Cmd) -> Html {
       span(class="size-2 rounded-full bg-green-500", ""),
       span(
         class="ml-1 font-mono text-xs text-gray-500 dark:text-gray-400",
-        "moon runwasm",
+        label,
       ),
     ],
     div(class="flex min-w-0 items-center gap-2 px-3 py-3") <| [
@@ -997,7 +1128,7 @@ fn detail_loading_skeleton() -> Html {
 }
 
 ///|
-pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
+pub fn wasm_list_page(app_actions~ : Val[Html]) -> Val[Html] {
   let entries : @rabbita.Resource[Array[WasmEntry]] = @rabbita.create_resource(inject => {
     @http.get(@config.api_url("/api/v0/skills")).expect_json(result => {
       if result is Err(error) {
@@ -1116,13 +1247,16 @@ pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
         right=app_actions,
       ),
       div(class="w-full") <| [
-        marketplace_hero(entries, browse=emit(ScrollToSkills)),
+        marketplace_hero(skill_count(entries), browse=emit(ScrollToSkills)),
         div(id="skills", class="h-0 scroll-mt-header", ""),
-        sticky_search(ui.filter, entries, on_filter=filter => {
+        sticky_search(ui.filter, skill_count(entries), on_filter=filter => {
           emit(FilterChanged(filter))
         }),
         content,
-        source_context_section(entries, browse=emit(ScrollToSkills)),
+        source_context_section(
+          skill_count(entries),
+          browse=emit(ScrollToSkills),
+        ),
         runwasm_showcase(entries, ui.showcase_index, ui.showcase_chars),
       ],
     )
@@ -1130,7 +1264,7 @@ pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
 }
 
 ///|
-pub fn skill_detail_page(entry : String, app_actions~ : Val[Html]) -> Val[Html] {
+pub fn wasm_detail_page(entry : String, app_actions~ : Val[Html]) -> Val[Html] {
   let skill : @rabbita.Resource[WasmEntry] = @rabbita.create_resource(inject => {
     @http.get(@config.api_url("/api/v0/skills/\{entry}")).expect_json(inject)
   })

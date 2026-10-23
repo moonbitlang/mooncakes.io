@@ -29,18 +29,15 @@ moon build --target js
 npm run dev
 ```
 
-`VITE_SKILLS_HOST` selects the host that renders the Skills homepage. The dev
-server defaults to `skills.mooncakes.io`; override it in the environment or
-`frontend/.env.development` to use a different host. Production builds require
-an explicit `VITE_SKILLS_HOST`.
+The skill marketplace is served at `/skills` on the main site. The retired
+`skills.mooncakes.io` host redirects there through Nginx.
 
 By default API requests use the same-origin `/api` path. To build with a
 different API endpoint, set `VITE_API_ENDPOINT` to the value that should replace
 `/api`:
 
 ```bash
-VITE_SKILLS_HOST=skills.mooncakes.io \
-  VITE_API_ENDPOINT=https://api.example.com/new-api \
+VITE_API_ENDPOINT=https://api.example.com/new-api \
   npm run build
 ```
 

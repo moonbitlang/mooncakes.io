@@ -1,10 +1,10 @@
 import {
   "moonbitlang/core/debug",
   "moonbitlang/core/env",
+  "moonbitlang/core/encoding/utf8",
   "moonbitlang/core/string",
   "moonbit-community/rabbita/common",
   "moonbit-community/rabbita/url",
-  "moonbitlang/mooncakes/config",
   "moonbitlang/x/encoding/percent",
   "moonbitlang/x/time",
 }

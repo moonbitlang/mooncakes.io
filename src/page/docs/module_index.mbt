@@ -37,6 +37,7 @@ priv struct Manifest {
   version : String
   latest_version : String
   versions : Array[ModuleVersion]
+  dependents : Array[Dependent]
   has_package : Bool
   module_meta : MetaInfo
 } derive(Eq)
@@ -260,6 +261,7 @@ impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
       "module": String(module_),
       "version": String(version),
       "versions"? : versions,
+      "dependents"? : dependents,
       "has_package": has_package,
       ..
     } => {
@@ -274,6 +276,11 @@ impl @json.FromJson for Manifest with fn from_json(json : Json, path) {
           module_meta.yanked,
           path,
         ),
+        dependents: if dependents is Some(json) && !(json is Null) {
+          @json.from_json(json, path~)
+        } else {
+          []
+        },
         latest_version: match raw_json {
           { "latest_version": String(latest_version), .. } => latest_version
           _ => version

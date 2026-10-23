@@ -39,6 +39,37 @@ test "decode module without update timestamp" {
   let manifest : Manifest = @json.from_json(json)
   assert_eq(manifest.module_meta.updated_at, None)
   assert_eq(manifest.module_meta.yanked, None)
+  assert_true(manifest.dependents.is_empty())
+}
+
+///|
+test "decode version-specific dependents without grouping consumer versions" {
+  let manifest : Manifest = @json.from_json({
+    "name": "alice/base",
+    "module": "alice/base",
+    "version": "1.0.0",
+    "has_package": true,
+    "metadata": { "name": "alice/base" },
+    "dependents": [
+      { "name": "bob/tool", "version": "2.0.0" },
+      { "name": "bob/tool", "version": "1.0.0" },
+      { "name": "charlie/other", "version": "0.1.0" },
+    ],
+  })
+  assert_eq(manifest.dependents.map(item => (item.name, item.version)), [
+    ("bob/tool", "2.0.0"),
+    ("bob/tool", "1.0.0"),
+    ("charlie/other", "0.1.0"),
+  ])
+  let empty : Manifest = @json.from_json({
+    "name": "alice/base",
+    "module": "alice/base",
+    "version": "1.0.0",
+    "has_package": true,
+    "metadata": { "name": "alice/base" },
+    "dependents": null,
+  })
+  assert_true(empty.dependents.is_empty())
 }
 
 ///|

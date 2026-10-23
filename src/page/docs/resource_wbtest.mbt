@@ -43,7 +43,7 @@ test "decode module without update timestamp" {
 }
 
 ///|
-test "decode version-specific dependents without grouping consumer versions" {
+test "decode grouped dependents preserves module and version order" {
   let manifest : Manifest = @json.from_json({
     "name": "alice/base",
     "module": "alice/base",
@@ -51,15 +51,14 @@ test "decode version-specific dependents without grouping consumer versions" {
     "has_package": true,
     "metadata": { "name": "alice/base" },
     "dependents": [
-      { "name": "bob/tool", "version": "2.0.0" },
-      { "name": "bob/tool", "version": "1.0.0" },
-      { "name": "charlie/other", "version": "0.1.0" },
+      { "name": "bob/tool", "versions": ["2.0.0", "1.0.0"] },
+      { "name": "charlie/other", "versions": ["0.1.0"] },
     ],
   })
-  assert_eq(manifest.dependents.map(item => (item.name, item.version)), [
-    ("bob/tool", "2.0.0"),
-    ("bob/tool", "1.0.0"),
-    ("charlie/other", "0.1.0"),
+  assert_eq(manifest.dependents.length(), 2)
+  assert_eq(manifest.dependents.map(item => (item.name, item.versions)), [
+    ("bob/tool", ["2.0.0", "1.0.0"]),
+    ("charlie/other", ["0.1.0"]),
   ])
   let empty : Manifest = @json.from_json({
     "name": "alice/base",

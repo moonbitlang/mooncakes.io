@@ -74,16 +74,15 @@ priv struct Metadata {
 
 ///|
 fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
-  let dependents = manifest.dependents.map(item => (item.name, item.version))
   let mobile_dependencies = dependency_accordion(
     manifest.module_meta.deps,
-    dependents,
+    manifest.dependents,
     id="docs-mobile-dependencies",
     class="px-6 border-t",
   )
   let sidebar_dependencies = dependency_accordion(
     manifest.module_meta.deps,
-    dependents,
+    manifest.dependents,
     id="docs-sidebar-dependencies",
     class="border-t mt-3",
   )

@@ -97,8 +97,13 @@
   }
 }
 
-/* RUI's base styles are inline; theme variables stay local to this control. */
-[data-theme="dark"] .docs-version-select {
+/* RUI's base styles are inline; theme variables stay local to these docs controls. */
+[data-theme="light"] .docs-dependency-accordion {
+  --rui-secondary: var(--color-gray-200);
+}
+
+[data-theme="dark"] .docs-version-select,
+[data-theme="dark"] .docs-dependency-accordion {
   --rui-foreground: oklch(0.985 0 0);
   --rui-muted-foreground: oklch(0.708 0 0);
   --rui-input: oklch(1 0 0 / 0.15);
@@ -109,6 +114,8 @@
   --rui-accent: oklch(0.269 0 0);
   --rui-accent-foreground: oklch(0.985 0 0);
   --rui-ring: oklch(0.556 0 0);
+  --rui-secondary: oklch(0.269 0 0);
+  --rui-secondary-foreground: oklch(0.985 0 0);
 }
 
 .hero-banner:empty {

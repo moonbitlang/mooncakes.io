@@ -144,9 +144,16 @@ pub fn skeleton_docs_content() -> Html {
   }
 
   div(class="animate-pulse py-4 mx-4 md:mx-0") <| [
-    // README toggle label + content + divider
-    div(class="mt-4 mb-8") <| [
-      div(class="h-4 w-16 bg-gray-200 dark:bg-gray-800 rounded mb-4", nothing),
+    // README label, heading and paragraphs share the loaded content's rhythm.
+    div(class="mb-8") <| [
+      div(
+        class="h-3 w-16 bg-gray-200 dark:bg-gray-800 rounded ml-8 mt-2 mb-7",
+        nothing,
+      ),
+      div(
+        class="h-9 w-48 max-w-full bg-gray-200 dark:bg-gray-800 rounded mb-7",
+        nothing,
+      ),
       div(class="space-y-2.5 mb-6") <| [
         div(class="h-3.5 w-full bg-gray-200 dark:bg-gray-800 rounded", nothing),
         div(class="h-3.5 w-5/6 bg-gray-200 dark:bg-gray-800 rounded", nothing),
@@ -228,10 +235,21 @@ pub fn skeleton_meta_sidebar() -> Html {
     // Install
     div(class="mb-4") <| [
       div(class="h-4 w-12 bg-gray-200 dark:bg-gray-800 rounded mb-1.5", nothing),
-      div(class="h-8 w-full bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      div(class="h-12 w-full bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      div(class="h-3 w-20 bg-gray-200 dark:bg-gray-800 rounded mt-1.5", nothing),
+    ],
+    // Description and keyword badges.
+    div(class="border-t pt-3 mb-3 space-y-2") <| [
+      div(class="h-3 w-full bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      div(class="h-3 w-3/4 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      div(class="flex gap-1") <| [
+        div(class="h-5 w-14 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+        div(class="h-5 w-10 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+        div(class="h-5 w-12 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      ],
     ],
     // Meta rows
-    div(class="border-t pt-3 space-y-2") <| [
+    div(class="border-t pt-3 space-y-2.5") <| [
       div(class="flex items-center gap-2") <| [
         div(
           class="size-4 bg-gray-200 dark:bg-gray-800 rounded shrink-0",
@@ -253,15 +271,37 @@ pub fn skeleton_meta_sidebar() -> Html {
         ),
         div(class="h-3.5 w-12 bg-gray-200 dark:bg-gray-800 rounded", nothing),
       ],
+      div(class="flex items-center gap-2") <| [
+        div(
+          class="size-4 bg-gray-200 dark:bg-gray-800 rounded shrink-0",
+          nothing,
+        ),
+        div(class="h-3.5 w-28 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      ],
+      div(class="flex items-center gap-2") <| [
+        div(
+          class="size-4 bg-gray-200 dark:bg-gray-800 rounded shrink-0",
+          nothing,
+        ),
+        div(class="h-3.5 w-24 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      ],
     ],
     // Dependencies
-    div(class="border-t pt-3 mt-3") <| [
-      div(class="h-4 w-24 bg-gray-200 dark:bg-gray-800 rounded mb-2", nothing),
+    div(class="border-t pt-3 mt-3 pb-3") <| [
+      div(class="flex items-center justify-between mb-4") <| [
+        div(class="h-4 w-28 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+        div(class="size-3 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      ],
       div(class="space-y-1.5") <| [
         div(class="h-3.5 w-full bg-gray-200 dark:bg-gray-800 rounded", nothing),
         div(class="h-3.5 w-3/4 bg-gray-200 dark:bg-gray-800 rounded", nothing),
         div(class="h-3.5 w-5/6 bg-gray-200 dark:bg-gray-800 rounded", nothing),
       ],
+    ],
+    // Dependents starts collapsed, matching the real accordion.
+    div(class="border-y py-3 flex items-center justify-between") <| [
+      div(class="h-4 w-24 bg-gray-200 dark:bg-gray-800 rounded", nothing),
+      div(class="size-3 bg-gray-200 dark:bg-gray-800 rounded", nothing),
     ],
   ]
 }

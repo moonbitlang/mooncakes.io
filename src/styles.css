@@ -33,6 +33,88 @@
   margin-inline: auto;
 }
 
+.docs-page {
+  background: var(--sidebar-bg);
+}
+
+.docs-sidebar-surface {
+  background: var(--sidebar-bg);
+}
+
+.docs-layout {
+  width: 100%;
+  min-width: 0;
+}
+
+.docs-sidebar-resizer {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .docs-layout {
+    display: grid;
+    grid-template-columns: clamp(14rem, var(--docs-nav-width, 18rem), 40vw) minmax(0, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+    padding-inline: 1.5rem;
+  }
+
+  .docs-sidebar-panel {
+    min-width: 0;
+  }
+
+  .docs-main {
+    width: 100%;
+    max-width: 54rem;
+    justify-self: center;
+    padding-inline: 1.5rem;
+  }
+
+  .docs-sidebar-resizer {
+    position: absolute;
+    display: block;
+    inset-block: 0;
+    right: -0.75rem;
+    width: 1.5rem;
+    transform: translateX(50%);
+    cursor: col-resize;
+    touch-action: none;
+    user-select: none;
+    outline: none;
+    z-index: 25;
+  }
+
+  .docs-sidebar-resizer::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--app-border);
+    transition: background-color 150ms ease;
+  }
+
+  .docs-sidebar-resizer:hover::after {
+    background: color-mix(in srgb, var(--app-border) 70%, var(--color-gray-500));
+  }
+
+  .docs-sidebar-resizer:focus-visible::after,
+  .docs-sidebar-resizer[data-resizing]::after {
+    background: color-mix(in srgb, var(--app-border) 50%, var(--color-gray-500));
+  }
+}
+
+@media (min-width: 1280px) {
+  .docs-layout {
+    grid-template-columns: clamp(14rem, var(--docs-nav-width, 18rem), 40vw) minmax(0, 1fr) 18rem;
+    padding-right: 3rem;
+  }
+
+  .docs-main {
+    padding-inline: 3rem;
+  }
+}
+
 @theme {
   --font-mono: Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace
 }

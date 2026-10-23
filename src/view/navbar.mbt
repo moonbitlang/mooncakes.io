@@ -29,7 +29,7 @@ pub fn navbar(
   if has_middle {
     div(class~) <| [
       div(
-        class="container px-5 sm:px-6 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-2.5 lg:grid-cols-[auto_minmax(0,1fr)_auto]",
+        class="w-full px-5 sm:px-6 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-2.5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
       ) <| [
         div(class="col-start-1 row-start-1 flex items-center gap-4 min-w-0") <| [
           left,
@@ -37,21 +37,22 @@ pub fn navbar(
         ],
         middle_view,
         div(
-          class="col-start-2 row-start-1 flex items-center gap-2 justify-end lg:col-start-3",
+          class="col-start-2 row-start-1 flex items-center gap-2 justify-end lg:col-start-3 xl:mr-6",
           right.unwrap_or(nothing),
         ),
       ],
     ]
   } else {
     div(class~) <| [
-      div(
-        class="container px-5 sm:px-6 flex items-center justify-between h-full",
-      ) <| [
+      div(class="w-full px-5 sm:px-6 flex items-center justify-between h-full") <| [
         div(class="flex items-center gap-4 min-w-0") <| [
           left,
           left_extra.unwrap_or(nothing),
         ],
-        div(class="flex items-center gap-2 shrink-0", right.unwrap_or(nothing)),
+        div(
+          class="flex items-center gap-2 shrink-0 xl:mr-6",
+          right.unwrap_or(nothing),
+        ),
       ],
     ]
   }

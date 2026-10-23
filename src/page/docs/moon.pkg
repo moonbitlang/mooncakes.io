@@ -5,6 +5,7 @@ import {
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/nav",
   "moonbit-community/rabbita/dialog",
+  "moonbit-community/rabbita/dom",
   "moonbitlang/core/immut/sorted_map" @immut/sorted_map,
   "moonbitlang/core/immut/sorted_set" @immut/sorted_set,
   "moonbitlang/core/json",
@@ -16,5 +17,9 @@ import {
   "moonbit-community/rabbita/clipboard",
   "moonbit-community/rabbita/svg",
 }
+
+// DOM events are used only by the JavaScript sidebar resize handles.
+
+warnings = "-unused_package"
 
 supported_targets = "js+native+wasm"

@@ -74,6 +74,19 @@ priv struct Metadata {
 
 ///|
 fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
+  let dependents = manifest.dependents.map(item => (item.name, item.version))
+  let mobile_dependencies = dependency_accordion(
+    manifest.module_meta.deps,
+    dependents,
+    id="docs-mobile-dependencies",
+    class="px-6 border-t",
+  )
+  let sidebar_dependencies = dependency_accordion(
+    manifest.module_meta.deps,
+    dependents,
+    id="docs-sidebar-dependencies",
+    class="border-t mt-3",
+  )
   let (install_copied, emit) = @rabbita.create_state(false, update=(
     model,
     msg,
@@ -94,7 +107,11 @@ fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
       }
     }
   })
-  install_copied.map(install_copied => {
+  install_copied.map3(mobile_dependencies, sidebar_dependencies, (
+    install_copied,
+    mobile_dependencies,
+    sidebar_dependencies,
+  ) => {
     let metadata = { ..manifest.module_meta, version: manifest.version, }
     let model_description : Html = div(class="pl-7 py-2 mb-2") <| [
       h1(
@@ -209,34 +226,7 @@ fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
           nothing
         },
       ],
-      // Dependencies
-      if metadata.deps.is_empty() {
-        nothing
-      } else {
-        div(class="px-6 py-3 border-t") <| [
-          p(class="font-semibold text-sm mb-1.5", "Dependencies"),
-          ul(
-            class="space-y-0.5",
-            metadata.deps.map(pair => {
-              let (name, version) = pair
-              li(
-                class="font-mono text-[13px] flex justify-between gap-2 min-w-0",
-              ) <| [
-                a(
-                  class="hover:underline text-gray-700 dark:text-slate-300 truncate",
-                  href="/docs/\{name}@\{version}",
-                  title=name,
-                  name,
-                ),
-                span(
-                  class="text-gray-400 dark:text-slate-500 shrink-0",
-                  version,
-                ),
-              ]
-            }),
-          ),
-        ]
-      },
+      mobile_dependencies,
     ]
     let install_cmd = "moon add \{metadata.name}@\{metadata.version}"
     let install_icon = if install_copied {
@@ -348,34 +338,7 @@ fn docs_metadata(manifest : Manifest) -> Val[Metadata] {
           nothing
         },
       ],
-      // Dependencies
-      if metadata.deps.is_empty() {
-        nothing
-      } else {
-        div(class="border-t pt-3 mt-3") <| [
-          p(class="font-semibold text-[13px] mb-1.5", "Dependencies"),
-          ul(
-            class="space-y-0.5",
-            metadata.deps.map(fn(pair) {
-              let (name, version) = pair
-              li(
-                class="font-mono text-[13px] flex justify-between gap-2 min-w-0",
-              ) <| [
-                a(
-                  class="hover:underline text-gray-700 dark:text-slate-300 truncate",
-                  href="/docs/\{name}@\{version}",
-                  title=name,
-                  name,
-                ),
-                span(
-                  class="text-gray-400 dark:text-slate-500 shrink-0",
-                  version,
-                ),
-              ]
-            }),
-          ),
-        ]
-      },
+      sidebar_dependencies,
     ]
     { mobile, sidebar: div(class="animate-fade-in", sidebar), }
   })

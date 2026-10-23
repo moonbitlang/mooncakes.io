@@ -412,7 +412,7 @@ fn docs_sidebar(
     ]
     let display = if model.sidebar_fab { "flex" } else { "hidden" }
     let panel = div(
-      class="\{display} md:block max-md:fixed max-md:inset-0 max-md:z-100 max-md:items-center max-md:justify-center md:sticky md:top-header md:w-64 md:shrink-0 md:h-[calc(100vh-3.5rem)]",
+      class="docs-sidebar-panel \{display} md:block max-md:fixed max-md:inset-0 max-md:z-100 max-md:items-center max-md:justify-center md:sticky md:top-header md:h-[calc(100vh-3.5rem)]",
     ) <| [
       button(
         class="fixed inset-0 bg-black/40 z-10 md:hidden",
@@ -420,8 +420,14 @@ fn docs_sidebar(
         nothing,
       ),
       div(
-        class="relative z-20 bg-zinc-50 dark:bg-zinc-950 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg md:z-auto md:w-full md:h-full md:rounded-none md:p-0 md:shadow-none",
+        class="docs-sidebar-surface relative z-20 w-3/4 h-3/4 overflow-y-auto rounded px-4 pb-4 shadow-lg md:z-auto md:w-full md:h-full md:rounded-none md:p-0 md:shadow-none",
         sidebar_content,
+      ),
+      div(
+        class="docs-sidebar-resizer",
+        title="Drag to resize navigation",
+        attrs=sidebar_resize_attrs(),
+        nothing,
       ),
     ]
     let fab = button(

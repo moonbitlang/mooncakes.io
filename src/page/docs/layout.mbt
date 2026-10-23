@@ -4,7 +4,7 @@ fn unresolved_docs_layout(
   content : Html,
   app_actions : Html,
 ) -> Html {
-  div(class="min-h-screen w-full flex-col") <| [
+  div(class="docs-page min-h-screen w-full flex-col") <| [
     navbar(
       path,
       None,
@@ -13,16 +13,41 @@ fn unresolved_docs_layout(
       app_actions~,
     ),
     div(class="flex-1") <| [
-      div(
-        class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
-      ) <| [
+      div(class="docs-layout") <| [
         div(
-          class="overflow-y-auto hidden md:block md:sticky md:top-header md:w-64 md:shrink-0 md:h-[calc(100vh-3.5rem)]",
-          div(class="w-full", @view.skeleton_sidebar()),
-        ),
-        div(class="flex-1 min-w-0 max-w-4xl", content),
+          class="docs-sidebar-panel hidden md:block md:sticky md:top-header md:h-[calc(100vh-3.5rem)]",
+        ) <| [
+          div(class="docs-sidebar-surface h-full overflow-y-auto") <| [
+            div(
+              class="animate-pulse flex flex-col gap-2 px-1 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1",
+            ) <| [
+              div(
+                class="h-8 w-full rounded-full bg-gray-200 dark:bg-gray-800",
+                nothing,
+              ),
+              div(class="flex items-center gap-3 px-1.5 py-1") <| [
+                div(
+                  class="h-2.5 w-14 rounded bg-gray-200 dark:bg-gray-800",
+                  nothing,
+                ),
+                div(
+                  class="h-2.5 w-16 rounded bg-gray-200 dark:bg-gray-800",
+                  nothing,
+                ),
+              ],
+            ],
+            @view.skeleton_sidebar(),
+          ],
+          div(
+            class="docs-sidebar-resizer",
+            title="Drag to resize navigation",
+            attrs=sidebar_resize_attrs(),
+            nothing,
+          ),
+        ],
+        div(class="docs-main min-w-0", content),
         div(
-          class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
+          class="docs-metadata hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:h-[calc(100vh-3.5rem)] overflow-y-auto min-w-0",
           @view.skeleton_meta_sidebar(),
         ),
       ],

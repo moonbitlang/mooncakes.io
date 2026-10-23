@@ -173,7 +173,7 @@ fn docs_module(
       } else {
         nothing
       }
-      div(class="min-h-screen w-full flex-col") <| [
+      div(class="docs-page min-h-screen w-full flex-col") <| [
         search_panel,
         navbar(
           versioned_docs_path(path, manifest.module_, manifest.version),
@@ -186,15 +186,13 @@ fn docs_module(
           Some(yanked_banner(reason))
         },
         div(class="flex-1") <| [
-          div(
-            class="container lg:px-4 h-full w-full flex flex-col md:flex-row relative md:gap-4 xl:gap-8",
-          ) <| [
+          div(class="docs-layout") <| [
             sidebar,
-            div(class="flex-1 min-w-0 max-w-4xl") <| [
+            div(class="docs-main min-w-0") <| [
               metadata_mobile, content,
             ],
             div(
-              class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
+              class="docs-metadata hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:h-[calc(100vh-3.5rem)] overflow-y-auto min-w-0",
               metadata.sidebar,
             ),
           ],

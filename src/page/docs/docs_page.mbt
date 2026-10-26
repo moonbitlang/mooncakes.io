@@ -227,9 +227,7 @@ pub fn docs_page(
       Val::constant(status)
     } else {
       @rabbita.create_resource(inject => {
-        @http.get(@config.api_url("/api/v0/manifest/\{path}")).expect_json(
-          inject,
-        )
+        @http.get("/api/v0/manifest/\{path}").expect_json(inject)
       })
     }
   })

@@ -63,16 +63,7 @@ let setting_request : @cmd.Op = @cmd.Op()
         .to_string()
         .trim_end(chars="/")
         .to_owned()
-      let endpoint = @config.api_url("/api/v0/\{path}")
-      let url = if endpoint.has_prefix("/") && !endpoint.has_prefix("//") {
-        origin + endpoint
-      } else if endpoint.has_prefix(origin + "/") {
-        endpoint
-      } else {
-        return on_response(0, {
-          "detail": "Account requests require a same-origin API endpoint.",
-        })
-      }
+      let url = "\{origin}/api/v0/\{path}"
       @async.with_timeout(20000, () => {
         let headers : @async_http.Headers = { "Accept": "application/json" }
         if http_method != Get {

@@ -138,22 +138,6 @@ pub let builtins_package_path : Map[String, String] = {
 
 ///|
 #cfg(target="js")
-extern "js" fn api_endpoint() -> String =
-  #|() => __MOONCAKES_API_ENDPOINT__
-
-///|
-#cfg(not(target="js"))
-fn api_endpoint() -> String {
-  _get_env_var("MOONCAKES_API_ENDPOINT").unwrap_or("/api")
-}
-
-///|
-pub fn api_url(path : String) -> String {
-  api_url_with_endpoint(api_endpoint(), path)
-}
-
-///|
-#cfg(target="js")
 extern "js" fn assets_endpoint() -> String =
   #|() =>
   #|  typeof __MOONCAKES_ASSETS_ENDPOINT__ === "undefined"
@@ -174,15 +158,5 @@ pub fn asset_url(path : String) -> String {
   match path {
     [.. "/", .. path] => "\{base}/\{path.to_owned()}"
     path => "\{base}/\{path}"
-  }
-}
-
-///|
-fn api_url_with_endpoint(endpoint : String, path : String) -> String {
-  match path {
-    [.. "/api/", .. path] => "\{endpoint}/\{path.to_owned()}"
-    [.. "/api"] => endpoint
-    [.. "/", .. path] => "\{endpoint}/\{path.to_owned()}"
-    path => "\{endpoint}\{path}"
   }
 }

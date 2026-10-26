@@ -2,8 +2,6 @@
 package "moonbitlang/mooncakes/config"
 
 // Values
-pub fn api_url(String) -> String
-
 pub fn asset_url(String) -> String
 
 pub let book_open : String

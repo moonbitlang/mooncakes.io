@@ -989,7 +989,7 @@ fn detail_loading_skeleton() -> Html {
 ///|
 pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
   let entries : @rabbita.Resource[Array[WasmEntry]] = @rabbita.create_resource(inject => {
-    @http.get(@config.api_url("/api/v0/skills")).expect_json(result => {
+    @http.get("/api/v0/skills").expect_json(result => {
       if result is Err(error) {
         println(error)
       }
@@ -1121,7 +1121,7 @@ pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
 ///|
 pub fn skill_detail_page(entry : String, app_actions~ : Val[Html]) -> Val[Html] {
   let skill : @rabbita.Resource[WasmEntry] = @rabbita.create_resource(inject => {
-    @http.get(@config.api_url("/api/v0/skills/\{entry}")).expect_json(inject)
+    @http.get("/api/v0/skills/\{entry}").expect_json(inject)
   })
   let readme : @rabbita.Resource[String] = @rabbita.create_resource(inject => {
     @http.get(@config.asset_url("/assets/\{entry}/SKILL.md")).expect_text(result => {

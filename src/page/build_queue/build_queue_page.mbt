@@ -17,7 +17,7 @@ struct BuildData {
 ///|
 pub fn build_queue_page(app_actions~ : Val[Html]) -> Val[Html] {
   let builds : @rabbita.Resource[BuildData] = @rabbita.create_resource(inject => {
-    @http.get(@config.api_url("/api/v0/builds")).expect_json(inject)
+    @http.get("/api/v0/builds").expect_json(inject)
   })
   builds.view2(app_actions, fn(status, app_actions) {
     if status is Failed(error) {

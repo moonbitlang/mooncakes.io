@@ -4,7 +4,6 @@ import {
   "moonbitlang/core/string",
   "moonbit-community/rabbita/common",
   "moonbit-community/rabbita/url",
-  "moonbitlang/mooncakes/config",
   "moonbitlang/x/encoding/percent",
   "moonbitlang/x/time",
 }

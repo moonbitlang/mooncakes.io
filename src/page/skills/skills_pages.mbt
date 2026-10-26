@@ -594,16 +594,6 @@ fn skeleton_skill_cards(count : Int32) -> Html {
 }
 
 ///|
-fn skills_logo() -> Html {
-  let host = @config.skills_host()
-  a(
-    href="//\{host}/",
-    class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
-    "🥮 \{host}",
-  )
-}
-
-///|
 fn action_link(href : String, label : String) -> Html {
   a(
     href~,
@@ -1108,7 +1098,6 @@ pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
     }
     skills_page(
       @view.navbar(
-        left=skills_logo(),
         left_extra=span(
           class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
           "experimental",
@@ -1249,7 +1238,6 @@ pub fn skill_detail_page(entry : String, app_actions~ : Val[Html]) -> Val[Html] 
     }
     skills_page(
       @view.navbar(
-        left=skills_logo(),
         left_extra=span(
           class="rounded-full border border-gray-300/60 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-500 dark:text-gray-400",
           "experimental",

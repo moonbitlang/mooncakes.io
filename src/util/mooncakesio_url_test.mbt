@@ -23,13 +23,13 @@ test "resolve root" {
 }
 
 ///|
-test "resolve skills host root" {
+test "root route does not depend on the host" {
   inspect(
     @util.MooncakesioPath::resolve(
-      test_url_with_host(@config.skills_host(), ""),
+      test_url_with_host("skills.mooncakes.io", ""),
     ),
     content=(
-      #|skills:
+      #|home:
     ),
   )
 }
@@ -51,6 +51,12 @@ test "resolve skills list" {
     content=(
       #|skills:
     ),
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(
+      @url.parse("https://mooncakes.io/skills/?q=a%2Bb#skills"),
+    ),
+    content="skills:",
   )
 }
 

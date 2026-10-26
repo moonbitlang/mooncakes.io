@@ -171,9 +171,8 @@ pub fn app() -> Val[Html] {
       Setting(kind) => @setting.page(kind, app_actions~, dark~)
       User(name) => @user.user_page(name, app_actions~)
       BuildQueue => @build_queue.build_queue_page(app_actions~)
-      SkillsList => @skills.skills_list_page(app_actions=theme_actions)
-      SkillsDetail(entry) =>
-        @skills.skill_detail_page(entry, app_actions=theme_actions)
+      SkillsList => @skills.skills_list_page(app_actions~)
+      SkillsDetail(entry) => @skills.skill_detail_page(entry, app_actions~)
       NotFound => Val::constant(@view.not_found())
       Redirect => Val::constant(@view.loading())
       Docs(fallback_path, ..) => {

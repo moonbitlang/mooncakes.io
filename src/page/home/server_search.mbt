@@ -147,9 +147,7 @@ fn update_search(
 
 ///|
 fn search_url(query : String) -> String {
-  @config.api_url(
-    "/api/v0/search?kw=\{@util.encode_uri_component(query)}&limit=20",
-  )
+  "/api/v0/search?kw=\{@util.encode_uri_component(query)}&limit=20"
 }
 
 ///|

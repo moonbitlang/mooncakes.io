@@ -347,15 +347,13 @@ fn code_frequency(code_frequency : Status[CodeFrequencyResponse]) -> Html {
 ///|
 pub fn user_page(username : String, app_actions~ : Val[Html]) -> Val[Html] {
   let profile_resource : @rabbita.Resource[Profile] = @rabbita.create_resource(inject => {
-    @http.get(@config.api_url("/api/v0/user/\{username}")).expect_json(inject)
+    @http.get("/api/v0/user/\{username}").expect_json(inject)
   })
   let today = @util.utc_date_days_ago(0)
   let start_date = @util.utc_date_days_ago(120)
   let frequency_resource : @rabbita.Resource[CodeFrequencyResponse] = @rabbita.create_resource(inject => {
       @http.get(
-        @config.api_url(
-          "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
-        ),
+        "/api/v0/user/\{username}/code-frequency?start_date=\{start_date}&end_date=\{today}",
       ).expect_json(inject)
     },
   )

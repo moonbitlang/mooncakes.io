@@ -481,7 +481,7 @@ fn auth_form(kind : @util.AuthFormKind) -> Val[Html] {
           nothing
         },
         @rui.form(
-          action=@config.api_url("/api/v0/\{form_endpoint(kind)}"),
+          action="/api/v0/\{form_endpoint(kind)}",
           attrs=Attrs::build()
             .method_("post")
             .aria_busy(if model.busy != Idle { "true" } else { "false" }),
@@ -784,7 +784,7 @@ fn token_dialog(model : Settings, emit : Emit[SettingsMsg]) -> Html {
       @rui.dialog_title(id="token-dialog-title", "Create API token"),
     ],
     @rui.form(
-      action=@config.api_url("/api/v0/api_token/create"),
+      action="/api/v0/api_token/create",
       attrs=Attrs::build().method_("post"),
       on_submit=emit(CreateToken),
     ) <| [
@@ -883,7 +883,7 @@ fn password_dialog(model : Settings, emit : Emit[SettingsMsg]) -> Html {
       ),
     ],
     @rui.form(
-      action=@config.api_url("/api/v0/change_password"),
+      action="/api/v0/change_password",
       attrs=Attrs::build().method_("post"),
       on_submit=emit(SavePassword),
     ) <| [

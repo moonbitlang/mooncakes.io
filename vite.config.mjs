@@ -62,14 +62,10 @@ const testAssetsServer = {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const apiEndpoint = removeTrailingSlash(
-    process.env.VITE_API_ENDPOINT || env.VITE_API_ENDPOINT || "/api"
-  )
-  // Override only the dev proxy; production still uses its configured API path.
   const devApiTarget = process.env.VITE_DEV_API_PROXY || env.VITE_DEV_API_PROXY || 'https://mooncakes.io'
   const assetsEndpoint = removeTrailingSlash(
-    process.env.VITE_ASSETS_ENDPOINT ||
-      env.VITE_ASSETS_ENDPOINT ||
+    process.env.MOONCAKES_ASSETS_ENDPOINT ||
+      env.MOONCAKES_ASSETS_ENDPOINT ||
       'https://assets.mooncakes.io'
   )
 
@@ -78,7 +74,6 @@ export default defineConfig(({ mode }) => {
     publicDir: '../public',
     base: assetsEndpoint ? `${assetsEndpoint}/` : '/',
     define: {
-      __MOONCAKES_API_ENDPOINT__: JSON.stringify(apiEndpoint),
       __MOONCAKES_ASSETS_ENDPOINT__: JSON.stringify(assetsEndpoint),
     },
     build: {

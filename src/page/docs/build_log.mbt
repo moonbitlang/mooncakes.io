@@ -60,9 +60,7 @@ fn docs_build_notice(manifest : Manifest) -> Val[Html?] {
               let cmd = match (build_log_open, model.build_log) {
                 (true, LogIdle | LogFailed) =>
                   @http.get(
-                    @config.api_url(
-                      "/api/v0/builds/log?module=\{@util.encode_uri_component(manifest.module_)}&version=\{@util.encode_uri_component(manifest.version)}",
-                    ),
+                    "/api/v0/builds/log?module=\{@util.encode_uri_component(manifest.module_)}&version=\{@util.encode_uri_component(manifest.version)}",
                   ).expect_text((result : Result[String, Error]) => {
                     emit(GotBuildLog(result))
                   })

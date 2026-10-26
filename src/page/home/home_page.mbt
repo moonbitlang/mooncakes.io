@@ -396,15 +396,13 @@ fn banner(
 pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
   let highlights : @rabbita.Resource[ModuleHighlights] = @rabbita.create_resource(inject => {
       @http.get(
-        @config.api_url(
-          "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
-        ),
+        "/api/v0/modules?recent=\{highlights_limit}&new=\{highlights_limit}&popular=\{highlights_limit}",
       ).expect_json(inject)
     },
   )
   let highlights_view = highlights_section(highlights)
   let statistics : @rabbita.Resource[PackageCount] = @rabbita.create_resource(inject => {
-    @http.get(@config.api_url("/api/v0/modules/statistics")).expect_json(inject)
+    @http.get("/api/v0/modules/statistics").expect_json(inject)
   })
   let (catalog, emit) = @rabbita.create_state(
     { all_modules: Idle, show_all_modules: false, search: initial_search(), },
@@ -439,7 +437,7 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
             Idle if show =>
               (
                 { ..model, all_modules: Loading, show_all_modules: show, },
-                @http.get(@config.api_url("/api/v0/modules")).expect_json(r => {
+                @http.get("/api/v0/modules").expect_json(r => {
                   emit(GotAllModule(r))
                 }),
               )

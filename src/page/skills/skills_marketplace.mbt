@@ -1,13 +1,6 @@
 ///|
 fn skills_header(app_actions : Html) -> Html {
-  @view.navbar(
-    left=a(
-      href="/skills",
-      class="border-gray-300 dark:border-zinc-700 font-title mx-2 font-semibold flex items-center text-nowrap",
-      "🥮 mooncakes.io / skills",
-    ),
-    right=app_actions,
-  )
+  @view.navbar(active=Skills, right=app_actions)
 }
 
 ///|

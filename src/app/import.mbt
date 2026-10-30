@@ -25,7 +25,6 @@ using @html {
   meta,
   nothing,
   script,
-  span,
   title,
 }
 

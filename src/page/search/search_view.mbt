@@ -21,7 +21,7 @@ fn search_module_card(result : SearchResult) -> Html {
           ),
           span(class="px-1 text-gray-500", "/"),
           a(
-            href="/docs/\{versioned_path(mod)}",
+            href="/docs/\{@util.versioned_module_path(mod)}",
             class="hover:underline break-all",
             mod.name,
           ),
@@ -165,7 +165,7 @@ fn search_results_view(search : SearchModel, retry : @rabbita.Cmd) -> Html {
         "\{search.results.length()} modules · Most relevant first"
       }
   }
-  div(id="search-results", class="container lg:w-4/5 px-4 pb-12") <| [
+  div(id="search-results", class="w-full pb-12") <| [
     p(
       class="py-4 text-sm text-gray-600 dark:text-slate-400",
       attrs=@html.Attrs::build().role("status").aria_live("polite"),
@@ -179,8 +179,9 @@ fn search_results_view(search : SearchModel, retry : @rabbita.Cmd) -> Html {
           @view.skeleton_module_cards(3),
         )
       Failed =>
-        button(
-          class="px-4 py-2 rounded border bg-white dark:bg-zinc-900 text-sm hover:bg-gray-100 dark:hover:bg-zinc-800",
+        @rui.button(
+          variant=Outline,
+          style=["font-family:inherit"],
           on_click=retry,
           "Retry search",
         )

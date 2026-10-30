@@ -21,6 +21,7 @@ pub extend SettingPage with Eq::{equal, not_equal}
 ///|
 pub enum MooncakesioPath {
   Home
+  Search(String)
   Setting(SettingPage)
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
@@ -38,6 +39,7 @@ pub extend MooncakesioPath with Show::{to_string, output}
 pub impl Show for MooncakesioPath with fn output(self, logger) {
   match self {
     Home => logger.write_string("home:")
+    Search(query) => logger.write_string("search:\{query}")
     Setting(page) =>
       logger.write_string(
         match page {
@@ -63,6 +65,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
 pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
   match url.path.split("/").collect() {
     ["/"] | [""] | [] => Home
+    ["search"] | ["search", ""] => Search(search_query(url))
     ["build-queue"] => BuildQueue
     ["login"] => Setting(Auth(Login))
     ["register"] => Setting(Auth(Register))
@@ -77,4 +80,16 @@ pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
       Docs(UnsolvedMooncakePath::new(remain.join("/")), fragment=url.fragment)
     xs => NotFound(xs.join("/"))
   }
+}
+
+///|
+fn search_query(url : @url.Url) -> String {
+  for part in url.query.unwrap_or("").split("&") {
+    let (name, value) = part.split_once("=").unwrap_or((part, ""))
+    if name == "q" {
+      let encoded = value.split("+").join(" ")
+      return @utf8.decode_lossy(@percent.decode(encoded).exact_view())
+    }
+  }
+  ""
 }

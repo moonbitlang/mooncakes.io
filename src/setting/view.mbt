@@ -109,11 +109,20 @@ pub fn navbar(
       let username = value_string(actions.user, "username")
       if username == "" {
         return Val::constant(
-          a(
-            href="/login",
-            class="theme-toggle inline-flex items-center justify-center rounded-full px-3 py-1.5 text-sm leading-4 font-medium transition-colors",
-            "Sign in",
-          ),
+          @rui.button(
+            variant=Ghost,
+            style=["font-family:inherit"],
+            on_click=@nav.push_url("/login"),
+            attrs=Attrs::build().aria_label("Sign in"),
+          ) <| [
+            @html.img(
+              src=@config.user,
+              alt="",
+              class="ui-icon h-4 w-4 shrink-0",
+              attrs=Attrs::build().data_set("icon", "inline-start"),
+            ),
+            span(class="hidden sm:inline", "Sign in"),
+          ],
         )
       }
       let menu = @rui.dropdown_menu(id="setting-menu", scope => {
@@ -121,7 +130,6 @@ pub fn navbar(
           @rui.dropdown_menu_trigger(
             scope,
             variant=Ghost,
-            style=["height:1.875rem"],
             disabled=actions.busy,
             aria_label="Account: \{username}",
           ) <| [

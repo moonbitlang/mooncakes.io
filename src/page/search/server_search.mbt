@@ -1,11 +1,11 @@
 ///|
-struct SummaryFragment {
+priv struct SummaryFragment {
   text : String
   matched : Bool
 } derive(Eq, @debug.Debug, @json.FromJson)
 
 ///|
-struct PackageMatch {
+priv struct PackageMatch {
   package_ : String
   name : String
   summary : String
@@ -42,7 +42,7 @@ impl @json.FromJson for PackageMatch with fn from_json(value, path) {
 }
 
 ///|
-struct SearchResult {
+priv struct SearchResult {
   module_info : ModuleIndex
   downloads : Int64?
   matched_package_count : Int32
@@ -68,7 +68,7 @@ impl @json.FromJson for SearchResult with fn from_json(value, path) {
 }
 
 ///|
-enum SearchPhase {
+priv enum SearchPhase {
   Inactive
   Debouncing
   Loading
@@ -77,7 +77,9 @@ enum SearchPhase {
 } derive(Eq, @debug.Debug)
 
 ///|
-struct SearchModel {
+// Debug is used by white-box search state assertions.
+#warnings("-unused_value")
+priv struct SearchModel {
   input : String
   request_id : Int32
   phase : SearchPhase
@@ -94,7 +96,9 @@ priv enum SearchMsg {
 }
 
 ///|
-enum SearchAction {
+// Eq and Debug are used by white-box search action assertions.
+#warnings("-unused_value")
+priv enum SearchAction {
   Nothing
   Schedule(Int32)
   Fetch(Int32, String)

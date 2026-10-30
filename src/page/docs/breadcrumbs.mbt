@@ -53,7 +53,7 @@ fn breadcrumbs(
   }
   let separator = div(class="text-gray-300 dark:text-gray-500 text-base", " / ")
   div(
-    class="text-base text-gray-800 dark:text-slate-200 font-semibold flex gap-2",
+    class="text-base text-gray-800 dark:text-slate-200 font-semibold flex items-center gap-2",
     elems.iter().intersperse(separator).collect(),
   )
 }

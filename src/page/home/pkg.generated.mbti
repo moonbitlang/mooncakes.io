@@ -4,8 +4,6 @@ package "moonbitlang/mooncakes/page/home"
 import {
   "moonbit-community/rabbita",
   "moonbit-community/rabbita/html",
-  "moonbitlang/core/debug",
-  "moonbitlang/core/json",
 }
 
 // Values
@@ -26,45 +24,9 @@ type ModuleHighlights derive(Eq)
 pub fn ModuleHighlights::equal(Self, Self) -> Bool
 pub fn ModuleHighlights::not_equal(Self, Self) -> Bool
 
-type ModuleIndex derive(Eq, @debug.Debug)
-pub fn ModuleIndex::equal(Self, Self) -> Bool
-pub fn ModuleIndex::not_equal(Self, Self) -> Bool
-pub fn ModuleIndex::to_repr(Self) -> @debug.Repr
-
 type PackageCount derive(Eq)
 pub fn PackageCount::equal(Self, Self) -> Bool
 pub fn PackageCount::not_equal(Self, Self) -> Bool
-
-type PackageMatch derive(Eq, @debug.Debug)
-pub fn PackageMatch::equal(Self, Self) -> Bool
-pub fn PackageMatch::not_equal(Self, Self) -> Bool
-pub fn PackageMatch::to_repr(Self) -> @debug.Repr
-
-type SearchAction derive(Eq, @debug.Debug)
-pub fn SearchAction::equal(Self, Self) -> Bool
-pub fn SearchAction::not_equal(Self, Self) -> Bool
-pub fn SearchAction::to_repr(Self) -> @debug.Repr
-
-type SearchModel derive(Eq, @debug.Debug)
-pub fn SearchModel::equal(Self, Self) -> Bool
-pub fn SearchModel::not_equal(Self, Self) -> Bool
-pub fn SearchModel::to_repr(Self) -> @debug.Repr
-
-type SearchPhase derive(Eq, @debug.Debug)
-pub fn SearchPhase::equal(Self, Self) -> Bool
-pub fn SearchPhase::not_equal(Self, Self) -> Bool
-pub fn SearchPhase::to_repr(Self) -> @debug.Repr
-
-type SearchResult derive(Eq, @debug.Debug)
-pub fn SearchResult::equal(Self, Self) -> Bool
-pub fn SearchResult::not_equal(Self, Self) -> Bool
-pub fn SearchResult::to_repr(Self) -> @debug.Repr
-
-type SummaryFragment derive(Eq, @debug.Debug, @json.FromJson)
-pub fn SummaryFragment::equal(Self, Self) -> Bool
-pub fn SummaryFragment::from_json(Json, @json.JsonPath) -> Self raise @json.JsonDecodeError
-pub fn SummaryFragment::not_equal(Self, Self) -> Bool
-pub fn SummaryFragment::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

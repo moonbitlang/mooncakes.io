@@ -506,41 +506,23 @@ fn readme(
   module_name~ : String,
   module_version~ : String,
   package_path~ : String,
-  folded~ : FoldedState,
-  toggle~ : Cmd,
 ) -> Html {
   let has_content = match content {
     None | Some("") => false
     _ => true
   }
-  let is_collapsed = folded.contains("readme")
-  let (body, icon) = if is_collapsed {
-    (nothing, @config.section_close)
-  } else if has_content {
+  let body = if has_content {
     let content = @view.markdown(content.unwrap(), heading_anchors=true, transform_link=href => {
       readme_href(href, module_name, module_version, package_path)
     })
-    (div(class="mt-4 mb-6", content), @config.section_open)
+    div(class="mb-6", content)
   } else {
-    (
-      p(
-        class="mt-3 mb-4 text-sm text-gray-400 dark:text-slate-500 text-center",
-        "\{package_path} does not have a README file",
-      ),
-      @config.section_open,
+    p(
+      class="mt-3 mb-4 text-sm text-gray-400 dark:text-slate-500 text-center",
+      "\{package_path} does not have a README file",
     )
   }
-  div(class="mt-4 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [
-    button(
-      class="flex items-center gap-1.5 py-1.5 px-2.5 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-900 select-none w-fit",
-      on_click=toggle,
-    ) <| [
-      img(src=icon, class="size-3.5 ui-icon"),
-      span(
-        class="font-medium text-gray-500 dark:text-gray-400 text-xs tracking-wide",
-        "README",
-      ),
-    ],
+  div(class="mt-2 mb-4 mx-4 md:mx-0 scroll-mt-header", id="readme") <| [
     body,
     div(class="border-b border-gray-200 dark:border-zinc-800 mt-4", nothing),
   ]

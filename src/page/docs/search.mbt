@@ -171,11 +171,15 @@ fn docs_search(
     }
     { module_index, entries, }
   })
-  let (filter, emit) = @rabbita.create_pure_state("", update=(_filter, msg) => {
-    match msg {
-      FilterChanged(filter) => filter
-    }
-  })
+  let (filter, emit) = @rabbita.create_state(
+    "",
+    update=(_filter, msg, _emit) => {
+      match msg {
+        FilterChanged(filter) => (filter, none)
+      }
+    },
+    subscriptions=(_, _) => on_api_search_shortcut(@dialog.show("search-panel")),
+  )
   filter.view2(search_entries, fn(filter, search_entries) {
     let results = if search_entries.entries is Some(entries) {
       search(entries, filter)
@@ -192,7 +196,8 @@ fn docs_search(
         input(
           input_type=Text,
           value=filter,
-          placeholder="search...",
+          placeholder="Find API in this module…",
+          attrs=@html.Attrs::build().aria_label("Find API in this module"),
           on_input=filter => emit(FilterChanged(filter)),
           class="outline-none m-0 flex-grow px-4 p-2 dark:placeholder:text-slate-500",
         ),

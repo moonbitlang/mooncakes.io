@@ -31,6 +31,16 @@ fn example_search_result() -> SearchResult raise {
 }
 
 ///|
+test "standalone search URLs preserve input without changing the API endpoint" {
+  assert_eq(search_page_url(""), "/search")
+  assert_eq(
+    search_page_url("a+b 文件"),
+    "/search?q=a%2Bb%20%E6%96%87%E4%BB%B6",
+  )
+  assert_eq(search_url("a+b"), "/api/v0/search?kw=a%2Bb&limit=20")
+}
+
+///|
 test "server search keeps legacy module decoding and adds package details" {
   let hit = example_search_result()
   assert_eq(hit.module_info.path, "alice/tools")

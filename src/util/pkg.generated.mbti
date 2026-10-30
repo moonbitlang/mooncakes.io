@@ -5,9 +5,12 @@ import {
   "moonbit-community/rabbita/common",
   "moonbit-community/rabbita/url",
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }
 
 // Values
+pub fn decode_module_index(Json, @json.JsonPath) -> ModuleIndex raise @json.JsonDecodeError
+
 pub fn decode_yanked(Json) -> String?
 
 pub fn encode_uri_component(String) -> String
@@ -19,6 +22,8 @@ pub fn iso8601_to_unix_seconds(String) -> Int64?
 pub fn recency_penalty(String) -> Int32
 
 pub fn utc_date_days_ago(Int32) -> String
+
+pub fn versioned_module_path(ModuleIndex) -> String
 
 // Errors
 
@@ -35,6 +40,23 @@ type Lazy[T]
 pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
 
+pub(all) struct ModuleIndex {
+  author : String
+  name : String
+  path : String
+  version : String
+  yanked : String?
+  keywords : Array[String]?
+  description : String?
+  created_at : String?
+  is_new : Bool
+} derive(Eq, @debug.Debug)
+pub fn ModuleIndex::equal(Self, Self) -> Bool
+pub fn ModuleIndex::from_json(Json, @json.JsonPath) -> Self raise @json.JsonDecodeError
+pub fn ModuleIndex::not_equal(Self, Self) -> Bool
+pub fn ModuleIndex::to_repr(Self) -> @debug.Repr
+pub impl @json.FromJson for ModuleIndex
+
 type MooncakePath derive(Eq)
 pub fn MooncakePath::equal(Self, Self) -> Bool
 pub fn MooncakePath::is_same_module(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
@@ -48,6 +70,7 @@ pub fn MooncakePath::version(Self) -> String
 
 pub enum MooncakesioPath {
   Home
+  Search(String)
   Setting(SettingPage)
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)

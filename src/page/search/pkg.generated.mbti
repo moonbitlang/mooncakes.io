@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "moonbitlang/mooncakes/page/search"
+
+import {
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
+}
+
+// Values
+pub fn search_page(@rabbita.Val[String], app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

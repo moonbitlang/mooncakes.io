@@ -15,7 +15,6 @@
 ///|
 priv enum CatalogMsg {
   GotAllModule(Result[Array[ModuleIndex], Error])
-  Search(SearchMsg)
   ToggleAllModules
 }
 
@@ -51,7 +50,6 @@ enum LazyStatus[T] {
 struct CatalogModel {
   all_modules : LazyStatus[AllModules]
   show_all_modules : Bool
-  search : SearchModel
 } derive(Eq)
 
 ///|
@@ -61,19 +59,6 @@ struct PackageCount {
   total_lines : Int32
   total_downloads : Int32
 } derive(Eq)
-
-///|
-struct ModuleIndex {
-  author : String
-  name : String
-  path : String
-  version : String
-  yanked : String?
-  keywords : Array[String]?
-  description : String?
-  created_at : String?
-  is_new : Bool
-} derive(Eq, @debug.Debug)
 
 ///|
 priv struct AllModules {
@@ -101,68 +86,6 @@ impl @json.FromJson for PackageCount with fn from_json(json : Json, path) {
       }
     _ => raise JsonDecodeError((path, "failed to parse json: \{Repr(json)}"))
   }
-}
-
-///|
-fn decode_module_index(
-  item : Json,
-  json_path : @json.JsonPath,
-) -> ModuleIndex raise @json.JsonDecodeError {
-  match item {
-    {
-      "name": String(path),
-      "version": String(version),
-      "keywords": Array(keywords),
-      "description": String(description),
-      "is_new": True
-      | False as bool,
-      "created_at": String(time),
-      ..
-    } => {
-      let keywords = Some(
-        keywords.filter_map(fn(x) {
-          match x {
-            String(s) => Some(s)
-            _ => None
-          }
-        }),
-      )
-      let description = Some(description)
-      let created_at = Some(time)
-      // we need Json::Boolean(x), not Json::True and Json::False
-      let is_new = match bool {
-        True => true
-        False => false
-        _ => raise JsonDecodeError((json_path, "invalid is_new field"))
-      }
-      let (author, name) = match path.split("/").collect() {
-        [author, .. name] => (author, name)
-        _ =>
-          raise JsonDecodeError((json_path, "unexpected module path: \{path}"))
-      }
-      let name = name.iter().map(StringView::to_owned).join("/")
-      {
-        path,
-        name,
-        author: author.to_owned(),
-        version,
-        yanked: @util.decode_yanked(item),
-        description,
-        keywords,
-        created_at,
-        is_new,
-      }
-    }
-    _ =>
-      raise JsonDecodeError(
-        (json_path, "unexpected item in json: \{Repr(item)}"),
-      )
-  }
-}
-
-///|
-impl @json.FromJson for ModuleIndex with fn from_json(json : Json, path) {
-  decode_module_index(json, path)
 }
 
 ///|

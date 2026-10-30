@@ -19,14 +19,37 @@ priv enum CardMode {
 } derive(Eq)
 
 ///|
-fn card_mode_toggle(mode~ : CardMode, click~ : (CardMode) -> Cmd) -> Html {
-  let (icon, next_mode) = match mode {
-    Expanded => (@config.reduction, Collapsed)
-    Collapsed => (@config.expansion, Expanded)
+fn card_mode_toggle(
+  mode~ : CardMode,
+  click~ : (CardMode) -> Cmd,
+  disabled~ : Bool = false,
+) -> Val[Html] {
+  let (next_mode, label, icon) = match mode {
+    Expanded =>
+      (
+        Collapsed,
+        "Collapse all documentation",
+        @config.asset_url("/icons/lucide/list-chevrons-down-up.svg"),
+      )
+    Collapsed =>
+      (
+        Expanded,
+        "Expand all documentation",
+        @config.asset_url("/icons/lucide/list-chevrons-up-down.svg"),
+      )
   }
-  button(
-    class="theme-toggle hidden md:inline-flex items-center rounded-full px-3 py-1.5 transition-colors",
-    on_click=click(next_mode),
-    img(class="w-4 h-4 ui-icon", src=icon),
+  @rui.tooltip(
+    id="docs-card-mode-tooltip",
+    trigger_variant=Ghost,
+    trigger_size=Icon,
+    trigger_attrs=@html.Attrs::build().aria_label(label),
+    disabled~,
+    delay=250,
+    side=Bottom,
+    align=End,
+    side_offset=8,
+    on_trigger_click=click(next_mode),
+    img(class="ui-icon h-4 w-4", src=icon, alt=""),
+    label,
   )
 }

@@ -21,6 +21,7 @@ priv enum ThemeMsg {
 ///|
 priv enum Route {
   Home
+  Search(String)
   Setting(@util.SettingPage)
   Docs(@util.UnsolvedMooncakePath, fragment~ : String)
   User(String)
@@ -41,6 +42,7 @@ priv enum RouteMsg {
 impl @rabbita.Enumerate for Route with fn tag(self) {
   match self {
     Home => "home"
+    Search(_) => "search"
     Setting(page) =>
       match page {
         Auth(Login) => "login"
@@ -63,6 +65,15 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
 fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
   match @util.MooncakesioPath::resolve(url) {
     Home => (Home, @nav.scroll_to_top())
+    Search(query) =>
+      (
+        Search(query),
+        if model is Search(_) {
+          none
+        } else {
+          batch([@nav.scroll_to_top(), @view.focus_search_input()])
+        },
+      )
     Setting(page) => (Setting(page), @nav.scroll_to_top())
     BuildQueue => (BuildQueue, @nav.scroll_to_top())
     SkillsList =>
@@ -143,13 +154,14 @@ fn theme() -> (Val[Html], Val[Theme]) {
       Light => (@config.sun_icon, "Using light mode. Switch to dark mode.")
       Dark => (@config.moon_icon, "Using dark mode. Switch to system theme.")
     }
-    @view.button(
+    @rui.button(
+      variant=Ghost,
+      size=Icon,
       on_click=emit(ToggleTheme),
-      class="theme-toggle inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-    ) <| [
-      img(class="theme-toggle-icon", src=icon),
-      span(class="sr-only", label),
-    ]
+      title=label,
+      attrs=Attrs::build().aria_label(label),
+      img(class="theme-toggle-icon", src=icon, alt=""),
+    )
   })
   (toggle, theme)
 }
@@ -162,7 +174,7 @@ pub fn app() -> Val[Html] {
   let app_actions = theme_actions.view2(@setting.navbar(dark~), (
     toggle,
     setting_actions,
-  ) => div(class="flex items-center gap-2", [setting_actions, toggle]))
+  ) => div(class="flex items-center gap-2", [toggle, setting_actions]))
   let (route, _) = @rabbita.create_state(
     Redirect,
     update=(model, msg, _emit) => {
@@ -182,6 +194,16 @@ pub fn app() -> Val[Html] {
   let page = route.switch(current => {
     match current {
       Home => @home.home_page(app_actions~)
+      Search(initial_query) => {
+        let query = route.map(current => {
+          if current is Search(query) {
+            query
+          } else {
+            initial_query
+          }
+        })
+        @search.search_page(query, app_actions~)
+      }
       Setting(kind) => @setting.page(kind, app_actions~, dark~)
       User(name) => @user.user_page(name, app_actions~)
       BuildQueue => @build_queue.build_queue_page(app_actions~)
@@ -210,6 +232,7 @@ pub fn app() -> Val[Html] {
   theme.view3(page, route, fn(theme, page, route) {
     let page_title = match route {
       Home => "mooncakes.io"
+      Search(_) => "Search - mooncakes.io"
       Docs(path, ..) => "\{path.package_path()} - mooncakes.io"
       User(name) => "\{name} - mooncakes.io"
       BuildQueue => "Build Queue - mooncakes.io"
@@ -240,7 +263,14 @@ pub fn app() -> Val[Html] {
         script(attrs=bootstrap_attrs, nothing),
       ],
       body <| [
-        div(class="theme-root min-h-screen w-full", page),
+        @rui.theme(
+          mode=if theme.resolved() == "dark" { Dark } else { Light },
+          class="theme-root min-h-screen w-full",
+          style=[
+            "background:transparent;color:inherit;font-family:inherit;-webkit-font-smoothing:auto;text-rendering:auto",
+          ],
+          page,
+        ),
       ],
     ]
   })

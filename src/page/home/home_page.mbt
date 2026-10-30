@@ -13,17 +13,8 @@
 // limitations under the License.
 
 ///|
-fn versioned_path(mod : ModuleIndex) -> String {
-  if mod.version.is_empty() || mod.path == "moonbitlang/core" {
-    mod.path
-  } else {
-    "\{mod.path}@\{mod.version}"
-  }
-}
-
-///|
 fn simple_module_card(mod : ModuleIndex) -> Html {
-  let href = "/docs/\{versioned_path(mod)}"
+  let href = "/docs/\{@util.versioned_module_path(mod)}"
   div(
     class="h-24 lg:h-30 flex-nowrap bg-white dark:bg-zinc-900 text-gray-700 dark:text-slate-300 select-none py-3 px-4 flex outline outline-transparent flex-col border-gray-200 dark:border-zinc-800 border-b lg:hover:outline-mooncake2 lg:hover:border-transparent lg:hover:shadow-md border rounded-md transition-shadow",
   ) <| [
@@ -73,7 +64,7 @@ fn simple_module_card(mod : ModuleIndex) -> Html {
 
 ///|
 fn pinned() -> Html {
-  let pinned = [
+  let pinned : Array[ModuleIndex] = [
     {
       author: "moonbitlang",
       name: "core",
@@ -127,7 +118,7 @@ fn pinned() -> Html {
 ///|
 fn compact_module_card(card : ModuleCard) -> Html {
   let mod = card.module_info
-  let href = "/docs/\{versioned_path(mod)}"
+  let href = "/docs/\{@util.versioned_module_path(mod)}"
   let badge = match card.badge {
     Version => text(mod.version)
     PublishedAt =>
@@ -247,28 +238,6 @@ fn all_modules(modules : Map[Char, Array[ModuleIndex]]) -> Html {
       ]
     })
   div(class="animate-fade-in", all_modules)
-}
-
-///|
-fn format_stat_text(value : String) -> String {
-  let chars = value.to_array()
-  let length = chars.length()
-  let sb = StringBuilder(size_hint=length + length / 3)
-  for i, c in chars {
-    if i > 0 && (length - i) % 3 == 0 {
-      sb.write_char(',')
-    }
-    sb.write_char(c)
-  }
-  sb.to_string()
-}
-
-///|
-test "format_stat_text groups digits and placeholders" {
-  inspect(format_stat_text("12"), content="12")
-  inspect(format_stat_text("1000"), content="1,000")
-  inspect(format_stat_text("1234567"), content="1,234,567")
-  inspect(format_stat_text("----"), content="-,---")
 }
 
 ///|
@@ -405,7 +374,7 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
     @http.get("/api/v0/modules/statistics").expect_json(inject)
   })
   let (catalog, emit) = @rabbita.create_state(
-    { all_modules: Idle, show_all_modules: false, search: initial_search(), },
+    { all_modules: Idle, show_all_modules: false, },
     update=(model, msg, emit) => {
       match msg {
         GotAllModule(Ok(modules)) => {
@@ -416,27 +385,12 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
           println(err.to_string())
           ({ ..model, all_modules: Failed, }, none)
         }
-        Search(msg) => {
-          let (search, action) = update_search(model.search, msg)
-          let command = match action {
-            Nothing => none
-            Schedule(id) => @rabbita.delay(emit(Search(Debounced(id))), 250)
-            Fetch(id, query) =>
-              @rabbita.batch([
-                @http.get(search_url(query)).expect_json(result => {
-                  emit(Search(Completed(id, result)))
-                }),
-                @rabbita.delay(emit(Search(TimedOut(id))), 15000),
-              ])
-          }
-          ({ ..model, search, }, command)
-        }
         ToggleAllModules => {
           let show = !model.show_all_modules
           match model.all_modules {
             Idle if show =>
               (
-                { ..model, all_modules: Loading, show_all_modules: show, },
+                { all_modules: Loading, show_all_modules: show, },
                 @http.get("/api/v0/modules").expect_json(r => {
                   emit(GotAllModule(r))
                 }),
@@ -472,7 +426,7 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
         }
       }
     }
-    let module_list = if catalog.search.input.trim().is_empty() {
+    let module_list = {
       let pinned_modules = pinned()
       let chevron_down : Html = @svg.svg(
         width=16,
@@ -533,33 +487,14 @@ pub fn home_page(app_actions~ : Val[Html]) -> Val[Html] {
       div <| [
         pinned_modules, highlights, all_modules_section,
       ]
-    } else {
-      search_results_view(catalog.search, emit(Search(Retry)))
     }
-    let stats = if catalog.search.input.trim().is_empty() {
-      banner(
-        total_modules=statistics.total_modules,
-        total_downloads=statistics.total_downloads,
-        total_packages=statistics.total_packages,
-      )
-    } else {
-      nothing
-    }
+    let stats = banner(
+      total_modules=statistics.total_modules,
+      total_downloads=statistics.total_downloads,
+      total_packages=statistics.total_packages,
+    )
     let header = div(class="home-hero-shell pb-2 sm:pb-8") <| [
-      @view.navbar(
-        style=Fusion,
-        middle=input(
-          input_type=Text,
-          value=catalog.search.input,
-          placeholder="Search modules and packages…",
-          attrs=@html.Attrs::build()
-            .aria_label("Search modules and packages")
-            .aria_controls("search-results"),
-          class="border rounded-full my-1 lg:my-0 w-full lg:w-[380px] text-base px-4 py-2 bg-white/90 dark:bg-zinc-900/90 focus:border-mooncake2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mooncake2 transition-colors dark:placeholder:text-slate-400",
-          on_input=query => emit(Search(Changed(query))),
-        ),
-        right=app_actions,
-      ),
+      @view.navbar(style=Fusion, active=Modules, right=app_actions),
       div(class="hero-banner", stats),
     ]
     @view.page(header~, main=div(class="w-full", module_list))

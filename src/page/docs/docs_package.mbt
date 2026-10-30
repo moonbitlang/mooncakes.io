@@ -94,7 +94,13 @@ fn docs_ready_package(
       }
     },
   )
-  model.map(model => {
+  let document_actions = model
+    .map(model => model.collapsed_docs.card_mode)
+    .switch_by(
+      by=mode => if mode == Expanded { "expanded" } else { "collapsed" },
+      mode => card_mode_toggle(mode~, click=mode => emit(DocModeChanged(mode))),
+    )
+  let content = model.map(model => {
     let folded = model.collapsed_docs
     let module_name = manifest.module_
     let module_version = manifest.version
@@ -104,8 +110,6 @@ fn docs_ready_package(
       module_name~,
       module_version~,
       package_path~,
-      folded~,
-      toggle=emit(ToggleDocDetail("readme")),
     )
     let doc_list = match package_data {
       Some({ traits, types, errors, typealiases, values, misc, name: _, }) => {
@@ -185,7 +189,7 @@ fn docs_ready_package(
       }
       _ => []
     }
-    let content = div <| [
+    div <| [
       div(class="animate-fade-in") <| [
         div(class="contents-center flex flex-col w-full") <| [
           readme,
@@ -198,13 +202,8 @@ fn docs_ready_package(
         package_path=make_versioned_asset_path(resolved),
       ),
     ]
-    (
-      content,
-      card_mode_toggle(mode=model.collapsed_docs.card_mode, click=mode => {
-        emit(DocModeChanged(mode))
-      }),
-    )
   })
+  content.map2(document_actions, (content, actions) => (content, actions))
 }
 
 ///|
@@ -215,16 +214,19 @@ fn docs_package(
   build_notice~ : Val[Html?],
   module_index~ : @rabbita.Resource[ModuleIndex]?,
 ) -> Val[(Html, Html)] {
-  let unavailable = build_notice.map(notice => {
-    (
-      if notice is Some(notice) {
-        notice
-      } else {
-        @view.document_not_available(resolved.package_path())
-      },
-      card_mode_toggle(mode=Expanded, click=_ => none),
-    )
-  })
+  let unavailable = build_notice.map2(
+    card_mode_toggle(mode=Expanded, click=_ => none, disabled=true),
+    (notice, actions) => {
+      (
+        if notice is Some(notice) {
+          notice
+        } else {
+          @view.document_not_available(resolved.package_path())
+        },
+        actions,
+      )
+    },
+  )
   guard module_index is Some(module_index) else { return unavailable }
   let asset_path = make_versioned_asset_path(resolved)
   let resource : @rabbita.Resource[ResourceInfo] = @rabbita.create_resource(inject => {
@@ -268,12 +270,9 @@ fn docs_package(
       Ready(resource, package_data) =>
         docs_ready_package(manifest, resolved, fragment, resource, package_data)
       Loading =>
-        Val::constant(
-          (
-            @view.skeleton_docs_content(),
-            card_mode_toggle(mode=Expanded, click=_ => none),
-          ),
-        )
+        card_mode_toggle(mode=Expanded, click=_ => none, disabled=true).map(actions => {
+          (@view.skeleton_docs_content(), actions)
+        })
       Failed => unavailable
     }
   })

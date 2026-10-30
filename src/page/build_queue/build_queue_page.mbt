@@ -24,7 +24,7 @@ pub fn build_queue_page(app_actions~ : Val[Html]) -> Val[Html] {
       println(error)
     }
     @view.page(
-      header=@view.navbar(right=app_actions),
+      header=@view.navbar(active=BuildQueue, right=app_actions),
       main=div(class="container max-w-3xl mx-auto px-4 py-8") <| [
         h1(
           class="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-6",

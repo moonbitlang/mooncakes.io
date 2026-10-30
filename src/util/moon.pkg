@@ -1,7 +1,9 @@
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
   "moonbitlang/core/env",
   "moonbitlang/core/string",
+  "moonbitlang/core/encoding/utf8",
   "moonbit-community/rabbita/common",
   "moonbit-community/rabbita/url",
   "moonbitlang/x/encoding/percent",

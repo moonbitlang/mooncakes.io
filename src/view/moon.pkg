@@ -1,6 +1,10 @@
 import {
+  "moonbit-community/rui",
   "moonbit-community/rabbita",
   "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/svg",
+  "moonbit-community/rabbita/nav",
+  "moonbit-community/rabbita/cmd",
   "moonbit-community/cmark/cmark",
   "moonbitlang/mooncakes/util/highlight",
   "moonbitlang/mooncakes/config",

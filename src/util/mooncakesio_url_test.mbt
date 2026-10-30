@@ -23,6 +23,27 @@ test "resolve root" {
 }
 
 ///|
+test "module search has its own route and decodes query text" {
+  inspect(@util.MooncakesioPath::resolve(test_url("search")), content="search:")
+  inspect(
+    @util.MooncakesioPath::resolve(
+      @url.parse(
+        "https://mooncakes.io/search/?q=a%2Bb+%E6%96%87%E4%BB%B6&other=1",
+      ),
+    ),
+    content="search:a+b 文件",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(@url.parse("https://mooncakes.io/?q=json")),
+    content="home:",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("search/unknown")),
+    content="not-found:search/unknown",
+  )
+}
+
+///|
 test "root route does not depend on the host" {
   inspect(
     @util.MooncakesioPath::resolve(

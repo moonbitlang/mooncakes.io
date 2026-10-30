@@ -13,10 +13,13 @@
 // limitations under the License.
 
 ///|
-using @html {type Html, a, div, nothing, text, input, img, h1, h2, span, p}
+using @html {type Html, a, div, nothing, text, img, h1, h2, span, p}
 
 ///|
-using @view {button}
+using @view {button, format_stat_text}
+
+///|
+using @util {type ModuleIndex, decode_module_index}
 
 ///|
 using @rabbita {type Val, none}

@@ -124,7 +124,6 @@ fn docs_module(
     Val::constant(None)
   }
   let search_panel = docs_search(module_index, manifest)
-  let sidebar = docs_sidebar(module_index, resolved, manifest)
   let metadata = docs_metadata(manifest)
   let build_notice = docs_build_notice(manifest)
   let document = path.switch(requested => {
@@ -146,13 +145,16 @@ fn docs_module(
       Val::constant((@view.skeleton_docs_content(), nothing))
     }
   })
-  document.view7(
+  let sidebar = docs_sidebar(module_index, resolved, manifest)
+  let search_button = docs_search_button()
+  document.view8(
     path,
     module_index,
     search_panel,
     sidebar,
     metadata,
     app_actions,
+    search_button,
     fn(
       document,
       requested,
@@ -161,10 +163,12 @@ fn docs_module(
       sidebar,
       metadata,
       app_actions,
+      search_button,
     ) {
-      let module_index = match module_index {
-        Some(Loaded(index)) => Some(index)
-        _ => None
+      let module_index = if module_index is Some(Loaded(index)) {
+        Some(index)
+      } else {
+        None
       }
       let (content, document_actions) = document
       let path = requested.package_path()
@@ -173,15 +177,9 @@ fn docs_module(
       } else {
         nothing
       }
-      div(class="min-h-screen w-full flex-col") <| [
+      div(class="docs-page min-h-screen w-full flex-col") <| [
         search_panel,
-        navbar(
-          versioned_docs_path(path, manifest.module_, manifest.version),
-          Some(manifest.module_),
-          module_index,
-          document_actions,
-          app_actions~,
-        ),
+        @view.navbar(right=app_actions, active=Modules, style=Static),
         ..if manifest.module_meta.yanked is Some(reason) {
           Some(yanked_banner(reason))
         },
@@ -191,10 +189,18 @@ fn docs_module(
           ) <| [
             sidebar,
             div(class="flex-1 min-w-0 max-w-4xl") <| [
-              metadata_mobile, content,
+              docs_navigation(
+                versioned_docs_path(path, manifest.module_, manifest.version),
+                Some(manifest.module_),
+                module_index,
+                document_actions,
+                search_button~,
+              ),
+              metadata_mobile,
+              content,
             ],
             div(
-              class="hidden xl:block xl:sticky xl:top-header xl:pt-3 xl:w-64 xl:h-[calc(100vh-3.5rem)] overflow-y-auto shrink-0",
+              class="hidden xl:block xl:sticky xl:top-0 xl:pt-3 xl:w-64 xl:h-screen overflow-y-auto shrink-0",
               metadata.sidebar,
             ),
           ],

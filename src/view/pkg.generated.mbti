@@ -21,7 +21,11 @@ pub fn deprecation_notice(String?) -> @html.Html
 
 pub fn document_not_available(String) -> @html.Html
 
+pub fn focus_search_input() -> @cmd.Cmd
+
 pub fn footer() -> @html.Html
+
+pub fn format_stat_text(String) -> String
 
 pub fn icon_button(String, text? : String, on_click? : @cmd.Cmd) -> @html.Html
 
@@ -33,7 +37,7 @@ pub fn logo() -> @html.Html
 
 pub fn markdown(String, small_heading? : Bool, heading_anchors? : Bool, transform_link? : (String) -> String) -> @html.Html
 
-pub fn navbar(left? : @html.Html, left_extra? : @html.Html, middle? : @html.Html, right? : @html.Html, style? : NavbarStyle) -> @html.Html
+pub fn navbar(left? : @html.Html, left_extra? : @html.Html, middle? : @html.Html, right? : @html.Html, style? : NavbarStyle, active? : NavbarSection) -> @html.Html
 
 pub fn not_found() -> @html.Html
 
@@ -66,8 +70,15 @@ pub(all) enum CodeBlockKind {
   Code
 }
 
+pub(all) enum NavbarSection {
+  Modules
+  Skills
+  BuildQueue
+}
+
 pub(all) enum NavbarStyle {
   Sticky
+  Static
   Fusion
 }
 

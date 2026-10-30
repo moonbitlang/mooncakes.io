@@ -381,7 +381,7 @@ fn docs_sidebar(
       class="text-gray-700 dark:text-slate-300 flex flex-col w-full min-w-0",
     ) <| [
       div(
-        class="sidebar-sticky-bar flex flex-col gap-2 px-1 sticky top-0 z-10 pt-3 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
+        class="sidebar-sticky-bar flex flex-col gap-2 px-1 sticky top-0 z-10 pt-1.5 pb-1.5 border-b border-gray-100 dark:border-zinc-800 mb-1 bg-[var(--sidebar-bg)]",
       ) <| [
         version_selector,
         div(class="flex items-center gap-1") <| [
@@ -412,7 +412,7 @@ fn docs_sidebar(
     ]
     let display = if model.sidebar_fab { "flex" } else { "hidden" }
     let panel = div(
-      class="\{display} md:block max-md:fixed max-md:inset-0 max-md:z-100 max-md:items-center max-md:justify-center md:sticky md:top-header md:w-64 md:shrink-0 md:h-[calc(100vh-3.5rem)]",
+      class="\{display} md:block max-md:fixed max-md:inset-0 max-md:z-100 max-md:items-center max-md:justify-center md:sticky md:top-0 md:w-64 md:shrink-0 md:h-screen",
     ) <| [
       button(
         class="fixed inset-0 bg-black/40 z-10 md:hidden",
@@ -427,6 +427,7 @@ fn docs_sidebar(
     let fab = button(
       class="flex md:hidden fixed bottom-4 right-4 z-20 bg-mooncake2 text-white rounded-full shadow-lg w-12 h-12 items-center justify-center hover:bg-moonbit-dark transition-all select-none",
       on_click=emit(ToggleSidebarFab),
+      attrs=@html.Attrs::build().aria_label("Open documentation navigation"),
       img(class="size-5", src=@config.hamburger_button),
     )
     @html.fragment([panel, fab])

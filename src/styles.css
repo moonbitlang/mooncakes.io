@@ -76,8 +76,8 @@
 .site-navbar-glass {
   border-bottom-color: var(--nav-border);
   background: rgb(255 255 255 / 60%);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 [data-theme="dark"] .site-navbar-glass {

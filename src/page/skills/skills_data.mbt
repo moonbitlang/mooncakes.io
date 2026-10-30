@@ -42,10 +42,12 @@ priv struct SkillsModel {
   request_id : Int32
   phase : SkillsPhase
   entries : Array[SkillEntry]
+  filter : String
 } derive(Eq)
 
 ///|
 priv enum SkillsMsg {
+  FilterChanged(String)
   Retry
   Completed(Int32, Result[Array[SkillEntry], Error])
   TimedOut(Int32)
@@ -84,6 +86,7 @@ fn update_skills(
   emit : @rabbita.Emit[SkillsMsg],
 ) -> (SkillsModel, Cmd) {
   match msg {
+    FilterChanged(filter) => ({ ..model, filter, }, none)
     Retry => {
       let next = { ..model, request_id: model.request_id + 1, phase: Loading, }
       (next, skills_request(next, emit))
@@ -94,4 +97,35 @@ fn update_skills(
       model.phase == Loading => ({ ..model, phase: Failed, }, none)
     _ => (model, none)
   }
+}
+
+///|
+fn filter_entries(
+  filter : String,
+  entries : Array[SkillEntry],
+) -> Array[SkillEntry] {
+  let tokens = filter
+    .to_lower()
+    .split(" ")
+    .filter_map(part => {
+      let token = part.trim()
+      if token.is_empty() {
+        None
+      } else {
+        Some(token.to_owned())
+      }
+    })
+    .collect()
+  if tokens.is_empty() {
+    return entries
+  }
+  entries.filter(entry => {
+    let haystack = "\{entry.owner}/\{entry.name} \{entry.description}".to_lower()
+    for token in tokens {
+      if !haystack.contains(token[:]) {
+        return false
+      }
+    }
+    true
+  })
 }

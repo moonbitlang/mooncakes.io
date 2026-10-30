@@ -145,6 +145,47 @@ fn marketplace_hero(browse~ : Cmd) -> Html {
 }
 
 ///|
+fn sticky_search(
+  filter : String,
+  count : String,
+  on_filter~ : (String) -> Cmd,
+) -> Html {
+  div(
+    class="skills-search-sticky sticky top-header z-20 border-b border-gray-200 dark:border-zinc-800 bg-white/85 dark:bg-zinc-950/85 px-4 py-4 backdrop-blur-md",
+  ) <| [
+    div(class="relative mx-auto w-full max-w-5xl") <| [
+      div(
+        class="overflow-hidden rounded-lg border border-mooncake2/35 bg-white dark:bg-zinc-900 shadow-sm shadow-mooncake2/10",
+      ) <| [
+        div(
+          class="flex h-8 items-center gap-1.5 border-b border-mooncake2/20 bg-mooncake2/5 px-3",
+        ) <| [
+          span(class="size-2 rounded-full bg-red-400", ""),
+          span(class="size-2 rounded-full bg-yellow-400", ""),
+          span(class="size-2 rounded-full bg-green-500", ""),
+          span(
+            class="ml-1 font-mono text-xs text-gray-500 dark:text-gray-400",
+            "Type to search \{count} skills",
+          ),
+        ],
+        div(class="flex items-center gap-2 px-4 py-4 font-mono text-sm") <| [
+          span(class="shrink-0 text-emerald-600 dark:text-emerald-300", "$"),
+          span(class="shrink-0 text-gray-500 dark:text-gray-400", "find"),
+          img(class="size-4 shrink-0 opacity-70 ui-icon", src=@config.search),
+          @html.input(
+            input_type=Text,
+            value=filter,
+            placeholder="Filter skills ...",
+            class="min-w-0 flex-1 bg-transparent outline-none placeholder:text-gray-400 dark:placeholder:text-slate-500",
+            on_input=on_filter,
+          ),
+        ],
+      ],
+    ],
+  ]
+}
+
+///|
 fn source_context_section(count : String, browse~ : Cmd) -> Html {
   div(class="mx-auto w-full max-w-[90rem] px-4 py-8 sm:px-6 lg:px-8") <| [
     div(class="border-t border-gray-200 dark:border-zinc-800 pt-7") <| [

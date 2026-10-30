@@ -4,7 +4,6 @@ import {
   "moonbit-community/rabbita/html",
   "moonbit-community/rabbita/http",
   "moonbit-community/rabbita/nav",
-  "moonbit-community/rabbita/sub",
   "moonbit-community/rabbita/svg",
   "moonbitlang/core/json",
   "moonbitlang/mooncakes/config",

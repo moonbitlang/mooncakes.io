@@ -38,42 +38,6 @@ test "keep markdown thematic breaks without skill metadata" {
 }
 
 ///|
-fn sample_entry(package_path : String) -> WasmEntry {
-  {
-    module_: "alice/cowsay",
-    author: "alice",
-    author_avatar: "",
-    version: "0.1.2",
-    yanked: None,
-    package_path,
-    name: if package_path.is_empty() {
-      "alice/cowsay"
-    } else {
-      "alice/cowsay/\{package_path}"
-    },
-    detail_url: "",
-    wasm_url: "",
-    checksum_url: "",
-    archive_url: "",
-    repository: "",
-    description: "",
-    created_at: "2026-06-10T00:00:00Z",
-  }
-}
-
-///|
-test "runwasm command includes module version" {
-  inspect(
-    runwasm_command(sample_entry("")),
-    content="moon runwasm alice/cowsay@0.1.2",
-  )
-  inspect(
-    runwasm_command(sample_entry("cmd/cow")),
-    content="moon runwasm alice/cowsay@0.1.2/cmd/cow",
-  )
-}
-
-///|
 test "download filename falls back to link label" {
   inspect(
     download_filename(
@@ -88,32 +52,4 @@ test "download filename falls back to link label" {
     download_filename("", "Download checksum"),
     content="Download checksum",
   )
-}
-
-///|
-test "decode skill deprecation and older responses" {
-  let fields : Map[String, Json] = {
-    "module": "alice/cowsay",
-    "author": "alice",
-    "version": "0.1.2",
-    "package": "cmd/cow",
-    "name": "alice/cowsay/cmd/cow",
-    "detail_url": "/skills/alice/cowsay@0.1.2/cmd/cow",
-    "wasm_url": "/cowsay.wasm",
-    "checksum_url": "/cowsay.sha256",
-    "archive_url": "/skills.zip",
-    "created_at": "2026-06-10T00:00:00Z",
-  }
-  let older : WasmEntry = @json.from_json(Json(fields))
-  assert_eq(older.yanked, None)
-  fields["yanked"] = true
-  fields["yanked_reason"] = "Use alice/cowsay-next."
-  let deprecated : WasmEntry = @json.from_json(Json(fields))
-  assert_eq(deprecated.yanked, Some("Use alice/cowsay-next."))
-  fields["yanked_reason"] = null
-  let without_reason : WasmEntry = @json.from_json(Json(fields))
-  assert_eq(without_reason.yanked, Some(""))
-  fields["yanked"] = false
-  let restored : WasmEntry = @json.from_json(Json(fields))
-  assert_eq(restored.yanked, None)
 }

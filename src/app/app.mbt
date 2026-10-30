@@ -53,7 +53,7 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
     User(name) => "user:\{name}"
     BuildQueue => "build-queue"
     SkillsList => "skills"
-    SkillsDetail(entry) => "skill:\{entry}"
+    SkillsDetail(entry) => "skills:\{entry}"
     NotFound => "not-found"
     Redirect => "redirect"
   }
@@ -65,8 +65,22 @@ fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
     Home => (Home, @nav.scroll_to_top())
     Setting(page) => (Setting(page), @nav.scroll_to_top())
     BuildQueue => (BuildQueue, @nav.scroll_to_top())
-    SkillsList => (SkillsList, @nav.scroll_to_top())
-    SkillsDetail(entry) => (SkillsDetail(entry), @nav.scroll_to_top())
+    SkillsList =>
+      (
+        SkillsList,
+        match url.fragment {
+          Some(anchor) => @nav.scroll_to(anchor)
+          None => @nav.scroll_to_top()
+        },
+      )
+    SkillsDetail(entry) =>
+      (
+        SkillsDetail(entry),
+        match url.fragment {
+          Some(anchor) => @nav.scroll_to(anchor)
+          None => @nav.scroll_to_top()
+        },
+      )
     User(name) => (User(name.to_owned()), @nav.scroll_to_top())
     Assets(url) => (Redirect, @nav.load(url.to_string()))
     Docs(mooncakes_path, fragment~) =>

@@ -14,17 +14,32 @@ fn skills_header(app_actions : Html) -> Html {
 pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
   let (model, emit) = @rabbita.create_state_with_init(
     init=emit => {
-      let model : SkillsModel = { request_id: 0, phase: Loading, entries: [], }
+      let model : SkillsModel = {
+        request_id: 0,
+        phase: Loading,
+        entries: [],
+        filter: "",
+      }
       (model, skills_request(model, emit))
     },
     update=update_skills,
   )
   model.view2(app_actions, (model, actions) => {
+    let visible_entries = filter_entries(model.filter, model.entries)
     skills_page(
       skills_header(actions),
       div(class="w-full") <| [
         marketplace_hero(browse=@nav.scroll_to("skills")),
         div(id="skills", class="h-0 scroll-mt-header", ""),
+        sticky_search(
+          model.filter,
+          if model.phase == Ready {
+            model.entries.length().to_string()
+          } else {
+            "..."
+          },
+          on_filter=filter => emit(FilterChanged(filter)),
+        ),
         match model.phase {
           Loading => skeleton_skill_cards(6)
           Failed =>
@@ -36,21 +51,25 @@ pub fn skills_list_page(app_actions~ : Val[Html]) -> Val[Html] {
             div(class="mx-auto w-full max-w-[90rem] px-4 py-6 sm:px-6 lg:px-8") <| [
               p(
                 class="mb-4 text-sm text-gray-500 dark:text-gray-400",
-                if model.entries.length() == 1 {
+                if visible_entries.length() == 1 {
                   "1 skill found"
                 } else {
-                  "\{model.entries.length()} skills found"
+                  "\{visible_entries.length()} skills found"
                 },
               ),
-              if model.entries.is_empty() {
+              if visible_entries.is_empty() {
                 p(
                   class="py-12 text-center text-gray-500 dark:text-gray-400",
-                  "No skills yet. Publish your first skill below.",
+                  if model.entries.is_empty() {
+                    "No skills yet. Publish your first skill below."
+                  } else {
+                    "No skills found."
+                  },
                 )
               } else {
                 div(
                   class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3",
-                  model.entries.map(entry_card),
+                  visible_entries.map(entry_card),
                 )
               },
             ]

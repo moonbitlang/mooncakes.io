@@ -26,7 +26,7 @@ fn user_avatar(user : Json) -> Html {
   let username = value_string(user, "username")
   let avatar = value_string(user, "gh_avatar")
   let initial = if username.offset_of_nth_char(1) is Some(end) {
-    username.view(end_offset=end).to_owned().to_upper()
+    username.clamped_view(end~).to_owned().to_upper()
   } else {
     "M"
   }

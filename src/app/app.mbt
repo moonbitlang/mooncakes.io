@@ -181,7 +181,10 @@ pub fn app() -> Val[Html] {
       match msg {
         LinkClicked(Internal(url)) => (model, @nav.push_url(url.to_string()))
         LinkClicked(External(url)) => (model, @nav.load(url))
-        UrlChanged(url) => route(url, model)
+        UrlChanged(url) => {
+          let (next, command) = route(url, model)
+          (next, batch([command, analytics_page_view(url)]))
+        }
       }
     },
     subscriptions=(_, emit) => {
@@ -261,6 +264,7 @@ pub fn app() -> Val[Html] {
         title(page_title),
         link(rel="icon", type_="image/svg+xml", href=@config.favicon),
         script(attrs=bootstrap_attrs, nothing),
+        ..analytics_head(),
       ],
       body <| [
         @rui.theme(

@@ -209,7 +209,7 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
           go(
             LexLinkHref(List([])),
             s,
-            acc.prepend(Symbol(op.view(end_offset=op.length() - 1).to_owned())),
+            acc.prepend(Symbol(op.clamped_view(end=op.length() - 1).to_owned())),
           )
         } else {
           go(LexStart, s, acc.prepend(Symbol(op)))
@@ -219,5 +219,5 @@ pub fn parse_signature(signature : String) -> List[CodeSpan] {
       (_, [], acc) => acc.rev()
     }
   }
-  go(LexStart, signature.view(), List([]))
+  go(LexStart, signature.clamped_view(), List([]))
 }

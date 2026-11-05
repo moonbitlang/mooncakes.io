@@ -23,9 +23,13 @@
 .cli-directory { border-top: 1px solid var(--app-border); padding-top: 24px; }
 .cli-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .cli-toolbar h2 { font-size: 22px; font-weight: 650; line-height: 1.4; }
-.cli-toolbar input { width: min(380px, 48%); min-height: 36px; padding: 7px 12px; border: 1px solid #d4d4d8; border-radius: 6px; background: transparent; font-size: 13px; }
-.cli-toolbar input::placeholder { color: #71717a; }
-.cli-status { min-height: 18px; margin-top: 8px; color: #52525b; font-size: 12px; }
+.cli-pagination { display: flex; align-items: center; gap: 12px; font-size: 12px; white-space: nowrap; }
+.cli-pagination > :is(a, span) { padding: 7px 10px; }
+.cli-pagination a { border: 1px solid var(--app-border); border-radius: 5px; }
+.cli-pagination a:hover { background: #f4f4f5; }
+.cli-pagination [aria-disabled="true"] { color: #71717a; opacity: 0.6; }
+.cli-page-number { color: #52525b; font-variant-numeric: tabular-nums; }
+.cli-pagination-bottom { display: flex; justify-content: flex-end; margin-top: 20px; }
 .cli-table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: left; }
 .cli-table .cli-package { width: 42%; padding-left: 12px; padding-right: 20px; }
 .cli-table .cli-version { width: 8%; padding-right: 12px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
@@ -52,13 +56,13 @@
 [data-theme="dark"] .cli-accent,
 [data-theme="dark"] .cli-install a,
 [data-theme="dark"] .cli-package a:hover .cli-package-path { color: #e8af96; }
-[data-theme="dark"] .cli-page :is(.cli-intro, .cli-install, .cli-status, .cli-description, .cli-message),
+[data-theme="dark"] .cli-page :is(.cli-intro, .cli-install, .cli-description, .cli-message),
+[data-theme="dark"] .cli-page-number,
 [data-theme="dark"] .cli-table th { color: #a1a1aa; }
 [data-theme="dark"] .cli-table tbody tr:hover { background: #202023; }
 [data-theme="dark"] .cli-copy { background: #27272a; border-color: #52525b; color: #e4e4e7; }
 [data-theme="dark"] .cli-copy:hover { background: #3f3f46; }
-[data-theme="dark"] .cli-toolbar input { border-color: #52525b; }
-[data-theme="dark"] .cli-toolbar input::placeholder { color: #a1a1aa; }
+[data-theme="dark"] .cli-pagination a:hover { background: #3f3f46; }
 @media (max-width: 767px) {
   .cli-main { padding: 0 16px 32px; }
   .cli-hero { padding: 36px 0 28px; }
@@ -66,9 +70,10 @@
   .cli-example { padding: 14px; gap: 10px; margin-top: 22px; }
   .cli-example code { font-size: 12px; }
   .cli-example-comment { font-size: 12px; }
-  .cli-toolbar { align-items: stretch; flex-direction: column; gap: 12px; }
+  .cli-toolbar { align-items: flex-start; flex-direction: column; gap: 12px; }
   .cli-toolbar h2 { font-size: 20px; }
-  .cli-toolbar input { width: 100%; min-height: 40px; }
+  .cli-pagination { width: 100%; justify-content: space-between; gap: 8px; }
+  .cli-pagination > :is(a, span) { padding-top: 10px; padding-bottom: 10px; }
   .cli-table, .cli-table tbody { display: block; }
   .cli-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .cli-table tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; padding: 12px; }

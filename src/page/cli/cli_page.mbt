@@ -100,14 +100,42 @@ fn entry_row(
 }
 
 ///|
-pub fn cli_page(app_actions~ : Val[Html]) -> Val[Html] {
+fn pagination(model : Model) -> Html {
+  if model.phase != Ready ||
+    model.total <= model.limit ||
+    model.entries.is_empty() {
+    return nothing
+  }
+  let pages = (model.total - 1) / model.limit + 1
+  @html.nav(
+    class="cli-pagination",
+    attrs=@html.Attrs::build().aria_label("CLI pages"),
+  ) <| [
+    if model.page > 1 {
+      a(href=page_url(model.page - 1), rel="prev", "Previous")
+    } else {
+      span(attrs=@html.Attrs::build().aria_disabled("true"), "Previous")
+    },
+    span(class="cli-page-number", "Page \{model.page} of \{pages}"),
+    if model.page < pages {
+      a(href=page_url(model.page + 1), rel="next", "Next")
+    } else {
+      span(attrs=@html.Attrs::build().aria_disabled("true"), "Next")
+    },
+  ]
+}
+
+///|
+pub fn cli_page(page : Int32, app_actions~ : Val[Html]) -> Val[Html] {
   let (model, emit) = @rabbita.create_state_with_init(
     init=emit => {
       let model : Model = {
         request_id: 0,
         phase: Loading,
         entries: [],
-        filter: "",
+        page,
+        limit: 30,
+        total: 0,
         copying: "",
         copied: "",
       }
@@ -116,36 +144,25 @@ pub fn cli_page(app_actions~ : Val[Html]) -> Val[Html] {
     update~,
   )
   model.view2(app_actions, (model, actions) => {
-    let entries = visible_entries(model)
+    let entries = model.entries
     div(class="cli-page") <| [
       @view.navbar(active=Cli, right=actions),
       @html.main_(class="cli-main") <| [
         hero(model, emit),
         @html.section(
           class="cli-directory",
+          id="cli-directory",
           attrs=@html.Attrs::build().aria_label("CLI directory"),
         ) <| [
           div(class="cli-toolbar") <| [
-            h2("Available CLIs"),
-            @html.input(
-              input_type=Search,
-              value=model.filter,
-              placeholder="Search CLIs",
-              attrs=@html.Attrs::build().aria_label("Search CLIs"),
-              on_input=filter => emit(Filter(filter)),
-            ),
+            h2("Recently built"),
+            pagination(model),
           ],
           p(
-            class="cli-status",
+            class="sr-only",
             attrs=@html.Attrs::build().role("status").aria_live("polite"),
             if !model.copied.is_empty() {
               "Command copied."
-            } else if model.phase == Ready {
-              if entries.length() == 1 {
-                "1 CLI"
-              } else {
-                "\{entries.length()} CLIs"
-              }
             } else {
               ""
             },
@@ -166,17 +183,17 @@ pub fn cli_page(app_actions~ : Val[Html]) -> Val[Html] {
               if entries.is_empty() {
                 div(class="cli-message") <| [
                   p(
-                    if model.entries.is_empty() {
+                    if model.total == 0 {
                       "No CLIs are available yet."
                     } else {
-                      "No CLIs match your search."
+                      "No CLIs on this page."
                     },
                   ),
-                  if !model.filter.is_empty() {
-                    button(
+                  if model.page > 1 {
+                    a(
                       class="cli-retry",
-                      on_click=emit(Filter("")),
-                      "Clear search",
+                      href=page_url(1),
+                      "Back to the first page",
                     )
                   } else {
                     nothing
@@ -186,7 +203,7 @@ pub fn cli_page(app_actions~ : Val[Html]) -> Val[Html] {
                 @html.table(class="cli-table") <| [
                   @html.caption(
                     class="sr-only",
-                    "Available CLI packages and their versioned moonx commands",
+                    "Recently built CLI packages and their versioned moonx commands",
                   ),
                   @html.thead(
                     @html.tr() <| [
@@ -200,6 +217,11 @@ pub fn cli_page(app_actions~ : Val[Html]) -> Val[Html] {
                   ),
                 ]
               }
+          },
+          if !entries.is_empty() {
+            div(class="cli-pagination-bottom", pagination(model))
+          } else {
+            nothing
           },
         ],
       ],

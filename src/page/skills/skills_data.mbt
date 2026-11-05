@@ -1,5 +1,5 @@
 ///|
-#derive(Eq, @json.FromJson(fields(archive_sha256(rename="archive_digest"))))
+#derive(Eq, @json.FromJson)
 priv struct SkillEntry {
   owner : String
   name : String
@@ -8,7 +8,7 @@ priv struct SkillEntry {
   description : String
   detail_url : String
   archive_url : String
-  archive_sha256 : String
+  archive_digest : String
   created_at : String
 }
 

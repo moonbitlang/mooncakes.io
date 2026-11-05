@@ -210,7 +210,7 @@ pub fn skill_detail_page(
                 div(class="space-y-4 p-4") <| [
                   action_link(entry.archive_url, "Download ZIP"),
                   p(class="text-xs text-gray-500", "SHA-256"),
-                  p(class="break-all font-mono text-xs", entry.archive_sha256),
+                  p(class="break-all font-mono text-xs", entry.archive_digest),
                 ],
               ),
             ],

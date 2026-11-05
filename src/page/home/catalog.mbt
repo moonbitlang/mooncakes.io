@@ -19,51 +19,58 @@ priv enum CatalogMsg {
 }
 
 ///|
+#derive(Eq)
 struct ModuleHighlights {
   recent : Array[ModuleCard]
   new_modules : Array[ModuleCard]
   popular : Array[ModuleCard]
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct ModuleCard {
   module_info : ModuleIndex
   badge : ModuleCardBadge
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv enum ModuleCardBadge {
   Version
   PublishedAt
   Trends(Int64)
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 enum LazyStatus[T] {
   Idle
   Loading
   Failed
   Success(T)
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 struct CatalogModel {
   all_modules : LazyStatus[AllModules]
   show_all_modules : Bool
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 struct PackageCount {
   total_modules : Int32
   total_packages : Int32
   total_lines : Int32
   total_downloads : Int32
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct AllModules {
   indices : Map[Char, Array[ModuleIndex]]
-} derive(Eq)
+}
 
 ///|
 let highlights_limit = 12

@@ -49,17 +49,19 @@ fn docs_failed(
 }
 
 ///|
+#derive(Eq)
 priv struct ResolvedModule {
   path : @util.MooncakePath
   manifest : Manifest
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv enum DocsPage {
   Loading(@util.UnsolvedMooncakePath)
   Failed(@util.UnsolvedMooncakePath)
   Resolved(ResolvedModule)
-} derive(Eq)
+}
 
 ///|
 impl @rabbita.Enumerate for DocsPage with fn tag(self) {

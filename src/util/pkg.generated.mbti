@@ -9,9 +9,9 @@ import {
 }
 
 // Values
-pub fn decode_module_index(Json, @json.JsonPath) -> ModuleIndex raise @json.JsonDecodeError
+pub fn decode_module_index(@json.Json, @json.JsonPath) -> ModuleIndex raise @json.JsonDecodeError
 
-pub fn decode_yanked(Json) -> String?
+pub fn decode_yanked(@json.Json) -> String?
 
 pub fn encode_uri_component(String) -> String
 
@@ -28,11 +28,12 @@ pub fn versioned_module_path(ModuleIndex) -> String
 // Errors
 
 // Types and methods
+#derive(Eq)
 pub(all) enum AuthFormKind {
   Login
   Register
   ResetPassword
-} derive(Eq)
+}
 pub fn AuthFormKind::equal(Self, Self) -> Bool
 pub fn AuthFormKind::not_equal(Self, Self) -> Bool
 
@@ -40,6 +41,7 @@ type Lazy[T]
 pub fn[T] Lazy::force(Self[T]) -> T
 pub fn[T] Lazy::new(() -> T) -> Self[T]
 
+#derive(Eq, @debug.Debug)
 pub(all) struct ModuleIndex {
   author : String
   name : String
@@ -50,14 +52,15 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
-} derive(Eq, @debug.Debug)
+}
 pub fn ModuleIndex::equal(Self, Self) -> Bool
-pub fn ModuleIndex::from_json(Json, @json.JsonPath) -> Self raise @json.JsonDecodeError
+pub fn ModuleIndex::from_json(@json.Json, @json.JsonPath) -> Self raise @json.JsonDecodeError
 pub fn ModuleIndex::not_equal(Self, Self) -> Bool
 pub fn ModuleIndex::to_repr(Self) -> @debug.Repr
 pub impl @json.FromJson for ModuleIndex
 
-type MooncakePath derive(Eq)
+#derive(Eq)
+type MooncakePath
 pub fn MooncakePath::equal(Self, Self) -> Bool
 pub fn MooncakePath::is_same_module(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
 pub fn MooncakePath::is_same_package(Self, UnsolvedMooncakePath, check_version? : Bool) -> Bool
@@ -85,15 +88,17 @@ pub fn MooncakesioPath::resolve(@url.Url) -> Self
 pub fn MooncakesioPath::to_string(Self) -> String
 pub impl Show for MooncakesioPath
 
+#derive(Eq)
 pub(all) enum SettingPage {
   Auth(AuthFormKind)
   Settings
   GithubFailed
-} derive(Eq)
+}
 pub fn SettingPage::equal(Self, Self) -> Bool
 pub fn SettingPage::not_equal(Self, Self) -> Bool
 
-type UnsolvedMooncakePath derive(Eq, @debug.Debug)
+#derive(Eq, @debug.Debug)
+type UnsolvedMooncakePath
 pub fn UnsolvedMooncakePath::equal(Self, Self) -> Bool
 pub fn UnsolvedMooncakePath::new(String) -> Self
 pub fn UnsolvedMooncakePath::not_equal(Self, Self) -> Bool

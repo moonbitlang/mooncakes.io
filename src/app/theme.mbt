@@ -35,17 +35,19 @@ let theme_bootstrap : String =
   #|})();
 
 ///|
+#derive(Eq)
 priv enum ThemePreference {
   System
   Light
   Dark
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct Theme {
   preference : ThemePreference
   system_dark : Bool
-} derive(Eq)
+}
 
 ///|
 fn theme_preference_from_string(value : String) -> ThemePreference {

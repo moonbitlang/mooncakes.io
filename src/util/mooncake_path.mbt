@@ -1,5 +1,6 @@
 ///|
-struct UnsolvedMooncakePath(String) derive(Debug, Eq)
+#derive(Debug, Eq)
+struct UnsolvedMooncakePath(String)
 
 ///|
 pub extend UnsolvedMooncakePath with @debug.Debug::{to_repr}
@@ -40,12 +41,13 @@ pub fn UnsolvedMooncakePath::package_path(self : Self) -> String {
 }
 
 ///|
+#derive(Eq)
 struct MooncakePath {
   module_path : String
   package_path : String
   version : String
   latest_version : String
-} derive(Eq)
+}
 
 ///|
 pub extend MooncakePath with Eq::{equal, not_equal}

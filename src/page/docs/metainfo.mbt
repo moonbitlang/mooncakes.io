@@ -67,10 +67,11 @@ priv enum MetadataMsg {
 }
 
 ///|
+#derive(Eq)
 priv struct Metadata {
   mobile : Html
   sidebar : Html
-} derive(Eq)
+}
 
 ///|
 fn docs_metadata(manifest : Manifest) -> Val[Metadata] {

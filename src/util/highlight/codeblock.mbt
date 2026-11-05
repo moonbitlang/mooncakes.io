@@ -16,6 +16,7 @@
 using @list {type List}
 
 ///|
+#derive(Debug)
 pub(all) enum CodeSpan {
   Unknown(String)
   Keyword(String)
@@ -31,7 +32,7 @@ pub(all) enum CodeSpan {
   Space(Int32)
   Comment(String)
   Attr(String)
-} derive(Debug)
+}
 
 ///|
 pub extend CodeSpan with @debug.Debug::{to_repr}

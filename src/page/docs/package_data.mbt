@@ -13,6 +13,7 @@
 // limitations under the License.
 
 ///|
+#derive(Eq)
 priv struct PackageData {
   name : String
   typealiases : Array[TypeAliasDoc]
@@ -21,15 +22,16 @@ priv struct PackageData {
   types : Array[TypeDoc]
   misc : Array[MiscDoc]
   values : Array[ValueDoc]
-} derive(Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct Loc {
   path : String
   file : String
   line : Int32
   column : Int32
-} derive(Debug, Eq)
+}
 
 ///|
 test "suppress unused warnings for Loc" {
@@ -38,6 +40,7 @@ test "suppress unused warnings for Loc" {
 }
 
 ///|
+#derive(Eq)
 priv struct TypeDoc {
   name : String
   docstring : String
@@ -45,46 +48,51 @@ priv struct TypeDoc {
   loc : Loc
   methods : Array[ValueDoc]
   impls : Array[ImplDoc]
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct TraitDoc {
   name : String
   docstring : String
   signature : String
   loc : Loc
   impls : Array[ImplDoc]
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct TypeAliasDoc {
   name : String
   docstring : String
   signature : String
   loc : Loc
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct ValueDoc {
   name : String
   docstring : String
   signature : String
   loc : Loc
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct ImplDoc {
   self_type : Stype
   trait_type : TypePath
   methods : Array[ValueDoc]
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct MiscDoc {
   name : String
   impls : Array[ImplDoc]
   methods : Array[ValueDoc]
-} derive(Eq)
+}
 
 ///|
 fn decode_loc(

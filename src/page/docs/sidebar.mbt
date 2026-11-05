@@ -76,6 +76,7 @@ fn[Id] compare_items(a : @tree.Tree[Id], b : @tree.Tree[Id]) -> Int32 {
 }
 
 ///|
+#derive(Compare, Eq)
 priv enum SymbolKind {
   KReadme
   KTypeAlias
@@ -84,14 +85,15 @@ priv enum SymbolKind {
   KType
   KMethod
   KValue
-} derive(Compare, Eq)
+}
 
 ///|
+#derive(Compare, Eq)
 priv enum ItemTarget {
   Package(String)
   Group(String)
   Symbol(pkg_path~ : String, kind~ : SymbolKind, String)
-} derive(Compare, Eq)
+}
 
 ///|
 fn PkgIndex::to_document_items(
@@ -246,10 +248,11 @@ fn source_files_section(files : Array[String], package_path~ : String) -> Html {
 }
 
 ///|
+#derive(Eq)
 priv struct SidebarModel {
   sidebar_collapsed : SortedSet[ItemTarget]
   sidebar_fab : Bool
-} derive(Eq)
+}
 
 ///|
 priv enum SidebarMsg {

@@ -1,4 +1,5 @@
 ///|
+#derive(Eq, @json.FromJson(fields(archive_sha256(rename="archive_digest"))))
 priv struct SkillEntry {
   owner : String
   name : String
@@ -9,14 +10,15 @@ priv struct SkillEntry {
   archive_url : String
   archive_sha256 : String
   created_at : String
-} derive(Eq, @json.FromJson(fields(archive_sha256(rename="archive_digest"))))
+}
 
 ///|
+#derive(Eq)
 priv struct SkillDetail {
   entry : SkillEntry
   readme : String
   versions : Array[String]
-} derive(Eq)
+}
 
 ///|
 impl @json.FromJson for SkillDetail with fn from_json(value, path) {
@@ -31,19 +33,21 @@ impl @json.FromJson for SkillDetail with fn from_json(value, path) {
 }
 
 ///|
+#derive(Eq)
 priv enum SkillsPhase {
   Loading
   Ready
   Failed
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct SkillsModel {
   request_id : Int32
   phase : SkillsPhase
   entries : Array[SkillEntry]
   filter : String
-} derive(Eq)
+}
 
 ///|
 priv enum SkillsMsg {

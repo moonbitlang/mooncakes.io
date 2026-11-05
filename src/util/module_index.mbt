@@ -1,4 +1,5 @@
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct ModuleIndex {
   author : String
   name : String
@@ -9,7 +10,7 @@ pub(all) struct ModuleIndex {
   description : String?
   created_at : String?
   is_new : Bool
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 pub fn decode_module_index(

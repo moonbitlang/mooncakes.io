@@ -14,6 +14,7 @@ pub fn parse_signature(String) -> @list.List[CodeSpan]
 // Errors
 
 // Types and methods
+#derive(@debug.Debug)
 pub(all) enum CodeSpan {
   Unknown(String)
   Keyword(String)
@@ -29,7 +30,7 @@ pub(all) enum CodeSpan {
   Space(Int32)
   Comment(String)
   Attr(String)
-} derive(@debug.Debug)
+}
 pub fn CodeSpan::to_repr(Self) -> @debug.Repr
 
 // Type aliases

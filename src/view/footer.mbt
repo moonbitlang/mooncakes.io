@@ -13,6 +13,7 @@ pub fn footer() -> Html {
     ),
     a(href="/", class~, "Modules"),
     a(href="/skills", class~, "Skills"),
+    a(href="/cli", class~, "CLI"),
     a(href="/build-queue", class~, "Build queue"),
     a(
       href="/api/v0/modules/statistics?raw=true",

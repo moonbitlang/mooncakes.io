@@ -7,7 +7,7 @@ import {
 }
 
 // Values
-pub fn cli_page(app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
+pub fn cli_page(Int32, app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.Html]
 
 // Errors
 

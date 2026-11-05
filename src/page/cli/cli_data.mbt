@@ -8,6 +8,15 @@ priv struct CliEntry {
 }
 
 ///|
+#derive(@json.FromJson)
+priv struct CliResult {
+  items : Array[CliEntry]
+  total : Int32
+  page : Int32
+  limit : Int32
+}
+
+///|
 #derive(Eq)
 priv enum Phase {
   Loading
@@ -21,16 +30,17 @@ priv struct Model {
   request_id : Int32
   phase : Phase
   entries : Array[CliEntry]
-  filter : String
+  page : Int32
+  limit : Int32
+  total : Int32
   copying : String
   copied : String
 }
 
 ///|
 priv enum Msg {
-  Filter(String)
   Retry
-  Completed(Int32, Result[Array[CliEntry], Error])
+  Completed(Int32, Result[CliResult, Error])
   TimedOut(Int32)
   Copy(String)
   Copied(String)
@@ -53,9 +63,10 @@ fn browser_delay(_cmd : Cmd, _ms : Int32) -> Cmd {
 ///|
 fn request(model : Model, emit : @rabbita.Emit[Msg]) -> Cmd {
   @rabbita.batch([
-    @http.get("/api/v0/cli").expect_json(result => {
-      emit(Completed(model.request_id, result))
-    }),
+    @http.get("/api/v0/cli?page=\{model.page}&limit=\{model.limit}").expect_json(result => {
+        emit(Completed(model.request_id, result))
+      },
+    ),
     browser_delay(emit(TimedOut(model.request_id)), 15000),
   ])
 }
@@ -63,13 +74,23 @@ fn request(model : Model, emit : @rabbita.Emit[Msg]) -> Cmd {
 ///|
 fn update(model : Model, msg : Msg, emit : @rabbita.Emit[Msg]) -> (Model, Cmd) {
   match msg {
-    Filter(filter) => ({ ..model, filter, }, none)
     Retry => {
       let next = { ..model, phase: Loading, request_id: model.request_id + 1, }
       (next, request(next, emit))
     }
-    Completed(id, Ok(entries)) if id == model.request_id &&
-      model.phase == Loading => ({ ..model, phase: Ready, entries, }, none)
+    Completed(id, Ok(result)) if id == model.request_id &&
+      model.phase == Loading =>
+      (
+        {
+          ..model,
+          phase: Ready,
+          entries: result.items,
+          page: result.page,
+          limit: result.limit,
+          total: result.total,
+        },
+        none,
+      )
     Completed(id, Err(_)) | TimedOut(id) if id == model.request_id &&
       model.phase == Loading => ({ ..model, phase: Failed, }, none)
     Copy(command) =>
@@ -89,14 +110,10 @@ fn update(model : Model, msg : Msg, emit : @rabbita.Emit[Msg]) -> (Model, Cmd) {
 }
 
 ///|
-fn visible_entries(model : Model) -> Array[CliEntry] {
-  let tokens = model.filter
-    .to_lower()
-    .split(" ")
-    .filter(part => !part.is_empty())
-    .collect()
-  model.entries.filter(entry => {
-    let haystack = "\{entry.package_path} \{entry.description}".to_lower()
-    tokens.iter().all(token => haystack.contains(token))
-  })
+fn page_url(page : Int32) -> String {
+  if page == 1 {
+    "/cli"
+  } else {
+    "/cli?page=\{page}"
+  }
 }

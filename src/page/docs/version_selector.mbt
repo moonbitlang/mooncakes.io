@@ -1,8 +1,9 @@
 ///|
+#derive(Eq)
 priv struct ModuleVersion {
   version : String
   yanked : String?
-} derive(Eq)
+}
 
 ///|
 fn decode_module_versions(

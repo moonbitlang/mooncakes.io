@@ -1,4 +1,5 @@
 ///|
+#derive(Eq)
 priv struct BuildItem {
   module_ : String
   version : String
@@ -6,13 +7,14 @@ priv struct BuildItem {
   status : String
   created_at : String
   finished_at : String?
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 struct BuildData {
   queued : Array[BuildItem]
   recent_completed : Array[BuildItem]
-} derive(Eq)
+}
 
 ///|
 pub fn build_queue_page(app_actions~ : Val[Html]) -> Val[Html] {

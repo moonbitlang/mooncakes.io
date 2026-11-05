@@ -13,10 +13,11 @@
 // limitations under the License.
 
 ///|
+#derive(Eq)
 priv enum CardMode {
   Expanded
   Collapsed
-} derive(Eq)
+}
 
 ///|
 fn card_mode_toggle(

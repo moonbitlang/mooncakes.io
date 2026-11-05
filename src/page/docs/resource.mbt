@@ -13,14 +13,16 @@
 // limitations under the License.
 
 ///|
+#derive(Eq)
 priv enum BuildStatus {
   BuildSuccess
   BuildLegacy
   BuildQueued
   BuildFailed
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct MetaInfo {
   name : String
   author : String
@@ -34,13 +36,14 @@ priv struct MetaInfo {
   deps : Array[(String, String)]
   build_status : BuildStatus?
   downloads : Int32
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct ResourceInfo {
   readme_content : String
   source_files : Array[String]
-} derive(Eq)
+}
 
 ///|
 /// Normalizes repository URLs so links stay clickable.

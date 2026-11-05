@@ -13,10 +13,11 @@
 // limitations under the License.
 
 ///|
+#derive(Eq)
 priv struct FoldedState {
   set : SortedSet[String]
   card_mode : CardMode
-} derive(Eq)
+}
 
 ///|
 fn FoldedState::new() -> FoldedState {

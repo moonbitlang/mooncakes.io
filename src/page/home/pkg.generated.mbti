@@ -12,19 +12,23 @@ pub fn home_page(app_actions~ : @rabbita.Val[@html.Html]) -> @rabbita.Val[@html.
 // Errors
 
 // Types and methods
-type CatalogModel derive(Eq)
+#derive(Eq)
+type CatalogModel
 pub fn CatalogModel::equal(Self, Self) -> Bool
 pub fn CatalogModel::not_equal(Self, Self) -> Bool
 
-type LazyStatus[T] derive(Eq)
+#derive(Eq)
+type LazyStatus[T]
 pub fn[T : Eq] LazyStatus::equal(Self[T], Self[T]) -> Bool
 pub fn[T : Eq] LazyStatus::not_equal(Self[T], Self[T]) -> Bool
 
-type ModuleHighlights derive(Eq)
+#derive(Eq)
+type ModuleHighlights
 pub fn ModuleHighlights::equal(Self, Self) -> Bool
 pub fn ModuleHighlights::not_equal(Self, Self) -> Bool
 
-type PackageCount derive(Eq)
+#derive(Eq)
+type PackageCount
 pub fn PackageCount::equal(Self, Self) -> Bool
 pub fn PackageCount::not_equal(Self, Self) -> Bool
 

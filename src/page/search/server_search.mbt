@@ -1,10 +1,12 @@
 ///|
+#derive(Eq, @debug.Debug, @json.FromJson)
 priv struct SummaryFragment {
   text : String
   matched : Bool
-} derive(Eq, @debug.Debug, @json.FromJson)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 priv struct PackageMatch {
   package_ : String
   name : String
@@ -12,7 +14,7 @@ priv struct PackageMatch {
   summary_version : String
   is_summary_current : Bool
   summary_fragments : Array[SummaryFragment]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 impl @json.FromJson for PackageMatch with fn from_json(value, path) {
@@ -42,12 +44,13 @@ impl @json.FromJson for PackageMatch with fn from_json(value, path) {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 priv struct SearchResult {
   module_info : ModuleIndex
   downloads : Int64?
   matched_package_count : Int32
   matched_packages : Array[PackageMatch]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 impl @json.FromJson for SearchResult with fn from_json(value, path) {
@@ -68,23 +71,25 @@ impl @json.FromJson for SearchResult with fn from_json(value, path) {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 priv enum SearchPhase {
   Inactive
   Debouncing
   Loading
   Ready
   Failed
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 // Debug is used by white-box search state assertions.
+#derive(Eq, @debug.Debug)
 #warnings("-unused_value")
 priv struct SearchModel {
   input : String
   request_id : Int32
   phase : SearchPhase
   results : Array[SearchResult]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 priv enum SearchMsg {
@@ -97,12 +102,13 @@ priv enum SearchMsg {
 
 ///|
 // Eq and Debug are used by white-box search action assertions.
+#derive(Eq, @debug.Debug)
 #warnings("-unused_value")
 priv enum SearchAction {
   Nothing
   Schedule(Int32)
   Fetch(Int32, String)
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 fn initial_search() -> SearchModel {

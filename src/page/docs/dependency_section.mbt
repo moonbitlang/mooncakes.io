@@ -1,8 +1,9 @@
 ///|
+#derive(Eq, @json.FromJson)
 priv struct Dependent {
   name : String
   versions : Array[String]
-} derive(Eq, @json.FromJson)
+}
 
 ///|
 fn dependent_module_row(item : Dependent) -> Html {

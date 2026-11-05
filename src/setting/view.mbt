@@ -14,12 +14,13 @@ const LinkClass : String = "underline underline-offset-4"
 const SettingsPanelClass : String = "divide-y divide-gray-200 overflow-hidden rounded-xl border border-gray-200 bg-white dark:divide-zinc-700 dark:border-zinc-700 dark:bg-zinc-950"
 
 ///|
+#derive(Eq, @json.FromJson)
 priv struct ApiToken {
   name : String
   token : String
   created_at : String
   revoked : Bool
-} derive(Eq, @json.FromJson)
+}
 
 ///|
 fn user_avatar(user : Json) -> Html {
@@ -41,11 +42,12 @@ fn user_avatar(user : Json) -> Html {
 }
 
 ///|
+#derive(Eq)
 priv struct SettingActions {
   user : Json
   busy : Bool
   error : String
-} derive(Eq)
+}
 
 ///|
 priv enum NavbarMsg {
@@ -226,12 +228,13 @@ fn field(
 }
 
 ///|
+#derive(Eq)
 priv enum AuthBusy {
   Idle
   Submitting
   SendingCode
   OpeningGitHub
-} derive(Eq)
+}
 
 ///|
 priv enum AuthResponse {
@@ -241,6 +244,7 @@ priv enum AuthResponse {
 }
 
 ///|
+#derive(Eq)
 priv struct AuthForm {
   username : String
   email : String
@@ -250,7 +254,7 @@ priv struct AuthForm {
   busy : AuthBusy
   error : String
   notice : String
-} derive(Eq)
+}
 
 ///|
 priv enum AuthFormMsg {
@@ -640,21 +644,23 @@ fn account_row(
 }
 
 ///|
+#derive(Eq)
 priv enum SettingsBusy {
   Idle
   CreatingToken
   OpeningGitHub
   SavingPassword
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv enum SettingsResponse {
   ProfileLoaded
   TokensLoaded
   TokenCreated
   GithubStarted
   PasswordChanged
-} derive(Eq)
+}
 
 ///|
 fn token_row(
@@ -827,6 +833,7 @@ fn token_dialog(model : Settings, emit : Emit[SettingsMsg]) -> Html {
 }
 
 ///|
+#derive(Eq)
 priv struct Settings {
   user : Json
   token_name : String
@@ -843,7 +850,7 @@ priv struct Settings {
   password : String
   confirm_password : String
   password_error : String
-} derive(Eq)
+}
 
 ///|
 priv enum SettingsMsg {

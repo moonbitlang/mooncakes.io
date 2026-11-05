@@ -13,13 +13,15 @@
 // limitations under the License.
 
 ///|
+#derive(Debug, Eq)
 priv struct IndexNode {
   name : String
   pkg : PkgIndex?
   childs : SortedMap[String, IndexNode]
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct PkgIndex {
   path : String
   typealias_ : Array[TypeAliasIndex]
@@ -28,9 +30,10 @@ priv struct PkgIndex {
   types : Array[TypeIndex]
   misc : Array[MiscIndex]
   values : Array[ValueIndex]
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct Manifest {
   name : String
   module_ : String
@@ -40,10 +43,11 @@ priv struct Manifest {
   dependents : Array[Dependent]
   has_package : Bool
   module_meta : MetaInfo
-} derive(Eq)
+}
 
 ///|
-priv struct ModuleIndex(IndexNode) derive(Debug, Eq)
+#derive(Debug, Eq)
+priv struct ModuleIndex(IndexNode)
 
 ///|
 test "dummy test to suppress unused trait implementation warning" {
@@ -94,22 +98,26 @@ fn ModuleIndex::has_package(self : ModuleIndex, path : String) -> Bool {
 }
 
 ///|
+#derive(Debug, Eq)
 priv struct TypeAliasIndex {
   name : String
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct ValueIndex {
   name : String
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct TraitIndex {
   name : String
   impls : Array[ImplIndex]
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv enum Stype {
   Constr(constr~ : TypePath, arguments~ : Array[Stype])
   Arrow(
@@ -120,34 +128,38 @@ priv enum Stype {
   )
   Param(name~ : String)
   TypePath(TypePath)
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct TypePath {
   path : String
   name : String
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct ImplIndex {
   self : Stype
   trait_ : TypePath
   methods : Array[String]
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct TypeIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
-} derive(Debug, Eq)
+}
 
 ///|
+#derive(Debug, Eq)
 priv struct MiscIndex {
   name : String
   impls : Array[ImplIndex]
   methods : Array[String]
-} derive(Debug, Eq)
+}
 
 ///|
 fn IndexNode::find_node(self : IndexNode, path : String) -> IndexNode? {

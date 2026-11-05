@@ -1,8 +1,9 @@
 ///|
+#derive(Eq)
 priv struct DocumentModel {
   collapsed_docs : FoldedState
   hide_large_package : Bool
-} derive(Eq)
+}
 
 ///|
 priv enum DocumentMsg {
@@ -13,11 +14,12 @@ priv enum DocumentMsg {
 }
 
 ///|
+#derive(Eq)
 priv enum PackageAssets {
   Loading
   Ready(ResourceInfo, PackageData?)
   Failed
-} derive(Eq)
+}
 
 ///|
 impl @rabbita.Enumerate for PackageAssets with fn tag(self) {

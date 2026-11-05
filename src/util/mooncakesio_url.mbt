@@ -1,16 +1,18 @@
 ///|
+#derive(Eq)
 pub(all) enum AuthFormKind {
   Login
   Register
   ResetPassword
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 pub(all) enum SettingPage {
   Auth(AuthFormKind)
   Settings
   GithubFailed
-} derive(Eq)
+}
 
 ///|
 pub extend AuthFormKind with Eq::{equal, not_equal}

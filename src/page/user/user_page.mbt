@@ -67,23 +67,26 @@ impl @json.FromJson for CodeFrequencyResponse with fn from_json(
 type CodeFrequency = Map[String, Int32]
 
 ///|
+#derive(Eq)
 priv struct CodeFrequencyResponse {
   data : CodeFrequency
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct PublishedModule {
   name : String
   version : String
   yanked : String?
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct Profile {
   username : String
   avatar_url : String
   modules : Array[PublishedModule]
-} derive(Eq)
+}
 
 ///|
 using @html {div, h1, h2, text, a, span, img, nothing}

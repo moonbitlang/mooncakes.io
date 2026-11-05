@@ -1,16 +1,18 @@
 ///|
+#derive(Eq)
 priv enum BuildLogStatus {
   LogIdle
   LogLoading
   LogFailed
   LogSuccess(String)
-} derive(Eq)
+}
 
 ///|
+#derive(Eq)
 priv struct BuildLogModel {
   build_log_open : Bool
   build_log : BuildLogStatus
-} derive(Eq)
+}
 
 ///|
 priv enum BuildLogMsg {

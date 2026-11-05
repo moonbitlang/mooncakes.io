@@ -19,6 +19,7 @@ priv enum ThemeMsg {
 }
 
 ///|
+#derive(Eq)
 priv enum Route {
   Home
   Search(String)
@@ -30,7 +31,7 @@ priv enum Route {
   SkillsDetail(String)
   NotFound
   Redirect
-} derive(Eq)
+}
 
 ///|
 priv enum RouteMsg {

@@ -73,6 +73,7 @@ pub(all) enum CodeBlockKind {
 pub(all) enum NavbarSection {
   Modules
   Skills
+  Cli
   BuildQueue
 }
 

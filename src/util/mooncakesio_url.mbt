@@ -28,6 +28,7 @@ pub enum MooncakesioPath {
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
   SkillsList
+  Cli(Int32)
   SkillsDetail(String)
   BuildQueue
   NotFound(String)
@@ -56,6 +57,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
     Docs(p, fragment~) =>
       logger.write_string("docs: \{p.0}, fragment: \{Repr(fragment)}")
     SkillsList => logger.write_string("skills:")
+    Cli(page) => logger.write_string("cli:\{page}")
     SkillsDetail(entry) => logger.write_string("skills:\{entry}")
     BuildQueue => logger.write_string("build-queue")
     NotFound(p) => logger.write_string("not-found:\{p}")
@@ -77,6 +79,18 @@ pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
     ["user", name] => User(name)
     ["assets", ..] => Assets(url)
     ["skills"] | ["skills", ""] => SkillsList
+    ["cli"] | ["cli", ""] => {
+      let mut page = 1
+      for part in url.query.unwrap_or("").split("&") {
+        let (name, value) = part.split_once("=").unwrap_or((part, ""))
+        if name == "page" {
+          let parsed = @string.parse_int(value) catch { _ => 1 }
+          page = if parsed > 0 { parsed } else { 1 }
+          break
+        }
+      }
+      Cli(page)
+    }
     ["skills", .. remain] => SkillsDetail(remain.join("/"))
     ["docs", .. remain] =>
       Docs(UnsolvedMooncakePath::new(remain.join("/")), fragment=url.fragment)

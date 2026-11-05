@@ -28,6 +28,7 @@ priv enum Route {
   User(String)
   BuildQueue
   SkillsList
+  Cli(Int32)
   SkillsDetail(String)
   NotFound
   Redirect
@@ -56,6 +57,7 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
     User(name) => "user:\{name}"
     BuildQueue => "build-queue"
     SkillsList => "skills"
+    Cli(page) => "cli:\{page}"
     SkillsDetail(entry) => "skills:\{entry}"
     NotFound => "not-found"
     Redirect => "redirect"
@@ -77,6 +79,7 @@ fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
       )
     Setting(page) => (Setting(page), @nav.scroll_to_top())
     BuildQueue => (BuildQueue, @nav.scroll_to_top())
+    Cli(page) => (Cli(page), @nav.scroll_to_top())
     SkillsList =>
       (
         SkillsList,
@@ -212,6 +215,7 @@ pub fn app() -> Val[Html] {
       User(name) => @user.user_page(name, app_actions~)
       BuildQueue => @build_queue.build_queue_page(app_actions~)
       SkillsList => @skills.skills_list_page(app_actions~)
+      Cli(page) => @cli.cli_page(page, app_actions~)
       SkillsDetail(entry) => @skills.skill_detail_page(entry, app_actions~)
       NotFound => Val::constant(@view.not_found())
       Redirect => Val::constant(@view.loading())
@@ -241,6 +245,7 @@ pub fn app() -> Val[Html] {
       User(name) => "\{name} - mooncakes.io"
       BuildQueue => "Build Queue - mooncakes.io"
       SkillsList => "Skills - mooncakes.io"
+      Cli(_) => "CLI - mooncakes.io"
       SkillsDetail(entry) => "\{entry} - Skills - mooncakes.io"
       Setting(kind) =>
         match kind {

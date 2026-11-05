@@ -3,6 +3,89 @@
 @config "./tailwind.config.js";
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+.cli-page {
+  min-height: 100vh;
+  background: white;
+  color: #18181b;
+}
+.cli-main { max-width: 1200px; margin: 0 auto; padding: 0 24px 48px; min-height: 75vh; }
+.cli-hero { padding: 48px 0 36px; text-align: center; }
+.cli-hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; }
+.cli-hero h1 > span { display: block; }
+.cli-accent { color: #a7664c; }
+.cli-intro { margin-top: 16px; color: #52525b; font-size: 17px; line-height: 1.6; }
+.cli-example { max-width: 760px; margin: 28px auto 18px; padding: 18px 22px; display: flex; align-items: center; gap: 16px; text-align: left; border: 1px solid #3f3f46; border-radius: 8px; background: #27272a; color: #fafafa; }
+.cli-example > div { flex: 1; }
+.cli-example code { font: 14px/1.7 var(--font-mono); overflow-wrap: anywhere; }
+.cli-example-comment { margin-bottom: 3px; color: #b8b8c0; font: 13px/1.5 var(--font-mono); }
+.cli-install { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; color: #52525b; font-size: 13px; line-height: 1.7; }
+.cli-install a { color: #9e5e46; text-decoration: underline; text-underline-offset: 3px; }
+.cli-directory { border-top: 1px solid var(--app-border); padding-top: 24px; }
+.cli-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.cli-toolbar h2 { font-size: 22px; font-weight: 650; line-height: 1.4; }
+.cli-pagination { display: flex; align-items: center; gap: 12px; font-size: 12px; white-space: nowrap; }
+.cli-pagination > :is(a, span) { padding: 7px 10px; }
+.cli-pagination a { border: 1px solid var(--app-border); border-radius: 5px; }
+.cli-pagination a:hover { background: #f4f4f5; }
+.cli-pagination [aria-disabled="true"] { color: #71717a; opacity: 0.6; }
+.cli-page-number { color: #52525b; font-variant-numeric: tabular-nums; }
+.cli-pagination-bottom { display: flex; justify-content: flex-end; margin-top: 20px; }
+.cli-table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: left; }
+.cli-table .cli-package { width: 42%; padding-left: 12px; padding-right: 20px; }
+.cli-table .cli-version { width: 8%; padding-right: 12px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.cli-table .cli-command { width: 50%; padding-right: 12px; }
+.cli-table th { padding-top: 9px; padding-bottom: 9px; color: #52525b; font-size: 12px; font-weight: 600; }
+.cli-table tr { border-bottom: 1px solid var(--app-border); }
+.cli-table td { padding-top: 12px; padding-bottom: 12px; vertical-align: middle; font-size: 13px; }
+.cli-table tbody tr:hover { background: #fafafa; }
+.cli-package a { display: block; }
+.cli-package-path { display: block; overflow-wrap: anywhere; font-size: 14px; font-weight: 600; line-height: 1.45; }
+.cli-package a:hover .cli-package-path { color: #9e5e46; text-decoration: underline; text-underline-offset: 3px; }
+.cli-description { display: block; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #52525b; font-size: 12px; line-height: 1.5; }
+.cli-command > div { display: flex; align-items: center; gap: 12px; }
+.cli-command code { flex: 1; min-width: 0; overflow-wrap: anywhere; font: 12px/1.6 var(--font-mono); user-select: all; }
+.cli-copy { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #d4d4d8; border-radius: 5px; background: white; color: #3f3f46; cursor: pointer; }
+.cli-copy:hover { background: #f4f4f5; border-color: #a1a1aa; }
+.cli-example .cli-copy { background: transparent; border-color: #62626b; color: #fafafa; }
+.cli-example .cli-copy:hover { background: #3f3f46; }
+.cli-example .ui-icon { filter: brightness(0) invert(1); }
+.cli-page :is(a, button, input):focus-visible { outline: 2px solid #a7664c; outline-offset: 3px; }
+.cli-message { padding: 40px 0; text-align: center; color: #52525b; font-size: 14px; }
+.cli-retry { margin-top: 12px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+[data-theme="dark"] .cli-page { background: #18181b; color: #f4f4f5; }
+[data-theme="dark"] .cli-accent,
+[data-theme="dark"] .cli-install a,
+[data-theme="dark"] .cli-package a:hover .cli-package-path { color: #e8af96; }
+[data-theme="dark"] .cli-page :is(.cli-intro, .cli-install, .cli-description, .cli-message),
+[data-theme="dark"] .cli-page-number,
+[data-theme="dark"] .cli-table th { color: #a1a1aa; }
+[data-theme="dark"] .cli-table tbody tr:hover { background: #202023; }
+[data-theme="dark"] .cli-copy { background: #27272a; border-color: #52525b; color: #e4e4e7; }
+[data-theme="dark"] .cli-copy:hover { background: #3f3f46; }
+[data-theme="dark"] .cli-pagination a:hover { background: #3f3f46; }
+@media (max-width: 767px) {
+  .cli-main { padding: 0 16px 32px; }
+  .cli-hero { padding: 36px 0 28px; }
+  .cli-intro { font-size: 15px; }
+  .cli-example { padding: 14px; gap: 10px; margin-top: 22px; }
+  .cli-example code { font-size: 12px; }
+  .cli-example-comment { font-size: 12px; }
+  .cli-toolbar { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .cli-toolbar h2 { font-size: 20px; }
+  .cli-pagination { width: 100%; justify-content: space-between; gap: 8px; }
+  .cli-pagination > :is(a, span) { padding-top: 10px; padding-bottom: 10px; }
+  .cli-table, .cli-table tbody { display: block; }
+  .cli-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .cli-table tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; padding: 12px; }
+  .cli-table td { display: block; padding: 0; }
+  .cli-table .cli-package { width: auto; padding-left: 0; padding-right: 0; }
+  .cli-table .cli-version { width: auto; padding-right: 0; color: #71717a; }
+  .cli-table .cli-command { width: auto; padding-right: 0; grid-column: 1 / -1; }
+  .cli-description { white-space: normal; }
+  .cli-copy { width: 40px; height: 40px; }
+  [data-theme="dark"] .cli-table .cli-version { color: #a1a1aa; }
+}
+
 @layer base {
   :root {
     --app-border: var(--color-gray-200);

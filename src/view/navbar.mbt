@@ -9,6 +9,7 @@ pub(all) enum NavbarStyle {
 pub(all) enum NavbarSection {
   Modules
   Skills
+  Cli
   BuildQueue
 }
 
@@ -17,11 +18,13 @@ fn navigation_link(section : NavbarSection, active : NavbarSection?) -> Html {
   let (label, href) = match section {
     Modules => ("Modules", "/")
     Skills => ("Skills", "/skills")
+    Cli => ("CLI", "/cli")
     BuildQueue => ("Build queue", "/build-queue")
   }
   let selected = match (section, active) {
     (Modules, Some(Modules))
     | (Skills, Some(Skills))
+    | (Cli, Some(Cli))
     | (BuildQueue, Some(BuildQueue)) => true
     _ => false
   }
@@ -59,6 +62,7 @@ pub fn navbar(
       ) <| [
         navigation_link(Modules, active),
         navigation_link(Skills, active),
+        navigation_link(Cli, active),
         navigation_link(BuildQueue, active),
       ],
       div(class="site-navbar-tools") <| [
@@ -104,6 +108,7 @@ pub fn navbar(
               selected=active is Some(Skills),
               "Skills",
             ),
+            @html.option(value="/cli", selected=active is Some(Cli), "CLI"),
             @html.option(
               value="/build-queue",
               selected=active is Some(BuildQueue),

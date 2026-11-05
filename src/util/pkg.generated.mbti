@@ -78,6 +78,7 @@ pub enum MooncakesioPath {
   User(StringView)
   Docs(UnsolvedMooncakePath, fragment~ : String?)
   SkillsList
+  Cli
   SkillsDetail(String)
   BuildQueue
   NotFound(String)

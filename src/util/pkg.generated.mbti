@@ -81,6 +81,7 @@ pub enum MooncakesioPath {
   Cli(Int32)
   SkillsDetail(String)
   BuildQueue
+  TakedownPolicy
   NotFound(String)
   Assets(@url.Url)
 }

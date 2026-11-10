@@ -1,0 +1,9 @@
+import {
+  "moonbit-community/rabbita",
+  "moonbit-community/rabbita/html",
+  "moonbit-community/rabbita/http",
+  "moonbitlang/mooncakes/config",
+  "moonbitlang/mooncakes/view",
+}
+
+supported_targets = "js+native+wasm"

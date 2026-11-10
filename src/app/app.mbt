@@ -27,6 +27,7 @@ priv enum Route {
   Docs(@util.UnsolvedMooncakePath, fragment~ : String)
   User(String)
   BuildQueue
+  TakedownPolicy
   SkillsList
   Cli(Int32)
   SkillsDetail(String)
@@ -56,6 +57,7 @@ impl @rabbita.Enumerate for Route with fn tag(self) {
     Docs(_, ..) => "docs"
     User(name) => "user:\{name}"
     BuildQueue => "build-queue"
+    TakedownPolicy => "takedown-policy"
     SkillsList => "skills"
     Cli(page) => "cli:\{page}"
     SkillsDetail(entry) => "skills:\{entry}"
@@ -79,6 +81,7 @@ fn route(url : @url.Url, model : Route) -> (Route, Cmd) {
       )
     Setting(page) => (Setting(page), @nav.scroll_to_top())
     BuildQueue => (BuildQueue, @nav.scroll_to_top())
+    TakedownPolicy => (TakedownPolicy, @nav.scroll_to_top())
     Cli(page) => (Cli(page), @nav.scroll_to_top())
     SkillsList =>
       (
@@ -214,6 +217,7 @@ pub fn app() -> Val[Html] {
       Setting(kind) => @setting.page(kind, app_actions~, dark~)
       User(name) => @user.user_page(name, app_actions~)
       BuildQueue => @build_queue.build_queue_page(app_actions~)
+      TakedownPolicy => @policy.takedown_policy_page(app_actions~)
       SkillsList => @skills.skills_list_page(app_actions~)
       Cli(page) => @cli.cli_page(page, app_actions~)
       SkillsDetail(entry) => @skills.skill_detail_page(entry, app_actions~)
@@ -244,6 +248,7 @@ pub fn app() -> Val[Html] {
       Docs(path, ..) => "\{path.package_path()} - mooncakes.io"
       User(name) => "\{name} - mooncakes.io"
       BuildQueue => "Build Queue - mooncakes.io"
+      TakedownPolicy => "Module takedown policy - mooncakes.io"
       SkillsList => "Skills - mooncakes.io"
       Cli(_) => "CLI - mooncakes.io"
       SkillsDetail(entry) => "\{entry} - Skills - mooncakes.io"

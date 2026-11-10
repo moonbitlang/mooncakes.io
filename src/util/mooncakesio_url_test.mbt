@@ -66,6 +66,24 @@ test "resolve build-queue" {
 }
 
 ///|
+test "takedown policy route supports direct and trailing-slash URLs" {
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("policies/takedown")),
+    content="takedown-policy",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(
+      @url.parse("https://mooncakes.io/policies/takedown/"),
+    ),
+    content="takedown-policy",
+  )
+  inspect(
+    @util.MooncakesioPath::resolve(test_url("policies/takedown/unknown")),
+    content="not-found:policies/takedown/unknown",
+  )
+}
+
+///|
 test "resolve skills list" {
   inspect(
     @util.MooncakesioPath::resolve(test_url("skills")),

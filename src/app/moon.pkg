@@ -17,6 +17,7 @@ import {
   "moonbitlang/mooncakes/page/build_queue",
   "moonbitlang/mooncakes/page/skills",
   "moonbitlang/mooncakes/page/cli",
+  "moonbitlang/mooncakes/page/policy",
 }
 
 supported_targets = "js+native+wasm"

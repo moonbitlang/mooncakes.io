@@ -31,6 +31,7 @@ pub enum MooncakesioPath {
   Cli(Int32)
   SkillsDetail(String)
   BuildQueue
+  TakedownPolicy
   NotFound(String)
   Assets(@url.Url)
 }
@@ -60,6 +61,7 @@ pub impl Show for MooncakesioPath with fn output(self, logger) {
     Cli(page) => logger.write_string("cli:\{page}")
     SkillsDetail(entry) => logger.write_string("skills:\{entry}")
     BuildQueue => logger.write_string("build-queue")
+    TakedownPolicy => logger.write_string("takedown-policy")
     NotFound(p) => logger.write_string("not-found:\{p}")
     Assets(url) => logger.write_string("assets:\{url.path}")
   }
@@ -71,6 +73,7 @@ pub fn MooncakesioPath::resolve(url : @url.Url) -> Self {
     ["/"] | [""] | [] => Home
     ["search"] | ["search", ""] => Search(search_query(url))
     ["build-queue"] => BuildQueue
+    ["policies", "takedown"] | ["policies", "takedown", ""] => TakedownPolicy
     ["login"] => Setting(Auth(Login))
     ["register"] => Setting(Auth(Register))
     ["reset-password"] => Setting(Auth(ResetPassword))

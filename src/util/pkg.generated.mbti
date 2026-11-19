@@ -9,7 +9,7 @@ import {
 }
 
 // Values
-pub fn decode_module_index(@json.Json, @json.JsonPath) -> ModuleIndex raise @json.JsonDecodeError
+pub fn decode_module_index(@json.Json, @json.DecodeContext) -> ModuleIndex raise @json.JsonDecodeError
 
 pub fn decode_yanked(@json.Json) -> String?
 
@@ -54,7 +54,7 @@ pub(all) struct ModuleIndex {
   is_new : Bool
 }
 pub fn ModuleIndex::equal(Self, Self) -> Bool
-pub fn ModuleIndex::from_json(@json.Json, @json.JsonPath) -> Self raise @json.JsonDecodeError
+pub fn ModuleIndex::from_json(@json.Json, @json.DecodeContext) -> Self raise @json.JsonDecodeError
 pub fn ModuleIndex::not_equal(Self, Self) -> Bool
 pub fn ModuleIndex::to_repr(Self) -> @debug.Repr
 pub impl @json.FromJson for ModuleIndex

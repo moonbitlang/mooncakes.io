@@ -124,7 +124,7 @@ priv enum Stype {
     parameters~ : Array[Stype],
     return_type~ : Stype,
     error_type~ : Stype?,
-    is_async~ : Bool
+    is_async~ : Bool,
   )
   Param(name~ : String)
   TypePath(TypePath)
